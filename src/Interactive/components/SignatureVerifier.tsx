@@ -1,0 +1,248 @@
+import { type CSSProperties, type FC } from "react";
+import { CheckCircle, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
+
+import { useBreakpoint, usePageTheme } from "../../Design";
+import { withOpacity } from "../../Design/helpers";
+import { useTranslation } from "../../I18n";
+import { type SigField, ORIGINAL_VALUES, useSignatureVerifier } from "../hooks/useSignatureVerifier";
+
+export const SignatureVerifier: FC = () => {
+  const { t } = useTranslation();
+  const { colors, moduleTheme } = usePageTheme();
+  const isMobile = useBreakpoint() === "mobile";
+  const world = colors[moduleTheme];
+  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const accentColor = world.border.secondary;
+  const successColor = colors.semantic.success.text;
+  const errorColor = colors.semantic.error?.text ?? "#ef4444";
+
+  const { tampered, status, toggle, verify, reset, getValue } = useSignatureVerifier();
+
+  const FIELDS: { key: SigField; label: string }[] = [
+    { key: "message", label: t("sigVerifier.message") },
+    { key: "pubkey", label: t("sigVerifier.pubkey") },
+    { key: "signature", label: t("sigVerifier.signature") },
+  ];
+
+  const container: CSSProperties = {
+    ...mono,
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
+    padding: isMobile ? "1.25rem" : "1.5rem",
+    borderRadius: "1rem",
+    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
+    margin: isMobile ? "1.5rem 0" : "2rem 0",
+  };
+
+  const titleStyle: CSSProperties = {
+    fontSize: "0.74rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
+    color: world.text.primary,
+  };
+
+  const fieldRow: CSSProperties = {
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    alignItems: isMobile ? "flex-start" : "center",
+    gap: isMobile ? "0.4rem" : "0.75rem",
+    padding: "0.65rem 0.85rem",
+    borderRadius: "0.65rem",
+    background: withOpacity(world.background.secondary, 0.03),
+    border: `1px solid ${withOpacity(world.border.secondary, 0.12)}`,
+    transition: "border-color 0.3s var(--ease-smooth)",
+  };
+
+  const fieldRowTampered: CSSProperties = {
+    ...fieldRow,
+    border: `1px solid ${withOpacity(errorColor, 0.4)}`,
+    background: withOpacity(errorColor, 0.04),
+  };
+
+  const fieldLabel: CSSProperties = {
+    fontSize: "0.6rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.07em",
+    color: colors.base.text.secondary,
+    minWidth: isMobile ? "auto" : "5rem",
+    flexShrink: 0,
+  };
+
+  const fieldValue = (isTampered: boolean): CSSProperties => ({
+    flex: 1,
+    fontSize: isMobile ? "0.62rem" : "0.66rem",
+    fontWeight: 600,
+    color: isTampered ? errorColor : world.text.primary,
+    wordBreak: "break-all",
+    transition: "color 0.3s var(--ease-smooth)",
+    letterSpacing: "0.02em",
+  });
+
+  const tamperBtn = (isTampered: boolean): CSSProperties => ({
+    ...mono,
+    flexShrink: 0,
+    cursor: "pointer",
+    padding: "0.3rem 0.6rem",
+    borderRadius: "0.45rem",
+    fontSize: "0.6rem",
+    fontWeight: 700,
+    letterSpacing: "0.05em",
+    textTransform: "uppercase",
+    border: `1px solid ${withOpacity(isTampered ? errorColor : world.border.secondary, isTampered ? 0.5 : 0.25)}`,
+    background: isTampered ? withOpacity(errorColor, 0.1) : "transparent",
+    color: isTampered ? errorColor : colors.base.text.secondary,
+    transition: "all 0.25s var(--ease-smooth)",
+  });
+
+  const verifyBtn: CSSProperties = {
+    ...mono,
+    cursor: "pointer",
+    padding: isMobile ? "0.6rem 1rem" : "0.65rem 1.25rem",
+    borderRadius: "0.65rem",
+    fontSize: isMobile ? "0.72rem" : "0.76rem",
+    fontWeight: 700,
+    letterSpacing: "0.05em",
+    textTransform: "uppercase",
+    border: `1.5px solid ${withOpacity(accentColor, 0.55)}`,
+    background: `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.12)}, transparent)`,
+    color: world.text.primary,
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    justifyContent: "center",
+    transition: "all 0.3s var(--ease-smooth)",
+  };
+
+  const resultPanel: CSSProperties = {
+    padding: "0.75rem 0.9rem",
+    borderRadius: "0.65rem",
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.35rem",
+    transition: "all 0.35s var(--ease-smooth)",
+    ...(status === "valid"
+      ? {
+          background: withOpacity(successColor, 0.07),
+          border: `1px solid ${withOpacity(successColor, 0.3)}`,
+        }
+      : status === "invalid"
+        ? {
+            background: withOpacity(errorColor, 0.07),
+            border: `1px solid ${withOpacity(errorColor, 0.3)}`,
+          }
+        : {
+            background: withOpacity(colors.base.border.secondary, 0.04),
+            border: `1px solid ${withOpacity(colors.base.border.secondary, 0.1)}`,
+          }),
+  };
+
+  const resultTitle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.45rem",
+    fontSize: "0.72rem",
+    fontWeight: 700,
+    color:
+      status === "valid"
+        ? successColor
+        : status === "invalid"
+          ? errorColor
+          : colors.base.text.secondary,
+    transition: "color 0.3s var(--ease-smooth)",
+  };
+
+  const resultDesc: CSSProperties = {
+    fontSize: "0.66rem",
+    lineHeight: 1.55,
+    color: colors.base.text.secondary,
+  };
+
+  const resetBtn: CSSProperties = {
+    ...mono,
+    alignSelf: "flex-end",
+    cursor: "pointer",
+    padding: "0.35rem 0.7rem",
+    borderRadius: "0.5rem",
+    fontSize: "0.66rem",
+    fontWeight: 600,
+    border: `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
+    background: "transparent",
+    color: colors.base.text.secondary,
+    display: "flex",
+    alignItems: "center",
+    gap: "0.35rem",
+    transition: "all 0.25s var(--ease-smooth)",
+  };
+
+  return (
+    <div
+      className="gradient-border"
+      style={{ ...container, "--border-glow-color": accentColor } as CSSProperties}
+    >
+      <div style={titleStyle}>{t("sigVerifier.title")}</div>
+
+      {/* Field rows */}
+      {FIELDS.map(({ key, label }) => {
+        const isTampered = tampered.has(key);
+        return (
+          <div key={key} style={isTampered ? fieldRowTampered : fieldRow}>
+            <span style={fieldLabel}>{label}</span>
+            <span style={fieldValue(isTampered)}>
+              {getValue(key)}
+            </span>
+            <button style={tamperBtn(isTampered)} onClick={() => toggle(key)}>
+              {isTampered ? t("sigVerifier.restore") : t("sigVerifier.tamper")}
+            </button>
+          </div>
+        );
+      })}
+
+      {/* Original reference (subtle) */}
+      {tampered.size > 0 && (
+        <div style={{ fontSize: "0.58rem", color: withOpacity(colors.base.text.secondary, 0.5), display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <CheckCircle size={10} strokeWidth={2} />
+          {t("sigVerifier.originalHint")}
+          {FIELDS.filter(f => tampered.has(f.key)).map(f => (
+            <span key={f.key} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.54rem", opacity: 0.6 }}>
+              {ORIGINAL_VALUES[f.key].slice(0, 10)}…
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Verify button */}
+      <button style={verifyBtn} onClick={verify}>
+        <ShieldCheck size={14} strokeWidth={2} />
+        {t("sigVerifier.verify")}
+      </button>
+
+      {/* Result */}
+      <div style={resultPanel}>
+        <div style={resultTitle}>
+          {status === "valid" && <ShieldCheck size={14} strokeWidth={2} />}
+          {status === "invalid" && <ShieldAlert size={14} strokeWidth={2} />}
+          {status === "valid"
+            ? t("sigVerifier.valid")
+            : status === "invalid"
+              ? t("sigVerifier.invalid")
+              : t("sigVerifier.idle")}
+        </div>
+        {status !== "idle" && (
+          <div style={resultDesc}>
+            {status === "valid"
+              ? t("sigVerifier.validDesc")
+              : t("sigVerifier.invalidDesc")}
+          </div>
+        )}
+      </div>
+
+      <button style={resetBtn} onClick={reset}>
+        <RefreshCw size={11} strokeWidth={2} />
+        {t("sigVerifier.reset")}
+      </button>
+    </div>
+  );
+};

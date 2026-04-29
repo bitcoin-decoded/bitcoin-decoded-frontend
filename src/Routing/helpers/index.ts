@@ -1,0 +1,1 @@
+export { flattenPages } from './flattenPages';

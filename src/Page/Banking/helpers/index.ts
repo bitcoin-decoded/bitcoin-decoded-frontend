@@ -1,0 +1,1 @@
+export { generateYieldData } from './generateYieldData';

@@ -1,0 +1,192 @@
+/*
+ * Global stylesheet — Bitcoin.Decoded
+ * Sober, elegant baseline with cypherpunk typography.
+ */
+
+:root {
+  --ease-smooth: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent Android Chrome from auto-inflating font sizes, which causes
+     layout reflow and horizontal overflow on mobile */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  transition: background-color 0.3s var(--ease-smooth),
+    color 0.3s var(--ease-smooth);
+}
+
+/* Utility: hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom scrollbar — near-invisible, warm tones */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(242, 242, 242, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(242, 242, 242, 0.3);
+}
+
+/* Gradient border — directional glow (brighter top, fades bottom) */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 0.8px;
+  background: radial-gradient(
+    60% 80% at 50% 0%,
+    var(--border-glow-color, rgba(255, 255, 255, 0.15)),
+    transparent
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Page enter animation — fade in + upward slide */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-enter {
+  animation: pageEnter 0.7s var(--ease-smooth) both;
+}
+
+/* Bitcoin icon pulse glow animation */
+@keyframes btcPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(247, 147, 26, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 24px rgba(247, 147, 26, 0.6))
+      drop-shadow(0 0 48px rgba(247, 147, 26, 0.2));
+  }
+}
+
+@keyframes metricPop {
+  0%   { opacity: 0; transform: translateY(-5px) scale(0.88); }
+  65%  { opacity: 1; transform: translateY(1px)  scale(1.04); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+.metric-pop {
+  animation: metricPop 0.32s var(--ease-smooth) both;
+}
+
+@keyframes confettiBurst {
+  0%   { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+  65%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0.4); }
+}
+.confetti-piece {
+  animation: confettiBurst var(--dur, 1.2s) var(--delay, 0s) cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes rewardNoteFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Styled lists — page content ──────────────────────────── */
+
+/* Unordered lists */
+.page-content ul {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.page-content ul > li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.page-content ul > li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  font-size: 0.875em;
+  color: var(--accent-color, rgba(242, 242, 242, 0.4));
+}
+
+/* Ordered lists */
+.page-content ol {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: styled-counter;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.page-content ol > li {
+  position: relative;
+  padding-left: 2rem;
+  counter-increment: styled-counter;
+}
+.page-content ol > li::before {
+  content: counter(styled-counter, decimal-leading-zero) ".";
+  position: absolute;
+  left: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  font-size: 0.8125em;
+  color: var(--accent-color, rgba(242, 242, 242, 0.4));
+  letter-spacing: 0.02em;
+}
+
+/* Nested lists — slightly dimmer marker */
+.page-content ul ul > li::before,
+.page-content ol ol > li::before {
+  opacity: 0.6;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+}

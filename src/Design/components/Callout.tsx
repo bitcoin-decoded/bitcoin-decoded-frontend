@@ -1,0 +1,83 @@
+import { type FC, type ReactNode, type CSSProperties } from "react";
+import { usePageTheme } from "../Theme";
+import { useBreakpoint } from "../Responsive";
+import { withOpacity } from "../helpers";
+import { Info } from "lucide-react";
+
+type Props = {
+  icon?: ReactNode;
+  title: string;
+  children: ReactNode;
+};
+
+export const Callout: FC<Props> = ({ icon, title, children }) => {
+  const { colors, moduleTheme } = usePageTheme();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+
+  const accentColor = colors[moduleTheme].border.secondary;
+
+  const containerStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: isMobile ? "0.75rem" : "1.25rem",
+    position: "relative",
+    margin: isMobile ? "1.5rem 0" : "2.5rem 0",
+    padding: isMobile ? "1rem 1.25rem" : "1.5rem 2rem",
+    background: `linear-gradient(190deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary})`,
+    borderRadius: "1rem",
+  };
+
+  const iconContainerStyle: CSSProperties = {
+    color: accentColor,
+    flexShrink: 0,
+    marginTop: "0.125rem",
+  };
+
+  const contentContainerStyle: CSSProperties = {
+    flex: "1 1 auto",
+  };
+
+  const titleStyle: CSSProperties = {
+    display: "block",
+    color: moduleTheme === "base"
+      ? colors.base.text.primary
+      : colors[moduleTheme].text.primary,
+    fontWeight: 600,
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: isMobile ? "0.8125rem" : "0.875rem",
+    letterSpacing: "0.02em",
+  };
+
+  const separatorStyle: CSSProperties = {
+    width: "100%",
+    height: "1px",
+    background: `linear-gradient(to right, ${withOpacity(accentColor, 0.25)}, transparent)`,
+    border: "none",
+    margin: isMobile ? "0.625rem 0" : "0.75rem 0",
+  };
+
+  const textStyle: CSSProperties = {
+    color: moduleTheme === "base"
+      ? colors.base.text.secondary
+      : colors[moduleTheme].text.secondary,
+    lineHeight: 1.7,
+    fontSize: isMobile ? "0.875rem" : "0.9375rem",
+    textAlign: "left",
+  };
+
+  const defaultIcon = (
+    <Info size={isMobile ? 18 : 20} strokeWidth={2} />
+  );
+
+  return (
+    <aside className="gradient-border" style={{ ...containerStyle, "--border-glow-color": accentColor } as CSSProperties}>
+      <div style={iconContainerStyle}>{icon || defaultIcon}</div>
+      <div style={contentContainerStyle}>
+        <span style={titleStyle}>{title}</span>
+        <hr style={separatorStyle} />
+        <div style={textStyle}>{children}</div>
+      </div>
+    </aside>
+  );
+};

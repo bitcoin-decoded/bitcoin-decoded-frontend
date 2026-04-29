@@ -1,0 +1,1 @@
+export { displayAristoteMoneyCharacs } from "./displayAristoteMoneyCharacs";

@@ -1,0 +1,552 @@
+import { type CSSProperties, type FC, type ReactNode } from "react";
+import {
+  ArrowDown,
+  CheckCircle,
+  Coins,
+  Info,
+  Pickaxe,
+  RefreshCw,
+  Send,
+  User,
+  Wallet,
+  XCircle,
+} from "lucide-react";
+
+import { useBreakpoint, usePageTheme } from "../../Design";
+import { withOpacity } from "../../Design/helpers";
+import { useTranslation } from "../../I18n";
+import { useUTXOBuilder } from "../hooks";
+
+const fmtBTC = (n: number) => n.toFixed(8).replace(/\.?0+$/, "") + " BTC";
+
+// Accept only digits + a single dot. Strips letters, commas, spaces, etc.
+const sanitizeAmount = (raw: string): string => {
+  const digitsAndDot = raw.replace(/[^0-9.]/g, "");
+  const firstDot = digitsAndDot.indexOf(".");
+  if (firstDot === -1) return digitsAndDot;
+  // Keep first dot, remove any subsequent ones
+  return (
+    digitsAndDot.slice(0, firstDot + 1) +
+    digitsAndDot.slice(firstDot + 1).replace(/\./g, "")
+  );
+};
+
+// ── Card (unified, used for inputs, outputs, fees) ──────────────────────────
+
+type CardTone = "accent" | "success" | "muted";
+
+type TxCardProps = {
+  icon: ReactNode;
+  title: string;
+  desc: string;
+  amount: string;
+  tone: CardTone;
+  toneColors: Record<CardTone, { color: string; border: string; bg: string }>;
+  amountFontSize: string;
+  amountOpacity?: number;
+  baseTextSecondary: string;
+};
+
+const TxCard: FC<TxCardProps> = ({
+  icon,
+  title,
+  desc,
+  amount,
+  tone,
+  toneColors,
+  amountFontSize,
+  amountOpacity,
+  baseTextSecondary,
+}) => {
+  const { color, border, bg } = toneColors[tone];
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.6rem",
+        padding: "0.55rem 0.7rem",
+        borderRadius: "0.6rem",
+        border: `1px solid ${border}`,
+        background: bg,
+        width: "100%",
+        minWidth: 0,
+        boxSizing: "border-box",
+        transition: "all 0.35s var(--ease-smooth)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "1.6rem",
+          height: "1.6rem",
+          borderRadius: "0.4rem",
+          background: withOpacity(color, 0.12),
+          color,
+          flexShrink: 0,
+        }}
+      >
+        {icon}
+      </div>
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.1rem",
+          minWidth: 0,
+        }}
+      >
+        <span
+          style={{
+            fontSize: "0.68rem",
+            fontWeight: 700,
+            color,
+            overflowWrap: "anywhere",
+            lineHeight: 1.3,
+          }}
+        >
+          {title}
+        </span>
+        <span
+          style={{
+            fontSize: "0.56rem",
+            color: withOpacity(baseTextSecondary, 0.6),
+            overflowWrap: "anywhere",
+            lineHeight: 1.3,
+          }}
+        >
+          {desc}
+        </span>
+      </div>
+      <span
+        style={{
+          fontWeight: 700,
+          fontSize: amountFontSize,
+          color,
+          opacity: amountOpacity,
+          flexShrink: 0,
+          whiteSpace: "nowrap",
+        }}
+      >
+        {amount}
+      </span>
+    </div>
+  );
+};
+
+// ── Main component ──────────────────────────────────────────────────────────
+
+export const UTXOTransactionBuilder: FC = () => {
+  const { t } = useTranslation();
+  const { colors, moduleTheme } = usePageTheme();
+  const isMobile = useBreakpoint() === "mobile";
+  const world = colors[moduleTheme];
+  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+
+  const accentColor = world.border.secondary;
+  const successColor = colors.semantic.success.text;
+  const errorColor = colors.semantic.error?.text ?? "#ef4444";
+  const mutedColor = withOpacity(colors.base.text.secondary, 0.7);
+
+  const {
+    utxos,
+    selectedIds,
+    toggle,
+    totalInput,
+    rawAmount,
+    setRawAmount,
+    parsedAmount,
+    fees,
+    change,
+    hasAmount,
+    hasSelection,
+    isInsufficient,
+    isValid,
+    reset,
+  } = useUTXOBuilder();
+
+  const toneColors: Record<CardTone, { color: string; border: string; bg: string }> = {
+    accent: {
+      color: accentColor,
+      border: withOpacity(accentColor, 0.22),
+      bg: withOpacity(accentColor, 0.04),
+    },
+    success: {
+      color: isValid ? successColor : mutedColor,
+      border: withOpacity(successColor, isValid ? 0.32 : 0.1),
+      bg: withOpacity(successColor, isValid ? 0.05 : 0.02),
+    },
+    muted: {
+      color: mutedColor,
+      border: withOpacity(colors.base.border.secondary, 0.18),
+      bg: withOpacity(colors.base.background.secondary, 0.03),
+    },
+  };
+
+  const amountFont = isMobile ? "0.7rem" : "0.76rem";
+  const smallLabel: CSSProperties = {
+    fontSize: "0.58rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+  };
+  const iconSize = isMobile ? 12 : 13;
+
+  return (
+    <div
+      className="gradient-border"
+      style={
+        {
+          ...mono,
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.1rem",
+          padding: isMobile ? "1.1rem" : "1.5rem",
+          borderRadius: "1rem",
+          background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
+          margin: isMobile ? "1.5rem 0" : "2rem 0",
+          width: "100%",
+          maxWidth: "100%",
+          boxSizing: "border-box",
+          overflow: "hidden",
+          "--border-glow-color": accentColor,
+        } as CSSProperties
+      }
+    >
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", minWidth: 0 }}>
+        <Coins size={isMobile ? 15 : 16} strokeWidth={2} style={{ color: accentColor, flexShrink: 0 }} />
+        <span
+          style={{
+            fontSize: "0.76rem",
+            fontWeight: 700,
+            color: world.text.primary,
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
+            minWidth: 0,
+            overflowWrap: "anywhere",
+          }}
+        >
+          {t("utxoBuilder.title")}
+        </span>
+      </div>
+
+      {/* Step 1 — UTXO selection */}
+      <div style={{ minWidth: 0 }}>
+        <div
+          style={{
+            ...smallLabel,
+            display: "flex",
+            alignItems: "center",
+            gap: "0.4rem",
+            color: world.text.secondary,
+            marginBottom: "0.5rem",
+            fontSize: "0.62rem",
+          }}
+        >
+          <Wallet size={iconSize} strokeWidth={2} />
+          {t("utxoBuilder.step1")}
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+          {utxos.map((u) => {
+            const selected = selectedIds.includes(u.id);
+            return (
+              <button
+                key={u.id}
+                onClick={() => toggle(u.id)}
+                style={{
+                  ...mono,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.35rem",
+                  padding: "0.4rem 0.7rem",
+                  borderRadius: "0.5rem",
+                  fontSize: isMobile ? "0.72rem" : "0.76rem",
+                  fontWeight: 700,
+                  border: `1.5px solid ${withOpacity(selected ? accentColor : world.border.secondary, selected ? 0.7 : 0.25)}`,
+                  background: selected
+                    ? withOpacity(accentColor, 0.12)
+                    : withOpacity(world.background.secondary, 0.04),
+                  color: selected ? accentColor : world.text.primary,
+                  transition: "all 0.25s var(--ease-smooth)",
+                  boxShadow: selected ? `0 0 10px ${withOpacity(accentColor, 0.2)}` : "none",
+                  whiteSpace: "nowrap",
+                  maxWidth: "100%",
+                }}
+              >
+                <Coins size={11} strokeWidth={2} style={{ opacity: selected ? 1 : 0.5 }} />
+                {fmtBTC(u.amount)}
+              </button>
+            );
+          })}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "0.4rem",
+            marginTop: "0.55rem",
+            fontSize: "0.62rem",
+            lineHeight: 1.5,
+            color: withOpacity(colors.base.text.secondary, 0.65),
+            minWidth: 0,
+            overflowWrap: "anywhere",
+          }}
+        >
+          <Info size={11} strokeWidth={2} style={{ flexShrink: 0, marginTop: "0.15rem" }} />
+          <span style={{ minWidth: 0 }}>{t("utxoBuilder.utxoHint")}</span>
+        </div>
+      </div>
+
+      {/* Step 2 — Amount */}
+      <div style={{ minWidth: 0 }}>
+        <div
+          style={{
+            ...smallLabel,
+            display: "flex",
+            alignItems: "center",
+            gap: "0.4rem",
+            color: world.text.secondary,
+            marginBottom: "0.5rem",
+            fontSize: "0.62rem",
+          }}
+        >
+          <Send size={iconSize} strokeWidth={2} />
+          {t("utxoBuilder.step2")}
+        </div>
+        <input
+          type="text"
+          inputMode="decimal"
+          placeholder={t("utxoBuilder.placeholder")}
+          value={rawAmount}
+          onChange={(e) => setRawAmount(sanitizeAmount(e.target.value))}
+          style={{
+            ...mono,
+            width: "100%",
+            maxWidth: "100%",
+            padding: "0.55rem 0.85rem",
+            borderRadius: "0.6rem",
+            fontSize: isMobile ? "1rem" : "0.85rem",
+            fontWeight: 600,
+            border: `1.5px solid ${withOpacity(isInsufficient ? errorColor : accentColor, isInsufficient ? 0.6 : 0.3)}`,
+            background: withOpacity(world.background.secondary, 0.05),
+            color: world.text.primary,
+            outline: "none",
+            transition: "border-color 0.25s var(--ease-smooth)",
+            boxSizing: "border-box",
+            touchAction: "manipulation",
+          }}
+        />
+      </div>
+
+      {/* Transaction panel */}
+      {(hasSelection || hasAmount) && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", minWidth: 0 }}>
+          {/* Inputs */}
+          {hasSelection && (
+            <>
+              <div
+                style={{
+                  ...smallLabel,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  color: withOpacity(colors.base.text.secondary, 0.5),
+                }}
+              >
+                {t("utxoBuilder.inputs")}
+              </div>
+              {selectedIds.map((id) => {
+                const u = utxos.find((x) => x.id === id)!;
+                return (
+                  <TxCard
+                    key={id}
+                    icon={<Coins size={12} strokeWidth={2} />}
+                    title={`UTXO #${id + 1}`}
+                    desc="Alice"
+                    amount={`+${fmtBTC(u.amount)}`}
+                    tone="accent"
+                    toneColors={toneColors}
+                    amountFontSize={amountFont}
+                    baseTextSecondary={colors.base.text.secondary}
+                  />
+                );
+              })}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  fontSize: "0.64rem",
+                  color: colors.base.text.secondary,
+                  padding: "0 0.1rem",
+                  minWidth: 0,
+                }}
+              >
+                <span style={{ minWidth: 0, overflowWrap: "anywhere" }}>{t("utxoBuilder.totalRow")}</span>
+                <span style={{ fontWeight: 700, color: accentColor, flexShrink: 0, whiteSpace: "nowrap" }}>
+                  {fmtBTC(totalInput)}
+                </span>
+              </div>
+            </>
+          )}
+
+          {/* Divider */}
+          {hasSelection && hasAmount && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                color: withOpacity(colors.base.text.secondary, 0.3),
+                padding: "0.1rem 0",
+                minWidth: 0,
+              }}
+            >
+              <div style={{ flex: 1, height: 1, background: withOpacity(world.border.secondary, 0.12) }} />
+              <ArrowDown size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
+              <div style={{ flex: 1, height: 1, background: withOpacity(world.border.secondary, 0.12) }} />
+            </div>
+          )}
+
+          {/* Outputs */}
+          {hasAmount && (
+            <>
+              <div
+                style={{
+                  ...smallLabel,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  color: withOpacity(colors.base.text.secondary, 0.5),
+                }}
+              >
+                {t("utxoBuilder.outputs")}
+              </div>
+
+              <TxCard
+                icon={<User size={12} strokeWidth={2} />}
+                title={t("utxoBuilder.newUtxoRecipient")}
+                desc={t("utxoBuilder.recipientDesc")}
+                amount={fmtBTC(parsedAmount)}
+                tone="success"
+                toneColors={toneColors}
+                amountFontSize={amountFont}
+                baseTextSecondary={colors.base.text.secondary}
+              />
+
+              {isValid && change > 0 && (
+                <TxCard
+                  icon={<Wallet size={12} strokeWidth={2} />}
+                  title={t("utxoBuilder.newUtxoAlice")}
+                  desc={t("utxoBuilder.changeDesc")}
+                  amount={fmtBTC(change)}
+                  tone="accent"
+                  toneColors={toneColors}
+                  amountFontSize={amountFont}
+                  baseTextSecondary={colors.base.text.secondary}
+                />
+              )}
+
+              {fees > 0 && isValid && (
+                <TxCard
+                  icon={<Pickaxe size={12} strokeWidth={2} />}
+                  title={t("utxoBuilder.feesImplicit")}
+                  desc={t("utxoBuilder.feesDesc")}
+                  amount={fmtBTC(fees)}
+                  tone="muted"
+                  toneColors={toneColors}
+                  amountFontSize="0.66rem"
+                  amountOpacity={0.75}
+                  baseTextSecondary={colors.base.text.secondary}
+                />
+              )}
+            </>
+          )}
+
+          {/* Status badge */}
+          <div
+            style={{
+              ...mono,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              padding: "0.45rem 0.7rem",
+              borderRadius: "0.55rem",
+              fontSize: "0.62rem",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
+              alignSelf: "flex-start",
+              maxWidth: "100%",
+              overflowWrap: "anywhere",
+              transition: "all 0.35s var(--ease-smooth)",
+              ...(isValid
+                ? {
+                    color: successColor,
+                    background: withOpacity(successColor, 0.08),
+                    border: `1px solid ${withOpacity(successColor, 0.25)}`,
+                  }
+                : isInsufficient
+                  ? {
+                      color: errorColor,
+                      background: withOpacity(errorColor, 0.08),
+                      border: `1px solid ${withOpacity(errorColor, 0.25)}`,
+                    }
+                  : {
+                      color: colors.base.text.secondary,
+                      background: withOpacity(colors.base.border.secondary, 0.05),
+                      border: `1px solid ${withOpacity(colors.base.border.secondary, 0.12)}`,
+                    }),
+            }}
+          >
+            {isValid ? (
+              <CheckCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
+            ) : isInsufficient ? (
+              <XCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
+            ) : null}
+            <span style={{ minWidth: 0 }}>
+              {isValid
+                ? t("utxoBuilder.valid")
+                : isInsufficient
+                  ? t("utxoBuilder.insufficient")
+                  : t("utxoBuilder.selectHint")}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Reset */}
+      <button
+        onClick={reset}
+        style={{
+          ...mono,
+          alignSelf: "flex-end",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.4rem",
+          fontSize: "0.66rem",
+          fontWeight: 600,
+          padding: "0.35rem 0.75rem",
+          borderRadius: "0.5rem",
+          letterSpacing: "0.04em",
+          cursor: "pointer",
+          border: `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
+          background: "transparent",
+          color: colors.base.text.secondary,
+          transition: "all 0.25s var(--ease-smooth)",
+          whiteSpace: "nowrap",
+          maxWidth: "100%",
+        }}
+      >
+        <RefreshCw size={11} strokeWidth={2} />
+        {t("utxoBuilder.reset")}
+      </button>
+    </div>
+  );
+};

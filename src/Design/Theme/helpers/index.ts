@@ -1,0 +1,1 @@
+export { getModuleThemeColor } from './getModuleThemeColor';

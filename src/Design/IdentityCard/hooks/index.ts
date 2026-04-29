@@ -1,0 +1,1 @@
+export { useIdentityCard } from './useIdentityCard';

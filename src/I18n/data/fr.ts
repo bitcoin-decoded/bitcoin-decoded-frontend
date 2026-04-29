@@ -1,0 +1,466 @@
+const fr = {
+  // Layout
+  "header.homeAriaLabel": "Retour à la page d'accueil",
+  "nav.title": "Navigation",
+  "nav.previous": "Précédent",
+  "nav.next": "Suivant",
+  "theme.toggleAriaLabel.light": "Passer en mode sombre",
+  "theme.toggleAriaLabel.dark": "Passer en mode clair",
+  "language.toggleAriaLabel": "Switch to English",
+
+  // Components
+  "chapterPrelude.label": "Prélude",
+  "quiz.label": "Quiz",
+  "identityCard.expand": "Déplier",
+  "identityCard.collapse": "Replier",
+  "balanceSheet.assets": "ACTIF",
+  "balanceSheet.liabilities": "PASSIF",
+
+  // Simulators — buttons
+  "simulator.credit.grant": "J'accorde le prêt !",
+  "simulator.credit.retry": "Réessayer",
+  "simulator.credit.title": "BILAN COMPTABLE DE LA BANQUE DE M. QUIPAYE",
+  "simulator.compensation.start": "Démarrer la compensation",
+  "simulator.compensation.retry": "Réessayer",
+  "simulator.compensation.title": "BILAN COMPTABLE DE LA BANQUE DE M. QUIPAYE",
+  "simulator.default.simulate": "Simuler un défaut de paiement d'une valeur totale de 15 000 000 €",
+  "simulator.default.retry": "Réessayer",
+  "simulator.default.title": "ILLUSTRATION DES POINTS 1 ET 2 SUR LE BILAN COMPTABLE DE LA BANQUE",
+  "simulator.qe.buy": "Acheter massivement des obligations",
+  "simulator.qe.retry": "Réessayer",
+  "simulator.qe.bondTitle": "Coupon d'obligation d'État",
+  "simulator.qe.bondPrice": "Prix de l'obligation",
+  "simulator.qe.bondYield": "Rendement (Taux d'intérêt)",
+  "simulator.capitalChain.button": "REMONTER LE TEMPS",
+
+  // YieldCurve
+  "yieldCurve.title":
+    "Simulation de la rentabilité des banques commerciales en fonction du taux à long terme",
+  "yieldCurve.shortRate": "Taux à court terme",
+  "yieldCurve.longRate": "Taux à long terme",
+  "yieldCurve.shortRateName": "Taux Court",
+  "yieldCurve.longRateName": "Taux Long",
+  "yieldCurve.years": "Années",
+  "yieldCurve.evaluation": "Evaluation",
+
+  // MonetaryGallery
+  "monetaryGallery.history": "Son histoire :",
+  "monetaryGallery.characteristics": "Ses caractéristiques :",
+  "monetaryGallery.limitations": "Ses limitations :",
+
+  // Monetary characteristics
+  "characteristic.durability": "Durabilité",
+  "characteristic.portability": "Portabilité",
+  "characteristic.divisibility": "Divisibilité",
+  "characteristic.fungibility": "Fongibilité",
+  "characteristic.hardness": "Dureté",
+
+  // BlockchainChainVisual
+  "chain.block": "Bloc",
+  "chain.header": "En-tête",
+  "chain.body": "Corps",
+  "chain.prevHash": "Hash bloc préc.",
+  "chain.timestamp": "Horodatage",
+  "chain.note":
+    "Le hash de chaque bloc est obtenu en appliquant un double SHA-256 à son en-tête. Modifier une seule transaction dans le bloc #826 changerait sa racine de Merkle, donc le hash du bloc, ce qui invaliderait le bloc #827, puis le #828 — toute la chaîne s'effondre.",
+
+  // MiningSimulator
+  "mining.title": "Simulateur de minage",
+  "mining.target": "Cible : le hash doit commencer par",
+  "mining.button": "Tester un nonce",
+  "mining.reset": "Réinitialiser",
+  "mining.attempt": "Nonce",
+  "mining.found": "Nonce valide trouvé ! Le mineur a gagné le droit de proposer ce bloc.",
+  "mining.notFound": "Hash invalide — la cible n'est pas atteinte. Essayez encore !",
+  "mining.headerLabel": "En-tête du bloc hashé :",
+  "mining.nonce": "nonce",
+
+  // ByzantineGenerals
+  "byzantine.title": "Problème des généraux byzantins",
+  "byzantine.city": "Ville assiégée",
+  "byzantine.general": "Général",
+  "byzantine.alteredMessage": "message altéré",
+  "byzantine.prompt": "Choisissez l'ordre à envoyer aux généraux :",
+  "byzantine.attack": "Attaquer",
+  "byzantine.retreat": "Battre en retraite",
+  "byzantine.attackLabel": "ATTAQUE",
+  "byzantine.retreatLabel": "RETRAITE",
+  "byzantine.failureTitle": "❌ Échec : les généraux ne reçoivent pas tous la même information.",
+  "byzantine.failureDetail":
+    "Chacun agit en fonction de ce qu'il croit être vrai, mais sans certitude sur les autres, la coordination échoue.",
+  "byzantine.retry": "Recommencer",
+
+  // MempoolVisual
+  "mempool.subtitle": "Transactions en attente",
+  "mempool.blockLabel": "Bloc",
+  "mempool.blockSubtitle": "En-tête & transactions incluses",
+  "mempool.added": "Ajouté",
+  "mempool.empty": "— vide —",
+  "mempool.doubleSpend.prefix": "Alice tente de dépenser",
+  "mempool.doubleSpend.emphasis": "le même BTC",
+  "mempool.doubleSpend.suffix": "deux fois : une fois vers Bob, une fois vers Charlie.",
+  "mempool.invalidated.prefix": "Transaction",
+  "mempool.invalidated.emphasis": "invalidée",
+  "mempool.invalidated.suffix": ": ce BTC a déjà été dépensé dans le bloc miné.",
+  "mempool.addBlock": "Ajouter ce nouveau bloc",
+  "mempool.reset": "Réinitialiser",
+
+  // MiningRewardBlock
+  "miningReward.blockSubtitle": "En-tête + transactions sélectionnées par le mineur",
+  "miningReward.validated": "Validé",
+  "miningReward.rewardTitle": "Récompense du bloc",
+  "miningReward.rewardSubtitle": "Subvention protocolaire + frais de transaction",
+  "miningReward.subsidy": "Subvention (2026)",
+  "miningReward.fees": "Frais de transaction",
+  "miningReward.total": "Total récompense",
+  "miningReward.wallet": "Wallet mineur",
+  "miningReward.unassigned": "Récompense non attribuée",
+  "miningReward.rewarded": "Mineur récompensé",
+  "miningReward.rewardBtn": "Récompenser le mineur",
+  "miningReward.resetBtn": "Réinitialiser",
+  "miningReward.rewardNoteTitle": "Récompense reçue",
+  "miningReward.rewardNoteFees": "de frais de transaction",
+  "miningReward.rewardNoteSubsidy": "de subvention protocolaire",
+  "miningReward.rewardNoteNewBitcoin": "nouveaux bitcoins créés par ce bloc",
+
+  // HalvingChart
+  "halvingChart.title": "Récompense par bloc (BTC) — programme des halvings",
+  "halvingChart.today": "aujourd'hui",
+  "halvingChart.tooltipLabel": "Récompense",
+  "halvingChart.tooltipYear": "Année",
+  "halvingChart.caption":
+    "Chaque palier correspond à un halving (~tous les 210 000 blocs, soit ~4 ans).",
+
+  // NetworkFlywheel
+  "flywheel.step.usage": "Utilisation du réseau",
+  "flywheel.step.fees": "Frais générés",
+  "flywheel.step.miners": "Revenus mineurs",
+  "flywheel.step.security": "Sécurité du réseau",
+  "flywheel.step.value": "Valeur sécurisée",
+  "flywheel.increase": "Augmenter l'utilisation",
+  "flywheel.maxReached": "Utilisation maximale",
+  "flywheel.reset": "Réinitialiser",
+  "flywheel.taglineIdle": "Augmentez l'utilisation pour observer la propagation dans le cycle.",
+  "flywheel.tagline": "Plus le réseau est utilisé, plus il est sécurisé.",
+  "flywheel.cycleLabel": "Cycle auto-renforcé",
+
+  // UTXOTransactionBuilder
+  "utxoBuilder.title": "Construisez une transaction",
+  "utxoBuilder.step1": "1. Sélectionnez les UTXO d'Alice",
+  "utxoBuilder.step2": "2. Montant à envoyer (BTC)",
+  "utxoBuilder.placeholder": "ex : 0.75",
+  "utxoBuilder.totalInput": "Total entrées :",
+  "utxoBuilder.inputs": "Entrées",
+  "utxoBuilder.outputs": "Sorties",
+  "utxoBuilder.recipient": "Destinataire",
+  "utxoBuilder.change": "Monnaie (Alice)",
+  "utxoBuilder.fees": "Frais mineur",
+  "utxoBuilder.valid": "Transaction valide",
+  "utxoBuilder.insufficient": "Fonds insuffisants",
+  "utxoBuilder.selectHint": "Sélectionnez des UTXO et entrez un montant",
+  "utxoBuilder.reset": "Tout effacer",
+  "utxoBuilder.utxoHint":
+    "Chaque UTXO est comme une pièce indivisible dans le portefeuille d'Alice — impossible de les découper.",
+  "utxoBuilder.newUtxoRecipient": "Nouvel UTXO → Destinataire",
+  "utxoBuilder.newUtxoAlice": "Nouvel UTXO → Alice",
+  "utxoBuilder.recipientDesc": "Ce qu'il reçoit",
+  "utxoBuilder.changeDesc": "Monnaie rendue (entrées − montant − frais)",
+  "utxoBuilder.feesImplicit": "Frais implicites → Mineur",
+  "utxoBuilder.feesDesc": "Différence non attribuée, collectée par le mineur",
+  "utxoBuilder.totalRow": "Total entrées",
+
+  // SignatureVerifier
+  "sigVerifier.title": "Vérification de signature",
+  "sigVerifier.message": "Message",
+  "sigVerifier.pubkey": "Clé publique",
+  "sigVerifier.signature": "Signature",
+  "sigVerifier.tamper": "Altérer",
+  "sigVerifier.restore": "Restaurer",
+  "sigVerifier.originalHint": "Valeur originale :",
+  "sigVerifier.verify": "Vérifier la signature",
+  "sigVerifier.valid": "Signature valide",
+  "sigVerifier.invalid": "Signature invalide",
+  "sigVerifier.validDesc":
+    "Les trois éléments correspondent. Le réseau accepterait cette transaction.",
+  "sigVerifier.invalidDesc":
+    "L'un des éléments a été altéré. Le réseau rejette immédiatement cette transaction.",
+  "sigVerifier.idle": "Cliquez sur « Vérifier » pour simuler la vérification.",
+  "sigVerifier.reset": "Réinitialiser",
+
+  // SignaturePlayground
+  "signaturePlayground.title": "Nicolas QuiPaye réalise sa première transaction",
+  "signaturePlayground.subtitle":
+    "Interagissez avec les éléments ci-dessous pour comprendre le rôle de chacun.",
+  "signaturePlayground.sectionElements": "Les éléments",
+  "signaturePlayground.privateKeyLabel": "Clé privée (secrète)",
+  "signaturePlayground.publicKeyLabel": "Clé publique",
+  "signaturePlayground.messageLabel": "Message à signer",
+  "signaturePlayground.privateKeyHint":
+    "Permet de produire une signature. Ne doit jamais être partagée.",
+  "signaturePlayground.publicKeyHint":
+    "Permet au réseau de vérifier la signature. Peut être partagée.",
+  "signaturePlayground.messageHint": "Le contenu de la transaction qui sera signée.",
+  "signaturePlayground.editable": "Modifiable",
+  "signaturePlayground.readOnly": "Lecture seule",
+  "signaturePlayground.privateKeyOwner": "Connue uniquement de Nicolas",
+  "signaturePlayground.publicKeyDerivation": "Dérivée de la clé privée",
+  "signaturePlayground.derivationCaption":
+    "Cet exemple présente l'un des couples (clé privée ↔ clé publique) de Nicolas. Dans Bitcoin, chaque utilisateur peut en posséder plusieurs ; chaque couple est unique parmi des millions, irréplicable.",
+  "signaturePlayground.message": "Nicolas envoie 1 BTC à Mme Michu",
+  "signaturePlayground.statusValid": "Cette clé privée dérive bien vers cette clé publique",
+  "signaturePlayground.statusInvalid": "Cette clé privée ne dérive plus vers cette clé publique",
+  "signaturePlayground.derivationArrowLabel": "dérivation",
+  "signaturePlayground.signAction": "Réaliser la transaction",
+  "signaturePlayground.signConsumed": "Transaction signée",
+  "signaturePlayground.verifyAction": "Simuler la vérification par le réseau",
+  "signaturePlayground.verifyConsumed": "Vérification simulée",
+  "signaturePlayground.signatureValidBadge": "Signature valide",
+  "signaturePlayground.signatureInvalidBadge": "Signature invalide",
+  "signaturePlayground.signValidExpl": "Cette signature correspond à la clé publique attendue.",
+  "signaturePlayground.signInvalidExpl":
+    "Cette signature ne correspond pas à la clé publique attendue.",
+  "signaturePlayground.matchVerifyFn": "verify(message, signature, clé publique)",
+  "signaturePlayground.matchYes": "correspondent",
+  "signaturePlayground.matchNo": "ne correspondent pas",
+  "signaturePlayground.signaturePrefix": "Signature générée :",
+  "signaturePlayground.verifyMoreInfo": "en savoir plus",
+  "signaturePlayground.verifyMoreInfoUrl": "https://fr.wikipedia.org/wiki/ECDSA",
+  "signaturePlayground.networkVerifies": "Le nœud vérifie 3 entrées",
+  "signaturePlayground.rowMessage": "message",
+  "signaturePlayground.rowSignature": "signature",
+  "signaturePlayground.rowPubkey": "clé publique",
+  "signaturePlayground.acceptedBadge": "Acceptée par le réseau",
+  "signaturePlayground.rejectedBadge": "Rejetée par le réseau",
+  "signaturePlayground.acceptedExpl":
+    "Le réseau peut vérifier que cette signature a bien été produite pour ce message par la clé privée correspondante, sans connaître la clé privée elle-même.",
+  "signaturePlayground.rejectedExpl":
+    "Le réseau attendait une signature produite par la clé privée de Nicolas. Aucune clé n'est « fausse » en soi : toute autre clé privée peut signer ses propres transactions, mais ne peut jamais se substituer à Nicolas pour signer la sienne.",
+  "signaturePlayground.disclosureDerivationTitle": "Qu'est-ce qu'une dérivation ?",
+  "signaturePlayground.disclosurePrivateKeyTitle":
+    "Comment cela prouve-t-il que l'on détient la clé privée sans jamais l'exposer ?",
+  "signaturePlayground.derivationDefinition":
+    "La dérivation est un procédé mathématique à sens unique : on créé un élément à partir d'une source sans jamais pouvoir revenir en arrière. C'est l'effet « tube de dentifrice » : une fois sorti, il ne rentre plus.",
+  "signaturePlayground.pedagogyBefore": "Parce qu'il est",
+  "signaturePlayground.pedagogyHighlight": "mathématiquement impossible",
+  "signaturePlayground.pedagogyAfter":
+    "de produire une signature valide sans la clé privée correspondante. Le réseau ne vérifie pas une identité : il vérifie une preuve.",
+  "signaturePlayground.pedagogyConcretely":
+    "Concrètement, même si tout le monde voit la clé publique, personne ne peut en déduire la clé privée ni fabriquer une signature valide à votre place.",
+  "signaturePlayground.pedagogyAnalogy":
+    "C'est comme une serrure : tout le monde peut vérifier qu'une clé ouvre la porte, mais seul celui qui possède la bonne clé peut l'utiliser.",
+  "signaturePlayground.reset": "Restaurer la clé",
+
+  // SeedGenerator
+  "seedGenerator.title": "Générez votre seed",
+  "seedGenerator.subtitle":
+    "Une seed phrase est une façon simple pour un humain de représenter une information aléatoire très longue, normalement écrite en binaire.",
+  "seedGenerator.step1Label": "1. Choisissez le format",
+  "seedGenerator.step2Label": "2. Générer la seed",
+  "seedGenerator.length12": "12 mots",
+  "seedGenerator.length24": "24 mots",
+  "seedGenerator.generate": "Générer une seed",
+  "seedGenerator.regenerate": "Générer une nouvelle seed",
+  "seedGenerator.mnemonicLabelPrefix": "Phrase mnémonique",
+  "seedGenerator.binaryDisclosureTitle": "Voir ce qu'il y a derrière",
+  "seedGenerator.entropy": "Entropie",
+  "seedGenerator.checksum": "Checksum",
+  "seedGenerator.mnemonic": "Mnemonic",
+  "seedGenerator.bitsUnit": "bits",
+  "seedGenerator.wordsUnit": "mots",
+  "seedGenerator.heroQuote":
+    "Une seed phrase est une façon simple pour un humain de représenter une information aléatoire très longue, normalement écrite en binaire.",
+  "seedGenerator.noteTitle": "À retenir",
+  "seedGenerator.noteWordForm":
+    "La forme en mots est choisie pour être plus simple à retenir et à recopier qu'une longue suite binaire.",
+  "seedGenerator.noteWordList":
+    "Ces mots ne sont pas choisis librement : ils proviennent d'une liste prédéfinie de 2048 mots (standard BIP39).",
+  "seedGenerator.noteStandardLengths":
+    "En BIP39, les longueurs standard sont 12, 15, 18, 21 ou 24 mots (jamais 25).",
+  "seedGenerator.notePedagogical": "Les mots affichés ici sont des exemples pédagogiques.",
+
+  // WalletDiscoveryGame
+  "walletGame.title": "Retrouvez les fonds dans ce portefeuille",
+  "walletGame.intro":
+    "Pour cet exercice, le portefeuille ne génère que 3 clés. Une seule permet de dépenser des fonds. Saurez-vous la retrouver ?",
+  "walletGame.revealAction": "Dériver 3 paires de clés",
+  "walletGame.derivedSection": "Trois adresses dérivées de la seed",
+  "walletGame.questionLabel": "Quelle adresse permet de dépenser des fonds ?",
+  "walletGame.selectHint": "Cliquez sur l'une des cartes ci-dessus pour la sélectionner.",
+  "walletGame.selectedPrefix": "Adresse",
+  "walletGame.selectedSuffix": "sélectionnée.",
+  "walletGame.amountLabel": "Quel est le montant total contrôlé (BTC) ?",
+  "walletGame.validateAction": "Valider ma réponse",
+  "walletGame.correctTitle": "Correct",
+  "walletGame.correctMain":
+    "Cette adresse contrôle plusieurs UTXO, et leur somme constitue le montant affiché par le portefeuille.",
+  "walletGame.correctPedagogy":
+    "Chaque UTXO est verrouillé pour une adresse donnée. La clé privée correspondante permet de produire une signature valide pour les dépenser. Le portefeuille agrège ces UTXO pour afficher un montant simple.",
+  "walletGame.incorrectTitle": "Incorrect",
+  "walletGame.incorrectMain":
+    "Observez quelles adresses possèdent des UTXO et additionnez-les. Vous pouvez changer votre sélection ci-dessus puis re-valider.",
+  "walletGame.restart": "Recommencer",
+  "walletGame.disclaimer":
+    "Les clés et adresses affichées sont fictives et utilisées uniquement à des fins pédagogiques.",
+  "walletGame.cardAddressPrefix": "Adresse",
+  "walletGame.cardPrivateKey": "Clé privée",
+  "walletGame.cardPublicKey": "Clé publique",
+  "walletGame.cardAddressLabel": "Adresse",
+  "walletGame.cardUtxosLabel": "UTXO contrôlés",
+  "walletGame.cardNoUtxos": "Aucun UTXO sur cette adresse",
+  "walletGame.cardUtxoPrefix": "UTXO",
+
+  // TransactionModelComparison
+  "txComparison.bankTitle": "Banque",
+  "txComparison.bankSubtitle": "Une transaction bancaire",
+  "txComparison.bankDesc": "Un virement met à jour un solde de compte.",
+  "txComparison.bankBefore": "Avant",
+  "txComparison.bankAfter": "Après",
+  "txComparison.bankScenario": "Alice souhaite virer 1 000 € à Bob.",
+  "txComparison.bankAction": "Virement de 1 000 €",
+  "txComparison.bankSummary": "Le solde est modifié dans le registre bancaire.",
+  "txComparison.bankKeyText": "Une transaction bancaire déplace un solde.",
+  "txComparison.btcTitle": "Bitcoin",
+  "txComparison.btcSubtitle": "Une transaction Bitcoin",
+  "txComparison.btcDesc": "Une transaction consomme des UTXO et en crée de nouvelles.",
+  "txComparison.btcScenario":
+    "Alice souhaite envoyer 1,3 BTC à Bob. Elle possède deux UTXO (0,8 et 1 BTC).",
+  "txComparison.btcBefore": "Avant",
+  "txComparison.btcAfter": "Après",
+  "txComparison.btcAction": "Transaction de 1,3 BTC",
+  "txComparison.btcConsumed": "Consommés",
+  "txComparison.btcOutputs": "Nouvelles sorties",
+  "txComparison.btcSummary": "Le droit de dépenser est transféré, pas un solde.",
+  "txComparison.btcKeyText":
+    "Une transaction Bitcoin n'est pas un déplacement monétaire : c'est un transfert du droit de dépenser.",
+  "txComparison.alice": "Alice",
+  "txComparison.bob": "Bob",
+  "txComparison.change": "Change (Alice)",
+  "txComparison.fees": "Frais mineur",
+  "txComparison.simulate": "Effectuer la transaction",
+  "txComparison.reset": "Réinitialiser",
+  "txComparison.balance": "Solde",
+  "txComparison.btcInputsLabel": "ENTRÉES",
+  "txComparison.btcOutputsLabel": "NOUVELLES SORTIES",
+  "txComparison.btcLockedBy": "Verrouillé par",
+  "txComparison.btcCanSpend": "peut dépenser",
+  "txComparison.btcConsumedBadge": "CONSOMMÉ",
+  "txComparison.btcTxBox": "TRANSACTION",
+  "txComparison.btcChangeNote": "monnaie",
+  "txComparison.btcRightsDestroyed":
+    "Les anciens droits sont détruits. De nouveaux droits sont créés.",
+
+  // DifficultyAdjustment
+  "difficulty.title": "Régulation de la difficulté",
+  "difficulty.miners": "mineurs",
+  "difficulty.hashTarget": "Cible de hash",
+  "difficulty.avgTime": "Temps moyen / bloc",
+  "difficulty.hint.prefix":
+    "Peu importe le nombre de mineurs sur le réseau, la cible s'ajuste pour maintenir un bloc toutes les",
+  "difficulty.hint.emphasis": "~10 minutes",
+  "difficulty.hint.suffix": ". Plus de mineurs ⇒ plus de zéros exigés ⇒ problème plus dur.",
+
+  // Navigation tree
+  "nav.tree.bankingSystem": "Comment fonctionne l'argent",
+  "nav.tree.moneyOrigin": "D'où vient la monnaie?",
+  "nav.tree.twoLevels": "Les deux niveaux de monnaies",
+  "nav.tree.qe": "Le Quantitative Easing",
+  "nav.tree.brokenEngine": "Le moteur cassé",
+  "nav.tree.cantillon": "L'Effet Cantillon",
+  "nav.tree.inflation": "L'Inflation",
+  "nav.tree.synthesis": "En synthèse",
+  "nav.tree.moneyLaws": "Pourquoi le système échoue",
+  "nav.tree.whatIsMoney": "Qu'est-ce qu'une monnaie?",
+  "nav.tree.economicCycles": "Les cycles économiques",
+  "nav.tree.socialismProblem": "Le problème du système socialiste",
+  "nav.tree.austrianMethod": "La méthodologie autrichienne",
+  "nav.tree.orangeSynthesis": "En synthèse",
+  "nav.tree.bitcoinRevolution": "Bitcoin, la rupture",
+  "nav.tree.howBitcoinWorks": "Comment fonctionne Bitcoin?",
+  "nav.tree.whyBitcoin": "Pourquoi Bitcoin?",
+  "nav.tree.blockchain": "Anatomie de la Blockchain",
+  "nav.tree.proofOfWork": "La preuve de travail",
+  "nav.tree.rewardAndHalving": "La récompense et le halving",
+  "nav.tree.utxoAndTransactions": "Transactions et modèle UTXO",
+  "nav.tree.keysAndSignatures": "Clés, adresses et signatures",
+  "nav.tree.walletsAndSeed": "Portefeuilles, seed et dérivation",
+  "nav.tree.getStarted": "Démarrez avec Bitcoin!",
+
+  // Footer
+  "footer.builtWith": "Construit avec",
+  "footer.inspiredBy": "Inspiré par le travail de",
+
+  // HomePage — Hero
+  "home.hero.headline": "L'argent que vous utilisez... vous ne le comprenez pas vraiment.",
+  "home.hero.subheadline":
+    "Comprendre Bitcoin, c'est d'abord comprendre comment fonctionne l'argent aujourd'hui.",
+  "home.hero.ctaPrimary": "Commencer le parcours",
+  "home.hero.ctaSecondary": "Voir le programme",
+
+  // HomePage — Section 1: Hook
+  "home.hook.title": "Quelque chose ne colle pas.",
+  "home.hook.line1": "Votre épargne diminue.",
+  "home.hook.line2": "Les prix augmentent.",
+  "home.hook.line3": "Les règles changent.",
+  "home.hook.bridgeP1": "Et pourtant…",
+  "home.hook.bridgeP2": "personne ne vous explique vraiment pourquoi.",
+
+  // HomePage — Section 2: Positioning
+  "home.positioning.title": "Ce site n'explique pas Bitcoin. Il remonte plus loin.",
+  "home.positioning.comparisonP1": "Comprendre Bitcoin sans comprendre l'argent,",
+  "home.positioning.comparisonP2": "c'est comme lire la fin sans connaître l'histoire.",
+  "home.positioning.flip": "Ici, on fait l'inverse.",
+
+  // HomePage — Section 3: Journey (3 cards)
+  "home.journey.title": "Un parcours en 3 modules",
+  "home.journey.step1.label": "Module 1",
+  "home.journey.step1.title": "Le Problème",
+  "home.journey.step1.desc":
+    "Pourquoi votre épargne perd-elle de la valeur ?\nComment l'argent est-il créé ?",
+  "home.journey.step2.label": "Module 2",
+  "home.journey.step2.title": "Les Lois",
+  "home.journey.step2.desc":
+    "Qu'est-ce qui fait une « bonne » monnaie ?\nLes règles invisibles qui gouvernent tout.",
+  "home.journey.step3.label": "Module 3",
+  "home.journey.step3.title": "Bitcoin",
+  "home.journey.step3.desc":
+    "Une autre façon de concevoir l'argent.\nEt ce que cela change vraiment.",
+  "home.journey.cardCta": "Voir ce module",
+
+  // HomePage — Section 4: Audience
+  "home.audience.title": "Ce parcours est pour vous si…",
+  "home.audience.item1": "Vous voulez comprendre sans vous perdre.",
+  "home.audience.item2": "Vous sentez que « l'argent » est important... sans savoir pourquoi.",
+  "home.audience.item3": "Vous en avez marre des explications floues.",
+  "home.audience.item4": "Vous préférez comprendre avant d'avoir un avis.",
+
+  // HomePage — Section 5: Promise
+  "home.promise.title": "Ce que vous allez obtenir",
+  "home.promise.intro": "À la fin du parcours :",
+  "home.promise.item1": "Vous verrez Bitcoin beaucoup plus clairement.",
+  "home.promise.item2": "Vous comprendrez ce qu'il change vraiment.",
+  "home.promise.item3": "Et surtout... pourquoi il existe.",
+
+  // HomePage — Section 6: Differentiation
+  "home.differentiation.neg1": "Ici, pas de jargon inutile.",
+  "home.differentiation.neg2": "Pas de discours militant.",
+  "home.differentiation.neg3": "Pas de simplification trompeuse.",
+  "home.differentiation.posIntro": "Juste un objectif :",
+  "home.differentiation.pos": "vous faire comprendre.",
+
+  // HomePage — Section 7: Philosophy quote
+  "home.philosophy.quote":
+    "Le problème fondamental des monnaies traditionnelles, c'est toute la confiance qu'elles exigent.",
+
+  // HomePage — Section 8: Final CTA
+  "home.finalCta.titleP1": "Accès totalement libre et gratuit.",
+  "home.finalCta.titleP2": "La curiosité est votre seul guide.",
+  "home.finalCta.button": "Commencer le parcours",
+
+  // Footer
+  "footer.donateMessage": "Si ce projet vous plaît, soutenez-le en sats.",
+  "footer.copy": "Copier",
+  "footer.copied": "Copié !",
+  "footer.copyright": "© 2026 — Bitcoin.Decoded",
+} as const;
+
+export default fr;
