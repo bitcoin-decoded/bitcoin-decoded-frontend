@@ -12,7 +12,7 @@ import {
   Wallet,
 } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import { Badge, Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useMiningReward } from "../hooks";
@@ -185,26 +185,6 @@ export const MiningRewardBlock: FC = () => {
     transition: "color 0.5s var(--ease-smooth)",
   };
 
-  const statusBadge: CSSProperties = {
-    ...mono,
-    display: "flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    fontSize: isMobile ? "0.58rem" : "0.62rem",
-    fontWeight: 600,
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-    padding: "0.35rem 0.55rem",
-    borderRadius: "0.5rem",
-    color: rewarded ? successColor : colors.base.text.secondary,
-    background: rewarded
-      ? withOpacity(successColor, 0.09)
-      : withOpacity(world.border.secondary, 0.05),
-    border: `1px solid ${withOpacity(rewarded ? successColor : world.border.secondary, rewarded ? 0.25 : 0.12)}`,
-    transition: "all 0.5s var(--ease-smooth)",
-    alignSelf: "flex-start",
-  };
-
   const rewardNoteStyle: CSSProperties = {
     ...mono,
     fontSize: isMobile ? "0.59rem" : "0.62rem",
@@ -333,16 +313,13 @@ export const MiningRewardBlock: FC = () => {
             <span style={walletAmount}>{fmtBTC(minerBalance)}</span>
           </div>
 
-          <div style={statusBadge}>
-            {rewarded ? (
-              <>
-                <CircleCheck size={12} strokeWidth={2} />
-                {t("miningReward.rewarded")}
-              </>
-            ) : (
-              <>{t("miningReward.unassigned")}</>
-            )}
-          </div>
+          <Badge
+            tone={rewarded ? "success" : "neutral"}
+            icon={rewarded ? <CircleCheck size={12} strokeWidth={2} /> : undefined}
+            style={{ alignSelf: "flex-start" }}
+          >
+            {rewarded ? t("miningReward.rewarded") : t("miningReward.unassigned")}
+          </Badge>
 
           {/* Button + confetti wrapper */}
           <div style={{ position: "relative" }}>

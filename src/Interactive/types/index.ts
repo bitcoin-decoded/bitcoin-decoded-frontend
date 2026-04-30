@@ -6,7 +6,6 @@ export type { FlipCardItem } from "./FlipCardItem";
 export type {
   FieldTone,
   ValueKind,
-  StatusTone,
   ActionButtonVariant,
   SigPlaygroundColors,
 } from "./SignaturePlayground";

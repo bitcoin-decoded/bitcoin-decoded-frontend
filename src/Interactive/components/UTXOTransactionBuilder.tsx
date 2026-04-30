@@ -12,7 +12,7 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import { Badge, Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useUTXOBuilder } from "../hooks";
@@ -415,54 +415,23 @@ export const UTXOTransactionBuilder: FC = () => {
           )}
 
           {/* Status badge */}
-          <div
-            style={{
-              ...mono,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.4rem",
-              padding: "0.45rem 0.7rem",
-              borderRadius: "0.55rem",
-              fontSize: "0.62rem",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-              alignSelf: "flex-start",
-              maxWidth: "100%",
-              overflowWrap: "anywhere",
-              transition: "all 0.35s var(--ease-smooth)",
-              ...(isValid
-                ? {
-                    color: successColor,
-                    background: withOpacity(successColor, 0.08),
-                    border: `1px solid ${withOpacity(successColor, 0.25)}`,
-                  }
-                : isInsufficient
-                  ? {
-                      color: errorColor,
-                      background: withOpacity(errorColor, 0.08),
-                      border: `1px solid ${withOpacity(errorColor, 0.25)}`,
-                    }
-                  : {
-                      color: colors.base.text.secondary,
-                      background: withOpacity(colors.base.border.secondary, 0.05),
-                      border: `1px solid ${withOpacity(colors.base.border.secondary, 0.12)}`,
-                    }),
-            }}
+          <Badge
+            tone={isValid ? "success" : isInsufficient ? "error" : "neutral"}
+            icon={
+              isValid ? (
+                <CheckCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
+              ) : isInsufficient ? (
+                <XCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
+              ) : undefined
+            }
+            style={{ alignSelf: "flex-start", padding: "0.45rem 0.7rem", overflowWrap: "anywhere", whiteSpace: "normal" }}
           >
-            {isValid ? (
-              <CheckCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
-            ) : isInsufficient ? (
-              <XCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
-            ) : null}
-            <span style={{ minWidth: 0 }}>
-              {isValid
-                ? t("utxoBuilder.valid")
-                : isInsufficient
-                  ? t("utxoBuilder.insufficient")
-                  : t("utxoBuilder.selectHint")}
-            </span>
-          </div>
+            {isValid
+              ? t("utxoBuilder.valid")
+              : isInsufficient
+                ? t("utxoBuilder.insufficient")
+                : t("utxoBuilder.selectHint")}
+          </Badge>
         </div>
       )}
 

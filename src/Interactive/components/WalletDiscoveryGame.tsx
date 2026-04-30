@@ -8,7 +8,7 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
@@ -59,22 +59,6 @@ export const WalletDiscoveryGame: FC = () => {
     letterSpacing: "0.08em",
     color: withOpacity(baseTextSecondary, 0.55),
     marginBottom: "0.55rem",
-  };
-
-  const verdictPanelStyle = (kind: "success" | "error"): CSSProperties => {
-    const c = kind === "success" ? successColor : errorColor;
-    return {
-      display: "flex",
-      flexDirection: "column",
-      gap: "0.5rem",
-      padding: "0.85rem 0.95rem",
-      borderRadius: "0.7rem",
-      border: `1px solid ${withOpacity(c, 0.32)}`,
-      background: withOpacity(c, 0.06),
-      transition: "all 0.35s var(--ease-smooth)",
-      minWidth: 0,
-      boxSizing: "border-box",
-    };
   };
 
   const inputStyle: CSSProperties = {
@@ -232,22 +216,11 @@ export const WalletDiscoveryGame: FC = () => {
 
           {/* Verdict */}
           {stage === "validated" && verdict === "correct" && (
-            <div style={verdictPanelStyle("success")}>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  fontSize: "0.7rem",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                  color: successColor,
-                }}
-              >
-                <CheckCircle size={14} strokeWidth={2.5} />
-                {t("walletGame.correctTitle")}
-              </div>
+            <FeedbackPanel
+              tone="success"
+              icon={<CheckCircle size={14} strokeWidth={2.5} />}
+              title={t("walletGame.correctTitle")}
+            >
               <p style={{ fontSize: "0.7rem", lineHeight: 1.55, color: basePrimaryText, margin: 0 }}>
                 {t("walletGame.correctMain")}
               </p>
@@ -256,35 +229,24 @@ export const WalletDiscoveryGame: FC = () => {
                   fontSize: "0.66rem",
                   lineHeight: 1.55,
                   color: withOpacity(baseTextSecondary, 0.85),
-                  margin: 0,
+                  margin: "0.4rem 0 0 0",
                 }}
               >
                 {t("walletGame.correctPedagogy")}
               </p>
-            </div>
+            </FeedbackPanel>
           )}
 
           {stage === "validated" && verdict === "incorrect" && (
-            <div style={verdictPanelStyle("error")}>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  fontSize: "0.7rem",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                  color: errorColor,
-                }}
-              >
-                <XCircle size={14} strokeWidth={2.5} />
-                {t("walletGame.incorrectTitle")}
-              </div>
+            <FeedbackPanel
+              tone="error"
+              icon={<XCircle size={14} strokeWidth={2.5} />}
+              title={t("walletGame.incorrectTitle")}
+            >
               <p style={{ fontSize: "0.7rem", lineHeight: 1.55, color: basePrimaryText, margin: 0 }}>
                 {t("walletGame.incorrectMain")}
               </p>
-            </div>
+            </FeedbackPanel>
           )}
 
           {/* Reset / restart — visible whenever cards are revealed */}

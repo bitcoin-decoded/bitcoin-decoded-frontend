@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 import { CheckCircle, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { type SigField, ORIGINAL_VALUES, useSignatureVerifier } from "../hooks/useSignatureVerifier";
@@ -12,7 +12,6 @@ export const SignatureVerifier: FC = () => {
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
-  const successColor = colors.semantic.success.text;
   const errorColor = colors.semantic.error?.text ?? "#ef4444";
 
   const { tampered, status, toggle, verify, reset, getValue } = useSignatureVerifier();
@@ -77,50 +76,6 @@ export const SignatureVerifier: FC = () => {
     transition: "all 0.25s var(--ease-smooth)",
   });
 
-  const resultPanel: CSSProperties = {
-    padding: "0.75rem 0.9rem",
-    borderRadius: "0.65rem",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.35rem",
-    transition: "all 0.35s var(--ease-smooth)",
-    ...(status === "valid"
-      ? {
-          background: withOpacity(successColor, 0.07),
-          border: `1px solid ${withOpacity(successColor, 0.3)}`,
-        }
-      : status === "invalid"
-        ? {
-            background: withOpacity(errorColor, 0.07),
-            border: `1px solid ${withOpacity(errorColor, 0.3)}`,
-          }
-        : {
-            background: withOpacity(colors.base.border.secondary, 0.04),
-            border: `1px solid ${withOpacity(colors.base.border.secondary, 0.1)}`,
-          }),
-  };
-
-  const resultTitle: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-    fontSize: "0.72rem",
-    fontWeight: 700,
-    color:
-      status === "valid"
-        ? successColor
-        : status === "invalid"
-          ? errorColor
-          : colors.base.text.secondary,
-    transition: "color 0.3s var(--ease-smooth)",
-  };
-
-  const resultDesc: CSSProperties = {
-    fontSize: "0.66rem",
-    lineHeight: 1.55,
-    color: colors.base.text.secondary,
-  };
-
   return (
     <SurfaceCard margin={isMobile ? "1.5rem 0" : "2rem 0"} style={mono}>
       <Caption tone="accent" size="md">
@@ -167,24 +122,28 @@ export const SignatureVerifier: FC = () => {
       </Button>
 
       {/* Result */}
-      <div style={resultPanel}>
-        <div style={resultTitle}>
-          {status === "valid" && <ShieldCheck size={14} strokeWidth={2} />}
-          {status === "invalid" && <ShieldAlert size={14} strokeWidth={2} />}
-          {status === "valid"
+      <FeedbackPanel
+        tone={status === "valid" ? "success" : status === "invalid" ? "error" : "neutral"}
+        icon={
+          status === "valid"
+            ? <ShieldCheck size={14} strokeWidth={2} />
+            : status === "invalid"
+              ? <ShieldAlert size={14} strokeWidth={2} />
+              : undefined
+        }
+        title={
+          status === "valid"
             ? t("sigVerifier.valid")
             : status === "invalid"
               ? t("sigVerifier.invalid")
-              : t("sigVerifier.idle")}
-        </div>
-        {status !== "idle" && (
-          <div style={resultDesc}>
-            {status === "valid"
-              ? t("sigVerifier.validDesc")
-              : t("sigVerifier.invalidDesc")}
-          </div>
-        )}
-      </div>
+              : t("sigVerifier.idle")
+        }
+      >
+        {status !== "idle" &&
+          (status === "valid"
+            ? t("sigVerifier.validDesc")
+            : t("sigVerifier.invalidDesc"))}
+      </FeedbackPanel>
 
       <Button
         variant="secondary"

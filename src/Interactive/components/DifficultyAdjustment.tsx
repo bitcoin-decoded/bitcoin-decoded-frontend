@@ -1,7 +1,7 @@
 import { type FC, type CSSProperties } from "react";
 import { Minus, Plus, Users, Target, Timer } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useDifficultyAdjustment } from "../hooks";
@@ -61,14 +61,6 @@ export const DifficultyAdjustment: FC = () => {
     ...metricValue, color: colors.semantic.success.text,
   };
 
-  const hint: CSSProperties = {
-    ...mono, fontSize: isMobile ? "0.6rem" : "0.65rem", lineHeight: 1.55,
-    padding: "0.6rem 0.85rem", borderRadius: "0.6rem",
-    color: colors.base.text.primary,
-    background: withOpacity(colors.semantic.info.text, 0.06),
-    border: `1px solid ${withOpacity(colors.semantic.info.text, 0.15)}`,
-  };
-
   return (
     <SurfaceCard gap="0.85rem" margin={isMobile ? "1.5rem 0" : "2rem 0"}>
       <Caption tone="world" size="md" icon={<Users size={isMobile ? 16 : 18} strokeWidth={2} />}>
@@ -118,9 +110,9 @@ export const DifficultyAdjustment: FC = () => {
         </div>
       </div>
 
-      <div style={hint}>
+      <FeedbackPanel tone="info">
         {t("difficulty.hint.prefix")} <b>{t("difficulty.hint.emphasis")}</b>{t("difficulty.hint.suffix")}
-      </div>
+      </FeedbackPanel>
     </SurfaceCard>
   );
 };
