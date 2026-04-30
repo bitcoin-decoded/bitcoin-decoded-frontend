@@ -3,7 +3,7 @@ import { NavBar } from "./NavBar";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { NavDrawer } from "./NavDrawer";
-import { ReadingProgressBar } from "../../../Page";
+import { ReadingProgressBar, ScrollToTopButton } from "../../../Page";
 import { useThemeContext, THEME_COLORS } from "../../Theme";
 import { useBreakpoint } from "../../Responsive";
 import { useRouterContext, ROUTE_NAME } from "../../../Routing";
@@ -100,6 +100,7 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
         <main style={mainContentStyle}>{children}</main>
       </div>
       <Footer breakpoint={breakpoint} />
+      {isChapterPage && <ScrollToTopButton />}
     </div>
   );
 };

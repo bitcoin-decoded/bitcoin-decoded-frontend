@@ -6,9 +6,15 @@ import { AudioLines } from "lucide-react";
 
 type ChapterPreludeProps = {
   children: ReactNode;
+  /**
+   * Bottom margin between the prelude and whatever follows. Driven by
+   * `PageTemplate`'s vertical rhythm system — passing `undefined` leaves
+   * spacing to the parent flow.
+   */
+  marginBottom?: string;
 };
 
-export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children }) => {
+export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { t } = useTranslation();
   const breakpoint = useBreakpoint();
@@ -25,8 +31,7 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children }) => {
     background: `linear-gradient(135deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary} 70%)`,
     borderLeft: `3px solid ${accentColor}`,
     boxShadow: `0 4px 24px ${withOpacity(accentColor, 0.08)}, 0 1px 4px ${withOpacity(accentColor, 0.06)}`,
-    marginTop: "1rem",
-    marginBottom: isMobile ? "2rem" : "3rem",
+    marginBottom,
   };
 
   const iconContainerStyle: CSSProperties = {

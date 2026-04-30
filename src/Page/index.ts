@@ -31,11 +31,13 @@ export {
   PageNavigation,
   ReadingTimeBadge,
   ReadingProgressBar,
+  ScrollToTopButton,
   PAGE_STYLES,
   PAGE_METADATA,
   useToggleSimulator,
   useReadingTime,
   useReadingProgress,
+  useScrollToTop,
   getReadingTime,
 } from "./Shared";
 export type { ReadingTimeEstimate, PageMetadata, PageMetadataMap } from "./Shared";
