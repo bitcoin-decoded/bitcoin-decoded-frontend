@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 import { CheckCircle, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
 
-import { useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { type SigField, ORIGINAL_VALUES, useSignatureVerifier } from "../hooks/useSignatureVerifier";
@@ -12,7 +12,6 @@ export const SignatureVerifier: FC = () => {
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
-  const accentColor = world.border.secondary;
   const successColor = colors.semantic.success.text;
   const errorColor = colors.semantic.error?.text ?? "#ef4444";
 
@@ -23,25 +22,6 @@ export const SignatureVerifier: FC = () => {
     { key: "pubkey", label: t("sigVerifier.pubkey") },
     { key: "signature", label: t("sigVerifier.signature") },
   ];
-
-  const container: CSSProperties = {
-    ...mono,
-    display: "flex",
-    flexDirection: "column",
-    gap: "1rem",
-    padding: isMobile ? "1.25rem" : "1.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-    margin: isMobile ? "1.5rem 0" : "2rem 0",
-  };
-
-  const titleStyle: CSSProperties = {
-    fontSize: "0.74rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
-    color: world.text.primary,
-  };
 
   const fieldRow: CSSProperties = {
     display: "flex",
@@ -97,25 +77,6 @@ export const SignatureVerifier: FC = () => {
     transition: "all 0.25s var(--ease-smooth)",
   });
 
-  const verifyBtn: CSSProperties = {
-    ...mono,
-    cursor: "pointer",
-    padding: isMobile ? "0.6rem 1rem" : "0.65rem 1.25rem",
-    borderRadius: "0.65rem",
-    fontSize: isMobile ? "0.72rem" : "0.76rem",
-    fontWeight: 700,
-    letterSpacing: "0.05em",
-    textTransform: "uppercase",
-    border: `1.5px solid ${withOpacity(accentColor, 0.55)}`,
-    background: `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.12)}, transparent)`,
-    color: world.text.primary,
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    justifyContent: "center",
-    transition: "all 0.3s var(--ease-smooth)",
-  };
-
   const resultPanel: CSSProperties = {
     padding: "0.75rem 0.9rem",
     borderRadius: "0.65rem",
@@ -160,29 +121,11 @@ export const SignatureVerifier: FC = () => {
     color: colors.base.text.secondary,
   };
 
-  const resetBtn: CSSProperties = {
-    ...mono,
-    alignSelf: "flex-end",
-    cursor: "pointer",
-    padding: "0.35rem 0.7rem",
-    borderRadius: "0.5rem",
-    fontSize: "0.66rem",
-    fontWeight: 600,
-    border: `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
-    background: "transparent",
-    color: colors.base.text.secondary,
-    display: "flex",
-    alignItems: "center",
-    gap: "0.35rem",
-    transition: "all 0.25s var(--ease-smooth)",
-  };
-
   return (
-    <div
-      className="gradient-border"
-      style={{ ...container, "--border-glow-color": accentColor } as CSSProperties}
-    >
-      <div style={titleStyle}>{t("sigVerifier.title")}</div>
+    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2rem 0"} style={mono}>
+      <Caption tone="accent" size="md">
+        {t("sigVerifier.title")}
+      </Caption>
 
       {/* Field rows */}
       {FIELDS.map(({ key, label }) => {
@@ -214,10 +157,14 @@ export const SignatureVerifier: FC = () => {
       )}
 
       {/* Verify button */}
-      <button style={verifyBtn} onClick={verify}>
-        <ShieldCheck size={14} strokeWidth={2} />
+      <Button
+        variant="primary"
+        icon={<ShieldCheck size={14} strokeWidth={2} />}
+        onClick={verify}
+        style={{ letterSpacing: "0.05em", textTransform: "uppercase" }}
+      >
         {t("sigVerifier.verify")}
-      </button>
+      </Button>
 
       {/* Result */}
       <div style={resultPanel}>
@@ -239,10 +186,15 @@ export const SignatureVerifier: FC = () => {
         )}
       </div>
 
-      <button style={resetBtn} onClick={reset}>
-        <RefreshCw size={11} strokeWidth={2} />
+      <Button
+        variant="secondary"
+        size="sm"
+        icon={<RefreshCw size={11} strokeWidth={2} />}
+        onClick={reset}
+        style={{ alignSelf: "flex-end" }}
+      >
         {t("sigVerifier.reset")}
-      </button>
-    </div>
+      </Button>
+    </SurfaceCard>
   );
 };

@@ -16,7 +16,7 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { Disclosure, useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, Disclosure, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useSignaturePlayground } from "../hooks/useSignaturePlayground";
@@ -60,26 +60,9 @@ export const SignaturePlayground: FC = () => {
   // an internal opaque value for state purposes.
   const displayMessage = t("signaturePlayground.message");
 
-  // ── Container & one-off styles ─────────────────────────────────────────────
+  // ── One-off styles ─────────────────────────────────────────────────────────
 
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
-
-  const containerStyle: CSSProperties = {
-    ...mono,
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.1rem",
-    padding: isMobile ? "1.1rem" : "1.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${themeColors.base.background.primary})`,
-    margin: isMobile ? "1.5rem 0" : "2rem 0",
-    width: "100%",
-    maxWidth: "100%",
-    boxSizing: "border-box",
-    overflow: "hidden",
-    // Override MainLayout's desktop "text-align: justify" — looks awkward in narrow cards
-    textAlign: "left",
-  };
 
   const sectionLabel: CSSProperties = {
     fontSize: "0.6rem",
@@ -119,54 +102,30 @@ export const SignaturePlayground: FC = () => {
     lineHeight: 1.5,
   };
 
-  const resetBtnStyle: CSSProperties = {
-    ...mono,
-    alignSelf: "flex-end",
-    cursor: "pointer",
-    padding: "0.4rem 0.8rem",
-    borderRadius: "0.5rem",
-    fontSize: "0.66rem",
-    fontWeight: 600,
-    letterSpacing: "0.04em",
-    border: `1px solid ${withOpacity(colors.baseBorderSecondary, 0.25)}`,
-    background: "transparent",
-    color: colors.baseTextSecondary,
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    whiteSpace: "nowrap",
-    transition: "all 0.25s var(--ease-smooth)",
-  };
-
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <div
-      className="gradient-border"
-      style={{ ...containerStyle, "--border-glow-color": colors.accentColor } as CSSProperties}
+    <SurfaceCard
+      gap="1.1rem"
+      margin={isMobile ? "1.5rem 0" : "2rem 0"}
+      style={{ ...mono, overflow: "hidden", textAlign: "left" }}
     >
       {/* Header */}
       <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", minWidth: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", minWidth: 0 }}>
-          <UserCheck
-            size={isMobile ? 17 : 18}
-            strokeWidth={2}
-            style={{ color: colors.accentColor, flexShrink: 0 }}
-          />
-          <span
-            style={{
-              fontSize: isMobile ? "0.74rem" : "0.8rem",
-              fontWeight: 700,
-              color: colors.basePrimaryText,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              minWidth: 0,
-              overflowWrap: "anywhere",
-            }}
-          >
-            {t("signaturePlayground.title")}
-          </span>
-        </div>
+        <Caption
+          tone="accent"
+          size="md"
+          icon={
+            <UserCheck
+              size={isMobile ? 17 : 18}
+              strokeWidth={2}
+              style={{ color: colors.accentColor, flexShrink: 0 }}
+            />
+          }
+          style={{ minWidth: 0, overflowWrap: "anywhere" }}
+        >
+          {t("signaturePlayground.title")}
+        </Caption>
         <span
           style={{
             fontSize: "0.66rem",
@@ -585,10 +544,15 @@ export const SignaturePlayground: FC = () => {
       </Disclosure>
 
       {/* Reset */}
-      <button style={resetBtnStyle} onClick={reset}>
-        <RefreshCw size={11} strokeWidth={2} />
+      <Button
+        variant="secondary"
+        size="sm"
+        icon={<RefreshCw size={11} strokeWidth={2} />}
+        onClick={reset}
+        style={{ alignSelf: "flex-end" }}
+      >
         {t("signaturePlayground.reset")}
-      </button>
-    </div>
+      </Button>
+    </SurfaceCard>
   );
 };

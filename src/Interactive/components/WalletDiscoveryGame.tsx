@@ -8,7 +8,7 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
@@ -45,89 +45,11 @@ export const WalletDiscoveryGame: FC = () => {
 
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
-  const containerStyle: CSSProperties = {
-    ...mono,
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.1rem",
-    padding: isMobile ? "1.1rem" : "1.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${themeColors.base.background.primary})`,
-    margin: isMobile ? "1.5rem 0" : "2rem 0",
-    width: "100%",
-    maxWidth: "100%",
-    boxSizing: "border-box",
-    overflow: "hidden",
-    textAlign: "left",
-  };
-
-  const headerStyle: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.55rem",
-    minWidth: 0,
-  };
-
-  const titleStyle: CSSProperties = {
-    fontSize: isMobile ? "0.74rem" : "0.8rem",
-    fontWeight: 700,
-    color: basePrimaryText,
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-    minWidth: 0,
-    overflowWrap: "anywhere",
-  };
-
   const introStyle: CSSProperties = {
     fontSize: "0.7rem",
     lineHeight: 1.55,
     color: withOpacity(baseTextSecondary, 0.85),
     margin: 0,
-  };
-
-  // Style aligned with the rest of the Bitcoin section (cf. ByzantineGenerals,
-  // chapter 4): subtle gradient + accent border, no saturated background.
-  const primaryBtnStyle = (active = true): CSSProperties => ({
-    ...mono,
-    alignSelf: "flex-start",
-    cursor: active ? "pointer" : "default",
-    padding: isMobile ? "0.6rem 1.25rem" : "0.7rem 1.5rem",
-    borderRadius: "0.75rem",
-    fontSize: isMobile ? "0.72rem" : "0.78rem",
-    fontWeight: 600,
-    letterSpacing: "0.04em",
-    color: active ? basePrimaryText : withOpacity(baseTextSecondary, 0.55),
-    background: active
-      ? `linear-gradient(135deg, ${withOpacity(accentColor, 0.12)}, transparent)`
-      : withOpacity(baseBorderSecondary, 0.04),
-    border: active
-      ? `1.5px solid ${withOpacity(accentColor, 0.55)}`
-      : `1px dashed ${withOpacity(baseBorderSecondary, 0.25)}`,
-    boxShadow: "none",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    whiteSpace: isMobile ? "normal" : "nowrap",
-    transition: "all 0.3s var(--ease-smooth)",
-  });
-
-  const ghostBtnStyle: CSSProperties = {
-    ...mono,
-    alignSelf: "flex-end",
-    cursor: "pointer",
-    padding: "0.4rem 0.8rem",
-    borderRadius: "0.5rem",
-    fontSize: "0.66rem",
-    fontWeight: 600,
-    letterSpacing: "0.04em",
-    border: `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,
-    background: "transparent",
-    color: baseTextSecondary,
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    whiteSpace: "nowrap",
-    transition: "all 0.25s var(--ease-smooth)",
   };
 
   const sectionLabelStyle: CSSProperties = {
@@ -175,28 +97,39 @@ export const WalletDiscoveryGame: FC = () => {
   const validateReady = selectedCardId !== null && amountInput.trim() !== "";
 
   return (
-    <div
-      className="gradient-border"
-      style={{ ...containerStyle, "--border-glow-color": accentColor } as CSSProperties}
+    <SurfaceCard
+      gap="1.1rem"
+      margin={isMobile ? "1.5rem 0" : "2rem 0"}
+      style={{ ...mono, overflow: "hidden", textAlign: "left" }}
     >
       {/* Header */}
-      <div style={headerStyle}>
-        <Wallet
-          size={isMobile ? 17 : 18}
-          strokeWidth={2}
-          style={{ color: accentColor, flexShrink: 0 }}
-        />
-        <span style={titleStyle}>{t("walletGame.title")}</span>
-      </div>
+      <Caption
+        tone="accent"
+        size="md"
+        icon={
+          <Wallet
+            size={isMobile ? 17 : 18}
+            strokeWidth={2}
+            style={{ color: accentColor, flexShrink: 0 }}
+          />
+        }
+        style={{ minWidth: 0, overflowWrap: "anywhere" }}
+      >
+        {t("walletGame.title")}
+      </Caption>
 
       <p style={introStyle}>{t("walletGame.intro")}</p>
 
       {/* Stage: idle — only the reveal button is shown */}
       {stage === "idle" && (
-        <button style={primaryBtnStyle(true)} onClick={reveal}>
-          <KeyRound size={14} strokeWidth={2.2} />
+        <Button
+          variant="primary"
+          icon={<KeyRound size={14} strokeWidth={2.2} />}
+          onClick={reveal}
+          style={{ alignSelf: "flex-start" }}
+        >
           {t("walletGame.revealAction")}
-        </button>
+        </Button>
       )}
 
       {/* Stage: revealed or validated — full game UI */}
@@ -286,14 +219,15 @@ export const WalletDiscoveryGame: FC = () => {
               />
             </div>
 
-            <button
-              style={primaryBtnStyle(validateReady && !isLocked)}
+            <Button
+              variant="primary"
+              icon={<Sparkles size={14} strokeWidth={2.2} />}
               onClick={validate}
               disabled={!validateReady || isLocked}
+              style={{ alignSelf: "flex-start" }}
             >
-              <Sparkles size={14} strokeWidth={2.2} />
               {t("walletGame.validateAction")}
-            </button>
+            </Button>
           </div>
 
           {/* Verdict */}
@@ -354,10 +288,15 @@ export const WalletDiscoveryGame: FC = () => {
           )}
 
           {/* Reset / restart — visible whenever cards are revealed */}
-          <button style={ghostBtnStyle} onClick={restart}>
-            <RefreshCw size={11} strokeWidth={2} />
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={<RefreshCw size={11} strokeWidth={2} />}
+            onClick={restart}
+            style={{ alignSelf: "flex-end" }}
+          >
             {t("walletGame.restart")}
-          </button>
+          </Button>
         </>
       )}
 
@@ -373,6 +312,6 @@ export const WalletDiscoveryGame: FC = () => {
       >
         {t("walletGame.disclaimer")}
       </p>
-    </div>
+    </SurfaceCard>
   );
 };
