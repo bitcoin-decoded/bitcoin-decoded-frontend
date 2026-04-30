@@ -1,9 +1,10 @@
 import { type FC, type CSSProperties } from "react";
-import { usePageTheme, useBreakpoint } from "../../Design";
+import { Swords, ShieldOff, RotateCcw, Castle } from "lucide-react";
+
+import { Button, Caption, SurfaceCard, usePageTheme, useBreakpoint } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useByzantineGenerals } from "../hooks";
-import { Swords, ShieldOff, RotateCcw, Castle } from "lucide-react";
 
 const SUFFIXES = ["A", "B", "C", "D"];
 
@@ -16,19 +17,6 @@ export const ByzantineGenerals: FC = () => {
 
   const labels = SUFFIXES.map((s) => `${t("byzantine.general")} ${s}`);
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
-
-  const container: CSSProperties = {
-    ...mono, display: "flex", flexDirection: "column", gap: "1rem",
-    padding: isMobile ? "1.25rem" : "1.5rem", borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-    margin: isMobile ? "1.5rem 0" : "2rem 0",
-  };
-
-  const header: CSSProperties = {
-    ...mono, fontSize: isMobile ? "0.72rem" : "0.8rem", fontWeight: 700,
-    textTransform: "uppercase", letterSpacing: "0.05em", color: world.text.secondary,
-    display: "flex", alignItems: "center", gap: "0.5rem",
-  };
 
   const cityStyle: CSSProperties = {
     display: "flex", alignItems: "center", justifyContent: "center",
@@ -73,21 +61,6 @@ export const ByzantineGenerals: FC = () => {
     color: colors.semantic.error.text, opacity: 0.8,
   };
 
-  const btnBase: CSSProperties = {
-    ...mono, fontSize: isMobile ? "0.72rem" : "0.78rem", fontWeight: 600,
-    padding: isMobile ? "0.6rem 1.25rem" : "0.7rem 1.5rem", borderRadius: "0.75rem",
-    letterSpacing: "0.04em", cursor: "pointer", display: "flex",
-    alignItems: "center", gap: "0.5rem", justifyContent: "center",
-    transition: "all 0.3s var(--ease-smooth)", border: "none",
-  };
-
-  const actionBtn = (variant: "attack" | "retreat"): CSSProperties => ({
-    ...btnBase,
-    border: `1.5px solid ${variant === "attack" ? colors.semantic.error.border : world.border.secondary}`,
-    background: `linear-gradient(135deg, ${withOpacity(variant === "attack" ? colors.semantic.error.text : world.background.secondary, 0.12)}, transparent)`,
-    color: variant === "attack" ? colors.semantic.error.text : world.text.primary,
-  });
-
   const feedbackBox: CSSProperties = {
     ...mono, fontSize: isMobile ? "0.7rem" : "0.75rem", lineHeight: 1.6,
     display: "flex", flexDirection: "column", gap: "0.35rem",
@@ -101,11 +74,14 @@ export const ByzantineGenerals: FC = () => {
     !decision ? "?" : decision === "attack" ? t("byzantine.attackLabel") : t("byzantine.retreatLabel");
 
   return (
-    <div className="gradient-border" style={{ ...container, "--border-glow-color": revealed ? colors.semantic.error.border : world.border.secondary } as CSSProperties}>
-      <div style={header}>
-        <Castle size={isMobile ? 16 : 18} strokeWidth={2} />
+    <SurfaceCard
+      glowColor={revealed ? colors.semantic.error.border : world.border.secondary}
+      margin={isMobile ? "1.5rem 0" : "2rem 0"}
+      style={mono}
+    >
+      <Caption tone="world" size="md" icon={<Castle size={isMobile ? 16 : 18} strokeWidth={2} />}>
         {t("byzantine.title")}
-      </div>
+      </Caption>
 
       <div style={cityStyle}>
         <Castle size={14} strokeWidth={2} />
@@ -135,12 +111,21 @@ export const ByzantineGenerals: FC = () => {
             {t("byzantine.prompt")}
           </div>
           <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <button style={actionBtn("attack")} onClick={() => chooseDecision("attack")}>
-              <Swords size={14} strokeWidth={2} /> {t("byzantine.attack")}
-            </button>
-            <button style={actionBtn("retreat")} onClick={() => chooseDecision("retreat")}>
-              <ShieldOff size={14} strokeWidth={2} /> {t("byzantine.retreat")}
-            </button>
+            <Button
+              variant="primary"
+              color={colors.semantic.error.text}
+              icon={<Swords size={14} strokeWidth={2} />}
+              onClick={() => chooseDecision("attack")}
+            >
+              {t("byzantine.attack")}
+            </Button>
+            <Button
+              variant="primary"
+              icon={<ShieldOff size={14} strokeWidth={2} />}
+              onClick={() => chooseDecision("retreat")}
+            >
+              {t("byzantine.retreat")}
+            </Button>
           </div>
         </>
       )}
@@ -152,12 +137,16 @@ export const ByzantineGenerals: FC = () => {
             <span>{t("byzantine.failureDetail")}</span>
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <button style={{ ...btnBase, border: `1.5px solid ${colors.base.border.secondary}`, background: "transparent", color: colors.base.text.secondary }} onClick={reset}>
-              <RotateCcw size={14} strokeWidth={2} /> {t("byzantine.retry")}
-            </button>
+            <Button
+              variant="secondary"
+              icon={<RotateCcw size={14} strokeWidth={2} />}
+              onClick={reset}
+            >
+              {t("byzantine.retry")}
+            </Button>
           </div>
         </>
       )}
-    </div>
+    </SurfaceCard>
   );
 };

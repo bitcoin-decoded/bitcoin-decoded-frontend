@@ -1,10 +1,10 @@
 import { type FC, type CSSProperties } from "react";
-import { usePageTheme } from "../../Design/Theme";
-import { useBreakpoint } from "../../Design";
+import { Monitor, Cpu } from "lucide-react";
+
+import { Button, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useLanguageContext } from "../../I18n";
 import { useBitcoinNodeDemo } from "../hooks";
-import { Monitor, Cpu } from "lucide-react";
 
 const TRANSITION = "all 0.8s var(--ease-smooth)";
 
@@ -18,14 +18,11 @@ export const BitcoinNodeDemo: FC = () => {
 
   const iconSize = isMobile ? 22 : 28;
 
-  const cardStyle: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
+  // Compact card padding/alignment — distinct from default SurfaceCard's
+  // simulator padding. Pass via style override.
+  const cardStyleOverride: CSSProperties = {
     alignItems: "center",
-    gap: "0.75rem",
     padding: isMobile ? "1.25rem 1rem" : "1.5rem 2rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
     transition: TRANSITION,
   };
 
@@ -72,22 +69,22 @@ export const BitcoinNodeDemo: FC = () => {
       <div style={{ display: "flex", alignItems: isMobile ? "center" : "flex-end", justifyContent: "center", gap: isLaunched ? "0" : isMobile ? "1.5rem" : "3rem", flexDirection: isMobile ? "column" : "row", transition: TRANSITION }}>
         {!isLaunched ? (
           <>
-            <div className="gradient-border" style={{ ...cardStyle, "--border-glow-color": colors.base.border.secondary } as CSSProperties}>
+            <SurfaceCard gap="0.75rem" glowColor={colors.base.border.secondary} style={cardStyleOverride}>
               <div style={iconCircle(false)}>
                 <Monitor size={iconSize} strokeWidth={1.5} />
               </div>
               <span style={label}>{fr ? "Ordinateur" : "Computer"}</span>
-            </div>
-            <div className="gradient-border" style={{ ...cardStyle, "--border-glow-color": colors.base.border.secondary } as CSSProperties}>
+            </SurfaceCard>
+            <SurfaceCard gap="0.75rem" glowColor={colors.base.border.secondary} style={cardStyleOverride}>
               <div style={iconCircle(false)}>
                 <Cpu size={iconSize} strokeWidth={1.5} />
               </div>
               <span style={label}>{fr ? "Logiciel Bitcoin" : "Bitcoin Software"}</span>
-            </div>
+            </SurfaceCard>
           </>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div className="gradient-border" style={{ ...cardStyle, "--border-glow-color": world.border.secondary } as CSSProperties}>
+            <SurfaceCard gap="0.75rem" style={cardStyleOverride}>
               <div style={{ position: "relative" }}>
                 <div style={iconCircle(true)}>
                   <Monitor size={iconSize} strokeWidth={1.5} />
@@ -96,31 +93,18 @@ export const BitcoinNodeDemo: FC = () => {
                 <div style={pulseRing} />
               </div>
               <span style={{ ...label, color: world.text.primary }}>{fr ? "Ordinateur + Bitcoin" : "Computer + Bitcoin"}</span>
-            </div>
+            </SurfaceCard>
             <span style={{ ...label, fontWeight: 700, color: world.text.secondary, marginTop: "0.5rem" }}>{fr ? "Nœud du réseau" : "Network node"}</span>
           </div>
         )}
       </div>
 
-      <button
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: isMobile ? "0.75rem" : "0.8rem",
-          fontWeight: 600,
-          padding: isMobile ? "0.6rem 1.25rem" : "0.75rem 1.5rem",
-          borderRadius: "0.75rem",
-          border: `1.5px solid ${world.border.secondary}`,
-          background: isLaunched ? "transparent" : `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.15)}, transparent)`,
-          color: isLaunched ? colors.base.text.secondary : world.text.primary,
-          cursor: "pointer",
-          letterSpacing: "0.05em",
-          transition: "all 0.3s var(--ease-smooth)",
-          outlineColor: world.border.secondary,
-        }}
+      <Button
+        variant={isLaunched ? "secondary" : "primary"}
         onClick={isLaunched ? handleReset : handleLaunch}
       >
         {isLaunched ? (fr ? "↺ Réinitialiser" : "↺ Reset") : (fr ? "▶ Lancer Bitcoin" : "▶ Launch Bitcoin")}
-      </button>
+      </Button>
     </div>
   );
 };
