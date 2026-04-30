@@ -1,6 +1,6 @@
 import { type FC, type CSSProperties } from "react";
-import { usePageTheme } from "../../Design/Theme";
-import { useBreakpoint } from "../../Design";
+
+import { SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useLanguageContext } from "../../I18n";
 import type { BlockField } from "../types";
@@ -13,17 +13,6 @@ export const BlockAnatomyVisual: FC = () => {
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const world = colors[moduleTheme];
-
-  const container: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.5rem",
-    padding: isMobile ? "1rem" : "1.25rem",
-    margin: isMobile ? "1.5rem 0" : "2.5rem 0",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-    width: "100%",
-  };
 
   const titleStyle: CSSProperties = {
     fontFamily: "'JetBrains Mono', monospace",
@@ -109,9 +98,10 @@ export const BlockAnatomyVisual: FC = () => {
     ));
 
   return (
-    <div
-      className="gradient-border"
-      style={{ ...container, "--border-glow-color": world.border.secondary } as CSSProperties}
+    <SurfaceCard
+      gap="0.5rem"
+      margin={isMobile ? "1.5rem 0" : "2.5rem 0"}
+      style={{ padding: isMobile ? "1rem" : "1.25rem" }}
     >
       <div style={titleStyle}>
         {fr ? "Exemple : Bloc #828 614" : "Example: Block #828,614"}
@@ -124,6 +114,6 @@ export const BlockAnatomyVisual: FC = () => {
 
       <span style={sectionLabel}>{fr ? "Corps" : "Body"}</span>
       {renderFields(BODY_FIELDS)}
-    </div>
+    </SurfaceCard>
   );
 };

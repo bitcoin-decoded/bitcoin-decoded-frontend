@@ -1,10 +1,11 @@
 import { type FC, type CSSProperties } from "react";
-import { usePageTheme, useBreakpoint } from "../../Design";
+import { Inbox, AlertTriangle, ArrowRight, Box, CircleCheck, PlusCircle, RotateCcw } from "lucide-react";
+
+import { Button, Caption, SurfaceCard, usePageTheme, useBreakpoint } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useMempool } from "../hooks";
 import type { MempoolTransaction } from "../hooks/useMempool";
-import { Inbox, AlertTriangle, ArrowRight, Box, CircleCheck, PlusCircle, RotateCcw } from "lucide-react";
 
 type MempoolVariant = "intro" | "resolution";
 type TxState = "normal" | "conflict" | "rejected";
@@ -58,13 +59,6 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
   const isResolution = variant === "resolution";
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
-  const container: CSSProperties = {
-    ...mono, display: "flex", flexDirection: "column", gap: "0.85rem",
-    padding: isMobile ? "1.25rem" : "1.5rem", borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-    margin: isMobile ? "1.5rem 0" : "2rem 0",
-  };
-
   const panelsRow: CSSProperties = {
     display: "flex", gap: isMobile ? "0.75rem" : "1rem",
     flexDirection: isMobile ? "column" : "row",
@@ -77,12 +71,6 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
     background: withOpacity(world.background.secondary, 0.04),
     border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
     minWidth: 0,
-  };
-
-  const panelHeader: CSSProperties = {
-    ...mono, display: "flex", alignItems: "center", gap: "0.5rem",
-    fontSize: isMobile ? "0.68rem" : "0.74rem", fontWeight: 700,
-    textTransform: "uppercase", letterSpacing: "0.05em", color: world.text.secondary,
   };
 
   const subtitle: CSSProperties = {
@@ -101,21 +89,6 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
   const divider: CSSProperties = {
     height: 1, background: withOpacity(world.border.secondary, 0.15),
     margin: "0.3rem 0",
-  };
-
-  const btnStyle: CSSProperties = {
-    ...mono, fontSize: isMobile ? "0.7rem" : "0.74rem", fontWeight: 600,
-    padding: isMobile ? "0.55rem 1rem" : "0.6rem 1.1rem", borderRadius: "0.65rem",
-    letterSpacing: "0.04em", cursor: "pointer", display: "flex",
-    alignItems: "center", gap: "0.5rem", justifyContent: "center",
-    transition: "all 0.3s var(--ease-smooth)",
-    border: `1.5px solid ${blockAdded ? colors.base.border.secondary : world.border.secondary}`,
-    background: blockAdded
-      ? "transparent"
-      : `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.15)}, transparent)`,
-    color: blockAdded ? colors.base.text.secondary : world.text.primary,
-    marginTop: "0.35rem",
-    width: "100%",
   };
 
   const hintStyle = (tone: "warning" | "error"): CSSProperties => ({
@@ -142,14 +115,13 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
   const blockTxs = transactions.filter((tx) => blockTxIds.includes(tx.id));
 
   return (
-    <div className="gradient-border" style={{ ...container, "--border-glow-color": world.border.secondary } as CSSProperties}>
+    <SurfaceCard gap="0.85rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={mono}>
       <div style={panelsRow}>
         {/* Mempool */}
         <div style={panel}>
-          <div style={panelHeader}>
-            <Inbox size={isMobile ? 14 : 16} strokeWidth={2} />
+          <Caption tone="world" size="sm" icon={<Inbox size={isMobile ? 14 : 16} strokeWidth={2} />}>
             Mempool
-          </div>
+          </Caption>
           <div style={subtitle}>{t("mempool.subtitle")}</div>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
             {visibleMempool.length === 0 ? (
@@ -185,9 +157,10 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
         {/* Bloc proposé — mode resolution uniquement */}
         {isResolution && (
           <div style={panel}>
-            <div style={panelHeader}>
-              <Box size={isMobile ? 14 : 16} strokeWidth={2} />
-              {t("mempool.blockLabel")} #{blockHeader.height}
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Caption tone="world" size="sm" icon={<Box size={isMobile ? 14 : 16} strokeWidth={2} />}>
+                {t("mempool.blockLabel")} #{blockHeader.height}
+              </Caption>
               {blockAdded && (
                 <span style={{
                   marginLeft: "auto", fontSize: isMobile ? "0.55rem" : "0.6rem",
@@ -214,22 +187,18 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
               ))}
             </div>
 
-            <button style={btnStyle} onClick={blockAdded ? reset : addBlock}>
-              {blockAdded ? (
-                <>
-                  <RotateCcw size={13} strokeWidth={2} />
-                  {t("mempool.reset")}
-                </>
-              ) : (
-                <>
-                  <PlusCircle size={13} strokeWidth={2} />
-                  {t("mempool.addBlock")}
-                </>
-              )}
-            </button>
+            <Button
+              variant={blockAdded ? "secondary" : "primary"}
+              icon={blockAdded ? <RotateCcw size={13} strokeWidth={2} /> : <PlusCircle size={13} strokeWidth={2} />}
+              onClick={blockAdded ? reset : addBlock}
+              fullWidth
+              style={{ marginTop: "0.35rem" }}
+            >
+              {blockAdded ? t("mempool.reset") : t("mempool.addBlock")}
+            </Button>
           </div>
         )}
       </div>
-    </div>
+    </SurfaceCard>
   );
 };

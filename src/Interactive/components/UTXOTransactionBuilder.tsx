@@ -12,7 +12,7 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useUTXOBuilder } from "../hooks";
@@ -187,69 +187,35 @@ export const UTXOTransactionBuilder: FC = () => {
   };
 
   const amountFont = isMobile ? "0.7rem" : "0.76rem";
-  const smallLabel: CSSProperties = {
-    fontSize: "0.58rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.08em",
-  };
   const iconSize = isMobile ? 12 : 13;
 
   return (
-    <div
-      className="gradient-border"
-      style={
-        {
-          ...mono,
-          display: "flex",
-          flexDirection: "column",
-          gap: "1.1rem",
-          padding: isMobile ? "1.1rem" : "1.5rem",
-          borderRadius: "1rem",
-          background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-          margin: isMobile ? "1.5rem 0" : "2rem 0",
-          width: "100%",
-          maxWidth: "100%",
-          boxSizing: "border-box",
-          overflow: "hidden",
-          "--border-glow-color": accentColor,
-        } as CSSProperties
-      }
+    <SurfaceCard
+      gap="1.1rem"
+      margin={isMobile ? "1.5rem 0" : "2rem 0"}
+      style={{ ...mono, overflow: "hidden" }}
     >
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", minWidth: 0 }}>
-        <Coins size={isMobile ? 15 : 16} strokeWidth={2} style={{ color: accentColor, flexShrink: 0 }} />
-        <span
-          style={{
-            fontSize: "0.76rem",
-            fontWeight: 700,
-            color: world.text.primary,
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-            minWidth: 0,
-            overflowWrap: "anywhere",
-          }}
-        >
-          {t("utxoBuilder.title")}
-        </span>
-      </div>
+      <Caption
+        tone="accent"
+        size="md"
+        icon={<Coins size={isMobile ? 15 : 16} strokeWidth={2} style={{ color: accentColor }} />}
+        style={{ minWidth: 0, overflowWrap: "anywhere" }}
+      >
+        {t("utxoBuilder.title")}
+      </Caption>
 
       {/* Step 1 — UTXO selection */}
       <div style={{ minWidth: 0 }}>
-        <div
-          style={{
-            ...smallLabel,
-            display: "flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            color: world.text.secondary,
-            marginBottom: "0.5rem",
-            fontSize: "0.62rem",
-          }}
+        <Caption
+          tone="world"
+          size="xs"
+          icon={<Wallet size={iconSize} strokeWidth={2} />}
+          as="div"
+          style={{ marginBottom: "0.5rem" }}
         >
-          <Wallet size={iconSize} strokeWidth={2} />
           {t("utxoBuilder.step1")}
-        </div>
+        </Caption>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
           {utxos.map((u) => {
             const selected = selectedIds.includes(u.id);
@@ -304,20 +270,15 @@ export const UTXOTransactionBuilder: FC = () => {
 
       {/* Step 2 — Amount */}
       <div style={{ minWidth: 0 }}>
-        <div
-          style={{
-            ...smallLabel,
-            display: "flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            color: world.text.secondary,
-            marginBottom: "0.5rem",
-            fontSize: "0.62rem",
-          }}
+        <Caption
+          tone="world"
+          size="xs"
+          icon={<Send size={iconSize} strokeWidth={2} />}
+          as="div"
+          style={{ marginBottom: "0.5rem" }}
         >
-          <Send size={iconSize} strokeWidth={2} />
           {t("utxoBuilder.step2")}
-        </div>
+        </Caption>
         <input
           type="text"
           inputMode="decimal"
@@ -349,17 +310,9 @@ export const UTXOTransactionBuilder: FC = () => {
           {/* Inputs */}
           {hasSelection && (
             <>
-              <div
-                style={{
-                  ...smallLabel,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  color: withOpacity(colors.base.text.secondary, 0.5),
-                }}
-              >
+              <Caption tone="muted" size="xs" color={withOpacity(colors.base.text.secondary, 0.5)} as="div">
                 {t("utxoBuilder.inputs")}
-              </div>
+              </Caption>
               {selectedIds.map((id) => {
                 const u = utxos.find((x) => x.id === id)!;
                 return (
@@ -417,17 +370,9 @@ export const UTXOTransactionBuilder: FC = () => {
           {/* Outputs */}
           {hasAmount && (
             <>
-              <div
-                style={{
-                  ...smallLabel,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  color: withOpacity(colors.base.text.secondary, 0.5),
-                }}
-              >
+              <Caption tone="muted" size="xs" color={withOpacity(colors.base.text.secondary, 0.5)} as="div">
                 {t("utxoBuilder.outputs")}
-              </div>
+              </Caption>
 
               <TxCard
                 icon={<User size={12} strokeWidth={2} />}
@@ -522,31 +467,15 @@ export const UTXOTransactionBuilder: FC = () => {
       )}
 
       {/* Reset */}
-      <button
+      <Button
+        variant="secondary"
+        size="sm"
+        icon={<RefreshCw size={11} strokeWidth={2} />}
         onClick={reset}
-        style={{
-          ...mono,
-          alignSelf: "flex-end",
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.4rem",
-          fontSize: "0.66rem",
-          fontWeight: 600,
-          padding: "0.35rem 0.75rem",
-          borderRadius: "0.5rem",
-          letterSpacing: "0.04em",
-          cursor: "pointer",
-          border: `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
-          background: "transparent",
-          color: colors.base.text.secondary,
-          transition: "all 0.25s var(--ease-smooth)",
-          whiteSpace: "nowrap",
-          maxWidth: "100%",
-        }}
+        style={{ alignSelf: "flex-end" }}
       >
-        <RefreshCw size={11} strokeWidth={2} />
         {t("utxoBuilder.reset")}
-      </button>
-    </div>
+      </Button>
+    </SurfaceCard>
   );
 };
