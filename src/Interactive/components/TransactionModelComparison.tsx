@@ -13,7 +13,7 @@ import {
   Zap,
 } from "lucide-react";
 
-import { Button, Caption, useBreakpoint, usePageTheme } from "../../Design";
+import { Badge, Button, Caption, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { BANK, BTC } from "../data";
@@ -244,17 +244,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
     transition: "color 0.45s var(--ease-smooth)",
   });
 
-  const consumedBadge: CSSProperties = {
-    ...mono,
-    fontSize: "0.56rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
-    padding: "0.18rem 0.42rem",
-    borderRadius: "0.3rem",
-    color: errorColor,
-    background: withOpacity(errorColor, 0.1),
-    border: `1px solid ${withOpacity(errorColor, 0.25)}`,
+  const consumedBadgeStyle: CSSProperties = {
     flexShrink: 0,
     opacity: isAfter ? 1 : 0,
     transition: "opacity 0.35s var(--ease-smooth) 0.1s",
@@ -549,7 +539,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
               {t("txComparison.btcLockedBy")} {t("txComparison.alice")}
             </span>
           </div>
-          <span style={consumedBadge}>{t("txComparison.btcConsumedBadge")}</span>
+          <Badge tone="error" size="xs" style={consumedBadgeStyle}>{t("txComparison.btcConsumedBadge")}</Badge>
         </div>
 
         {/* UTXO 2 */}
@@ -564,7 +554,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
               {t("txComparison.btcLockedBy")} {t("txComparison.alice")}
             </span>
           </div>
-          <span style={consumedBadge}>{t("txComparison.btcConsumedBadge")}</span>
+          <Badge tone="error" size="xs" style={consumedBadgeStyle}>{t("txComparison.btcConsumedBadge")}</Badge>
         </div>
 
         {/* ── TRANSACTION CONNECTOR ── */}

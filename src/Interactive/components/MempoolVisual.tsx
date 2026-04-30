@@ -1,7 +1,7 @@
 import { type FC, type CSSProperties } from "react";
 import { Inbox, AlertTriangle, ArrowRight, Box, CircleCheck, PlusCircle, RotateCcw } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, usePageTheme, useBreakpoint } from "../../Design";
+import { Badge, Button, Caption, FeedbackPanel, SurfaceCard, usePageTheme, useBreakpoint } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useMempool } from "../hooks";
@@ -91,16 +91,6 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
     margin: "0.3rem 0",
   };
 
-  const hintStyle = (tone: "warning" | "error"): CSSProperties => ({
-    ...mono, fontSize: isMobile ? "0.56rem" : "0.6rem", lineHeight: 1.45,
-    display: "flex", alignItems: "flex-start", gap: "0.4rem",
-    padding: "0.45rem 0.6rem", borderRadius: "0.5rem",
-    color: colors.base.text.primary,
-    background: withOpacity(colors.semantic[tone === "error" ? "error" : "info"].text, 0.07),
-    border: `1px solid ${withOpacity(colors.semantic[tone === "error" ? "error" : "info"].text, 0.18)}`,
-    marginTop: "0.25rem",
-  });
-
   const getTxState = (tx: MempoolTransaction): TxState => {
     if (!isResolution || !blockAdded) return tx.conflictGroup ? "conflict" : "normal";
     if (tx.id === rejectedTxId) return "rejected";
@@ -136,21 +126,23 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
           </div>
 
           {!blockAdded && (
-            <div style={hintStyle("warning")}>
-              <AlertTriangle size={11} strokeWidth={2} color={colors.semantic.info.text} style={{ flexShrink: 0, marginTop: "0.15rem" }} />
-              <span>
-                {t("mempool.doubleSpend.prefix")} <b>{t("mempool.doubleSpend.emphasis")}</b> {t("mempool.doubleSpend.suffix")}
-              </span>
-            </div>
+            <FeedbackPanel
+              tone="info"
+              icon={<AlertTriangle size={11} strokeWidth={2} />}
+              style={{ marginTop: "0.25rem" }}
+            >
+              {t("mempool.doubleSpend.prefix")} <b>{t("mempool.doubleSpend.emphasis")}</b> {t("mempool.doubleSpend.suffix")}
+            </FeedbackPanel>
           )}
 
           {isResolution && blockAdded && (
-            <div style={hintStyle("error")}>
-              <AlertTriangle size={11} strokeWidth={2} color={colors.semantic.error.text} style={{ flexShrink: 0, marginTop: "0.15rem" }} />
-              <span>
-                {t("mempool.invalidated.prefix")} <b>{t("mempool.invalidated.emphasis")}</b> {t("mempool.invalidated.suffix")}
-              </span>
-            </div>
+            <FeedbackPanel
+              tone="error"
+              icon={<AlertTriangle size={11} strokeWidth={2} />}
+              style={{ marginTop: "0.25rem" }}
+            >
+              {t("mempool.invalidated.prefix")} <b>{t("mempool.invalidated.emphasis")}</b> {t("mempool.invalidated.suffix")}
+            </FeedbackPanel>
           )}
         </div>
 
@@ -162,15 +154,14 @@ export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "int
                 {t("mempool.blockLabel")} #{blockHeader.height}
               </Caption>
               {blockAdded && (
-                <span style={{
-                  marginLeft: "auto", fontSize: isMobile ? "0.55rem" : "0.6rem",
-                  color: colors.semantic.success.text,
-                  display: "flex", alignItems: "center", gap: "0.25rem",
-                  letterSpacing: "0.03em", textTransform: "uppercase",
-                }}>
-                  <CircleCheck size={12} strokeWidth={2} />
+                <Badge
+                  tone="success"
+                  size="xs"
+                  icon={<CircleCheck size={12} strokeWidth={2} />}
+                  style={{ marginLeft: "auto" }}
+                >
                   {t("mempool.added")}
-                </span>
+                </Badge>
               )}
             </div>
             <div style={subtitle}>{t("mempool.blockSubtitle")}</div>

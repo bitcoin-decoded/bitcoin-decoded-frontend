@@ -16,13 +16,13 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { Button, Caption, Disclosure, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import { Badge, Button, Caption, Disclosure, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useSignaturePlayground } from "../hooks/useSignaturePlayground";
 import type { SigPlaygroundColors } from "../types";
 
-import { ActionButton, FieldCard, MatchVisualizer, StatusBadge } from "./SignaturePlayground/index";
+import { ActionButton, FieldCard, MatchVisualizer } from "./SignaturePlayground/index";
 
 export const SignaturePlayground: FC = () => {
   const { t } = useTranslation();
@@ -71,22 +71,6 @@ export const SignaturePlayground: FC = () => {
     letterSpacing: "0.08em",
     color: withOpacity(colors.baseTextSecondary, 0.55),
     marginBottom: "0.55rem",
-  };
-
-  const panelStyle = (tone: "success" | "error"): CSSProperties => {
-    const c = tone === "success" ? colors.successColor : colors.errorColor;
-    return {
-      display: "flex",
-      flexDirection: "column",
-      gap: "0.5rem",
-      padding: "0.85rem 0.95rem",
-      borderRadius: "0.7rem",
-      border: `1px solid ${withOpacity(c, 0.32)}`,
-      background: withOpacity(c, 0.06),
-      transition: "all 0.35s var(--ease-smooth)",
-      minWidth: 0,
-      boxSizing: "border-box",
-    };
   };
 
   const sigCodeBoxStyle: CSSProperties = {
@@ -326,8 +310,8 @@ export const SignaturePlayground: FC = () => {
 
       {/* Signature output panel */}
       {hasSignature && (
-        <div style={panelStyle(isOriginalKey ? "success" : "error")}>
-          <StatusBadge
+        <FeedbackPanel tone={isOriginalKey ? "success" : "error"} style={{ gap: "0.5rem" }}>
+          <Badge
             tone={isOriginalKey ? "success" : "error"}
             icon={
               isOriginalKey ? (
@@ -336,13 +320,12 @@ export const SignaturePlayground: FC = () => {
                 <XCircle size={11} strokeWidth={2.5} />
               )
             }
-            label={
-              isOriginalKey
-                ? t("signaturePlayground.signatureValidBadge")
-                : t("signaturePlayground.signatureInvalidBadge")
-            }
-            colors={colors}
-          />
+            style={{ alignSelf: "flex-start" }}
+          >
+            {isOriginalKey
+              ? t("signaturePlayground.signatureValidBadge")
+              : t("signaturePlayground.signatureInvalidBadge")}
+          </Badge>
           <div style={sigCodeBoxStyle}>
             <span
               style={{
@@ -384,7 +367,7 @@ export const SignaturePlayground: FC = () => {
               ? t("signaturePlayground.signValidExpl")
               : t("signaturePlayground.signInvalidExpl")}
           </p>
-        </div>
+        </FeedbackPanel>
       )}
 
       {/* Verify action */}
@@ -403,7 +386,7 @@ export const SignaturePlayground: FC = () => {
 
       {/* Verification result panel */}
       {verifyStatus !== "idle" && (
-        <div style={panelStyle(verifyStatus === "accepted" ? "success" : "error")}>
+        <FeedbackPanel tone={verifyStatus === "accepted" ? "success" : "error"} style={{ gap: "0.5rem" }}>
           <div
             style={{
               ...sectionLabel,
@@ -481,7 +464,7 @@ export const SignaturePlayground: FC = () => {
             ))}
           </ul>
 
-          <StatusBadge
+          <Badge
             tone={verifyStatus === "accepted" ? "success" : "error"}
             icon={
               verifyStatus === "accepted" ? (
@@ -490,13 +473,12 @@ export const SignaturePlayground: FC = () => {
                 <XCircle size={11} strokeWidth={2.5} />
               )
             }
-            label={
-              verifyStatus === "accepted"
-                ? t("signaturePlayground.acceptedBadge")
-                : t("signaturePlayground.rejectedBadge")
-            }
-            colors={colors}
-          />
+            style={{ alignSelf: "flex-start" }}
+          >
+            {verifyStatus === "accepted"
+              ? t("signaturePlayground.acceptedBadge")
+              : t("signaturePlayground.rejectedBadge")}
+          </Badge>
 
           <p
             style={{
@@ -510,7 +492,7 @@ export const SignaturePlayground: FC = () => {
               ? t("signaturePlayground.acceptedExpl")
               : t("signaturePlayground.rejectedExpl")}
           </p>
-        </div>
+        </FeedbackPanel>
       )}
 
       {/* Pedagogy disclosure */}

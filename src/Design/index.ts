@@ -1,9 +1,11 @@
 export {
+  Badge,
   Button,
   Callout,
   Caption,
   Disclosure,
   Emphasis,
+  FeedbackPanel,
   HighlightText,
   KeywordHighlight,
   Quote,

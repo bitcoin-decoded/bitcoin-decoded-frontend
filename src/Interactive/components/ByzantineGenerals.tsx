@@ -1,7 +1,7 @@
 import { type FC, type CSSProperties } from "react";
 import { Swords, ShieldOff, RotateCcw, Castle } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, usePageTheme, useBreakpoint } from "../../Design";
+import { Badge, Button, Caption, FeedbackPanel, SurfaceCard, usePageTheme, useBreakpoint } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useByzantineGenerals } from "../hooks";
@@ -44,30 +44,14 @@ export const ByzantineGenerals: FC = () => {
     };
   };
 
-  const decisionBadge = (decision: string | null, corrupted: boolean): CSSProperties => ({
-    ...mono, fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.03em",
-    padding: "0.2rem 0.5rem", borderRadius: "1rem",
-    background: !revealed ? "transparent" : withOpacity(
-      corrupted ? colors.semantic.error.text : colors.semantic.success.text, 0.12,
-    ),
-    color: !decision ? colors.base.text.secondary
-      : corrupted && revealed ? colors.semantic.error.text
-      : revealed ? colors.semantic.success.text : colors.base.text.primary,
-    opacity: decision ? 1 : 0.4,
-  });
+  const decisionBadgeTone = (decision: string | null, corrupted: boolean): "success" | "error" | "neutral" => {
+    if (!decision || !revealed) return "neutral";
+    return corrupted ? "error" : "success";
+  };
 
   const corruptedTag: CSSProperties = {
     ...mono, fontSize: "0.5rem", fontStyle: "italic",
     color: colors.semantic.error.text, opacity: 0.8,
-  };
-
-  const feedbackBox: CSSProperties = {
-    ...mono, fontSize: isMobile ? "0.7rem" : "0.75rem", lineHeight: 1.6,
-    display: "flex", flexDirection: "column", gap: "0.35rem",
-    padding: "0.75rem 1rem", borderRadius: "0.75rem",
-    color: colors.base.text.primary,
-    background: withOpacity(colors.semantic.error.text, 0.06),
-    border: `1px solid ${withOpacity(colors.semantic.error.text, 0.15)}`,
   };
 
   const decisionLabel = (decision: string | null) =>
@@ -95,9 +79,13 @@ export const ByzantineGenerals: FC = () => {
             <span style={{ ...mono, fontSize: "0.65rem", fontWeight: 600, color: colors.base.text.primary }}>
               {labels[i]}
             </span>
-            <span style={decisionBadge(g.decision, g.corrupted)}>
+            <Badge
+              tone={decisionBadgeTone(g.decision, g.corrupted)}
+              size="xs"
+              style={{ opacity: g.decision ? 1 : 0.4 }}
+            >
               {decisionLabel(g.decision)}
-            </span>
+            </Badge>
             {revealed && g.corrupted && (
               <span style={corruptedTag}>{t("byzantine.alteredMessage")}</span>
             )}
@@ -132,10 +120,9 @@ export const ByzantineGenerals: FC = () => {
 
       {revealed && (
         <>
-          <div style={feedbackBox}>
-            <span style={{ fontWeight: 700 }}>{t("byzantine.failureTitle")}</span>
-            <span>{t("byzantine.failureDetail")}</span>
-          </div>
+          <FeedbackPanel tone="error" title={t("byzantine.failureTitle")}>
+            {t("byzantine.failureDetail")}
+          </FeedbackPanel>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button
               variant="secondary"

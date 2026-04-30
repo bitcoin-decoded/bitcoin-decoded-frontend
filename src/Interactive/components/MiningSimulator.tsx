@@ -1,7 +1,7 @@
 import { type FC, type CSSProperties, useRef, useEffect } from "react";
 import { Pickaxe, RotateCcw, CircleCheck, CircleX } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useMiningSimulator } from "../hooks";
@@ -73,15 +73,6 @@ export const MiningSimulator: FC = () => {
     color: valid ? colors.semantic.success.text : colors.base.text.secondary,
   });
 
-  const feedbackStyle = (success: boolean): CSSProperties => ({
-    ...mono, fontSize: isMobile ? "0.7rem" : "0.75rem", lineHeight: 1.5,
-    display: "flex", alignItems: "flex-start", gap: "0.5rem",
-    padding: "0.75rem 1rem", borderRadius: "0.75rem",
-    color: colors.base.text.primary,
-    background: withOpacity(success ? colors.semantic.success.text : colors.semantic.info.text, 0.06),
-    border: `1px solid ${withOpacity(success ? colors.semantic.success.text : colors.semantic.info.text, 0.15)}`,
-  });
-
   return (
     <SurfaceCard
       glowColor={found ? colors.semantic.success.border : world.border.secondary}
@@ -147,12 +138,16 @@ export const MiningSimulator: FC = () => {
       </div>
 
       {attempts.length > 0 && (
-        <div style={feedbackStyle(found)}>
-          {found
-            ? <CircleCheck size={18} strokeWidth={2} color={colors.semantic.success.text} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
-            : <CircleX size={18} strokeWidth={2} color={colors.semantic.info.text} style={{ flexShrink: 0, marginTop: "0.1rem" }} />}
-          <span>{found ? t("mining.found") : t("mining.notFound")}</span>
-        </div>
+        <FeedbackPanel
+          tone={found ? "success" : "info"}
+          icon={
+            found
+              ? <CircleCheck size={18} strokeWidth={2} />
+              : <CircleX size={18} strokeWidth={2} />
+          }
+        >
+          {found ? t("mining.found") : t("mining.notFound")}
+        </FeedbackPanel>
       )}
     </SurfaceCard>
   );

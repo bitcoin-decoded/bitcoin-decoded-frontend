@@ -1,7 +1,7 @@
 import { type FC, type CSSProperties, type ReactNode } from "react";
 import { Landmark, ShieldOff, ShieldCheck, CirclePlus, Ban, Bitcoin, CircleCheck, CircleX } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useLanguageContext } from "../../I18n";
 import { useTrustComparison } from "../hooks";
@@ -43,33 +43,23 @@ export const TrustComparisonDemo: FC = () => {
     color: textPrimary,
   });
 
-  const feedback = (color: string): CSSProperties => ({
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: isMobile ? "0.65rem" : "0.7rem",
-    lineHeight: 1.5,
-    color: textPrimary,
-    fontWeight: 500,
-    padding: "0.6rem 0.85rem",
-    borderRadius: "0.5rem",
-    background: withOpacity(color, 0.12),
-    border: `1px solid ${withOpacity(color, 0.25)}`,
-    display: "flex",
-    alignItems: "flex-start",
-    gap: "0.5rem",
-  });
-
   const renderFeedback = (state: ActionState, successMsg: ReactNode, failureMsg: ReactNode) => {
     if (state === "idle") return null;
     const isSuccess = state === "success";
-    const color = isSuccess ? danger : success;
+    // Inverted mapping: in this demo "success" of a bad action shows in error
+    // tone (it actually happened — fiat dilution / censorship), and "failure"
+    // of a bad action shows in success tone (Bitcoin protocol prevented it).
     return (
-      <div style={feedback(color)}>
-        {isSuccess
-          ? <CircleCheck size={18} strokeWidth={2} color={danger} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
-          : <CircleX size={18} strokeWidth={2} color={success} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
+      <FeedbackPanel
+        tone={isSuccess ? "error" : "success"}
+        icon={
+          isSuccess
+            ? <CircleCheck size={18} strokeWidth={2} color={danger} />
+            : <CircleX size={18} strokeWidth={2} color={success} />
         }
-        <span>{isSuccess ? successMsg : failureMsg}</span>
-      </div>
+      >
+        {isSuccess ? successMsg : failureMsg}
+      </FeedbackPanel>
     );
   };
 

@@ -2,8 +2,6 @@ export type FieldTone = "secret" | "public" | "neutral";
 
 export type ValueKind = "hex" | "text";
 
-export type StatusTone = "success" | "error" | "muted";
-
 export type ActionButtonVariant = "primary" | "verify";
 
 /**
