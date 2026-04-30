@@ -5,3 +5,4 @@ export { PageTemplate } from "./PageTemplate";
 export { ReadingProgressBar } from "./ReadingProgressBar";
 export { ReadingTimeBadge } from "./ReadingTimeBadge";
 export { RevealOnScroll } from "./RevealOnScroll";
+export { ScrollToTopButton } from "./ScrollToTopButton";

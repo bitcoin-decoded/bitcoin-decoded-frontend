@@ -41,17 +41,20 @@ Domain/
 
 | Dossier | Rôle |
 |---------|------|
-| `src/Design/` | Système de design : composants UI partagés, icônes, layout, thème |
-| `src/Design/Layout/` | MainLayout, Header (sticky + blur), Footer, NavBar |
-| `src/Design/Theme/` | ThemeProvider/Context, ThemeToggle, THEME_COLORS |
+| `src/Design/` | Système de design : primitives UI (`Button`, `SurfaceCard`, `Caption`, `Badge`, `FeedbackPanel`, `Callout`, `Quote`, `Disclosure`, …), icônes, layout, thème, marque |
+| `src/Design/Brand/` | `BitcoinDecodedLogo`, `BitcoinDecodedAvatar` |
+| `src/Design/Layout/` | MainLayout, Header (hide-on-scroll), Footer, NavBar, NavDrawer |
+| `src/Design/Theme/` | ThemeProvider/Context, ThemeToggle, THEME_COLORS, `usePageTheme()` |
 | `src/Design/icons/` | Icônes SVG en FC, barrel `index.ts` |
 | `src/Design/IdentityCard/` | Composant carte d'identité interactive |
+| `src/Design/Responsive/` | `useBreakpoint()`, `useMediaQuery()` |
 | `src/Routing/` | RouterProvider/Context, NAVIGATION_TREE, ROUTE_NAME |
-| `src/Page/` | Pages de contenu + composants partagés (HomePage, ChapterPrelude, PageNavigation) |
-| `src/Page/MondeBleu/` | 7 pages (111→117) sur le système bancaire |
-| `src/Page/MondeOrange/` | 5 pages (211→215) sur les lois de la monnaie |
-| `src/Page/MondeVert/` | 1 page (311) : Qu'est-ce que Bitcoin ? |
-| `src/Interactive/` | Domaine unifié : Illustrations, Simulateurs interactifs, Quiz, FlipCardGrid, DebateArena, BitcoinNodeDemo, BitcoinNetworkMap |
+| `src/Page/` | Pages de contenu et composants partagés |
+| `src/Page/Shared/` | `HomePage`, `PageTemplate`, `ChapterPrelude`, `PageNavigation`, `ReadingTimeBadge`, `ReadingProgressBar`, `ScrollToTopButton`, `RevealOnScroll` |
+| `src/Page/Banking/` | 7 pages sur le système bancaire (Banking1Page → Banking7Page) |
+| `src/Page/MoneyLaws/` | 5 pages sur les lois de la monnaie (MoneyLaws1Page → MoneyLaws5Page) |
+| `src/Page/Bitcoin/` | 8 pages sur Bitcoin (Bitcoin1Page → Bitcoin8Page) |
+| `src/Interactive/` | Domaine unifié : Illustrations, Simulateurs interactifs, Quiz, FlipCardGrid, DebateArena, BitcoinNodeDemo, BitcoinNetworkMap, … |
 
 ---
 
@@ -75,11 +78,13 @@ Domain/
 - **Hook** : `useLanguageContext()`
 
 ### Code couleur par section
-`getWorldThemeColorName(currentPage)` mappe la page courante vers une palette :
-- MondeBleu → `"blue"` (#3b82f6)
-- MondeOrange → `"violet"` (#8b5cf6)
-- MondeVert / Bitcoin → `"amber"` (#f7931a)
+`usePageTheme()` (= `useThemeContext()` + `useRouterContext()`) renvoie `{ colors, moduleTheme }` où `moduleTheme` est dérivé de la page courante :
+- Banking → `"blue"` (#3b82f6)
+- MoneyLaws → `"violet"` (#8b5cf6)
+- Bitcoin → `"amber"` (#f7931a)
 - HomePage / défaut → `"base"`
+
+Toutes les primitives (`Button`, `SurfaceCard`, `Caption`, `Badge`, `FeedbackPanel`) sont module-aware via ce hook : l'accent suit automatiquement le monde courant.
 
 ---
 
@@ -111,6 +116,38 @@ Chaque palette contient : `background`, `text`, `border` avec sous-niveaux (`pri
 ### Icônes
 - Composants SVG dans `src/Design/icons/`, exportés via barrel, utilisent `currentColor`
 - **Lucide React** comme librairie d'icônes externe (Monitor, Cpu, Pickaxe, Info, etc.)
+
+### Primitives UI partagées (`src/Design/components/`)
+
+Centralisent le style des éléments récurrents. Toutes lisent `usePageTheme()` et s'adaptent au thème (dark/light) + au module (blue/violet/amber/base).
+
+| Primitive | Rôle | Variantes |
+|---|---|---|
+| `Button` | Action — bouton avec icône optionnelle | `primary` / `secondary` / `ghost`, `sm` / `md` / `lg`, `fullWidth`, `disabled`, override `color` |
+| `SurfaceCard` | Coque standard des simulateurs (gradient + `gradient-border`) | `glowColor`, `fillColor`, `gap`, `margin`, `as` |
+| `Caption` | Petit titre uppercase mono (eyebrow) | `tone` = `world` / `accent` / `muted`, `size` = `xs` / `sm` / `md`, `icon` |
+| `Badge` | Pill compact pour statut / verdict | `tone` = `success` / `error` / `info` / `neutral` / `world`, `size` = `xs` / `sm`, `icon` |
+| `FeedbackPanel` | Bloc tinté (résultat, hint, avertissement) | `tone` (5 valeurs), `variant` = `full` / `border-left`, `icon`, `title` |
+
+**Règle** : si un composant Interactive ré-implémente l'un de ces patterns en inline, c'est qu'il faut migrer vers la primitive.
+
+### Composants overlay (`src/Page/Shared/`)
+
+Montés au niveau `MainLayout` ou `PageTemplate`, indépendants du contenu :
+
+- **`ReadingProgressBar`** — barre de progression `position: fixed; bottom: 0` (chapitres uniquement)
+- **`ScrollToTopButton`** — flèche flottante en bas-droite, fade-in après 600 px de scroll, smooth scroll au clic (chapitres uniquement, DDD : `useScrollToTop()` + composant FC)
+- **`RevealOnScroll`** — wrapper IntersectionObserver pour les apparitions au scroll (utilisé sur HomePage)
+
+### Rythme vertical des pages
+
+`PageTemplate` et `HomePage` utilisent un système de tokens responsifs (`pick(mobile, tablet, desktop)`) qui pilote tous les espacements verticaux d'une page. La règle :
+
+> **Couplage serré à l'intérieur d'un groupe sémantique**, **respiration généreuse entre groupes**.
+
+Pour `PageTemplate` : `pageTop`, `titleToReadingTime`, `headerToPrelude`, `preludeToBody`, `pageBottom`. Pour `HomePage` : tokens dédiés (`logoToSlogan`, `sloganToHeadline`, `headlineToSub`, `subToCta`, `sectionPadY`, …).
+
+Ne pas réintroduire de `marginTop` / `marginBottom` ad hoc sur les sous-éléments — passer par les tokens.
 
 ---
 
