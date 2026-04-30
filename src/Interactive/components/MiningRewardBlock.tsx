@@ -12,7 +12,7 @@ import {
   Wallet,
 } from "lucide-react";
 
-import { useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useMiningReward } from "../hooks";
@@ -39,19 +39,6 @@ export const MiningRewardBlock: FC = () => {
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
   const successColor = colors.semantic.success.text;
 
-  // ── Container ─────────────────────────────────────────────────────────────
-
-  const container: CSSProperties = {
-    ...mono,
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.85rem",
-    padding: isMobile ? "1.25rem" : "1.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-    margin: isMobile ? "1.5rem 0" : "2rem 0",
-  };
-
   const panelsRow: CSSProperties = {
     display: "flex",
     gap: isMobile ? "0.75rem" : "1rem",
@@ -59,7 +46,7 @@ export const MiningRewardBlock: FC = () => {
     alignItems: "stretch",
   };
 
-  // ── Block panel (amber, highlights on reward) ──────────────────────────────
+  // ── Block panel (highlights on reward) ────────────────────────────────────
 
   const blockPanel: CSSProperties = {
     ...mono,
@@ -95,20 +82,6 @@ export const MiningRewardBlock: FC = () => {
     minWidth: 0,
     position: "relative",
     overflow: "visible",
-  };
-
-  // ── Shared panel sub-styles ────────────────────────────────────────────────
-
-  const panelHeader: CSSProperties = {
-    ...mono,
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    fontSize: isMobile ? "0.68rem" : "0.74rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-    color: world.text.secondary,
   };
 
   const subtitle: CSSProperties = {
@@ -232,28 +205,6 @@ export const MiningRewardBlock: FC = () => {
     alignSelf: "flex-start",
   };
 
-  const btnStyle: CSSProperties = {
-    ...mono,
-    fontSize: isMobile ? "0.7rem" : "0.74rem",
-    fontWeight: 600,
-    padding: isMobile ? "0.55rem 1rem" : "0.6rem 1.1rem",
-    borderRadius: "0.65rem",
-    letterSpacing: "0.04em",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    justifyContent: "center",
-    transition: "all 0.3s var(--ease-smooth)",
-    border: `1.5px solid ${rewarded ? colors.base.border.secondary : world.border.secondary}`,
-    background: rewarded
-      ? "transparent"
-      : `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.15)}, transparent)`,
-    color: rewarded ? colors.base.text.secondary : world.text.primary,
-    marginTop: "0.35rem",
-    width: "100%",
-  };
-
   const rewardNoteStyle: CSSProperties = {
     ...mono,
     fontSize: isMobile ? "0.59rem" : "0.62rem",
@@ -269,16 +220,14 @@ export const MiningRewardBlock: FC = () => {
   };
 
   return (
-    <div
-      className="gradient-border"
-      style={{ ...container, "--border-glow-color": world.border.secondary } as CSSProperties}
-    >
+    <SurfaceCard gap="0.85rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={mono}>
       <div style={panelsRow}>
         {/* ── Block panel ── */}
         <div style={blockPanel}>
-          <div style={panelHeader}>
-            <Box size={isMobile ? 14 : 16} strokeWidth={2} />
-            Bloc #{blockHeader.height.toLocaleString("fr-FR")}
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Caption tone="world" size="sm" icon={<Box size={isMobile ? 14 : 16} strokeWidth={2} />}>
+              Bloc #{blockHeader.height.toLocaleString("fr-FR")}
+            </Caption>
             {rewarded && (
               <span
                 style={{
@@ -333,10 +282,15 @@ export const MiningRewardBlock: FC = () => {
 
         {/* ── Reward panel ── */}
         <div style={rewardPanel}>
-          <div style={{ ...panelHeader, color: withOpacity(successColor, rewarded ? 0.9 : 0.6), transition: "color 0.5s var(--ease-smooth)" }}>
-            <Gift size={isMobile ? 14 : 16} strokeWidth={2} />
+          <Caption
+            tone="world"
+            size="sm"
+            color={withOpacity(successColor, rewarded ? 0.9 : 0.6)}
+            icon={<Gift size={isMobile ? 14 : 16} strokeWidth={2} />}
+            style={{ transition: "color 0.5s var(--ease-smooth)" }}
+          >
             {t("miningReward.rewardTitle")}
-          </div>
+          </Caption>
           <div style={subtitle}>{t("miningReward.rewardSubtitle")}</div>
 
           <div style={rewardLine()}>
@@ -392,19 +346,15 @@ export const MiningRewardBlock: FC = () => {
 
           {/* Button + confetti wrapper */}
           <div style={{ position: "relative" }}>
-            <button style={btnStyle} onClick={rewarded ? reset : reward}>
-              {rewarded ? (
-                <>
-                  <RotateCcw size={13} strokeWidth={2} />
-                  {t("miningReward.resetBtn")}
-                </>
-              ) : (
-                <>
-                  <PlusCircle size={13} strokeWidth={2} />
-                  {t("miningReward.rewardBtn")}
-                </>
-              )}
-            </button>
+            <Button
+              variant={rewarded ? "secondary" : "primary"}
+              icon={rewarded ? <RotateCcw size={13} strokeWidth={2} /> : <PlusCircle size={13} strokeWidth={2} />}
+              onClick={rewarded ? reset : reward}
+              fullWidth
+              style={{ marginTop: "0.35rem" }}
+            >
+              {rewarded ? t("miningReward.resetBtn") : t("miningReward.rewardBtn")}
+            </Button>
 
             {/* Confetti burst */}
             {rewarded && (
@@ -457,6 +407,6 @@ export const MiningRewardBlock: FC = () => {
           )}
         </div>
       </div>
-    </div>
+    </SurfaceCard>
   );
 };

@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { ChevronDown, Info, Sparkles, Sprout } from "lucide-react";
 
-import { Disclosure, useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, Disclosure, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useSeedGenerator } from "../hooks";
@@ -34,39 +34,6 @@ export const SeedGenerator: FC = () => {
 
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
-  const containerStyle: CSSProperties = {
-    ...mono,
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.1rem",
-    padding: isMobile ? "1.1rem" : "1.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${themeColors.base.background.primary})`,
-    margin: isMobile ? "1.5rem 0" : "2rem 0",
-    width: "100%",
-    maxWidth: "100%",
-    boxSizing: "border-box",
-    overflow: "hidden",
-    textAlign: "left",
-  };
-
-  const titleStyle: CSSProperties = {
-    fontSize: isMobile ? "0.74rem" : "0.8rem",
-    fontWeight: 700,
-    color: basePrimaryText,
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-    minWidth: 0,
-    overflowWrap: "anywhere",
-  };
-
-  const subtitleStyle: CSSProperties = {
-    fontSize: "0.66rem",
-    fontStyle: "italic",
-    color: withOpacity(baseTextSecondary, 0.75),
-    margin: 0,
-  };
-
   const stepLabelStyle: CSSProperties = {
     fontSize: "0.6rem",
     fontWeight: 700,
@@ -91,25 +58,6 @@ export const SeedGenerator: FC = () => {
     background: active ? accentColor : "transparent",
     transition: "all 0.25s var(--ease-smooth)",
   });
-
-  const primaryBtnStyle: CSSProperties = {
-    ...mono,
-    cursor: "pointer",
-    padding: isMobile ? "0.6rem 1.25rem" : "0.7rem 1.5rem",
-    borderRadius: "0.75rem",
-    fontSize: isMobile ? "0.72rem" : "0.78rem",
-    fontWeight: 600,
-    letterSpacing: "0.04em",
-    color: basePrimaryText,
-    background: `linear-gradient(135deg, ${withOpacity(accentColor, 0.12)}, transparent)`,
-    border: `1.5px solid ${withOpacity(accentColor, 0.55)}`,
-    boxShadow: "none",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    whiteSpace: isMobile ? "normal" : "nowrap",
-    transition: "all 0.3s var(--ease-smooth)",
-  };
 
   const sectionLabelStyle: CSSProperties = {
     fontSize: "0.6rem",
@@ -192,21 +140,24 @@ export const SeedGenerator: FC = () => {
   };
 
   return (
-    <div
-      className="gradient-border"
-      style={{ ...containerStyle, "--border-glow-color": accentColor } as CSSProperties}
+    <SurfaceCard
+      gap="1.1rem"
+      margin={isMobile ? "1.5rem 0" : "2rem 0"}
+      style={{ ...mono, overflow: "hidden", textAlign: "left" }}
     >
       {/* Header */}
       <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", minWidth: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", minWidth: 0 }}>
-          <Sprout
-            size={isMobile ? 17 : 18}
-            strokeWidth={2}
-            style={{ color: accentColor, flexShrink: 0 }}
-          />
-          <span style={titleStyle}>{t("seedGenerator.title")}</span>
-        </div>
-        <p style={subtitleStyle}>{t("seedGenerator.subtitle")}</p>
+        <Caption
+          tone="accent"
+          size="md"
+          icon={<Sprout size={isMobile ? 17 : 18} strokeWidth={2} style={{ color: accentColor }} />}
+          style={{ minWidth: 0, overflowWrap: "anywhere" }}
+        >
+          {t("seedGenerator.title")}
+        </Caption>
+        <p style={{ fontSize: "0.66rem", fontStyle: "italic", color: withOpacity(baseTextSecondary, 0.75), margin: 0 }}>
+          {t("seedGenerator.subtitle")}
+        </p>
       </div>
 
       {/* Two-step controls — labels guide the user, controls are vertically
@@ -250,10 +201,14 @@ export const SeedGenerator: FC = () => {
         {/* Step 2 — generate */}
         <div>
           <div style={stepLabelStyle}>{t("seedGenerator.step2Label")}</div>
-          <button style={primaryBtnStyle} onClick={generate}>
-            <Sparkles size={14} strokeWidth={2.2} />
+          <Button
+            variant="primary"
+            icon={<Sparkles size={14} strokeWidth={2.2} />}
+            onClick={generate}
+            style={{ whiteSpace: isMobile ? "normal" : "nowrap" }}
+          >
             {seed ? t("seedGenerator.regenerate") : t("seedGenerator.generate")}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -313,21 +268,14 @@ export const SeedGenerator: FC = () => {
 
       {/* Pedagogy note (always visible) */}
       <div style={noteStyle}>
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            fontSize: "0.62rem",
-            fontWeight: 700,
-            color: accentColor,
-            textTransform: "uppercase",
-            letterSpacing: "0.06em",
-          }}
+        <Caption
+          tone="world"
+          size="xs"
+          color={accentColor}
+          icon={<Info size={11} strokeWidth={2.2} />}
         >
-          <Info size={11} strokeWidth={2.2} />
           {t("seedGenerator.noteTitle")}
-        </div>
+        </Caption>
         <ul
           style={{
             listStyle: "none",
@@ -347,6 +295,6 @@ export const SeedGenerator: FC = () => {
           <li>{t("seedGenerator.notePedagogical")}</li>
         </ul>
       </div>
-    </div>
+    </SurfaceCard>
   );
 };

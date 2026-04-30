@@ -1,11 +1,11 @@
 import { type FC, type CSSProperties, useRef, useEffect } from "react";
-import { usePageTheme } from "../../Design/Theme";
-import { useBreakpoint } from "../../Design";
+import { Pickaxe, RotateCcw, CircleCheck, CircleX } from "lucide-react";
+
+import { Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useMiningSimulator } from "../hooks";
 import { truncateHash } from "../helpers";
-import { Pickaxe, RotateCcw, CircleCheck, CircleX } from "lucide-react";
 
 export const MiningSimulator: FC = () => {
   const { t } = useTranslation();
@@ -20,19 +20,6 @@ export const MiningSimulator: FC = () => {
   }, [attempts.length]);
 
   const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
-
-  const container: CSSProperties = {
-    ...mono, display: "flex", flexDirection: "column", gap: "1rem",
-    padding: isMobile ? "1.25rem" : "1.5rem", borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-    width: "100%", margin: isMobile ? "1.5rem 0" : "2rem 0",
-  };
-
-  const titleStyle: CSSProperties = {
-    ...mono, fontSize: isMobile ? "0.72rem" : "0.8rem", fontWeight: 700,
-    textTransform: "uppercase", letterSpacing: "0.05em", color: world.text.secondary,
-    display: "flex", alignItems: "center", gap: "0.5rem",
-  };
 
   const targetBox: CSSProperties = {
     ...mono, fontSize: isMobile ? "0.7rem" : "0.75rem", color: colors.base.text.primary,
@@ -53,12 +40,6 @@ export const MiningSimulator: FC = () => {
     background: withOpacity(world.background.secondary, 0.04),
     border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
     display: "flex", flexDirection: "column", gap: "0.25rem",
-  };
-
-  const headerLabel: CSSProperties = {
-    ...mono, fontSize: isMobile ? "0.6rem" : "0.65rem", fontWeight: 600,
-    textTransform: "uppercase", letterSpacing: "0.04em",
-    color: world.text.secondary, marginBottom: "0.25rem",
   };
 
   const fieldName: CSSProperties = {
@@ -92,25 +73,6 @@ export const MiningSimulator: FC = () => {
     color: valid ? colors.semantic.success.text : colors.base.text.secondary,
   });
 
-  const btnBase: CSSProperties = {
-    ...mono, fontSize: isMobile ? "0.72rem" : "0.78rem", fontWeight: 600,
-    padding: isMobile ? "0.6rem 1.25rem" : "0.7rem 1.5rem", borderRadius: "0.75rem",
-    letterSpacing: "0.04em", cursor: "pointer", display: "flex",
-    alignItems: "center", gap: "0.5rem", justifyContent: "center",
-    transition: "all 0.3s var(--ease-smooth)",
-  };
-
-  const primaryBtn: CSSProperties = {
-    ...btnBase, border: `1.5px solid ${world.border.secondary}`,
-    background: `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.15)}, transparent)`,
-    color: world.text.primary, opacity: found ? 0.4 : 1,
-  };
-
-  const secondaryBtn: CSSProperties = {
-    ...btnBase, border: `1.5px solid ${colors.base.border.secondary}`,
-    background: "transparent", color: colors.base.text.secondary,
-  };
-
   const feedbackStyle = (success: boolean): CSSProperties => ({
     ...mono, fontSize: isMobile ? "0.7rem" : "0.75rem", lineHeight: 1.5,
     display: "flex", alignItems: "flex-start", gap: "0.5rem",
@@ -121,11 +83,14 @@ export const MiningSimulator: FC = () => {
   });
 
   return (
-    <div className="gradient-border" style={{ ...container, "--border-glow-color": found ? colors.semantic.success.border : world.border.secondary } as CSSProperties}>
-      <div style={titleStyle}>
-        <Pickaxe size={isMobile ? 16 : 18} strokeWidth={2} />
+    <SurfaceCard
+      glowColor={found ? colors.semantic.success.border : world.border.secondary}
+      margin={isMobile ? "1.5rem 0" : "2rem 0"}
+      style={mono}
+    >
+      <Caption tone="world" size="md" icon={<Pickaxe size={isMobile ? 16 : 18} strokeWidth={2} />}>
         {t("mining.title")}
-      </div>
+      </Caption>
 
       <div style={targetBox}>
         <span>{t("mining.target")}</span>
@@ -133,7 +98,9 @@ export const MiningSimulator: FC = () => {
       </div>
 
       <div style={headerBox}>
-        <span style={headerLabel}>{t("mining.headerLabel")}</span>
+        <Caption tone="world" size="xs" style={{ marginBottom: "0.25rem" }}>
+          {t("mining.headerLabel")}
+        </Caption>
         <div><span style={fieldName}>prevHash</span> <span style={fieldValue}>{headerFields.prevHash}</span></div>
         <div><span style={fieldName}>merkleRoot</span> <span style={fieldValue}>{headerFields.merkleRoot}</span></div>
         <div><span style={fieldName}>timestamp</span> <span style={fieldValue}>{headerFields.timestamp}</span></div>
@@ -160,15 +127,22 @@ export const MiningSimulator: FC = () => {
       )}
 
       <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-        <button style={primaryBtn} onClick={!found ? tryNonce : undefined} disabled={found}>
-          <Pickaxe size={isMobile ? 12 : 14} strokeWidth={2} />
+        <Button
+          variant="primary"
+          icon={<Pickaxe size={isMobile ? 12 : 14} strokeWidth={2} />}
+          onClick={!found ? tryNonce : undefined}
+          disabled={found}
+        >
           {t("mining.button")}
-        </button>
+        </Button>
         {attempts.length > 0 && (
-          <button style={secondaryBtn} onClick={reset}>
-            <RotateCcw size={isMobile ? 12 : 14} strokeWidth={2} />
+          <Button
+            variant="secondary"
+            icon={<RotateCcw size={isMobile ? 12 : 14} strokeWidth={2} />}
+            onClick={reset}
+          >
             {t("mining.reset")}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -180,6 +154,6 @@ export const MiningSimulator: FC = () => {
           <span>{found ? t("mining.found") : t("mining.notFound")}</span>
         </div>
       )}
-    </div>
+    </SurfaceCard>
   );
 };

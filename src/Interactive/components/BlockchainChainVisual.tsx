@@ -1,12 +1,12 @@
 import { type FC, type CSSProperties } from "react";
-import { usePageTheme } from "../../Design/Theme";
-import { useBreakpoint } from "../../Design";
+import { ArrowRight, ArrowDown, Link } from "lucide-react";
+
+import { SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useBlockchainChain } from "../hooks";
 import { truncateHash } from "../helpers";
 import type { BlockData } from "../types";
-import { ArrowRight, ArrowDown, Link } from "lucide-react";
 
 export const BlockchainChainVisual: FC = () => {
   const { t, language } = useTranslation();
@@ -22,12 +22,6 @@ export const BlockchainChainVisual: FC = () => {
   const fs = isMobile ? "0.5rem" : "0.55rem";
 
   const styles = {
-    card: {
-      ...mono, display: "flex", flexDirection: "column", gap: "0.35rem",
-      padding: isMobile ? "0.85rem" : "1rem 1.15rem", borderRadius: "0.85rem",
-      background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-      width: "100%",
-    } as CSSProperties,
     title: {
       ...mono, fontSize: isMobile ? "0.68rem" : "0.75rem", fontWeight: 700,
       textTransform: "uppercase", letterSpacing: "0.05em", color: world.text.secondary,
@@ -63,7 +57,14 @@ export const BlockchainChainVisual: FC = () => {
 
   const BlockCard: FC<{ block: BlockData }> = ({ block }) => (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.35rem", flex: 1, minWidth: 0, width: isMobile ? "100%" : "auto" }}>
-      <div className="gradient-border" style={{ ...styles.card, "--border-glow-color": world.border.secondary } as CSSProperties}>
+      <SurfaceCard
+        gap="0.35rem"
+        style={{
+          ...mono,
+          padding: isMobile ? "0.85rem" : "1rem 1.15rem",
+          borderRadius: "0.85rem",
+        }}
+      >
         <div style={styles.title}>{t("chain.block")} #{block.number}</div>
 
         <span style={styles.tag}>{t("chain.header")}</span>
@@ -78,7 +79,7 @@ export const BlockchainChainVisual: FC = () => {
           <span style={styles.tx}>{block.tx1}</span>
           <span style={styles.tx}>{block.tx2}</span>
         </div>
-      </div>
+      </SurfaceCard>
       <div style={styles.badge}>Double SHA-256 → {truncateHash(block.headerHash)}</div>
     </div>
   );

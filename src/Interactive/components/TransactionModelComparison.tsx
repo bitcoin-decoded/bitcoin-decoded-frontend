@@ -13,7 +13,7 @@ import {
   Zap,
 } from "lucide-react";
 
-import { useBreakpoint, usePageTheme } from "../../Design";
+import { Button, Caption, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { BANK, BTC } from "../data";
@@ -62,14 +62,6 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
   });
 
   const cardHeaderRow: CSSProperties = { display: "flex", alignItems: "center", gap: "0.5rem" };
-
-  const cardTitleStyle = (accent: string): CSSProperties => ({
-    fontSize: isMobile ? "0.8rem" : "0.85rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.07em",
-    color: accent,
-  });
 
   const cardSubtitle: CSSProperties = {
     fontSize: isMobile ? "0.7rem" : "0.74rem",
@@ -377,38 +369,26 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
     alignItems: "stretch",
   };
 
-  const ctaBtn: CSSProperties = {
-    ...mono,
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-    padding: isMobile ? "0.6rem 1.1rem" : "0.65rem 1.4rem",
-    borderRadius: "0.65rem",
-    fontSize: isMobile ? "0.7rem" : "0.74rem",
-    fontWeight: 700,
-    letterSpacing: "0.05em",
-    textTransform: "uppercase",
-    border: `1.5px solid ${withOpacity(isAfter ? colors.base.border.secondary : btcAccent, isAfter ? 0.25 : 0.6)}`,
-    background: isAfter
-      ? "transparent"
-      : `linear-gradient(135deg, ${withOpacity(btcAccent, 0.12)}, transparent)`,
-    color: isAfter ? colors.base.text.secondary : world.text.primary,
-    transition: "all 0.35s var(--ease-smooth)",
-  };
-
   // ── Bank card ──────────────────────────────────────────────────────────────
 
   const bankCard = (
     <div style={card(bankAccent)}>
       <div style={cardHeader(bankAccent)}>
         <div style={cardHeaderRow}>
-          <Building2
-            size={isMobile ? 13 : 14}
-            strokeWidth={2}
-            style={{ color: bankAccent, flexShrink: 0 }}
-          />
-          <span style={cardTitleStyle(bankAccent)}>{t("txComparison.bankTitle")}</span>
+          <Caption
+            size="md"
+            color={bankAccent}
+            icon={
+              <Building2
+                size={isMobile ? 13 : 14}
+                strokeWidth={2}
+                style={{ color: bankAccent, flexShrink: 0 }}
+              />
+            }
+            style={{ letterSpacing: "0.07em" }}
+          >
+            {t("txComparison.bankTitle")}
+          </Caption>
         </div>
         <span style={cardSubtitle}>{t("txComparison.bankSubtitle")}</span>
         <span style={cardDescStyle}>{t("txComparison.bankDesc")}</span>
@@ -516,12 +496,20 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
     <div style={card(btcAccent)}>
       <div style={cardHeader(btcAccent)}>
         <div style={cardHeaderRow}>
-          <CircleDollarSign
-            size={isMobile ? 13 : 14}
-            strokeWidth={2}
-            style={{ color: btcAccent, flexShrink: 0 }}
-          />
-          <span style={cardTitleStyle(btcAccent)}>{t("txComparison.btcTitle")}</span>
+          <Caption
+            size="md"
+            color={btcAccent}
+            icon={
+              <CircleDollarSign
+                size={isMobile ? 13 : 14}
+                strokeWidth={2}
+                style={{ color: btcAccent, flexShrink: 0 }}
+              />
+            }
+            style={{ letterSpacing: "0.07em" }}
+          >
+            {t("txComparison.btcTitle")}
+          </Caption>
         </div>
         <span style={cardSubtitle}>{t("txComparison.btcSubtitle")}</span>
         <span style={cardDescStyle}>{t("txComparison.btcDesc")}</span>
@@ -674,19 +662,19 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
         {(mode === "bitcoin" || mode === "compare") && bitcoinCard}
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <button style={ctaBtn} onClick={isAfter ? reset : trigger}>
-          {isAfter ? (
-            <>
-              <RefreshCw size={12} strokeWidth={2} />
-              {t("txComparison.reset")}
-            </>
-          ) : (
-            <>
-              <Zap size={12} strokeWidth={2} />
-              {t("txComparison.simulate")}
-            </>
-          )}
-        </button>
+        <Button
+          variant={isAfter ? "secondary" : "primary"}
+          color={btcAccent}
+          icon={
+            isAfter
+              ? <RefreshCw size={12} strokeWidth={2} />
+              : <Zap size={12} strokeWidth={2} />
+          }
+          onClick={isAfter ? reset : trigger}
+          style={{ letterSpacing: "0.05em", textTransform: "uppercase" }}
+        >
+          {isAfter ? t("txComparison.reset") : t("txComparison.simulate")}
+        </Button>
       </div>
     </div>
   );
