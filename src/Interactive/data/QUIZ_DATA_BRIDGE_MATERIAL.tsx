@@ -1,5 +1,5 @@
-import type { QuizData } from "../types";
 import type { Language } from "../../I18n";
+import type { QuizData } from "../types";
 
 export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
   const fr = language === "fr";
@@ -15,18 +15,16 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            Vous jouez à la loterie avec les ressources de la société ! Sans
-            prix, comment savoir si l'acier utilisé pour votre pont n'est pas 100
-            fois plus utile ailleurs pour fabriquer des scalpels chirurgicaux ? Ou
-            si le béton utilisé n'aurait pas été plus précieux pour construire des
-            logements urgents ?
+            Vous jouez à la loterie avec les ressources de la société ! Sans prix, comment savoir si
+            l'acier utilisé pour votre pont n'est pas 100 fois plus utile ailleurs pour fabriquer
+            des scalpels chirurgicaux ? Ou si le béton utilisé n'aurait pas été plus précieux pour
+            construire des logements urgents ?
           </>
         ) : (
           <>
-            You're gambling with society's resources! Without prices, how can
-            you know if the steel used for your bridge isn't 100 times more
-            useful elsewhere for making surgical scalpels? Or if the concrete
-            wouldn't have been more valuable for building emergency housing?
+            You're gambling with society's resources! Without prices, how can you know if the steel
+            used for your bridge isn't 100 times more useful elsewhere for making surgical scalpels?
+            Or if the concrete wouldn't have been more valuable for building emergency housing?
           </>
         ),
       },
@@ -37,18 +35,16 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            Vous jouez à la loterie avec les ressources de la société ! Sans
-            prix, comment savoir si l'acier utilisé pour votre pont n'est pas 100
-            fois plus utile ailleurs pour fabriquer des scalpels chirurgicaux ? Ou
-            si le béton utilisé n'aurait pas été plus précieux pour construire des
-            logements urgents ?
+            Vous jouez à la loterie avec les ressources de la société ! Sans prix, comment savoir si
+            l'acier utilisé pour votre pont n'est pas 100 fois plus utile ailleurs pour fabriquer
+            des scalpels chirurgicaux ? Ou si le béton utilisé n'aurait pas été plus précieux pour
+            construire des logements urgents ?
           </>
         ) : (
           <>
-            You're gambling with society's resources! Without prices, how can
-            you know if the steel used for your bridge isn't 100 times more
-            useful elsewhere for making surgical scalpels? Or if the concrete
-            wouldn't have been more valuable for building emergency housing?
+            You're gambling with society's resources! Without prices, how can you know if the steel
+            used for your bridge isn't 100 times more useful elsewhere for making surgical scalpels?
+            Or if the concrete wouldn't have been more valuable for building emergency housing?
           </>
         ),
       },
@@ -59,16 +55,15 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
         isCorrect: true,
         rationale: fr ? (
           <>
-            Félicitations, vous avez compris le génie de Mises ! Sans prix
-            de marché, vous ne pouvez pas comparer le « coût social » d'un
-            matériau par rapport à un autre. Vous n'avez pas de dénominateur
-            commun.
+            Félicitations, vous venez de mettre le doigt sur l'argument de Mises ! Sans prix de
+            marché, vous ne pouvez pas comparer le « coût social » d'un matériau par rapport à un
+            autre. Vous n'avez pas de dénominateur commun.
           </>
         ) : (
           <>
-            Congratulations, you've grasped Mises' genius! Without market
-            prices, you cannot compare the "social cost" of one material
-            against another. You have no common denominator.
+            Congratulations, you've just put your finger on Mises's argument! Without market prices,
+            you cannot compare the "social cost" of one material against another. You have no common
+            denominator.
           </>
         ),
       },
