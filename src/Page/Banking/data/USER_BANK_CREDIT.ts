@@ -17,8 +17,8 @@ export const getUserBankCredit = (language: Language) => {
           {
             amount: "1 000 000 €",
             description: fr
-              ? "(tous les dépôts des créances, sur les comptes des clients)"
-              : "(all claim deposits on customer accounts)",
+              ? "(tous les dépôts correspondants, sur les comptes des clients)"
+              : "(all corresponding deposits in customers' accounts)",
           },
         ],
       },
@@ -34,9 +34,7 @@ export const getUserBankCredit = (language: Language) => {
           },
           {
             amount: "200 000 €",
-            description: fr
-              ? "(créance sur M. QuiPaye)"
-              : "(claim on Mr. WhoPays)",
+            description: fr ? "(créance sur M. QuiPaye)" : "(claim on Mr. WhoPays)",
             hasChanged: true,
           },
         ],
@@ -44,8 +42,8 @@ export const getUserBankCredit = (language: Language) => {
           {
             amount: "1 000 000 €",
             description: fr
-              ? "(tous les dépôts des créances, sur les comptes des clients)"
-              : "(all claim deposits on customer accounts)",
+              ? "(tous les dépôts correspondants, sur les comptes des clients)"
+              : "(all corresponding deposits in customers' accounts)",
           },
           {
             amount: "200 000 €",

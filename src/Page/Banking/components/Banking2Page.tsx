@@ -1,8 +1,11 @@
 import { type FC } from "react";
+
+import { Home } from "lucide-react";
+
 import { Callout, Emphasis, KeywordHighlight } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { PageTemplate } from "../../Shared/components";
-import { Home } from "lucide-react";
+
 import { CompensationSimulator } from "./CompensationSimulator";
 
 export const Banking2Page: FC = () => {
@@ -15,16 +18,15 @@ export const Banking2Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Seule la monnaie des Banques Commerciales (appelée M2) circule dans
-            l'économie. Pour finaliser les transactions, les banques commerciales
-            compensent leurs dettes reciproques en se payant mutuellement avec la
-            monnaie de Banque Centrale (appelée M0).
+            Seule la monnaie des Banques Commerciales (appelée M2) circule dans l'économie. Pour
+            finaliser les transactions, les banques commerciales compensent leurs dettes reciproques
+            en se payant mutuellement avec la monnaie de Banque Centrale (appelée M0).
           </>
         ) : (
           <>
-            Only commercial bank money (called M2) circulates in the economy. To
-            finalize transactions, commercial banks settle their mutual debts by
-            paying each other with Central Bank money (called M0).
+            Only commercial bank money (called M2) circulates in the economy. To finalize
+            transactions, commercial banks settle their mutual debts by paying each other with
+            Central Bank money (called M0).
           </>
         )
       }
@@ -32,45 +34,40 @@ export const Banking2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            <i>Nicolas QuiPaye</i> est content puisqu'il a reçu 200 000 €,
-            prêtés par sa banque pour l'achat d'une résidence principale. <br />
-            Cet argent ne va pas rester très longtemps sur le compte de Nicolas :
-            il va payer la vendeuse de la maison, <i>Mme Michu</i>. Et que se
-            passe-t-il si le compte de <i>Mme Michu</i> est dans une autre
-            banque ?
+            <i>Nicolas QuiPaye</i> est content puisqu'il a reçu 200 000 €, prêtés par sa banque pour
+            l'achat d'une résidence principale. <br />
+            Cet argent ne va pas rester très longtemps sur le compte de Nicolas : il va payer la
+            vendeuse de la maison, <i>Mme Michu</i>. Et que se passe-t-il si le compte de{" "}
+            <i>Mme Michu</i> est dans une autre banque ?
           </>
         ) : (
           <>
-            <i>Nicolas WhoPays</i> is happy because he received €200,000, lent
-            by his bank to buy a primary residence. <br />
-            This money won't stay long in Nicolas's account: he will pay the
-            house seller, <i>Ms. Michu</i>. And what happens if{" "}
-            <i>Ms. Michu</i>'s account is at a different bank?
+            <i>Nicolas WhoPays</i> is happy because he received €200,000, lent by his bank to buy a
+            primary residence. <br />
+            This money won't stay long in Nicolas's account: he will pay the house seller,{" "}
+            <i>Ms. Michu</i>. And what happens if <i>Ms. Michu</i>'s account is at a different bank?
           </>
         )}
       </p>
       <p>
         {fr ? (
           <>
-            C'est là qu'intervient le mécanisme de{" "}
-            <Emphasis>compensation interbancaire</Emphasis>. Attendez, ne partez
-            pas ! Je vais tout vous expliquer, de manière très simple et
+            C'est là qu'intervient le mécanisme de <Emphasis>compensation interbancaire</Emphasis>.
+            Attendez, ne partez pas ! Je vais tout vous expliquer, de manière très simple et
             concrète.
           </>
         ) : (
           <>
-            This is where the{" "}
-            <Emphasis>interbank compensation</Emphasis> mechanism comes in.
-            Wait, don't leave! I'll explain everything in a very simple and
-            concrete way.
+            This is where the <Emphasis>interbank compensation</Emphasis> mechanism comes in. Wait,
+            don't leave! I'll explain everything in a very simple and concrete way.
           </>
         )}
       </p>
       <Callout
         title={
           fr
-            ? "Les Deux Types de monnaie : Celle que l'on utilise et celle réservée aux Banques"
-            : "The Two Types of money: The one we use and the one reserved for Banks"
+            ? "Les deux types de monnaie : celle que l'on utilise et celle réservée aux Banques"
+            : "The two types of money: the one we use and the one reserved for Banks"
         }
       >
         <p>
@@ -82,8 +79,8 @@ export const Banking2Page: FC = () => {
           <KeywordHighlight>{fr ? "Monnaie M2" : "M2 Money"}</KeywordHighlight>{" "}
           <Emphasis>
             {fr
-              ? "→ C'est l'argent essentiellement créé par les banques commerciales et qui circule dans l'��conomie."
-              : "→ Money essentially created by commercial banks that circulates in the economy."}
+              ? "→ C'est l'argent créé à plus de 95% par les banques commerciales."
+              : "→ This is the money that is more than 95% created by commercial banks."}
           </Emphasis>
           <br />
           <i>
@@ -115,25 +112,23 @@ export const Banking2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            A fréquence régulière (par exemple, en fin de journée), les banques
-            font le total de ce qu'elles se doivent mutuellement à cause de tous
-            ces virements. Elles ne se paient ensuite que la différence nette (le
-            solde) en utilisant l'argent M0. <br />
+            À fréquence régulière (par exemple, en fin de journée), les banques font le total de ce
+            qu'elles se doivent mutuellement à cause de tous ces virements. Elles ne se paient
+            ensuite que la différence nette (le solde) en utilisant l'argent M0. <br />
             <Emphasis>C'est ça, la compensation interbancaire</Emphasis>.
           </>
         ) : (
           <>
-            At regular intervals (for example, at end of day), banks calculate
-            the total of what they owe each other from all these transfers. They
-            then only pay the net difference (the balance) using M0 money.{" "}
-            <br />
+            At regular intervals (for example, at end of day), banks calculate the total of what
+            they owe each other from all these transfers. They then only pay the net difference (the
+            balance) using M0 money. <br />
             <Emphasis>That's interbank compensation</Emphasis>.
           </>
         )}
       </p>
       <p>
         {fr
-          ? "Cela vous parait abstrait ? Très bien, passons une fois de plus à la pratique !"
+          ? "Cela vous parait abstraît ? Très bien, passons une fois de plus à la pratique !"
           : "Does this seem abstract? Alright, let's get hands-on once again!"}
       </p>
       <Callout
@@ -147,19 +142,17 @@ export const Banking2Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Revenons à nos deux protagonistes <i>M. Nicolas QuiPaye</i> et{" "}
-              <i>Mme Michu</i>. <br />
-              Ca y est, Nicolas fait le virement de 200 000 € sur le compte
-              bancaire de Mme Michu. Si vous avez bien suivi, cette transaction
-              correspond à la monnaie M2. Parfait.
+              Revenons à nos deux protagonistes <i>M. Nicolas QuiPaye</i> et <i>Mme Michu</i>.{" "}
+              <br />
+              Ça y est, Nicolas fait le virement de 200 000 € sur le compte bancaire de Mme Michu.
+              Si vous avez bien suivi, cette transaction correspond à la monnaie M2. Parfait.
             </>
           ) : (
             <>
-              Let's return to our two protagonists <i>Mr. Nicolas WhoPays</i>{" "}
-              and <i>Ms. Michu</i>. <br />
-              There it is, Nicolas transfers €200,000 to Ms. Michu's bank
-              account. If you've been following, this transaction corresponds to
-              M2 money. Perfect.
+              Let's return to our two protagonists <i>Mr. Nicolas WhoPays</i> and <i>Ms. Michu</i>.{" "}
+              <br />
+              There it is, Nicolas transfers €200,000 to Ms. Michu's bank account. If you've been
+              following, this transaction corresponds to M2 money. Perfect.
             </>
           )}
         </p>
@@ -172,17 +165,16 @@ export const Banking2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Maintenant, observons le bilan de la banque de <i>M. QuiPaye</i>{" "}
-            juste après son virement à Mme Michu. Notez la dette de 200 000 € en
-            M0 au passif. Cliquez ci-dessous pour voir comment la banque utilise
-            ses réserves M0 pour solder cette dette lors de la compensation.
+            Maintenant, observons le bilan de la banque de <i>M. QuiPaye</i> juste après son
+            virement à Mme Michu. Notez la dette de 200 000 € en M0 au passif. Cliquez ci-dessous
+            pour voir comment la banque utilise ses réserves M0 pour solder cette dette lors de la
+            compensation.
           </>
         ) : (
           <>
-            Now, let's observe <i>Mr. WhoPays</i>'s bank balance sheet right
-            after his transfer to Ms. Michu. Note the €200,000 M0 debt on the
-            liabilities side. Click below to see how the bank uses its M0
-            reserves to settle this debt during compensation.
+            Now, let's observe <i>Mr. WhoPays</i>'s bank balance sheet right after his transfer to
+            Ms. Michu. Note the €200,000 M0 debt on the liabilities side. Click below to see how the
+            bank uses its M0 reserves to settle this debt during compensation.
           </>
         )}
       </p>

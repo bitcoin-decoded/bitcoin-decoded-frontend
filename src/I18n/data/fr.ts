@@ -41,7 +41,7 @@ const fr = {
   "yieldCurve.shortRateName": "Taux Court",
   "yieldCurve.longRateName": "Taux Long",
   "yieldCurve.years": "Années",
-  "yieldCurve.evaluation": "Evaluation",
+  "yieldCurve.evaluation": "Évaluation",
 
   // MonetaryGallery
   "monetaryGallery.history": "Son histoire :",

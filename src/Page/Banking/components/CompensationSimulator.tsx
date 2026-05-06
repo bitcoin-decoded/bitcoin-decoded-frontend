@@ -1,9 +1,11 @@
-import { type FC, type CSSProperties, useMemo } from "react";
-import { BalanceSheet } from "./BalanceSheet";
+import { type CSSProperties, type FC, useMemo } from "react";
+
 import { usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
 import { getUserBankCompensation } from "../data";
+
+import { BalanceSheet } from "./BalanceSheet";
 
 export const CompensationSimulator: FC = () => {
   const { colors, moduleTheme } = usePageTheme();
@@ -92,26 +94,24 @@ export const CompensationSimulator: FC = () => {
             {fr ? (
               <>
                 - Au passif : la banque de Nicolas a épongé sa dette.
-                <br />- À l'actif : les "Réserves M0" de la banque ont diminué de
-                200 000 €.
+                <br />- À l'actif : les "Réserves M0" de la banque ont diminué de 200 000 €.
               </>
             ) : (
               <>
                 - On the liabilities side: Nicolas's bank has settled its debt.
-                <br />- On the assets side: the bank's "M0 Reserves" decreased by
-                €200,000.
+                <br />- On the assets side: the bank's "M0 Reserves" decreased by €200,000.
               </>
             )}
           </p>
           <p style={sectionStyle}>
             {fr
-              ? "La banque a bel et bien utilisé sa monnaie de Banque Centrale (M0) pour régler une dette née d'une transaction en monnaie commerciale (M2). Vous comprenez maintenant parfaitement la différence entre ces deux niveaux de monnaie !"
-              : "The bank did indeed use its Central Bank money (M0) to settle a debt born from a transaction in commercial money (M2). You now perfectly understand the difference between these two levels of money!"}
+              ? "La banque a bel et bien utilisé sa monnaie de Banque Centrale (M0) pour régler une dette née d'une transaction en monnaie commerciale (M2). Vous saisissez maintenant la différence entre ces deux niveaux de monnaie !"
+              : "The bank did indeed use its Central Bank money (M0) to settle a debt born from a transaction in commercial money (M2). You now understand the difference between these two layers of money!"}
           </p>
           <p style={sectionStyle}>
             {fr
-              ? "Nous venons encore de voir une notion fondamentale de l'économie moderne, et essentielle pour aborder la suite."
-              : "We have just seen yet another fundamental concept of the modern economy, essential for what comes next."}
+              ? "Vous venez encore de gratter une couche que la plupart des gens ne soupçonnent même pas. Et croyez-moi, ça va servir pour la suite."
+              : "You've just uncovered another layer that most people don't even suspect exists. And trust me, this will matter for what comes next."}
           </p>
         </>
       )}

@@ -21,8 +21,8 @@ export const getUserBankCompensation = (language: Language) => {
           {
             amount: "1 000 000 €",
             description: fr
-              ? "(tous les dépôts des créances sur les comptes des clients sauf Nicolas QuiPaye, qui a transféré l'argent chez Mme Michu)"
-              : "(all claim deposits on customer accounts except Nicolas WhoPays, who transferred the money to Ms. Michu)",
+              ? "(tous les dépôts correspondants sur les comptes des clients sauf Nicolas QuiPaye, qui a transféré son argent chez Mme Michu)"
+              : "(all corresponding deposits in customers' accounts except Nicolas WhoPays, who transferred its money to Ms. Michu)",
           },
           {
             amount: "200 000 €",
@@ -43,8 +43,8 @@ export const getUserBankCompensation = (language: Language) => {
           {
             amount: "1 200 000 €",
             description: fr
-              ? "(toutes les créances auprès des clients incluant celle de Nicolas QuiPaye)"
-              : "(all claims from customers including Nicolas WhoPays)",
+              ? "(toutes les créances sur les clients, dont celle de Nicolas QuiPaye)"
+              : "(all claims on customers, including that of Nicolas QuiPaye)",
           },
           {
             amount: "1 800 000 €",
@@ -56,8 +56,8 @@ export const getUserBankCompensation = (language: Language) => {
           {
             amount: "1 000 000 €",
             description: fr
-              ? "(tous les dépôts des créances sur les comptes des clients sauf Nicolas QuiPaye, qui a transféré l'argent chez Mme Michu)"
-              : "(all claim deposits on customer accounts except Nicolas WhoPays, who transferred the money to Ms. Michu)",
+              ? "(tous les dépôts correspondants sur les comptes des clients sauf Nicolas QuiPaye, qui a transféré son argent chez Mme Michu)"
+              : "(all corresponding deposits in customers' accounts except Nicolas WhoPays, who transferred its money to Ms. Michu)",
           },
           {
             amount: "0 €",

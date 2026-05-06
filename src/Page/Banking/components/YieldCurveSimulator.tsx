@@ -1,14 +1,16 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
+
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  CartesianGrid,
+  Line,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Line,
 } from "recharts";
+
 import { usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useYieldCurve } from "../hooks/useYieldCurve";
@@ -71,10 +73,7 @@ export const YieldCurveSimulator: FC = () => {
       <p style={titleStyle}>{t("yieldCurve.title")}</p>
       <div style={{ height: "20rem", width: "100%" }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            data={chartData}
-            margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
-          >
+          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="colorMargin" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={marginColor} stopOpacity={0.6} />
@@ -119,13 +118,8 @@ export const YieldCurveSimulator: FC = () => {
                 borderRadius: "0.5rem",
               }}
               itemStyle={{ color: colors.base.text.primary }}
-              labelFormatter={(value) =>
-                fr ? `Terme : ${value} ans` : `Term: ${value} years`
-              }
-              formatter={(value, name) => [
-                `${(value as number).toFixed(2)}%`,
-                name,
-              ]}
+              labelFormatter={(value) => (fr ? `Terme : ${value} ans` : `Term: ${value} years`)}
+              formatter={(value, name) => [`${(value as number).toFixed(2)}%`, name]}
             />
 
             <Area
@@ -171,9 +165,7 @@ export const YieldCurveSimulator: FC = () => {
           >
             {t("yieldCurve.longRate")} : <strong>{longRate}%</strong>
           </label>
-          <div
-            style={{ display: "flex", alignItems: "center", height: "100%" }}
-          >
+          <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
             <input
               type="range"
               min="1"

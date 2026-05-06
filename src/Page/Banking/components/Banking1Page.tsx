@@ -1,7 +1,9 @@
 import { type FC } from "react";
+
 import { Callout, Emphasis, KeywordHighlight } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { PageTemplate } from "../../Shared/components";
+
 import { CreditCreationSimulator } from "./CreditCreationSimulator";
 
 export const Banking1Page: FC = () => {
@@ -14,13 +16,13 @@ export const Banking1Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Plus de 95% de la monnaie que nous utilisons est créée par les
-            banques commerciales, au moment où elles accordent un prêt.
+            Plus de 95% de la monnaie que nous utilisons est créée par les banques commerciales, au
+            moment où elles accordent un prêt.
           </>
         ) : (
           <>
-            Over 95% of the money we use is created by commercial banks at the
-            moment they grant a loan.
+            Over 95% of the money we use is created by commercial banks at the moment they grant a
+            loan.
           </>
         )
       }
@@ -30,9 +32,8 @@ export const Banking1Page: FC = () => {
           <>
             Alors, savez-vous d'où vient l'argent ?
             <br />
-            Si vous répondez{" "}
-            <i>« de la planche à billets de la banque centrale »</i>, alors vous
-            êtes tombés dans le piège.
+            Si vous répondez <i>« de la planche à billets de la banque centrale »</i>, alors vous
+            êtes tombé dans le piège.
             <br />
             Lisez attentivement ce qui suit, vous allez être surpris :
           </>
@@ -40,9 +41,8 @@ export const Banking1Page: FC = () => {
           <>
             So, do you know where money comes from?
             <br />
-            If you answer{" "}
-            <i>"from the central bank's printing press"</i>, then you've fallen
-            into the trap.
+            If you answer <i>"from the central bank's printing press"</i>, then you've fallen into
+            the trap.
             <br />
             Read carefully what follows, you're in for a surprise:
           </>
@@ -50,29 +50,25 @@ export const Banking1Page: FC = () => {
         <Callout title={fr ? "D'où vient l'argent ?" : "Where does money come from?"}>
           {fr ? (
             <>
-              Plus de 95% de notre monnaie n'est ni imprimée par l'État ni
-              imprimée par les Banques Centrales, mais créée{" "}
-              <i>*comme par magie*</i> par les banques commerciales (du style BNP
-              Paribas, Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de
-              l'argent.
+              Plus de 95% de notre monnaie n'est ni imprimée par l'État ni créée par les Banques
+              Centrales, mais créée <i>comme par magie</i> par les banques commerciales (du style
+              BNP Paribas, Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent.
               <p>
-                Dès qu'elles accordent un prêt, par une simple écriture comptable
-                elles créent de l'argent à partir de rien.
+                Dès qu'elles accordent un prêt, par une simple écriture comptable elles créent de
+                l'argent à partir de rien.
               </p>
-              <p>
-                Ces banques disposent donc en quelque sorte d'un pouvoir magique.
-              </p>
+              <p>Ces banques disposent d'un pouvoir quasi magique.</p>
             </>
           ) : (
             <>
-              Over 95% of our money is neither printed by the State nor by
-              Central Banks, but created <i>*as if by magic*</i> by commercial
-              banks (like JPMorgan, HSBC, ...) every time they lend money.
+              More than 95% of our money is neither printed by the state nor created by central
+              banks, but instead is created <i>as if by magic</i> by commercial banks (like
+              JPMorgan, HSBC, ...) every time they lend money.
               <p>
-                As soon as they grant a loan, through a simple accounting entry
-                they create money out of thin air.
+                As soon as they grant a loan, through a simple accounting entry they create money
+                out of thin air.
               </p>
-              <p>These banks thus possess a sort of magical power.</p>
+              <p>These banks have an almost magical power.</p>
             </>
           )}
         </Callout>
@@ -80,8 +76,7 @@ export const Banking1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Vous voulez le voir de vos propres yeux ? Parfait. Passons à la
-            pratique.
+            Vous voulez le voir de vos propres yeux ? Parfait. Passons à la pratique.
             <br />
             Vous êtes maintenant un banquier, toutes mes félicitations ! (ou pas)
           </>
@@ -185,32 +180,29 @@ export const Banking1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            C'est bon ? Parfait. <br /> Regardez le bilan de la banque de M.
-            QuiPaye : elle a déjà octroyé des prêts à des clients pour une valeur
-            de 1 000 000 €. <br />
-            Maintenant, il est temps d'accorder le prêt à votre client.
+            C'est bon ? Parfait. <br /> Regardez le bilan de la banque de M. QuiPaye : elle a déjà
+            octroyé des prêts à des clients pour une valeur de 1 000 000 €. <br />
+            Maintenant, accordez le prêt à votre client.
           </>
         ) : (
           <>
-            Got it? Perfect. <br /> Look at Mr. WhoPays's bank balance sheet: it
-            has already granted loans to customers worth €1,000,000. <br />
-            Now, it's time to grant the loan to your customer.
+            Got it? Perfect. <br /> Look at Mr. WhoPays's bank balance sheet: it has already granted
+            loans to customers worth €1,000,000. <br />
+            Now, grant the loan to your customer.
           </>
         )}
       </p>
       <CreditCreationSimulator />
       <p>
-        {fr
-          ? <>
-              Si tout ceci est clair pour vous, je vous propose de passer au second
-              aspect fondamental de notre économie :{" "}
-              <Emphasis>les deux niveaux de monnaies</Emphasis>.
-            </>
-          : <>
-              If all of this is clear, I suggest we move on to the second
-              fundamental aspect of our economy:{" "}
-              <Emphasis>the two levels of money</Emphasis>.
-            </>}
+        {fr ? (
+          <>
+            On enchaîne sur le second pilier : <Emphasis>les deux niveaux de monnaies</Emphasis>.
+          </>
+        ) : (
+          <>
+            Let’s move on to the second pillar: <Emphasis>the two levels of money</Emphasis>.
+          </>
+        )}
       </p>
     </PageTemplate>
   );
