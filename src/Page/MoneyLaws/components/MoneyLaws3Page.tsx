@@ -44,15 +44,15 @@ export const MoneyLaws3Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Dans son ouvrage de 1920
-            <i>« Le calcul économique en régime socialiste »</i>,<i>Ludwig von Mises</i> a démontré
-            que ce modèle se heurte à une <Emphasis>impossibilité logique</Emphasis>.
+            Dans son ouvrage de 1920 <i>« Le calcul économique en régime socialiste »</i>,{" "}
+            <i>Ludwig von Mises</i> a démontré que ce modèle se heurte à une{" "}
+            <Emphasis>impossibilité logique</Emphasis>.
           </>
         ) : (
           <>
-            In his 1920 work titled
-            <i> "Economic Calculation in the Socialist Commonwealth"</i>, <i>Ludwig von Mises</i>{" "}
-            demonstrated that this model faces a <Emphasis>logical impossibility</Emphasis>.
+            In his 1920 work titled <i> "Economic Calculation in the Socialist Commonwealth"</i>,{" "}
+            <i>Ludwig von Mises</i> demonstrated that this model faces a{" "}
+            <Emphasis>logical impossibility</Emphasis>.
           </>
         )}
       </p>
