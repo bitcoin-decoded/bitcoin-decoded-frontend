@@ -1,7 +1,9 @@
 import { type FC } from "react";
+
 import { Callout, Emphasis } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { PageTemplate } from "../../Shared/components";
+
 import { QESimulator } from "./QESimulator";
 import { YieldCurveSimulator } from "./YieldCurveSimulator";
 
@@ -15,15 +17,15 @@ export const Banking4Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Le Quantitative Easing écrase les taux d'intérêts, ce qui "casse le
-            moteur" des banques en détruisant leur rentabilité et les forçant
-            ainsi à changer de stratégie en délaissant l'économie réelle.
+            Le Quantitative Easing écrase les taux d'intérêts, ce qui « casse le moteur » des
+            banques en détruisant leur rentabilité et les forçant ainsi à changer de stratégie en
+            délaissant l'économie réelle.
           </>
         ) : (
           <>
-            Quantitative Easing crushes interest rates, which "breaks the
-            engine" of banks by destroying their profitability and forcing them
-            to change strategy by abandoning the real economy.
+            Quantitative Easing crushes interest rates, which "breaks the engine" of banks by
+            destroying their profitability and forcing them to change strategy by abandoning the
+            real economy.
           </>
         )
       }
@@ -31,29 +33,25 @@ export const Banking4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Jusqu'ici, la Banque Centrale a sauvé les banques commerciales en
-            leur injectant de la M0. Le problème c'est qu'en faisant ça,
-            <Emphasis> elle a enraillé le moteur.</Emphasis>
+            Jusqu'ici, la Banque Centrale a sauvé les banques commerciales en leur injectant de la
+            M0. Le problème c'est qu'en faisant ça,
+            <Emphasis> elle a enrayé le moteur.</Emphasis>
           </>
         ) : (
           <>
-            So far, the Central Bank has saved commercial banks by injecting
-            them with M0. The problem is that in doing so,
+            So far, the Central Bank has saved commercial banks by injecting them with M0. The
+            problem is that in doing so,
             <Emphasis> it broke the engine.</Emphasis>
           </>
         )}
       </p>
       <p>
         {fr
-          ? "Pour commencer, il faut savoir comment une banque gagne de l'argent."
-          : "First, you need to know how a bank makes money."}
+          ? "Pour comprendre pourquoi, il faut d'abord savoir comment une banque gagne de l'argent."
+          : "To understand why, you first need to know how a bank makes money."}
       </p>
       <Callout
-        title={
-          fr
-            ? "Comment une banque gagne t-elle de l'argent ?"
-            : "How does a bank make money?"
-        }
+        title={fr ? "Comment une banque gagne-t-elle de l'argent ?" : "How does a bank make money?"}
       >
         <p>
           {fr ? (
@@ -61,12 +59,11 @@ export const Banking4Page: FC = () => {
               C'est très simple :
               <ol>
                 <li>
-                  Elle <i>emprunte</i> de l'argent à court terme, à un taux
-                  généralement très bas (pratiquement à 0%)
+                  Elle <i>emprunte</i> de l'argent à court terme, à un taux généralement très bas
+                  (pratiquement à 0%)
                 </li>
                 <li>
-                  Elle <i>prête</i> ensuite à long terme, à un taux généralement
-                  bien plus élevé.
+                  Elle <i>prête</i> ensuite à long terme, à un taux généralement bien plus élevé.
                 </li>
               </ol>
             </>
@@ -75,12 +72,10 @@ export const Banking4Page: FC = () => {
               It's very simple:
               <ol>
                 <li>
-                  It <i>borrows</i> money short-term, at a generally very low
-                  rate (practically 0%)
+                  It <i>borrows</i> money short-term, at a generally very low rate (practically 0%)
                 </li>
                 <li>
-                  It then <i>lends</i> long-term, at a generally much higher
-                  rate.
+                  It then <i>lends</i> long-term, at a generally much higher rate.
                 </li>
               </ol>
             </>
@@ -97,18 +92,16 @@ export const Banking4Page: FC = () => {
         <p>
           {fr ? (
             <>
-              <u>Exemple</u> : La banque de <i>M. Nicolas QuiPaye</i> lui a
-              accordé un prêt de 200 000€ avec un taux d'intérêt de 3% sur 20
-              ans, une somme que cette même banque a obtenu à un taux
-              extrêmement bas voire quasi-nul ! <br /> → C'est cette marge qui
-              la rémunère pour prendre des risques et ainsi financer l'économie.
+              <u>Exemple</u> : La banque de <i>M. Nicolas QuiPaye</i> lui a accordé un prêt de 200
+              000€ avec un taux d'intérêt de 3% sur 20 ans, une somme que cette même banque a
+              obtenue à un taux extrêmement bas voire quasi-nul ! <br /> → C'est cette marge qui la
+              rémunère pour prendre des risques et ainsi financer l'économie.
             </>
           ) : (
             <>
-              <u>Example</u>: <i>Mr. Nicolas WhoPays</i>'s bank granted him a
-              loan of €200,000 at an interest rate of 3% over 20 years, an
-              amount the same bank obtained at an extremely low, almost zero,
-              rate! <br /> → This margin is what pays the bank for taking risks
+              <u>Example</u>: <i>Mr. Nicolas WhoPays</i>'s bank granted him a loan of €200,000 at an
+              interest rate of 3% over 20 years, an amount the same bank obtained at an extremely
+              low, almost zero, rate! <br /> → This margin is what pays the bank for taking risks
               and thus financing the economy.
             </>
           )}
@@ -117,16 +110,15 @@ export const Banking4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            En achetant massivement des obligations, la Banque Centrale fait
-            mécaniquement monter leur prix (la loi de{" "}
-            <i>l'offre et de la demande</i>). Et cette montée du prix des
+            En achetant massivement des obligations, la Banque Centrale fait mécaniquement monter
+            leur prix (la loi de <i>l'offre et de la demande</i>). Et cette montée du prix des
             obligations fait simultanément baisser leur taux d'intérêt.
           </>
         ) : (
           <>
-            By massively buying bonds, the Central Bank mechanically drives
-            their price up (the law of <i>supply and demand</i>). And this rise
-            in bond prices simultaneously lowers their interest rate.
+            By massively buying bonds, the Central Bank mechanically drives their price up (the law
+            of <i>supply and demand</i>). And this rise in bond prices simultaneously lowers their
+            interest rate.
           </>
         )}
       </p>
@@ -138,14 +130,13 @@ export const Banking4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Vous êtes maintenant une banque centrale et vous allez réaliser une
-            opération de QE. Observez les effets que cela provoque sur les
-            obligations.
+            Vous êtes maintenant une banque centrale et vous allez réaliser une opération de QE.
+            Observez les effets que cela provoque sur les obligations.
           </>
         ) : (
           <>
-            You are now a central bank and you will carry out a QE operation.
-            Observe the effects this has on bonds.
+            You are now a central bank and you will carry out a QE operation. Observe the effects
+            this has on bonds.
           </>
         )}
         <QESimulator />
@@ -159,16 +150,13 @@ export const Banking4Page: FC = () => {
         {fr ? (
           <>
             Alors vous me répondrez sans doute :{" "}
-            <i>« OK, super... et alors ? C'est grave, Docteur ? »</i> — je vous
-            réponds tout de suite : « Oui, car ça casse le modèle de
-            rémunération des banques commerciales ».
+            <i>« OK, super... et alors ? C'est grave, Docteur ? »</i> — je vous réponds tout de
+            suite : « Oui, car ça casse le modèle de rémunération des banques commerciales ».
           </>
         ) : (
           <>
-            You'll probably say:{" "}
-            <i>"OK, great... so what? Is it serious, Doctor?"</i> — I'll answer
-            right away: "Yes, because it breaks the compensation model of
-            commercial banks."
+            You'll probably say: <i>"OK, great... so what? Is it serious, Doctor?"</i> — I'll answer
+            right away: "Yes, because it breaks the compensation model of commercial banks."
           </>
         )}
       </p>
@@ -179,30 +167,50 @@ export const Banking4Page: FC = () => {
       </p>
       <p style={{ textAlign: "center" }}>
         {fr
-          ? "Expérimentez ! Faites varier les taux à long terme sur le graphique ci-dessous afin de mieux saisir les conséquences de taux trop bas"
-          : "Experiment! Adjust the long-term rates on the chart below to better grasp the consequences of rates that are too low"}
+          ? "Expérimentez ! Faites varier les taux à long terme sur le graphique ci-dessous afin de mieux saisir les conséquences de taux trop bas."
+          : "Experiment! Adjust the long-term rates on the chart below to better grasp the consequences of rates that are too low."}
         <YieldCurveSimulator />
-      </p>
-      <p>
-        {fr
-          ? <>Le constat est sans appel : avec des taux si bas, le financement de l'<i>Économie Productive</i> (créer de la valeur, lancer des projets en finançant les entrepreneurs, embaucher) n'est plus rentable pour les banques. Le risque est bien trop grand pour une marge si petite.</>
-          : <>The conclusion is clear: with rates so low, financing the <i>Productive Economy</i> (creating value, launching projects by funding entrepreneurs, hiring) is no longer profitable for banks. The risk is far too great for such a small margin.</>}
-      </p>
-      <p>
-        {fr
-          ? <>Mais les banques doivent survivre ! Elles vont donc opérer un virage stratégique majeur. Elles vont délaisser la production pour se concentrer massivement sur le financement de l'<i>Économie Patrimoniale</i>.</>
-          : <>But banks must survive! They will therefore make a major strategic shift. They will abandon production to focus massively on financing the <i>Asset Economy</i>.</>}
       </p>
       <p>
         {fr ? (
           <>
-            Au lieu de prêter à ceux qui <i>font</i>, elles vont prêter à ceux
-            qui <i>ont</i>. C'est ce que nous allons voir dans la suite !
+            Voilà ce qui se passe : avec des taux si bas, le financement de l'
+            <i>Économie Productive</i> (créer de la valeur, lancer des projets en finançant les
+            entrepreneurs, embaucher) n'est plus rentable pour les banques. Le risque est bien trop
+            grand pour une marge si maigre.
           </>
         ) : (
           <>
-            Instead of lending to those who <i>make</i>, they will lend to
-            those who <i>have</i>. That's what we'll see next!
+            Here's what happens: with rates so low, financing the <i>Productive Economy</i>{" "}
+            (creating value, launching projects by funding entrepreneurs, hiring) is no longer
+            profitable for banks. The risk is far too great for such a poor margin.
+          </>
+        )}
+      </p>
+      <p>
+        {fr ? (
+          <>
+            Mais les banques doivent survivre ! Elles vont donc opérer un virage stratégique majeur.
+            Elles vont délaisser la production pour se concentrer massivement sur le financement de
+            l'<i>Économie Patrimoniale</i>.
+          </>
+        ) : (
+          <>
+            But banks must survive! They will therefore make a major strategic shift. They will
+            abandon production to focus massively on financing the <i>Asset Economy</i>.
+          </>
+        )}
+      </p>
+      <p>
+        {fr ? (
+          <>
+            Au lieu de prêter à ceux qui <i>font</i>, elles vont prêter à ceux qui <i>ont</i>. La
+            suite, juste après !
+          </>
+        ) : (
+          <>
+            Instead of lending to those who <i>make</i>, they will lend to those who <i>have</i>.
+            More on that right after!
           </>
         )}
       </p>

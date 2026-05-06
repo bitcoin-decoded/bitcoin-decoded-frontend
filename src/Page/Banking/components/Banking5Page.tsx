@@ -1,14 +1,15 @@
-import { type FC, type CSSProperties } from "react";
-import { Callout, Emphasis, IdentityCard } from "../../../Design";
-import { useTranslation } from "../../../I18n";
-import { PageTemplate } from "../../Shared/components";
-import { PAGE_STYLES } from "../../Shared/styles";
+import { type CSSProperties, type FC } from "react";
+
+import cantillonEffectImg from "../../../../src/Design/img/Cantillon_Effect.jpg";
 import gyroGearlooseImg from "../../../../src/Design/img/Gyro_Gearloose.png";
 import picsouImg from "../../../../src/Design/img/picsou.webp";
-import cantillonEffectImg from "../../../../src/Design/img/Cantillon_Effect.jpg";
-import { Quiz, getQuizDataProfileChoice } from "../../../Interactive";
-import { useToggleSimulator } from "../../Shared/hooks";
+import { Callout, Emphasis, IdentityCard } from "../../../Design";
+import { useTranslation } from "../../../I18n";
+import { getQuizDataProfileChoice, Quiz } from "../../../Interactive";
 import { Illustration } from "../../../Interactive";
+import { PageTemplate } from "../../Shared/components";
+import { useToggleSimulator } from "../../Shared/hooks";
+import { PAGE_STYLES } from "../../Shared/styles";
 
 export const Banking5Page: FC = () => {
   const { t, language } = useTranslation();
@@ -27,19 +28,17 @@ export const Banking5Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Débordant de liquidités (M0), les banques commerciales ouvrent les
-            vannes du crédit (M2). Mais pour éviter les risques, elles dirigent
-            cet argent vers les actifs patrimoniaux plutôt que vers l'économie
-            productive. L'argent profite donc en premier à ceux qui possèdent
-            déjà du capital : c'est l'Effet Cantillon.
+            Disposant de réserves abondantes en M0, les banques commerciales ouvrent les vannes du
+            crédit, créant ainsi de la M2. Mais pour éviter les risques, elles dirigent cet argent
+            vers les actifs patrimoniaux plutôt que vers l'économie productive. L'argent profite
+            donc en premier à ceux qui possèdent déjà du capital : c'est l'Effet Cantillon.
           </>
         ) : (
           <>
-            Overflowing with liquidity (M0), commercial banks open the credit
-            floodgates (M2). But to avoid risk, they direct this money toward
-            asset investments rather than the productive economy. The money
-            therefore benefits first those who already own capital: this is the
-            Cantillon Effect.
+            With abundant M0 reserves, commercial banks open the floodgates of credit, thereby
+            creating M2. But to avoid risk, they direct this money toward asset investments rather
+            than the productive economy. The money therefore benefits first those who already own
+            capital: this is the Cantillon Effect.
           </>
         )
       }
@@ -47,15 +46,13 @@ export const Banking5Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Les marges sont écrasées, mais les coffres débordent de M0.
-            L'équation de survie pour la banque commerciale est simple :{" "}
-            <Emphasis>faire du volume avec zéro risque</Emphasis>.
+            Les marges sont écrasées, mais les coffres débordent de M0. L'équation de survie pour la
+            banque commerciale est simple : <Emphasis>faire du volume avec zéro risque</Emphasis>.
           </>
         ) : (
           <>
-            Margins are crushed, but the vaults overflow with M0. The survival
-            equation for the commercial bank is simple:{" "}
-            <Emphasis>do volume with zero risk</Emphasis>.
+            Margins are crushed, but the vaults overflow with M0. The survival equation for the
+            commercial bank is simple: <Emphasis>do volume with zero risk</Emphasis>.
           </>
         )}
       </p>
@@ -74,13 +71,13 @@ export const Banking5Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Je vous présente deux nouveaux personnages :{" "}
-              <i>M. Balthazar Picsou</i> et <i>M. Géo Trouve-Tout</i>.
+              Je vous présente deux nouveaux personnages : <i>M. Balthazar Picsou</i> et{" "}
+              <i>M. Géo Trouve-Tout</i>.
             </>
           ) : (
             <>
-              Let me introduce two new characters:{" "}
-              <i>Mr. Scrooge McDuck</i> and <i>Mr. Gyro Gearloose</i>.
+              Let me introduce two new characters: <i>Mr. Scrooge McDuck</i> and{" "}
+              <i>Mr. Gyro Gearloose</i>.
             </>
           )}
         </p>
@@ -104,16 +101,16 @@ export const Banking5Page: FC = () => {
                 {
                   label: fr ? "Son projet :" : "His project:",
                   value: fr
-                    ? "Créer une machine révolutionnaire pour les boulangers"
-                    : "Create a revolutionary machine for bakers",
+                    ? "Créer une machine astucieuse qui pétrit le pain deux fois plus vite que les modèles actuels"
+                    : "Build an ingenious machine that kneads dough twice as fast as current models",
                 },
                 {
                   label: fr
                     ? "Ses garanties auprès de la banque :"
                     : "His collateral for the bank:",
                   value: fr
-                    ? "Rien d'autre que sa bonne volonté"
-                    : "Nothing but his goodwill",
+                    ? "Sa motivation et un business plan, rien d'autre !"
+                    : "His motivation and a business plan, nothing else!",
                 },
               ]}
             />
@@ -154,10 +151,7 @@ export const Banking5Page: FC = () => {
         </div>
       </Callout>
 
-      <Quiz
-        {...getQuizDataProfileChoice(language)}
-        onCorrectAnswer={onQuizSolved}
-      />
+      <Quiz {...getQuizDataProfileChoice(language)} onCorrectAnswer={onQuizSolved} />
 
       {isQuizSolved && (
         <>
@@ -169,21 +163,19 @@ export const Banking5Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Vous venez de comprendre la mécanique implacable de l'
-                <i>Effet Cantillon</i>, théorisé par l'économiste{" "}
-                <i>Richard Cantillon</i> : l'argent nouvellement créé (M2) fuit
-                l'économie réelle (trop risquée) pour aller gonfler la bulle des
-                actifs. Les "Picsou" s'enrichissent en dormant (car la demande
-                pour les actifs monte). Les "Géo" restent sur la touche.
+                Vous venez de comprendre la mécanique de l'<i>Effet Cantillon</i>, du nom de
+                l'économiste irlandais du XVIIIe siècle <i>Richard Cantillon</i> : l'argent
+                nouvellement créé (M2) fuit l'économie réelle, jugée trop risquée, pour aller
+                gonfler le prix des actifs. Les « Picsou » s'enrichissent en dormant : la demande
+                pour les actifs monte, leurs portefeuilles aussi. Les « Géo » restent sur la touche.
               </>
             ) : (
               <>
-                You've just understood the relentless mechanics of the{" "}
-                <i>Cantillon Effect</i>, theorized by economist{" "}
-                <i>Richard Cantillon</i>: newly created money (M2) flees the
-                real economy (too risky) to inflate the asset bubble. The
-                "Scrooges" get richer while sleeping (because demand for assets
-                rises). The "Gyros" are left on the sidelines.
+                You've just understood the mechanism of the <i>Cantillon Effect</i>, named after the
+                18th-century Irish economist Richard Cantillon: newly created money (M2) tends to
+                flow away from the real economy—considered too risky—and instead inflates asset
+                prices. The "Scrooges" get richer while they sleep: demand for assets rises, and so
+                do the value of their portfolios. The "Geos" are left on the sidelines.
               </>
             )}
           </p>
@@ -193,23 +185,22 @@ export const Banking5Page: FC = () => {
             width="40%"
             caption={
               fr
-                ? "Le ruissellement de l'argent : Le robinet monétaire remplit d'abord les investisseurs (les 'Picsou') avant de ruisseler... jusque dans notre caddie"
-                : "The trickle-down of money: The monetary tap fills investors ('the Scrooges') first before trickling down... into our shopping cart"
+                ? "Le ruissellement de l'argent : le robinet monétaire remplit d'abord les portefeuilles des « Picsou » avant que ça ne finisse par ruisseler... jusque dans notre caddie"
+                : "The trickle-down of money: the monetary tap first fills the pockets of the “Scrooges” before it eventually trickles down... all the way to our shopping carts"
             }
           />
           <p>
             {fr ? (
               <>
-                Mais quand les Picsou se sentent riches, ils finissent par
-                dépenser leurs gains... et c'est là que les problèmes arrivent
-                pour le caddie de courses. Qui vient de prononcer le mot{" "}
+                Mais quand les Picsou se sentent riches, ils finissent par dépenser. Et là, ça
+                déborde dans le caddie de courses. Tiens, quelqu'un n'aurait pas prononcé le mot{" "}
                 <i>inflation</i> ?
               </>
             ) : (
               <>
-                But when the Scrooges feel rich, they end up spending their
-                gains... and that's when problems arrive for the shopping cart.
-                Who just said the word <i>inflation</i>?
+                But when the Scrooges feel wealthy, they eventually start spending. And that's when
+                it spills over into the shopping cart. Did someone just say the word{" "}
+                <i>inflation</i>?
               </>
             )}
           </p>

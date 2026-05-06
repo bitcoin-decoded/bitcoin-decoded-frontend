@@ -1,5 +1,5 @@
-import type { QuizData } from "../types";
 import type { Language } from "../../I18n";
+import type { QuizData } from "../types";
 
 export const getQuizDataM0 = (language: Language): QuizData => {
   const fr = language === "fr";
@@ -14,31 +14,23 @@ export const getQuizDataM0 = (language: Language): QuizData => {
           : "a) The commercial bank committed violations and the central bank deducted M0 from it as a fine.",
         isCorrect: false,
         rationale: fr ? (
-          <>
-            Bien tenté mais non, la Banque Centrale ne peut pas 'ponctionner'
-            le M0 comme ça.
-          </>
+          <>Bien tenté mais non, la Banque Centrale ne peut pas 'ponctionner' le M0 comme ça.</>
         ) : (
-          <>
-            Nice try but no, the Central Bank cannot 'deduct' M0 like that.
-          </>
+          <>Nice try but no, the Central Bank cannot 'deduct' M0 like that.</>
         ),
       },
       {
         text: fr
-          ? "b) La banque commerciale a créé trop d'argent M2 (pour Nicolas et d'autres) et n'a plus les moyens d'imprimer suffisamment de M0 en proportion."
-          : "b) The commercial bank created too much M2 money (for Nicolas and others) and no longer has the means to print enough M0 in proportion.",
+          ? "b) La banque commerciale a créé trop d'argent M2 (pour Nicolas et d'autres) et n'a plus assez de M0 en proportion du M2 créé."
+          : "b) The commercial bank has created too much M2 money (for Nicolas and others) and no longer has enough M0 in proportion to the M2 that has been created.",
         isCorrect: false,
         rationale: fr ? (
           <>
-            Rappelez-vous : les banques commerciales créent le M2, mais elles
-            ne peuvent jamais fabriquer de M0.
+            Rappelez-vous : les banques commerciales créent le M2, mais elles ne peuvent jamais
+            fabriquer de M0.
           </>
         ) : (
-          <>
-            Remember: commercial banks create M2, but they can never
-            manufacture M0.
-          </>
+          <>Remember: commercial banks create M2, but they can never manufacture M0.</>
         ),
       },
       {
@@ -47,9 +39,12 @@ export const getQuizDataM0 = (language: Language): QuizData => {
           : "c) The commercial bank gave too many M2 loans (called 'bad loans') that are never repaid.",
         isCorrect: true,
         rationale: fr ? (
-          <>Bien vu, c'est la perte de confiance !</>
+          <>
+            Bien vu, ce sont les défauts de paiement en cascade qui finissent par engendrer une
+            perte de confiance !
+          </>
         ) : (
-          <>Well spotted, it's a loss of confidence!</>
+          <>Well spotted, cascading defaults ultimately lead to a loss of confidence!</>
         ),
       },
     ],
