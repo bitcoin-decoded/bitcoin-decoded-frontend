@@ -19,14 +19,15 @@ export const Banking3Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Pour faire face à une crise de liquidité majeure et ainsi rétablir la confiance, la
-            Banque Centrale renfloue les banques commerciales en monnaie M0 en leur rachetant
-            massivement des obligations.
+            Une banque manque d'argent. Pas de problème : la Banque Centrale appuie sur un bouton,
+            et l'argent apparaît. Magique, non ? Vous vous doutez bien qu'il y a un piège. Il
+            s'appelle le Quantitative Easing.
           </>
         ) : (
           <>
-            To face a major liquidity crisis and restore confidence, the Central Bank bails out
-            commercial banks in M0 money by massively buying back their bonds.
+            A bank runs short of money. No problem: the central bank presses a button, and the money
+            appears. Magic, right? But you can probably guess there's a catch. It's called
+            Quantitative Easing.
           </>
         )
       }

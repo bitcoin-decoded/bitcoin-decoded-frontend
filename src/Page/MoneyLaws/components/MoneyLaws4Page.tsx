@@ -22,13 +22,15 @@ export const MoneyLaws4Page: FC = () => {
       prelude={
         fr ? (
           <>
-            L'école de pensée économique autrichienne se distingue par son approche méthodologique
-            fondée, non pas sur le positivisme, mais sur la logique pure.
+            En 2008, les banques centrales ont injecté des milliers de milliards. Selon les
+            keynésiens, l'inflation aurait dû exploser. Elle ne l'a pas fait. Donc imprimer de la
+            monnaie ne crée pas d'inflation ? Mauvaise réponse. Mauvaise méthode, surtout.
           </>
         ) : (
           <>
-            The Austrian school of economic thought stands out through its methodological approach,
-            grounded not in positivism but in pure logic.
+            In 2008, central banks injected trillions. According to Keynesians, inflation should
+            have exploded. It didn’t. So does printing money not cause inflation? Wrong answer.
+            Wrong method, above all.
           </>
         )
       }

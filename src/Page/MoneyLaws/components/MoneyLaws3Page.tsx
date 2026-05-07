@@ -22,16 +22,21 @@ export const MoneyLaws3Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Une économie complexe ne peut pas fonctionner sans boussole. En supprimant la propriété
-            privée et les prix, le socialisme ne détruit pas seulement la liberté, il détruit
-            l'information. Sans prix, impossible de savoir si l'on crée de la valeur ou si l'on
-            gaspille des ressources.
+            Imaginez qu'on vous demande, là, maintenant, de décider combien d'acier la France doit
+            produire l'année prochaine. Pas une fourchette. Un chiffre précis. En tonnes. Vous avez
+            accès à toutes les données techniques que vous voulez : les stocks, les capacités de
+            production, les besoins déclarés des industries. Mais une seule information vous manque,
+            et sans elle, votre chiffre n'a aucun sens. Cette information, le socialisme l'a
+            supprimée. Et c'est ce qui le rend mathématiquement impossible.
           </>
         ) : (
           <>
-            A complex economy cannot function without a compass. By abolishing private property and
-            prices, socialism does not only destroy freedom — it destroys information. Without
-            prices, impossible to know whether we are creating value or wasting resources.
+            Imagine you are asked, right now, to decide how much steel France should produce next
+            year. Not a range. A precise number. In tons. You have access to all the technical data
+            you want: inventories, production capacity, declared industrial needs. But there is one
+            missing piece of information—and without it, your number makes no sense. That piece of
+            information is prices. Socialism removes that information. And that is what makes it
+            mathematically impossible.
           </>
         )
       }

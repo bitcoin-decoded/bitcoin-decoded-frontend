@@ -27,17 +27,14 @@ export const MoneyLaws2Page: FC = () => {
       prelude={
         fr ? (
           <>
-            En manipulant une monnaie sans dureté, les banques faussent le signal économique le plus
-            important de la société : le taux d'intérêt. Bercés dans une illusion d'abondance et de
-            richesse (le Boom), nous finissons systématiquement par être rattrapés par la réalité
-            qui corrige tous les excès (le Krach).
+            Pourquoi les crises économiques reviennent-elles toujours, malgré toutes les leçons du
+            passé ? La réponse n'est pas dans la psychologie des marchés. Elle est dans la monnaie
+            qu'on utilise.
           </>
         ) : (
           <>
-            By manipulating a currency with no hardness, banks distort the most important economic
-            signal in society: the interest rate. Lulled into an illusion of abundance and wealth
-            (the Boom), we are systematically caught up by reality, which corrects all excesses (the
-            Bust).
+            Why do economic crises keep coming back, despite all the lessons from the past? The
+            answer is not in market psychology. It lies in the money we use.
           </>
         )
       }
