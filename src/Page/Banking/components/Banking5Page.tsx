@@ -28,17 +28,19 @@ export const Banking5Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Disposant de réserves abondantes en M0, les banques commerciales ouvrent les vannes du
-            crédit, créant ainsi de la M2. Mais pour éviter les risques, elles dirigent cet argent
-            vers les actifs patrimoniaux plutôt que vers l'économie productive. L'argent profite
-            donc en premier à ceux qui possèdent déjà du capital : c'est l'Effet Cantillon.
+            Vous êtes banquier. Vos coffres débordent de M0, vos marges sont écrasées, et la
+            direction veut du volume. Sur votre bureau, deux dossiers de prêt. L'un va vous
+            rapporter peu mais sans aucun risque. L'autre pourrait financer la prochaine révolution
+            industrielle, mais peut-être pas. Vous avez 30 secondes pour choisir. Bienvenue dans
+            l'Effet Cantillon.
           </>
         ) : (
           <>
-            With abundant M0 reserves, commercial banks open the floodgates of credit, thereby
-            creating M2. But to avoid risk, they direct this money toward asset investments rather
-            than the productive economy. The money therefore benefits first those who already own
-            capital: this is the Cantillon Effect.
+            You are a banker. Your vaults are overflowing with M0, your margins are compressed, and
+            management is pushing for volume. On your desk, two loan applications. One will bring
+            you little return but virtually no risk. The other could fund the next industrial
+            revolution—but maybe not. You have 30 seconds to decide. Welcome to the Cantillon
+            effect.
           </>
         )
       }

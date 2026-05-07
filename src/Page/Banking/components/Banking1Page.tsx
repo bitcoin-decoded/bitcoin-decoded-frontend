@@ -16,13 +16,15 @@ export const Banking1Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Plus de 95% de la monnaie que nous utilisons est créée par les banques commerciales, au
-            moment où elles accordent un prêt.
+            95% de votre argent n'a jamais existé physiquement. Il n'a pas été imprimé. Il n'a pas
+            été frappé. Il a été tapé au clavier. Par votre banque. Pour vous prêter de l'argent que
+            personne ne possédait.
           </>
         ) : (
           <>
-            Over 95% of the money we use is created by commercial banks at the moment they grant a
-            loan.
+            95% of your money has never physically existed. It was not printed. It was not minted.
+            It was typed into a computer by your bank, to lend you money that nobody actually
+            possessed.
           </>
         )
       }

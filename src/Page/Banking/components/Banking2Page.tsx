@@ -18,15 +18,15 @@ export const Banking2Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Seule la monnaie des Banques Commerciales (appelée M2) circule dans l'économie. Pour
-            finaliser les transactions, les banques commerciales compensent leurs dettes reciproques
-            en se payant mutuellement avec la monnaie de Banque Centrale (appelée M0).
+            Nicolas vient de virer 200 000 € pour acheter sa maison. Sauf que cet argent n'a jamais
+            quitté sa banque. Et pourtant, Mme Michu a bien reçu son virement. Comment est-ce
+            possible ?
           </>
         ) : (
           <>
-            Only commercial bank money (called M2) circulates in the economy. To finalize
-            transactions, commercial banks settle their mutual debts by paying each other with
-            Central Bank money (called M0).
+            Nicolas has just transferred $200,000 to buy his house. Except that the money never
+            actually left his bank. And yet, Mrs. Michu did receive the transfer. How is that
+            possible?
           </>
         )
       }

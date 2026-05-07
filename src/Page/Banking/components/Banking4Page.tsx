@@ -17,15 +17,17 @@ export const Banking4Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Le Quantitative Easing écrase les taux d'intérêts, ce qui « casse le moteur » des
-            banques en détruisant leur rentabilité et les forçant ainsi à changer de stratégie en
-            délaissant l'économie réelle.
+            Vous êtes-vous déjà demandé pourquoi votre banquier vous regarde de travers quand vous
+            parlez de financer un vrai projet, mais déroule le tapis rouge dès qu'il s'agit d'un
+            crédit immobilier ou d'un placement ? Ce n'est pas votre dossier. C'est son moteur qui
+            tourne au ralenti. Et c'est la Banque Centrale qui l'a enrayé.
           </>
         ) : (
           <>
-            Quantitative Easing crushes interest rates, which "breaks the engine" of banks by
-            destroying their profitability and forcing them to change strategy by abandoning the
-            real economy.
+            Have you ever wondered why your banker looks at you sideways when you talk about
+            financing a real project, but rolls out the red carpet for a mortgage or an investment
+            product? It's not your file. It's the engine running at low speed. And it's the Central
+            Bank that has jammed it.
           </>
         )
       }

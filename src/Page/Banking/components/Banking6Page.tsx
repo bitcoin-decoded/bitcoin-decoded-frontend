@@ -18,16 +18,15 @@ export const Banking6Page: FC = () => {
       prelude={
         fr ? (
           <>
-            L'argent accumulé dans les actifs (Bourse, Immobilier) finit inévitablement par "fuir"
-            vers l'économie réelle : c'est l'Effet de Richesse. Une masse de monnaie excessive se
-            met alors à chasser une quantité limitée de biens. Résultat mathématique : les prix du
-            quotidien explosent.
+            Vos courses ont augmenté. Votre loyer aussi. Votre salaire, lui, suit mollement. Pendant
+            ce temps, le CAC 40 bat des records et l'immobilier parisien tutoie l'absurde. Vous
+            sentez qu'il y a un lien. Vous avez raison.
           </>
         ) : (
           <>
-            Money accumulated in assets (Stock Market, Real Estate) inevitably ends up "leaking"
-            into the real economy: this is the Wealth Effect. An excessive money supply then chases
-            a limited quantity of goods. Mathematical result: everyday prices skyrocket.
+            Your grocery bill has gone up. So has your rent. Your salary, meanwhile, is barely
+            keeping pace. At the same time, the NASDAQ is hitting record highs and real estate
+            prices are climbing into the absurd. You sense there's a link. You're right.
           </>
         )
       }
