@@ -1,13 +1,11 @@
-import type { DebateItem } from "../types";
 import type { Language } from "../../I18n";
+import type { DebateItem } from "../types";
 
 export const getKeynesianVsAustrian = (language: Language): DebateItem[] => {
   const fr = language === "fr";
   return [
     {
-      topic: fr
-        ? "Comment vérifier une théorie ?"
-        : "How do you verify a theory?",
+      topic: fr ? "Comment vérifier une théorie ?" : "How do you verify a theory?",
       sides: [
         {
           school: fr ? "Keynésien" : "Keynesian",
@@ -24,14 +22,12 @@ export const getKeynesianVsAustrian = (language: Language): DebateItem[] => {
       ],
     },
     {
-      topic: fr
-        ? "L'inflation après 2008"
-        : "Inflation after 2008",
+      topic: fr ? "L'inflation après 2008" : "Inflation after 2008",
       sides: [
         {
           school: fr ? "Le Keynésien" : "The Keynesian",
           argument: fr
-            ? "Nous avons injectés des milliards de liquidités et l'indice des prix (le pain, le lait, ...) n'a pas explosé. Donc, imprimer de la monnaie ne provoque pas d'inflation."
+            ? "Nous avons injecté des milliards de liquidités et l'indice des prix (le pain, le lait, ...) n'a pas explosé. Donc, imprimer de la monnaie ne provoque pas d'inflation."
             : "We injected billions in liquidity and the price index (bread, milk, ...) didn't skyrocket. Therefore, printing money doesn't cause inflation.",
         },
         {

@@ -1,6 +1,7 @@
 import type { FC } from "react";
+
 import type { IdentityCharacteristic, MonetaryItem } from "../../../Design";
-import { IdentityCard, RatingRow, getMonetaryHistory } from "../../../Design";
+import { getMonetaryHistory, IdentityCard, RatingRow } from "../../../Design";
 import { useLanguageContext, useTranslation } from "../../../I18n";
 
 export const MonetaryGallery: FC = () => {
