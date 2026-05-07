@@ -72,18 +72,18 @@ export const MoneyLaws2Page: FC = () => {
         <p>
           {fr ? (
             <>
-              En tant qu'humains, nous préférons fondamentalement{" "}
+              En tant qu'humains, on préfère{" "}
               <Emphasis>consommer tout de suite plutôt que plus tard</Emphasis>. Toutefois, pour
-              bâtir un futur plus confortable, il est nécessaire de différer une partie de notre
-              consommation. Cette tension entre favoriser le présent ou le futur, c'est ce qu'on
-              appelle la <i>Préférence Temporelle</i>.
+              bâtir un futur plus confortable, il faut différer une partie de notre consommation.
+              Cette tension entre favoriser le présent ou le futur, c'est ce qu'on appelle la{" "}
+              <i>Préférence Temporelle</i>.
             </>
           ) : (
             <>
-              As humans, we fundamentally prefer to{" "}
-              <Emphasis>consume now rather than later</Emphasis>. However, to build a more
-              comfortable future, we must defer part of our consumption. This tension between
-              favoring the present or the future is what we call <i>Time Preference</i>.
+              As humans, we prefer <Emphasis>consuming now rather than later</Emphasis>. However, to
+              build a more comfortable future, we need to defer part of our consumption. This
+              tension between favoring the present or the future is what we call{" "}
+              <i>Time Preference</i>.
             </>
           )}
         </p>
@@ -114,7 +114,7 @@ export const MoneyLaws2Page: FC = () => {
             <>
               Sacrifier le présent pour le futur n'est pas naturel. Ce sacrifice nécessite donc une
               contrepartie. Reporter sa consommation à demain ou à dans dix ans n'a pas du tout la
-              même incidence en terme de risque et d'attente. En économie, cette récompense
+              même incidence en termes de risque et d'attente. En économie, cette récompense
               s'appelle le <i> taux d'intérêt</i> : il est le <Emphasis>prix du temps</Emphasis>.
             </>
           ) : (
@@ -130,9 +130,9 @@ export const MoneyLaws2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            L'épargne n'est donc pas un stock qu'on empile juste pour le plaisir des yeux ! Il sert
-            à l'<Emphasis>investissement</Emphasis>, c'est-à-dire à lancer des projets, parfois un
-            peu longs, qui rendent la société plus efficace et qui nous libèrent du temps.
+            L'épargne n'est donc pas un stock qu'on empile juste pour le plaisir des yeux ! Elle
+            sert à l'<Emphasis>investissement</Emphasis>, c'est-à-dire à lancer des projets, parfois
+            un peu longs, qui rendent la société plus efficace et qui nous libèrent du temps.
           </>
         ) : (
           <>
@@ -145,16 +145,16 @@ export const MoneyLaws2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Ces investissements prennent la forme de <i>détours de Production</i> qui s'inscrivent
+            Ces investissements prennent la forme de <i>détours de production</i> qui s'inscrivent
             dans une <i>structure de capital</i>. <br />
-            Non non ne fuyez pas, sous ces termes un peu barbares se cachent des concepts très
+            Non non, ne fuyez pas, sous ces termes un peu barbares se cachent des concepts très
             concrets !
           </>
         ) : (
           <>
             These investments take the form of <i>roundabout production</i> embedded within a{" "}
             <i>capital structure</i>. <br />
-            Don't run away — behind these intimidating terms lie very concrete concepts!
+            Don't run away, behind these intimidating terms lie very concrete concepts!
           </>
         )}
       </p>
@@ -166,8 +166,8 @@ export const MoneyLaws2Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "C'est tout une succession d'étapes intermédiaires qui servent à produire quelque chose à la fin, et qui sert le consommateur. C'est un procédé qui prend du temps, et qui mobilise beaucoup de ressources."
-            : "It is a whole sequence of intermediate steps used to produce something at the end that serves the consumer. It is a process that takes time and mobilizes many resources."}
+            ? "C'est toute une succession d'étapes intermédiaires qui servent à produire un bien final, destiné au consommateur. C'est un procédé qui prend du temps, et qui mobilise beaucoup de ressources."
+            : "It's a whole sequence of intermediate steps that are used to produce a final good, intended for the consumer. It's a process that takes time and mobilizes many resources."}
         </p>
         <p>
           {fr ? (
@@ -186,18 +186,13 @@ export const MoneyLaws2Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Comme vous pouvez l'observer, la production d'un simple sandwich requiert des milliers d'étapes, ça ne se fait pas en cinq minutes."
-            : "As you can see, producing a simple sandwich requires thousands of steps — it does not happen in five minutes."}
+            ? "Comme vous pouvez l'observer, la production d'un simple sandwich requiert des centaines d'étapes, ça ne se fait pas en cinq minutes."
+            : "As you can see, producing a simple sandwich requires hundreds of steps, it doesn't happen in five minutes."}
         </p>
         <p>
           {fr
             ? "Ces étapes sont des détours de production : on fabrique d'abord les outils qui nous permettront ensuite d'être bien plus efficaces. L'ensemble de ces outils et de ces étapes forment une structure complexe, le capital."
             : "These steps are roundabout production: we first build the tools that will then make us far more efficient. All these tools and steps together form a complex structure — capital."}
-        </p>
-        <p>
-          {fr
-            ? "Bien, nous sommes maintenant prêts pour la suite."
-            : "Good — we are now ready for what comes next."}
         </p>
       </Callout>
       <p>
@@ -212,7 +207,7 @@ export const MoneyLaws2Page: FC = () => {
             <ul>
               <li>
                 Lorsque les citoyens épargnent (préférence temporelle faible), ils ne consomment pas
-                tout tout de suite. L'argent n'est pas rare. Naturellement, le prix pour emprunter
+                tout, tout de suite. L'argent n'est pas rare. Naturellement, le prix pour emprunter
                 de l'argent (taux d'intérêt) est bas.
               </li>
               <li style={{ marginTop: "1rem" }}>
@@ -277,22 +272,22 @@ export const MoneyLaws2Page: FC = () => {
       />
       <p>
         {fr
-          ? "Mais alors quand est-ce que ça déraille, me demanderez-vous ?"
+          ? "Mais alors quand est-ce que ça déraille ?"
           : "So when does it all go wrong, you might ask?"}
       </p>
       <p>
         {fr ? (
           <>
-            Le problème survient lorsque les banques, prises par l'euphorie, commencent à tricher
-            avec la boussole en émettant de la nouvelle monnaie : que ça soit par le recours abusif
-            au crédit bancaire ou par les interventions de la Banque Centrale. Je m'explique :
+            Le problème survient lorsque les banques commencent à tricher avec la boussole en
+            émettant de la nouvelle monnaie : que ce soit par le recours abusif au crédit bancaire
+            ou par les interventions de la Banque Centrale. Je m'explique :
             <ul>
               <li>
                 Au lieu d'attendre que les gens épargnent réellement, les banques « injectent » des
                 liquidités pour forcer les taux à rester bas. En faisant cela, elles faussent la
-                boussole. Le signal indique "Taux Bas" alors qu'en réalité, la société n'épargne
-                plus. Les ressources physiques (acier, briques, temps) n'existent pas en réserve.
-                L'argent est rare.
+                boussole. Le signal indique "Taux Bas" alors qu'en réalité, la société n'épargne pas
+                assez. Les ressources physiques (acier, briques, temps) n'existent pas en réserve.
+                L'argent réel est rare.
               </li>
               <li style={{ marginTop: "1rem" }}>
                 Trompés par ce signal truqué, les entrepreneurs se lancent dans une euphorie de
@@ -305,15 +300,14 @@ export const MoneyLaws2Page: FC = () => {
           </>
         ) : (
           <>
-            The problem arises when banks, caught up in euphoria, start tampering with the compass
-            by issuing new money — whether through excessive bank lending or Central Bank
-            interventions. Let me explain:
+            The problem arises when banks start tampering with the compass by issuing new money,
+            whether through excessive bank lending or Central Bank interventions. Let me explain:
             <ul>
               <li>
                 Instead of waiting for people to actually save, banks "inject" liquidity to force
                 rates to stay low. In doing so, they tamper with the compass. The signal reads "Low
-                Rates" when in reality, society is no longer saving. Physical resources (steel,
-                bricks, time) do not exist in reserve. Money is scarce.
+                Rates" when in reality, society doesn't save enough. Physical resources (steel,
+                bricks, time) do not exist in reserve. Real money is scarce.
               </li>
               <li style={{ marginTop: "1rem" }}>
                 Misled by this rigged signal, entrepreneurs rush into a frenzy of projects: useless
@@ -331,15 +325,15 @@ export const MoneyLaws2Page: FC = () => {
         width="35%"
         caption={
           fr
-            ? "Trompés par un signal de taux artificiellement bas, ces super-batisseurs gaspillent une énergie colossale dans un projet déconnecté des besoins réels. C'est l'illustration du malinvestment."
+            ? "Trompés par un signal de taux artificiellement bas, ces super-bâtisseurs gaspillent une énergie colossale dans un projet déconnecté des besoins réels. C'est l'illustration du malinvestissement."
             : "Misled by an artificially low interest rate signal, these super-builders waste colossal energy on a project disconnected from real needs. This illustrates malinvestment."
         }
       />
       <p>
         {fr ? (
           <>
-            La réalité physique finit toujours par rattraper le mensonge monétaire. À un moment
-            donné, on réalise que les ressources manquent pour terminer tous les chantiers. La bulle
+            La réalité physique finit toujours par rattraper le mensonge monétaire. À un moment, on
+            s'aperçoit que les ressources manquent pour terminer tous les chantiers. La bulle
             explose : les prix des matériaux s'envolent, les banques paniquent et arrêtent de
             prêter.{" "}
           </>
@@ -354,11 +348,11 @@ export const MoneyLaws2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Et vient ensuite la purge : ce que nous appelons « crise » est en réalité un processus
-            de <i>destruction créatrice</i>. C'est le moment où l'économie liquide les mauvais
-            projets pour essayer de sauver ce qui peut l'être. La récession est une période de «
-            ceinture serrée » obligatoire pour reconstituer l'épargne que nous avons fait semblant
-            d'avoir pendant le boom.
+            Et vient ensuite la purge : ce qu'on appelle « crise » est en réalité un processus de{" "}
+            <i>destruction créatrice</i>. C'est le moment où l'économie liquide les mauvais projets
+            pour essayer de sauver ce qui peut l'être. La récession est une période de « ceinture
+            serrée » obligatoire pour reconstituer l'épargne qu'on a fait semblant d'avoir pendant
+            le boom.
           </>
         ) : (
           <>
@@ -374,7 +368,7 @@ export const MoneyLaws2Page: FC = () => {
       >
         <p>
           {fr
-            ? "Pour vérifier si vous avez bien saisi toutes les notions précédentes, qui sont un peu chargées je le reconnais volontier, faisons un petit test avec notre ami Robinson Crusoé, seul sur son île."
+            ? "Pour vérifier si vous avez bien saisi toutes les notions précédentes, qui sont un peu chargées je le reconnais volontiers, faisons un petit test avec notre ami Robinson Crusoé, seul sur son île."
             : "To check whether you have grasped all the previous concepts — which are admittedly quite dense — let's run a little test with our friend Robinson Crusoe, alone on his island."}
         </p>
         <p>
@@ -451,29 +445,28 @@ export const MoneyLaws2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Ce qu'il faut retenir de ce chapitre dense, c'est que la cause des cycles économiques
-            n'est pas extérieure. Ce ne sont pas des problèmes de « psychologie » des investisseurs.
-            Bien au contraire, il s'agit d'un <Emphasis>phénomène endogène</Emphasis>, causé par la
-            structure du système lui-même.{" "}
+            La cause des cycles économiques n'est pas extérieure. Ce ne sont pas des problèmes de «
+            psychologie » des investisseurs. Au contraire, c'est un{" "}
+            <Emphasis>phénomène endogène</Emphasis>, causé par la structure du système
+            lui-même.{" "}
           </>
         ) : (
           <>
-            The key takeaway from this dense chapter is that economic cycles are not caused by
-            external factors. They are not problems of investor "psychology." On the contrary, they
-            are an <Emphasis>endogenous phenomenon</Emphasis>, caused by the structure of the system
-            itself.{" "}
+            Economic cycles are not caused by external factors. They are not problems of investor
+            "psychology." They are an <Emphasis>endogenous phenomenon</Emphasis>, caused by the
+            structure of the system itself.{" "}
           </>
         )}
       </p>
       <p>
         {fr
-          ? "Parce que notre monnaie n'est pas « dure », nous permettons aux banques de saboter notre boussole (le taux d'intérêt). Nous forçons l'économie à vivre dans un mensonge permanent qui se termine inévitablement par un krach."
-          : 'Because our money is not "hard," we allow banks to sabotage our compass (the interest rate). We force the economy to live in a permanent lie that inevitably ends in a crash.'}
+          ? "Parce que notre monnaie n'est pas « dure », on laisse les banques saboter notre boussole (le taux d'intérêt). On force l'économie à vivre dans un mensonge permanent qui se termine inévitablement par un krach."
+          : "Because our money is not “hard”, we allow banks to distort our compass (the interest rate). We force the economy to live in a permanent illusion that inevitably ends in a crash."}
       </p>
       <p>
         {fr
-          ? "Mais si le problème était encore plus profond ? Si le simple fait de vouloir « piloter » l'économie depuis un bureau central était une impossibilité mathématique ? Avant de découvrir notre nouvel instrument de navigation, comprenons pourquoi même le plus brillant des cartographes ne pourra jamais remplacer la vérité du marché."
-          : 'But what if the problem runs even deeper? What if the very act of trying to "steer" the economy from a central office were a mathematical impossibility? Before discovering our new navigation instrument, let us understand why even the most brilliant cartographer can never replace the truth of the market.'}
+          ? "Mais si le problème était encore plus profond ? Si le simple fait de vouloir « piloter » l'économie depuis un bureau central était une impossibilité mathématique ? Avant de découvrir notre nouvel instrument de navigation, regardons pourquoi même le plus brillant des cartographes ne pourra jamais remplacer la vérité du marché."
+          : 'But what if the problem runs even deeper? What if the very act of trying to "steer" the economy from a central office were a mathematical impossibility? Before discovering our new navigation instrument, let us look at why even the most brilliant cartographer can never replace the truth of the market.'}
       </p>
       <p>
         {fr ? (
@@ -482,14 +475,10 @@ export const MoneyLaws2Page: FC = () => {
               Alors, prêts à comprendre pourquoi les systèmes planifiés sont condamnés à
               l'aveuglement ?
             </Emphasis>
-            <br />
-            Nous avons parcouru pas mal de chemin depuis le début !
           </>
         ) : (
           <>
             <Emphasis>Ready to understand why planned systems are doomed to blindness?</Emphasis>
-            <br />
-            We have come a long way since the beginning!
           </>
         )}
       </p>

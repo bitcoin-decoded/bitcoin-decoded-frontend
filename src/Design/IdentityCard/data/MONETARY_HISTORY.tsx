@@ -1,18 +1,12 @@
-import {
-  CloverLeafIcon,
-  DivisionIcon,
-  EqualIcon,
-  FeatherIcon,
-  TimeIcon,
-} from "../..";
-import grainOrge from "../../../Design/img/grains_orge.jpg";
-import sel from "../../../Design/img/sel.jpg";
 import cauris from "../../../Design/img/cauris.webp";
-import or from "../../../Design/img/Or.png";
+import grainOrge from "../../../Design/img/grains_orge.jpg";
 import oneDollar from "../../../Design/img/one_dollar.png";
+import or from "../../../Design/img/Or.png";
+import sel from "../../../Design/img/sel.jpg";
 import pierreYap from "../../../Design/img/yap_stone.jpg";
-import type { MonetaryItem } from "../types";
 import type { Language } from "../../../I18n";
+import { CloverLeafIcon, DivisionIcon, EqualIcon, FeatherIcon, TimeIcon } from "../..";
+import type { MonetaryItem } from "../types";
 
 export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
   const fr = language === "fr";
@@ -21,8 +15,8 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
       name: fr ? "Le grain d'orge" : "Barley Grain",
       profile: fr ? "La monnaie de subsistance" : "The subsistence currency",
       history: fr
-        ? "Dans l'ancienne Sumérie, on payait le travail avec des sacs d'orge. Pratique, vous me direz... à condition que cette monnaie n'ait pas été mangée par des souris ou pourrie par la pluie 😅."
-        : "In ancient Sumer, labor was paid with bags of barley. Practical, you might say... as long as this currency wasn't eaten by mice or rotted by rain 😅.",
+        ? "Dans la Sumer antique, on payait le travail avec des sacs d'orge. Pratique, vous me direz... à condition que cette monnaie n'ait pas été mangée par des souris ou pourrie par la pluie !"
+        : "In ancient Sumer, labor was paid with bags of barley. Practical, you might say... as long as this currency wasn't eaten by mice or rotted by rain!",
       imgSrc: grainOrge,
       characteristics: [
         {
@@ -44,7 +38,7 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
         },
       ],
       death: fr
-        ? "L'orge se périssait vite, était lourde à transporter et difficile à stocker. En d'autres termes, cette monnaie n'était pas faite pour durer !"
+        ? "L'orge périssait vite, était lourde à transporter et difficile à stocker. En d'autres termes, cette monnaie n'était pas faite pour durer !"
         : "Barley perished quickly, was heavy to transport, and difficult to store. In other words, this currency wasn't built to last!",
     },
     {
@@ -70,7 +64,7 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
         },
       ],
       death: fr
-        ? "Avec le progrès technique, extraire et produire du sel est devenu beaucoup plus simple. Et comme le sel se trouve en abondance à peu près partout, elle a cessé d'être une monnaie."
+        ? "Avec le progrès technique, extraire et produire du sel est devenu beaucoup plus simple. Et comme le sel se trouve en abondance à peu près partout, il a cessé d'être une monnaie."
         : "With technological progress, extracting and producing salt became much simpler. And since salt is found abundantly almost everywhere, it ceased to be a currency.",
     },
     {
@@ -100,8 +94,8 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
         },
       ],
       death: fr
-        ? "Un capitaine étranger (David O'Keefe) est arrivé avec de la dynamite et des navires modernes. Ce qui demandait des années de travail d'extraction est soudain devenu facile."
-        : "A foreign captain (David O'Keefe) arrived with dynamite and modern ships. What once required years of extraction work suddenly became easy.",
+        ? "Un capitaine étranger (David O'Keefe) est arrivé au XIXe siècle avec des outils en fer et des navires modernes. Ce qui demandait des années de travail d'extraction est soudain devenu facile."
+        : "A foreign captain (David O'Keefe) with iron tools and modern ships. What once required years of extraction work suddenly became easy.",
     },
     {
       name: fr ? "Les Cauris" : "Cowrie Shells",
@@ -122,7 +116,7 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
         },
       ],
       death: fr
-        ? "L'arrivée de technologies européennes avancées a transformé la récolte en promenade industrielle 😅. L'offre a littéralement explosé, en provoquant une hyperinflation locale."
+        ? "L'arrivée de technologies européennes avancées a transformé la récolte en promenade industrielle 😅. L'offre a littéralement explosé, provoquant une hyperinflation locale."
         : "The arrival of advanced European technologies turned harvesting into an industrial walkover 😅. Supply literally exploded, causing local hyperinflation.",
     },
     {
@@ -182,7 +176,7 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
         },
       ],
       death: fr
-        ? "Sans réelle contrainte d'émission, les monnaies fiduciaires n'accomplissent pas leur fonction de réserve de valeur. Historiquement, elle finissent toujours par disparaître."
+        ? "Sans réelle contrainte d'émission, les monnaies fiduciaires n'accomplissent pas leur fonction de réserve de valeur. Historiquement, elles finissent toujours par disparaître."
         : "Without any real issuance constraint, fiat currencies fail to serve as a store of value. Historically, they always end up disappearing.",
     },
   ];

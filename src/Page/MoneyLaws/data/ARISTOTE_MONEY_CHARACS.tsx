@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
-import { TimeIcon } from "../../../Design/icons/TimeIcon";
-import { FeatherIcon } from "../../../Design/icons/FeatherIcon";
+
+import { CloverLeafIcon } from "../../../Design/icons/CloverLeafIcon";
 import { DivisionIcon } from "../../../Design/icons/DivisionIcon";
 import { EqualIcon } from "../../../Design/icons/EqualIcon";
-import { CloverLeafIcon } from "../../../Design/icons/CloverLeafIcon";
+import { FeatherIcon } from "../../../Design/icons/FeatherIcon";
+import { TimeIcon } from "../../../Design/icons/TimeIcon";
 import type { Language } from "../../../I18n";
 
 export type AristoteMoneyCharacs = {
@@ -25,16 +26,14 @@ export const getAristoteMoneyCharacs = (language: Language): AristoteMoneyCharac
     {
       icon: <FeatherIcon size="2.5rem" />,
       title: fr ? "PORTABILITÉ" : "PORTABILITY",
-      text: fr
-        ? "Elle doit être facile à déplacer."
-        : "It must be easy to carry.",
+      text: fr ? "Elle doit être facile à déplacer." : "It must be easy to carry.",
     },
     {
       icon: <DivisionIcon size="2.5rem" />,
       title: fr ? "DIVISIBILITÉ" : "DIVISIBILITY",
       text: fr
-        ? "Elle doit être facilement fractionnable, afin de permettre des petits achats (comme un café) ou des gros achats (comme une maison)."
-        : "It must be easily divisible, to allow for small purchases (like a coffee) or large ones (like a house).",
+        ? "Elle doit être facilement fractionnable, afin de permettre des petits achats (un café) comme des gros (une maison)."
+        : "It must be easily divisible, allowing both small purchases (a coffee) and large ones (a house).",
     },
     {
       icon: <EqualIcon size="2.5rem" />,
