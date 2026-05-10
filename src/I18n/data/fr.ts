@@ -113,7 +113,7 @@ const fr = {
   "miningReward.subsidy": "Subvention (2026)",
   "miningReward.fees": "Frais de transaction",
   "miningReward.total": "Total récompense",
-  "miningReward.wallet": "Wallet mineur",
+  "miningReward.wallet": "Portefeuille mineur",
   "miningReward.unassigned": "Récompense non attribuée",
   "miningReward.rewarded": "Mineur récompensé",
   "miningReward.rewardBtn": "Récompenser le mineur",
@@ -225,7 +225,7 @@ const fr = {
   "signaturePlayground.signaturePrefix": "Signature générée :",
   "signaturePlayground.verifyMoreInfo": "en savoir plus",
   "signaturePlayground.verifyMoreInfoUrl": "https://fr.wikipedia.org/wiki/ECDSA",
-  "signaturePlayground.networkVerifies": "Le nœud vérifie 3 entrées",
+  "signaturePlayground.networkVerifies": "Le nœud vérifie 3 éléments",
   "signaturePlayground.rowMessage": "message",
   "signaturePlayground.rowSignature": "signature",
   "signaturePlayground.rowPubkey": "clé publique",
@@ -239,7 +239,7 @@ const fr = {
   "signaturePlayground.disclosurePrivateKeyTitle":
     "Comment cela prouve-t-il que l'on détient la clé privée sans jamais l'exposer ?",
   "signaturePlayground.derivationDefinition":
-    "La dérivation est un procédé mathématique à sens unique : on créé un élément à partir d'une source sans jamais pouvoir revenir en arrière. C'est l'effet « tube de dentifrice » : une fois sorti, il ne rentre plus.",
+    "La dérivation est un procédé mathématique à sens unique : on crée un élément à partir d'une source sans jamais pouvoir revenir en arrière. C'est l'effet « tube de dentifrice » : une fois sorti, il ne rentre plus.",
   "signaturePlayground.pedagogyBefore": "Parce qu'il est",
   "signaturePlayground.pedagogyHighlight": "mathématiquement impossible",
   "signaturePlayground.pedagogyAfter":
@@ -261,7 +261,7 @@ const fr = {
   "seedGenerator.generate": "Générer une seed",
   "seedGenerator.regenerate": "Générer une nouvelle seed",
   "seedGenerator.mnemonicLabelPrefix": "Phrase mnémonique",
-  "seedGenerator.binaryDisclosureTitle": "Voir ce qu'il y a derrière",
+  "seedGenerator.binaryDisclosureTitle": "Voir ce qu'il y a derrière la seed",
   "seedGenerator.entropy": "Entropie",
   "seedGenerator.checksum": "Checksum",
   "seedGenerator.mnemonic": "Mnemonic",
@@ -275,7 +275,7 @@ const fr = {
   "seedGenerator.noteWordList":
     "Ces mots ne sont pas choisis librement : ils proviennent d'une liste prédéfinie de 2048 mots (standard BIP39).",
   "seedGenerator.noteStandardLengths":
-    "En BIP39, les longueurs standard sont 12, 15, 18, 21 ou 24 mots (jamais 25).",
+    "En BIP39, les longueurs standard sont 12, 15, 18, 21 ou 24 mots.",
   "seedGenerator.notePedagogical": "Les mots affichés ici sont des exemples pédagogiques.",
 
   // WalletDiscoveryGame
@@ -374,15 +374,15 @@ const fr = {
   "nav.tree.socialismProblem": "Le problème du système socialiste",
   "nav.tree.austrianMethod": "La méthodologie autrichienne",
   "nav.tree.orangeSynthesis": "En synthèse",
-  "nav.tree.bitcoinRevolution": "Bitcoin, la rupture",
-  "nav.tree.howBitcoinWorks": "Comment fonctionne Bitcoin?",
-  "nav.tree.whyBitcoin": "Pourquoi Bitcoin?",
-  "nav.tree.blockchain": "Anatomie de la Blockchain",
-  "nav.tree.proofOfWork": "La preuve de travail",
-  "nav.tree.rewardAndHalving": "La récompense et le halving",
-  "nav.tree.utxoAndTransactions": "Transactions et modèle UTXO",
-  "nav.tree.keysAndSignatures": "Clés, adresses et signatures",
-  "nav.tree.walletsAndSeed": "Portefeuilles, seed et dérivation",
+  "nav.tree.bitcoinRevolution": "La rupture Bitcoin",
+  "nav.tree.howBitcoinWorks": "Bitcoin, sous le capot",
+  "nav.tree.whyBitcoin": "Le bloc qui contenait un message",
+  "nav.tree.blockchain": "La blockchain disséquée",
+  "nav.tree.proofOfWork": "Se mettre d'accord sans chef",
+  "nav.tree.rewardAndHalving": "Halving, la dureté codée en dur",
+  "nav.tree.utxoAndTransactions": "Bitcoin ne déplace pas d'argent",
+  "nav.tree.keysAndSignatures": "Prouver sans se montrer",
+  "nav.tree.walletsAndSeed": "Bitcoin, ni compte, ni coffre",
   "nav.tree.getStarted": "Démarrez avec Bitcoin!",
 
   // Footer

@@ -24,15 +24,17 @@ export const Bitcoin1Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Bitcoin est une infrastructure publique de paiement qui permet d'envoyer et de recevoir
-            une monnaie appelée « bitcoin » de pair-à-pair, sans tiers de confiance grâce à des
-            acteurs décentralisés qui assurent le bon fonctionnement du réseau.
+            Bitcoin est trois choses à la fois : un logiciel, un réseau, une monnaie. Trois mots
+            simples. Et pourtant, expliquer comment ces trois choses tiennent ensemble, sans aucune
+            banque, aucun gouvernement, personne aux commandes, c'est là que la plupart des
+            explications dérapent. On va essayer de ne pas déraper.
           </>
         ) : (
           <>
-            Bitcoin is a public payment infrastructure that allows sending and receiving a currency
-            called "bitcoin" peer-to-peer, without a trusted third party, thanks to decentralized
-            actors who ensure the network runs properly.
+            Bitcoin is three things at once: software, a network, and a currency. Three simple
+            words. And yet, explaining how these three pieces hold together, without any bank, any
+            government, anyone in charge, is where most explanations fall apart. Let's try not to
+            fall apart.
           </>
         )
       }
@@ -64,7 +66,7 @@ export const Bitcoin1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Cette infrastructure est une révolution technologique :{" "}
+            Cette infrastructure change la donne :{" "}
             <Emphasis>
               elle permet à n'importe qui, n'importe où et n'importe quand de pouvoir envoyer ou de
               recevoir de la valeur. Sans discrimination. Sans tiers de confiance. Uniquement de
@@ -73,7 +75,7 @@ export const Bitcoin1Page: FC = () => {
           </>
         ) : (
           <>
-            This infrastructure is a technological revolution:{" "}
+            This infrastructure changes the picture:{" "}
             <Emphasis>
               it allows anyone, anywhere, at any time, to send or receive value. Without
               discrimination. Without a trusted third party. Purely peer-to-peer within a
@@ -86,7 +88,8 @@ export const Bitcoin1Page: FC = () => {
         {fr ? (
           <>
             « Ok c'est bien, mais concrètement comment ça fonctionne ? » me demanderez-vous. <br />
-            Et vous avez bien raison de demander, c'est précisément ce que l'on va maintenant voir.
+            Et vous avez bien raison de demander, c'est précisément ce que vous allez voir
+            maintenant.
           </>
         ) : (
           <>
@@ -98,9 +101,7 @@ export const Bitcoin1Page: FC = () => {
 
       <Callout
         title={
-          fr
-            ? "Comment toute cette magie opère — Les nœuds simples"
-            : "How all this magic works — Simple nodes"
+          fr ? "Comment ça fonctionne - Les nœuds simples" : "How does it works - Simple nodes"
         }
       >
         <p>
@@ -125,9 +126,9 @@ export const Bitcoin1Page: FC = () => {
               {fr ? (
                 <>
                   Accès à l'historique de toutes les transactions qui ont eu lieu sur le réseau
-                  depuis le départ, c'est-à-dire un{" "}
+                  depuis le départ, c'est-à-dire{" "}
                   <Emphasis>
-                    un grand livre de compte appelé <i>blockchain</i>
+                    un grand livre de comptes appelé <i>blockchain</i>
                   </Emphasis>
                   .
                 </>
@@ -144,7 +145,7 @@ export const Bitcoin1Page: FC = () => {
             </li>
             <li>
               {fr
-                ? "Synchronisation avec ce grand livre de compte en temps réel."
+                ? "Synchronisation avec ce grand livre de comptes en temps réel."
                 : "Real-time synchronization with this ledger."}
             </li>
             <li>
@@ -177,8 +178,8 @@ export const Bitcoin1Page: FC = () => {
       </Callout>
       <p>
         {fr
-          ? "Et le réseau Bitcoin, ce n'est rien de plus que plusieurs nœuds."
-          : "And the Bitcoin network is nothing more than a collection of nodes."}
+          ? "Et le réseau Bitcoin, ce n'est rien de plus que plusieurs nœuds connectés entre eux."
+          : "And the Bitcoin network is nothing more than a set of interconnected nodes."}
       </p>
       <BitcoinNetworkMap />
       <p>
@@ -186,22 +187,20 @@ export const Bitcoin1Page: FC = () => {
         <ul>
           <li>
             {fr
-              ? "Les nœuds simples (ceux que nous venons tout juste de voir)."
-              : "Simple nodes (the ones we just saw)."}
+              ? "Les nœuds simples (ceux que vous venez tout juste de voir)."
+              : "Simple nodes (the ones you just saw)."}
           </li>
           <li>
             {fr
-              ? "Et les nœuds-mineurs (ceux que nous allons voir dès maintenant)."
-              : "And mining nodes (the ones we're about to discover)."}
+              ? "Et les nœuds-mineurs (ceux que vous allez découvrir dès maintenant)."
+              : "And mining nodes (the ones you're about to discover)."}
           </li>
         </ul>
       </p>
 
       <Callout
         title={
-          fr
-            ? "Comment toute cette magie opère — Les nœuds-mineurs"
-            : "How all this magic works — Mining nodes"
+          fr ? "Comment ça fonctionne - Les nœuds-mineurs" : "How does it works - Mining nodes"
         }
       >
         <p>
@@ -257,13 +256,15 @@ export const Bitcoin1Page: FC = () => {
             <li>
               {fr ? (
                 <>
-                  <Emphasis>Une récompense en bitcoin</Emphasis>, fournie par le protocole lui-même
-                  (c'est la seule façon dont de nouveaux bitcoins entrent en circulation).
+                  <Emphasis>Une récompense en bitcoin</Emphasis> composée de deux parts : les
+                  nouveaux bitcoins créés par le protocole (la seule façon dont de nouveaux bitcoins
+                  entrent en circulation) et les frais des transactions incluses dans le bloc.
                 </>
               ) : (
                 <>
-                  <Emphasis>A bitcoin reward</Emphasis>, issued by the protocol itself (this is the
-                  only way new bitcoins enter circulation).
+                  A <Emphasis>Bitcoin reward</Emphasis> made up of two parts: newly created bitcoins
+                  issued by the protocol (the only way new bitcoins enter circulation) and the
+                  transaction fees included in the block.
                 </>
               )}
             </li>
@@ -311,7 +312,7 @@ export const Bitcoin1Page: FC = () => {
           <>
             Et si tout est conforme,{" "}
             <Emphasis>
-              le nœud ajoute cette nouvelle page à son propre exemplaire du grand livre de compte
+              le nœud ajoute cette nouvelle page à son propre exemplaire du grand livre de comptes
             </Emphasis>
             . Sinon, le bloc est purement et simplement rejeté.
           </>
@@ -341,8 +342,8 @@ export const Bitcoin1Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Rien que pour vous, voici une petite synthèse des différents acteurs du réseau :"
-          : "Just for you, here's a quick summary of the network's key players:"}
+          ? "Pour récapituler, voici les deux acteurs du réseau :"
+          : "To recap, here are the two actors in the network:"}
       </p>
       <div style={PAGE_STYLES.cardsContainer}>
         <div style={cardWrapperStyle}>
@@ -366,8 +367,8 @@ export const Bitcoin1Page: FC = () => {
               {
                 label: fr ? "Son rôle :" : "Its role:",
                 value: fr
-                  ? "Stocker une copie complète de la Blockchain et vérifier que chaque transaction et chaque bloc respectent les règles du protocole."
-                  : "Store a complete copy of the Blockchain and verify that every transaction and block follows the protocol's rules.",
+                  ? "Stocker une copie complète de la blockchain et vérifier que chaque transaction et chaque bloc respectent les règles du protocole."
+                  : "Store a complete copy of the blockchain and verify that every transaction and block follows the protocol's rules.",
               },
               {
                 label: fr ? "Son super-pouvoir :" : "Its superpower:",
@@ -405,7 +406,7 @@ export const Bitcoin1Page: FC = () => {
               {
                 label: fr ? "Son rôle :" : "Its role:",
                 value: fr
-                  ? "Proposer un nouveau bloc remplies de transaction en résolvant le premier un problème mathématique compliqué."
+                  ? "Proposer un nouveau bloc rempli de transactions en résolvant en premier un problème mathématique complexe."
                   : "Propose a new block filled with transactions by being the first to solve a complex mathematical problem.",
               },
               {
@@ -432,8 +433,8 @@ export const Bitcoin1Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Aucune banque, aucun gouvernement, aucun intermédiaire. Juste du code, de l'énergie et des mathématiques."
-          : "No bank, no government, no middleman. Just code, energy, and mathematics."}
+          ? "Aucune banque. Aucun gouvernement. Aucun intermédiaire. Juste du code, de l'électricité et des maths."
+          : "No banks. No governments. No intermediaries. Just code, electricity, and mathematics."}
       </p>
       <p>
         {fr ? (

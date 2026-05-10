@@ -258,7 +258,7 @@ const en = {
   "seedGenerator.generate": "Generate a seed",
   "seedGenerator.regenerate": "Generate a new seed",
   "seedGenerator.mnemonicLabelPrefix": "Mnemonic phrase",
-  "seedGenerator.binaryDisclosureTitle": "See what's behind it",
+  "seedGenerator.binaryDisclosureTitle": "See what's behind the seed",
   "seedGenerator.entropy": "Entropy",
   "seedGenerator.checksum": "Checksum",
   "seedGenerator.mnemonic": "Mnemonic",
@@ -272,7 +272,7 @@ const en = {
   "seedGenerator.noteWordList":
     "These words are not chosen freely: they come from a predefined list of 2048 words (BIP39 standard).",
   "seedGenerator.noteStandardLengths":
-    "In BIP39, the standard lengths are 12, 15, 18, 21 or 24 words (never 25).",
+    "In BIP39, the standard lengths are 12, 15, 18, 21 or 24 words.",
   "seedGenerator.notePedagogical": "The words shown here are pedagogical examples.",
 
   // WalletDiscoveryGame
@@ -370,15 +370,15 @@ const en = {
   "nav.tree.socialismProblem": "The problem with socialism",
   "nav.tree.austrianMethod": "The Austrian methodology",
   "nav.tree.orangeSynthesis": "In summary",
-  "nav.tree.bitcoinRevolution": "Bitcoin, the breakthrough",
-  "nav.tree.howBitcoinWorks": "How does Bitcoin work?",
-  "nav.tree.whyBitcoin": "Why Bitcoin?",
-  "nav.tree.blockchain": "Blockchain Anatomy",
-  "nav.tree.proofOfWork": "Proof of Work",
-  "nav.tree.rewardAndHalving": "Reward and Halving",
-  "nav.tree.utxoAndTransactions": "Transactions and the UTXO model",
-  "nav.tree.keysAndSignatures": "Keys, addresses and signatures",
-  "nav.tree.walletsAndSeed": "Wallets, seed and derivation",
+  "nav.tree.bitcoinRevolution": "The Bitcoin breakthrough",
+  "nav.tree.howBitcoinWorks": "Bitcoin, under the hood",
+  "nav.tree.whyBitcoin": "The block that contained a message",
+  "nav.tree.blockchain": "The blockchain, dissected",
+  "nav.tree.proofOfWork": "Reaching agreement without a leader",
+  "nav.tree.rewardAndHalving": "Halving: the hardness hard-coded into the protocol",
+  "nav.tree.utxoAndTransactions": "Bitcoin doesn't move money",
+  "nav.tree.keysAndSignatures": "Proving without revealing oneself",
+  "nav.tree.walletsAndSeed": "Bitcoin: not an account, not a vault",
   "nav.tree.getStarted": "Get started with Bitcoin!",
 
   // Footer

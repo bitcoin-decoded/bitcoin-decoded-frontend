@@ -18,44 +18,43 @@ export const Bitcoin2Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Bitcoin est né d'un constat : notre monnaie est facile à créer, et sa gestion est
-            concentrée entre les mains de quelques décideurs. Face à ces failles, Bitcoin propose
-            une monnaie à offre fixe, vérifiable par tous et qui ne dépend d'aucune autorité
-            centrale.
+            En janvier 2009, un développeur anonyme lance un logiciel et grave un titre de presse
+            dans son tout premier bloc. Une référence au sauvetage des banques britanniques, ce
+            jour-là. Quinze ans plus tard, ce logiciel pèse plus de mille milliards de dollars et
+            personne ne sait qui l'a écrit. Avant de comprendre comment Bitcoin fonctionne, il faut
+            comprendre pourquoi quelqu'un a jugé nécessaire de l'écrire.
           </>
         ) : (
           <>
-            Bitcoin was born from an observation: our money is easy to create, and its management is
-            concentrated in the hands of a few decision-makers. Facing these flaws, Bitcoin offers a
-            fixed-supply currency, verifiable by all, that depends on no central authority.
+            In January 2009, an anonymous developer launched a software program and embedded a
+            newspaper headline in its very first block—a reference to the UK bank bailouts on that
+            very day. Fifteen years later, that software is worth over a trillion dollars, and no
+            one knows who wrote it. Before understanding how Bitcoin works, you need to understand
+            why someone felt it had to be written in the first place.
           </>
         )
       }
     >
       <p>
         {fr
-          ? "Nous venons de voir dans les grandes lignes ce qu'est Bitcoin, à savoir un logiciel, un réseau et une monnaie. Cela étant dit, une question plus profonde reste en suspens :"
-          : "We've just seen what Bitcoin is in broad strokes — a software, a network, and a currency. That said, a deeper question remains:"}
+          ? "Vous savez maintenant ce qu'est Bitcoin : un logiciel, un réseau, une monnaie. Reste la vraie question :"
+          : "You now know what Bitcoin is: a software, a network, and a currency. The real question remains:"}
       </p>
       <p>
         {fr ? (
           <>
             <Emphasis>Pourquoi Bitcoin existe-t-il ?</Emphasis> <br />
-            Quel problème résout-il ? Pourquoi est-il si important ?
+            Quel problème résout-il ?
           </>
         ) : (
           <>
             <Emphasis>Why does Bitcoin exist?</Emphasis> <br />
-            What problem does it solve? Why does it matter so much?
+            What problem does it solve?
           </>
         )}
       </p>
 
-      <p>
-        {fr
-          ? "Un graphique vaut parfois mille mots."
-          : "A chart is sometimes worth a thousand words."}
-      </p>
+      <p>{fr ? "Regardez ce graphique." : "Take a look at this chart."}</p>
 
       <M2MoneySupplyChart showTitle={isQuizSolved} />
 
@@ -85,8 +84,7 @@ export const Bitcoin2Page: FC = () => {
               <li>
                 {fr ? (
                   <>
-                    Et en 2020 (<i>crise du Covid</i>),{" "}
-                    <Emphasis>c'est un véritable mur vertical</Emphasis>.
+                    Et en 2020 (<i>crise du Covid</i>), <Emphasis>c'est un mur vertical</Emphasis>.
                   </>
                 ) : (
                   <>
@@ -97,13 +95,13 @@ export const Bitcoin2Page: FC = () => {
               </li>
             </ol>
             {fr
-              ? "En moins de deux ans, environ 6 000 milliards de dollars ont été créés à partir de rien. Plus de 40 % de tous les dollars en circulation ont été créés entre 2020 et 2021."
-              : "In less than two years, roughly $6 trillion was created from nothing. Over 40% of all dollars in circulation were created between 2020 and 2021."}
+              ? "En moins de deux ans, environ 6 000 milliards de dollars ont été créés à partir de rien."
+              : "In less than two years, roughly $6 trillion was created from nothing."}
           </p>
           <p>
             {fr ? (
               <>
-                Cette création ne vient pas de la production de richesse réelle.{" "}
+                Cette création ne correspond à aucune richesse réellement produite.{" "}
                 <Emphasis>
                   C'est de la dilution pure : plus de billets pour la même quantité de biens et de
                   services
@@ -112,7 +110,7 @@ export const Bitcoin2Page: FC = () => {
               </>
             ) : (
               <>
-                This creation didn't come from real wealth production.{" "}
+                This creation does not correspond to any real wealth being produced.{" "}
                 <Emphasis>
                   It's pure dilution: more bills for the same amount of goods and services
                 </Emphasis>
@@ -126,8 +124,8 @@ export const Bitcoin2Page: FC = () => {
                 Le résultat est l'inflation que chacun a constatée dans sa vie quotidienne.{" "}
                 <Emphasis>
                   C'est le fonctionnement normal d'un système où une poignée de décideurs peut créer
-                  de la monnaie sans limite et sans consentement afin de renflouer les banques et
-                  ainsi sauver le système bancaire
+                  de la monnaie sans limite et sans consentement, pour renflouer les banques et
+                  sauver le système bancaire
                 </Emphasis>
                 .
               </>
@@ -135,9 +133,9 @@ export const Bitcoin2Page: FC = () => {
               <>
                 The result is the inflation that everyone has experienced in their daily life.{" "}
                 <Emphasis>
-                  It's the normal functioning of a system where a handful of decision-makers can
-                  create money without limit or consent in order to bail out banks and save the
-                  banking system
+                  This is how the system normally works: a small group of decision-makers can create
+                  money without limit and without consent, to bail out banks and keep the financial
+                  system afloat
                 </Emphasis>
                 .
               </>
@@ -185,7 +183,7 @@ export const Bitcoin2Page: FC = () => {
                 </Emphasis>{" "}
                 et{" "}
                 <Emphasis>
-                  <i>Les lois de la monnaies</i>
+                  <i>Les lois de la monnaie</i>
                 </Emphasis>
                 . Plus encore, il répare la boussole de la société.
               </>
@@ -208,8 +206,8 @@ export const Bitcoin2Page: FC = () => {
           <Callout
             title={
               fr
-                ? "Bitcoin, la monnaie la plus dure jamais créée"
-                : "Bitcoin, the hardest money ever created"
+                ? "Une offre fixe, gravée dans le code"
+                : "A fixed supply, hard-coded into the protocol"
             }
           >
             <p>
@@ -244,19 +242,19 @@ export const Bitcoin2Page: FC = () => {
                 <>
                   Puisque personne ne peut imprimer de bitcoins à volonté, le{" "}
                   <Emphasis>
-                    prix du temps (le taux d'intérêt) redevient une vérité mathématique pure, non
-                    manipulable par une autorité centrale
+                    prix du temps (le taux d'intérêt) redevient un signal honnête, non manipulable
+                    par une autorité centrale
                   </Emphasis>
-                  . C'est la fin des mirages monétaires et des malinvestissements.
+                  .
                 </>
               ) : (
                 <>
                   Since no one can print bitcoins at will, the{" "}
                   <Emphasis>
-                    price of time (the interest rate) once again becomes a pure mathematical truth,
-                    not manipulable by a central authority
+                    price of time (the interest rate) becomes an honest signal again, one that
+                    cannot be manipulated by a central authority
                   </Emphasis>
-                  . It is the end of monetary illusions and malinvestments.
+                  .
                 </>
               )}
             </p>
@@ -293,53 +291,40 @@ export const Bitcoin2Page: FC = () => {
                 Bitcoin n'est pas une simple innovation technologique.{" "}
                 <Emphasis>
                   C'est l'implémentation concrète de la logique autrichienne dans le silicium
-                </Emphasis>
-                . C'est la première monnaie de l'histoire qui combine dureté absolue et
-                décentralisation totale.
+                </Emphasis>{" "}
+                : la première monnaie qui combine dureté absolue et décentralisation.
               </>
             ) : (
               <>
                 Bitcoin is not just a technological innovation.{" "}
-                <Emphasis>
-                  It is the concrete implementation of Austrian economic logic in silicon
-                </Emphasis>
-                . It is the first currency in history that combine absolute hardness with total
-                decentralization.
+                <Emphasis>It is the concrete implementation of Austrian logic in silicon</Emphasis>:
+                the first currency that combines absolute hardness with decentralization.
               </>
             )}
           </p>
           <p>
             {fr ? (
-              <>
-                Nous savons maintenant pourquoi Bitcoin existe et quels problèmes fondamentaux il
-                résout.
-              </>
+              <>Vous savez maintenant pourquoi Bitcoin existe et quels problèmes il résout.</>
             ) : (
-              <>We now know why Bitcoin exists and what fundamental problems it solves.</>
+              <>You now know why Bitcoin exists and what problems it solves.</>
             )}
           </p>
           <p>
             {fr ? (
               <>
-                Mais comprendre l'intention ne suffit pas. Il reste à voir <i>comment</i> cette
-                promesse se traduit concrètement. Quels sont les mécanismes précis qui garantissent
-                ces propriétés ? Comment la rareté est-elle véritablement protégée ? Comment le
-                réseau fonctionne-t-il sans chef d'orchestre ?
+                Mais comprendre l'intention ne suffit pas. Reste à voir comment cette promesse tient
+                en pratique. Comment la rareté est-elle protégée ? Comment le réseau fonctionne-t-il
+                sans chef d'orchestre ?
               </>
             ) : (
               <>
-                But understanding the intent isn't enough. We still need to see <i>how</i> this
-                promise translates concretely. What are the precise mechanisms that guarantee these
-                properties? How is scarcity truly protected? How does the network function without a
-                conductor?
+                But understanding the intention is not enough. We still need to see how this promise
+                holds up in practice. How is scarcity protected? How does the network function
+                without a conductor?
               </>
             )}
           </p>
-          <p>
-            {fr
-              ? "Ce sont tant de questions que nous allons explorer par la suite !"
-              : "These are the questions we'll explore next!"}
-          </p>
+          <p>{fr ? "C'est ce qu'on regarde dans la suite !" : "That's what we'll look at next!"}</p>
         </>
       )}
     </PageTemplate>
