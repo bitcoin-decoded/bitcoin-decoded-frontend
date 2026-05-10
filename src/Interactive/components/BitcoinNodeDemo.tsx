@@ -1,5 +1,6 @@
-import { type FC, type CSSProperties } from "react";
-import { Monitor, Cpu } from "lucide-react";
+import { type CSSProperties, type FC } from "react";
+
+import { Cpu, Monitor } from "lucide-react";
 
 import { Button, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
@@ -63,19 +64,45 @@ export const BitcoinNodeDemo: FC = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", width: "100%", margin: isMobile ? "1.5rem 0" : "2rem 0" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "1.5rem",
+        width: "100%",
+        margin: isMobile ? "1.5rem 0" : "2rem 0",
+      }}
+    >
       <style>{`@keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.5); opacity: 0; } }`}</style>
 
-      <div style={{ display: "flex", alignItems: isMobile ? "center" : "flex-end", justifyContent: "center", gap: isLaunched ? "0" : isMobile ? "1.5rem" : "3rem", flexDirection: isMobile ? "column" : "row", transition: TRANSITION }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: isMobile ? "center" : "flex-end",
+          justifyContent: "center",
+          gap: isLaunched ? "0" : isMobile ? "1.5rem" : "3rem",
+          flexDirection: isMobile ? "column" : "row",
+          transition: TRANSITION,
+        }}
+      >
         {!isLaunched ? (
           <>
-            <SurfaceCard gap="0.75rem" glowColor={colors.base.border.secondary} style={cardStyleOverride}>
+            <SurfaceCard
+              gap="0.75rem"
+              glowColor={colors.base.border.secondary}
+              style={cardStyleOverride}
+            >
               <div style={iconCircle(false)}>
                 <Monitor size={iconSize} strokeWidth={1.5} />
               </div>
               <span style={label}>{fr ? "Ordinateur" : "Computer"}</span>
             </SurfaceCard>
-            <SurfaceCard gap="0.75rem" glowColor={colors.base.border.secondary} style={cardStyleOverride}>
+            <SurfaceCard
+              gap="0.75rem"
+              glowColor={colors.base.border.secondary}
+              style={cardStyleOverride}
+            >
               <div style={iconCircle(false)}>
                 <Cpu size={iconSize} strokeWidth={1.5} />
               </div>
@@ -88,13 +115,33 @@ export const BitcoinNodeDemo: FC = () => {
               <div style={{ position: "relative" }}>
                 <div style={iconCircle(true)}>
                   <Monitor size={iconSize} strokeWidth={1.5} />
-                  <Cpu size={isMobile ? 12 : 14} strokeWidth={2} style={{ position: "absolute", bottom: isMobile ? "6px" : "8px", right: isMobile ? "6px" : "8px", color: world.background.secondary }} />
+                  <Cpu
+                    size={isMobile ? 12 : 14}
+                    strokeWidth={2}
+                    style={{
+                      position: "absolute",
+                      bottom: isMobile ? "6px" : "8px",
+                      right: isMobile ? "6px" : "8px",
+                      color: world.background.secondary,
+                    }}
+                  />
                 </div>
                 <div style={pulseRing} />
               </div>
-              <span style={{ ...label, color: world.text.primary }}>{fr ? "Ordinateur + Bitcoin" : "Computer + Bitcoin"}</span>
+              <span style={{ ...label, color: world.text.primary }}>
+                {fr ? "Ordinateur + Bitcoin" : "Computer + Bitcoin"}
+              </span>
             </SurfaceCard>
-            <span style={{ ...label, fontWeight: 700, color: world.text.secondary, marginTop: "0.5rem" }}>{fr ? "Nœud du réseau" : "Network node"}</span>
+            <span
+              style={{
+                ...label,
+                fontWeight: 700,
+                color: world.text.secondary,
+                marginTop: "0.5rem",
+              }}
+            >
+              {fr ? "Nœud du réseau" : "Network node"}
+            </span>
           </div>
         )}
       </div>
@@ -103,7 +150,13 @@ export const BitcoinNodeDemo: FC = () => {
         variant={isLaunched ? "secondary" : "primary"}
         onClick={isLaunched ? handleReset : handleLaunch}
       >
-        {isLaunched ? (fr ? "↺ Réinitialiser" : "↺ Reset") : (fr ? "▶ Lancer Bitcoin" : "▶ Launch Bitcoin")}
+        {isLaunched
+          ? fr
+            ? "↺ Réinitialiser"
+            : "↺ Reset"
+          : fr
+            ? "▶ Démarrer le nœud"
+            : "▶ Run the node"}
       </Button>
     </div>
   );

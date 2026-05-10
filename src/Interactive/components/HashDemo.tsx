@@ -1,13 +1,8 @@
-import { type FC, type CSSProperties } from "react";
-import { Hash, RotateCcw, CircleCheck } from "lucide-react";
+import { type CSSProperties, type FC } from "react";
 
-import {
-  Button,
-  Caption,
-  Emphasis,
-  SurfaceCard,
-  useBreakpoint,
-} from "../../Design";
+import { CircleCheck, Hash, RotateCcw } from "lucide-react";
+
+import { Button, Caption, Emphasis, SurfaceCard, useBreakpoint } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { usePageTheme } from "../../Design/Theme";
 import { useLanguageContext } from "../../I18n";
@@ -70,9 +65,7 @@ export const HashDemo: FC = () => {
       glowColor={hash ? world.border.secondary : colors.base.border.secondary}
       style={{ marginTop: "0.75rem" }}
     >
-      <Caption icon={<Hash size={isMobile ? 16 : 18} strokeWidth={2} />}>
-        SHA-256
-      </Caption>
+      <Caption icon={<Hash size={isMobile ? 16 : 18} strokeWidth={2} />}>SHA-256</Caption>
 
       <input
         type="text"
@@ -115,7 +108,7 @@ export const HashDemo: FC = () => {
           />
           <span>
             {fr
-              ? "Il est computationnellement impossible de retrouver le texte d'origine à partir de son hash. Chaque empreinte est déterministe, de taille fixe (64 caractères hexadécimaux pour SHA-256) et conçue pour être unique en pratique, quelle que soit la taille du texte en entrée."
+              ? "En pratique, il est impossible de retrouver le texte d'origine à partir de son hash. Chaque empreinte est déterministe, de taille fixe (64 caractères hexadécimaux pour SHA-256) et conçue pour être unique en pratique, quelle que soit la taille du texte en entrée."
               : "It's computationally infeasible to recover the original input from its hash. Each hash is deterministic, fixed in size (64 hexadecimal characters for SHA-256), and designed to be practically unique, regardless of the input size."}
           </span>
         </div>

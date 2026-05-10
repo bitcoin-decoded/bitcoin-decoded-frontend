@@ -9,7 +9,7 @@ import {
   NetworkFlywheel,
   Quiz,
 } from "../../../Interactive";
-import { PageTemplate } from "../../Shared/components";
+import { PageTemplate } from "../../Shared/";
 
 export const Bitcoin5Page: FC = () => {
   const { t, language } = useTranslation();
@@ -20,14 +20,14 @@ export const Bitcoin5Page: FC = () => {
       title={t("nav.tree.rewardAndHalving")}
       prelude={
         fr
-          ? "Bitcoin est programmé pour devenir de plus en plus difficile à produire. La création monétaire diminue automatiquement dans le temps jusqu'à disparaître, laissant progressivement place aux frais de transaction comme unique source de rémunération des mineurs."
-          : "Bitcoin is programmed to become progressively harder to produce. Its monetary supply decreases automatically over time until it eventually disappears, gradually giving way to transaction fees as the sole source of miner compensation."
+          ? "En 2009, miner un bloc rapportait 50 bitcoins. En 2026, c'est 3,125. En 2140, ce sera zéro. Ce n'est pas une dérive, c'est le plan depuis le départ."
+          : "In 2009, mining a block earned 50 bitcoins. In 2026, it's 3.125. In 2140, it will be zero. This isn't a drift, it's been the plan from the very beginning."
       }
     >
       <p>
         {fr
-          ? "Nous avons abordé la preuve de travail. Elle repose sur un effort important fourni par les mineurs."
-          : "We explored proof of work — a mechanism that relies on significant effort from miners."}
+          ? "Vous avez vu la preuve de travail dans le chapitre précédent. Elle repose sur un effort important fourni par les mineurs."
+          : "You saw proof of work, a mechanism that relies on significant effort from miners."}
       </p>
       <p>
         {fr ? (
@@ -110,7 +110,7 @@ export const Bitcoin5Page: FC = () => {
       <p>
         <Emphasis>
           {fr
-            ? "L'émission de nouveaux bitcoins suit une courbe mathématique en escalier. Elle correspond à un mécanisme appelé « halving ». Voyons cela plus en détail."
+            ? "L'émission de nouveaux bitcoins suit une courbe mathématique en escalier. Elle correspond à un mécanisme appelé « halving ». Regardez ça de plus près."
             : "The issuance of new bitcoins follows a mathematical staircase curve, defined by a mechanism called the halving. Let's explore this further."}
         </Emphasis>
       </p>
@@ -128,13 +128,13 @@ export const Bitcoin5Page: FC = () => {
             <>
               Elle est codée en dur dans le protocole et peut se résumer ainsi : tous les{" "}
               <i>210 000 blocs</i> (soit environ tous les <i>4 ans</i>), la subvention accordée aux
-              mineurs pour chaque bloc miné est divisée par deux.
+              mineurs pour chaque bloc validé est divisée par deux.
             </>
           ) : (
             <>
               It is hard-coded into the protocol and can be summarised as follows: every{" "}
               <i>210,000 blocks</i> (roughly every <i>4 years</i>), the subsidy paid to miners for
-              each mined block is cut in half.
+              each validated block is cut in half.
             </>
           )}
         </p>
@@ -200,12 +200,12 @@ export const Bitcoin5Page: FC = () => {
           <Emphasis>
             {fr ? (
               <>
-                Dès 2034, la récompense ne sera plus que de <strong>0,78125 BTC par bloc</strong> —
+                Dès 2032, la récompense ne sera plus que de <strong>0,78125 BTC par bloc</strong>,
                 soit 64 fois moins qu'à l'origine. La subvention tend inexorablement vers zéro.
               </>
             ) : (
               <>
-                By 2034, the reward will be just <strong>0.78125 BTC per block</strong> — 64 times
+                By 2032, the reward will be just <strong>0.78125 BTC per block</strong>, 64 times
                 less than the original. The subsidy is inexorably approaching zero.
               </>
             )}
@@ -232,8 +232,8 @@ export const Bitcoin5Page: FC = () => {
       </ul>
       <p>
         {fr
-          ? "Votre marge de rentabilité est menacée. Vous pourriez sortir du marché avec d'autres mineurs devenus moins efficaces, ce qui pourrait menacer la sécurité du réseau."
-          : "Your profit margin is under threat. You might exit the market along with other less-efficient miners, potentially threatening network security."}
+          ? "Votre marge de rentabilité est menacée. Vous pourriez quitter le marché avec d'autres mineurs devenus moins efficaces. Et là, la sécurité du réseau pourrait vaciller."
+          : "Your profit margin is under threat. You could leave the market along with other miners who have become less efficient. And at that point, the security of the network could start to weaken."}
       </p>
       <p>
         {fr
@@ -245,8 +245,8 @@ export const Bitcoin5Page: FC = () => {
 
       <p>
         {fr
-          ? "Une question revient assez fréquemment sur le modèle de rentabilité du minage à long terme, surtout lorsqu'il n'y aura presque plus d'émissions de nouveaux bitcoins."
-          : "A question that comes up frequently concerns the long-term profitability of mining, especially once new bitcoin issuance is nearly zero."}
+          ? "Une question revient souvent sur la rentabilité du minage à long terme, quand il n'y aura presque plus d'émissions de nouveaux bitcoins."
+          : "One question often comes up about the long-term profitability of mining, once there are almost no new bitcoins left to be issued."}
       </p>
 
       <Callout title={fr ? "Objection fréquente" : "Common objection"}>
@@ -322,11 +322,11 @@ export const Bitcoin5Page: FC = () => {
         <li>
           {fr ? (
             <>
-              Dans le système Bitcoin, la sécurité est <Emphasis>financée par l'usage</Emphasis>
+              Dans Bitcoin, la sécurité est <Emphasis>financée par l'usage</Emphasis>
             </>
           ) : (
             <>
-              In the Bitcoin system, security is <Emphasis>funded by usage</Emphasis>
+              In Bitcoin, security is <Emphasis>funded by usage</Emphasis>
             </>
           )}
         </li>
@@ -336,14 +336,12 @@ export const Bitcoin5Page: FC = () => {
         {fr ? (
           <>
             {" "}
-            <Emphasis>C'est un cercle vertueux qui s'auto-renforce</Emphasis>. Augmentez
-            l'utilisation ci-dessous et observez la propagation.
+            <Emphasis>Un cercle vertueux qui s'auto-renforce.</Emphasis>.
           </>
         ) : (
           <>
             {" "}
-            <Emphasis>It is a virtuous self-reinforcing cycle</Emphasis>. Increase usage below and
-            observe how it propagates.
+            <Emphasis>A virtuous self-reinforcing cycle</Emphasis>.
           </>
         )}
       </p>
@@ -353,12 +351,12 @@ export const Bitcoin5Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Nous savons maintenant <i>pourquoi les mineurs participent</i>,{" "}
+            Vous savez maintenant <i>pourquoi les mineurs participent</i>,{" "}
             <i>comment leur subvention évolue</i> et <i>pourquoi elle disparaît progressivement</i>.
           </>
         ) : (
           <>
-            We now understand <i>why miners participate</i>, <i>how their subsidy evolves</i>, and{" "}
+            You now understand <i>why miners participate</i>, <i>how their subsidy evolves</i>, and{" "}
             <i>why it progressively disappears</i>.
           </>
         )}

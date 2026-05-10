@@ -10,7 +10,7 @@ import {
   MiningSimulator,
   Quiz,
 } from "../../../Interactive";
-import { PageTemplate } from "../../Shared/components";
+import { PageTemplate } from "../../Shared/";
 
 export const Bitcoin4Page: FC = () => {
   const { t, language } = useTranslation();
@@ -21,8 +21,8 @@ export const Bitcoin4Page: FC = () => {
       title={t("nav.tree.proofOfWork")}
       prelude={
         fr
-          ? "La preuve de travail est un mécanisme de consensus basé sur une compétition computationnelle entre mineurs, qui repose sur une cible de difficulté et un nonce pour trouver un hash valide. Cet ingénieux dispositif rend toute réécriture de l'historique économiquement prohibitive, permet une vérification simple et rapide du travail effectué, et résout le problème de la double dépense dans les systèmes distribués."
-          : "Proof of work is a consensus mechanism based on a computational competition between miners, relying on a difficulty target and a nonce to find a valid hash. This ingenious mechanism makes any attempt to rewrite history economically prohibitive, allows simple and fast verification of the work performed, and solves the double-spending problem in distributed systems."
+          ? "Bitcoin consomme l'équivalent en électricité d'un pays moyen. Pour valider des transactions. Vu de loin, ça paraît absurde. Vu de près, c'est exactement le contraire : c'est la seule manière connue de se mettre d'accord à plusieurs millions, sans chef et sans confiance. Ce chapitre explique pourquoi."
+          : "Bitcoin consumes as much electricity as a mid-sized country. To validate transactions. From a distance, that sounds absurd. Up close, it's exactly the opposite: it is the only known way for millions of people to reach consensus without a leader and without trust. This chapter explains why."
       }
     >
       <p>
@@ -110,7 +110,7 @@ export const Bitcoin4Page: FC = () => {
 
       <p>
         {fr
-          ? "Voyons exactement comment Bitcoin résout élégamment ce problème. Pour cela, nous allons voir successivement :"
+          ? "Regardons exactement comment Bitcoin résout élégamment ce problème. Pour cela, on va voir successivement :"
           : "Let's see exactly how Bitcoin elegantly solves this problem. To do so, we'll go through, in order:"}
         <ol>
           <li>{fr ? "La mempool" : "The mempool"}</li>
@@ -226,13 +226,13 @@ export const Bitcoin4Page: FC = () => {
       >
         <p>
           {fr
-            ? "Le mineur construit l'en-tête de son bloc et le passe dans une fonction de hachage."
-            : "The miner builds the header of their block and runs it through a hash function."}
+            ? "Le mineur construit l'en-tête de son bloc et le passe dans une fonction de hachage (SHA-256, appliquée deux fois)."
+            : "TThe miner builds the block header and runs it through a hashing function (SHA-256, applied twice)."}
         </p>
         <p>
           {fr
-            ? "Le but est d'obtenir un hash inférieur à une cible fixée par le réseau. Concrètement, cela revient à produire un hash avec un certain nombre de zéros au début."
-            : "The goal is to produce a hash lower than a target set by the network. Concretely, that means producing a hash with a certain number of leading zeros."}
+            ? "Le but est d'obtenir un hash numériquement inférieur à une cible fixée par le réseau. Concrètement, comme un hash s'écrit en hexadécimal, cela revient à produire un hash qui commence par un certain nombre de zéros."
+            : "The goal is to obtain a hash numerically lower than a target set by the network. In practice, since a hash is written in hexadecimal, this amounts to producing a hash that begins with a certain number of zeros."}
         </p>
         <p>
           {fr
@@ -280,7 +280,7 @@ export const Bitcoin4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Et là je vous vois venir : « Que se passe t-il si deux mineurs trouve en même temps un
+            Et là je vous vois venir : « Que se passe-t-il si deux mineurs trouvent en même temps un
             hash valide ? » <br />
             Très bonne question.
           </>
@@ -321,13 +321,21 @@ export const Bitcoin4Page: FC = () => {
         <p>
           {fr ? (
             <>
-              La règle du consensus est sans ambiguité :{" "}
-              <Emphasis>le réseau conserve la chaîne qui a accumulé le plus de travail</Emphasis>.
+              La règle du consensus est sans ambiguïté :{" "}
+              <Emphasis>
+                le réseau conserve la chaîne qui a accumulé le plus de travail cumulé (pas la plus
+                longue en nombre de blocs, mais celle dont la difficulté totale est la plus élevée)
+              </Emphasis>
+              .
             </>
           ) : (
             <>
               The consensus rule is unambiguous:{" "}
-              <Emphasis>the network keeps the chain that has accumulated the most work</Emphasis>.
+              <Emphasis>
+                the network keeps the chain that has accumulated the most cumulative work (not the
+                longest in number of blocks, but the one with the highest total difficulty)
+              </Emphasis>
+              .
             </>
           )}
         </p>
@@ -342,8 +350,8 @@ export const Bitcoin4Page: FC = () => {
 
       <p>
         {fr
-          ? "Avant de terminer sur ce chapitre assez dense mais fondamental, il faut revenir sur la cible de difficulté."
-          : "Before wrapping up this dense but fundamental chapter, we need to come back to the difficulty target."}
+          ? "Avant de boucler ce chapitre, un dernier point : la cible de difficulté."
+          : "Before wrapping up this chapter, one last point: the difficulty target."}
       </p>
 
       <Callout
@@ -384,18 +392,17 @@ export const Bitcoin4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            En conclusion, la preuve de travail réalise une double prouesse,{" "}
+            Voilà. La preuve de travail résout deux choses d'un coup :{" "}
             <Emphasis>
-              en résolvant les conflits sans autorité centrale et en transformant l'énergie en
-              confiance
+              les conflits sans autorité centrale, et la transformation de l'énergie en confiance
             </Emphasis>
             .
           </>
         ) : (
           <>
-            In conclusion, proof of work achieves a double feat:{" "}
+            That's it. Proof of Work solves two problems at once:{" "}
             <Emphasis>
-              resolving conflicts without a central authority and turning energy into trust
+              resolving conflicts without a central authority, and transforming energy into trust
             </Emphasis>
             .
           </>

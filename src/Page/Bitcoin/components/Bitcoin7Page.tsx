@@ -14,8 +14,8 @@ export const Bitcoin7Page: FC = () => {
       title={t("nav.tree.keysAndSignatures")}
       prelude={
         fr
-          ? "Une transaction Bitcoin ne demande jamais qui vous êtes. Elle demande seulement si vous pouvez prouver que vous avez le droit de dépenser une sortie. Cette preuve repose sur trois objets : une clé privée, une clé publique et une signature. C'est ici qu'entrent en jeu les clés."
-          : "A Bitcoin transaction never asks who you are. It only asks whether you can prove you have the right to spend an output. This proof relies on three objects: a private key, a public key, and a signature. This is where keys come in."
+          ? "Votre banque a besoin de savoir qui vous êtes. Bitcoin, non. Aucun papier d'identité, aucun nom, aucun compte. Et pourtant, personne ne peut dépenser vos bitcoins à votre place. Comment ?"
+          : "Your bank needs to know who you are. Bitcoin doesn't. No ID, no name, no account. And yet, no one can spend your bitcoins on your behalf. How?"
       }
     >
       <Callout title={fr ? "Trois éléments, trois rôles" : "Three elements, three roles"}>
@@ -55,11 +55,7 @@ export const Bitcoin7Page: FC = () => {
         </ol>
       </Callout>
 
-      <p>
-        {fr
-          ? "Ceci étant vu, passons à la pratique."
-          : "With that said, let's move on to practice."}
-      </p>
+      <p>{fr ? "Passons à la pratique." : "Let's move on to practice."}</p>
 
       <Callout
         title={
@@ -154,17 +150,15 @@ export const Bitcoin7Page: FC = () => {
 
       <p>
         {fr
-          ? "Nous savons maintenant comment Bitcoin transforme la propriété en preuve."
-          : "We now know how Bitcoin turns ownership into proof."}
+          ? "Vous savez maintenant comment Bitcoin transforme la propriété en preuve."
+          : "You now know how Bitcoin turns ownership into proof."}
       </p>
       <p>
-        {fr
-          ? "Afin de boucler la boucle, il nous reste une dernière question en suspens : "
-          : "To close the loop, one final question remains: "}
+        {fr ? "Reste une dernière question : " : "One last question remains: "}
         <Emphasis>
           {fr
             ? "comment tout cela est-il présenté à l'utilisateur dans la vraie vie ?"
-            : "how is all of this presented to the user in real life?"}
+            : "how is all of this actually presented to the user in real life?"}
         </Emphasis>
       </p>
       <p>

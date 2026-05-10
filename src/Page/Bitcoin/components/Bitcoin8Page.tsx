@@ -14,8 +14,8 @@ export const Bitcoin8Page: FC = () => {
       title={t("nav.tree.walletsAndSeed")}
       prelude={
         fr
-          ? "Un portefeuille Bitcoin ne contient pas des bitcoins. Il contient ce qu'il faut pour les dépenser. Pour comprendre comment, il faut remonter à la racine : la seed."
-          : "A Bitcoin wallet doesn't contain bitcoins. It contains what's needed to spend them. To understand how, you have to go back to the root: the seed."
+          ? "Si tu perds ta seed, tu perds tes bitcoins. Pas une partie. Tout. Ça paraît absurde : pourquoi 12 mots décident-ils de qui possède quoi ? Parce qu'un portefeuille Bitcoin ne contient pas des bitcoins. Il contient ce qu'il faut pour les dépenser."
+          : "If you lose your seed, you lose your bitcoins. Not part of them. All of them. It sounds absurd: why should 12 words determine who owns what? Because a Bitcoin wallet does not contain bitcoins. It contains what is needed to spend them."
       }
     >
       <p>
@@ -56,9 +56,7 @@ export const Bitcoin8Page: FC = () => {
           </>
         )}
       </p>
-      <p>
-        {fr ? "Remettons simplement les choses dans l'ordre." : "Let's simply put things in order."}
-      </p>
+      <p>{fr ? "Remettons les choses dans l'ordre." : "Let's put things in order."}</p>
 
       <Callout title={fr ? "Une seed, un point de départ" : "A seed, a starting point"}>
         <p>
@@ -74,13 +72,13 @@ export const Bitcoin8Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "À partir d'elle, le portefeuille peut dériver un grand nombre de clés privées. Chaque clé privée donne une clé publique, puis une adresse."
-            : "From it, the wallet can derive a large number of private keys. Each private key yields a public key, then an address."}
+            ? "À partir d'elle, le portefeuille dérive un grand nombre de clés privées. Chaque clé privée donne une clé publique, puis une adresse."
+            : "From it, the wallet derives a large number of private keys. Each private key yields a public key, then an address."}
         </p>
         <p>
           {fr
-            ? "Et c'est sur ces adresses que les UTXO sont reçus."
-            : "And it's on these addresses that the UTXOs are received."}
+            ? "Et c'est sur ces adresses que les UTXO sont enregistrés."
+            : "And it's to these addresses that UTXOs are assigned."}
         </p>
         <p>{fr ? "On peut résumer simplement :" : "We can sum it up simply:"}</p>
         <ol>
@@ -100,7 +98,9 @@ export const Bitcoin8Page: FC = () => {
       </p>
       <SeedGenerator />
 
-      <Callout title={fr ? "Ce que fait réellement un portefeuille" : "What a wallet actually does"}>
+      <Callout
+        title={fr ? "Ce que fait réellement un portefeuille" : "What a wallet actually does"}
+      >
         <p>
           {fr
             ? "Un portefeuille n'est pas magique. Il suit une logique simple :"
@@ -170,15 +170,15 @@ export const Bitcoin8Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Mais derrière cette interface sympa, le portefeuille gère toute la complexité,
-            c'est-à-dire <HighlightText>la seed</HighlightText>,{" "}
-            <HighlightText>la dérivation</HighlightText>, <HighlightText>les clés</HighlightText>,{" "}
-            <HighlightText>les adresses</HighlightText>, <HighlightText>les UTXO</HighlightText> et
-            bien entendu <HighlightText>les signatures</HighlightText>.
+            Mais derrière l'interface, le portefeuille gère toute la complexité, c'est-à-dire{" "}
+            <HighlightText>la seed</HighlightText>, <HighlightText>la dérivation</HighlightText>,{" "}
+            <HighlightText>les clés</HighlightText>, <HighlightText>les adresses</HighlightText>,{" "}
+            <HighlightText>les UTXO</HighlightText> et bien entendu{" "}
+            <HighlightText>les signatures</HighlightText>.
           </>
         ) : (
           <>
-            But behind that friendly interface, the wallet handles all the complexity, that is{" "}
+            But behind the interface, the wallet handles all the complexity, that is{" "}
             <HighlightText>the seed</HighlightText>, <HighlightText>derivation</HighlightText>,{" "}
             <HighlightText>the keys</HighlightText>, <HighlightText>the addresses</HighlightText>,{" "}
             <HighlightText>the UTXOs</HighlightText> and of course{" "}
@@ -201,8 +201,8 @@ export const Bitcoin8Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Pour ce défi, vous allez être en possession d'une seed vous permettant de générer trois clés. Une seule permet de dépenser des fonds."
-            : "For this challenge, you'll be given a seed that lets you generate three keys. Only one allows you to spend funds."}
+            ? "Pour ce défi, vous allez être en possession d'une seed vous permettant de générer trois clés. Une seule contrôle des fonds dépensables."
+            : "For this challenge, you'll be given a seed that lets you generate three keys. Only one controls spendable funds."}
         </p>
         <p>{fr ? "Saurez-vous la retrouver ?" : "Can you find it?"}</p>
       </Callout>
@@ -220,13 +220,13 @@ export const Bitcoin8Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Bitcoin n'est donc pas un système de comptes, mais un ingénieux système de clés, de droits de dépense et de preuves cryptographiques."
-          : "Bitcoin is therefore not an account system, but a clever system of keys, spending rights and cryptographic proofs."}
+          ? "Bitcoin n'est donc pas un système de comptes, mais un système de clés, de droits de dépense et de preuves cryptographiques."
+          : "Bitcoin is therefore not an account system, but a system of keys, spending rights and cryptographic proofs."}
       </p>
       <p>
         {fr
-          ? "Et vous savez quoi ? C'est précisément ce qui le rend à la fois exigeant, élégant et radicalement différent d'un système bancaire."
-          : "And you know what? That's precisely what makes it demanding, elegant, and radically different from a banking system."}
+          ? "Et c'est précisément ce qui le rend exigeant, élégant, radicalement différent d'un système bancaire."
+          : "And that is precisely what makes it demanding, elegant, and radically different from a banking system."}
       </p>
     </PageTemplate>
   );

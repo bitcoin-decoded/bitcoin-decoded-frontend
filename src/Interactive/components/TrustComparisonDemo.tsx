@@ -1,7 +1,24 @@
-import { type FC, type CSSProperties, type ReactNode } from "react";
-import { Landmark, ShieldOff, ShieldCheck, CirclePlus, Ban, Bitcoin, CircleCheck, CircleX } from "lucide-react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { Button, Caption, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import {
+  Ban,
+  Bitcoin,
+  CircleCheck,
+  CirclePlus,
+  CircleX,
+  Landmark,
+  ShieldCheck,
+  ShieldOff,
+} from "lucide-react";
+
+import {
+  Button,
+  Caption,
+  FeedbackPanel,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+} from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useLanguageContext } from "../../I18n";
 import { useTrustComparison } from "../hooks";
@@ -16,10 +33,14 @@ export const TrustComparisonDemo: FC = () => {
   const world = colors[moduleTheme];
 
   const {
-    fiat, bitcoin,
-    fiatCreateMoney, fiatCensorTx,
-    bitcoinCreateMoney, bitcoinCensorTx,
-    fiatTrustBroken, bitcoinAttempted,
+    fiat,
+    bitcoin,
+    fiatCreateMoney,
+    fiatCensorTx,
+    bitcoinCreateMoney,
+    bitcoinCensorTx,
+    fiatTrustBroken,
+    bitcoinAttempted,
   } = useTrustComparison();
 
   const danger = colors.semantic.error.text;
@@ -53,9 +74,11 @@ export const TrustComparisonDemo: FC = () => {
       <FeedbackPanel
         tone={isSuccess ? "error" : "success"}
         icon={
-          isSuccess
-            ? <CircleCheck size={18} strokeWidth={2} color={danger} />
-            : <CircleX size={18} strokeWidth={2} color={success} />
+          isSuccess ? (
+            <CircleCheck size={18} strokeWidth={2} color={danger} />
+          ) : (
+            <CircleX size={18} strokeWidth={2} color={success} />
+          )
         }
       >
         {isSuccess ? successMsg : failureMsg}
@@ -107,23 +130,51 @@ export const TrustComparisonDemo: FC = () => {
         </Caption>
 
         <div style={infoBox(fiatTrustBroken ? danger : textSecondary)}>
-          {fiatTrustBroken
-            ? <ShieldOff size={16} color={danger} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
-            : <ShieldCheck size={16} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
-          }
+          {fiatTrustBroken ? (
+            <ShieldOff size={16} color={danger} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
+          ) : (
+            <ShieldCheck size={16} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
+          )}
           <span>
             {fiatTrustBroken
-              ? (fr ? "La confiance a été rompue. Et pourtant, c'est exactement ce qui se passe dans le système actuel." : "Trust has been broken. And yet, this is exactly what happens in the current system.")
-              : (fr ? "On vous fait confiance pour ne cliquer sur aucun des deux boutons ci-dessous." : "We trust you not to click either of the two buttons below.")
-            }
+              ? fr
+                ? "La confiance peut être rompue. Et c'est exactement ce qui se passe dans le système actuel."
+                : "Trust can be broken. And yet, this is exactly what happens in the current system."
+              : fr
+                ? "On vous fait confiance pour ne cliquer sur aucun des deux boutons ci-dessous."
+                : "We trust you not to click either of the two buttons below."}
           </span>
         </div>
 
-        {renderActionButton(fiat.createMoney, danger, fiatCreateMoney, <CirclePlus size={iconSize} />, fr ? "Créer de la monnaie" : "Create money")}
-        {renderFeedback(fiat.createMoney, fr ? "Monnaie créée. L'épargne de tout le monde vient d'être diluée." : "Money created. Everyone's savings just got diluted.", null)}
+        {renderActionButton(
+          fiat.createMoney,
+          danger,
+          fiatCreateMoney,
+          <CirclePlus size={iconSize} />,
+          fr ? "Créer de la monnaie" : "Create money",
+        )}
+        {renderFeedback(
+          fiat.createMoney,
+          fr
+            ? "Monnaie créée. L'épargne de tout le monde vient d'être diluée."
+            : "Money created. Everyone's savings just got diluted.",
+          null,
+        )}
 
-        {renderActionButton(fiat.censorTx, danger, fiatCensorTx, <Ban size={iconSize} />, fr ? "Censurer une transaction" : "Censor a transaction")}
-        {renderFeedback(fiat.censorTx, fr ? "Transaction censurée. L'utilisateur n'a aucun recours." : "Transaction censored. The user has no recourse.", null)}
+        {renderActionButton(
+          fiat.censorTx,
+          danger,
+          fiatCensorTx,
+          <Ban size={iconSize} />,
+          fr ? "Censurer une transaction" : "Censor a transaction",
+        )}
+        {renderFeedback(
+          fiat.censorTx,
+          fr
+            ? "Transaction censurée. L'utilisateur n'a aucun recours."
+            : "Transaction censored. The user has no recourse.",
+          null,
+        )}
       </SurfaceCard>
 
       <SurfaceCard
@@ -140,20 +191,51 @@ export const TrustComparisonDemo: FC = () => {
         </Caption>
 
         <div style={infoBox(bitcoinAttempted ? success : world.text.secondary)}>
-          <ShieldCheck size={16} color={bitcoinAttempted ? success : world.text.secondary} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
+          <ShieldCheck
+            size={16}
+            color={bitcoinAttempted ? success : world.text.secondary}
+            style={{ flexShrink: 0, marginTop: "0.1rem" }}
+          />
           <span>
             {bitcoinAttempted
-              ? (fr ? "Le protocole a fait son travail. Aucune confiance n'était nécessaire." : "The protocol did its job. No trust was needed.")
-              : (fr ? "Pas besoin de vous faire confiance ici. Mais tentez quand même." : "No need to trust you here. But try anyway.")
-            }
+              ? fr
+                ? "Le protocole a fait son travail. Aucune confiance n'était nécessaire."
+                : "The protocol did its job. No trust was needed."
+              : fr
+                ? "Pas besoin de vous faire confiance ici. Mais tentez quand même."
+                : "No need to trust you here. But try anyway."}
           </span>
         </div>
 
-        {renderActionButton(bitcoin.createMoney, world.border.secondary, bitcoinCreateMoney, <CirclePlus size={iconSize} />, fr ? "Créer de la monnaie" : "Create money")}
-        {renderFeedback(bitcoin.createMoney, null, fr ? "Échec. L'offre maximale de 21 millions est gravée dans le code." : "Failed. The maximum supply of 21 million is hard-coded.")}
+        {renderActionButton(
+          bitcoin.createMoney,
+          world.border.secondary,
+          bitcoinCreateMoney,
+          <CirclePlus size={iconSize} />,
+          fr ? "Créer de la monnaie" : "Create money",
+        )}
+        {renderFeedback(
+          bitcoin.createMoney,
+          null,
+          fr
+            ? "Échec. L'offre maximale de 21 millions est gravée dans le code."
+            : "Failed. The maximum supply of 21 million is hard-coded.",
+        )}
 
-        {renderActionButton(bitcoin.censorTx, world.border.secondary, bitcoinCensorTx, <Ban size={iconSize} />, fr ? "Censurer une transaction" : "Censor a transaction")}
-        {renderFeedback(bitcoin.censorTx, null, fr ? "Échec. Le réseau est décentralisé, personne n'a ce pouvoir." : "Failed. The network is decentralized — no one has that power.")}
+        {renderActionButton(
+          bitcoin.censorTx,
+          world.border.secondary,
+          bitcoinCensorTx,
+          <Ban size={iconSize} />,
+          fr ? "Censurer une transaction" : "Censor a transaction",
+        )}
+        {renderFeedback(
+          bitcoin.censorTx,
+          null,
+          fr
+            ? "Échec. Le réseau est décentralisé, personne n'a ce pouvoir."
+            : "Failed. The network is decentralized — no one has that power.",
+        )}
       </SurfaceCard>
     </div>
   );

@@ -1,13 +1,14 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
+
 import {
   Activity,
   Coins,
   Pickaxe,
+  PlusCircle,
+  RefreshCw,
+  RotateCcw,
   ShieldCheck,
   TrendingUp,
-  PlusCircle,
-  RotateCcw,
-  RefreshCw,
 } from "lucide-react";
 
 import { Button, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
@@ -23,8 +24,7 @@ export const NetworkFlywheel: FC = () => {
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
-  const { level, highlightedStep, steps, canIncrease, increase, reset } =
-    useNetworkFlywheel();
+  const { level, highlightedStep, steps, canIncrease, increase, reset } = useNetworkFlywheel();
 
   const accentColor = world.border.secondary;
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
@@ -50,7 +50,7 @@ export const NetworkFlywheel: FC = () => {
     alignItems: "center",
   };
 
-  const stepNode = (isHighlighted: boolean, _isActive: boolean): CSSProperties => ({
+  const stepNode = (isHighlighted: boolean): CSSProperties => ({
     ...mono,
     flex: "1 1 0",
     display: "flex",
@@ -66,9 +66,7 @@ export const NetworkFlywheel: FC = () => {
       isHighlighted ? accentColor : world.border.secondary,
       isHighlighted ? 0.5 : 0.15,
     )}`,
-    boxShadow: isHighlighted
-      ? `0 0 16px ${withOpacity(accentColor, 0.28)}`
-      : "none",
+    boxShadow: isHighlighted ? `0 0 16px ${withOpacity(accentColor, 0.28)}` : "none",
     transition: "all 0.35s var(--ease-smooth)",
     minWidth: 0,
     textAlign: "center",
@@ -188,16 +186,12 @@ export const NetworkFlywheel: FC = () => {
     transition: "background 0.3s var(--ease-smooth)",
   });
 
-  const renderStep = (step: typeof steps[0], i: number) => {
+  const renderStep = (step: (typeof steps)[0], i: number) => {
     const Icon = STEP_ICONS[i];
     const isHighlighted = highlightedStep === i;
     return (
-      <div key={step.id} style={stepNode(isHighlighted, level > 0)}>
-        <Icon
-          size={isMobile ? 16 : 16}
-          strokeWidth={2}
-          style={stepIcon(isHighlighted)}
-        />
+      <div key={step.id} style={stepNode(isHighlighted)}>
+        <Icon size={isMobile ? 16 : 16} strokeWidth={2} style={stepIcon(isHighlighted)} />
         <span style={stepLabel}>{t(step.labelKey as Parameters<typeof t>[0])}</span>
         <span key={level} className="metric-pop" style={stepMetric(isHighlighted)}>
           {step.metricByLevel[level]}
@@ -207,11 +201,7 @@ export const NetworkFlywheel: FC = () => {
   };
 
   return (
-    <SurfaceCard
-      gap="0.85rem"
-      margin={isMobile ? "1.5rem 0" : "2rem 0"}
-      style={mono}
-    >
+    <SurfaceCard gap="0.85rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={mono}>
       {isMobile ? (
         <div style={mobileGrid}>
           {/* Row 1: steps 0, 1, 2 */}
@@ -290,11 +280,7 @@ export const NetworkFlywheel: FC = () => {
       </div>
 
       {/* Tagline */}
-      <div style={tagline}>
-        {level === 0
-          ? t("flywheel.taglineIdle")
-          : t("flywheel.tagline")}
-      </div>
+      <div style={tagline}>{level === 0 ? t("flywheel.taglineIdle") : t("flywheel.tagline")}</div>
     </SurfaceCard>
   );
 };
