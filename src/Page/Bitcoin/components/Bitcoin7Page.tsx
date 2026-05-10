@@ -14,7 +14,7 @@ export const Bitcoin7Page: FC = () => {
       title={t("nav.tree.keysAndSignatures")}
       prelude={
         fr
-          ? "Votre banque a besoin de savoir qui vous êtes. Bitcoin, non. Aucun papier d'identité, aucun nom, aucun compte. Et pourtant, personne ne peut dépenser vos bitcoins à votre place. Comment ?"
+          ? "Ta banque a besoin de savoir qui tu es. Bitcoin, non. Aucun papier d'identité, aucun nom, aucun compte. Et pourtant, personne ne peut dépenser tes bitcoins à ta place. Comment ?"
           : "Your bank needs to know who you are. Bitcoin doesn't. No ID, no name, no account. And yet, no one can spend your bitcoins on your behalf. How?"
       }
     >
@@ -59,9 +59,7 @@ export const Bitcoin7Page: FC = () => {
 
       <Callout
         title={
-          fr
-            ? "M. Nicolas QuiPaye réalise sa première transaction"
-            : "Mr. Nicolas the Payer makes his first transaction"
+          fr ? "Nicolas réalise sa première transaction" : "Nicolas makes his first transaction"
         }
       >
         <p>
@@ -100,7 +98,7 @@ export const Bitcoin7Page: FC = () => {
 
       <p>
         {fr
-          ? "Interagissez avec les éléments ci-dessous pour comprendre comment clés privées, clés publiques et signatures fonctionnent ensemble :"
+          ? "Interagis avec les éléments ci-dessous pour comprendre comment clés privées, clés publiques et signatures fonctionnent ensemble :"
           : "Interact with the elements below to understand how private keys, public keys and signatures work together:"}
       </p>
       <SignaturePlayground />
@@ -112,7 +110,7 @@ export const Bitcoin7Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Dans le monde classique, vous devez prouver votre identité pour accéder à un compte. Dans Bitcoin, vous devez seulement prouver que vous contrôlez la bonne clé."
+          ? "Dans le monde classique, tu dois prouver ton identité pour accéder à un compte. Dans Bitcoin, tu dois seulement prouver que tu contrôles la bonne clé."
           : "In the classical world, you must prove your identity to access an account. In Bitcoin, you only need to prove you control the right key."}
       </p>
       <p>
@@ -132,7 +130,7 @@ export const Bitcoin7Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Pour le moment, retenez seulement ceci : une adresse est une forme pratique de destination. C'est ce que l'on donne pour recevoir des fonds de manière simple."
+            ? "Pour le moment, retiens seulement ceci : une adresse est une forme pratique de destination. C'est ce que l'on donne pour recevoir des fonds de manière simple."
             : "For now, just remember this: an address is a practical form of destination. It's what you share to receive funds easily."}
         </p>
         <p>
@@ -150,7 +148,7 @@ export const Bitcoin7Page: FC = () => {
 
       <p>
         {fr
-          ? "Vous savez maintenant comment Bitcoin transforme la propriété en preuve."
+          ? "Tu sais maintenant comment Bitcoin transforme la propriété en preuve."
           : "You now know how Bitcoin turns ownership into proof."}
       </p>
       <p>

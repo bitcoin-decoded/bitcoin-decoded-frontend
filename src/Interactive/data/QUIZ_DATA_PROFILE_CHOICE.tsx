@@ -5,7 +5,7 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
   const fr = language === "fr";
   return {
     question: fr
-      ? "Alors, à quel profil préférez-vous accorder un prêt ?"
+      ? "Alors, à quel profil préféres-tu accorder un prêt ?"
       : "So, which profile would you prefer to grant a loan to?",
     answers: [
       {
@@ -14,7 +14,7 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
         rationale: fr ? (
           <>
             Refusé ! Désolé pour Géo... Son projet est génial, mais trop risqué. Avec une marge
-            minuscule (souvenez-vous du chapitre précédent), la banque ne peut pas se permettre le
+            minuscule (souviens-toi du chapitre précédent), la banque ne peut pas se permettre le
             moindre défaut de paiement. Sans garantie solide à saisir, c'est non.
           </>
         ) : (

@@ -34,16 +34,16 @@ export const Banking2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            <i>Nicolas QuiPaye</i> est content puisqu'il a reçu 200 000 €, prêtés par sa banque pour
-            l'achat d'une résidence principale. <br />
+            <i>Nicolas</i> est content puisqu'il a reçu 200 000 €, prêtés par sa banque pour l'achat
+            d'une résidence principale. <br />
             Cet argent ne va pas rester très longtemps sur le compte de Nicolas : il va payer la
             vendeuse de la maison, <i>Mme Michu</i>. Et que se passe-t-il si le compte de{" "}
             <i>Mme Michu</i> est dans une autre banque ?
           </>
         ) : (
           <>
-            <i>Nicolas WhoPays</i> is happy because he received €200,000, lent by his bank to buy a
-            primary residence. <br />
+            <i>Nicolas</i> is happy because he received $200,000, lent by his bank to buy a primary
+            residence. <br />
             This money won't stay long in Nicolas's account: he will pay the house seller,{" "}
             <i>Ms. Michu</i>. And what happens if <i>Ms. Michu</i>'s account is at a different bank?
           </>
@@ -53,8 +53,7 @@ export const Banking2Page: FC = () => {
         {fr ? (
           <>
             C'est là qu'intervient le mécanisme de <Emphasis>compensation interbancaire</Emphasis>.
-            Attendez, ne partez pas ! Je vais tout vous expliquer, de manière très simple et
-            concrète.
+            Attends, ne pars pas ! Je vais tout t'expliquer, de manière très simple et concrète.
           </>
         ) : (
           <>
@@ -106,7 +105,7 @@ export const Banking2Page: FC = () => {
       </Callout>
       <p>
         {fr
-          ? "Imaginez maintenant des millions de virements en monnaie M2 chaque jour entre les banques."
+          ? "Imagines maintenant des millions de virements en monnaie M2 chaque jour entre les banques."
           : "Now imagine millions of M2 money transfers every day between banks."}
       </p>
       <p>
@@ -128,52 +127,50 @@ export const Banking2Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Cela vous parait abstraît ? Très bien, passons une fois de plus à la pratique !"
+          ? "Cela te parait abstraît ? Très bien, passons une fois de plus à la pratique !"
           : "Does this seem abstract? Alright, let's get hands-on once again!"}
       </p>
       <Callout
         icon={<Home size={20} strokeWidth={2} />}
         title={
           fr
-            ? "Illustration concrète — Le mécanisme de compensation pour la transaction entre M. QuiPaye et Mme Michu"
-            : "Concrete illustration — The compensation mechanism for the transaction between Mr. WhoPays and Ms. Michu"
+            ? "Illustration concrète : Le mécanisme de compensation pour la transaction entre Nicolas et Mme Michu"
+            : "Concrete illustration: The compensation mechanism for the transaction between Nicolas and Ms. Michu"
         }
       >
         <p>
           {fr ? (
             <>
-              Revenons à nos deux protagonistes <i>M. Nicolas QuiPaye</i> et <i>Mme Michu</i>.{" "}
-              <br />
+              Revenons à nos deux protagonistes <i>M. Nicolas </i> et <i>Mme Michu</i>. <br />
               Ça y est, Nicolas fait le virement de 200 000 € sur le compte bancaire de Mme Michu.
-              Si vous avez bien suivi, cette transaction correspond à la monnaie M2. Parfait.
+              Si tu as bien suivi, cette transaction correspond à la monnaie M2. Parfait.
             </>
           ) : (
             <>
-              Let's return to our two protagonists <i>Mr. Nicolas WhoPays</i> and <i>Ms. Michu</i>.{" "}
-              <br />
-              There it is, Nicolas transfers €200,000 to Ms. Michu's bank account. If you've been
+              Let's return to our two protagonists <i>Mr. Nicolas </i>and<i> Ms. Michu</i>. <br />
+              There it is, Nicolas transfers $200,000 to Ms. Michu's bank account. If you've been
               following, this transaction corresponds to M2 money. Perfect.
             </>
           )}
         </p>
         <p>
           {fr
-            ? "On arrive en fin de journée, c'est l'heure des comptes : la banque de Nicolas doit 200 000 € à la banque de Mme Michu. Quelle monnaie va être utilisée ? Bravo ! La monnaie M0."
-            : "We reach end of day, it's time to settle up: Nicolas's bank owes €200,000 to Ms. Michu's bank. Which money will be used? Bravo! M0 money."}
+            ? "On arrive en fin de journée, c'est l'heure des comptes : la banque de Nicolas doit 200 000 € à la banque de Mme Michu. Quelle monnaie va être utilisée ? Exact, la monnaie M0 !"
+            : "We reach end of day, it's time to settle up: Nicolas's bank owes $200,000 to Ms. Michu's bank. Which money will be used? Exactly, M0 money!"}
         </p>
       </Callout>
       <p>
         {fr ? (
           <>
-            Maintenant, observons le bilan de la banque de <i>M. QuiPaye</i> juste après son
-            virement à Mme Michu. Notez la dette de 200 000 € en M0 au passif. Cliquez ci-dessous
+            Maintenant, observons le bilan de la banque de <i>Nicolas</i> juste après son
+            virement à Mme Michu. Notes la dette de 200 000 € en M0 au passif. Cliques ci-dessous
             pour voir comment la banque utilise ses réserves M0 pour solder cette dette lors de la
             compensation.
           </>
         ) : (
           <>
-            Now, let's observe <i>Mr. WhoPays</i>'s bank balance sheet right after his transfer to
-            Ms. Michu. Note the €200,000 M0 debt on the liabilities side. Click below to see how the
+            Now, let's observe <i>Nicolas</i>'s bank balance sheet right after his transfer to
+            Ms. Michu. Note the $200,000 M0 debt on the liabilities side. Click below to see how the
             bank uses its M0 reserves to settle this debt during compensation.
           </>
         )}

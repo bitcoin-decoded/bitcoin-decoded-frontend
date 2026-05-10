@@ -144,7 +144,7 @@ export const MoneyLaws2Page: FC = () => {
           <>
             Ces investissements prennent la forme de <i>détours de production</i> qui s'inscrivent
             dans une <i>structure de capital</i>. <br />
-            Non non, ne fuyez pas, sous ces termes un peu barbares se cachent des concepts très
+            Non non, ne fuis pas, sous ces termes un peu barbares se cachent des concepts très
             concrets !
           </>
         ) : (
@@ -183,7 +183,7 @@ export const MoneyLaws2Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Comme vous pouvez l'observer, la production d'un simple sandwich requiert des centaines d'étapes, ça ne se fait pas en cinq minutes."
+            ? "Comme tu peux l'observer, la production d'un simple sandwich requiert des centaines d'étapes, ça ne se fait pas en cinq minutes."
             : "As you can see, producing a simple sandwich requires hundreds of steps, it doesn't happen in five minutes."}
         </p>
         <p>
@@ -365,8 +365,8 @@ export const MoneyLaws2Page: FC = () => {
       >
         <p>
           {fr
-            ? "Pour vérifier si vous avez bien saisi toutes les notions précédentes, qui sont un peu chargées je le reconnais volontiers, faisons un petit test avec notre ami Robinson Crusoé, seul sur son île."
-            : "To check whether you have grasped all the previous concepts — which are admittedly quite dense — let's run a little test with our friend Robinson Crusoe, alone on his island."}
+            ? "Pour vérifier si t'as bien saisi toutes les notions précédentes, qui sont un peu chargées je le reconnais volontiers, faisons un petit test avec notre ami Robinson Crusoé, seul sur son île."
+            : "To check whether you have grasped all the previous concepts, which are admittedly quite dense, let's run a little test with our friend Robinson Crusoe, alone on his island."}
         </p>
         <p>
           {fr ? (
@@ -378,7 +378,7 @@ export const MoneyLaws2Page: FC = () => {
             </>
           ) : (
             <>
-              Robinson fishes by hand eight hours a day. This allows him to catch four fish —
+              Robinson fishes by hand eight hours a day. This allows him to catch four fish,
               exactly what he needs to eat each day. His situation is stable, but his life is
               somewhat limited. He then has a brilliant idea: build a fishing net so he only has to
               work four hours a day.
@@ -469,7 +469,7 @@ export const MoneyLaws2Page: FC = () => {
         {fr ? (
           <>
             <Emphasis>
-              Alors, prêts à comprendre pourquoi les systèmes planifiés sont condamnés à
+              Alors, prêt à comprendre pourquoi les systèmes planifiés sont condamnés à
               l'aveuglement ?
             </Emphasis>
           </>

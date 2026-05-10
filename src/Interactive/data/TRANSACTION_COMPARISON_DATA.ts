@@ -1,4 +1,4 @@
-/** Bank scenario data — Alice sends €1,000 to Bob */
+/** Bank scenario data — Alice sends $1,000 to Bob */
 export const BANK = {
   aliceBefore: 2500,
   aliceAfter: 1500,

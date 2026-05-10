@@ -17,10 +17,10 @@ export const Banking4Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Vous êtes-vous déjà demandé pourquoi votre banquier vous regarde de travers quand vous
-            parlez de financer un vrai projet, mais déroule le tapis rouge dès qu'il s'agit d'un
-            crédit immobilier ou d'un placement ? Ce n'est pas votre dossier. C'est son moteur qui
-            tourne au ralenti. Et c'est la Banque Centrale qui l'a enrayé.
+            T'es-tu déjà demandé pourquoi ton banquier te regarde de travers quand tu lui parles de
+            financer un vrai projet, mais déroule le tapis rouge dès qu'il s'agit d'un crédit
+            immobilier ou d'un placement ? Ce n'est pas ton dossier. C'est son moteur qui tourne au
+            ralenti. Et c'est la Banque Centrale qui l'a enrayé.
           </>
         ) : (
           <>
@@ -94,17 +94,17 @@ export const Banking4Page: FC = () => {
         <p>
           {fr ? (
             <>
-              <u>Exemple</u> : La banque de <i>M. Nicolas QuiPaye</i> lui a accordé un prêt de 200
-              000€ avec un taux d'intérêt de 3% sur 20 ans, une somme que cette même banque a
-              obtenue à un taux extrêmement bas voire quasi-nul ! <br /> → C'est cette marge qui la
-              rémunère pour prendre des risques et ainsi financer l'économie.
+              <u>Exemple</u> : La banque de <i>Nicolas</i> lui a accordé un prêt de 200 000 € avec
+              un taux d'intérêt de 3% sur 20 ans, une somme que cette même banque a obtenue à un
+              taux extrêmement bas voire quasi-nul ! <br /> → C'est cette marge qui la rémunère pour
+              prendre des risques et ainsi financer l'économie.
             </>
           ) : (
             <>
-              <u>Example</u>: <i>Mr. Nicolas WhoPays</i>'s bank granted him a loan of €200,000 at an
-              interest rate of 3% over 20 years, an amount the same bank obtained at an extremely
-              low, almost zero, rate! <br /> → This margin is what pays the bank for taking risks
-              and thus financing the economy.
+              <u>Example</u>: <i>Nicolas</i>'s bank granted him a loan of $200,000 at an interest
+              rate of 3% over 20 years, an amount the same bank obtained at an extremely low, almost
+              zero, rate! <br /> → This margin is what pays the bank for taking risks and thus
+              financing the economy.
             </>
           )}
         </p>
@@ -126,14 +126,14 @@ export const Banking4Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Vous voulez une illustration pour mieux comprendre ? OK c'est parti !"
+          ? "Tu veux une illustration pour mieux comprendre ? OK c'est parti !"
           : "Want an illustration to better understand? OK let's go!"}
       </p>
       <p>
         {fr ? (
           <>
-            Vous êtes maintenant une banque centrale et vous allez réaliser une opération de QE.
-            Observez les effets que cela provoque sur les obligations.
+            T'es maintenant une banque centrale et tu vas réaliser une opération de QE. Observes les
+            effets que cela provoque sur les obligations.
           </>
         ) : (
           <>
@@ -151,9 +151,9 @@ export const Banking4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Alors vous me répondrez sans doute :{" "}
-            <i>« OK, super... et alors ? C'est grave, Docteur ? »</i> — je vous réponds tout de
-            suite : « Oui, car ça casse le modèle de rémunération des banques commerciales ».
+            Alors tu me répondras sans doute :{" "}
+            <i>« OK, super... et alors ? C'est grave, Docteur ? »</i>, je te réponds tout de suite :
+            « Oui, car ça casse le modèle de rémunération des banques commerciales ».
           </>
         ) : (
           <>
@@ -164,12 +164,12 @@ export const Banking4Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Rappelez-vous, une banque commerciale se rémunère sur l'écart entre les taux à long terme (ce qu'elle prête) et les taux à court terme (ce qu'elle emprunte)."
+          ? "Souviens-toi, une banque commerciale se rémunère sur l'écart entre les taux à long terme (ce qu'elle prête) et les taux à court terme (ce qu'elle emprunte)."
           : "Remember, a commercial bank earns from the spread between long-term rates (what it lends) and short-term rates (what it borrows)."}
       </p>
       <p style={{ textAlign: "center" }}>
         {fr
-          ? "Expérimentez ! Faites varier les taux à long terme sur le graphique ci-dessous afin de mieux saisir les conséquences de taux trop bas."
+          ? "Expérimentes ! Fais varier les taux à long terme sur le graphique ci-dessous afin de mieux saisir les conséquences de taux trop bas."
           : "Experiment! Adjust the long-term rates on the chart below to better grasp the consequences of rates that are too low."}
         <YieldCurveSimulator />
       </p>

@@ -36,8 +36,8 @@ export const MoneyLaws1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Si je vous demande : <i>« Qu'avez-vous dans votre portefeuille ? »</i>, vous me
-            répondrez sûrement <i>« de l'argent »</i>.
+            Si je te demande : <i>« Qu'as-tu dans ton portefeuille ? »</i>, tu me répondras sûrement{" "}
+            <i>« de l'argent »</i>.
           </>
         ) : (
           <>
@@ -49,9 +49,9 @@ export const MoneyLaws1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Pourtant, seul sur une île déserte avec un million d'euros, vous seriez pauvre. Pourquoi
-            ? Parce que les billets ne se mangent pas. La monnaie ne vaut rien sans les autres :
-            elle est avant tout une <Emphasis> technologie de collaboration</Emphasis>.
+            Pourtant, seul sur une île déserte avec un million d'euros, tu serais pauvre. Pourquoi ?
+            Parce que les billets ne se mangent pas. La monnaie ne vaut rien sans les autres : elle
+            est avant tout une <Emphasis> technologie de collaboration</Emphasis>.
           </>
         ) : (
           <>
@@ -98,8 +98,8 @@ export const MoneyLaws1Page: FC = () => {
           {fr ? (
             <>
               La monnaie prend alors le relais : elle devient une mémoire collective. Posséder de
-              l'argent, c'est détenir la preuve matérielle que vous avez contribué à la société par
-              votre travail, et que vous avez le droit de réclamer un service équivalent en retour.
+              l'argent, c'est détenir la preuve matérielle que tu as contribué à la société par ton
+              travail, et que t'as le droit de réclamer un service équivalent en retour.
             </>
           ) : (
             <>
@@ -237,7 +237,7 @@ export const MoneyLaws1Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Dépliez les monnaies ci-dessous afin d'en savoir plus !"
+          ? "Déplies les monnaies ci-dessous afin d'en savoir plus !"
           : "Unfold the currencies below to learn more!"}
       </p>
       <MonetaryGallery />

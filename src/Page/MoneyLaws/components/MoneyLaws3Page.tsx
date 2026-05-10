@@ -22,11 +22,11 @@ export const MoneyLaws3Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Imaginez qu'on vous demande, là, maintenant, de décider combien d'acier la France doit
-            produire l'année prochaine. Pas une fourchette. Un chiffre précis. En tonnes. Vous avez
-            accès à toutes les données techniques que vous voulez : les stocks, les capacités de
-            production, les besoins déclarés des industries. Mais une seule information vous manque,
-            et sans elle, votre chiffre n'a aucun sens. Cette information, le socialisme l'a
+            Imagines qu'on te demande, là, maintenant, de décider combien d'acier la France doit
+            produire l'année prochaine. Pas une fourchette. Un chiffre précis. En tonnes. T'as
+            accès à toutes les données techniques que tu voulez : les stocks, les capacités de
+            production, les besoins déclarés des industries. Mais une seule information te manque,
+            et sans elle, ton chiffre n'a aucun sens. Cette information, le socialisme l'a
             supprimée. Et c'est ce qui le rend mathématiquement impossible.
           </>
         ) : (
@@ -75,18 +75,18 @@ export const MoneyLaws3Page: FC = () => {
       >
         <p>
           {fr
-            ? "Pour illustrer, je vous nomme à la tête du Comité Central de Planification. Toutes mes sincères félicitations pour cette promotion !"
+            ? "Pour illustrer, je te nomme à la tête du Comité Central de Planification. Toutes mes sincères félicitations pour cette promotion !"
             : "To illustrate, I am appointing you as head of the Central Planning Committee. Sincere congratulations on this promotion!"}
         </p>
         <p>
           {fr
-            ? "Votre première mission : construire un pont afin de relier deux régions. "
+            ? "Ta première mission : construire un pont afin de relier deux régions. "
             : "Your first mission: build a bridge to connect two regions. "}
         </p>
         <p>
           {fr ? (
             <>
-              Vos ingénieurs vous présentent deux options techniques :
+              Tes ingénieurs te présentent deux options techniques :
               <ul>
                 <li>L'Acier : Ultra-résistant, mais sa production demande énormément d'énergie.</li>
                 <li>
@@ -108,7 +108,7 @@ export const MoneyLaws3Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Le problème ? Vous n'avez pas de prix. L'État possède tout, donc rien ne s'achète ni ne se vend. Vous n'avez que des rapports techniques sur les quantités de minerai ou de sable."
+            ? "Le problème ? Tu n'as pas de prix. L'État possède tout, donc rien ne s'achète ni ne se vend. Tu n'as que des rapports techniques sur les quantités de minerai ou de sable."
             : "The problem? You have no prices. The State owns everything, so nothing is bought or sold. All you have are technical reports on quantities of ore or sand."}
         </p>
         <Quiz {...getQuizDataBridgeMaterial(language)} onCorrectAnswer={onQuizSolved} />
@@ -135,12 +135,12 @@ export const MoneyLaws3Page: FC = () => {
       <Callout title={fr ? "Le secret du Capitalisme" : "The secret of Capitalism"}>
         <p>
           {fr
-            ? "Quand vous êtes un entrepreneur libre et que vous construisez un pont, vous vous posez une vraie question : « Quel matériau maximise mon profit ? »"
+            ? "Quand t'es un entrepreneur libre et que tu construis un pont, tu te poses une vraie question : « Quel matériau maximise mon profit ? »"
             : 'When you are a free entrepreneur building a bridge, you ask yourself a real question: "Which material maximizes my profit?"'}
         </p>
         <p>
           {fr
-            ? "Vous regardez le prix de l'acier. Il est élevé ? Vous explorez celui du béton. Il est moins cher ? Vous réfléchissez à la durée de vie du pont, au coût de sa maintenance, vous prenez en compte tous ces éléments dans vos calculs et vous arbitrez."
+            ? "Tu regardes le prix de l'acier. Il est élevé ? Tu explores celui du béton. Il est moins cher ? Tu réfléchis à la durée de vie du pont, au coût de sa maintenance, tu prends en compte tous ces éléments dans tes calculs et tu arbitres."
             : "You look at the price of steel. Too high? You explore the price of concrete. Cheaper? You consider the bridge's lifespan, maintenance costs, weigh all these factors in your calculations, and make a decision."}
         </p>
         <p>
@@ -150,7 +150,7 @@ export const MoneyLaws3Page: FC = () => {
               <br />
               Pourquoi ? Parce que le prix de l'acier reflète sa rareté réelle. Si beaucoup d'autres
               entrepreneurs ont besoin d'acier pour d'autres projets (par exemple des fusées), alors
-              son prix monte. Vous êtes donc « guidé » vers le matériau qui crée le moins de
+              son prix monte. Tu es donc « guidé » vers le matériau qui crée le moins de
               gaspillage pour la société.
             </>
           ) : (
@@ -226,10 +226,10 @@ export const MoneyLaws3Page: FC = () => {
       </Callout>
       <p>
         {fr
-          ? "Pour sentir l'ampleur du problème, prenez la fabrication d'une simple bière. Pour un planificateur, c'est un cauchemar logistique !"
+          ? "Pour sentir l'ampleur du problème, prends la fabrication d'une simple bière. Pour un planificateur, c'est un cauchemar logistique !"
           : "To grasp the scale of the problem, take the production of a simple beer. For a planner, it is a logistical nightmare!"}
       </p>
-      <p>{fr ? "Cliquez sur chaque carte :" : "Click on each card:"}</p>
+      <p>{fr ? "Cliques sur chaque carte :" : "Click on each card:"}</p>
       <FlipCardGrid items={getBeerProductionChain(language)} />
       <p>
         {fr ? (

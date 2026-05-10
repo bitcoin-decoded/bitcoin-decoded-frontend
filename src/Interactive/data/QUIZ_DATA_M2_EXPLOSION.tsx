@@ -6,7 +6,7 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
 
   return {
     question: fr
-      ? "Selon vous, à quoi correspond ce graphique ?"
+      ? "Selon toi, à quoi correspond ce graphique ?"
       : "In your opinion, what does this chart represent?",
     answers: [
       {
@@ -53,7 +53,7 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
           <>
             L'administration française est généreuse, mais pas à ce
             point ! L'échelle se compte ici en milliers de milliards.
-            Regardez bien l'axe vertical.
+            Regardes bien l'axe vertical.
           </>
         ) : (
           <>

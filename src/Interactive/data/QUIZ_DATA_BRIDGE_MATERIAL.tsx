@@ -5,7 +5,7 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
   const fr = language === "fr";
   return {
     question: fr
-      ? "Alors, quel matériau allez-vous utiliser ?"
+      ? "Alors, quel matériau vas-tu utiliser ?"
       : "So, which material will you use?",
     answers: [
       {
@@ -15,8 +15,8 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            Vous jouez à la loterie avec les ressources de la société ! Sans prix, comment savoir si
-            l'acier utilisé pour votre pont n'est pas 100 fois plus utile ailleurs pour fabriquer
+            Tu joues à la loterie avec les ressources de la société ! Sans prix, comment savoir si
+            l'acier utilisé pour ton pont n'est pas 100 fois plus utile ailleurs pour fabriquer
             des scalpels chirurgicaux ? Ou si le béton utilisé n'aurait pas été plus précieux pour
             construire des logements urgents ?
           </>
@@ -35,8 +35,8 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            Vous jouez à la loterie avec les ressources de la société ! Sans prix, comment savoir si
-            l'acier utilisé pour votre pont n'est pas 100 fois plus utile ailleurs pour fabriquer
+            Tu joues à la loterie avec les ressources de la société ! Sans prix, comment savoir si
+            l'acier utilisé pour ton pont n'est pas 100 fois plus utile ailleurs pour fabriquer
             des scalpels chirurgicaux ? Ou si le béton utilisé n'aurait pas été plus précieux pour
             construire des logements urgents ?
           </>
@@ -55,9 +55,9 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
         isCorrect: true,
         rationale: fr ? (
           <>
-            Félicitations, vous venez de mettre le doigt sur l'argument de Mises ! Sans prix de
-            marché, vous ne pouvez pas comparer le « coût social » d'un matériau par rapport à un
-            autre. Vous n'avez pas de dénominateur commun.
+            Félicitations, tu viens de mettre le doigt sur l'argument de Mises ! Sans prix de
+            marché, tu ne peux pas comparer le « coût social » d'un matériau par rapport à un
+            autre. Tu n'as pas de dénominateur commun.
           </>
         ) : (
           <>

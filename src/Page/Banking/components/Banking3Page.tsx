@@ -20,7 +20,7 @@ export const Banking3Page: FC = () => {
         fr ? (
           <>
             Une banque manque d'argent. Pas de problème : la Banque Centrale appuie sur un bouton,
-            et l'argent apparaît. Magique, non ? Vous vous doutez bien qu'il y a un piège. Il
+            et l'argent apparaît. Magique, non ? Tu te doutes bien qu'il y a un piège. Il
             s'appelle le Quantitative Easing.
           </>
         ) : (
@@ -76,7 +76,7 @@ export const Banking3Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Si la Banque de <i>M. QuiPaye</i> n'avait pas pu payer sa dette auprès de la Banque de{" "}
+              Si la Banque de <i>Nicolas</i> n'avait pas pu payer sa dette auprès de la Banque de{" "}
               <i>Mme Michu</i>, alors il est possible que la banque de <i>Mme Michu</i> n'aurait à
               son tour pas pu payer toutes ses dettes auprès d'autres banques tierces, et ainsi de
               suite. Par effet domino, les banques pourraient être dans l'incapacité d'honorer leurs
@@ -84,7 +84,7 @@ export const Banking3Page: FC = () => {
             </>
           ) : (
             <>
-              If <i>Mr. WhoPays</i>'s Bank hadn't been able to pay its debt to <i>Ms. Michu</i>'s
+              If <i>Nicolas</i>'s Bank hadn't been able to pay its debt to <i>Ms. Michu</i>'s
               Bank, then it's possible that <i>Ms. Michu</i>'s bank in turn couldn't pay all its
               debts to other third-party banks, and so on. Through a domino effect, banks could
               become unable to honor their debts.{" "}
@@ -117,7 +117,7 @@ export const Banking3Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Vous comprenez donc que ne pas payer en M0, c'est la faillite immédiate et le blocage de toute l'économie."
+            ? "Tu comprends donc que ne pas payer en M0, c'est la faillite immédiate et le blocage de toute l'économie."
             : "So you understand that failing to pay in M0 means immediate bankruptcy and the freezing of the entire economy."}
         </p>
       </Callout>
@@ -204,7 +204,7 @@ export const Banking3Page: FC = () => {
             <p>
               {fr ? (
                 <>
-                  Et ce n'est pas de la science-fiction : cette "arme" a été utilisée massivement
+                  Et ce n'est pas de la science-fiction : cette « arme » a été utilisée massivement
                   par toutes les grandes banques centrales (Japon, États-Unis, Europe) après la{" "}
                   <i>crise des subprimes</i> de 2008 et lors de la <i>crise pandémique</i> de 2020.
                 </>
@@ -237,7 +237,7 @@ export const Banking3Page: FC = () => {
           </p>
           <p>
             {fr
-              ? "Vous vous doutez bien que tout cela est bien trop beau pour être vrai. Et vous avez raison : ces manœuvres ont des conséquences lourdes sur l'économie, et elles sont au cœur du problème financier actuel. C'est ce que vous allez voir par la suite. On y arrive !"
+              ? "Tu te doutes bien que tout cela est bien trop beau pour être vrai. Et t'as raison : ces manœuvres ont des conséquences lourdes sur l'économie, et elles sont au cœur du problème financier actuel. C'est ce que tu vas voir par la suite. On y arrive !"
               : "You probably suspect all of this is too good to be true. And you're right: these maneuvers have major consequences for the economy, and they are at the heart of the current financial problem. This is what you are going to see next. We're getting there!"}
           </p>
         </>

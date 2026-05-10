@@ -87,13 +87,13 @@ export const CreditCreationSimulator: FC = () => {
           <p style={sectionStyle}>
             <strong>
               {fr
-                ? "ALAKAZAM ! 💥 Regardez attentivement la ligne en jaune. 🧐"
+                ? "ALAKAZAM ! 💥 Regardes attentivement la ligne en jaune. 🧐"
                 : "ALAKAZAM! 💥 Look carefully at the yellow line. 🧐"}
             </strong>
             <br />
             {fr
-              ? "Par un simple jeu d'écritures, en un seul clic, vous avez en tant que banquier créé une ligne magique : une créance de 200 000 € (un actif car M. Nicolas QuiPaye vous doit cet argent) et un dépôt de 200 000 € dans le compte de banque de M. Nicolas QuiPaye (un passif pour vous, car cet argent est dû au client : il peut le retirer ou le dépenser à tout moment). 200 000 € ont littéralement été ajoutés dans l'économie."
-              : "With a simple accounting entry, in a single click, you as a banker created a magic line: a claim of €200,000 (an asset because Mr. Nicolas WhoPays owes you this money) and a deposit of €200,000 in Mr. Nicolas WhoPays's bank account (a liability for you, because this money is owed to the customer: they can withdraw it or spend it at any time). €200,000 has literally been added to the economy."}
+              ? "Par un simple jeu d'écritures, en un seul clic, tu as en tant que banquier créé une ligne magique : une créance de 200 000 € (un actif car Nicolas te doit cet argent) et un dépôt de 200 000 € dans le compte de banque de Nicolas (un passif pour toi, car cet argent est dû au client : il peut le retirer ou le dépenser à tout moment). 200 000 € ont littéralement été ajoutés dans l'économie."
+              : "With a simple accounting entry, in a single click, you as a banker created a magic line: a claim of $200,000 (an asset because Mr. Nicolas owes you this money) and a deposit of $200,000 in Nicolas's bank account (a liability for you, because this money is owed to the customer: they can withdraw it or spend it at any time). $200,000 has literally been added to the economy."}
           </p>
           <p style={sectionStyle}>
             {fr

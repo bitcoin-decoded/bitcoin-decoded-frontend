@@ -28,10 +28,10 @@ export const Banking5Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Vous êtes banquier. Vos coffres débordent de M0, vos marges sont écrasées, et la
-            direction veut du volume. Sur votre bureau, deux dossiers de prêt. L'un va vous
+            T'es un banquier. Tes coffres débordent de M0, tes marges sont écrasées, et la
+            direction veut du volume. Sur ton bureau, deux dossiers de prêt. L'un va te
             rapporter peu mais sans aucun risque. L'autre pourrait financer la prochaine révolution
-            industrielle, mais peut-être pas. Vous avez 30 secondes pour choisir. Bienvenue dans
+            industrielle, mais peut-être pas. T'as 30 secondes pour choisir. Bienvenue dans
             l'Effet Cantillon.
           </>
         ) : (
@@ -60,7 +60,7 @@ export const Banking5Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "C'est l'heure du tri sélectif : en tant que banquier, voici vos deux prochains rendez-vous."
+          ? "C'est l'heure du tri sélectif : en tant que banquier, voici tes deux prochains rendez-vous."
           : "It's time for selective sorting: as a banker, here are your next two appointments."}
       </p>
       <Callout
@@ -73,7 +73,7 @@ export const Banking5Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Je vous présente deux nouveaux personnages : <i>M. Balthazar Picsou</i> et{" "}
+              Je te présente deux nouveaux personnages : <i>M. Balthazar Picsou</i> et{" "}
               <i>M. Géo Trouve-Tout</i>.
             </>
           ) : (
@@ -165,7 +165,7 @@ export const Banking5Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Vous venez de comprendre la mécanique de l'<i>Effet Cantillon</i>, du nom de
+                Tu viens de comprendre la mécanique de l'<i>Effet Cantillon</i>, du nom de
                 l'économiste irlandais du XVIIIe siècle <i>Richard Cantillon</i> : l'argent
                 nouvellement créé (M2) fuit l'économie réelle, jugée trop risquée, pour aller
                 gonfler le prix des actifs. Les « Picsou » s'enrichissent en dormant : la demande

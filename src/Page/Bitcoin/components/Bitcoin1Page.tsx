@@ -87,9 +87,8 @@ export const Bitcoin1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            « Ok c'est bien, mais concrètement comment ça fonctionne ? » me demanderez-vous. <br />
-            Et vous avez bien raison de demander, c'est précisément ce que vous allez voir
-            maintenant.
+            « Ok c'est bien, mais concrètement comment ça fonctionne ? » me demanderas-tu. <br />
+            Et t'as bien raison de demander, c'est précisément ce que tu vas voir maintenant.
           </>
         ) : (
           <>
@@ -187,12 +186,12 @@ export const Bitcoin1Page: FC = () => {
         <ul>
           <li>
             {fr
-              ? "Les nœuds simples (ceux que vous venez tout juste de voir)."
+              ? "Les nœuds simples (ceux que tu viens tout juste de voir)."
               : "Simple nodes (the ones you just saw)."}
           </li>
           <li>
             {fr
-              ? "Et les nœuds-mineurs (ceux que vous allez découvrir dès maintenant)."
+              ? "Et les nœuds-mineurs (ceux que tu vas découvrir dès maintenant)."
               : "And mining nodes (the ones you're about to discover)."}
           </li>
         </ul>
@@ -428,8 +427,8 @@ export const Bitcoin1Page: FC = () => {
 
       <p>
         {fr
-          ? "Voilà, vous comprenez maintenant les grandes fondations de Bitcoin : un réseau décentralisé où des nœuds gardent les règles et des mineurs sécurisent le système en échange de bitcoin."
-          : "There you have it — you now understand the foundations of Bitcoin: a decentralized network where nodes enforce the rules and miners secure the system in exchange for bitcoin."}
+          ? "Voilà, tu comprends maintenant les grandes fondations de Bitcoin : un réseau décentralisé où des nœuds gardent les règles et des mineurs sécurisent le système en échange de bitcoin."
+          : "There you have it, you now understand the foundations of Bitcoin: a decentralized network where nodes enforce the rules and miners secure the system in exchange for bitcoin."}
       </p>
       <p>
         {fr

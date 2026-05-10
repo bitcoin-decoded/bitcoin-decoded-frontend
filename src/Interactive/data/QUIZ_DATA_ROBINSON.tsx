@@ -1,11 +1,11 @@
-import type { QuizData } from "../types";
 import type { Language } from "../../I18n";
+import type { QuizData } from "../types";
 
 export const getQuizDataRobinson = (language: Language): QuizData => {
   const fr = language === "fr";
   return {
     question: fr
-      ? "Selon vous, que devrait faire Robinson ?"
+      ? "Selon toi, que devrait faire Robinson ?"
       : "In your opinion, what should Robinson do?",
     answers: [
       {
@@ -15,14 +15,11 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            Allons, en êtes-vous bien certain ? N'y a t-il pas une marche de
-            manoeuvre pour Robinson ?
+            Allons, en êtes-toi bien certain ? N'y a t-il pas une marche de manoeuvre pour Robinson
+            ?
           </>
         ) : (
-          <>
-            Come on, are you sure about that? Isn't there some room for
-            maneuver for Robinson?
-          </>
+          <>Come on, are you sure about that? Isn't there some room for maneuver for Robinson?</>
         ),
       },
       {
@@ -32,15 +29,13 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
         isCorrect: true,
         rationale: fr ? (
           <>
-            Dans le mille ! Robinson a compris qu'il doit créer un surplus
-            (en travaillant plus ou en consommant moins) pour financer son détour
-            de production (le filet).
+            Dans le mille ! Robinson a compris qu'il doit créer un surplus (en travaillant plus ou
+            en consommant moins) pour financer son détour de production (le filet).
           </>
         ) : (
           <>
-            Bullseye! Robinson understood that he must create a surplus
-            (by working more or consuming less) to fund his roundabout
-            production (the net).
+            Bullseye! Robinson understood that he must create a surplus (by working more or
+            consuming less) to fund his roundabout production (the net).
           </>
         ),
       },
@@ -51,15 +46,13 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            Mauvaise idée ! Au bout du deuxième jour, Robinson sera trop faible
-            pour finir son filet. On ne peut pas ignorer les besoins du présent
-            pour construire le futur.
+            Mauvaise idée ! Au bout du deuxième jour, Robinson sera trop faible pour finir son
+            filet. On ne peut pas ignorer les besoins du présent pour construire le futur.
           </>
         ) : (
           <>
-            Bad idea! By the second day, Robinson will be too weak
-            to finish his net. You can't ignore present needs
-            to build the future.
+            Bad idea! By the second day, Robinson will be too weak to finish his net. You can't
+            ignore present needs to build the future.
           </>
         ),
       },

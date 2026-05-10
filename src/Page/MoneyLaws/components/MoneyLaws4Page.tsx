@@ -29,7 +29,7 @@ export const MoneyLaws4Page: FC = () => {
         ) : (
           <>
             In 2008, central banks injected trillions. According to Keynesians, inflation should
-            have exploded. It didn’t. So does printing money not cause inflation? Wrong answer.
+            have exploded. It didn't. So does printing money not cause inflation? Wrong answer.
             Wrong method, above all.
           </>
         )
@@ -37,7 +37,7 @@ export const MoneyLaws4Page: FC = () => {
     >
       <p>
         {fr
-          ? "Au chapitre précédent, vous avez vu que la doctrine socialiste s'effondre par manque d'information. Mais alors, comment les économistes font-ils pour étudier cette information ? C'est là que les chemins se séparent."
+          ? "Au chapitre précédent, t'as vu que la doctrine socialiste s'effondre par manque d'information. Mais alors, comment les économistes font-ils pour étudier cette information ? C'est là que les chemins se séparent."
           : "In the previous chapter, you saw that the socialist doctrine collapses due to a lack of information. But then, how do economists study this information? This is where paths diverge."}
       </p>
       <Callout title={fr ? "Le Physicien contre le Logicien" : "The Physicist versus the Logician"}>
@@ -98,7 +98,7 @@ export const MoneyLaws4Page: FC = () => {
         ) : (
           <>
             Friedrich Hayek, economist of the Austrian school, denounced what he called{" "}
-            <Emphasis>scientism</Emphasis> — the desire to apply hard science methods (physics,
+            <Emphasis>scientism</Emphasis>, the desire to apply hard science methods (physics,
             chemistry) to human action.
           </>
         )}
@@ -193,7 +193,7 @@ export const MoneyLaws4Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Cliquez sur chaque école pour comparer leurs raisonnements face à une même question :"
+          ? "Cliques sur chaque école pour comparer leurs raisonnements face à une même question :"
           : "Click on each school to compare their reasoning on the same question:"}
       </p>
       <DebateArena items={getKeynesianVsAustrian(language)} />

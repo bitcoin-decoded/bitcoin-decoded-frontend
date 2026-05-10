@@ -7,28 +7,24 @@ export const getUsersDebtsDefault = (language: Language) => {
       bank: {
         assets: [
           {
-            amount: "20 000 000 €",
+            amount: fr ? "20 000 000 €" : "$20,000,000",
             description: fr
               ? "(créances totales auprès des clients)"
               : "(total claims from customers)",
           },
           {
-            amount: "30 000 000 €",
-            description: fr
-              ? "(autres actifs divers)"
-              : "(various other assets)",
+            amount: fr ? "30 000 000 €" : "$30,000,000",
+            description: fr ? "(autres actifs divers)" : "(various other assets)",
           },
         ],
         liabilities: [
           {
-            amount: "30 000 000 €",
+            amount: fr ? "30 000 000 €" : "$30,000,000",
             description: fr ? "(capital propre)" : "(equity)",
           },
           {
-            amount: "20 000 000 €",
-            description: fr
-              ? "(autres passifs divers)"
-              : "(various other liabilities)",
+            amount: fr ? "20 000 000 €" : "$20,000,000",
+            description: fr ? "(autres passifs divers)" : "(various other liabilities)",
           },
         ],
       },
@@ -37,30 +33,26 @@ export const getUsersDebtsDefault = (language: Language) => {
       bank: {
         assets: [
           {
-            amount: "5 000 000 €",
+            amount: fr ? "5 000 000 €" : "$5,000,000",
             description: fr
               ? "(créances totales auprès des clients)"
               : "(total claims from customers)",
             hasChanged: true,
           },
           {
-            amount: "30 000 000 €",
-            description: fr
-              ? "(autres actifs divers)"
-              : "(various other assets)",
+            amount: fr ? "30 000 000 €" : "$30,000,000",
+            description: fr ? "(autres actifs divers)" : "(various other assets)",
           },
         ],
         liabilities: [
           {
-            amount: "15 000 000 €",
+            amount: fr ? "15 000 000 €" : "$15,000,000",
             description: fr ? "(Capital propre)" : "(Equity)",
             hasChanged: true,
           },
           {
-            amount: "20 000 000 €",
-            description: fr
-              ? "(autres passifs divers)"
-              : "(various other liabilities)",
+            amount: fr ? "20 000 000 €" : "$20,000,000",
+            description: fr ? "(autres passifs divers)" : "(various other liabilities)",
           },
         ],
       },

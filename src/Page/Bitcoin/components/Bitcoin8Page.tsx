@@ -62,7 +62,7 @@ export const Bitcoin8Page: FC = () => {
         <p>
           <Emphasis>
             {fr
-              ? "Une seed phrase est une suite de mots que vous pouvez noter, sauvegarder et restaurer"
+              ? "Une seed phrase est une suite de mots que tu peux noter, sauvegarder et restaurer"
               : "A seed phrase is a sequence of words that you can write down, save, and restore"}
           </Emphasis>
           .
@@ -119,7 +119,7 @@ export const Bitcoin8Page: FC = () => {
           <li>
             <Emphasis>
               {fr
-                ? "Et il affiche une vue simplifiée de ce que vous contrôlez"
+                ? "Et il affiche une vue simplifiée de ce que tu contrôles"
                 : "And it displays a simplified view of what you control"}
             </Emphasis>
           </li>
@@ -132,7 +132,7 @@ export const Bitcoin8Page: FC = () => {
         <p>
           <Emphasis>
             {fr
-              ? "C'est une agrégation des UTXO que vos clés permettent de dépenser"
+              ? "C'est une agrégation des UTXO que tes clés permettent de dépenser"
               : "It's an aggregation of the UTXOs your keys can spend"}
           </Emphasis>
           .
@@ -152,9 +152,8 @@ export const Bitcoin8Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Vous ouvrez votre portefeuille, et vous voyez :{" "}
-            <HighlightText>une adresse</HighlightText>, <HighlightText>un montant</HighlightText>,{" "}
-            <HighlightText>un historique</HighlightText>,{" "}
+            Tu ouvres votre portefeuille, et tu vois : <HighlightText>une adresse</HighlightText>,{" "}
+            <HighlightText>un montant</HighlightText>, <HighlightText>un historique</HighlightText>,{" "}
             <HighlightText>un bouton « Recevoir »</HighlightText>,{" "}
             <HighlightText>un bouton « Envoyer »</HighlightText>.
           </>
@@ -190,21 +189,21 @@ export const Bitcoin8Page: FC = () => {
       <Callout
         title={
           fr
-            ? "Défi : Retrouvez les fonds dans un portefeuille"
+            ? "Défi : Retrouves les fonds dans un portefeuille"
             : "Challenge: find the funds in a wallet"
         }
       >
         <p>
           {fr
-            ? "À ce stade, vous avez tous les éléments en tête. Voyons maintenant si vous pouvez les reconnaître en pratique."
+            ? "À ce stade, tu as tous les éléments en tête. Voyons maintenant si tu peux les reconnaître en pratique."
             : "At this point, you have all the pieces in mind. Let's see if you can recognize them in practice."}
         </p>
         <p>
           {fr
-            ? "Pour ce défi, vous allez être en possession d'une seed vous permettant de générer trois clés. Une seule contrôle des fonds dépensables."
+            ? "Pour ce défi, tu vas être en possession d'une seed te permettant de générer trois clés. Une seule contrôle des fonds dépensables."
             : "For this challenge, you'll be given a seed that lets you generate three keys. Only one controls spendable funds."}
         </p>
-        <p>{fr ? "Saurez-vous la retrouver ?" : "Can you find it?"}</p>
+        <p>{fr ? "Sauras-tu la retrouver ?" : "Can you find it?"}</p>
       </Callout>
       <WalletDiscoveryGame />
 
@@ -215,7 +214,7 @@ export const Bitcoin8Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Un portefeuille dérive des clés, génère des adresses, repère les UTXO associés, et affiche une vue simplifiée de ce que vous contrôlez vraiment."
+          ? "Un portefeuille dérive des clés, génère des adresses, repère les UTXO associés, et affiche une vue simplifiée de ce que tu contrôles vraiment."
           : "A wallet derives keys, generates addresses, tracks the associated UTXOs, and displays a simplified view of what you actually control."}
       </p>
       <p>
