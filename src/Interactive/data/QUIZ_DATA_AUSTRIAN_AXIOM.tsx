@@ -5,7 +5,7 @@ export const getQuizDataAustrianAxiom = (language: Language): QuizData => {
   const fr = language === "fr";
   return {
     question: fr
-      ? "Pouvez-vous réfuter cet axiome ? Essayez de prouver que l'être humain n'agit pas de manière intentionnelle."
+      ? "Peux-tu réfuter cet axiome ? Essaies de prouver que l'être humain n'agit pas de manière intentionnelle."
       : "Can you refute this axiom? Try to prove that human beings don't act intentionally.",
     answers: [
       {
@@ -15,7 +15,7 @@ export const getQuizDataAustrianAxiom = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            En agissant ainsi, vous agissez dans le but de me prouver que j'ai tort. Votre tentative
+            En agissant ainsi, tu agis dans le but de me prouver que j'ai tort. Ta tentative
             de réfutation confirme l'axiome !
           </>
         ) : (
@@ -29,7 +29,7 @@ export const getQuizDataAustrianAxiom = (language: Language): QuizData => {
         text: fr ? "b) C'est impossible à réfuter." : "b) It's impossible to refute.",
         isCorrect: true,
         rationale: fr ? (
-          <>Exactement. Vous avez compris : toute action humaine est motivée par une intention.</>
+          <>Exactement. Tu as compris : toute action humaine est motivée par une intention.</>
         ) : (
           <>Exactly. You've understood: every human action is driven by intention.</>
         ),

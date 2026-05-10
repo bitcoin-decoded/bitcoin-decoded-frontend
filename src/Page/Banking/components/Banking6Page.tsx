@@ -18,9 +18,9 @@ export const Banking6Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Vos courses ont augmenté. Votre loyer aussi. Votre salaire, lui, suit mollement. Pendant
-            ce temps, le CAC 40 bat des records et l'immobilier parisien tutoie l'absurde. Vous
-            sentez qu'il y a un lien. Vous avez raison.
+            Tes courses ont augmenté. Ton loyer aussi. Ton salaire, lui, suit mollement. Pendant ce
+            temps, le CAC 40 bat des records et l'immobilier parisien tutoie l'absurde. tu sens
+            qu'il y a un lien. Tu as raison.
           </>
         ) : (
           <>
@@ -33,7 +33,7 @@ export const Banking6Page: FC = () => {
     >
       <p>
         {fr
-          ? "Vous pensiez que l'argent resterait sagement enfermé dans les actifs patrimoniaux ? Mauvaise nouvelle."
+          ? "Tu pensais que l'argent resterait sagement enfermé dans les actifs patrimoniaux ? Mauvaise nouvelle."
           : "You thought money would stay neatly locked away in wealth assets? Bad news."}
       </p>
       <p>
@@ -141,7 +141,7 @@ export const Banking6Page: FC = () => {
       <p>
         {fr ? (
           <>
-            <Emphasis>OK. L'argent afflue dans l'économie réelle</Emphasis>. Vous sentez le problème
+            <Emphasis>OK. L'argent afflue dans l'économie réelle</Emphasis>. Tu sens le problème
             arriver, non ?
           </>
         ) : (
@@ -179,8 +179,8 @@ export const Banking6Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Petite synthèse de tout ce qu'on a vu. Vous allez voir, plein de choses vont s'éclairer d'un coup."
-          : "A quick summary of everything we've covered. You'll see, many things will suddenly start to make sense."}
+          ? "Et voilà. Premier module bouclé. Avant de passer à la suite, un petit quiz pour vérifier que tout est solide."
+          : "That's it. First module done. Before moving on, a quick quiz to make sure everything's solid."}
       </p>
     </PageTemplate>
   );

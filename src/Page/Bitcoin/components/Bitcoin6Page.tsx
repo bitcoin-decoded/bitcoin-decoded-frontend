@@ -19,7 +19,7 @@ export const Bitcoin6Page: FC = () => {
       title={t("nav.tree.utxoAndTransactions")}
       prelude={
         fr
-          ? "Vous imaginez probablement Bitcoin comme un compte en banque numérique. Un solde qui monte, un solde qui descend, des bitcoins qui voyagent d'un portefeuille à l'autre. Cette image est fausse. Pas approximative : fausse. Et tant que vous la gardez en tête, vous ne comprendrez ni ce qu'est un bitcoin, ni comment fonctionne une transaction. On va corriger ça."
+          ? "Tu t'imagines probablement Bitcoin comme un compte en banque numérique. Un solde qui monte, un solde qui descend, des bitcoins qui voyagent d'un portefeuille à l'autre. Cette image est fausse. Pas approximative : fausse. Et tant que tu la gardes en tête, tu ne comprendras ni ce qu'est un bitcoin, ni comment fonctionne une transaction. On va corriger ça."
           : "You probably imagine Bitcoin as a digital bank account. A balance that goes up, a balance that goes down, bitcoins traveling from one wallet to another. That image is wrong. Not approximate: wrong. And as long as you keep it in mind, you won't understand what a bitcoin is, or how a transaction works. Let's fix that."
       }
     >
@@ -69,8 +69,8 @@ export const Bitcoin6Page: FC = () => {
             <>
               Dans une banque, la réponse est évidente :{" "}
               <Emphasis>
-                votre compte affiche un solde, vous envoyez de l'argent, et le système met à jour
-                les chiffres
+                ton compte affiche un solde, tu envoies de l'argent, et le système met à jour les
+                chiffres
               </Emphasis>
               .
             </>
@@ -87,7 +87,7 @@ export const Bitcoin6Page: FC = () => {
       </Callout>
       <p>
         {fr
-          ? "Imaginez qu'Alice veuille virer 1000 € à Bob. Exécutez une transaction dans le système bancaire traditionnel :"
+          ? "Imagines qu'Alice veuille virer 1000 € à Bob. Exécutes une transaction dans le système bancaire traditionnel :"
           : "Now imagine Alice wants to send $1000 to Bob. Execute a transaction in the traditional banking system:"}
       </p>
       <TransactionModelComparison mode="bank" />
@@ -100,9 +100,9 @@ export const Bitcoin6Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Quand vous dites « je vais envoyer 1 bitcoin à mon pote » (j'aimerais bien être votre
-            ami), vous imaginez peut-être un objet numérique qui quitte votre portefeuille pour
-            rejoindre celui de quelqu'un d'autre. Eh bien, pas tout à fait.
+            Quand tu dis « je vais envoyer 1 bitcoin à mon pote » (j'aimerais bien être ton ami),
+            tu t'imagines peut-être un objet numérique qui quitte ton portefeuille pour rejoindre
+            celui de quelqu'un d'autre. Eh bien, pas tout à fait.
           </>
         ) : (
           <>
@@ -136,9 +136,7 @@ export const Bitcoin6Page: FC = () => {
       <Callout
         title={fr ? "Le système UTXO expliqué simplement" : "The UTXO system explained simply"}
       >
-        <p>
-          {fr ? "Laissez-moi vous expliquer comment ça marche." : "Let me explain how it works."}
-        </p>
+        <p>{fr ? "Laisses-moi t'expliquer comment ça marche." : "Let me explain how it works."}</p>
         <p>
           <Emphasis>
             {fr ? (
@@ -160,7 +158,7 @@ export const Bitcoin6Page: FC = () => {
             <>
               Ces sorties non dépensées portent un nom :{" "}
               <HighlightText>UTXO (Unspent Transaction Output)</HighlightText>. Elles peuvent être
-              vues comme des pièces rangées dans votre portefeuille qui sont indivisibles et qui
+              vues comme des pièces rangées dans ton portefeuille qui sont indivisibles et qui
               sont prêtes à être dépensées.
             </>
           ) : (
@@ -176,8 +174,8 @@ export const Bitcoin6Page: FC = () => {
         {fr ? (
           <>
             Le mieux pour comprendre, c'est de manipuler.
-            <br /> Vous êtes en possession du portefeuille d'Alice, amusez-vous à simuler une
-            transaction :
+            <br /> T'es en possession du portefeuille d'Alice, amuses-toi à simuler une transaction
+            :
           </>
         ) : (
           <>
@@ -190,12 +188,12 @@ export const Bitcoin6Page: FC = () => {
       <p>
         {fr
           ? " UTXO, c'est posé. On enchaîne sur un concept tout aussi central."
-          : "UTXO is now covered. Let’s move on to an equally central concept."}
+          : "UTXO is now covered. Let's move on to an equally central concept."}
       </p>
       <p>
         <Emphasis>
           {fr
-            ? "Votre portefeuille ne contient pas de bitcoins au sens strict : il contient les clés privées qui permettent de les dépenser."
+            ? "Ton portefeuille ne contient pas de bitcoins au sens strict : il contient les clés privées qui permettent de les dépenser."
             : "Your wallet doesn't contain bitcoins in the strict sense: it holds the private keys that allow you to spend them"}
         </Emphasis>
         .
@@ -227,14 +225,14 @@ export const Bitcoin6Page: FC = () => {
       </Callout>
       <p>
         {fr
-          ? "Imaginez maintenant qu'Alice veuille virer 1,3 bitcoin à Bob. Exécutez une transaction dans le système Bitcoin :"
+          ? "Imagines maintenant qu'Alice veuille virer 1,3 bitcoin à Bob. Exécutes une transaction dans le système Bitcoin :"
           : "Now imagine Alice wants to send 1.3 bitcoins to Bob. Execute a transaction in the Bitcoin system:"}
       </p>
       <TransactionModelComparison mode="bitcoin" />
 
       <p>
         {fr
-          ? "Et maintenant, petite question de validation. Tentez votre chance."
+          ? "Et maintenant, petite question de validation. Tentes ta chance."
           : "And now, a quick check question. Give it a try."}
       </p>
 
@@ -259,7 +257,7 @@ export const Bitcoin6Page: FC = () => {
           <>
             Il nous manque néanmoins une pièce importante au puzzle :{" "}
             <i>
-              comment le réseau sait-il que vous avez vraiment le droit de dépenser ces sorties ?
+              comment le réseau sait-il que tu as vraiment le droit de dépenser ces sorties ?
             </i>{" "}
             et{" "}
             <i>
@@ -283,12 +281,12 @@ export const Bitcoin6Page: FC = () => {
           <>
             La réponse tient dans un autre mécanisme fondamental de Bitcoin :{" "}
             <Emphasis>les clés, les signatures, et la cryptographie</Emphasis>.<br /> Direction le
-            prochain chapitre, vous tenez le bon bout !
+            prochain chapitre, tu tiens le bon bout !
           </>
         ) : (
           <>
             The answer lies in another fundamental mechanism of Bitcoin:{" "}
-            <Emphasis>keys, signatures, and cryptography</Emphasis>.<br /> On to the next chapter —
+            <Emphasis>keys, signatures, and cryptography</Emphasis>.<br /> On to the next chapter,
             you're on the right track!
           </>
         )}

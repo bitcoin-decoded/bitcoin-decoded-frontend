@@ -26,7 +26,7 @@ export const getQuizDataM0 = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            Rappelez-vous : les banques commerciales créent le M2, mais elles ne peuvent jamais
+            Souviens-toi : les banques commerciales créent le M2, mais elles ne peuvent jamais
             fabriquer de M0.
           </>
         ) : (

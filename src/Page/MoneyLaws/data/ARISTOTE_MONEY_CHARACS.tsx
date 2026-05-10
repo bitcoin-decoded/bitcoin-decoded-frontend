@@ -40,7 +40,7 @@ export const getAristoteMoneyCharacs = (language: Language): AristoteMoneyCharac
       title: fr ? "FONGIBILITÉ" : "FUNGIBILITY",
       text: fr
         ? "Chaque unité doit être identique (1€ = 1€). Pas de discrimination."
-        : "Each unit must be identical (1€ = 1€). No discrimination.",
+        : "Each unit must be identical (1$ = 1$). No discrimination.",
     },
     {
       icon: <CloverLeafIcon size="2.5rem" />,

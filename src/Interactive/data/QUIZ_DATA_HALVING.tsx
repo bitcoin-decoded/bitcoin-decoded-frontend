@@ -1,5 +1,5 @@
-import type { QuizData } from "../types";
 import type { Language } from "../../I18n";
+import type { QuizData } from "../types";
 
 export const getQuizDataHalving = (language: Language): QuizData => {
   const fr = language === "fr";
@@ -15,24 +15,22 @@ export const getQuizDataHalving = (language: Language): QuizData => {
         isCorrect: true,
         rationale: fr ? (
           <>
-            Exactement. Rappelez-vous : le système ajuste dynamiquement sa cible de difficulté.
-            Après un halving, si la rentabilité baisse et que certains mineurs quittent le réseau,
-            la difficulté finit par s'ajuster à la baisse, ce qui rétablit progressivement
-            l'équilibre économique et incite de nouveaux mineurs à entrer dans la partie.
+            Exactement. Souviens-toi : le système ajuste dynamiquement sa cible de difficulté. Après
+            un halving, si la rentabilité baisse et que certains mineurs quittent le réseau, la
+            difficulté finit par s'ajuster à la baisse, ce qui rétablit progressivement l'équilibre
+            économique et incite de nouveaux mineurs à entrer dans la partie.
           </>
         ) : (
           <>
             Exactly. Remember: the system dynamically adjusts its difficulty target. After a
             halving, if profitability drops and some miners leave the network, the difficulty
-            eventually adjusts downward, progressively restoring economic balance and
-            incentivizing new miners to join.
+            eventually adjusts downward, progressively restoring economic balance and incentivizing
+            new miners to join.
           </>
         ),
       },
       {
-        text: fr
-          ? "b) La hausse du prix du bitcoin"
-          : "b) A rise in the price of bitcoin",
+        text: fr ? "b) La hausse du prix du bitcoin" : "b) A rise in the price of bitcoin",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -41,8 +39,8 @@ export const getQuizDataHalving = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            Partially true in the short term but insufficient in the long run: the price alone
-            does not guarantee the network's security structure.
+            Partially true in the short term but insufficient in the long run: the price alone does
+            not guarantee the network's security structure.
           </>
         ),
       },

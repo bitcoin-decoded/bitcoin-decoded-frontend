@@ -87,7 +87,7 @@ export const CompensationSimulator: FC = () => {
           <p style={sectionStyle}>
             <strong>
               {fr
-                ? "Et voilà ! La compensation est effectuée. Observez bien les changements en jaune."
+                ? "Et voilà ! La compensation est effectuée. Observes bien les changements en jaune."
                 : "There you go! The compensation is complete. Look closely at the changes in yellow."}
             </strong>
             <br />
@@ -99,18 +99,18 @@ export const CompensationSimulator: FC = () => {
             ) : (
               <>
                 - On the liabilities side: Nicolas's bank has settled its debt.
-                <br />- On the assets side: the bank's "M0 Reserves" decreased by €200,000.
+                <br />- On the assets side: the bank's "M0 Reserves" decreased by $200,000.
               </>
             )}
           </p>
           <p style={sectionStyle}>
             {fr
-              ? "La banque a bel et bien utilisé sa monnaie de Banque Centrale (M0) pour régler une dette née d'une transaction en monnaie commerciale (M2). Vous saisissez maintenant la différence entre ces deux niveaux de monnaie !"
+              ? "La banque a bel et bien utilisé sa monnaie de Banque Centrale (M0) pour régler une dette née d'une transaction en monnaie commerciale (M2). Tu saisis maintenant la différence entre ces deux niveaux de monnaie !"
               : "The bank did indeed use its Central Bank money (M0) to settle a debt born from a transaction in commercial money (M2). You now understand the difference between these two layers of money!"}
           </p>
           <p style={sectionStyle}>
             {fr
-              ? "Vous venez encore de gratter une couche que la plupart des gens ne soupçonnent même pas. Et croyez-moi, ça va servir pour la suite."
+              ? "Tu viens encore de gratter une couche que la plupart des gens ne soupçonnent même pas. Et crois-moi, ça va servir pour la suite."
               : "You've just uncovered another layer that most people don't even suspect exists. And trust me, this will matter for what comes next."}
           </p>
         </>

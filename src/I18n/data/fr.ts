@@ -19,10 +19,10 @@ const fr = {
   // Simulators — buttons
   "simulator.credit.grant": "J'accorde le prêt !",
   "simulator.credit.retry": "Réessayer",
-  "simulator.credit.title": "BILAN COMPTABLE DE LA BANQUE DE M. QUIPAYE",
+  "simulator.credit.title": "BILAN COMPTABLE DE LA BANQUE DE NICOLAS",
   "simulator.compensation.start": "Démarrer la compensation",
   "simulator.compensation.retry": "Réessayer",
-  "simulator.compensation.title": "BILAN COMPTABLE DE LA BANQUE DE M. QUIPAYE",
+  "simulator.compensation.title": "BILAN COMPTABLE DE LA BANQUE DE NICOLAS",
   "simulator.default.simulate": "Simuler un défaut de paiement d'une valeur totale de 15 000 000 €",
   "simulator.default.retry": "Réessayer",
   "simulator.default.title": "ILLUSTRATION DES POINTS 1 ET 2 SUR LE BILAN COMPTABLE DE LA BANQUE",
@@ -71,7 +71,7 @@ const fr = {
   "mining.reset": "Réinitialiser",
   "mining.attempt": "Nonce",
   "mining.found": "Nonce valide trouvé ! Le mineur a gagné le droit de proposer ce bloc.",
-  "mining.notFound": "Hash invalide — la cible n'est pas atteinte. Essayez encore !",
+  "mining.notFound": "Hash invalide: la cible n'est pas atteinte. Essaies encore !",
   "mining.headerLabel": "En-tête du bloc hashé :",
   "mining.nonce": "nonce",
 
@@ -80,7 +80,7 @@ const fr = {
   "byzantine.city": "Ville assiégée",
   "byzantine.general": "Général",
   "byzantine.alteredMessage": "message altéré",
-  "byzantine.prompt": "Choisissez l'ordre à envoyer aux généraux :",
+  "byzantine.prompt": "Choisis l'ordre à envoyer aux généraux :",
   "byzantine.attack": "Attaquer",
   "byzantine.retreat": "Battre en retraite",
   "byzantine.attackLabel": "ATTAQUE",
@@ -140,13 +140,13 @@ const fr = {
   "flywheel.increase": "Augmenter l'utilisation",
   "flywheel.maxReached": "Utilisation maximale",
   "flywheel.reset": "Réinitialiser",
-  "flywheel.taglineIdle": "Augmentez l'utilisation pour observer la propagation dans le cycle.",
+  "flywheel.taglineIdle": "Augmentes l'utilisation pour observer la propagation dans le cycle.",
   "flywheel.tagline": "Plus le réseau est utilisé, plus il est sécurisé.",
   "flywheel.cycleLabel": "Cycle auto-renforcé",
 
   // UTXOTransactionBuilder
-  "utxoBuilder.title": "Construisez une transaction",
-  "utxoBuilder.step1": "1. Sélectionnez les UTXO d'Alice",
+  "utxoBuilder.title": "Construis une transaction",
+  "utxoBuilder.step1": "1. Sélectionnes les UTXO d'Alice",
   "utxoBuilder.step2": "2. Montant à envoyer (BTC)",
   "utxoBuilder.placeholder": "ex : 0.75",
   "utxoBuilder.totalInput": "Total entrées :",
@@ -157,7 +157,7 @@ const fr = {
   "utxoBuilder.fees": "Frais mineur",
   "utxoBuilder.valid": "Transaction valide",
   "utxoBuilder.insufficient": "Fonds insuffisants",
-  "utxoBuilder.selectHint": "Sélectionnez des UTXO et entrez un montant",
+  "utxoBuilder.selectHint": "Sélectionnes des UTXO et entres un montant",
   "utxoBuilder.reset": "Tout effacer",
   "utxoBuilder.utxoHint":
     "Chaque UTXO est comme une pièce indivisible dans le portefeuille d'Alice — impossible de les découper.",
@@ -184,13 +184,13 @@ const fr = {
     "Les trois éléments correspondent. Le réseau accepterait cette transaction.",
   "sigVerifier.invalidDesc":
     "L'un des éléments a été altéré. Le réseau rejette immédiatement cette transaction.",
-  "sigVerifier.idle": "Cliquez sur « Vérifier » pour simuler la vérification.",
+  "sigVerifier.idle": "Cliques sur « Vérifier » pour simuler la vérification.",
   "sigVerifier.reset": "Réinitialiser",
 
   // SignaturePlayground
-  "signaturePlayground.title": "Nicolas QuiPaye réalise sa première transaction",
+  "signaturePlayground.title": "Nicolas réalise sa première transaction",
   "signaturePlayground.subtitle":
-    "Interagissez avec les éléments ci-dessous pour comprendre le rôle de chacun.",
+    "Interagis avec les éléments ci-dessous pour comprendre le rôle de chacun.",
   "signaturePlayground.sectionElements": "Les éléments",
   "signaturePlayground.privateKeyLabel": "Clé privée (secrète)",
   "signaturePlayground.publicKeyLabel": "Clé publique",
@@ -245,16 +245,16 @@ const fr = {
   "signaturePlayground.pedagogyAfter":
     "de produire une signature valide sans la clé privée correspondante. Le réseau ne vérifie pas une identité : il vérifie une preuve.",
   "signaturePlayground.pedagogyConcretely":
-    "Concrètement, même si tout le monde voit la clé publique, personne ne peut en déduire la clé privée ni fabriquer une signature valide à votre place.",
+    "Concrètement, même si tout le monde voit la clé publique, personne ne peut en déduire la clé privée ni fabriquer une signature valide à ta place.",
   "signaturePlayground.pedagogyAnalogy":
     "C'est comme une serrure : tout le monde peut vérifier qu'une clé ouvre la porte, mais seul celui qui possède la bonne clé peut l'utiliser.",
   "signaturePlayground.reset": "Restaurer la clé",
 
   // SeedGenerator
-  "seedGenerator.title": "Générez votre seed",
+  "seedGenerator.title": "Génères ta seed",
   "seedGenerator.subtitle":
     "Une seed phrase est une façon simple pour un humain de représenter une information aléatoire très longue, normalement écrite en binaire.",
-  "seedGenerator.step1Label": "1. Choisissez le format",
+  "seedGenerator.step1Label": "1. Choisis le format",
   "seedGenerator.step2Label": "2. Générer la seed",
   "seedGenerator.length12": "12 mots",
   "seedGenerator.length24": "24 mots",
@@ -279,13 +279,13 @@ const fr = {
   "seedGenerator.notePedagogical": "Les mots affichés ici sont des exemples pédagogiques.",
 
   // WalletDiscoveryGame
-  "walletGame.title": "Retrouvez les fonds dans ce portefeuille",
+  "walletGame.title": "Retrouves les fonds dans ce portefeuille",
   "walletGame.intro":
-    "Pour cet exercice, le portefeuille ne génère que 3 clés. Une seule permet de dépenser des fonds. Saurez-vous la retrouver ?",
+    "Pour cet exercice, le portefeuille ne génère que 3 clés. Une seule permet de dépenser des fonds. Sauras-tu la retrouver ?",
   "walletGame.revealAction": "Dériver 3 paires de clés",
   "walletGame.derivedSection": "Trois adresses dérivées de la seed",
   "walletGame.questionLabel": "Quelle adresse permet de dépenser des fonds ?",
-  "walletGame.selectHint": "Cliquez sur l'une des cartes ci-dessus pour la sélectionner.",
+  "walletGame.selectHint": "Cliques sur l'une des cartes ci-dessus pour la sélectionner.",
   "walletGame.selectedPrefix": "Adresse",
   "walletGame.selectedSuffix": "sélectionnée.",
   "walletGame.amountLabel": "Quel est le montant total contrôlé (BTC) ?",
@@ -297,7 +297,7 @@ const fr = {
     "Chaque UTXO est verrouillé pour une adresse donnée. La clé privée correspondante permet de produire une signature valide pour les dépenser. Le portefeuille agrège ces UTXO pour afficher un montant simple.",
   "walletGame.incorrectTitle": "Incorrect",
   "walletGame.incorrectMain":
-    "Observez quelles adresses possèdent des UTXO et additionnez-les. Vous pouvez changer votre sélection ci-dessus puis re-valider.",
+    "Observes quelles adresses possèdent des UTXO et additionnes-les. Tu peux changer ta sélection ci-dessus puis re-valider.",
   "walletGame.restart": "Recommencer",
   "walletGame.disclaimer":
     "Les clés et adresses affichées sont fictives et utilisées uniquement à des fins pédagogiques.",
@@ -361,18 +361,18 @@ const fr = {
 
   // Navigation tree
   "nav.tree.bankingSystem": "Comment fonctionne l'argent",
-  "nav.tree.moneyOrigin": "D'où vient la monnaie?",
-  "nav.tree.twoLevels": "Les deux niveaux de monnaies",
-  "nav.tree.qe": "Le Quantitative Easing",
-  "nav.tree.brokenEngine": "Le moteur cassé",
-  "nav.tree.cantillon": "L'Effet Cantillon",
-  "nav.tree.inflation": "L'Inflation",
+  "nav.tree.moneyOrigin": "D'où vient vraiment ton argent?",
+  "nav.tree.twoLevels": "Les deux euros que tu ignores",
+  "nav.tree.qe": "L'arme nucléaire des banques centrales",
+  "nav.tree.brokenEngine": "Qui a cassé le moteur ?",
+  "nav.tree.cantillon": "Pourquoi l'argent va à l'argent",
+  "nav.tree.inflation": "Pourquoi ta baguette coûte plus cher",
   "nav.tree.synthesis": "En synthèse",
   "nav.tree.moneyLaws": "Pourquoi le système échoue",
-  "nav.tree.whatIsMoney": "Qu'est-ce qu'une monnaie?",
-  "nav.tree.economicCycles": "Les cycles économiques",
-  "nav.tree.socialismProblem": "Le problème du système socialiste",
-  "nav.tree.austrianMethod": "La méthodologie autrichienne",
+  "nav.tree.whatIsMoney": "5000 ans de batteries qui fuient",
+  "nav.tree.economicCycles": "La boussole truquée de l'économie",
+  "nav.tree.socialismProblem": "Mises avait prévenu",
+  "nav.tree.austrianMethod": "Le physicien contre le logicien",
   "nav.tree.orangeSynthesis": "En synthèse",
   "nav.tree.bitcoinRevolution": "La rupture Bitcoin",
   "nav.tree.howBitcoinWorks": "Bitcoin, sous le capot",
@@ -383,14 +383,14 @@ const fr = {
   "nav.tree.utxoAndTransactions": "Bitcoin ne déplace pas d'argent",
   "nav.tree.keysAndSignatures": "Prouver sans se montrer",
   "nav.tree.walletsAndSeed": "Bitcoin, ni compte, ni coffre",
-  "nav.tree.getStarted": "Démarrez avec Bitcoin!",
+  "nav.tree.getStarted": "Démarres avec Bitcoin!",
 
   // Footer
   "footer.builtWith": "Construit avec",
   "footer.inspiredBy": "Inspiré par le travail de",
 
   // HomePage — Hero
-  "home.hero.headline": "L'argent que vous utilisez... vous ne le comprenez pas vraiment.",
+  "home.hero.headline": "L'argent que tu utilises... tu ne le comprends pas vraiment.",
   "home.hero.subheadline":
     "Comprendre Bitcoin, c'est d'abord comprendre comment fonctionne l'argent aujourd'hui.",
   "home.hero.ctaPrimary": "Commencer le parcours",
@@ -398,11 +398,11 @@ const fr = {
 
   // HomePage — Section 1: Hook
   "home.hook.title": "Quelque chose ne colle pas.",
-  "home.hook.line1": "Votre épargne diminue.",
+  "home.hook.line1": "Ton épargne diminue.",
   "home.hook.line2": "Les prix augmentent.",
   "home.hook.line3": "Les règles changent.",
   "home.hook.bridgeP1": "Et pourtant…",
-  "home.hook.bridgeP2": "personne ne vous explique vraiment pourquoi.",
+  "home.hook.bridgeP2": "personne ne t'explique vraiment pourquoi.",
 
   // HomePage — Section 2: Positioning
   "home.positioning.title": "Ce site n'explique pas Bitcoin. Il remonte plus loin.",
@@ -415,7 +415,7 @@ const fr = {
   "home.journey.step1.label": "Module 1",
   "home.journey.step1.title": "Le Problème",
   "home.journey.step1.desc":
-    "Pourquoi votre épargne perd-elle de la valeur ?\nComment l'argent est-il créé ?",
+    "Pourquoi ton épargne perd-elle de la valeur ?\nComment l'argent est-il créé ?",
   "home.journey.step2.label": "Module 2",
   "home.journey.step2.title": "Les Lois",
   "home.journey.step2.desc":
@@ -427,17 +427,17 @@ const fr = {
   "home.journey.cardCta": "Voir ce module",
 
   // HomePage — Section 4: Audience
-  "home.audience.title": "Ce parcours est pour vous si…",
-  "home.audience.item1": "Vous voulez comprendre sans vous perdre.",
-  "home.audience.item2": "Vous sentez que « l'argent » est important... sans savoir pourquoi.",
-  "home.audience.item3": "Vous en avez marre des explications floues.",
-  "home.audience.item4": "Vous préférez comprendre avant d'avoir un avis.",
+  "home.audience.title": "Ce parcours est pour toi si…",
+  "home.audience.item1": "Tu veux comprendre sans te perdre.",
+  "home.audience.item2": "Tu sens que « l'argent » est important... sans savoir pourquoi.",
+  "home.audience.item3": "Tu en as marre des explications floues.",
+  "home.audience.item4": "Tu préfères comprendre avant d'avoir un avis.",
 
   // HomePage — Section 5: Promise
-  "home.promise.title": "Ce que vous allez obtenir",
+  "home.promise.title": "Ce que tu vas obtenir",
   "home.promise.intro": "À la fin du parcours :",
-  "home.promise.item1": "Vous verrez Bitcoin beaucoup plus clairement.",
-  "home.promise.item2": "Vous comprendrez ce qu'il change vraiment.",
+  "home.promise.item1": "Tu verras Bitcoin beaucoup plus clairement.",
+  "home.promise.item2": "Tu comprendras ce qu'il change vraiment.",
   "home.promise.item3": "Et surtout... pourquoi il existe.",
 
   // HomePage — Section 6: Differentiation
@@ -445,7 +445,7 @@ const fr = {
   "home.differentiation.neg2": "Pas de discours militant.",
   "home.differentiation.neg3": "Pas de simplification trompeuse.",
   "home.differentiation.posIntro": "Juste un objectif :",
-  "home.differentiation.pos": "vous faire comprendre.",
+  "home.differentiation.pos": "Te faire comprendre.",
 
   // HomePage — Section 7: Philosophy quote
   "home.philosophy.quote":
@@ -453,11 +453,11 @@ const fr = {
 
   // HomePage — Section 8: Final CTA
   "home.finalCta.titleP1": "Accès totalement libre et gratuit.",
-  "home.finalCta.titleP2": "La curiosité est votre seul guide.",
+  "home.finalCta.titleP2": "La curiosité est ton seul guide.",
   "home.finalCta.button": "Commencer le parcours",
 
   // Footer
-  "footer.donateMessage": "Si ce projet vous plaît, soutenez-le en sats.",
+  "footer.donateMessage": "Si ce projet te plaît, soutiens-le en sats.",
   "footer.copy": "Copier",
   "footer.copied": "Copié !",
   "footer.copyright": "© 2026 — Bitcoin.Decoded",

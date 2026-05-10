@@ -37,7 +37,7 @@ export const Bitcoin2Page: FC = () => {
     >
       <p>
         {fr
-          ? "Vous savez maintenant ce qu'est Bitcoin : un logiciel, un réseau, une monnaie. Reste la vraie question :"
+          ? "Tu sais maintenant ce qu'est Bitcoin : un logiciel, un réseau, une monnaie. Reste la vraie question :"
           : "You now know what Bitcoin is: a software, a network, and a currency. The real question remains:"}
       </p>
       <p>
@@ -54,7 +54,7 @@ export const Bitcoin2Page: FC = () => {
         )}
       </p>
 
-      <p>{fr ? "Regardez ce graphique." : "Take a look at this chart."}</p>
+      <p>{fr ? "Regardes ce graphique." : "Take a look at this chart."}</p>
 
       <M2MoneySupplyChart showTitle={isQuizSolved} />
 
@@ -63,7 +63,7 @@ export const Bitcoin2Page: FC = () => {
       {isQuizSolved && (
         <>
           <p>
-            {fr ? "Observez l'accélération." : "Notice the acceleration."}
+            {fr ? "Observes l'accélération." : "Notice the acceleration."}
             <ol>
               <li>
                 {fr
@@ -177,28 +177,14 @@ export const Bitcoin2Page: FC = () => {
             {fr ? (
               <>
                 Bitcoin a été conçu pour résoudre simultanément les problèmes de dureté et de
-                centralisation abordés dans les modules{" "}
-                <Emphasis>
-                  <i>Le fonctionnement du système bancaire</i>
-                </Emphasis>{" "}
-                et{" "}
-                <Emphasis>
-                  <i>Les lois de la monnaie</i>
-                </Emphasis>
-                . Plus encore, il répare la boussole de la société.
+                centralisation abordés dans les deux premiers modules. Plus encore, il répare la
+                boussole de la société.
               </>
             ) : (
               <>
                 Bitcoin was designed to simultaneously solve the problems of hardness and
-                centralization studied in the modules{" "}
-                <Emphasis>
-                  <i>How the banking system works</i>
-                </Emphasis>{" "}
-                and{" "}
-                <Emphasis>
-                  <i>The laws of money</i>
-                </Emphasis>
-                . More than that, it repairs society's compass.
+                centralization studied in the two first modules. More than that, it repairs
+                society's compass.
               </>
             )}
           </p>
@@ -304,7 +290,7 @@ export const Bitcoin2Page: FC = () => {
           </p>
           <p>
             {fr ? (
-              <>Vous savez maintenant pourquoi Bitcoin existe et quels problèmes il résout.</>
+              <>Tu sais maintenant pourquoi Bitcoin existe et quels problèmes il résout.</>
             ) : (
               <>You now know why Bitcoin exists and what problems it solves.</>
             )}

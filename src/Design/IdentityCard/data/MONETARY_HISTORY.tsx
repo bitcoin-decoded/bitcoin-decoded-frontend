@@ -15,7 +15,7 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
       name: fr ? "Le grain d'orge" : "Barley Grain",
       profile: fr ? "La monnaie de subsistance" : "The subsistence currency",
       history: fr
-        ? "Dans la Sumer antique, on payait le travail avec des sacs d'orge. Pratique, vous me direz... à condition que cette monnaie n'ait pas été mangée par des souris ou pourrie par la pluie !"
+        ? "Dans la Sumer antique, on payait le travail avec des sacs d'orge. Pratique, tu me diras... à condition que cette monnaie n'ait pas été mangée par des souris ou pourrie par la pluie !"
         : "In ancient Sumer, labor was paid with bags of barley. Practical, you might say... as long as this currency wasn't eaten by mice or rotted by rain!",
       imgSrc: grainOrge,
       characteristics: [

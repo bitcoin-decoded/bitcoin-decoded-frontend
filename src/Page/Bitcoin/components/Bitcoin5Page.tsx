@@ -26,7 +26,7 @@ export const Bitcoin5Page: FC = () => {
     >
       <p>
         {fr
-          ? "Vous avez vu la preuve de travail dans le chapitre précédent. Elle repose sur un effort important fourni par les mineurs."
+          ? "Tu as vu la preuve de travail dans le chapitre précédent. Elle repose sur un effort important fourni par les mineurs."
           : "You saw proof of work, a mechanism that relies on significant effort from miners."}
       </p>
       <p>
@@ -88,7 +88,7 @@ export const Bitcoin5Page: FC = () => {
         </ul>
         <p>
           {fr
-            ? "Cliquez sur le bouton « Récompenser le mineur » et observez ce qu'il se passe."
+            ? "Cliques sur le bouton « Récompenser le mineur » et observes ce qu'il se passe."
             : 'Click the "Reward the miner" button and observe what happens.'}
         </p>
         <MiningRewardBlock />
@@ -96,7 +96,7 @@ export const Bitcoin5Page: FC = () => {
 
       <p>
         {fr
-          ? "Cependant, cette subvention ne reste pas stable dans le temps. Regardez attentivement la courbe qui suit."
+          ? "Cependant, cette subvention ne reste pas stable dans le temps. Regardes attentivement la courbe qui suit."
           : "However, this subsidy does not remain stable over time. Take a close look at the curve below."}
       </p>
 
@@ -110,7 +110,7 @@ export const Bitcoin5Page: FC = () => {
       <p>
         <Emphasis>
           {fr
-            ? "L'émission de nouveaux bitcoins suit une courbe mathématique en escalier. Elle correspond à un mécanisme appelé « halving ». Regardez ça de plus près."
+            ? "L'émission de nouveaux bitcoins suit une courbe mathématique en escalier. Elle correspond à un mécanisme appelé « halving ». Regardes ça de plus près."
             : "The issuance of new bitcoins follows a mathematical staircase curve, defined by a mechanism called the halving. Let's explore this further."}
         </Emphasis>
       </p>
@@ -215,29 +215,29 @@ export const Bitcoin5Page: FC = () => {
 
       <p>
         {fr
-          ? "Mettez-vous un instant à la place d'un mineur."
+          ? "Mets-toi un instant à la place d'un mineur."
           : "Put yourself in a miner's shoes for a moment."}
       </p>
       <ul>
         <li>
           {fr
-            ? "votre revenu en bitcoins est divisé par deux"
+            ? "ton revenu en bitcoins est divisé par deux"
             : "your bitcoin income is cut in half"}
         </li>
         <li>
           {fr
-            ? "vos coûts (machines, électricité) restent à peu près identiques"
+            ? "tes coûts (machines, électricité) restent à peu près identiques"
             : "your costs (hardware, electricity) remain roughly the same"}
         </li>
       </ul>
       <p>
         {fr
-          ? "Votre marge de rentabilité est menacée. Vous pourriez quitter le marché avec d'autres mineurs devenus moins efficaces. Et là, la sécurité du réseau pourrait vaciller."
+          ? "ta marge de rentabilité est menacée. Tu pourrais quitter le marché avec d'autres mineurs devenus moins efficaces. Et là, la sécurité du réseau pourrait vaciller."
           : "Your profit margin is under threat. You could leave the market along with other miners who have become less efficient. And at that point, the security of the network could start to weaken."}
       </p>
       <p>
         {fr
-          ? "Que répondriez-vous à la question suivante :"
+          ? "Que répondrais-tu à la question suivante :"
           : "How would you answer the following question:"}
       </p>
 
@@ -351,7 +351,7 @@ export const Bitcoin5Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Vous savez maintenant <i>pourquoi les mineurs participent</i>,{" "}
+            Tu sais maintenant <i>pourquoi les mineurs participent</i>,{" "}
             <i>comment leur subvention évolue</i> et <i>pourquoi elle disparaît progressivement</i>.
           </>
         ) : (

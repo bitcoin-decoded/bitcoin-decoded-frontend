@@ -141,7 +141,7 @@ export const TrustComparisonDemo: FC = () => {
                 ? "La confiance peut être rompue. Et c'est exactement ce qui se passe dans le système actuel."
                 : "Trust can be broken. And yet, this is exactly what happens in the current system."
               : fr
-                ? "On vous fait confiance pour ne cliquer sur aucun des deux boutons ci-dessous."
+                ? "On te fait confiance pour ne cliquer sur aucun des deux boutons ci-dessous."
                 : "We trust you not to click either of the two buttons below."}
           </span>
         </div>
@@ -202,7 +202,7 @@ export const TrustComparisonDemo: FC = () => {
                 ? "Le protocole a fait son travail. Aucune confiance n'était nécessaire."
                 : "The protocol did its job. No trust was needed."
               : fr
-                ? "Pas besoin de vous faire confiance ici. Mais tentez quand même."
+                ? "Pas besoin de te faire confiance ici. Mais tentes quand même."
                 : "No need to trust you here. But try anyway."}
           </span>
         </div>

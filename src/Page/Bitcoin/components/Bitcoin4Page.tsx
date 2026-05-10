@@ -27,7 +27,7 @@ export const Bitcoin4Page: FC = () => {
     >
       <p>
         {fr
-          ? "Imaginez un réseau mondial où personne ne se connaît, personne ne fait confiance à personne. Et pourtant, tout le monde doit être d'accord sur une seule version du registre."
+          ? "Imagines un réseau mondial où personne ne se connaît, personne ne fait confiance à personne. Et pourtant, tout le monde doit être d'accord sur une seule version du registre."
           : "Imagine a global network where nobody knows anyone, and nobody trusts anyone. Yet everyone must agree on a single version of the ledger."}
       </p>
 
@@ -152,7 +152,7 @@ export const Bitcoin4Page: FC = () => {
 
         <p>
           {fr
-            ? "Oui, vous avez bien lu. Deux transactions contradictoires peuvent coexister temporairement :"
+            ? "Oui, tu as bien lu. Deux transactions contradictoires peuvent coexister temporairement :"
             : "Yes, you read that right. Two contradictory transactions can coexist temporarily:"}
           <ul>
             <li>
@@ -227,7 +227,7 @@ export const Bitcoin4Page: FC = () => {
         <p>
           {fr
             ? "Le mineur construit l'en-tête de son bloc et le passe dans une fonction de hachage (SHA-256, appliquée deux fois)."
-            : "TThe miner builds the block header and runs it through a hashing function (SHA-256, applied twice)."}
+            : "The miner builds the block header and runs it through a hashing function (SHA-256, applied twice)."}
         </p>
         <p>
           {fr
@@ -258,7 +258,7 @@ export const Bitcoin4Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Vous voulez miner un bloc ? Allez-y, la compétition est ouverte à toutes et à tous !"
+            ? "Tu veux miner un bloc ? Vas-y, la compétition est ouverte à toutes et à tous !"
             : "Want to mine a block? Go ahead: the competition is open to everyone!"}
         </p>
         <MiningSimulator />
@@ -271,7 +271,7 @@ export const Bitcoin4Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Rappelez-vous des deux transactions concurrentes de l'exemple précédent : si le mineur a choisi de prendre une transaction dans le nouveau bloc miné, alors la seconde est automatiquement rejetée de la mempool."
+          ? "Souviens-toi des deux transactions concurrentes de l'exemple précédent : si le mineur a choisi de prendre une transaction dans le nouveau bloc miné, alors la seconde est automatiquement rejetée de la mempool."
           : "Remember the two competing transactions from the previous example: if the miner chose to include one of them in the newly mined block, then the other is automatically rejected from the mempool."}
       </p>
 
@@ -280,7 +280,7 @@ export const Bitcoin4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Et là je vous vois venir : « Que se passe-t-il si deux mineurs trouvent en même temps un
+            Et là je te vois venir : « Que se passe-t-il si deux mineurs trouvent en même temps un
             hash valide ? » <br />
             Très bonne question.
           </>

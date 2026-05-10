@@ -22,7 +22,7 @@ export const Bitcoin3Page: FC = () => {
         Je plaisante.
       </p>
       <p>
-        Imaginez un immense livre de compte qui retrace chaque transaction depuis la création du
+        Imagines un immense livre de compte qui retrace chaque transaction depuis la création du
         réseau (le temps <i>t = 0</i>, le tout premier bloc, appelé <i>« Bloc Genesis »</i>) :
         <ul>
           <li>un bloc = une page. Chaque page est remplie de transactions.</li>
@@ -76,13 +76,13 @@ export const Bitcoin3Page: FC = () => {
           (l'en-tête du bloc est haché deux fois de suite).
         </p>
         <p>
-          Imaginez une machine à broyer : vous y jetez n'importe quelle donnée (un mot, un livre
-          entier, une image) et la machine vous ressort{" "}
+          Imagines une machine à broyer : Tu y jetes n'importe quelle donnée (un mot, un livre
+          entier, une image) et la machine te ressort{" "}
           <Emphasis>une empreinte numérique de taille fixe</Emphasis>.
         </p>
         <p>
-          A vous de jouer, expérimentez ! <br />
-          Rentrez ce que vous voulez dans la machine de hachage et observons ce qu'il se passe.
+          A toi de jouer, expérimentes ! <br />
+          Rentres ce que tu veux dans la machine de hachage et observes ce qu'il se passe.
         </p>
         <HashDemo />
       </Callout>
@@ -110,7 +110,7 @@ export const Bitcoin3Page: FC = () => {
       <p>
         Car ce fameux <i>nonce</i>, croisé dans chaque bloc, n'est pas là par hasard. Il est la clé
         d'une compétition mondiale entre mineurs, où la puissance de calcul remplace la confiance,
-        et où le hash que vous venez de découvrir joue un rôle central.
+        et où le hash que tu viens de découvrir joue un rôle central.
       </p>
       <p>
         Direction le prochain chapitre : <Emphasis>la preuve de travail</Emphasis>.

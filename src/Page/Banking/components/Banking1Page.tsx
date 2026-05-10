@@ -16,9 +16,9 @@ export const Banking1Page: FC = () => {
       prelude={
         fr ? (
           <>
-            95% de votre argent n'a jamais existé physiquement. Il n'a pas été imprimé. Il n'a pas
-            été frappé. Il a été tapé au clavier. Par votre banque. Pour vous prêter de l'argent que
-            personne ne possédait.
+            95% de ton argent n'a jamais existé physiquement. Il n'a pas été imprimé. Il n'a pas été
+            frappé. Il a été tapé au clavier. Par ta banque. Pour te prêter de l'argent que personne
+            ne possédait.
           </>
         ) : (
           <>
@@ -32,12 +32,12 @@ export const Banking1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Alors, savez-vous d'où vient l'argent ?
+            Alors, sais-tu d'où vient l'argent ?
             <br />
-            Si vous répondez <i>« de la planche à billets de la banque centrale »</i>, alors vous
-            êtes tombé dans le piège.
+            Si tu réponds <i>« de la planche à billets de la banque centrale »</i>, alors t'es tombé
+            dans le piège.
             <br />
-            Lisez attentivement ce qui suit, vous allez être surpris :
+            Lis attentivement ce qui suit, tu vas être surpris :
           </>
         ) : (
           <>
@@ -78,9 +78,9 @@ export const Banking1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Vous voulez le voir de vos propres yeux ? Parfait. Passons à la pratique.
+            Tu veux le voir de tes propres yeux ? Parfait. Passons à la pratique.
             <br />
-            Vous êtes maintenant un banquier, toutes mes félicitations ! (ou pas)
+            Tu es maintenant banquier, toutes mes félicitations ! (ou pas)
           </>
         ) : (
           <>
@@ -93,18 +93,18 @@ export const Banking1Page: FC = () => {
       <Callout
         title={
           fr
-            ? "Illustration concrète — M. Nicolas QuiPaye veut acheter une maison"
-            : "Concrete illustration — Mr. Nicolas WhoPays wants to buy a house"
+            ? "Illustration concrète : Nicolas veut acheter une maison"
+            : "Concrete illustration: Mr. Nicolas wants to buy a house"
         }
       >
         <p>
           {fr
-            ? "Nicolas QuiPaye a un super projet : être propriétaire de sa résidence principale. Pour cela, il va faire une demande de prêt à sa banque pour un montant de 200 000 €."
-            : "Nicolas WhoPays has a great plan: to own his primary residence. To do so, he will apply for a loan from his bank for €200,000."}
+            ? "Nicolas a un super projet : être propriétaire de sa résidence principale. Pour cela, il va faire une demande de prêt à sa banque pour un montant de 200 000 €."
+            : "Nicolas has a great plan: to own his primary residence. To do so, he will apply for a loan from his bank for $200,000."}
         </p>
         <p>
           {fr
-            ? "Et c'est là que vous entrez en scène : vous êtes son banquier, vous avez le pouvoir d'accomplir son rêve en lui accordant ce prêt."
+            ? "Et c'est là que tu entres en scène : Tu es son banquier, tu as le pouvoir d'accomplir son rêve en lui accordant ce prêt."
             : "And this is where you come in: you are his banker, you have the power to make his dream come true by granting this loan."}
         </p>
       </Callout>
@@ -116,21 +116,21 @@ export const Banking1Page: FC = () => {
       <Callout
         title={
           fr
-            ? "Comptabilité — Quelques définitions essentielles"
-            : "Accounting — A few essential definitions"
+            ? "Comptabilité : Quelques définitions essentielles"
+            : "Accounting: A few essential definitions"
         }
       >
         <p>
           <KeywordHighlight>{fr ? "ACTIF" : "ASSETS"}</KeywordHighlight>{" "}
           <Emphasis>
             {fr
-              ? "→ C'est tout ce que vous possédez et qui a de la valeur."
+              ? "→ C'est tout ce que tu possèdes et qui a de la valeur."
               : "→ Everything you own that has value."}
           </Emphasis>{" "}
           <br />
           <i>
             {fr
-              ? "Votre épargne, votre maison, votre téléphone..."
+              ? "ton épargne, ta maison, ton téléphone..."
               : "Your savings, your house, your phone..."}
           </i>
         </p>
@@ -138,7 +138,7 @@ export const Banking1Page: FC = () => {
           <KeywordHighlight>{fr ? "PASSIF" : "LIABILITIES"}</KeywordHighlight>{" "}
           <Emphasis>
             {fr
-              ? "→ C'est la provenance de l'argent qui a payé tout ce que vous possédez."
+              ? "→ C'est la provenance de l'argent qui a payé tout ce que tu possèdes."
               : "→ The source of the money that paid for everything you own."}
           </Emphasis>
           <br />
@@ -151,7 +151,7 @@ export const Banking1Page: FC = () => {
                     Des autres : c'est une <u>dette</u>.
                   </li>
                   <li>
-                    De vous-même : c'est un <u>capital propre</u>.
+                    De toi-même : c'est un <u>capital propre</u>.
                   </li>
                 </ul>
               </>
@@ -174,7 +174,7 @@ export const Banking1Page: FC = () => {
           <KeywordHighlight>{fr ? "CRÉANCE" : "CLAIM"}</KeywordHighlight>{" "}
           <Emphasis>
             {fr
-              ? "→ C'est une promesse officielle que quelqu'un va vous rendre l'argent qu'il vous doit."
+              ? "→ C'est une promesse officielle que quelqu'un va te rendre l'argent qu'il te doit."
               : "→ An official promise that someone will pay you back the money they owe you."}
           </Emphasis>
         </p>
@@ -182,14 +182,14 @@ export const Banking1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            C'est bon ? Parfait. <br /> Regardez le bilan de la banque de M. QuiPaye : elle a déjà
+            C'est bon ? Parfait. <br /> Regardes le bilan de la banque de Nicolas : elle a déjà
             octroyé des prêts à des clients pour une valeur de 1 000 000 €. <br />
-            Maintenant, accordez le prêt à votre client.
+            Maintenant, accordes le prêt à ton client.
           </>
         ) : (
           <>
-            Got it? Perfect. <br /> Look at Mr. WhoPays's bank balance sheet: it has already granted
-            loans to customers worth €1,000,000. <br />
+            Got it? Perfect. <br /> Look at Nicolas's bank balance sheet: it has already granted
+            loans to customers worth $1,000,000. <br />
             Now, grant the loan to your customer.
           </>
         )}
@@ -202,7 +202,7 @@ export const Banking1Page: FC = () => {
           </>
         ) : (
           <>
-            Let’s move on to the second pillar: <Emphasis>the two levels of money</Emphasis>.
+            Let's move on to the second pillar: <Emphasis>the two levels of money</Emphasis>.
           </>
         )}
       </p>

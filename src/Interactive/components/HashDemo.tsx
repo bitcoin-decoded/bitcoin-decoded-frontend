@@ -72,7 +72,7 @@ export const HashDemo: FC = () => {
         maxLength={50}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={fr ? "Entrez ce que vous voulez…" : "Type anything you want…"}
+        placeholder={fr ? "Entres ce que tu veux..." : "Type anything you want..."}
         style={inputStyle}
         disabled={disabled}
       />
