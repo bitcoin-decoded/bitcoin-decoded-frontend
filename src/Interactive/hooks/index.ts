@@ -17,5 +17,6 @@ export { useDebate } from "./useDebate";
 export { useFlipCard } from "./useFlipCard";
 export { useIllustration } from "./useIllustration";
 export { useQuiz } from "./useQuiz";
+export { useSynthesisQuiz } from "./useSynthesisQuiz";
 export { useTrustComparison } from "./useTrustComparison";
 export { useTransactionComparison } from "./useTransactionComparison";
