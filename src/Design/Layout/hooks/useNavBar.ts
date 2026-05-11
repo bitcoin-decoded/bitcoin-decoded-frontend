@@ -29,28 +29,32 @@ export const useNavBar = () => {
     [navigationTree, currentPage],
   );
 
-  const accordion = useAccordion<string>(activePath[0] ?? null);
+  const { openKey: openModule, toggle, open } = useAccordion<string>(
+    activePath[0] ?? null,
+  );
   const [interactionId, setInteractionId] = useState<string | null>(null);
 
-  // Keep the accordion in sync with the current page: opening (not
-  // toggling) so a same-module re-navigation doesn't accidentally close
-  // it. Closing is only ever user-driven (clicking the open module).
+  // Re-open the parent module on every navigation, even when the user
+  // stays inside the same module. Depending on `activePath[0]` alone
+  // would miss intra-module hops (closed module → click "next" at the
+  // bottom of a chapter → next chapter is in the same module → its
+  // parent stays closed). `activePath` is memoized on `currentPage`, so
+  // its reference changes per navigation and gives us the right signal.
   useEffect(() => {
-    if (activePath[0]) accordion.open(activePath[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activePath[0]]);
+    if (activePath[0]) open(activePath[0]);
+  }, [activePath, open]);
 
   const handleMenuClick = (item: NavigationItem) => {
     if (item.isPage && item.id) {
       setCurrentPage(item.id);
       return;
     }
-    if (item.children) accordion.toggle(item.label);
+    if (item.children) toggle(item.label);
   };
 
   return {
     navigationTree,
-    openModule: accordion.openKey,
+    openModule,
     handleMenuClick,
     activePath,
     interactionId,
