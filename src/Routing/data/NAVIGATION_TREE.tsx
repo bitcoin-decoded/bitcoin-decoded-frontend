@@ -43,6 +43,7 @@ export const getNavigationTree = (
         id: ROUTE_NAME.Banking_7,
         label: t("nav.tree.synthesis"),
         isPage: true,
+        kind: "challenge",
       },
     ],
   },
@@ -74,6 +75,7 @@ export const getNavigationTree = (
         id: ROUTE_NAME.MoneyLaws_5,
         label: t("nav.tree.orangeSynthesis"),
         isPage: true,
+        kind: "challenge",
       },
     ],
   },
@@ -125,6 +127,7 @@ export const getNavigationTree = (
         id: ROUTE_NAME.Bitcoin_9,
         label: t("nav.tree.greenSynthesis"),
         isPage: true,
+        kind: "challenge",
       },
       {
         label: t("nav.tree.getStarted"),

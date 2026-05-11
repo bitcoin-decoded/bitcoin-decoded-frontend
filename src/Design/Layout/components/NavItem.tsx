@@ -1,5 +1,7 @@
 import { type FC, type CSSProperties, type JSX, Fragment } from "react";
+import { ClipboardCheck } from "lucide-react";
 import { ChevronIcon } from "../../icons";
+import { Badge } from "../../components";
 import { type NavigationItem } from "../../../Routing";
 
 type Props = {
@@ -97,12 +99,23 @@ export const NavItem: FC<Props> = ({
             display: "flex",
             alignItems: "center",
             gap: "0.625rem",
+            flexWrap: "wrap",
+            minWidth: 0,
           }}
         >
           {item.icon && level === 0 && (
             <span style={{ opacity: 0.7 }}>{item.icon}</span>
           )}
           <span>{item.label}</span>
+          {item.kind === "challenge" && (
+            <Badge
+              size="xs"
+              color="#f7931a"
+              icon={<ClipboardCheck size={11} strokeWidth={2} />}
+            >
+              Quiz
+            </Badge>
+          )}
         </div>
         {item.children && (
           <div
