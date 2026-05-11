@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <rect width="180" height="180" fill="#16213E" rx="32"/>
-  <text x="90" y="138" font-family="'Cormorant Garamond', Garamond, Georgia, serif" font-size="172" font-weight="500" fill="#F8F5EE" text-anchor="middle">B</text>
-  <rect x="64" y="149" width="52" height="26" fill="#C4A45A" rx="2"/>
+  <rect width="180" height="180" fill="#F8F5EE" rx="4"/>
+  <text x="90" y="125" font-family="'Cormorant Garamond', Garamond, Georgia, serif" font-size="153" font-weight="500" font-style="italic" fill="#16213E" text-anchor="middle">B</text>
+  <g transform="skewX(-12)">
+    <rect x="106.65" y="18.9" width="4.95" height="120.6" fill="#C4A45A" rx="0.7"/>
+    <rect x="96.3" y="18.9" width="4.95" height="120.6" fill="#C4A45A" rx="0.7"/>
+  </g>
+  <rect x="118.8" y="118.8" width="16.2" height="16.2" fill="#C4A45A" rx="0.9"/>
 </svg>
