@@ -106,22 +106,17 @@ export const NavItem: FC<Props> = ({
           {item.icon && level === 0 && (
             <span style={{ opacity: 0.7, flexShrink: 0 }}>{item.icon}</span>
           )}
-          <span style={{ minWidth: 0 }}>
-            {item.label}
-            {item.kind === "challenge" && (
-              <>
-                {" "}
-                <Badge
-                  size="sm"
-                  color="#f7931a"
-                  icon={<ClipboardCheck size={13} strokeWidth={2} />}
-                  style={{ verticalAlign: "middle" }}
-                >
-                  Quiz
-                </Badge>
-              </>
-            )}
-          </span>
+          <span style={{ minWidth: 0 }}>{item.label}</span>
+          {item.kind === "challenge" && (
+            <Badge
+              size="sm"
+              color="#f7931a"
+              icon={<ClipboardCheck size={13} strokeWidth={2} />}
+              style={{ flexShrink: 0 }}
+            >
+              Quiz
+            </Badge>
+          )}
         </div>
         {item.children && (
           <div
