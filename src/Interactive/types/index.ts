@@ -2,6 +2,11 @@ export type { BlockData, BlockSeed, BlockField } from "./BlockData";
 export type { DebateItem, DebateSide } from "./DebateItem";
 export type { QuizData } from "./QuizData";
 export type { QuizAnswer } from "./QuizAnswer";
+export type {
+  SynthesisQuizData,
+  SynthesisQuizQuestion,
+  SynthesisQuizAnswer,
+} from "./SynthesisQuizData";
 export type { FlipCardItem } from "./FlipCardItem";
 export type {
   FieldTone,

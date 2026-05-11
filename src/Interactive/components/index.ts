@@ -17,6 +17,7 @@ export { MiningSimulator } from "./MiningSimulator";
 export { MiningRewardBlock } from "./MiningRewardBlock";
 export { NetworkFlywheel } from "./NetworkFlywheel";
 export { Quiz } from "./Quiz";
+export { SynthesisQuiz } from "./SynthesisQuiz";
 export { TrustComparisonDemo } from "./TrustComparisonDemo";
 export { UTXOTransactionBuilder } from "./UTXOTransactionBuilder";
 export { SignatureVerifier } from "./SignatureVerifier";
