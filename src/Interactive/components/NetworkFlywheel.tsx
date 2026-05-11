@@ -213,7 +213,7 @@ export const NetworkFlywheel: FC = () => {
               </div>
             ))}
           </div>
-          {/* Row 2: steps 3, 4 — centered */}
+          {/* Row 2: steps 3, 4 - centered */}
           <div style={{ ...mobileRow, justifyContent: "center" }}>
             {steps.slice(3).map((step, i) => (
               <div key={step.id} style={{ display: "contents" }}>
@@ -234,7 +234,7 @@ export const NetworkFlywheel: FC = () => {
         </div>
       )}
 
-      {/* Loop-back arc — desktop */}
+      {/* Loop-back arc - desktop */}
       <div style={arcWrapper}>
         <div style={arcLine} />
         <div style={arcLabel}>
@@ -244,7 +244,7 @@ export const NetworkFlywheel: FC = () => {
         <div style={arcLine} />
       </div>
 
-      {/* Loop-back hint — mobile */}
+      {/* Loop-back hint - mobile */}
       <div style={mobileLoop}>
         <RefreshCw size={10} strokeWidth={2} />
         {t("flywheel.cycleLabel")}

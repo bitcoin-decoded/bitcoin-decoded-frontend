@@ -506,7 +506,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
       </div>
 
       <div style={cardBody}>
-        {/* Scenario context — same layout as bank card */}
+        {/* Scenario context - same layout as bank card */}
         <div
           style={{
             padding: "0.4rem 0.65rem",
@@ -539,7 +539,9 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
               {t("txComparison.btcLockedBy")} {t("txComparison.alice")}
             </span>
           </div>
-          <Badge tone="error" size="xs" style={consumedBadgeStyle}>{t("txComparison.btcConsumedBadge")}</Badge>
+          <Badge tone="error" size="xs" style={consumedBadgeStyle}>
+            {t("txComparison.btcConsumedBadge")}
+          </Badge>
         </div>
 
         {/* UTXO 2 */}
@@ -554,7 +556,9 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
               {t("txComparison.btcLockedBy")} {t("txComparison.alice")}
             </span>
           </div>
-          <Badge tone="error" size="xs" style={consumedBadgeStyle}>{t("txComparison.btcConsumedBadge")}</Badge>
+          <Badge tone="error" size="xs" style={consumedBadgeStyle}>
+            {t("txComparison.btcConsumedBadge")}
+          </Badge>
         </div>
 
         {/* ── TRANSACTION CONNECTOR ── */}
@@ -656,9 +660,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
           variant={isAfter ? "secondary" : "primary"}
           color={btcAccent}
           icon={
-            isAfter
-              ? <RefreshCw size={12} strokeWidth={2} />
-              : <Zap size={12} strokeWidth={2} />
+            isAfter ? <RefreshCw size={12} strokeWidth={2} /> : <Zap size={12} strokeWidth={2} />
           }
           onClick={isAfter ? reset : trigger}
           style={{ letterSpacing: "0.05em", textTransform: "uppercase" }}

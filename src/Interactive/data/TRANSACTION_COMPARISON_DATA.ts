@@ -1,4 +1,4 @@
-/** Bank scenario data — Alice sends $1,000 to Bob */
+/** Bank scenario data - Alice sends $1,000 to Bob */
 export const BANK = {
   aliceBefore: 2500,
   aliceAfter: 1500,
@@ -7,7 +7,7 @@ export const BANK = {
   sent: 1000,
 } as const;
 
-/** Bitcoin scenario data — Alice spends 2 UTXOs, sends 1.3 BTC to Bob */
+/** Bitcoin scenario data - Alice spends 2 UTXOs, sends 1.3 BTC to Bob */
 export const BTC = {
   utxo1: 0.8,
   utxo2: 1.0,

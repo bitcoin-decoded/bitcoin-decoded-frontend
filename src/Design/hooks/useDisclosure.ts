@@ -1,7 +1,7 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 
 /**
- * Generic disclosure (open/close) state — useful for collapsible panels,
+ * Generic disclosure (open/close) state - useful for collapsible panels,
  * accordion items, dropdowns, etc.
  */
 export const useDisclosure = (initialOpen = false) => {

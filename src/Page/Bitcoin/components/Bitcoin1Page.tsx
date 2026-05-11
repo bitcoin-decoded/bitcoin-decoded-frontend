@@ -93,7 +93,7 @@ export const Bitcoin1Page: FC = () => {
         ) : (
           <>
             "OK, that's great, but how does it actually work?" you might ask. <br />
-            And you're right to ask — that's precisely what we're about to explore.
+            And you're right to ask - that's precisely what we're about to explore.
           </>
         )}
       </p>
@@ -134,7 +134,7 @@ export const Bitcoin1Page: FC = () => {
               ) : (
                 <>
                   Access to the full history of every transaction that ever occurred on the network
-                  — a{" "}
+                  - a{" "}
                   <Emphasis>
                     ledger called the <i>blockchain</i>
                   </Emphasis>

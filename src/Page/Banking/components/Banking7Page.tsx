@@ -18,7 +18,7 @@ export const Banking7Page: FC = () => {
       <p>
         {fr
           ? "Vous avez traversé la partie la plus dense. Prenons maintenant un peu de recul. Si l'on assemble les mécanismes que nous venons de voir, une image cohérente, et un peu inquiétante, se dessine."
-          : "You've made it through the densest part. Let's now take a step back. If we put together the mechanisms we've just seen, a coherent — and somewhat troubling — picture emerges."}
+          : "You've made it through the densest part. Let's now take a step back. If we put together the mechanisms we've just seen, a coherent - and somewhat troubling - picture emerges."}
       </p>
       <p>
         {fr ? (
@@ -157,7 +157,7 @@ export const Banking7Page: FC = () => {
               very functioning of a monetary system based on credit and debt expansion
             </Emphasis>
             . By trying to resolve short-term imbalances through ever-increasing money creation, the
-            system tends to transfer the cost of these adjustments over time — and onto savers.
+            system tends to transfer the cost of these adjustments over time - and onto savers.
           </>
         )}
       </p>

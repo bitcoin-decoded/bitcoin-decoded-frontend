@@ -9,7 +9,7 @@ type Props = {
   breakpoint?: Breakpoint;
 };
 
-// Placeholder BTC address — a syntactically bech32-shaped string the user
+// Placeholder BTC address - a syntactically bech32-shaped string the user
 // can copy. Replace later with the real donation address. Intentionally
 // not a valid checksum so wallets reject sends to it during testing.
 const DONATION_ADDRESS = "bc1qph7nrgrvksm4ja6cpdrt0w35e0scqms6r0xvjy";
@@ -25,7 +25,7 @@ const DONATION_ADDRESS = "bc1qph7nrgrvksm4ja6cpdrt0w35e0scqms6r0xvjy";
  *   • a vertical tonal step (`background.primary` → `background.tertiary`)
  *   • a soft Bitcoin-orange halo glowing up from the bottom-center
  * so the footer feels like a warm continuation of the chrome, with a
- * faint "sunset" thematic undertone — not a flat slab.
+ * faint "sunset" thematic undertone - not a flat slab.
  */
 export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
   const { theme } = useThemeContext();
@@ -43,13 +43,13 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      // Clipboard API blocked (rare) — silently no-op.
+      // Clipboard API blocked (rare) - silently no-op.
     }
   };
 
   // ── Container ──────────────────────────────────────────────────────────
   // Two-layer background:
-  //   1. Linear vertical gradient — primary at top (matches navbar) →
+  //   1. Linear vertical gradient - primary at top (matches navbar) →
   //      tertiary mid → amber base color at the bottom for warm depth.
   //   2. Soft radial halo of Bitcoin orange emerging from below-center,
   //      so the footer reads as a glowing horizon rather than flat.
@@ -101,7 +101,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
 
   // ── Donation message ───────────────────────────────────────────────────
   // On desktop the message MUST stay on a single line so the row layout
-  // (message + address card side-by-side) is consistent across languages —
+  // (message + address card side-by-side) is consistent across languages -
   // without `whiteSpace: nowrap`, a slightly longer FR translation would
   // wrap and force the address card onto a second row, breaking the
   // visual alignment we get for free in EN. Mobile/tablet allow wrapping.
@@ -136,8 +136,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
     gap: "0.5rem",
     padding: isMobile ? "0.4rem 0.45rem 0.4rem 0.7rem" : "0.45rem 0.5rem 0.45rem 0.85rem",
     borderRadius: "0.6rem",
-    background:
-      "linear-gradient(135deg, rgba(247, 147, 26, 0.1), rgba(247, 147, 26, 0.03))",
+    background: "linear-gradient(135deg, rgba(247, 147, 26, 0.1), rgba(247, 147, 26, 0.03))",
     border: "1px solid rgba(247, 147, 26, 0.3)",
     maxWidth: "100%",
   };

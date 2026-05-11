@@ -1,1 +1,1 @@
-// No domain-specific hooks — shared hooks are in Page/hooks/
+// No domain-specific hooks - shared hooks are in Page/hooks/

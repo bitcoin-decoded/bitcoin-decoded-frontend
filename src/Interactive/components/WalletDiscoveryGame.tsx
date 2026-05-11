@@ -1,14 +1,14 @@
 import { type CSSProperties, type FC } from "react";
-import {
-  CheckCircle,
-  KeyRound,
-  RefreshCw,
-  Sparkles,
-  Wallet,
-  XCircle,
-} from "lucide-react";
+import { CheckCircle, KeyRound, RefreshCw, Sparkles, Wallet, XCircle } from "lucide-react";
 
-import { Button, Caption, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import {
+  Button,
+  Caption,
+  FeedbackPanel,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+} from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
@@ -104,7 +104,7 @@ export const WalletDiscoveryGame: FC = () => {
 
       <p style={introStyle}>{t("walletGame.intro")}</p>
 
-      {/* Stage: idle — only the reveal button is shown */}
+      {/* Stage: idle - only the reveal button is shown */}
       {stage === "idle" && (
         <Button
           variant="primary"
@@ -116,7 +116,7 @@ export const WalletDiscoveryGame: FC = () => {
         </Button>
       )}
 
-      {/* Stage: revealed or validated — full game UI */}
+      {/* Stage: revealed or validated - full game UI */}
       {stage !== "idle" && (
         <>
           <div style={{ minWidth: 0 }}>
@@ -221,7 +221,9 @@ export const WalletDiscoveryGame: FC = () => {
               icon={<CheckCircle size={14} strokeWidth={2.5} />}
               title={t("walletGame.correctTitle")}
             >
-              <p style={{ fontSize: "0.7rem", lineHeight: 1.55, color: basePrimaryText, margin: 0 }}>
+              <p
+                style={{ fontSize: "0.7rem", lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
+              >
                 {t("walletGame.correctMain")}
               </p>
               <p
@@ -243,13 +245,15 @@ export const WalletDiscoveryGame: FC = () => {
               icon={<XCircle size={14} strokeWidth={2.5} />}
               title={t("walletGame.incorrectTitle")}
             >
-              <p style={{ fontSize: "0.7rem", lineHeight: 1.55, color: basePrimaryText, margin: 0 }}>
+              <p
+                style={{ fontSize: "0.7rem", lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
+              >
                 {t("walletGame.incorrectMain")}
               </p>
             </FeedbackPanel>
           )}
 
-          {/* Reset / restart — visible whenever cards are revealed */}
+          {/* Reset / restart - visible whenever cards are revealed */}
           <Button
             variant="secondary"
             size="sm"

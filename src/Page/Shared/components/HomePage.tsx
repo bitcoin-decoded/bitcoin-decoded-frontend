@@ -28,13 +28,12 @@ export const HomePage: FC = () => {
   const isMobile = breakpoint === "mobile";
   const isTablet = breakpoint === "tablet";
 
-  // ── Vertical rhythm — single source of truth for the whole homepage ──
+  // ── Vertical rhythm - single source of truth for the whole homepage ──
   // Three tiers (mobile / tablet / desktop). Picking values that keep the
   // total between sections (sectionPadY × 2 + separator margin) around
-  // ~4rem mobile / ~5rem tablet / ~6rem desktop — comfortable for a
+  // ~4rem mobile / ~5rem tablet / ~6rem desktop - comfortable for a
   // landing page without feeling padded for the sake of padding.
-  const pick = <T,>(m: T, ta: T, d: T): T =>
-    isMobile ? m : isTablet ? ta : d;
+  const pick = <T,>(m: T, ta: T, d: T): T => (isMobile ? m : isTablet ? ta : d);
 
   const space = {
     // Section padding (top = bottom)
@@ -42,18 +41,18 @@ export const HomePage: FC = () => {
     // Gap between elements inside a section (title → body → punch line, etc.)
     sectionGap: pick("0.85rem", "1rem", "1.15rem"),
 
-    // Hero — the entry surface. Generous top padding, slightly tighter bottom.
+    // Hero - the entry surface. Generous top padding, slightly tighter bottom.
     heroPadTop: pick("2rem", "3.25rem", "4.5rem"),
     heroPadBottom: pick("1.25rem", "2rem", "2.75rem"),
 
-    // Hero internal — semantic groupings (brand block / content block / CTA
+    // Hero internal - semantic groupings (brand block / content block / CTA
     // block) get distinct breathing rhythms rather than a uniform gap.
-    logoToSlogan: pick("0.35rem", "0.4rem", "0.5rem"),    // tight: brand identity
+    logoToSlogan: pick("0.35rem", "0.4rem", "0.5rem"), // tight: brand identity
     sloganToHeadline: pick("1.25rem", "1.5rem", "1.85rem"), // wide: brand → message
-    headlineToSub: pick("0.5rem", "0.65rem", "0.75rem"),   // tight: message body
-    subToCta: pick("1rem", "1.25rem", "1.5rem"),           // medium: anticipation
+    headlineToSub: pick("0.5rem", "0.65rem", "0.75rem"), // tight: message body
+    subToCta: pick("1rem", "1.25rem", "1.5rem"), // medium: anticipation
 
-    // Section 3 — cards row spacing
+    // Section 3 - cards row spacing
     cardsGap: pick("0.75rem", "0.9rem", "1.25rem"),
     cardsMarginTop: pick("0.5rem", "0.75rem", "1rem"),
 
@@ -78,7 +77,7 @@ export const HomePage: FC = () => {
     el?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Subtle hover/leave handlers shared by every primary CTA — gentle bg
+  // Subtle hover/leave handlers shared by every primary CTA - gentle bg
   // shift + 1px lift, no big shadow swing.
   const onCtaEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.currentTarget.style.background =
@@ -103,7 +102,7 @@ export const HomePage: FC = () => {
     padding: `0 ${space.containerPadX}`,
   };
 
-  // Section vertical spacing — driven by the spacing tokens above.
+  // Section vertical spacing - driven by the spacing tokens above.
   const sectionStyle: CSSProperties = {
     padding: `${space.sectionPadY} 0`,
     display: "flex",
@@ -145,7 +144,7 @@ export const HomePage: FC = () => {
     letterSpacing: "-0.005em",
   };
 
-  // Soft separator — narrow gradient bar, used between sections. Margin
+  // Soft separator - narrow gradient bar, used between sections. Margin
   // is small because the surrounding section padding already handles
   // section-to-section breathing.
   const separatorStyle: CSSProperties = {
@@ -160,7 +159,7 @@ export const HomePage: FC = () => {
 
   // Aligned with the rest of the Bitcoin section (cf. ByzantineGenerals
   // chapter 4): subtle accent-tinted gradient + accent border, accent text.
-  // Quiet on the page yet unmistakably the primary action — no more
+  // Quiet on the page yet unmistakably the primary action - no more
   // saturated solid orange that read as "aggressive".
   const primaryCtaStyle: CSSProperties = {
     display: "inline-flex",
@@ -202,9 +201,9 @@ export const HomePage: FC = () => {
   // We drop the uniform flex `gap` and instead drive every transition via
   // the spacing tokens above (`logoToSlogan`, `sloganToHeadline`,
   // `headlineToSub`, `subToCta`). Three semantic blocks emerge:
-  //   • Brand (logo + slogan)   — tight inside, wide gap to next
-  //   • Message (h1 + sub)      — tight inside, medium gap to next
-  //   • Action (primary + sub)  — tight inside
+  //   • Brand (logo + slogan)   - tight inside, wide gap to next
+  //   • Message (h1 + sub)      - tight inside, medium gap to next
+  //   • Action (primary + sub)  - tight inside
   const heroStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -311,39 +310,23 @@ export const HomePage: FC = () => {
     <div style={containerStyle}>
       {/* ─────── HERO ─────── */}
       <section style={heroStyle}>
-        <RevealOnScroll
-          delay={0}
-          duration={600}
-          style={{ marginBottom: space.logoToSlogan }}
-        >
+        <RevealOnScroll delay={0} duration={600} style={{ marginBottom: space.logoToSlogan }}>
           <div style={heroBadgeStyle}>
             <BitcoinDecodedLogo width={pick(220, 270, 320)} />
           </div>
         </RevealOnScroll>
 
-        <RevealOnScroll
-          delay={120}
-          duration={700}
-          style={{ marginBottom: space.sloganToHeadline }}
-        >
+        <RevealOnScroll delay={120} duration={700} style={{ marginBottom: space.sloganToHeadline }}>
           <p style={sloganStyle}>
             Fix money<span style={sloganDotStyle}>.</span>Decode Bitcoin
           </p>
         </RevealOnScroll>
 
-        <RevealOnScroll
-          delay={240}
-          duration={700}
-          style={{ marginBottom: space.headlineToSub }}
-        >
+        <RevealOnScroll delay={240} duration={700} style={{ marginBottom: space.headlineToSub }}>
           <h1 style={headlineStyle}>{t("home.hero.headline")}</h1>
         </RevealOnScroll>
 
-        <RevealOnScroll
-          delay={360}
-          duration={700}
-          style={{ marginBottom: space.subToCta }}
-        >
+        <RevealOnScroll delay={360} duration={700} style={{ marginBottom: space.subToCta }}>
           <p style={subheadlineStyle}>{t("home.hero.subheadline")}</p>
         </RevealOnScroll>
 
@@ -377,7 +360,7 @@ export const HomePage: FC = () => {
         <hr style={separatorStyle} />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 1 — HOOK ─────── */}
+      {/* ─────── SECTION 1 - HOOK ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <h2 style={sectionTitleStyle}>{t("home.hook.title")}</h2>
@@ -407,7 +390,7 @@ export const HomePage: FC = () => {
         <hr style={separatorStyle} />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 2 — POSITIONING ─────── */}
+      {/* ─────── SECTION 2 - POSITIONING ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <h2 style={sectionTitleStyle}>{t("home.positioning.title")}</h2>
@@ -424,7 +407,7 @@ export const HomePage: FC = () => {
         <hr style={separatorStyle} />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 3 — JOURNEY (cards) ─────── */}
+      {/* ─────── SECTION 3 - JOURNEY (cards) ─────── */}
       <section id={JOURNEY_SECTION_ID} style={sectionStyle}>
         <RevealOnScroll>
           <h2 style={sectionTitleStyle}>{t("home.journey.title")}</h2>
@@ -491,7 +474,7 @@ export const HomePage: FC = () => {
         <hr style={separatorStyle} />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 4 — AUDIENCE ─────── */}
+      {/* ─────── SECTION 4 - AUDIENCE ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <h2 style={sectionTitleStyle}>{t("home.audience.title")}</h2>
@@ -503,7 +486,7 @@ export const HomePage: FC = () => {
               t("home.audience.item4"),
             ].map((item, i) => (
               <li key={i} style={audienceItemStyle}>
-                <span style={bulletStyle}>—</span>
+                <span style={bulletStyle}>-</span>
                 {item}
               </li>
             ))}
@@ -515,7 +498,7 @@ export const HomePage: FC = () => {
         <hr style={separatorStyle} />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 5 — PROMISE ─────── */}
+      {/* ─────── SECTION 5 - PROMISE ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <h2 style={sectionTitleStyle}>{t("home.promise.title")}</h2>
@@ -524,7 +507,7 @@ export const HomePage: FC = () => {
             {[t("home.promise.item1"), t("home.promise.item2"), t("home.promise.item3")].map(
               (item, i) => (
                 <li key={i} style={audienceItemStyle}>
-                  <span style={bulletStyle}>—</span>
+                  <span style={bulletStyle}>-</span>
                   {item}
                 </li>
               ),
@@ -537,7 +520,7 @@ export const HomePage: FC = () => {
         <hr style={separatorStyle} />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 6 — DIFFERENTIATION ─────── */}
+      {/* ─────── SECTION 6 - DIFFERENTIATION ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <div
@@ -563,7 +546,7 @@ export const HomePage: FC = () => {
         <hr style={separatorStyle} />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 7 — PHILOSOPHY ─────── */}
+      {/* ─────── SECTION 7 - PHILOSOPHY ─────── */}
       <RevealOnScroll>
         <section style={{ ...sectionStyle, paddingTop: space.quoteTopOverride }}>
           <Quote author="Satoshi Nakamoto" source="BitcoinTalk, 2010">
@@ -572,7 +555,7 @@ export const HomePage: FC = () => {
         </section>
       </RevealOnScroll>
 
-      {/* ─────── SECTION 8 — FINAL CTA ─────── */}
+      {/* ─────── SECTION 8 - FINAL CTA ─────── */}
       <RevealOnScroll>
         <section style={{ ...sectionStyle, paddingBottom: space.finalCtaBottomOverride }}>
           <h2 style={sectionTitleStyle}>

@@ -16,7 +16,7 @@ const en = {
   "balanceSheet.assets": "ASSETS",
   "balanceSheet.liabilities": "LIABILITIES",
 
-  // Simulators — buttons
+  // Simulators - buttons
   "simulator.credit.grant": "Grant the loan!",
   "simulator.credit.retry": "Retry",
   "simulator.credit.title": "NICOLAS'S BANK BALANCE SHEET",
@@ -61,7 +61,7 @@ const en = {
   "chain.prevHash": "Prev. block hash",
   "chain.timestamp": "Timestamp",
   "chain.note":
-    "Each block's hash is obtained by applying a double SHA-256 to its header. Changing a single transaction in block #826 would alter its Merkle root, thus the block's hash, which would invalidate block #827, then #828 — the entire chain collapses.",
+    "Each block's hash is obtained by applying a double SHA-256 to its header. Changing a single transaction in block #826 would alter its Merkle root, thus the block's hash, which would invalidate block #827, then #828 - the entire chain collapses.",
 
   // MiningSimulator
   "mining.title": "Mining simulator",
@@ -70,7 +70,7 @@ const en = {
   "mining.reset": "Reset",
   "mining.attempt": "Nonce",
   "mining.found": "Valid nonce found! The miner earned the right to propose this block.",
-  "mining.notFound": "Invalid hash — target not reached. Try again!",
+  "mining.notFound": "Invalid hash - target not reached. Try again!",
   "mining.headerLabel": "Block header being hashed:",
   "mining.nonce": "nonce",
 
@@ -94,7 +94,7 @@ const en = {
   "mempool.blockLabel": "Block",
   "mempool.blockSubtitle": "Header & included transactions",
   "mempool.added": "Added",
-  "mempool.empty": "— empty —",
+  "mempool.empty": "- empty -",
   "mempool.doubleSpend.prefix": "Alice is trying to spend",
   "mempool.doubleSpend.emphasis": "the same BTC",
   "mempool.doubleSpend.suffix": "twice: once to Bob, once to Charlie.",
@@ -123,7 +123,7 @@ const en = {
   "miningReward.rewardNoteNewBitcoin": "new bitcoins created by this block",
 
   // HalvingChart
-  "halvingChart.title": "Block reward (BTC) — halving schedule",
+  "halvingChart.title": "Block reward (BTC) - halving schedule",
   "halvingChart.today": "today",
   "halvingChart.tooltipLabel": "Reward",
   "halvingChart.tooltipYear": "Year",
@@ -159,7 +159,7 @@ const en = {
   "utxoBuilder.selectHint": "Select UTXOs and enter an amount",
   "utxoBuilder.reset": "Clear all",
   "utxoBuilder.utxoHint":
-    "Each UTXO is like an indivisible coin in Alice's wallet — they can't be split.",
+    "Each UTXO is like an indivisible coin in Alice's wallet - they can't be split.",
   "utxoBuilder.newUtxoRecipient": "New UTXO → Recipient",
   "utxoBuilder.newUtxoAlice": "New UTXO → Alice",
   "utxoBuilder.recipientDesc": "What they receive",
@@ -358,7 +358,7 @@ const en = {
   // Navigation tree
   "nav.tree.bankingSystem": "How money really works",
   "nav.tree.moneyOrigin": "Who really creates your money?",
-  "nav.tree.twoLevels": "The two euros you don't know about",
+  "nav.tree.twoLevels": "The two dollars you don't know about",
   "nav.tree.qe": "The Central Banks' Nuclear Option",
   "nav.tree.brokenEngine": "Who broke the engine?",
   "nav.tree.cantillon": "The trickle that never trickles",
@@ -385,14 +385,14 @@ const en = {
   "footer.builtWith": "Built with",
   "footer.inspiredBy": "Inspired by the work of",
 
-  // HomePage — Hero
+  // HomePage - Hero
   "home.hero.headline": "The money you use... you don't really understand it.",
   "home.hero.subheadline":
     "To understand Bitcoin, you first need to understand how money work today.",
   "home.hero.ctaPrimary": "Start the journey",
   "home.hero.ctaSecondary": "See the program",
 
-  // HomePage — Section 1: Hook
+  // HomePage - Section 1: Hook
   "home.hook.title": "Something doesn't add up.",
   "home.hook.line1": "Your savings shrink.",
   "home.hook.line2": "Prices rise.",
@@ -400,13 +400,13 @@ const en = {
   "home.hook.bridgeP1": "And yet…",
   "home.hook.bridgeP2": "no one really explains why.",
 
-  // HomePage — Section 2: Positioning
+  // HomePage - Section 2: Positioning
   "home.positioning.title": "This site doesn't explain Bitcoin. It goes back further.",
   "home.positioning.comparisonP1": "Understanding Bitcoin without understanding money,",
   "home.positioning.comparisonP2": "is like reading the ending without knowing the story.",
   "home.positioning.flip": "Here, we do the opposite.",
 
-  // HomePage — Section 3: Journey (3 cards)
+  // HomePage - Section 3: Journey (3 cards)
   "home.journey.title": "A journey in 3 modules",
   "home.journey.step1.label": "Module 1",
   "home.journey.step1.title": "The Problem",
@@ -420,32 +420,32 @@ const en = {
   "home.journey.step3.desc": "A different way to design money.\nAnd what it really changes.",
   "home.journey.cardCta": "See this module",
 
-  // HomePage — Section 4: Audience
+  // HomePage - Section 4: Audience
   "home.audience.title": "This journey is for you if...",
   "home.audience.item1": "You want to understand without getting lost",
   "home.audience.item2": 'You sense that "money" is important... without knowing why',
   "home.audience.item3": "You're tired of fuzzy explanations",
   "home.audience.item4": "You'd rather understand before forming an opinion",
 
-  // HomePage — Section 5: Promise
+  // HomePage - Section 5: Promise
   "home.promise.title": "What you'll get",
   "home.promise.intro": "By the end of the journey:",
   "home.promise.item1": "You'll see Bitcoin more clearly.",
   "home.promise.item2": "You'll understand what it really changes.",
   "home.promise.item3": "And above all... why it exists",
 
-  // HomePage — Section 6: Differentiation
+  // HomePage - Section 6: Differentiation
   "home.differentiation.neg1": "No unnecessary jargon.",
   "home.differentiation.neg2": "No ideology.",
   "home.differentiation.neg3": "No misleading simplifications.",
   "home.differentiation.posIntro": "Just one goal:",
   "home.differentiation.pos": "to make you understand.",
 
-  // HomePage — Section 7: Philosophy quote
+  // HomePage - Section 7: Philosophy quote
   "home.philosophy.quote":
     "The root problem with conventional currency is all the trust that's required...",
 
-  // HomePage — Section 8: Final CTA
+  // HomePage - Section 8: Final CTA
   "home.finalCta.titleP1": "Free and open access.",
   "home.finalCta.titleP2": "Curiosity is your only guide.",
   "home.finalCta.button": "Start the journey",
@@ -454,7 +454,7 @@ const en = {
   "footer.donateMessage": "If you like this project, support it in sats.",
   "footer.copy": "Copy",
   "footer.copied": "Copied!",
-  "footer.copyright": "© 2026 — Bitcoin.Decoded",
+  "footer.copyright": "© 2026 - Bitcoin.Decoded",
 } as const;
 
 export default en;

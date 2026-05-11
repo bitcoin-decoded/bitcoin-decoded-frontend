@@ -71,7 +71,7 @@ export const WorldCard: FC<Props> = ({
     color: color,
     letterSpacing: "0.02em",
     margin: 0,
-    // Reserve 2 lines so all sibling titles take the same vertical space —
+    // Reserve 2 lines so all sibling titles take the same vertical space -
     // ensures the description (and arrow) align across cards regardless of
     // whether a title wraps to one or two lines.
     lineHeight: 1.25,
@@ -106,7 +106,7 @@ export const WorldCard: FC<Props> = ({
     marginTop: "auto",
   };
 
-  // Arrow pill — sits at the bottom-right of the card. The shared
+  // Arrow pill - sits at the bottom-right of the card. The shared
   // ctaRowStyle (with marginTop: auto) keeps arrows aligned across cards
   // regardless of description length (cards stretch to equal heights via
   // the parent's flex layout).

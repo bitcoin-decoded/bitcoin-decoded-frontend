@@ -68,7 +68,7 @@ export const TrustComparisonDemo: FC = () => {
     if (state === "idle") return null;
     const isSuccess = state === "success";
     // Inverted mapping: in this demo "success" of a bad action shows in error
-    // tone (it actually happened — fiat dilution / censorship), and "failure"
+    // tone (it actually happened - fiat dilution / censorship), and "failure"
     // of a bad action shows in success tone (Bitcoin protocol prevented it).
     return (
       <FeedbackPanel
@@ -234,7 +234,7 @@ export const TrustComparisonDemo: FC = () => {
           null,
           fr
             ? "Échec. Le réseau est décentralisé, personne n'a ce pouvoir."
-            : "Failed. The network is decentralized — no one has that power.",
+            : "Failed. The network is decentralized - no one has that power.",
         )}
       </SurfaceCard>
     </div>

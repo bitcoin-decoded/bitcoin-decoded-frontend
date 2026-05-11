@@ -10,9 +10,9 @@ type Props = {
   children: ReactNode;
   /**
    * Color recipe.
-   * - `world` (default): module accent — uses the current page's world color (Banking blue, etc.)
-   * - `muted`: base text.secondary — quiet/neutral context
-   * - `accent`: module text.primary — slightly brighter, used as a soft emphasis
+   * - `world` (default): module accent - uses the current page's world color (Banking blue, etc.)
+   * - `muted`: base text.secondary - quiet/neutral context
+   * - `accent`: module text.primary - slightly brighter, used as a soft emphasis
    * @default "world"
    */
   tone?: Tone;
@@ -87,10 +87,5 @@ export const Caption: FC<Props> = ({
     ...style,
   };
 
-  return createElement(
-    as,
-    { style: finalStyle },
-    icon,
-    icon ? <span>{children}</span> : children,
-  );
+  return createElement(as, { style: finalStyle }, icon, icon ? <span>{children}</span> : children);
 };

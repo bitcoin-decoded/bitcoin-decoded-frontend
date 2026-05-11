@@ -34,16 +34,14 @@ const TRANSACTIONS: readonly MiningRewardTx[] = [
 // Subvention protocolaire pour l'ère 2024–2028 (après le 4ᵉ halving)
 const SUBSIDY_BTC = 3.125;
 
-// Rounding helper — floats can produce 3.12584999... due to IEEE-754
+// Rounding helper - floats can produce 3.12584999... due to IEEE-754
 const round = (btc: number, decimals = 8): number =>
   Math.round(btc * 10 ** decimals) / 10 ** decimals;
 
 export const useMiningReward = () => {
   const [rewarded, setRewarded] = useState(false);
 
-  const totalFees = round(
-    TRANSACTIONS.reduce((sum, tx) => sum + tx.fee, 0),
-  );
+  const totalFees = round(TRANSACTIONS.reduce((sum, tx) => sum + tx.fee, 0));
   const totalReward = round(SUBSIDY_BTC + totalFees);
   const minerBalance = rewarded ? totalReward : 0;
 

@@ -29,7 +29,7 @@ type Props = {
 };
 
 /**
- * One labelled field — used for the private key, public key and message.
+ * One labelled field - used for the private key, public key and message.
  * Renders an editable input or a read-only display depending on `editable`.
  */
 export const FieldCard: FC<Props> = ({

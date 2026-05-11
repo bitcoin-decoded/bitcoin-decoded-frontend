@@ -19,7 +19,7 @@ export const BitcoinNodeDemo: FC = () => {
 
   const iconSize = isMobile ? 22 : 28;
 
-  // Compact card padding/alignment — distinct from default SurfaceCard's
+  // Compact card padding/alignment - distinct from default SurfaceCard's
   // simulator padding. Pass via style override.
   const cardStyleOverride: CSSProperties = {
     alignItems: "center",

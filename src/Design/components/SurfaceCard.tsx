@@ -33,7 +33,7 @@ type Props = {
 };
 
 /**
- * The canonical "interactive surface" card — the gradient-bordered shell
+ * The canonical "interactive surface" card - the gradient-bordered shell
  * used by every simulator, demo, and game in the Interactive domain.
  *
  * Bakes the recurring recipe in one place:
@@ -61,8 +61,7 @@ export const SurfaceCard: FC<Props> = ({
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
 
-  const padding =
-    size === "lg" ? (isMobile ? "1.5rem" : "2rem") : isMobile ? "1.25rem" : "1.5rem";
+  const padding = size === "lg" ? (isMobile ? "1.5rem" : "2rem") : isMobile ? "1.25rem" : "1.5rem";
 
   const fill = fillColor ?? colors[moduleTheme].background.primary;
   const glow = glowColor ?? colors[moduleTheme].border.secondary;
@@ -84,9 +83,7 @@ export const SurfaceCard: FC<Props> = ({
     ...style,
   };
 
-  const finalClassName = className
-    ? `gradient-border ${className}`
-    : "gradient-border";
+  const finalClassName = className ? `gradient-border ${className}` : "gradient-border";
 
   return createElement(as, { className: finalClassName, style: cardStyle }, children);
 };

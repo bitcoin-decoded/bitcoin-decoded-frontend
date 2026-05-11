@@ -7,7 +7,7 @@ import { THEME_COLORS, ThemeToggle, useThemeContext } from "../../Theme";
 
 import { HamburgerButton } from "./HamburgerButton";
 
-// Brand "live indicator" red — distinct from the Bitcoin orange used
+// Brand "live indicator" red - distinct from the Bitcoin orange used
 // elsewhere on the page so the wordmark in the navbar reads as a
 // status/identity beacon, not as a content accent.
 const DOT_RED = "#ef4444";
@@ -45,7 +45,7 @@ export const Header: FC<Props> = ({
   // scrollY to the previous one each rAF tick; flip `isHidden` only when
   // the delta exceeds the jitter threshold. When the drawer is open we
   // FORCE the header visible so the user can always reach the close (X)
-  // button — the alternative (header hidden + drawer open) would trap
+  // button - the alternative (header hidden + drawer open) would trap
   // the user.
   const [isHidden, setIsHidden] = useState(false);
   useEffect(() => {
@@ -109,7 +109,7 @@ export const Header: FC<Props> = ({
     willChange: "transform",
   };
 
-  // Left: simple "Bitcoin.Decoded" wordmark (no icon) — the dot between
+  // Left: simple "Bitcoin.Decoded" wordmark (no icon) - the dot between
   // the two words turns red as a small live-indicator beacon, distinct
   // from the orange used in content. We dropped the avatar here to
   // avoid duplicating the brand mark already shown in the Hero.
@@ -122,9 +122,7 @@ export const Header: FC<Props> = ({
     fontWeight: 500,
     fontSize: isMobile ? "0.875rem" : "0.95rem",
     letterSpacing: "0.04em",
-    color: isWordmarkHovered
-      ? colors.base.text.primary
-      : colors.base.text.secondary,
+    color: isWordmarkHovered ? colors.base.text.primary : colors.base.text.secondary,
     transition: "color 0.25s cubic-bezier(0.165, 0.84, 0.44, 1)",
     display: "inline-flex",
     alignItems: "center",
@@ -133,7 +131,7 @@ export const Header: FC<Props> = ({
   const wordmarkDotStyle: CSSProperties = {
     color: DOT_RED,
     margin: "0 0.05em",
-    // Subtle scale-up on hover — the dot reads more like a beacon coming
+    // Subtle scale-up on hover - the dot reads more like a beacon coming
     // online rather than a static glyph.
     transform: isWordmarkHovered ? "scale(1.25)" : "scale(1)",
     display: "inline-block",

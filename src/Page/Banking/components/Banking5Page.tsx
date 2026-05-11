@@ -28,18 +28,17 @@ export const Banking5Page: FC = () => {
       prelude={
         fr ? (
           <>
-            T'es un banquier. Tes coffres débordent de M0, tes marges sont écrasées, et la
-            direction veut du volume. Sur ton bureau, deux dossiers de prêt. L'un va te
-            rapporter peu mais sans aucun risque. L'autre pourrait financer la prochaine révolution
-            industrielle, mais peut-être pas. T'as 30 secondes pour choisir. Bienvenue dans
-            l'Effet Cantillon.
+            T'es un banquier. Tes coffres débordent de M0, tes marges sont écrasées, et la direction
+            veut du volume. Sur ton bureau, deux dossiers de prêt. L'un va te rapporter peu mais
+            sans aucun risque. L'autre pourrait financer la prochaine révolution industrielle, mais
+            peut-être pas. T'as 30 secondes pour choisir. Bienvenue dans l'Effet Cantillon.
           </>
         ) : (
           <>
             You are a banker. Your vaults are overflowing with M0, your margins are compressed, and
             management is pushing for volume. On your desk, two loan applications. One will bring
             you little return but virtually no risk. The other could fund the next industrial
-            revolution—but maybe not. You have 30 seconds to decide. Welcome to the Cantillon
+            revolution-but maybe not. You have 30 seconds to decide. Welcome to the Cantillon
             effect.
           </>
         )
@@ -175,7 +174,7 @@ export const Banking5Page: FC = () => {
               <>
                 You've just understood the mechanism of the <i>Cantillon Effect</i>, named after the
                 18th-century Irish economist Richard Cantillon: newly created money (M2) tends to
-                flow away from the real economy—considered too risky—and instead inflates asset
+                flow away from the real economy-considered too risky-and instead inflates asset
                 prices. The "Scrooges" get richer while they sleep: demand for assets rises, and so
                 do the value of their portfolios. The "Geos" are left on the sidelines.
               </>

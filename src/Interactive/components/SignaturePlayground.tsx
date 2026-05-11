@@ -16,7 +16,16 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { Badge, Button, Caption, Disclosure, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import {
+  Badge,
+  Button,
+  Caption,
+  Disclosure,
+  FeedbackPanel,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+} from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useSignaturePlayground } from "../hooks/useSignaturePlayground";
@@ -163,7 +172,7 @@ export const SignaturePlayground: FC = () => {
               colors={colors}
             />
 
-            {/* Pair-coherence banner — attached to the private key (the field
+            {/* Pair-coherence banner - attached to the private key (the field
                 that drives the verdict). */}
             <div
               style={{
@@ -386,7 +395,10 @@ export const SignaturePlayground: FC = () => {
 
       {/* Verification result panel */}
       {verifyStatus !== "idle" && (
-        <FeedbackPanel tone={verifyStatus === "accepted" ? "success" : "error"} style={{ gap: "0.5rem" }}>
+        <FeedbackPanel
+          tone={verifyStatus === "accepted" ? "success" : "error"}
+          style={{ gap: "0.5rem" }}
+        >
           <div
             style={{
               ...sectionLabel,

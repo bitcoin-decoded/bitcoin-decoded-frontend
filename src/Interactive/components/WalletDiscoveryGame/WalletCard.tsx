@@ -9,9 +9,9 @@ type Props = {
   card: WalletCardData;
   index: number;
   selected: boolean;
-  /** Marks this card as the "correct" choice — used after validation. */
+  /** Marks this card as the "correct" choice - used after validation. */
   highlightAsAnswer?: boolean;
-  /** Marks this card as the "wrong" pick — used after validation. */
+  /** Marks this card as the "wrong" pick - used after validation. */
   highlightAsWrong?: boolean;
   onSelect: (id: number) => void;
   /** i18n labels passed in to keep the sub-component decoupled from useTranslation */
@@ -76,7 +76,13 @@ export const WalletCard: FC<Props> = ({
     padding: "0.85rem 0.9rem",
     borderRadius: "0.7rem",
     border: `1.5px solid ${withOpacity(
-      highlightAsAnswer ? successColor : highlightAsWrong ? errorColor : selected ? accentColor : baseBorderSecondary,
+      highlightAsAnswer
+        ? successColor
+        : highlightAsWrong
+          ? errorColor
+          : selected
+            ? accentColor
+            : baseBorderSecondary,
       borderOpacity,
     )}`,
     background: bgTint,
@@ -115,10 +121,7 @@ export const WalletCard: FC<Props> = ({
     fontSize: "0.55rem",
     fontWeight: 700,
     letterSpacing: "0.04em",
-    color:
-      card.utxos.length > 0
-        ? accentColor
-        : withOpacity(baseTextSecondary, 0.55),
+    color: card.utxos.length > 0 ? accentColor : withOpacity(baseTextSecondary, 0.55),
     background:
       card.utxos.length > 0
         ? withOpacity(accentColor, 0.1)
@@ -178,13 +181,11 @@ export const WalletCard: FC<Props> = ({
   };
 
   return (
-    <button
-      type="button"
-      onClick={() => onSelect(card.id)}
-      style={containerStyle}
-    >
+    <button type="button" onClick={() => onSelect(card.id)} style={containerStyle}>
       <div style={headerRowStyle}>
-        <span style={headerLabelStyle}>{addressPrefix} #{index + 1}</span>
+        <span style={headerLabelStyle}>
+          {addressPrefix} #{index + 1}
+        </span>
         <span style={utxoBadgeStyle}>
           <Coins size={9} strokeWidth={2.5} />
           {card.utxos.length} UTXO

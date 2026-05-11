@@ -18,7 +18,7 @@ type Props = {
    */
   tone?: Tone;
   /**
-   * - `full`: tinted bg + 1px border on all sides (default — most simulators)
+   * - `full`: tinted bg + 1px border on all sides (default - most simulators)
    * - `border-left`: tinted bg + 3px accent stripe on the left edge (Quiz-like)
    * @default "full"
    */
@@ -32,7 +32,7 @@ type Props = {
 };
 
 /**
- * Tinted feedback block with optional icon + title — used everywhere the
+ * Tinted feedback block with optional icon + title - used everywhere the
  * UI needs to acknowledge a result (success/failure), surface a hint,
  * or explain a constraint.
  *
@@ -75,11 +75,8 @@ export const FeedbackPanel: FC<Props> = ({
     borderRadius: "0.65rem",
     background: withOpacity(accent, bgOpacity),
     border:
-      variant === "border-left"
-        ? "none"
-        : `1px solid ${withOpacity(accent, borderOpacity + 0.1)}`,
-    borderLeft:
-      variant === "border-left" ? `3px solid ${withOpacity(accent, 0.5)}` : undefined,
+      variant === "border-left" ? "none" : `1px solid ${withOpacity(accent, borderOpacity + 0.1)}`,
+    borderLeft: variant === "border-left" ? `3px solid ${withOpacity(accent, 0.5)}` : undefined,
     color: colors.base.text.primary,
     fontSize: isMobile ? "0.66rem" : "0.7rem",
     lineHeight: 1.55,
@@ -121,9 +118,7 @@ export const FeedbackPanel: FC<Props> = ({
             color: colors.base.text.primary,
           }}
         >
-          {!hasTitle && icon && (
-            <span style={{ flexShrink: 0, marginTop: "0.1rem" }}>{icon}</span>
-          )}
+          {!hasTitle && icon && <span style={{ flexShrink: 0, marginTop: "0.1rem" }}>{icon}</span>}
           <div style={{ flex: 1, minWidth: 0 }}>{children}</div>
         </div>
       )}

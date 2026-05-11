@@ -2,7 +2,14 @@ import { type CSSProperties, type FC } from "react";
 
 import { ChevronDown, Info, Sparkles, Sprout } from "lucide-react";
 
-import { Button, Caption, Disclosure, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
+import {
+  Button,
+  Caption,
+  Disclosure,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+} from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useSeedGenerator } from "../hooks";
@@ -155,12 +162,19 @@ export const SeedGenerator: FC = () => {
         >
           {t("seedGenerator.title")}
         </Caption>
-        <p style={{ fontSize: "0.66rem", fontStyle: "italic", color: withOpacity(baseTextSecondary, 0.75), margin: 0 }}>
+        <p
+          style={{
+            fontSize: "0.66rem",
+            fontStyle: "italic",
+            color: withOpacity(baseTextSecondary, 0.75),
+            margin: 0,
+          }}
+        >
           {t("seedGenerator.subtitle")}
         </p>
       </div>
 
-      {/* Two-step controls — labels guide the user, controls are vertically
+      {/* Two-step controls - labels guide the user, controls are vertically
           aligned thanks to matching paddings on segmented & primary buttons. */}
       <div
         style={{
@@ -171,7 +185,7 @@ export const SeedGenerator: FC = () => {
           flexWrap: "wrap",
         }}
       >
-        {/* Step 1 — segmented control */}
+        {/* Step 1 - segmented control */}
         <div>
           <div style={stepLabelStyle}>{t("seedGenerator.step1Label")}</div>
           <div
@@ -198,7 +212,7 @@ export const SeedGenerator: FC = () => {
           </div>
         </div>
 
-        {/* Step 2 — generate */}
+        {/* Step 2 - generate */}
         <div>
           <div style={stepLabelStyle}>{t("seedGenerator.step2Label")}</div>
           <Button
@@ -230,7 +244,7 @@ export const SeedGenerator: FC = () => {
             </div>
           </div>
 
-          {/* Binary visualization — collapsed by default to keep the focus
+          {/* Binary visualization - collapsed by default to keep the focus
               on the human-readable form first. Power users can dive in. */}
           <Disclosure
             title={t("seedGenerator.binaryDisclosureTitle")}

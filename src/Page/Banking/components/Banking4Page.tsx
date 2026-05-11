@@ -157,7 +157,7 @@ export const Banking4Page: FC = () => {
           </>
         ) : (
           <>
-            You'll probably say: <i>"OK, great... so what? Is it serious, Doctor?"</i> — I'll answer
+            You'll probably say: <i>"OK, great... so what? Is it serious, Doctor?"</i> - I'll answer
             right away: "Yes, because it breaks the compensation model of commercial banks."
           </>
         )}
