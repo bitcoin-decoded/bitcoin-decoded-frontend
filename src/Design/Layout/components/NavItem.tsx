@@ -8,7 +8,15 @@ type Props = {
   item: NavigationItem;
   level?: number;
   isDirectlyActive: boolean;
+  /** Module is expanded (only meaningful at level 0). */
   isExpanded: boolean;
+  /**
+   * Module contains the current page but isn't the page itself.
+   * Used to keep the parent module subtly highlighted when it's
+   * been collapsed by another module opening (so the user keeps a
+   * sense of "where am I").
+   */
+  isActiveAncestor: boolean;
   isInteracting: boolean;
   colors: Record<string, any>;
   onItemClick: (item: NavigationItem) => void;
@@ -22,6 +30,7 @@ export const NavItem: FC<Props> = ({
   level = 0,
   isDirectlyActive,
   isExpanded,
+  isActiveAncestor,
   isInteracting,
   colors,
   onItemClick,
@@ -37,8 +46,8 @@ export const NavItem: FC<Props> = ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingTop: "0.5rem",
-    paddingBottom: "0.5rem",
+    paddingTop: "0.6rem",
+    paddingBottom: "0.6rem",
     paddingLeft: `${1.25 + level * 0.75}rem`,
     paddingRight: "1rem",
     textAlign: "left",
@@ -53,10 +62,12 @@ export const NavItem: FC<Props> = ({
       isDirectlyActive || isInteracting
         ? colors.base.background.hover
         : "transparent",
-    color: isDirectlyActive
-      ? colors.base.text.primary
-      : colors.base.text.secondary,
+    color:
+      isDirectlyActive || isActiveAncestor
+        ? colors.base.text.primary
+        : colors.base.text.secondary,
     outline: "none",
+    WebkitTapHighlightColor: "transparent",
   };
 
   const activeIndicatorStyle: CSSProperties = {
@@ -71,16 +82,21 @@ export const NavItem: FC<Props> = ({
     transition: "opacity 0.2s",
   };
 
-  const submenuStyle: CSSProperties = {
+  // grid-template-rows: 0fr ↔ 1fr animates the natural height of the
+  // child without needing a max-height cap. The inner <ul> has
+  // overflow: hidden so the rows clip cleanly during the transition.
+  const submenuWrapperStyle: CSSProperties = {
+    display: "grid",
+    gridTemplateRows: isExpanded ? "1fr" : "0fr",
+    transition: "grid-template-rows 0.3s var(--ease-smooth)",
+  };
+
+  const submenuListStyle: CSSProperties = {
     listStyle: "none",
     padding: 0,
     margin: 0,
     overflow: "hidden",
-    maxHeight: isExpanded ? "500px" : "0",
-    visibility: isExpanded ? "visible" : "hidden",
-    transition: `max-height 0.3s ease-in-out, visibility 0s linear ${
-      isExpanded ? "0s" : "0.3s"
-    }`,
+    minHeight: 0,
   };
 
   return (
@@ -92,6 +108,7 @@ export const NavItem: FC<Props> = ({
         onMouseLeave={onInteractionEnd}
         onFocus={() => onInteractionStart(itemId)}
         onBlur={onInteractionEnd}
+        aria-expanded={item.children ? isExpanded : undefined}
       >
         <span style={activeIndicatorStyle} />
         <div
@@ -124,8 +141,9 @@ export const NavItem: FC<Props> = ({
               width: "1rem",
               height: "1rem",
               color: "#f7931a",
-              opacity: 0.7,
+              opacity: isExpanded ? 1 : 0.55,
               flexShrink: 0,
+              transition: "opacity 0.2s",
             }}
           >
             <ChevronIcon isExpanded={isExpanded} />
@@ -133,13 +151,15 @@ export const NavItem: FC<Props> = ({
         )}
       </button>
       {item.children && (
-        <ul style={submenuStyle}>
-          {item.children.map((subItem) => (
-            <li key={subItem.id || subItem.label}>
-              {renderItem(subItem, level + 1)}
-            </li>
-          ))}
-        </ul>
+        <div style={submenuWrapperStyle} aria-hidden={!isExpanded}>
+          <ul style={submenuListStyle}>
+            {item.children.map((subItem) => (
+              <li key={subItem.id || subItem.label}>
+                {renderItem(subItem, level + 1)}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </Fragment>
   );

@@ -1,2 +1,1 @@
-export { findPathToId } from './findPathToId';
-export { findAllDescendantLabels } from './findAllDescendantLabels';
+export { findPathToId } from "./findPathToId";
