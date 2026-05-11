@@ -19,11 +19,19 @@ import type {
 } from "../types/SynthesisQuizData";
 
 type Props = SynthesisQuizData & {
+  /** localStorage key used to persist selections + submitted across page navigations. */
+  storageKey: string;
   onPass?: () => void;
   onReset?: () => void;
 };
 
-export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass, onReset }) => {
+export const SynthesisQuiz: FC<Props> = ({
+  questions,
+  passThreshold,
+  storageKey,
+  onPass,
+  onReset,
+}) => {
   const { t } = useTranslation();
   const { setCurrentPage } = useRouterContext();
   const { colors, moduleTheme } = usePageTheme();
@@ -38,7 +46,7 @@ export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass, onR
     handleSelect,
     handleSubmit,
     handleReset,
-  } = useSynthesisQuiz({ questions, passThreshold, onPass });
+  } = useSynthesisQuiz({ questions, passThreshold, storageKey, onPass });
 
   const onRetryClick = () => {
     handleReset();

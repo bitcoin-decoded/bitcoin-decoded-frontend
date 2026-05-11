@@ -46,7 +46,12 @@ export const Banking7Page: FC = () => {
         )}
       </p>
 
-      <SynthesisQuiz {...quiz} onPass={onQuizPassed} onReset={onQuizReset} />
+      <SynthesisQuiz
+        {...quiz}
+        storageKey="synthesisQuiz.module1"
+        onPass={onQuizPassed}
+        onReset={onQuizReset}
+      />
 
       {isQuizPassed && (
         <>

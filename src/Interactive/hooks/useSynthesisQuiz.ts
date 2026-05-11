@@ -5,14 +5,61 @@ import type { SynthesisQuizQuestion } from "../types/SynthesisQuizData";
 type Options = {
   questions: SynthesisQuizQuestion[];
   passThreshold: number;
+  storageKey: string;
   onPass?: () => void;
 };
 
-export const useSynthesisQuiz = ({ questions, passThreshold, onPass }: Options) => {
+type PersistedState = {
+  selections: (number | null)[];
+  submitted: boolean;
+};
+
+const readPersistedState = (
+  key: string,
+  expectedLength: number,
+): PersistedState | null => {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<PersistedState>;
+    if (
+      !Array.isArray(parsed.selections) ||
+      parsed.selections.length !== expectedLength ||
+      typeof parsed.submitted !== "boolean"
+    ) {
+      return null;
+    }
+    return {
+      selections: parsed.selections.map((v) => (typeof v === "number" ? v : null)),
+      submitted: parsed.submitted,
+    };
+  } catch {
+    return null;
+  }
+};
+
+export const useSynthesisQuiz = ({
+  questions,
+  passThreshold,
+  storageKey,
+  onPass,
+}: Options) => {
+  const defaultSelections = useMemo(() => questions.map(() => null), [questions]);
+
   const [selections, setSelections] = useState<(number | null)[]>(
-    () => questions.map(() => null),
+    () => readPersistedState(storageKey, questions.length)?.selections ?? defaultSelections,
   );
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState<boolean>(
+    () => readPersistedState(storageKey, questions.length)?.submitted ?? false,
+  );
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify({ selections, submitted }));
+    } catch {
+      // storage full or unavailable — silently ignore
+    }
+  }, [storageKey, selections, submitted]);
 
   const allAnswered = selections.every((s) => s !== null);
 
@@ -47,8 +94,13 @@ export const useSynthesisQuiz = ({ questions, passThreshold, onPass }: Options) 
   };
 
   const handleReset = () => {
-    setSelections(questions.map(() => null));
+    setSelections(defaultSelections);
     setSubmitted(false);
+    try {
+      localStorage.removeItem(storageKey);
+    } catch {
+      // ignore
+    }
   };
 
   return {
