@@ -12,4 +12,5 @@ export {
   getQuizDataHalving,
   getQuizDataUtxo,
   getQuizDataModule1Synthesis,
+  getQuizDataModule2Synthesis,
 } from "./data";
