@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write src",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "audit:reading-time": "node scripts/count-prose.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.7.0",
