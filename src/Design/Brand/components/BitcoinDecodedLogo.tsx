@@ -18,7 +18,7 @@ const FONT_FAMILY = "'Cormorant Garamond', Georgia, serif";
 /**
  * Bitcoin.Decoded logo lockup ("Bitcoin" + gold rule + small gold square +
  * italic "Decoded"). Renders the **Logo Kit Version 04** (full color, dark
- * surface — signature variant) on dark theme and **Version 01** (full
+ * surface - signature variant) on dark theme and **Version 01** (full
  * color, white surface) on light theme.
  *
  * Background: intentionally transparent so the logo sits on whatever
@@ -34,7 +34,7 @@ export const BitcoinDecodedLogo: FC<Props> = ({ width = 320, style }) => {
   const bitcoinFill = isDark ? CREAM : NAVY;
   const decodedFill = isDark ? GOLD : NAVY;
   // The horizontal rule has slightly different opacity in V01 vs V04 of the
-  // kit — keep both at full strength here for crispness.
+  // kit - keep both at full strength here for crispness.
 
   return (
     <svg

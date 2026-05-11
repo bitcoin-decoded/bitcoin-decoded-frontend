@@ -36,7 +36,7 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            Bingo! It's easy money. The loan is 100% secured by his existing stock portfolio—this is
+            Bingo! It's easy money. The loan is 100% secured by his existing stock portfolio-this is
             what's called collateralization. If he doesn't pay, the bank sells his securities in one
             click. Risk = 0. File validated!
           </>

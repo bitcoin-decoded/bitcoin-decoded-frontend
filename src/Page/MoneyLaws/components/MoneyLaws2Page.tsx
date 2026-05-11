@@ -134,7 +134,7 @@ export const MoneyLaws2Page: FC = () => {
         ) : (
           <>
             Savings are therefore not a pile of resources stacked up just for show! They serve{" "}
-            <Emphasis>investment</Emphasis> — that is, launching projects, sometimes lengthy ones,
+            <Emphasis>investment</Emphasis> - that is, launching projects, sometimes lengthy ones,
             that make society more efficient and free up our time.
           </>
         )}
@@ -155,7 +155,7 @@ export const MoneyLaws2Page: FC = () => {
           </>
         )}
       </p>
-      <Callout title={fr ? "La structure du capital, késako ?" : "Capital structure — what is it?"}>
+      <Callout title={fr ? "La structure du capital, késako ?" : "Capital structure - what is it?"}>
         <p>
           {fr
             ? "Le capital n'est pas une simple pile de billets de banque. "
@@ -169,7 +169,7 @@ export const MoneyLaws2Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Prenons l'exemple du sandwich (cliquez sur les petites boîtes afin de remonter le fil
+              Prenons l'exemple du sandwich (cliques sur les petites boîtes afin de remonter le fil
               de la production) :
               <CapitalStructureChain />
             </>
@@ -189,7 +189,7 @@ export const MoneyLaws2Page: FC = () => {
         <p>
           {fr
             ? "Ces étapes sont des détours de production : on fabrique d'abord les outils qui nous permettront ensuite d'être bien plus efficaces. L'ensemble de ces outils et de ces étapes forment une structure complexe, le capital."
-            : "These steps are roundabout production: we first build the tools that will then make us far more efficient. All these tools and steps together form a complex structure — capital."}
+            : "These steps are roundabout production: we first build the tools that will then make us far more efficient. All these tools and steps together form a complex structure - capital."}
         </p>
       </Callout>
       <p>
@@ -239,7 +239,7 @@ export const MoneyLaws2Page: FC = () => {
               <li style={{ marginTop: "1rem" }}>
                 This low interest rate sends a very clear signal to those who want to build:{" "}
                 <i>
-                  "All clear! Society has set aside enough resources — we can launch long and
+                  "All clear! Society has set aside enough resources - we can launch long and
                   complex projects (roundabout production)"
                 </i>
                 .
@@ -378,10 +378,10 @@ export const MoneyLaws2Page: FC = () => {
             </>
           ) : (
             <>
-              Robinson fishes by hand eight hours a day. This allows him to catch four fish,
-              exactly what he needs to eat each day. His situation is stable, but his life is
-              somewhat limited. He then has a brilliant idea: build a fishing net so he only has to
-              work four hours a day.
+              Robinson fishes by hand eight hours a day. This allows him to catch four fish, exactly
+              what he needs to eat each day. His situation is stable, but his life is somewhat
+              limited. He then has a brilliant idea: build a fishing net so he only has to work four
+              hours a day.
             </>
           )}
         </p>

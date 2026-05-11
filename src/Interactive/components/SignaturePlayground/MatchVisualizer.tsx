@@ -95,7 +95,7 @@ export const MatchVisualizer: FC<Props> = ({
         }}
       >
         ƒ {verifyFnLabel}
-        {" — "}
+        {" - "}
         <a
           href={verifyMoreInfoUrl}
           target="_blank"

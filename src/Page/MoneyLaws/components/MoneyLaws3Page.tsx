@@ -23,18 +23,18 @@ export const MoneyLaws3Page: FC = () => {
         fr ? (
           <>
             Imagines qu'on te demande, là, maintenant, de décider combien d'acier la France doit
-            produire l'année prochaine. Pas une fourchette. Un chiffre précis. En tonnes. T'as
-            accès à toutes les données techniques que tu voulez : les stocks, les capacités de
-            production, les besoins déclarés des industries. Mais une seule information te manque,
-            et sans elle, ton chiffre n'a aucun sens. Cette information, le socialisme l'a
-            supprimée. Et c'est ce qui le rend mathématiquement impossible.
+            produire l'année prochaine. Pas une fourchette. Un chiffre précis. En tonnes. T'as accès
+            à toutes les données techniques que tu veux : les stocks, les capacités de production,
+            les besoins déclarés des industries. Mais une seule information te manque, et sans elle,
+            ton chiffre n'a aucun sens. Cette information, le socialisme l'a supprimée. Et c'est ce
+            qui le rend mathématiquement impossible.
           </>
         ) : (
           <>
             Imagine you are asked, right now, to decide how much steel France should produce next
             year. Not a range. A precise number. In tons. You have access to all the technical data
             you want: inventories, production capacity, declared industrial needs. But there is one
-            missing piece of information—and without it, your number makes no sense. That piece of
+            missing piece of information-and without it, your number makes no sense. That piece of
             information is prices. Socialism removes that information. And that is what makes it
             mathematically impossible.
           </>
@@ -150,8 +150,8 @@ export const MoneyLaws3Page: FC = () => {
               <br />
               Pourquoi ? Parce que le prix de l'acier reflète sa rareté réelle. Si beaucoup d'autres
               entrepreneurs ont besoin d'acier pour d'autres projets (par exemple des fusées), alors
-              son prix monte. Tu es donc « guidé » vers le matériau qui crée le moins de
-              gaspillage pour la société.
+              son prix monte. Tu es donc « guidé » vers le matériau qui crée le moins de gaspillage
+              pour la société.
             </>
           ) : (
             <>

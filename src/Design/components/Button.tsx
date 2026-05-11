@@ -46,13 +46,13 @@ type Props = {
 
 /**
  * Theme- and module-aware button primitive. One source of truth for every
- * action button across simulators, games, and chrome — replaces ~30+
+ * action button across simulators, games, and chrome - replaces ~30+
  * inline button-style blocks scattered across the Interactive domain
  * with a single, consistent recipe.
  *
  * Reads the current page's module accent from `usePageTheme()`, so a
  * `<Button>` rendered on a Banking page is blue, on a Bitcoin page it
- * is amber, etc. — without any caller awareness of the world theme.
+ * is amber, etc. - without any caller awareness of the world theme.
  * Override with the `color` prop when needed.
  */
 export const Button: FC<Props> = ({
@@ -73,7 +73,7 @@ export const Button: FC<Props> = ({
   const isMobile = useBreakpoint() === "mobile";
   const [isHovered, setIsHovered] = useState(false);
 
-  // Accent — module color by default, overridable via `color`.
+  // Accent - module color by default, overridable via `color`.
   const accent = color ?? colors[moduleTheme].border.secondary;
   const accentText = color ?? colors[moduleTheme].text.primary;
   const neutralBorder = colors.base.border.secondary;
@@ -104,7 +104,7 @@ export const Button: FC<Props> = ({
     boxSizing: "border-box",
   };
 
-  // Hover-aware variant styles. Every variant gets a hover whisper —
+  // Hover-aware variant styles. Every variant gets a hover whisper -
   // brightness lift on bg/border, no transform on `secondary`/`ghost`
   // (only `primary` gets the 1px translateY for "click me" affordance).
   const hoverable = !disabled;

@@ -1,4 +1,4 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
 
 import { useThemeContext } from "../../Theme";
 
@@ -16,18 +16,18 @@ const GOLD = "#C4A45A";
 const FONT_FAMILY = "'Cormorant Garamond', Georgia, serif";
 
 /**
- * 1:1 square avatar mark — large serif "B" + gold accent bar.
+ * 1:1 square avatar mark - large serif "B" + gold accent bar.
  *
  * Renders the Avatar Kit's "Carré YouTube/LinkedIn" variant on dark theme
  * and "Carré variante claire" on light theme (per the user-defined
  * mapping for the navbar).
  *
- * Background: **transparent** — the avatar drops its colored square
+ * Background: **transparent** - the avatar drops its colored square
  * fill so it blends with whatever surface it lands on (works equally
  * well on the navbar's solid color, on the header's tonal gradient, or
  * on any future surface). The "B" letter color is per the kit recipe
  * (cream on dark, navy on light) and the gold accent bar is identical
- * across themes — the contrast comes from the page chrome, not from a
+ * across themes - the contrast comes from the page chrome, not from a
  * carried background.
  */
 export const BitcoinDecodedAvatar: FC<Props> = ({ size = 28, style }) => {

@@ -25,10 +25,7 @@ const sanitizeAmount = (raw: string): string => {
   const firstDot = digitsAndDot.indexOf(".");
   if (firstDot === -1) return digitsAndDot;
   // Keep first dot, remove any subsequent ones
-  return (
-    digitsAndDot.slice(0, firstDot + 1) +
-    digitsAndDot.slice(firstDot + 1).replace(/\./g, "")
-  );
+  return digitsAndDot.slice(0, firstDot + 1) + digitsAndDot.slice(firstDot + 1).replace(/\./g, "");
 };
 
 // ── Card (unified, used for inputs, outputs, fees) ──────────────────────────
@@ -205,7 +202,7 @@ export const UTXOTransactionBuilder: FC = () => {
         {t("utxoBuilder.title")}
       </Caption>
 
-      {/* Step 1 — UTXO selection */}
+      {/* Step 1 - UTXO selection */}
       <div style={{ minWidth: 0 }}>
         <Caption
           tone="world"
@@ -268,7 +265,7 @@ export const UTXOTransactionBuilder: FC = () => {
         </div>
       </div>
 
-      {/* Step 2 — Amount */}
+      {/* Step 2 - Amount */}
       <div style={{ minWidth: 0 }}>
         <Caption
           tone="world"
@@ -310,7 +307,12 @@ export const UTXOTransactionBuilder: FC = () => {
           {/* Inputs */}
           {hasSelection && (
             <>
-              <Caption tone="muted" size="xs" color={withOpacity(colors.base.text.secondary, 0.5)} as="div">
+              <Caption
+                tone="muted"
+                size="xs"
+                color={withOpacity(colors.base.text.secondary, 0.5)}
+                as="div"
+              >
                 {t("utxoBuilder.inputs")}
               </Caption>
               {selectedIds.map((id) => {
@@ -341,8 +343,17 @@ export const UTXOTransactionBuilder: FC = () => {
                   minWidth: 0,
                 }}
               >
-                <span style={{ minWidth: 0, overflowWrap: "anywhere" }}>{t("utxoBuilder.totalRow")}</span>
-                <span style={{ fontWeight: 700, color: accentColor, flexShrink: 0, whiteSpace: "nowrap" }}>
+                <span style={{ minWidth: 0, overflowWrap: "anywhere" }}>
+                  {t("utxoBuilder.totalRow")}
+                </span>
+                <span
+                  style={{
+                    fontWeight: 700,
+                    color: accentColor,
+                    flexShrink: 0,
+                    whiteSpace: "nowrap",
+                  }}
+                >
                   {fmtBTC(totalInput)}
                 </span>
               </div>
@@ -361,16 +372,33 @@ export const UTXOTransactionBuilder: FC = () => {
                 minWidth: 0,
               }}
             >
-              <div style={{ flex: 1, height: 1, background: withOpacity(world.border.secondary, 0.12) }} />
+              <div
+                style={{
+                  flex: 1,
+                  height: 1,
+                  background: withOpacity(world.border.secondary, 0.12),
+                }}
+              />
               <ArrowDown size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
-              <div style={{ flex: 1, height: 1, background: withOpacity(world.border.secondary, 0.12) }} />
+              <div
+                style={{
+                  flex: 1,
+                  height: 1,
+                  background: withOpacity(world.border.secondary, 0.12),
+                }}
+              />
             </div>
           )}
 
           {/* Outputs */}
           {hasAmount && (
             <>
-              <Caption tone="muted" size="xs" color={withOpacity(colors.base.text.secondary, 0.5)} as="div">
+              <Caption
+                tone="muted"
+                size="xs"
+                color={withOpacity(colors.base.text.secondary, 0.5)}
+                as="div"
+              >
                 {t("utxoBuilder.outputs")}
               </Caption>
 
@@ -424,7 +452,12 @@ export const UTXOTransactionBuilder: FC = () => {
                 <XCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
               ) : undefined
             }
-            style={{ alignSelf: "flex-start", padding: "0.45rem 0.7rem", overflowWrap: "anywhere", whiteSpace: "normal" }}
+            style={{
+              alignSelf: "flex-start",
+              padding: "0.45rem 0.7rem",
+              overflowWrap: "anywhere",
+              whiteSpace: "normal",
+            }}
           >
             {isValid
               ? t("utxoBuilder.valid")

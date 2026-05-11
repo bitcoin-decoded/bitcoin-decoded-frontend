@@ -19,25 +19,25 @@ export const PageTemplate: FC<Props> = ({ title, prelude, children }) => {
   const isTablet = breakpoint === "tablet";
   const accentColor = colors[moduleTheme].border.secondary;
 
-  // ── Vertical rhythm — single source of truth for the page header.
+  // ── Vertical rhythm - single source of truth for the page header.
   // Three tiers (mobile / tablet / desktop). Same philosophy as HomePage:
   // tight coupling within a semantic group, generous breathing between groups.
   const pick = <T,>(m: T, ta: T, d: T): T => (isMobile ? m : isTablet ? ta : d);
 
   const space = {
-    // Container chrome — comfortable top breathing before the title lands.
+    // Container chrome - comfortable top breathing before the title lands.
     pageTop: pick("1.5rem", "2rem", "2.5rem"),
     pageBottom: pick("2rem", "2.5rem", "3rem"),
 
-    // Header internals — title and reading time form a tight "page header"
+    // Header internals - title and reading time form a tight "page header"
     // group. They belong together, so the gap is small enough to read as
     // a couplet but wide enough to breathe.
     titleToReadingTime: pick("0.85rem", "1rem", "1.15rem"),
 
-    // Header → prelude — clear semantic break (page identity → abstract).
+    // Header → prelude - clear semantic break (page identity → abstract).
     headerToPrelude: pick("2rem", "2.5rem", "3rem"),
 
-    // Prelude → body — second clear break (abstract → development).
+    // Prelude → body - second clear break (abstract → development).
     preludeToBody: pick("2rem", "2.5rem", "3rem"),
 
     // No-prelude case: header → body needs the equivalent total breathing.

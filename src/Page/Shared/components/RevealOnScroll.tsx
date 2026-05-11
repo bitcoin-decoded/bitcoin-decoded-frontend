@@ -1,11 +1,4 @@
-import {
-  type CSSProperties,
-  type FC,
-  type ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { type CSSProperties, type FC, type ReactNode, useEffect, useRef, useState } from "react";
 
 type Props = {
   children: ReactNode;
@@ -24,7 +17,7 @@ type Props = {
    */
   duration?: number;
   /**
-   * Margin used by the IntersectionObserver — negative values delay the
+   * Margin used by the IntersectionObserver - negative values delay the
    * reveal until the element is more clearly inside the viewport.
    * Default: "0px 0px -10% 0px" (trigger when ~10% past the bottom edge)
    */
@@ -41,7 +34,7 @@ type Props = {
 
 /**
  * Fade-in + gentle translate-up reveal triggered when the wrapper enters
- * the viewport. Uses IntersectionObserver (single-shot — once revealed,
+ * the viewport. Uses IntersectionObserver (single-shot - once revealed,
  * the element stays visible). Respects `prefers-reduced-motion` by
  * skipping the animation entirely.
  *

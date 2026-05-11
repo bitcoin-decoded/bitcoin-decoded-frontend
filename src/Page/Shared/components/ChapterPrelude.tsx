@@ -8,7 +8,7 @@ type ChapterPreludeProps = {
   children: ReactNode;
   /**
    * Bottom margin between the prelude and whatever follows. Driven by
-   * `PageTemplate`'s vertical rhythm system — passing `undefined` leaves
+   * `PageTemplate`'s vertical rhythm system - passing `undefined` leaves
    * spacing to the parent flow.
    */
   marginBottom?: string;
@@ -64,9 +64,7 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom
 
   const textStyle: CSSProperties = {
     margin: 0,
-    color: moduleTheme === "base"
-      ? colors.base.text.secondary
-      : colors[moduleTheme].text.primary,
+    color: moduleTheme === "base" ? colors.base.text.secondary : colors[moduleTheme].text.primary,
     fontStyle: "italic",
     lineHeight: 1.7,
     fontSize: isMobile ? "0.875rem" : "0.9375rem",

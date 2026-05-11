@@ -54,19 +54,27 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
 
   return (
     <div style={containerStyle}>
-      <div className="gradient-border" style={{ ...chartWrapperStyle, "--border-glow-color": world.border.primary } as CSSProperties}>
+      <div
+        className="gradient-border"
+        style={
+          { ...chartWrapperStyle, "--border-glow-color": world.border.primary } as CSSProperties
+        }
+      >
         {showTitle && (
           <Caption
             tone="world"
             style={{ display: "block", textAlign: "center", marginBottom: "0.75rem" }}
           >
             {fr
-              ? "Masse monétaire M2 — États-Unis (1960–2024)"
-              : "M2 Money Supply — United States (1960–2024)"}
+              ? "Masse monétaire M2 - États-Unis (1960–2024)"
+              : "M2 Money Supply - United States (1960–2024)"}
           </Caption>
         )}
         <ResponsiveContainer width="100%" height={isMobile ? 220 : 300}>
-          <AreaChart data={M2_MONEY_SUPPLY} margin={{ top: 5, right: 10, left: isMobile ? -15 : 0, bottom: 5 }}>
+          <AreaChart
+            data={M2_MONEY_SUPPLY}
+            margin={{ top: 5, right: 10, left: isMobile ? -15 : 0, bottom: 5 }}
+          >
             <defs>
               <linearGradient id="m2Gradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={accentColor} stopOpacity={0.3} />
@@ -104,13 +112,23 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
               x={2008}
               stroke={withOpacity(colors.base.text.secondary, 0.4)}
               strokeDasharray="4 4"
-              label={{ value: "2008", position: "top", fontSize: isMobile ? 9 : 11, fill: axisColor }}
+              label={{
+                value: "2008",
+                position: "top",
+                fontSize: isMobile ? 9 : 11,
+                fill: axisColor,
+              }}
             />
             <ReferenceLine
               x={2020}
               stroke={withOpacity(colors.base.text.secondary, 0.4)}
               strokeDasharray="4 4"
-              label={{ value: "Covid", position: "top", fontSize: isMobile ? 9 : 11, fill: axisColor }}
+              label={{
+                value: "Covid",
+                position: "top",
+                fontSize: isMobile ? 9 : 11,
+                fill: axisColor,
+              }}
             />
             <Area
               type="monotone"
@@ -124,7 +142,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
           </AreaChart>
         </ResponsiveContainer>
         <div style={sourceStyle}>
-          Source : Federal Reserve (FRED) — fred.stlouisfed.org/series/M2SL
+          Source : Federal Reserve (FRED) - fred.stlouisfed.org/series/M2SL
         </div>
       </div>
     </div>

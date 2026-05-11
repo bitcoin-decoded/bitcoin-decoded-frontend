@@ -68,7 +68,7 @@ export const Bitcoin5Page: FC = () => {
               </>
             ) : (
               <>
-                a <HighlightText>subsidy</HighlightText> — newly issued bitcoins
+                a <HighlightText>subsidy</HighlightText> - newly issued bitcoins
               </>
             )}
           </li>
@@ -220,9 +220,7 @@ export const Bitcoin5Page: FC = () => {
       </p>
       <ul>
         <li>
-          {fr
-            ? "ton revenu en bitcoins est divisé par deux"
-            : "your bitcoin income is cut in half"}
+          {fr ? "ton revenu en bitcoins est divisé par deux" : "your bitcoin income is cut in half"}
         </li>
         <li>
           {fr

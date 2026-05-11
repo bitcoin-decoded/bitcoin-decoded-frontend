@@ -27,7 +27,7 @@ export const Bitcoin2Page: FC = () => {
         ) : (
           <>
             In January 2009, an anonymous developer launched a software program and embedded a
-            newspaper headline in its very first block—a reference to the UK bank bailouts on that
+            newspaper headline in its very first block-a reference to the UK bank bailouts on that
             very day. Fifteen years later, that software is worth over a trillion dollars, and no
             one knows who wrote it. Before understanding how Bitcoin works, you need to understand
             why someone felt it had to be written in the first place.

@@ -11,7 +11,7 @@ import { useScrollToTop } from "../hooks";
  * the user has scrolled past the threshold and smoothly returns them to
  * the top of the page on click.
  *
- * Presentational only — all state and behaviour live in `useScrollToTop`.
+ * Presentational only - all state and behaviour live in `useScrollToTop`.
  * Theme- and module-aware so the accent matches the current world
  * (Banking blue, MoneyLaws violet, Bitcoin amber).
  */

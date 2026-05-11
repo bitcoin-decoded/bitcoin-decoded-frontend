@@ -132,7 +132,7 @@ export const Banking6Page: FC = () => {
               renovations.
               <br />
               <Emphasis>
-                The famous "trickle-down" begins—the one economists in suits like to talk about.
+                The famous "trickle-down" begins-the one economists in suits like to talk about.
               </Emphasis>
             </>
           )}

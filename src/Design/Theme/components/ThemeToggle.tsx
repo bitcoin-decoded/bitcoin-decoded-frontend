@@ -10,7 +10,7 @@ export const ThemeToggle: FC = () => {
   const { t } = useTranslation();
   const colors = THEME_COLORS[theme];
 
-  // Aligned with LanguageToggle and HamburgerButton — same 2rem square
+  // Aligned with LanguageToggle and HamburgerButton - same 2rem square
   // footprint, same border + hover treatment.
   const buttonStyle: CSSProperties = {
     width: "2rem",
@@ -24,8 +24,7 @@ export const ThemeToggle: FC = () => {
     cursor: "pointer",
     color: isHovered ? colors.base.text.primary : colors.base.text.secondary,
     padding: 0,
-    transition:
-      "background-color 0.2s, color 0.2s, border-color 0.2s",
+    transition: "background-color 0.2s, color 0.2s, border-color 0.2s",
   };
 
   return (
@@ -35,9 +34,7 @@ export const ThemeToggle: FC = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       aria-label={
-        theme === "light"
-          ? t("theme.toggleAriaLabel.light")
-          : t("theme.toggleAriaLabel.dark")
+        theme === "light" ? t("theme.toggleAriaLabel.light") : t("theme.toggleAriaLabel.dark")
       }
     >
       {theme === "light" ? <MoonIcon /> : <SunIcon />}

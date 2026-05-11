@@ -16,7 +16,7 @@ const fr = {
   "balanceSheet.assets": "ACTIF",
   "balanceSheet.liabilities": "PASSIF",
 
-  // Simulators — buttons
+  // Simulators - buttons
   "simulator.credit.grant": "J'accorde le prêt !",
   "simulator.credit.retry": "Réessayer",
   "simulator.credit.title": "BILAN COMPTABLE DE LA BANQUE DE NICOLAS",
@@ -62,7 +62,7 @@ const fr = {
   "chain.prevHash": "Hash bloc préc.",
   "chain.timestamp": "Horodatage",
   "chain.note":
-    "Le hash de chaque bloc est obtenu en appliquant un double SHA-256 à son en-tête. Modifier une seule transaction dans le bloc #826 changerait sa racine de Merkle, donc le hash du bloc, ce qui invaliderait le bloc #827, puis le #828 — toute la chaîne s'effondre.",
+    "Le hash de chaque bloc est obtenu en appliquant un double SHA-256 à son en-tête. Modifier une seule transaction dans le bloc #826 changerait sa racine de Merkle, donc le hash du bloc, ce qui invaliderait le bloc #827, puis le #828 - toute la chaîne s'effondre.",
 
   // MiningSimulator
   "mining.title": "Simulateur de minage",
@@ -95,7 +95,7 @@ const fr = {
   "mempool.blockLabel": "Bloc",
   "mempool.blockSubtitle": "En-tête & transactions incluses",
   "mempool.added": "Ajouté",
-  "mempool.empty": "— vide —",
+  "mempool.empty": "- vide -",
   "mempool.doubleSpend.prefix": "Alice tente de dépenser",
   "mempool.doubleSpend.emphasis": "le même BTC",
   "mempool.doubleSpend.suffix": "deux fois : une fois vers Bob, une fois vers Charlie.",
@@ -124,7 +124,7 @@ const fr = {
   "miningReward.rewardNoteNewBitcoin": "nouveaux bitcoins créés par ce bloc",
 
   // HalvingChart
-  "halvingChart.title": "Récompense par bloc (BTC) — programme des halvings",
+  "halvingChart.title": "Récompense par bloc (BTC) - programme des halvings",
   "halvingChart.today": "aujourd'hui",
   "halvingChart.tooltipLabel": "Récompense",
   "halvingChart.tooltipYear": "Année",
@@ -160,7 +160,7 @@ const fr = {
   "utxoBuilder.selectHint": "Sélectionnes des UTXO et entres un montant",
   "utxoBuilder.reset": "Tout effacer",
   "utxoBuilder.utxoHint":
-    "Chaque UTXO est comme une pièce indivisible dans le portefeuille d'Alice — impossible de les découper.",
+    "Chaque UTXO est comme une pièce indivisible dans le portefeuille d'Alice - impossible de les découper.",
   "utxoBuilder.newUtxoRecipient": "Nouvel UTXO → Destinataire",
   "utxoBuilder.newUtxoAlice": "Nouvel UTXO → Alice",
   "utxoBuilder.recipientDesc": "Ce qu'il reçoit",
@@ -389,14 +389,14 @@ const fr = {
   "footer.builtWith": "Construit avec",
   "footer.inspiredBy": "Inspiré par le travail de",
 
-  // HomePage — Hero
+  // HomePage - Hero
   "home.hero.headline": "L'argent que tu utilises... tu ne le comprends pas vraiment.",
   "home.hero.subheadline":
     "Comprendre Bitcoin, c'est d'abord comprendre comment fonctionne l'argent aujourd'hui.",
   "home.hero.ctaPrimary": "Commencer le parcours",
   "home.hero.ctaSecondary": "Voir le programme",
 
-  // HomePage — Section 1: Hook
+  // HomePage - Section 1: Hook
   "home.hook.title": "Quelque chose ne colle pas.",
   "home.hook.line1": "Ton épargne diminue.",
   "home.hook.line2": "Les prix augmentent.",
@@ -404,13 +404,13 @@ const fr = {
   "home.hook.bridgeP1": "Et pourtant…",
   "home.hook.bridgeP2": "personne ne t'explique vraiment pourquoi.",
 
-  // HomePage — Section 2: Positioning
+  // HomePage - Section 2: Positioning
   "home.positioning.title": "Ce site n'explique pas Bitcoin. Il remonte plus loin.",
   "home.positioning.comparisonP1": "Comprendre Bitcoin sans comprendre l'argent,",
   "home.positioning.comparisonP2": "c'est comme lire la fin sans connaître l'histoire.",
   "home.positioning.flip": "Ici, on fait l'inverse.",
 
-  // HomePage — Section 3: Journey (3 cards)
+  // HomePage - Section 3: Journey (3 cards)
   "home.journey.title": "Un parcours en 3 modules",
   "home.journey.step1.label": "Module 1",
   "home.journey.step1.title": "Le Problème",
@@ -426,32 +426,32 @@ const fr = {
     "Une autre façon de concevoir l'argent.\nEt ce que cela change vraiment.",
   "home.journey.cardCta": "Voir ce module",
 
-  // HomePage — Section 4: Audience
+  // HomePage - Section 4: Audience
   "home.audience.title": "Ce parcours est pour toi si…",
   "home.audience.item1": "Tu veux comprendre sans te perdre.",
   "home.audience.item2": "Tu sens que « l'argent » est important... sans savoir pourquoi.",
   "home.audience.item3": "Tu en as marre des explications floues.",
   "home.audience.item4": "Tu préfères comprendre avant d'avoir un avis.",
 
-  // HomePage — Section 5: Promise
+  // HomePage - Section 5: Promise
   "home.promise.title": "Ce que tu vas obtenir",
   "home.promise.intro": "À la fin du parcours :",
   "home.promise.item1": "Tu verras Bitcoin beaucoup plus clairement.",
   "home.promise.item2": "Tu comprendras ce qu'il change vraiment.",
   "home.promise.item3": "Et surtout... pourquoi il existe.",
 
-  // HomePage — Section 6: Differentiation
+  // HomePage - Section 6: Differentiation
   "home.differentiation.neg1": "Ici, pas de jargon inutile.",
   "home.differentiation.neg2": "Pas de discours militant.",
   "home.differentiation.neg3": "Pas de simplification trompeuse.",
   "home.differentiation.posIntro": "Juste un objectif :",
   "home.differentiation.pos": "Te faire comprendre.",
 
-  // HomePage — Section 7: Philosophy quote
+  // HomePage - Section 7: Philosophy quote
   "home.philosophy.quote":
     "Le problème fondamental des monnaies traditionnelles, c'est toute la confiance qu'elles exigent.",
 
-  // HomePage — Section 8: Final CTA
+  // HomePage - Section 8: Final CTA
   "home.finalCta.titleP1": "Accès totalement libre et gratuit.",
   "home.finalCta.titleP2": "La curiosité est ton seul guide.",
   "home.finalCta.button": "Commencer le parcours",
@@ -460,7 +460,7 @@ const fr = {
   "footer.donateMessage": "Si ce projet te plaît, soutiens-le en sats.",
   "footer.copy": "Copier",
   "footer.copied": "Copié !",
-  "footer.copyright": "© 2026 — Bitcoin.Decoded",
+  "footer.copyright": "© 2026 - Bitcoin.Decoded",
 } as const;
 
 export default fr;

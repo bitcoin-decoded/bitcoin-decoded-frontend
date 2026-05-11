@@ -22,7 +22,7 @@ export const Bitcoin3Page: FC = () => {
         ) : (
           <>
             A blockchain is a chain of blocks. Literally. The word says what it does. The real
-            question isn't what it is — it's why it's impossible to falsify. That's where things
+            question isn't what it is - it's why it's impossible to falsify. That's where things
             get interesting.
           </>
         )
@@ -132,7 +132,7 @@ export const Bitcoin3Page: FC = () => {
                 </>
               ) : (
                 <>
-                  <HighlightText>Nonce</HighlightText> (a number used by miners — we'll cover it in
+                  <HighlightText>Nonce</HighlightText> (a number used by miners - we'll cover it in
                   the next chapter)
                 </>
               )}
@@ -162,7 +162,7 @@ export const Bitcoin3Page: FC = () => {
         ) : (
           <>
             <i>"But how are these pages linked?"</i>,{" "}
-            <i>"And this mathematical glue — what is it, concretely?"</i> <br />
+            <i>"And this mathematical glue - what is it, concretely?"</i> <br />
             Great questions. Let's clear that up right now.
           </>
         )}
@@ -209,7 +209,7 @@ export const Bitcoin3Page: FC = () => {
             </>
           ) : (
             <>
-              Your turn — try it out! <br />
+              Your turn - try it out! <br />
               Type whatever you want into the hashing machine and watch what happens.
             </>
           )}
