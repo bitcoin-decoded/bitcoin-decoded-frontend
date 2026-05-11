@@ -8,6 +8,7 @@ import {
   Bitcoin6Page,
   Bitcoin7Page,
   Bitcoin8Page,
+  Bitcoin9Page,
   Banking1Page,
   Banking2Page,
   Banking3Page,
@@ -73,6 +74,8 @@ export const AppRouter: FC = () => {
         return <Bitcoin7Page />;
       case ROUTE_NAME.Bitcoin_8:
         return <Bitcoin8Page />;
+      case ROUTE_NAME.Bitcoin_9:
+        return <Bitcoin9Page />;
 
       default:
         return <HomePage />;

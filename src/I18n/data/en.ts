@@ -388,6 +388,7 @@ const en = {
   "nav.tree.utxoAndTransactions": "Bitcoin doesn't move money",
   "nav.tree.keysAndSignatures": "Proving without revealing oneself",
   "nav.tree.walletsAndSeed": "Bitcoin: not an account, not a vault",
+  "nav.tree.greenSynthesis": "In summary",
   "nav.tree.getStarted": "Get started with Bitcoin!",
 
   // Footer

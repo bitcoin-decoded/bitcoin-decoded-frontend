@@ -392,6 +392,7 @@ const fr = {
   "nav.tree.utxoAndTransactions": "Bitcoin ne déplace pas d'argent",
   "nav.tree.keysAndSignatures": "Prouver sans se montrer",
   "nav.tree.walletsAndSeed": "Bitcoin, ni compte, ni coffre",
+  "nav.tree.greenSynthesis": "En synthèse",
   "nav.tree.getStarted": "Démarres avec Bitcoin!",
 
   // Footer

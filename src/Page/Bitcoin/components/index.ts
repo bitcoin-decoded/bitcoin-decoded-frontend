@@ -6,3 +6,4 @@ export { Bitcoin5Page } from './Bitcoin5Page';
 export { Bitcoin6Page } from './Bitcoin6Page';
 export { Bitcoin7Page } from './Bitcoin7Page';
 export { Bitcoin8Page } from './Bitcoin8Page';
+export { Bitcoin9Page } from './Bitcoin9Page';

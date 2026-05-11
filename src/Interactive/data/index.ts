@@ -14,6 +14,7 @@ export { getQuizDataHalving } from "./QUIZ_DATA_HALVING";
 export { getQuizDataUtxo } from "./QUIZ_DATA_UTXO";
 export { getQuizDataModule1Synthesis } from "./QUIZ_DATA_MODULE_1_SYNTHESIS";
 export { getQuizDataModule2Synthesis } from "./QUIZ_DATA_MODULE_2_SYNTHESIS";
+export { getQuizDataModule3Synthesis } from "./QUIZ_DATA_MODULE_3_SYNTHESIS";
 export { M2_MONEY_SUPPLY } from "./M2_MONEY_SUPPLY";
 export { HALVING_SCHEDULE } from "./HALVING_SCHEDULE";
 export type { HalvingPoint } from "./HALVING_SCHEDULE";

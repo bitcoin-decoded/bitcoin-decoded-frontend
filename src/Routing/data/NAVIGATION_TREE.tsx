@@ -122,6 +122,11 @@ export const getNavigationTree = (
         isPage: true,
       },
       {
+        id: ROUTE_NAME.Bitcoin_9,
+        label: t("nav.tree.greenSynthesis"),
+        isPage: true,
+      },
+      {
         label: t("nav.tree.getStarted"),
         isPage: true,
       },
