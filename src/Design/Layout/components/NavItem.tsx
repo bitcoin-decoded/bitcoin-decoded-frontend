@@ -99,19 +99,20 @@ export const NavItem: FC<Props> = ({
             display: "flex",
             alignItems: "center",
             gap: "0.625rem",
-            flexWrap: "wrap",
             minWidth: 0,
+            flex: 1,
           }}
         >
           {item.icon && level === 0 && (
-            <span style={{ opacity: 0.7 }}>{item.icon}</span>
+            <span style={{ opacity: 0.7, flexShrink: 0 }}>{item.icon}</span>
           )}
-          <span>{item.label}</span>
+          <span style={{ minWidth: 0 }}>{item.label}</span>
           {item.kind === "challenge" && (
             <Badge
-              size="xs"
+              size="sm"
               color="#f7931a"
-              icon={<ClipboardCheck size={11} strokeWidth={2} />}
+              icon={<ClipboardCheck size={13} strokeWidth={2} />}
+              style={{ flexShrink: 0 }}
             >
               Quiz
             </Badge>
