@@ -14,8 +14,14 @@ export const NavBar: FC = () => {
   const colors = THEME_COLORS[theme];
   const { t } = useTranslation();
   const { currentPage } = useRouterContext();
-  const { navigationTree, openMenus, handleMenuClick, interactionId, setInteractionId } =
-    useNavBar();
+  const {
+    navigationTree,
+    openModule,
+    handleMenuClick,
+    activePath,
+    interactionId,
+    setInteractionId,
+  } = useNavBar();
 
   const navStyle: CSSProperties = {
     padding: "1.5rem 0",
@@ -71,7 +77,10 @@ export const NavBar: FC = () => {
       item={item}
       level={level}
       isDirectlyActive={currentPage === item.id}
-      isExpanded={openMenus.has(item.label)}
+      isExpanded={openModule === item.label}
+      isActiveAncestor={
+        level === 0 && activePath.includes(item.label) && currentPage !== item.id
+      }
       isInteracting={interactionId === (item.id || item.label)}
       colors={colors}
       onItemClick={handleMenuClick}

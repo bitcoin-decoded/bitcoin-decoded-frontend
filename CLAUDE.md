@@ -140,6 +140,17 @@ Centralisent le style des éléments récurrents. Toutes lisent `usePageTheme()`
 
 **Règle** : si un composant Interactive ré-implémente l'un de ces patterns en inline, c'est qu'il faut migrer vers la primitive.
 
+### Disclosure vs Accordion (à ne pas confondre)
+
+Deux primitives de "collapse" coexistent — elles ne sont pas redondantes, leurs périmètres sont disjoints :
+
+| Brique                                    | Périmètre                                                                                                                                      |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Disclosure` + `useDisclosure`            | **Un seul** panneau qui s'ouvre / se ferme (état `boolean`). Pour un "show more" isolé, un détail optionnel sous un titre.                     |
+| `useAccordion<K>` (hook seul, pas de composant prêt-à-l'emploi) | **Groupe** de panneaux mutuellement exclusifs (état `K \| null` = quelle clé est ouverte, le cas échéant). Pour la navbar, une FAQ, etc. |
+
+Convention industrielle (Headless UI, Radix, MUI) : Disclosure = un seul, Accordion = groupe exclusif. Quand on a besoin d'un groupe non-exclusif (plusieurs ouverts simultanément), on compose plusieurs `useDisclosure` ou on monte une variante locale.
+
 ### Composants overlay (`src/Page/Shared/`)
 
 Montés au niveau `MainLayout` ou `PageTemplate`, indépendants du contenu :
