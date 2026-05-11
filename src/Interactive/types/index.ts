@@ -6,6 +6,7 @@ export type {
   SynthesisQuizData,
   SynthesisQuizQuestion,
   SynthesisQuizAnswer,
+  ChapterReference,
 } from "./SynthesisQuizData";
 export type { FlipCardItem } from "./FlipCardItem";
 export type {

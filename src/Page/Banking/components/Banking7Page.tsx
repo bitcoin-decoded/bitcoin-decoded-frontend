@@ -12,7 +12,11 @@ import { useToggleSimulator } from "../../Shared/hooks";
 export const Banking7Page: FC = () => {
   const { t, language } = useTranslation();
   const fr = language === "fr";
-  const { isActive: isQuizPassed, activate: onQuizPassed } = useToggleSimulator();
+  const {
+    isActive: isQuizPassed,
+    activate: onQuizPassed,
+    reset: onQuizReset,
+  } = useToggleSimulator();
   const quiz = getQuizDataModule1Synthesis(language);
 
   return (
@@ -42,7 +46,7 @@ export const Banking7Page: FC = () => {
         )}
       </p>
 
-      <SynthesisQuiz {...quiz} onPass={onQuizPassed} />
+      <SynthesisQuiz {...quiz} onPass={onQuizPassed} onReset={onQuizReset} />
 
       {isQuizPassed && (
         <>

@@ -1,19 +1,21 @@
 import type { Language } from "../../I18n";
-import type { SynthesisQuizData } from "../types/SynthesisQuizData";
+import { ROUTE_NAME } from "../../Routing";
+import type {
+  ChapterReference,
+  SynthesisQuizData,
+} from "../types/SynthesisQuizData";
+
+const CHAPTERS = {
+  moneyOrigin: { routeId: ROUTE_NAME.Banking_1, labelKey: "nav.tree.moneyOrigin" },
+  twoLevels: { routeId: ROUTE_NAME.Banking_2, labelKey: "nav.tree.twoLevels" },
+  qe: { routeId: ROUTE_NAME.Banking_3, labelKey: "nav.tree.qe" },
+  brokenEngine: { routeId: ROUTE_NAME.Banking_4, labelKey: "nav.tree.brokenEngine" },
+  cantillon: { routeId: ROUTE_NAME.Banking_5, labelKey: "nav.tree.cantillon" },
+  inflation: { routeId: ROUTE_NAME.Banking_6, labelKey: "nav.tree.inflation" },
+} as const satisfies Record<string, ChapterReference>;
 
 export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizData => {
   const fr = language === "fr";
-
-  const chapters = {
-    moneyOrigin: fr ? "D'où vient vraiment ton argent ?" : "Where does your money really come from?",
-    twoEuros: fr ? "Les deux euros que tu ignores" : "The two euros you never knew about",
-    nuclearWeapon: fr
-      ? "L'arme nucléaire des banques centrales"
-      : "The central banks' nuclear weapon",
-    brokenEngine: fr ? "Qui a cassé le moteur ?" : "Who broke the engine?",
-    moneyGoesToMoney: fr ? "Pourquoi l'argent va à l'argent" : "Why money goes to money",
-    baguette: fr ? "Pourquoi ta baguette coûte plus cher" : "Why your baguette costs more",
-  } as const;
 
   return {
     passThreshold: 10,
@@ -22,7 +24,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Quelle proportion de la monnaie en circulation est créée par les banques commerciales ?"
           : "What share of the money in circulation is created by commercial banks?",
-        chapterRef: chapters.moneyOrigin,
+        chapterRefs: [CHAPTERS.moneyOrigin],
         answers: [
           { text: fr ? "a) Environ 50 %" : "a) About 50%", isCorrect: false },
           { text: fr ? "b) Plus de 95 %" : "b) More than 95%", isCorrect: true },
@@ -33,7 +35,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Comment une banque commerciale crée-t-elle de l'argent ?"
           : "How does a commercial bank create money?",
-        chapterRef: chapters.moneyOrigin,
+        chapterRefs: [CHAPTERS.moneyOrigin],
         answers: [
           {
             text: fr
@@ -59,7 +61,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Dans le bilan comptable d'une banque, une créance sur un client est :"
           : "On a bank's balance sheet, a claim on a customer is:",
-        chapterRef: chapters.moneyOrigin,
+        chapterRefs: [CHAPTERS.moneyOrigin],
         answers: [
           {
             text: fr
@@ -85,7 +87,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Qu'est-ce qui distingue la monnaie M0 de la monnaie M2 ?"
           : "What distinguishes M0 money from M2 money?",
-        chapterRef: chapters.twoEuros,
+        chapterRefs: [CHAPTERS.twoLevels],
         answers: [
           {
             text: fr
@@ -111,7 +113,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "À quoi sert la compensation interbancaire ?"
           : "What is the purpose of interbank settlement?",
-        chapterRef: chapters.twoEuros,
+        chapterRefs: [CHAPTERS.twoLevels],
         answers: [
           {
             text: fr
@@ -137,7 +139,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Quand Nicolas vire 200 000 € à Mme Michu (cliente d'une autre banque), que se passe-t-il concrètement en fin de journée ?"
           : "When Nicolas transfers €200,000 to Mrs. Michu (a customer of another bank), what actually happens at the end of the day?",
-        chapterRef: chapters.twoEuros,
+        chapterRefs: [CHAPTERS.twoLevels],
         answers: [
           {
             text: fr
@@ -163,7 +165,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Quelle est la cause principale qui peut amener une banque commerciale à manquer de M0 ?"
           : "What is the main cause that can leave a commercial bank short of M0?",
-        chapterRef: chapters.nuclearWeapon,
+        chapterRefs: [CHAPTERS.qe],
         answers: [
           {
             text: fr
@@ -187,7 +189,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
       },
       {
         question: fr ? "Qu'est-ce que le Quantitative Easing ?" : "What is Quantitative Easing?",
-        chapterRef: chapters.nuclearWeapon,
+        chapterRefs: [CHAPTERS.qe],
         answers: [
           {
             text: fr
@@ -213,7 +215,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Lorsque la Banque Centrale achète massivement des obligations, quel est l'effet mécanique sur leurs taux d'intérêt ?"
           : "When the Central Bank massively buys bonds, what is the mechanical effect on their interest rates?",
-        chapterRef: chapters.brokenEngine,
+        chapterRefs: [CHAPTERS.brokenEngine],
         answers: [
           {
             text: fr
@@ -239,7 +241,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Comment une banque commerciale gagne-t-elle traditionnellement de l'argent ?"
           : "How does a commercial bank traditionally make money?",
-        chapterRef: chapters.brokenEngine,
+        chapterRefs: [CHAPTERS.brokenEngine],
         answers: [
           {
             text: fr
@@ -265,7 +267,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Pourquoi le Quantitative Easing « casse-t-il le moteur » des banques commerciales ?"
           : "Why does Quantitative Easing \"break the engine\" of commercial banks?",
-        chapterRef: chapters.brokenEngine,
+        chapterRefs: [CHAPTERS.brokenEngine],
         answers: [
           {
             text: fr
@@ -291,7 +293,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Face à un entrepreneur (projet risqué, peu de garanties) et un investisseur (achat d'actions avec son portefeuille existant en nantissement), pourquoi la banque privilégie-t-elle aujourd'hui le second ?"
           : "Between an entrepreneur (risky project, few guarantees) and an investor (buying stocks with an existing portfolio as collateral), why does the bank now favor the latter?",
-        chapterRef: `${chapters.brokenEngine} + ${chapters.moneyGoesToMoney}`,
+        chapterRefs: [CHAPTERS.brokenEngine, CHAPTERS.cantillon],
         answers: [
           {
             text: fr
@@ -315,7 +317,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
       },
       {
         question: fr ? "Qu'est-ce que l'Effet Cantillon ?" : "What is the Cantillon Effect?",
-        chapterRef: chapters.moneyGoesToMoney,
+        chapterRefs: [CHAPTERS.cantillon],
         answers: [
           {
             text: fr
@@ -341,7 +343,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Comment l'argent créé par le crédit bancaire finit-il par atteindre l'économie réelle ?"
           : "How does money created by bank credit eventually reach the real economy?",
-        chapterRef: chapters.baguette,
+        chapterRefs: [CHAPTERS.inflation],
         answers: [
           {
             text: fr
@@ -367,7 +369,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Pourquoi l'inflation des prix de consommation finit-elle par apparaître ?"
           : "Why does consumer price inflation eventually appear?",
-        chapterRef: chapters.baguette,
+        chapterRefs: [CHAPTERS.inflation],
         answers: [
           {
             text: fr

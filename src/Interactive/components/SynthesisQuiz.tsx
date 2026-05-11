@@ -11,15 +11,21 @@ import {
 } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
+import { useRouterContext } from "../../Routing";
 import { useSynthesisQuiz } from "../hooks/useSynthesisQuiz";
-import type { SynthesisQuizData } from "../types/SynthesisQuizData";
+import type {
+  ChapterReference,
+  SynthesisQuizData,
+} from "../types/SynthesisQuizData";
 
 type Props = SynthesisQuizData & {
   onPass?: () => void;
+  onReset?: () => void;
 };
 
-export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass }) => {
+export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass, onReset }) => {
   const { t } = useTranslation();
+  const { setCurrentPage } = useRouterContext();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
@@ -33,6 +39,11 @@ export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass }) =
     handleSubmit,
     handleReset,
   } = useSynthesisQuiz({ questions, passThreshold, onPass });
+
+  const onRetryClick = () => {
+    handleReset();
+    onReset?.();
+  };
 
   const questionTitleStyle: CSSProperties = {
     color: colors.base.text.primary,
@@ -48,6 +59,22 @@ export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass }) =
     fontWeight: 700,
     color: world.text.secondary,
     letterSpacing: "0.05em",
+  };
+
+  const chapterLinkStyle: CSSProperties = {
+    background: "none",
+    border: "none",
+    padding: 0,
+    margin: 0,
+    cursor: "pointer",
+    color: world.text.secondary,
+    textDecoration: "underline",
+    textDecorationColor: withOpacity(world.text.secondary, 0.4),
+    textUnderlineOffset: "3px",
+    fontFamily: "inherit",
+    fontSize: "inherit",
+    fontWeight: 500,
+    transition: "color 0.2s var(--ease-smooth)",
   };
 
   const getOptionStyle = (qIdx: number, aIdx: number): CSSProperties => {
@@ -91,6 +118,18 @@ export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass }) =
       fontFamily: "inherit",
     };
   };
+
+  const ChapterLink: FC<{ ref_: ChapterReference }> = ({ ref_ }) => (
+    <button
+      type="button"
+      style={chapterLinkStyle}
+      onClick={() => setCurrentPage(ref_.routeId)}
+      onMouseEnter={(e) => (e.currentTarget.style.color = colors.base.text.primary)}
+      onMouseLeave={(e) => (e.currentTarget.style.color = world.text.secondary)}
+    >
+      {t(ref_.labelKey)}
+    </button>
+  );
 
   const scoreColor = passed ? colors.semantic.success.text : colors.semantic.error.text;
   const headlineKey = passed ? "synthesisQuiz.passed" : "synthesisQuiz.failed";
@@ -140,7 +179,14 @@ export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass }) =
                 )
               }
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", flexWrap: "wrap" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  flexWrap: "wrap",
+                }}
+              >
                 <BookOpen size={13} strokeWidth={2} color={world.text.secondary} />
                 <span
                   style={{
@@ -153,7 +199,20 @@ export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass }) =
                 >
                   {t("synthesisQuiz.chapter")}
                 </span>
-                <span style={{ color: colors.base.text.primary }}>{q.chapterRef}</span>
+                {q.chapterRefs.map((ref, i) => (
+                  <span
+                    key={ref.routeId}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      color: colors.base.text.primary,
+                    }}
+                  >
+                    {i > 0 && <span style={{ color: world.text.secondary }}>+</span>}
+                    <ChapterLink ref_={ref} />
+                  </span>
+                ))}
               </div>
             </FeedbackPanel>
           )}
@@ -208,7 +267,7 @@ export const SynthesisQuiz: FC<Props> = ({ questions, passThreshold, onPass }) =
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
               variant="secondary"
-              onClick={handleReset}
+              onClick={onRetryClick}
               icon={<RotateCcw size={isMobile ? 12 : 14} strokeWidth={2} />}
             >
               {t("synthesisQuiz.retry")}
