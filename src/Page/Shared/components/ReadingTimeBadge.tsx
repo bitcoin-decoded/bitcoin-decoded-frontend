@@ -51,7 +51,7 @@ export const ReadingTimeBadge: FC = () => {
         <Clock size={isMobile ? 12 : 13} strokeWidth={2} style={{ opacity: 0.7 }} />
         <span style={{ fontWeight: 600 }}>{estimate.minutes} min</span>
       </div>
-      {flavor && <span style={flavorStyle}>- {flavor}</span>}
+      {flavor && <span style={flavorStyle}>· {flavor}</span>}
     </div>
   );
 };

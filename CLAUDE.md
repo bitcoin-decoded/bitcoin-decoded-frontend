@@ -53,7 +53,7 @@ Domain/
 | `src/Page/Shared/`         | `HomePage`, `PageTemplate`, `ChapterPrelude`, `PageNavigation`, `ReadingTimeBadge`, `ReadingProgressBar`, `ScrollToTopButton`, `RevealOnScroll`                      |
 | `src/Page/Banking/`        | 7 pages sur le système bancaire (Banking1Page → Banking7Page)                                                                                                        |
 | `src/Page/MoneyLaws/`      | 5 pages sur les lois de la monnaie (MoneyLaws1Page → MoneyLaws5Page)                                                                                                 |
-| `src/Page/Bitcoin/`        | 8 pages sur Bitcoin (Bitcoin1Page → Bitcoin8Page)                                                                                                                    |
+| `src/Page/Bitcoin/`        | 9 pages sur Bitcoin (Bitcoin1Page → Bitcoin9Page, dont Bitcoin9Page = quiz de synthèse)                                                                              |
 | `src/Interactive/`         | Domaine unifié : Illustrations, Simulateurs interactifs, Quiz, FlipCardGrid, DebateArena, BitcoinNodeDemo, BitcoinNetworkMap, …                                      |
 
 ---
@@ -172,6 +172,12 @@ type NavigationItem = {
   label: string;
   isPage: boolean;
   icon?: JSX.Element;
+  /**
+   * Discriminateur sémantique du type de chapitre. Pilote le rendu d'un marqueur
+   * visuel dans la navbar (ex : pill `Quiz` pour les chapitres `kind: "challenge"`).
+   * Champ extensible : ajouter ici les futurs types (`exercise`, `recap`, …).
+   */
+  kind?: "challenge";
   children?: NavigationItem[];
 };
 ```
@@ -181,6 +187,86 @@ type NavigationItem = {
 - `flattenPages(items)` → séquence linéaire pour la logique précédent/suivant
 - `findPathToId(nodes, id)` → chemin de labels vers une page (pour déterminer la section)
 - `findAllDescendantLabels(item)` → tous les labels enfants (pour le collapse du menu)
+
+### Marqueur visuel `challenge` dans la navbar
+
+Les chapitres `kind: "challenge"` (= quiz de synthèse de fin de module) sont distingués dans la navbar par un pill `Quiz` (icône Lucide `ClipboardCheck` + label uppercase mono), construit sur la primitive `Badge` (taille `xs`, couleur `#f7931a` figée pour cohérence avec l'accent navigation). Le pill est rendu inline juste après le libellé (pas flotté à droite) dans `NavItem.tsx`.
+
+Pour ajouter un nouveau type de marqueur (`exercise`, `recap`, …) : étendre le discriminateur `kind` sur `NavigationItem`, ajouter une branche de rendu dans `NavItem.tsx` à côté de celle de `challenge`.
+
+---
+
+## Quiz de synthèse (chapitres `kind: "challenge"`)
+
+Chaque module se conclut par un chapitre « Tu as compris ? Prouve le. » (EN : « Got it? Prove it. ») qui contient un quiz à validation différée gatant un texte de synthèse.
+
+### Pages concernées
+
+| Module    | Route      | Seuil   | Clé de titre i18n          |
+| --------- | ---------- | ------- | -------------------------- |
+| Banking   | Banking_7  | ≥ 10/15 | `nav.tree.synthesis`       |
+| MoneyLaws | MoneyLaws_5 | ≥ 10/15 | `nav.tree.orangeSynthesis` |
+| Bitcoin   | Bitcoin_9  | ≥ 15/20 | `nav.tree.greenSynthesis`  |
+
+### Briques (toutes dans `src/Interactive/`)
+
+- `types/SynthesisQuizData.ts` — `SynthesisQuizData`, `SynthesisQuizQuestion`, `SynthesisQuizAnswer`, `ChapterReference` (`{ routeId: RouteName; labelKey: TranslationKey }`)
+- `hooks/useSynthesisQuiz.ts` — état des sélections, score mémoïsé, soumission, reset, callback `onPass`, **persistance localStorage** sous une `storageKey` fournie par l'appelant
+- `data/QUIZ_DATA_MODULE_<N>_SYNTHESIS.ts` — getters language-aware retournant un `SynthesisQuizData` avec les références de chapitres (route id + clé i18n)
+- `components/SynthesisQuiz.tsx` — UI : une seule validation au clic du bouton « Valider », **pas de feedback au clic sur une réponse**. Au submit : score + FeedbackPanel par question (success / error) avec liens cliquables vers les chapitres référencés. Bouton « Recommencer » qui clear le localStorage et appelle `onReset` (pour permettre à la page parent de masquer à nouveau la synthèse)
+
+### Pattern d'intégration dans une page
+
+```tsx
+const { isActive: isQuizPassed, activate: onQuizPassed, reset: onQuizReset } = useToggleSimulator();
+const quiz = getQuizDataModule<N>Synthesis(language);
+
+return (
+  <PageTemplate title={t("nav.tree.<X>Synthesis")}>
+    <p>{/* intro courte */}</p>
+    <SynthesisQuiz
+      {...quiz}
+      storageKey="synthesisQuiz.module<N>" // ← clé unique par module
+      onPass={onQuizPassed}
+      onReset={onQuizReset}
+    />
+    {isQuizPassed && (
+      <>
+        {/* texte de synthèse, gaté */}
+      </>
+    )}
+  </PageTemplate>
+);
+```
+
+### Pourquoi `localStorage` et pas un Context React
+
+L'état du quiz doit survivre à la navigation (l'utilisateur clique sur une référence de chapitre, lit la page, revient) **et** au refresh. Un Context vit le temps de la session, donc tomberait au F5. La persistance `localStorage` couvre les deux cas avec un seul mécanisme local au hook, sans lifter d'état au-dessus du routeur.
+
+---
+
+## Temps de lecture (centralisé)
+
+### Source de vérité
+
+`src/Page/Shared/data/PAGE_METADATA.ts` mappe chaque `RouteName` → `{ wordCount, interactiveCount }`. Une page non listée ⇒ pas de badge de temps de lecture (cas voulu : `HomePage`).
+
+### Calcul
+
+`src/Page/Shared/helpers/getReadingTime.ts` :
+
+```
+minutes = ceil( wordCount / 200  +  interactiveCount × 0.75 )
+```
+
+- **200 WPM** : pace adulte standard pour de la prose éducative
+- **0.75 min / interactif** : engagement moyen attendu (lire le prompt, interagir, lire le résultat)
+
+### Audit & recalibrage
+
+`npm run audit:reading-time` (= `node scripts/count-prose.mjs`) re-mesure tous les chapitres en extrayant la prose FR des ternaires `fr ? … : …` et en comptant les composants Interactive. À relancer après tout ajout / réécriture significative de contenu et copier le résultat dans `PAGE_METADATA`.
+
+**Règle** : ne jamais hand-typer un `wordCount` dans `PAGE_METADATA`. Toujours partir de la sortie du script.
 
 ---
 
@@ -222,6 +308,7 @@ npm run build                      # Build production (tsc + vite build)
 npm run build 2>&1 | tail -3       # Build tronqué (économie de tokens)
 npm run lint                       # ESLint
 npm run preview                    # Preview du build (port 4173)
+npm run audit:reading-time         # Recompte les mots de chaque page → met à jour PAGE_METADATA
 ```
 
 ---
