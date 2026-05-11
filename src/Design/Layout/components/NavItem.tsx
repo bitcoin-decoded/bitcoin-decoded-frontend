@@ -1,4 +1,5 @@
 import { type FC, type CSSProperties, type JSX, Fragment } from "react";
+import { BadgeCheck } from "lucide-react";
 import { ChevronIcon } from "../../icons";
 import { type NavigationItem } from "../../../Routing";
 
@@ -116,6 +117,22 @@ export const NavItem: FC<Props> = ({
           >
             <ChevronIcon isExpanded={isExpanded} />
           </div>
+        )}
+        {!item.children && item.kind === "challenge" && (
+          <span
+            aria-hidden="true"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#f7931a",
+              opacity: isDirectlyActive || isInteracting ? 1 : 0.6,
+              flexShrink: 0,
+              transition: "opacity 0.15s",
+            }}
+          >
+            <BadgeCheck size={13} strokeWidth={1.8} />
+          </span>
         )}
       </button>
       {item.children && (
