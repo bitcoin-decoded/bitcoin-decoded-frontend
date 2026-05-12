@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis } from "../../../Design";
+import { Callout, Emphasis, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getQuizDataM0, Quiz } from "../../../Interactive";
 import { PageTemplate } from "../../Shared/components";
@@ -179,12 +179,20 @@ export const Banking3Page: FC = () => {
             {fr ? (
               <>
                 Face à un risque d'effondrement complet, la Banque Centrale sort son arme nucléaire
-                monétaire pour sauver le système : le <i>Quantitative Easing</i>.
+                monétaire pour sauver le système : le{" "}
+                <Reference href="https://fr.wikipedia.org/wiki/Assouplissement_quantitatif">
+                  Quantitative Easing
+                </Reference>
+                .
               </>
             ) : (
               <>
                 Facing the risk of total collapse, the Central Bank deploys its monetary nuclear
-                weapon to save the system: <i>Quantitative Easing</i>.
+                weapon to save the system:{" "}
+                <Reference href="https://en.wikipedia.org/wiki/Quantitative_easing">
+                  Quantitative Easing
+                </Reference>
+                .
               </>
             )}
           </p>

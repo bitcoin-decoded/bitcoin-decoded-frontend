@@ -2,9 +2,10 @@ import { type FC } from "react";
 
 import picsouCar from "../../../../src/Design/img/picsou_car.jpg";
 import picsouVilla from "../../../../src/Design/img/picsou_villa.jpg";
-import { Callout, Emphasis } from "../../../Design";
+import { Callout, Emphasis, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { Illustration } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 import { PAGE_STYLES } from "../../Shared/styles";
 
@@ -40,11 +41,16 @@ export const Banking6Page: FC = () => {
         {fr ? (
           <>
             L'argent finit toujours par brûler les doigts. C'est ce qu'on appelle l'
-            <i>Effet de Richesse.</i>
+            <Reference href="https://fr.wikipedia.org/wiki/Effet_de_richesse">
+              <i>Effet de Richesse.</i>
+            </Reference>
           </>
         ) : (
           <>
-            Money always ends up burning your fingers. This is called the <i>Wealth Effect.</i>
+            Money always ends up burning your fingers. This is called the{" "}
+            <Reference href="https://en.wikipedia.org/wiki/Wealth_effect">
+              <i>Wealth Effect.</i>
+            </Reference>
           </>
         )}
       </p>
@@ -178,9 +184,19 @@ export const Banking6Page: FC = () => {
         )}
       </p>
       <p>
-        {fr
-          ? "Et voilà. Premier module bouclé. Avant de passer à la suite, un petit quiz pour vérifier que tout est solide."
-          : "That's it. First module done. Before moving on, a quick quiz to make sure everything's solid."}
+        {fr ? (
+          <>
+            Et voilà. Premier module bouclé. Avant de passer à la suite,{" "}
+            <Reference to={ROUTE_NAME.Banking_7}>un petit quiz</Reference> pour vérifier que tout
+            est solide.
+          </>
+        ) : (
+          <>
+            That's it. First module done. Before moving on,{" "}
+            <Reference to={ROUTE_NAME.Banking_7}>a quick quiz</Reference> to make sure everything's
+            solid.
+          </>
+        )}
       </p>
     </PageTemplate>
   );

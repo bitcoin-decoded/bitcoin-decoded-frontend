@@ -3,10 +3,11 @@ import { type CSSProperties, type FC } from "react";
 import cantillonEffectImg from "../../../../src/Design/img/Cantillon_Effect.jpg";
 import gyroGearlooseImg from "../../../../src/Design/img/Gyro_Gearloose.png";
 import picsouImg from "../../../../src/Design/img/picsou.webp";
-import { Callout, Emphasis, IdentityCard } from "../../../Design";
+import { Callout, Emphasis, IdentityCard, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getQuizDataProfileChoice, Quiz } from "../../../Interactive";
 import { Illustration } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 import { useToggleSimulator } from "../../Shared/hooks";
 import { PAGE_STYLES } from "../../Shared/styles";
@@ -165,18 +166,26 @@ export const Banking5Page: FC = () => {
             {fr ? (
               <>
                 Tu viens de comprendre la mécanique de l'<i>Effet Cantillon</i>, du nom de
-                l'économiste irlandais du XVIIIe siècle <i>Richard Cantillon</i> : l'argent
-                nouvellement créé (M2) fuit l'économie réelle, jugée trop risquée, pour aller
-                gonfler le prix des actifs. Les « Picsou » s'enrichissent en dormant : la demande
-                pour les actifs monte, leurs portefeuilles aussi. Les « Géo » restent sur la touche.
+                l'économiste irlandais du XVIIIe siècle{" "}
+                <Reference href="https://fr.wikipedia.org/wiki/Richard_Cantillon">
+                  <i>Richard Cantillon</i>
+                </Reference>{" "}
+                : l'argent nouvellement créé (M2) fuit l'économie réelle, jugée trop risquée, pour
+                aller gonfler le prix des actifs. Les « Picsou » s'enrichissent en dormant : la
+                demande pour les actifs monte, leurs portefeuilles aussi. Les « Géo » restent sur
+                la touche.
               </>
             ) : (
               <>
                 You've just understood the mechanism of the <i>Cantillon Effect</i>, named after the
-                18th-century Irish economist Richard Cantillon: newly created money (M2) tends to
-                flow away from the real economy-considered too risky-and instead inflates asset
-                prices. The "Scrooges" get richer while they sleep: demand for assets rises, and so
-                do the value of their portfolios. The "Geos" are left on the sidelines.
+                18th-century Irish economist{" "}
+                <Reference href="https://en.wikipedia.org/wiki/Richard_Cantillon">
+                  Richard Cantillon
+                </Reference>
+                : newly created money (M2) tends to flow away from the real economy-considered too
+                risky-and instead inflates asset prices. The "Scrooges" get richer while they
+                sleep: demand for assets rises, and so do the value of their portfolios. The
+                "Geos" are left on the sidelines.
               </>
             )}
           </p>
@@ -195,13 +204,19 @@ export const Banking5Page: FC = () => {
               <>
                 Mais quand les Picsou se sentent riches, ils finissent par dépenser. Et là, ça
                 déborde dans le caddie de courses. Tiens, quelqu'un n'aurait pas prononcé le mot{" "}
-                <i>inflation</i> ?
+                <Reference to={ROUTE_NAME.Banking_6}>
+                  <i>inflation</i>
+                </Reference>
+                {" "}?
               </>
             ) : (
               <>
                 But when the Scrooges feel wealthy, they eventually start spending. And that's when
                 it spills over into the shopping cart. Did someone just say the word{" "}
-                <i>inflation</i>?
+                <Reference to={ROUTE_NAME.Banking_6}>
+                  <i>inflation</i>
+                </Reference>
+                ?
               </>
             )}
           </p>

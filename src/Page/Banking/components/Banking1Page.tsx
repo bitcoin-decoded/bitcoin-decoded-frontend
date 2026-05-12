@@ -1,7 +1,8 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, KeywordHighlight } from "../../../Design";
+import { Callout, Emphasis, KeywordHighlight, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 
 import { CreditCreationSimulator } from "./CreditCreationSimulator";
@@ -198,11 +199,13 @@ export const Banking1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            On enchaîne sur le second pilier : <Emphasis>les deux niveaux de monnaies</Emphasis>.
+            On enchaîne sur le second pilier :{" "}
+            <Reference to={ROUTE_NAME.Banking_2}>les deux niveaux de monnaies</Reference>.
           </>
         ) : (
           <>
-            Let's move on to the second pillar: <Emphasis>the two levels of money</Emphasis>.
+            Let's move on to the second pillar:{" "}
+            <Reference to={ROUTE_NAME.Banking_2}>the two levels of money</Reference>.
           </>
         )}
       </p>

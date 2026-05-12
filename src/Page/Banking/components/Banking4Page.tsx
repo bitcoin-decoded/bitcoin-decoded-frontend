@@ -1,7 +1,8 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis } from "../../../Design";
+import { Callout, Emphasis, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 
 import { QESimulator } from "./QESimulator";
@@ -206,13 +207,19 @@ export const Banking4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Au lieu de prêter à ceux qui <i>font</i>, elles vont prêter à ceux qui <i>ont</i>. La
-            suite, juste après !
+            Au lieu de prêter à ceux qui <i>font</i>, elles vont prêter{" "}
+            <Reference to={ROUTE_NAME.Banking_5}>
+              à ceux qui <i>ont</i>
+            </Reference>
+            . La suite, juste après !
           </>
         ) : (
           <>
-            Instead of lending to those who <i>make</i>, they will lend to those who <i>have</i>.
-            More on that right after!
+            Instead of lending to those who <i>make</i>, they will lend{" "}
+            <Reference to={ROUTE_NAME.Banking_5}>
+              to those who <i>have</i>
+            </Reference>
+            . More on that right after!
           </>
         )}
       </p>
