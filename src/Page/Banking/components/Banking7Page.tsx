@@ -5,9 +5,8 @@ import moneyCreationCodeline from "../../../../src/Design/img/money_creation_cod
 import moneyPrinting from "../../../../src/Design/img/money_printing.webp";
 import { Emphasis } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { Illustration, SynthesisQuiz, getQuizDataModule1Synthesis } from "../../../Interactive";
-import { PageTemplate } from "../../Shared/components";
-import { useToggleSimulator } from "../../Shared/hooks";
+import { getQuizDataModule1Synthesis, Illustration, SynthesisQuiz } from "../../../Interactive";
+import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
 export const Banking7Page: FC = () => {
   const { t, language } = useTranslation();
@@ -23,24 +22,22 @@ export const Banking7Page: FC = () => {
     <PageTemplate title={t("nav.tree.synthesis")}>
       <p>
         {fr
-          ? "Tu viens de traverser la partie la plus dense du parcours. Avant de prendre du recul, mets tes acquis à l'épreuve."
-          : "You've just made it through the densest part of the journey. Before stepping back, put what you've learned to the test."}
+          ? "Tu viens de traverser la partie la plus dense. Avant de prendre du recul, mets tes acquis à l'épreuve."
+          : "You've just made it through the densest part. Before stepping back, put your understanding to the test."}
       </p>
       <p>
         {fr ? (
           <>
-            15 questions sur l'ensemble du module.{" "}
+            {quiz.questions.length} questions sur l'ensemble du module.{" "}
             <Emphasis>
-              Atteins au moins {quiz.passThreshold} bonnes réponses sur {quiz.questions.length} pour
-              débloquer la synthèse.
+              Il te faut au moins {quiz.passThreshold} bonnes réponses pour débloquer la synthèse.
             </Emphasis>
           </>
         ) : (
           <>
-            15 questions covering the whole module.{" "}
+            {quiz.questions.length} questions covering the whole module.{" "}
             <Emphasis>
-              Score at least {quiz.passThreshold} out of {quiz.questions.length} to unlock the
-              synthesis.
+              You need at least {quiz.passThreshold} correct answers to unlock the summary.
             </Emphasis>
           </>
         )}
@@ -55,41 +52,43 @@ export const Banking7Page: FC = () => {
 
       {isQuizPassed && (
         <>
-          <p>{fr ? "Pour commencer, bravo !" : "First of all, well done!"}</p>
+          <p>{fr ? "Bravo !" : "Well done!"}</p>
           <p>
             {fr
-              ? "Vous avez traversé la partie la plus dense. Prenons maintenant un peu de recul. Si l'on assemble les mécanismes que nous venons de voir, une image cohérente, et un peu inquiétante, se dessine."
-              : "You've made it through the densest part. Let's now take a step back. If we put together the mechanisms we've just seen, a coherent - and somewhat troubling - picture emerges."}
+              ? "Tu as traversé la partie la plus dense. Prenons un peu de recul. Si l'on assemble les mécanismes vus jusqu'ici, une image cohérente se dessine. Et elle est inquiétante."
+              : "You've made it through the densest part. Now let's take a step back. If we put together the mechanisms we've explored so far, a coherent picture begins to emerge. And it's a troubling one."}
           </p>
           <p>
             {fr ? (
               <>
-                Nous avons vu que l'argent utilisé au quotidien (M2) n'est plus une ressource rare
-                adossé à un sous-jacent réel, mais{" "}
+                L'argent que tu utilises au quotidien (M2) n'est plus une ressource rare adossé à un
+                sous-jacent réel. C'est{" "}
                 <Emphasis>
-                  une monnaie scripturale créée par les banques commerciales lors de l'octroi de
-                  crédits
+                  une monnaie scripturale, créée par les banques commerciales à chaque crédit
+                  accordé
                 </Emphasis>
-                . Cette création monétaire s'inscrit dans un cadre réglementaire et comptable, mais
-                elle demeure structurellement extensible. Autrement dit, la monnaie est devenue{" "}
+                . Cette création monétaire s'inscrit dans un cadre réglementaire et comptable. Mais
+                elle reste extensible par nature. Autrement dit : la monnaie est devenue{" "}
                 <Emphasis>intrinsèquement facile à produire</Emphasis>.
               </>
             ) : (
               <>
-                We saw that the money used daily (M2) is no longer a scarce resource backed by a
-                real underlying asset, but{" "}
+                The money you use every day (M2) is no longer a scarce resource backed by a real
+                underlying asset. It is{" "}
                 <Emphasis>
-                  a scriptural currency created by commercial banks when granting loans
+                  bank-created money, generated by commercial banks every time a loan is issued
                 </Emphasis>
-                . This money creation operates within a regulatory and accounting framework, but it
-                remains structurally expandable. In other words, money has become{" "}
-                <Emphasis>inherently easy to produce</Emphasis>.
+                . This money creation operates within a regulatory and accounting framework. But by
+                nature, it remains expandable. In other words: money has become{" "}
+                <Emphasis>easy to produce</Emphasis>.
               </>
             )}
             <Illustration
               src={moneyCreationCodeline}
               alt={
-                fr ? "Création monétaire via une ligne de code" : "Money creation via a line of code"
+                fr
+                  ? "Création monétaire via une ligne de code"
+                  : "Money creation via a line of code"
               }
               width="30%"
               caption={fr ? "Une simple ligne de code" : "A simple line of code"}
@@ -98,28 +97,26 @@ export const Banking7Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Lorsque ce système montre des signes de fragilité, un acteur central intervient : la
-                Banque Centrale. Sans consultation directe des épargnants ou des citoyens, elle
-                dispose du pouvoir d'augmenter la monnaie de base (M0) en volumes très importants,
-                notamment via des programmes de rachat d'actifs comme le{" "}
-                <Emphasis>Quantitative Easing</Emphasis>. Ces interventions permettent de maintenir
-                le système financier à court terme,{" "}
+                Quand le système vacille, un acteur central intervient : la Banque Centrale. Sans
+                demander l'avis des épargnants ni des citoyens, elle peut augmenter la monnaie de
+                base (M0) en volumes massifs. Notamment via le{" "}
+                <Emphasis>Quantitative Easing</Emphasis>, ces fameux rachats d'obligations. Ces
+                interventions sauvent le système à court terme.{" "}
                 <Emphasis>
-                  mais au prix d'une dilution progressive de la valeur de la monnaie existante,
-                  lorsque cette expansion n'est pas compensée par une création de richesse réelle
-                  équivalente.
+                  Mais au prix d'une dilution progressive de la monnaie existante, dès que cette
+                  expansion n'est pas compensée par une création de richesse équivalente.
                 </Emphasis>
               </>
             ) : (
               <>
-                When this system shows signs of fragility, a central actor intervenes: the Central
-                Bank. Without directly consulting savers or citizens, it has the power to increase
-                base money (M0) in very large volumes, notably through asset purchase programs like{" "}
-                <Emphasis>Quantitative Easing</Emphasis>. These interventions help maintain the
-                financial system in the short term,{" "}
+                When the system begins to wobble, a central actor steps in: the Central Bank.
+                Without asking savers or citizens for consent, it can massively increase the
+                monetary base (M0). In particular through <Emphasis>Quantitative Easing</Emphasis>,
+                those large-scale bond purchases. These interventions keep the system afloat in the
+                short term.{" "}
                 <Emphasis>
-                  but at the cost of a gradual dilution of the existing money's value, when this
-                  expansion is not offset by equivalent real wealth creation.
+                  But at the cost of a gradual dilution of the existing currency, whenever that
+                  expansion is not matched by an equivalent creation of real wealth.
                 </Emphasis>
               </>
             )}
@@ -133,43 +130,35 @@ export const Banking7Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Cette création monétaire n'affecte pas l'ensemble de l'économie de manière uniforme.
-                Comme nous l'avons vu avec l'<Emphasis>Effet Cantillon</Emphasis>, l'argent
-                nouvellement créé bénéficie d'abord aux acteurs les plus proches de sa source,
-                principalement les marchés financiers et les détenteurs d'actifs. Il en résulte une
-                inflation marquée des prix des actifs, notamment sur la bourse et l'immobilier,
-                tandis que l'économie productive et les revenus du travail n'évoluent pas au même
-                rythme, <Emphasis>accentuant les écarts de richesse</Emphasis>.
+                Cette création monétaire n'arrose pas l'économie de façon uniforme. L'
+                <Emphasis>Effet Cantillon</Emphasis>, vous vous en souvenez : l'argent nouvellement
+                créé bénéficie d'abord à ceux qui sont proches de la source. Principalement les
+                marchés financiers et les détenteurs d'actifs. Résultat : les prix des actifs
+                s'envolent. Bourse, immobilier. Pendant que l'économie productive et les revenus du
+                travail traînent derrière. <Emphasis>Les écarts de richesse se creusent</Emphasis>.
               </>
             ) : (
               <>
-                This money creation does not affect the entire economy uniformly. As we saw with the{" "}
-                <Emphasis>Cantillon Effect</Emphasis>, newly created money first benefits those
-                closest to its source, mainly financial markets and asset holders. This results in
-                marked asset price inflation, particularly in stocks and real estate, while the
-                productive economy and labor income don't keep pace,{" "}
-                <Emphasis>widening the wealth gap</Emphasis>.
+                This money creation does not flow evenly through the economy. You remember the{" "}
+                <Emphasis>Cantillon Effect</Emphasis>: newly created money benefits first those
+                closest to the source, primarily financial markets and asset holders. The result:
+                asset prices soar. Stocks. Real estate. Meanwhile, the productive economy and labor
+                income lag behind. <Emphasis>Wealth inequality widens.</Emphasis>
               </>
             )}
           </p>
           <p>
             {fr ? (
               <>
-                A terme, ces déséquilibres se diffusent vers l'économie réelle. Une masse monétaire
-                en forte expansion, confrontée à une production de biens et de services qui
-                progresse plus lentement, exerce une pression inflationniste durable. Il ne s'agit
-                pas simplement d'une hausse ponctuelle des prix, mais{" "}
-                <Emphasis>
-                  d'une dégradation progressive de la valeur de la monnaie elle-même
-                </Emphasis>
-                .
+                À terme, ces déséquilibres finissent par atteindre l'économie réelle. Une masse
+                monétaire qui gonfle vite, face à une production de biens et services qui progresse
+                plus lentement, ça donne <Emphasis>une pression inflationniste durable</Emphasis>.
               </>
             ) : (
               <>
-                Eventually, these imbalances spread to the real economy. A rapidly expanding money
-                supply, facing production of goods and services that grows more slowly, exerts
-                lasting inflationary pressure. This is not simply a one-time price increase, but{" "}
-                <Emphasis>a gradual degradation of the value of money itself</Emphasis>.
+                Eventually, these imbalances spill over into the real economy. When the money supply
+                expands rapidly while the production of goods and services grows more slowly, the
+                result is <Emphasis>sustained inflationary pressure</Emphasis>.
               </>
             )}
             <Illustration
@@ -178,7 +167,7 @@ export const Banking7Page: FC = () => {
               width="30%"
               caption={
                 fr
-                  ? "Lentement mais sûrement les monnaies fiduciaires se consumment"
+                  ? "Lentement mais sûrement les monnaies fiduciaires se consument"
                   : "Slowly but surely, fiat currencies burn away"
               }
             />
@@ -186,54 +175,53 @@ export const Banking7Page: FC = () => {
           <p>
             {fr ? (
               <>
-                <Emphasis>Le constat est donc structurel</Emphasis>. Ces dynamiques ne relèvent ni
-                d'un accident de parcours, ni de mauvaises décisions isolées. Elles découlent du{" "}
+                <Emphasis>Le constat est structurel</Emphasis>. Ces dynamiques ne sont ni un
+                accident de parcours, ni une suite de mauvaises décisions. Elles découlent du{" "}
                 <Emphasis>
-                  fonctionnement même d'un système monétaire fondé sur l'expansion du crédit et de
-                  la dette
+                  fonctionnement même d'un système monétaire bâti sur l'expansion du crédit et de la
+                  dette
                 </Emphasis>
-                . En cherchant à résoudre des déséquilibres à court terme par une création monétaire
-                toujours plus importante, le système tend à transférer dans le temps, et vers les
-                épargnants, le coût de ces ajustements.
+                . À chaque déséquilibre court terme, on imprime plus. Et le coût de l'ajustement ?
+                On le repousse dans le temps. On le fait porter aux épargnants.
               </>
             ) : (
               <>
-                <Emphasis>The diagnosis is therefore structural</Emphasis>. These dynamics are
-                neither an accident nor isolated bad decisions. They stem from the{" "}
+                <Emphasis>The problem is structural.</Emphasis> These dynamics are neither accidents
+                nor a series of bad decisions. They arise from the{" "}
                 <Emphasis>
-                  very functioning of a monetary system based on credit and debt expansion
+                  very functioning of a monetary system built on credit and debt expansion
                 </Emphasis>
-                . By trying to resolve short-term imbalances through ever-increasing money creation,
-                the system tends to transfer the cost of these adjustments over time - and onto
-                savers.
+                . Every time a short-term imbalance appears, more money is created. And the cost of
+                the adjustment? It is pushed into the future. Passed on to savers.
               </>
             )}
           </p>
           <p>
             {fr
-              ? "Dès lors, un espoir émerge. On pourrait rêver d'un outil différent. Une monnaie que personne ne pourrait imprimer à volonté, qui ne dépendrait d'aucun émetteur central et qui protégerait \"mécaniquement\" la valeur de notre épargne dans le temps. Une telle solution semble être le \"Graal\" de l'économie. Mais avant de découvrir si cet outil existe et comment il fonctionne, nous devons d'abord lever le voile sur un mystère que l'on oublie trop souvent : Dès lors, une question fondamentale se pose :"
-              : 'From here, a hope emerges. We could dream of a different tool. A currency that nobody could print at will, that wouldn\'t depend on any central issuer, and that would "mechanically" protect the value of our savings over time. Such a solution seems to be the "Holy Grail" of economics. But before discovering if this tool exists and how it works, we must first unveil a mystery too often forgotten. A fundamental question arises:'}
+              ? "Et là, une question commence à pointer. Et si on avait un outil différent ? Une monnaie que personne ne pourrait imprimer à volonté. Qui ne dépendrait d'aucun émetteur central. Qui protégerait la valeur de votre épargne dans le temps, presque mécaniquement. Le Graal monétaire, en somme. Mais avant de savoir si cet outil existe, il faut lever le voile sur un mystère qu'on oublie trop souvent."
+              : "And then a question begins to emerge. What if there were a different tool? A currency that no one could print at will. One that wouldn't depend on any central issuer. One that would protect the value of your savings over time, almost mechanically. The monetary holy grail, in a way. But before we find out whether such a tool exists, we need to lift the veil on a mystery that is too often overlooked."}
           </p>
           <p>
             {fr ? (
               <>
-                <Emphasis>Au fond, c'est quoi l'argent ?</Emphasis> Pourquoi un billet a-t-il de la
-                valeur alors qu'une feuille d'arbre n'en a pas ? Pourquoi l'humanité a-t-elle
-                utilisé de l'or pendant des millénaires avant de s'en détourner ? Pour comprendre la
-                solution, il faut d'abord redéfinir les bases.
+                <Emphasis>Au fond, c'est quoi l'argent ?</Emphasis> Pourquoi un billet a de la
+                valeur, et une feuille d'arbre non ? Pourquoi l'humanité a utilisé l'or pendant des
+                millénaires avant de s'en détourner ? Pour comprendre la solution, il faut d'abord
+                poser les bases.
               </>
             ) : (
               <>
-                <Emphasis>What is money, really?</Emphasis> Why does a banknote have value while a
-                tree leaf doesn't? Why did humanity use gold for millennia before turning away from
-                it? To understand the solution, we must first redefine the basics.
+                <Emphasis>At its core, what is money?</Emphasis> Why does a banknote have value,
+                while a leaf does not? Why did humanity use gold for thousands of years before
+                moving away from it? To understand the solution, we first need to lay the
+                foundations.
               </>
             )}
           </p>
           <p>
             {fr
-              ? "Cap vers notre prochaine destination : l'essence même de la monnaie !"
-              : "Onward to our next destination: the very essence of money!"}
+              ? "Direction la prochaine étape : l'essence de la monnaie."
+              : "Next step: the essence of money."}
           </p>
         </>
       )}

@@ -1,9 +1,6 @@
 import type { Language } from "../../I18n";
 import { ROUTE_NAME } from "../../Routing";
-import type {
-  ChapterReference,
-  SynthesisQuizData,
-} from "../types/SynthesisQuizData";
+import type { ChapterReference, SynthesisQuizData } from "../types";
 
 const CHAPTERS = {
   whatIsMoney: { routeId: ROUTE_NAME.MoneyLaws_1, labelKey: "nav.tree.whatIsMoney" },
@@ -29,8 +26,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Pour permettre aux États de prélever l'impôt plus efficacement"
-              : "a) To allow States to collect taxes more efficiently",
+              ? "a) Pour permettre aux États naissants de prélever l'impôt plus efficacement sur leurs populations"
+              : "a) To allow emerging States to collect taxes more efficiently from their populations",
             isCorrect: false,
           },
           {
@@ -41,8 +38,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Pour remplacer le troc, jugé trop inefficace"
-              : "c) To replace barter, deemed too inefficient",
+              ? "c) Pour remplacer le troc, jugé trop inefficace pour faire prospérer les civilisations agraires"
+              : "c) To replace barter, deemed too inefficient to grow agrarian civilizations",
             isCorrect: false,
           },
         ],
@@ -61,22 +58,22 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) La rareté est une propriété physique, la dureté est une propriété juridique"
-              : "b) Scarcity is a physical property, hardness is a legal property",
+              ? "b) La rareté est une propriété physique du métal ou du bien, la dureté est une propriété strictement juridique encadrée par les autorités"
+              : "b) Scarcity is a physical property of the metal or good, hardness is a strictly legal property framed by the authorities",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Ce sont deux mots qui désignent la même chose"
-              : "c) They are two words that mean the same thing",
+              ? "c) Ce sont deux synonymes : les économistes utilisent l'un ou l'autre indifféremment selon leur école de pensée"
+              : "c) They are two synonyms: economists use one or the other interchangeably depending on their school of thought",
             isCorrect: false,
           },
         ],
       },
       {
         question: fr
-          ? "Parmi ces cinq propriétés, laquelle ne fait PAS partie des piliers d'une bonne monnaie ?"
-          : "Among these five properties, which is NOT one of the pillars of sound money?",
+          ? "Parmi ces propositions, laquelle ne fait PAS partie des piliers d'une bonne monnaie ?"
+          : "Among these proposals, which one is NOT a pillar of sound money?",
         chapterRefs: [CHAPTERS.whatIsMoney],
         answers: [
           {
@@ -103,8 +100,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Parce que les autorités locales les ont officiellement interdits"
-              : "a) Because local authorities officially banned them",
+              ? "a) Parce que les autorités locales ont fini par les interdire officiellement au profit de monnaies métalliques plus modernes"
+              : "a) Because local authorities eventually banned them officially in favour of more modern metal currencies",
             isCorrect: false,
           },
           {
@@ -115,8 +112,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Parce qu'ils étaient trop fragiles physiquement et finissaient par se détériorer"
-              : "c) Because they were too physically fragile and eventually deteriorated",
+              ? "c) Parce qu'ils étaient physiquement trop fragiles et finissaient par se détériorer au fil des manipulations quotidiennes"
+              : "c) Because they were physically too fragile and ended up deteriorating through daily handling",
             isCorrect: false,
           },
         ],
@@ -129,8 +126,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Parce que sa production est devenue trop facile avec les techniques minières modernes"
-              : "a) Because its production has become too easy with modern mining techniques",
+              ? "a) Parce que sa production est devenue trop facile depuis l'arrivée des techniques minières industrielles, faisant chuter sa dureté"
+              : "a) Because its production has become too easy with industrial mining techniques, collapsing its hardness",
             isCorrect: false,
           },
           {
@@ -141,8 +138,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Parce que les États en ont officiellement interdit l'usage entre particuliers"
-              : "c) Because States have officially banned its use between individuals",
+              ? "c) Parce que les États ont fini par interdire officiellement son usage entre particuliers dans la plupart des juridictions"
+              : "c) Because States eventually banned its use between individuals in most jurisdictions",
             isCorrect: false,
           },
         ],
@@ -159,14 +156,14 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Le temps moyen qu'un investisseur conserve un actif avant de le revendre"
-              : "b) The average time an investor holds an asset before reselling it",
+              ? "b) Le temps moyen pendant lequel un investisseur conserve un actif financier avant de le revendre sur le marché"
+              : "b) The average time an investor holds a financial asset before reselling it on the market",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) La durée légale d'un contrat de prêt bancaire"
-              : "c) The legal duration of a bank loan contract",
+              ? "c) La durée légale maximale d'un contrat de prêt bancaire à taux fixe, fixée par le législateur"
+              : "c) The maximum legal duration of a fixed-rate bank loan contract, set by the legislator",
             isCorrect: false,
           },
         ],
@@ -179,8 +176,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Il est fixé par la Banque Centrale pour piloter l'inflation"
-              : "a) It is set by the Central Bank to steer inflation",
+              ? "a) Il est fixé chaque trimestre par la Banque Centrale pour piloter l'inflation en fonction des objectifs gouvernementaux"
+              : "a) It is set every quarter by the Central Bank to steer inflation according to government targets",
             isCorrect: false,
           },
           {
@@ -191,14 +188,16 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Il représente la marge de profit garantie aux banques commerciales"
-              : "c) It represents the profit margin guaranteed to commercial banks",
+              ? "c) Il représente la marge de profit minimale garantie aux banques commerciales par la réglementation prudentielle européenne"
+              : "c) It represents the minimum profit margin guaranteed to commercial banks by European prudential regulation",
             isCorrect: false,
           },
         ],
       },
       {
-        question: fr ? "Qu'est-ce qu'un détour de production ?" : "What is a roundabout production process?",
+        question: fr
+          ? "Qu'est-ce qu'un détour de production ?"
+          : "What is a roundabout production process?",
         chapterRefs: [CHAPTERS.economicCycles],
         answers: [
           {
@@ -209,14 +208,14 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Un délai administratif imposé par la réglementation entre la commande et la livraison"
-              : "b) An administrative delay imposed by regulation between order and delivery",
+              ? "b) Un délai administratif imposé par la réglementation européenne entre la commande d'un bien et sa livraison effective"
+              : "b) An administrative delay imposed by European regulation between the order of a good and its actual delivery",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Une perte de temps causée par un mauvais choix logistique"
-              : "c) A waste of time caused by a poor logistical choice",
+              ? "c) Une perte de temps causée par un mauvais choix logistique, comme un itinéraire mal optimisé entre deux entrepôts"
+              : "c) A waste of time caused by a poor logistical choice, such as a badly optimised route between two warehouses",
             isCorrect: false,
           },
         ],
@@ -229,8 +228,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) L'épargne réelle augmente mécaniquement, ce qui finance davantage de projets"
-              : "a) Real savings mechanically increase, financing more projects",
+              ? "a) L'épargne réelle augmente mécaniquement, ce qui finance davantage de projets dans l'économie productive"
+              : "a) Real savings mechanically increase, financing more projects in the productive economy",
             isCorrect: false,
           },
           {
@@ -241,8 +240,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Rien de particulier : les taux finissent toujours par s'ajuster naturellement sans conséquence"
-              : "c) Nothing particular: rates always end up adjusting naturally without consequence",
+              ? "c) Rien de particulier ne se produit, car les taux finissent toujours par s'ajuster naturellement sans aucune conséquence durable"
+              : "c) Nothing particular happens, since rates always end up adjusting naturally without any lasting consequence",
             isCorrect: false,
           },
         ],
@@ -255,8 +254,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Que l'épargne est inutile tant qu'on a la volonté de réussir un projet"
-              : "a) That savings are useless as long as one has the will to succeed in a project",
+              ? "a) Que l'épargne est largement inutile dès lors qu'un individu fait preuve de la volonté nécessaire pour mener à bien son projet"
+              : "a) That savings are largely useless as long as an individual shows the necessary will to carry through their project",
             isCorrect: false,
           },
           {
@@ -267,8 +266,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Que l'investissement est plus important que l'épargne dans une économie moderne"
-              : "c) That investment is more important than savings in a modern economy",
+              ? "c) Que l'investissement productif compte davantage que l'épargne dans une économie moderne hautement financiarisée"
+              : "c) That productive investment matters more than savings in a modern, highly financialised economy",
             isCorrect: false,
           },
         ],
@@ -281,8 +280,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Parce que les planificateurs manquent généralement de compétences techniques"
-              : "a) Because planners generally lack technical skills",
+              ? "a) Parce que les planificateurs centraux manquent généralement des compétences techniques et de l'expérience industrielle nécessaires pour piloter une économie complexe"
+              : "a) Because central planners generally lack the technical skills and industrial experience needed to steer a complex economy",
             isCorrect: false,
           },
           {
@@ -293,8 +292,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Parce que les citoyens d'un régime socialiste refusent de travailler efficacement"
-              : "c) Because citizens under a socialist regime refuse to work efficiently",
+              ? "c) Parce que les citoyens d'un régime socialiste refusent collectivement de travailler avec sérieux, sabotant ainsi tout effort de planification"
+              : "c) Because citizens under a socialist regime collectively refuse to work seriously, sabotaging any planning effort",
             isCorrect: false,
           },
         ],
@@ -307,8 +306,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Il transmet passivement les prix fixés par les autorités aux consommateurs"
-              : "a) They passively pass on the prices set by authorities to consumers",
+              ? "a) Il transmet passivement aux consommateurs les prix officiellement fixés par les autorités économiques compétentes"
+              : "a) They passively pass on to consumers the prices officially set by the competent economic authorities",
             isCorrect: false,
           },
           {
@@ -319,8 +318,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Il exécute les plans de production définis en amont par les ingénieurs"
-              : "c) They execute production plans defined upstream by engineers",
+              ? "c) Il se contente d'exécuter sur le terrain les plans de production définis en amont par les ingénieurs et les bureaux d'études"
+              : "c) They merely execute on the ground the production plans defined upstream by engineers and design offices",
             isCorrect: false,
           },
         ],
@@ -339,14 +338,14 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Les deux ont exactement les mêmes effets sur l'économie"
-              : "b) Both have exactly the same effects on the economy",
+              ? "b) Les deux mécanismes ont en réalité exactement les mêmes effets sur l'économie : seuls les habillages politiques diffèrent"
+              : "b) Both mechanisms actually have exactly the same effects on the economy: only the political wrapping differs",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) La manipulation monétaire est légale, la planification socialiste ne l'est pas"
-              : "c) Monetary manipulation is legal, socialist planning is not",
+              ? "c) La manipulation monétaire est parfaitement légale et encadrée, alors que la planification socialiste a été condamnée par les traités internationaux"
+              : "c) Monetary manipulation is perfectly legal and regulated, whereas socialist planning has been condemned by international treaties",
             isCorrect: false,
           },
         ],
@@ -354,13 +353,13 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
       {
         question: fr
           ? "Pourquoi Hayek critique-t-il le « scientisme » en économie ?"
-          : "Why does Hayek criticize \"scientism\" in economics?",
+          : 'Why does Hayek criticize "scientism" in economics?',
         chapterRefs: [CHAPTERS.austrianMethod],
         answers: [
           {
             text: fr
-              ? "a) Parce que les économistes n'ont pas assez recours aux mathématiques"
-              : "a) Because economists do not rely enough on mathematics",
+              ? "a) Parce que les économistes contemporains n'ont pas suffisamment recours aux mathématiques pour formaliser leurs théories"
+              : "a) Because contemporary economists do not rely enough on mathematics to formalize their theories",
             isCorrect: false,
           },
           {
@@ -371,8 +370,8 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Parce que la science est trop neutre politiquement pour étudier l'économie"
-              : "c) Because science is too politically neutral to study economics",
+              ? "c) Parce que la science est, selon lui, trop neutre politiquement pour pouvoir étudier honnêtement les phénomènes économiques"
+              : "c) Because science is, in his view, too politically neutral to honestly study economic phenomena",
             isCorrect: false,
           },
         ],

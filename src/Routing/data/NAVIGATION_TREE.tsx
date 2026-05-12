@@ -1,10 +1,9 @@
-import type { NavigationItem } from "../types";
 import type { TranslationFn } from "../../I18n";
+import type { NavigationItem } from "../types";
+
 import { ROUTE_NAME } from "./ROUTE_NAME";
 
-export const getNavigationTree = (
-  t: TranslationFn
-): NavigationItem[] => [
+export const getNavigationTree = (t: TranslationFn): NavigationItem[] => [
   {
     label: t("nav.tree.bankingSystem"),
     isPage: false,
@@ -73,7 +72,7 @@ export const getNavigationTree = (
       },
       {
         id: ROUTE_NAME.MoneyLaws_5,
-        label: t("nav.tree.orangeSynthesis"),
+        label: t("nav.tree.synthesis"),
         isPage: true,
         kind: "challenge",
       },
@@ -125,7 +124,7 @@ export const getNavigationTree = (
       },
       {
         id: ROUTE_NAME.Bitcoin_9,
-        label: t("nav.tree.greenSynthesis"),
+        label: t("nav.tree.synthesis"),
         isPage: true,
         kind: "challenge",
       },
