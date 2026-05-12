@@ -9,6 +9,7 @@ export {
   HighlightText,
   KeywordHighlight,
   Quote,
+  Reference,
   SurfaceCard,
 } from "./components";
 export { useDisclosure } from "./hooks";
