@@ -8,4 +8,5 @@ export { FeedbackPanel } from "./FeedbackPanel";
 export { HighlightText } from "./HighlightText";
 export { KeywordHighlight } from "./KeywordHighlight";
 export { Quote } from "./Quote";
+export { Reference } from "./Reference";
 export { SurfaceCard } from "./SurfaceCard";

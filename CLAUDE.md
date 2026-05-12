@@ -41,7 +41,7 @@ Domain/
 
 | Dossier                    | Rôle                                                                                                                                                                 |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/Design/`              | Système de design : primitives UI (`Button`, `SurfaceCard`, `Caption`, `Badge`, `FeedbackPanel`, `Callout`, `Quote`, `Disclosure`, …), icônes, layout, thème, marque |
+| `src/Design/`              | Système de design : primitives UI (`Button`, `SurfaceCard`, `Caption`, `Badge`, `FeedbackPanel`, `Callout`, `Quote`, `Disclosure`, `Reference`, …), icônes, layout, thème, marque |
 | `src/Design/Brand/`        | `BitcoinDecodedLogo`, `BitcoinDecodedAvatar`                                                                                                                         |
 | `src/Design/Layout/`       | MainLayout, Header (hide-on-scroll), Footer, NavBar, NavDrawer                                                                                                       |
 | `src/Design/Theme/`        | ThemeProvider/Context, ThemeToggle, THEME_COLORS, `usePageTheme()`                                                                                                   |
@@ -89,7 +89,7 @@ Domain/
 - Bitcoin → `"amber"` (#f7931a)
 - HomePage / défaut → `"base"`
 
-Toutes les primitives (`Button`, `SurfaceCard`, `Caption`, `Badge`, `FeedbackPanel`) sont module-aware via ce hook : l'accent suit automatiquement le monde courant.
+Toutes les primitives (`Button`, `SurfaceCard`, `Caption`, `Badge`, `FeedbackPanel`, `Reference`) sont module-aware via ce hook : l'accent suit automatiquement le monde courant.
 
 ---
 
@@ -139,6 +139,19 @@ Centralisent le style des éléments récurrents. Toutes lisent `usePageTheme()`
 | `FeedbackPanel` | Bloc tinté (résultat, hint, avertissement)                    | `tone` (5 valeurs), `variant` = `full` / `border-left`, `icon`, `title`                          |
 
 **Règle** : si un composant Interactive ré-implémente l'un de ces patterns en inline, c'est qu'il faut migrer vers la primitive.
+
+### Mise en valeur du texte vs référence (à ne pas confondre)
+
+Quatre primitives inline coexistent et se répartissent en deux couches disjointes : **mise en valeur** (purement décorative, non cliquable) et **référence** (cliquable, mène ailleurs). Choisir la mauvaise primitive trompe l'utilisateur (croit qu'un mot gras est cliquable, ou rate une vraie référence).
+
+| Couche       | Composant         | Visuel                                | Cliquable | Utiliser pour                                            |
+| ------------ | ----------------- | ------------------------------------- | --------- | -------------------------------------------------------- |
+| Emphasis     | `Emphasis`        | gras + couleur accent du monde         | ❌        | un mot / concept à faire ressortir dans une phrase       |
+| Emphasis     | `HighlightText`   | fond stabilo (gradient doux)           | ❌        | un passage entier (une demi-phrase) qu'on veut surligner |
+| Référence    | `Reference to={...}`   | underline pointillé + accent          | ✅        | renvoi interne (autre chapitre / module)                 |
+| Référence    | `Reference href={...}` | idem + icône `↗` traînante            | ✅        | renvoi externe (approfondissement Wikipédia, etc.)       |
+
+`Reference` est polymorphique : on passe `to: RouteName` pour de l'interne, `href: string` pour de l'externe — TypeScript force l'un ou l'autre. Pour les anti-patterns à éviter, voir le JSDoc de `Reference.tsx`.
 
 ### Disclosure vs Accordion (à ne pas confondre)
 
