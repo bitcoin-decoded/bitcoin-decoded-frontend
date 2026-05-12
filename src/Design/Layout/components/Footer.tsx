@@ -15,10 +15,9 @@ type Props = {
 const DONATION_ADDRESS = "bc1qph7nrgrvksm4ja6cpdrt0w35e0scqms6r0xvjy";
 
 /**
- * Footer with two visual rows:
- *   1. Donation message + small copyable BTC address card
- *      (laid out side-by-side on desktop; stacked on tablet/mobile)
- *   2. Copyright (subtle signature line)
+ * Footer — single row on desktop:
+ *   [ donation message + lightning icon ]  [ BTC address card ]  [ © copyright ]
+ * Tablet / mobile stack the items vertically (donationRow switches to column).
  *
  * Visual treatment: the footer carries a more pronounced background than
  * just a flat panel. We layer:
@@ -184,14 +183,15 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
       : "rgba(247, 147, 26, 0.4)";
   };
 
-  // ── Copyright row ──────────────────────────────────────────────────────
+  // ── Copyright (inline with the donation row to keep the footer compact)
   const copyrightStyle: CSSProperties = {
     fontSize: isMobile ? "0.62rem" : "0.68rem",
     color: colors.base.text.secondary,
     opacity: 0.65,
     letterSpacing: "0.05em",
     margin: 0,
-    marginTop: "0.15rem",
+    whiteSpace: "nowrap",
+    flexShrink: 0,
   };
 
   return (
@@ -228,9 +228,9 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
               )}
             </button>
           </div>
-        </div>
 
-        <p style={copyrightStyle}>{t("footer.copyright")}</p>
+          <p style={copyrightStyle}>{t("footer.copyright")}</p>
+        </div>
       </div>
     </footer>
   );
