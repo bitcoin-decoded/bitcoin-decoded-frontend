@@ -149,28 +149,22 @@ Centralisent le style des éléments récurrents. Toutes lisent `usePageTheme()`
 
 **Règle** : si un composant Interactive ré-implémente l'un de ces patterns en inline, c'est qu'il faut migrer vers la primitive.
 
-### Mise en valeur du texte vs référence (à ne pas confondre)
+### Mise en valeur du texte vs référence
 
-Quatre primitives inline coexistent et se répartissent en deux couches disjointes : **mise en valeur** (purement décorative, non cliquable) et **référence** (cliquable, mène ailleurs). Choisir la mauvaise primitive trompe l'utilisateur (croit qu'un mot gras est cliquable, ou rate une vraie référence).
+Trois patterns inline pour éviter la confusion "cliquable / pas cliquable" :
 
-| Couche    | Composant              | Visuel                       | Cliquable | Utiliser pour                                            |
-| --------- | ---------------------- | ---------------------------- | --------- | -------------------------------------------------------- |
-| Emphasis  | `HighlightText`        | fond stabilo (gradient doux) | ❌        | un passage entier (une demi-phrase) qu'on veut surligner |
-| Référence | `Reference to={...}`   | underline pointillé + accent | ✅        | renvoi interne (autre chapitre / module)                 |
-| Référence | `Reference href={...}` | idem + icône `↗` traînante   | ✅        | renvoi externe (approfondissement Wikipédia, etc.)       |
+| Composant              | Visuel                       | Cliquable | Pour                                                |
+| ---------------------- | ---------------------------- | --------- | --------------------------------------------------- |
+| `<strong>`             | gras neutre (HTML standard)  | ❌        | un mot / concept à faire ressortir                  |
+| `HighlightText`        | fond stabilo (gradient doux) | ❌        | un passage entier qu'on veut surligner              |
+| `Reference to={...}`   | underline pointillé + accent | ✅        | renvoi interne (autre chapitre / module)            |
+| `Reference href={...}` | idem + icône `↗` traînante   | ✅        | renvoi externe (Wikipédia, source canonique, etc.)  |
 
-`Reference` est polymorphique : on passe `to: RouteName` pour de l'interne, `href: string` pour de l'externe — TypeScript force l'un ou l'autre. Pour les anti-patterns à éviter, voir le JSDoc de `Reference.tsx`.
+`Reference` est polymorphique : `to: RouteName` pour l'interne, `href: string` pour l'externe — TypeScript force l'un ou l'autre. Voir le JSDoc de `Reference.tsx` pour les anti-patterns.
 
-### Disclosure vs Accordion (à ne pas confondre)
+### Collapse : Disclosure vs Accordion
 
-Deux primitives de "collapse" coexistent — elles ne sont pas redondantes, leurs périmètres sont disjoints :
-
-| Brique                                                          | Périmètre                                                                                                                                |
-| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `Disclosure` + `useDisclosure`                                  | **Un seul** panneau qui s'ouvre / se ferme (état `boolean`). Pour un "show more" isolé, un détail optionnel sous un titre.               |
-| `useAccordion<K>` (hook seul, pas de composant prêt-à-l'emploi) | **Groupe** de panneaux mutuellement exclusifs (état `K \| null` = quelle clé est ouverte, le cas échéant). Pour la navbar, une FAQ, etc. |
-
-Convention industrielle (Headless UI, Radix, MUI) : Disclosure = un seul, Accordion = groupe exclusif. Quand on a besoin d'un groupe non-exclusif (plusieurs ouverts simultanément), on compose plusieurs `useDisclosure` ou on monte une variante locale.
+`Disclosure` + `useDisclosure` = **un seul** panneau (état `boolean`). `useAccordion<K>` = **groupe** mutuellement exclusif (état `K | null`). Convention Headless UI / Radix / MUI.
 
 ### Composants overlay (`src/Page/Shared/`)
 
@@ -267,9 +261,9 @@ return (
 );
 ```
 
-### Pourquoi `localStorage` et pas un Context React
+### Persistance
 
-L'état du quiz doit survivre à la navigation (l'utilisateur clique sur une référence de chapitre, lit la page, revient) **et** au refresh. Un Context vit le temps de la session, donc tomberait au F5. La persistance `localStorage` couvre les deux cas avec un seul mécanisme local au hook, sans lifter d'état au-dessus du routeur.
+`localStorage` (pas Context) — l'état doit survivre au F5 ET au saut de page via Reference.
 
 ---
 

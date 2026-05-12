@@ -42,12 +42,13 @@ type Props = InternalProps | ExternalProps;
  * Underline opacity intensifies on hover / focus.
  *
  * --- When to use which primitive --------------------------------------
- *   • <strong>      → un mot/concept à faire ressortir, sans lien
+ *   • <strong>        → un mot / concept à faire ressortir, sans lien
  *   • <HighlightText> → un passage entier (effet stabilo), sans lien
  *   • <Reference>     → cross-référence cliquable (interne OU externe)
  *
- * If the goal is purely visual strong, DON'T use Reference — its dotted
- * underline reads as "click me" and will frustrate the user.
+ * If the goal is purely visual emphasis, DON'T use Reference — its
+ * dotted underline reads as "click me" and will frustrate the user.
+ * Reach for <strong> or <HighlightText> instead.
  * ---------------------------------------------------------------------
  */
 export const Reference: FC<Props> = ({ children, ...rest }) => {
@@ -55,9 +56,9 @@ export const Reference: FC<Props> = ({ children, ...rest }) => {
   const { setCurrentPage } = useRouterContext();
   const [hovered, setHovered] = useState(false);
 
-  // Slightly less saturated than Emphasis (which uses text.primary) so a
-  // Reference doesn't visually outweigh a plain bold concept; the dotted
-  // underline carries the "interactive" signal.
+  // text.secondary on a world page, base.text.primary on neutral pages.
+  // The dotted underline carries the "interactive" signal; the color is
+  // only there to confirm it.
   const accent =
     moduleTheme === "base" ? colors.base.text.primary : colors[moduleTheme].text.secondary;
 
