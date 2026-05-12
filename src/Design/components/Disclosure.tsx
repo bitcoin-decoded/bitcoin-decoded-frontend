@@ -1,9 +1,10 @@
-import { type FC, type ReactNode, type CSSProperties } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
+
 import { ChevronDown } from "lucide-react";
 
+import { withOpacity } from "../helpers";
 import { useDisclosure } from "../hooks";
 import { usePageTheme } from "../Theme";
-import { withOpacity } from "../helpers";
 
 type Props = {
   title: string;
@@ -96,12 +97,7 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
 
   return (
     <div style={containerStyle}>
-      <button
-        type="button"
-        onClick={toggle}
-        aria-expanded={isOpen}
-        style={headerStyle}
-      >
+      <button type="button" onClick={toggle} aria-expanded={isOpen} style={headerStyle}>
         <span style={headerLabelStyle}>
           {icon}
           <span style={{ minWidth: 0 }}>{title}</span>

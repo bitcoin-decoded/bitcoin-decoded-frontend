@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, type ReactNode, createElement } from "react";
+import { createElement, type CSSProperties, type FC, type ReactNode } from "react";
 
 import { useBreakpoint } from "../Responsive";
 import { usePageTheme } from "../Theme";

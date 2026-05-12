@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, HighlightText } from "../../../Design";
+import { Callout, HighlightText } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { SeedGenerator, WalletDiscoveryGame } from "../../../Interactive";
 import { PageTemplate } from "../../Shared";
@@ -60,11 +60,9 @@ export const Bitcoin8Page: FC = () => {
 
       <Callout title={fr ? "Une seed, un point de départ" : "A seed, a starting point"}>
         <p>
-          <Emphasis>
-            {fr
-              ? "Une seed phrase est une suite de mots que tu peux noter, sauvegarder et restaurer"
-              : "A seed phrase is a sequence of words that you can write down, save, and restore"}
-          </Emphasis>
+          {fr
+            ? "Une seed phrase est une suite de mots que tu peux noter, sauvegarder et restaurer"
+            : "A seed phrase is a sequence of words that you can write down, save, and restore"}
           .
         </p>
         <p>
@@ -117,11 +115,9 @@ export const Bitcoin8Page: FC = () => {
               : "It tracks the UTXOs received on those addresses"}
           </li>
           <li>
-            <Emphasis>
-              {fr
-                ? "Et il affiche une vue simplifiée de ce que tu contrôles"
-                : "And it displays a simplified view of what you control"}
-            </Emphasis>
+            {fr
+              ? "Et il affiche une vue simplifiée de ce que tu contrôles"
+              : "And it displays a simplified view of what you control"}
           </li>
         </ol>
         <p>
@@ -130,11 +126,9 @@ export const Bitcoin8Page: FC = () => {
             : 'What it calls "balance" is not a bank balance.'}
         </p>
         <p>
-          <Emphasis>
-            {fr
-              ? "C'est une agrégation des UTXO que tes clés permettent de dépenser"
-              : "It's an aggregation of the UTXOs your keys can spend"}
-          </Emphasis>
+          {fr
+            ? "C'est une agrégation des UTXO que tes clés permettent de dépenser"
+            : "It's an aggregation of the UTXOs your keys can spend"}
           .
         </p>
         <p>

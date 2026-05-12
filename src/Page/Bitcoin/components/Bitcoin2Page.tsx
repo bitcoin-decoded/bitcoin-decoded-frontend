@@ -1,11 +1,14 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Quote, Reference } from "../../../Design";
+import { Callout, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { M2MoneySupplyChart, Quiz, TrustComparisonDemo } from "../../../Interactive";
-import { getQuizDataM2Explosion } from "../../../Interactive/data/QUIZ_DATA_M2_EXPLOSION";
-import { PageTemplate } from "../../Shared/components";
-import { useToggleSimulator } from "../../Shared/hooks";
+import {
+  getQuizDataM2Explosion,
+  M2MoneySupplyChart,
+  Quiz,
+  TrustComparisonDemo,
+} from "../../../Interactive";
+import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
 export const Bitcoin2Page: FC = () => {
   const { t, language } = useTranslation();
@@ -43,12 +46,12 @@ export const Bitcoin2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            <Emphasis>Pourquoi Bitcoin existe-t-il ?</Emphasis> <br />
+            Pourquoi Bitcoin existe-t-il ? <br />
             Quel problème résout-il ?
           </>
         ) : (
           <>
-            <Emphasis>Why does Bitcoin exist?</Emphasis> <br />
+            Why does Bitcoin exist? <br />
             What problem does it solve?
           </>
         )}
@@ -84,12 +87,11 @@ export const Bitcoin2Page: FC = () => {
               <li>
                 {fr ? (
                   <>
-                    Et en 2020 (<i>crise du Covid</i>), <Emphasis>c'est un mur vertical</Emphasis>.
+                    Et en 2020 (<i>crise du Covid</i>), c'est un mur vertical.
                   </>
                 ) : (
                   <>
-                    And in 2020 (<i>Covid crisis</i>),{" "}
-                    <Emphasis>it becomes a vertical wall</Emphasis>.
+                    And in 2020 (<i>Covid crisis</i>), it becomes a vertical wall.
                   </>
                 )}
               </li>
@@ -101,43 +103,30 @@ export const Bitcoin2Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Cette création ne correspond à aucune richesse réellement produite.{" "}
-                <Emphasis>
-                  C'est de la dilution pure : plus de billets pour la même quantité de biens et de
-                  services
-                </Emphasis>
-                .
+                Cette création ne correspond à aucune richesse réellement produite. C'est de la
+                dilution pure : plus de billets pour la même quantité de biens et de services .
               </>
             ) : (
               <>
-                This creation does not correspond to any real wealth being produced.{" "}
-                <Emphasis>
-                  It's pure dilution: more bills for the same amount of goods and services
-                </Emphasis>
-                .
+                This creation does not correspond to any real wealth being produced. It's pure
+                dilution: more bills for the same amount of goods and services .
               </>
             )}
           </p>
           <p>
             {fr ? (
               <>
-                Le résultat est l'inflation que chacun a constatée dans sa vie quotidienne.{" "}
-                <Emphasis>
-                  C'est le fonctionnement normal d'un système où une poignée de décideurs peut créer
-                  de la monnaie sans limite et sans consentement, pour renflouer les banques et
-                  sauver le système bancaire
-                </Emphasis>
-                .
+                Le résultat est l'inflation que chacun a constatée dans sa vie quotidienne. C'est le
+                fonctionnement normal d'un système où une poignée de décideurs peut créer de la
+                monnaie sans limite et sans consentement, pour renflouer les banques et sauver le
+                système bancaire .
               </>
             ) : (
               <>
-                The result is the inflation that everyone has experienced in their daily life.{" "}
-                <Emphasis>
-                  This is how the system normally works: a small group of decision-makers can create
-                  money without limit and without consent, to bail out banks and keep the financial
-                  system afloat
-                </Emphasis>
-                .
+                The result is the inflation that everyone has experienced in their daily life. This
+                is how the system normally works: a small group of decision-makers can create money
+                without limit and without consent, to bail out banks and keep the financial system
+                afloat .
               </>
             )}
           </p>
@@ -179,17 +168,14 @@ export const Bitcoin2Page: FC = () => {
             {fr ? (
               <>
                 Un titre du journal <i>The Times</i>. Le chancelier britannique était sur le point
-                de renflouer les banques pour la deuxième fois. Ce message n'est pas anodin.{" "}
-                <Emphasis>
-                  C'est une déclaration d'intention gravée à jamais dans la blockchain
-                </Emphasis>
-                .
+                de renflouer les banques pour la deuxième fois. Ce message n'est pas anodin. C'est
+                une déclaration d'intention gravée à jamais dans la blockchain .
               </>
             ) : (
               <>
                 A headline from <i>The Times</i>. The British chancellor was about to bail out the
-                banks for the second time. This message is no coincidence.{" "}
-                <Emphasis>It's a statement of intent forever etched in the blockchain</Emphasis>.
+                banks for the second time. This message is no coincidence. It's a statement of
+                intent forever etched in the blockchain.
               </>
             )}
           </p>
@@ -219,13 +205,13 @@ export const Bitcoin2Page: FC = () => {
             <p>
               {fr ? (
                 <>
-                  Face au problème de dureté, Bitcoin impose une offre maximale absolue de{" "}
-                  <Emphasis>21 millions de bitcoins, pas un de plus</Emphasis>.
+                  Face au problème de dureté, Bitcoin impose une offre maximale absolue de 21
+                  millions de bitcoins, pas un de plus.
                 </>
               ) : (
                 <>
-                  Facing the hardness problem, Bitcoin imposes an absolute maximum supply of{" "}
-                  <Emphasis>21 million bitcoins, not one more</Emphasis>.
+                  Facing the hardness problem, Bitcoin imposes an absolute maximum supply of 21
+                  million bitcoins, not one more.
                 </>
               )}
             </p>
@@ -233,34 +219,27 @@ export const Bitcoin2Page: FC = () => {
               {fr ? (
                 <>
                   Ce plafond est inscrit dans le code et vérifié par chaque nœud du réseau. Il ne
-                  s'agit pas d'une promesse politique :{" "}
-                  <Emphasis>c'est une règle mathématique</Emphasis>.
+                  s'agit pas d'une promesse politique : c'est une règle mathématique.
                 </>
               ) : (
                 <>
                   This cap is written in the code and verified by every node in the network. It's
-                  not a political promise: <Emphasis>it's a mathematical rule</Emphasis>.
+                  not a political promise: it's a mathematical rule.
                 </>
               )}
             </p>
             <p>
               {fr ? (
                 <>
-                  Puisque personne ne peut imprimer de bitcoins à volonté, le{" "}
-                  <Emphasis>
-                    prix du temps (le taux d'intérêt) redevient un signal honnête, non manipulable
-                    par une autorité centrale
-                  </Emphasis>
+                  Puisque personne ne peut imprimer de bitcoins à volonté, le prix du temps (le taux
+                  d'intérêt) redevient un signal honnête, non manipulable par une autorité centrale
                   .
                 </>
               ) : (
                 <>
-                  Since no one can print bitcoins at will, the{" "}
-                  <Emphasis>
-                    price of time (the interest rate) becomes an honest signal again, one that
-                    cannot be manipulated by a central authority
-                  </Emphasis>
-                  .
+                  Since no one can print bitcoins at will, the price of time (the interest rate)
+                  becomes an honest signal again, one that cannot be manipulated by a central
+                  authority .
                 </>
               )}
             </p>
@@ -275,17 +254,15 @@ export const Bitcoin2Page: FC = () => {
             <p>
               {fr ? (
                 <>
-                  Face au problème de centralisation, Bitcoin fonctionne{" "}
-                  <Emphasis>sans autorité centrale</Emphasis>. Le réseau peut être vu comme un
-                  essaim d'abeilles où l'information est distribuée collectivement et où personne ne
-                  décide pour les autres.
+                  Face au problème de centralisation, Bitcoin fonctionne sans autorité centrale. Le
+                  réseau peut être vu comme un essaim d'abeilles où l'information est distribuée
+                  collectivement et où personne ne décide pour les autres.
                 </>
               ) : (
                 <>
-                  Facing the centralization problem, Bitcoin operates{" "}
-                  <Emphasis>without a central authority</Emphasis>. The network can be seen as a
-                  swarm of bees, where information is collectively distributed and no one decides
-                  for others.
+                  Facing the centralization problem, Bitcoin operates without a central authority.
+                  The network can be seen as a swarm of bees, where information is collectively
+                  distributed and no one decides for others.
                 </>
               )}
             </p>
@@ -294,17 +271,15 @@ export const Bitcoin2Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Bitcoin n'est pas une simple innovation technologique.{" "}
-                <Emphasis>
-                  C'est l'implémentation concrète de la logique autrichienne dans le silicium
-                </Emphasis>{" "}
-                : la première monnaie qui combine dureté absolue et décentralisation.
+                Bitcoin n'est pas une simple innovation technologique. C'est l'implémentation
+                concrète de la logique autrichienne dans le silicium : la première monnaie qui
+                combine dureté absolue et décentralisation.
               </>
             ) : (
               <>
-                Bitcoin is not just a technological innovation.{" "}
-                <Emphasis>It is the concrete implementation of Austrian logic in silicon</Emphasis>:
-                the first currency that combines absolute hardness with decentralization.
+                Bitcoin is not just a technological innovation. It is the concrete implementation of
+                Austrian logic in silicon: the first currency that combines absolute hardness with
+                decentralization.
               </>
             )}
           </p>

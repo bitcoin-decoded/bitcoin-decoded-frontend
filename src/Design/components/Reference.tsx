@@ -1,4 +1,5 @@
-import { type FC, type ReactNode, type CSSProperties, useState } from "react";
+import { type CSSProperties, type FC, type ReactNode, useState } from "react";
+
 import { ArrowUpRight } from "lucide-react";
 
 import { type RouteName, useRouterContext } from "../../Routing";
@@ -41,11 +42,11 @@ type Props = InternalProps | ExternalProps;
  * Underline opacity intensifies on hover / focus.
  *
  * --- When to use which primitive --------------------------------------
- *   • <Emphasis>      → un mot/concept à faire ressortir, sans lien
+ *   • <strong>      → un mot/concept à faire ressortir, sans lien
  *   • <HighlightText> → un passage entier (effet stabilo), sans lien
  *   • <Reference>     → cross-référence cliquable (interne OU externe)
  *
- * If the goal is purely visual emphasis, DON'T use Reference — its dotted
+ * If the goal is purely visual strong, DON'T use Reference — its dotted
  * underline reads as "click me" and will frustrate the user.
  * ---------------------------------------------------------------------
  */
@@ -58,9 +59,7 @@ export const Reference: FC<Props> = ({ children, ...rest }) => {
   // Reference doesn't visually outweigh a plain bold concept; the dotted
   // underline carries the "interactive" signal.
   const accent =
-    moduleTheme === "base"
-      ? colors.base.text.primary
-      : colors[moduleTheme].text.secondary;
+    moduleTheme === "base" ? colors.base.text.primary : colors[moduleTheme].text.secondary;
 
   const baseStyle: CSSProperties = {
     color: accent,
@@ -73,8 +72,7 @@ export const Reference: FC<Props> = ({ children, ...rest }) => {
     textDecoration: "underline dotted",
     textDecorationColor: withOpacity(accent, hovered ? 0.85 : 0.4),
     textUnderlineOffset: "3px",
-    transition:
-      "text-decoration-color 0.2s var(--ease-smooth), color 0.2s var(--ease-smooth)",
+    transition: "text-decoration-color 0.2s var(--ease-smooth), color 0.2s var(--ease-smooth)",
   };
 
   const interactionHandlers = {

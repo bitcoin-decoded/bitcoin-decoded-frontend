@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Reference } from "../../../Design";
+import { Callout, Reference } from "../../../Design";
 import highTimePreference from "../../../Design/img/high_time_preference.jpg";
 import lowTimePreference from "../../../Design/img/low_time_preference.jpg";
 import prosperousEconomy from "../../../Design/img/Prosperous_economy.jpg";
@@ -13,10 +13,7 @@ import {
   Quiz,
 } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
-import { useToggleSimulator } from "../../Shared/hooks";
-import { PAGE_STYLES } from "../../Shared/styles";
-
+import { PAGE_STYLES, PageTemplate, useToggleSimulator } from "../../Shared/";
 export const MoneyLaws2Page: FC = () => {
   const { isActive: isQuizSolved, activate: onQuizSolved } = useToggleSimulator();
   const { t, language } = useTranslation();
@@ -50,8 +47,8 @@ export const MoneyLaws2Page: FC = () => {
         ) : (
           <>
             In the previous chapter, we saw that the{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_1}>hardness</Reference> of our currency (fiat
-            money) has been sacrificed. The problem? The hidden cost of that sacrifice is immense.
+            <Reference to={ROUTE_NAME.MoneyLaws_1}>hardness</Reference> of our currency (fiat money)
+            has been sacrificed. The problem? The hidden cost of that sacrifice is immense.
           </>
         )}
       </p>
@@ -59,18 +56,12 @@ export const MoneyLaws2Page: FC = () => {
         {fr ? (
           <>
             Et pour bien le comprendre, posons-nous une question fondamentale :{" "}
-            <Emphasis>
-              <i>« Comment la richesse est-elle créée ? »</i>
-            </Emphasis>
-            .
+            <i>« Comment la richesse est-elle créée ? »</i>.
           </>
         ) : (
           <>
             To truly understand this, let us ask ourselves a fundamental question:{" "}
-            <Emphasis>
-              <i>"How is wealth created?"</i>
-            </Emphasis>
-            .
+            <i>"How is wealth created?"</i>.
           </>
         )}
       </p>
@@ -80,18 +71,16 @@ export const MoneyLaws2Page: FC = () => {
         <p>
           {fr ? (
             <>
-              En tant qu'humains, on préfère{" "}
-              <Emphasis>consommer tout de suite plutôt que plus tard</Emphasis>. Toutefois, pour
-              bâtir un futur plus confortable, il faut différer une partie de notre consommation.
-              Cette tension entre favoriser le présent ou le futur, c'est ce qu'on appelle la{" "}
-              <i>Préférence Temporelle</i>.
+              En tant qu'humains, on préfère consommer tout de suite plutôt que plus tard.
+              Toutefois, pour bâtir un futur plus confortable, il faut différer une partie de notre
+              consommation. Cette tension entre favoriser le présent ou le futur, c'est ce qu'on
+              appelle la <i>Préférence Temporelle</i>.
             </>
           ) : (
             <>
-              As humans, we prefer <Emphasis>consuming now rather than later</Emphasis>. However, to
-              build a more comfortable future, we need to defer part of our consumption. This
-              tension between favoring the present or the future is what we call{" "}
-              <i>Time Preference</i>.
+              As humans, we prefer consuming now rather than later. However, to build a more
+              comfortable future, we need to defer part of our consumption. This tension between
+              favoring the present or the future is what we call <i>Time Preference</i>.
             </>
           )}
         </p>
@@ -123,14 +112,14 @@ export const MoneyLaws2Page: FC = () => {
               Sacrifier le présent pour le futur n'est pas naturel. Ce sacrifice nécessite donc une
               contrepartie. Reporter sa consommation à demain ou à dans dix ans n'a pas du tout la
               même incidence en termes de risque et d'attente. En économie, cette récompense
-              s'appelle le <i> taux d'intérêt</i> : il est le <Emphasis>prix du temps</Emphasis>.
+              s'appelle le <i> taux d'intérêt</i> : il est le prix du temps.
             </>
           ) : (
             <>
               Sacrificing the present for the future is not natural. This sacrifice therefore
               requires compensation. Postponing consumption to tomorrow or to ten years from now
               carries very different levels of risk and expectation. In economics, this reward is
-              called the <i> interest rate</i>: it is the <Emphasis>price of time</Emphasis>.
+              called the <i> interest rate</i>: it is the price of time.
             </>
           )}
         </p>
@@ -139,14 +128,14 @@ export const MoneyLaws2Page: FC = () => {
         {fr ? (
           <>
             L'épargne n'est donc pas un stock qu'on empile juste pour le plaisir des yeux ! Elle
-            sert à l'<Emphasis>investissement</Emphasis>, c'est-à-dire à lancer des projets, parfois
-            un peu longs, qui rendent la société plus efficace et qui nous libèrent du temps.
+            sert à l'investissement, c'est-à-dire à lancer des projets, parfois un peu longs, qui
+            rendent la société plus efficace et qui nous libèrent du temps.
           </>
         ) : (
           <>
             Savings are therefore not a pile of resources stacked up just for show! They serve{" "}
-            <Emphasis>investment</Emphasis> - that is, launching projects, sometimes lengthy ones,
-            that make society more efficient and free up our time.
+            investment - that is, launching projects, sometimes lengthy ones, that make society more
+            efficient and free up our time.
           </>
         )}
       </p>
@@ -230,11 +219,8 @@ export const MoneyLaws2Page: FC = () => {
               <li style={{ marginTop: "1rem" }}>
                 Ces projets créent des machines et des usines qui rendent la société plus efficiente
                 et productive. À la fin, les prix des biens chutent car la société produit plus avec
-                moins d'effort.{" "}
-                <Emphasis>
-                  C'est comme cela qu'est créée la vraie richesse : le pouvoir d'achat de chacun
-                  augmente car la vie coûte moins cher.
-                </Emphasis>
+                moins d'effort. C'est comme cela qu'est créée la vraie richesse : le pouvoir d'achat
+                de chacun augmente car la vie coûte moins cher.
               </li>
             </ul>
           </>
@@ -258,11 +244,8 @@ export const MoneyLaws2Page: FC = () => {
               <li style={{ marginTop: "1rem" }}>
                 These projects create machines and factories that make society more efficient and
                 productive. In the end, the prices of goods fall because society produces more with
-                less effort.{" "}
-                <Emphasis>
-                  This is how true wealth is created: everyone's purchasing power increases because
-                  life becomes cheaper.
-                </Emphasis>
+                less effort. This is how true wealth is created: everyone's purchasing power
+                increases because life becomes cheaper.
               </li>
             </ul>
           </>
@@ -360,10 +343,9 @@ export const MoneyLaws2Page: FC = () => {
             <Reference href="https://fr.wikipedia.org/wiki/Destruction_cr%C3%A9atrice">
               <i>destruction créatrice</i>
             </Reference>
-            . C'est le moment où l'économie liquide les mauvais projets
-            pour essayer de sauver ce qui peut l'être. La récession est une période de « ceinture
-            serrée » obligatoire pour reconstituer l'épargne qu'on a fait semblant d'avoir pendant
-            le boom.
+            . C'est le moment où l'économie liquide les mauvais projets pour essayer de sauver ce
+            qui peut l'être. La récession est une période de « ceinture serrée » obligatoire pour
+            reconstituer l'épargne qu'on a fait semblant d'avoir pendant le boom.
           </>
         ) : (
           <>
@@ -371,9 +353,9 @@ export const MoneyLaws2Page: FC = () => {
             <Reference href="https://en.wikipedia.org/wiki/Creative_destruction">
               <i>creative destruction</i>
             </Reference>
-            . It is the moment when the economy liquidates bad projects
-            to try to salvage what can be saved. The recession is a mandatory belt-tightening period
-            to rebuild the savings we pretended to have during the boom.
+            . It is the moment when the economy liquidates bad projects to try to salvage what can
+            be saved. The recession is a mandatory belt-tightening period to rebuild the savings we
+            pretended to have during the boom.
           </>
         )}
       </p>
@@ -427,29 +409,26 @@ export const MoneyLaws2Page: FC = () => {
               <li>
                 {fr ? (
                   <>
-                    <Emphasis>L'épargne précède toujours l'investissement</Emphasis>. On ne peut pas
-                    construire un filet (le bien de capital) sans avoir mis de côté les poissons
-                    (l'épargne) nécessaires pour nourrir le travailleur pendant la construction.
+                    L'épargne précède toujours l'investissement. On ne peut pas construire un filet
+                    (le bien de capital) sans avoir mis de côté les poissons (l'épargne) nécessaires
+                    pour nourrir le travailleur pendant la construction.
                   </>
                 ) : (
                   <>
-                    <Emphasis>Savings always precede investment</Emphasis>. You cannot build a net
-                    (the capital good) without having set aside the fish (savings) needed to feed
-                    the worker during construction.
+                    Savings always precede investment. You cannot build a net (the capital good)
+                    without having set aside the fish (savings) needed to feed the worker during
+                    construction.
                   </>
                 )}
               </li>
               <li style={{ marginTop: "1rem" }}>
                 {fr ? (
                   <>
-                    <Emphasis>La réalité est implacable</Emphasis>. On ne peut pas créer du temps ou
-                    de la nourriture à partir de rien.
+                    La réalité est implacable. On ne peut pas créer du temps ou de la nourriture à
+                    partir de rien.
                   </>
                 ) : (
-                  <>
-                    <Emphasis>Reality is unforgiving</Emphasis>. You cannot create time or food out
-                    of thin air.
-                  </>
+                  <>Reality is unforgiving. You cannot create time or food out of thin air.</>
                 )}
               </li>
             </ol>
@@ -460,15 +439,14 @@ export const MoneyLaws2Page: FC = () => {
         {fr ? (
           <>
             La cause des cycles économiques n'est pas extérieure. Ce ne sont pas des problèmes de «
-            psychologie » des investisseurs. Au contraire, c'est un{" "}
-            <Emphasis>phénomène endogène</Emphasis>, causé par la structure du système
-            lui-même.{" "}
+            psychologie » des investisseurs. Au contraire, c'est un phénomène endogène, causé par la
+            structure du système lui-même.{" "}
           </>
         ) : (
           <>
             Economic cycles are not caused by external factors. They are not problems of investor
-            "psychology." They are an <Emphasis>endogenous phenomenon</Emphasis>, caused by the
-            structure of the system itself.{" "}
+            "psychology." They are an endogenous phenomenon, caused by the structure of the system
+            itself.{" "}
           </>
         )}
       </p>
@@ -485,19 +463,15 @@ export const MoneyLaws2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            <Emphasis>
-              Alors, prêt à comprendre pourquoi les{" "}
-              <Reference to={ROUTE_NAME.MoneyLaws_3}>systèmes planifiés</Reference> sont condamnés
-              à l'aveuglement ?
-            </Emphasis>
+            Alors, prêt à comprendre pourquoi les{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_3}>systèmes planifiés</Reference> sont condamnés à
+            l'aveuglement ?
           </>
         ) : (
           <>
-            <Emphasis>
-              Ready to understand why{" "}
-              <Reference to={ROUTE_NAME.MoneyLaws_3}>planned systems</Reference> are doomed to
-              blindness?
-            </Emphasis>
+            Ready to understand why{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_3}>planned systems</Reference> are doomed to
+            blindness?
           </>
         )}
       </p>

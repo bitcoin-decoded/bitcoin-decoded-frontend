@@ -1,10 +1,11 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
+
 import {
-  Inbox,
   AlertTriangle,
   ArrowRight,
   Box,
   CircleCheck,
+  Inbox,
   PlusCircle,
   RotateCcw,
 } from "lucide-react";
@@ -15,8 +16,8 @@ import {
   Caption,
   FeedbackPanel,
   SurfaceCard,
-  usePageTheme,
   useBreakpoint,
+  usePageTheme,
 } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";

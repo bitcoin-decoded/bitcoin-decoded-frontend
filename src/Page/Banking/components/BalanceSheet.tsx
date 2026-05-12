@@ -1,7 +1,8 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
+
 import { usePageTheme } from "../../../Design";
-import { useBreakpoint } from "../../../Design/Responsive";
 import { withOpacity } from "../../../Design/helpers";
+import { useBreakpoint } from "../../../Design/Responsive";
 import { useTranslation } from "../../../I18n";
 import type { BalanceSheetLine } from "../types";
 
@@ -110,9 +111,7 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
                 </>
               ) : null;
 
-            const lastRowOverride: CSSProperties = isLast
-              ? { borderBottom: "none" }
-              : {};
+            const lastRowOverride: CSSProperties = isLast ? { borderBottom: "none" } : {};
 
             const changedOverride: CSSProperties = isChanged
               ? { color: changedColor, backgroundColor: changedBg, fontWeight: 600 }

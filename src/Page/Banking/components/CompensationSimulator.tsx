@@ -46,13 +46,6 @@ export const CompensationSimulator: FC = () => {
     cursor: "not-allowed",
   };
 
-  const sectionStyle: CSSProperties = {
-    paddingTop: "2rem",
-    fontSize: "1rem",
-    letterSpacing: "0.05rem",
-    lineHeight: 1.625,
-  };
-
   return (
     <div style={{ marginTop: "2rem" }}>
       <div style={controlsStyle}>
@@ -84,18 +77,16 @@ export const CompensationSimulator: FC = () => {
       />
       {isActive && (
         <>
-          <p style={sectionStyle}>
-            <strong>
-              {fr
-                ? "Et voilà ! La compensation est effectuée. Observes bien les changements en jaune."
-                : "There you go! The compensation is complete. Look closely at the changes in yellow."}
-            </strong>
+          <p>
+            {fr
+              ? "Et voilà ! La compensation est effectuée. Observes bien les changements en jaune."
+              : "There you go! The compensation is complete. Look closely at the changes in yellow."}
             <br />
             {fr ? (
-              <>
-                - Au passif : la banque de Nicolas a épongé sa dette.
-                <br />- À l'actif : les "Réserves M0" de la banque ont diminué de 200 000 €.
-              </>
+              <ul>
+                <li>Au passif : la banque de Nicolas a épongé sa dette.</li>
+                <li>À l'actif : les "Réserves M0" de la banque ont diminué de 200 000 €.</li>
+              </ul>
             ) : (
               <>
                 - On the liabilities side: Nicolas's bank has settled its debt.
@@ -103,15 +94,10 @@ export const CompensationSimulator: FC = () => {
               </>
             )}
           </p>
-          <p style={sectionStyle}>
+          <p>
             {fr
               ? "La banque a bel et bien utilisé sa monnaie de Banque Centrale (M0) pour régler une dette née d'une transaction en monnaie commerciale (M2). Tu saisis maintenant la différence entre ces deux niveaux de monnaie !"
               : "The bank did indeed use its Central Bank money (M0) to settle a debt born from a transaction in commercial money (M2). You now understand the difference between these two layers of money!"}
-          </p>
-          <p style={sectionStyle}>
-            {fr
-              ? "Tu viens encore de gratter une couche que la plupart des gens ne soupçonnent même pas. Et crois-moi, ça va servir pour la suite."
-              : "You've just uncovered another layer that most people don't even suspect exists. And trust me, this will matter for what comes next."}
           </p>
         </>
       )}

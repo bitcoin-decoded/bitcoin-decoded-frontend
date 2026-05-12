@@ -20,8 +20,7 @@ const PAGE_DIRS = [
   "src/Page/Bitcoin/components",
 ];
 
-const isPageFile = (name) =>
-  /^(Banking|MoneyLaws|Bitcoin)\d+Page\.tsx$/.test(name);
+const isPageFile = (name) => /^(Banking|MoneyLaws|Bitcoin)\d+Page\.tsx$/.test(name);
 
 // Walk to the matching close of the current ternary branch.
 // Returns the index of the `:` (else separator) or `;`/EOF (else absent).
@@ -53,7 +52,6 @@ const walkToBranchEnd = (src, from) => {
 };
 
 const COMMON_JSX_NOISE = new Set([
-  "Emphasis",
   "HighlightText",
   "KeywordHighlight",
   "Callout",
@@ -153,9 +151,7 @@ const INTERACTIVE_NAMES = new Set([
 
 const countInteractives = (src) => {
   const matches = src.match(/<([A-Z][A-Za-z0-9]+)\b/g) ?? [];
-  return matches
-    .map((m) => m.slice(1))
-    .filter((n) => INTERACTIVE_NAMES.has(n)).length;
+  return matches.map((m) => m.slice(1)).filter((n) => INTERACTIVE_NAMES.has(n)).length;
 };
 
 const rows = [];

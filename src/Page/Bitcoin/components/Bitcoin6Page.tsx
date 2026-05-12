@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, HighlightText, Reference } from "../../../Design";
+import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   getQuizDataUtxo,
@@ -9,7 +9,7 @@ import {
   UTXOTransactionBuilder,
 } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
+import { PageTemplate } from "../../Shared/";
 
 export const Bitcoin6Page: FC = () => {
   const { t, language } = useTranslation();
@@ -42,18 +42,14 @@ export const Bitcoin6Page: FC = () => {
         {fr ? (
           <>
             Néanmoins, une question reste encore entière :{" "}
-            <Emphasis>
-              <i>
-                « qu'est-ce qu'un bitcoin, au juste ? et que se passe-t-il quand on le dépense ? »
-              </i>
-            </Emphasis>
+            <i>
+              « qu'est-ce qu'un bitcoin, au juste ? et que se passe-t-il quand on le dépense ? »
+            </i>
           </>
         ) : (
           <>
             One question still lingers:{" "}
-            <Emphasis>
-              <i>"What exactly is a bitcoin? And what happens when you spend one?"</i>
-            </Emphasis>
+            <i>"What exactly is a bitcoin? And what happens when you spend one?"</i>
           </>
         )}
       </p>
@@ -68,20 +64,13 @@ export const Bitcoin6Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Dans une banque, la réponse est évidente :{" "}
-              <Emphasis>
-                ton compte affiche un solde, tu envoies de l'argent, et le système met à jour les
-                chiffres
-              </Emphasis>
-              .
+              Dans une banque, la réponse est évidente : ton compte affiche un solde, tu envoies de
+              l'argent, et le système met à jour les chiffres .
             </>
           ) : (
             <>
-              In a bank, the answer is straightforward:{" "}
-              <Emphasis>
-                your account shows a balance, you send money, and the system updates the numbers
-              </Emphasis>
-              .
+              In a bank, the answer is straightforward: your account shows a balance, you send
+              money, and the system updates the numbers .
             </>
           )}
         </p>
@@ -101,9 +90,9 @@ export const Bitcoin6Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Quand tu dis « je vais envoyer 1 bitcoin à mon pote » (j'aimerais bien être ton ami),
-            tu t'imagines peut-être un objet numérique qui quitte ton portefeuille pour rejoindre
-            celui de quelqu'un d'autre. Eh bien, pas tout à fait.
+            Quand tu dis « je vais envoyer 1 bitcoin à mon pote » (j'aimerais bien être ton ami), tu
+            t'imagines peut-être un objet numérique qui quitte ton portefeuille pour rejoindre celui
+            de quelqu'un d'autre. Eh bien, pas tout à fait.
           </>
         ) : (
           <>
@@ -118,19 +107,17 @@ export const Bitcoin6Page: FC = () => {
           : "It's a fundamental shift in perspective."}
       </p>
       <p>
-        <Emphasis>
-          {fr ? (
-            <>
-              Une transaction Bitcoin n'est pas un virement. Elle repose sur un principe appelé{" "}
-              <i>UTXO</i> (<i>Unspent Transaction Output</i>)
-            </>
-          ) : (
-            <>
-              A Bitcoin transaction is not a bank transfer. It relies on a principle called{" "}
-              <i>UTXO</i> (<i>Unspent Transaction Output</i>)
-            </>
-          )}
-        </Emphasis>
+        {fr ? (
+          <>
+            Une transaction Bitcoin n'est pas un virement. Elle repose sur un principe appelé{" "}
+            <i>UTXO</i> (<i>Unspent Transaction Output</i>)
+          </>
+        ) : (
+          <>
+            A Bitcoin transaction is not a bank transfer. It relies on a principle called{" "}
+            <i>UTXO</i> (<i>Unspent Transaction Output</i>)
+          </>
+        )}
         .
       </p>
 
@@ -139,19 +126,17 @@ export const Bitcoin6Page: FC = () => {
       >
         <p>{fr ? "Laisses-moi t'expliquer comment ça marche." : "Let me explain how it works."}</p>
         <p>
-          <Emphasis>
-            {fr ? (
-              <>
-                Une transaction Bitcoin prend en entrée des sorties non dépensées issues de
-                transactions précédentes, puis crée de nouvelles sorties
-              </>
-            ) : (
-              <>
-                A Bitcoin transaction takes as input unspent outputs from previous transactions, and
-                then creates new outputs
-              </>
-            )}
-          </Emphasis>
+          {fr ? (
+            <>
+              Une transaction Bitcoin prend en entrée des sorties non dépensées issues de
+              transactions précédentes, puis crée de nouvelles sorties
+            </>
+          ) : (
+            <>
+              A Bitcoin transaction takes as input unspent outputs from previous transactions, and
+              then creates new outputs
+            </>
+          )}
           .
         </p>
         <p>
@@ -159,8 +144,8 @@ export const Bitcoin6Page: FC = () => {
             <>
               Ces sorties non dépensées portent un nom :{" "}
               <HighlightText>UTXO (Unspent Transaction Output)</HighlightText>. Elles peuvent être
-              vues comme des pièces rangées dans ton portefeuille qui sont indivisibles et qui
-              sont prêtes à être dépensées.
+              vues comme des pièces rangées dans ton portefeuille qui sont indivisibles et qui sont
+              prêtes à être dépensées.
             </>
           ) : (
             <>
@@ -192,11 +177,9 @@ export const Bitcoin6Page: FC = () => {
           : "UTXO is now covered. Let's move on to an equally central concept."}
       </p>
       <p>
-        <Emphasis>
-          {fr
-            ? "Ton portefeuille ne contient pas de bitcoins au sens strict : il contient les clés privées qui permettent de les dépenser."
-            : "Your wallet doesn't contain bitcoins in the strict sense: it holds the private keys that allow you to spend them"}
-        </Emphasis>
+        {fr
+          ? "Ton portefeuille ne contient pas de bitcoins au sens strict : il contient les clés privées qui permettent de les dépenser."
+          : "Your wallet doesn't contain bitcoins in the strict sense: it holds the private keys that allow you to spend them"}
         .
       </p>
 
@@ -217,11 +200,9 @@ export const Bitcoin6Page: FC = () => {
             : "Executing a transaction means proving you have the right to spend a UTXO, then creating new outputs."}
         </p>
         <p>
-          <Emphasis>
-            {fr
-              ? "Une transaction Bitcoin n'est pas un déplacement monétaire : c'est un transfert du droit de dépenser."
-              : "A Bitcoin transaction is not a monetary movement: it's a transfer of the right to spend."}
-          </Emphasis>
+          {fr
+            ? "Une transaction Bitcoin n'est pas un déplacement monétaire : c'est un transfert du droit de dépenser."
+            : "A Bitcoin transaction is not a monetary movement: it's a transfer of the right to spend."}
         </p>
       </Callout>
       <p>
@@ -257,9 +238,7 @@ export const Bitcoin6Page: FC = () => {
         {fr ? (
           <>
             Il nous manque néanmoins une pièce importante au puzzle :{" "}
-            <i>
-              comment le réseau sait-il que tu as vraiment le droit de dépenser ces sorties ?
-            </i>{" "}
+            <i>comment le réseau sait-il que tu as vraiment le droit de dépenser ces sorties ?</i>{" "}
             et{" "}
             <i>
               comment prouver cette propriété sans compter sur une banque, un compte, ou une
@@ -289,9 +268,7 @@ export const Bitcoin6Page: FC = () => {
         ) : (
           <>
             The answer lies in another fundamental mechanism of Bitcoin:{" "}
-            <Reference to={ROUTE_NAME.Bitcoin_7}>
-              keys, signatures, and cryptography
-            </Reference>
+            <Reference to={ROUTE_NAME.Bitcoin_7}>keys, signatures, and cryptography</Reference>
             .<br /> On to the next chapter, you're on the right track!
           </>
         )}

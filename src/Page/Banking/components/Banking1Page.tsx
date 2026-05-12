@@ -1,9 +1,9 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, KeywordHighlight, Reference } from "../../../Design";
+import { Callout, KeywordHighlight, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
+import { PageTemplate } from "../../Shared/";
 
 import { CreditCreationSimulator } from "./CreditCreationSimulator";
 
@@ -123,25 +123,21 @@ export const Banking1Page: FC = () => {
       >
         <p>
           <KeywordHighlight>{fr ? "ACTIF" : "ASSETS"}</KeywordHighlight>{" "}
-          <Emphasis>
-            {fr
-              ? "→ C'est tout ce que tu possèdes et qui a de la valeur."
-              : "→ Everything you own that has value."}
-          </Emphasis>{" "}
+          {fr
+            ? "→ C'est tout ce que tu possèdes et qui a de la valeur."
+            : "→ Everything you own that has value."}{" "}
           <br />
           <i>
             {fr
-              ? "ton épargne, ta maison, ton téléphone..."
+              ? "Ton épargne, ta maison, ton téléphone..."
               : "Your savings, your house, your phone..."}
           </i>
         </p>
         <p>
           <KeywordHighlight>{fr ? "PASSIF" : "LIABILITIES"}</KeywordHighlight>{" "}
-          <Emphasis>
-            {fr
-              ? "→ C'est la provenance de l'argent qui a payé tout ce que tu possèdes."
-              : "→ The source of the money that paid for everything you own."}
-          </Emphasis>
+          {fr
+            ? "→ C'est la provenance de l'argent qui a payé tout ce que tu possèdes."
+            : "→ The source of the money that paid for everything you own."}
           <br />
           <i>
             {fr ? (
@@ -173,41 +169,33 @@ export const Banking1Page: FC = () => {
         </p>
         <p>
           <KeywordHighlight>{fr ? "CRÉANCE" : "CLAIM"}</KeywordHighlight>{" "}
-          <Emphasis>
-            {fr
-              ? "→ C'est une promesse officielle que quelqu'un va te rendre l'argent qu'il te doit."
-              : "→ An official promise that someone will pay you back the money they owe you."}
-          </Emphasis>
+          {fr
+            ? "→ C'est une promesse officielle que quelqu'un va te rendre l'argent qu'il te doit."
+            : "→ An official promise that someone will pay you back the money they owe you."}
         </p>
       </Callout>
       <p>
         {fr ? (
           <>
-            C'est bon ? Parfait. <br /> Regardes le bilan de la banque de Nicolas : elle a déjà
-            octroyé des prêts à des clients pour une valeur de 1 000 000 €. <br />
-            Maintenant, accordes le prêt à ton client.
+            C'est bon ? Parfait. Regardes le bilan de la banque de Nicolas : elle a déjà octroyé des
+            prêts à des clients pour une valeur de 1 000 000 €. <br />
           </>
         ) : (
           <>
-            Got it? Perfect. <br /> Look at Nicolas's bank balance sheet: it has already granted
-            loans to customers worth $1,000,000. <br />
-            Now, grant the loan to your customer.
+            Got it? Perfect. Look at Nicolas's bank balance sheet: it has already granted loans to
+            customers worth $1,000,000.
           </>
         )}
       </p>
+      <p>
+        {fr
+          ? "Maintenant, accordes le prêt à ton client."
+          : "Now, grant the loan to your customer."}
+      </p>
       <CreditCreationSimulator />
       <p>
-        {fr ? (
-          <>
-            On enchaîne sur le second pilier :{" "}
-            <Reference to={ROUTE_NAME.Banking_2}>les deux niveaux de monnaies</Reference>.
-          </>
-        ) : (
-          <>
-            Let's move on to the second pillar:{" "}
-            <Reference to={ROUTE_NAME.Banking_2}>the two levels of money</Reference>.
-          </>
-        )}
+        {fr ? "On enchaîne sur le second pilier :" : "Let's move on to the second pillar:"}{" "}
+        <Reference to={ROUTE_NAME.Banking_2}>{t("nav.tree.twoLevels")}</Reference>.
       </p>
     </PageTemplate>
   );

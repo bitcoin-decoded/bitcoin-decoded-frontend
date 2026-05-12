@@ -1,10 +1,10 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Reference } from "../../../Design";
+import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getQuizDataM0, Quiz } from "../../../Interactive";
-import { PageTemplate } from "../../Shared/components";
-import { useToggleSimulator } from "../../Shared/hooks";
+import { ROUTE_NAME } from "../../../Routing";
+import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
 import { DefaultSimulator } from "./DefaultSimulator";
 
@@ -20,8 +20,8 @@ export const Banking3Page: FC = () => {
         fr ? (
           <>
             Une banque manque d'argent. Pas de problème : la Banque Centrale appuie sur un bouton,
-            et l'argent apparaît. Magique, non ? Tu te doutes bien qu'il y a un piège. Il
-            s'appelle le Quantitative Easing.
+            et l'argent apparaît. Magique, non ? Tu te doutes bien qu'il y a un piège. Il s'appelle
+            le Quantitative Easing.
           </>
         ) : (
           <>
@@ -60,11 +60,9 @@ export const Banking3Page: FC = () => {
         )}
       </p>
       <p>
-        <Emphasis>
-          {fr
-            ? "Et si une banque venait à manquer de M0, que se passerait-il ?"
-            : "What if a bank were to run out of M0?"}
-        </Emphasis>
+        {fr
+          ? "Et si une banque venait à manquer de M0, que se passerait-il ?"
+          : "What if a bank were to run out of M0?"}
       </p>
       <Callout
         title={
@@ -80,15 +78,14 @@ export const Banking3Page: FC = () => {
               <i>Mme Michu</i>, alors il est possible que la banque de <i>Mme Michu</i> n'aurait à
               son tour pas pu payer toutes ses dettes auprès d'autres banques tierces, et ainsi de
               suite. Par effet domino, les banques pourraient être dans l'incapacité d'honorer leurs
-              dettes. <Emphasis>Et ce serait catastrophique.</Emphasis>
+              dettes. Et ce serait catastrophique.
             </>
           ) : (
             <>
-              If <i>Nicolas</i>'s Bank hadn't been able to pay its debt to <i>Ms. Michu</i>'s
-              Bank, then it's possible that <i>Ms. Michu</i>'s bank in turn couldn't pay all its
-              debts to other third-party banks, and so on. Through a domino effect, banks could
-              become unable to honor their debts.{" "}
-              <Emphasis>And that would be catastrophic.</Emphasis>
+              If <i>Nicolas</i>'s Bank hadn't been able to pay its debt to <i>Ms. Michu</i>'s Bank,
+              then it's possible that <i>Ms. Michu</i>'s bank in turn couldn't pay all its debts to
+              other third-party banks, and so on. Through a domino effect, banks could become unable
+              to honor their debts. And that would be catastrophic.
             </>
           )}
         </p>
@@ -96,22 +93,14 @@ export const Banking3Page: FC = () => {
           {fr ? (
             <>
               La monnaie M0 est la garantie que les paiements en M2 (qui sont des promesses) sont
-              bel et bien basés sur quelque chose de réel.{" "}
-              <Emphasis>
-                Sans cela, c'est tout le système de paiement qui s'effondre car les promesses n'ont
-                tout simplement plus aucune valeur
-              </Emphasis>
-              .
+              bel et bien basés sur quelque chose de réel. Sans cela, c'est tout le système de
+              paiement qui s'effondre car les promesses n'ont tout simplement plus aucune valeur .
             </>
           ) : (
             <>
               M0 money is the guarantee that M2 payments (which are promises) are indeed based on
-              something real.{" "}
-              <Emphasis>
-                Without it, the entire payment system collapses because promises simply have no
-                value anymore
-              </Emphasis>
-              .
+              something real. Without it, the entire payment system collapses because promises
+              simply have no value anymore .
             </>
           )}
         </p>
@@ -145,12 +134,12 @@ export const Banking3Page: FC = () => {
                     paniquer.
                   </li>
                   <li>
-                    Paniquées, les banques ne prêtent plus de M0 à la banque en difficulté :{" "}
-                    <Emphasis>c'est la crise de confiance</Emphasis>.
+                    Paniquées, les banques ne prêtent plus de M0 à la banque en difficulté : c'est
+                    la crise de confiance.
                   </li>
                   <li>
                     La banque n'a plus accès au M0 et ne peut plus régler ses dettes avec les autres
-                    banques : <Emphasis>tout le système est paralysé</Emphasis>.
+                    banques : tout le système est paralysé.
                   </li>
                 </ol>
               </>
@@ -164,12 +153,12 @@ export const Banking3Page: FC = () => {
                   <DefaultSimulator />
                   <li>Other banks see the bank's equity melting and start to panic.</li>
                   <li>
-                    Panicked, banks stop lending M0 to the struggling bank:{" "}
-                    <Emphasis>it's a confidence crisis</Emphasis>.
+                    Panicked, banks stop lending M0 to the struggling bank: it's a confidence
+                    crisis.
                   </li>
                   <li>
                     The bank no longer has access to M0 and can no longer settle its debts with
-                    other banks: <Emphasis>the entire system is paralyzed</Emphasis>.
+                    other banks: the entire system is paralyzed.
                   </li>
                 </ol>
               </>
@@ -245,8 +234,9 @@ export const Banking3Page: FC = () => {
           </p>
           <p>
             {fr
-              ? "Tu te doutes bien que tout cela est bien trop beau pour être vrai. Et t'as raison : ces manœuvres ont des conséquences lourdes sur l'économie, et elles sont au cœur du problème financier actuel. C'est ce que tu vas voir par la suite. On y arrive !"
-              : "You probably suspect all of this is too good to be true. And you're right: these maneuvers have major consequences for the economy, and they are at the heart of the current financial problem. This is what you are going to see next. We're getting there!"}
+              ? "Tu te doutes bien que tout cela est bien trop beau pour être vrai. Et t'as raison : ces manœuvres ont des conséquences lourdes sur l'économie, et elles sont au cœur du problème financier actuel. C'est ce que tu vas voir par la suite :"
+              : "You probably suspect all of this is too good to be true. And you're right: these maneuvers have major consequences for the economy, and they are at the heart of the current financial problem. This is what you are going to see next:"}{" "}
+            <Reference to={ROUTE_NAME.Banking_4}>{t("nav.tree.brokenEngine")}</Reference>.
           </p>
         </>
       )}

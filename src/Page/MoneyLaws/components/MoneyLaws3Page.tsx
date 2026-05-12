@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Quote, Reference } from "../../../Design";
+import { Callout, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   FlipCardGrid,
@@ -9,8 +9,7 @@ import {
   Quiz,
 } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
-import { useToggleSimulator } from "../../Shared/hooks";
+import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
 export const MoneyLaws3Page: FC = () => {
   const { t, language } = useTranslation();
@@ -46,8 +45,8 @@ export const MoneyLaws3Page: FC = () => {
         {fr ? (
           <>
             Au chapitre précédent, on a vu que la{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_2}>manipulation de la monnaie</Reference> fausse
-            les signaux et provoque des krachs. Mais que se passerait-il si, pour éviter ces
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>manipulation de la monnaie</Reference> fausse les
+            signaux et provoque des krachs. Mais que se passerait-il si, pour éviter ces
             déséquilibres, les autorités décidaient de supprimer totalement ces signaux ?
           </>
         ) : (
@@ -66,8 +65,7 @@ export const MoneyLaws3Page: FC = () => {
             <Reference href="https://fr.wikipedia.org/wiki/Ludwig_von_Mises">
               <i>Ludwig von Mises</i>
             </Reference>{" "}
-            a démontré que ce modèle se heurte à une{" "}
-            <Emphasis>impossibilité logique</Emphasis>.
+            a démontré que ce modèle se heurte à une impossibilité logique.
           </>
         ) : (
           <>
@@ -75,7 +73,7 @@ export const MoneyLaws3Page: FC = () => {
             <Reference href="https://en.wikipedia.org/wiki/Ludwig_von_Mises">
               <i>Ludwig von Mises</i>
             </Reference>{" "}
-            demonstrated that this model faces a <Emphasis>logical impossibility</Emphasis>.
+            demonstrated that this model faces a logical impossibility.
           </>
         )}
       </p>
@@ -164,7 +162,7 @@ export const MoneyLaws3Page: FC = () => {
         <p>
           {fr ? (
             <>
-              <Emphasis>L'intérêt personnel crée automatiquement l'intérêt collectif.</Emphasis>
+              L'intérêt personnel crée automatiquement l'intérêt collectif.
               <br />
               Pourquoi ? Parce que le prix de l'acier reflète sa rareté réelle. Si beaucoup d'autres
               entrepreneurs ont besoin d'acier pour d'autres projets (par exemple des fusées), alors
@@ -173,7 +171,7 @@ export const MoneyLaws3Page: FC = () => {
             </>
           ) : (
             <>
-              <Emphasis>Self-interest automatically creates collective interest.</Emphasis>
+              Self-interest automatically creates collective interest.
               <br />
               Why? Because the price of steel reflects its real scarcity. If many other
               entrepreneurs need steel for other projects (rockets, for instance), its price rises.
@@ -183,26 +181,21 @@ export const MoneyLaws3Page: FC = () => {
           )}
         </p>
         <p>
-          <Emphasis>
-            {fr
-              ? "C'est une coordination sans coordinateur. Une intelligence distribuée."
-              : "It is coordination without a coordinator. Distributed intelligence."}
-          </Emphasis>
+          {fr
+            ? "C'est une coordination sans coordinateur. Une intelligence distribuée."
+            : "It is coordination without a coordinator. Distributed intelligence."}
         </p>
       </Callout>
       <p>
         {fr ? (
           <>
-            Mais voici l'astuce que les socialistes manquent :{" "}
-            <Emphasis>
-              les prix ne transmettent que l'information, les entrepreneurs créent cette
-              information.
-            </Emphasis>
+            Mais voici l'astuce que les socialistes manquent : les prix ne transmettent que
+            l'information, les entrepreneurs créent cette information.
           </>
         ) : (
           <>
-            But here is the trick that socialists miss:{" "}
-            <Emphasis>prices only transmit information, entrepreneurs create it.</Emphasis>
+            But here is the trick that socialists miss: prices only transmit information,
+            entrepreneurs create it.
           </>
         )}
       </p>
@@ -253,18 +246,14 @@ export const MoneyLaws3Page: FC = () => {
         {fr ? (
           <>
             Chaque étape implique des milliers de décisions. Un entrepreneur pour le verre anticipe
-            les prix. Un autre pour le houblon fait de même.{" "}
-            <Emphasis>
-              C'est une intelligence distribuée qu'aucun cerveau central ne pourra jamais égaler.
-            </Emphasis>
+            les prix. Un autre pour le houblon fait de même. C'est une intelligence distribuée
+            qu'aucun cerveau central ne pourra jamais égaler.
           </>
         ) : (
           <>
             Each step involves thousands of decisions. An entrepreneur for glass anticipates prices.
-            Another for hops does the same.{" "}
-            <Emphasis>
-              It is a distributed intelligence that no central brain could ever match.
-            </Emphasis>
+            Another for hops does the same. It is a distributed intelligence that no central brain
+            could ever match.
           </>
         )}
       </p>
@@ -298,11 +287,9 @@ export const MoneyLaws3Page: FC = () => {
             : "The result? Groundwater reserves are now depleted. And in a domino effect, electricity becomes scarce during drought periods, leading to factory shutdowns and driving up the cost of raw materials."}
         </p>
         <p>
-          <Emphasis>
-            {fr
-              ? "Tout cela, parce qu'une ressource n'avait pas de prix pour signaler sa rareté"
-              : "All of this, because a resource had no price to signal its scarcity"}
-          </Emphasis>
+          {fr
+            ? "Tout cela, parce qu'une ressource n'avait pas de prix pour signaler sa rareté"
+            : "All of this, because a resource had no price to signal its scarcity"}
           .
         </p>
       </Callout>
@@ -326,11 +313,9 @@ export const MoneyLaws3Page: FC = () => {
         </p>
       </Callout>
       <p>
-        <Emphasis>
-          {fr
-            ? "Le problème du socialisme n'est pas la méchanceté ou l'incompétence des planificateurs. Il est structurel."
-            : "The problem with socialism is not the malice or incompetence of planners. It is structural."}
-        </Emphasis>
+        {fr
+          ? "Le problème du socialisme n'est pas la méchanceté ou l'incompétence des planificateurs. Il est structurel."
+          : "The problem with socialism is not the malice or incompetence of planners. It is structural."}
       </p>
 
       <p>
@@ -358,15 +343,15 @@ export const MoneyLaws3Page: FC = () => {
         {fr ? (
           <>
             Mais comment sortir de cette impasse ? C'est là qu'intervient{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_4}>la méthodologie autrichienne</Reference>. Elle
-            ne se contente pas de critiquer : elle propose une compréhension du monde basée sur
+            <Reference to={ROUTE_NAME.MoneyLaws_4}>la méthodologie autrichienne</Reference>. Elle ne
+            se contente pas de critiquer : elle propose une compréhension du monde basée sur
             l'action humaine.
           </>
         ) : (
           <>
             But how do we break out of this deadlock? This is where{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_4}>the Austrian methodology</Reference> comes in.
-            It doesn't just criticize: it offers a way of understanding the world based on human
+            <Reference to={ROUTE_NAME.MoneyLaws_4}>the Austrian methodology</Reference> comes in. It
+            doesn't just criticize: it offers a way of understanding the world based on human
             action.
           </>
         )}

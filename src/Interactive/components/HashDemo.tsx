@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { CircleCheck, Hash, RotateCcw } from "lucide-react";
 
-import { Button, Caption, Emphasis, SurfaceCard, useBreakpoint } from "../../Design";
+import { Button, Caption, SurfaceCard, useBreakpoint } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { usePageTheme } from "../../Design/Theme";
 import { useLanguageContext } from "../../I18n";
@@ -94,7 +94,7 @@ export const HashDemo: FC = () => {
 
       {hash && (
         <div style={outputBox}>
-          {fr ? "Empreinte générée :" : "Generated hash:"} <Emphasis>{hash}</Emphasis>
+          {fr ? "Empreinte générée :" : "Generated hash:"} <strong>{hash}</strong>
         </div>
       )}
 

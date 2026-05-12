@@ -1,9 +1,9 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Reference } from "../../../Design";
+import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
+import { PageTemplate } from "../../Shared/";
 
 import { QESimulator } from "./QESimulator";
 import { YieldCurveSimulator } from "./YieldCurveSimulator";
@@ -37,14 +37,12 @@ export const Banking4Page: FC = () => {
         {fr ? (
           <>
             Jusqu'ici, la Banque Centrale a sauvé les banques commerciales en leur injectant de la
-            M0. Le problème c'est qu'en faisant ça,
-            <Emphasis> elle a enrayé le moteur.</Emphasis>
+            M0. Le problème c'est qu'en faisant ça, elle a enrayé le moteur.
           </>
         ) : (
           <>
             So far, the Central Bank has saved commercial banks by injecting them with M0. The
-            problem is that in doing so,
-            <Emphasis> it broke the engine.</Emphasis>
+            problem is that in doing so, it broke the engine.
           </>
         )}
       </p>
@@ -85,11 +83,9 @@ export const Banking4Page: FC = () => {
           )}
         </p>
         <p>
-          <Emphasis>
-            {fr
-              ? "Son profit, c'est l'écart entre le taux long et le taux court"
-              : "Its profit is the spread between the long-term rate and the short-term rate"}
-          </Emphasis>
+          {fr
+            ? "Son profit, c'est l'écart entre le taux long et le taux court"
+            : "Its profit is the spread between the long-term rate and the short-term rate"}
           .
         </p>
         <p>
@@ -211,7 +207,7 @@ export const Banking4Page: FC = () => {
             <Reference to={ROUTE_NAME.Banking_5}>
               à ceux qui <i>ont</i>
             </Reference>
-            . La suite, juste après !
+            . La suite, c'est maintenant !
           </>
         ) : (
           <>
@@ -219,7 +215,7 @@ export const Banking4Page: FC = () => {
             <Reference to={ROUTE_NAME.Banking_5}>
               to those who <i>have</i>
             </Reference>
-            . More on that right after!
+            . More on that right now!
           </>
         )}
       </p>
