@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis } from "../../../Design";
+import { Callout, Emphasis, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   ByzantineGenerals,
@@ -10,6 +10,7 @@ import {
   MiningSimulator,
   Quiz,
 } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/";
 
 export const Bitcoin4Page: FC = () => {
@@ -80,7 +81,11 @@ export const Bitcoin4Page: FC = () => {
         <p>
           {fr ? (
             <>
-              C'est ça, le problème des généraux byzantins :{" "}
+              C'est ça, le{" "}
+              <Reference href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins">
+                problème des généraux byzantins
+              </Reference>
+              {" "}:{" "}
               <Emphasis>
                 comment être sûr que tout le monde prendra la même décision, sans se faire confiance
                 ?
@@ -88,7 +93,11 @@ export const Bitcoin4Page: FC = () => {
             </>
           ) : (
             <>
-              That is the Byzantine Generals Problem:{" "}
+              That is the{" "}
+              <Reference href="https://en.wikipedia.org/wiki/Byzantine_fault">
+                Byzantine Generals Problem
+              </Reference>
+              :{" "}
               <Emphasis>
                 how can we be sure everyone will make the same decision, without trusting one
                 another?
@@ -413,12 +422,14 @@ export const Bitcoin4Page: FC = () => {
         {fr ? (
           <>
             Mais pourquoi des mineurs dépensent-ils autant d'énergie pour participer ? <br />
-            Direction le prochain chapitre : <Emphasis>la récompense et le halving</Emphasis>.
+            Direction le prochain chapitre :{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_5}>la récompense et le halving</Reference>.
           </>
         ) : (
           <>
             But why do miners spend so much energy to participate? <br />
-            On to the next chapter: <Emphasis>the reward and the halving</Emphasis>.
+            On to the next chapter:{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_5}>the reward and the halving</Reference>.
           </>
         )}
       </p>
