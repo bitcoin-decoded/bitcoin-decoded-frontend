@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Quote } from "../../../Design";
+import { Callout, Emphasis, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   DebateArena,
@@ -8,6 +8,7 @@ import {
   getQuizDataAustrianAxiom,
   Quiz,
 } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 import { useToggleSimulator } from "../../Shared/hooks";
 
@@ -36,9 +37,21 @@ export const MoneyLaws4Page: FC = () => {
       }
     >
       <p>
-        {fr
-          ? "Au chapitre précédent, t'as vu que la doctrine socialiste s'effondre par manque d'information. Mais alors, comment les économistes font-ils pour étudier cette information ? C'est là que les chemins se séparent."
-          : "In the previous chapter, you saw that the socialist doctrine collapses due to a lack of information. But then, how do economists study this information? This is where paths diverge."}
+        {fr ? (
+          <>
+            Au chapitre précédent, t'as vu que la{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_3}>doctrine socialiste</Reference> s'effondre par
+            manque d'information. Mais alors, comment les économistes font-ils pour étudier cette
+            information ? C'est là que les chemins se séparent.
+          </>
+        ) : (
+          <>
+            In the previous chapter, you saw that the{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_3}>socialist doctrine</Reference> collapses due to
+            a lack of information. But then, how do economists study this information? This is
+            where paths diverge.
+          </>
+        )}
       </p>
       <Callout title={fr ? "Le Physicien contre le Logicien" : "The Physicist versus the Logician"}>
         <p>
@@ -91,13 +104,19 @@ export const MoneyLaws4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Friedrich Hayek, économiste de l'école de pensée autrichienne, a dénoncé ce qu'il
-            appelait le <Emphasis>scientisme</Emphasis>, c'est-à-dire la volonté d'appliquer les
-            méthodes des sciences dures (physique, chimie) à l'action humaine.
+            <Reference href="https://fr.wikipedia.org/wiki/Friedrich_Hayek">
+              Friedrich Hayek
+            </Reference>
+            , économiste de l'école de pensée autrichienne, a dénoncé ce qu'il appelait le{" "}
+            <Emphasis>scientisme</Emphasis>, c'est-à-dire la volonté d'appliquer les méthodes des
+            sciences dures (physique, chimie) à l'action humaine.
           </>
         ) : (
           <>
-            Friedrich Hayek, economist of the Austrian school, denounced what he called{" "}
+            <Reference href="https://en.wikipedia.org/wiki/Friedrich_Hayek">
+              Friedrich Hayek
+            </Reference>
+            , economist of the Austrian school, denounced what he called{" "}
             <Emphasis>scientism</Emphasis>, the desire to apply hard science methods (physics,
             chemistry) to human action.
           </>
@@ -148,14 +167,18 @@ export const MoneyLaws4Page: FC = () => {
         {fr ? (
           <>
             Toute la pensée autrichienne repose sur une seule brique, une vérité de base. C'est ce
-            qu'on appelle l'<Emphasis>axiome praxéologique</Emphasis> (de la praxéologie, la science
-            de l'action humaine).
+            qu'on appelle l'<Emphasis>axiome praxéologique</Emphasis> (de la{" "}
+            <Reference href="https://fr.wikipedia.org/wiki/Prax%C3%A9ologie">
+              praxéologie
+            </Reference>
+            , la science de l'action humaine).
           </>
         ) : (
           <>
             All Austrian thought rests on a single building block, a fundamental truth. This is what
-            is called the <Emphasis>praxeological axiom</Emphasis> (from praxeology, the science of
-            human action).
+            is called the <Emphasis>praxeological axiom</Emphasis> (from{" "}
+            <Reference href="https://en.wikipedia.org/wiki/Praxeology">praxeology</Reference>, the
+            science of human action).
           </>
         )}
       </p>

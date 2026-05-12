@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Quote } from "../../../Design";
+import { Callout, Emphasis, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   FlipCardGrid,
@@ -8,6 +8,7 @@ import {
   getQuizDataBridgeMaterial,
   Quiz,
 } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 import { useToggleSimulator } from "../../Shared/hooks";
 
@@ -42,22 +43,39 @@ export const MoneyLaws3Page: FC = () => {
       }
     >
       <p>
-        {fr
-          ? "Au chapitre précédent, on a vu que la manipulation de la monnaie fausse les signaux et provoque des krachs. Mais que se passerait-il si, pour éviter ces déséquilibres, les autorités décidaient de supprimer totalement ces signaux ?"
-          : "In the previous chapter, we saw that monetary manipulation distorts signals and causes crashes. But what would happen if, to avoid these imbalances, the authorities decided to eliminate these signals entirely?"}
+        {fr ? (
+          <>
+            Au chapitre précédent, on a vu que la{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>manipulation de la monnaie</Reference> fausse
+            les signaux et provoque des krachs. Mais que se passerait-il si, pour éviter ces
+            déséquilibres, les autorités décidaient de supprimer totalement ces signaux ?
+          </>
+        ) : (
+          <>
+            In the previous chapter, we saw that{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>monetary manipulation</Reference> distorts
+            signals and causes crashes. But what would happen if, to avoid these imbalances, the
+            authorities decided to eliminate these signals entirely?
+          </>
+        )}
       </p>
       <p>
         {fr ? (
           <>
             Dans son ouvrage de 1920 <i>« Le calcul économique en régime socialiste »</i>,{" "}
-            <i>Ludwig von Mises</i> a démontré que ce modèle se heurte à une{" "}
+            <Reference href="https://fr.wikipedia.org/wiki/Ludwig_von_Mises">
+              <i>Ludwig von Mises</i>
+            </Reference>{" "}
+            a démontré que ce modèle se heurte à une{" "}
             <Emphasis>impossibilité logique</Emphasis>.
           </>
         ) : (
           <>
             In his 1920 work titled <i> "Economic Calculation in the Socialist Commonwealth"</i>,{" "}
-            <i>Ludwig von Mises</i> demonstrated that this model faces a{" "}
-            <Emphasis>logical impossibility</Emphasis>.
+            <Reference href="https://en.wikipedia.org/wiki/Ludwig_von_Mises">
+              <i>Ludwig von Mises</i>
+            </Reference>{" "}
+            demonstrated that this model faces a <Emphasis>logical impossibility</Emphasis>.
           </>
         )}
       </p>
@@ -340,14 +358,16 @@ export const MoneyLaws3Page: FC = () => {
         {fr ? (
           <>
             Mais comment sortir de cette impasse ? C'est là qu'intervient{" "}
-            <Emphasis>la méthodologie autrichienne</Emphasis>. Elle ne se contente pas de critiquer
-            : elle propose une compréhension du monde basée sur l'action humaine.
+            <Reference to={ROUTE_NAME.MoneyLaws_4}>la méthodologie autrichienne</Reference>. Elle
+            ne se contente pas de critiquer : elle propose une compréhension du monde basée sur
+            l'action humaine.
           </>
         ) : (
           <>
             But how do we break out of this deadlock? This is where{" "}
-            <Emphasis>the Austrian methodology</Emphasis> comes in. It doesn't just criticize: it
-            offers a way of understanding the world based on human action.
+            <Reference to={ROUTE_NAME.MoneyLaws_4}>the Austrian methodology</Reference> comes in.
+            It doesn't just criticize: it offers a way of understanding the world based on human
+            action.
           </>
         )}
       </p>

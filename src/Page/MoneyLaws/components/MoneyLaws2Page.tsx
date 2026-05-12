@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis } from "../../../Design";
+import { Callout, Emphasis, Reference } from "../../../Design";
 import highTimePreference from "../../../Design/img/high_time_preference.jpg";
 import lowTimePreference from "../../../Design/img/low_time_preference.jpg";
 import prosperousEconomy from "../../../Design/img/Prosperous_economy.jpg";
@@ -12,6 +12,7 @@ import {
   Illustration,
   Quiz,
 } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 import { useToggleSimulator } from "../../Shared/hooks";
 import { PAGE_STYLES } from "../../Shared/styles";
@@ -40,9 +41,19 @@ export const MoneyLaws2Page: FC = () => {
       }
     >
       <p>
-        {fr
-          ? "Au chapitre précédent, nous avons vu que la dureté de notre monnaie (la monnaie Fiat) a été sacrifiée. Le problème ? Le coût caché de ce sacrifice est immense."
-          : "In the previous chapter, we saw that the hardness of our currency (fiat money) has been sacrificed. The problem? The hidden cost of that sacrifice is immense."}
+        {fr ? (
+          <>
+            Au chapitre précédent, nous avons vu que la{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_1}>dureté</Reference> de notre monnaie (la monnaie
+            Fiat) a été sacrifiée. Le problème ? Le coût caché de ce sacrifice est immense.
+          </>
+        ) : (
+          <>
+            In the previous chapter, we saw that the{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_1}>hardness</Reference> of our currency (fiat
+            money) has been sacrificed. The problem? The hidden cost of that sacrifice is immense.
+          </>
+        )}
       </p>
       <p>
         {fr ? (
@@ -346,7 +357,10 @@ export const MoneyLaws2Page: FC = () => {
         {fr ? (
           <>
             Et vient ensuite la purge : ce qu'on appelle « crise » est en réalité un processus de{" "}
-            <i>destruction créatrice</i>. C'est le moment où l'économie liquide les mauvais projets
+            <Reference href="https://fr.wikipedia.org/wiki/Destruction_cr%C3%A9atrice">
+              <i>destruction créatrice</i>
+            </Reference>
+            . C'est le moment où l'économie liquide les mauvais projets
             pour essayer de sauver ce qui peut l'être. La récession est une période de « ceinture
             serrée » obligatoire pour reconstituer l'épargne qu'on a fait semblant d'avoir pendant
             le boom.
@@ -354,7 +368,10 @@ export const MoneyLaws2Page: FC = () => {
         ) : (
           <>
             Then comes the purge: what we call a "crisis" is actually a process of{" "}
-            <i>creative destruction</i>. It is the moment when the economy liquidates bad projects
+            <Reference href="https://en.wikipedia.org/wiki/Creative_destruction">
+              <i>creative destruction</i>
+            </Reference>
+            . It is the moment when the economy liquidates bad projects
             to try to salvage what can be saved. The recession is a mandatory belt-tightening period
             to rebuild the savings we pretended to have during the boom.
           </>
@@ -469,13 +486,18 @@ export const MoneyLaws2Page: FC = () => {
         {fr ? (
           <>
             <Emphasis>
-              Alors, prêt à comprendre pourquoi les systèmes planifiés sont condamnés à
-              l'aveuglement ?
+              Alors, prêt à comprendre pourquoi les{" "}
+              <Reference to={ROUTE_NAME.MoneyLaws_3}>systèmes planifiés</Reference> sont condamnés
+              à l'aveuglement ?
             </Emphasis>
           </>
         ) : (
           <>
-            <Emphasis>Ready to understand why planned systems are doomed to blindness?</Emphasis>
+            <Emphasis>
+              Ready to understand why{" "}
+              <Reference to={ROUTE_NAME.MoneyLaws_3}>planned systems</Reference> are doomed to
+              blindness?
+            </Emphasis>
           </>
         )}
       </p>

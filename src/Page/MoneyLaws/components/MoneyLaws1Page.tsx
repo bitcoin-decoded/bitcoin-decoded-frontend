@@ -1,10 +1,11 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, KeywordHighlight } from "../../../Design";
+import { Callout, Emphasis, KeywordHighlight, Reference } from "../../../Design";
 import petrole from "../../../Design/img/Petroleum_sample.jpg";
 import pikachuIllustratorCard from "../../../Design/img/Pikachu_Illustrator_Card.webp";
 import { useTranslation } from "../../../I18n";
 import { Illustration } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 import { PAGE_STYLES } from "../../Shared/styles";
 import { displayAristoteMoneyCharacs } from "../helpers";
@@ -112,11 +113,19 @@ export const MoneyLaws1Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Ce nombre n'est pas choisi par pur hasard : il s'agit du <i>nombre de Dunbar</i>.
+              Ce nombre n'est pas choisi par pur hasard : il s'agit du{" "}
+              <Reference href="https://fr.wikipedia.org/wiki/Nombre_de_Dunbar">
+                <i>nombre de Dunbar</i>
+              </Reference>
+              .
             </>
           ) : (
             <>
-              This number is not arbitrary: it is known as <i>Dunbar's number</i>.
+              This number is not arbitrary: it is known as{" "}
+              <Reference href="https://en.wikipedia.org/wiki/Dunbar%27s_number">
+                <i>Dunbar's number</i>
+              </Reference>
+              .
             </>
           )}
         </p>
@@ -333,16 +342,19 @@ export const MoneyLaws1Page: FC = () => {
         {fr ? (
           <>
             <Emphasis>
-              Prêt à découvrir comment ce manque de dureté engendre, mécaniquement, les cycles de
-              crises (Boum et Krach) que nous subissons ?
+              Prêt à découvrir comment ce manque de dureté engendre, mécaniquement, les{" "}
+              <Reference to={ROUTE_NAME.MoneyLaws_2}>
+                cycles de crises (Boum et Krach)
+              </Reference>{" "}
+              que nous subissons ?
             </Emphasis>{" "}
             On y va.
           </>
         ) : (
           <>
             <Emphasis>
-              Ready to discover how this lack of hardness mechanically generates the boom-and-bust
-              cycles we endure?
+              Ready to discover how this lack of hardness mechanically generates the{" "}
+              <Reference to={ROUTE_NAME.MoneyLaws_2}>boom-and-bust cycles</Reference> we endure?
             </Emphasis>{" "}
             Let's go.
           </>
