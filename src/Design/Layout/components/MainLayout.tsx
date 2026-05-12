@@ -51,6 +51,20 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
     flex: "1 1 auto",
   };
 
+  // Persistent sticky sidebar (desktop only). Notion / Linear / Stripe
+  // pattern: the nav stays anchored in the viewport while the main
+  // content scrolls. Three things are needed for this to work inside a
+  // flex row:
+  //   1. position: sticky + a `top` offset matching the sticky Header
+  //      height (3.5rem), so the nav lands just under it
+  //   2. an explicit height that fills the remaining viewport
+  //      (100vh - header), otherwise the column has no defined size
+  //   3. align-self: flex-start so the flex row doesn't stretch the
+  //      column to match the main content's height (which would
+  //      neutralise both the height and the sticky behaviour)
+  // Internal scroll is handled by NavBar itself (its list container
+  // already has overflow-y: auto), so we don't need a second scroll
+  // context here.
   const navContainerStyle: CSSProperties = {
     backgroundColor: colors.base.background.primary,
     color: colors.base.text.secondary,
@@ -58,6 +72,10 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
     flexShrink: 0,
     fontSize: "0.8125rem",
     lineHeight: "1.25rem",
+    position: "sticky",
+    top: "3.5rem",
+    height: "calc(100vh - 3.5rem)",
+    alignSelf: "flex-start",
   };
 
   const mainContentPadding = {
