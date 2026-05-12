@@ -144,9 +144,9 @@ Centralisent le style des éléments récurrents. Toutes lisent `usePageTheme()`
 
 Deux primitives de "collapse" coexistent — elles ne sont pas redondantes, leurs périmètres sont disjoints :
 
-| Brique                                    | Périmètre                                                                                                                                      |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Disclosure` + `useDisclosure`            | **Un seul** panneau qui s'ouvre / se ferme (état `boolean`). Pour un "show more" isolé, un détail optionnel sous un titre.                     |
+| Brique                                                          | Périmètre                                                                                                                                |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `Disclosure` + `useDisclosure`                                  | **Un seul** panneau qui s'ouvre / se ferme (état `boolean`). Pour un "show more" isolé, un détail optionnel sous un titre.               |
 | `useAccordion<K>` (hook seul, pas de composant prêt-à-l'emploi) | **Groupe** de panneaux mutuellement exclusifs (état `K \| null` = quelle clé est ouverte, le cas échéant). Pour la navbar, une FAQ, etc. |
 
 Convention industrielle (Headless UI, Radix, MUI) : Disclosure = un seul, Accordion = groupe exclusif. Quand on a besoin d'un groupe non-exclusif (plusieurs ouverts simultanément), on compose plusieurs `useDisclosure` ou on monte une variante locale.
@@ -209,15 +209,15 @@ Pour ajouter un nouveau type de marqueur (`exercise`, `recap`, …) : étendre l
 
 ## Quiz de synthèse (chapitres `kind: "challenge"`)
 
-Chaque module se conclut par un chapitre « Tu as compris ? Prouve le. » (EN : « Got it? Prove it. ») qui contient un quiz à validation différée gatant un texte de synthèse.
+Chaque module se conclut par un chapitre « Tu as compris ? Prouve-le. » (EN : « Got it? Prove it. ») qui contient un quiz à validation différée gatant un texte de synthèse.
 
 ### Pages concernées
 
-| Module    | Route      | Seuil   | Clé de titre i18n          |
-| --------- | ---------- | ------- | -------------------------- |
-| Banking   | Banking_7  | ≥ 10/15 | `nav.tree.synthesis`       |
+| Module    | Route       | Seuil   | Clé de titre i18n          |
+| --------- | ----------- | ------- | -------------------------- |
+| Banking   | Banking_7   | ≥ 10/15 | `nav.tree.synthesis`       |
 | MoneyLaws | MoneyLaws_5 | ≥ 10/15 | `nav.tree.orangeSynthesis` |
-| Bitcoin   | Bitcoin_9  | ≥ 15/20 | `nav.tree.greenSynthesis`  |
+| Bitcoin   | Bitcoin_9   | ≥ 15/20 | `nav.tree.greenSynthesis`  |
 
 ### Briques (toutes dans `src/Interactive/`)
 
@@ -230,7 +230,7 @@ Chaque module se conclut par un chapitre « Tu as compris ? Prouve le. » (EN : 
 
 ```tsx
 const { isActive: isQuizPassed, activate: onQuizPassed, reset: onQuizReset } = useToggleSimulator();
-const quiz = getQuizDataModule<N>Synthesis(language);
+const quiz = getQuizDataModule < N > Synthesis(language);
 
 return (
   <PageTemplate title={t("nav.tree.<X>Synthesis")}>
@@ -241,11 +241,7 @@ return (
       onPass={onQuizPassed}
       onReset={onQuizReset}
     />
-    {isQuizPassed && (
-      <>
-        {/* texte de synthèse, gaté */}
-      </>
-    )}
+    {isQuizPassed && <>{/* texte de synthèse, gaté */}</>}
   </PageTemplate>
 );
 ```
