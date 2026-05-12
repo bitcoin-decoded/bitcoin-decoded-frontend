@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Quote, Reference } from "../../../Design";
+import { Callout, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   DebateArena,
@@ -9,8 +9,7 @@ import {
   Quiz,
 } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
-import { useToggleSimulator } from "../../Shared/hooks";
+import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
 export const MoneyLaws4Page: FC = () => {
   const { t, language } = useTranslation();
@@ -47,9 +46,9 @@ export const MoneyLaws4Page: FC = () => {
         ) : (
           <>
             In the previous chapter, you saw that the{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_3}>socialist doctrine</Reference> collapses due to
-            a lack of information. But then, how do economists study this information? This is
-            where paths diverge.
+            <Reference to={ROUTE_NAME.MoneyLaws_3}>socialist doctrine</Reference> collapses due to a
+            lack of information. But then, how do economists study this information? This is where
+            paths diverge.
           </>
         )}
       </p>
@@ -62,18 +61,13 @@ export const MoneyLaws4Page: FC = () => {
                 <li>
                   L'école keynésienne (<i>la méthode du physicien</i>) : on observe des chiffres (le
                   PIB, le chômage), on fait une hypothèse, et on regarde si les données du passé
-                  confirment la théorie.{" "}
-                  <Emphasis>
-                    C'est ce qu'on appelle l'empirisme (ou positivisme dans sa version
-                    méthodologique)
-                  </Emphasis>
-                  .
+                  confirment la théorie. C'est ce qu'on appelle l'empirisme (ou positivisme dans sa
+                  version méthodologique) .
                 </li>
                 <li>
                   L'école autrichienne (<i>la méthode du logicien</i>) : on ne part pas de
                   l'observation, mais d'une vérité indiscutable, puis on en déduit tout le reste par
-                  la logique, comme en géométrie.{" "}
-                  <Emphasis>C'est la méthode axiomatique-déductive</Emphasis>.
+                  la logique, comme en géométrie. C'est la méthode axiomatique-déductive.
                 </li>
               </ul>
             </>
@@ -84,17 +78,13 @@ export const MoneyLaws4Page: FC = () => {
                 <li>
                   The Keynesian school (<i>the physicist's method</i>): you observe numbers (GDP,
                   unemployment), formulate a hypothesis, and then check whether past data confirms
-                  the theory.{" "}
-                  <Emphasis>
-                    This is what is called empiricism (or positivism in its methodological form)
-                  </Emphasis>
-                  .
+                  the theory. This is what is called empiricism (or positivism in its methodological
+                  form) .
                 </li>
                 <li>
                   The Austrian school (<i>the logician's method</i>): you do not start from
                   observation, but from an indisputable truth, then deduce everything else through
-                  logic, as in geometry. <Emphasis>This is the axiomatic-deductive method</Emphasis>
-                  .
+                  logic, as in geometry. This is the axiomatic-deductive method .
                 </li>
               </ul>
             </>
@@ -108,17 +98,16 @@ export const MoneyLaws4Page: FC = () => {
               Friedrich Hayek
             </Reference>
             , économiste de l'école de pensée autrichienne, a dénoncé ce qu'il appelait le{" "}
-            <Emphasis>scientisme</Emphasis>, c'est-à-dire la volonté d'appliquer les méthodes des
-            sciences dures (physique, chimie) à l'action humaine.
+            scientisme, c'est-à-dire la volonté d'appliquer les méthodes des sciences dures
+            (physique, chimie) à l'action humaine.
           </>
         ) : (
           <>
             <Reference href="https://en.wikipedia.org/wiki/Friedrich_Hayek">
               Friedrich Hayek
             </Reference>
-            , economist of the Austrian school, denounced what he called{" "}
-            <Emphasis>scientism</Emphasis>, the desire to apply hard science methods (physics,
-            chemistry) to human action.
+            , economist of the Austrian school, denounced what he called scientism, the desire to
+            apply hard science methods (physics, chemistry) to human action.
           </>
         )}
       </p>
@@ -134,15 +123,14 @@ export const MoneyLaws4Page: FC = () => {
             inadaptées :
             <ul>
               <li>
-                <Emphasis>La société n'est pas un laboratoire</Emphasis>. On ne peut pas isoler une
-                variable. Par exemple, si les impôts baissent et que la croissance se met à monter,
-                est-ce à cause des impôts ou d'une nouvelle technologie apparue au même moment ? On
-                ne peut pas le savoir.
+                La société n'est pas un laboratoire. On ne peut pas isoler une variable. Par
+                exemple, si les impôts baissent et que la croissance se met à monter, est-ce à cause
+                des impôts ou d'une nouvelle technologie apparue au même moment ? On ne peut pas le
+                savoir.
               </li>
               <li>
-                <Emphasis>L'humain apprend</Emphasis>. Contrairement à une planète, l'humain change
-                son comportement s'il connaît une théorie. Les données du passé ne prédisent donc
-                jamais le futur.
+                L'humain apprend. Contrairement à une planète, l'humain change son comportement s'il
+                connaît une théorie. Les données du passé ne prédisent donc jamais le futur.
               </li>
             </ul>
           </>
@@ -151,13 +139,13 @@ export const MoneyLaws4Page: FC = () => {
             But why such criticism? Simply because these methods are unsuited:
             <ul>
               <li>
-                <Emphasis>Society is not a laboratory</Emphasis>. You cannot isolate a variable. For
-                instance, if taxes go down and growth picks up, is it because of the tax cut or a
-                new technology that appeared at the same time? There is no way to tell.
+                Society is not a laboratory. You cannot isolate a variable. For instance, if taxes
+                go down and growth picks up, is it because of the tax cut or a new technology that
+                appeared at the same time? There is no way to tell.
               </li>
               <li>
-                <Emphasis>Humans learn</Emphasis>. Unlike a planet, humans change their behavior if
-                they know about a theory. Past data therefore never predicts the future.
+                Humans learn. Unlike a planet, humans change their behavior if they know about a
+                theory. Past data therefore never predicts the future.
               </li>
             </ul>
           </>
@@ -167,16 +155,14 @@ export const MoneyLaws4Page: FC = () => {
         {fr ? (
           <>
             Toute la pensée autrichienne repose sur une seule brique, une vérité de base. C'est ce
-            qu'on appelle l'<Emphasis>axiome praxéologique</Emphasis> (de la{" "}
-            <Reference href="https://fr.wikipedia.org/wiki/Prax%C3%A9ologie">
-              praxéologie
-            </Reference>
+            qu'on appelle l'axiome praxéologique (de la{" "}
+            <Reference href="https://fr.wikipedia.org/wiki/Prax%C3%A9ologie">praxéologie</Reference>
             , la science de l'action humaine).
           </>
         ) : (
           <>
             All Austrian thought rests on a single building block, a fundamental truth. This is what
-            is called the <Emphasis>praxeological axiom</Emphasis> (from{" "}
+            is called the praxeological axiom (from{" "}
             <Reference href="https://en.wikipedia.org/wiki/Praxeology">praxeology</Reference>, the
             science of human action).
           </>
@@ -223,16 +209,18 @@ export const MoneyLaws4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            L'école autrichienne ne cherche pas à prédire que « le PIB montera de 1.2 % ».{" "}
-            <Emphasis>Elle établit des lois qualitatives et universelles</Emphasis>.<br />
+            L'école autrichienne ne cherche pas à prédire que « le PIB montera de 1.2 % ». Elle
+            établit des lois qualitatives et universelles.
+            <br />
             Par exemple : « la manipulation artificielle des taux d'intérêt provoque
             systématiquement une mauvaise allocation du capital » est aussi certain que « 2 + 2 font
             4 ».
           </>
         ) : (
           <>
-            The Austrian school does not try to predict that "GDP will rise by 1.2%."{" "}
-            <Emphasis>It establishes qualitative and universal laws</Emphasis>.<br />
+            The Austrian school does not try to predict that "GDP will rise by 1.2%." It establishes
+            qualitative and universal laws.
+            <br />
             For example: “the artificial manipulation of interest rates systematically leads to a
             misallocation of capital” is considered just as certain as “2 + 2 equals 4.”"
           </>
@@ -241,21 +229,26 @@ export const MoneyLaws4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            On boucle la boucle ici.{" "}
-            <Emphasis>
-              Les conclusions des chapitres précédents ne sont pas des opinions politiques. Ce sont
-              des conséquences logiques de la nature même de l'être humain.
-            </Emphasis>
+            On boucle la boucle ici. Les conclusions des chapitres précédents ne sont pas des
+            opinions politiques. Ce sont des conséquences logiques de la nature même de l'être
+            humain.
           </>
         ) : (
           <>
-            We come full circle here.{" "}
-            <Emphasis>
-              The conclusions from the previous chapters are not political opinions. They are
-              logical consequences of human nature itself.
-            </Emphasis>
+            We come full circle here. The conclusions from the previous chapters are not political
+            opinions. They are logical consequences of human nature itself.
           </>
         )}
+      </p>
+      <p>
+        {" "}
+        {fr
+          ? "On se fait un quiz pour tester les acquis du module ?"
+          : "How about a quick quiz to test what you've learned in this module?"}{" "}
+        <Reference to={ROUTE_NAME.MoneyLaws_5}>
+          {fr ? "C'est par ici." : "Right this way."}
+        </Reference>
+        .
       </p>
     </PageTemplate>
   );

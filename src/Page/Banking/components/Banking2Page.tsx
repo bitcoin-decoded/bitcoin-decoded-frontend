@@ -2,9 +2,10 @@ import { type FC } from "react";
 
 import { Home } from "lucide-react";
 
-import { Callout, Emphasis, KeywordHighlight } from "../../../Design";
+import { Callout, KeywordHighlight, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { PageTemplate } from "../../Shared/components";
+import { ROUTE_NAME } from "../../../Routing";
+import { PageTemplate } from "../../Shared/";
 
 import { CompensationSimulator } from "./CompensationSimulator";
 
@@ -52,13 +53,13 @@ export const Banking2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            C'est là qu'intervient le mécanisme de <Emphasis>compensation interbancaire</Emphasis>.
-            Attends, ne pars pas ! Je vais tout t'expliquer, de manière très simple et concrète.
+            C'est là qu'intervient le mécanisme de compensation interbancaire. Attends, ne pars pas
+            ! Je vais tout t'expliquer, de manière très simple et concrète.
           </>
         ) : (
           <>
-            This is where the <Emphasis>interbank compensation</Emphasis> mechanism comes in. Wait,
-            don't leave! I'll explain everything in a very simple and concrete way.
+            This is where the interbank compensation mechanism comes in. Wait, don't leave! I'll
+            explain everything in a very simple and concrete way.
           </>
         )}
       </p>
@@ -76,11 +77,9 @@ export const Banking2Page: FC = () => {
         </p>
         <p>
           <KeywordHighlight>{fr ? "Monnaie M2" : "M2 Money"}</KeywordHighlight>{" "}
-          <Emphasis>
-            {fr
-              ? "→ C'est l'argent créé à plus de 95% par les banques commerciales."
-              : "→ This is the money that is more than 95% created by commercial banks."}
-          </Emphasis>
+          {fr
+            ? "→ C'est l'argent créé à plus de 95% par les banques commerciales."
+            : "→ This is the money that is more than 95% created by commercial banks."}
           <br />
           <i>
             {fr
@@ -90,11 +89,9 @@ export const Banking2Page: FC = () => {
         </p>
         <p>
           <KeywordHighlight>{fr ? "Monnaie M0" : "M0 Money"}</KeywordHighlight>{" "}
-          <Emphasis>
-            {fr
-              ? "→ C'est la monnaie émise par la Banque Centrale et réservée aux banques commerciales, afin qu'elles règlent leurs dettes mutuelles entre elles."
-              : "→ Money issued by the Central Bank and reserved for commercial banks, so they can settle their mutual debts with each other."}
-          </Emphasis>
+          {fr
+            ? "→ C'est la monnaie émise par la Banque Centrale et réservée aux banques commerciales, afin qu'elles règlent leurs dettes mutuelles entre elles."
+            : "→ Money issued by the Central Bank and reserved for commercial banks, so they can settle their mutual debts with each other."}
           <br />
           <i>
             {fr
@@ -114,14 +111,14 @@ export const Banking2Page: FC = () => {
             À fréquence régulière (par exemple, en fin de journée), les banques font le total de ce
             qu'elles se doivent mutuellement à cause de tous ces virements. Elles ne se paient
             ensuite que la différence nette (le solde) en utilisant l'argent M0. <br />
-            <Emphasis>C'est ça, la compensation interbancaire</Emphasis>.
+            C'est ça, la compensation interbancaire.
           </>
         ) : (
           <>
             At regular intervals (for example, at end of day), banks calculate the total of what
             they owe each other from all these transfers. They then only pay the net difference (the
             balance) using M0 money. <br />
-            <Emphasis>That's interbank compensation</Emphasis>.
+            That's interbank compensation.
           </>
         )}
       </p>
@@ -162,20 +159,26 @@ export const Banking2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Maintenant, observons le bilan de la banque de <i>Nicolas</i> juste après son
-            virement à Mme Michu. Notes la dette de 200 000 € en M0 au passif. Cliques ci-dessous
-            pour voir comment la banque utilise ses réserves M0 pour solder cette dette lors de la
+            Maintenant, observons le bilan de la banque de <i>Nicolas</i> juste après son virement à
+            Mme Michu. Notes la dette de 200 000 € en M0 au passif. Cliques ci-dessous pour voir
+            comment la banque utilise ses réserves M0 pour solder cette dette lors de la
             compensation.
           </>
         ) : (
           <>
-            Now, let's observe <i>Nicolas</i>'s bank balance sheet right after his transfer to
-            Ms. Michu. Note the $200,000 M0 debt on the liabilities side. Click below to see how the
+            Now, let's observe <i>Nicolas</i>'s bank balance sheet right after his transfer to Ms.
+            Michu. Note the $200,000 M0 debt on the liabilities side. Click below to see how the
             bank uses its M0 reserves to settle this debt during compensation.
           </>
         )}
       </p>
       <CompensationSimulator />
+      <p>
+        {fr
+          ? "Tu viens encore de gratter une couche que la plupart des gens ne soupçonnent même pas. Et crois-moi, ça va servir pour la suite :"
+          : "You've just uncovered another layer that most people don't even suspect exists. And trust me, this will matter for what comes next:"}{" "}
+        <Reference to={ROUTE_NAME.Banking_3}>{t("nav.tree.qe")}</Reference>.
+      </p>
     </PageTemplate>
   );
 };

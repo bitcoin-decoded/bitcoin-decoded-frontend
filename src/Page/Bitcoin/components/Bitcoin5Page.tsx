@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, HighlightText, Quote, Reference } from "../../../Design";
+import { Callout, HighlightText, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   getQuizDataHalving,
@@ -28,28 +28,24 @@ export const Bitcoin5Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Tu as vu la{" "}
-            <Reference to={ROUTE_NAME.Bitcoin_4}>preuve de travail</Reference> dans le chapitre
-            précédent. Elle repose sur un effort important fourni par les mineurs.
+            Tu as vu la <Reference to={ROUTE_NAME.Bitcoin_4}>preuve de travail</Reference> dans le
+            chapitre précédent. Elle repose sur un effort important fourni par les mineurs.
           </>
         ) : (
           <>
-            You saw <Reference to={ROUTE_NAME.Bitcoin_4}>proof of work</Reference>, a mechanism
-            that relies on significant effort from miners.
+            You saw <Reference to={ROUTE_NAME.Bitcoin_4}>proof of work</Reference>, a mechanism that
+            relies on significant effort from miners.
           </>
         )}
       </p>
       <p>
         {fr ? (
           <>
-            Pourquoi un tel travail ? Pas par pur altruisme, mais{" "}
-            <Emphasis>parce que le protocole les récompense</Emphasis>.
+            Pourquoi un tel travail ? Pas par pur altruisme, mais parce que le protocole les
+            récompense.
           </>
         ) : (
-          <>
-            Why such effort? Not out of pure altruism, but{" "}
-            <Emphasis>because the protocol rewards them</Emphasis>.
-          </>
+          <>Why such effort? Not out of pure altruism, but because the protocol rewards them.</>
         )}
       </p>
 
@@ -118,20 +114,16 @@ export const Bitcoin5Page: FC = () => {
           : "The subsidy only ever decreases over time. The last fraction of bitcoin will be issued around 2140."}
       </p>
       <p>
-        <Emphasis>
-          {fr
-            ? "L'émission de nouveaux bitcoins suit une courbe mathématique en escalier. Elle correspond à un mécanisme appelé « halving ». Regardes ça de plus près."
-            : "The issuance of new bitcoins follows a mathematical staircase curve, defined by a mechanism called the halving. Let's explore this further."}
-        </Emphasis>
+        {fr
+          ? "L'émission de nouveaux bitcoins suit une courbe mathématique en escalier. Elle correspond à un mécanisme appelé « halving ». Regardes ça de plus près."
+          : "The issuance of new bitcoins follows a mathematical staircase curve, defined by a mechanism called the halving. Let's explore this further."}
       </p>
 
       <Callout title={fr ? "Le halving et ses effets" : "The halving and its effects"}>
         <p>
-          <Emphasis>
-            {fr
-              ? "Le halving définit la politique monétaire d'émission de nouveaux bitcoins."
-              : "The halving defines Bitcoin's monetary policy for issuing new coins."}
-          </Emphasis>
+          {fr
+            ? "Le halving définit la politique monétaire d'émission de nouveaux bitcoins."
+            : "The halving defines Bitcoin's monetary policy for issuing new coins."}
         </p>
         <p>
           {fr ? (
@@ -153,22 +145,15 @@ export const Bitcoin5Page: FC = () => {
           {fr ? (
             <>
               La compréhension de ce mécanisme change radicalement la façon de voir Bitcoin. Pour la
-              première fois,{" "}
-              <Emphasis>
-                une monnaie combine une rareté absolue (21 millions d'unités, pas une de plus) avec
-                une émission entièrement prévisible, indépendante de toute décision humaine
-              </Emphasis>
-              .
+              première fois, une monnaie combine une rareté absolue (21 millions d'unités, pas une
+              de plus) avec une émission entièrement prévisible, indépendante de toute décision
+              humaine .
             </>
           ) : (
             <>
               Understanding this mechanism fundamentally changes how you see Bitcoin. For the first
-              time,{" "}
-              <Emphasis>
-                a currency combines absolute scarcity (21 million units, not one more) with a fully
-                predictable issuance, independent of any human decision
-              </Emphasis>
-              .
+              time, a currency combines absolute scarcity (21 million units, not one more) with a
+              fully predictable issuance, independent of any human decision .
             </>
           )}
         </p>
@@ -176,14 +161,12 @@ export const Bitcoin5Page: FC = () => {
           {fr ? (
             <>
               Du point de vue de l'acquéreur : avec le temps, obtenir des bitcoins ne passe plus par
-              la création, mais par l'échange.{" "}
-              <Emphasis>Il faut les acheter à quelqu'un d'autre</Emphasis>.
+              la création, mais par l'échange. Il faut les acheter à quelqu'un d'autre.
             </>
           ) : (
             <>
               From the buyer's perspective: over time, obtaining bitcoin no longer goes through
-              creation but through exchange.{" "}
-              <Emphasis>You have to buy it from someone else</Emphasis>.
+              creation but through exchange. You have to buy it from someone else.
             </>
           )}
         </p>
@@ -191,12 +174,12 @@ export const Bitcoin5Page: FC = () => {
           {fr ? (
             <>
               Du point de vue du mineur : à chaque halving, les revenus chutent, la pression monte,
-              et <Emphasis>seuls les plus efficaces restent en course</Emphasis>.
+              et seuls les plus efficaces restent en course.
             </>
           ) : (
             <>
               From the miner's perspective: with each halving, revenue drops, pressure rises, and{" "}
-              <Emphasis>only the most efficient survive</Emphasis>.
+              only the most efficient survive.
             </>
           )}
         </p>
@@ -207,19 +190,17 @@ export const Bitcoin5Page: FC = () => {
         </p>
 
         <p style={{ marginTop: "1rem" }}>
-          <Emphasis>
-            {fr ? (
-              <>
-                Dès 2032, la récompense ne sera plus que de <strong>0,78125 BTC par bloc</strong>,
-                soit 64 fois moins qu'à l'origine. La subvention tend inexorablement vers zéro.
-              </>
-            ) : (
-              <>
-                By 2032, the reward will be just <strong>0.78125 BTC per block</strong>, 64 times
-                less than the original. The subsidy is inexorably approaching zero.
-              </>
-            )}
-          </Emphasis>
+          {fr ? (
+            <>
+              Dès 2032, la récompense ne sera plus que de <strong>0,78125 BTC par bloc</strong>,
+              soit 64 fois moins qu'à l'origine. La subvention tend inexorablement vers zéro.
+            </>
+          ) : (
+            <>
+              By 2032, the reward will be just <strong>0.78125 BTC per block</strong>, 64 times less
+              than the original. The subsidy is inexorably approaching zero.
+            </>
+          )}
         </p>
       </Callout>
 
@@ -267,20 +248,14 @@ export const Bitcoin5Page: FC = () => {
           {fr ? (
             <>
               {" "}
-              <Emphasis>
-                Bitcoin n'a pas été conçu pour être sécurisé par une émission monétaire permanente,
-                mais par la valeur qu'il protège
-              </Emphasis>
-              .
+              Bitcoin n'a pas été conçu pour être sécurisé par une émission monétaire permanente,
+              mais par la valeur qu'il protège .
             </>
           ) : (
             <>
               {" "}
-              <Emphasis>
-                Bitcoin was not designed to be secured by permanent monetary issuance, but by the
-                value it protects
-              </Emphasis>
-              .
+              Bitcoin was not designed to be secured by permanent monetary issuance, but by the
+              value it protects .
             </>
           )}
         </p>
@@ -317,40 +292,25 @@ export const Bitcoin5Page: FC = () => {
       <ul>
         <li>
           {fr ? (
-            <>
-              Dans les systèmes traditionnels, la sécurité est{" "}
-              <Emphasis>financée par l'inflation</Emphasis>
-            </>
+            <>Dans les systèmes traditionnels, la sécurité est financée par l'inflation</>
           ) : (
-            <>
-              In traditional systems, security is <Emphasis>funded by inflation</Emphasis>
-            </>
+            <>In traditional systems, security is funded by inflation</>
           )}
         </li>
         <li>
           {fr ? (
-            <>
-              Dans Bitcoin, la sécurité est <Emphasis>financée par l'usage</Emphasis>
-            </>
+            <>Dans Bitcoin, la sécurité est financée par l'usage</>
           ) : (
-            <>
-              In Bitcoin, security is <Emphasis>funded by usage</Emphasis>
-            </>
+            <>In Bitcoin, security is funded by usage</>
           )}
         </li>
       </ul>
 
       <p>
         {fr ? (
-          <>
-            {" "}
-            <Emphasis>Un cercle vertueux qui s'auto-renforce.</Emphasis>.
-          </>
+          <> Un cercle vertueux qui s'auto-renforce..</>
         ) : (
-          <>
-            {" "}
-            <Emphasis>A virtuous self-reinforcing cycle</Emphasis>.
-          </>
+          <> A virtuous self-reinforcing cycle.</>
         )}
       </p>
 
@@ -370,17 +330,7 @@ export const Bitcoin5Page: FC = () => {
         )}
       </p>
       <p>
-        {fr ? (
-          <>
-            {" "}
-            <Emphasis>Que sécurisent-ils exactement ?</Emphasis>
-          </>
-        ) : (
-          <>
-            {" "}
-            <Emphasis>But what exactly are they securing?</Emphasis>
-          </>
-        )}
+        {fr ? <> Que sécurisent-ils exactement ?</> : <> But what exactly are they securing?</>}
       </p>
       <p>
         {fr

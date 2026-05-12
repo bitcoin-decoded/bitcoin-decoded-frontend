@@ -3,14 +3,12 @@ import { type CSSProperties, type FC } from "react";
 import cantillonEffectImg from "../../../../src/Design/img/Cantillon_Effect.jpg";
 import gyroGearlooseImg from "../../../../src/Design/img/Gyro_Gearloose.png";
 import picsouImg from "../../../../src/Design/img/picsou.webp";
-import { Callout, Emphasis, IdentityCard, Reference } from "../../../Design";
+import { Callout, IdentityCard, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getQuizDataProfileChoice, Quiz } from "../../../Interactive";
 import { Illustration } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
-import { useToggleSimulator } from "../../Shared/hooks";
-import { PAGE_STYLES } from "../../Shared/styles";
+import { PAGE_STYLES, PageTemplate, useToggleSimulator } from "../../Shared/";
 
 export const Banking5Page: FC = () => {
   const { t, language } = useTranslation();
@@ -49,12 +47,12 @@ export const Banking5Page: FC = () => {
         {fr ? (
           <>
             Les marges sont écrasées, mais les coffres débordent de M0. L'équation de survie pour la
-            banque commerciale est simple : <Emphasis>faire du volume avec zéro risque</Emphasis>.
+            banque commerciale est simple : faire du volume avec zéro risque.
           </>
         ) : (
           <>
             Margins are crushed, but the vaults overflow with M0. The survival equation for the
-            commercial bank is simple: <Emphasis>do volume with zero risk</Emphasis>.
+            commercial bank is simple: do volume with zero risk.
           </>
         )}
       </p>
@@ -172,8 +170,8 @@ export const Banking5Page: FC = () => {
                 </Reference>{" "}
                 : l'argent nouvellement créé (M2) fuit l'économie réelle, jugée trop risquée, pour
                 aller gonfler le prix des actifs. Les « Picsou » s'enrichissent en dormant : la
-                demande pour les actifs monte, leurs portefeuilles aussi. Les « Géo » restent sur
-                la touche.
+                demande pour les actifs monte, leurs portefeuilles aussi. Les « Géo » restent sur la
+                touche.
               </>
             ) : (
               <>
@@ -183,9 +181,9 @@ export const Banking5Page: FC = () => {
                   Richard Cantillon
                 </Reference>
                 : newly created money (M2) tends to flow away from the real economy-considered too
-                risky-and instead inflates asset prices. The "Scrooges" get richer while they
-                sleep: demand for assets rises, and so do the value of their portfolios. The
-                "Geos" are left on the sidelines.
+                risky-and instead inflates asset prices. The "Scrooges" get richer while they sleep:
+                demand for assets rises, and so do the value of their portfolios. The "Geos" are
+                left on the sidelines.
               </>
             )}
           </p>
@@ -206,8 +204,8 @@ export const Banking5Page: FC = () => {
                 déborde dans le caddie de courses. Tiens, quelqu'un n'aurait pas prononcé le mot{" "}
                 <Reference to={ROUTE_NAME.Banking_6}>
                   <i>inflation</i>
-                </Reference>
-                {" "}?
+                </Reference>{" "}
+                ?
               </>
             ) : (
               <>

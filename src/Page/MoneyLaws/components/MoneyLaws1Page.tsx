@@ -1,13 +1,12 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, KeywordHighlight, Reference } from "../../../Design";
+import { Callout, KeywordHighlight, Reference } from "../../../Design";
 import petrole from "../../../Design/img/Petroleum_sample.jpg";
 import pikachuIllustratorCard from "../../../Design/img/Pikachu_Illustrator_Card.webp";
 import { useTranslation } from "../../../I18n";
 import { Illustration } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
-import { PAGE_STYLES } from "../../Shared/styles";
+import { PAGE_STYLES, PageTemplate } from "../../Shared/";
 import { displayAristoteMoneyCharacs } from "../helpers";
 
 import { MonetaryGallery } from "./MonetaryGallery";
@@ -52,13 +51,13 @@ export const MoneyLaws1Page: FC = () => {
           <>
             Pourtant, seul sur une île déserte avec un million d'euros, tu serais pauvre. Pourquoi ?
             Parce que les billets ne se mangent pas. La monnaie ne vaut rien sans les autres : elle
-            est avant tout une <Emphasis> technologie de collaboration</Emphasis>.
+            est avant tout une technologie de collaboration.
           </>
         ) : (
           <>
             Yet, stranded on a desert island with a million euros, you would be poor. Why? Because
             you cannot eat banknotes. Money is worthless without other people: above all, it is a{" "}
-            <Emphasis> collaboration technology</Emphasis>.
+            collaboration technology.
           </>
         )}
       </p>
@@ -134,12 +133,12 @@ export const MoneyLaws1Page: FC = () => {
         {fr ? (
           <>
             La monnaie a un job précis : transférer la valeur de notre travail dans l'espace, mais
-            surtout <Emphasis> dans le temps</Emphasis>.
+            surtout dans le temps.
           </>
         ) : (
           <>
             Money has a specific job: to transfer the value of our work across space, but above all{" "}
-            <Emphasis> across time</Emphasis>.
+            across time.
           </>
         )}
       </p>
@@ -148,16 +147,15 @@ export const MoneyLaws1Page: FC = () => {
           <>
             Comme nous ignorons de quoi demain sera fait (santé, coup dur, opportunité), nous
             stockons la valeur de notre travail aujourd'hui pour pouvoir la restituer plus tard. On
-            peut imaginer la monnaie comme une <Emphasis>batterie</Emphasis> stockant de l'énergie.
-            Mais attention : pour qu'une batterie soit utile, il ne faut pas qu'elle se vide toute
-            seule !
+            peut imaginer la monnaie comme une batterie stockant de l'énergie. Mais attention : pour
+            qu'une batterie soit utile, il ne faut pas qu'elle se vide toute seule !
           </>
         ) : (
           <>
             Since we never know what tomorrow holds (health issues, setbacks, opportunities), we
             store the value of our work today so we can retrieve it later. Think of money as a{" "}
-            <Emphasis>battery</Emphasis> storing energy. But beware: for a battery to be useful, it
-            must not drain on its own!
+            battery storing energy. But beware: for a battery to be useful, it must not drain on its
+            own!
           </>
         )}
       </p>
@@ -176,11 +174,9 @@ export const MoneyLaws1Page: FC = () => {
       <Callout title={fr ? "Rareté versus Dureté" : "Scarcity versus Hardness"}>
         <p>
           <KeywordHighlight>{fr ? "RARETÉ MONÉTAIRE" : "MONETARY SCARCITY"}</KeywordHighlight>{" "}
-          <Emphasis>
-            {fr
-              ? "→ C'est une photographie à l'instant T du stock existant."
-              : "→ It's a snapshot, at a given moment, of the existing stock."}
-          </Emphasis>{" "}
+          {fr
+            ? "→ C'est une photographie à l'instant T du stock existant."
+            : "→ It's a snapshot, at a given moment, of the existing stock."}{" "}
           <br />
           <i>
             {fr ? "« Combien y en a-t-il actuellement ? »." : '"How much of it currently exists?"'}
@@ -188,11 +184,9 @@ export const MoneyLaws1Page: FC = () => {
         </p>
         <p>
           <KeywordHighlight>{fr ? "DURETÉ MONÉTAIRE" : "MONETARY HARDNESS"}</KeywordHighlight>{" "}
-          <Emphasis>
-            {fr
-              ? "→ C'est la résistance de la monnaie à la production de nouvelles unités."
-              : "→ It's a currency's resistance to the creation of new units."}
-          </Emphasis>{" "}
+          {fr
+            ? "→ C'est la résistance de la monnaie à la production de nouvelles unités."
+            : "→ It's a currency's resistance to the creation of new units."}{" "}
           <br />
           <i>
             {fr ? (
@@ -253,21 +247,13 @@ export const MoneyLaws1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Le verdict de cette galerie est sans appel :{" "}
-            <Emphasis>
-              dès qu'une monnaie perd sa dureté, elle cesse d'être une réserve de valeur et finit
-              inéluctablement par disparaitre
-            </Emphasis>
-            .
+            Le verdict de cette galerie est sans appel : dès qu'une monnaie perd sa dureté, elle
+            cesse d'être une réserve de valeur et finit inéluctablement par disparaitre .
           </>
         ) : (
           <>
-            The verdict from this gallery is crystal clear:{" "}
-            <Emphasis>
-              as soon as a currency loses its hardness, it stops being a store of value and
-              inevitably disappears
-            </Emphasis>
-            .
+            The verdict from this gallery is crystal clear: as soon as a currency loses its
+            hardness, it stops being a store of value and inevitably disappears .
           </>
         )}
       </p>
@@ -311,15 +297,15 @@ export const MoneyLaws1Page: FC = () => {
         {fr ? (
           <>
             Aujourd'hui, nous vivons une situation inédite. Pour la première fois dans l'histoire,
-            le monde entier utilise des monnaies dont la <Emphasis>dureté tend vers zéro</Emphasis>{" "}
-            (les monnaies Fiat). Nous avons choisi la vitesse de transaction au détriment de la
-            solidité de notre batterie.
+            le monde entier utilise des monnaies dont la dureté tend vers zéro (les monnaies Fiat).
+            Nous avons choisi la vitesse de transaction au détriment de la solidité de notre
+            batterie.
           </>
         ) : (
           <>
             Today, we are living through an unprecedented situation. For the first time in history,
-            the entire world uses currencies whose <Emphasis>hardness tends toward zero</Emphasis>{" "}
-            (fiat currencies). We chose transaction speed at the expense of our battery's solidity.
+            the entire world uses currencies whose hardness tends toward zero (fiat currencies). We
+            chose transaction speed at the expense of our battery's solidity.
           </>
         )}
       </p>
@@ -341,22 +327,15 @@ export const MoneyLaws1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            <Emphasis>
-              Prêt à découvrir comment ce manque de dureté engendre, mécaniquement, les{" "}
-              <Reference to={ROUTE_NAME.MoneyLaws_2}>
-                cycles de crises (Boum et Krach)
-              </Reference>{" "}
-              que nous subissons ?
-            </Emphasis>{" "}
-            On y va.
+            Prêt à découvrir les{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>cycles de crises (Boum et Krach)</Reference> que
+            nous subissons ? On y va.
           </>
         ) : (
           <>
-            <Emphasis>
-              Ready to discover how this lack of hardness mechanically generates the{" "}
-              <Reference to={ROUTE_NAME.MoneyLaws_2}>boom-and-bust cycles</Reference> we endure?
-            </Emphasis>{" "}
-            Let's go.
+            Ready to discover the{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>boom-and-bust cycles</Reference> we endure? Let's
+            go.
           </>
         )}{" "}
       </p>

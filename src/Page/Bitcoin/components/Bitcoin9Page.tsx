@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Emphasis } from "../../../Design";
+import { HighlightText } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getQuizDataModule3Synthesis, SynthesisQuiz } from "../../../Interactive";
 import { PageTemplate, useToggleSimulator } from "../../Shared/";
@@ -23,19 +23,19 @@ export const Bitcoin9Page: FC = () => {
           : "You've just dived into the guts of Bitcoin: from the protocol down to the seed. Before turning the page, make sure the key concepts are firmly anchored."}
       </p>
       <p>
-        {fr ? (
-          <>
-            {quiz.questions.length} questions sur l'ensemble du module.{" "}
-            <Emphasis>
-              Il te faut au moins {quiz.passThreshold} bonnes réponses pour débloquer la synthèse.
-            </Emphasis>
-          </>
-        ) : (
-          <>
-            {quiz.questions.length} questions covering the whole module.{" "}
-            <Emphasis>You need at least {quiz.passThreshold} to unlock the wrap-up.</Emphasis>
-          </>
-        )}
+        <HighlightText>
+          {fr ? (
+            <>
+              {quiz.questions.length} questions sur l'ensemble du module. Il te faut au moins{" "}
+              {quiz.passThreshold} bonnes réponses pour débloquer la synthèse.
+            </>
+          ) : (
+            <>
+              {quiz.questions.length} questions covering the whole module. You need at least{" "}
+              {quiz.passThreshold} to unlock the wrap-up.
+            </>
+          )}
+        </HighlightText>
       </p>
 
       <SynthesisQuiz

@@ -1,8 +1,9 @@
 import { type FC } from "react";
 
-import { Emphasis } from "../../../Design";
+import { HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getQuizDataModule2Synthesis, SynthesisQuiz } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
 export const MoneyLaws5Page: FC = () => {
@@ -23,22 +24,19 @@ export const MoneyLaws5Page: FC = () => {
           : "You've just made it through a dense module. Before stepping back, put what you've learned to the test."}
       </p>
       <p>
-        {fr ? (
-          <>
-            {quiz.questions.length} questions sur l'ensemble du module.{" "}
-            <Emphasis>
-              Atteins au moins {quiz.passThreshold} bonnes réponses pour débloquer la synthèse.
-            </Emphasis>
-          </>
-        ) : (
-          <>
-            {quiz.questions.length} questions covering the whole module.{" "}
-            <Emphasis>
-              Score at least {quiz.passThreshold} to unlock the
-              synthesis.
-            </Emphasis>
-          </>
-        )}
+        <HighlightText>
+          {fr ? (
+            <>
+              {quiz.questions.length} questions sur l'ensemble du module. Atteins au moins{" "}
+              {quiz.passThreshold} bonnes réponses pour débloquer la synthèse.
+            </>
+          ) : (
+            <>
+              {quiz.questions.length} questions covering the whole module. Score at least{" "}
+              {quiz.passThreshold} to unlock the synthesis.
+            </>
+          )}
+        </HighlightText>
       </p>
 
       <SynthesisQuiz
@@ -87,8 +85,9 @@ export const MoneyLaws5Page: FC = () => {
           </p>
           <p>
             {fr
-              ? "Il est temps de lever le voile sur cette technologie. Place au grand final : Bitcoin."
-              : "It's time to lift the veil on this technology. On to the grand finale: Bitcoin."}
+              ? "Il est temps de lever le voile sur cette technologie. Place au grand final :"
+              : "It's time to lift the veil on this technology. On to the grand finale:"}{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_1}>{t("nav.tree.bitcoinRevolution")}</Reference>.
           </p>
         </>
       )}

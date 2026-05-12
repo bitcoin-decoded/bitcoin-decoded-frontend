@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Reference } from "../../../Design";
+import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   ByzantineGenerals,
@@ -43,13 +43,13 @@ export const Bitcoin4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Dans un système centralisé, la réponse est simple : une autorité tranche.{" "}
-            <Emphasis>Mais ici, il n'y en a pas</Emphasis>.
+            Dans un système centralisé, la réponse est simple : une autorité tranche. Mais ici, il
+            n'y en a pas.
           </>
         ) : (
           <>
-            In a centralized system, the answer is simple: an authority decides.{" "}
-            <Emphasis>But here, there is none</Emphasis>.
+            In a centralized system, the answer is simple: an authority decides. But here, there is
+            none.
           </>
         )}
       </p>
@@ -84,12 +84,9 @@ export const Bitcoin4Page: FC = () => {
               C'est ça, le{" "}
               <Reference href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins">
                 problème des généraux byzantins
-              </Reference>
-              {" "}:{" "}
-              <Emphasis>
-                comment être sûr que tout le monde prendra la même décision, sans se faire confiance
-                ?
-              </Emphasis>
+              </Reference>{" "}
+              : comment être sûr que tout le monde prendra la même décision, sans se faire confiance
+              ?
             </>
           ) : (
             <>
@@ -97,11 +94,8 @@ export const Bitcoin4Page: FC = () => {
               <Reference href="https://en.wikipedia.org/wiki/Byzantine_fault">
                 Byzantine Generals Problem
               </Reference>
-              :{" "}
-              <Emphasis>
-                how can we be sure everyone will make the same decision, without trusting one
-                another?
-              </Emphasis>
+              : how can we be sure everyone will make the same decision, without trusting one
+              another?
             </>
           )}
         </p>
@@ -133,12 +127,12 @@ export const Bitcoin4Page: FC = () => {
           {fr ? (
             <>
               Quand une transaction est soumise au réseau Bitcoin, elle n'est pas immédiatement
-              validée. <Emphasis>Elle entre dans une salle d'attente appelée « mempool »</Emphasis>.
+              validée. Elle entre dans une salle d'attente appelée « mempool ».
             </>
           ) : (
             <>
               When a transaction is submitted to the Bitcoin network, it is not immediately
-              validated. <Emphasis>It enters a waiting room called the "mempool"</Emphasis>.
+              validated. It enters a waiting room called the "mempool".
             </>
           )}
         </p>
@@ -147,14 +141,12 @@ export const Bitcoin4Page: FC = () => {
           {fr ? (
             <>
               Chaque nœud du réseau maintient sa propre mempool : elle contient les transactions
-              valides, mais pas encore confirmées, et{" "}
-              <Emphasis>potentiellement... en conflit</Emphasis>.
+              valides, mais pas encore confirmées, et potentiellement... en conflit.
             </>
           ) : (
             <>
               Each node on the network maintains its own mempool: it contains valid but
-              not-yet-confirmed transactions, and{" "}
-              <Emphasis>potentially... conflicting ones</Emphasis>.
+              not-yet-confirmed transactions, and potentially... conflicting ones.
             </>
           )}
         </p>
@@ -178,13 +170,13 @@ export const Bitcoin4Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Les deux peuvent circuler en parallèle dans le réseau :{" "}
-              <Emphasis>à ce stade, aucun consensus n'existe encore</Emphasis>.
+              Les deux peuvent circuler en parallèle dans le réseau : à ce stade, aucun consensus
+              n'existe encore.
             </>
           ) : (
             <>
-              Both can circulate in parallel across the network:{" "}
-              <Emphasis>at this stage, no consensus exists yet</Emphasis>.
+              Both can circulate in parallel across the network: at this stage, no consensus exists
+              yet.
             </>
           )}
         </p>
@@ -213,15 +205,15 @@ export const Bitcoin4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Mais attention : tout le monde peut proposer un bloc. Alors{" "}
-            <Emphasis>comment décider qui a le droit d'écrire la prochaine page ?</Emphasis> <br />
-            La réponse est simple : <Emphasis>le premier à trouver la solution gagne</Emphasis>.
+            Mais attention : tout le monde peut proposer un bloc. Alors comment décider qui a le
+            droit d'écrire la prochaine page ? <br />
+            La réponse est simple : le premier à trouver la solution gagne.
           </>
         ) : (
           <>
-            But careful: anyone can propose a block. So{" "}
-            <Emphasis>how do we decide who gets to write the next page?</Emphasis> <br />
-            The answer is simple: <Emphasis>The first to find the solution wins</Emphasis>.
+            But careful: anyone can propose a block. So how do we decide who gets to write the next
+            page? <br />
+            The answer is simple: The first to find the solution wins.
           </>
         )}
       </p>
@@ -254,14 +246,14 @@ export const Bitcoin4Page: FC = () => {
               C'est du pur essai-erreur. <br />
               Aucune astuce. Aucune optimisation magique.
               <br />
-              <Emphasis>Juste de la puissance de calcul : du travail computationnel</Emphasis>.
+              Juste de la puissance de calcul : du travail computationnel.
             </>
           ) : (
             <>
               It's pure trial and error. <br />
               No trick. No magic optimization.
               <br />
-              <Emphasis>Just raw computing power: computational work</Emphasis>.
+              Just raw computing power: computational work.
             </>
           )}
         </p>
@@ -317,34 +309,24 @@ export const Bitcoin4Page: FC = () => {
 
         <p>
           {fr ? (
-            <>
-              C'est ce que l'on appelle un <Emphasis>fork temporaire</Emphasis>.
-            </>
+            <>C'est ce que l'on appelle un fork temporaire.</>
           ) : (
-            <>
-              This is what's called a <Emphasis>temporary fork</Emphasis>.
-            </>
+            <>This is what's called a temporary fork.</>
           )}
         </p>
 
         <p>
           {fr ? (
             <>
-              La règle du consensus est sans ambiguïté :{" "}
-              <Emphasis>
-                le réseau conserve la chaîne qui a accumulé le plus de travail cumulé (pas la plus
-                longue en nombre de blocs, mais celle dont la difficulté totale est la plus élevée)
-              </Emphasis>
-              .
+              La règle du consensus est sans ambiguïté : le réseau conserve la chaîne qui a accumulé
+              le plus de travail cumulé (pas la plus longue en nombre de blocs, mais celle dont la
+              difficulté totale est la plus élevée) .
             </>
           ) : (
             <>
-              The consensus rule is unambiguous:{" "}
-              <Emphasis>
-                the network keeps the chain that has accumulated the most cumulative work (not the
-                longest in number of blocks, but the one with the highest total difficulty)
-              </Emphasis>
-              .
+              The consensus rule is unambiguous: the network keeps the chain that has accumulated
+              the most cumulative work (not the longest in number of blocks, but the one with the
+              highest total difficulty) .
             </>
           )}
         </p>
@@ -378,19 +360,13 @@ export const Bitcoin4Page: FC = () => {
         <p>
           {fr ? (
             <>
-              <Emphasis>
-                Elle s'ajuste tous les 2016 blocs (~2 semaines) de façon à ce qu'un bloc soit miné
-                toutes les 10 minutes
-              </Emphasis>
-              .
+              Elle s'ajuste tous les 2016 blocs (~2 semaines) de façon à ce qu'un bloc soit miné
+              toutes les 10 minutes .
             </>
           ) : (
             <>
-              <Emphasis>
-                It adjusts every 2016 blocks (~2 weeks) so that a block is mined roughly every 10
-                minutes
-              </Emphasis>
-              .
+              It adjusts every 2016 blocks (~2 weeks) so that a block is mined roughly every 10
+              minutes .
             </>
           )}
         </p>
@@ -401,19 +377,13 @@ export const Bitcoin4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Voilà. La preuve de travail résout deux choses d'un coup :{" "}
-            <Emphasis>
-              les conflits sans autorité centrale, et la transformation de l'énergie en confiance
-            </Emphasis>
-            .
+            Voilà. La preuve de travail résout deux choses d'un coup : les conflits sans autorité
+            centrale, et la transformation de l'énergie en confiance .
           </>
         ) : (
           <>
-            That's it. Proof of Work solves two problems at once:{" "}
-            <Emphasis>
-              resolving conflicts without a central authority, and transforming energy into trust
-            </Emphasis>
-            .
+            That's it. Proof of Work solves two problems at once: resolving conflicts without a
+            central authority, and transforming energy into trust .
           </>
         )}
       </p>

@@ -2,12 +2,11 @@ import { type FC } from "react";
 
 import picsouCar from "../../../../src/Design/img/picsou_car.jpg";
 import picsouVilla from "../../../../src/Design/img/picsou_villa.jpg";
-import { Callout, Emphasis, Reference } from "../../../Design";
+import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { Illustration } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate } from "../../Shared/components";
-import { PAGE_STYLES } from "../../Shared/styles";
+import { PAGE_STYLES, PageTemplate } from "../../Shared/";
 
 export const Banking6Page: FC = () => {
   const { t, language } = useTranslation();
@@ -128,32 +127,24 @@ export const Banking6Page: FC = () => {
               Ces gens-là vont à leur tour dépenser cet argent au restaurant, au supermarché, ou
               pour faire des travaux.
               <br />
-              <Emphasis>
-                Le fameux « ruissellement » commence, celui dont parlent les économistes en costume.
-              </Emphasis>
+              Le fameux « ruissellement » commence, celui dont parlent les économistes en costume.
             </>
           ) : (
             <>
               These people will in turn spend this money at restaurants, at the supermarket, or on
               renovations.
               <br />
-              <Emphasis>
-                The famous "trickle-down" begins-the one economists in suits like to talk about.
-              </Emphasis>
+              The famous "trickle-down" begins-the one economists in suits like to talk about.
             </>
           )}
         </p>
       </Callout>
       <p>
         {fr ? (
-          <>
-            <Emphasis>OK. L'argent afflue dans l'économie réelle</Emphasis>. Tu sens le problème
-            arriver, non ?
-          </>
+          <>OK. L'argent afflue dans l'économie réelle. Tu sens le problème arriver, non ?</>
         ) : (
           <>
-            <Emphasis>OK. Money is flooding into the real economy</Emphasis>. You can feel the
-            problem coming, can't you?
+            OK. Money is flooding into the real economy. You can feel the problem coming, can't you?
           </>
         )}
       </p>
@@ -165,21 +156,15 @@ export const Banking6Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Et ça, c'est la définition mécanique de l'inflation :{" "}
-            <Emphasis>
-              si la quantité d'argent en circulation explose, mais que la quantité de produits reste
-              à peu près la même, alors les prix finissent eux aussi par exploser
-            </Emphasis>
-            . Logique, non ?
+            Et ça, c'est la définition mécanique de l'inflation : si la quantité d'argent en
+            circulation explose, mais que la quantité de produits reste à peu près la même, alors
+            les prix finissent eux aussi par exploser . Logique, non ?
           </>
         ) : (
           <>
-            And that is the mechanical definition of inflation:{" "}
-            <Emphasis>
-              if the amount of money in circulation explodes, but the quantity of goods stays
-              roughly the same, then prices end up exploding too
-            </Emphasis>
-            . Makes sense, right?
+            And that is the mechanical definition of inflation: if the amount of money in
+            circulation explodes, but the quantity of goods stays roughly the same, then prices end
+            up exploding too . Makes sense, right?
           </>
         )}
       </p>

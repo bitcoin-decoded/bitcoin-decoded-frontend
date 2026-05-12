@@ -2,14 +2,23 @@
 
 ## Projet
 
-Application éducative ReactJS qui enseigne l'économie et Bitcoin en jouant.
-Trois mondes thématiques progressifs :
+Application éducative qui enseigne Bitcoin sous l'angle de l'économie autrichienne, sous un ton familier (non académique), tout en étant rigoureux, et de façon interactive. L'utilisateur apprend en expérimentant.
 
-1. **MondeBleu** - Le fonctionnement du système bancaire (création monétaire, QE, Cantillon, inflation)
-2. **MondeOrange** - Les lois de la monnaie (définition, cycles économiques, limites du socialisme, école autrichienne)
-3. **MondeVert** - La révolution Bitcoin (3.1.1 : Qu'est-ce que Bitcoin ?)
+Trois modules thématiques progressifs :
 
-Chaque chapitre suit le schéma : **idées clés → explications interactives → ouverture vers la suite**.
+1. Le fonctionnement du système bancaire
+2. Les lois de la monnaie
+3. La révolution Bitcoin
+
+Chaque chapitre suit le schéma : **prelude → explications interactives → ouverture vers la suite**.
+Chaque module se conclut par un quiz de validation (chapitre spécial).
+
+### Public cible
+
+Francophones 25-50 ans, curieux mais NON-bitcoiners. Méfiants face aux
+promesses, soucieux de comprendre avant d'agir, allergiques au jargon
+crypto. Ils savent ce qu'est un Livret A et l'inflation, pas la création
+monétaire ni le protocole Bitcoin.
 
 ---
 
@@ -39,22 +48,22 @@ Domain/
 
 ### Domaines
 
-| Dossier                    | Rôle                                                                                                                                                                 |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dossier                    | Rôle                                                                                                                                                                              |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/Design/`              | Système de design : primitives UI (`Button`, `SurfaceCard`, `Caption`, `Badge`, `FeedbackPanel`, `Callout`, `Quote`, `Disclosure`, `Reference`, …), icônes, layout, thème, marque |
-| `src/Design/Brand/`        | `BitcoinDecodedLogo`, `BitcoinDecodedAvatar`                                                                                                                         |
-| `src/Design/Layout/`       | MainLayout, Header (hide-on-scroll), Footer, NavBar, NavDrawer                                                                                                       |
-| `src/Design/Theme/`        | ThemeProvider/Context, ThemeToggle, THEME_COLORS, `usePageTheme()`                                                                                                   |
-| `src/Design/icons/`        | Icônes SVG en FC, barrel `index.ts`                                                                                                                                  |
-| `src/Design/IdentityCard/` | Composant carte d'identité interactive                                                                                                                               |
-| `src/Design/Responsive/`   | `useBreakpoint()`, `useMediaQuery()`                                                                                                                                 |
-| `src/Routing/`             | RouterProvider/Context, NAVIGATION_TREE, ROUTE_NAME                                                                                                                  |
-| `src/Page/`                | Pages de contenu et composants partagés                                                                                                                              |
-| `src/Page/Shared/`         | `HomePage`, `PageTemplate`, `ChapterPrelude`, `PageNavigation`, `ReadingTimeBadge`, `ReadingProgressBar`, `ScrollToTopButton`, `RevealOnScroll`                      |
-| `src/Page/Banking/`        | 7 pages sur le système bancaire (Banking1Page → Banking7Page)                                                                                                        |
-| `src/Page/MoneyLaws/`      | 5 pages sur les lois de la monnaie (MoneyLaws1Page → MoneyLaws5Page)                                                                                                 |
-| `src/Page/Bitcoin/`        | 9 pages sur Bitcoin (Bitcoin1Page → Bitcoin9Page, dont Bitcoin9Page = quiz de synthèse)                                                                              |
-| `src/Interactive/`         | Domaine unifié : Illustrations, Simulateurs interactifs, Quiz, FlipCardGrid, DebateArena, BitcoinNodeDemo, BitcoinNetworkMap, …                                      |
+| `src/Design/Brand/`        | `BitcoinDecodedLogo`, `BitcoinDecodedAvatar`                                                                                                                                      |
+| `src/Design/Layout/`       | MainLayout, Header (hide-on-scroll), Footer, NavBar, NavDrawer                                                                                                                    |
+| `src/Design/Theme/`        | ThemeProvider/Context, ThemeToggle, THEME_COLORS, `usePageTheme()`                                                                                                                |
+| `src/Design/icons/`        | Icônes SVG en FC, barrel `index.ts`                                                                                                                                               |
+| `src/Design/IdentityCard/` | Composant carte d'identité interactive                                                                                                                                            |
+| `src/Design/Responsive/`   | `useBreakpoint()`, `useMediaQuery()`                                                                                                                                              |
+| `src/Routing/`             | RouterProvider/Context, NAVIGATION_TREE, ROUTE_NAME                                                                                                                               |
+| `src/Page/`                | Pages de contenu et composants partagés                                                                                                                                           |
+| `src/Page/Shared/`         | `HomePage`, `PageTemplate`, `ChapterPrelude`, `PageNavigation`, `ReadingTimeBadge`, `ReadingProgressBar`, `ScrollToTopButton`, `RevealOnScroll`                                   |
+| `src/Page/Banking/`        | 7 pages sur le système bancaire (Banking1Page → Banking7Page)                                                                                                                     |
+| `src/Page/MoneyLaws/`      | 5 pages sur les lois de la monnaie (MoneyLaws1Page → MoneyLaws5Page)                                                                                                              |
+| `src/Page/Bitcoin/`        | 9 pages sur Bitcoin (Bitcoin1Page → Bitcoin9Page, dont Bitcoin9Page = quiz de synthèse)                                                                                           |
+| `src/Interactive/`         | Domaine unifié : Illustrations, Simulateurs interactifs, Quiz, FlipCardGrid, DebateArena, BitcoinNodeDemo, BitcoinNetworkMap, …                                                   |
 
 ---
 
@@ -144,12 +153,11 @@ Centralisent le style des éléments récurrents. Toutes lisent `usePageTheme()`
 
 Quatre primitives inline coexistent et se répartissent en deux couches disjointes : **mise en valeur** (purement décorative, non cliquable) et **référence** (cliquable, mène ailleurs). Choisir la mauvaise primitive trompe l'utilisateur (croit qu'un mot gras est cliquable, ou rate une vraie référence).
 
-| Couche       | Composant         | Visuel                                | Cliquable | Utiliser pour                                            |
-| ------------ | ----------------- | ------------------------------------- | --------- | -------------------------------------------------------- |
-| Emphasis     | `Emphasis`        | gras + couleur accent du monde         | ❌        | un mot / concept à faire ressortir dans une phrase       |
-| Emphasis     | `HighlightText`   | fond stabilo (gradient doux)           | ❌        | un passage entier (une demi-phrase) qu'on veut surligner |
-| Référence    | `Reference to={...}`   | underline pointillé + accent          | ✅        | renvoi interne (autre chapitre / module)                 |
-| Référence    | `Reference href={...}` | idem + icône `↗` traînante            | ✅        | renvoi externe (approfondissement Wikipédia, etc.)       |
+| Couche    | Composant              | Visuel                       | Cliquable | Utiliser pour                                            |
+| --------- | ---------------------- | ---------------------------- | --------- | -------------------------------------------------------- |
+| Emphasis  | `HighlightText`        | fond stabilo (gradient doux) | ❌        | un passage entier (une demi-phrase) qu'on veut surligner |
+| Référence | `Reference to={...}`   | underline pointillé + accent | ✅        | renvoi interne (autre chapitre / module)                 |
+| Référence | `Reference href={...}` | idem + icône `↗` traînante   | ✅        | renvoi externe (approfondissement Wikipédia, etc.)       |
 
 `Reference` est polymorphique : on passe `to: RouteName` pour de l'interne, `href: string` pour de l'externe — TypeScript force l'un ou l'autre. Pour les anti-patterns à éviter, voir le JSDoc de `Reference.tsx`.
 
@@ -346,7 +354,7 @@ Système **hybride strict** - le périmètre de chaque type de chaîne est non-n
 
 ### Pourquoi cette séparation ?
 
-- **La prose des pages est éditoriale** : elle change souvent, intègre des balises JSX riches (`<Emphasis>`, `<HighlightText>`, `<i>`), et son écriture nécessite de voir le contexte structurel autour. La centraliser dans `fr.ts/en.ts` la fragmente artificiellement (besoin d'inventer 30 clés `bitcoin7.outroP3Italic2` pour un seul paragraphe) et casse la lisibilité du composant page.
+- **La prose des pages est éditoriale** : elle change souvent, intègre des balises JSX riches (``, `<HighlightText>`, `<i>`), et son écriture nécessite de voir le contexte structurel autour. La centraliser dans `fr.ts/en.ts`la fragmente artificiellement (besoin d'inventer 30 clés`bitcoin7.outroP3Italic2` pour un seul paragraphe) et casse la lisibilité du composant page.
 - **Les labels de composants sont réutilisables** : un bouton "Réinitialiser" ou un badge "Signature valide" apparaît dans plusieurs composants ou états. Centraliser garantit la cohérence et facilite l'audit traduction.
 
 ### ❌ Anti-pattern à éviter
@@ -381,49 +389,12 @@ Les **fichiers de traduction** : `src/I18n/data/fr.ts` et `src/I18n/data/en.ts`.
   title={t("nav.tree.xxx")}    {/* Titre partagé avec le sommaire */}
   prelude={<>Prélude</>}
 >
-  <p>Contenu avec <Emphasis /> et <KeywordHighlight /></p>
+  <p>Contenu avec <Reference /> et <KeywordHighlight /></p>
   <Callout ... />               {/* Encart concept clé */}
   <Quote ... />                 {/* Citation (author et source optionnels) */}
   {/* Composants interactifs (simulateurs, quiz, illustrations) */}
 </PageTemplate>
 ```
-
-### Prelude (Prélude)
-
-**Définition** : Le Prelude est une **couche de compression conceptuelle**. C'est un résumé ultra-condensé, dense, technique, lisible par un expert, qui compresse les concepts structurants du chapitre sous forme très concise.
-
-Le Prelude n'est PAS :
-
-- ❌ une accroche narrative ou marketing
-- ❌ une introduction simplifiée ou vulgarisée
-- ❌ un résumé classique ou un abstract
-- ❌ du storytelling ou du teasing
-
-Le Prelude EST :
-
-- ✅ un condensé structurel des idées-forces du chapitre
-- ✅ techniquement fidèle au sujet
-- ✅ immédiatement reconnaissable par un expert du domaine
-- ✅ une préparation mentale au body du chapitre
-
-#### Règles de génération
-
-1. **Densité maximale** - chaque phrase porte au moins un concept structurant ; aucun mot superflu
-2. **Fidélité technique** - terminologie exacte, pas de simplification abusive
-3. **Complétude structurelle** - tous les axes conceptuels du chapitre doivent être présents, même si l'explicitation reste volontairement minimale
-4. **Pas de fluff** - zéro phrase marketing, zéro ton d'accroche, zéro storytelling
-5. **Court** - 2 à 4 phrases maximum
-6. **Le body du chapitre suit la trame conceptuelle du Prelude** - le Prelude pose la structure, le body la développe
-
-#### Critères de qualité
-
-Un bon Prelude satisfait ces tests :
-
-- [ ] Un expert du domaine peut reconstruire mentalement le plan du chapitre à partir du Prelude seul
-- [ ] Aucune phrase ne peut être retirée sans perte d'information structurelle
-- [ ] Le vocabulaire technique est exact (pas d'approximations)
-- [ ] Le ton est neutre, factuel, dense - pas de séduction
-- [ ] Le body du chapitre développe chaque concept mentionné dans le Prelude, dans l'ordre
 
 ---
 

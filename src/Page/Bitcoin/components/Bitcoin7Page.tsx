@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, HighlightText, Reference } from "../../../Design";
+import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { SignaturePlayground } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
@@ -27,30 +27,24 @@ export const Bitcoin7Page: FC = () => {
         </p>
         <ol>
           <li>
-            <Emphasis>
-              <HighlightText>{fr ? "Clé privée" : "Private key"}</HighlightText>
-              {fr
-                ? " : ne doit jamais être divulguée, elle permet de produire une signature"
-                : ": must never be shared, it lets you produce a signature"}
-            </Emphasis>
+            <HighlightText>{fr ? "Clé privée" : "Private key"}</HighlightText>
+            {fr
+              ? " : ne doit jamais être divulguée, elle permet de produire une signature"
+              : ": must never be shared, it lets you produce a signature"}
             .
           </li>
           <li>
-            <Emphasis>
-              <HighlightText>{fr ? "Clé publique" : "Public key"}</HighlightText>
-              {fr
-                ? " : dérivée de la clé privée, elle permet de vérifier une signature"
-                : ": derived from the private key, it lets you verify a signature"}
-            </Emphasis>
+            <HighlightText>{fr ? "Clé publique" : "Public key"}</HighlightText>
+            {fr
+              ? " : dérivée de la clé privée, elle permet de vérifier une signature"
+              : ": derived from the private key, it lets you verify a signature"}
             .
           </li>
           <li>
-            <Emphasis>
-              <HighlightText>{fr ? "Signature" : "Signature"}</HighlightText>
-              {fr
-                ? " : preuve produite à partir de la clé privée pour un message donné"
-                : ": a proof produced from the private key for a given message"}
-            </Emphasis>
+            <HighlightText>{fr ? "Signature" : "Signature"}</HighlightText>
+            {fr
+              ? " : preuve produite à partir de la clé privée pour un message donné"
+              : ": a proof produced from the private key for a given message"}
             .
           </li>
         </ol>
@@ -80,17 +74,12 @@ export const Bitcoin7Page: FC = () => {
           {fr ? (
             <>
               Il possède une clé privée :{" "}
-              <Emphasis>
-                <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText>
-              </Emphasis>{" "}
-              et souhaite envoyer 1 bitcoin à <i>Mme Michu</i>.
+              <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText> et souhaite envoyer 1
+              bitcoin à <i>Mme Michu</i>.
             </>
           ) : (
             <>
-              He owns a private key:{" "}
-              <Emphasis>
-                <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText>
-              </Emphasis>{" "}
+              He owns a private key: <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText>{" "}
               and wants to send 1 bitcoin to <i>Ms. Michu</i>.
             </>
           )}
@@ -115,11 +104,9 @@ export const Bitcoin7Page: FC = () => {
           : "In the classical world, you must prove your identity to access an account. In Bitcoin, you only need to prove you control the right key."}
       </p>
       <p>
-        <Emphasis>
-          {fr
-            ? "La propriété devient alors une preuve cryptographique, pas une déclaration"
-            : "Ownership thus becomes a cryptographic proof, not a declaration"}
-        </Emphasis>
+        {fr
+          ? "La propriété devient alors une preuve cryptographique, pas une déclaration"
+          : "Ownership thus becomes a cryptographic proof, not a declaration"}
         .
       </p>
 
@@ -138,11 +125,9 @@ export const Bitcoin7Page: FC = () => {
           {fr
             ? "Mais le cœur du système reste ailleurs : "
             : "But the heart of the system lies elsewhere: "}
-          <Emphasis>
-            {fr
-              ? "la clé privée permet de signer, la clé publique permet de vérifier, et la signature prouve le droit de dépenser"
-              : "the private key signs, the public key verifies, and the signature proves the right to spend"}
-          </Emphasis>
+          {fr
+            ? "la clé privée permet de signer, la clé publique permet de vérifier, et la signature prouve le droit de dépenser"
+            : "the private key signs, the public key verifies, and the signature proves the right to spend"}
           .
         </p>
       </Callout>
@@ -154,11 +139,10 @@ export const Bitcoin7Page: FC = () => {
       </p>
       <p>
         {fr ? "Reste une dernière question : " : "One last question remains: "}
-        <Emphasis>
-          {fr
-            ? "comment tout cela est-il présenté à l'utilisateur dans la vraie vie ?"
-            : "how is all of this actually presented to the user in real life?"}
-        </Emphasis>
+
+        {fr
+          ? "comment tout cela est-il présenté à l'utilisateur dans la vraie vie ?"
+          : "how is all of this actually presented to the user in real life?"}
       </p>
       <p>
         {fr ? "Plus concrètement, " : "More concretely, "}
