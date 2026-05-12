@@ -1,9 +1,6 @@
 import type { Language } from "../../I18n";
 import { ROUTE_NAME } from "../../Routing";
-import type {
-  ChapterReference,
-  SynthesisQuizData,
-} from "../types/SynthesisQuizData";
+import type { ChapterReference, SynthesisQuizData } from "../types/";
 
 const CHAPTERS = {
   moneyOrigin: { routeId: ROUTE_NAME.Banking_1, labelKey: "nav.tree.moneyOrigin" },
@@ -39,14 +36,14 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Elle reçoit de la monnaie M0 de la Banque Centrale puis la prête à ses clients"
-              : "a) It receives M0 from the Central Bank and lends it to its customers",
+              ? "a) Elle reçoit de la M0 de la Banque Centrale, puis la reprête à ses clients en gardant une marge au passage"
+              : "a) It receives M0 from the Central Bank, then re-lends it to its customers while pocketing a margin along the way",
             isCorrect: false,
           },
           {
             text: fr
-              ? "b) Elle prête une partie des dépôts existants de ses autres clients"
-              : "b) It lends out part of the existing deposits of its other customers",
+              ? "b) Elle puise dans les dépôts existants de ses autres clients pour les prêter à de nouveaux emprunteurs"
+              : "b) It dips into the existing deposits of its other customers to lend them to new borrowers",
             isCorrect: false,
           },
           {
@@ -71,14 +68,14 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Un passif, car la banque doit cet argent au client"
-              : "b) A liability, because the bank owes this money to the customer",
+              ? "b) Un passif, puisque la banque doit cet argent au client qui le lui a emprunté"
+              : "b) A liability, since the bank owes this money to the customer who borrowed it",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Un capital propre, car cela appartient à la banque"
-              : "c) Equity, because it belongs to the bank",
+              ? "c) Un élément de capitaux propres, puisque le prêt accordé enrichit la banque dès sa signature"
+              : "c) An equity item, since the loan granted enriches the bank from the moment it is signed",
             isCorrect: false,
           },
         ],
@@ -91,8 +88,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) La M0 est physique (pièces et billets), la M2 est numérique"
-              : "a) M0 is physical (coins and notes), M2 is digital",
+              ? "a) La M0 désigne uniquement les pièces et billets physiques, la M2 désigne uniquement l'argent qui circule par virement ou carte bancaire"
+              : "a) M0 refers only to physical coins and notes; M2 refers only to money moving via transfers or bank cards",
             isCorrect: false,
           },
           {
@@ -103,8 +100,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) La M0 est garantie par l'État, la M2 ne l'est pas"
-              : "c) M0 is guaranteed by the State, M2 is not",
+              ? "c) La M0 est garantie par l'État via le Fonds de Garantie des Dépôts, la M2 ne bénéficie d'aucune protection"
+              : "c) M0 is guaranteed by the State through the Deposit Guarantee Fund; M2 has no protection at all",
             isCorrect: false,
           },
         ],
@@ -123,14 +120,14 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) À garantir les dépôts des clients en cas de faillite d'une banque"
-              : "b) To guarantee customer deposits in case of a bank failure",
+              ? "b) À garantir les dépôts des clients en cas de faillite d'une banque, via un fonds commun alimenté quotidiennement"
+              : "b) To guarantee customer deposits in case of bank failure, through a common fund replenished daily",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) À transférer la M2 des comptes clients vers les réserves de la Banque Centrale"
-              : "c) To transfer M2 from customer accounts to Central Bank reserves",
+              ? "c) À transférer chaque soir la M2 des comptes clients vers les coffres-forts numériques de la Banque Centrale"
+              : "c) To transfer M2 every evening from customer accounts into the Central Bank's digital vaults",
             isCorrect: false,
           },
         ],
@@ -143,8 +140,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) La banque de Nicolas transfère 200 000 € en M2 à la banque de Mme Michu"
-              : "a) Nicolas' bank transfers €200,000 in M2 to Mrs. Michu's bank",
+              ? "a) La banque de Nicolas envoie directement 200 000 € en monnaie M2 aux serveurs de la banque de Mme Michu"
+              : "a) Nicolas' bank directly sends €200,000 in M2 to the servers of Mrs. Michu's bank",
             isCorrect: false,
           },
           {
@@ -155,8 +152,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) La Banque Centrale crédite directement le compte M2 de Mme Michu"
-              : "c) The Central Bank directly credits Mrs. Michu's M2 account",
+              ? "c) La Banque Centrale crédite directement le compte M2 de Mme Michu, en débitant celui de Nicolas par contrepartie"
+              : "c) The Central Bank directly credits Mrs. Michu's M2 account, debiting Nicolas' account as a counterpart",
             isCorrect: false,
           },
         ],
@@ -169,8 +166,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Une amende infligée par la Banque Centrale qui ponctionne ses réserves"
-              : "a) A fine from the Central Bank that drains its reserves",
+              ? "a) Une amende disciplinaire infligée par la Banque Centrale, qui ponctionne ses réserves pour sanctionner un mauvais comportement"
+              : "a) A disciplinary fine from the Central Bank, draining its reserves to punish bad behaviour",
             isCorrect: false,
           },
           {
@@ -181,8 +178,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Un retrait massif de billets aux distributeurs par ses clients"
-              : "c) A massive withdrawal of cash from ATMs by its customers",
+              ? "c) Un retrait massif de billets aux distributeurs par ses clients pris d'une soudaine fièvre du cash"
+              : "c) A massive cash withdrawal by its customers, suddenly seized by an attack of cash fever",
             isCorrect: false,
           },
         ],
@@ -193,8 +190,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Un programme de prêts à taux préférentiels aux entreprises stratégiques"
-              : "a) A program of preferential loans to strategic companies",
+              ? "a) Un programme de prêts à taux préférentiels accordés aux entreprises jugées stratégiques pour l'économie nationale"
+              : "a) A program of preferential-rate loans granted to companies deemed strategic for the national economy",
             isCorrect: false,
           },
           {
@@ -205,8 +202,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Un mécanisme de garantie des dépôts des particuliers en cas de faillite bancaire"
-              : "c) A mechanism to guarantee retail deposits in case of bank failure",
+              ? "c) Un dispositif d'assurance qui garantit les dépôts des particuliers en cas de faillite bancaire, financé par les cotisations des banques"
+              : "c) An insurance scheme guaranteeing retail deposits in case of bank failure, funded by bank contributions",
             isCorrect: false,
           },
         ],
@@ -219,14 +216,14 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Les taux montent, car la demande pour les obligations augmente"
-              : "a) Rates rise, because demand for bonds increases",
+              ? "a) Les taux montent, car cette ruée sur les obligations signale aux investisseurs qu'elles sont devenues plus risquées"
+              : "a) Rates rise, because this rush on bonds signals to investors that they have become riskier",
             isCorrect: false,
           },
           {
             text: fr
-              ? "b) Les taux restent stables, car le coupon de l'obligation est fixe"
-              : "b) Rates stay stable, because the bond coupon is fixed",
+              ? "b) Les taux restent stables, parce que le coupon de chaque obligation est contractuellement fixe et ne peut pas bouger"
+              : "b) Rates stay stable, because the coupon of each bond is contractually fixed and cannot move",
             isCorrect: false,
           },
           {
@@ -245,8 +242,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) En facturant des frais de tenue de compte à ses clients"
-              : "a) By charging account-keeping fees to its customers",
+              ? "a) Principalement en facturant des frais de tenue de compte, de carte bancaire et de découvert à ses clients particuliers"
+              : "a) Mainly by charging account-keeping, card and overdraft fees to its retail customers",
             isCorrect: false,
           },
           {
@@ -257,8 +254,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) En revendant à profit les obligations qu'elle détient"
-              : "c) By reselling at a profit the bonds it holds",
+              ? "c) En revendant à profit sur les marchés financiers les obligations d'État qu'elle accumule patiemment dans son bilan"
+              : "c) By selling at a profit on financial markets the government bonds it patiently piles up on its balance sheet",
             isCorrect: false,
           },
         ],
@@ -266,7 +263,7 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
       {
         question: fr
           ? "Pourquoi le Quantitative Easing « casse-t-il le moteur » des banques commerciales ?"
-          : "Why does Quantitative Easing \"break the engine\" of commercial banks?",
+          : 'Why does Quantitative Easing "break the engine" of commercial banks?',
         chapterRefs: [CHAPTERS.brokenEngine],
         answers: [
           {
@@ -277,28 +274,28 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Il oblige les banques à conserver davantage de réserves M0 inutilisées"
-              : "b) It forces banks to hold more unused M0 reserves",
+              ? "b) Il oblige les banques à immobiliser des montagnes de réserves M0 inutilisées, qui dorment sur leur bilan sans rapporter un centime"
+              : "b) It forces banks to lock up mountains of unused M0 reserves, sleeping on their balance sheet without earning a cent",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Il interdit aux banques de prêter à long terme tant que les obligations d'État ne sont pas vendues"
-              : "c) It forbids banks from lending long term until government bonds are sold",
+              ? "c) Il interdit explicitement aux banques de prêter à long terme tant que les obligations d'État rachetées par la Banque Centrale ne sont pas revendues"
+              : "c) It explicitly forbids banks from lending long term until the government bonds bought back by the Central Bank are resold",
             isCorrect: false,
           },
         ],
       },
       {
         question: fr
-          ? "Face à un entrepreneur (projet risqué, peu de garanties) et un investisseur (achat d'actions avec son portefeuille existant en nantissement), pourquoi la banque privilégie-t-elle aujourd'hui le second ?"
-          : "Between an entrepreneur (risky project, few guarantees) and an investor (buying stocks with an existing portfolio as collateral), why does the bank now favor the latter?",
+          ? "Face à un entrepreneur (projet risqué, peu de garanties) et un investisseur qui achète des actions en nantissant son portefeuille existant, pourquoi la banque privilégie-t-elle aujourd'hui le second ?"
+          : "Between an entrepreneur (risky project, few guarantees) and an investor who buys stocks while pledging their existing portfolio as collateral, why does the bank now favor the latter?",
         chapterRefs: [CHAPTERS.brokenEngine, CHAPTERS.cantillon],
         answers: [
           {
             text: fr
-              ? "a) Parce que la réglementation interdit désormais le financement des entrepreneurs sans apport personnel"
-              : "a) Because regulation now forbids financing entrepreneurs without personal equity",
+              ? "a) Parce que les nouvelles réglementations bancaires interdisent désormais le financement d'entrepreneurs ne disposant pas d'un apport personnel suffisant"
+              : "a) Because new banking regulations now forbid financing entrepreneurs who do not have sufficient personal equity",
             isCorrect: false,
           },
           {
@@ -309,8 +306,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Parce que les investisseurs paient des taux d'intérêt plus élevés que les entrepreneurs"
-              : "c) Because investors pay higher interest rates than entrepreneurs",
+              ? "c) Parce que les investisseurs financiers sont contractuellement obligés de payer des taux d'intérêt plus élevés que les entrepreneurs porteurs de projets"
+              : "c) Because financial investors are contractually obliged to pay higher interest rates than project-bearing entrepreneurs",
             isCorrect: false,
           },
         ],
@@ -327,14 +324,14 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) La théorie selon laquelle l'inflation se répartit uniformément dans toute l'économie"
-              : "b) The theory that inflation spreads uniformly across the whole economy",
+              ? "b) La théorie économique selon laquelle toute inflation se répartit uniformément et instantanément dans l'ensemble de l'économie, sans favoriser aucun acteur"
+              : "b) The economic theory that any inflation spreads uniformly and instantly across the whole economy, favouring no single actor",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Le mécanisme par lequel la Banque Centrale fixe le taux directeur en fonction de l'inflation"
-              : "c) The mechanism by which the Central Bank sets the policy rate based on inflation",
+              ? "c) Le mécanisme par lequel la Banque Centrale calibre son taux directeur en fonction des écarts d'inflation observés entre régions"
+              : "c) The mechanism by which the Central Bank calibrates its policy rate based on observed inflation gaps between regions",
             isCorrect: false,
           },
         ],
@@ -347,8 +344,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Par la fiscalité : l'État prélève l'impôt sur les plus-values et le redistribue"
-              : "a) Through taxation: the State levies tax on capital gains and redistributes it",
+              ? "a) Par la fiscalité : l'État prélève l'impôt sur les plus-values des détenteurs d'actifs et le redistribue aux ménages modestes"
+              : "a) Through taxation: the State levies tax on the capital gains of asset holders and redistributes it to lower-income households",
             isCorrect: false,
           },
           {
@@ -359,8 +356,8 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Par la Banque Centrale, qui transfère directement une partie de la M0 vers les comptes des ménages"
-              : "c) Through the Central Bank, which directly transfers part of the M0 to household accounts",
+              ? "c) Par la Banque Centrale, qui transfère directement chaque trimestre une fraction de la M0 sur les comptes courants des ménages"
+              : "c) Through the Central Bank, which directly transfers a fraction of M0 each quarter into household current accounts",
             isCorrect: false,
           },
         ],
@@ -373,20 +370,20 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Parce que les coûts de production augmentent mécaniquement avec le temps"
-              : "a) Because production costs mechanically rise over time",
+              ? "a) Parce que les coûts de production des entreprises augmentent mécaniquement chaque année, indépendamment de toute autre variable économique"
+              : "a) Because companies' production costs mechanically rise each year, independently of any other economic variable",
             isCorrect: false,
           },
           {
             text: fr
-              ? "b) Parce que les banques commerciales décident d'augmenter leurs marges sur les prêts"
-              : "b) Because commercial banks decide to widen their loan margins",
+              ? "b) Parce que les banques commerciales décident, à intervalles réguliers, d'augmenter leurs marges sur les prêts accordés à l'économie"
+              : "b) Because commercial banks decide, at regular intervals, to widen their margins on loans granted to the economy",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Parce que la quantité de monnaie en circulation augmente massivement alors que la quantité de biens disponibles reste à peu près stable"
-              : "c) Because the amount of money in circulation rises massively while the amount of available goods stays roughly stable",
+              ? "c) Parce que la quantité de monnaie en circulation augmente plus vite que la quantité de biens et services produits"
+              : "c) Because the amount of money in circulation rises faster than the quantity of goods and services produced",
             isCorrect: true,
           },
         ],

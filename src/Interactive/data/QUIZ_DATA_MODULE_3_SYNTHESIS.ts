@@ -1,9 +1,6 @@
 import type { Language } from "../../I18n";
 import { ROUTE_NAME } from "../../Routing";
-import type {
-  ChapterReference,
-  SynthesisQuizData,
-} from "../types/SynthesisQuizData";
+import type { ChapterReference, SynthesisQuizData } from "../types/";
 
 const CHAPTERS = {
   howBitcoinWorks: { routeId: ROUTE_NAME.Bitcoin_1, labelKey: "nav.tree.howBitcoinWorks" },
@@ -45,14 +42,14 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Une banque, un protocole et une crypto-monnaie"
-              : "b) A bank, a protocol, and a cryptocurrency",
+              ? "b) Une banque numérique, un protocole de paiement et une crypto-monnaie volatile"
+              : "b) A digital bank, a payment protocol, and a volatile cryptocurrency",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Une blockchain, un marché et un actif financier"
-              : "c) A blockchain, a market, and a financial asset",
+              ? "c) Une blockchain, un marché spéculatif et un actif financier non régulé"
+              : "c) A blockchain, a speculative market, and an unregulated financial asset",
             isCorrect: false,
           },
         ],
@@ -65,8 +62,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Miner de nouveaux bitcoins en résolvant des problèmes mathématiques"
-              : "a) Mining new bitcoins by solving mathematical problems",
+              ? "a) Miner de nouveaux bitcoins en résolvant des problèmes mathématiques complexes pour empocher la récompense"
+              : "a) Mining new bitcoins by solving complex mathematical problems to pocket the reward",
             isCorrect: false,
           },
           {
@@ -77,8 +74,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Centraliser les transactions avant de les transmettre aux mineurs"
-              : "c) Centralizing transactions before forwarding them to miners",
+              ? "c) Centraliser localement les transactions de sa région géographique avant de les transmettre aux mineurs autorisés"
+              : "c) Locally centralizing the transactions of its geographical region before forwarding them to authorized miners",
             isCorrect: false,
           },
         ],
@@ -91,8 +88,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Le nœud-mineur ne stocke pas la blockchain"
-              : "a) The miner-node does not store the blockchain",
+              ? "a) Le nœud-mineur ne stocke pas la blockchain et se contente de calculer des hashs"
+              : "a) The miner-node does not store the blockchain and only computes hashes",
             isCorrect: false,
           },
           {
@@ -103,8 +100,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Le nœud-mineur est désigné par un comité de gouvernance du réseau"
-              : "c) The miner-node is appointed by a network governance committee",
+              ? "c) Le nœud-mineur est désigné par un comité de gouvernance du réseau, sur dossier et après vote des autres mineurs"
+              : "c) The miner-node is appointed by a network governance committee, after application and a vote of other miners",
             isCorrect: false,
           },
         ],
@@ -117,8 +114,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Un manifeste philosophique de plusieurs paragraphes sur la liberté monétaire"
-              : "a) A multi-paragraph philosophical manifesto on monetary freedom",
+              ? "a) Un manifeste philosophique de plusieurs paragraphes sur la liberté monétaire et la souveraineté individuelle"
+              : "a) A multi-paragraph philosophical manifesto on monetary freedom and individual sovereignty",
             isCorrect: false,
           },
           {
@@ -129,8 +126,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Une dédicace à Friedrich Hayek et Ludwig von Mises"
-              : "c) A dedication to Friedrich Hayek and Ludwig von Mises",
+              ? "c) Une dédicace à Friedrich Hayek et Ludwig von Mises, accompagnée d'une citation tirée de L'Action humaine"
+              : "c) A dedication to Friedrich Hayek and Ludwig von Mises, with a quote from Human Action",
             isCorrect: false,
           },
         ],
@@ -143,8 +140,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) La lenteur des paiements internationaux et les frais bancaires"
-              : "a) The slowness of international payments and banking fees",
+              ? "a) La lenteur des paiements internationaux et les frais bancaires excessifs sur les virements transfrontaliers"
+              : "a) The slowness of international payments and the excessive banking fees on cross-border transfers",
             isCorrect: false,
           },
           {
@@ -155,8 +152,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) La fraude fiscale et le blanchiment d'argent"
-              : "c) Tax fraud and money laundering",
+              ? "c) La fraude fiscale internationale et le blanchiment d'argent dans les paradis fiscaux"
+              : "c) International tax fraud and money laundering through tax havens",
             isCorrect: false,
           },
         ],
@@ -169,8 +166,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) 100 millions, ajustable par vote des mineurs"
-              : "a) 100 million, adjustable by miner vote",
+              ? "a) 100 millions, ajustables par vote des principaux mineurs lors d'une mise à jour quadriennale du protocole"
+              : "a) 100 million, adjustable by a vote of the main miners during a four-yearly protocol upgrade",
             isCorrect: false,
           },
           {
@@ -181,8 +178,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Aucune limite, l'émission s'ajuste à la demande"
-              : "c) No limit, issuance adjusts to demand",
+              ? "c) Aucune limite : l'émission s'ajuste à la demande réelle pour stabiliser le prix au fil du temps"
+              : "c) No limit: issuance adjusts to real demand to stabilise the price over time",
             isCorrect: false,
           },
         ],
@@ -195,8 +192,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Uniquement la liste des transactions, rien de plus"
-              : "a) Only the list of transactions, nothing more",
+              ? "a) Uniquement la liste des transactions de la dernière période, sans aucune autre métadonnée"
+              : "a) Only the list of transactions from the last period, without any other metadata",
             isCorrect: false,
           },
           {
@@ -207,8 +204,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Un solde global du réseau mis à jour à chaque cycle"
-              : "c) A global network balance updated each cycle",
+              ? "c) Un solde global du réseau mis à jour à chaque cycle, accompagné de la liste des comptes actifs sur la période"
+              : "c) A global network balance updated each cycle, alongside the list of active accounts during the period",
             isCorrect: false,
           },
         ],
@@ -216,13 +213,13 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
       {
         question: fr
           ? "Pourquoi la blockchain Bitcoin est-elle dite « immutable » ?"
-          : "Why is the Bitcoin blockchain said to be \"immutable\"?",
+          : 'Why is the Bitcoin blockchain said to be "immutable"?',
         chapterRefs: [CHAPTERS.blockchain],
         answers: [
           {
             text: fr
-              ? "a) Parce que les blocs sont stockés sur des serveurs sécurisés appartenant à la Fondation Bitcoin"
-              : "a) Because blocks are stored on secure servers owned by the Bitcoin Foundation",
+              ? "a) Parce que les blocs sont stockés sur des serveurs ultra-sécurisés appartenant à la Fondation Bitcoin basée à Genève"
+              : "a) Because blocks are stored on ultra-secure servers owned by the Bitcoin Foundation based in Geneva",
             isCorrect: false,
           },
           {
@@ -233,8 +230,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Parce qu'une loi internationale interdit toute modification des données"
-              : "c) Because an international law forbids any modification of the data",
+              ? "c) Parce qu'un traité international signé en 2015 interdit explicitement toute modification rétroactive des données du réseau"
+              : "c) Because an international treaty signed in 2015 explicitly forbids any retroactive modification of network data",
             isCorrect: false,
           },
         ],
@@ -247,8 +244,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) À chiffrer les transactions pour qu'elles soient illisibles"
-              : "a) To encrypt transactions so they become unreadable",
+              ? "a) À chiffrer les transactions pour qu'elles soient illisibles par des observateurs extérieurs au réseau"
+              : "a) To encrypt transactions so that they become unreadable to outside observers of the network",
             isCorrect: false,
           },
           {
@@ -259,8 +256,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) À compresser les données pour économiser de l'espace de stockage"
-              : "c) To compress data and save storage space",
+              ? "c) À compresser les données du bloc pour économiser de l'espace de stockage sur les serveurs des mineurs"
+              : "c) To compress block data and save storage space on the miners' servers",
             isCorrect: false,
           },
         ],
@@ -273,8 +270,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) C'est un problème de cryptographie ancienne, résolu par Bitcoin grâce à la signature numérique"
-              : "a) It's a problem of ancient cryptography, solved by Bitcoin through digital signatures",
+              ? "a) C'est un problème de cryptographie ancienne datant de l'Empire byzantin, résolu par Bitcoin grâce à la signature numérique elliptique"
+              : "a) It's an ancient cryptography problem dating from the Byzantine Empire, solved by Bitcoin through elliptic-curve digital signatures",
             isCorrect: false,
           },
           {
@@ -285,8 +282,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) C'est un problème de routage réseau, résolu par Bitcoin grâce à la connexion directe entre nœuds"
-              : "c) It's a network-routing problem, solved by Bitcoin through direct node-to-node connections",
+              ? "c) C'est un problème de routage réseau lié à la propagation des paquets, résolu par Bitcoin grâce aux connexions directes entre nœuds géographiquement proches"
+              : "c) It's a network-routing problem linked to packet propagation, solved by Bitcoin through direct connections between geographically close nodes",
             isCorrect: false,
           },
         ],
@@ -303,12 +300,14 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Un fonds de garantie alimenté par les frais de transaction"
-              : "b) A guarantee fund fed by transaction fees",
+              ? "b) Un fonds de garantie alimenté par les frais de transaction, qui sert à couvrir les pertes en cas de fork"
+              : "b) A guarantee fund fed by transaction fees, used to cover losses in case of a fork",
             isCorrect: false,
           },
           {
-            text: fr ? "c) Le portefeuille collectif des mineurs" : "c) The miners' collective wallet",
+            text: fr
+              ? "c) Le portefeuille collectif des mineurs, où s'accumulent les récompenses avant leur redistribution mensuelle"
+              : "c) The miners' collective wallet, where rewards accumulate before their monthly redistribution",
             isCorrect: false,
           },
         ],
@@ -327,14 +326,14 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Un vote des nœuds simples détermine la chaîne gagnante"
-              : "b) A vote among regular nodes decides the winning chain",
+              ? "b) Un vote pondéré des nœuds simples selon leur ancienneté détermine la chaîne gagnante à l'issue de la période contestée"
+              : "b) A weighted vote of regular nodes based on their seniority decides the winning chain at the end of the contested period",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) C'est la chaîne contenant le plus grand nombre de transactions qui l'emporte"
-              : "c) The chain containing the most transactions wins",
+              ? "c) C'est la chaîne contenant le plus grand nombre de transactions sur le bloc litigieux qui l'emporte automatiquement"
+              : "c) The chain containing the largest number of transactions in the disputed block automatically wins",
             isCorrect: false,
           },
         ],
@@ -353,14 +352,14 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Pour récompenser les mineurs qui ont validé le plus de blocs sur la période"
-              : "b) To reward miners who validated the most blocks during the period",
+              ? "b) Pour récompenser financièrement les mineurs qui ont validé le plus de blocs sur la période, en augmentant leur quote-part de subvention"
+              : "b) To financially reward miners who validated the most blocks during the period, by increasing their share of the subsidy",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Pour permettre à de nouveaux mineurs d'entrer plus facilement sur le réseau"
-              : "c) To let new miners join the network more easily",
+              ? "c) Pour permettre à de nouveaux mineurs d'entrer plus facilement sur le réseau, en baissant temporairement le seuil de calcul requis"
+              : "c) To let new miners join the network more easily, by temporarily lowering the required computational threshold",
             isCorrect: false,
           },
         ],
@@ -371,8 +370,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Un évènement qui divise par deux le nombre total de bitcoins en circulation"
-              : "a) An event that halves the total number of bitcoins in circulation",
+              ? "a) Un événement qui divise par deux le nombre total de bitcoins déjà en circulation, redistribué à parts égales aux mineurs actifs"
+              : "a) An event that halves the total number of bitcoins already in circulation, redistributed equally among active miners",
             isCorrect: false,
           },
           {
@@ -383,8 +382,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Un mécanisme de gouvernance qui permet aux nœuds de voter sur les évolutions du protocole"
-              : "c) A governance mechanism that lets nodes vote on protocol changes",
+              ? "c) Un mécanisme de gouvernance qui permet aux nœuds de voter à la majorité simple sur les évolutions techniques du protocole"
+              : "c) A governance mechanism that lets nodes vote by simple majority on the technical evolutions of the protocol",
             isCorrect: false,
           },
         ],
@@ -403,14 +402,14 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) En 2032, lorsque le réseau aura atteint sa pleine maturité"
-              : "b) In 2032, once the network has reached full maturity",
+              ? "b) En 2032, lorsque le réseau aura atteint sa pleine maturité technique et que l'adoption institutionnelle sera consolidée"
+              : "b) In 2032, once the network has reached technical maturity and institutional adoption is consolidated",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Jamais, l'émission continuera indéfiniment pour rémunérer les mineurs"
-              : "c) Never — issuance will continue indefinitely to pay miners",
+              ? "c) Jamais : l'émission continuera indéfiniment à un rythme constant pour garantir la rémunération perpétuelle des mineurs"
+              : "c) Never: issuance will continue indefinitely at a constant pace to guarantee miners' perpetual remuneration",
             isCorrect: false,
           },
         ],
@@ -423,8 +422,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Par une taxe prélevée sur les détenteurs de bitcoins"
-              : "a) Through a tax levied on bitcoin holders",
+              ? "a) Par une taxe annuelle prélevée sur les détenteurs de bitcoins en proportion de leur portefeuille"
+              : "a) Through an annual tax levied on bitcoin holders in proportion to their portfolio size",
             isCorrect: false,
           },
           {
@@ -435,8 +434,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Par une subvention versée par les principales bourses d'échange"
-              : "c) Through a subsidy paid by the main exchanges",
+              ? "c) Par une subvention conjointe versée par les principales bourses d'échange, qui ont tout intérêt à préserver l'infrastructure"
+              : "c) Through a joint subsidy paid by the main exchanges, which have every interest in preserving the infrastructure",
             isCorrect: false,
           },
         ],
@@ -453,14 +452,14 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) Un solde de compte enregistré dans la blockchain"
-              : "b) An account balance recorded on the blockchain",
+              ? "b) Un solde de compte numérique enregistré dans la blockchain et associé à l'adresse publique de son détenteur"
+              : "b) A digital account balance recorded on the blockchain and linked to its holder's public address",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) Une unité de mesure du temps de minage"
-              : "c) A unit of measurement for mining time",
+              ? "c) Une unité de mesure du temps de minage utilisée pour évaluer la productivité des fermes industrielles"
+              : "c) A unit of measurement for mining time, used to evaluate the productivity of industrial farms",
             isCorrect: false,
           },
         ],
@@ -479,14 +478,14 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "b) À une taxe automatique reversée au protocole"
-              : "b) An automatic tax paid back to the protocol",
+              ? "b) À une taxe automatique reversée au protocole pour financer son développement et la maintenance des nœuds officiels"
+              : "b) An automatic tax paid back to the protocol to fund its development and the maintenance of official nodes",
             isCorrect: false,
           },
           {
             text: fr
-              ? "c) À un nouveau bitcoin créé par le portefeuille de l'expéditeur"
-              : "c) A new bitcoin created by the sender's wallet",
+              ? "c) À un nouveau bitcoin créé spontanément par le portefeuille de l'expéditeur lorsque la transaction est confirmée"
+              : "c) A new bitcoin spontaneously created by the sender's wallet when the transaction is confirmed",
             isCorrect: false,
           },
         ],
@@ -499,8 +498,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) La clé privée chiffre la transaction, la clé publique la déchiffre, la signature certifie l'identité de l'utilisateur"
-              : "a) The private key encrypts the transaction, the public key decrypts it, and the signature certifies the user's identity",
+              ? "a) La clé privée chiffre la transaction, la clé publique la déchiffre, et la signature certifie l'identité civile de l'utilisateur auprès du réseau"
+              : "a) The private key encrypts the transaction, the public key decrypts it, and the signature certifies the user's civil identity to the network",
             isCorrect: false,
           },
           {
@@ -511,8 +510,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) La clé privée est partagée avec le destinataire, la clé publique reste secrète, la signature est générée par le mineur"
-              : "c) The private key is shared with the recipient, the public key stays secret, and the signature is generated by the miner",
+              ? "c) La clé privée est partagée avec le destinataire pour qu'il reçoive les fonds, la clé publique reste secrète chez l'expéditeur, et la signature est générée par le mineur"
+              : "c) The private key is shared with the recipient so they receive the funds, the public key stays secret with the sender, and the signature is generated by the miner",
             isCorrect: false,
           },
         ],
@@ -525,8 +524,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
         answers: [
           {
             text: fr
-              ? "a) Des bitcoins, stockés sous forme numérique dans une base de données locale"
-              : "a) Bitcoins, stored digitally in a local database",
+              ? "a) Des bitcoins, stockés sous forme numérique dans une base de données locale chiffrée par le mot de passe de l'utilisateur"
+              : "a) Bitcoins, stored digitally in a local database encrypted with the user's password",
             isCorrect: false,
           },
           {
@@ -537,8 +536,8 @@ export const getQuizDataModule3Synthesis = (language: Language): SynthesisQuizDa
           },
           {
             text: fr
-              ? "c) Un solde bancaire numérique synchronisé avec un serveur central"
-              : "c) A digital bank balance synchronized with a central server",
+              ? "c) Un solde bancaire numérique synchronisé en continu avec un serveur central géré par les principaux fournisseurs de portefeuilles"
+              : "c) A digital bank balance continuously synchronized with a central server managed by the main wallet providers",
             isCorrect: false,
           },
         ],
