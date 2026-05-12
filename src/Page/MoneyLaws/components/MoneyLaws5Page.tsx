@@ -16,7 +16,7 @@ export const MoneyLaws5Page: FC = () => {
   const quiz = getQuizDataModule2Synthesis(language);
 
   return (
-    <PageTemplate title={t("nav.tree.synthesis")}>
+    <PageTemplate title={t("nav.tree.synthesis")} showReadingTime={false}>
       <p>
         {fr
           ? "Tu viens de traverser un module dense. Avant de prendre du recul, mets tes acquis à l'épreuve."

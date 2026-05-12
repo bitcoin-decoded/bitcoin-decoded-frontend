@@ -16,7 +16,7 @@ export const Bitcoin9Page: FC = () => {
   const quiz = getQuizDataModule3Synthesis(language);
 
   return (
-    <PageTemplate title={t("nav.tree.synthesis")}>
+    <PageTemplate title={t("nav.tree.synthesis")} showReadingTime={false}>
       <p>
         {fr
           ? "Tu viens de plonger dans les entrailles de Bitcoin : du protocole jusqu'à la seed. Avant de tourner la page, vérifie que les concepts clés sont bien arrimés."
