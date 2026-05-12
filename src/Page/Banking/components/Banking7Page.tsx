@@ -19,7 +19,7 @@ export const Banking7Page: FC = () => {
   const quiz = getQuizDataModule1Synthesis(language);
 
   return (
-    <PageTemplate title={t("nav.tree.synthesis")}>
+    <PageTemplate title={t("nav.tree.synthesis")} showReadingTime={false}>
       <p>
         {fr
           ? "Tu viens de traverser la partie la plus dense. Avant de prendre du recul, mets tes acquis à l'épreuve."

@@ -9,10 +9,20 @@ import { ReadingTimeBadge } from "./ReadingTimeBadge";
 type Props = {
   title: string;
   prelude?: ReactNode;
+  /**
+   * Show the "X min · flavor" reading-time badge under the title.
+   * Default `true`. Pass `false` for chapters that aren't a read (quizzes).
+   */
+  showReadingTime?: boolean;
   children: ReactNode;
 };
 
-export const PageTemplate: FC<Props> = ({ title, prelude, children }) => {
+export const PageTemplate: FC<Props> = ({
+  title,
+  prelude,
+  showReadingTime = true,
+  children,
+}) => {
   const { colors, moduleTheme } = usePageTheme();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
@@ -80,7 +90,7 @@ export const PageTemplate: FC<Props> = ({ title, prelude, children }) => {
     <div style={containerStyle}>
       <header style={headerStyle}>
         <h1 style={titleStyle}>{title}</h1>
-        <ReadingTimeBadge />
+        {showReadingTime && <ReadingTimeBadge />}
       </header>
       {prelude && <ChapterPrelude marginBottom={space.preludeToBody}>{prelude}</ChapterPrelude>}
       <section className="page-content" style={sectionStyle}>
