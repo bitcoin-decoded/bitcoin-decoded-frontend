@@ -53,18 +53,26 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
   // Persistent sticky sidebar (desktop only). Notion / Linear / Stripe
   // pattern: the nav stays anchored in the viewport while the main
-  // content scrolls. Three things are needed for this to work inside a
-  // flex row:
-  //   1. position: sticky + a `top` offset matching the sticky Header
-  //      height (3.5rem), so the nav lands just under it
-  //   2. an explicit height that fills the remaining viewport
-  //      (100vh - header), otherwise the column has no defined size
-  //   3. align-self: flex-start so the flex row doesn't stretch the
-  //      column to match the main content's height (which would
-  //      neutralise both the height and the sticky behaviour)
-  // Internal scroll is handled by NavBar itself (its list container
-  // already has overflow-y: auto), so we don't need a second scroll
-  // context here.
+  // content scrolls.
+  //
+  // Important: the sidebar spans the FULL viewport (top: 0, height:
+  // 100vh) — it runs UNDERNEATH the Header (which has z-index 101).
+  // When the Header is visible, it visually covers the sidebar's top
+  // 3.5rem zone; when the Header auto-hides on scroll, the sidebar
+  // continues all the way up with its own background, instead of
+  // exposing the body's secondary background and creating a 3.5rem
+  // colour step at the top-left.
+  //
+  // The visible nav content is pushed below the Header by a matching
+  // padding-top inside NavBar — so the first item never sits under
+  // the Header when it's visible.
+  //
+  // align-self: flex-start is required because the parent is a flex
+  // row with default `align-items: stretch` — without it the wrapper
+  // would stretch to the main content's height and break sticky.
+  //
+  // Internal scroll is delegated to NavBar (its list container has
+  // overflow-y: auto), so no second scroll context here.
   const navContainerStyle: CSSProperties = {
     backgroundColor: colors.base.background.primary,
     color: colors.base.text.secondary,
@@ -73,8 +81,8 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
     fontSize: "0.8125rem",
     lineHeight: "1.25rem",
     position: "sticky",
-    top: "3.5rem",
-    height: "calc(100vh - 3.5rem)",
+    top: 0,
+    height: "100vh",
     alignSelf: "flex-start",
   };
 

@@ -23,8 +23,13 @@ export const NavBar: FC = () => {
     setInteractionId,
   } = useNavBar();
 
+  // Padding-top accounts for the Header height (3.5rem) so the first
+  // nav item never sits under the Header — the sidebar wrapper in
+  // MainLayout extends behind the Header (top: 0, height: 100vh),
+  // which is what keeps the top-left tidy when the Header auto-hides
+  // on scroll.
   const navStyle: CSSProperties = {
-    padding: "1.5rem 0",
+    padding: "calc(3.5rem + 1rem) 0 1.5rem",
     display: "flex",
     flexDirection: "column",
     borderRight: `1px solid ${colors.base.border.primary}`,
@@ -91,7 +96,7 @@ export const NavBar: FC = () => {
   );
 
   return (
-    <nav style={navStyle}>
+    <nav style={navStyle} aria-label={t("nav.title")}>
       <div style={headerStyle}>
         <span style={headerLabelStyle}>{t("nav.title")}</span>
         <hr style={separatorStyle} />
