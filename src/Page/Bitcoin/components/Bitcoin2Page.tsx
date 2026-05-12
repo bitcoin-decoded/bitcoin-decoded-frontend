@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, Quote } from "../../../Design";
+import { Callout, Emphasis, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { M2MoneySupplyChart, Quiz, TrustComparisonDemo } from "../../../Interactive";
 import { getQuizDataM2Explosion } from "../../../Interactive/data/QUIZ_DATA_M2_EXPLOSION";
@@ -150,9 +150,29 @@ export const Bitcoin2Page: FC = () => {
               : "The root problem with conventional currency is all the trust that's required to make it work. The central bank must be trusted not to debase the currency, but the history of fiat currencies is full of breaches of that trust."}
           </Quote>
           <p>
-            {fr
-              ? "C'est précisément dans ce contexte que Bitcoin a vu le jour. Le 3 janvier 2009, un développeur anonyme utilisant le pseudonyme Satoshi Nakamoto a lancé le réseau Bitcoin. Et dans le tout premier bloc de la blockchain, il a inscrit un message :"
-              : "It is precisely in this context that Bitcoin was born. On January 3, 2009, an anonymous developer using the pseudonym Satoshi Nakamoto launched the Bitcoin network. And in the very first block of the blockchain, he inscribed a message:"}
+            {fr ? (
+              <>
+                C'est précisément dans ce contexte que Bitcoin a vu le jour. Le 3 janvier 2009, un
+                développeur anonyme utilisant le pseudonyme{" "}
+                <Reference href="https://fr.wikipedia.org/wiki/Satoshi_Nakamoto">
+                  Satoshi Nakamoto
+                </Reference>{" "}
+                a lancé le réseau Bitcoin (cf.{" "}
+                <Reference href="https://bitcoin.org/bitcoin.pdf">livre blanc</Reference>). Et dans
+                le tout premier bloc de la blockchain, il a inscrit un message :
+              </>
+            ) : (
+              <>
+                It is precisely in this context that Bitcoin was born. On January 3, 2009, an
+                anonymous developer using the pseudonym{" "}
+                <Reference href="https://en.wikipedia.org/wiki/Satoshi_Nakamoto">
+                  Satoshi Nakamoto
+                </Reference>{" "}
+                launched the Bitcoin network (cf. the{" "}
+                <Reference href="https://bitcoin.org/bitcoin.pdf">white paper</Reference>). And in
+                the very first block of the blockchain, he inscribed a message:
+              </>
+            )}
           </p>
           <Quote>The Times 03/Jan/2009 Chancellor on brink of second bailout for banks.</Quote>
           <p>

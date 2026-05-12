@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, HighlightText } from "../../../Design";
+import { Callout, Emphasis, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   getQuizDataUtxo,
@@ -8,6 +8,7 @@ import {
   TransactionModelComparison,
   UTXOTransactionBuilder,
 } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 
 export const Bitcoin6Page: FC = () => {
@@ -280,14 +281,18 @@ export const Bitcoin6Page: FC = () => {
         {fr ? (
           <>
             La réponse tient dans un autre mécanisme fondamental de Bitcoin :{" "}
-            <Emphasis>les clés, les signatures, et la cryptographie</Emphasis>.<br /> Direction le
-            prochain chapitre, tu tiens le bon bout !
+            <Reference to={ROUTE_NAME.Bitcoin_7}>
+              les clés, les signatures, et la cryptographie
+            </Reference>
+            .<br /> Direction le prochain chapitre, tu tiens le bon bout !
           </>
         ) : (
           <>
             The answer lies in another fundamental mechanism of Bitcoin:{" "}
-            <Emphasis>keys, signatures, and cryptography</Emphasis>.<br /> On to the next chapter,
-            you're on the right track!
+            <Reference to={ROUTE_NAME.Bitcoin_7}>
+              keys, signatures, and cryptography
+            </Reference>
+            .<br /> On to the next chapter, you're on the right track!
           </>
         )}
       </p>

@@ -2,9 +2,10 @@ import { type CSSProperties, type FC } from "react";
 
 import { Monitor, Pickaxe } from "lucide-react";
 
-import { Callout, Emphasis, IdentityCard } from "../../../Design";
+import { Callout, Emphasis, IdentityCard, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { BitcoinNetworkMap, BitcoinNodeDemo } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/components";
 import { PAGE_STYLES } from "../../Shared/styles";
 
@@ -127,7 +128,10 @@ export const Bitcoin1Page: FC = () => {
                   Accès à l'historique de toutes les transactions qui ont eu lieu sur le réseau
                   depuis le départ, c'est-à-dire{" "}
                   <Emphasis>
-                    un grand livre de comptes appelé <i>blockchain</i>
+                    un grand livre de comptes appelé{" "}
+                    <Reference to={ROUTE_NAME.Bitcoin_3}>
+                      <i>blockchain</i>
+                    </Reference>
                   </Emphasis>
                   .
                 </>
@@ -136,7 +140,10 @@ export const Bitcoin1Page: FC = () => {
                   Access to the full history of every transaction that ever occurred on the network
                   - a{" "}
                   <Emphasis>
-                    ledger called the <i>blockchain</i>
+                    ledger called the{" "}
+                    <Reference to={ROUTE_NAME.Bitcoin_3}>
+                      <i>blockchain</i>
+                    </Reference>
                   </Emphasis>
                   .
                 </>
@@ -220,7 +227,10 @@ export const Bitcoin1Page: FC = () => {
               En plus de stocker et vérifier les transactions, ils participent à une compétition
               permanente : ils utilisent leur puissance de calcul pour{" "}
               <Emphasis>
-                résoudre un problème mathématique complexe appelé <i>preuve de travail</i>
+                résoudre un problème mathématique complexe appelé{" "}
+                <Reference to={ROUTE_NAME.Bitcoin_4}>
+                  <i>preuve de travail</i>
+                </Reference>
               </Emphasis>
               .
             </>
@@ -229,7 +239,10 @@ export const Bitcoin1Page: FC = () => {
               On top of storing and verifying transactions, they compete in a permanent race: they
               use their computing power to{" "}
               <Emphasis>
-                solve a complex mathematical problem called <i>proof of work</i>
+                solve a complex mathematical problem called{" "}
+                <Reference to={ROUTE_NAME.Bitcoin_4}>
+                  <i>proof of work</i>
+                </Reference>
               </Emphasis>
               .
             </>
@@ -454,9 +467,19 @@ export const Bitcoin1Page: FC = () => {
         )}
       </p>
       <p>
-        {fr
-          ? "Pour le comprendre, il va falloir revenir sur les crises qui ont façonné notre époque et découvrir ce que Bitcoin propose comme alternative. Satoshi, nous voici !"
-          : "To understand, we'll need to revisit the crises that shaped our era and discover what Bitcoin offers as an alternative. Satoshi, here we come!"}
+        {fr ? (
+          <>
+            Pour le comprendre, il va falloir revenir sur les crises qui ont façonné notre époque
+            et découvrir ce que Bitcoin propose comme alternative.{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_2}>Satoshi, nous voici !</Reference>
+          </>
+        ) : (
+          <>
+            To understand, we'll need to revisit the crises that shaped our era and discover what
+            Bitcoin offers as an alternative.{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_2}>Satoshi, here we come!</Reference>
+          </>
+        )}
       </p>
     </PageTemplate>
   );

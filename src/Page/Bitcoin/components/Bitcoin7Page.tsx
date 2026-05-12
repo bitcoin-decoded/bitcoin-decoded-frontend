@@ -1,8 +1,9 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, HighlightText } from "../../../Design";
+import { Callout, Emphasis, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { SignaturePlayground } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared";
 
 export const Bitcoin7Page: FC = () => {
@@ -167,9 +168,20 @@ export const Bitcoin7Page: FC = () => {
         <i>{fr ? "qu'est-ce qu'un portefeuille, exactement ?" : "what exactly is a wallet?"}</i>
       </p>
       <p>
-        {fr
-          ? "Direction le prochain chapitre : les portefeuilles et la gestion des clés."
-          : "Heading to the next chapter: wallets and key management."}
+        {fr ? (
+          <>
+            Direction le prochain chapitre :{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_8}>
+              les portefeuilles et la gestion des clés
+            </Reference>
+            .
+          </>
+        ) : (
+          <>
+            Heading to the next chapter:{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_8}>wallets and key management</Reference>.
+          </>
+        )}
       </p>
     </PageTemplate>
   );

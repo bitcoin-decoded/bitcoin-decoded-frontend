@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, HighlightText, Quote } from "../../../Design";
+import { Callout, Emphasis, HighlightText, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   getQuizDataHalving,
@@ -9,6 +9,7 @@ import {
   NetworkFlywheel,
   Quiz,
 } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/";
 
 export const Bitcoin5Page: FC = () => {
@@ -25,9 +26,18 @@ export const Bitcoin5Page: FC = () => {
       }
     >
       <p>
-        {fr
-          ? "Tu as vu la preuve de travail dans le chapitre précédent. Elle repose sur un effort important fourni par les mineurs."
-          : "You saw proof of work, a mechanism that relies on significant effort from miners."}
+        {fr ? (
+          <>
+            Tu as vu la{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_4}>preuve de travail</Reference> dans le chapitre
+            précédent. Elle repose sur un effort important fourni par les mineurs.
+          </>
+        ) : (
+          <>
+            You saw <Reference to={ROUTE_NAME.Bitcoin_4}>proof of work</Reference>, a mechanism
+            that relies on significant effort from miners.
+          </>
+        )}
       </p>
       <p>
         {fr ? (
@@ -381,12 +391,14 @@ export const Bitcoin5Page: FC = () => {
         {fr ? (
           <>
             {" "}
-            Direction le prochain chapitre : <Emphasis>Transactions et modèle UTXO</Emphasis>.
+            Direction le prochain chapitre :{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_6}>Transactions et modèle UTXO</Reference>.
           </>
         ) : (
           <>
             {" "}
-            On to the next chapter: <Emphasis>Transactions and the UTXO model</Emphasis>.
+            On to the next chapter:{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_6}>Transactions and the UTXO model</Reference>.
           </>
         )}
       </p>

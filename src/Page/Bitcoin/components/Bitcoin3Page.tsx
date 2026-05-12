@@ -1,8 +1,9 @@
 import { type FC } from "react";
 
-import { Callout, Emphasis, HighlightText } from "../../../Design";
+import { Callout, Emphasis, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { BlockAnatomyVisual, BlockchainChainVisual, HashDemo } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/";
 
 export const Bitcoin3Page: FC = () => {
@@ -173,14 +174,20 @@ export const Bitcoin3Page: FC = () => {
             <>
               <Emphasis>
                 Pour lier les blocs entre eux, le protocole Bitcoin utilise un double hachage{" "}
-                <i>SHA-256</i>
+                <Reference href="https://fr.wikipedia.org/wiki/SHA-2">
+                  <i>SHA-256</i>
+                </Reference>
               </Emphasis>{" "}
               (l'en-tête du bloc est haché deux fois de suite).
             </>
           ) : (
             <>
               <Emphasis>
-                To link blocks together, the Bitcoin protocol uses a double <i>SHA-256</i> hash
+                To link blocks together, the Bitcoin protocol uses a double{" "}
+                <Reference href="https://en.wikipedia.org/wiki/SHA-2">
+                  <i>SHA-256</i>
+                </Reference>{" "}
+                hash
               </Emphasis>{" "}
               (the block header is hashed twice in a row).
             </>
@@ -284,11 +291,13 @@ export const Bitcoin3Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Direction le prochain chapitre : <Emphasis>la preuve de travail</Emphasis>.
+            Direction le prochain chapitre :{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_4}>la preuve de travail</Reference>.
           </>
         ) : (
           <>
-            On to the next chapter: <Emphasis>proof of work</Emphasis>.
+            On to the next chapter:{" "}
+            <Reference to={ROUTE_NAME.Bitcoin_4}>proof of work</Reference>.
           </>
         )}
       </p>
