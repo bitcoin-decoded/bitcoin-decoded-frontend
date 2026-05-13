@@ -74,11 +74,13 @@ export const Bitcoin4Page: FC = () => {
         )}
       </p>
 
-      <DoubleSpendDemo scrollTargetId="bitcoin4-how-bitcoin-decides" />
+      <DoubleSpendDemo scrollTargetId="bitcoin4-byzantine-quiz" />
 
-      <Quiz {...getQuizDataByzantine(language)} onCorrectAnswer={() => {}} />
+      <div id="bitcoin4-byzantine-quiz">
+        <Quiz {...getQuizDataByzantine(language)} onCorrectAnswer={() => {}} />
+      </div>
 
-      <p id="bitcoin4-how-bitcoin-decides">
+      <p>
         {fr
           ? "Regardons exactement comment Bitcoin résout élégamment ce problème. Pour cela, on va voir successivement :"
           : "Let's see exactly how Bitcoin elegantly solves this problem. To do so, we'll go through, in order:"}
