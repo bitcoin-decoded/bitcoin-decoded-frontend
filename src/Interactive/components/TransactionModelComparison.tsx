@@ -403,27 +403,27 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-          {/* Alice */}
+          {/* Nicolas */}
           <div style={balanceRow}>
             <User size={iconSm} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
-            <span style={balanceName}>{t("txComparison.alice")}</span>
+            <span style={balanceName}>{t("txComparison.nicolas")}</span>
             <div style={balanceBar(100, bankAccent)}>
               <div style={balanceFill(isAfter ? 60 : 100, bankAccent)} />
             </div>
             <span style={balanceAmount(isAfter ? errorColor : undefined)}>
-              {fmtEur(isAfter ? BANK.aliceAfter : BANK.aliceBefore)}
+              {fmtEur(isAfter ? BANK.nicolasAfter : BANK.nicolasBefore)}
             </span>
             <span style={deltaBadge(false)}>−{fmtEur(BANK.sent)}</span>
           </div>
-          {/* Bob */}
+          {/* Michu */}
           <div style={balanceRow}>
             <User size={iconSm} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
-            <span style={balanceName}>{t("txComparison.bob")}</span>
+            <span style={balanceName}>{t("txComparison.michu")}</span>
             <div style={balanceBar(72, bankAccent)}>
               <div style={balanceFill(isAfter ? 72 : 32, bankAccent)} />
             </div>
             <span style={balanceAmount(isAfter ? successColor : undefined)}>
-              {fmtEur(isAfter ? BANK.bobAfter : BANK.bobBefore)}
+              {fmtEur(isAfter ? BANK.michuAfter : BANK.michuBefore)}
             </span>
             <span style={deltaBadge(true)}>+{fmtEur(BANK.sent)}</span>
           </div>
@@ -467,8 +467,8 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
             }}
           >
             {isAfter
-              ? `${t("txComparison.alice")} : ${fmtEur(BANK.aliceBefore)} → ${fmtEur(BANK.aliceAfter)}   ${t("txComparison.bob")} : ${fmtEur(BANK.bobBefore)} → ${fmtEur(BANK.bobAfter)}`
-              : `${t("txComparison.alice")} : ${fmtEur(BANK.aliceBefore)}   ${t("txComparison.bob")} : ${fmtEur(BANK.bobBefore)}`}
+              ? `${t("txComparison.nicolas")} : ${fmtEur(BANK.nicolasBefore)} → ${fmtEur(BANK.nicolasAfter)}   ${t("txComparison.michu")} : ${fmtEur(BANK.michuBefore)} → ${fmtEur(BANK.michuAfter)}`
+              : `${t("txComparison.nicolas")} : ${fmtEur(BANK.nicolasBefore)}   ${t("txComparison.michu")} : ${fmtEur(BANK.michuBefore)}`}
           </span>
         </div>
       </div>
@@ -536,7 +536,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
             <span style={inputAmountStyle()}>{fmtBTC(BTC.utxo1)}</span>
             <span style={inputOwnerStyle()}>
               <KeyRound size={9} strokeWidth={2} />
-              {t("txComparison.btcLockedBy")} {t("txComparison.alice")}
+              {t("txComparison.btcLockedBy")} {t("txComparison.nicolas")}
             </span>
           </div>
           <Badge tone="error" size="xs" style={consumedBadgeStyle}>
@@ -553,7 +553,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
             <span style={inputAmountStyle()}>{fmtBTC(BTC.utxo2)}</span>
             <span style={inputOwnerStyle()}>
               <KeyRound size={9} strokeWidth={2} />
-              {t("txComparison.btcLockedBy")} {t("txComparison.alice")}
+              {t("txComparison.btcLockedBy")} {t("txComparison.nicolas")}
             </span>
           </div>
           <Badge tone="error" size="xs" style={consumedBadgeStyle}>
@@ -577,30 +577,30 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
           {t("txComparison.btcOutputsLabel")}
         </div>
 
-        {/* Bob */}
+        {/* Michu */}
         <div style={outputCard(0.25, successColor)}>
           <div style={outputIconBox(successColor)}>
             <KeyRound size={iconSm} strokeWidth={2} />
           </div>
           <div style={outputCardBody}>
-            <span style={outputAmountStyle(successColor)}>{fmtBTC(BTC.sentToBob)}</span>
+            <span style={outputAmountStyle(successColor)}>{fmtBTC(BTC.sentToMichu)}</span>
             <span style={outputOwnerStyle(successColor)}>
               <KeyRound size={9} strokeWidth={2} />
-              {t("txComparison.bob")} {t("txComparison.btcCanSpend")}
+              {t("txComparison.michu")} {t("txComparison.btcCanSpend")}
             </span>
           </div>
         </div>
 
-        {/* Alice (change) */}
+        {/* Nicolas (change) */}
         <div style={outputCard(0.38, btcAccent)}>
           <div style={outputIconBox(btcAccent)}>
             <Wallet size={iconSm} strokeWidth={2} />
           </div>
           <div style={outputCardBody}>
-            <span style={outputAmountStyle(btcAccent)}>{fmtBTC(BTC.changeToAlice)}</span>
+            <span style={outputAmountStyle(btcAccent)}>{fmtBTC(BTC.changeToNicolas)}</span>
             <span style={outputOwnerStyle(btcAccent)}>
               <KeyRound size={9} strokeWidth={2} />
-              {t("txComparison.alice")} {t("txComparison.btcCanSpend")}{" "}
+              {t("txComparison.nicolas")} {t("txComparison.btcCanSpend")}{" "}
               <span style={{ opacity: 0.65 }}>({t("txComparison.btcChangeNote")})</span>
             </span>
           </div>
