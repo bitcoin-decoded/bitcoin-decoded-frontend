@@ -253,7 +253,7 @@ export const MiningRewardBlock: FC = () => {
                 <span style={nameStyle}>{tx.to}</span>
                 <span style={amountStyle}>{fmtBTC(tx.amount)}</span>
                 <span style={feeStyle}>
-                  {t("miningReward.fees").toLowerCase()} {fmtBTC(tx.fee)}
+                  {t("miningReward.feesPerTx")} {fmtBTC(tx.fee)}
                 </span>
               </div>
             ))}
