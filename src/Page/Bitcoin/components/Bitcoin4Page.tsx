@@ -56,8 +56,8 @@ export const Bitcoin4Page: FC = () => {
 
       <p>
         {fr
-          ? "Ce problème de coordination s'appelle le problème des généraux byzantins. Lamport l'a formulé en 1982 avec une métaphore militaire. Pour Bitcoin, on va le voir dans son contexte natif : un paiement contesté."
-          : "This coordination problem is known as the Byzantine Generals Problem. Lamport framed it in 1982 with a military metaphor. For Bitcoin, we'll look at it in its native context: a contested payment."}
+          ? "Ce problème de coordination porte un nom historique : le problème des généraux byzantins, formulé par Lamport en 1982. Bitcoin en est la première solution pratique à grande échelle."
+          : "This coordination problem has a historical name: the Byzantine Generals Problem, framed by Lamport in 1982. Bitcoin is its first practical large-scale solution."}
       </p>
 
       <DoubleSpendDemo />

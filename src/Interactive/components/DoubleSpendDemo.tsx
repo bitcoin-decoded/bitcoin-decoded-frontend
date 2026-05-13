@@ -1,6 +1,8 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 import {
   ArrowDown,
+  ArrowDownLeft,
+  ArrowDownRight,
   Coins,
   Eye,
   Monitor,
@@ -20,35 +22,45 @@ import {
 } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
 import { useLanguageContext } from "../../I18n";
-import { useDoubleSpend } from "../hooks";
-
-// Same UTXO hash on both transactions — the visual punchline of the
-// double-spend: a single coin spent twice.
-const SHARED_UTXO = "ed3f…8b21";
+import { useDoubleSpend, type TxId } from "../hooks";
 
 type Branch = {
-  id: "a" | "b";
+  id: TxId;
+  labelFr: string;
+  labelEn: string;
   recipientFr: string;
   recipientEn: string;
   originFr: string;
   originEn: string;
 };
 
-// Two parallel branches, each rooted at "Nicolas" (broadcast from a
-// distinct origin) and ending on a different recipient.
+// Two parallel branches, each rooted at the same "Nicolas" (one person,
+// two broadcast points) and ending on a different recipient.
 const BRANCHES: readonly Branch[] = [
-  { id: "a", recipientFr: "Christine L.", recipientEn: "Christine L.", originFr: "Paris", originEn: "Paris" },
-  { id: "b", recipientFr: "Mme Michu",    recipientEn: "Mrs. Smith",   originFr: "Tokyo", originEn: "Tokyo" },
+  {
+    id: "a",
+    labelFr: "Transaction A",
+    labelEn: "Transaction A",
+    recipientFr: "Christine L.",
+    recipientEn: "Christine L.",
+    originFr: "Paris",
+    originEn: "Paris",
+  },
+  {
+    id: "b",
+    labelFr: "Transaction B",
+    labelEn: "Transaction B",
+    recipientFr: "Mme Michu",
+    recipientEn: "Mrs. Smith",
+    originFr: "Tokyo",
+    originEn: "Tokyo",
+  },
 ];
 
-// Four geographically spread network nodes. Half see TX_a first, the
-// other half see TX_b first — modelling realistic propagation latency.
-const NODES: readonly { city: string; firstSeen: "a" | "b" }[] = [
-  { city: "Tokyo",     firstSeen: "a" },
-  { city: "Berlin",    firstSeen: "b" },
-  { city: "Lagos",     firstSeen: "a" },
-  { city: "São Paulo", firstSeen: "b" },
-];
+// Cities for the four network nodes — positions stay fixed across
+// re-runs; only the first-seen TX assignment (driven by the hook) is
+// shuffled.
+const CITIES: readonly string[] = ["Tokyo", "Berlin", "Lagos", "São Paulo"];
 
 export const DoubleSpendDemo: FC = () => {
   const { language } = useLanguageContext();
@@ -57,20 +69,33 @@ export const DoubleSpendDemo: FC = () => {
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
 
-  const { phase, reveal, reset } = useDoubleSpend();
+  const { phase, nodeFirstSeen, reveal, reset } = useDoubleSpend();
   const propagated = phase === "propagated";
 
-  // Two distinct, non-amber accents so each branch (and the node badges
-  // that pick it up) reads as a separate identity against the Bitcoin
-  // world.
-  const accents = {
-    a: colors.semantic.info.text,   // cyan
+  // Two distinct, non-amber accents so each branch (and the node
+  // badges that pick it up) reads as a separate identity against the
+  // Bitcoin world.
+  const accents: Record<TxId, string> = {
+    a: colors.semantic.info.text,    // cyan
     b: colors.violet.text.secondary, // violet
   };
 
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
   // ── styles ────────────────────────────────────────────────────────────
+  const nicolasRow: CSSProperties = {
+    display: "flex",
+    justifyContent: "center",
+  };
+
+  const forkRow: CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    placeItems: "center",
+    columnGap: isMobile ? "0.75rem" : "2rem",
+    marginTop: "-0.25rem",
+  };
+
   const branchesGrid: CSSProperties = {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
@@ -81,7 +106,7 @@ export const DoubleSpendDemo: FC = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "0.5rem",
+    gap: "0.4rem",
   };
 
   const partyCard = (accent: string): CSSProperties => ({
@@ -103,22 +128,32 @@ export const DoubleSpendDemo: FC = () => {
     color: colors.base.text.primary,
   };
 
-  const partySub: CSSProperties = {
+  const txBlock = (accent: string): CSSProperties => ({
     ...mono,
-    fontSize: "0.6rem",
-    color: colors.base.text.secondary,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "0.15rem",
+    fontSize: "0.62rem",
+    lineHeight: 1.35,
+    color: accent,
+    textAlign: "center",
+  });
+
+  const txTitle: CSSProperties = {
+    fontWeight: 700,
     letterSpacing: "0.04em",
     textTransform: "uppercase",
+    fontSize: "0.6rem",
   };
 
-  const txLabel = (accent: string): CSSProperties => ({
-    ...mono,
-    fontSize: "0.6rem",
-    color: accent,
+  const txOrigin: CSSProperties = {
+    color: colors.base.text.secondary,
+    fontSize: "0.55rem",
     letterSpacing: "0.04em",
-    textAlign: "center",
-    lineHeight: 1.3,
-  });
+    textTransform: "uppercase",
+    opacity: 0.85,
+  };
 
   const pinchNotice: CSSProperties = {
     ...mono,
@@ -161,8 +196,8 @@ export const DoubleSpendDemo: FC = () => {
   };
 
   // The "Comment décider ?" button is a rhetorical pacing affordance —
-  // it nudges the reader forward toward the next concept (proof of work)
-  // by scrolling the next slab of the chapter into view.
+  // it nudges the reader forward toward the next concept (proof of
+  // work) by scrolling the next slab of the chapter into view.
   const continueForward = () => {
     window.scrollBy({ top: window.innerHeight * 0.85, behavior: "smooth" });
   };
@@ -170,20 +205,18 @@ export const DoubleSpendDemo: FC = () => {
   // ── render helpers ────────────────────────────────────────────────────
   const renderBranch = (branch: Branch) => {
     const accent = accents[branch.id];
+    const label = fr ? branch.labelFr : branch.labelEn;
     const recipient = fr ? branch.recipientFr : branch.recipientEn;
     const origin = fr ? branch.originFr : branch.originEn;
     return (
       <div key={branch.id} style={branchColumn}>
-        <div style={partyCard(colors.base.border.secondary)}>
-          <User size={isMobile ? 18 : 22} strokeWidth={1.5} color={colors.base.text.secondary} />
-          <span style={partyLabel}>Nicolas</span>
-          <span style={partySub}>{fr ? "depuis" : "from"} {origin}</span>
+        <div style={txBlock(accent)}>
+          <span style={txTitle}>{label}</span>
+          <span style={txOrigin}>
+            {fr ? "signée depuis" : "signed from"} {origin}
+          </span>
+          <span>0.1 BTC</span>
         </div>
-        <span style={txLabel(accent)}>
-          TX_{branch.id} · 0.1 BTC
-          <br />
-          <span style={{ opacity: 0.7 }}>{SHARED_UTXO}</span>
-        </span>
         <ArrowDown size={16} strokeWidth={2} color={accent} />
         <div style={partyCard(accent)}>
           <Wallet size={isMobile ? 18 : 22} strokeWidth={1.5} color={accent} />
@@ -193,18 +226,26 @@ export const DoubleSpendDemo: FC = () => {
     );
   };
 
-  const renderNode = (node: { city: string; firstSeen: "a" | "b" }, i: number) => {
-    const accent = accents[node.firstSeen];
-    const recipient = fr
-      ? BRANCHES.find((b) => b.id === node.firstSeen)!.recipientFr
-      : BRANCHES.find((b) => b.id === node.firstSeen)!.recipientEn;
+  const renderNode = (city: string, i: number) => {
+    const txId = nodeFirstSeen[i];
+    const accent = accents[txId];
+    const branch = BRANCHES.find((b) => b.id === txId)!;
+    const recipient = fr ? branch.recipientFr : branch.recipientEn;
     return (
-      <div key={i} style={nodeCard(accent)}>
+      <div key={city} style={nodeCard(accent)}>
         <Monitor size={isMobile ? 18 : 20} strokeWidth={1.5} color={accent} />
         <span style={{ ...mono, fontSize: "0.6rem", fontWeight: 600, color: colors.base.text.primary }}>
-          {node.city}
+          {city}
         </span>
-        <Badge tone="neutral" size="xs" style={{ background: withOpacity(accent, 0.12), color: accent, border: `1px solid ${withOpacity(accent, 0.3)}` }}>
+        <Badge
+          tone="neutral"
+          size="xs"
+          style={{
+            background: withOpacity(accent, 0.12),
+            color: accent,
+            border: `1px solid ${withOpacity(accent, 0.3)}`,
+          }}
+        >
           → {recipient}
         </Badge>
       </div>
@@ -223,6 +264,20 @@ export const DoubleSpendDemo: FC = () => {
         {fr ? "La double dépense" : "Double-spending"}
       </Caption>
 
+      {/* Single Nicolas at the top — one person, two broadcasts below. */}
+      <div style={nicolasRow}>
+        <div style={{ ...partyCard(colors.base.border.secondary), width: isMobile ? "60%" : "40%" }}>
+          <User size={isMobile ? 18 : 22} strokeWidth={1.5} color={colors.base.text.secondary} />
+          <span style={partyLabel}>Nicolas</span>
+        </div>
+      </div>
+
+      {/* Fork: two diagonal arrows showing the broadcast splits. */}
+      <div style={forkRow}>
+        <ArrowDownLeft size={20} strokeWidth={2} color={accents.a} />
+        <ArrowDownRight size={20} strokeWidth={2} color={accents.b} />
+      </div>
+
       <div style={branchesGrid}>
         {BRANCHES.map(renderBranch)}
       </div>
@@ -230,8 +285,8 @@ export const DoubleSpendDemo: FC = () => {
       <div style={pinchNotice}>
         <Coins size={12} strokeWidth={2} />
         {fr
-          ? "Même UTXO, deux destinataires. Nicolas dépense le même bitcoin deux fois, depuis deux endroits du globe."
-          : "Same UTXO, two recipients. Nicolas spends the same bitcoin twice, from two different points on the globe."}
+          ? "Même bitcoin, deux destinataires. Nicolas tente de le dépenser deux fois, depuis deux endroits du globe."
+          : "Same bitcoin, two recipients. Nicolas tries to spend it twice, from two different points on the globe."}
       </div>
 
       {!propagated && (
@@ -249,10 +304,12 @@ export const DoubleSpendDemo: FC = () => {
       {propagated && (
         <>
           <Caption tone="muted" size="sm">
-            {fr ? "Nœuds du réseau (1re transaction reçue)" : "Network nodes (1st transaction seen)"}
+            {fr
+              ? "Ce que chaque nœud a vu en premier"
+              : "What each node saw first"}
           </Caption>
           <div style={nodesGrid}>
-            {NODES.map(renderNode)}
+            {CITIES.map(renderNode)}
           </div>
 
           <FeedbackPanel

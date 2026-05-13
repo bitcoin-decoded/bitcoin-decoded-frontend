@@ -9,11 +9,33 @@ import { useCallback, useState } from "react";
  */
 export type DoubleSpendPhase = "broadcast" | "propagated";
 
+export type TxId = "a" | "b";
+
+/**
+ * Returns a 4-element array assigning each node position (0..3) to the
+ * transaction it saw first. Always a 2-vs-2 split — Fisher-Yates
+ * shuffle of `[a, a, b, b]`. Re-rolled on every `reset()` so the reader
+ * sees a different propagation pattern each run and understands that
+ * no node is intrinsically "on the side" of either recipient.
+ */
+const shuffleFirstSeen = (): readonly TxId[] => {
+  const dist: TxId[] = ["a", "a", "b", "b"];
+  for (let i = dist.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [dist[i], dist[j]] = [dist[j], dist[i]];
+  }
+  return dist;
+};
+
 export const useDoubleSpend = () => {
   const [phase, setPhase] = useState<DoubleSpendPhase>("broadcast");
+  const [nodeFirstSeen, setNodeFirstSeen] = useState<readonly TxId[]>(shuffleFirstSeen);
 
   const reveal = useCallback(() => setPhase("propagated"), []);
-  const reset = useCallback(() => setPhase("broadcast"), []);
+  const reset = useCallback(() => {
+    setNodeFirstSeen(shuffleFirstSeen());
+    setPhase("broadcast");
+  }, []);
 
-  return { phase, reveal, reset };
+  return { phase, nodeFirstSeen, reveal, reset };
 };
