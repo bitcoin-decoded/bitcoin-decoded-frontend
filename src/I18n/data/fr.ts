@@ -84,20 +84,26 @@ const fr = {
   "mining.headerLabel": "En-tête du bloc hashé :",
   "mining.nonce": "nonce",
 
-  // ByzantineGenerals
-  "byzantine.title": "Problème des généraux byzantins",
-  "byzantine.city": "Ville assiégée",
-  "byzantine.general": "Général",
-  "byzantine.alteredMessage": "message altéré",
-  "byzantine.prompt": "Choisis l'ordre à envoyer aux généraux :",
-  "byzantine.attack": "Attaquer",
-  "byzantine.retreat": "Battre en retraite",
-  "byzantine.attackLabel": "ATTAQUE",
-  "byzantine.retreatLabel": "RETRAITE",
-  "byzantine.failureTitle": "❌ Échec : les généraux ne reçoivent pas tous la même information.",
-  "byzantine.failureDetail":
-    "Chacun agit en fonction de ce qu'il croit être vrai, mais sans certitude sur les autres, la coordination échoue.",
-  "byzantine.retry": "Recommencer",
+  // DoubleSpendDemo
+  "doubleSpend.title": "La double dépense",
+  "doubleSpend.sender": "Nicolas",
+  "doubleSpend.txA": "Transaction A",
+  "doubleSpend.txB": "Transaction B",
+  "doubleSpend.signedFrom": "signée depuis",
+  "doubleSpend.amount": "0.1 BTC",
+  "doubleSpend.recipientA": "Christine L.",
+  "doubleSpend.recipientB": "Mme Michu",
+  "doubleSpend.originA": "Paris",
+  "doubleSpend.originB": "Tokyo",
+  "doubleSpend.pinch":
+    "Même bitcoin, deux destinataires. Nicolas tente de le dépenser deux fois, depuis deux endroits du globe.",
+  "doubleSpend.revealAction": "Que voient les nœuds ?",
+  "doubleSpend.firstSeenLabel": "Ce que chaque nœud a vu en premier",
+  "doubleSpend.verdictTitle": "Le réseau n'est pas d'accord",
+  "doubleSpend.verdictBody":
+    "Christine pense être payée. Mme Michu aussi. Personne ne peut trancher sans autorité centrale.",
+  "doubleSpend.reset": "Recommencer",
+  "doubleSpend.continue": "Comment décider ?",
 
   // MempoolVisual
   "mempool.subtitle": "Transactions en attente",

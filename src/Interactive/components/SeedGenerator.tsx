@@ -50,7 +50,7 @@ export const SeedGenerator: FC = () => {
     marginBottom: "0.4rem",
   };
 
-  // Aligned with the Bitcoin section pattern (cf. ByzantineGenerals chapter 4):
+  // Aligned with the Bitcoin section pattern (cf. DoubleSpendDemo chapter 4):
   // subtle gradient + accent border, no saturated white-on-color.
   // Padding tuned to match the segmented control for visual alignment.
   const segmentBtnStyle = (active: boolean): CSSProperties => ({

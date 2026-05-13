@@ -83,20 +83,26 @@ const en = {
   "mining.headerLabel": "Block header being hashed:",
   "mining.nonce": "nonce",
 
-  // ByzantineGenerals
-  "byzantine.title": "Byzantine Generals Problem",
-  "byzantine.city": "Besieged city",
-  "byzantine.general": "General",
-  "byzantine.alteredMessage": "altered message",
-  "byzantine.prompt": "Choose the order to send to the generals:",
-  "byzantine.attack": "Attack",
-  "byzantine.retreat": "Retreat",
-  "byzantine.attackLabel": "ATTACK",
-  "byzantine.retreatLabel": "RETREAT",
-  "byzantine.failureTitle": "❌ Failure: the generals don't all receive the same information.",
-  "byzantine.failureDetail":
-    "Each one acts based on what they believe to be true, but without certainty about the others, coordination fails.",
-  "byzantine.retry": "Try again",
+  // DoubleSpendDemo
+  "doubleSpend.title": "Double-spending",
+  "doubleSpend.sender": "Nicolas",
+  "doubleSpend.txA": "Transaction A",
+  "doubleSpend.txB": "Transaction B",
+  "doubleSpend.signedFrom": "signed from",
+  "doubleSpend.amount": "0.1 BTC",
+  "doubleSpend.recipientA": "Christine L.",
+  "doubleSpend.recipientB": "Mrs. Smith",
+  "doubleSpend.originA": "Paris",
+  "doubleSpend.originB": "Tokyo",
+  "doubleSpend.pinch":
+    "Same bitcoin, two recipients. Nicolas tries to spend it twice, from two different points on the globe.",
+  "doubleSpend.revealAction": "What do the nodes see?",
+  "doubleSpend.firstSeenLabel": "What each node saw first",
+  "doubleSpend.verdictTitle": "The network disagrees",
+  "doubleSpend.verdictBody":
+    "Christine thinks she's been paid. So does Mrs. Smith. Nobody can decide without a central authority.",
+  "doubleSpend.reset": "Try again",
+  "doubleSpend.continue": "How do we decide?",
 
   // MempoolVisual
   "mempool.subtitle": "Pending transactions",

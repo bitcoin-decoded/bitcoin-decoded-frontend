@@ -32,7 +32,7 @@ export const ActionButton: FC<Props> = ({
 }) => {
   const palette = variant === "primary" ? colors.accentColor : colors.successColor;
 
-  // Style aligned with the rest of the Bitcoin section (cf. ByzantineGenerals,
+  // Style aligned with the rest of the Bitcoin section (cf. DoubleSpendDemo,
   // chapter 4): subtle gradient + accent border + accent text. Less "loud"
   // than a saturated white-on-color button.
   const activeStyle: CSSProperties = {

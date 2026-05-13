@@ -3,8 +3,8 @@ import { type FC } from "react";
 import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
-  ByzantineGenerals,
   DifficultyAdjustment,
+  DoubleSpendDemo,
   getQuizDataByzantine,
   MempoolVisual,
   MiningSimulator,
@@ -54,62 +54,31 @@ export const Bitcoin4Page: FC = () => {
         )}
       </p>
 
-      <Callout title={fr ? "Le problème des généraux byzantins" : "The Byzantine Generals Problem"}>
-        <p>
-          {fr ? (
-            <>
-              Plusieurs généraux encerclent une ville. Ils doivent se coordonner et choisir une
-              tactique : <i>attaquer</i> ou <i>battre en retraite</i>.
-            </>
-          ) : (
-            <>
-              Several generals surround a city. They must coordinate and choose a tactic:{" "}
-              <i>attack</i> or <i>retreat</i>.
-            </>
-          )}
-        </p>
-        <p>
-          {fr
-            ? "Mais ils communiquent uniquement par messagers qui peuvent être retardés, perdus ou corrompus."
-            : "But they communicate only through messengers who can be delayed, lost, or corrupted."}
-        </p>
-        <p>
-          {fr
-            ? "Si certains généraux attaquent et que d'autres reculent, c'est la défaite assurée faute de coordination."
-            : "If some generals attack while others retreat, defeat is certain due to lack of coordination."}
-        </p>
-        <p>
-          {fr ? (
-            <>
-              C'est ça, le{" "}
-              <Reference href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins">
-                problème des généraux byzantins
-              </Reference>{" "}
-              : comment être sûr que tout le monde prendra la même décision, sans se faire confiance
-              ?
-            </>
-          ) : (
-            <>
-              That is the{" "}
-              <Reference href="https://en.wikipedia.org/wiki/Byzantine_fault">
-                Byzantine Generals Problem
-              </Reference>
-              : how can we be sure everyone will make the same decision, without trusting one
-              another?
-            </>
-          )}
-        </p>
+      <p>
+        {fr ? (
+          <>
+            Ce problème de coordination porte un nom historique : le{" "}
+            <Reference href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins">
+              problème des généraux byzantins
+            </Reference>
+            , formulé par Lamport en 1982. Bitcoin en est la première solution pratique à grande échelle.
+          </>
+        ) : (
+          <>
+            This coordination problem has a historical name: the{" "}
+            <Reference href="https://en.wikipedia.org/wiki/Byzantine_fault">
+              Byzantine Generals Problem
+            </Reference>
+            , framed by Lamport in 1982. Bitcoin is its first practical large-scale solution.
+          </>
+        )}
+      </p>
 
-        <ByzantineGenerals />
+      <DoubleSpendDemo scrollTargetId="bitcoin4-byzantine-quiz" />
 
-        <p>
-          {fr
-            ? "Bitcoin fait face au même problème : comment s'accorder sur l'état complet du registre de la blockchain, sans autorité centrale ?"
-            : "Bitcoin faces the same problem: how do we agree on the full state of the blockchain ledger, without a central authority?"}
-        </p>
-      </Callout>
-
-      <Quiz {...getQuizDataByzantine(language)} onCorrectAnswer={() => {}} />
+      <div id="bitcoin4-byzantine-quiz">
+        <Quiz {...getQuizDataByzantine(language)} onCorrectAnswer={() => {}} />
+      </div>
 
       <p>
         {fr
