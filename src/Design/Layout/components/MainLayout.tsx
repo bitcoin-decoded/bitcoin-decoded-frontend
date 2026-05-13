@@ -7,7 +7,6 @@ import { ReadingProgressBar, ScrollToTopButton } from "../../../Page";
 import { useThemeContext, THEME_COLORS } from "../../Theme";
 import { useBreakpoint } from "../../Responsive";
 import { useRouterContext, ROUTE_NAME } from "../../../Routing";
-import { useHeaderHidden } from "../hooks";
 
 export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   const { theme } = useThemeContext();
@@ -17,9 +16,6 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isDesktop = breakpoint === "desktop";
-  // Shared with Header (single rAF-throttled scroll listener under the
-  // hood). Drives the sidebar's translateY when the Header auto-hides.
-  const isHeaderHidden = useHeaderHidden();
 
   const toggleDrawer = useCallback(() => setIsDrawerOpen((prev) => !prev), []);
   const closeDrawer = useCallback(() => setIsDrawerOpen(false), []);
@@ -60,11 +56,15 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   // content scrolls.
   //
   // The wrapper spans the FULL viewport (top: 0, height: 100vh) — it
-  // runs UNDERNEATH the Header (z-index 101). When the Header auto-
-  // hides on scroll, the sidebar slides up by 3.5rem in lockstep so
-  // its content rises with the Header instead of leaving a vacant
-  // strip at the top. Coupling driven by `useHeaderHidden` (same
-  // boolean both elements consume).
+  // runs UNDERNEATH the Header (z-index 101) and never moves. Its
+  // background fills the entire left column, top to bottom, regardless
+  // of scroll state — no exposed-body-bg gaps.
+  //
+  // When the Header auto-hides on scroll, only the NavBar's CONTENT
+  // slides up (it consumes `useHeaderHidden` itself), so the wrapper
+  // stays put and the bottom of the sidebar column never reveals a
+  // mismatched colour strip. The previous version translated the
+  // wrapper itself, which shifted the gap from top to bottom — fixed.
   //
   // align-self: flex-start is required because the parent is a flex
   // row with default `align-items: stretch` — without it the wrapper
@@ -83,9 +83,12 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
     top: 0,
     height: "100vh",
     alignSelf: "flex-start",
-    transform: isHeaderHidden ? "translateY(-3.5rem)" : "translateY(0)",
-    transition: "transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)",
-    willChange: "transform",
+    // Divider lives on the WRAPPER (not on NavBar) because NavBar
+    // translates -3.5rem when the Header hides — a border drawn there
+    // would slide with it, leaving the bottom 3.5rem of the column
+    // without a separator. The wrapper stays full-height, so its right
+    // edge always spans the entire viewport.
+    borderRight: `1px solid ${colors.base.border.primary}`,
   };
 
   const mainContentPadding = {
