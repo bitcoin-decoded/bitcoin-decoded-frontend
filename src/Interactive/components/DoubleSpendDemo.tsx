@@ -21,50 +21,44 @@ import {
   usePageTheme,
 } from "../../Design";
 import { withOpacity } from "../../Design/helpers";
-import { useLanguageContext } from "../../I18n";
+import { useTranslation, type TranslationKey } from "../../I18n";
 import { useDoubleSpend, type TxId } from "../hooks";
 
 type Branch = {
   id: TxId;
-  labelFr: string;
-  labelEn: string;
-  recipientFr: string;
-  recipientEn: string;
-  originFr: string;
-  originEn: string;
+  labelKey: TranslationKey;
+  recipientKey: TranslationKey;
+  originKey: TranslationKey;
 };
 
 // Two parallel branches, each rooted at the same "Nicolas" (one person,
-// two broadcast points) and ending on a different recipient.
+// two broadcast points) and ending on a different recipient. All
+// user-facing strings live in `fr.ts` / `en.ts` under the
+// `doubleSpend.*` namespace.
 const BRANCHES: readonly Branch[] = [
-  {
-    id: "a",
-    labelFr: "Transaction A",
-    labelEn: "Transaction A",
-    recipientFr: "Christine L.",
-    recipientEn: "Christine L.",
-    originFr: "Paris",
-    originEn: "Paris",
-  },
-  {
-    id: "b",
-    labelFr: "Transaction B",
-    labelEn: "Transaction B",
-    recipientFr: "Mme Michu",
-    recipientEn: "Mrs. Smith",
-    originFr: "Tokyo",
-    originEn: "Tokyo",
-  },
+  { id: "a", labelKey: "doubleSpend.txA", recipientKey: "doubleSpend.recipientA", originKey: "doubleSpend.originA" },
+  { id: "b", labelKey: "doubleSpend.txB", recipientKey: "doubleSpend.recipientB", originKey: "doubleSpend.originB" },
 ];
 
 // Cities for the four network nodes — positions stay fixed across
 // re-runs; only the first-seen TX assignment (driven by the hook) is
-// shuffled.
+// shuffled. City names are stable across FR/EN so no translation
+// indirection is needed.
 const CITIES: readonly string[] = ["Tokyo", "Berlin", "Lagos", "São Paulo"];
 
-export const DoubleSpendDemo: FC = () => {
-  const { language } = useLanguageContext();
-  const fr = language === "fr";
+type Props = {
+  /**
+   * DOM id of the page element that the "Comment décider ?" CTA should
+   * scroll into view (typically the next answer section of the
+   * chapter). If omitted, the CTA is rendered but the click is a
+   * no-op — keeps the component fully self-contained even without
+   * page-level wiring.
+   */
+  scrollTargetId?: string;
+};
+
+export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
+  const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
@@ -195,32 +189,33 @@ export const DoubleSpendDemo: FC = () => {
     flexWrap: "wrap",
   };
 
-  // The "Comment décider ?" button is a rhetorical pacing affordance —
-  // it nudges the reader forward toward the next concept (proof of
-  // work) by scrolling the next slab of the chapter into view.
+  // The "Comment décider ?" button anchors a smooth-scroll on a stable
+  // page element (passed by id) so the user always lands on the same
+  // section — the explicit answer paragraph that introduces the
+  // proof-of-work chain. No-op if the host page didn't wire an id.
   const continueForward = () => {
-    window.scrollBy({ top: window.innerHeight * 0.85, behavior: "smooth" });
+    if (!scrollTargetId) return;
+    document
+      .getElementById(scrollTargetId)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   // ── render helpers ────────────────────────────────────────────────────
   const renderBranch = (branch: Branch) => {
     const accent = accents[branch.id];
-    const label = fr ? branch.labelFr : branch.labelEn;
-    const recipient = fr ? branch.recipientFr : branch.recipientEn;
-    const origin = fr ? branch.originFr : branch.originEn;
     return (
       <div key={branch.id} style={branchColumn}>
         <div style={txBlock(accent)}>
-          <span style={txTitle}>{label}</span>
+          <span style={txTitle}>{t(branch.labelKey)}</span>
           <span style={txOrigin}>
-            {fr ? "signée depuis" : "signed from"} {origin}
+            {t("doubleSpend.signedFrom")} {t(branch.originKey)}
           </span>
-          <span>0.1 BTC</span>
+          <span>{t("doubleSpend.amount")}</span>
         </div>
         <ArrowDown size={16} strokeWidth={2} color={accent} />
         <div style={partyCard(accent)}>
           <Wallet size={isMobile ? 18 : 22} strokeWidth={1.5} color={accent} />
-          <span style={partyLabel}>{recipient}</span>
+          <span style={partyLabel}>{t(branch.recipientKey)}</span>
         </div>
       </div>
     );
@@ -230,7 +225,6 @@ export const DoubleSpendDemo: FC = () => {
     const txId = nodeFirstSeen[i];
     const accent = accents[txId];
     const branch = BRANCHES.find((b) => b.id === txId)!;
-    const recipient = fr ? branch.recipientFr : branch.recipientEn;
     return (
       <div key={city} style={nodeCard(accent)}>
         <Monitor size={isMobile ? 18 : 20} strokeWidth={1.5} color={accent} />
@@ -246,7 +240,7 @@ export const DoubleSpendDemo: FC = () => {
             border: `1px solid ${withOpacity(accent, 0.3)}`,
           }}
         >
-          → {recipient}
+          → {t(branch.recipientKey)}
         </Badge>
       </div>
     );
@@ -261,14 +255,14 @@ export const DoubleSpendDemo: FC = () => {
       margin={isMobile ? "1.5rem 0" : "2rem 0"}
     >
       <Caption tone="world" size="md" icon={captionIcon}>
-        {fr ? "La double dépense" : "Double-spending"}
+        {t("doubleSpend.title")}
       </Caption>
 
       {/* Single Nicolas at the top — one person, two broadcasts below. */}
       <div style={nicolasRow}>
         <div style={{ ...partyCard(colors.base.border.secondary), width: isMobile ? "60%" : "40%" }}>
           <User size={isMobile ? 18 : 22} strokeWidth={1.5} color={colors.base.text.secondary} />
-          <span style={partyLabel}>Nicolas</span>
+          <span style={partyLabel}>{t("doubleSpend.sender")}</span>
         </div>
       </div>
 
@@ -284,9 +278,7 @@ export const DoubleSpendDemo: FC = () => {
 
       <div style={pinchNotice}>
         <Coins size={12} strokeWidth={2} />
-        {fr
-          ? "Même bitcoin, deux destinataires. Nicolas tente de le dépenser deux fois, depuis deux endroits du globe."
-          : "Same bitcoin, two recipients. Nicolas tries to spend it twice, from two different points on the globe."}
+        {t("doubleSpend.pinch")}
       </div>
 
       {!propagated && (
@@ -296,7 +288,7 @@ export const DoubleSpendDemo: FC = () => {
             icon={<Eye size={14} strokeWidth={2} />}
             onClick={reveal}
           >
-            {fr ? "Que voient les nœuds ?" : "What do the nodes see?"}
+            {t("doubleSpend.revealAction")}
           </Button>
         </div>
       )}
@@ -304,21 +296,14 @@ export const DoubleSpendDemo: FC = () => {
       {propagated && (
         <>
           <Caption tone="muted" size="sm">
-            {fr
-              ? "Ce que chaque nœud a vu en premier"
-              : "What each node saw first"}
+            {t("doubleSpend.firstSeenLabel")}
           </Caption>
           <div style={nodesGrid}>
             {CITIES.map(renderNode)}
           </div>
 
-          <FeedbackPanel
-            tone="error"
-            title={fr ? "Le réseau n'est pas d'accord" : "The network disagrees"}
-          >
-            {fr
-              ? "Christine pense être payée. Mme Michu aussi. Personne ne peut trancher sans autorité centrale."
-              : "Christine thinks she's been paid. So does Mrs. Smith. Nobody can decide without a central authority."}
+          <FeedbackPanel tone="error" title={t("doubleSpend.verdictTitle")}>
+            {t("doubleSpend.verdictBody")}
           </FeedbackPanel>
 
           <div style={ctaRow}>
@@ -327,14 +312,14 @@ export const DoubleSpendDemo: FC = () => {
               icon={<RotateCcw size={14} strokeWidth={2} />}
               onClick={reset}
             >
-              {fr ? "Recommencer" : "Try again"}
+              {t("doubleSpend.reset")}
             </Button>
             <Button
               variant="primary"
               icon={<ArrowDown size={14} strokeWidth={2} />}
               onClick={continueForward}
             >
-              {fr ? "Comment décider ?" : "How do we decide?"}
+              {t("doubleSpend.continue")}
             </Button>
           </div>
         </>

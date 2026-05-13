@@ -55,16 +55,30 @@ export const Bitcoin4Page: FC = () => {
       </p>
 
       <p>
-        {fr
-          ? "Ce problème de coordination porte un nom historique : le problème des généraux byzantins, formulé par Lamport en 1982. Bitcoin en est la première solution pratique à grande échelle."
-          : "This coordination problem has a historical name: the Byzantine Generals Problem, framed by Lamport in 1982. Bitcoin is its first practical large-scale solution."}
+        {fr ? (
+          <>
+            Ce problème de coordination porte un nom historique : le{" "}
+            <Reference href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins">
+              problème des généraux byzantins
+            </Reference>
+            , formulé par Lamport en 1982. Bitcoin en est la première solution pratique à grande échelle.
+          </>
+        ) : (
+          <>
+            This coordination problem has a historical name: the{" "}
+            <Reference href="https://en.wikipedia.org/wiki/Byzantine_fault">
+              Byzantine Generals Problem
+            </Reference>
+            , framed by Lamport in 1982. Bitcoin is its first practical large-scale solution.
+          </>
+        )}
       </p>
 
-      <DoubleSpendDemo />
+      <DoubleSpendDemo scrollTargetId="bitcoin4-how-bitcoin-decides" />
 
       <Quiz {...getQuizDataByzantine(language)} onCorrectAnswer={() => {}} />
 
-      <p>
+      <p id="bitcoin4-how-bitcoin-decides">
         {fr
           ? "Regardons exactement comment Bitcoin résout élégamment ce problème. Pour cela, on va voir successivement :"
           : "Let's see exactly how Bitcoin elegantly solves this problem. To do so, we'll go through, in order:"}

@@ -83,6 +83,27 @@ const en = {
   "mining.headerLabel": "Block header being hashed:",
   "mining.nonce": "nonce",
 
+  // DoubleSpendDemo
+  "doubleSpend.title": "Double-spending",
+  "doubleSpend.sender": "Nicolas",
+  "doubleSpend.txA": "Transaction A",
+  "doubleSpend.txB": "Transaction B",
+  "doubleSpend.signedFrom": "signed from",
+  "doubleSpend.amount": "0.1 BTC",
+  "doubleSpend.recipientA": "Christine L.",
+  "doubleSpend.recipientB": "Mrs. Smith",
+  "doubleSpend.originA": "Paris",
+  "doubleSpend.originB": "Tokyo",
+  "doubleSpend.pinch":
+    "Same bitcoin, two recipients. Nicolas tries to spend it twice, from two different points on the globe.",
+  "doubleSpend.revealAction": "What do the nodes see?",
+  "doubleSpend.firstSeenLabel": "What each node saw first",
+  "doubleSpend.verdictTitle": "The network disagrees",
+  "doubleSpend.verdictBody":
+    "Christine thinks she's been paid. So does Mrs. Smith. Nobody can decide without a central authority.",
+  "doubleSpend.reset": "Try again",
+  "doubleSpend.continue": "How do we decide?",
+
   // MempoolVisual
   "mempool.subtitle": "Pending transactions",
   "mempool.blockLabel": "Block",
