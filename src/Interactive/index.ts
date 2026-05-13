@@ -14,4 +14,8 @@ export {
   getQuizDataModule1Synthesis,
   getQuizDataModule2Synthesis,
   getQuizDataModule3Synthesis,
+  BITCOIN_REFERENCE_VALUES,
+  FIAT_REFERENCE_VALUES,
+  currentBlockSubsidyBTC,
 } from "./data";
+export type { BitcoinReferenceKey, FiatReferenceKey } from "./data";
