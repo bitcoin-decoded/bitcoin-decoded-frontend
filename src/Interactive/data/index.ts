@@ -20,3 +20,10 @@ export { HALVING_SCHEDULE } from "./HALVING_SCHEDULE";
 export type { HalvingPoint } from "./HALVING_SCHEDULE";
 export { BANK, BTC } from "./TRANSACTION_COMPARISON_DATA";
 export { CONFETTI_DATA } from "./MINING_REWARD_DATA";
+export {
+  BITCOIN_REFERENCE_VALUES,
+  FIAT_REFERENCE_VALUES,
+  currentBlockSubsidyBTC,
+  type BitcoinReferenceKey,
+  type FiatReferenceKey,
+} from "./ECONOMIC_REFERENCE";
