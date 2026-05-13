@@ -148,8 +148,8 @@ const fr = {
 
   // NetworkFlywheel
   "flywheel.step.usage": "Utilisation du réseau",
-  "flywheel.step.fees": "Frais générés",
-  "flywheel.step.miners": "Revenus mineurs",
+  "flywheel.step.fees": "Frais générés (par bloc)",
+  "flywheel.step.miners": "Revenus mineurs (par bloc)",
   "flywheel.step.security": "Sécurité du réseau",
   "flywheel.step.value": "Valeur sécurisée",
   "flywheel.increase": "Augmenter l'utilisation",

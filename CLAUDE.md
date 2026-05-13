@@ -292,6 +292,40 @@ minutes = ceil( wordCount / 200  +  interactiveCount × 0.75 )
 
 ---
 
+## Référentiel économique (centralisé)
+
+`src/Interactive/data/ECONOMIC_REFERENCE.ts` — source de vérité unique des chiffres économiques (Bitcoin + fiat) consommés par les composants pédagogiques. Évite les désynchronisations inter-composants (frais/bloc qui ne correspondent pas entre deux Interactives, etc.).
+
+### Exports
+
+- **`BITCOIN_REFERENCE_VALUES`** : subvention par bloc (dérivée du `HALVING_SCHEDULE` → auto-update à chaque halving), temps de bloc, supply totale, frais moyens/pic par bloc, frais par tx, hashrate, capitalisation, TPS, tx/bloc.
+- **`FIAT_REFERENCE_VALUES`** : M2 US (FRED), M2 Euro (ECB SDW), M2 global (BIS/McKinsey, fourchette commentée).
+- **`currentBlockSubsidyBTC(year?)`** : helper qui dérive la subvention courante depuis le calendrier protocolaire.
+
+### Discipline
+
+- **Aucune valeur inventée** : chaque entrée porte sa source en commentaire (`mempool.space`, FRED, ECB SDW, `blockchain.com`, CoinMetrics).
+- **Tag `[À VÉRIFIER]`** sur toute valeur qui dérive avec le temps. Ré-auditer à chaque halving et au minimum tous les 12 mois.
+- **Cohérence interne** : pour les valeurs corrélées, en caler DEUX sur des sources externes et DÉRIVER la troisième par calcul (ex : `AVERAGE_TX_FEE_BTC = AVERAGE_BLOCK_FEES_BTC / AVERAGE_TX_PER_BLOCK`). Les valeurs amont vivent comme `const _*` privées au module — modifier l'amont propage automatiquement aux dérivées.
+- **Tag `[PÉDAGOGIQUE]`** dans le code consommateur quand une valeur est volontairement simplifiée par rapport au ref (ex : frais arrondis à 5 décimales pour la lisibilité d'un calcul de change).
+
+### Comment consommer
+
+```typescript
+import { BITCOIN_REFERENCE_VALUES } from "../data";
+
+const subsidy = BITCOIN_REFERENCE_VALUES.BLOCK_SUBSIDY_BTC;
+const peakFees = BITCOIN_REFERENCE_VALUES.PEAK_BLOCK_FEES_BTC;
+```
+
+Les barrels `Interactive/data/index.ts` et `Interactive/index.ts` ré-exportent tout.
+
+### Composants déjà branchés (audit Q1 2025)
+
+`useMiningReward` (subvention + frais cumulés bloc), `useUTXOBuilder` (frais tx), `TRANSACTION_COMPARISON_DATA` (frais + change dérivé), `useNetworkFlywheel` (4 niveaux du Cycle auto-renforcé).
+
+---
+
 ## Règles de développement
 
 1. **1 FC = 1 fichier** - jamais plusieurs composants dans un même fichier
