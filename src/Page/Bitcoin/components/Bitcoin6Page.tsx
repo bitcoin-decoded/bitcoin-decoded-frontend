@@ -77,8 +77,8 @@ export const Bitcoin6Page: FC = () => {
       </Callout>
       <p>
         {fr
-          ? "Imagines qu'Alice veuille virer 1000 € à Bob. Exécutes une transaction dans le système bancaire traditionnel :"
-          : "Now imagine Alice wants to send $1000 to Bob. Execute a transaction in the traditional banking system:"}
+          ? "Imagines que Nicolas veuille virer 1000 € à Ms. Michu. Exécutes une transaction dans le système bancaire traditionnel :"
+          : "Now imagine Nicolas wants to send $1000 to Ms. Michu. Execute a transaction in the traditional banking system:"}
       </p>
       <TransactionModelComparison mode="bank" />
 
@@ -160,13 +160,13 @@ export const Bitcoin6Page: FC = () => {
         {fr ? (
           <>
             Le mieux pour comprendre, c'est de manipuler.
-            <br /> T'es en possession du portefeuille d'Alice, amuses-toi à simuler une transaction
+            <br /> T'es en possession du portefeuille de Nicolas, amuses-toi à simuler une transaction
             :
           </>
         ) : (
           <>
             The best way to understand it is to get hands-on with it.
-            <br /> You are in possession of Alice's wallet, have fun simulating a transaction:
+            <br /> You are in possession of Nicolas's wallet, have fun simulating a transaction:
           </>
         )}
       </p>
@@ -207,8 +207,8 @@ export const Bitcoin6Page: FC = () => {
       </Callout>
       <p>
         {fr
-          ? "Imagines maintenant qu'Alice veuille virer 1,3 bitcoin à Bob. Exécutes une transaction dans le système Bitcoin :"
-          : "Now imagine Alice wants to send 1.3 bitcoins to Bob. Execute a transaction in the Bitcoin system:"}
+          ? "Imagines maintenant que Nicolas veuille virer 1,3 bitcoin à Mme. Michu. Exécutes une transaction dans le système Bitcoin :"
+          : "Now imagine Nicolas wants to send 1.3 bitcoins to Ms. Michu. Execute a transaction in the Bitcoin system:"}
       </p>
       <TransactionModelComparison mode="bitcoin" />
 

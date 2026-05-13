@@ -126,11 +126,11 @@ export const Bitcoin4Page: FC = () => {
             : "Yes, you read that right. Two contradictory transactions can coexist temporarily:"}
           <ul>
             <li>
-              <i>{fr ? "Alice envoie 1 BTC à Bob" : "Alice sends 1 BTC to Bob"}</i>
+              <i>{fr ? "Nicolas envoie 1 BTC à Mme. Michu" : "Nicolas sends 1 BTC to Ms. Michu"}</i>
             </li>
             <li>
               <i>
-                {fr ? "Alice envoie le même BTC à Charlie" : "Alice sends the same BTC to Charlie"}
+                {fr ? "Nicolas envoie le même BTC à Christine L." : "Nicolas sends the same BTC to Christine L."}
               </i>
             </li>
           </ul>

@@ -1,17 +1,17 @@
-/** Bank scenario data - Alice sends $1,000 to Bob */
+/** Bank scenario data - Nicolas sends $1,000 to Ms. Michu */
 export const BANK = {
-  aliceBefore: 2500,
-  aliceAfter: 1500,
-  bobBefore: 800,
-  bobAfter: 1800,
+  nicolasBefore: 2500,
+  nicolasAfter: 1500,
+  michuBefore: 800,
+  michuAfter: 1800,
   sent: 1000,
 } as const;
 
-/** Bitcoin scenario data - Alice spends 2 UTXOs, sends 1.3 BTC to Bob */
+/** Bitcoin scenario data - Nicolas spends 2 UTXOs, sends 1.3 BTC to Ms. Michu */
 export const BTC = {
   utxo1: 0.8,
   utxo2: 1.0,
-  sentToBob: 1.3,
-  changeToAlice: 0.4999,
+  sentToMichu: 1.3,
+  changeToNicolas: 0.4999,
   fees: 0.0001,
 } as const;

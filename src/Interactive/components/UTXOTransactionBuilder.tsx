@@ -1,4 +1,5 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
+
 import {
   ArrowDown,
   CheckCircle,
@@ -322,7 +323,7 @@ export const UTXOTransactionBuilder: FC = () => {
                     key={id}
                     icon={<Coins size={12} strokeWidth={2} />}
                     title={`UTXO #${id + 1}`}
-                    desc="Alice"
+                    desc="Nicolas"
                     amount={`+${fmtBTC(u.amount)}`}
                     tone="accent"
                     toneColors={toneColors}
@@ -416,7 +417,7 @@ export const UTXOTransactionBuilder: FC = () => {
               {isValid && change > 0 && (
                 <TxCard
                   icon={<Wallet size={12} strokeWidth={2} />}
-                  title={t("utxoBuilder.newUtxoAlice")}
+                  title={t("utxoBuilder.newUtxoNicolas")}
                   desc={t("utxoBuilder.changeDesc")}
                   amount={fmtBTC(change)}
                   tone="accent"

@@ -5,7 +5,7 @@ export type UtxoItem = {
   amount: number;
 };
 
-export const ALICE_UTXOS: readonly UtxoItem[] = [
+export const NICOLAS_UTXOS: readonly UtxoItem[] = [
   { id: 0, amount: 0.8 },
   { id: 1, amount: 1.0 },
   { id: 2, amount: 0.5 },
@@ -26,7 +26,7 @@ export const useUTXOBuilder = () => {
 
   const totalInput = round8(
     selectedIds.reduce((sum, id) => {
-      const utxo = ALICE_UTXOS.find((u) => u.id === id);
+      const utxo = NICOLAS_UTXOS.find((u) => u.id === id);
       return sum + (utxo?.amount ?? 0);
     }, 0),
   );
@@ -46,7 +46,7 @@ export const useUTXOBuilder = () => {
   };
 
   return {
-    utxos: ALICE_UTXOS,
+    utxos: NICOLAS_UTXOS,
     selectedIds,
     toggle,
     totalInput,
