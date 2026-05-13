@@ -40,11 +40,15 @@ export const NavBar: FC = () => {
   // space for no functional value. Notion / Linear / Stripe go
   // straight to the items; the <nav> element with aria-label preserves
   // screen-reader semantics.
+  // borderRight lives on the WRAPPER in MainLayout, not here — because
+  // this element translates by -3.5rem when the Header hides, and a
+  // border drawn here would translate with it, leaving the bottom
+  // 3.5rem of the sidebar column without a separator. The wrapper
+  // stays at full 100vh and owns the divider instead.
   const navStyle: CSSProperties = {
     padding: "calc(3.5rem + 0.75rem) 0 1.5rem",
     display: "flex",
     flexDirection: "column",
-    borderRight: `1px solid ${colors.base.border.primary}`,
     height: "100%",
     transform: isHeaderHidden ? "translateY(-3.5rem)" : "translateY(0)",
     transition: "transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)",

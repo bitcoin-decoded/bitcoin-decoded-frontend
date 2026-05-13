@@ -83,6 +83,12 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
     top: 0,
     height: "100vh",
     alignSelf: "flex-start",
+    // Divider lives on the WRAPPER (not on NavBar) because NavBar
+    // translates -3.5rem when the Header hides — a border drawn there
+    // would slide with it, leaving the bottom 3.5rem of the column
+    // without a separator. The wrapper stays full-height, so its right
+    // edge always spans the entire viewport.
+    borderRight: `1px solid ${colors.base.border.primary}`,
   };
 
   const mainContentPadding = {
