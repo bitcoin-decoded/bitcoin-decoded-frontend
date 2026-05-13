@@ -147,8 +147,8 @@ const en = {
 
   // NetworkFlywheel
   "flywheel.step.usage": "Network usage",
-  "flywheel.step.fees": "Fees generated",
-  "flywheel.step.miners": "Miner revenue",
+  "flywheel.step.fees": "Fees generated (per block)",
+  "flywheel.step.miners": "Miner revenue (per block)",
   "flywheel.step.security": "Network security",
   "flywheel.step.value": "Value secured",
   "flywheel.increase": "Increase usage",
