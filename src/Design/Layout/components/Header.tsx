@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, useEffect, useState } from "react";
+import { type CSSProperties, type FC, useState } from "react";
 
 import { LanguageToggle, useTranslation } from "../../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../../Routing";
@@ -6,18 +6,12 @@ import type { Breakpoint } from "../../Responsive";
 import { THEME_COLORS, ThemeToggle, useThemeContext } from "../../Theme";
 
 import { HamburgerButton } from "./HamburgerButton";
+import { useHeaderHidden } from "../hooks";
 
 // Brand "live indicator" red - distinct from the Bitcoin orange used
 // elsewhere on the page so the wordmark in the navbar reads as a
 // status/identity beacon, not as a content accent.
 const DOT_RED = "#ef4444";
-
-// Scroll-direction thresholds for the hide/reveal behavior. The buffer
-// near the top keeps the header always visible when the user is at the
-// page top (no flicker on tiny scroll-bounces). The min delta filters
-// micro-jitter from trackpads / inertial scrolls.
-const TOP_BUFFER_PX = 60;
-const SCROLL_DELTA_THRESHOLD_PX = 8;
 
 type Props = {
   showHamburger?: boolean;
@@ -41,42 +35,12 @@ export const Header: FC<Props> = ({
 
   const [isWordmarkHovered, setIsWordmarkHovered] = useState(false);
 
-  // Hide-on-scroll-down / reveal-on-scroll-up. Compare the current
-  // scrollY to the previous one each rAF tick; flip `isHidden` only when
-  // the delta exceeds the jitter threshold. When the drawer is open we
-  // FORCE the header visible so the user can always reach the close (X)
-  // button - the alternative (header hidden + drawer open) would trap
-  // the user.
-  const [isHidden, setIsHidden] = useState(false);
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-
-    const update = () => {
-      const currentScrollY = window.scrollY;
-      const delta = currentScrollY - lastScrollY;
-
-      if (currentScrollY < TOP_BUFFER_PX) {
-        setIsHidden(false);
-      } else if (Math.abs(delta) > SCROLL_DELTA_THRESHOLD_PX) {
-        setIsHidden(delta > 0);
-      }
-
-      lastScrollY = currentScrollY;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+  // Hide-on-scroll-down / reveal-on-scroll-up — single source of truth
+  // shared with the sidebar in MainLayout (see useHeaderHidden).
+  // When the drawer is open we FORCE the header visible so the user
+  // can always reach the close (X) button — the alternative (header
+  // hidden + drawer open) would trap the user.
+  const isHidden = useHeaderHidden();
   const effectivelyHidden = isHidden && !isDrawerOpen;
 
   // Header background mirrors the Footer's tonal+halo treatment, but

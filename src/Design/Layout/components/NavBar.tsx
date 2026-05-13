@@ -24,43 +24,22 @@ export const NavBar: FC = () => {
   } = useNavBar();
 
   // Padding-top accounts for the Header height (3.5rem) so the first
-  // nav item never sits under the Header — the sidebar wrapper in
-  // MainLayout extends behind the Header (top: 0, height: 100vh),
-  // which is what keeps the top-left tidy when the Header auto-hides
-  // on scroll.
+  // nav item never sits under the Header. The sidebar wrapper in
+  // MainLayout spans the full viewport (top: 0, height: 100vh) and
+  // slides up by 3.5rem when the Header auto-hides, so the modules
+  // never end up with a vacant strip above them.
+  //
+  // The "NAVIGATION" label + separator that used to sit at the top
+  // are gone — they were decorative chrome that ate ~3rem of vertical
+  // space for no functional value. Notion / Linear / Stripe go
+  // straight to the items; the <nav> element with aria-label preserves
+  // screen-reader semantics.
   const navStyle: CSSProperties = {
-    padding: "calc(3.5rem + 1rem) 0 1.5rem",
+    padding: "calc(3.5rem + 0.75rem) 0 1.5rem",
     display: "flex",
     flexDirection: "column",
     borderRight: `1px solid ${colors.base.border.primary}`,
     height: "100%",
-  };
-
-  const headerStyle: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1rem",
-    padding: "0 1.25rem",
-    marginBottom: "1.5rem",
-    flexShrink: 0,
-  };
-
-  const headerLabelStyle: CSSProperties = {
-    fontSize: "0.8125rem",
-    fontFamily: "'JetBrains Mono', monospace",
-    fontWeight: 600,
-    color: colors.base.text.primary,
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-  };
-
-  const separatorStyle: CSSProperties = {
-    height: "1px",
-    width: "100%",
-    margin: 0,
-    border: "none",
-    outline: "none",
-    background: colors.base.border.primary,
   };
 
   const listContainerStyle: CSSProperties = {
@@ -97,10 +76,6 @@ export const NavBar: FC = () => {
 
   return (
     <nav style={navStyle} aria-label={t("nav.title")}>
-      <div style={headerStyle}>
-        <span style={headerLabelStyle}>{t("nav.title")}</span>
-        <hr style={separatorStyle} />
-      </div>
       <div style={listContainerStyle}>
         <ul style={listStyle}>
           {navigationTree.map((mainItem) => (

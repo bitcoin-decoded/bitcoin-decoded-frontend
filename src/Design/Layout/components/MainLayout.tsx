@@ -7,6 +7,7 @@ import { ReadingProgressBar, ScrollToTopButton } from "../../../Page";
 import { useThemeContext, THEME_COLORS } from "../../Theme";
 import { useBreakpoint } from "../../Responsive";
 import { useRouterContext, ROUTE_NAME } from "../../../Routing";
+import { useHeaderHidden } from "../hooks";
 
 export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   const { theme } = useThemeContext();
@@ -16,6 +17,9 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isDesktop = breakpoint === "desktop";
+  // Shared with Header (single rAF-throttled scroll listener under the
+  // hood). Drives the sidebar's translateY when the Header auto-hides.
+  const isHeaderHidden = useHeaderHidden();
 
   const toggleDrawer = useCallback(() => setIsDrawerOpen((prev) => !prev), []);
   const closeDrawer = useCallback(() => setIsDrawerOpen(false), []);
@@ -55,17 +59,12 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   // pattern: the nav stays anchored in the viewport while the main
   // content scrolls.
   //
-  // Important: the sidebar spans the FULL viewport (top: 0, height:
-  // 100vh) — it runs UNDERNEATH the Header (which has z-index 101).
-  // When the Header is visible, it visually covers the sidebar's top
-  // 3.5rem zone; when the Header auto-hides on scroll, the sidebar
-  // continues all the way up with its own background, instead of
-  // exposing the body's secondary background and creating a 3.5rem
-  // colour step at the top-left.
-  //
-  // The visible nav content is pushed below the Header by a matching
-  // padding-top inside NavBar — so the first item never sits under
-  // the Header when it's visible.
+  // The wrapper spans the FULL viewport (top: 0, height: 100vh) — it
+  // runs UNDERNEATH the Header (z-index 101). When the Header auto-
+  // hides on scroll, the sidebar slides up by 3.5rem in lockstep so
+  // its content rises with the Header instead of leaving a vacant
+  // strip at the top. Coupling driven by `useHeaderHidden` (same
+  // boolean both elements consume).
   //
   // align-self: flex-start is required because the parent is a flex
   // row with default `align-items: stretch` — without it the wrapper
@@ -84,6 +83,9 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
     top: 0,
     height: "100vh",
     alignSelf: "flex-start",
+    transform: isHeaderHidden ? "translateY(-3.5rem)" : "translateY(0)",
+    transition: "transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)",
+    willChange: "transform",
   };
 
   const mainContentPadding = {
