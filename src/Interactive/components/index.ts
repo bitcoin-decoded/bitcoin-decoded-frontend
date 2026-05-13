@@ -1,5 +1,5 @@
 export { BitcoinNetworkMap } from "./BitcoinNetworkMap";
-export { ByzantineGenerals } from "./ByzantineGenerals";
+export { DoubleSpendDemo } from "./DoubleSpendDemo";
 export { MempoolVisual } from "./MempoolVisual";
 export { BitcoinNodeDemo } from "./BitcoinNodeDemo";
 export { BlockAnatomyVisual } from "./BlockAnatomyVisual";

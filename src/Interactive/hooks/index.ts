@@ -1,5 +1,5 @@
 export { useBlockchainChain } from "./useBlockchainChain";
-export { useByzantineGenerals } from "./useByzantineGenerals";
+export { useDoubleSpend } from "./useDoubleSpend";
 export { useMempool } from "./useMempool";
 export { useDifficultyAdjustment } from "./useDifficultyAdjustment";
 export { useBitcoinNodeDemo } from "./useBitcoinNodeDemo";

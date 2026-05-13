@@ -157,7 +157,7 @@ export const HomePage: FC = () => {
 
   // ── Buttons ──────────────────────────────────────────────────────────────
 
-  // Aligned with the rest of the Bitcoin section (cf. ByzantineGenerals
+  // Aligned with the rest of the Bitcoin section (cf. DoubleSpendDemo
   // chapter 4): subtle accent-tinted gradient + accent border, accent text.
   // Quiet on the page yet unmistakably the primary action - no more
   // saturated solid orange that read as "aggressive".

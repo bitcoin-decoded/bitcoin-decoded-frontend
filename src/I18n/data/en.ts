@@ -83,21 +83,6 @@ const en = {
   "mining.headerLabel": "Block header being hashed:",
   "mining.nonce": "nonce",
 
-  // ByzantineGenerals
-  "byzantine.title": "Byzantine Generals Problem",
-  "byzantine.city": "Besieged city",
-  "byzantine.general": "General",
-  "byzantine.alteredMessage": "altered message",
-  "byzantine.prompt": "Choose the order to send to the generals:",
-  "byzantine.attack": "Attack",
-  "byzantine.retreat": "Retreat",
-  "byzantine.attackLabel": "ATTACK",
-  "byzantine.retreatLabel": "RETREAT",
-  "byzantine.failureTitle": "❌ Failure: the generals don't all receive the same information.",
-  "byzantine.failureDetail":
-    "Each one acts based on what they believe to be true, but without certainty about the others, coordination fails.",
-  "byzantine.retry": "Try again",
-
   // MempoolVisual
   "mempool.subtitle": "Pending transactions",
   "mempool.blockLabel": "Block",

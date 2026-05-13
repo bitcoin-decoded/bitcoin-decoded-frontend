@@ -1,4 +1,4 @@
-export { BitcoinNetworkMap, BitcoinNodeDemo, BlockAnatomyVisual, BlockchainChainVisual, ByzantineGenerals, CapitalStructureChain, DebateArena, DifficultyAdjustment, FlipCardGrid, HalvingChart, HashDemo, Illustration, M2MoneySupplyChart, MempoolVisual, MiningRewardBlock, MiningSimulator, NetworkFlywheel, Quiz, SignaturePlayground, SignatureVerifier, SynthesisQuiz, TransactionModelComparison, TrustComparisonDemo, UTXOTransactionBuilder, WalletDiscoveryGame, SeedGenerator } from "./components";
+export { BitcoinNetworkMap, BitcoinNodeDemo, BlockAnatomyVisual, BlockchainChainVisual, CapitalStructureChain, DebateArena, DifficultyAdjustment, DoubleSpendDemo, FlipCardGrid, HalvingChart, HashDemo, Illustration, M2MoneySupplyChart, MempoolVisual, MiningRewardBlock, MiningSimulator, NetworkFlywheel, Quiz, SignaturePlayground, SignatureVerifier, SynthesisQuiz, TransactionModelComparison, TrustComparisonDemo, UTXOTransactionBuilder, WalletDiscoveryGame, SeedGenerator } from "./components";
 export {
   getBeerProductionChain,
   getKeynesianVsAustrian,

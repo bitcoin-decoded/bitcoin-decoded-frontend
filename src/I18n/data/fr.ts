@@ -84,21 +84,6 @@ const fr = {
   "mining.headerLabel": "En-tête du bloc hashé :",
   "mining.nonce": "nonce",
 
-  // ByzantineGenerals
-  "byzantine.title": "Problème des généraux byzantins",
-  "byzantine.city": "Ville assiégée",
-  "byzantine.general": "Général",
-  "byzantine.alteredMessage": "message altéré",
-  "byzantine.prompt": "Choisis l'ordre à envoyer aux généraux :",
-  "byzantine.attack": "Attaquer",
-  "byzantine.retreat": "Battre en retraite",
-  "byzantine.attackLabel": "ATTAQUE",
-  "byzantine.retreatLabel": "RETRAITE",
-  "byzantine.failureTitle": "❌ Échec : les généraux ne reçoivent pas tous la même information.",
-  "byzantine.failureDetail":
-    "Chacun agit en fonction de ce qu'il croit être vrai, mais sans certitude sur les autres, la coordination échoue.",
-  "byzantine.retry": "Recommencer",
-
   // MempoolVisual
   "mempool.subtitle": "Transactions en attente",
   "mempool.blockLabel": "Bloc",
