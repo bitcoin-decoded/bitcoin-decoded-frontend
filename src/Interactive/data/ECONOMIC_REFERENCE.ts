@@ -19,9 +19,17 @@
  * ──────────────────────────────────────────────────────────────────────
  * DATE D'AUDIT
  * ──────────────────────────────────────────────────────────────────────
- *  Audit initial : Q2 2026, ère post-halving avril 2024
+ *  Audit initial : Q1 2025, ère post-halving avril 2024
  *  (subvention 3.125 BTC, prochain halving prévu printemps 2028).
  *  À ré-auditer à chaque halving et au minimum tous les 12 mois.
+ *
+ * ──────────────────────────────────────────────────────────────────────
+ * COHÉRENCE INTERNE
+ * ──────────────────────────────────────────────────────────────────────
+ *  Pour éviter la désynchronisation que ce référentiel doit éliminer :
+ *  les valeurs CORRÉLÉES sont calées sur deux sources externes et la
+ *  troisième est DÉRIVÉE par calcul (commenté en regard).
+ *  Exemple : frais/bloc + tx/bloc sourcés → frais/tx = frais/bloc ÷ tx/bloc.
  */
 
 import { HALVING_SCHEDULE } from "./HALVING_SCHEDULE";
@@ -50,6 +58,13 @@ export const currentBlockSubsidyBTC = (
 // BITCOIN_REFERENCE_VALUES
 // ──────────────────────────────────────────────────────────────────────
 
+// Constantes amont (sourcées). Mises à jour ici, les dérivées (frais/tx,
+// tx/s) se recalent automatiquement — c'est précisément la garantie de
+// cohérence interne que le référentiel doit offrir.
+const _AVG_BLOCK_FEES_BTC = 0.08;
+const _AVG_TX_PER_BLOCK = 3000;
+const _BLOCK_TIME_MIN = 10;
+
 export const BITCOIN_REFERENCE_VALUES = {
   /**
    * Subvention par bloc en cours.
@@ -64,13 +79,18 @@ export const BITCOIN_REFERENCE_VALUES = {
    * Protocole, ajusté par la difficulté toutes les 2016 blocs.
    * Source : Bitcoin protocol.
    */
-  BLOCK_TIME_MIN: 10,
+  BLOCK_TIME_MIN: _BLOCK_TIME_MIN,
 
   /**
    * Plafond d'émission monétaire.
    * Source : Bitcoin protocol (limite asymptotique de l'émission).
    */
   TOTAL_SUPPLY_BTC: 21_000_000,
+
+  // ── Flux frais — SOURCÉS ──────────────────────────────────────────
+  // Les deux entrées suivantes sont calées sur des sources externes ;
+  // `AVERAGE_TX_FEE_BTC` plus bas en est DÉRIVÉE pour garantir la
+  // cohérence interne du référentiel.
 
   /**
    * Frais cumulés moyens par bloc, période calme post-halving 2024.
@@ -80,7 +100,7 @@ export const BITCOIN_REFERENCE_VALUES = {
    * 7 jours, hors pics ordinals).
    * [À VÉRIFIER au moment de chaque commit qui consomme cette valeur]
    */
-  AVERAGE_BLOCK_FEES_BTC: 0.08,
+  AVERAGE_BLOCK_FEES_BTC: _AVG_BLOCK_FEES_BTC,
 
   /**
    * Frais cumulés par bloc en période de congestion soutenue (pic).
@@ -94,16 +114,34 @@ export const BITCOIN_REFERENCE_VALUES = {
   PEAK_BLOCK_FEES_BTC: 1.5,
 
   /**
-   * Frais moyens par transaction L1 en période calme.
-   * Une tx SegWit typique ~150–250 vB à 2–8 sats/vB ⇒ 300–2 000 sats.
-   * Médiane retenue : 1 000 sats = 0.00001 BTC.
-   * Source : mempool.space → mempool fee stats.
+   * Nombre moyen de transactions par bloc, période calme.
+   * Fourchette : 2 500–4 000. Médiane retenue.
+   * Source : mempool.space, blockchain.com/charts/n-transactions-per-block.
    * [À VÉRIFIER]
    */
-  AVERAGE_TX_FEE_BTC: 0.00001,
+  AVERAGE_TX_PER_BLOCK: _AVG_TX_PER_BLOCK,
+
+  // ── Flux frais — DÉRIVÉ ───────────────────────────────────────────
 
   /**
-   * Hashrate global du réseau, Q2 2026.
+   * Frais moyens par transaction L1 en période calme.
+   *
+   * DÉRIVÉ : AVERAGE_BLOCK_FEES_BTC / AVERAGE_TX_PER_BLOCK
+   *        = 0.08 / 3 000
+   *        ≈ 0.0000267 BTC ≈ 2 667 sats
+   *
+   * On ne sait pas calibrer indépendamment frais/bloc, tx/bloc et
+   * frais/tx sans introduire une incohérence — donc on en source deux
+   * et on dérive la troisième. Ordre de grandeur corroborant : ~2-10
+   * sats/vB sur une tx SegWit ~250-400 vB en période calme.
+   * Source de cohérence : mempool.space (les deux valeurs amont).
+   */
+  AVERAGE_TX_FEE_BTC: _AVG_BLOCK_FEES_BTC / _AVG_TX_PER_BLOCK,
+
+  // ── Photographie réseau ───────────────────────────────────────────
+
+  /**
+   * Hashrate global du réseau, Q1 2025.
    * Fourchette : 700–900 EH/s (forte variabilité saisonnière, croît
    * ~+30 %/an en tendance longue).
    * Source : mempool.space → Mining → Hashrate, blockchain.com/charts/hash-rate.
@@ -113,29 +151,32 @@ export const BITCOIN_REFERENCE_VALUES = {
 
   /**
    * Capitalisation indicative en milliards de dollars.
-   * Très variable selon le cycle post-halving. Fourchette retenue pour
-   * 2024–2026 : $1 200–2 000 Md. Valeur médiane pédagogique.
-   * Source : CoinMetrics, CoinGecko, blockchain.com.
-   * [À VÉRIFIER : à recaler à chaque audit ; chiffre extrêmement
-   * volatil]
+   *
+   * Photographie : Q1 2025 — prix BTC ~$80k, supply ~19.8 M ⇒ ~$1.58 T.
+   * Fourchette plausible sur le cycle 2024–2026 : $1 200–2 200 Md
+   * (le prix BTC oscille typiquement entre $60k et $130k sur la période,
+   * la supply croît lentement de ~0.85 %/an).
+   *
+   * Source : CoinMetrics, CoinGecko, blockchain.com/charts/market-cap.
+   *
+   * [À VÉRIFIER] Chiffre extrêmement volatil — les composants qui le
+   * consomment DOIVENT afficher la date de référence côté UI pour
+   * absorber les écarts perçus par le lecteur (ex. « ordre de grandeur
+   * 2025 »).
    */
   MARKET_CAP_USD_BILLIONS: 1500,
 
   /**
    * Débit moyen Bitcoin L1 en transactions par seconde.
-   * 3–7 tx/s selon période. Cohérent avec ~300 tx/min, ~3 000 tx/bloc.
-   * Source : blockchain.com → charts → n-transactions-per-second.
-   * [À VÉRIFIER]
+   *
+   * DÉRIVÉ : AVERAGE_TX_PER_BLOCK / (BLOCK_TIME_MIN × 60)
+   *        = 3 000 / 600 = 5 tx/s
+   *
+   * Fourchette observée : 3–7 tx/s selon période.
+   * Source de cohérence : AVERAGE_TX_PER_BLOCK ÷ temps de bloc.
+   * Source externe corroborante : blockchain.com → n-transactions-per-second.
    */
-  AVERAGE_TX_PER_SECOND: 5,
-
-  /**
-   * Nombre moyen de transactions par bloc, période calme.
-   * Fourchette : 2 500–4 000. Médiane retenue.
-   * Source : mempool.space, blockchain.com.
-   * [À VÉRIFIER]
-   */
-  AVERAGE_TX_PER_BLOCK: 3000,
+  AVERAGE_TX_PER_SECOND: _AVG_TX_PER_BLOCK / (_BLOCK_TIME_MIN * 60),
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────
@@ -165,13 +206,25 @@ export const FIAT_REFERENCE_VALUES = {
   EUR_M2_TRILLIONS: 15.5,
 
   /**
-   * Masse monétaire mondiale agrégée (estimation), fin 2024.
-   * Indicatif uniquement — agrégation hétérogène entre banques
-   * centrales. Source : Visual Capitalist / All the World's Money.
-   * En milliers de milliards de dollars équivalents.
-   * [À VÉRIFIER : agrégation grossière]
+   * Masse monétaire mondiale agrégée (M2 / quasi-M2), estimation 2024.
+   *
+   * Définition NON standardisée internationalement — la valeur précise
+   * dépend des agrégats nationaux retenus et du périmètre (M2 strict
+   * vs « broad money »). Fourchette consensuelle 80–110 T$ équivalents
+   * selon agrégation.
+   *
+   * Les composants pédagogiques qui consomment cette valeur devraient
+   * afficher la fourchette plutôt qu'un point précis, ou contextualiser
+   * « ordre de grandeur ».
+   *
+   * Sources convergentes : BIS Quarterly Review, McKinsey Global
+   * Institute, Visual Capitalist (agrégation non-officielle).
+   * [À VÉRIFIER : agrégation hétérogène — médiane retenue à titre
+   * indicatif uniquement]
    */
   GLOBAL_M2_USD_TRILLIONS: 95,
+  /** Fourchette consensuelle associée à `GLOBAL_M2_USD_TRILLIONS`. */
+  GLOBAL_M2_USD_TRILLIONS_RANGE: [80, 110] as const,
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────
