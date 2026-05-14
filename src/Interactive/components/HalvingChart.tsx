@@ -1,18 +1,19 @@
-import { type FC, type CSSProperties } from "react";
-import { useTranslation } from "../../I18n";
+import { type CSSProperties, type FC } from "react";
+
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  CartesianGrid,
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  ReferenceLine,
 } from "recharts";
-import { Caption, usePageTheme, useBreakpoint } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
-import { HALVING_SCHEDULE } from "../data/HALVING_SCHEDULE";
+
+import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
+import { useTranslation } from "../../I18n";
+import { HALVING_SCHEDULE } from "../data/";
 
 export const HalvingChart: FC = () => {
   const { t } = useTranslation();
@@ -57,7 +58,9 @@ export const HalvingChart: FC = () => {
     <div style={containerStyle}>
       <div
         className="gradient-border"
-        style={{ ...chartWrapperStyle, "--border-glow-color": world.border.primary } as CSSProperties}
+        style={
+          { ...chartWrapperStyle, "--border-glow-color": world.border.primary } as CSSProperties
+        }
       >
         <Caption
           tone="world"
@@ -101,7 +104,10 @@ export const HalvingChart: FC = () => {
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: "0.75rem",
               }}
-              formatter={(value: number) => [`${fmtBTC(value)} BTC`, t("halvingChart.tooltipLabel")]}
+              formatter={(value: number) => [
+                `${fmtBTC(value)} BTC`,
+                t("halvingChart.tooltipLabel"),
+              ]}
               labelFormatter={(label: number) => `${t("halvingChart.tooltipYear")} ${label}`}
             />
             <ReferenceLine

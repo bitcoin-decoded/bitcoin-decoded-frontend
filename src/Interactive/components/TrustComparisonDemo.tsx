@@ -18,8 +18,8 @@ import {
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
+  withOpacity,
 } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
 import { useLanguageContext } from "../../I18n";
 import { useTrustComparison } from "../hooks";
 

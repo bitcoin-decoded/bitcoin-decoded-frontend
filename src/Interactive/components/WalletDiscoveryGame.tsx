@@ -1,4 +1,5 @@
 import { type CSSProperties, type FC } from "react";
+
 import { CheckCircle, KeyRound, RefreshCw, Sparkles, Wallet, XCircle } from "lucide-react";
 
 import {
@@ -8,11 +9,12 @@ import {
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
+  withOpacity,
 } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
-import { WalletCard } from "./WalletDiscoveryGame/index";
+
+import { WalletCard } from "./WalletDiscoveryGame/";
 
 export const WalletDiscoveryGame: FC = () => {
   const { t } = useTranslation();

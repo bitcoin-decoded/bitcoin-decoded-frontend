@@ -1,4 +1,5 @@
 import { type CSSProperties, type FC } from "react";
+
 import {
   ArrowRight,
   Box,
@@ -12,12 +13,19 @@ import {
   Wallet,
 } from "lucide-react";
 
-import { Badge, Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import {
+  Badge,
+  Button,
+  Caption,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../Design";
 import { useTranslation } from "../../I18n";
-import { useMiningReward } from "../hooks";
 import { CONFETTI_DATA } from "../data";
 import { fmtBTC } from "../helpers";
+import { useMiningReward } from "../hooks";
 
 export const MiningRewardBlock: FC = () => {
   const { t } = useTranslation();
@@ -205,7 +213,11 @@ export const MiningRewardBlock: FC = () => {
         {/* ── Block panel ── */}
         <div style={blockPanel}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Caption tone="world" size="sm" icon={<Box size={isMobile ? 14 : 16} strokeWidth={2} />}>
+            <Caption
+              tone="world"
+              size="sm"
+              icon={<Box size={isMobile ? 14 : 16} strokeWidth={2} />}
+            >
               Bloc #{blockHeader.height.toLocaleString("fr-FR")}
             </Caption>
             {rewarded && (
@@ -325,7 +337,13 @@ export const MiningRewardBlock: FC = () => {
           <div style={{ position: "relative" }}>
             <Button
               variant={rewarded ? "secondary" : "primary"}
-              icon={rewarded ? <RotateCcw size={13} strokeWidth={2} /> : <PlusCircle size={13} strokeWidth={2} />}
+              icon={
+                rewarded ? (
+                  <RotateCcw size={13} strokeWidth={2} />
+                ) : (
+                  <PlusCircle size={13} strokeWidth={2} />
+                )
+              }
               onClick={rewarded ? reset : reward}
               fullWidth
               style={{ marginTop: "0.35rem" }}
@@ -374,8 +392,8 @@ export const MiningRewardBlock: FC = () => {
             <div style={rewardNoteStyle}>
               <strong>{t("miningReward.rewardNoteTitle")}</strong>
               <br />
-              {fmtBTC(totalFees)} {t("miningReward.rewardNoteFees")} +{" "}
-              {fmtBTC(subsidy)} {t("miningReward.rewardNoteSubsidy")}
+              {fmtBTC(totalFees)} {t("miningReward.rewardNoteFees")} + {fmtBTC(subsidy)}{" "}
+              {t("miningReward.rewardNoteSubsidy")}
               <br />
               <span style={{ opacity: 0.65, fontSize: "0.54rem" }}>
                 ({t("miningReward.rewardNoteNewBitcoin")})

@@ -9,8 +9,8 @@ import {
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
+  withOpacity
 } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
 import { useDifficultyAdjustment } from "../hooks";
 

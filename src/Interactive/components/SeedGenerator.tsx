@@ -9,20 +9,12 @@ import {
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
+  withOpacity,
 } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
 import { useTranslation } from "../../I18n";
+import { groupBits } from "../helpers";
 import { useSeedGenerator } from "../hooks";
 import type { SeedLength } from "../types";
-
-/** Group a binary string by `groupSize` chars, separated by `separator`. */
-const groupBits = (bits: string, groupSize = 8, separator = " ") => {
-  const groups: string[] = [];
-  for (let i = 0; i < bits.length; i += groupSize) {
-    groups.push(bits.slice(i, i + groupSize));
-  }
-  return groups.join(separator);
-};
 
 export const SeedGenerator: FC = () => {
   const { t } = useTranslation();

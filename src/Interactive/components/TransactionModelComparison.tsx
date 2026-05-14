@@ -13,12 +13,11 @@ import {
   Zap,
 } from "lucide-react";
 
-import { Badge, Button, Caption, useBreakpoint, usePageTheme } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import { Badge, Button, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { BANK, BTC } from "../data";
 import { fmtBTC, fmtEur } from "../helpers";
-import { useTransactionComparison } from "../hooks/useTransactionComparison";
+import { useTransactionComparison } from "../hooks/";
 
 export type ComparisonMode = "bank" | "bitcoin" | "compare";
 

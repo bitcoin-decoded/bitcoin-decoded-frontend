@@ -1,16 +1,11 @@
-import { type FC, type CSSProperties } from "react";
-import { CircleHelp, CircleCheck, CircleX } from "lucide-react";
+import { type CSSProperties, type FC } from "react";
 
-import {
-  Caption,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-} from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import { CircleCheck, CircleHelp, CircleX } from "lucide-react";
+
+import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
 import { useTranslation } from "../../I18n";
-import { type QuizData } from "../types";
 import { useQuiz } from "../hooks";
+import { type QuizData } from "../types";
 
 type QuizProps = QuizData & {
   onCorrectAnswer: () => void;
@@ -21,10 +16,7 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
   const { t } = useTranslation();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
-  const { selectedIndex, isCorrectlySolved, handleSelect } = useQuiz(
-    data.answers,
-    onCorrectAnswer
-  );
+  const { selectedIndex, isCorrectlySolved, handleSelect } = useQuiz(data.answers, onCorrectAnswer);
 
   const accentColor = colors[moduleTheme].border.secondary;
 
@@ -115,9 +107,7 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       marginTop: "1.25rem",
       padding: isMobile ? "0.875rem 1rem" : "1rem 1.25rem",
       borderRadius: "0.75rem",
-      backgroundColor: isCorrect
-        ? "rgba(16, 185, 129, 0.06)"
-        : "rgba(249, 115, 22, 0.06)",
+      backgroundColor: isCorrect ? "rgba(16, 185, 129, 0.06)" : "rgba(249, 115, 22, 0.06)",
       borderLeft: `3px solid ${feedbackColor}`,
       color: colors.base.text.secondary,
       fontSize: isMobile ? "0.8125rem" : "0.875rem",

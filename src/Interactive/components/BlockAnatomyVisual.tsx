@@ -1,10 +1,9 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
 
-import { SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import { SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
 import { useLanguageContext } from "../../I18n";
+import { BODY_FIELDS, HEADER_FIELDS } from "../data";
 import type { BlockField } from "../types";
-import { HEADER_FIELDS, BODY_FIELDS } from "../data";
 
 export const BlockAnatomyVisual: FC = () => {
   const { language } = useLanguageContext();
@@ -103,14 +102,17 @@ export const BlockAnatomyVisual: FC = () => {
       margin={isMobile ? "1.5rem 0" : "2.5rem 0"}
       style={{ padding: isMobile ? "1rem" : "1.25rem" }}
     >
-      <div style={titleStyle}>
-        {fr ? "Exemple : Bloc #828 614" : "Example: Block #828,614"}
-      </div>
+      <div style={titleStyle}>{fr ? "Exemple : Bloc #828 614" : "Example: Block #828,614"}</div>
 
       <span style={sectionLabel}>{fr ? "En-tête" : "Header"}</span>
       {renderFields(HEADER_FIELDS)}
 
-      <div style={{ borderTop: `1px dashed ${withOpacity(world.border.secondary, 0.3)}`, margin: "0.25rem 0" }} />
+      <div
+        style={{
+          borderTop: `1px dashed ${withOpacity(world.border.secondary, 0.3)}`,
+          margin: "0.25rem 0",
+        }}
+      />
 
       <span style={sectionLabel}>{fr ? "Corps" : "Body"}</span>
       {renderFields(BODY_FIELDS)}

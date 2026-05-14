@@ -1,10 +1,22 @@
 import { type CSSProperties, type FC } from "react";
+
 import { CheckCircle, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
 
-import { Button, Caption, FeedbackPanel, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import {
+  Button,
+  Caption,
+  FeedbackPanel,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../Design";
 import { useTranslation } from "../../I18n";
-import { type SigField, ORIGINAL_VALUES, useSignatureVerifier } from "../hooks/useSignatureVerifier";
+import {
+  ORIGINAL_VALUES,
+  type SigField,
+  useSignatureVerifier,
+} from "../hooks/useSignatureVerifier";
 
 export const SignatureVerifier: FC = () => {
   const { t } = useTranslation();
@@ -88,9 +100,7 @@ export const SignatureVerifier: FC = () => {
         return (
           <div key={key} style={isTampered ? fieldRowTampered : fieldRow}>
             <span style={fieldLabel}>{label}</span>
-            <span style={fieldValue(isTampered)}>
-              {getValue(key)}
-            </span>
+            <span style={fieldValue(isTampered)}>{getValue(key)}</span>
             <button style={tamperBtn(isTampered)} onClick={() => toggle(key)}>
               {isTampered ? t("sigVerifier.restore") : t("sigVerifier.tamper")}
             </button>
@@ -100,11 +110,26 @@ export const SignatureVerifier: FC = () => {
 
       {/* Original reference (subtle) */}
       {tampered.size > 0 && (
-        <div style={{ fontSize: "0.58rem", color: withOpacity(colors.base.text.secondary, 0.5), display: "flex", alignItems: "center", gap: "0.35rem" }}>
+        <div
+          style={{
+            fontSize: "0.58rem",
+            color: withOpacity(colors.base.text.secondary, 0.5),
+            display: "flex",
+            alignItems: "center",
+            gap: "0.35rem",
+          }}
+        >
           <CheckCircle size={10} strokeWidth={2} />
           {t("sigVerifier.originalHint")}
-          {FIELDS.filter(f => tampered.has(f.key)).map(f => (
-            <span key={f.key} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.54rem", opacity: 0.6 }}>
+          {FIELDS.filter((f) => tampered.has(f.key)).map((f) => (
+            <span
+              key={f.key}
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.54rem",
+                opacity: 0.6,
+              }}
+            >
               {ORIGINAL_VALUES[f.key].slice(0, 10)}…
             </span>
           ))}
@@ -125,11 +150,11 @@ export const SignatureVerifier: FC = () => {
       <FeedbackPanel
         tone={status === "valid" ? "success" : status === "invalid" ? "error" : "neutral"}
         icon={
-          status === "valid"
-            ? <ShieldCheck size={14} strokeWidth={2} />
-            : status === "invalid"
-              ? <ShieldAlert size={14} strokeWidth={2} />
-              : undefined
+          status === "valid" ? (
+            <ShieldCheck size={14} strokeWidth={2} />
+          ) : status === "invalid" ? (
+            <ShieldAlert size={14} strokeWidth={2} />
+          ) : undefined
         }
         title={
           status === "valid"
@@ -140,9 +165,7 @@ export const SignatureVerifier: FC = () => {
         }
       >
         {status !== "idle" &&
-          (status === "valid"
-            ? t("sigVerifier.validDesc")
-            : t("sigVerifier.invalidDesc"))}
+          (status === "valid" ? t("sigVerifier.validDesc") : t("sigVerifier.invalidDesc"))}
       </FeedbackPanel>
 
       <Button

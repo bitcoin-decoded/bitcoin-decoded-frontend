@@ -2,8 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Cpu, Monitor } from "lucide-react";
 
-import { Button, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import { Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
 import { useLanguageContext } from "../../I18n";
 import { useBitcoinNodeDemo } from "../hooks";
 

@@ -12,6 +12,7 @@ export {
   Reference,
   SurfaceCard,
 } from "./components";
+export { withOpacity } from "./helpers";
 export { useDisclosure } from "./hooks";
 export {
   CloverLeafIcon,
