@@ -65,41 +65,44 @@ export const Bitcoin2Page: FC = () => {
 
       {isQuizSolved && (
         <>
+          <p>{fr ? "Observes l'accélération." : "Notice the acceleration."}</p>
+          <ol>
+            <li>
+              {fr
+                ? "Pendant des décennies, la courbe monte progressivement."
+                : "For decades, the curve climbs gradually."}
+            </li>
+
+            <li>
+              {fr ? (
+                <>
+                  Puis, à partir de 2008 (<i>crise des subprimes</i>), la pente s'accentue.
+                </>
+              ) : (
+                <>
+                  Then, starting in 2008 (<i>subprime crisis</i>), the slope steepens.
+                </>
+              )}
+            </li>
+
+            <li>
+              {fr ? (
+                <>
+                  Et en 2020 (<i>crise du Covid</i>), c'est un mur vertical.
+                </>
+              ) : (
+                <>
+                  And in 2020 (<i>Covid crisis</i>), it becomes a vertical wall.
+                </>
+              )}
+            </li>
+          </ol>
           <p>
-            {fr ? "Observes l'accélération." : "Notice the acceleration."}
-            <ol>
-              <li>
-                {fr
-                  ? "Pendant des décennies, la courbe monte progressivement."
-                  : "For decades, the curve climbs gradually."}
-              </li>
-              <li>
-                {fr ? (
-                  <>
-                    Puis, à partir de 2008 (<i>crise des subprimes</i>), la pente s'accentue.
-                  </>
-                ) : (
-                  <>
-                    Then, starting in 2008 (<i>subprime crisis</i>), the slope steepens.
-                  </>
-                )}
-              </li>
-              <li>
-                {fr ? (
-                  <>
-                    Et en 2020 (<i>crise du Covid</i>), c'est un mur vertical.
-                  </>
-                ) : (
-                  <>
-                    And in 2020 (<i>Covid crisis</i>), it becomes a vertical wall.
-                  </>
-                )}
-              </li>
-            </ol>
             {fr
               ? "En moins de deux ans, environ 6 000 milliards de dollars ont été créés à partir de rien."
               : "In less than two years, roughly $6 trillion was created from nothing."}
           </p>
+          *
           <p>
             {fr ? (
               <>
@@ -194,7 +197,6 @@ export const Bitcoin2Page: FC = () => {
               </>
             )}
           </p>
-
           <Callout
             title={
               fr

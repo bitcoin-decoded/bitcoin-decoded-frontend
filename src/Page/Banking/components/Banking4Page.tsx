@@ -54,34 +54,33 @@ export const Banking4Page: FC = () => {
       <Callout
         title={fr ? "Comment une banque gagne-t-elle de l'argent ?" : "How does a bank make money?"}
       >
-        <p>
-          {fr ? (
-            <>
-              C'est très simple :
-              <ol>
-                <li>
-                  Elle <i>emprunte</i> de l'argent à court terme, à un taux généralement très bas
-                  (pratiquement à 0%)
-                </li>
-                <li>
-                  Elle <i>prête</i> ensuite à long terme, à un taux généralement bien plus élevé.
-                </li>
-              </ol>
-            </>
-          ) : (
-            <>
-              It's very simple:
-              <ol>
-                <li>
-                  It <i>borrows</i> money short-term, at a generally very low rate (practically 0%)
-                </li>
-                <li>
-                  It then <i>lends</i> long-term, at a generally much higher rate.
-                </li>
-              </ol>
-            </>
-          )}
-        </p>
+        <p>{fr ? "C'est très simple :" : "It's very simple:"}</p>
+        <ol>
+          <li>
+            {fr ? (
+              <>
+                Elle <i>emprunte</i> de l'argent à court terme, à un taux généralement très bas
+                (pratiquement à 0%)
+              </>
+            ) : (
+              <>
+                It <i>borrows</i> money short-term, at a generally very low rate (practically 0%)
+              </>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <>
+                Elle <i>prête</i> ensuite à long terme, à un taux généralement bien plus élevé.
+              </>
+            ) : (
+              <>
+                It then <i>lends</i> long-term, at a generally much higher rate.
+              </>
+            )}
+          </li>
+        </ol>
         <p>
           {fr
             ? "Son profit, c'est l'écart entre le taux long et le taux court"

@@ -14,7 +14,7 @@ import {
 import { useTranslation } from "../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
 
-import { WalletCard } from "./WalletDiscoveryGame/";
+import { WalletCard } from "./WalletDiscoveryGame/WalletCard";
 
 export const WalletDiscoveryGame: FC = () => {
   const { t } = useTranslation();

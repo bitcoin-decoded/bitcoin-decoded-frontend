@@ -44,24 +44,16 @@ export const Bitcoin1Page: FC = () => {
           ? "Expliquer Bitcoin de façon simple et complète n'est pas si facile, tant c'est un objet compliqué à approcher parce qu'il couvre beaucoup de sujets différents."
           : "Explaining Bitcoin in a simple yet complete way is not that easy, as it is a complex object that covers many different topics."}
       </p>
+      <p>{fr ? "Bitcoin est trois choses à la fois :" : "Bitcoin is three things at once:"}</p>
+      <ol>
+        <li>{fr ? "Un logiciel" : "A software"}</li>
+        <li>{fr ? "Un réseau" : "A network"}</li>
+        <li>{fr ? "Et une monnaie" : "And a currency"}</li>
+      </ol>
       <p>
-        {fr ? "Bitcoin est trois choses à la fois :" : "Bitcoin is three things at once:"}
-        <ol>
-          <li>{fr ? "Un logiciel" : "A software"}</li>
-          <li>{fr ? "Un réseau" : "A network"}</li>
-          <li>{fr ? "Et une monnaie" : "And a currency"}</li>
-        </ol>
-        {fr ? (
-          <>
-            Ensemble, ces éléments constituent l'essence de Bitcoin, c'est-à-dire une infrastructure
-            publique de paiement.
-          </>
-        ) : (
-          <>
-            Together, these elements form the essence of Bitcoin, that is a public payment
-            infrastructure.
-          </>
-        )}
+        {fr
+          ? "Ensemble, ces éléments constituent l'essence de Bitcoin, c'est-à-dire une infrastructure publique de paiement."
+          : "Together, these elements form the essence of Bitcoin, that is a public payment infrastructure."}
       </p>
       <p>
         {fr ? (
@@ -222,31 +214,32 @@ export const Bitcoin1Page: FC = () => {
           {fr
             ? "Le premier mineur qui trouve la solution gagne deux choses :"
             : "The first miner to find the solution wins two things:"}
-          <ol>
-            <li>
-              {fr ? (
-                <>Le droit d'ajouter une nouvelle page au grand livre de compte.</>
-              ) : (
-                <>The right to add a new page to the ledger.</>
-              )}
-            </li>
-            <li>
-              {fr ? (
-                <>
-                  Une récompense en bitcoin composée de deux parts : les nouveaux bitcoins créés par
-                  le protocole (la seule façon dont de nouveaux bitcoins entrent en circulation) et
-                  les frais des transactions incluses dans le bloc.
-                </>
-              ) : (
-                <>
-                  A Bitcoin reward made up of two parts: newly created bitcoins issued by the
-                  protocol (the only way new bitcoins enter circulation) and the transaction fees
-                  included in the block.
-                </>
-              )}
-            </li>
-          </ol>
         </p>
+        <ol>
+          <li>
+            {fr ? (
+              <>Le droit d'ajouter une nouvelle page au grand livre de compte.</>
+            ) : (
+              <>The right to add a new page to the ledger.</>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <>
+                Une récompense en bitcoin composée de deux parts : les nouveaux bitcoins créés par
+                le protocole (la seule façon dont de nouveaux bitcoins entrent en circulation) et
+                les frais des transactions incluses dans le bloc.
+              </>
+            ) : (
+              <>
+                A Bitcoin reward made up of two parts: newly created bitcoins issued by the protocol
+                (the only way new bitcoins enter circulation) and the transaction fees included in
+                the block.
+              </>
+            )}
+          </li>
+        </ol>
       </Callout>
 
       <p>

@@ -61,7 +61,8 @@ export const Bitcoin4Page: FC = () => {
             <Reference href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins">
               problème des généraux byzantins
             </Reference>
-            , formulé par Lamport en 1982. Bitcoin en est la première solution pratique à grande échelle.
+            , formulé par Lamport en 1982. Bitcoin en est la première solution pratique à grande
+            échelle.
           </>
         ) : (
           <>
@@ -84,12 +85,13 @@ export const Bitcoin4Page: FC = () => {
         {fr
           ? "Regardons exactement comment Bitcoin résout élégamment ce problème. Pour cela, on va voir successivement :"
           : "Let's see exactly how Bitcoin elegantly solves this problem. To do so, we'll go through, in order:"}
-        <ol>
-          <li>{fr ? "La mempool" : "The mempool"}</li>
-          <li>{fr ? "Le fonctionnement du minage" : "How mining works"}</li>
-          <li>{fr ? "Et la formation du consensus" : "And how consensus is reached"}</li>
-        </ol>
       </p>
+
+      <ol>
+        <li>{fr ? "La mempool" : "The mempool"}</li>
+        <li>{fr ? "Le fonctionnement du minage" : "How mining works"}</li>
+        <li>{fr ? "Et la formation du consensus" : "And how consensus is reached"}</li>
+      </ol>
 
       <Callout title={fr ? "Memory Pool ou salle d'attente" : "Memory Pool: the waiting room"}>
         <p>
@@ -130,7 +132,9 @@ export const Bitcoin4Page: FC = () => {
             </li>
             <li>
               <i>
-                {fr ? "Nicolas envoie le même BTC à Christine L." : "Nicolas sends the same BTC to Christine L."}
+                {fr
+                  ? "Nicolas envoie le même BTC à Christine L."
+                  : "Nicolas sends the same BTC to Christine L."}
               </i>
             </li>
           </ul>
@@ -157,20 +161,23 @@ export const Bitcoin4Page: FC = () => {
         {fr
           ? "C'est ici que les mineurs entrent en jeu. Leur rôle :"
           : "This is where miners come in. Their role:"}
-        <ol>
-          <li>
-            {fr
-              ? "sélectionner des transactions dans la mempool"
-              : "pick transactions from the mempool"}
-          </li>
-          <li>{fr ? "les regrouper dans un bloc" : "bundle them into a block"}</li>
-          <li>
-            {fr
-              ? "tenter de faire accepter ce bloc par le réseau"
-              : "try to get this block accepted by the network"}
-          </li>
-        </ol>
       </p>
+
+      <ol>
+        <li>
+          {fr
+            ? "sélectionner des transactions dans la mempool"
+            : "pick transactions from the mempool"}
+        </li>
+
+        <li>{fr ? "les regrouper dans un bloc" : "bundle them into a block"}</li>
+
+        <li>
+          {fr
+            ? "tenter de faire accepter ce bloc par le réseau"
+            : "try to get this block accepted by the network"}
+        </li>
+      </ol>
       <p>
         {fr ? (
           <>

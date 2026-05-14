@@ -87,59 +87,63 @@ export const Bitcoin3Page: FC = () => {
           {fr
             ? "L'en-tête contient les métadonnées du bloc :"
             : "The header contains the block's metadata:"}
-          <ol>
-            <li>
-              {fr ? (
-                <>
-                  <HighlightText>Hash du bloc précédent</HighlightText> (l'empreinte qui crée le
-                  lien avec le bloc d'avant)
-                </>
-              ) : (
-                <>
-                  <HighlightText>Previous block hash</HighlightText> (the fingerprint that creates
-                  the link with the prior block)
-                </>
-              )}
-            </li>
-            <li>
-              {fr ? (
-                <>
-                  <HighlightText>Racine de Merkle</HighlightText> (une empreinte unique qui résume
-                  d'un coup toutes les transactions du bloc)
-                </>
-              ) : (
-                <>
-                  <HighlightText>Merkle root</HighlightText> (a single fingerprint that summarizes
-                  every transaction in the block at once)
-                </>
-              )}
-            </li>
-            <li>
-              {fr ? (
-                <>
-                  <HighlightText>Horodatage</HighlightText> (date de naissance du bloc)
-                </>
-              ) : (
-                <>
-                  <HighlightText>Timestamp</HighlightText> (the block's birth date)
-                </>
-              )}
-            </li>
-            <li>
-              {fr ? (
-                <>
-                  <HighlightText>Nonce</HighlightText> (un numéro utilisé par les mineurs que nous
-                  verrons au prochain chapitre)
-                </>
-              ) : (
-                <>
-                  <HighlightText>Nonce</HighlightText> (a number used by miners - we'll cover it in
-                  the next chapter)
-                </>
-              )}
-            </li>
-          </ol>
         </p>
+
+        <ol>
+          <li>
+            {fr ? (
+              <span>
+                <HighlightText>Hash du bloc précédent</HighlightText> (l'empreinte qui crée le lien
+                avec le bloc d'avant)
+              </span>
+            ) : (
+              <span>
+                <HighlightText>Previous block hash</HighlightText> (the fingerprint that creates the
+                link with the prior block)
+              </span>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <span>
+                <HighlightText>Racine de Merkle</HighlightText> (une empreinte unique qui résume
+                d'un coup toutes les transactions du bloc)
+              </span>
+            ) : (
+              <span>
+                <HighlightText>Merkle root</HighlightText> (a single fingerprint that summarizes
+                every transaction in the block at once)
+              </span>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <span>
+                <HighlightText>Horodatage</HighlightText> (date de naissance du bloc)
+              </span>
+            ) : (
+              <span>
+                <HighlightText>Timestamp</HighlightText> (the block's birth date)
+              </span>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <span>
+                <HighlightText>Nonce</HighlightText> (un numéro utilisé par les mineurs que nous
+                verrons au prochain chapitre)
+              </span>
+            ) : (
+              <span>
+                <HighlightText>Nonce</HighlightText> (a number used by miners - we'll cover it in
+                the next chapter)
+              </span>
+            )}
+          </li>
+        </ol>
         <p>
           {fr ? (
             <>
