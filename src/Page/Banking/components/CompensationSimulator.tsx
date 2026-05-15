@@ -81,19 +81,21 @@ export const CompensationSimulator: FC = () => {
             {fr
               ? "Et voilà ! La compensation est effectuée. Observes bien les changements en jaune."
               : "There you go! The compensation is complete. Look closely at the changes in yellow."}
-            <br />
+          </p>
+          <ul>
             {fr ? (
-              <ul>
+              <>
                 <li>Au passif : la banque de Nicolas a épongé sa dette.</li>
                 <li>À l'actif : les "Réserves M0" de la banque ont diminué de 200 000 €.</li>
-              </ul>
+              </>
             ) : (
               <>
-                - On the liabilities side: Nicolas's bank has settled its debt.
-                <br />- On the assets side: the bank's "M0 Reserves" decreased by $200,000.
+                <li>On the liabilities side: Nicolas's bank has settled its debt.</li>
+
+                <li>On the assets side: the bank's "M0 Reserves" decreased by $200,000.</li>
               </>
             )}
-          </p>
+          </ul>
           <p>
             {fr
               ? "La banque a bel et bien utilisé sa monnaie de Banque Centrale (M0) pour régler une dette née d'une transaction en monnaie commerciale (M2). Tu saisis maintenant la différence entre ces deux niveaux de monnaie !"

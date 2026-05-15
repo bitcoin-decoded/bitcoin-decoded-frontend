@@ -74,26 +74,21 @@ export const Banking6Page: FC = () => {
           )}
         </p>
         <p>
-          {fr ? (
-            <>
-              Il décide alors de se faire plaisir, et c'est bien normal :
-              <ul>
-                <li>il vend quelques actions</li>
-                <li>il achète une résidence secondaire au bord de la mer</li>
-                <li>et il commande une voiture de luxe.</li>
-              </ul>
-            </>
-          ) : (
-            <>
-              He then decides to treat himself, and that's perfectly normal:
-              <ul>
-                <li>he sells some shares</li>
-                <li>he buys a seaside vacation home</li>
-                <li>and he orders a luxury car.</li>
-              </ul>
-            </>
-          )}
+          {fr
+            ? "Il décide alors de se faire plaisir, et c'est bien normal :"
+            : "He then decides to treat himself, and that's perfectly normal:"}
         </p>
+        <ul>
+          <li>{fr ? "il vend quelques actions" : "he sells some shares"}</li>
+
+          <li>
+            {fr
+              ? "il achète une résidence secondaire au bord de la mer"
+              : "he buys a seaside vacation home"}
+          </li>
+
+          <li>{fr ? "et il commande une voiture de luxe." : "and he orders a luxury car."}</li>
+        </ul>
         <div style={PAGE_STYLES.illustrationsWrapper}>
           <Illustration
             src={picsouVilla}

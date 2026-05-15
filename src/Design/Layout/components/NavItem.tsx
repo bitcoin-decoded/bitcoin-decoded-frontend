@@ -1,8 +1,10 @@
-import { type FC, type CSSProperties, type JSX, Fragment } from "react";
+import { type CSSProperties, type FC, Fragment, type JSX } from "react";
+
 import { ClipboardCheck } from "lucide-react";
-import { ChevronIcon } from "../../icons";
-import { Badge } from "../../components";
+
 import { type NavigationItem } from "../../../Routing";
+import { Badge } from "../../components";
+import { ChevronIcon } from "../../icons";
 
 type Props = {
   item: NavigationItem;
@@ -59,13 +61,9 @@ export const NavItem: FC<Props> = ({
     borderRadius: 0,
     transition: "background-color 0.15s, color 0.15s",
     backgroundColor:
-      isDirectlyActive || isInteracting
-        ? colors.base.background.hover
-        : "transparent",
+      isDirectlyActive || isInteracting ? colors.base.background.hover : "transparent",
     color:
-      isDirectlyActive || isActiveAncestor
-        ? colors.base.text.primary
-        : colors.base.text.secondary,
+      isDirectlyActive || isActiveAncestor ? colors.base.text.primary : colors.base.text.secondary,
     outline: "none",
     WebkitTapHighlightColor: "transparent",
   };
@@ -154,9 +152,7 @@ export const NavItem: FC<Props> = ({
         <div style={submenuWrapperStyle} aria-hidden={!isExpanded}>
           <ul style={submenuListStyle}>
             {item.children.map((subItem) => (
-              <li key={subItem.id || subItem.label}>
-                {renderItem(subItem, level + 1)}
-              </li>
+              <li key={subItem.id || subItem.label}>{renderItem(subItem, level + 1)}</li>
             ))}
           </ul>
         </div>

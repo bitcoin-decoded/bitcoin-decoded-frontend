@@ -43,32 +43,23 @@ export const Bitcoin3Page: FC = () => {
         )}
       </p>
       <p>
-        {fr ? (
-          <>
-            Imagines un immense livre de compte qui retrace chaque transaction depuis la création du
-            réseau (le temps <i>t = 0</i>, le tout premier bloc, appelé <i>« Bloc Genesis »</i>) :
-            <ul>
-              <li>un bloc = une page. Chaque page est remplie de transactions.</li>
-              <li>
-                une chaîne de blocs = un livre dont toutes les pages sont liées entre elles, formant
-                ainsi une chaîne difficile à rompre sans casser tout l'ensemble.
-              </li>
-            </ul>
-          </>
-        ) : (
-          <>
-            Imagine a giant ledger that records every transaction since the network was born (time{" "}
-            <i>t = 0</i>, the very first block, called the <i>"Genesis Block"</i>):
-            <ul>
-              <li>a block = a page. Each page is filled with transactions.</li>
-              <li>
-                a chain of blocks = a book whose pages are all linked together, forming a chain
-                that's hard to break without breaking the whole thing.
-              </li>
-            </ul>
-          </>
-        )}
+        {fr
+          ? "Imagines un immense livre de compte qui retrace chaque transaction depuis la création du réseau (le temps t = 0, le tout premier bloc, appelé « Bloc Genesis ») :"
+          : 'Imagine a giant ledger that records every transaction since the network was born (time t = 0, the very first block, called the "Genesis Block"):'}
       </p>
+      <ul>
+        <li>
+          {fr
+            ? "un bloc = une page. Chaque page est remplie de transactions."
+            : "a block = a page. Each page is filled with transactions."}
+        </li>
+
+        <li>
+          {fr
+            ? "une chaîne de blocs = un livre dont toutes les pages sont liées entre elles, formant ainsi une chaîne difficile à rompre sans casser tout l'ensemble."
+            : "a chain of blocks = a book whose pages are all linked together, forming a chain that's hard to break without breaking the whole thing."}
+        </li>
+      </ul>
       <Callout title={fr ? "Dissection d'un bloc" : "Dissecting a block"}>
         <p>
           {fr ? (

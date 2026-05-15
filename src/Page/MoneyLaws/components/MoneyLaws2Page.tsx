@@ -198,59 +198,44 @@ export const MoneyLaws2Page: FC = () => {
           : "If Capital is a structure of time-consuming steps (like our sandwich), how do we know whether we can afford to start a new project? This is where the interest rate comes in."}
       </p>
       <p>
-        {fr ? (
-          <>
-            Dans un monde sans manipulation monétaire, ce taux agit comme une boussole naturelle :
-            <ul>
-              <li>
-                Lorsque les citoyens épargnent (préférence temporelle faible), ils ne consomment pas
-                tout, tout de suite. L'argent n'est pas rare. Naturellement, le prix pour emprunter
-                de l'argent (taux d'intérêt) est bas.
-              </li>
-              <li style={{ marginTop: "1rem" }}>
-                Ce taux d'intérêt bas envoie un signal très clair à celles et ceux qui souhaitent
-                entreprendre :{" "}
-                <i>
-                  « C'est bon ! La société a mis assez de ressources de côté, nous pouvons lancer
-                  des projets longs et complexes (des détours de production) »
-                </i>
-                .
-              </li>
-              <li style={{ marginTop: "1rem" }}>
-                Ces projets créent des machines et des usines qui rendent la société plus efficiente
-                et productive. À la fin, les prix des biens chutent car la société produit plus avec
-                moins d'effort. C'est comme cela qu'est créée la vraie richesse : le pouvoir d'achat
-                de chacun augmente car la vie coûte moins cher.
-              </li>
-            </ul>
-          </>
-        ) : (
-          <>
-            In a world without monetary manipulation, this rate acts as a natural compass:
-            <ul>
-              <li>
-                When citizens save (low time preference), they do not consume everything
-                immediately. Money is not scarce. Naturally, the cost of borrowing (the interest
-                rate) is low.
-              </li>
-              <li style={{ marginTop: "1rem" }}>
-                This low interest rate sends a very clear signal to those who want to build:{" "}
-                <i>
-                  "All clear! Society has set aside enough resources - we can launch long and
-                  complex projects (roundabout production)"
-                </i>
-                .
-              </li>
-              <li style={{ marginTop: "1rem" }}>
-                These projects create machines and factories that make society more efficient and
-                productive. In the end, the prices of goods fall because society produces more with
-                less effort. This is how true wealth is created: everyone's purchasing power
-                increases because life becomes cheaper.
-              </li>
-            </ul>
-          </>
-        )}
+        {fr
+          ? "Dans un monde sans manipulation monétaire, ce taux agit comme une boussole naturelle :"
+          : "In a world without monetary manipulation, this rate acts as a natural compass:"}
       </p>
+      <ul>
+        <li>
+          {fr
+            ? "Lorsque les citoyens épargnent (préférence temporelle faible), ils ne consomment pas tout, tout de suite. L'argent n'est pas rare. Naturellement, le prix pour emprunter de l'argent (taux d'intérêt) est bas."
+            : "When citizens save (low time preference), they do not consume everything immediately. Money is not scarce. Naturally, the cost of borrowing (the interest rate) is low."}
+        </li>
+        <li style={{ marginTop: "1rem" }}>
+          {fr ? (
+            <span>
+              Ce taux d'intérêt bas envoie un signal très clair à celles et ceux qui souhaitent
+              entreprendre :{" "}
+              <i>
+                « C'est bon ! La société a mis assez de ressources de côté, nous pouvons lancer des
+                projets longs et complexes (des détours de production) »
+              </i>
+              .
+            </span>
+          ) : (
+            <span>
+              This low interest rate sends a very clear signal to those who want to build:{" "}
+              <i>
+                "All clear! Society has set aside enough resources - we can launch long and complex
+                projects (roundabout production)"
+              </i>
+              .
+            </span>
+          )}
+        </li>
+        <li style={{ marginTop: "1rem" }}>
+          {fr
+            ? "Ces projets créent des machines et des usines qui rendent la société plus efficiente et productive. À la fin, les prix des biens chutent car la société produit plus avec moins d'effort. C'est comme cela qu'est créée la vraie richesse : le pouvoir d'achat de chacun augmente car la vie coûte moins cher."
+            : "These projects create machines and factories that make society more efficient and productive. In the end, the prices of goods fall because society produces more with less effort. This is how true wealth is created: everyone's purchasing power increases because life becomes cheaper."}
+        </li>
+      </ul>
       <Illustration
         src={prosperousEconomy}
         alt={fr ? "L'économie saine et prospère" : "A healthy and prosperous economy"}
@@ -267,49 +252,48 @@ export const MoneyLaws2Page: FC = () => {
           : "So when does it all go wrong, you might ask?"}
       </p>
       <p>
-        {fr ? (
-          <>
-            Le problème survient lorsque les banques commencent à tricher avec la boussole en
-            émettant de la nouvelle monnaie : que ce soit par le recours abusif au crédit bancaire
-            ou par les interventions de la Banque Centrale. Je m'explique :
-            <ul>
-              <li>
-                Au lieu d'attendre que les gens épargnent réellement, les banques « injectent » des
-                liquidités pour forcer les taux à rester bas. En faisant cela, elles faussent la
-                boussole. Le signal indique "Taux Bas" alors qu'en réalité, la société n'épargne pas
-                assez. Les ressources physiques (acier, briques, temps) n'existent pas en réserve.
-                L'argent réel est rare.
-              </li>
-              <li style={{ marginTop: "1rem" }}>
-                Trompés par ce signal truqué, les entrepreneurs se lancent dans une euphorie de
-                projets : on construit des aéroports inutiles, des immeubles vides ou des startups
-                qui ne rapportent rien. C'est ce qu'on appelle le <i>malinvestissement</i>. On
-                observe une déconnexion totale entre les rendements réels (ce qu'on produit
-                vraiment) et les rendements nominaux (les chiffres qui grimpent sur les écrans).
-              </li>
-            </ul>
-          </>
-        ) : (
-          <>
-            The problem arises when banks start tampering with the compass by issuing new money,
-            whether through excessive bank lending or Central Bank interventions. Let me explain:
-            <ul>
-              <li>
-                Instead of waiting for people to actually save, banks "inject" liquidity to force
-                rates to stay low. In doing so, they tamper with the compass. The signal reads "Low
-                Rates" when in reality, society doesn't save enough. Physical resources (steel,
-                bricks, time) do not exist in reserve. Real money is scarce.
-              </li>
-              <li style={{ marginTop: "1rem" }}>
-                Misled by this rigged signal, entrepreneurs rush into a frenzy of projects: useless
-                airports, empty buildings, or startups that generate nothing. This is called{" "}
-                <i>malinvestment</i>. There is a total disconnect between real returns (what is
-                actually produced) and nominal returns (the numbers climbing on screens).
-              </li>
-            </ul>
-          </>
-        )}
+        {fr
+          ? "Le problème survient lorsque les banques commencent à tricher avec la boussole en émettant de la nouvelle monnaie : que ce soit par le recours abusif au crédit bancaire ou par les interventions de la Banque Centrale. Je m'explique :"
+          : "The problem arises when banks start tampering with the compass by issuing new money, whether through excessive bank lending or Central Bank interventions. Let me explain:"}
       </p>
+      <ul>
+        <li>
+          {fr ? (
+            <span>
+              Au lieu d'attendre que les gens épargnent réellement, les banques « injectent » des
+              liquidités pour forcer les taux à rester bas. En faisant cela, elles faussent la
+              boussole. Le signal indique "Taux Bas" alors qu'en réalité, la société n'épargne pas
+              assez. Les ressources physiques (acier, briques, temps) n'existent pas en réserve.
+              L'argent réel est rare.
+            </span>
+          ) : (
+            <span>
+              Instead of waiting for people to actually save, banks "inject" liquidity to force
+              rates to stay low. In doing so, they tamper with the compass. The signal reads "Low
+              Rates" when in reality, society doesn't save enough. Physical resources (steel,
+              bricks, time) do not exist in reserve. Real money is scarce.
+            </span>
+          )}
+        </li>
+        <li style={{ marginTop: "1rem" }}>
+          {fr ? (
+            <span>
+              Trompés par ce signal truqué, les entrepreneurs se lancent dans une euphorie de
+              projets : on construit des aéroports inutiles, des immeubles vides ou des startups qui
+              ne rapportent rien. C'est ce qu'on appelle le <i>malinvestissement</i>. On observe une
+              déconnexion totale entre les rendements réels (ce qu'on produit vraiment) et les
+              rendements nominaux (les chiffres qui grimpent sur les écrans).
+            </span>
+          ) : (
+            <span>
+              Misled by this rigged signal, entrepreneurs rush into a frenzy of projects: useless
+              airports, empty buildings, or startups that generate nothing. This is called{" "}
+              <i>malinvestment</i>. There is a total disconnect between real returns (what is
+              actually produced) and nominal returns (the numbers climbing on screens).
+            </span>
+          )}
+        </li>
+      </ul>
       <Illustration
         src={taintedEconomy}
         alt={fr ? "Le mirage de la monnaie facile" : "The mirage of easy money"}

@@ -31,15 +31,11 @@ export const Bitcoin4Page: FC = () => {
           ? "Imagines un réseau mondial où personne ne se connaît, personne ne fait confiance à personne. Et pourtant, tout le monde doit être d'accord sur une seule version du registre."
           : "Imagine a global network where nobody knows anyone, and nobody trusts anyone. Yet everyone must agree on a single version of the ledger."}
       </p>
-
-      <p>
-        <ul>
-          <li>{fr ? "Qui a payé qui ?" : "Who paid whom?"}</li>
-          <li>{fr ? "Quelle transaction est valide ?" : "Which transaction is valid?"}</li>
-          <li>{fr ? "Laquelle est une fraude ?" : "Which one is a fraud?"}</li>
-        </ul>
-      </p>
-
+      <ul>
+        <li>{fr ? "Qui a payé qui ?" : "Who paid whom?"}</li>
+        <li>{fr ? "Quelle transaction est valide ?" : "Which transaction is valid?"}</li>
+        <li>{fr ? "Laquelle est une fraude ?" : "Which one is a fraud?"}</li>
+      </ul>
       <p>
         {fr ? (
           <>
@@ -121,25 +117,24 @@ export const Bitcoin4Page: FC = () => {
             </>
           )}
         </p>
-
         <p>
           {fr
             ? "Oui, tu as bien lu. Deux transactions contradictoires peuvent coexister temporairement :"
             : "Yes, you read that right. Two contradictory transactions can coexist temporarily:"}
-          <ul>
-            <li>
-              <i>{fr ? "Nicolas envoie 1 BTC à Mme. Michu" : "Nicolas sends 1 BTC to Ms. Michu"}</i>
-            </li>
-            <li>
-              <i>
-                {fr
-                  ? "Nicolas envoie le même BTC à Christine L."
-                  : "Nicolas sends the same BTC to Christine L."}
-              </i>
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            <i>{fr ? "Nicolas envoie 1 BTC à Mme. Michu" : "Nicolas sends 1 BTC to Ms. Michu"}</i>
+          </li>
 
+          <li>
+            <i>
+              {fr
+                ? "Nicolas envoie le même BTC à Christine L."
+                : "Nicolas sends the same BTC to Christine L."}
+            </i>
+          </li>
+        </ul>
         <p>
           {fr ? (
             <>

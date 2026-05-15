@@ -103,52 +103,55 @@ export const Bitcoin1Page: FC = () => {
           {fr
             ? "Et ce logiciel permet d'avoir en quelque sorte des super-pouvoirs :"
             : "And this software grants you a kind of superpower:"}
-          <ul>
-            <li>
-              {fr ? (
-                <>
-                  Accès à l'historique de toutes les transactions qui ont eu lieu sur le réseau
-                  depuis le départ, c'est-à-dire un grand livre de comptes appelé{" "}
-                  <Reference to={ROUTE_NAME.Bitcoin_3}>
-                    <i>blockchain</i>
-                  </Reference>
-                  .
-                </>
-              ) : (
-                <>
-                  Access to the full history of every transaction that ever occurred on the network
-                  - a ledger called the{" "}
-                  <Reference to={ROUTE_NAME.Bitcoin_3}>
-                    <i>blockchain</i>
-                  </Reference>
-                  .
-                </>
-              )}
-            </li>
-            <li>
-              {fr
-                ? "Synchronisation avec ce grand livre de comptes en temps réel."
-                : "Real-time synchronization with this ledger."}
-            </li>
-            <li>
-              {fr
-                ? "Et capacité de veiller à la bonne application des règles en détectant d'éventuels acteurs malveillants."
-                : "And the ability to enforce the rules by detecting any malicious actors."}
-            </li>
-          </ul>
-          <p>
+        </p>
+        <ul>
+          <li>
             {fr ? (
-              <>
-                En utilisant ce logiciel, on devient un acteur à part entière du réseau Bitcoin,
-                appelé <i>nœud</i>.
-              </>
+              <span>
+                Accès à l'historique de toutes les transactions qui ont eu lieu sur le réseau depuis
+                le départ, c'est-à-dire un grand livre de comptes appelé{" "}
+                <Reference to={ROUTE_NAME.Bitcoin_3}>
+                  <i>blockchain</i>
+                </Reference>
+                .
+              </span>
             ) : (
-              <>
-                By running this software, you become a full participant in the Bitcoin network,
-                called a <i>node</i>.
-              </>
+              <span>
+                Access to the full history of every transaction that ever occurred on the network -
+                a ledger called the{" "}
+                <Reference to={ROUTE_NAME.Bitcoin_3}>
+                  <i>blockchain</i>
+                </Reference>
+                .
+              </span>
             )}
-          </p>
+          </li>
+
+          <li>
+            {fr
+              ? "Synchronisation avec ce grand livre de comptes en temps réel."
+              : "Real-time synchronization with this ledger."}
+          </li>
+
+          <li>
+            {fr
+              ? "Et capacité de veiller à la bonne application des règles en détectant d'éventuels acteurs malveillants."
+              : "And the ability to enforce the rules by detecting any malicious actors."}
+          </li>
+        </ul>
+
+        <p>
+          {fr ? (
+            <span>
+              En utilisant ce logiciel, on devient un acteur à part entière du réseau Bitcoin,
+              appelé <i>nœud</i>.
+            </span>
+          ) : (
+            <span>
+              By running this software, you become a full participant in the Bitcoin network, called
+              a <i>node</i>.
+            </span>
+          )}
         </p>
         <BitcoinNodeDemo />
       </Callout>
@@ -158,21 +161,20 @@ export const Bitcoin1Page: FC = () => {
           : "And the Bitcoin network is nothing more than a set of interconnected nodes."}
       </p>
       <BitcoinNetworkMap />
-      <p>
-        {fr ? "Il existe plusieurs types de nœuds :" : "There are several types of nodes:"}
-        <ul>
-          <li>
-            {fr
-              ? "Les nœuds simples (ceux que tu viens tout juste de voir)."
-              : "Simple nodes (the ones you just saw)."}
-          </li>
-          <li>
-            {fr
-              ? "Et les nœuds-mineurs (ceux que tu vas découvrir dès maintenant)."
-              : "And mining nodes (the ones you're about to discover)."}
-          </li>
-        </ul>
-      </p>
+      <p>{fr ? "Il existe plusieurs types de nœuds :" : "There are several types of nodes:"}</p>
+      <ul>
+        <li>
+          {fr
+            ? "Les nœuds simples (ceux que tu viens tout juste de voir)."
+            : "Simple nodes (the ones you just saw)."}
+        </li>
+
+        <li>
+          {fr
+            ? "Et les nœuds-mineurs (ceux que tu vas découvrir dès maintenant)."
+            : "And mining nodes (the ones you're about to discover)."}
+        </li>
+      </ul>
 
       <Callout
         title={
@@ -256,27 +258,21 @@ export const Bitcoin1Page: FC = () => {
         )}
       </p>
       <p>
-        {fr ? (
-          <>
-            Les nœuds simples entrent alors en action : chacun d'entre eux vérifie indépendamment
-            que le bloc respecte toutes les règles :
-          </>
-        ) : (
-          <>
-            Simple nodes then step in: each one independently verifies that the block follows all
-            the rules:
-          </>
-        )}
-        <ul>
-          <li>{fr ? "Les transactions sont-elles valides ?" : "Are the transactions valid?"}</li>
-          <li>
-            {fr
-              ? "Le problème mathématique a-t-il bien été résolu ?"
-              : "Was the mathematical problem properly solved?"}
-          </li>
-          <li>{fr ? "Aucune règle n'a-t-elle été enfreinte ?" : "Were any rules broken?"}</li>
-        </ul>
+        {fr
+          ? "Les nœuds simples entrent alors en action : chacun d'entre eux vérifie indépendamment que le bloc respecte toutes les règles :"
+          : "Simple nodes then step in: each one independently verifies that the block follows all the rules:"}
       </p>
+      <ul>
+        <li>{fr ? "Les transactions sont-elles valides ?" : "Are the transactions valid?"}</li>
+
+        <li>
+          {fr
+            ? "Le problème mathématique a-t-il bien été résolu ?"
+            : "Was the mathematical problem properly solved?"}
+        </li>
+
+        <li>{fr ? "Aucune règle n'a-t-elle été enfreinte ?" : "Were any rules broken?"}</li>
+      </ul>
       <p>
         {fr ? (
           <>
