@@ -44,24 +44,16 @@ export const Bitcoin1Page: FC = () => {
           ? "Expliquer Bitcoin de façon simple et complète n'est pas si facile, tant c'est un objet compliqué à approcher parce qu'il couvre beaucoup de sujets différents."
           : "Explaining Bitcoin in a simple yet complete way is not that easy, as it is a complex object that covers many different topics."}
       </p>
+      <p>{fr ? "Bitcoin est trois choses à la fois :" : "Bitcoin is three things at once:"}</p>
+      <ol>
+        <li>{fr ? "Un logiciel" : "A software"}</li>
+        <li>{fr ? "Un réseau" : "A network"}</li>
+        <li>{fr ? "Et une monnaie" : "And a currency"}</li>
+      </ol>
       <p>
-        {fr ? "Bitcoin est trois choses à la fois :" : "Bitcoin is three things at once:"}
-        <ol>
-          <li>{fr ? "Un logiciel" : "A software"}</li>
-          <li>{fr ? "Un réseau" : "A network"}</li>
-          <li>{fr ? "Et une monnaie" : "And a currency"}</li>
-        </ol>
-        {fr ? (
-          <>
-            Ensemble, ces éléments constituent l'essence de Bitcoin, c'est-à-dire une infrastructure
-            publique de paiement.
-          </>
-        ) : (
-          <>
-            Together, these elements form the essence of Bitcoin, that is a public payment
-            infrastructure.
-          </>
-        )}
+        {fr
+          ? "Ensemble, ces éléments constituent l'essence de Bitcoin, c'est-à-dire une infrastructure publique de paiement."
+          : "Together, these elements form the essence of Bitcoin, that is a public payment infrastructure."}
       </p>
       <p>
         {fr ? (
@@ -111,52 +103,55 @@ export const Bitcoin1Page: FC = () => {
           {fr
             ? "Et ce logiciel permet d'avoir en quelque sorte des super-pouvoirs :"
             : "And this software grants you a kind of superpower:"}
-          <ul>
-            <li>
-              {fr ? (
-                <>
-                  Accès à l'historique de toutes les transactions qui ont eu lieu sur le réseau
-                  depuis le départ, c'est-à-dire un grand livre de comptes appelé{" "}
-                  <Reference to={ROUTE_NAME.Bitcoin_3}>
-                    <i>blockchain</i>
-                  </Reference>
-                  .
-                </>
-              ) : (
-                <>
-                  Access to the full history of every transaction that ever occurred on the network
-                  - a ledger called the{" "}
-                  <Reference to={ROUTE_NAME.Bitcoin_3}>
-                    <i>blockchain</i>
-                  </Reference>
-                  .
-                </>
-              )}
-            </li>
-            <li>
-              {fr
-                ? "Synchronisation avec ce grand livre de comptes en temps réel."
-                : "Real-time synchronization with this ledger."}
-            </li>
-            <li>
-              {fr
-                ? "Et capacité de veiller à la bonne application des règles en détectant d'éventuels acteurs malveillants."
-                : "And the ability to enforce the rules by detecting any malicious actors."}
-            </li>
-          </ul>
-          <p>
+        </p>
+        <ul>
+          <li>
             {fr ? (
-              <>
-                En utilisant ce logiciel, on devient un acteur à part entière du réseau Bitcoin,
-                appelé <i>nœud</i>.
-              </>
+              <span>
+                Accès à l'historique de toutes les transactions qui ont eu lieu sur le réseau depuis
+                le départ, c'est-à-dire un grand livre de comptes appelé{" "}
+                <Reference to={ROUTE_NAME.Bitcoin_3}>
+                  <i>blockchain</i>
+                </Reference>
+                .
+              </span>
             ) : (
-              <>
-                By running this software, you become a full participant in the Bitcoin network,
-                called a <i>node</i>.
-              </>
+              <span>
+                Access to the full history of every transaction that ever occurred on the network -
+                a ledger called the{" "}
+                <Reference to={ROUTE_NAME.Bitcoin_3}>
+                  <i>blockchain</i>
+                </Reference>
+                .
+              </span>
             )}
-          </p>
+          </li>
+
+          <li>
+            {fr
+              ? "Synchronisation avec ce grand livre de comptes en temps réel."
+              : "Real-time synchronization with this ledger."}
+          </li>
+
+          <li>
+            {fr
+              ? "Et capacité de veiller à la bonne application des règles en détectant d'éventuels acteurs malveillants."
+              : "And the ability to enforce the rules by detecting any malicious actors."}
+          </li>
+        </ul>
+
+        <p>
+          {fr ? (
+            <span>
+              En utilisant ce logiciel, on devient un acteur à part entière du réseau Bitcoin,
+              appelé <i>nœud</i>.
+            </span>
+          ) : (
+            <span>
+              By running this software, you become a full participant in the Bitcoin network, called
+              a <i>node</i>.
+            </span>
+          )}
         </p>
         <BitcoinNodeDemo />
       </Callout>
@@ -166,21 +161,20 @@ export const Bitcoin1Page: FC = () => {
           : "And the Bitcoin network is nothing more than a set of interconnected nodes."}
       </p>
       <BitcoinNetworkMap />
-      <p>
-        {fr ? "Il existe plusieurs types de nœuds :" : "There are several types of nodes:"}
-        <ul>
-          <li>
-            {fr
-              ? "Les nœuds simples (ceux que tu viens tout juste de voir)."
-              : "Simple nodes (the ones you just saw)."}
-          </li>
-          <li>
-            {fr
-              ? "Et les nœuds-mineurs (ceux que tu vas découvrir dès maintenant)."
-              : "And mining nodes (the ones you're about to discover)."}
-          </li>
-        </ul>
-      </p>
+      <p>{fr ? "Il existe plusieurs types de nœuds :" : "There are several types of nodes:"}</p>
+      <ul>
+        <li>
+          {fr
+            ? "Les nœuds simples (ceux que tu viens tout juste de voir)."
+            : "Simple nodes (the ones you just saw)."}
+        </li>
+
+        <li>
+          {fr
+            ? "Et les nœuds-mineurs (ceux que tu vas découvrir dès maintenant)."
+            : "And mining nodes (the ones you're about to discover)."}
+        </li>
+      </ul>
 
       <Callout
         title={
@@ -222,31 +216,32 @@ export const Bitcoin1Page: FC = () => {
           {fr
             ? "Le premier mineur qui trouve la solution gagne deux choses :"
             : "The first miner to find the solution wins two things:"}
-          <ol>
-            <li>
-              {fr ? (
-                <>Le droit d'ajouter une nouvelle page au grand livre de compte.</>
-              ) : (
-                <>The right to add a new page to the ledger.</>
-              )}
-            </li>
-            <li>
-              {fr ? (
-                <>
-                  Une récompense en bitcoin composée de deux parts : les nouveaux bitcoins créés par
-                  le protocole (la seule façon dont de nouveaux bitcoins entrent en circulation) et
-                  les frais des transactions incluses dans le bloc.
-                </>
-              ) : (
-                <>
-                  A Bitcoin reward made up of two parts: newly created bitcoins issued by the
-                  protocol (the only way new bitcoins enter circulation) and the transaction fees
-                  included in the block.
-                </>
-              )}
-            </li>
-          </ol>
         </p>
+        <ol>
+          <li>
+            {fr ? (
+              <>Le droit d'ajouter une nouvelle page au grand livre de compte.</>
+            ) : (
+              <>The right to add a new page to the ledger.</>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <>
+                Une récompense en bitcoin composée de deux parts : les nouveaux bitcoins créés par
+                le protocole (la seule façon dont de nouveaux bitcoins entrent en circulation) et
+                les frais des transactions incluses dans le bloc.
+              </>
+            ) : (
+              <>
+                A Bitcoin reward made up of two parts: newly created bitcoins issued by the protocol
+                (the only way new bitcoins enter circulation) and the transaction fees included in
+                the block.
+              </>
+            )}
+          </li>
+        </ol>
       </Callout>
 
       <p>
@@ -263,27 +258,21 @@ export const Bitcoin1Page: FC = () => {
         )}
       </p>
       <p>
-        {fr ? (
-          <>
-            Les nœuds simples entrent alors en action : chacun d'entre eux vérifie indépendamment
-            que le bloc respecte toutes les règles :
-          </>
-        ) : (
-          <>
-            Simple nodes then step in: each one independently verifies that the block follows all
-            the rules:
-          </>
-        )}
-        <ul>
-          <li>{fr ? "Les transactions sont-elles valides ?" : "Are the transactions valid?"}</li>
-          <li>
-            {fr
-              ? "Le problème mathématique a-t-il bien été résolu ?"
-              : "Was the mathematical problem properly solved?"}
-          </li>
-          <li>{fr ? "Aucune règle n'a-t-elle été enfreinte ?" : "Were any rules broken?"}</li>
-        </ul>
+        {fr
+          ? "Les nœuds simples entrent alors en action : chacun d'entre eux vérifie indépendamment que le bloc respecte toutes les règles :"
+          : "Simple nodes then step in: each one independently verifies that the block follows all the rules:"}
       </p>
+      <ul>
+        <li>{fr ? "Les transactions sont-elles valides ?" : "Are the transactions valid?"}</li>
+
+        <li>
+          {fr
+            ? "Le problème mathématique a-t-il bien été résolu ?"
+            : "Was the mathematical problem properly solved?"}
+        </li>
+
+        <li>{fr ? "Aucune règle n'a-t-elle été enfreinte ?" : "Were any rules broken?"}</li>
+      </ul>
       <p>
         {fr ? (
           <>

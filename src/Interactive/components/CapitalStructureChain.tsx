@@ -1,4 +1,5 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
+
 import { usePageTheme } from "../../Design";
 import { SANDWICH_CHAIN } from "../data";
 import { useCapitalStructureChain } from "../hooks";
@@ -128,7 +129,15 @@ export const CapitalStructureChain: FC = () => {
           <div key={step.id} style={itemWrapperStyle}>
             <div
               className="gradient-border"
-              style={{ ...cardStyle(index), "--border-glow-color": hoveredCardIndex === index ? colors[moduleTheme].text.secondary : colors[moduleTheme].border.secondary } as CSSProperties}
+              style={
+                {
+                  ...cardStyle(index),
+                  "--border-glow-color":
+                    hoveredCardIndex === index
+                      ? colors[moduleTheme].text.secondary
+                      : colors[moduleTheme].border.secondary,
+                } as CSSProperties
+              }
               onMouseEnter={() => setHoveredCardIndex(index)}
               onMouseLeave={() => setHoveredCardIndex(null)}
             >

@@ -1,7 +1,8 @@
 import { type CSSProperties, type FC } from "react";
+
 import { Coins, KeyRound, Lock, MapPin } from "lucide-react";
 
-import { withOpacity } from "../../../Design/helpers";
+import { withOpacity } from "../../../Design/";
 import { fmtBTC, truncateHash } from "../../helpers";
 import type { WalletCardData } from "../../types";
 

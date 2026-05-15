@@ -2,9 +2,14 @@ import { type CSSProperties, type FC } from "react";
 
 import { CircleCheck, Hash, RotateCcw } from "lucide-react";
 
-import { Button, Caption, SurfaceCard, useBreakpoint } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
-import { usePageTheme } from "../../Design/Theme";
+import {
+  Button,
+  Caption,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../Design";
 import { useLanguageContext } from "../../I18n";
 import { useHashDemo } from "../hooks";
 

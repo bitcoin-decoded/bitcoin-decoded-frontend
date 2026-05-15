@@ -54,42 +54,44 @@ export const MoneyLaws4Page: FC = () => {
       </p>
       <Callout title={fr ? "Le Physicien contre le Logicien" : "The Physicist versus the Logician"}>
         <p>
-          {fr ? (
-            <>
-              Il existe deux manières radicalement opposées d'aborder l'économie :
-              <ul>
-                <li>
-                  L'école keynésienne (<i>la méthode du physicien</i>) : on observe des chiffres (le
-                  PIB, le chômage), on fait une hypothèse, et on regarde si les données du passé
-                  confirment la théorie. C'est ce qu'on appelle l'empirisme (ou positivisme dans sa
-                  version méthodologique) .
-                </li>
-                <li>
-                  L'école autrichienne (<i>la méthode du logicien</i>) : on ne part pas de
-                  l'observation, mais d'une vérité indiscutable, puis on en déduit tout le reste par
-                  la logique, comme en géométrie. C'est la méthode axiomatique-déductive.
-                </li>
-              </ul>
-            </>
-          ) : (
-            <>
-              There are two radically opposed ways of approaching economics:
-              <ul>
-                <li>
-                  The Keynesian school (<i>the physicist's method</i>): you observe numbers (GDP,
-                  unemployment), formulate a hypothesis, and then check whether past data confirms
-                  the theory. This is what is called empiricism (or positivism in its methodological
-                  form) .
-                </li>
-                <li>
-                  The Austrian school (<i>the logician's method</i>): you do not start from
-                  observation, but from an indisputable truth, then deduce everything else through
-                  logic, as in geometry. This is the axiomatic-deductive method .
-                </li>
-              </ul>
-            </>
-          )}
+          {fr
+            ? "Il existe deux manières radicalement opposées d'aborder l'économie :"
+            : "There are two radically opposed ways of approaching economics:"}
         </p>
+        <ul>
+          <li>
+            {fr ? (
+              <span>
+                L'école keynésienne (<i>la méthode du physicien</i>) : on observe des chiffres (le
+                PIB, le chômage), on fait une hypothèse, et on regarde si les données du passé
+                confirment la théorie. C'est ce qu'on appelle l'empirisme (ou positivisme dans sa
+                version méthodologique) .
+              </span>
+            ) : (
+              <span>
+                The Keynesian school (<i>the physicist's method</i>): you observe numbers (GDP,
+                unemployment), formulate a hypothesis, and then check whether past data confirms the
+                theory. This is what is called empiricism (or positivism in its methodological form)
+                .
+              </span>
+            )}
+          </li>
+          <li>
+            {fr ? (
+              <span>
+                L'école autrichienne (<i>la méthode du logicien</i>) : on ne part pas de
+                l'observation, mais d'une vérité indiscutable, puis on en déduit tout le reste par
+                la logique, comme en géométrie. C'est la méthode axiomatique-déductive.
+              </span>
+            ) : (
+              <span>
+                The Austrian school (<i>the logician's method</i>): you do not start from
+                observation, but from an indisputable truth, then deduce everything else through
+                logic, as in geometry. This is the axiomatic-deductive method .
+              </span>
+            )}
+          </li>
+        </ul>
       </Callout>
       <p>
         {fr ? (
@@ -117,40 +119,40 @@ export const MoneyLaws4Page: FC = () => {
           : "Scientism is the slavish imitation of the method and language of Science by those who study the problems of society, even though these methods do not apply to their subject."}
       </Quote>
       <p>
-        {fr ? (
-          <>
-            Mais pourquoi une telle critique ? Tout simplement parce que ces méthodes sont
-            inadaptées :
-            <ul>
-              <li>
-                La société n'est pas un laboratoire. On ne peut pas isoler une variable. Par
-                exemple, si les impôts baissent et que la croissance se met à monter, est-ce à cause
-                des impôts ou d'une nouvelle technologie apparue au même moment ? On ne peut pas le
-                savoir.
-              </li>
-              <li>
-                L'humain apprend. Contrairement à une planète, l'humain change son comportement s'il
-                connaît une théorie. Les données du passé ne prédisent donc jamais le futur.
-              </li>
-            </ul>
-          </>
-        ) : (
-          <>
-            But why such criticism? Simply because these methods are unsuited:
-            <ul>
-              <li>
-                Society is not a laboratory. You cannot isolate a variable. For instance, if taxes
-                go down and growth picks up, is it because of the tax cut or a new technology that
-                appeared at the same time? There is no way to tell.
-              </li>
-              <li>
-                Humans learn. Unlike a planet, humans change their behavior if they know about a
-                theory. Past data therefore never predicts the future.
-              </li>
-            </ul>
-          </>
-        )}
+        {fr
+          ? "Mais pourquoi une telle critique ? Tout simplement parce que ces méthodes sont inadaptées :"
+          : "But why such criticism? Simply because these methods are unsuited:"}
       </p>
+      <ul>
+        <li>
+          {fr ? (
+            <span>
+              La société n'est pas un laboratoire. On ne peut pas isoler une variable. Par exemple,
+              si les impôts baissent et que la croissance se met à monter, est-ce à cause des impôts
+              ou d'une nouvelle technologie apparue au même moment ? On ne peut pas le savoir.
+            </span>
+          ) : (
+            <span>
+              Society is not a laboratory. You cannot isolate a variable. For instance, if taxes go
+              down and growth picks up, is it because of the tax cut or a new technology that
+              appeared at the same time? There is no way to tell.
+            </span>
+          )}
+        </li>
+        <li>
+          {fr ? (
+            <span>
+              L'humain apprend. Contrairement à une planète, l'humain change son comportement s'il
+              connaît une théorie. Les données du passé ne prédisent donc jamais le futur.
+            </span>
+          ) : (
+            <span>
+              Humans learn. Unlike a planet, humans change their behavior if they know about a
+              theory. Past data therefore never predicts the future.
+            </span>
+          )}
+        </li>
+      </ul>
       <p>
         {fr ? (
           <>

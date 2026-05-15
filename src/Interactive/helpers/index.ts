@@ -1,5 +1,10 @@
-export { sha256, doubleSha256 } from "./sha256";
-export { truncateHash } from "./truncateHash";
+export { fmtBtc } from "./fmtBtc";
+export { fmtTxMin } from "./fmtTxMin";
 export { fmtBTC, fmtEur } from "./format";
-export { generateWalletSession } from "./generateWalletSession";
 export { generateSeed } from "./generateSeed";
+export { generateWalletSession } from "./generateWalletSession";
+export { getTxPool } from "./getTxPool";
+export { groupBits } from "./groupBits";
+export { minerRev } from "./minerRev";
+export { doubleSha256, sha256 } from "./sha256";
+export { truncateHash } from "./truncateHash";

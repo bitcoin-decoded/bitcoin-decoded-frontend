@@ -43,32 +43,23 @@ export const Bitcoin3Page: FC = () => {
         )}
       </p>
       <p>
-        {fr ? (
-          <>
-            Imagines un immense livre de compte qui retrace chaque transaction depuis la création du
-            réseau (le temps <i>t = 0</i>, le tout premier bloc, appelé <i>« Bloc Genesis »</i>) :
-            <ul>
-              <li>un bloc = une page. Chaque page est remplie de transactions.</li>
-              <li>
-                une chaîne de blocs = un livre dont toutes les pages sont liées entre elles, formant
-                ainsi une chaîne difficile à rompre sans casser tout l'ensemble.
-              </li>
-            </ul>
-          </>
-        ) : (
-          <>
-            Imagine a giant ledger that records every transaction since the network was born (time{" "}
-            <i>t = 0</i>, the very first block, called the <i>"Genesis Block"</i>):
-            <ul>
-              <li>a block = a page. Each page is filled with transactions.</li>
-              <li>
-                a chain of blocks = a book whose pages are all linked together, forming a chain
-                that's hard to break without breaking the whole thing.
-              </li>
-            </ul>
-          </>
-        )}
+        {fr
+          ? "Imagines un immense livre de compte qui retrace chaque transaction depuis la création du réseau (le temps t = 0, le tout premier bloc, appelé « Bloc Genesis ») :"
+          : 'Imagine a giant ledger that records every transaction since the network was born (time t = 0, the very first block, called the "Genesis Block"):'}
       </p>
+      <ul>
+        <li>
+          {fr
+            ? "un bloc = une page. Chaque page est remplie de transactions."
+            : "a block = a page. Each page is filled with transactions."}
+        </li>
+
+        <li>
+          {fr
+            ? "une chaîne de blocs = un livre dont toutes les pages sont liées entre elles, formant ainsi une chaîne difficile à rompre sans casser tout l'ensemble."
+            : "a chain of blocks = a book whose pages are all linked together, forming a chain that's hard to break without breaking the whole thing."}
+        </li>
+      </ul>
       <Callout title={fr ? "Dissection d'un bloc" : "Dissecting a block"}>
         <p>
           {fr ? (
@@ -87,59 +78,63 @@ export const Bitcoin3Page: FC = () => {
           {fr
             ? "L'en-tête contient les métadonnées du bloc :"
             : "The header contains the block's metadata:"}
-          <ol>
-            <li>
-              {fr ? (
-                <>
-                  <HighlightText>Hash du bloc précédent</HighlightText> (l'empreinte qui crée le
-                  lien avec le bloc d'avant)
-                </>
-              ) : (
-                <>
-                  <HighlightText>Previous block hash</HighlightText> (the fingerprint that creates
-                  the link with the prior block)
-                </>
-              )}
-            </li>
-            <li>
-              {fr ? (
-                <>
-                  <HighlightText>Racine de Merkle</HighlightText> (une empreinte unique qui résume
-                  d'un coup toutes les transactions du bloc)
-                </>
-              ) : (
-                <>
-                  <HighlightText>Merkle root</HighlightText> (a single fingerprint that summarizes
-                  every transaction in the block at once)
-                </>
-              )}
-            </li>
-            <li>
-              {fr ? (
-                <>
-                  <HighlightText>Horodatage</HighlightText> (date de naissance du bloc)
-                </>
-              ) : (
-                <>
-                  <HighlightText>Timestamp</HighlightText> (the block's birth date)
-                </>
-              )}
-            </li>
-            <li>
-              {fr ? (
-                <>
-                  <HighlightText>Nonce</HighlightText> (un numéro utilisé par les mineurs que nous
-                  verrons au prochain chapitre)
-                </>
-              ) : (
-                <>
-                  <HighlightText>Nonce</HighlightText> (a number used by miners - we'll cover it in
-                  the next chapter)
-                </>
-              )}
-            </li>
-          </ol>
         </p>
+
+        <ol>
+          <li>
+            {fr ? (
+              <span>
+                <HighlightText>Hash du bloc précédent</HighlightText> (l'empreinte qui crée le lien
+                avec le bloc d'avant)
+              </span>
+            ) : (
+              <span>
+                <HighlightText>Previous block hash</HighlightText> (the fingerprint that creates the
+                link with the prior block)
+              </span>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <span>
+                <HighlightText>Racine de Merkle</HighlightText> (une empreinte unique qui résume
+                d'un coup toutes les transactions du bloc)
+              </span>
+            ) : (
+              <span>
+                <HighlightText>Merkle root</HighlightText> (a single fingerprint that summarizes
+                every transaction in the block at once)
+              </span>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <span>
+                <HighlightText>Horodatage</HighlightText> (date de naissance du bloc)
+              </span>
+            ) : (
+              <span>
+                <HighlightText>Timestamp</HighlightText> (the block's birth date)
+              </span>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <span>
+                <HighlightText>Nonce</HighlightText> (un numéro utilisé par les mineurs que nous
+                verrons au prochain chapitre)
+              </span>
+            ) : (
+              <span>
+                <HighlightText>Nonce</HighlightText> (a number used by miners - we'll cover it in
+                the next chapter)
+              </span>
+            )}
+          </li>
+        </ol>
         <p>
           {fr ? (
             <>

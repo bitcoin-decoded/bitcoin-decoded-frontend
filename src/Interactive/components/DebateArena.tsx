@@ -1,8 +1,7 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
 
-import { Caption, useBreakpoint, usePageTheme } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
-import { useDebate } from "../hooks/useDebate";
+import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
+import { useDebate } from "../hooks/";
 import type { DebateItem } from "../types";
 
 type DebateArenaProps = {
@@ -14,9 +13,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const world = colors[moduleTheme];
-  const { activeSides, selectSide, isHovered, hoverHandlers } = useDebate(
-    items.length
-  );
+  const { activeSides, selectSide, isHovered, hoverHandlers } = useDebate(items.length);
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -53,9 +50,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
           const isActive = active === side;
           const hovering = isHovered(i, side);
           const isAustrian = side === 1;
-          const sideColor = isAustrian
-            ? world.background.secondary
-            : colors.base.text.secondary;
+          const sideColor = isAustrian ? world.background.secondary : colors.base.text.secondary;
 
           return {
             position: "relative",
@@ -66,9 +61,10 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
               ? `linear-gradient(190deg, ${withOpacity(sideColor, isAustrian ? 0.1 : 0.05)}, ${colors.base.background.primary})`
               : colors.base.background.secondary,
             transform: hovering && !isActive ? "translateY(-2px)" : "translateY(0)",
-            boxShadow: hovering && !isActive
-              ? `0 4px 16px ${withOpacity(isAustrian ? world.background.secondary : colors.base.text.secondary, 0.12)}`
-              : "none",
+            boxShadow:
+              hovering && !isActive
+                ? `0 4px 16px ${withOpacity(isAustrian ? world.background.secondary : colors.base.text.secondary, 0.12)}`
+                : "none",
             transition: "all 0.3s var(--ease-smooth)",
             overflow: "hidden",
           };
@@ -79,10 +75,8 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
           const hovering = isHovered(i, side);
           const isAustrian = side === 1;
 
-          if (isActive)
-            return isAustrian ? world.border.secondary : colors.base.border.tertiary;
-          if (hovering)
-            return isAustrian ? world.text.secondary : colors.base.text.secondary;
+          if (isActive) return isAustrian ? world.border.secondary : colors.base.border.tertiary;
+          if (hovering) return isAustrian ? world.text.secondary : colors.base.text.secondary;
           return colors.base.border.secondary;
         };
 
@@ -114,18 +108,14 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
           const isActive = active === side;
           const hovering = isHovered(i, side);
           const isAustrian = side === 1;
-          const dotColor = isAustrian
-            ? world.background.secondary
-            : colors.base.text.secondary;
+          const dotColor = isAustrian ? world.background.secondary : colors.base.text.secondary;
 
           return {
             width: "0.5rem",
             height: "0.5rem",
             borderRadius: "50%",
             backgroundColor: isActive || hovering ? dotColor : "transparent",
-            border: `1.5px solid ${
-              isActive || hovering ? dotColor : colors.base.border.secondary
-            }`,
+            border: `1.5px solid ${isActive || hovering ? dotColor : colors.base.border.secondary}`,
             transition: "all 0.3s var(--ease-smooth)",
             flexShrink: 0,
           };
@@ -162,10 +152,12 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
             <div style={rowStyle}>
               <div
                 className="gradient-border"
-                style={{
-                  ...makeSideStyle(0),
-                  "--border-glow-color": makeBorderColor(0),
-                } as CSSProperties}
+                style={
+                  {
+                    ...makeSideStyle(0),
+                    "--border-glow-color": makeBorderColor(0),
+                  } as CSSProperties
+                }
                 onClick={() => selectSide(i, 0)}
                 {...hoverHandlers(i, 0)}
                 role="button"
@@ -175,17 +167,17 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
                   <span style={makeIndicatorStyle(0)} />
                   {item.sides[0].school}
                 </div>
-                <div style={makeArgumentStyle(0)}>
-                  {item.sides[0].argument}
-                </div>
+                <div style={makeArgumentStyle(0)}>{item.sides[0].argument}</div>
               </div>
               <div style={vsStyle}>VS</div>
               <div
                 className="gradient-border"
-                style={{
-                  ...makeSideStyle(1),
-                  "--border-glow-color": makeBorderColor(1),
-                } as CSSProperties}
+                style={
+                  {
+                    ...makeSideStyle(1),
+                    "--border-glow-color": makeBorderColor(1),
+                  } as CSSProperties
+                }
                 onClick={() => selectSide(i, 1)}
                 {...hoverHandlers(i, 1)}
                 role="button"
@@ -195,9 +187,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
                   <span style={makeIndicatorStyle(1)} />
                   {item.sides[1].school}
                 </div>
-                <div style={makeArgumentStyle(1)}>
-                  {item.sides[1].argument}
-                </div>
+                <div style={makeArgumentStyle(1)}>{item.sides[1].argument}</div>
               </div>
             </div>
           </div>

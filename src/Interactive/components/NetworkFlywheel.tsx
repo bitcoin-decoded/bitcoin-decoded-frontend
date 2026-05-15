@@ -1,23 +1,11 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  Activity,
-  Coins,
-  Pickaxe,
-  PlusCircle,
-  RefreshCw,
-  RotateCcw,
-  ShieldCheck,
-  TrendingUp,
-} from "lucide-react";
+import { PlusCircle, RefreshCw, RotateCcw } from "lucide-react";
 
-import { Button, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import { Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
 import { useTranslation } from "../../I18n";
+import { MAX_LEVEL, STEP_ICONS } from "../data";
 import { useNetworkFlywheel } from "../hooks";
-import { MAX_LEVEL } from "../hooks/useNetworkFlywheel";
-
-const STEP_ICONS = [Activity, Coins, Pickaxe, ShieldCheck, TrendingUp] as const;
 
 export const NetworkFlywheel: FC = () => {
   const { t } = useTranslation();

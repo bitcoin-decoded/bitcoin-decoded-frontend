@@ -1,18 +1,19 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
+
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  CartesianGrid,
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  ReferenceLine,
 } from "recharts";
-import { Caption, usePageTheme, useBreakpoint } from "../../Design";
+
+import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
 import { useLanguageContext } from "../../I18n";
-import { withOpacity } from "../../Design/helpers";
-import { M2_MONEY_SUPPLY } from "../data/M2_MONEY_SUPPLY";
+import { M2_MONEY_SUPPLY } from "../data";
 
 type Props = {
   showTitle?: boolean;

@@ -1,8 +1,10 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties, type FC } from "react";
+
 import { useBreakpoint } from "../../Design";
-import { FlipCard } from "./FlipCard";
-import { useFlipCard } from "../hooks/useFlipCard";
+import { useFlipCard } from "../hooks/";
 import type { FlipCardItem } from "../types";
+
+import { FlipCard } from "./FlipCard";
 
 type FlipCardGridProps = {
   items: FlipCardItem[];

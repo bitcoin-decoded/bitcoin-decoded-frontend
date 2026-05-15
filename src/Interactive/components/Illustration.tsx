@@ -1,6 +1,7 @@
-import { type FC, type ReactNode, type CSSProperties } from "react";
-import { usePageTheme } from "../../Design/Theme";
-import { useIllustration } from "../hooks/useIllustration";
+import { type CSSProperties, type FC, type ReactNode } from "react";
+
+import { usePageTheme } from "../../Design/";
+import { useIllustration } from "../hooks/";
 
 type IllustrationProps = {
   src?: string;
@@ -54,8 +55,8 @@ export const Illustration: FC<IllustrationProps> = ({
           ? "brightness(1)"
           : "brightness(0.9)"
         : isHovered
-        ? "brightness(0.95)"
-        : "none",
+          ? "brightness(0.95)"
+          : "none",
   };
 
   const captionStyle: CSSProperties = {
@@ -69,13 +70,20 @@ export const Illustration: FC<IllustrationProps> = ({
 
   return (
     <figure style={containerStyle}>
-      <div className="gradient-border" style={{ ...frameStyle, "--border-glow-color": isHovered ? colors[moduleTheme].text.secondary : colors[moduleTheme].border.secondary } as CSSProperties} {...containerHandlers}>
+      <div
+        className="gradient-border"
+        style={
+          {
+            ...frameStyle,
+            "--border-glow-color": isHovered
+              ? colors[moduleTheme].text.secondary
+              : colors[moduleTheme].border.secondary,
+          } as CSSProperties
+        }
+        {...containerHandlers}
+      >
         {src ? (
-          <img
-            src={src}
-            alt={alt || "Illustration"}
-            style={contentTransitionStyle}
-          />
+          <img src={src} alt={alt || "Illustration"} style={contentTransitionStyle} />
         ) : (
           <div
             style={{

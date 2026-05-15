@@ -13,8 +13,15 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { Badge, Button, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import {
+  Badge,
+  Button,
+  Caption,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../Design";
 import { useTranslation } from "../../I18n";
 import { useUTXOBuilder } from "../hooks";
 

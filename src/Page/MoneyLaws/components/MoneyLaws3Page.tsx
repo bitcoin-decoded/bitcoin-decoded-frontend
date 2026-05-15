@@ -100,28 +100,22 @@ export const MoneyLaws3Page: FC = () => {
             : "Your first mission: build a bridge to connect two regions. "}
         </p>
         <p>
-          {fr ? (
-            <>
-              Tes ingénieurs te présentent deux options techniques :
-              <ul>
-                <li>L'Acier : Ultra-résistant, mais sa production demande énormément d'énergie.</li>
-                <li>
-                  Le Béton : Moins complexe à fabriquer, mais il en faut des volumes colossaux.
-                </li>
-              </ul>
-            </>
-          ) : (
-            <>
-              Your engineers present two technical options:
-              <ul>
-                <li>
-                  Steel: Ultra-resistant, but its production requires enormous amounts of energy.
-                </li>
-                <li>Concrete: Less complex to manufacture, but colossal volumes are needed.</li>
-              </ul>
-            </>
-          )}
+          {fr
+            ? "Tes ingénieurs te présentent deux options techniques :"
+            : "Your engineers present two technical options:"}
         </p>
+        <ul>
+          <li>
+            {fr
+              ? "L'Acier : Ultra-résistant, mais sa production demande énormément d'énergie."
+              : "Steel: Ultra-resistant, but its production requires enormous amounts of energy."}
+          </li>
+          <li>
+            {fr
+              ? "Le Béton : Moins complexe à fabriquer, mais il en faut des volumes colossaux."
+              : "Concrete: Less complex to manufacture, but colossal volumes are needed."}
+          </li>
+        </ul>
         <p>
           {fr
             ? "Le problème ? Tu n'as pas de prix. L'État possède tout, donc rien ne s'achète ni ne se vend. Tu n'as que des rapports techniques sur les quantités de minerai ou de sable."
@@ -205,28 +199,28 @@ export const MoneyLaws3Page: FC = () => {
         }
       >
         <p>
+          {fr
+            ? "Quand un entrepreneur met sa fortune en jeu et dit « je parie que cette ressource vaut plus ici que là », il crée une donnée économique nouvelle."
+            : 'When an entrepreneur puts their fortune on the line and says "I bet this resource is worth more here than there," they create a new piece of economic data.'}
+        </p>
+        <ul>
+          <li>{fr ? "S'il a raison, il gagne." : "If they are right, they profit."}</li>
+
+          <li>
+            {fr ? "S'il se trompe, il fait faillite." : "If they are wrong, they go bankrupt."}
+          </li>
+        </ul>
+        <p>
           {fr ? (
-            <>
-              Quand un entrepreneur met sa fortune en jeu et dit « je parie que cette ressource vaut
-              plus ici que là », il crée une donnée économique nouvelle.
-              <ul>
-                <li>S'il a raison, il gagne.</li>
-                <li>S'il se trompe, il fait faillite.</li>
-              </ul>
+            <span>
               C'est ce risque, cette peau dans le jeu (<i>« skin in the game »</i>), qui force la
               découverte de l'allocation optimale.
-            </>
+            </span>
           ) : (
-            <>
-              When an entrepreneur puts their fortune on the line and says "I bet this resource is
-              worth more here than there," they create a new piece of economic data.
-              <ul>
-                <li>If they are right, they profit.</li>
-                <li>If they are wrong, they go bankrupt.</li>
-              </ul>
+            <span>
               It is this risk, this <i>"skin in the game"</i>, that drives the discovery of optimal
               allocation.
-            </>
+            </span>
           )}
         </p>
         <p>
@@ -317,28 +311,23 @@ export const MoneyLaws3Page: FC = () => {
           ? "Le problème du socialisme n'est pas la méchanceté ou l'incompétence des planificateurs. Il est structurel."
           : "The problem with socialism is not the malice or incompetence of planners. It is structural."}
       </p>
-
       <p>
-        {fr ? (
-          <>
-            Sans prix, on ne peut pas calculer. Sans calcul, on ne peut pas allouer. Et sans
-            allocation, on gaspille.
-            <ul>
-              <li>La manipulation monétaire : la boussole ment.</li>
-              <li>La doctrine du socialisme : la boussole n'existe plus.</li>
-            </ul>
-          </>
-        ) : (
-          <>
-            Without prices, we cannot calculate. Without calculation, we cannot allocate. And
-            without allocation, we waste.
-            <ul>
-              <li>Monetary manipulation: the compass lies.</li>
-              <li>The socialist doctrine: the compass no longer exists.</li>
-            </ul>
-          </>
-        )}
+        {fr
+          ? "Sans prix, on ne peut pas calculer. Sans calcul, on ne peut pas allouer. Et sans allocation, on gaspille."
+          : "Without prices, we cannot calculate. Without calculation, we cannot allocate. And without allocation, we waste."}
       </p>
+      <ul>
+        <li>
+          {fr
+            ? "La manipulation monétaire : la boussole ment."
+            : "Monetary manipulation: the compass lies."}
+        </li>
+        <li>
+          {fr
+            ? "La doctrine du socialisme : la boussole n'existe plus."
+            : "The socialist doctrine: the compass no longer exists."}
+        </li>
+      </ul>
       <p>
         {fr ? (
           <>

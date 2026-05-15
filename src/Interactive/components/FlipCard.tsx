@@ -1,6 +1,6 @@
-import { type FC, type CSSProperties } from "react";
-import { usePageTheme } from "../../Design/Theme";
-import { withOpacity } from "../../Design/helpers";
+import { type CSSProperties, type FC } from "react";
+
+import { usePageTheme, withOpacity } from "../../Design/";
 import type { FlipCardItem } from "../types";
 
 type FlipCardProps = {
@@ -85,20 +85,34 @@ export const FlipCard: FC<FlipCardProps> = ({
       <div style={innerStyle}>
         <div
           className="gradient-border"
-          style={{ ...frontStyle, "--border-glow-color": hovered ? world.text.secondary : world.border.primary } as CSSProperties}
+          style={
+            {
+              ...frontStyle,
+              "--border-glow-color": hovered ? world.text.secondary : world.border.primary,
+            } as CSSProperties
+          }
         >
-          <span style={{ fontSize: "2.5rem", lineHeight: 1, marginBottom: "0.5rem", filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.3))" }}>
+          <span
+            style={{
+              fontSize: "2.5rem",
+              lineHeight: 1,
+              marginBottom: "0.5rem",
+              filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.3))",
+            }}
+          >
             {item.emoji}
           </span>
-          <span style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.85rem",
-            fontWeight: 600,
-            color: hovered ? world.text.secondary : world.text.primary,
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-            transition: "color 0.3s var(--ease-smooth)",
-          }}>
+          <span
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "0.85rem",
+              fontWeight: 600,
+              color: hovered ? world.text.secondary : world.text.primary,
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              transition: "color 0.3s var(--ease-smooth)",
+            }}
+          >
             {item.title}
           </span>
         </div>
@@ -106,15 +120,17 @@ export const FlipCard: FC<FlipCardProps> = ({
           className="gradient-border"
           style={{ ...backStyle, "--border-glow-color": world.border.secondary } as CSSProperties}
         >
-          <span style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.7rem",
-            fontWeight: 600,
-            color: world.text.secondary,
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-            marginBottom: "0.25rem",
-          }}>
+          <span
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "0.7rem",
+              fontWeight: 600,
+              color: world.text.secondary,
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              marginBottom: "0.25rem",
+            }}
+          >
             {item.title}
           </span>
           {item.questions.map((q, i) => (
@@ -126,7 +142,10 @@ export const FlipCard: FC<FlipCardProps> = ({
                 textAlign: "center",
                 lineHeight: 1.4,
                 padding: "0.2rem 0",
-                borderBottom: i < item.questions.length - 1 ? `1px solid ${colors.base.border.primary}` : "none",
+                borderBottom:
+                  i < item.questions.length - 1
+                    ? `1px solid ${colors.base.border.primary}`
+                    : "none",
                 width: "100%",
               }}
             >

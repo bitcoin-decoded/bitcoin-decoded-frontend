@@ -32,33 +32,21 @@ export const Banking3Page: FC = () => {
         )
       }
     >
-      <p>
-        {fr ? (
-          <>
-            On a vu deux grands principes :
-            <ol>
-              <li>
-                L'essentiel de la monnaie en circulation (M2) est une promesse de remboursement.
-              </li>
-              <li>
-                Les banques commerciales doivent absolument avoir assez de monnaie de réserve (M0)
-                afin de régler leurs comptes entre elles.
-              </li>
-            </ol>
-          </>
-        ) : (
-          <>
-            We have seen two key principles:
-            <ol>
-              <li>Most of the money in circulation (M2) is a promise of repayment.</li>
-              <li>
-                Commercial banks absolutely must have enough reserve money (M0) to settle their
-                accounts with each other.
-              </li>
-            </ol>
-          </>
-        )}
-      </p>
+      <p>{fr ? "On a vu deux grands principes :" : "We have seen two key principles:"}</p>
+
+      <ol>
+        <li>
+          {fr
+            ? "L'essentiel de la monnaie en circulation (M2) est une promesse de remboursement."
+            : "Most of the money in circulation (M2) is a promise of repayment."}
+        </li>
+
+        <li>
+          {fr
+            ? "Les banques commerciales doivent absolument avoir assez de monnaie de réserve (M0) afin de régler leurs comptes entre elles."
+            : "Commercial banks absolutely must have enough reserve money (M0) to settle their accounts with each other."}
+        </li>
+      </ol>
       <p>
         {fr
           ? "Et si une banque venait à manquer de M0, que se passerait-il ?"
@@ -115,55 +103,41 @@ export const Banking3Page: FC = () => {
       {isQuizSolved && (
         <>
           <p>
-            {fr ? (
-              <>
-                Si plusieurs Nicolas n'arrivent plus à rembourser leurs prêts au sein d'une même
-                banque, voici la réaction en chaîne :
-                <ol>
-                  <li>
-                    Les créances de la banque diminuent à chaque fois qu'un prêt n'est pas
-                    remboursé.
-                  </li>
-                  <li>
-                    Le capital propre diminue à son tour, afin que le bilan de la banque soit
-                    équilibré.
-                  </li>
-                  <DefaultSimulator />
-                  <li>
-                    Les autres banques voient le capital propre de la banque fondre et commencent à
-                    paniquer.
-                  </li>
-                  <li>
-                    Paniquées, les banques ne prêtent plus de M0 à la banque en difficulté : c'est
-                    la crise de confiance.
-                  </li>
-                  <li>
-                    La banque n'a plus accès au M0 et ne peut plus régler ses dettes avec les autres
-                    banques : tout le système est paralysé.
-                  </li>
-                </ol>
-              </>
-            ) : (
-              <>
-                If several borrowers can no longer repay their loans within the same bank, here is
-                the chain reaction:
-                <ol>
-                  <li>The bank's claims decrease each time a loan is not repaid.</li>
-                  <li>Equity decreases in turn, so the bank's balance sheet stays balanced.</li>
-                  <DefaultSimulator />
-                  <li>Other banks see the bank's equity melting and start to panic.</li>
-                  <li>
-                    Panicked, banks stop lending M0 to the struggling bank: it's a confidence
-                    crisis.
-                  </li>
-                  <li>
-                    The bank no longer has access to M0 and can no longer settle its debts with
-                    other banks: the entire system is paralyzed.
-                  </li>
-                </ol>
-              </>
-            )}
+            {fr
+              ? "Si plusieurs Nicolas n'arrivent plus à rembourser leurs prêts au sein d'une même banque, voici la réaction en chaîne :"
+              : "If several borrowers can no longer repay their loans within the same bank, here is the chain reaction:"}
           </p>
+          <ol>
+            <li>
+              {fr
+                ? "Les créances de la banque diminuent à chaque fois qu'un prêt n'est pas remboursé."
+                : "The bank's claims decrease each time a loan is not repaid."}
+            </li>
+            <li>
+              {fr
+                ? "Le capital propre diminue à son tour, afin que le bilan de la banque soit équilibré."
+                : "Equity decreases in turn, so the bank's balance sheet stays balanced."}
+            </li>
+            <li>
+              <DefaultSimulator />
+            </li>
+            <li>
+              {fr
+                ? "Les autres banques voient le capital propre de la banque fondre et commencent à paniquer."
+                : "Other banks see the bank's equity melting and start to panic."}
+            </li>
+            <li>
+              {fr
+                ? "Paniquées, les banques ne prêtent plus de M0 à la banque en difficulté : c'est la crise de confiance."
+                : "Panicked, banks stop lending M0 to the struggling bank: it's a confidence crisis."}
+            </li>
+            <li>
+              {fr
+                ? "La banque n'a plus accès au M0 et ne peut plus régler ses dettes avec les autres banques : tout le système est paralysé."
+                : "The bank no longer has access to M0 and can no longer settle its debts with other banks: the entire system is paralyzed."}
+            </li>
+          </ol>
+
           <p>
             {fr ? (
               <>

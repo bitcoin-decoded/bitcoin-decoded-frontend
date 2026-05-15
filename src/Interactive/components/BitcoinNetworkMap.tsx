@@ -1,24 +1,10 @@
-import { type FC, type CSSProperties } from "react";
-import { usePageTheme } from "../../Design/Theme";
-import { useBreakpoint } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
+import { type CSSProperties, type FC } from "react";
+
+import { Cpu, Monitor } from "lucide-react";
+
+import { useBreakpoint, usePageTheme, withOpacity } from "../../Design";
 import { useLanguageContext } from "../../I18n";
-import { Monitor, Cpu } from "lucide-react";
-
-type NodePosition = { x: number; y: number; label: string };
-
-const NODES: NodePosition[] = [
-  { x: 50, y: 12, label: "A" },
-  { x: 18, y: 35, label: "B" },
-  { x: 82, y: 30, label: "C" },
-  { x: 30, y: 65, label: "D" },
-  { x: 70, y: 68, label: "E" },
-  { x: 50, y: 90, label: "F" },
-];
-
-const LINKS: [number, number][] = [
-  [0, 1], [0, 2], [1, 3], [2, 4], [3, 5], [4, 5], [1, 4], [0, 4], [2, 3],
-];
+import { LINKS, NODES } from "../data/";
 
 export const BitcoinNetworkMap: FC = () => {
   const { language } = useLanguageContext();
@@ -59,7 +45,15 @@ export const BitcoinNetworkMap: FC = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", margin: isMobile ? "1.5rem 0 2.5rem" : "2rem 0 3rem" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100%",
+        margin: isMobile ? "1.5rem 0 2.5rem" : "2rem 0 3rem",
+      }}
+    >
       <div style={containerStyle}>
         <svg style={svgStyle} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
           {LINKS.map(([a, b], i) => (
@@ -76,56 +70,58 @@ export const BitcoinNetworkMap: FC = () => {
           ))}
         </svg>
         {NODES.map((node, i) => {
-        const nodeStyle: CSSProperties = {
-          position: "absolute",
-          left: `${node.x}%`,
-          top: `${node.y}%`,
-          transform: "translate(-50%, -50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.25rem",
-        };
+          const nodeStyle: CSSProperties = {
+            position: "absolute",
+            left: `${node.x}%`,
+            top: `${node.y}%`,
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.25rem",
+          };
 
-        const circleStyle: CSSProperties = {
-          width: `${nodeSize}px`,
-          height: `${nodeSize}px`,
-          borderRadius: "50%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          background: `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.12)}, ${colors.base.background.primary})`,
-          border: `1.5px solid ${world.border.primary}`,
-          color: world.text.secondary,
-        };
+          const circleStyle: CSSProperties = {
+            width: `${nodeSize}px`,
+            height: `${nodeSize}px`,
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            background: `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.12)}, ${colors.base.background.primary})`,
+            border: `1.5px solid ${world.border.primary}`,
+            color: world.text.secondary,
+          };
 
-        const labelNodeStyle: CSSProperties = {
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: isMobile ? "0.5rem" : "0.55rem",
-          fontWeight: 600,
-          color: colors.base.text.secondary,
-          letterSpacing: "0.05em",
-        };
+          const labelNodeStyle: CSSProperties = {
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: isMobile ? "0.5rem" : "0.55rem",
+            fontWeight: 600,
+            color: colors.base.text.secondary,
+            letterSpacing: "0.05em",
+          };
 
-        return (
-          <div key={i} style={nodeStyle}>
-            <div style={circleStyle}>
-              <Monitor size={iconSize} strokeWidth={1.5} />
-              <Cpu
-                size={cpuSize}
-                strokeWidth={2}
-                style={{
-                  position: "absolute",
-                  bottom: isMobile ? "6px" : "8px",
-                  right: isMobile ? "6px" : "8px",
-                  color: world.background.secondary,
-                }}
-              />
+          return (
+            <div key={i} style={nodeStyle}>
+              <div style={circleStyle}>
+                <Monitor size={iconSize} strokeWidth={1.5} />
+                <Cpu
+                  size={cpuSize}
+                  strokeWidth={2}
+                  style={{
+                    position: "absolute",
+                    bottom: isMobile ? "6px" : "8px",
+                    right: isMobile ? "6px" : "8px",
+                    color: world.background.secondary,
+                  }}
+                />
+              </div>
+              <span style={labelNodeStyle}>
+                {fr ? "Nœud" : "Node"} {node.label}
+              </span>
             </div>
-            <span style={labelNodeStyle}>{fr ? "Nœud" : "Node"} {node.label}</span>
-          </div>
-        );
+          );
         })}
       </div>
       <span style={titleStyle}>{fr ? "Réseau Bitcoin" : "Bitcoin Network"}</span>

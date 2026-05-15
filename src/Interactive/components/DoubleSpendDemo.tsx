@@ -1,4 +1,5 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
+
 import {
   ArrowDown,
   ArrowDownLeft,
@@ -19,41 +20,14 @@ import {
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
+  withOpacity,
 } from "../../Design";
-import { withOpacity } from "../../Design/helpers";
-import { useTranslation, type TranslationKey } from "../../I18n";
-import { useDoubleSpend, type TxId } from "../hooks";
-
-type Branch = {
-  id: TxId;
-  labelKey: TranslationKey;
-  recipientKey: TranslationKey;
-  originKey: TranslationKey;
-};
-
-// Two parallel branches, each rooted at the same "Nicolas" (one person,
-// two broadcast points) and ending on a different recipient. All
-// user-facing strings live in `fr.ts` / `en.ts` under the
-// `doubleSpend.*` namespace.
-const BRANCHES: readonly Branch[] = [
-  { id: "a", labelKey: "doubleSpend.txA", recipientKey: "doubleSpend.recipientA", originKey: "doubleSpend.originA" },
-  { id: "b", labelKey: "doubleSpend.txB", recipientKey: "doubleSpend.recipientB", originKey: "doubleSpend.originB" },
-];
-
-// Cities for the four network nodes — positions stay fixed across
-// re-runs; only the first-seen TX assignment (driven by the hook) is
-// shuffled. City names are stable across FR/EN so no translation
-// indirection is needed.
-const CITIES: readonly string[] = ["Tokyo", "Berlin", "Lagos", "São Paulo"];
+import { useTranslation } from "../../I18n";
+import { BRANCHES, CITIES } from "../data";
+import { type TxId, useDoubleSpend } from "../hooks";
+import type { Branch } from "../types";
 
 type Props = {
-  /**
-   * DOM id of the page element that the "Comment décider ?" CTA should
-   * scroll into view (typically the next answer section of the
-   * chapter). If omitted, the CTA is rendered but the click is a
-   * no-op — keeps the component fully self-contained even without
-   * page-level wiring.
-   */
   scrollTargetId?: string;
 };
 
@@ -66,11 +40,8 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
   const { phase, nodeFirstSeen, reveal, reset } = useDoubleSpend();
   const propagated = phase === "propagated";
 
-  // Two distinct, non-amber accents so each branch (and the node
-  // badges that pick it up) reads as a separate identity against the
-  // Bitcoin world.
   const accents: Record<TxId, string> = {
-    a: colors.semantic.info.text,    // cyan
+    a: colors.semantic.info.text, // cyan
     b: colors.violet.text.secondary, // violet
   };
 
@@ -195,9 +166,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
   // proof-of-work chain. No-op if the host page didn't wire an id.
   const continueForward = () => {
     if (!scrollTargetId) return;
-    document
-      .getElementById(scrollTargetId)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById(scrollTargetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   // ── render helpers ────────────────────────────────────────────────────
@@ -228,7 +197,9 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
     return (
       <div key={city} style={nodeCard(accent)}>
         <Monitor size={isMobile ? 18 : 20} strokeWidth={1.5} color={accent} />
-        <span style={{ ...mono, fontSize: "0.6rem", fontWeight: 600, color: colors.base.text.primary }}>
+        <span
+          style={{ ...mono, fontSize: "0.6rem", fontWeight: 600, color: colors.base.text.primary }}
+        >
           {city}
         </span>
         <Badge
@@ -260,7 +231,9 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
 
       {/* Single Nicolas at the top — one person, two broadcasts below. */}
       <div style={nicolasRow}>
-        <div style={{ ...partyCard(colors.base.border.secondary), width: isMobile ? "60%" : "40%" }}>
+        <div
+          style={{ ...partyCard(colors.base.border.secondary), width: isMobile ? "60%" : "40%" }}
+        >
           <User size={isMobile ? 18 : 22} strokeWidth={1.5} color={colors.base.text.secondary} />
           <span style={partyLabel}>{t("doubleSpend.sender")}</span>
         </div>
@@ -272,9 +245,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
         <ArrowDownRight size={20} strokeWidth={2} color={accents.b} />
       </div>
 
-      <div style={branchesGrid}>
-        {BRANCHES.map(renderBranch)}
-      </div>
+      <div style={branchesGrid}>{BRANCHES.map(renderBranch)}</div>
 
       <div style={pinchNotice}>
         <Coins size={12} strokeWidth={2} />
@@ -283,11 +254,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
 
       {!propagated && (
         <div style={ctaRow}>
-          <Button
-            variant="primary"
-            icon={<Eye size={14} strokeWidth={2} />}
-            onClick={reveal}
-          >
+          <Button variant="primary" icon={<Eye size={14} strokeWidth={2} />} onClick={reveal}>
             {t("doubleSpend.revealAction")}
           </Button>
         </div>
@@ -298,9 +265,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
           <Caption tone="muted" size="sm">
             {t("doubleSpend.firstSeenLabel")}
           </Caption>
-          <div style={nodesGrid}>
-            {CITIES.map(renderNode)}
-          </div>
+          <div style={nodesGrid}>{CITIES.map(renderNode)}</div>
 
           <FeedbackPanel tone="error" title={t("doubleSpend.verdictTitle")}>
             {t("doubleSpend.verdictBody")}

@@ -138,35 +138,35 @@ export const Banking1Page: FC = () => {
           {fr
             ? "→ C'est la provenance de l'argent qui a payé tout ce que tu possèdes."
             : "→ The source of the money that paid for everything you own."}
-          <br />
-          <i>
-            {fr ? (
-              <>
-                L'argent peut venir de deux endroits :
-                <ul>
-                  <li>
-                    Des autres : c'est une <u>dette</u>.
-                  </li>
-                  <li>
-                    De toi-même : c'est un <u>capital propre</u>.
-                  </li>
-                </ul>
-              </>
-            ) : (
-              <>
-                Money can come from two places:
-                <ul>
-                  <li>
-                    From others: that's a <u>debt</u>.
-                  </li>
-                  <li>
-                    From yourself: that's <u>equity</u>.
-                  </li>
-                </ul>
-              </>
-            )}
-          </i>
         </p>
+
+        <i>{fr ? "L'argent peut venir de deux endroits :" : "Money can come from two places:"}</i>
+
+        <ul>
+          <li>
+            {fr ? (
+              <span>
+                Des autres : c'est une <u>dette</u>.
+              </span>
+            ) : (
+              <span>
+                From others: that's a <u>debt</u>.
+              </span>
+            )}
+          </li>
+
+          <li>
+            {fr ? (
+              <span>
+                De toi-même : c'est un <u>capital propre</u>.
+              </span>
+            ) : (
+              <span>
+                From yourself: that's <u>equity</u>.
+              </span>
+            )}
+          </li>
+        </ul>
         <p>
           <KeywordHighlight>{fr ? "CRÉANCE" : "CLAIM"}</KeywordHighlight>{" "}
           {fr

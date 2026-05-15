@@ -258,41 +258,42 @@ export const MoneyLaws1Page: FC = () => {
         )}
       </p>
       <p>
-        {fr ? (
-          <>
-            C'est une loi de la nature économique : l'être humain cherche toujours à stocker son
-            travail dans la technologie la plus résistante possible :
-            <ul>
-              <li>
-                Une monnaie dont on peut augmenter l'offre facilement est une batterie qui fuit.
-                Personne n'a envie d'y laisser ses économies.
-              </li>
-              <li>
-                À l'inverse, une monnaie qui reste durablement dure devient de plus en plus
-                désirable. Comme son offre ne peut pas « suivre » l'augmentation de la demande, elle
-                devient mécaniquement de plus en plus rare. C'est un cercle vertueux qui protège
-                ceux qui l'utilisent.
-              </li>
-            </ul>
-          </>
-        ) : (
-          <>
-            This is a law of economic nature: humans always seek to store their work in the most
-            resilient technology available:
-            <ul>
-              <li>
-                A currency whose supply can be easily increased is a leaky battery. Nobody wants to
-                leave their savings in it.
-              </li>
-              <li>
-                Conversely, a currency that remains durably hard becomes increasingly desirable.
-                Since its supply cannot "keep up" with rising demand, it mechanically becomes rarer
-                and rarer. It is a virtuous cycle that protects its users.
-              </li>
-            </ul>
-          </>
-        )}
+        {fr
+          ? "C'est une loi de la nature économique : l'être humain cherche toujours à stocker son travail dans la technologie la plus résistante possible :"
+          : "This is a law of economic nature: humans always seek to store their work in the most resilient technology available:"}
       </p>
+      <ul>
+        <li>
+          {fr ? (
+            <span>
+              Une monnaie dont on peut augmenter l'offre facilement est une batterie qui fuit.
+              Personne n'a envie d'y laisser ses économies.
+            </span>
+          ) : (
+            <span>
+              A currency whose supply can be easily increased is a leaky battery. Nobody wants to
+              leave their savings in it.
+            </span>
+          )}
+        </li>
+
+        <li>
+          {fr ? (
+            <span>
+              À l'inverse, une monnaie qui reste durablement dure devient de plus en plus désirable.
+              Comme son offre ne peut pas « suivre » l'augmentation de la demande, elle devient
+              mécaniquement de plus en plus rare. C'est un cercle vertueux qui protège ceux qui
+              l'utilisent.
+            </span>
+          ) : (
+            <span>
+              Conversely, a currency that remains durably hard becomes increasingly desirable. Since
+              its supply cannot "keep up" with rising demand, it mechanically becomes rarer and
+              rarer. It is a virtuous cycle that protects its users.
+            </span>
+          )}
+        </li>
+      </ul>
       <p>
         {fr ? (
           <>
