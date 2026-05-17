@@ -1,10 +1,5 @@
-export type HalvingPoint = {
-  year: number;
-  reward: number; // BTC per block
-};
+import type { HalvingPoint } from "../types";
 
-// Programme d'émission du Bitcoin : un halving tous les 210 000 blocs (~4 ans).
-// Années approximées sur un pas de 4 ans à partir du bloc genesis (janvier 2009).
 export const HALVING_SCHEDULE: readonly HalvingPoint[] = [
   { year: 2009, reward: 50 },
   { year: 2012, reward: 25 },

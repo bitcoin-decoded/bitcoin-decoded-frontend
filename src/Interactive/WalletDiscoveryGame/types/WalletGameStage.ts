@@ -1,0 +1,1 @@
+export type WalletGameStage = "idle" | "revealed" | "validated";

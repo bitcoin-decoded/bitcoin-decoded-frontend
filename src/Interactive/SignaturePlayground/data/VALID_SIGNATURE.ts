@@ -1,0 +1,1 @@
+export const VALID_SIGNATURE = "3045022100a9f3b1d2e4c6...8a7f3b5c8e7";

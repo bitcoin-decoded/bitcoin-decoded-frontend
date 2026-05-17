@@ -1,0 +1,1 @@
+export { useSynthesisQuiz } from "./useSynthesisQuiz";

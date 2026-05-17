@@ -31,12 +31,11 @@
  *  troisième est DÉRIVÉE par calcul (commenté en regard).
  *  Exemple : frais/bloc + tx/bloc sourcés → frais/tx = frais/bloc ÷ tx/bloc.
  */
-
-import { HALVING_SCHEDULE } from "./HALVING_SCHEDULE";
-
 // ──────────────────────────────────────────────────────────────────────
 // HELPER : subvention courante dérivée du calendrier protocolaire
 // ──────────────────────────────────────────────────────────────────────
+
+import { currentBlockSubsidyBTC } from "../helpers";
 
 /**
  * Subvention par bloc en vigueur à une année donnée. Choisit le dernier
@@ -47,12 +46,6 @@ import { HALVING_SCHEDULE } from "./HALVING_SCHEDULE";
  * cette dérivation est exacte par construction. Centralisée ici pour
  * que les composants ne re-implémentent pas la logique.
  */
-export const currentBlockSubsidyBTC = (
-  year: number = new Date().getFullYear(),
-): number => {
-  const sorted = [...HALVING_SCHEDULE].sort((a, b) => b.year - a.year);
-  return sorted.find((h) => h.year <= year)?.reward ?? sorted[sorted.length - 1].reward;
-};
 
 // ──────────────────────────────────────────────────────────────────────
 // BITCOIN_REFERENCE_VALUES

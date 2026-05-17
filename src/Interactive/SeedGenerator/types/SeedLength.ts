@@ -1,0 +1,1 @@
+export type SeedLength = 12 | 24;

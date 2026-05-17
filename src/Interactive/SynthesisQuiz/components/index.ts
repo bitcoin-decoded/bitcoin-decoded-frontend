@@ -1,0 +1,1 @@
+export { SynthesisQuiz } from "./SynthesisQuiz";
