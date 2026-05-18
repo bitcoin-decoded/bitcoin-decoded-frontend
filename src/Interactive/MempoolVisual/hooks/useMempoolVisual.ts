@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 import type { Language } from "../../../I18n";
-import { getTxPool } from "../../helpers";
+import { getTxPool } from "../helpers";
 import { BLOCK_HEADER, BLOCK_TX_IDS, REJECTED_TX_ID } from "../data";
 
 export const useMempoolVisual = (language: Language) => {

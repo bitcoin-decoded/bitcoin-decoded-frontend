@@ -27,13 +27,15 @@ export const ChapterLink: FC<{ ref_: ChapterReference }> = ({ ref_ }) => {
     transition: "color 0.2s var(--ease-smooth)",
   };
 
-  <button
-    type="button"
-    style={chapterLinkStyle}
-    onClick={() => setCurrentPage(ref_.routeId)}
-    onMouseEnter={(e) => (e.currentTarget.style.color = colors.base.text.primary)}
-    onMouseLeave={(e) => (e.currentTarget.style.color = world.text.secondary)}
-  >
-    {t(ref_.labelKey)}
-  </button>;
+  return (
+    <button
+      type="button"
+      style={chapterLinkStyle}
+      onClick={() => setCurrentPage(ref_.routeId)}
+      onMouseEnter={(e) => (e.currentTarget.style.color = colors.base.text.primary)}
+      onMouseLeave={(e) => (e.currentTarget.style.color = world.text.secondary)}
+    >
+      {t(ref_.labelKey)}
+    </button>
+  );
 };

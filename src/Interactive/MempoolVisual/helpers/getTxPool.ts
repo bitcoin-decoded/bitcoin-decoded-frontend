@@ -1,4 +1,4 @@
-import type { Language } from "../../I18n";
+import type { Language } from "../../../I18n";
 import type { MempoolTransaction } from "../types";
 
 export const getTxPool = (language: Language): MempoolTransaction[] => {
