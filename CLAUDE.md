@@ -272,6 +272,7 @@ Process :
 - branch depuis main
 - commit + push
 - PR obligatoire
+- **avant tout `git push` qui touche `src/Interactive/` ou `src/References/`** : invoquer le skill `ddd-pr-check` (audit DDD / séparation des responsabilités). Voir `.claude/skills/ddd-pr-check/SKILL.md`.
 
 ❌ jamais push direct sur main (sauf modification de `CLAUDE.md`)
 
