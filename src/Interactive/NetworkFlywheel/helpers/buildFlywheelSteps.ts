@@ -1,9 +1,11 @@
-import { FEES_BTC_BY_LEVEL, TX_PER_MIN_BY_LEVEL } from "../data";
+import { FEES_BTC_BY_LEVEL } from "../data";
 import type { FlywheelStepData } from "../types";
 
-import { fmtBtc, fmtTxMin, minerRev } from ".";
+import { fmtBtc, fmtTxMin, getTxPerMinByLevel, minerRev } from ".";
 
 export const buildFlywheelSteps = (): readonly FlywheelStepData[] => {
+  const txPerMinByLevel = getTxPerMinByLevel();
+
   const map4 = <T>(fn: (index: 0 | 1 | 2 | 3) => T): readonly [T, T, T, T] => [
     fn(0),
     fn(1),
@@ -15,7 +17,7 @@ export const buildFlywheelSteps = (): readonly FlywheelStepData[] => {
     {
       id: 0,
       labelKey: "flywheel.step.usage",
-      metricByLevel: map4((i) => fmtTxMin(TX_PER_MIN_BY_LEVEL[i])),
+      metricByLevel: map4((i) => fmtTxMin(txPerMinByLevel[i])),
     },
     {
       id: 1,

@@ -1,5 +1,3 @@
-import { BITCOIN_REFERENCE_VALUES } from "../../data";
+import { getCurrentBlockSubsidyBTC } from "../../../References";
 
-const SUBSIDY = BITCOIN_REFERENCE_VALUES.BLOCK_SUBSIDY_BTC;
-
-export const minerRev = (fees: number): number => SUBSIDY + fees;
+export const minerRev = (fees: number): number => getCurrentBlockSubsidyBTC() + fees;

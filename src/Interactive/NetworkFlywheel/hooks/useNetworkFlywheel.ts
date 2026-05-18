@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { FLYWHEEL_STEPS, MAX_LEVEL, STEP_DELAY_MS } from "../data";
+import { MAX_LEVEL, STEP_DELAY_MS } from "../data";
 import { buildFlywheelSteps } from "../helpers";
 
 export const useNetworkFlywheel = () => {
@@ -54,7 +54,7 @@ export const useNetworkFlywheel = () => {
   return {
     level,
     highlightedStep,
-    steps: FLYWHEEL_STEPS,
+    steps,
     canIncrease: level < MAX_LEVEL,
     increase,
     reset,
