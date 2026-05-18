@@ -43,25 +43,40 @@ Francophones 25-50 ans
 
 ## Architecture (DDD simplifiée)
 
-### Structure standard domaine
+### Structure standard
 
-`Domain/`
+Tout dossier de code (domaine top-level OU feature dans un domaine) suit la même structure :
 
-components # UI dumb components
+components # UI dumb
 hooks # logique métier
-helpers # utils
+helpers # fonctions pures
 data # datasets statiques
-types
-index.ts # barrel export
+types # déclarations
+index.ts # barrel public
+
+Pattern appliqué à 2 niveaux :
+
+- domaine top-level → `src/References/`, `src/Routing/`, `src/Design/Theme/`
+- feature dans un domaine → `src/Interactive/<FeatureName>/`
 
 ### Domaines principaux
 
-- Design/ → système UI global (primitives, theme, layout, icons)
-- Page/ → contenu pédagogique
-- Interactive/ → simulateurs, quiz, interactions
+- Design/ → primitives, theme, layout, icons
+- Interactive/ → simulateurs, quiz, viz (chacun dans son sous-dossier `<FeatureName>/`)
+- Page/ → contenu pédagogique (sous-module `Page/Shared/` pour le transverse pages)
+- References/ → constantes économiques (Bitcoin + fiat)
 - Routing/ → navigation interne
 - I18n/ → traductions
-- Shared/ → composants transverses
+
+### 1 symbole = 1 fichier (strict)
+
+| Type      | Convention                                     |
+| --------- | ---------------------------------------------- |
+| Composant | `PascalCase.tsx`                               |
+| Hook      | `useXxx.ts`                                    |
+| Helper    | `camelCaseVerb.ts`                             |
+| Type      | `PascalCase.ts`                                |
+| Dataset   | `SCREAMING_SNAKE_CASE.ts` ou `getXxx.ts`       |
 
 ---
 
@@ -138,14 +153,11 @@ Quiz = pill "Quiz" dans navbar
 
 ## Interactive system
 
-### Domaine unique
+Chaque interaction (simulateur, quiz, visualisation) dans son propre dossier feature :
 
-Contient :
+`src/Interactive/<FeatureName>/` + structure DDD standard.
 
-- simulateurs
-- quiz
-- visualisations
-- interactions pédagogiques
+`Interactive/index.ts` n'expose que le composant principal de chaque feature.
 
 ---
 
@@ -165,11 +177,11 @@ Chaque module se termine par un quiz validant l’accès à la synthèse.
 
 ### Architecture
 
-`Interactive/SynthesisQuiz/`
+`Interactive/SynthesisQuiz/` (structure DDD standard) :
 
-- `useSynthesisQuiz` → logique métier + localStorage
-- `SynthesisQuiz.tsx` → UI + feedback
-- datasets i18n-aware
+- `hooks/useSynthesisQuiz.ts` → logique + localStorage
+- `components/SynthesisQuiz.tsx` → UI + feedback
+- `data/` → datasets i18n-aware
 
 ---
 
@@ -209,12 +221,12 @@ traduire uniquement composants réutilisables via `t()`
 
 ### Source unique
 
-`Interactive/data/ECONOMIC_REFERENCE.ts`
+`src/References/` (domaine top-level, structure DDD standard).
 
-Contient :
+Exports :
 
-- Bitcoin (subsidy, fees, hashrate, supply)
-- Fiat (M2 US / EU / global)
+- `BITCOIN_REFS`, `MACRO_REFS`, `MARKET_REFS` → constantes (subsidy, fees, hashrate, supply, M2)
+- `getCurrentBlockSubsidyBTC`, `getAverageTxFeeBTC`, `getAverageTxPerSecond` → helpers dérivés
 
 ---
 
@@ -238,7 +250,7 @@ minutes = ceil(wordCount / 200 + interactiveCount × 0.75)
 
 ### Source
 
-`Shared/data/PAGE_METADATA.ts`
+`Page/Shared/data/PAGE_METADATA.ts`
 
 ---
 
@@ -250,11 +262,12 @@ minutes = ceil(wordCount / 200 + interactiveCount × 0.75)
 
 ## Règles de développement
 
-- 1 FC = 1 fichier
+- 1 symbole = 1 fichier (composant, hook, helper, type, dataset)
 - hooks = logique métier uniquement
 - composants = stateless
+- rien d'inline dans un composant (dataset, helper, type, ternaire i18n → fichiers dédiés)
+- barrels `index.ts` à chaque niveau peuplé
 - pas de duplication
-- barrels `index.ts`
 - simplicité > abstraction
 
 ---
