@@ -12,8 +12,12 @@ dist
 dist-ssr
 *.local
 
-# Claude Code
-.claude/
+# Claude Code — ignore everything except the shared project skills
+# (use `.claude/*` rather than `.claude/` so the `!skills/` exception
+# can re-include subpaths — trailing-slash patterns swallow the dir
+# itself and block any negation inside).
+.claude/*
+!.claude/skills/
 
 # Editor directories and files
 .vscode/*
