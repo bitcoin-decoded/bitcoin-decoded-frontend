@@ -1,8 +1,9 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
+
 import { PenLine } from "lucide-react";
 
 import { withOpacity } from "../../../Design/helpers";
-import type { FieldTone, SigPlaygroundColors, ValueKind } from "../../types";
+import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
 
 type Props = {
   icon: ReactNode;

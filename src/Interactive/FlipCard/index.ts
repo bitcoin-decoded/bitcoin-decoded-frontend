@@ -1,3 +1,2 @@
-export { FlipCard } from "./components";
-export { useFlipCard } from "./hooks";
-export type { FlipCardItem } from "./types";
+export { FlipCardGrid } from "./components";
+export { getBeerProductionChain } from "./helpers";

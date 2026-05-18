@@ -4,7 +4,7 @@ import { CheckCircle, XCircle } from "lucide-react";
 
 import { withOpacity } from "../../../Design/";
 import { truncateHash } from "../../helpers";
-import type { SigPlaygroundColors } from "../../types";
+import type { SigPlaygroundColors } from "../types";
 
 type Props = {
   publicKey: string;

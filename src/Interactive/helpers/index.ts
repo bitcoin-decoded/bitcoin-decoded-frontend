@@ -1,4 +1,3 @@
-export { currentBlockSubsidyBTC } from "./currentBlockSubsidyBTC";
 export { doubleSha256 } from "./doubleSha256";
 export { fmtBTC, fmtEur } from "./format";
 export { getTxPool } from "./getTxPool";

@@ -1,8 +1,9 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
+
 import { Check } from "lucide-react";
 
 import { withOpacity } from "../../../Design/helpers";
-import type { ActionButtonVariant, SigPlaygroundColors } from "../../types";
+import type { ActionButtonVariant, SigPlaygroundColors } from "../types";
 
 type Props = {
   onClick: () => void;

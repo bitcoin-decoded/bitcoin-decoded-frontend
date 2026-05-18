@@ -1,1 +1,1 @@
-export { FlipCard } from "./FlipCard";
+export { FlipCardGrid } from "./FlipCardGrid";

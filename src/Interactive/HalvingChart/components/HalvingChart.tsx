@@ -13,7 +13,7 @@ import {
 
 import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { HALVING_SCHEDULE } from "../../data";
+import { BITCOIN_REFS } from "../../../References";
 
 export const HalvingChart: FC = () => {
   const { t } = useTranslation();
@@ -70,7 +70,7 @@ export const HalvingChart: FC = () => {
         </Caption>
         <ResponsiveContainer width="100%" height={isMobile ? 220 : 280}>
           <AreaChart
-            data={HALVING_SCHEDULE as unknown as { year: number; reward: number }[]}
+            data={BITCOIN_REFS.HALVING_SCHEDULE as unknown as { year: number; reward: number }[]}
             margin={{ top: 10, right: 15, left: isMobile ? -15 : 0, bottom: 5 }}
           >
             <defs>

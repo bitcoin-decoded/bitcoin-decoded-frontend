@@ -13,10 +13,11 @@ import {
   withOpacity,
 } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { TxRow } from "../../components";
 import { getTxState } from "../helpers/";
 import { useMempoolVisual } from "../hooks";
 import type { MempoolVariant } from "../types";
+
+import { TxRow } from "./TxRow";
 
 export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "intro" }) => {
   const { t, language } = useTranslation();

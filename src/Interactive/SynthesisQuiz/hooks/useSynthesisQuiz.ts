@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import type { SynthesisQuizQuestion } from "../types/SynthesisQuizData";
+import type { SynthesisQuizQuestion } from "../types/";
 
 type Options = {
   questions: SynthesisQuizQuestion[];
@@ -14,10 +14,7 @@ type PersistedState = {
   submitted: boolean;
 };
 
-const readPersistedState = (
-  key: string,
-  expectedLength: number,
-): PersistedState | null => {
+const readPersistedState = (key: string, expectedLength: number): PersistedState | null => {
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
@@ -38,12 +35,7 @@ const readPersistedState = (
   }
 };
 
-export const useSynthesisQuiz = ({
-  questions,
-  passThreshold,
-  storageKey,
-  onPass,
-}: Options) => {
+export const useSynthesisQuiz = ({ questions, passThreshold, storageKey, onPass }: Options) => {
   const defaultSelections = useMemo(() => questions.map(() => null), [questions]);
 
   const [selections, setSelections] = useState<(number | null)[]>(
