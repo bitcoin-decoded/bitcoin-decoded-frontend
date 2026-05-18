@@ -1,0 +1,2 @@
+export { ORIGINAL_VALUES } from "./ORIGINAL_VALUES";
+export { TAMPERED_VALUES } from "./TAMPERED_VALUES";

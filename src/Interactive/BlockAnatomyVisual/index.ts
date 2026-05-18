@@ -1,0 +1,1 @@
+export { BlockAnatomyVisual } from "./components";

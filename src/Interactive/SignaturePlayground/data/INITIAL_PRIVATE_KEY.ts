@@ -1,0 +1,1 @@
+export const INITIAL_PRIVATE_KEY = "L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB";

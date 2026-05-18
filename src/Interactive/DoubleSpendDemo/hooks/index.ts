@@ -1,0 +1,1 @@
+export { useDoubleSpendDemo } from "./useDoubleSpendDemo";

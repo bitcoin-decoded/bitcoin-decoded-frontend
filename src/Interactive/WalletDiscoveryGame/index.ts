@@ -1,0 +1,1 @@
+export { WalletDiscoveryGame } from "./components";

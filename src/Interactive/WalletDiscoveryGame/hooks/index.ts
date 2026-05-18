@@ -1,0 +1,1 @@
+export { useWalletDiscoveryGame } from "./useWalletDiscoveryGame";
