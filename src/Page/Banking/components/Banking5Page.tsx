@@ -34,11 +34,10 @@ export const Banking5Page: FC = () => {
           </>
         ) : (
           <>
-            You are a banker. Your vaults are overflowing with M0, your margins are compressed, and
-            management is pushing for volume. On your desk, two loan applications. One will bring
-            you little return but virtually no risk. The other could fund the next industrial
-            revolution-but maybe not. You have 30 seconds to decide. Welcome to the Cantillon
-            effect.
+            You're a banker. Your vaults are overflowing with M0, your margins are razor-thin, and
+            management wants volume. On your desk: two loan applications. One earns you almost
+            nothing, but carries almost no risk. The other could fund the next industrial
+            revolution. Or not. You've got 30 seconds. Welcome to the Cantillon Effect.
           </>
         )
       }
@@ -47,25 +46,25 @@ export const Banking5Page: FC = () => {
         {fr ? (
           <>
             Les marges sont écrasées, mais les coffres débordent de M0. L'équation de survie pour la
-            banque commerciale est simple : faire du volume avec zéro risque.
+            banque commerciale est simple : faire du volume en prenant le moins de risque possible.
           </>
         ) : (
           <>
-            Margins are crushed, but the vaults overflow with M0. The survival equation for the
-            commercial bank is simple: do volume with zero risk.
+            Margins are crushed, but the vaults are overflowing with M0. The commercial bank's
+            survival equation is simple: do volume while taking on as little risk as possible.
           </>
         )}
       </p>
       <p>
         {fr
           ? "C'est l'heure du tri sélectif : en tant que banquier, voici tes deux prochains rendez-vous."
-          : "It's time for selective sorting: as a banker, here are your next two appointments."}
+          : "Time to sort the pile: as a banker, here are your next two appointments."}
       </p>
       <Callout
         title={
           fr
             ? "Les deux types de clients : l'entrepreneur et l'Investisseur"
-            : "The two types of clients: the entrepreneur and the investor"
+            : "The two types of client: the entrepreneur and the investor"
         }
       >
         <p>
@@ -102,7 +101,7 @@ export const Banking5Page: FC = () => {
                   label: fr ? "Son projet :" : "His project:",
                   value: fr
                     ? "Créer une machine astucieuse qui pétrit le pain deux fois plus vite que les modèles actuels"
-                    : "Build an ingenious machine that kneads dough twice as fast as current models",
+                    : "Build a clever machine that kneads bread twice as fast as anything on the market",
                 },
                 {
                   label: fr
@@ -110,7 +109,7 @@ export const Banking5Page: FC = () => {
                     : "His collateral for the bank:",
                   value: fr
                     ? "Sa motivation et un business plan, rien d'autre !"
-                    : "His motivation and a business plan, nothing else!",
+                    : "His drive and a business plan, nothing else!",
                 },
               ]}
             />
@@ -135,7 +134,7 @@ export const Banking5Page: FC = () => {
                   label: fr ? "Son projet :" : "His project:",
                   value: fr
                     ? "Diversifier son portefeuille d'actions (Apple, Tesla et NVidia)"
-                    : "Diversify his stock portfolio (Apple, Tesla, and NVidia)",
+                    : "Diversify his stock portfolio (Apple, Tesla, NVidia)",
                 },
                 {
                   label: fr
@@ -143,7 +142,7 @@ export const Banking5Page: FC = () => {
                     : "His collateral for the bank:",
                   value: fr
                     ? "Son portefeuille d'actions existant est mis en gage"
-                    : "His existing stock portfolio is pledged",
+                    : "His existing stock portfolio, put up as security",
                 },
               ]}
             />
@@ -168,22 +167,21 @@ export const Banking5Page: FC = () => {
                 <Reference href="https://fr.wikipedia.org/wiki/Richard_Cantillon">
                   <i>Richard Cantillon</i>
                 </Reference>{" "}
-                : l'argent nouvellement créé (M2) fuit l'économie réelle, jugée trop risquée, pour
-                aller gonfler le prix des actifs. Les « Picsou » s'enrichissent en dormant : la
-                demande pour les actifs monte, leurs portefeuilles aussi. Les « Géo » restent sur la
-                touche.
+                : l'argent nouvellement créé (M2) se dirige en priorité vers les actifs, jugés moins
+                risqués, plutôt que vers l'économie réelle. Les « Picsou » s'enrichissent en dormant
+                : la demande pour les actifs monte, leurs portefeuilles aussi. Les « Géo » restent
+                sur la touche.
               </>
             ) : (
               <>
-                You've just understood the mechanism of the <i>Cantillon Effect</i>, named after the
+                You've just understood the mechanics of the <i>Cantillon Effect</i>, named after the
                 18th-century Irish economist{" "}
                 <Reference href="https://en.wikipedia.org/wiki/Richard_Cantillon">
                   Richard Cantillon
-                </Reference>
-                : newly created money (M2) tends to flow away from the real economy-considered too
-                risky-and instead inflates asset prices. The "Scrooges" get richer while they sleep:
-                demand for assets rises, and so do the value of their portfolios. The "Geos" are
-                left on the sidelines.
+                </Reference>{" "}
+                : newly created money (M2) flows first toward assets, judged less risky, rather than
+                into the real economy. The "Scrooges" get richer in their sleep: demand for assets
+                climbs, and so do their portfolios. The "Geos" are left on the sidelines.
               </>
             )}
           </p>
@@ -194,14 +192,15 @@ export const Banking5Page: FC = () => {
             caption={
               fr
                 ? "Le ruissellement de l'argent : le robinet monétaire remplit d'abord les portefeuilles des « Picsou » avant que ça ne finisse par ruisseler... jusque dans notre caddie"
-                : "The trickle-down of money: the monetary tap first fills the pockets of the “Scrooges” before it eventually trickles down... all the way to our shopping carts"
+                : "The trickle-down of money: the monetary tap fills the “Scrooges’” pockets first, before any of it ever trickles down... all the way to our shopping cart"
             }
           />
           <p>
             {fr ? (
               <>
-                Mais quand les Picsou se sentent riches, ils finissent par dépenser. Et là, ça
-                déborde dans le caddie de courses. Tiens, quelqu'un n'aurait pas prononcé le mot{" "}
+                Mais quand les Picsou se sentent riches, ils finissent par dépenser. Cette demande
+                en plus, sur la même quantité de biens, pousse les prix. Et là, ça déborde dans le
+                caddie de courses. Tiens, quelqu'un n'aurait pas prononcé le mot{" "}
                 <Reference to={ROUTE_NAME.Banking_6}>
                   <i>inflation</i>
                 </Reference>{" "}
@@ -209,11 +208,12 @@ export const Banking5Page: FC = () => {
               </>
             ) : (
               <>
-                But when the Scrooges feel wealthy, they eventually start spending. And that's when
-                it spills over into the shopping cart. Did someone just say the word{" "}
+                But when the Scrooges feel wealthy, they eventually start spending. More demand,
+                same amount of goods, prices climb. And that's when it spills over into the shopping
+                cart. Wait, did someone just say the word{" "}
                 <Reference to={ROUTE_NAME.Banking_6}>
                   <i>inflation</i>
-                </Reference>
+                </Reference>{" "}
                 ?
               </>
             )}

@@ -6,7 +6,7 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
   return {
     question: fr
       ? "Alors, à quel profil préféres-tu accorder un prêt ?"
-      : "So, which profile would you prefer to grant a loan to?",
+      : "So, which profile would you rather lend to?",
     answers: [
       {
         text: fr ? "a) M. Géo Trouve-Tout" : "a) Mr. Gyro Gearloose",
@@ -19,9 +19,9 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            Rejected! Sorry for Gyro... His project is brilliant, but too risky. With a tiny margin
-            (remember the previous chapter), the bank cannot afford the slightest payment default.
-            Without solid collateral to seize, it's no.
+            Rejected! Sorry, Gyro... Great project, but too risky. With margins this thin (remember
+            the previous chapter), the bank can't afford a single missed payment. No solid
+            collateral to seize? Then it's a no.
           </>
         ),
       },
@@ -30,15 +30,16 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
         isCorrect: true,
         rationale: fr ? (
           <>
-            Bingo ! C'est de l'argent facile. Le prêt est sécurisé à 100% par son portefeuille
-            d'actions existant : c'est ce qu'on appelle le nantissement. S'il ne paie pas, la banque
-            vend ses titres en un clic. Risque = 0. Dossier validé !
+            Bingo ! C'est de l'argent facile. Le prêt est adossé à son portefeuille d'actions
+            existant : c'est ce qu'on appelle le nantissement. Si Picsou ne rembourse pas, la banque
+            saisit ses titres et les vend en un clic (et c'est un retour au French Dream !). Risque
+            quasi nul. Dossier validé !
           </>
         ) : (
           <>
-            Bingo! It's easy money. The loan is 100% secured by his existing stock portfolio-this is
-            what's called collateralization. If he doesn't pay, the bank sells his securities in one
-            click. Risk = 0. File validated!
+            Bingo! Easy money. The loan is backed by his existing stock portfolio: that's what's
+            called collateralization. If Scrooge doesn't pay, the bank seizes his shares and sells
+            them in one click (welcome back to the American Dream!). Risk close to zero. Approved!
           </>
         ),
       },
@@ -51,7 +52,7 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            Our <i>Ms. Michu</i> has nothing to do with this story for once!
+            Our <i>Ms. Michu</i> has nothing to do with this one, for once!
           </>
         ),
       },

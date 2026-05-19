@@ -79,8 +79,8 @@ export const CompensationSimulator: FC = () => {
         <>
           <p>
             {fr
-              ? "Et voilà ! La compensation est effectuée. Observes bien les changements en jaune."
-              : "There you go! The compensation is complete. Look closely at the changes in yellow."}
+              ? "Et voilà ! La compensation est effectuée. Observe bien les changements en jaune."
+              : "And there it is! The clearing is done. Look closely at what changed in yellow."}
           </p>
           <ul>
             {fr ? (
@@ -90,16 +90,16 @@ export const CompensationSimulator: FC = () => {
               </>
             ) : (
               <>
-                <li>On the liabilities side: Nicolas's bank has settled its debt.</li>
+                <li>Liabilities side: Nicolas's bank has wiped out its debt.</li>
 
-                <li>On the assets side: the bank's "M0 Reserves" decreased by $200,000.</li>
+                <li>Assets side: the bank's "M0 reserves" dropped by $200,000.</li>
               </>
             )}
           </ul>
           <p>
             {fr
-              ? "La banque a bel et bien utilisé sa monnaie de Banque Centrale (M0) pour régler une dette née d'une transaction en monnaie commerciale (M2). Tu saisis maintenant la différence entre ces deux niveaux de monnaie !"
-              : "The bank did indeed use its Central Bank money (M0) to settle a debt born from a transaction in commercial money (M2). You now understand the difference between these two layers of money!"}
+              ? "La banque a bel et bien utilisé ses réserves en monnaie de Banque Centrale (M0) pour régler une dette née d'une transaction en monnaie commerciale (M2). Tu saisis maintenant la différence entre ces deux niveaux de monnaie !"
+              : "The bank really did use its Central Bank reserves (M0) to settle a debt born from a commercial-money (M2) transaction. Now you've got the difference between these two levels of money!"}
           </p>
         </>
       )}
