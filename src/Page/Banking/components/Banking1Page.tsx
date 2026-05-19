@@ -55,9 +55,12 @@ export const Banking1Page: FC = () => {
         <Callout title={fr ? "D'où vient l'argent ?" : "Where does money come from?"}>
           {fr ? (
             <>
-              Plus de 90% de notre monnaie n'est ni imprimée par l'État ni créée par les Banques
-              Centrales, mais créée <i>comme par magie</i> par les banques commerciales (du style
-              BNP Paribas, Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent.
+              <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-in-the-modern-economy-an-introduction.pdf">
+                Plus de 90%
+              </Reference>{" "}
+              de notre monnaie n'est ni imprimée par l'État ni créée par les Banques Centrales, mais
+              créée <i>comme par magie</i> par les banques commerciales (du style BNP Paribas,
+              Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent .
               <p>
                 Dès qu'elles accordent un prêt, par une simple écriture comptable elles créent de
                 l'argent à partir de rien.
@@ -77,9 +80,12 @@ export const Banking1Page: FC = () => {
             </>
           ) : (
             <>
-              More than 90% of our money is neither printed by the state nor created by central
-              banks. It's conjured up <i>as if by magic</i> by commercial banks (think JPMorgan,
-              HSBC, ...) every single time they lend money.
+              <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-in-the-modern-economy-an-introduction.pdf">
+                More than 90%
+              </Reference>{" "}
+              of our money is neither printed by the state nor created by central banks. It's
+              conjured up <i>as if by magic</i> by commercial banks (think JPMorgan, HSBC, ...)
+              every single time they lend money.
               <p>
                 The moment they grant a loan, with one simple accounting entry, they create money
                 out of thin air.

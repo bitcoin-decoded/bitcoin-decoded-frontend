@@ -109,16 +109,28 @@ export const Banking2Page: FC = () => {
         {fr ? (
           <>
             À fréquence régulière (par exemple, en fin de journée), les banques font le total de ce
-            qu'elles se doivent mutuellement : c'est la compensation. Puis elles règlent uniquement
-            la différence nette (le solde) en monnaie M0 : c'est le règlement. <br />
+            qu'elles se doivent mutuellement : c'est la{" "}
+            <Reference href="https://fr.wikipedia.org/wiki/Compensation_(finance)">
+              compensation
+            </Reference>
+            . Puis elles règlent uniquement la différence nette (le solde) en monnaie M0 : c'est le{" "}
+            <Reference href="https://fr.wikipedia.org/wiki/R%C3%A8glement_-_livraison">
+              règlement
+            </Reference>
+            . <br />
             C'est ça, la compensation interbancaire.
           </>
         ) : (
           <>
             At regular intervals (say, at the end of the day), banks tally up everything they owe
-            one another: that's the clearing. Then they settle only the net difference (the balance)
-            in M0 money: that's the settlement. <br />
-            That, right there, is interbank clearing.
+            one another: that's the{" "}
+            <Reference href="https://en.wikipedia.org/wiki/Clearing_(finance)">clearing</Reference>.
+            Then they settle only the net difference (the balance) in M0 money: that's the{" "}
+            <Reference href="https://en.wikipedia.org/wiki/Settlement_(finance)">
+              settlement
+            </Reference>
+            . <br />
+            That, right there, is interbank clearing .
           </>
         )}
       </p>

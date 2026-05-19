@@ -82,9 +82,21 @@ export const Banking4Page: FC = () => {
           </li>
         </ol>
         <p>
-          {fr
-            ? "Son profit principal, c'est l'écart entre le taux long et le taux court"
-            : "Its main profit is the gap between the long rate and the short rate"}
+          {fr ? (
+            <>
+              Son profit principal, c'est l'
+              <Reference href="https://nerd.wwnorton.com/ebooks/epub/prineco4/EPUB/content/30.2.0-chapter30.xhtml#:~:text=Banks%20charge%20more%20interest%20for,Louis.">
+                écart entre le taux long et le taux court
+              </Reference>
+            </>
+          ) : (
+            <>
+              Its main profit is the{" "}
+              <Reference href="https://nerd.wwnorton.com/ebooks/epub/prineco4/EPUB/content/30.2.0-chapter30.xhtml#:~:text=Banks%20charge%20more%20interest%20for,Louis.">
+                gap between the long rate and the short rate
+              </Reference>
+            </>
+          )}
           .
         </p>
         <p>
