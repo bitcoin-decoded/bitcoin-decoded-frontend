@@ -119,9 +119,9 @@ export const Banking3Page: FC = () => {
                 ? "Le capital propre diminue à son tour, afin que le bilan de la banque soit équilibré."
                 : "Equity shrinks in turn, so the bank's balance sheet stays balanced."}
             </li>
-            <li>
-              <DefaultSimulator />
-            </li>
+
+            <DefaultSimulator />
+
             <li>
               {fr
                 ? "Les autres banques voient le capital propre de la banque fondre et commencent à paniquer."
@@ -174,15 +174,15 @@ export const Banking3Page: FC = () => {
                   Il s'agit d'un véritable tour de passe-passe : les banques commerciales peuvent
                   ainsi être renflouées en M0, comme par magie, grâce aux banques centrales qui
                   peuvent créer de la M0 quasiment à partir de rien, en échange d'obligations
-                  qu'elles encaissent à leur bilan. La « contrepartie » ? De la dette d'État.
-                  (Rassurant, non ?)
+                  qu'elles encaissent à leur bilan. La « contrepartie » ? De la dette d'État
+                  (rassurant, non ?).
                 </>
               ) : (
                 <>
                   It's a genuine sleight of hand: commercial banks get bailed out in M0, as if by
                   magic, thanks to central banks that can conjure M0 out of almost nothing, in
                   exchange for bonds they park on their own balance sheet. The "counterpart"?
-                  Government debt. (Reassuring, isn't it?)
+                  Government debt (reassuring, isn't it?).
                 </>
               )}
             </p>

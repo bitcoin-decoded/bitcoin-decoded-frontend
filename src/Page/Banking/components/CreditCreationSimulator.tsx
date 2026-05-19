@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useMemo } from "react";
 
-import { usePageTheme } from "../../../Design";
+import { Reference, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
 import { getUserBankCredit } from "../data";
@@ -120,8 +120,10 @@ export const CreditCreationSimulator: FC = () => {
               <>
                 Voilà.{" "}
                 <strong>
-                  La monnaie scripturale que tu utilises tous les jours naît surtout du crédit
-                  bancaire
+                  <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf">
+                    La monnaie scripturale que tu utilises tous les jours naît surtout du crédit
+                    bancaire
+                  </Reference>
                 </strong>
                 {", bien plus que de la planche à billets."}
               </>
@@ -129,7 +131,9 @@ export const CreditCreationSimulator: FC = () => {
               <>
                 There you have it.{" "}
                 <strong>
-                  The bank-deposit money you use every day is born mostly from bank lending
+                  <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf">
+                    The bank-deposit money you use every day is born mostly from bank lending
+                  </Reference>
                 </strong>
                 {", far more than from any printing press."}
               </>
