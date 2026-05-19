@@ -102,7 +102,7 @@ export const Bitcoin5Page: FC = () => {
 
       <p>
         {fr
-          ? "Cependant, cette subvention ne reste pas stable dans le temps. Regardes attentivement la courbe qui suit."
+          ? "Cependant, cette subvention ne reste pas stable dans le temps. Regarde attentivement la courbe qui suit."
           : "However, this subsidy does not remain stable over time. Take a close look at the curve below."}
       </p>
 

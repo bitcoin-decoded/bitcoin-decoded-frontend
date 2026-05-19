@@ -2,6 +2,7 @@ import { type FC } from "react";
 
 import picsouCar from "../../../../src/Design/img/picsou_car.jpg";
 import picsouVilla from "../../../../src/Design/img/picsou_villa.jpg";
+import { Quote } from "../../../Design";
 import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { Illustration } from "../../../Interactive";
@@ -19,14 +20,14 @@ export const Banking6Page: FC = () => {
         fr ? (
           <>
             Tes courses ont augmenté. Ton loyer aussi. Ton salaire, lui, suit mollement. Pendant ce
-            temps, le CAC 40 bat des records et l'immobilier parisien tutoie l'absurde. tu sens
+            temps, le CAC 40 bat des records et l'immobilier parisien tutoie l'absurde. Tu sens
             qu'il y a un lien. Tu as raison.
           </>
         ) : (
           <>
-            Your grocery bill has gone up. So has your rent. Your salary, meanwhile, is barely
-            keeping pace. At the same time, the NASDAQ is hitting record highs and real estate
-            prices are climbing into the absurd. You sense there's a link. You're right.
+            Your grocery bill has gone up. So has your rent. Your paycheck, meanwhile, is barely
+            keeping pace. At the same time, the NASDAQ is hitting record highs and real estate is
+            climbing into the absurd. You sense there's a link. You're right.
           </>
         )
       }
@@ -34,19 +35,19 @@ export const Banking6Page: FC = () => {
       <p>
         {fr
           ? "Tu pensais que l'argent resterait sagement enfermé dans les actifs patrimoniaux ? Mauvaise nouvelle."
-          : "You thought money would stay neatly locked away in wealth assets? Bad news."}
+          : "You thought money would stay neatly locked away in financial assets? Bad news."}
       </p>
       <p>
         {fr ? (
           <>
-            L'argent finit toujours par brûler les doigts. C'est ce qu'on appelle l'
+            L'argent finit presque toujours par brûler les doigts. C'est ce qu'on appelle l'
             <Reference href="https://fr.wikipedia.org/wiki/Effet_de_richesse">
               <i>Effet de Richesse.</i>
             </Reference>
           </>
         ) : (
           <>
-            Money always ends up burning your fingers. This is called the{" "}
+            Money almost always ends up burning your fingers. This is called the{" "}
             <Reference href="https://en.wikipedia.org/wiki/Wealth_effect">
               <i>Wealth Effect.</i>
             </Reference>
@@ -76,7 +77,7 @@ export const Banking6Page: FC = () => {
         <p>
           {fr
             ? "Il décide alors de se faire plaisir, et c'est bien normal :"
-            : "He then decides to treat himself, and that's perfectly normal:"}
+            : "He decides to treat himself, and that's perfectly normal:"}
         </p>
         <ul>
           <li>{fr ? "il vend quelques actions" : "he sells some shares"}</li>
@@ -89,6 +90,11 @@ export const Banking6Page: FC = () => {
 
           <li>{fr ? "et il commande une voiture de luxe." : "and he orders a luxury car."}</li>
         </ul>
+        <p>
+          {fr
+            ? "(Et s'il ne veut pas vendre, il emprunte en mettant ses actions en garantie. Même résultat : de l'argent frais dans l'économie réelle.)"
+            : "(And if he'd rather not sell, he borrows against his shares instead. Same result: fresh money in the real economy.)"}
+        </p>
         <div style={PAGE_STYLES.illustrationsWrapper}>
           <Illustration
             src={picsouVilla}
@@ -106,15 +112,15 @@ export const Banking6Page: FC = () => {
             width="30%"
             caption={
               fr
-                ? "Picsou au volant de sa belle voiture de collection"
-                : "Scrooge at the wheel of his beautiful classic car"
+                ? "Picsou au volant de sa belle voiture de luxe"
+                : "Scrooge at the wheel of his fancy luxury car"
             }
           />
         </div>
         <p>
           {fr
             ? "Et voilà ! L'argent vient de sortir du circuit financier pour entrer dans l'économie réelle : le vendeur de la maison et le concessionnaire auto le reçoivent."
-            : "And there you go! Money has just left the financial circuit to enter the real economy: the house seller and the car dealer both receive it."}
+            : "And there it goes! Money has just left the financial circuit to enter the real economy: the home seller and the car dealer both receive it."}
         </p>
         <p>
           {fr ? (
@@ -126,10 +132,10 @@ export const Banking6Page: FC = () => {
             </>
           ) : (
             <>
-              These people will in turn spend this money at restaurants, at the supermarket, or on
-              renovations.
+              These people will in turn spend that money at restaurants, at the supermarket, or on
+              home improvements.
               <br />
-              The famous "trickle-down" begins-the one economists in suits like to talk about.
+              The famous "trickle-down" begins, the one economists in suits like to talk about.
             </>
           )}
         </p>
@@ -138,28 +144,42 @@ export const Banking6Page: FC = () => {
         {fr ? (
           <>OK. L'argent afflue dans l'économie réelle. Tu sens le problème arriver, non ?</>
         ) : (
-          <>
-            OK. Money is flooding into the real economy. You can feel the problem coming, can't you?
-          </>
+          <>OK. Money is flooding into the real economy. You can feel the problem coming, right?</>
         )}
       </p>
       <p>
         {fr
-          ? "Eh oui ! Les banques ont créé de la nouvelle monnaie en abondance, augmentant massivement la quantité d'argent en circulation. Mais est-ce que le nombre de baguettes de pain, de litres d'essence ou de maisons a explosé aussi vite ? Non."
-          : "Indeed! Banks have created new money in abundance, massively increasing the amount of money in circulation. But has the number of loaves of bread, liters of gas, or houses exploded just as fast? No."}
+          ? "Eh oui ! Sur la dernière décennie, crédit facile et taux planchers ont fait gonfler massivement la quantité d'argent en circulation. Mais est-ce que le nombre de baguettes de pain, de litres d'essence ou de maisons a explosé aussi vite ? Non."
+          : "Indeed! Over the past decade, easy credit and rock-bottom rates have massively swollen the amount of money in circulation. But has the number of loaves of bread, liters of gas, or houses grown just as fast? No."}
       </p>
       <p>
         {fr ? (
           <>
-            Et ça, c'est la définition mécanique de l'inflation : si la quantité d'argent en
-            circulation explose, mais que la quantité de produits reste à peu près la même, alors
-            les prix finissent eux aussi par exploser . Logique, non ?
+            Et ça, c'est le moteur principal de l'inflation.{" "}
+            <Reference href="https://fr.wikipedia.org/wiki/Milton_Friedman">
+              Milton Friedman
+            </Reference>
+            , prix Nobel, le résumait ainsi :
+            <Quote author="Milton Friedman" source="Counter-Revolution in Monetary Theory (1970)">
+              {fr
+                ? "L'inflation est toujours et partout un phénomène monétaire."
+                : "Inflation is always and everywhere a monetary phenomenon."}
+            </Quote>
+            Logique, non ?
           </>
         ) : (
           <>
-            And that is the mechanical definition of inflation: if the amount of money in
-            circulation explodes, but the quantity of goods stays roughly the same, then prices end
-            up exploding too . Makes sense, right?
+            And that is the main engine of inflation.{" "}
+            <Reference href="https://en.wikipedia.org/wiki/Milton_Friedman">
+              Milton Friedman
+            </Reference>
+            , the Nobel laureate, put it bluntly:
+            <Quote author="Milton Friedman" source="Counter-Revolution in Monetary Theory (1970)">
+              {fr
+                ? "L'inflation est toujours et partout un phénomène monétaire."
+                : "Inflation is always and everywhere a monetary phenomenon."}
+            </Quote>
+            Makes sense, right?
           </>
         )}
       </p>
@@ -173,8 +193,8 @@ export const Banking6Page: FC = () => {
         ) : (
           <>
             That's it. First module done. Before moving on,{" "}
-            <Reference to={ROUTE_NAME.Banking_7}>a quick quiz</Reference> to make sure everything's
-            solid.
+            <Reference to={ROUTE_NAME.Banking_7}>a quick quiz</Reference> to make sure it all holds
+            up.
           </>
         )}
       </p>

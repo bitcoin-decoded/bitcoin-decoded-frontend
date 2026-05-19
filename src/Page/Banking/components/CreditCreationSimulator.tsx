@@ -46,13 +46,6 @@ export const CreditCreationSimulator: FC = () => {
     cursor: "not-allowed",
   };
 
-  const sectionStyle: CSSProperties = {
-    paddingTop: "2rem",
-    fontSize: "1rem",
-    letterSpacing: "0.05rem",
-    lineHeight: 1.625,
-  };
-
   return (
     <div style={{ marginTop: "2rem" }}>
       <div style={controlsStyle}>
@@ -84,21 +77,63 @@ export const CreditCreationSimulator: FC = () => {
       />
       {isActive && (
         <>
-          <p style={sectionStyle}>
+          <p>
             <strong>
               {fr
-                ? "ALAKAZAM ! 💥 Regardes attentivement la ligne en jaune. 🧐"
-                : "ALAKAZAM! 💥 Look carefully at the yellow line. 🧐"}
+                ? "ALAKAZAM ! 💥 Regarde attentivement la ligne en jaune."
+                : "ALAKAZAM! 💥 Look closely at the line in yellow."}
             </strong>
-            <br />
-            {fr
-              ? "Par un simple jeu d'écritures, en un seul clic, tu as en tant que banquier créé une ligne magique : une créance de 200 000 € (un actif car Nicolas te doit cet argent) et un dépôt de 200 000 € dans le compte de banque de Nicolas (un passif pour toi, car cet argent est dû au client : il peut le retirer ou le dépenser à tout moment). 200 000 € ont littéralement été ajoutés dans l'économie."
-              : "With a simple accounting entry, in a single click, you as a banker created a magic line: a claim of $200,000 (an asset because Mr. Nicolas owes you this money) and a deposit of $200,000 in Nicolas's bank account (a liability for you, because this money is owed to the customer: they can withdraw it or spend it at any time). $200,000 has literally been added to the economy."}
           </p>
-          <p style={sectionStyle}>
+          <p>
             {fr
-              ? "Voilà. L'essentiel de la monnaie en circulation provient du crédit bancaire, pas de la planche à billets."
-              : "The vast majority of money in circulation is created through bank lending, not by the central bank printing money."}
+              ? "Par un simple jeu d'écritures, en un seul clic, tu as en tant que banquier créé une ligne magique : une créance de 200 000 € (un actif car Nicolas te doit cet argent) et un dépôt de 200 000 € dans le compte de banque de Nicolas (un passif pour toi, car cet argent est dû au client : il peut le retirer ou le dépenser à tout moment)."
+              : "With one simple bookkeeping move, in a single click, you the banker just created a magic line: a $200,000 claim (an asset, because Nicolas owes you that money) and a $200,000 deposit in Nicolas's bank account (a liability for you, because that money is owed to the customer: he can withdraw it or spend it whenever he wants)."}
+          </p>
+
+          <p>
+            {fr ? (
+              <>
+                200 000 € viennent d'apparaître sur le compte de Nicolas. Ils sont sortis du
+                chapeau, enfin... presque ! En face, Nicolas porte maintenant une dette de 200 000
+                €.{" "}
+                <strong>
+                  La banque n'a absolument pas créé de richesse. Elle a juste créé de la monnaie
+                  d'un côté et une dette de l'autre.
+                </strong>
+                {" Et c'est exactement ça, le tour de passe-passe."}
+              </>
+            ) : (
+              <>
+                $200,000 just appeared in Nicolas's account. Pulled out of a hat, well... almost! On
+                the other side, Nicolas now carries a $200,000 debt.{" "}
+                <strong>
+                  The bank created no wealth whatsoever. It just created money on one side and debt
+                  on the other.
+                </strong>
+                {" And that, right there, is the sleight of hand."}
+              </>
+            )}
+          </p>
+
+          <p>
+            {fr ? (
+              <>
+                Voilà.{" "}
+                <strong>
+                  La monnaie scripturale que tu utilises tous les jours naît surtout du crédit
+                  bancaire
+                </strong>
+                {", bien plus que de la planche à billets."}
+              </>
+            ) : (
+              <>
+                There you have it.{" "}
+                <strong>
+                  The bank-deposit money you use every day is born mostly from bank lending
+                </strong>
+                {", far more than from any printing press."}
+              </>
+            )}
           </p>
         </>
       )}

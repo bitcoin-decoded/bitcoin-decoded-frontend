@@ -1,9 +1,11 @@
-import { type FC, type CSSProperties, useMemo } from "react";
-import { BalanceSheet } from "./BalanceSheet";
+import { type CSSProperties, type FC, useMemo } from "react";
+
 import { usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
 import { getUsersDebtsDefault } from "../data";
+
+import { BalanceSheet } from "./BalanceSheet";
 
 export const DefaultSimulator: FC = () => {
   const { colors, moduleTheme } = usePageTheme();

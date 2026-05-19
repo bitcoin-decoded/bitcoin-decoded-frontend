@@ -110,7 +110,7 @@ export const QESimulator: FC = () => {
         >
           {fr
             ? "Le coupon (paiement annuel) de l'obligation est fixé à 40€ (4% de 1 000 €)"
-            : "The coupon (annual payment) of the bond is fixed at $40 (4% of $1,000)"}
+            : "The bond's coupon (its annual payment) is fixed at €40 (4% of €1,000)"}
         </div>
         <div
           style={{
@@ -142,15 +142,19 @@ export const QESimulator: FC = () => {
               coupon reste fixé à 40 €, mais rapporté à un prix d'achat de 4 000 €, cela ne
               représente plus que 1% de rendement. C'est ainsi que le{" "}
               <strong>
-                Quantitative Easing écrase artificiellement les taux sur toute l'économie.
+                Quantitative Easing écrase artificiellement les taux, et de proche en proche, sur
+                une grande partie de l'économie.
               </strong>
             </>
           ) : (
             <>
-              The Central Bank flooded the market to buy these securities. By driving the bond's price up to $4,000, its annual yield mechanically drops to 1%: the coupon remains fixed at $40, but relative to a purchase price of $4,000, that's only a 1% return. This is
-              how{" "}
+              The Central Bank flooded the market to snap up these securities. By sending the bond's
+              price soaring to €4,000, its annual yield mechanically collapses to 1%: the coupon is
+              still fixed at €40, but set against a €4,000 purchase price, that's no more than a 1%
+              return. This is how{" "}
               <strong>
-                Quantitative Easing artificially crushes rates across the entire economy.
+                Quantitative Easing artificially crushes rates, and step by step, spreads across a
+                large part of the economy.
               </strong>
             </>
           )}
