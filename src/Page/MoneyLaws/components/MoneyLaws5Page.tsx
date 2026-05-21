@@ -32,8 +32,8 @@ export const MoneyLaws5Page: FC = () => {
             </>
           ) : (
             <>
-              {quiz.questions.length} questions covering the whole module. Score at least{" "}
-              {quiz.passThreshold} to unlock the synthesis.
+              {quiz.questions.length} questions across the whole module. You need at least{" "}
+              {quiz.passThreshold} right answers to unlock the wrap-up.
             </>
           )}
         </HighlightText>
@@ -49,44 +49,140 @@ export const MoneyLaws5Page: FC = () => {
       {isQuizPassed && (
         <>
           <p>
-            {fr
-              ? "Bravo. Cette partie n'était pas la plus simple."
-              : "Well done. This wasn't the easiest part."}
+            {fr ? (
+              <>
+                (Bien joué, sincèrement. C'était pas la partie la plus simple. Combiné au{" "}
+                <Reference to={ROUTE_NAME.Banking_1}>module 1</Reference>, tu as maintenant une
+                vision d'ensemble du diagnostic. Et si l'on colle les pièces : l'image devient très
+                claire.)
+              </>
+            ) : (
+              <>
+                (Well done, truly. That wasn't the easiest stretch. Combined with{" "}
+                <Reference to={ROUTE_NAME.Banking_1}>module 1</Reference>, you now have the full
+                diagnosis in hand. Put the pieces together: the picture sharpens.)
+              </>
+            )}
           </p>
           <p>
-            {fr
-              ? "Tu as maintenant une vision d'ensemble du diagnostic. Assemblons les pièces : l'image devient limpide."
-              : "You now have an overall view of the diagnosis. Let's put the pieces together: the picture becomes clear."}
+            {fr ? (
+              <>
+                La monnaie n'est pas un simple objet.{" "}
+                <HighlightText>
+                  C'est une technologie de mémoire collective, faite pour collaborer au-delà de nos
+                  limites biologiques
+                </HighlightText>
+                . Et pour faire son boulot de batterie, il lui faut une qualité centrale : la
+                dureté.
+              </>
+            ) : (
+              <>
+                Money isn't just an object.{" "}
+                <HighlightText>
+                  It's a technology of collective memory, built to let humans cooperate beyond their
+                  biological limits
+                </HighlightText>
+                . And to do its job as a battery, it needs one central property: hardness.
+              </>
+            )}
           </p>
           <p>
-            {fr
-              ? "Première découverte : la monnaie n'est pas un simple objet. C'est une technologie de mémoire collective, faite pour collaborer au-delà de nos limites biologiques. Pour faire son boulot de batterie, il lui faut une qualité essentielle : la dureté."
-              : "First discovery: money is not just an object. It is a technology of collective memory, designed to enable cooperation beyond our biological limits. To function as a store of value, it requires one essential property: hardness."}
+            {fr ? (
+              <>
+                Or la monnaie fiat qu'on utilise aujourd'hui a une dureté qui tend vers zéro : aucun
+                stock physique pour freiner son émission, juste des règles politiques qui peuvent
+                céder sous la pression. Cette flexibilité permet aux banques centrales et au système
+                bancaire d'injecter des liquidités à grande échelle. Et de saboter le signal le plus
+                important de l'économie : le taux d'intérêt. En manipulant ce « prix du temps », on
+                envoie aux entrepreneurs un signal trompeur : épargne abondante, feu vert, en avant
+                Guingamp ! Sauf que les ressources réelles ne suivent pas toujours.{" "}
+                <HighlightText>C'est le mensonge monétaire</HighlightText>. Résultat : des
+                malinvestissements massifs et des cycles de crises où la réalité finit, tôt ou tard,
+                par corriger les excès du boom.
+              </>
+            ) : (
+              <>
+                Yet the fiat money we use today has a hardness that tends toward zero: no physical
+                stock holding it back, just political rules that can fold under pressure. That
+                flexibility lets central banks and the banking system pump in liquidity on a massive
+                scale. And sabotage the most important signal in the economy: the interest rate.
+                Manipulate this "price of time" and entrepreneurs get a misleading signal: plenty of
+                savings, green light. Except the real resources don't always follow.{" "}
+                <HighlightText>That's the monetary lie</HighlightText>. The result: massive
+                malinvestments, and boom-bust cycles where reality, sooner or later, settles the
+                bill.
+              </>
+            )}
           </p>
           <p>
-            {fr
-              ? "On utilise aujourd'hui une monnaie fiat dont la dureté est de zéro. Cette facilité de création permet aux banques d'injecter des liquidités. Et de saboter le signal le plus important de l'économie : le taux d'intérêt. En manipulant ce « prix du temps », on fait croire aux entrepreneurs que l'épargne est abondante. Sauf qu'en réalité, les ressources ne sont pas là. C'est le mensonge monétaire. Résultat : des malinvestissements massifs, et des cycles de crises où la réalité finit toujours par corriger les excès du boom."
-              : "Today, we use fiat money whose hardness is effectively zero. This ease of creation allows banks to inject liquidity and distort the economy's most important signal: the interest rate. By manipulating this “price of time,” it gives entrepreneurs the illusion that savings are abundant—when in reality, the resources are not there. This is the monetary illusion. The result: massive malinvestments, and boom-bust cycles where reality eventually corrects the excesses of the boom."}
+            {fr ? (
+              <>
+                Et si la manipulation des taux fausse la boussole, la planification centrale (le
+                socialisme) éteint carrément le tableau de bord. C'est l'argument de Mises :{" "}
+                <HighlightText>
+                  sans propriété privée et sans prix de marché libres, calculer la valeur relative
+                  des choses devient mathématiquement impossible
+                </HighlightText>
+                . On avance dans le noir. Impossible de savoir si on crée de la richesse, ou si on
+                gaspille tout dans des projets absurdes.
+              </>
+            ) : (
+              <>
+                And if rate manipulation skews the compass, central planning (socialism) just turns
+                off the whole dashboard. This is Mises' argument:{" "}
+                <HighlightText>
+                  without private property and free market prices, calculating the relative value of
+                  things becomes mathematically impossible
+                </HighlightText>
+                . You're flying blind. No way to tell if you're building wealth or burning through
+                resources on absurd projects.
+              </>
+            )}
           </p>
           <p>
-            {fr
-              ? "Et si la manipulation des taux fausse la boussole, la planification centrale (le socialisme) éteint carrément le tableau de bord. Sans propriété privée et sans prix de marché libres, calculer la valeur relative des choses devient mathématiquement impossible. On avance dans le noir. Impossible de savoir si on crée de la richesse, ou si on gaspille tout dans des projets absurdes."
-              : "And if interest-rate manipulation distorts the compass, central planning (socialism) shuts down the dashboard entirely. Without private property and without free market prices, calculating the relative value of things becomes mathematically impossible. You are moving in the dark. There is no way to know whether you are creating wealth, or wasting everything on absurd projects."}
+            {fr ? (
+              <>
+                Dernier morceau : la méthodologie autrichienne. Plutôt que de traiter les humains
+                comme des atomes prévisibles dans des statistiques mouvantes, elle part de la
+                logique de l'action humaine. Une méthode qui rappelle une chose simple :{" "}
+                <HighlightText>on ne triche pas avec la rareté et le temps</HighlightText>.
+              </>
+            ) : (
+              <>
+                Last piece: the Austrian methodology. Rather than treating humans like predictable
+                atoms in shifting statistics, it starts from the logic of human action. A method
+                that drives home one simple thing:{" "}
+                <HighlightText>you don't cheat scarcity, and you don't cheat time</HighlightText>.
+              </>
+            )}
           </p>
           <p>
-            {fr
-              ? "Dernier morceau : la méthodologie autrichienne. Au lieu de traiter les humains comme des atomes prévisibles dans des statistiques mouvantes, elle part de la logique de l'action humaine. Une science de la vérité, qui rappelle qu'on ne triche pas avec la rareté et le temps."
-              : "Last piece: the Austrian methodology. Instead of treating humans as predictable atoms in shifting statistics, it starts from the logic of human action. A science of truth that reminds us we cannot cheat scarcity and time."}
-          </p>
-          <p>
-            {fr
-              ? "Tu comprends maintenant pourquoi le système actuel est structurellement instable. La batterie fuit. La boussole ment. Le pilote est aveugle. D'où la question : existe-t-il une alternative ? Une monnaie qui rendrait le pouvoir aux individus, à la fois dure et impossible à manipuler par les banques centrales ?"
-              : "You now understand why the current system is structurally unstable. The battery leaks. The compass lies. The pilot is blind. Which raises the question: is there an alternative? A currency that would return power to individuals, both hard and impossible for central banks to manipulate?"}
+            {fr ? (
+              <>
+                Tu vois maintenant pourquoi ce système est défaillant.{" "}
+                <HighlightText>
+                  La batterie fuit. La boussole ment. Le pilote est aveugle
+                </HighlightText>
+                . D'où la question : existe-t-il une alternative ? Une monnaie qui redonnerait la
+                main aux individus sur leur épargne, à la fois dure et impossible à manipuler par
+                les banques centrales ?
+              </>
+            ) : (
+              <>
+                You see now why this system is broken at its core.{" "}
+                <HighlightText>
+                  The battery leaks. The compass lies. The pilot is blind
+                </HighlightText>
+                . Hence the question: is there an alternative? A currency that would put savers back
+                in control of their own money, one that's both hard and out of reach of central
+                banks?
+              </>
+            )}
           </p>
           <p>
             {fr
               ? "Il est temps de lever le voile sur cette technologie. Place au grand final :"
-              : "It's time to lift the veil on this technology. On to the grand finale:"}{" "}
+              : "Time to lift the veil on that technology. On to the grand finale:"}{" "}
             <Reference to={ROUTE_NAME.Bitcoin_1}>{t("nav.tree.bitcoinRevolution")}</Reference>.
           </p>
         </>

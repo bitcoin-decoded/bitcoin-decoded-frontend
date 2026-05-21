@@ -10,5 +10,5 @@ export type MonetaryItem = {
     label: string;
     score: number;
   }[];
-  death: string;
+  death: string | ReactNode;
 };
