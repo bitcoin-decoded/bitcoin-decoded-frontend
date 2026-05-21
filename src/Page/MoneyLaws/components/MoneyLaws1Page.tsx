@@ -21,14 +21,17 @@ export const MoneyLaws1Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Une monnaie ne sert à rien tout seul. Elle ne vaut quelque chose que parce que les
-            autres l'acceptent. Toute la question, depuis 5000 ans, c'est : pourquoi acceptent-ils
+            Une monnaie ne sert à rien toute seule. Elle ne vaut quelque chose que parce qu'un
+            réseau d'utilisateurs l'accepte. Parfois par habitude, parfois par contrainte légale,
+            parfois par choix. Toute la question, depuis 5000 ans, c'est : pourquoi acceptent-ils
             celle-ci, et plus celle-là ?
           </>
         ) : (
           <>
-            Money is useless on its own. It only has value because others accept it. For the past
-            5,000 years, the real question has been: why do people accept this one, and not another?
+            A currency is useless on its own. It only has value because a network of users agrees to
+            use it. Sometimes out of habit, sometimes by legal mandate, sometimes by choice. The
+            real question, for 5,000 years now, has been: why do people accept this one, and not the
+            other?
           </>
         )
       }
@@ -41,8 +44,7 @@ export const MoneyLaws1Page: FC = () => {
           </>
         ) : (
           <>
-            If I ask you: <i>"What do you have in your wallet?"</i>, you would probably answer{" "}
-            <i>"money"</i>.
+            If I ask you: <i>"What's in your wallet?"</i>, you'll probably answer <i>"money"</i>.
           </>
         )}
       </p>
@@ -55,9 +57,9 @@ export const MoneyLaws1Page: FC = () => {
           </>
         ) : (
           <>
-            Yet, stranded on a desert island with a million euros, you would be poor. Why? Because
-            you cannot eat banknotes. Money is worthless without other people: above all, it is a{" "}
-            collaboration technology.
+            And yet, stranded alone on a desert island with a million dollars, you'd be poor. Why?
+            Because you can't eat banknotes. Money is worthless without other people: above all,
+            it's a collaboration technology.
           </>
         )}
       </p>
@@ -71,7 +73,7 @@ export const MoneyLaws1Page: FC = () => {
           ) : (
             <>
               Why did we invent this technology? <br />
-              To overcome our biological limits.
+              To push past our biological limits.
             </>
           )}
         </p>
@@ -86,11 +88,11 @@ export const MoneyLaws1Page: FC = () => {
             </>
           ) : (
             <>
-              In a small group of fewer than 150 people, money is not essential. Everyone knows each
-              other, trust is implicit, and social debt does the job: "I help you build your hut,
-              you help me with my harvest." Beyond that threshold, our brains can no longer keep up:
-              we can't remember who owes what to whom anymore. Individual memory is no longer
-              enough.
+              In a small group of fewer than 150 people, money isn't really needed. Everyone knows
+              each other, trust is built in, and social debt does the job:{" "}
+              <i>"I'll help you build your hut, you'll help me with my harvest."</i> Past that
+              threshold, our brain can't keep up: we just can't remember who owes what to whom
+              anymore. Individual memory isn't enough.
             </>
           )}
         </p>
@@ -98,33 +100,38 @@ export const MoneyLaws1Page: FC = () => {
           {fr ? (
             <>
               La monnaie prend alors le relais : elle devient une mémoire collective. Posséder de
-              l'argent, c'est détenir la preuve matérielle que tu as contribué à la société par ton
-              travail, et que t'as le droit de réclamer un service équivalent en retour.
+              l'argent, c'est détenir une reconnaissance sociale : généralement la trace d'un
+              travail fourni, parfois d'un crédit accordé. Et le droit de réclamer un service
+              équivalent en retour.
             </>
           ) : (
             <>
-              Money then takes over: it becomes a collective memory. Owning money is holding
-              tangible proof that you contributed to society through your work, and that you have
-              the right to claim an equivalent service in return.
+              Money then steps in: it becomes a collective memory. Owning money means holding a form
+              of social recognition — usually the trace of work you've done, sometimes credit
+              extended to you. And the right to claim an equivalent service in return.
             </>
           )}
         </p>
         <p>
           {fr ? (
             <>
-              Ce nombre n'est pas choisi par pur hasard : il s'agit du{" "}
+              Ce nombre n'est pas choisi au hasard : c'est le{" "}
               <Reference href="https://fr.wikipedia.org/wiki/Nombre_de_Dunbar">
                 <i>nombre de Dunbar</i>
               </Reference>
-              .
+              , la limite cognitive estimée de notre cerveau pour entretenir des relations stables.
+              Ce n'est pas une frontière magique au-dessus de laquelle la monnaie « apparaît », mais
+              plutôt un seuil où la mémoire individuelle commence à coincer.
             </>
           ) : (
             <>
-              This number is not arbitrary: it is known as{" "}
+              This number isn't picked at random: it's{" "}
               <Reference href="https://en.wikipedia.org/wiki/Dunbar%27s_number">
                 <i>Dunbar's number</i>
               </Reference>
-              .
+              , the estimated cognitive limit of our brain for keeping stable relationships going.
+              It's not some magical threshold where money suddenly "appears" — more like the point
+              where individual memory starts to crack.
             </>
           )}
         </p>
@@ -137,8 +144,8 @@ export const MoneyLaws1Page: FC = () => {
           </>
         ) : (
           <>
-            Money has a specific job: to transfer the value of our work across space, but above all{" "}
-            across time.
+            Money has one specific job: to transfer the value of our work across space, but above
+            all across time.
           </>
         )}
       </p>
@@ -152,9 +159,9 @@ export const MoneyLaws1Page: FC = () => {
           </>
         ) : (
           <>
-            Since we never know what tomorrow holds (health issues, setbacks, opportunities), we
-            store the value of our work today so we can retrieve it later. Think of money as a{" "}
-            battery storing energy. But beware: for a battery to be useful, it must not drain on its
+            Since we have no idea what tomorrow holds (health issues, setbacks, opportunities), we
+            store the value of our work today so we can pull it back out later. Think of money as a
+            battery storing energy. But careful: for a battery to be useful, it can't drain on its
             own!
           </>
         )}
@@ -179,14 +186,14 @@ export const MoneyLaws1Page: FC = () => {
             : "→ It's a snapshot, at a given moment, of the existing stock."}{" "}
           <br />
           <i>
-            {fr ? "« Combien y en a-t-il actuellement ? »." : '"How much of it currently exists?"'}
+            {fr ? "« Combien y en a-t-il actuellement ? »." : '"How much of it exists right now?"'}
           </i>
         </p>
         <p>
           <KeywordHighlight>{fr ? "DURETÉ MONÉTAIRE" : "MONETARY HARDNESS"}</KeywordHighlight>{" "}
           {fr
             ? "→ C'est la résistance de la monnaie à la production de nouvelles unités."
-            : "→ It's a currency's resistance to the creation of new units."}{" "}
+            : "→ It's how much a currency resists the production of new units."}{" "}
           <br />
           <i>
             {fr ? (
@@ -196,8 +203,8 @@ export const MoneyLaws1Page: FC = () => {
               </>
             ) : (
               <>
-                "If we ramp up production of a currency, will supply keep up with demand?" If the
-                answer is no, then that currency is hard.
+                "If we crank up production of a currency, will supply actually follow demand?" If
+                the answer is no, then that currency is hard.
               </>
             )}
           </i>
@@ -210,7 +217,7 @@ export const MoneyLaws1Page: FC = () => {
             caption={
               fr
                 ? "« Pikachu Illustrator » est la carte pokémon la plus rare (39 exemplaires dans le monde). Cependant, elle n'est pas dure (Nintendo pourrait facilement imprimer des milliers de cartes « Pikachu Illustrator » identiques)."
-                : '"Pikachu Illustrator" is the rarest Pokémon card (39 copies worldwide). However, it is not hard (Nintendo could easily print thousands of identical "Pikachu Illustrator" cards).'
+                : '"Pikachu Illustrator" is the rarest Pokémon card (39 copies worldwide). But it isn\'t hard: Nintendo could easily print thousands of identical "Pikachu Illustrator" cards if they wanted to.'
             }
           />
           <Illustration
@@ -220,15 +227,15 @@ export const MoneyLaws1Page: FC = () => {
             caption={
               fr
                 ? "Le pétrole n'est pas rare, les gisements abondent dans le monde. Pourtant, il est dur : même avec la meilleure volonté, doubler la production annuelle est impossible à court terme."
-                : "Oil is not rare, deposits are abundant around the world. Yet it is hard money: even with the best intentions, doubling annual production in the short term is impossible."
+                : "Oil isn't rare — deposits are abundant around the world. Yet it's hard: even with the best intentions, doubling annual production in the short term is impossible."
             }
           />
         </div>
       </Callout>
       <p>
         {fr
-          ? "Pour qu'une monnaie soit une « batterie » digne de ce nom, les penseurs de l'économie se sont accordés sur cinq propriétés essentielles."
-          : 'For money to be a worthy "battery," economic thinkers have agreed on five essential properties.'}
+          ? "Pour qu'une monnaie soit une « batterie » qui tient la route, on retient cinq propriétés."
+          : 'For money to be a "battery" worth its name, five properties are usually retained.'}
       </p>
       <Callout title={fr ? "Les cinq piliers d'une monnaie" : "The five pillars of money"}>
         {displayAristoteMoneyCharacs(language)}
@@ -236,31 +243,31 @@ export const MoneyLaws1Page: FC = () => {
       <p>
         {fr
           ? "Et comme toujours, passons à la pratique en découvrant comment l'histoire a « puni » les batteries qui fuyaient."
-          : 'And as always, let\'s move to practice by discovering how history "punished" leaky batteries.'}
+          : 'And as always, let\'s get practical and see how history "punished" the batteries that leaked.'}
       </p>
       <p>
         {fr
           ? "Déplies les monnaies ci-dessous afin d'en savoir plus !"
-          : "Unfold the currencies below to learn more!"}
+          : "Unfold the currencies below to find out more!"}
       </p>
       <MonetaryGallery />
       <p>
         {fr ? (
           <>
             Le verdict de cette galerie est sans appel : dès qu'une monnaie perd sa dureté, elle
-            cesse d'être une réserve de valeur et finit inéluctablement par disparaitre .
+            cesse d'être une réserve de valeur et finit inéluctablement par disparaître.
           </>
         ) : (
           <>
-            The verdict from this gallery is crystal clear: as soon as a currency loses its
-            hardness, it stops being a store of value and inevitably disappears .
+            The verdict from this gallery is clear-cut: the moment a currency loses its hardness, it
+            stops working as a store of value and inevitably ends up vanishing.
           </>
         )}
       </p>
       <p>
         {fr
-          ? "C'est une loi de la nature économique : l'être humain cherche toujours à stocker son travail dans la technologie la plus résistante possible :"
-          : "This is a law of economic nature: humans always seek to store their work in the most resilient technology available:"}
+          ? "C'est une régularité historique frappante : à long terme, les utilisateurs migrent vers les technologies monétaires qui résistent le mieux à la dilution."
+          : "It's a striking historical pattern: over the long run, users migrate toward the monetary technologies that best resist dilution."}
       </p>
       <ul>
         <li>
@@ -271,8 +278,8 @@ export const MoneyLaws1Page: FC = () => {
             </span>
           ) : (
             <span>
-              A currency whose supply can be easily increased is a leaky battery. Nobody wants to
-              leave their savings in it.
+              A currency whose supply can easily be inflated is a leaky battery. Nobody wants to
+              leave their savings sitting in it.
             </span>
           )}
         </li>
@@ -287,9 +294,9 @@ export const MoneyLaws1Page: FC = () => {
             </span>
           ) : (
             <span>
-              Conversely, a currency that remains durably hard becomes increasingly desirable. Since
-              its supply cannot "keep up" with rising demand, it mechanically becomes rarer and
-              rarer. It is a virtuous cycle that protects its users.
+              On the flip side, a currency that stays durably hard becomes more and more desirable.
+              Since its supply can't "keep up" with rising demand, it mechanically becomes scarcer
+              and scarcer. A virtuous cycle that protects whoever uses it.
             </span>
           )}
         </li>
@@ -304,9 +311,9 @@ export const MoneyLaws1Page: FC = () => {
           </>
         ) : (
           <>
-            Today, we are living through an unprecedented situation. For the first time in history,
-            the entire world uses currencies whose hardness tends toward zero (fiat currencies). We
-            chose transaction speed at the expense of our battery's solidity.
+            Today, we're living through something unprecedented. For the first time in history, the
+            entire world uses currencies whose hardness tends toward zero (fiat currencies). We
+            chose transaction speed over the solidity of our battery.
           </>
         )}
       </p>
@@ -319,26 +326,47 @@ export const MoneyLaws1Page: FC = () => {
           </>
         ) : (
           <>
-            But beware: when we use money that is "easy to create," we distort the price of time and
-            effort. We send false signals to the entire society, which creates phases of artificial
-            euphoria followed by violent crashes.
+            But careful: when we use a currency that's "easy to create," we distort the price of
+            time and effort. We send false signals to the entire society, which creates phases of
+            artificial euphoria followed by violent crashes.
           </>
         )}
       </p>
       <p>
         {fr ? (
           <>
-            Prêt à découvrir les{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_2}>cycles de crises (Boum et Krach)</Reference> que
-            nous subissons ? On y va.
+            Reste alors une question ouverte :{" "}
+            <i>
+              « existe-t-il une monnaie dont la dureté serait structurellement garantie, sans
+              dépendre d'aucune institution ? »
+            </i>{" "}
+            On y reviendra.
           </>
         ) : (
           <>
-            Ready to discover the{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_2}>boom-and-bust cycles</Reference> we endure? Let's
-            go.
+            That leaves one open question:{" "}
+            <i>
+              "Is there a currency whose hardness would be structurally guaranteed, without
+              depending on any institution?"
+            </i>{" "}
+            We'll come back to it.
           </>
-        )}{" "}
+        )}
+      </p>
+      <p>
+        {fr ? (
+          <>
+            Prêt à découvrir comment ce manque de dureté fabrique, mécaniquement, les{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>cycles de Boum et Krach</Reference> que nous
+            subissons ? On y va.
+          </>
+        ) : (
+          <>
+            Ready to see how this lack of hardness mechanically manufactures the{" "}
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>Boom-and-Bust cycles</Reference> we all endure?
+            Let's go.
+          </>
+        )}
       </p>
     </PageTemplate>
   );

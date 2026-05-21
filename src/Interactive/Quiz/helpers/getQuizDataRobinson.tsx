@@ -11,15 +11,12 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
       {
         text: fr
           ? "a) Laisser tomber le projet, la situation ne peut pas évoluer !"
-          : "a) Give up the project, the situation can't improve!",
+          : "a) Give up the project - the situation can't improve!",
         isCorrect: false,
         rationale: fr ? (
-          <>
-            Allons, en êtes-toi bien certain ? N'y a t-il pas une marche de manoeuvre pour Robinson
-            ?
-          </>
+          <>Allons, en es-tu bien certain ? N'y a-t-il pas une marge de manœuvre pour Robinson ?</>
         ) : (
-          <>Come on, are you sure about that? Isn't there some room for maneuver for Robinson?</>
+          <>Come on, are you sure about that? Isn't there some room to maneuver for Robinson?</>
         ),
       },
       {
@@ -34,15 +31,15 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            Bullseye! Robinson understood that he must create a surplus (by working more or
-            consuming less) to fund his roundabout production (the net).
+            Bullseye! Robinson figured out that he needs to create a surplus (by working more or
+            consuming less) to pay for his roundabout production (the net).
           </>
         ),
       },
       {
         text: fr
           ? "c) Se lancer tête baissée dans le tressage du filet : avec de la volonté, on peut tout faire !"
-          : "c) Dive headfirst into weaving the net: with willpower, anything is possible!",
+          : "c) Dive headfirst into weaving the net: with enough willpower, anything is possible!",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -51,8 +48,8 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            Bad idea! By the second day, Robinson will be too weak to finish his net. You can't
-            ignore present needs to build the future.
+            Bad idea! By day two, Robinson will be too weak to finish his net. You can't ignore
+            today's needs to build tomorrow.
           </>
         ),
       },

@@ -5,13 +5,13 @@ export const getQuizDataAustrianAxiom = (language: Language): QuizData => {
   const fr = language === "fr";
   return {
     question: fr
-      ? "Peux-tu réfuter cet axiome ? Essaies de prouver que l'être humain n'agit pas de manière intentionnelle."
-      : "Can you refute this axiom? Try to prove that human beings don't act intentionally.",
+      ? "Peux-tu réfuter cet axiome ? Essaie de prouver que l'être humain n'agit pas de manière intentionnelle."
+      : "Can you refute this axiom? Try to prove that human beings don't act with intention.",
     answers: [
       {
         text: fr
           ? "a) J'ai trouvé ! Je vais rester immobile et ne rien faire."
-          : "a) I've got it! I'll stay still and do nothing.",
+          : "a) Got it! I'll stay still and do nothing.",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -20,7 +20,7 @@ export const getQuizDataAustrianAxiom = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            By doing so, you are acting with the purpose of proving me wrong. Your attempt at
+            By doing that, you're acting with the goal of proving me wrong. Your attempt at
             refutation confirms the axiom!
           </>
         ),
@@ -29,9 +29,16 @@ export const getQuizDataAustrianAxiom = (language: Language): QuizData => {
         text: fr ? "b) C'est impossible à réfuter." : "b) It's impossible to refute.",
         isCorrect: true,
         rationale: fr ? (
-          <>Exactement. Tu as compris : toute action humaine est motivée par une intention.</>
+          <>
+            Exactement. Tu as compris : au sens praxéologique, une action est un comportement
+            orienté vers un but (et non, je te vois venir : un réflexe, lui, n'est pas une action
+            !).
+          </>
         ) : (
-          <>Exactly. You've understood: every human action is driven by intention.</>
+          <>
+            Exactly. You got it: in the praxeological sense, an action is behavior aimed at a goal
+            (and no, I see you coming: a reflex doesn't count as an action!).
+          </>
         ),
       },
     ],

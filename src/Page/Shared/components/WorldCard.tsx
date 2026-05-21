@@ -1,4 +1,5 @@
-import { type FC, type CSSProperties, useState } from "react";
+import { type CSSProperties, type FC, useState } from "react";
+
 import { ArrowRight } from "lucide-react";
 
 import { useBreakpoint } from "../../../Design/Responsive";

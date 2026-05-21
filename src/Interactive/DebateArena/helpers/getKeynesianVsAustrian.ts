@@ -11,13 +11,13 @@ export const getKeynesianVsAustrian = (language: Language): DebateItem[] => {
           school: fr ? "Keynésien" : "Keynesian",
           argument: fr
             ? "On regarde les données passées. Si les chiffres confirment l'hypothèse, alors la théorie est validée jusqu'à preuve du contraire."
-            : "We look at past data. If the numbers confirm the hypothesis, the theory is validated until proven otherwise.",
+            : "You look at past data. If the numbers back the hypothesis, the theory holds up until proven otherwise.",
         },
         {
           school: fr ? "Autrichien" : "Austrian",
           argument: fr
             ? "On part d'une vérité logique indiscutable et on en déduit le reste. Ce qui est logiquement vrai ne dépend pas des données : c'est vrai partout et tout le temps."
-            : "We start from an indisputable logical truth and deduce the rest. What is logically true does not depend on data: it holds everywhere and at all times.",
+            : "You start from a premise treated as indisputable and deduce the rest. What's logically true doesn't depend on data: it holds everywhere, all the time.",
         },
       ],
     },
@@ -28,13 +28,13 @@ export const getKeynesianVsAustrian = (language: Language): DebateItem[] => {
           school: fr ? "Le Keynésien" : "The Keynesian",
           argument: fr
             ? "Nous avons injecté des milliards de liquidités et l'indice des prix (le pain, le lait, ...) n'a pas explosé. Donc, imprimer de la monnaie ne provoque pas d'inflation."
-            : "We injected billions in liquidity and the price index (bread, milk, ...) didn't skyrocket. Therefore, printing money doesn't cause inflation.",
+            : "We injected billions in liquidity and the price index (bread, milk, that kind of thing) didn't blow up. So, printing money doesn't cause inflation.",
         },
         {
           school: fr ? "L'Autrichien" : "The Austrian",
           argument: fr
-            ? "L'inflation ne se limite pas au prix du pain. La monnaie créée s'est déversée dans l'immobilier et la bourse, gonflant des bulles invisibles dans les statistiques officielles."
-            : "Inflation isn't limited to the price of bread. The newly created money flowed into real estate and stocks, inflating bubbles invisible in official statistics.",
+            ? "L'inflation ne se limite pas au prix du pain. Une grande partie de la monnaie créée s'est reflétée dans l'immobilier et la bourse, sur des actifs que les principaux indices d'inflation ne mesurent pas."
+            : "Inflation isn't just about the price of bread. A large share of the newly created money showed up in real estate and the stock market, on assets the main inflation indexes don't even track.",
         },
       ],
     },
