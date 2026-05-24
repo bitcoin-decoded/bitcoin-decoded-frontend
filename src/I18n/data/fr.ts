@@ -71,7 +71,7 @@ const fr = {
   "chain.prevHash": "Hash bloc préc.",
   "chain.timestamp": "Horodatage",
   "chain.note":
-    "Le hash de chaque bloc est obtenu en appliquant un double SHA-256 à son en-tête. Modifier une seule transaction dans le bloc #826 changerait sa racine de Merkle, donc le hash du bloc, ce qui invaliderait le bloc #827, puis le #828 - toute la chaîne s'effondre.",
+    "Le hash de chaque bloc est obtenu en appliquant un double SHA-256 à son en-tête. Modifier une seule transaction dans le bloc #826 changerait sa racine de Merkle, donc le hash du bloc, ce qui invaliderait le bloc #827, puis le #828 - toute cette version de la chaîne s'effondre.",
 
   // MiningSimulator
   "mining.title": "Simulateur de minage",
@@ -80,7 +80,7 @@ const fr = {
   "mining.reset": "Réinitialiser",
   "mining.attempt": "Nonce",
   "mining.found": "Nonce valide trouvé ! Le mineur a gagné le droit de proposer ce bloc.",
-  "mining.notFound": "Hash invalide: la cible n'est pas atteinte. Essaies encore !",
+  "mining.notFound": "Hash invalide: la cible n'est pas atteinte. Essaie encore !",
   "mining.headerLabel": "En-tête du bloc hashé :",
   "mining.nonce": "nonce",
 
@@ -155,13 +155,13 @@ const fr = {
   "flywheel.increase": "Augmenter l'utilisation",
   "flywheel.maxReached": "Utilisation maximale",
   "flywheel.reset": "Réinitialiser",
-  "flywheel.taglineIdle": "Augmentes l'utilisation pour observer la propagation dans le cycle.",
+  "flywheel.taglineIdle": "Augmente l'utilisation pour observer la propagation dans le cycle.",
   "flywheel.tagline": "Plus le réseau est utilisé, plus il est sécurisé.",
   "flywheel.cycleLabel": "Cycle auto-renforcé",
 
   // UTXOTransactionBuilder
   "utxoBuilder.title": "Construis une transaction",
-  "utxoBuilder.step1": "1. Sélectionnes les UTXO de Nicolas",
+  "utxoBuilder.step1": "1. Sélectionne les UTXO de Nicolas",
   "utxoBuilder.step2": "2. Montant à envoyer (BTC)",
   "utxoBuilder.placeholder": "ex : 0.75",
   "utxoBuilder.totalInput": "Total entrées :",
@@ -172,7 +172,7 @@ const fr = {
   "utxoBuilder.fees": "Frais mineur",
   "utxoBuilder.valid": "Transaction valide",
   "utxoBuilder.insufficient": "Fonds insuffisants",
-  "utxoBuilder.selectHint": "Sélectionnes des UTXO et entres un montant",
+  "utxoBuilder.selectHint": "Sélectionne des UTXO et entres un montant",
   "utxoBuilder.reset": "Tout effacer",
   "utxoBuilder.utxoHint":
     "Chaque UTXO est comme une pièce indivisible dans le portefeuille de Nicolas - impossible de les découper.",
@@ -199,7 +199,7 @@ const fr = {
     "Les trois éléments correspondent. Le réseau accepterait cette transaction.",
   "sigVerifier.invalidDesc":
     "L'un des éléments a été altéré. Le réseau rejette immédiatement cette transaction.",
-  "sigVerifier.idle": "Cliques sur « Vérifier » pour simuler la vérification.",
+  "sigVerifier.idle": "Clique sur « Vérifier » pour simuler la vérification.",
   "sigVerifier.reset": "Réinitialiser",
 
   // SignaturePlayground
@@ -220,7 +220,7 @@ const fr = {
   "signaturePlayground.privateKeyOwner": "Connue uniquement de Nicolas",
   "signaturePlayground.publicKeyDerivation": "Dérivée de la clé privée",
   "signaturePlayground.derivationCaption":
-    "Cet exemple présente l'un des couples (clé privée ↔ clé publique) de Nicolas. Dans Bitcoin, chaque utilisateur peut en posséder plusieurs ; chaque couple est unique parmi des millions, irréplicable.",
+    "Cet exemple présente l'un des couples (clé privée ↔ clé publique) de Nicolas. Dans Bitcoin, chaque utilisateur peut en posséder plusieurs. Et chaque couple est tiré d'un espace si vaste qu'il y a plus de clés possibles que d'atomes dans l'univers observable. Bonne chance pour tomber sur la même !",
   "signaturePlayground.message": "Nicolas envoie 1 BTC à Mme Michu",
   "signaturePlayground.statusValid": "Cette clé privée dérive bien vers cette clé publique",
   "signaturePlayground.statusInvalid": "Cette clé privée ne dérive plus vers cette clé publique",
@@ -268,7 +268,7 @@ const fr = {
   // SeedGenerator
   "seedGenerator.title": "Génères ta seed",
   "seedGenerator.subtitle":
-    "Une seed phrase est une façon simple pour un humain de représenter une information aléatoire très longue, normalement écrite en binaire.",
+    "Une seed phrase est une façon simple pour un humain de représenter une grande quantité d'information aléatoire, que la machine, elle, manipule en bits.",
   "seedGenerator.step1Label": "1. Choisis le format",
   "seedGenerator.step2Label": "2. Générer la seed",
   "seedGenerator.length12": "12 mots",
@@ -283,7 +283,7 @@ const fr = {
   "seedGenerator.bitsUnit": "bits",
   "seedGenerator.wordsUnit": "mots",
   "seedGenerator.heroQuote":
-    "Une seed phrase est une façon simple pour un humain de représenter une information aléatoire très longue, normalement écrite en binaire.",
+    "Derrière ces mots, il y a en réalité une suite de bits générée aléatoirement. C'est ça, la vraie seed. Les mots ne sont qu'une couche de lecture pour ton cerveau.",
   "seedGenerator.noteTitle": "À retenir",
   "seedGenerator.noteWordForm":
     "La forme en mots est choisie pour être plus simple à retenir et à recopier qu'une longue suite binaire.",
@@ -294,13 +294,13 @@ const fr = {
   "seedGenerator.notePedagogical": "Les mots affichés ici sont des exemples pédagogiques.",
 
   // WalletDiscoveryGame
-  "walletGame.title": "Retrouves les fonds dans ce portefeuille",
+  "walletGame.title": "Retrouve les fonds dans ce portefeuille",
   "walletGame.intro":
     "Pour cet exercice, le portefeuille ne génère que 3 clés. Une seule permet de dépenser des fonds. Sauras-tu la retrouver ?",
   "walletGame.revealAction": "Dériver 3 paires de clés",
   "walletGame.derivedSection": "Trois adresses dérivées de la seed",
   "walletGame.questionLabel": "Quelle adresse permet de dépenser des fonds ?",
-  "walletGame.selectHint": "Cliques sur l'une des cartes ci-dessus pour la sélectionner.",
+  "walletGame.selectHint": "Clique sur l'une des cartes ci-dessus pour la sélectionner.",
   "walletGame.selectedPrefix": "Adresse",
   "walletGame.selectedSuffix": "sélectionnée.",
   "walletGame.amountLabel": "Quel est le montant total contrôlé (BTC) ?",
@@ -312,7 +312,7 @@ const fr = {
     "Chaque UTXO est verrouillé pour une adresse donnée. La clé privée correspondante permet de produire une signature valide pour les dépenser. Le portefeuille agrège ces UTXO pour afficher un montant simple.",
   "walletGame.incorrectTitle": "Incorrect",
   "walletGame.incorrectMain":
-    "Observes quelles adresses possèdent des UTXO et additionnes-les. Tu peux changer ta sélection ci-dessus puis re-valider.",
+    "Observe quelles adresses possèdent des UTXO et additionne-les. Tu peux changer ta sélection ci-dessus puis re-valider.",
   "walletGame.restart": "Recommencer",
   "walletGame.disclaimer":
     "Les clés et adresses affichées sont fictives et utilisées uniquement à des fins pédagogiques.",
@@ -397,7 +397,7 @@ const fr = {
   "nav.tree.utxoAndTransactions": "Bitcoin ne déplace pas d'argent",
   "nav.tree.keysAndSignatures": "Prouver sans se montrer",
   "nav.tree.walletsAndSeed": "Bitcoin, ni compte, ni coffre",
-  "nav.tree.getStarted": "Démarres avec Bitcoin!",
+  "nav.tree.getStarted": "Démarre avec Bitcoin!",
 
   // Footer
   "footer.builtWith": "Construit avec",

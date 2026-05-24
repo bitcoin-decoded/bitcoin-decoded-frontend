@@ -6,7 +6,7 @@ export const getQuizDataHalving = (language: Language): QuizData => {
   return {
     question: fr
       ? "Après un halving, qu'est-ce qui maintient l'équilibre du réseau ?"
-      : "After a halving, what maintains the network's equilibrium?",
+      : "After a halving, what keeps the network in balance?",
     answers: [
       {
         text: fr
@@ -15,17 +15,30 @@ export const getQuizDataHalving = (language: Language): QuizData => {
         isCorrect: true,
         rationale: fr ? (
           <>
-            Exactement. Souviens-toi : le système ajuste dynamiquement sa cible de difficulté. Après
-            un halving, si la rentabilité baisse et que certains mineurs quittent le réseau, la
-            difficulté finit par s'ajuster à la baisse, ce qui rétablit progressivement l'équilibre
-            économique et incite de nouveaux mineurs à entrer dans la partie.
+            <p>
+              Exactement. Souviens-toi : le système ajuste dynamiquement sa cible de difficulté.
+              Après un halving, si la rentabilité baisse et que certains mineurs quittent le réseau,
+              la difficulté finit par s'ajuster à la baisse :
+            </p>
+            <ul>
+              <li>ça améliore l'équation économique pour les mineurs déjà en place</li>
+              <li>
+                ça peut attirer de nouveaux entrants si les conditions du marché redeviennent
+                favorables
+              </li>
+            </ul>
           </>
         ) : (
           <>
-            Exactly. Remember: the system dynamically adjusts its difficulty target. After a
-            halving, if profitability drops and some miners leave the network, the difficulty
-            eventually adjusts downward, progressively restoring economic balance and incentivizing
-            new miners to join.
+            <p>
+              Exactly. Remember: the system dynamically adjusts its difficulty target. After a
+              halving, if profitability drops and some miners leave, the difficulty eventually
+              adjusts downward:
+            </p>
+            <ul>
+              <li>that improves the economics for miners already in place</li>
+              <li>and it can pull in new entrants if market conditions turn favourable again</li>
+            </ul>
           </>
         ),
       },
@@ -34,25 +47,37 @@ export const getQuizDataHalving = (language: Language): QuizData => {
         isCorrect: false,
         rationale: fr ? (
           <>
-            Partiellement vrai à court terme mais insuffisant à long terme : le prix seul ne
-            garantit pas la structure de sécurité du réseau.
+            Tentant, mais incomplet. Un prix qui grimpe peut compenser un halving à court terme,
+            c'est vrai. Mais ça ne dit rien sur ce qui se passe quand le prix stagne ou baisse. Le
+            vrai mécanisme structurel, c'est l'ajustement automatique de la difficulté, qui
+            fonctionne quelle que soit l'humeur du marché.
           </>
         ) : (
           <>
-            Partially true in the short term but insufficient in the long run: the price alone does
-            not guarantee the network's security structure.
+            Tempting, but incomplete. A rising price can offset a halving in the short term, true.
+            But it tells you nothing about what happens when the price stagnates or drops. The real
+            structural mechanism is the automatic difficulty adjustment, which keeps working
+            whatever mood the market is in.
           </>
         ),
       },
       {
         text: fr
           ? "c) La diminution du nombre de transactions"
-          : "c) A decrease in the number of transactions",
+          : "c) A drop in the number of transactions",
         isCorrect: false,
         rationale: fr ? (
-          <>Ah non ! Les transactions ne contrôlent pas la sécurité du réseau.</>
+          <>
+            Mauvaise piste. Moins de transactions, ce serait surtout moins de frais pour les
+            mineurs, donc le contraire d'un rééquilibrage. L'équilibre du réseau ne dépend pas du
+            volume de transactions, mais du couple difficulté + concurrence entre mineurs.
+          </>
         ) : (
-          <>Not at all! The number of transactions does not control network security.</>
+          <>
+            Wrong track. Fewer transactions would mean fewer fees for miners, which is the opposite
+            of rebalancing. Network equilibrium doesn't depend on transaction volume, but on the
+            difficulty + miner competition pair.
+          </>
         ),
       },
     ],

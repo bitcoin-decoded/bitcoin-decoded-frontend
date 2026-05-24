@@ -70,7 +70,7 @@ const en = {
   "chain.prevHash": "Prev. block hash",
   "chain.timestamp": "Timestamp",
   "chain.note":
-    "Each block's hash is obtained by applying a double SHA-256 to its header. Changing a single transaction in block #826 would alter its Merkle root, thus the block's hash, which would invalidate block #827, then #828 - the entire chain collapses.",
+    "The hash of each block is computed by applying SHA-256 twice to its header. If even a single transaction in block #826 is modified, its Merkle root changes, which in turn changes the block hash. This would invalidate block #827, then #828 - and effectively render that version of the chain unusable.",
 
   // MiningSimulator
   "mining.title": "Mining simulator",
@@ -217,7 +217,7 @@ const en = {
   "signaturePlayground.privateKeyOwner": "Known only by Nicolas",
   "signaturePlayground.publicKeyDerivation": "Derived from the private key",
   "signaturePlayground.derivationCaption":
-    "This example shows one of Nicolas's (private ↔ public) key couples. In Bitcoin, every user can own several; each couple is unique among millions, impossible to reproduce.",
+    "This example shows one of Nicolas's (private key ↔ public key) pairs. In Bitcoin, each user can hold several. And each pair is drawn from a space so vast that there are more possible keys than atoms in the observable universe. Good luck landing on the same one.",
   "signaturePlayground.message": "Nicolas sends 1 BTC to Ms. Michu",
   "signaturePlayground.statusValid": "This private key correctly derives to this public key",
   "signaturePlayground.statusInvalid": "This private key no longer derives to this public key",
@@ -265,7 +265,7 @@ const en = {
   // SeedGenerator
   "seedGenerator.title": "Generate your seed",
   "seedGenerator.subtitle":
-    "A seed phrase is a simple way for a human to represent a very long piece of random information, normally written in binary.",
+    "A seed phrase is a human-friendly way to represent a large amount of random information - information the machine itself handles as bits.",
   "seedGenerator.step1Label": "1. Choose the format",
   "seedGenerator.step2Label": "2. Generate the seed",
   "seedGenerator.length12": "12 words",
@@ -280,7 +280,7 @@ const en = {
   "seedGenerator.bitsUnit": "bits",
   "seedGenerator.wordsUnit": "words",
   "seedGenerator.heroQuote":
-    "A seed phrase is a simple way for a human to represent very long random data, normally written in binary.",
+    "Behind these words, there's actually a sequence of randomly generated bits. That's the real seed. The words are just a readable layer for your brain.",
   "seedGenerator.noteTitle": "Key points",
   "seedGenerator.noteWordForm":
     "The word form is chosen because it's easier to remember and copy than a long binary string.",
@@ -296,23 +296,23 @@ const en = {
     "For this exercise, the wallet generates only 3 keys. Only one allows you to spend funds. Can you find it?",
   "walletGame.revealAction": "Derive 3 key pairs",
   "walletGame.derivedSection": "Three addresses derived from the seed",
-  "walletGame.questionLabel": "Which address allows you to spend funds?",
+  "walletGame.questionLabel": "Which address can spend funds?",
   "walletGame.selectHint": "Click one of the cards above to select it.",
   "walletGame.selectedPrefix": "Address",
   "walletGame.selectedSuffix": "selected.",
-  "walletGame.amountLabel": "What is the total controlled amount (BTC)?",
-  "walletGame.validateAction": "Validate my answer",
+  "walletGame.amountLabel": "What's the total amount controlled (BTC)?",
+  "walletGame.validateAction": "Submit my answer",
   "walletGame.correctTitle": "Correct",
   "walletGame.correctMain":
-    "This address controls several UTXOs, and their sum is the amount displayed by the wallet.",
+    "This address controls several UTXOs, and their sum makes up the amount the wallet displays.",
   "walletGame.correctPedagogy":
-    "Each UTXO is locked to a given address. The corresponding private key produces a valid signature to spend it. The wallet aggregates these UTXOs to show a simple amount.",
+    "Each UTXO is locked to a given address. The matching private key produces a valid signature to spend it. The wallet aggregates these UTXOs to display a single simple amount.",
   "walletGame.incorrectTitle": "Incorrect",
   "walletGame.incorrectMain":
-    "Look at which addresses hold UTXOs and add them up. You can change your selection above and re-validate.",
-  "walletGame.restart": "Restart",
+    "Look at which addresses hold UTXOs and add them up. You can change your selection above and submit again.",
+  "walletGame.restart": "Start over",
   "walletGame.disclaimer":
-    "The keys and addresses shown are fictional, used for pedagogical purposes only.",
+    "The keys and addresses shown are fictitious, used for teaching purposes only.",
   "walletGame.cardAddressPrefix": "Address",
   "walletGame.cardPrivateKey": "Private key",
   "walletGame.cardPublicKey": "Public key",

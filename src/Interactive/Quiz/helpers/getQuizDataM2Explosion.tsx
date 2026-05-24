@@ -7,7 +7,7 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
   return {
     question: fr
       ? "Selon toi, à quoi correspond ce graphique ?"
-      : "In your opinion, what does this chart represent?",
+      : "What do you think this chart represents?",
     answers: [
       {
         text: fr
@@ -21,7 +21,7 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            Gold has indeed risen sharply, but its curve doesn't show this kind of vertical
+            Gold has indeed climbed sharply, but its curve doesn't show this kind of vertical
             acceleration.
           </>
         ),
@@ -38,8 +38,8 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            Exactly. This chart shows the US M2 money supply, all dollars in circulation (bills,
-            checking accounts, accessible savings).
+            Exactly. This chart shows the US M2 money supply, meaning all the dollars in circulation
+            (bills, checking accounts, accessible savings).
           </>
         ),
       },
@@ -51,11 +51,11 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
         rationale: fr ? (
           <>
             L'administration française est généreuse, mais pas à ce point ! L'échelle se compte ici
-            en milliers de milliards. Regardes bien l'axe vertical.
+            en milliers de milliards. Regarde bien l'axe vertical.
           </>
         ) : (
           <>
-            The French civil service is generous, but not to that extent! The scale here is in
+            The French civil service is generous, but not that generous. The scale here is in
             trillions. Take a closer look at the vertical axis.
           </>
         ),

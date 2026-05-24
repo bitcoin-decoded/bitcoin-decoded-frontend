@@ -1,6 +1,8 @@
 import { type FC } from "react";
 
-import { Callout, HighlightText } from "../../../Design";
+import { ChevronDown } from "lucide-react";
+
+import { Callout, Disclosure, HighlightText } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { SeedGenerator, WalletDiscoveryGame } from "../../../Interactive";
 import { PageTemplate } from "../../Shared";
@@ -14,14 +16,14 @@ export const Bitcoin8Page: FC = () => {
       title={t("nav.tree.walletsAndSeed")}
       prelude={
         fr
-          ? "Si tu perds ta seed, tu perds tes bitcoins. Pas une partie. Tout. Ça paraît absurde : pourquoi 12 mots décident-ils de qui possède quoi ? Parce qu'un portefeuille Bitcoin ne contient pas des bitcoins. Il contient ce qu'il faut pour les dépenser."
-          : "If you lose your seed, you lose your bitcoins. Not part of them. All of them. It sounds absurd: why should 12 words determine who owns what? Because a Bitcoin wallet does not contain bitcoins. It contains what is needed to spend them."
+          ? "Si tu perds ta seed sans sauvegarde, tu perds tes bitcoins. Pas une partie. Tout. Ça paraît absurde : pourquoi 12 mots décident-ils de qui possède quoi ? Parce qu'un portefeuille Bitcoin ne contient pas des bitcoins. Il contient ce qu'il faut pour les dépenser."
+          : "Lose your seed without a backup, and your bitcoins are gone. Not part of them. All of them. Sounds absurd: why should 12 words decide who owns what? Because a Bitcoin wallet does not hold bitcoins. It holds what is needed to spend them."
       }
     >
       <p>
         {fr
           ? "Quand on parle de portefeuille Bitcoin, on mélange souvent plusieurs notions."
-          : "When we talk about a Bitcoin wallet, we often mix up several concepts."}
+          : "When people talk about a Bitcoin wallet, several ideas usually get tangled together."}
       </p>
       <p>
         {fr ? (
@@ -52,37 +54,37 @@ export const Bitcoin8Page: FC = () => {
             <i>
               <HighlightText>an address</HighlightText>
             </i>
-            ... it all seems connected, yet not entirely clear.
+            ... it all sounds connected, but the picture stays blurry.
           </>
         )}
       </p>
-      <p>{fr ? "Remettons les choses dans l'ordre." : "Let's put things in order."}</p>
+      <p>{fr ? "Remettons les choses dans l'ordre." : "Let's put things back in order."}</p>
 
       <Callout title={fr ? "Une seed, un point de départ" : "A seed, a starting point"}>
         <p>
           {fr
             ? "Une seed phrase est une suite de mots que tu peux noter, sauvegarder et restaurer"
-            : "A seed phrase is a sequence of words that you can write down, save, and restore"}
+            : "A seed phrase is a sequence of words you can write down, back up, and restore"}
           .
         </p>
         <p>
-          {fr ? "Elle constitue la racine de tout le reste." : "It is the root of everything else."}
+          {fr ? "Elle constitue la racine de tout le reste." : "It's the root of everything else."}
         </p>
         <p>
           {fr
             ? "À partir d'elle, le portefeuille dérive un grand nombre de clés privées. Chaque clé privée donne une clé publique, puis une adresse."
-            : "From it, the wallet derives a large number of private keys. Each private key yields a public key, then an address."}
+            : "From it, the wallet derives a large number of private keys. Each private key yields a public key, and from that, an address."}
         </p>
         <p>
           {fr
-            ? "Et c'est sur ces adresses que les UTXO sont enregistrés."
-            : "And it's to these addresses that UTXOs are assigned."}
+            ? "Et c'est à ces adresses que les UTXO sont rattachés."
+            : "And it's to these addresses that UTXOs are attached."}
         </p>
-        <p>{fr ? "On peut résumer simplement :" : "We can sum it up simply:"}</p>
+        <p>{fr ? "On peut résumer ainsi :" : "Here's the chain, in short:"}</p>
         <ol>
           <li>{fr ? "La seed est la racine" : "The seed is the root"}</li>
           <li>{fr ? "Les clés en sont dérivées" : "The keys are derived from it"}</li>
-          <li>{fr ? "Les adresses en découlent" : "The addresses follow from those"}</li>
+          <li>{fr ? "Les adresses en découlent" : "The addresses follow"}</li>
           <li>
             {fr ? "Et les UTXO arrivent sur ces adresses" : "And the UTXOs land on those addresses"}
           </li>
@@ -92,7 +94,7 @@ export const Bitcoin8Page: FC = () => {
       <p>
         {fr
           ? "Avant d'aller plus loin, regardons à quoi ressemble concrètement une seed phrase, et comment elle représente une information binaire."
-          : "Before going further, let's look at what a seed phrase actually looks like, and how it represents binary information."}
+          : "Before going further, let's look at what a seed phrase actually looks like, and how it encodes binary information."}
       </p>
       <SeedGenerator />
 
@@ -101,8 +103,8 @@ export const Bitcoin8Page: FC = () => {
       >
         <p>
           {fr
-            ? "Un portefeuille n'est pas magique. Il suit une logique simple :"
-            : "A wallet isn't magic. It follows a simple logic:"}
+            ? "Un portefeuille n'est pas magique. Il suit une logique claire :"
+            : "A wallet isn't magic. It follows a clear logic:"}
         </p>
         <ol>
           <li>{fr ? "Il dérive des clés à partir de la seed" : "It derives keys from the seed"}</li>
@@ -112,7 +114,7 @@ export const Bitcoin8Page: FC = () => {
           <li>
             {fr
               ? "Il repère les UTXO reçus sur ces adresses"
-              : "It tracks the UTXOs received on those addresses"}
+              : "It tracks the UTXOs received at those addresses"}
           </li>
           <li>
             {fr
@@ -123,7 +125,7 @@ export const Bitcoin8Page: FC = () => {
         <p>
           {fr
             ? "Ce qu'il appelle « solde » n'est pas un solde bancaire."
-            : 'What it calls "balance" is not a bank balance.'}
+            : 'What it calls a "balance" is not a bank balance.'}
         </p>
         <p>
           {fr
@@ -133,20 +135,20 @@ export const Bitcoin8Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Autrement dit : un portefeuille, c'est simplement une seed qui permet de retrouver des clés, et donc de contrôler les UTXO associés aux adresses correspondantes."
-            : "In other words: a wallet is simply a seed that lets you recover keys, and thus control the UTXOs associated with the matching addresses."}
+            ? "Autrement dit : dans un portefeuille classique, tout part de la seed. Elle permet de retrouver les clés, et donc de contrôler les UTXO associés aux adresses correspondantes."
+            : "In other words: in a classic wallet, everything starts with the seed. It rebuilds the keys, and through them, you control the UTXOs tied to the matching addresses."}
         </p>
       </Callout>
 
       <p>
         {fr
           ? "Du point de vue de l'utilisateur, tout cela est invisible."
-          : "From the user's point of view, all of this is invisible."}
+          : "From the user's point of view, none of this is visible."}
       </p>
       <p>
         {fr ? (
           <>
-            Tu ouvres votre portefeuille, et tu vois : <HighlightText>une adresse</HighlightText>,{" "}
+            Tu ouvres ton portefeuille, et tu vois : <HighlightText>une adresse</HighlightText>,{" "}
             <HighlightText>un montant</HighlightText>, <HighlightText>un historique</HighlightText>,{" "}
             <HighlightText>un bouton « Recevoir »</HighlightText>,{" "}
             <HighlightText>un bouton « Envoyer »</HighlightText>.
@@ -171,10 +173,10 @@ export const Bitcoin8Page: FC = () => {
           </>
         ) : (
           <>
-            But behind the interface, the wallet handles all the complexity, that is{" "}
+            But behind the interface, the wallet handles the whole machinery, namely{" "}
             <HighlightText>the seed</HighlightText>, <HighlightText>derivation</HighlightText>,{" "}
             <HighlightText>the keys</HighlightText>, <HighlightText>the addresses</HighlightText>,{" "}
-            <HighlightText>the UTXOs</HighlightText> and of course{" "}
+            <HighlightText>the UTXOs</HighlightText> and, of course,{" "}
             <HighlightText>the signatures</HighlightText>.
           </>
         )}
@@ -190,36 +192,55 @@ export const Bitcoin8Page: FC = () => {
         <p>
           {fr
             ? "À ce stade, tu as tous les éléments en tête. Voyons maintenant si tu peux les reconnaître en pratique."
-            : "At this point, you have all the pieces in mind. Let's see if you can recognize them in practice."}
+            : "At this point, you have all the pieces in mind. Time to see if you can spot them in practice."}
         </p>
         <p>
           {fr
             ? "Pour ce défi, tu vas être en possession d'une seed te permettant de générer trois clés. Une seule contrôle des fonds dépensables."
-            : "For this challenge, you'll be given a seed that lets you generate three keys. Only one controls spendable funds."}
+            : "For this challenge, you're given a seed that lets you generate three keys. Only one controls spendable funds."}
         </p>
-        <p>{fr ? "Sauras-tu la retrouver ?" : "Can you find it?"}</p>
+        <p>{fr ? "Sauras-tu la retrouver ?" : "Can you find which one?"}</p>
+        <Disclosure
+          title={
+            fr
+              ? "Avant de jouer : un mot sur la sécurité"
+              : "Before you play: a quick word on security"
+          }
+          icon={<ChevronDown size={13} strokeWidth={2} />}
+        >
+          <p>
+            {fr
+              ? "Dans un vrai portefeuille, tu ne vois jamais tes clés privées comme ici. Elles restent cachées."
+              : "In a real wallet, you never see your private keys like this. They stay hidden."}
+          </p>
+          <p>
+            {fr
+              ? "Si une application te les affiche en clair, fuis. Et ne les communique à personne, jamais."
+              : "If an app ever shows them to you in plain sight, walk away. And never share them with anyone, ever."}
+          </p>
+        </Disclosure>
       </Callout>
       <WalletDiscoveryGame />
 
       <p>
         {fr
           ? "En conclusion, une seed permet de reconstruire tout un portefeuille."
-          : "In conclusion, a seed lets you rebuild an entire wallet."}
+          : "To wrap up: a seed lets you rebuild an entire wallet."}
       </p>
       <p>
         {fr
           ? "Un portefeuille dérive des clés, génère des adresses, repère les UTXO associés, et affiche une vue simplifiée de ce que tu contrôles vraiment."
-          : "A wallet derives keys, generates addresses, tracks the associated UTXOs, and displays a simplified view of what you actually control."}
+          : "A wallet derives keys, generates addresses, tracks the matching UTXOs, and shows a simplified view of what you really control."}
       </p>
       <p>
         {fr
-          ? "Bitcoin n'est donc pas un système de comptes, mais un système de clés, de droits de dépense et de preuves cryptographiques."
-          : "Bitcoin is therefore not an account system, but a system of keys, spending rights and cryptographic proofs."}
+          ? "Au niveau du protocole, Bitcoin ne fonctionne pas comme un système de comptes. C'est un système de clés, de droits de dépense et de preuves cryptographiques."
+          : "At the protocol level, Bitcoin doesn't run on accounts. It runs on keys, spending rights, and cryptographic proofs."}
       </p>
       <p>
         {fr
           ? "Et c'est précisément ce qui le rend exigeant, élégant, radicalement différent d'un système bancaire."
-          : "And that is precisely what makes it demanding, elegant, and radically different from a banking system."}
+          : "And that's exactly what makes it demanding, elegant, and radically different from a banking system."}
       </p>
     </PageTemplate>
   );

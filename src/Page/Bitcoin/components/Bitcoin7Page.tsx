@@ -16,7 +16,7 @@ export const Bitcoin7Page: FC = () => {
       prelude={
         fr
           ? "Ta banque a besoin de savoir qui tu es. Bitcoin, non. Aucun papier d'identité, aucun nom, aucun compte. Et pourtant, personne ne peut dépenser tes bitcoins à ta place. Comment ?"
-          : "Your bank needs to know who you are. Bitcoin doesn't. No ID, no name, no account. And yet, no one can spend your bitcoins on your behalf. How?"
+          : "Your bank needs to know who you are. Bitcoin doesn't. No ID, no name, no account. And yet, no one can spend your bitcoins for you. How?"
       }
     >
       <Callout title={fr ? "Trois éléments, trois rôles" : "Three elements, three roles"}>
@@ -50,7 +50,7 @@ export const Bitcoin7Page: FC = () => {
         </ol>
       </Callout>
 
-      <p>{fr ? "Passons à la pratique." : "Let's move on to practice."}</p>
+      <p>{fr ? "Passons à la pratique." : "Let's get practical."}</p>
 
       <Callout
         title={
@@ -73,14 +73,15 @@ export const Bitcoin7Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Il possède une clé privée :{" "}
-              <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText> et souhaite envoyer 1
+              Il possède une clé privée (disons{" "}
+              <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText>) et souhaite envoyer 1
               bitcoin à <i>Mme Michu</i>.
             </>
           ) : (
             <>
-              He owns a private key: <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText>{" "}
-              and wants to send 1 bitcoin to <i>Ms. Michu</i>.
+              He owns a private key (let's say{" "}
+              <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText>) and wants to send 1
+              bitcoin to <i>Ms. Michu</i>.
             </>
           )}
         </p>
@@ -89,7 +90,7 @@ export const Bitcoin7Page: FC = () => {
       <p>
         {fr
           ? "Interagis avec les éléments ci-dessous pour comprendre comment clés privées, clés publiques et signatures fonctionnent ensemble :"
-          : "Interact with the elements below to understand how private keys, public keys and signatures work together:"}
+          : "Interact with the elements below to see how private keys, public keys and signatures work together:"}
       </p>
       <SignaturePlayground />
 
@@ -106,20 +107,20 @@ export const Bitcoin7Page: FC = () => {
       <p>
         {fr
           ? "La propriété devient alors une preuve cryptographique, pas une déclaration"
-          : "Ownership thus becomes a cryptographic proof, not a declaration"}
+          : "Ownership then becomes a cryptographic proof, not a declaration"}
         .
       </p>
 
-      <Callout title={fr ? "Et l'adresse dans tout ça ?" : "What about the address?"}>
+      <Callout title={fr ? "Et l'adresse dans tout ça ?" : "And what about the address?"}>
         <p>
           {fr
             ? "On entend souvent parler d'adresse Bitcoin."
-            : "We often hear about Bitcoin addresses."}
+            : "You'll often hear about Bitcoin addresses."}
         </p>
         <p>
           {fr
-            ? "Pour le moment, retiens seulement ceci : une adresse est une forme pratique de destination. C'est ce que l'on donne pour recevoir des fonds de manière simple."
-            : "For now, just remember this: an address is a practical form of destination. It's what you share to receive funds easily."}
+            ? "Pour le moment, retiens seulement ceci : une adresse est une forme pratique de destination, généralement dérivée de la clé publique. C'est ce que l'on donne pour recevoir des fonds de manière simple. On creusera tout ça au prochain chapitre."
+            : "For now, just remember this: an address is a practical form of destination, usually derived from the public key. It's what you share to receive funds easily. We'll dig into all that in the next chapter."}
         </p>
         <p>
           {fr
@@ -142,7 +143,7 @@ export const Bitcoin7Page: FC = () => {
 
         {fr
           ? "comment tout cela est-il présenté à l'utilisateur dans la vraie vie ?"
-          : "how is all of this actually presented to the user in real life?"}
+          : "how is all this actually presented to the user in real life?"}
       </p>
       <p>
         {fr ? "Plus concrètement, " : "More concretely, "}
@@ -162,7 +163,7 @@ export const Bitcoin7Page: FC = () => {
           </>
         ) : (
           <>
-            Heading to the next chapter:{" "}
+            Next chapter:{" "}
             <Reference to={ROUTE_NAME.Bitcoin_8}>wallets and key management</Reference>.
           </>
         )}
