@@ -10,53 +10,57 @@ export const getQuizDataUtxo = (language: Language): QuizData => {
       : "In the Bitcoin model, what does the difference between the sum of inputs and the sum of outputs represent?",
     answers: [
       {
-        text: fr ? "a) Les frais de transaction" : "a) Transaction fees",
+        text: fr ? "a) Les frais de transaction" : "a) The transaction fees",
         isCorrect: true,
         rationale: fr ? (
           <>
             Exact. Cette différence constitue les frais, qui reviennent au mineur qui inclut la
-            transaction dans un bloc. Plus cette différence est élevée, plus la transaction sera
-            attractive pour les mineurs.
+            transaction dans un bloc. Plus les frais proposés sont élevés par rapport à la taille de
+            la transaction (en sat/vB), plus le mineur a intérêt à l'inclure rapidement.
           </>
         ) : (
           <>
-            Correct. This difference constitutes the fees, which go to the miner who includes the
-            transaction in a block. The higher this difference, the more attractive the transaction
-            is for miners.
+            Correct. That difference is the fee, which goes to the miner who includes the
+            transaction in a block. The higher the fee relative to the transaction's size (in
+            sat/vB), the stronger the incentive for a miner to include it quickly.
+          </>
+        ),
+      },
+      {
+        text: fr ? "b) La monnaie rendue à l'expéditeur" : "b) The change returned to the sender",
+        isCorrect: false,
+        rationale: fr ? (
+          <>
+            Non. La monnaie rendue est elle-même une sortie de la transaction : elle est donc déjà
+            comptée dans la somme des sorties. La différence entrées − sorties capture autre chose :
+            la part qui n'a été attribuée à aucune sortie explicite. C'est ça, les frais.
+          </>
+        ) : (
+          <>
+            No. The change is itself one of the transaction's outputs, so it's already counted in
+            the sum of outputs. The difference inputs − outputs captures something else: the portion
+            that wasn't assigned to any explicit output. That's what fees are.
           </>
         ),
       },
       {
         text: fr
-          ? "b) Un nouveau bitcoin créé par le portefeuille"
-          : "b) A new bitcoin created by the wallet",
+          ? "c) La valeur effectivement transférée au destinataire"
+          : "c) The value actually transferred to the recipient",
         isCorrect: false,
         rationale: fr ? (
           <>
-            Non. Le portefeuille ne crée rien : il organise seulement des dépenses à partir d'UTXO
-            existants. Seul le protocole peut émettre de nouveaux bitcoins, via la subvention de
-            bloc.
+            Non. La valeur transférée au destinataire est une des sorties créées par la transaction.
+            Elle est donc déjà comptée dans la somme des sorties, au même titre que la monnaie
+            rendue à l'expéditeur. Ce que mesure la différence entrées − sorties, c'est ce qui ne va
+            à aucun des deux : les frais collectés par le mineur.
           </>
         ) : (
           <>
-            No. The wallet creates nothing: it only organises spending from existing UTXOs. Only the
-            protocol can issue new bitcoins, via the block subsidy.
-          </>
-        ),
-      },
-      {
-        text: fr ? "c) Une taxe fixée par la banque centrale" : "c) A tax set by the central bank",
-        isCorrect: false,
-        rationale: fr ? (
-          <>
-            Non. Il n'existe pas d'autorité centrale dans Bitcoin. Les frais sont déterminés par la
-            structure de la transaction et le marché : c'est l'offre et la demande d'espace dans un
-            bloc qui les fixe.
-          </>
-        ) : (
-          <>
-            No. There is no central authority in Bitcoin. Fees are determined by the transaction
-            structure and the market: it is supply and demand for block space that sets them.
+            No. The value transferred to the recipient is one of the outputs created by the
+            transaction. It's already counted in the sum of outputs, just like the change returned
+            to the sender. What the difference inputs − outputs measures is what goes to neither of
+            them: the fee collected by the miner.
           </>
         ),
       },

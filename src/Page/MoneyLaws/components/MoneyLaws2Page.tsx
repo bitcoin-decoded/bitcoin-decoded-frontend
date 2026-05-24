@@ -40,7 +40,7 @@ export const MoneyLaws2Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Au chapitre précédent, nous avons vu que la{" "}
+            Au chapitre précédent, on a vu que la{" "}
             <Reference to={ROUTE_NAME.MoneyLaws_1}>dureté</Reference> de notre monnaie (la monnaie
             Fiat) a été sacrifiée. Le problème ? Le coût caché de ce sacrifice est immense.
           </>

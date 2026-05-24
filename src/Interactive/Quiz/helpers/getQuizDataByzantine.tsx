@@ -5,31 +5,30 @@ export const getQuizDataByzantine = (language: Language): QuizData => {
   const fr = language === "fr";
   return {
     question: fr
-      ? "Comment trancher entre deux transactions concurrentes, sans autorité centrale ?"
-      : "How can you settle between two competing transactions, without a central authority?",
+      ? "Comment trancher entre deux transactions concurrentes, quand t'as pas d'autorité centrale ?"
+      : "How do you settle a dispute between two competing transactions, with no central authority?",
     answers: [
       {
         text: fr
-          ? "a) Compter les nœuds qui ont reçu chaque transaction en premier, et garder la majorité"
-          : "a) Count the nodes that received each transaction first, and keep the majority",
+          ? "a) Compter les nœuds qui ont reçu chaque transaction en premier, et prendre l'avis de la majorité"
+          : "a) Count the nodes that received each transaction first, and go with the majority",
         isCorrect: false,
         rationale: fr ? (
           <>
-            Tentant, mais inutilisable. N'importe qui peut créer des milliers de faux nœuds pour
-            faire pencher le vote. Compter des identités sans coût, c'est ouvrir la porte à la
-            fraude.
+            Tentant, mais non. N'importe qui peut créer des milliers de faux nœuds pour faire
+            pencher le vote. Compter des identités sans coût, c'est ouvrir la porte à la triche.
           </>
         ) : (
           <>
-            Tempting, but unusable. Anyone can spin up thousands of fake nodes to tilt the vote.
-            Counting identities with no cost opens the door to fraud.
+            Tempting, but no. Anyone can spin up thousands of fake nodes to tilt the vote. Counting
+            identities at zero cost is an open door to cheating.
           </>
         ),
       },
       {
         text: fr
           ? "b) Faire confiance à la première transaction reçue par chaque nœud"
-          : "b) Trust the first transaction received by each node",
+          : "b) Trust the first transaction each node happens to receive",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -38,27 +37,27 @@ export const getQuizDataByzantine = (language: Language): QuizData => {
           </>
         ) : (
           <>
-            That's exactly what the example above shows: depending on network latency, each node
-            receives a different version first. No consensus possible.
+            That's exactly what the example above showed: depending on network latency, each node
+            sees a different version first. No consensus possible.
           </>
         ),
       },
       {
         text: fr
           ? "c) Exiger une preuve coûteuse à produire avant d'inscrire la transaction dans le registre"
-          : "c) Require a costly proof before inscribing the transaction in the ledger",
+          : "c) Require a costly proof before the transaction can be written into the ledger",
         isCorrect: true,
         rationale: fr ? (
           <>
-            Exact. Au lieu de compter des identités ou de faire confiance au plus rapide, on exige
-            une preuve coûteuse à produire mais facile à vérifier. C'est précisément ce que fait
-            Bitcoin avec la preuve de travail.
+            Bravo champion. Au lieu de compter des identités ou de faire aveuglément confiance au
+            plus rapide, on exige une preuve de travail (Proof of Work) - coûteuse à produire en
+            calcul, facile à vérifier. C'est le mécanisme central de Bitcoin.
           </>
         ) : (
           <>
-            Exactly. Instead of counting identities or trusting the fastest, we require a proof that
-            is costly to produce but easy to verify. This is precisely what Bitcoin does with proof
-            of work.
+            Nailed it. Instead of counting identities or blindly trusting whoever is fastest, the
+            network requires Proof of Work - costly to produce in computation, cheap to verify.
+            That's the core mechanism of Bitcoin.
           </>
         ),
       },

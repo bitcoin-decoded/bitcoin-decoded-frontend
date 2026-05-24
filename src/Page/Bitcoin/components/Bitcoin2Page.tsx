@@ -29,11 +29,11 @@ export const Bitcoin2Page: FC = () => {
           </>
         ) : (
           <>
-            In January 2009, an anonymous developer launched a software program and embedded a
-            newspaper headline in its very first block-a reference to the UK bank bailouts on that
-            very day. Fifteen years later, that software is worth over a trillion dollars, and no
-            one knows who wrote it. Before understanding how Bitcoin works, you need to understand
-            why someone felt it had to be written in the first place.
+            In January 2009, an anonymous developer launched a piece of software and engraved a
+            newspaper headline into its very first block. A reference to the UK bank bailouts, on
+            that very day. Fifteen years later, that software is worth over a trillion dollars, and
+            no one knows who wrote it. Before understanding how Bitcoin works, you need to
+            understand why someone thought it had to be written in the first place.
           </>
         )
       }
@@ -41,7 +41,7 @@ export const Bitcoin2Page: FC = () => {
       <p>
         {fr
           ? "Tu sais maintenant ce qu'est Bitcoin : un logiciel, un réseau, une monnaie. Reste la vraie question :"
-          : "You now know what Bitcoin is: a software, a network, and a currency. The real question remains:"}
+          : "You now know what Bitcoin is: a piece of software, a network, a currency. The real question remains:"}
       </p>
       <p>
         {fr ? (
@@ -57,7 +57,7 @@ export const Bitcoin2Page: FC = () => {
         )}
       </p>
 
-      <p>{fr ? "Regardes ce graphique." : "Take a look at this chart."}</p>
+      <p>{fr ? "Regarde ce graphique." : "Take a look at this chart."}</p>
 
       <M2MoneySupplyChart showTitle={isQuizSolved} />
 
@@ -65,7 +65,7 @@ export const Bitcoin2Page: FC = () => {
 
       {isQuizSolved && (
         <>
-          <p>{fr ? "Observes l'accélération." : "Notice the acceleration."}</p>
+          <p>{fr ? "Observe l'accélération." : "Notice the acceleration."}</p>
           <ol>
             <li>
               {fr
@@ -98,38 +98,75 @@ export const Bitcoin2Page: FC = () => {
             </li>
           </ol>
           <p>
-            {fr
-              ? "En moins de deux ans, environ 6 000 milliards de dollars ont été créés à partir de rien."
-              : "In less than two years, roughly $6 trillion was created from nothing."}
-          </p>
-          *
-          <p>
             {fr ? (
               <>
-                Cette création ne correspond à aucune richesse réellement produite. C'est de la
-                dilution pure : plus de billets pour la même quantité de biens et de services .
+                En moins de deux ans, environ 6 000 milliards de dollars ont été injectés dans le
+                système, principalement via l'achat d'actifs par la{" "}
+                <Reference href="https://www.federalreserve.gov/monetarypolicy/bst_recenttrends.htm">
+                  Fed
+                </Reference>
+                . Alors OK, ce n'est pas du papier qui sort d'une imprimante. Mais le résultat est
+                exactement le même : une avalanche de nouveaux dollars en circulation, pour la même
+                quantité de biens et services.
               </>
             ) : (
               <>
-                This creation does not correspond to any real wealth being produced. It's pure
-                dilution: more bills for the same amount of goods and services .
+                In less than two years, roughly 6 trillion dollars were injected into the system,
+                mostly through asset purchases by the{" "}
+                <Reference href="https://www.federalreserve.gov/monetarypolicy/bst_recenttrends.htm">
+                  Fed
+                </Reference>
+                . Sure, it's not paper coming out of a printer. But the result is exactly the same:
+                a flood of new dollars in circulation, for the same amount of goods and services.
               </>
             )}
           </p>
           <p>
             {fr ? (
               <>
-                Le résultat est l'inflation que chacun a constatée dans sa vie quotidienne. C'est le
-                fonctionnement normal d'un système où une poignée de décideurs peut créer de la
-                monnaie sans limite et sans consentement, pour renflouer les banques et sauver le
-                système bancaire .
+                Cette création ne correspond à aucune richesse réellement produite. C'est de la
+                dilution pure : plus de billets pour la même quantité de biens et de services.
               </>
             ) : (
               <>
-                The result is the inflation that everyone has experienced in their daily life. This
-                is how the system normally works: a small group of decision-makers can create money
-                without limit and without consent, to bail out banks and keep the financial system
-                afloat .
+                This creation doesn't match any wealth actually produced. It's pure dilution: more
+                bills for the same amount of goods and services.
+              </>
+            )}
+          </p>
+          <p>
+            {fr ? (
+              <>
+                Une partie de cette création s'est retrouvée dans les prix que tu paies tous les
+                jours. Pas toute, pas immédiatement, pas dans la même proportion partout. Mais pas
+                besoin d'un prix Nobel pour comprendre que : quand tu multiplies les dollars en
+                circulation par 1,4 en 18 mois, à un moment ou un autre ça se répercute dans
+                l'économie réelle et ça crée de l'inflation. Il faut soit être de très mauvaise foi
+                soit s'appeler Bruno Le Maire pour s'étonner que les prix bougent.
+              </>
+            ) : (
+              <>
+                Some of that creation ended up in the prices you pay every day. Not all of it, not
+                immediately, not in the same proportion everywhere. But you don't need a Nobel Prize
+                to figure out that: when you multiply the dollars in circulation by 1.4 in 18
+                months, sooner or later it shows up in the real economy and creates inflation. You
+                have to be acting in seriously bad faith — or be Jerome Powell calling it
+                "transitory" — to act surprised when prices start moving.
+              </>
+            )}
+          </p>
+          <p>
+            {fr ? (
+              <>
+                C'est le fonctionnement normal d'un système où une poignée de décideurs peut créer
+                de la monnaie sans limite et sans consentement, pour renflouer les banques et sauver
+                le système bancaire.
+              </>
+            ) : (
+              <>
+                That's how the system normally works: a small group of decision-makers can create
+                money without limit and without consent, to bail out banks and keep the financial
+                system afloat.
               </>
             )}
           </p>
@@ -155,12 +192,12 @@ export const Bitcoin2Page: FC = () => {
               </>
             ) : (
               <>
-                It is precisely in this context that Bitcoin was born. On January 3, 2009, an
-                anonymous developer using the pseudonym{" "}
+                It's in exactly this context that Bitcoin was born. On January 3, 2009, an anonymous
+                developer using the pseudonym{" "}
                 <Reference href="https://en.wikipedia.org/wiki/Satoshi_Nakamoto">
                   Satoshi Nakamoto
                 </Reference>{" "}
-                launched the Bitcoin network (cf. the{" "}
+                launched the Bitcoin network (see the{" "}
                 <Reference href="https://bitcoin.org/bitcoin.pdf">white paper</Reference>). And in
                 the very first block of the blockchain, he inscribed a message:
               </>
@@ -172,13 +209,13 @@ export const Bitcoin2Page: FC = () => {
               <>
                 Un titre du journal <i>The Times</i>. Le chancelier britannique était sur le point
                 de renflouer les banques pour la deuxième fois. Ce message n'est pas anodin. C'est
-                une déclaration d'intention gravée à jamais dans la blockchain .
+                une déclaration d'intention gravée à jamais dans la blockchain.
               </>
             ) : (
               <>
                 A headline from <i>The Times</i>. The British chancellor was about to bail out the
-                banks for the second time. This message is no coincidence. It's a statement of
-                intent forever etched in the blockchain.
+                banks for the second time. This message is no accident. It's a statement of intent,
+                etched into the blockchain forever.
               </>
             )}
           </p>
@@ -186,14 +223,12 @@ export const Bitcoin2Page: FC = () => {
             {fr ? (
               <>
                 Bitcoin a été conçu pour résoudre simultanément les problèmes de dureté et de
-                centralisation abordés dans les deux premiers modules. Plus encore, il répare la
-                boussole de la société.
+                centralisation abordés dans les deux premiers modules.
               </>
             ) : (
               <>
-                Bitcoin was designed to simultaneously solve the problems of hardness and
-                centralization studied in the two first modules. More than that, it repairs
-                society's compass.
+                Bitcoin was designed to solve, at the same time, the problems of hardness and
+                centralization covered in the two previous modules.
               </>
             )}
           </p>
@@ -212,7 +247,7 @@ export const Bitcoin2Page: FC = () => {
                 </>
               ) : (
                 <>
-                  Facing the hardness problem, Bitcoin imposes an absolute maximum supply of 21
+                  To address the hardness problem, Bitcoin enforces an absolute maximum supply of 21
                   million bitcoins, not one more.
                 </>
               )}
@@ -225,7 +260,7 @@ export const Bitcoin2Page: FC = () => {
                 </>
               ) : (
                 <>
-                  This cap is written in the code and verified by every node in the network. It's
+                  This cap is written in the code and verified by every node on the network. It's
                   not a political promise: it's a mathematical rule.
                 </>
               )}
@@ -233,15 +268,17 @@ export const Bitcoin2Page: FC = () => {
             <p>
               {fr ? (
                 <>
-                  Puisque personne ne peut imprimer de bitcoins à volonté, le prix du temps (le taux
-                  d'intérêt) redevient un signal honnête, non manipulable par une autorité centrale
-                  .
+                  Puisque personne ne peut imprimer de bitcoins à volonté, le taux d'intérêt cesse
+                  d'être l'instrument d'une autorité centrale. Il redevient ce qu'il devrait
+                  toujours être : le prix auquel les gens acceptent de prêter ou d'emprunter. Pas
+                  une manette qu'on tourne dans un bureau.
                 </>
               ) : (
                 <>
-                  Since no one can print bitcoins at will, the price of time (the interest rate)
-                  becomes an honest signal again, one that cannot be manipulated by a central
-                  authority .
+                  Since no one can print bitcoins at will, the interest rate stops being the
+                  instrument of a central authority. It goes back to being what it should always
+                  have been: the price at which people agree to lend or borrow. Not a lever someone
+                  pulls in an office.
                 </>
               )}
             </p>
@@ -258,13 +295,16 @@ export const Bitcoin2Page: FC = () => {
                 <>
                   Face au problème de centralisation, Bitcoin fonctionne sans autorité centrale. Le
                   réseau peut être vu comme un essaim d'abeilles où l'information est distribuée
-                  collectivement et où personne ne décide pour les autres.
+                  collectivement. Pas d'autorité centrale capable d'imposer une règle. Juste des
+                  développeurs, des mineurs, des nœuds qui ont chacun une influence, mais où aucun
+                  ne décide pour tout le monde.
                 </>
               ) : (
                 <>
-                  Facing the centralization problem, Bitcoin operates without a central authority.
-                  The network can be seen as a swarm of bees, where information is collectively
-                  distributed and no one decides for others.
+                  To address the centralization problem, Bitcoin runs without a central authority.
+                  The network can be pictured as a swarm of bees where information is shared
+                  collectively. No central authority can impose a rule. Just developers, miners, and
+                  nodes, each with some influence, but none deciding for everyone else.
                 </>
               )}
             </p>
@@ -279,8 +319,8 @@ export const Bitcoin2Page: FC = () => {
               </>
             ) : (
               <>
-                Bitcoin is not just a technological innovation. It is the concrete implementation of
-                Austrian logic in silicon: the first currency that combines absolute hardness with
+                Bitcoin isn't just a piece of technology. It's the concrete implementation of
+                Austrian logic in silicon: the first currency to combine absolute hardness with
                 decentralization.
               </>
             )}
@@ -301,9 +341,9 @@ export const Bitcoin2Page: FC = () => {
               </>
             ) : (
               <>
-                But understanding the intention is not enough. We still need to see how this promise
-                holds up in practice. How is scarcity protected? How does the network function
-                without a conductor?
+                But understanding the intention isn't enough. The real question is whether this
+                promise holds up in practice. How is scarcity actually protected? How does the
+                network run without a conductor?
               </>
             )}
           </p>

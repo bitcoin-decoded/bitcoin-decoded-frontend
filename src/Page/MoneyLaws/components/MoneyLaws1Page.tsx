@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, KeywordHighlight, Reference } from "../../../Design";
+import { Callout, HighlightText, KeywordHighlight, Reference } from "../../../Design";
 import petrole from "../../../Design/img/Petroleum_sample.jpg";
 import pikachuIllustratorCard from "../../../Design/img/Pikachu_Illustrator_Card.webp";
 import { useTranslation } from "../../../I18n";
@@ -23,15 +23,15 @@ export const MoneyLaws1Page: FC = () => {
           <>
             Une monnaie ne sert à rien toute seule. Elle ne vaut quelque chose que parce qu'un
             réseau d'utilisateurs l'accepte. Parfois par habitude, parfois par contrainte légale,
-            parfois par choix. Toute la question, depuis 5000 ans, c'est : pourquoi acceptent-ils
-            celle-ci, et plus celle-là ?
+            parfois par choix. Toute la question, depuis 5000 ans, c'est : pourquoi on adopte cette
+            monnaie-ci, et qu'on abandonne celle-là ?
           </>
         ) : (
           <>
             A currency is useless on its own. It only has value because a network of users agrees to
             use it. Sometimes out of habit, sometimes by legal mandate, sometimes by choice. The
-            real question, for 5,000 years now, has been: why do people accept this one, and not the
-            other?
+            real question, for 5,000 years now, has been: why do we adopt this particular form of
+            money, and abandon that one?
           </>
         )
       }
@@ -39,12 +39,13 @@ export const MoneyLaws1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            Si je te demande : <i>« Qu'as-tu dans ton portefeuille ? »</i>, tu me répondras sûrement{" "}
-            <i>« de l'argent »</i>.
+            Si je te demande ce que tu as dans ton portefeuille, tu me répondras sûrement (après
+            m'avoir dit que ça ne me regarde pas) : <i>« de l'argent »</i>.
           </>
         ) : (
           <>
-            If I ask you: <i>"What's in your wallet?"</i>, you'll probably answer <i>"money"</i>.
+            If I ask you what's in your wallet, you'll probably answer (after reminding me it's none
+            of my business): <i>"money"</i>.
           </>
         )}
       </p>
@@ -53,13 +54,13 @@ export const MoneyLaws1Page: FC = () => {
           <>
             Pourtant, seul sur une île déserte avec un million d'euros, tu serais pauvre. Pourquoi ?
             Parce que les billets ne se mangent pas. La monnaie ne vaut rien sans les autres : elle
-            est avant tout une technologie de collaboration.
+            est avant tout <HighlightText>une technologie de collaboration</HighlightText>.
           </>
         ) : (
           <>
             And yet, stranded alone on a desert island with a million dollars, you'd be poor. Why?
             Because you can't eat banknotes. Money is worthless without other people: above all,
-            it's a collaboration technology.
+            it's <HighlightText>a collaboration technology</HighlightText>.
           </>
         )}
       </p>
@@ -81,16 +82,16 @@ export const MoneyLaws1Page: FC = () => {
           {fr ? (
             <>
               Dans un petit groupe de moins de 150 personnes, la monnaie n'est pas indispensable. On
-              se connaît, on se fait confiance, on utilise la dette sociale : « je t'aide pour ta
-              hutte, tu m'aideras pour ma récolte ». Au-delà de ce seuil, notre cerveau ne suit plus
-              : on ne peut plus mémoriser qui doit quoi à qui. La mémoire individuelle ne suffit
-              plus.
+              se connaît, on se fait confiance, on utilise{" "}
+              <HighlightText>la dette sociale</HighlightText> : « je t'aide pour ta hutte, tu
+              m'aideras pour ma récolte ». Au-delà de ce seuil, notre cerveau ne suit plus : on ne
+              peut plus mémoriser qui doit quoi à qui. La mémoire individuelle ne suffit plus.
             </>
           ) : (
             <>
               In a small group of fewer than 150 people, money isn't really needed. Everyone knows
-              each other, trust is built in, and social debt does the job:{" "}
-              <i>"I'll help you build your hut, you'll help me with my harvest."</i> Past that
+              each other, trust is built in, and <HighlightText>social debt</HighlightText> does the
+              job: <i>"I'll help you build your hut, you'll help me with my harvest."</i> Past that
               threshold, our brain can't keep up: we just can't remember who owes what to whom
               anymore. Individual memory isn't enough.
             </>
@@ -99,16 +100,17 @@ export const MoneyLaws1Page: FC = () => {
         <p>
           {fr ? (
             <>
-              La monnaie prend alors le relais : elle devient une mémoire collective. Posséder de
-              l'argent, c'est détenir une reconnaissance sociale : généralement la trace d'un
-              travail fourni, parfois d'un crédit accordé. Et le droit de réclamer un service
-              équivalent en retour.
+              La monnaie prend alors le relais : elle devient{" "}
+              <HighlightText>une mémoire collective</HighlightText>. Posséder de l'argent, c'est
+              détenir une reconnaissance sociale : généralement la trace d'un travail fourni,
+              parfois d'un crédit accordé. Et le droit de réclamer un service équivalent en retour.
             </>
           ) : (
             <>
-              Money then steps in: it becomes a collective memory. Owning money means holding a form
-              of social recognition — usually the trace of work you've done, sometimes credit
-              extended to you. And the right to claim an equivalent service in return.
+              Money then steps in: it becomes <HighlightText>a collective memory</HighlightText>.
+              Owning money means holding a form of social recognition - usually the trace of work
+              you've done, sometimes credit extended to you. And the right to claim an equivalent
+              service in return.
             </>
           )}
         </p>
@@ -130,7 +132,7 @@ export const MoneyLaws1Page: FC = () => {
                 <i>Dunbar's number</i>
               </Reference>
               , the estimated cognitive limit of our brain for keeping stable relationships going.
-              It's not some magical threshold where money suddenly "appears" — more like the point
+              It's not some magical threshold where money suddenly "appears" - more like the point
               where individual memory starts to crack.
             </>
           )}
@@ -169,12 +171,13 @@ export const MoneyLaws1Page: FC = () => {
       <p>
         {fr ? (
           <>
-            C'est ici qu'interviennent deux concepts souvent confondus : la <i>Rareté</i> et la{" "}
-            <i>Dureté</i>.
+            C'est ici qu'interviennent deux concepts souvent confondus :{" "}
+            <HighlightText>la rareté et la dureté</HighlightText>.
           </>
         ) : (
           <>
-            This is where two often-confused concepts come in: <i>Scarcity</i> and <i>Hardness</i>.
+            This is where two often-confused concepts come in:{" "}
+            <HighlightText>scarcity and hardness</HighlightText>.
           </>
         )}
       </p>
@@ -227,7 +230,7 @@ export const MoneyLaws1Page: FC = () => {
             caption={
               fr
                 ? "Le pétrole n'est pas rare, les gisements abondent dans le monde. Pourtant, il est dur : même avec la meilleure volonté, doubler la production annuelle est impossible à court terme."
-                : "Oil isn't rare — deposits are abundant around the world. Yet it's hard: even with the best intentions, doubling annual production in the short term is impossible."
+                : "Oil isn't rare - deposits are abundant around the world. Yet it's hard: even with the best intentions, doubling annual production in the short term is impossible."
             }
           />
         </div>

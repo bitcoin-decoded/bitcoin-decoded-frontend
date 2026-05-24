@@ -80,10 +80,10 @@ export const TrustComparisonDemo: FC = () => {
             {fiatTrustBroken
               ? fr
                 ? "La confiance peut être rompue. Et c'est exactement ce qui se passe dans le système actuel."
-                : "Trust can be broken. And yet, this is exactly what happens in the current system."
+                : "Trust can be broken. And that's exactly what's happening in the current system."
               : fr
                 ? "On te fait confiance pour ne cliquer sur aucun des deux boutons ci-dessous."
-                : "We trust you not to click either of the two buttons below."}
+                : "We're trusting you not to click either of the buttons below."}
           </span>
         </div>
 
@@ -146,11 +146,11 @@ export const TrustComparisonDemo: FC = () => {
           <span>
             {bitcoinAttempted
               ? fr
-                ? "Le protocole a fait son travail. Aucune confiance n'était nécessaire."
-                : "The protocol did its job. No trust was needed."
+                ? "Le protocole a fait son travail. Pas de PDG à appeler, pas de comité à supplier, pas de ministre à convaincre. Reste à faire confiance au code lui-même, que chacun de nous peut lire."
+                : "The protocol did its job. No CEO to call, no committee to beg, no minister to convince. The only thing left to trust is the code itself, which anyone can read."
               : fr
-                ? "Pas besoin de te faire confiance ici. Mais tentes quand même."
-                : "No need to trust you here. But try anyway."}
+                ? "Pas besoin de te faire confiance ici. Mais tente quand même."
+                : "No need to trust you here. But go ahead and try."}
           </span>
         </div>
 
@@ -166,8 +166,8 @@ export const TrustComparisonDemo: FC = () => {
           bitcoin.createMoney,
           null,
           fr
-            ? "Échec. L'offre maximale de 21 millions est gravée dans le code."
-            : "Failed. The maximum supply of 21 million is hard-coded.",
+            ? "Échec. L'offre maximale de 21 millions est gravée dans le code, et chaque nœud du réseau refuserait la transaction."
+            : "Failed. The maximum supply of 21 million is hard-coded, and every node on the network would reject the transaction.",
           success,
           danger,
         )}
@@ -184,8 +184,8 @@ export const TrustComparisonDemo: FC = () => {
           bitcoin.censorTx,
           null,
           fr
-            ? "Échec. Le réseau est décentralisé, personne n'a ce pouvoir."
-            : "Failed. The network is decentralized - no one has that power.",
+            ? "Échec. Aucun acteur unique n'a ce pouvoir sur le réseau lui-même."
+            : "Failed. No single actor has that power over the network itself.",
           success,
           danger,
         )}

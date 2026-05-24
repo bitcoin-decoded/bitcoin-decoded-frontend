@@ -1,6 +1,8 @@
 import { type FC } from "react";
 
-import { Callout, HighlightText, Reference } from "../../../Design";
+import { ChevronDown } from "lucide-react";
+
+import { Callout, Disclosure, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   getQuizDataUtxo,
@@ -20,8 +22,8 @@ export const Bitcoin6Page: FC = () => {
       title={t("nav.tree.utxoAndTransactions")}
       prelude={
         fr
-          ? "Tu t'imagines probablement Bitcoin comme un compte en banque numérique. Un solde qui monte, un solde qui descend, des bitcoins qui voyagent d'un portefeuille à l'autre. Cette image est fausse. Pas approximative : fausse. Et tant que tu la gardes en tête, tu ne comprendras ni ce qu'est un bitcoin, ni comment fonctionne une transaction. On va corriger ça."
-          : "You probably imagine Bitcoin as a digital bank account. A balance that goes up, a balance that goes down, bitcoins traveling from one wallet to another. That image is wrong. Not approximate: wrong. And as long as you keep it in mind, you won't understand what a bitcoin is, or how a transaction works. Let's fix that."
+          ? "Tu imagines probablement Bitcoin comme un compte en banque numérique. Un solde qui monte, un solde qui descend, des bitcoins qui voyagent d'un portefeuille à l'autre. Cette image est fausse. Pas approximative : fausse. Et tant que tu la gardes en tête, tu ne comprendras ni ce qu'est un bitcoin, ni comment fonctionne une transaction. On va corriger ça."
+          : "You probably picture Bitcoin as a digital bank account. A balance that goes up, a balance that goes down, bitcoins traveling from one wallet to another. That picture is wrong. Not approximate: wrong. And as long as you keep it in mind, you won't understand what a bitcoin is, or how a transaction works. Let's fix that."
       }
     >
       <p>
@@ -32,9 +34,8 @@ export const Bitcoin6Page: FC = () => {
           </>
         ) : (
           <>
-            Congratulations on making it this far!
-            <br /> We've covered many concepts and had the chance to put them into practice.
-            Excellent.
+            Congrats for making it this far!
+            <br /> We've covered a lot of ground and put it into practice. Nice work.
           </>
         )}
       </p>
@@ -48,7 +49,7 @@ export const Bitcoin6Page: FC = () => {
           </>
         ) : (
           <>
-            One question still lingers:{" "}
+            But one question is still open:{" "}
             <i>"What exactly is a bitcoin? And what happens when you spend one?"</i>
           </>
         )}
@@ -65,20 +66,20 @@ export const Bitcoin6Page: FC = () => {
           {fr ? (
             <>
               Dans une banque, la réponse est évidente : ton compte affiche un solde, tu envoies de
-              l'argent, et le système met à jour les chiffres .
+              l'argent, et le système met à jour les chiffres.
             </>
           ) : (
             <>
-              In a bank, the answer is straightforward: your account shows a balance, you send
-              money, and the system updates the numbers .
+              In a bank, the answer is obvious: your account shows a balance, you send money, and
+              the system updates the numbers.
             </>
           )}
         </p>
       </Callout>
       <p>
         {fr
-          ? "Imagines que Nicolas veuille virer 1000 € à Ms. Michu. Exécutes une transaction dans le système bancaire traditionnel :"
-          : "Now imagine Nicolas wants to send $1000 to Ms. Michu. Execute a transaction in the traditional banking system:"}
+          ? "Imagine que Nicolas veuille virer 1 000 € à Mme Michu. Exécute une transaction dans le système bancaire traditionnel :"
+          : "Imagine Nicolas wants to send $1,000 to Ms. Michu. Run a transaction in the traditional banking system:"}
       </p>
       <TransactionModelComparison mode="bank" />
 
@@ -91,13 +92,14 @@ export const Bitcoin6Page: FC = () => {
         {fr ? (
           <>
             Quand tu dis « je vais envoyer 1 bitcoin à mon pote » (j'aimerais bien être ton ami), tu
-            t'imagines peut-être un objet numérique qui quitte ton portefeuille pour rejoindre celui
+            imagines peut-être un objet numérique qui quitte ton portefeuille pour rejoindre celui
             de quelqu'un d'autre. Eh bien, pas tout à fait.
           </>
         ) : (
           <>
-            When you say "I'm going to send 1 bitcoin to a friend", you might picture a digital
-            object leaving your wallet and arriving in someone else's. Not quite.
+            When you say "I'm going to send 1 bitcoin to a friend" (wish I had friends like that),
+            you might picture a digital object leaving your wallet and arriving in someone else's.
+            Well, not quite.
           </>
         )}
       </p>
@@ -114,17 +116,43 @@ export const Bitcoin6Page: FC = () => {
           </>
         ) : (
           <>
-            A Bitcoin transaction is not a bank transfer. It relies on a principle called{" "}
+            A Bitcoin transaction is not a wire transfer. It relies on a principle called{" "}
             <i>UTXO</i> (<i>Unspent Transaction Output</i>)
           </>
         )}
         .
       </p>
 
+      <Disclosure
+        title={
+          fr ? "Attends, Bitcoin ne déplace pas d'argent ?" : "Wait, Bitcoin doesn't move money?"
+        }
+        icon={<ChevronDown size={13} strokeWidth={2} />}
+      >
+        <p>
+          {fr ? (
+            <>
+              Précision importante : la valeur économique, elle, est bien transférée à Mme Michu. Ce
+              qui ne bouge pas, c'est un solde.
+            </>
+          ) : (
+            <>
+              Important clarification: the economic value is in fact transferred to Ms. Michu. What
+              doesn't move is a balance.
+            </>
+          )}
+        </p>
+        <p>
+          {fr
+            ? "Bitcoin ne met pas à jour un registre de comptes comme le fait une banque. Il consomme et recrée des droits de dépense. Le titre du chapitre est un raccourci volontaire pour t'aider à casser la mauvaise image mentale. Sur le fond, ton ami récupère bien quelque chose qui a de la valeur."
+            : "Bitcoin doesn't update an account ledger the way a bank does. It consumes and recreates spending rights. The chapter title is a deliberate shortcut to help you break the wrong mental picture. In substance, your friend does end up with something valuable."}
+        </p>
+      </Disclosure>
+
       <Callout
         title={fr ? "Le système UTXO expliqué simplement" : "The UTXO system explained simply"}
       >
-        <p>{fr ? "Laisses-moi t'expliquer comment ça marche." : "Let me explain how it works."}</p>
+        <p>{fr ? "Laisse-moi t'expliquer comment ça marche." : "Let me explain how it works."}</p>
         <p>
           {fr ? (
             <>
@@ -133,7 +161,7 @@ export const Bitcoin6Page: FC = () => {
             </>
           ) : (
             <>
-              A Bitcoin transaction takes as input unspent outputs from previous transactions, and
+              A Bitcoin transaction takes unspent outputs from previous transactions as inputs, and
               then creates new outputs
             </>
           )}
@@ -143,15 +171,18 @@ export const Bitcoin6Page: FC = () => {
           {fr ? (
             <>
               Ces sorties non dépensées portent un nom :{" "}
-              <HighlightText>UTXO (Unspent Transaction Output)</HighlightText>. Elles peuvent être
-              vues comme des pièces rangées dans ton portefeuille qui sont indivisibles et qui sont
-              prêtes à être dépensées.
+              <HighlightText>UTXO (Unspent Transaction Output)</HighlightText>. Tu peux les voir
+              comme des pièces rangées dans ton portefeuille. Chacune doit être dépensée en entier -
+              impossible de la couper en deux. Si tu veux en envoyer seulement une partie, la pièce
+              est cassée en plusieurs nouvelles pièces. Tu verras ça en pratique juste après.
             </>
           ) : (
             <>
               These unspent outputs have a name:{" "}
               <HighlightText>UTXOs (Unspent Transaction Outputs)</HighlightText>. Think of them as
-              indivisible coins in your wallet, each one ready to be spent.
+              coins sitting in your wallet. Each one has to be spent in full - you can't cut it in
+              half. If you want to send only part of it, the coin gets broken into several new
+              coins. You'll see this in action right below.
             </>
           )}
         </p>
@@ -160,62 +191,72 @@ export const Bitcoin6Page: FC = () => {
         {fr ? (
           <>
             Le mieux pour comprendre, c'est de manipuler.
-            <br /> T'es en possession du portefeuille de Nicolas, amuses-toi à simuler une transaction
-            :
+            <br /> Tu es en possession du portefeuille de Nicolas, amuse-toi à simuler une
+            transaction :
           </>
         ) : (
           <>
-            The best way to understand it is to get hands-on with it.
-            <br /> You are in possession of Nicolas's wallet, have fun simulating a transaction:
+            The best way to understand is to play with it.
+            <br /> You're holding Nicolas's wallet. Have a go at simulating a transaction:
           </>
         )}
       </p>
       <UTXOTransactionBuilder />
       <p>
         {fr
-          ? " UTXO, c'est posé. On enchaîne sur un concept tout aussi central."
-          : "UTXO is now covered. Let's move on to an equally central concept."}
+          ? "UTXO, c'est posé. On enchaîne sur un concept tout aussi central."
+          : "UTXO is on the table. Let's move on to an equally central concept."}
       </p>
       <p>
-        {fr
-          ? "Ton portefeuille ne contient pas de bitcoins au sens strict : il contient les clés privées qui permettent de les dépenser."
-          : "Your wallet doesn't contain bitcoins in the strict sense: it holds the private keys that allow you to spend them"}
-        .
+        {fr ? (
+          <>
+            Ton portefeuille ne stocke aucun bitcoin. Étrange, hein ? Plus précisément : il ne
+            stocke pas tes bitcoins comme des fichiers sont stockés sur ton ordi. Il stocke en
+            réalité{" "}
+            <HighlightText>les clés privées qui te permettent de dépenser tes UTXO.</HighlightText>
+          </>
+        ) : (
+          <>
+            Your wallet stores zero bitcoins. Weird, right? More precisely: it doesn't store your
+            bitcoins the way files are stored on your computer. What it actually stores is{" "}
+            <HighlightText>the private keys that let you spend your UTXOs.</HighlightText>
+          </>
+        )}
       </p>
 
       <Callout title={fr ? "Le pouvoir des clés" : "The power of keys"}>
         <p>
           {fr
             ? "Chaque UTXO est verrouillé par une condition cryptographique. Pour le dépenser, il faut prouver qu'on possède la clé privée correspondante."
-            : "Each UTXO is locked by a cryptographic condition. To spend it, you must prove that you possess the corresponding private key."}
+            : "Each UTXO is locked by a cryptographic condition. To spend it, you have to prove you own the matching private key."}
         </p>
         <p>
           {fr
             ? "Cette clé fonctionne comme un titre de propriété : qui la détient peut dépenser l'UTXO."
-            : "This key works like a proof of ownership: whoever holds it can spend the UTXO."}
+            : "This key works like a deed of ownership: whoever holds it can spend the UTXO."}
         </p>
         <p>
           {fr
             ? "Réaliser une transaction, c'est donc prouver que l'on a le droit de dépenser un UTXO, puis créer de nouvelles sorties."
-            : "Executing a transaction means proving you have the right to spend a UTXO, then creating new outputs."}
+            : "Running a transaction means proving you have the right to spend a UTXO, then creating new outputs."}
         </p>
         <p>
           {fr
             ? "Une transaction Bitcoin n'est pas un déplacement monétaire : c'est un transfert du droit de dépenser."
-            : "A Bitcoin transaction is not a monetary movement: it's a transfer of the right to spend."}
+            : "A Bitcoin transaction is not a money movement: it's a transfer of the right to spend."}
         </p>
       </Callout>
       <p>
         {fr
-          ? "Imagines maintenant que Nicolas veuille virer 1,3 bitcoin à Mme. Michu. Exécutes une transaction dans le système Bitcoin :"
-          : "Now imagine Nicolas wants to send 1.3 bitcoins to Ms. Michu. Execute a transaction in the Bitcoin system:"}
+          ? "Imagine maintenant que Nicolas veuille virer 1,3 bitcoin à Mme Michu. Exécute une transaction dans le système Bitcoin :"
+          : "Now imagine Nicolas wants to send 1.3 bitcoins to Ms. Michu. Run a transaction in the Bitcoin system:"}
       </p>
       <TransactionModelComparison mode="bitcoin" />
 
       <p>
         {fr
-          ? "Et maintenant, petite question de validation. Tentes ta chance."
-          : "And now, a quick check question. Give it a try."}
+          ? "Et maintenant, petite question de validation. Tente ta chance."
+          : "And now, a quick check question. Take a shot."}
       </p>
 
       <Quiz {...getQuizDataUtxo(language)} onCorrectAnswer={() => {}} />
@@ -230,7 +271,7 @@ export const Bitcoin6Page: FC = () => {
         ) : (
           <>
             A Bitcoin transaction does not move a balance. It consumes unspent outputs, creates new
-            ones, and transforms value into verifiable spending rights.
+            ones, and turns value into verifiable spending rights.
           </>
         )}
       </p>
@@ -248,9 +289,9 @@ export const Bitcoin6Page: FC = () => {
         ) : (
           <>
             But one important piece of the puzzle is still missing:{" "}
-            <i>how does the network know you truly have the right to spend those outputs?</i> And{" "}
+            <i>how does the network know you actually have the right to spend those outputs?</i> And{" "}
             <i>
-              how can you prove ownership without relying on a bank, an account, or a central
+              how do you prove that ownership without relying on a bank, an account, or a central
               authority?
             </i>
           </>
@@ -267,9 +308,9 @@ export const Bitcoin6Page: FC = () => {
           </>
         ) : (
           <>
-            The answer lies in another fundamental mechanism of Bitcoin:{" "}
+            The answer sits in another fundamental mechanism of Bitcoin:{" "}
             <Reference to={ROUTE_NAME.Bitcoin_7}>keys, signatures, and cryptography</Reference>
-            .<br /> On to the next chapter, you're on the right track!
+            .<br /> On to the next chapter, you're nearly there!
           </>
         )}
       </p>

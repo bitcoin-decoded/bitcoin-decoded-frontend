@@ -1,8 +1,8 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Monitor, Pickaxe } from "lucide-react";
+import { ChevronDown, Monitor, Pickaxe } from "lucide-react";
 
-import { Callout, IdentityCard, Reference } from "../../../Design";
+import { Callout, Disclosure, IdentityCard, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { BitcoinNetworkMap, BitcoinNodeDemo } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
@@ -42,18 +42,18 @@ export const Bitcoin1Page: FC = () => {
       <p>
         {fr
           ? "Expliquer Bitcoin de façon simple et complète n'est pas si facile, tant c'est un objet compliqué à approcher parce qu'il couvre beaucoup de sujets différents."
-          : "Explaining Bitcoin in a simple yet complete way is not that easy, as it is a complex object that covers many different topics."}
+          : "Explaining Bitcoin in a simple yet complete way isn't easy: it's a tricky object to approach because it touches on so many different topics."}
       </p>
       <p>{fr ? "Bitcoin est trois choses à la fois :" : "Bitcoin is three things at once:"}</p>
       <ol>
-        <li>{fr ? "Un logiciel" : "A software"}</li>
+        <li>{fr ? "Un logiciel" : "A piece of software"}</li>
         <li>{fr ? "Un réseau" : "A network"}</li>
         <li>{fr ? "Et une monnaie" : "And a currency"}</li>
       </ol>
       <p>
         {fr
           ? "Ensemble, ces éléments constituent l'essence de Bitcoin, c'est-à-dire une infrastructure publique de paiement."
-          : "Together, these elements form the essence of Bitcoin, that is a public payment infrastructure."}
+          : "Together, these pieces form the essence of Bitcoin: a public payment infrastructure."}
       </p>
       <p>
         {fr ? (
@@ -64,9 +64,9 @@ export const Bitcoin1Page: FC = () => {
           </>
         ) : (
           <>
-            This infrastructure changes the picture: it allows anyone, anywhere, at any time, to
-            send or receive value. Without discrimination. Without a trusted third party. Purely
-            peer-to-peer within a decentralized network.
+            This infrastructure changes the picture: it lets anyone, anywhere, at any time, send or
+            receive value. Without discrimination. Without any trusted third party. Purely
+            peer-to-peer, inside a decentralized network.
           </>
         )}
       </p>
@@ -78,31 +78,24 @@ export const Bitcoin1Page: FC = () => {
           </>
         ) : (
           <>
-            "OK, that's great, but how does it actually work?" you might ask. <br />
-            And you're right to ask - that's precisely what we're about to explore.
+            "OK, sounds nice, but how does it actually work?" you're probably asking. <br />
+            And you're right to ask. That's exactly what you're about to see.
           </>
         )}
       </p>
 
       <Callout
-        title={
-          fr ? "Comment ça fonctionne - Les nœuds simples" : "How does it works - Simple nodes"
-        }
+        title={fr ? "Comment ça fonctionne - Les nœuds simples" : "How it works - Simple nodes"}
       >
         <p>
-          {fr ? (
-            <>
-              {fr && "Bitcoin est un "}
-              logiciel public et gratuit qui tourne sur un ordinateur.
-            </>
-          ) : (
-            <>Bitcoin is a free and open-source software that runs on a computer.</>
-          )}
+          {fr
+            ? "Bitcoin est un logiciel libre et gratuit qui tourne sur un ordinateur. N'importe qui peut en lire le code, le modifier, le faire tourner."
+            : "Bitcoin is a free and open-source software that runs on a computer. Anyone can read the code, modify it, run it."}
         </p>
         <p>
           {fr
             ? "Et ce logiciel permet d'avoir en quelque sorte des super-pouvoirs :"
-            : "And this software grants you a kind of superpower:"}
+            : "And this software gives you a kind of superpower:"}
         </p>
         <ul>
           <li>
@@ -117,7 +110,7 @@ export const Bitcoin1Page: FC = () => {
               </span>
             ) : (
               <span>
-                Access to the full history of every transaction that ever occurred on the network -
+                Access to the full history of every transaction that ever happened on the network -
                 a ledger called the{" "}
                 <Reference to={ROUTE_NAME.Bitcoin_3}>
                   <i>blockchain</i>
@@ -136,7 +129,7 @@ export const Bitcoin1Page: FC = () => {
           <li>
             {fr
               ? "Et capacité de veiller à la bonne application des règles en détectant d'éventuels acteurs malveillants."
-              : "And the ability to enforce the rules by detecting any malicious actors."}
+              : "And the ability to enforce the rules by spotting any malicious actor."}
           </li>
         </ul>
 
@@ -158,7 +151,7 @@ export const Bitcoin1Page: FC = () => {
       <p>
         {fr
           ? "Et le réseau Bitcoin, ce n'est rien de plus que plusieurs nœuds connectés entre eux."
-          : "And the Bitcoin network is nothing more than a set of interconnected nodes."}
+          : "And the Bitcoin network is nothing more than a bunch of nodes connected to each other."}
       </p>
       <BitcoinNetworkMap />
       <p>{fr ? "Il existe plusieurs types de nœuds :" : "There are several types of nodes:"}</p>
@@ -177,9 +170,7 @@ export const Bitcoin1Page: FC = () => {
       </ul>
 
       <Callout
-        title={
-          fr ? "Comment ça fonctionne - Les nœuds-mineurs" : "How does it works - Mining nodes"
-        }
+        title={fr ? "Comment ça fonctionne - Les nœuds-mineurs" : "How it works - Mining nodes"}
       >
         <p>
           {fr ? (
@@ -187,15 +178,15 @@ export const Bitcoin1Page: FC = () => {
               Les nœuds-mineurs sont des nœuds comme les autres, mais avec un super-pouvoir en plus.
             </>
           ) : (
-            <>Mining nodes are regular nodes, but with an extra superpower.</>
+            <>Mining nodes are regular nodes, but with one extra superpower.</>
           )}
         </p>
         <p>
           {fr ? (
             <>
               En plus de stocker et vérifier les transactions, ils participent à une compétition
-              permanente : ils utilisent leur puissance de calcul pour résoudre un problème
-              mathématique complexe appelé{" "}
+              permanente : ils utilisent leur puissance de calcul pour résoudre un calcul difficile
+              à résoudre, mais simple à vérifier, appelé{" "}
               <Reference to={ROUTE_NAME.Bitcoin_4}>
                 <i>preuve de travail</i>
               </Reference>
@@ -203,8 +194,9 @@ export const Bitcoin1Page: FC = () => {
             </>
           ) : (
             <>
-              On top of storing and verifying transactions, they compete in a permanent race: they
-              use their computing power to solve a complex mathematical problem called{" "}
+              On top of storing and verifying transactions, they enter a permanent race: they use
+              their computing power to solve a calculation that's hard to crack but easy to check,
+              called{" "}
               <Reference to={ROUTE_NAME.Bitcoin_4}>
                 <i>proof of work</i>
               </Reference>
@@ -220,7 +212,7 @@ export const Bitcoin1Page: FC = () => {
         <ol>
           <li>
             {fr ? (
-              <>Le droit d'ajouter une nouvelle page au grand livre de compte.</>
+              <>Le droit d'ajouter une nouvelle page au grand livre de comptes.</>
             ) : (
               <>The right to add a new page to the ledger.</>
             )}
@@ -235,13 +227,33 @@ export const Bitcoin1Page: FC = () => {
               </>
             ) : (
               <>
-                A Bitcoin reward made up of two parts: newly created bitcoins issued by the protocol
-                (the only way new bitcoins enter circulation) and the transaction fees included in
-                the block.
+                A bitcoin reward made of two parts: the new bitcoins created by the protocol (the
+                only way new bitcoins enter circulation) and the fees from the transactions included
+                in the block.
               </>
             )}
           </li>
         </ol>
+        <Disclosure
+          title={fr ? "Note d'attention" : "A word of caution"}
+          icon={<ChevronDown size={13} strokeWidth={2} />}
+        >
+          {fr ? (
+            <p>
+              La création de nouveaux bitcoins n'est pas illimitée : elle est divisée par deux tous
+              les quatre ans environ et s'arrêtera définitivement à 21 millions de bitcoins au
+              total. Cette mécanique fondamentale a un nom et tout un chapitre dédié :{" "}
+              <Reference to={ROUTE_NAME.Bitcoin_5}>le halving</Reference>.
+            </p>
+          ) : (
+            <p>
+              The creation of new bitcoins isn't unlimited: it's cut in half roughly every four
+              years and will stop for good at a total of 21 million bitcoins. This core mechanic has
+              a name, and a chapter of its own:{" "}
+              <Reference to={ROUTE_NAME.Bitcoin_5}>the halving</Reference>.
+            </p>
+          )}
+        </Disclosure>
       </Callout>
 
       <p>
@@ -252,15 +264,15 @@ export const Bitcoin1Page: FC = () => {
           </>
         ) : (
           <>
-            Once a miner finds the solution and proposes a new block, it is broadcast to the entire
-            network.
+            Once a miner finds the solution and proposes a new block, it gets broadcast to the
+            entire network.
           </>
         )}
       </p>
       <p>
         {fr
           ? "Les nœuds simples entrent alors en action : chacun d'entre eux vérifie indépendamment que le bloc respecte toutes les règles :"
-          : "Simple nodes then step in: each one independently verifies that the block follows all the rules:"}
+          : "Simple nodes then step in: each one independently checks that the block follows every rule:"}
       </p>
       <ul>
         <li>{fr ? "Les transactions sont-elles valides ?" : "Are the transactions valid?"}</li>
@@ -268,47 +280,47 @@ export const Bitcoin1Page: FC = () => {
         <li>
           {fr
             ? "Le problème mathématique a-t-il bien été résolu ?"
-            : "Was the mathematical problem properly solved?"}
+            : "Was the calculation properly solved?"}
         </li>
 
-        <li>{fr ? "Aucune règle n'a-t-elle été enfreinte ?" : "Were any rules broken?"}</li>
+        <li>{fr ? "Aucune règle n'a-t-elle été enfreinte ?" : "Was any rule broken?"}</li>
       </ul>
       <p>
         {fr ? (
           <>
             Et si tout est conforme, le nœud ajoute cette nouvelle page à son propre exemplaire du
-            grand livre de comptes . Sinon, le bloc est purement et simplement rejeté.
+            grand livre de comptes. Sinon, le bloc est purement et simplement rejeté.
           </>
         ) : (
           <>
             If everything checks out, the node adds this new page to its own copy of the ledger.
-            Otherwise, the block is simply rejected.
+            Otherwise, the block is plainly and simply rejected.
           </>
         )}
       </p>
       <p>
         {fr ? (
           <>
-            C'est cette vérification collective et indépendante qui rend Bitcoin si robuste :{" "}
-            personne ne fait confiance à personne, mais tout le monde vérifie tout .
+            C'est cette vérification collective et indépendante qui rend Bitcoin si robuste :
+            personne ne fait confiance à personne, mais tout le monde vérifie tout.
           </>
         ) : (
           <>
-            This collective and independent verification is what makes Bitcoin so robust: nobody
-            trusts anyone, but everyone verifies everything.
+            This collective, independent verification is what makes Bitcoin so robust: nobody trusts
+            anyone, but everyone verifies everything.
           </>
         )}
       </p>
       <p>
         {fr
           ? "Pour récapituler, voici les deux acteurs du réseau :"
-          : "To recap, here are the two actors in the network:"}
+          : "To recap, here are the two players in the network:"}
       </p>
       <div style={PAGE_STYLES.cardsContainer}>
         <div style={cardWrapperStyle}>
           <IdentityCard
             name={fr ? "Nœud simple" : "Simple node"}
-            profile={fr ? "Le gardien des règles" : "The rule guardian"}
+            profile={fr ? "Le gardien des règles" : "The rule keeper"}
             profilePicture={
               <div
                 style={{
@@ -327,19 +339,19 @@ export const Bitcoin1Page: FC = () => {
                 label: fr ? "Son rôle :" : "Its role:",
                 value: fr
                   ? "Stocker une copie complète de la blockchain et vérifier que chaque transaction et chaque bloc respectent les règles du protocole."
-                  : "Store a complete copy of the blockchain and verify that every transaction and block follows the protocol's rules.",
+                  : "Store a complete copy of the blockchain and check that every transaction and every block follows the protocol's rules.",
               },
               {
                 label: fr ? "Son super-pouvoir :" : "Its superpower:",
                 value: fr
                   ? "Rejeter tout bloc invalide, même s'il provient du mineur le plus puissant du monde."
-                  : "Reject any invalid block, even from the most powerful miner in the world.",
+                  : "Reject any invalid block, even from the most powerful miner on Earth.",
               },
               {
-                label: fr ? "Accessible à tous :" : "Accessible to all:",
+                label: fr ? "Accessible à tous :" : "Within reach of anyone:",
                 value: fr
                   ? "Un simple ordinateur et une connexion internet suffisent pour en faire tourner un."
-                  : "A regular computer and an internet connection are all you need to run one.",
+                  : "A regular computer and an internet connection are all it takes to run one.",
               },
             ]}
           />
@@ -365,20 +377,20 @@ export const Bitcoin1Page: FC = () => {
               {
                 label: fr ? "Son rôle :" : "Its role:",
                 value: fr
-                  ? "Proposer un nouveau bloc rempli de transactions en résolvant en premier un problème mathématique complexe."
-                  : "Propose a new block filled with transactions by being the first to solve a complex mathematical problem.",
+                  ? "Proposer un nouveau bloc rempli de transactions en résolvant ce calcul le premier."
+                  : "Propose a new block full of transactions by being the first to solve that calculation.",
               },
               {
                 label: fr ? "Son super-pouvoir :" : "Its superpower:",
                 value: fr
-                  ? "Créer de nouveaux bitcoins à chaque bloc validé."
-                  : "Create new bitcoins with every validated block.",
+                  ? "Créer de nouveaux bitcoins à chaque bloc validé, en quantité qui diminue de moitié tous les quatre ans environ, jusqu'à un plafond total de 21 millions."
+                  : "Create new bitcoins with every validated block, in an amount that gets cut in half roughly every four years, up to a total cap of 21 million.",
               },
               {
                 label: fr ? "Ce qu'il faut :" : "What it takes:",
                 value: fr
                   ? "Du matériel de calcul spécialisé (ASIC) et de l'électricité à moindre coût pour que cela soit rentable."
-                  : "Specialized computing hardware (ASIC) and low-cost electricity to make it profitable.",
+                  : "Specialized computing hardware (ASIC) and cheap electricity to make it profitable.",
               },
             ]}
           />
@@ -388,12 +400,12 @@ export const Bitcoin1Page: FC = () => {
       <p>
         {fr
           ? "Voilà, tu comprends maintenant les grandes fondations de Bitcoin : un réseau décentralisé où des nœuds gardent les règles et des mineurs sécurisent le système en échange de bitcoin."
-          : "There you have it, you now understand the foundations of Bitcoin: a decentralized network where nodes enforce the rules and miners secure the system in exchange for bitcoin."}
+          : "There you have it. You now grasp the foundations of Bitcoin: a decentralized network where nodes keep the rules and miners secure the system in exchange for bitcoin."}
       </p>
       <p>
         {fr
-          ? "Aucune banque. Aucun gouvernement. Aucun intermédiaire. Juste du code, de l'électricité et des maths."
-          : "No banks. No governments. No intermediaries. Just code, electricity, and mathematics."}
+          ? "Aucune banque pour valider les transactions. Aucun gouvernement pour faire tourner le réseau. Aucun intermédiaire pour autoriser ton paiement. Juste du code, de l'électricité et des maths."
+          : "No bank to validate the transactions. No government to run the network. No middleman to authorize your payment. Just code, electricity, and math."}
       </p>
       <p>
         {fr ? (
@@ -405,7 +417,7 @@ export const Bitcoin1Page: FC = () => {
           </>
         ) : (
           <>
-            But a crucial question remains: why does all of this matter?
+            But one crucial question still hangs in the air: why does all of this matter?
             <br />
             Why would humanity need a currency that nobody controls?
           </>
@@ -420,8 +432,8 @@ export const Bitcoin1Page: FC = () => {
           </>
         ) : (
           <>
-            To understand, we'll need to revisit the crises that shaped our era and discover what
-            Bitcoin offers as an alternative.{" "}
+            To understand it, we'll have to revisit the crises that shaped our era and discover what
+            Bitcoin brings to the table.{" "}
             <Reference to={ROUTE_NAME.Bitcoin_2}>Satoshi, here we come!</Reference>
           </>
         )}

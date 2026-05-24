@@ -113,8 +113,8 @@ export const HashDemo: FC = () => {
           />
           <span>
             {fr
-              ? "En pratique, il est impossible de retrouver le texte d'origine à partir de son hash. Chaque empreinte est déterministe, de taille fixe (64 caractères hexadécimaux pour SHA-256) et conçue pour être unique en pratique, quelle que soit la taille du texte en entrée."
-              : "It's computationally infeasible to recover the original input from its hash. Each hash is deterministic, fixed in size (64 hexadecimal characters for SHA-256), and designed to be practically unique, regardless of the input size."}
+              ? "En pratique, il est impossible de retrouver le texte d'origine à partir de son hash. Chaque empreinte est déterministe, de taille fixe (64 caractères hexadécimaux pour SHA-256) et conçue pour que deux entrées différentes produisent quasiment jamais la même empreinte."
+              : "In practice, there's no way to recover the original text from its hash. Each fingerprint is deterministic, fixed in size (64 hexadecimal characters for SHA-256), and built so that two different inputs are vanishingly unlikely to land on the same fingerprint."}
           </span>
         </div>
       )}

@@ -17,14 +17,14 @@ export const Bitcoin3Page: FC = () => {
         fr ? (
           <>
             Une blockchain, c'est une chaîne de blocs. Littéralement. Le mot dit ce qu'il fait. La
-            vraie question, ce n'est pas qu'est-ce que c'est : c'est pourquoi c'est impossible à
-            falsifier. Et là, ça devient intéressant.
+            vraie question, ce n'est pas « qu'est-ce que c'est ? » : c'est pourquoi c'est si
+            difficile à falsifier que personne ne s'y frotte. Et là, ça devient intéressant.
           </>
         ) : (
           <>
             A blockchain is a chain of blocks. Literally. The word says what it does. The real
-            question isn't what it is - it's why it's impossible to falsify. That's where things get
-            interesting.
+            question isn't "what is it?": it's why it's so hard to falsify that no one seriously
+            tries. That's where things get interesting.
           </>
         )
       }
@@ -37,15 +37,15 @@ export const Bitcoin3Page: FC = () => {
           </>
         ) : (
           <>
-            A blockchain is a chain of blocks. There you go, the chapter is done. <br />
-            Just kidding.
+            A blockchain is a chain of blocks. There, chapter done. <br />
+            Kidding.
           </>
         )}
       </p>
       <p>
         {fr
-          ? "Imagines un immense livre de compte qui retrace chaque transaction depuis la création du réseau (le temps t = 0, le tout premier bloc, appelé « Bloc Genesis ») :"
-          : 'Imagine a giant ledger that records every transaction since the network was born (time t = 0, the very first block, called the "Genesis Block"):'}
+          ? "Imagine un immense livre de comptes qui retrace chaque transaction depuis la création du réseau (le temps t = 0, le tout premier bloc, appelé « Bloc Genesis ») :"
+          : 'Picture a giant ledger that records every transaction since the network came to life (time t = 0, the very first block, known as the "Genesis Block"):'}
       </p>
       <ul>
         <li>
@@ -57,7 +57,7 @@ export const Bitcoin3Page: FC = () => {
         <li>
           {fr
             ? "une chaîne de blocs = un livre dont toutes les pages sont liées entre elles, formant ainsi une chaîne difficile à rompre sans casser tout l'ensemble."
-            : "a chain of blocks = a book whose pages are all linked together, forming a chain that's hard to break without breaking the whole thing."}
+            : "a chain of blocks = a book whose pages are all linked together, forming a chain you can't break without breaking the whole thing."}
         </li>
       </ul>
       <Callout title={fr ? "Dissection d'un bloc" : "Dissecting a block"}>
@@ -77,7 +77,7 @@ export const Bitcoin3Page: FC = () => {
         <p>
           {fr
             ? "L'en-tête contient les métadonnées du bloc :"
-            : "The header contains the block's metadata:"}
+            : "The header holds the block's metadata:"}
         </p>
 
         <ol>
@@ -89,8 +89,8 @@ export const Bitcoin3Page: FC = () => {
               </span>
             ) : (
               <span>
-                <HighlightText>Previous block hash</HighlightText> (the fingerprint that creates the
-                link with the prior block)
+                <HighlightText>Previous block hash</HighlightText> (the fingerprint that links to
+                the block before)
               </span>
             )}
           </li>
@@ -103,8 +103,8 @@ export const Bitcoin3Page: FC = () => {
               </span>
             ) : (
               <span>
-                <HighlightText>Merkle root</HighlightText> (a single fingerprint that summarizes
-                every transaction in the block at once)
+                <HighlightText>Merkle root</HighlightText> (a single fingerprint that sums up every
+                transaction in the block at once)
               </span>
             )}
           </li>
@@ -129,7 +129,7 @@ export const Bitcoin3Page: FC = () => {
               </span>
             ) : (
               <span>
-                <HighlightText>Nonce</HighlightText> (a number used by miners - we'll cover it in
+                <HighlightText>Nonce</HighlightText> (a number used by miners, which we'll get to in
                 the next chapter)
               </span>
             )}
@@ -158,7 +158,7 @@ export const Bitcoin3Page: FC = () => {
         ) : (
           <>
             <i>"But how are these pages linked?"</i>,{" "}
-            <i>"And this mathematical glue - what is it, concretely?"</i> <br />
+            <i>"And this mathematical glue, what is it, concretely?"</i> <br />
             Great questions. Let's clear that up right now.
           </>
         )}
@@ -171,7 +171,13 @@ export const Bitcoin3Page: FC = () => {
               <Reference href="https://fr.wikipedia.org/wiki/SHA-2">
                 <i>SHA-256</i>
               </Reference>{" "}
-              (l'en-tête du bloc est haché deux fois de suite).
+              - oui, deux fois de suite, tu as bien lu. Un choix historique de Satoshi pour
+              renforcer la résistance à certaines attaques mathématiques. On ne s'attarde pas
+              là-dessus, mais voici un lien pour les plus curieux :{" "}
+              <Reference href="https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch04_keys.adoc">
+                Mastering Bitcoin, chapitre 4
+              </Reference>
+              .
             </>
           ) : (
             <>
@@ -179,32 +185,38 @@ export const Bitcoin3Page: FC = () => {
               <Reference href="https://en.wikipedia.org/wiki/SHA-2">
                 <i>SHA-256</i>
               </Reference>{" "}
-              hash (the block header is hashed twice in a row).
+              hash - yes, twice in a row, you read that right. A historical design choice by Satoshi
+              to strengthen resistance against certain mathematical attacks. We won't dwell on it
+              here, but here's a link for the curious:{" "}
+              <Reference href="https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch04_keys.adoc">
+                Mastering Bitcoin, chapter 4
+              </Reference>
+              .
             </>
           )}
         </p>
         <p>
           {fr ? (
             <>
-              Imagines une machine à broyer : Tu y jetes n'importe quelle donnée (un mot, un livre
+              Imagine une machine à broyer : tu y jettes n'importe quelle donnée (un mot, un livre
               entier, une image) et la machine te ressort une empreinte numérique de taille fixe.
             </>
           ) : (
             <>
-              Picture a grinding machine: you toss in any data (a word, an entire book, an image)
-              and the machine spits out a digital fingerprint of fixed size.
+              Picture a meat grinder: you toss in any data you want (a word, an entire book, an
+              image) and the machine spits out a digital fingerprint of fixed size.
             </>
           )}
         </p>
         <p>
           {fr ? (
             <>
-              A toi de jouer, expérimentes ! <br />
-              Rentres ce que tu veux dans la machine de hachage et observes ce qu'il se passe.
+              A toi de jouer, expérimente ! <br />
+              Tape ce que tu veux dans la machine de hachage et observe ce qu'il se passe.
             </>
           ) : (
             <>
-              Your turn - try it out! <br />
+              Your turn, give it a shot! <br />
               Type whatever you want into the hashing machine and watch what happens.
             </>
           )}
@@ -216,27 +228,31 @@ export const Bitcoin3Page: FC = () => {
         {fr ? (
           <>
             Ce double hachage est appliqué à l'en-tête du bloc (et uniquement à son en-tête)
-            produisant une empreinte appelée « hash du bloc », qui sert d'identifiant. Ce hash est
-            ensuite repris dans l'en-tête du bloc suivant.
+            produisant une empreinte appelée « hash du bloc ». Cette empreinte sert d'identifiant -
+            et tu vas voir au <Reference to={ROUTE_NAME.Bitcoin_4}>prochain chapitre</Reference>{" "}
+            qu'elle sert aussi à bien autre chose. Ce hash est ensuite repris dans l'en-tête du bloc
+            suivant.
           </>
         ) : (
           <>
             This double hash is applied to the block's header (and only to its header), producing a
-            fingerprint called the "block hash," which serves as its identifier. That hash is then
-            carried into the header of the next block.
+            fingerprint called the "block hash". That fingerprint serves as an identifier - and
+            you'll see in the <Reference to={ROUTE_NAME.Bitcoin_4}>next chapter</Reference> that it
+            has a lot more going on than just that. This hash is then carried into the header of the
+            next block.
           </>
         )}
       </p>
       <p>
         {fr
           ? "Résultat : la moindre modification d'un bloc invalide immédiatement tous les blocs qui le suivent. Réécrire la blockchain devient extrêmement difficile en pratique."
-          : "The result: the slightest modification to a block immediately invalidates every block that follows. Rewriting the blockchain becomes extremely difficult in practice."}
+          : "The result: the slightest change to a block immediately invalidates every block that follows. Rewriting the blockchain becomes extremely hard in practice."}
       </p>
       <p>
         {fr ? (
           <>On appelle ça l'immutabilité de la blockchain.</>
         ) : (
-          <>This is what's called the immutability of the blockchain.</>
+          <>That's what we call the immutability of the blockchain.</>
         )}
       </p>
 
@@ -252,7 +268,7 @@ export const Bitcoin3Page: FC = () => {
         ) : (
           <>
             The blockchain is therefore a ledger that's practically impossible to falsify, where
-            each page is sealed by the next one. But a solid ledger isn't enough: we still have to
+            each page is sealed by the next one. But a solid ledger isn't enough: we still need to
             decide who is allowed to write in it, and at what cost.
           </>
         )}
@@ -266,8 +282,8 @@ export const Bitcoin3Page: FC = () => {
           </>
         ) : (
           <>
-            Because that <i>nonce</i> you came across in every block isn't there by accident. It's
-            the key to a worldwide competition among miners, where computing power replaces trust,
+            Because that <i>nonce</i>, the one you ran into in every block, isn't there by accident.
+            It's the key to a worldwide race between miners, where computing power replaces trust,
             and where the hash you just discovered plays a central role.
           </>
         )}
