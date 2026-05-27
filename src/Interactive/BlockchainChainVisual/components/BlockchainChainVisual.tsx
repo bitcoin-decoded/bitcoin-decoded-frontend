@@ -1,223 +1,174 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, useEffect, useRef } from "react";
 
-import { ArrowDown, ArrowRight, Link } from "lucide-react";
+import { Info, Plus, RotateCcw, Sparkles } from "lucide-react";
 
-import { SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Button,
+  Caption,
+  Disclosure,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { truncateHash } from "../../helpers";
 import { useBlockchainChainVisual } from "../hooks";
-import type { BlockData } from "../types";
 
-export const BlockchainChainVisual: FC = () => {
-  const { t, language } = useTranslation();
-  const fr = language === "fr";
+import { BlockCard } from "./BlockCard";
+import { ChainArrow } from "./ChainArrow";
+
+type Props = {
+  resetScrollTargetId?: string;
+};
+
+export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId }) => {
+  const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
-  const world = colors[moduleTheme];
-  const blocks: BlockData[] = useBlockchainChainVisual();
+  const { blocks, addPhase, canAddBlock, canEdit, editTx, addBlock, reset } =
+    useBlockchainChainVisual();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (addPhase !== "scrolling") return;
+    const node = document.querySelector<HTMLElement>("[data-first-block-hash]");
+    node?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [addPhase]);
 
   if (blocks.length === 0) return null;
 
-  const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
-  const fs = isMobile ? "0.5rem" : "0.55rem";
+  const firstBrokenIndex = blocks.findIndex(
+    (b, i) => i > 0 && b.prevHash !== blocks[i - 1].headerHash,
+  );
+  const isOrphaned = (i: number) => firstBrokenIndex !== -1 && i >= firstBrokenIndex;
+  const isBrokenLink = (i: number) => i === firstBrokenIndex;
 
-  const styles = {
-    title: {
-      ...mono,
-      fontSize: isMobile ? "0.68rem" : "0.75rem",
-      fontWeight: 700,
-      textTransform: "uppercase",
-      letterSpacing: "0.05em",
-      color: world.text.secondary,
-      textAlign: "center",
-      paddingBottom: "0.3rem",
-      borderBottom: `1px solid ${withOpacity(world.border.secondary, 0.25)}`,
-    } as CSSProperties,
-    tag: {
-      ...mono,
-      fontSize: isMobile ? "0.5rem" : "0.52rem",
-      fontWeight: 700,
-      textTransform: "uppercase",
-      letterSpacing: "0.05em",
-      color: world.text.primary,
-      padding: "0.2rem 0.4rem",
-      borderRadius: "0.25rem",
-      background: withOpacity(world.background.secondary, 0.1),
-      alignSelf: "flex-start",
-    } as CSSProperties,
-    label: {
-      ...mono,
-      fontSize: fs,
-      fontWeight: 600,
-      color: colors.base.text.secondary,
-      textTransform: "uppercase",
-      letterSpacing: "0.04em",
-    } as CSSProperties,
-    value: {
-      ...mono,
-      fontSize: fs,
-      color: colors.base.text.primary,
-      wordBreak: "break-all",
-    } as CSSProperties,
-    hash: {
-      ...mono,
-      fontSize: fs,
-      color: world.text.primary,
-      wordBreak: "break-all",
-    } as CSSProperties,
-    tx: {
-      ...mono,
-      fontSize: fs,
-      color: colors.base.text.primary,
-      padding: "0.25rem 0.4rem",
-      borderRadius: "0.3rem",
-      background: withOpacity(world.background.secondary, 0.05),
-    } as CSSProperties,
-    badge: {
-      ...mono,
-      fontSize: fs,
-      fontWeight: 600,
-      color: world.text.secondary,
-      textAlign: "center",
-      padding: "0.3rem 0.6rem",
-      borderRadius: "0.5rem",
-      background: withOpacity(world.background.secondary, 0.08),
-      border: `1px dashed ${withOpacity(world.border.secondary, 0.4)}`,
-    } as CSSProperties,
+  const hasEdited = blocks.some((b) => b.isEdited);
+  const showInvitation = canEdit && !hasEdited;
+  const chainIsLinked = blocks.length >= 2 && !hasEdited;
+
+  const handleAdd = () => {
+    void addBlock();
   };
 
-  const dashed: CSSProperties = {
-    borderTop: `1px dashed ${withOpacity(world.border.secondary, 0.25)}`,
-    margin: "0.15rem 0",
+  const handleReset = async () => {
+    await reset();
+    const target = resetScrollTargetId
+      ? document.getElementById(resetScrollTargetId)
+      : containerRef.current;
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
-  const Field: FC<{ label: string; value: string; isHash?: boolean }> = ({
-    label,
-    value,
-    isHash,
-  }) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem" }}>
-      <span style={styles.label}>{label}</span>
-      <span style={isHash ? styles.hash : styles.value}>{value}</span>
-    </div>
-  );
+  const stageFor = (i: number): "skeleton" | "revealing" | "full" => {
+    const isLast = i === blocks.length - 1;
+    if (!isLast || blocks.length === 1) return "full";
+    if (addPhase === "skeleton") return "skeleton";
+    if (addPhase === "revealing") return "revealing";
+    return "full";
+  };
 
-  const BlockCard: FC<{ block: BlockData }> = ({ block }) => (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "0.35rem",
-        flex: 1,
-        minWidth: 0,
-        width: isMobile ? "100%" : "auto",
-      }}
-    >
-      <SurfaceCard
-        gap="0.35rem"
-        style={{
-          ...mono,
-          padding: isMobile ? "0.85rem" : "1rem 1.15rem",
-          borderRadius: "0.85rem",
-        }}
-      >
-        <div style={styles.title}>
-          {t("chain.block")} #{block.number}
-        </div>
+  const containerStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "1.25rem",
+    width: "100%",
+    maxWidth: "26rem",
+    margin: isMobile ? "1.5rem auto 2rem" : "2rem auto 2.5rem",
+  };
 
-        <span style={styles.tag}>{t("chain.header")}</span>
-        <Field label={t("chain.prevHash")} value={truncateHash(block.prevHash)} isHash />
-        <Field label="Merkle root" value={truncateHash(block.merkleRoot)} isHash />
-        <Field label={t("chain.timestamp")} value={block.timestamp} />
-        <Field label="Nonce" value={block.nonce.toLocaleString(fr ? "fr-FR" : "en-US")} />
+  const chainStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "stretch",
+    gap: "0.6rem",
+    width: "100%",
+  };
 
-        <div style={dashed} />
-        <span style={styles.tag}>{t("chain.body")}</span>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
-          <span style={styles.tx}>{block.tx1}</span>
-          <span style={styles.tx}>{block.tx2}</span>
-        </div>
-      </SurfaceCard>
-      <div style={styles.badge}>Double SHA-256 → {truncateHash(block.headerHash)}</div>
-    </div>
-  );
+  const controlsStyle: CSSProperties = {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: "0.6rem",
+  };
 
-  const ArrowIcon = isMobile ? ArrowDown : ArrowRight;
+  const invitationStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "0.5rem",
+    padding: "0.65rem 0.9rem",
+    borderRadius: "0.65rem",
+    background: withOpacity(colors[moduleTheme].background.secondary, 0.08),
+    border: `1px dashed ${withOpacity(colors[moduleTheme].border.secondary, 0.4)}`,
+    color: colors[moduleTheme].text.primary,
+    textTransform: "none",
+    letterSpacing: "0.01em",
+    fontWeight: 500,
+    lineHeight: 1.4,
+    textAlign: "left",
+    whiteSpace: "pre-line",
+  };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        width: "100%",
-        margin: isMobile ? "1.5rem 0 2rem" : "2rem 0 2.5rem",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          alignItems: "center",
-          gap: isMobile ? "0.5rem" : "0.4rem",
-        }}
-      >
+    <div ref={containerRef} style={containerStyle}>
+      <div style={chainStyle}>
         {blocks.map((block, i) => (
           <div
             key={block.number}
+            className="page-enter"
             style={{
               display: "flex",
-              flexDirection: isMobile ? "column" : "row",
-              alignItems: "center",
-              gap: isMobile ? "0.5rem" : "0.4rem",
-              flex: 1,
-              minWidth: 0,
-              width: isMobile ? "100%" : "auto",
+              flexDirection: "column",
+              alignItems: "stretch",
+              gap: "0.5rem",
             }}
           >
-            <BlockCard block={block} />
-            {i < blocks.length - 1 && (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: world.text.secondary,
-                  flexShrink: 0,
-                }}
-              >
-                <ArrowIcon size={isMobile ? 18 : 20} strokeWidth={2} />
-              </div>
-            )}
+            <BlockCard
+              block={block}
+              isOrphaned={isOrphaned(i)}
+              expectedPrevHash={isBrokenLink(i) ? blocks[i - 1].headerHash : undefined}
+              onEditTx={(tx) => editTx(i, tx)}
+              revealStage={stageFor(i)}
+              canEdit={canEdit && i === 0}
+              isFirstBlock={i === 0}
+              highlightChainLink={chainIsLinked}
+            />
+            {i < blocks.length - 1 && <ChainArrow isBroken={isOrphaned(i + 1)} />}
           </div>
         ))}
       </div>
 
-      <div
-        style={{
-          ...mono,
-          display: "flex",
-          alignItems: "flex-start",
-          gap: "0.5rem",
-          fontSize: isMobile ? "0.7rem" : "0.75rem",
-          lineHeight: 1.5,
-          color: colors.base.text.primary,
-          padding: "0.75rem 1rem",
-          borderRadius: "0.75rem",
-          background: withOpacity(world.background.secondary, 0.06),
-          border: `1px solid ${withOpacity(world.border.secondary, 0.2)}`,
-          marginTop: "0.5rem",
-        }}
-      >
-        <Link
-          size={16}
-          color={world.text.secondary}
-          strokeWidth={2}
-          style={{ flexShrink: 0, marginTop: "0.15rem" }}
-        />
-        <span>{t("chain.note")}</span>
+      <Disclosure title={t("chain.disclosureTitle")} icon={<Info size={14} strokeWidth={2} />}>
+        {t("chain.disclosureBody")}
+      </Disclosure>
+
+      <div style={controlsStyle}>
+        <Button
+          onClick={handleAdd}
+          disabled={!canAddBlock}
+          icon={<Plus size={14} strokeWidth={2.5} />}
+          size="sm"
+        >
+          {t("chain.addBlock")}
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={handleReset}
+          icon={<RotateCcw size={14} strokeWidth={2} />}
+          size="sm"
+        >
+          {t("chain.reset")}
+        </Button>
       </div>
+
+      {showInvitation && (
+        <Caption tone="world" size="sm" as="p" style={invitationStyle}>
+          <Sparkles size={14} strokeWidth={2} style={{ flexShrink: 0, marginTop: "0.15rem" }} />
+          <span>{t("chain.invitation")}</span>
+        </Caption>
+      )}
     </div>
   );
 };

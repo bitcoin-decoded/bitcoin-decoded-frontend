@@ -1,44 +1,70 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { sha256 } from "../../helpers";
-import { doubleSha256 } from "../../helpers";
-import { BLOCKS_SEED } from "../data";
-import type { BlockData } from "../types";
+import { MAX_BLOCKS } from "../data";
+import { buildInitialChain, buildNextSeed, computeBlock, recomputeBlock } from "../helpers";
+import type { AddPhase, BlockData } from "../types";
 
-export const useBlockchainChainVisual = (): BlockData[] => {
+const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+type UseBlockchainChainVisual = {
+  blocks: BlockData[];
+  addPhase: AddPhase;
+  canAddBlock: boolean;
+  canEdit: boolean;
+  editTx: (index: number, tx: string) => Promise<void>;
+  addBlock: () => Promise<void>;
+  reset: () => Promise<void>;
+};
+
+export const useBlockchainChainVisual = (): UseBlockchainChainVisual => {
   const [blocks, setBlocks] = useState<BlockData[]>([]);
+  const [addPhase, setAddPhase] = useState<AddPhase>("idle");
+  const blocksRef = useRef<BlockData[]>([]);
 
   useEffect(() => {
-    const compute = async () => {
-      const result: BlockData[] = [];
-      let prevHash = "0000000000000000000000000000000000000000000000000000000000a3f7c1";
+    blocksRef.current = blocks;
+  }, [blocks]);
 
-      for (const seed of BLOCKS_SEED) {
-        const tx1Hash = await sha256(seed.tx1);
-        const tx2Hash = await sha256(seed.tx2);
-        const merkleRoot = await sha256(tx1Hash + tx2Hash);
-
-        const header = `${prevHash}|${merkleRoot}|${seed.timestamp}|${seed.nonce}`;
-        const headerHash = await doubleSha256(header);
-
-        result.push({
-          number: seed.number,
-          prevHash,
-          merkleRoot,
-          headerHash,
-          tx1: seed.tx1,
-          tx2: seed.tx2,
-          nonce: seed.nonce,
-          timestamp: seed.timestamp,
-        });
-        prevHash = headerHash;
-      }
-
-      setBlocks(result);
-    };
-
-    compute();
+  useEffect(() => {
+    buildInitialChain().then(setBlocks);
   }, []);
 
-  return blocks;
+  const editTx = useCallback(async (index: number, tx: string) => {
+    const target = blocksRef.current[index];
+    if (!target || target.tx === tx) return;
+    const updated = await recomputeBlock(target, tx);
+    setBlocks((latest) => latest.map((b, i) => (i === index ? updated : b)));
+  }, []);
+
+  const addBlock = useCallback(async () => {
+    const current = blocksRef.current;
+    if (current.length === 0 || current.length >= MAX_BLOCKS) return;
+    const last = current[current.length - 1];
+
+    setAddPhase("scrolling");
+    await wait(750);
+
+    setAddPhase("skeleton");
+    const seed = buildNextSeed(last.number, current.length - 1);
+    const block = await computeBlock(seed, last.headerHash);
+    setBlocks((latest) => [...latest, block]);
+    await wait(700);
+
+    setAddPhase("revealing");
+    await wait(1700);
+
+    setAddPhase("done");
+  }, []);
+
+  const reset = useCallback(async () => {
+    setAddPhase("idle");
+    const chain = await buildInitialChain();
+    setBlocks(chain);
+  }, []);
+
+  const canAddBlock =
+    blocks.length < MAX_BLOCKS && (addPhase === "idle" || addPhase === "done");
+  const canEdit = addPhase === "done";
+
+  return { blocks, addPhase, canAddBlock, canEdit, editTx, addBlock, reset };
 };
