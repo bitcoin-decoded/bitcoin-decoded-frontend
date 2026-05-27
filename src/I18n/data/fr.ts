@@ -68,10 +68,28 @@ const fr = {
   "chain.block": "Bloc",
   "chain.header": "En-tête",
   "chain.body": "Corps",
+  "chain.merkleRoot": "Racine de Merkle",
+  "chain.hashFormula": "Hash de l'en-tête du bloc",
+  "chain.blockHash": "Hash du bloc",
   "chain.prevHash": "Hash bloc préc.",
   "chain.timestamp": "Horodatage",
+  "chain.transaction": "Transaction",
+  "chain.addBlock": "Ajouter un bloc",
+  "chain.reset": "Réinitialiser",
+  "chain.chainBroken": "Lien rompu",
+  "chain.modified": "Falsifié",
+  "chain.editTx": "Modifier la transaction",
+  "chain.modifyTx": "Modifier la transaction",
+  "chain.originalHash": "Hash d'origine",
+  "chain.newHash": "Nouveau hash",
+  "chain.invitation":
+    "ALAKAZAM ! 💥 Tu vois ? Le hash du premier bloc est devenu la référence du second. Maintenant, le clou du spectacle : modifie la transaction du bloc #100826 et regarde la chaîne se briser.",
+  "chain.disclosureTitle": "Pourquoi une seule transaction par bloc ?",
+  "chain.disclosureBody":
+    "Simplification pédagogique. Dans la réalité, un bloc Bitcoin contient des milliers de transactions, toutes résumées dans la racine de Merkle. Ici, on n'en met qu'une pour que le mécanisme reste lisible. Rassure-toi, le principe est exactement le même.",
+  "chain.noteTitle": "Pourquoi modifier une transaction casse toute la chaîne",
   "chain.note":
-    "Le hash de chaque bloc est obtenu en appliquant un double SHA-256 à son en-tête. Modifier une seule transaction dans le bloc #826 changerait sa racine de Merkle, donc le hash du bloc, ce qui invaliderait le bloc #827, puis le #828 - toute cette version de la chaîne s'effondre.",
+    "Le hash de chaque bloc est calculé en appliquant un double SHA-256 à son en-tête — pas directement à ses transactions. Les transactions sont d'abord condensées en une racine de Merkle, qui est placée dans l'en-tête. Modifier une seule transaction change la racine de Merkle, donc l'en-tête, donc le hash du bloc — et tous les blocs suivants pointent alors vers un hash qui n'existe plus. La chaîne entière s'effondre.",
 
   // MiningSimulator
   "mining.title": "Simulateur de minage",

@@ -1,7 +1,6 @@
 export type BlockSeed = {
   number: number;
-  tx1: string;
-  tx2: string;
+  tx: string;
   nonce: number;
   timestamp: string;
 };

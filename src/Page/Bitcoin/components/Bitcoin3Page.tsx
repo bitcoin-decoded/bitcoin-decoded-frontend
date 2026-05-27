@@ -248,15 +248,18 @@ export const Bitcoin3Page: FC = () => {
           ? "Résultat : la moindre modification d'un bloc invalide immédiatement tous les blocs qui le suivent. Réécrire la blockchain devient extrêmement difficile en pratique."
           : "The result: the slightest change to a block immediately invalidates every block that follows. Rewriting the blockchain becomes extremely hard in practice."}
       </p>
-      <p>
+      <p id="blockchainChainVisual-start">
         {fr ? (
-          <>On appelle ça l'immutabilité de la blockchain.</>
+          <>
+            À toi de jouer : voici un bloc, tout seul. Ajoute-en un autre derrière. Tu vas voir ce
+            qui les lie.
+          </>
         ) : (
-          <>That's what we call the immutability of the blockchain.</>
+          <>Here's one block, on its own. Add another behind it. You'll see what links them.</>
         )}
       </p>
 
-      <BlockchainChainVisual />
+      <BlockchainChainVisual resetScrollTargetId="blockchainChainVisual-start" />
 
       <p>
         {fr ? (
