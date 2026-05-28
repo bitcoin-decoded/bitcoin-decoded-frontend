@@ -1,7 +1,10 @@
 import { type CSSProperties, type FC, useMemo } from "react";
 
-import { Reference, usePageTheme } from "../../../Design";
+import { ChevronDown } from "lucide-react";
+
+import { Disclosure, Reference, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { ROUTE_NAME } from "../../../Routing";
 import { useToggleSimulator } from "../../Shared/hooks";
 import { getUserBankCredit } from "../data";
 
@@ -75,6 +78,28 @@ export const CreditCreationSimulator: FC = () => {
         assets={data!.bank.assets}
         liabilities={data!.bank.liabilities}
       />
+      <div style={{ marginTop: "1rem" }}>
+        <Disclosure
+          title={fr ? "Note d'attention" : "A word of caution"}
+          icon={<ChevronDown size={13} strokeWidth={2} />}
+        >
+          {fr ? (
+            <p>
+              Petite triche pédagogique : j'ai laissé de côté le capital propre, les réserves, les
+              dettes interbancaires. Une vraie banque a tout ça aussi. On y revient{" "}
+              <Reference to={ROUTE_NAME.Banking_2}>au chapitre suivant</Reference>. Pour l'instant,
+              on regarde un seul truc : la ligne magique.
+            </p>
+          ) : (
+            <p>
+              A small pedagogical shortcut: I've left out the bank's own capital, its reserves, its
+              interbank debt. A real bank has all of that too. We'll get to it in{" "}
+              <Reference to={ROUTE_NAME.Banking_2}>the next chapter</Reference>. For now, we're
+              zooming in on one thing only: the magic line.
+            </p>
+          )}
+        </Disclosure>
+      </div>
       {isActive && (
         <>
           <p>
@@ -87,7 +112,7 @@ export const CreditCreationSimulator: FC = () => {
           <p>
             {fr
               ? "Par un simple jeu d'écritures, en un seul clic, tu as en tant que banquier créé une ligne magique : une créance de 200 000 € (un actif car Nicolas te doit cet argent) et un dépôt de 200 000 € dans le compte de banque de Nicolas (un passif pour toi, car cet argent est dû au client : il peut le retirer ou le dépenser à tout moment)."
-              : "With one simple bookkeeping move, in a single click, you the banker just created a magic line: a $200,000 claim (an asset, because Nicolas owes you that money) and a $200,000 deposit in Nicolas's bank account (a liability for you, because that money is owed to the customer: he can withdraw it or spend it whenever he wants)."}
+              : "With one simple bookkeeping move, in a single click, you the banker just created a magic line: a €200,000 claim (an asset, because Nicolas owes you that money) and a €200,000 deposit in Nicolas's bank account (a liability for you, because that money is owed to the customer: he can withdraw it or spend it whenever he wants)."}
           </p>
 
           <p>
@@ -104,8 +129,8 @@ export const CreditCreationSimulator: FC = () => {
               </>
             ) : (
               <>
-                $200,000 just appeared in Nicolas's account. Pulled out of a hat, well... almost! On
-                the other side, Nicolas now carries a $200,000 debt.{" "}
+                €200,000 just appeared in Nicolas's account. Pulled out of a hat, well... almost! On
+                the other side, Nicolas now carries a €200,000 debt.{" "}
                 <strong>
                   The bank created no wealth whatsoever. It just created money on one side and debt
                   on the other.

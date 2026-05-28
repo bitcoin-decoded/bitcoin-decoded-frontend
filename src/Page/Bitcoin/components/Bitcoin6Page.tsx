@@ -79,7 +79,7 @@ export const Bitcoin6Page: FC = () => {
       <p>
         {fr
           ? "Imagine que Nicolas veuille virer 1 000 € à Mme Michu. Exécute une transaction dans le système bancaire traditionnel :"
-          : "Imagine Nicolas wants to send $1,000 to Ms. Michu. Run a transaction in the traditional banking system:"}
+          : "Imagine Nicolas wants to send €1,000 to Ms. Smith. Run a transaction in the traditional banking system:"}
       </p>
       <TransactionModelComparison mode="bank" />
 
@@ -137,7 +137,7 @@ export const Bitcoin6Page: FC = () => {
             </>
           ) : (
             <>
-              Important clarification: the economic value is in fact transferred to Ms. Michu. What
+              Important clarification: the economic value is in fact transferred to Ms. Smith. What
               doesn't move is a balance.
             </>
           )}
@@ -249,7 +249,7 @@ export const Bitcoin6Page: FC = () => {
       <p>
         {fr
           ? "Imagine maintenant que Nicolas veuille virer 1,3 bitcoin à Mme Michu. Exécute une transaction dans le système Bitcoin :"
-          : "Now imagine Nicolas wants to send 1.3 bitcoins to Ms. Michu. Run a transaction in the Bitcoin system:"}
+          : "Now imagine Nicolas wants to send 1.3 bitcoins to Ms. Smith. Run a transaction in the Bitcoin system:"}
       </p>
       <TransactionModelComparison mode="bitcoin" />
 

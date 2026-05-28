@@ -37,7 +37,7 @@ export const buildFlywheelSteps = (): readonly FlywheelStepData[] => {
     {
       id: 4,
       labelKey: "flywheel.step.value",
-      metricByLevel: ["$200B", "$450B", "$900B", "$1 600B"] as const,
+      metricByLevel: ["€200B", "€450B", "€900B", "€1 600B"] as const,
     },
   ];
 };

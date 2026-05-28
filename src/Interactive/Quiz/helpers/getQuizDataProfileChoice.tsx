@@ -44,15 +44,15 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
         ),
       },
       {
-        text: fr ? "c) Mme Michu pour sûr !" : "c) Ms. Michu for sure!",
+        text: fr ? "c) Mme Michu pour sûr !" : "c) Ms. Smith for sure!",
         isCorrect: false,
         rationale: fr ? (
           <>
-            Notre <i>Madame Michu</i> n'a rien à voir dans cette histoire pour une fois !
+            Notre <i>Mme Michu</i> n'a rien à voir dans cette histoire pour une fois !
           </>
         ) : (
           <>
-            Our <i>Ms. Michu</i> has nothing to do with this one, for once!
+            Our <i>Ms. Smith</i> has nothing to do with this one, for once!
           </>
         ),
       },

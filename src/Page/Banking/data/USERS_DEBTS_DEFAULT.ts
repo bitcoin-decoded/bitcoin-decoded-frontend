@@ -7,24 +7,30 @@ export const getUsersDebtsDefault = (language: Language) => {
       bank: {
         assets: [
           {
-            amount: fr ? "20 000 000 €" : "$20,000,000",
+            amount: fr ? "500 000 000 €" : "€500,000,000",
             description: fr
-              ? "(créances totales auprès des clients)"
-              : "(total claims from customers)",
+              ? "(toutes les créances sur les clients, dont celle de Nicolas)"
+              : "(all claims on customers, including that of Nicolas)",
           },
           {
-            amount: fr ? "30 000 000 €" : "$30,000,000",
-            description: fr ? "(autres actifs divers)" : "(various other assets)",
+            amount: fr ? "9 800 000 €" : "€9,800,000",
+            description: fr ? "(Réserves M0)" : "(M0 Reserves)",
           },
         ],
         liabilities: [
           {
-            amount: fr ? "30 000 000 €" : "$30,000,000",
-            description: fr ? "(capital propre)" : "(equity)",
+            amount: fr ? "440 000 000 €" : "€440,000,000",
+            description: fr
+              ? "(tous les dépôts des clients, sauf Nicolas qui a transféré son argent chez Mme Michu)"
+              : "(all customer deposits, except Nicolas who transferred his money to Ms. Smith)",
           },
           {
-            amount: fr ? "20 000 000 €" : "$20,000,000",
-            description: fr ? "(autres passifs divers)" : "(various other liabilities)",
+            amount: fr ? "20 000 000 €" : "€20,000,000",
+            description: fr ? "(dette envers la Banque Centrale)" : "(debt to the Central Bank)",
+          },
+          {
+            amount: fr ? "49 800 000 €" : "€49,800,000",
+            description: fr ? "(capital propre)" : "(equity)",
           },
         ],
       },
@@ -33,26 +39,32 @@ export const getUsersDebtsDefault = (language: Language) => {
       bank: {
         assets: [
           {
-            amount: fr ? "5 000 000 €" : "$5,000,000",
+            amount: fr ? "470 000 000 €" : "€470,000,000",
             description: fr
-              ? "(créances totales auprès des clients)"
-              : "(total claims from customers)",
+              ? "(toutes les créances sur les clients, dont celle de Nicolas)"
+              : "(all claims on customers, including that of Nicolas)",
             hasChanged: true,
           },
           {
-            amount: fr ? "30 000 000 €" : "$30,000,000",
-            description: fr ? "(autres actifs divers)" : "(various other assets)",
+            amount: fr ? "9 800 000 €" : "€9,800,000",
+            description: fr ? "(Réserves M0)" : "(M0 Reserves)",
           },
         ],
         liabilities: [
           {
-            amount: fr ? "15 000 000 €" : "$15,000,000",
-            description: fr ? "(Capital propre)" : "(Equity)",
-            hasChanged: true,
+            amount: fr ? "440 000 000 €" : "€440,000,000",
+            description: fr
+              ? "(tous les dépôts des clients, sauf Nicolas qui a transféré son argent chez Mme Michu)"
+              : "(all customer deposits, except Nicolas who transferred his money to Ms. Smith)",
           },
           {
-            amount: fr ? "20 000 000 €" : "$20,000,000",
-            description: fr ? "(autres passifs divers)" : "(various other liabilities)",
+            amount: fr ? "20 000 000 €" : "€20,000,000",
+            description: fr ? "(dette envers la Banque Centrale)" : "(debt to the Central Bank)",
+          },
+          {
+            amount: fr ? "19 800 000 €" : "€19,800,000",
+            description: fr ? "(capital propre)" : "(equity)",
+            hasChanged: true,
           },
         ],
       },

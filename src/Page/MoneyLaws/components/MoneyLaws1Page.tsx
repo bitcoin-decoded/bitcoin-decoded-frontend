@@ -268,42 +268,28 @@ export const MoneyLaws1Page: FC = () => {
         )}
       </p>
       <p>
-        {fr
-          ? "C'est une régularité historique frappante : à long terme, les utilisateurs migrent vers les technologies monétaires qui résistent le mieux à la dilution."
-          : "It's a striking historical pattern: over the long run, users migrate toward the monetary technologies that best resist dilution."}
+        {fr ? (
+          <>
+            C'est une régularité historique frappante : à long terme, les utilisateurs délaissent
+            les batteries qui fuient pour celles qui tiennent.{" "}
+            <HighlightText>
+              Une monnaie facile à diluer se vide toute seule. Une monnaie durablement dure devient
+              mécaniquement de plus en plus rare, et protège ceux qui l'utilisent
+            </HighlightText>
+            .
+          </>
+        ) : (
+          <>
+            It's a striking historical pattern: over the long run, users abandon the batteries that
+            leak for the ones that hold.{" "}
+            <HighlightText>
+              A currency that's easy to dilute drains on its own; one that stays durably hard
+              mechanically grows scarcer and scarcer, and protects whoever uses it
+            </HighlightText>
+            .
+          </>
+        )}
       </p>
-      <ul>
-        <li>
-          {fr ? (
-            <span>
-              Une monnaie dont on peut augmenter l'offre facilement est une batterie qui fuit.
-              Personne n'a envie d'y laisser ses économies.
-            </span>
-          ) : (
-            <span>
-              A currency whose supply can easily be inflated is a leaky battery. Nobody wants to
-              leave their savings sitting in it.
-            </span>
-          )}
-        </li>
-
-        <li>
-          {fr ? (
-            <span>
-              À l'inverse, une monnaie qui reste durablement dure devient de plus en plus désirable.
-              Comme son offre ne peut pas « suivre » l'augmentation de la demande, elle devient
-              mécaniquement de plus en plus rare. C'est un cercle vertueux qui protège ceux qui
-              l'utilisent.
-            </span>
-          ) : (
-            <span>
-              On the flip side, a currency that stays durably hard becomes more and more desirable.
-              Since its supply can't "keep up" with rising demand, it mechanically becomes scarcer
-              and scarcer. A virtuous cycle that protects whoever uses it.
-            </span>
-          )}
-        </li>
-      </ul>
       <p>
         {fr ? (
           <>
@@ -360,14 +346,14 @@ export const MoneyLaws1Page: FC = () => {
         {fr ? (
           <>
             Prêt à découvrir comment ce manque de dureté fabrique, mécaniquement, les{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_2}>cycles de Boum et Krach</Reference> que nous
-            subissons ? On y va.
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>cycles économiques</Reference> que nous subissons
+            ? On y va.
           </>
         ) : (
           <>
             Ready to see how this lack of hardness mechanically manufactures the{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_2}>Boom-and-Bust cycles</Reference> we all endure?
-            Let's go.
+            <Reference to={ROUTE_NAME.MoneyLaws_2}>economic cycles</Reference> we all endure? Let's
+            go.
           </>
         )}
       </p>

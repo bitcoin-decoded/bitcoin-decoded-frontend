@@ -81,7 +81,7 @@ export const Bitcoin7Page: FC = () => {
             <>
               He owns a private key (let's say{" "}
               <HighlightText>L4mX9pQ2zV7nK3rT8yH1sF6dJ5aW0cB</HighlightText>) and wants to send 1
-              bitcoin to <i>Ms. Michu</i>.
+              bitcoin to <i>Ms. Smith</i>.
             </>
           )}
         </p>

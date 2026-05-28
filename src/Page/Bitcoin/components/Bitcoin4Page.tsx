@@ -150,7 +150,7 @@ export const Bitcoin4Page: FC = () => {
         </p>
         <ul>
           <li>
-            <i>{fr ? "Nicolas envoie 1 BTC à Mme. Michu" : "Nicolas sends 1 BTC to Ms. Michu"}</i>
+            <i>{fr ? "Nicolas envoie 1 BTC à Mme Michu" : "Nicolas sends 1 BTC to Ms. Smith"}</i>
           </li>
 
           <li>

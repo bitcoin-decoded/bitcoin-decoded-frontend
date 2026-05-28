@@ -129,7 +129,7 @@ export const Banking1Page: FC = () => {
         <p>
           {fr
             ? "Nicolas a un super projet : être propriétaire de sa résidence principale. Pour cela, il va faire une demande de prêt à sa banque pour un montant de 200 000 €."
-            : "Nicolas has a great plan: to own the home he lives in. To pull it off, he's going to ask his bank for a $200,000 loan."}
+            : "Nicolas has a great plan: to own the home he lives in. To pull it off, he's going to ask his bank for a €200,000 loan."}
         </p>
         <p>
           {fr
@@ -152,8 +152,8 @@ export const Banking1Page: FC = () => {
         <p>
           <KeywordHighlight>{fr ? "ACTIF" : "ASSETS"}</KeywordHighlight>{" "}
           {fr
-            ? "→ C'est tout ce que tu possèdes, ou tout ce qu'on te doit."
-            : "→ Everything you own, or everything you're owed."}{" "}
+            ? "→ Ce que tu possèdes, ou ce qu'on te doit."
+            : "→ What you own, or what you're owed."}{" "}
           <br />
           <i>
             {fr
@@ -164,44 +164,44 @@ export const Banking1Page: FC = () => {
         <p>
           <KeywordHighlight>{fr ? "PASSIF" : "LIABILITIES"}</KeywordHighlight>{" "}
           {fr
-            ? "→ C'est tout ce que tu dois aux autres, plus ce qui t'appartient vraiment en propre."
-            : "→ Everything you owe to others, plus what truly belongs to you (your own equity)."}
+            ? "→ D'où vient l'argent qui a financé tout ça."
+            : "→ Where the money that financed all of it came from."}
         </p>
-
         <i>
-          {fr ? "L'argent peut venir de deux endroits :" : "The money can come from two places:"}
+          {fr
+            ? "Cet argent vient forcément de l'une de ces deux sources :"
+            : "That money can only come from one of two sources:"}
         </i>
-
         <ul>
           <li>
             {fr ? (
-              <span>
-                Des autres : c'est une <u>dette</u>.
-              </span>
+              <span>Des autres : tu leur dois, c'est une dette.</span>
             ) : (
-              <span>
-                From others: that's <u>debt</u>.
-              </span>
+              <span>From others: you owe them, that's debt.</span>
             )}
           </li>
-
           <li>
             {fr ? (
-              <span>
-                De toi-même : c'est un <u>capital propre</u>.
-              </span>
+              <span>De toi-même : c'est ton capital propre.</span>
             ) : (
               <span>
-                From yourself: that's <u>equity</u>.
+                From yourself: that's your <u>equity</u>.
               </span>
             )}
           </li>
         </ul>
         <p>
+          <i>
+            {fr
+              ? "Eh oui, ton propre argent apparaît au passif. Pas parce que tu le dois à quelqu'un, mais parce que le passif répond à une seule question : « qui a payé ? » Et la réponse, ici, c'est toi."
+              : 'Yes, your own money shows up under liabilities. Not because you owe it to anyone, but because liabilities answer one single question: "who paid for this?" And here, the answer is you.'}
+          </i>
+        </p>
+        <p>
           <KeywordHighlight>{fr ? "CRÉANCE" : "CLAIM"}</KeywordHighlight>{" "}
           {fr
-            ? "→ C'est une promesse officielle que quelqu'un va te rendre l'argent qu'il te doit."
-            : "→ An official, enforceable promise that someone will pay you back the money they owe you."}
+            ? "→ Le droit d'exiger que quelqu'un te rende l'argent qu'il te doit."
+            : "→ Your right to be paid back the money someone owes you."}
         </p>
       </Callout>
       <p>
@@ -213,7 +213,7 @@ export const Banking1Page: FC = () => {
         ) : (
           <>
             Got it? Perfect. Take a look at Nicolas's bank balance sheet: it has already lent
-            $1,000,000 to its customers. <br />
+            €1,000,000 to its customers. <br />
           </>
         )}
       </p>
