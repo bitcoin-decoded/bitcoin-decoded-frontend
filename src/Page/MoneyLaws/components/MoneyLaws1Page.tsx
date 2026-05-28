@@ -1,12 +1,10 @@
 import { type FC } from "react";
 
-import { Callout, HighlightText, KeywordHighlight, Reference } from "../../../Design";
-import petrole from "../../../Design/img/Petroleum_sample.jpg";
-import pikachuIllustratorCard from "../../../Design/img/Pikachu_Illustrator_Card.webp";
+import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { Illustration } from "../../../Interactive";
+import { MonetaryProperties } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PAGE_STYLES, PageTemplate } from "../../Shared/";
+import { PageTemplate } from "../../Shared/";
 import { displayAristoteMoneyCharacs } from "../helpers";
 
 import { MonetaryGallery } from "./MonetaryGallery";
@@ -181,60 +179,7 @@ export const MoneyLaws1Page: FC = () => {
           </>
         )}
       </p>
-      <Callout title={fr ? "Rareté versus Dureté" : "Scarcity versus Hardness"}>
-        <p>
-          <KeywordHighlight>{fr ? "RARETÉ MONÉTAIRE" : "MONETARY SCARCITY"}</KeywordHighlight>{" "}
-          {fr
-            ? "→ C'est une photographie à l'instant T du stock existant."
-            : "→ It's a snapshot, at a given moment, of the existing stock."}{" "}
-          <br />
-          <i>
-            {fr ? "« Combien y en a-t-il actuellement ? »." : '"How much of it exists right now?"'}
-          </i>
-        </p>
-        <p>
-          <KeywordHighlight>{fr ? "DURETÉ MONÉTAIRE" : "MONETARY HARDNESS"}</KeywordHighlight>{" "}
-          {fr
-            ? "→ C'est la résistance de la monnaie à la production de nouvelles unités."
-            : "→ It's how much a currency resists the production of new units."}{" "}
-          <br />
-          <i>
-            {fr ? (
-              <>
-                « Si l'on augmente la production d'une monnaie, est-ce que l'offre va suivre cette
-                demande ? » Si la réponse est non, alors cette monnaie est dure.
-              </>
-            ) : (
-              <>
-                "If we crank up production of a currency, will supply actually follow demand?" If
-                the answer is no, then that currency is hard.
-              </>
-            )}
-          </i>
-        </p>
-        <div style={PAGE_STYLES.illustrationsWrapper}>
-          <Illustration
-            src={pikachuIllustratorCard}
-            alt={fr ? "Carte de Pikachu Illustrator" : "Pikachu Illustrator card"}
-            width="30%"
-            caption={
-              fr
-                ? "« Pikachu Illustrator » est la carte pokémon la plus rare (39 exemplaires dans le monde). Cependant, elle n'est pas dure (Nintendo pourrait facilement imprimer des milliers de cartes « Pikachu Illustrator » identiques)."
-                : '"Pikachu Illustrator" is the rarest Pokémon card (39 copies worldwide). But it isn\'t hard: Nintendo could easily print thousands of identical "Pikachu Illustrator" cards if they wanted to.'
-            }
-          />
-          <Illustration
-            src={petrole}
-            alt={fr ? "Pétrole brut" : "Crude oil"}
-            width="30%"
-            caption={
-              fr
-                ? "Le pétrole n'est pas rare, les gisements abondent dans le monde. Pourtant, il est dur : même avec la meilleure volonté, doubler la production annuelle est impossible à court terme."
-                : "Oil isn't rare - deposits are abundant around the world. Yet it's hard: even with the best intentions, doubling annual production in the short term is impossible."
-            }
-          />
-        </div>
-      </Callout>
+      <MonetaryProperties />
       <p>
         {fr
           ? "Pour qu'une monnaie soit une « batterie » qui tient la route, on retient cinq propriétés."

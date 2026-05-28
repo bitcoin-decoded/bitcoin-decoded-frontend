@@ -18,6 +18,7 @@ export { MempoolVisual } from "./MempoolVisual";
 export { MiningRewardBlock } from "./MiningRewardBlock";
 export { MiningSimulator } from "./MiningSimulator";
 export { MonetaryAggregates } from "./MonetaryAggregates";
+export { MonetaryProperties } from "./MonetaryProperties";
 export { NetworkFlywheel } from "./NetworkFlywheel";
 export {
   getQuizDataAustrianAxiom,

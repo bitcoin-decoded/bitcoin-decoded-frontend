@@ -70,6 +70,9 @@ const en = {
   "monetaryAggregates.sectionTitle":
     "The two kinds of money: the one you use, and the one reserved for banks",
 
+  // MonetaryProperties
+  "monetaryProperties.sectionTitle": "Scarcity versus Hardness",
+
   // BlockchainChainVisual
   "chain.block": "Block",
   "chain.header": "Header",

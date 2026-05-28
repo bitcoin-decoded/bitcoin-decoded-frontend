@@ -9,6 +9,13 @@ type IllustrationProps = {
   alt?: string;
   width?: string;
   caption?: string;
+  /**
+   * Override the vertical margin around the figure. The default
+   * `2.5rem auto` suits standalone in-page illustrations; pass a smaller
+   * value when embedding inside another card (e.g. inside an expandable
+   * definition body).
+   */
+  margin?: string;
 };
 
 export const Illustration: FC<IllustrationProps> = ({
@@ -17,6 +24,7 @@ export const Illustration: FC<IllustrationProps> = ({
   alt,
   width = "100%",
   caption,
+  margin = "2.5rem auto",
 }) => {
   const { theme, colors, moduleTheme } = usePageTheme();
   const { isHovered, containerHandlers } = useIllustration();
@@ -25,7 +33,7 @@ export const Illustration: FC<IllustrationProps> = ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    margin: "2.5rem auto",
+    margin,
     width: width,
     minWidth: "min(100%, 17.5rem)",
   };
