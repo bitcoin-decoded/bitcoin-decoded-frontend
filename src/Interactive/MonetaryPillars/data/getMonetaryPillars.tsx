@@ -40,8 +40,8 @@ export const getMonetaryPillars = (language: Language): MonetaryPillar[] => {
       icon: CloverLeafIcon,
       title: fr ? "Dureté" : "Hardness",
       description: fr
-        ? "Comme vu précédemment, elle doit être difficile à produire. C'est la propriété qui détermine si une monnaie peut tenir sur la durée — sans elle, les quatre autres ne suffisent pas."
-        : "As previously discussed, it must be difficult to produce. It's the property that decides whether a currency can last through time — without it, the four others aren't enough.",
+        ? "Comme vu plus haut, c'est la résistance à la création de nouvelles unités. C'est un peu le patron. Tu vas le voir à l'œuvre dans la galerie juste en dessous."
+        : "As mentioned just above, it's the resistance to the creation of new units. The boss, basically. You'll see it in action in the gallery just below.",
       isKeystone: true,
     },
   ];

@@ -72,9 +72,8 @@ const en = {
 
   // MonetaryPillars
   "monetaryPillars.sectionTitle": "The five pillars of money",
-  "monetaryPillars.keystoneBadge": "Structural pillar",
   "monetaryPillars.prompt":
-    "Click each pillar to reveal its definition. The fifth one stands apart — it's the one that decides whether a currency can last through time.",
+    "Click each pillar for the definition. Keep an eye on the fifth one. It's the one that decides everything.",
 
   // MonetaryProperties
   "monetaryProperties.sectionTitle": "Scarcity versus Hardness",

@@ -2,8 +2,7 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { ChevronDown } from "lucide-react";
 
-import { Badge, useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import type { MonetaryPillar } from "../types";
 
 type Props = {
@@ -24,7 +23,6 @@ type Props = {
  * (hardness, in the current dataset).
  */
 export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
-  const { t } = useTranslation();
   const { isOpen, toggle } = useDisclosure(false);
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -45,7 +43,10 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
     borderBottom: isLast ? "none" : `1px dashed ${withOpacity(world.border.secondary, 0.28)}`,
     background:
       isHovered || isOpen
-        ? withOpacity(pillar.isKeystone ? colors.amber.text.secondary : world.background.secondary, 0.05)
+        ? withOpacity(
+            pillar.isKeystone ? colors.amber.text.secondary : world.background.secondary,
+            0.05,
+          )
         : "transparent",
     transition: "background 0.25s var(--ease-smooth)",
   };
@@ -161,11 +162,6 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
         <div style={titleColumnStyle}>
           <div style={titleRowStyle}>
             <span style={titleStyle}>{pillar.title}</span>
-            {pillar.isKeystone && (
-              <Badge tone="world" size="xs" color={accentText}>
-                {t("monetaryPillars.keystoneBadge")}
-              </Badge>
-            )}
           </div>
         </div>
         <ChevronDown size={isMobile ? 16 : 18} strokeWidth={2.2} style={chevronStyle} />

@@ -73,9 +73,8 @@ const fr = {
 
   // MonetaryPillars
   "monetaryPillars.sectionTitle": "Les cinq piliers d'une monnaie",
-  "monetaryPillars.keystoneBadge": "Pilier structurel",
   "monetaryPillars.prompt":
-    "Clique sur chaque pilier pour en découvrir la définition. Le cinquième tient une place à part — c'est celui qui décide si une monnaie résiste au temps.",
+    " Clique sur chaque pilier pour la définition. Garde un œil sur le cinquième. C'est lui qui décide de tout.",
 
   // MonetaryProperties
   "monetaryProperties.sectionTitle": "Rareté versus Dureté",
