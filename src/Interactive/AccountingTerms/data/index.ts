@@ -1,0 +1,1 @@
+export { getAccountingTerms } from "./getAccountingTerms";
