@@ -87,8 +87,7 @@ export const Banking2Page: FC = () => {
             <Reference href="https://fr.wikipedia.org/wiki/R%C3%A8glement_-_livraison">
               règlement
             </Reference>
-            . <br />
-            C'est ça, la compensation interbancaire.
+            . C'est ça, la compensation interbancaire.
           </>
         ) : (
           <>
@@ -99,8 +98,7 @@ export const Banking2Page: FC = () => {
             <Reference href="https://en.wikipedia.org/wiki/Settlement_(finance)">
               settlement
             </Reference>
-            . <br />
-            That, right there, is interbank clearing.
+            . That, right there, is interbank clearing.
           </>
         )}
       </p>

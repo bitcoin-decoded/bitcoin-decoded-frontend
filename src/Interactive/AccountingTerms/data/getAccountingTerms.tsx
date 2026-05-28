@@ -95,8 +95,8 @@ export const getAccountingTerms = (
         ? "Le droit d'exiger que quelqu'un te rende l'argent qu'il te doit."
         : "Your right to be paid back the money someone owes you.",
       icon: Handshake,
-      accentText: colors.amber.text.secondary,
-      accentBorder: colors.amber.border.secondary,
+      accentText: colors.violet.text.secondary,
+      accentBorder: colors.violet.border.secondary,
       body: fr ? (
         <p>
           <i>

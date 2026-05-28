@@ -26,12 +26,6 @@ export const getMonetaryAggregates = (
         <>
           <p>
             <i>
-              L'essentiel est créé non pas par la Banque Centrale, mais par les banques commerciales
-              quand elles accordent des crédits.
-            </i>
-          </p>
-          <p>
-            <i>
               Quand on paie nos courses, notre essence, notre shopping ou encore quand on achète
               quelques cryptos parce qu'on ne sait jamais…
             </i>
@@ -39,12 +33,6 @@ export const getMonetaryAggregates = (
         </>
       ) : (
         <>
-          <p>
-            <i>
-              Most of it is created not by the Central Bank, but by commercial banks when they hand
-              out loans.
-            </i>
-          </p>
           <p>
             <i>
               When we pay for groceries, gas, a bit of shopping, or grab some crypto just in case
@@ -61,8 +49,8 @@ export const getMonetaryAggregates = (
         ? "La monnaie émise par la Banque Centrale, dont les réserves interbancaires."
         : "The money issued by the Central Bank, including interbank reserves.",
       icon: Building2,
-      accentText: colors.amber.text.secondary,
-      accentBorder: colors.amber.border.secondary,
+      accentText: colors.violet.text.secondary,
+      accentBorder: colors.violet.border.secondary,
       body: fr ? (
         <>
           <p>
