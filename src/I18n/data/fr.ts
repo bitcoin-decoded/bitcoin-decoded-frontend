@@ -71,6 +71,9 @@ const fr = {
   "monetaryAggregates.sectionTitle":
     "Les deux types de monnaie : celle que l'on utilise et celle réservée aux Banques",
 
+  // MonetaryProperties
+  "monetaryProperties.sectionTitle": "Rareté versus Dureté",
+
   // BlockchainChainVisual
   "chain.block": "Bloc",
   "chain.header": "En-tête",

@@ -1,0 +1,1 @@
+export { MonetaryProperties } from "./components";
