@@ -1,11 +1,21 @@
 import { Banknote, Handshake, Wallet } from "lucide-react";
 
-import type { AccountingTerm } from "../types";
+import type { THEME_COLORS } from "../../../Design";
+import type { ExpandableTerm } from "../../ExpandableDefinitions";
 
 type Language = "fr" | "en";
+type ThemeColors = (typeof THEME_COLORS)["dark"];
 
-export const getAccountingTerms = (language: Language): AccountingTerm[] => {
+export const getAccountingTerms = (
+  language: Language,
+  colors: ThemeColors,
+  moduleTheme: "amber" | "blue" | "violet" | "base",
+): ExpandableTerm[] => {
   const fr = language === "fr";
+  const worldText =
+    moduleTheme === "base" ? colors.base.text.secondary : colors[moduleTheme].text.secondary;
+  const worldBorder =
+    moduleTheme === "base" ? colors.base.border.secondary : colors[moduleTheme].border.secondary;
 
   return [
     {
@@ -15,7 +25,8 @@ export const getAccountingTerms = (language: Language): AccountingTerm[] => {
         ? "Ce que tu possèdes, ou ce qu'on te doit."
         : "What you own, or what you're owed.",
       icon: Wallet,
-      accent: "asset",
+      accentText: colors.semantic.success.text,
+      accentBorder: colors.semantic.success.border,
       body: fr ? (
         <p>
           <i>
@@ -39,7 +50,8 @@ export const getAccountingTerms = (language: Language): AccountingTerm[] => {
         ? "D'où vient l'argent qui a financé tout ça."
         : "Where the money that financed all of it came from.",
       icon: Banknote,
-      accent: "world",
+      accentText: worldText,
+      accentBorder: worldBorder,
       body: fr ? (
         <>
           <p>
@@ -83,7 +95,8 @@ export const getAccountingTerms = (language: Language): AccountingTerm[] => {
         ? "Le droit d'exiger que quelqu'un te rende l'argent qu'il te doit."
         : "Your right to be paid back the money someone owes you.",
       icon: Handshake,
-      accent: "claim",
+      accentText: colors.violet.text.secondary,
+      accentBorder: colors.violet.border.secondary,
       body: fr ? (
         <p>
           <i>

@@ -66,6 +66,10 @@ const en = {
   // AccountingTerms
   "accountingTerms.sectionTitle": "Accounting: a few key definitions",
 
+  // MonetaryAggregates
+  "monetaryAggregates.sectionTitle":
+    "The two kinds of money: the one you use, and the one reserved for banks",
+
   // BlockchainChainVisual
   "chain.block": "Block",
   "chain.header": "Header",

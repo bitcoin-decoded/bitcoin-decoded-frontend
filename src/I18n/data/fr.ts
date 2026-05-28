@@ -67,6 +67,10 @@ const fr = {
   // AccountingTerms
   "accountingTerms.sectionTitle": "Comptabilité : quelques définitions",
 
+  // MonetaryAggregates
+  "monetaryAggregates.sectionTitle":
+    "Les deux types de monnaie : celle que l'on utilise et celle réservée aux Banques",
+
   // BlockchainChainVisual
   "chain.block": "Bloc",
   "chain.header": "En-tête",
