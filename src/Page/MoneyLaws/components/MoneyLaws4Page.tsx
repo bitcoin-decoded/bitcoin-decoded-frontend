@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Quote, Reference } from "../../../Design";
+import { Callout, HighlightText, Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   DebateArena,
@@ -65,15 +65,16 @@ export const MoneyLaws4Page: FC = () => {
               <span>
                 L'école keynésienne (<i>la méthode du physicien</i>) : on observe des chiffres
                 (genre le PIB, le chômage, ...), on fait une hypothèse et on regarde si les données
-                du passé confirment la théorie. C'est ce qu'on appelle l'empirisme (ou le
-                positivisme dans sa version méthodologique) .
+                du passé confirment la théorie.{" "}
+                <HighlightText>C'est ce qu'on appelle l'empirisme</HighlightText> (ou le positivisme
+                dans sa version méthodologique) .
               </span>
             ) : (
               <span>
                 The Keynesian school (<i>the physicist's method</i>): you watch the numbers (GDP,
                 unemployment, that kind of thing), you form a hypothesis, and you check whether past
-                data backs it up. This is called empiricism (or positivism, in its methodological
-                flavor).
+                data backs it up. <HighlightText>This is called empiricism</HighlightText> (or
+                positivism, in its methodological flavor).
               </span>
             )}
           </li>
@@ -82,15 +83,20 @@ export const MoneyLaws4Page: FC = () => {
               <span>
                 L'école autrichienne (<i>la méthode du logicien</i>) : là, on ne part pas de
                 l'observation, mais d'un point de départ qu'on tient pour indiscutable, puis on en
-                déduit tout le reste par la logique, exactement comme en géométrie. C'est la méthode
-                axiomatique-déductive.
+                déduit tout le reste par la logique, exactement comme en géométrie.{" "}
+                <HighlightText>C'est la méthode axiomatique-déductive</HighlightText>.{" "}
+                <Reference href="https://mises.org/library/book/human-action">
+                  En savoir plus
+                </Reference>
+                .
               </span>
             ) : (
               <span>
                 The Austrian school (<i>the logician's method</i>): here, you don't start from
                 observation but from a premise you treat as indisputable, and you deduce everything
-                else through logic, exactly like in geometry. This is the axiomatic-deductive
-                method.
+                else through logic, exactly like in geometry.{" "}
+                <HighlightText>This is the axiomatic-deductive method</HighlightText>.{" "}
+                <Reference href="https://mises.org/library/book/human-action">Read more</Reference>.
               </span>
             )}
           </li>

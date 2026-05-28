@@ -135,25 +135,25 @@ export const getQuizDataModule1Synthesis = (language: Language): SynthesisQuizDa
       {
         question: fr
           ? "Quand Nicolas vire 200 000 € à Mme Michu (cliente d'une autre banque), que se passe-t-il concrètement en fin de journée ?"
-          : "When Nicolas transfers €200,000 to Mrs. Michu (a customer of another bank), what actually happens at the end of the day?",
+          : "When Nicolas transfers €200,000 to Ms. Smith (a customer of another bank), what actually happens at the end of the day?",
         chapterRefs: [CHAPTERS.twoLevels],
         answers: [
           {
             text: fr
               ? "a) La banque de Nicolas envoie directement 200 000 € en monnaie M2 aux serveurs de la banque de Mme Michu"
-              : "a) Nicolas' bank directly sends €200,000 in M2 to the servers of Mrs. Michu's bank",
+              : "a) Nicolas' bank directly sends €200,000 in M2 to the servers of Ms. Smith's bank",
             isCorrect: false,
           },
           {
             text: fr
               ? "b) La banque de Nicolas utilise ses réserves M0 pour régler sa dette envers la banque de Mme Michu"
-              : "b) Nicolas' bank uses its M0 reserves to settle its debt to Mrs. Michu's bank",
+              : "b) Nicolas' bank uses its M0 reserves to settle its debt to Ms. Smith's bank",
             isCorrect: true,
           },
           {
             text: fr
               ? "c) La Banque Centrale crédite directement le compte M2 de Mme Michu, en débitant celui de Nicolas par contrepartie"
-              : "c) The Central Bank directly credits Mrs. Michu's M2 account, debiting Nicolas' account as a counterpart",
+              : "c) The Central Bank directly credits Ms. Smith's M2 account, debiting Nicolas' account as a counterpart",
             isCorrect: false,
           },
         ],

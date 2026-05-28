@@ -3,8 +3,6 @@ import { type FC } from "react";
 import { Callout, Reference } from "../../../Design";
 import highTimePreference from "../../../Design/img/high_time_preference.jpg";
 import lowTimePreference from "../../../Design/img/low_time_preference.jpg";
-import prosperousEconomy from "../../../Design/img/Prosperous_economy.jpg";
-import taintedEconomy from "../../../Design/img/tainted_economy.jpg";
 import { useTranslation } from "../../../I18n";
 import {
   CapitalStructureChain,
@@ -41,14 +39,14 @@ export const MoneyLaws2Page: FC = () => {
         {fr ? (
           <>
             Au chapitre précédent, on a vu que la{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_1}>dureté</Reference> de notre monnaie (la monnaie
-            Fiat) a été sacrifiée. Le problème ? Le coût caché de ce sacrifice est immense.
+            <Reference to={ROUTE_NAME.MoneyLaws_1}>dureté</Reference> de notre monnaie a été
+            sacrifiée. Le problème ? Le coût caché de ce sacrifice est immense.
           </>
         ) : (
           <>
             In the previous chapter, we saw that the{" "}
-            <Reference to={ROUTE_NAME.MoneyLaws_1}>hardness</Reference> of our currency (fiat money)
-            has been sacrificed. The problem? The hidden cost of that sacrifice is massive.
+            <Reference to={ROUTE_NAME.MoneyLaws_1}>hardness</Reference> of our currency has been
+            sacrificed. The problem? The hidden cost of that sacrifice is massive.
           </>
         )}
       </p>
@@ -71,16 +69,23 @@ export const MoneyLaws2Page: FC = () => {
         <p>
           {fr ? (
             <>
-              En tant qu'humains, on préfère consommer tout de suite plutôt que plus tard.
-              Toutefois, pour bâtir un futur plus confortable, il faut différer une partie de notre
-              consommation. Cette tension entre favoriser le présent ou le futur, c'est ce qu'on
-              appelle la <i>Préférence Temporelle</i>.
+              En tant qu'humains, on préfère consommer tout de suite plutôt que plus tard. Pour
+              bâtir un futur plus confortable, il faut différer une partie de notre consommation :
+              cette tension entre favoriser le présent ou le futur, c'est ce qu'on appelle la{" "}
+              <Reference href="https://fr.wikipedia.org/wiki/Pr%C3%A9f%C3%A9rence_temporelle">
+                Préférence Temporelle
+              </Reference>
+              .
             </>
           ) : (
             <>
               As humans, we'd rather consume now than later. But to build a more comfortable future,
-              we have to postpone part of our consumption. This tension between favoring the present
-              or the future is what we call <i>Time Preference</i>.
+              we have to postpone part of our consumption: this tension between favoring the present
+              or the future is what we call{" "}
+              <Reference href="https://en.wikipedia.org/wiki/Time_preference">
+                Time Preference
+              </Reference>
+              .
             </>
           )}
         </p>
@@ -164,7 +169,7 @@ export const MoneyLaws2Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "C'est toute une succession d'étapes intermédiaires qui servent à produire un bien final, destiné au consommateur. C'est un procédé qui prend du temps, et qui mobilise beaucoup de ressources."
+            ? "C'est toute une succession d'étapes intermédiaires qui servent à produire un bien final, destiné au consommateur. C'est un procédé qui prend du temps et qui mobilise beaucoup de ressources."
             : "It's a whole sequence of intermediate steps that lead to producing a final good for the consumer. It's a process that takes time and mobilizes a lot of resources."}
         </p>
         <p>
@@ -188,9 +193,26 @@ export const MoneyLaws2Page: FC = () => {
             : "As you can see, producing a simple sandwich requires hundreds of steps. It doesn't happen in five minutes."}
         </p>
         <p>
-          {fr
-            ? "Ces étapes sont des détours de production : on fabrique d'abord les outils qui nous permettront ensuite d'être bien plus efficaces. L'ensemble de ces outils et de ces étapes forment une structure complexe, le capital."
-            : "These steps are roundabout production: you first build the tools that will then make you far more efficient. All these tools and steps together form a complex structure - capital."}
+          {fr ? (
+            <>
+              Ces étapes sont des{" "}
+              <Reference href="https://fr.wikipedia.org/wiki/D%C3%A9tour_de_production">
+                détours de production
+              </Reference>{" "}
+              : on fabrique d'abord les outils qui nous permettront ensuite d'être bien plus
+              efficaces. L'ensemble de ces outils et de ces étapes forment une structure complexe,
+              le capital.
+            </>
+          ) : (
+            <>
+              These steps are{" "}
+              <Reference href="https://en.wikipedia.org/wiki/Roundaboutness">
+                roundabout production
+              </Reference>
+              : you first build the tools that will then make you far more efficient. All these
+              tools and steps together form a complex structure - capital.
+            </>
+          )}
         </p>
       </Callout>
       <p>
@@ -202,115 +224,106 @@ export const MoneyLaws2Page: FC = () => {
         {fr ? (
           <>
             Dans un monde sans manipulation monétaire, ce taux agit comme une boussole naturelle.
-            Voilà comment ça marche :
+            Voilà comment ça marche.
           </>
         ) : (
           <>
             In a world without monetary manipulation, this rate acts as a natural compass. Here's
-            how it works:
+            how it works.
           </>
         )}
       </p>
-      <ul>
-        <li>
-          {fr
-            ? "Lorsque les citoyens épargnent (préférence temporelle faible), ils ne consomment pas tout, tout de suite. L'argent n'est pas rare. Naturellement, le prix pour emprunter de l'argent (taux d'intérêt) est bas."
-            : "When citizens save (low time preference), they don't consume everything right away. Money isn't scarce. Naturally, the price of borrowing money (the interest rate) is low."}
-        </li>
-        <li style={{ marginTop: "1rem" }}>
-          {fr ? (
-            <span>
-              Ce taux d'intérêt bas envoie un signal très clair à celles et ceux qui souhaitent
-              entreprendre :{" "}
-              <i>
-                « C'est bon ! La société a mis assez de ressources de côté, nous pouvons lancer des
-                projets longs et complexes (des détours de production) »
-              </i>
-              .
-            </span>
-          ) : (
-            <span>
-              This low interest rate sends a very clear signal to anyone looking to build:{" "}
-              <i>
-                "All clear! Society has set aside enough resources - we can launch long, complex
-                projects (roundabout production)."
-              </i>
-            </span>
-          )}
-        </li>
-        <li style={{ marginTop: "1rem" }}>
-          {fr
-            ? "Ces projets créent des machines et des usines qui rendent la société plus efficiente et productive. À la fin, les prix des biens chutent car la société produit plus avec moins d'effort. C'est comme cela qu'est créée la vraie richesse : le pouvoir d'achat de chacun augmente car la vie coûte moins cher."
-            : "These projects create machines and factories that make society more efficient and productive. In the end, the prices of goods fall because society produces more with less effort. That's how real wealth is created: everyone's purchasing power rises because life costs less."}
-        </li>
-      </ul>
-      <Illustration
-        src={prosperousEconomy}
-        alt={fr ? "L'économie saine et prospère" : "A healthy and prosperous economy"}
-        width="35%"
-        caption={
-          fr
-            ? "L'expansion saine. Lorsque le taux d'intérêt est le reflet fidèle de l'épargne réelle, les bâtisseurs travaillent en cohérence avec les ressources disponibles. Ce signal honnête permet de réaliser des projets connectés au réel, qui contribue à la société et qui font chuter les prix : c'est la vraie prospérité."
-            : "Healthy expansion. When the interest rate faithfully reflects real savings, builders work in line with the resources actually available. This honest signal makes possible projects grounded in reality, projects that contribute to society and drive prices down: that's true prosperity."
-        }
-      />
-      <p>
-        {fr ? "Mais alors quand est-ce que ça déraille ?" : "So when does it all go off the rails?"}
-      </p>
-      <p>
-        {fr
-          ? "Le problème survient lorsque les banques commencent à tricher avec la boussole en émettant de la nouvelle monnaie : que ce soit par le recours abusif au crédit bancaire ou par les interventions de la Banque Centrale. Je m'explique :"
-          : "The problem starts when banks begin to cheat with the compass by issuing new money - whether through excessive bank lending or Central Bank interventions. Let me explain:"}
-      </p>
-      <ul>
-        <li>
-          {fr ? (
-            <span>
-              Au lieu d'attendre que les gens épargnent réellement, les banques (commerciales par la
-              création monétaire, centrales par les politiques expansionnistes) maintiennent les
-              taux artificiellement bas. En faisant cela, elles faussent la boussole. Le signal
-              indique "Taux Bas" alors qu'en réalité, la société n'épargne pas assez. Les ressources
-              physiques (acier, briques, temps) n'existent pas en réserve. L'argent réel est rare.
-            </span>
-          ) : (
-            <span>
-              Instead of waiting for people to actually save, banks (commercial banks through money
-              creation, central banks through expansionary policies) keep rates artificially low. In
-              doing so, they distort the compass. The signal reads "Low Rates" while in reality,
-              society isn't saving enough. The physical resources (steel, bricks, time) don't exist
-              in reserve. Real money is scarce.
-            </span>
-          )}
-        </li>
-        <li style={{ marginTop: "1rem" }}>
-          {fr ? (
-            <span>
-              Trompés par ce signal truqué, les entrepreneurs se lancent dans une euphorie de
-              projets : on construit des aéroports inutiles, des immeubles vides ou des startups qui
-              ne rapportent rien. C'est ce qu'on appelle le <i>malinvestissement</i>. On observe une
-              déconnexion croissante entre les rendements réels (ce qu'on produit vraiment) et les
-              rendements nominaux (les chiffres qui grimpent sur les écrans).
-            </span>
-          ) : (
-            <span>
-              Misled by this rigged signal, entrepreneurs throw themselves into a frenzy of
-              projects: useless airports, empty buildings, startups that earn nothing. This is what
-              we call <i>malinvestment</i>. A growing gap opens between real returns (what's
-              actually produced) and nominal returns (the numbers climbing on screens).
-            </span>
-          )}
-        </li>
-      </ul>
-      <Illustration
-        src={taintedEconomy}
-        alt={fr ? "Le mirage de la monnaie facile" : "The mirage of easy money"}
-        width="35%"
-        caption={
-          fr
-            ? "Trompés par un signal de taux artificiellement bas, ces super-bâtisseurs gaspillent une énergie colossale dans un projet déconnecté des besoins réels. C'est l'illustration du malinvestissement."
-            : "Misled by an artificially low rate signal, these super-builders burn colossal energy on a project disconnected from real needs. That's malinvestment in action."
-        }
-      />
+      <Callout title={fr ? "La boussole honnête" : "The honest compass"}>
+        <ol>
+          <li>
+            {fr
+              ? "Les citoyens épargnent : ils ne consomment pas tout, tout de suite (préférence temporelle faible). L'argent disponible est abondant, donc le prix pour l'emprunter (le taux d'intérêt) baisse naturellement."
+              : "Citizens save: they don't spend everything right away (low time preference). Money is plentiful, so the price of borrowing it (the interest rate) drops on its own."}
+          </li>
+          <li style={{ marginTop: "1rem" }}>
+            {fr ? (
+              <span>
+                Ce taux bas envoie un message à ceux qui veulent entreprendre :{" "}
+                <i>
+                  « La société a mis assez de ressources de côté, lancez vos projets longs et
+                  complexes »
+                </i>
+                . Et c'est vrai : l'épargne existe pour de bon.
+              </span>
+            ) : (
+              <span>
+                That low rate sends a message to anyone looking to build:{" "}
+                <i>
+                  "Society has set aside enough resources - go launch your long, complex projects."
+                </i>{" "}
+                And it's telling the truth: the savings are really there.
+              </span>
+            )}
+          </li>
+          <li style={{ marginTop: "1rem" }}>
+            {fr
+              ? "Résultat : on bâtit des machines, des usines, des outils qui rendent la société plus productive. Les prix chutent parce qu'on produit plus avec moins d'effort. Le pouvoir d'achat de tout le monde grimpe. Ça, c'est la prospérité réelle."
+              : "The payoff: we build machines, factories, tools that make society more productive. Prices fall because we produce more with less effort. Everyone's purchasing power climbs. That's what real prosperity looks like."}
+          </li>
+        </ol>
+      </Callout>
+
+      <p>{fr ? "Maintenant, le même film, mais truqué." : "Now, the same movie - rigged."}</p>
+      <Callout title={fr ? "La boussole truquée" : "The rigged compass"}>
+        <ol>
+          <li>
+            {fr ? (
+              <span>
+                Cette fois, personne n'a épargné. Mais les banques (commerciales via la création
+                monétaire, centrales via leurs politiques) maintiennent quand même les taux au
+                plancher. L'acier, les briques, le temps : rien de tout ça n'attend en réserve.
+              </span>
+            ) : (
+              <span>
+                This time, nobody saved. But the banks (commercial ones through money creation,
+                central ones through their policies) pin rates to the floor anyway. Steel, bricks,
+                time - none of it is sitting in reserve.
+              </span>
+            )}
+          </li>
+          <li style={{ marginTop: "1rem" }}>
+            {fr ? (
+              <span>
+                Le taux bas envoie pourtant le même message qu'avant : <i>« Lancez vos projets »</i>
+                . Sauf qu'il ment. La boussole dit « plein de ressources », la réalité dit « les
+                caisses sont vides ».
+              </span>
+            ) : (
+              <span>
+                Yet the low rate sends the very same message as before:{" "}
+                <i>"Go launch your projects."</i> Except it's lying. The compass says "plenty of
+                resources," reality says "the vaults are empty."
+              </span>
+            )}
+          </li>
+          <li style={{ marginTop: "1rem" }}>
+            {fr ? (
+              <span>
+                Trompés, les entrepreneurs se ruent sur des chantiers que rien ne soutient :
+                aéroports déserts, tours vides, startups qui brûlent du cash sans rien produire.
+                C'est le <Reference href="</Reference>">malinvestissement</Reference>. Et l'écart se
+                creuse entre ce qu'on fabrique vraiment et les chiffres qui s'envolent sur les
+                écrans.
+              </span>
+            ) : (
+              <span>
+                Fooled, entrepreneurs pile into projects that nothing supports: deserted airports,
+                empty towers, startups burning cash without producing a thing. This is{" "}
+                <Reference href="https://en.wikipedia.org/wiki/Malinvestment">
+                  malinvestment
+                </Reference>
+                . And the gap widens between what we actually make and the numbers shooting up on
+                screens.
+              </span>
+            )}
+          </li>
+        </ol>
+      </Callout>
       <p>
         {fr ? (
           <>

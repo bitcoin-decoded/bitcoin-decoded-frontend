@@ -167,31 +167,13 @@ export const Bitcoin3Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Pour lier les blocs entre eux, le protocole Bitcoin utilise un double hachage{" "}
-              <Reference href="https://fr.wikipedia.org/wiki/SHA-2">
-                <i>SHA-256</i>
-              </Reference>{" "}
-              - oui, deux fois de suite, tu as bien lu. Un choix historique de Satoshi pour
-              renforcer la résistance à certaines attaques mathématiques. On ne s'attarde pas
-              là-dessus, mais voici un lien pour les plus curieux :{" "}
-              <Reference href="https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch04_keys.adoc">
-                Mastering Bitcoin, chapitre 4
-              </Reference>
-              .
+              Pour lier les blocs entre eux, le protocole Bitcoin utilise une fonction de hachage.
+              Le nom fiche un peu la trouille, mais le principe est en réalité ultra simple.
             </>
           ) : (
             <>
-              To link blocks together, the Bitcoin protocol uses a double{" "}
-              <Reference href="https://en.wikipedia.org/wiki/SHA-2">
-                <i>SHA-256</i>
-              </Reference>{" "}
-              hash - yes, twice in a row, you read that right. A historical design choice by Satoshi
-              to strengthen resistance against certain mathematical attacks. We won't dwell on it
-              here, but here's a link for the curious:{" "}
-              <Reference href="https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch04_keys.adoc">
-                Mastering Bitcoin, chapter 4
-              </Reference>
-              .
+              To link blocks together, the Bitcoin protocol uses a hash function. The name sounds
+              scary, but the idea behind it is dead simple.
             </>
           )}
         </p>
@@ -212,7 +194,7 @@ export const Bitcoin3Page: FC = () => {
           {fr ? (
             <>
               A toi de jouer, expérimente ! <br />
-              Tape ce que tu veux dans la machine de hachage et observe ce qu'il se passe.
+              Tape ce que tu veux dans la machine de hachage et observe ce qui se passe.
             </>
           ) : (
             <>
@@ -222,6 +204,39 @@ export const Bitcoin3Page: FC = () => {
           )}
         </p>
         <HashDemo />
+        <p>
+          {fr ? (
+            <>
+              Tu viens de faire un hachage{" "}
+              <Reference href="https://fr.wikipedia.org/wiki/SHA-2">
+                <i>SHA-256</i>
+              </Reference>
+              . Comme un apprenti boucher. Magnifique. Bitcoin, lui, en fait deux à la suite : il
+              hache l'en-tête du bloc, puis il hache le résultat. Un choix historique de Satoshi
+              pour renforcer la résistance à certaines attaques mathématiques. On ne s'attarde pas
+              là-dessus, mais voici un lien pour les plus curieux :{" "}
+              <Reference href="https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch04_keys.adoc">
+                Mastering Bitcoin, chapitre 4
+              </Reference>
+              .
+            </>
+          ) : (
+            <>
+              You just ran a single{" "}
+              <Reference href="https://en.wikipedia.org/wiki/SHA-2">
+                <i>SHA-256</i>
+              </Reference>{" "}
+              hash. Like a butcher's apprentice. Beautiful. Bitcoin does it twice in a row: it
+              hashes the block header, then hashes the result. A historical design choice by Satoshi
+              to strengthen resistance against certain mathematical attacks. We won't dwell on it
+              here, but here's a link for the curious:{" "}
+              <Reference href="https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch04_keys.adoc">
+                Mastering Bitcoin, chapter 4
+              </Reference>
+              .
+            </>
+          )}
+        </p>
       </Callout>
 
       <p>

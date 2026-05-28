@@ -1,8 +1,8 @@
 import { type FC } from "react";
 
-import { Home } from "lucide-react";
+import { ChevronDown, Home } from "lucide-react";
 
-import { Callout, KeywordHighlight, Reference } from "../../../Design";
+import { Callout, Disclosure, KeywordHighlight, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/";
@@ -25,8 +25,8 @@ export const Banking2Page: FC = () => {
           </>
         ) : (
           <>
-            Nicolas just wired $200,000 to buy his house. Except not a single banknote made the trip
-            from one bank to the other. And yet, Mrs. Michu did receive the money. How does that
+            Nicolas just wired €200,000 to buy his house. Except not a single banknote made the trip
+            from one bank to the other. And yet, Ms. Smith did receive the money. How does that
             work?
           </>
         )
@@ -43,10 +43,10 @@ export const Banking2Page: FC = () => {
           </>
         ) : (
           <>
-            <i>Nicolas</i> is a happy man: his bank just lent him $200,000 to buy his main home.{" "}
+            <i>Nicolas</i> is a happy man: his bank just lent him €200,000 to buy his main home.{" "}
             <br />
             That money won't sit in Nicolas's account for long: he's using it to pay the seller,{" "}
-            <i>Mrs. Michu</i>. So what happens if <i>Mrs. Michu</i> banks somewhere else?
+            <i>Ms. Smith</i>. So what happens if <i>Ms. Smith</i> banks somewhere else?
           </>
         )}
       </p>
@@ -130,7 +130,7 @@ export const Banking2Page: FC = () => {
               settlement
             </Reference>
             . <br />
-            That, right there, is interbank clearing .
+            That, right there, is interbank clearing.
           </>
         )}
       </p>
@@ -144,7 +144,7 @@ export const Banking2Page: FC = () => {
         title={
           fr
             ? "Illustration concrète : Le mécanisme de compensation pour la transaction entre Nicolas et Mme Michu"
-            : "A concrete walkthrough: the clearing mechanism for the Nicolas–Mrs. Michu transaction"
+            : "A concrete walkthrough: the clearing mechanism for the Nicolas-Ms. Smith transaction"
         }
       >
         <p>
@@ -156,8 +156,8 @@ export const Banking2Page: FC = () => {
             </>
           ) : (
             <>
-              Back to our two characters, <i>Nicolas </i>and<i> Mrs. Michu</i>. <br />
-              Here we go: Nicolas wires $200,000 to Mrs. Michu's bank account. If you've been
+              Back to our two characters, <i>Nicolas </i>and<i> Ms. Smith</i>. <br />
+              Here we go: Nicolas wires €200,000 to Ms. Smith's bank account. If you've been
               following, this transaction is M2 money. Perfect.
             </>
           )}
@@ -165,24 +165,50 @@ export const Banking2Page: FC = () => {
         <p>
           {fr
             ? "On arrive en fin de journée, c'est l'heure des comptes : la banque de Nicolas doit 200 000 € à la banque de Mme Michu. Quelle monnaie va être utilisée ? Exact, la monnaie M0 !"
-            : "End of the day rolls around, time to settle up: Nicolas's bank owes $200,000 to Mrs. Michu's bank. Which money gets used? Exactly, M0 money!"}
+            : "End of the day rolls around, time to settle up: Nicolas's bank owes €200,000 to Ms. Smith's bank. Which money gets used? Exactly, M0 money!"}
         </p>
+        <Disclosure
+          title={fr ? "Note d'attention" : "A word of caution"}
+          icon={<ChevronDown size={13} strokeWidth={2} />}
+        >
+          {fr ? (
+            <p>
+              On a simplifié : une seule transaction aujourd'hui. En vrai, c'est des millions de
+              virements compensés, et seul le solde net change de mains. Mais la mécanique est
+              identique.
+            </p>
+          ) : (
+            <p>
+              We've simplified: just one transaction today. In real life it's millions of transfers,
+              all netted, and only the net balance changes hands. But the mechanism is exactly the
+              same.
+            </p>
+          )}
+        </Disclosure>
       </Callout>
       <p>
         {fr ? (
           <>
-            Maintenant, observons le bilan de la banque de <i>Nicolas</i> juste après son virement à
-            Mme Michu. Note la dette de 200 000 € en M0 au passif. Clique ci-dessous pour voir
-            comment la banque utilise ses réserves M0 pour solder cette dette lors de la
-            compensation.
+            Maintenant, observons le bilan complet de la banque de <i>Nicolas</i>, cette fois avec
+            tout ce qu'on avait laissé de côté{" "}
+            <Reference to={ROUTE_NAME.Banking_1}>au chapitre précédent</Reference> : les réserves
+            M0, les dettes envers la Banque Centrale, le capital propre. Note la dette de 200 000 €
+            en M0 au passif.
           </>
         ) : (
           <>
-            Now let's look at <i>Nicolas</i>'s bank balance sheet right after his transfer to Mrs.
-            Michu. Notice the $200,000 M0 debt on the liabilities side. Click below to see how the
-            bank taps its M0 reserves to clear that debt during settlement.
+            Now let's look at the full balance sheet of <i>Nicolas</i>'s bank - this time with
+            everything we set aside in{" "}
+            <Reference to={ROUTE_NAME.Banking_1}>the previous chapter</Reference>: the M0 reserves,
+            the debt owed to the Central Bank, the equity. Notice the €200,000 M0 debt on the
+            liabilities side.
           </>
         )}
+      </p>
+      <p>
+        {fr
+          ? "Clique ci-dessous pour voir comment la banque utilise ses réserves M0 pour solder cette dette lors de la compensation."
+          : "Click below to see how the bank taps its M0 reserves to clear that debt during settlement."}
       </p>
       <CompensationSimulator />
       <p>

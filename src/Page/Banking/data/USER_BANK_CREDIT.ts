@@ -7,18 +7,16 @@ export const getUserBankCredit = (language: Language) => {
       bank: {
         assets: [
           {
-            amount: fr ? "1 000 000 €" : "$1,000,000",
-            description: fr
-              ? "(toutes les créances auprès des clients)"
-              : "(all claims from customers)",
+            amount: fr ? "480 000 000 €" : "€480,000,000",
+            description: fr ? "(toutes les créances sur les clients)" : "(all claims on customers)",
           },
         ],
         liabilities: [
           {
-            amount: fr ? "1 000 000 €" : "$1,000,000",
+            amount: fr ? "480 000 000 €" : "€480,000,000",
             description: fr
               ? "(tous les dépôts correspondants, sur les comptes des clients)"
-              : "(all corresponding deposits in customers' accounts)",
+              : "(all matching deposits in customers' accounts)",
           },
         ],
       },
@@ -27,29 +25,25 @@ export const getUserBankCredit = (language: Language) => {
       bank: {
         assets: [
           {
-            amount: fr ? "1 000 000 €" : "$1,000,000",
-            description: fr
-              ? "(toutes les créances auprès des clients)"
-              : "(all claims from customers)",
+            amount: fr ? "480 000 000 €" : "€480,000,000",
+            description: fr ? "(toutes les créances sur les clients)" : "(all claims on customers)",
           },
           {
-            amount: fr ? "200 000 €" : "$200,000",
+            amount: fr ? "200 000 €" : "€200,000",
             description: fr ? "(créance sur Nicolas)" : "(claim on Nicolas)",
             hasChanged: true,
           },
         ],
         liabilities: [
           {
-            amount: fr ? "1 000 000 €" : "$1,000,000",
+            amount: fr ? "480 000 000 €" : "€480,000,000",
             description: fr
               ? "(tous les dépôts correspondants, sur les comptes des clients)"
-              : "(all corresponding deposits in customers' accounts)",
+              : "(all matching deposits in customers' accounts)",
           },
           {
-            amount: fr ? "200 000 €" : "$200,000",
-            description: fr
-              ? "(dépôt sur le compte de Nicolas)"
-              : "(deposit on Nicolas)",
+            amount: fr ? "200 000 €" : "€200,000",
+            description: fr ? "(dépôt sur le compte de Nicolas)" : "(deposit in Nicolas's account)",
             hasChanged: true,
           },
         ],

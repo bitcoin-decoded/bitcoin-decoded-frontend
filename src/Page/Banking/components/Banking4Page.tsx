@@ -102,17 +102,17 @@ export const Banking4Page: FC = () => {
         <p>
           {fr ? (
             <>
-              <u>Exemple</u> : La banque de <i>Nicolas</i> lui a accordé un prêt de 200 000 € avec
-              un taux d'intérêt de 3% sur 20 ans, une somme que cette même banque a obtenue à un
-              taux extrêmement bas voire quasi-nul ! <br /> → C'est cette marge qui la rémunère pour
-              prendre des risques et ainsi financer l'économie.
+              Souviens-toi de <i>Nicolas</i> : sa banque a créé les 200 000 € en un clic. Mais
+              prêter n'est jamais gratuit - il faut que Nicolas soit solvable, et la banque doit
+              elle-même emprunter à court terme pour tourner, à un taux très bas voire quasi nul.
+              Son profit, c'est l'écart entre les 3% que paie Nicolas et ce taux-là.
             </>
           ) : (
             <>
-              <u>Example</u>: <i>Nicolas</i>'s bank granted him a €200,000 loan at a 3% interest
-              rate over 20 years, money that same bank had itself borrowed at an extremely low,
-              near-zero rate! <br /> → That margin is exactly what pays the bank for taking on risk,
-              and what lets it finance the economy.
+              Remember <i>Nicolas</i>: his bank created the €200,000 in a single click. But lending
+              is never free - Nicolas has to be creditworthy, and the bank itself has to borrow
+              short-term to keep running, at a very low, near-zero rate. Its profit is the gap
+              between the 3% Nicolas pays and that rate.
             </>
           )}
         </p>
@@ -140,21 +140,21 @@ export const Banking4Page: FC = () => {
       <p>
         {fr ? (
           <>
-            T'es maintenant une banque centrale et tu vas réaliser une opération de QE. Observe les
-            effets que cela provoque sur les obligations.
+            T'es maintenant une banque centrale et tu vas réaliser une opération d'assouplissement
+            quantitatif. Observe les effets que cela provoque sur les obligations.
           </>
         ) : (
           <>
-            You're now a central bank, and you're about to run a QE operation. Watch what it does to
-            bonds.
+            You're now a central bank, and you're about to run a quantitative easing operation.
+            Watch what it does to bonds.
           </>
         )}
         <QESimulator />
       </p>
       <p>
         {fr
-          ? "Le QE fait donc s'effondrer les taux d'intérêt à long terme. Et comme ce taux d'État (le prêt jugé le plus sûr) sert de référence, il met une pression à la baisse sur tous les autres types de prêts (immobiliers, entreprises, etc.)."
-          : "So QE sends long-term interest rates tumbling. And since the government rate (the loan considered the safest) serves as the benchmark, it drags down pretty much every other type of loan with it (mortgages, business loans, and so on)."}
+          ? "Et comme ce taux d'État (le prêt jugé le plus sûr) sert de référence, il met une pression à la baisse sur tous les autres types de prêts (immobiliers, entreprises, etc.)."
+          : "And since the government rate (the loan considered the safest) serves as the benchmark, it drags down pretty much every other type of loan with it (mortgages, business loans, and so on)."}
       </p>
       <p>
         {fr ? (

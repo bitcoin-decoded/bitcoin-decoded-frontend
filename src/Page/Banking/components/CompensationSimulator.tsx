@@ -92,7 +92,7 @@ export const CompensationSimulator: FC = () => {
               <>
                 <li>Liabilities side: Nicolas's bank has wiped out its debt.</li>
 
-                <li>Assets side: the bank's "M0 reserves" dropped by $200,000.</li>
+                <li>Assets side: the bank's "M0 reserves" dropped by €200,000.</li>
               </>
             )}
           </ul>

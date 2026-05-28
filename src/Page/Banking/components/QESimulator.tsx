@@ -140,10 +140,10 @@ export const QESimulator: FC = () => {
               La Banque Centrale a inondé le marché pour acheter ces titres. En faisant s'envoler le
               prix de l'obligation à 4 000 €, son rendement annuel s'écrase mécaniquement à 1% : le
               coupon reste fixé à 40 €, mais rapporté à un prix d'achat de 4 000 €, cela ne
-              représente plus que 1% de rendement. C'est ainsi que le{" "}
+              représente plus que 1% de rendement. C'est ainsi que l'
               <strong>
-                Quantitative Easing écrase artificiellement les taux, et de proche en proche, sur
-                une grande partie de l'économie.
+                assouplissement quantitatif écrase artificiellement les taux, et de proche en
+                proche, sur une grande partie de l'économie.
               </strong>
             </>
           ) : (

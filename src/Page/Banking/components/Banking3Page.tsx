@@ -70,8 +70,8 @@ export const Banking3Page: FC = () => {
             </>
           ) : (
             <>
-              If <i>Nicolas</i>'s Bank couldn't pay its debt to <i>Ms. Michu</i>'s Bank, then{" "}
-              <i>Ms. Michu</i>'s bank might in turn fail to pay all its own debts to other
+              If <i>Nicolas</i>'s Bank couldn't pay its debt to <i>Ms. Smith</i>'s Bank, then{" "}
+              <i>Ms. Smith</i>'s bank might in turn fail to pay all its own debts to other
               third-party banks, and so on. Through a domino effect, banks could become unable to
               honor their debts. And that would be catastrophic.
             </>
@@ -104,9 +104,21 @@ export const Banking3Page: FC = () => {
       {isQuizSolved && (
         <>
           <p>
-            {fr
-              ? "Si plusieurs Nicolas n'arrivent plus à rembourser leurs prêts au sein d'une même banque, voici la réaction en chaîne :"
-              : "If several borrowers can no longer repay their loans within the same bank, here is the chain reaction:"}
+            {fr ? (
+              <>
+                Reprenons la banque de <i>Nicolas</i>{" "}
+                <Reference to={ROUTE_NAME.Banking_2}> du chapitre précédent</Reference>. Tout allait
+                bien, jusqu'au jour où plusieurs <i>Nicolas</i> (appelons-les les <i>Nicolas-bis</i>
+                ) cessent de rembourser leurs prêts. Voici la réaction en chaîne :
+              </>
+            ) : (
+              <>
+                Let's go back to <i>Nicolas</i>'s bank from{" "}
+                <Reference to={ROUTE_NAME.Banking_2}> the previous chapter</Reference>. Everything
+                was fine - until the day several <i>Nicolas</i>-types (let's call them the{" "}
+                <i>Nicolas-bis</i>) stop repaying their loans. Here's the chain reaction:
+              </>
+            )}
           </p>
           <ol>
             <li>
@@ -173,31 +185,44 @@ export const Banking3Page: FC = () => {
                 <>
                   Il s'agit d'un véritable tour de passe-passe : les banques commerciales peuvent
                   ainsi être renflouées en M0, comme par magie, grâce aux banques centrales qui
-                  peuvent créer de la M0 quasiment à partir de rien, en échange d'obligations
-                  qu'elles encaissent à leur bilan. La « contrepartie » ? De la dette d'État
-                  (rassurant, non ?).
+                  créent cette M0 quasiment à partir de rien. En échange, elles récupèrent les
+                  obligations et les inscrivent à leur propre bilan. Autrement dit, la contrepartie
+                  de tout ce M0 fraîchement créé, c'est de la dette d'État (rassurant, non ?).
                 </>
               ) : (
                 <>
                   It's a genuine sleight of hand: commercial banks get bailed out in M0, as if by
-                  magic, thanks to central banks that can conjure M0 out of almost nothing, in
-                  exchange for bonds they park on their own balance sheet. The "counterpart"?
-                  Government debt (reassuring, isn't it?).
+                  magic, thanks to central banks that conjure this M0 out of almost nothing. In
+                  return, they take in the bonds and park them on their own balance sheet. In other
+                  words, the counterpart backing all that freshly created M0 is government debt
+                  (reassuring, isn't it?).
                 </>
               )}
             </p>
             <p>
               {fr ? (
                 <>
-                  Et ce n'est pas de la science-fiction : cette « arme » a été utilisée massivement
-                  par les plus grandes banques centrales (Japon, États-Unis, Europe) après la{" "}
-                  <i>crise des subprimes</i> de 2008 et lors de la <i>crise pandémique</i> de 2020.
+                  Et ce n'est pas de la science-fiction : la Banque du Japon dégaine cette « arme »
+                  dès 2001, la Fed américaine et la Banque d'Angleterre l'utilisent massivement
+                  après la <i>crise des subprimes</i> de 2008, et la BCE s'y met à son tour en 2015.
+                  Puis tout le monde remet ça, ensemble, lors de la <i>crise pandémique</i> de 2020.
+                  Si tu veux vérifier par toi-même, la{" "}
+                  <Reference href="https://www.banque-france.fr/fr/publications-et-statistiques/publications/quantitative-easing">
+                    Banque de France
+                  </Reference>{" "}
+                  le raconte sans détour.
                 </>
               ) : (
                 <>
-                  And this isn't science fiction: this "weapon" was used massively by the largest
-                  central banks (Japan, United States, Europe) after the <i>subprime crisis</i> of
-                  2008 and during the <i>pandemic crisis</i> of 2020.
+                  And this isn't science fiction: the Bank of Japan first pulled out this "weapon"
+                  back in 2001, the US Fed and the Bank of England used it massively after the{" "}
+                  <i>subprime crisis</i> of 2008, and the ECB joined in by 2015. Then everyone did
+                  it again, together, during the <i>pandemic crisis</i> of 2020. If you want to
+                  check for yourself, the{" "}
+                  <Reference href="https://www.banque-france.fr/en/monetary-strategy/operational-framework/asset-purchase-programmes">
+                    Banque de France
+                  </Reference>{" "}
+                  lays it out plainly.
                 </>
               )}
             </p>
