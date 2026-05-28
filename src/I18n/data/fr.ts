@@ -64,6 +64,9 @@ const fr = {
   "characteristic.fungibility": "Fongibilité",
   "characteristic.hardness": "Dureté",
 
+  // AccountingTerms
+  "accountingTerms.sectionTitle": "Comptabilité : quelques définitions",
+
   // BlockchainChainVisual
   "chain.block": "Bloc",
   "chain.header": "En-tête",

@@ -1,7 +1,8 @@
 import { type FC } from "react";
 
-import { Callout, KeywordHighlight, Reference } from "../../../Design";
+import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { AccountingTerms } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/";
 
@@ -142,68 +143,7 @@ export const Banking1Page: FC = () => {
           ? "Mais avant de prendre les commandes, faisons un petit rappel de vocabulaire en comptabilité."
           : "But before you take the controls, let's run through a quick accounting vocabulary refresher."}
       </p>
-      <Callout
-        title={
-          fr
-            ? "Comptabilité : Quelques définitions essentielles"
-            : "Accounting: a few essential definitions"
-        }
-      >
-        <p>
-          <KeywordHighlight>{fr ? "ACTIF" : "ASSETS"}</KeywordHighlight>{" "}
-          {fr
-            ? "→ Ce que tu possèdes, ou ce qu'on te doit."
-            : "→ What you own, or what you're owed."}{" "}
-          <br />
-          <i>
-            {fr
-              ? "Ton épargne, ton téléphone, l'argent que t'as prêté à ton beau-frère et qu'il te doit toujours ? Ce sont des actifs !"
-              : "Your savings, your phone, that money you lent your brother-in-law and still haven't seen again? All assets!"}
-          </i>
-        </p>
-        <p>
-          <KeywordHighlight>{fr ? "PASSIF" : "LIABILITIES"}</KeywordHighlight>{" "}
-          {fr
-            ? "→ D'où vient l'argent qui a financé tout ça."
-            : "→ Where the money that financed all of it came from."}
-        </p>
-        <i>
-          {fr
-            ? "Cet argent vient forcément de l'une de ces deux sources :"
-            : "That money can only come from one of two sources:"}
-        </i>
-        <ul>
-          <li>
-            {fr ? (
-              <span>Des autres : tu leur dois, c'est une dette.</span>
-            ) : (
-              <span>From others: you owe them, that's debt.</span>
-            )}
-          </li>
-          <li>
-            {fr ? (
-              <span>De toi-même : c'est ton capital propre.</span>
-            ) : (
-              <span>
-                From yourself: that's your <u>equity</u>.
-              </span>
-            )}
-          </li>
-        </ul>
-        <p>
-          <i>
-            {fr
-              ? "Eh oui, ton propre argent apparaît au passif. Pas parce que tu le dois à quelqu'un, mais parce que le passif répond à une seule question : « qui a payé ? » Et la réponse, ici, c'est toi."
-              : 'Yes, your own money shows up under liabilities. Not because you owe it to anyone, but because liabilities answer one single question: "who paid for this?" And here, the answer is you.'}
-          </i>
-        </p>
-        <p>
-          <KeywordHighlight>{fr ? "CRÉANCE" : "CLAIM"}</KeywordHighlight>{" "}
-          {fr
-            ? "→ Le droit d'exiger que quelqu'un te rende l'argent qu'il te doit."
-            : "→ Your right to be paid back the money someone owes you."}
-        </p>
-      </Callout>
+      <AccountingTerms />
       <p>
         {fr ? (
           <>
