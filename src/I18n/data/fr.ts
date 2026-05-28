@@ -71,6 +71,11 @@ const fr = {
   "monetaryAggregates.sectionTitle":
     "Les deux types de monnaie : celle que l'on utilise et celle réservée aux Banques",
 
+  // MonetaryPillars
+  "monetaryPillars.sectionTitle": "Les cinq piliers d'une monnaie",
+  "monetaryPillars.prompt":
+    " Clique sur chaque pilier pour la définition. Garde un œil sur le cinquième. C'est lui qui décide de tout.",
+
   // MonetaryProperties
   "monetaryProperties.sectionTitle": "Rareté versus Dureté",
 

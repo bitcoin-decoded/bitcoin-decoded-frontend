@@ -70,6 +70,11 @@ const en = {
   "monetaryAggregates.sectionTitle":
     "The two kinds of money: the one you use, and the one reserved for banks",
 
+  // MonetaryPillars
+  "monetaryPillars.sectionTitle": "The five pillars of money",
+  "monetaryPillars.prompt":
+    "Click each pillar for the definition. Keep an eye on the fifth one. It's the one that decides everything.",
+
   // MonetaryProperties
   "monetaryProperties.sectionTitle": "Scarcity versus Hardness",
 

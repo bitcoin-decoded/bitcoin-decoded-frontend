@@ -2,10 +2,9 @@ import { type FC } from "react";
 
 import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { MonetaryProperties } from "../../../Interactive";
+import { MonetaryPillars, MonetaryProperties } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/";
-import { displayAristoteMoneyCharacs } from "../helpers";
 
 import { MonetaryGallery } from "./MonetaryGallery";
 
@@ -185,9 +184,7 @@ export const MoneyLaws1Page: FC = () => {
           ? "Pour qu'une monnaie soit une « batterie » qui tient la route, on retient cinq propriétés."
           : 'For money to be a "battery" worth its name, five properties are usually retained.'}
       </p>
-      <Callout title={fr ? "Les cinq piliers d'une monnaie" : "The five pillars of money"}>
-        {displayAristoteMoneyCharacs(language)}
-      </Callout>
+      <MonetaryPillars />
       <p>
         {fr
           ? "Et comme toujours, passons à la pratique en découvrant comment l'histoire a « puni » les batteries qui fuyaient."
