@@ -8,6 +8,7 @@ export { getKeynesianVsAustrian } from "./DebateArena";
 export { DebateArena } from "./DebateArena";
 export { DifficultyAdjustment } from "./DifficultyAdjustment";
 export { DoubleSpendDemo } from "./DoubleSpendDemo";
+export { ExpandableDefinitions, type ExpandableTerm } from "./ExpandableDefinitions";
 export { FlipCardGrid, getBeerProductionChain } from "./FlipCard";
 export { HalvingChart } from "./HalvingChart";
 export { HashDemo } from "./HashDemo";
@@ -16,6 +17,7 @@ export { M2MoneySupplyChart } from "./M2MoneySupplyChart";
 export { MempoolVisual } from "./MempoolVisual";
 export { MiningRewardBlock } from "./MiningRewardBlock";
 export { MiningSimulator } from "./MiningSimulator";
+export { MonetaryAggregates } from "./MonetaryAggregates";
 export { NetworkFlywheel } from "./NetworkFlywheel";
 export {
   getQuizDataAustrianAxiom,

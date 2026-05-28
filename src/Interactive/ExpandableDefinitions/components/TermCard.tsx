@@ -3,47 +3,17 @@ import { type CSSProperties, type FC, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 import { useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
-import type { AccountingTerm } from "../types";
+import type { ExpandableTerm } from "../types";
 
 type Props = {
-  term: AccountingTerm;
-};
-
-type AccentTokens = {
-  text: string;
-  border: string;
-  background: string;
+  term: ExpandableTerm;
 };
 
 export const TermCard: FC<Props> = ({ term }) => {
   const { isOpen, toggle } = useDisclosure(false);
-  const { colors, moduleTheme } = usePageTheme();
+  const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const [isHovered, setIsHovered] = useState(false);
-
-  const resolveAccent = (): AccentTokens => {
-    if (term.accent === "asset") {
-      return {
-        text: colors.semantic.success.text,
-        border: colors.semantic.success.border,
-        background: colors.semantic.success.background,
-      };
-    }
-    if (term.accent === "claim") {
-      return {
-        text: colors.amber.text.secondary,
-        border: colors.amber.border.secondary,
-        background: colors.amber.background.primary,
-      };
-    }
-    return {
-      text: colors[moduleTheme].text.secondary,
-      border: colors[moduleTheme].border.secondary,
-      background: colors[moduleTheme].background.primary,
-    };
-  };
-
-  const accent = resolveAccent();
 
   const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
 
@@ -51,9 +21,9 @@ export const TermCard: FC<Props> = ({ term }) => {
     display: "flex",
     flexDirection: "column",
     borderRadius: "0.85rem",
-    border: `1px solid ${withOpacity(accent.border, isHovered || isOpen ? 0.55 : 0.28)}`,
-    background: `linear-gradient(180deg, ${withOpacity(accent.text, 0.06)}, ${withOpacity(
-      accent.text,
+    border: `1px solid ${withOpacity(term.accentBorder, isHovered || isOpen ? 0.55 : 0.28)}`,
+    background: `linear-gradient(180deg, ${withOpacity(term.accentText, 0.06)}, ${withOpacity(
+      term.accentText,
       0.015,
     )})`,
     overflow: "hidden",
@@ -63,9 +33,9 @@ export const TermCard: FC<Props> = ({ term }) => {
     transform: isHovered && !isOpen ? "translateY(-1.5px)" : "translateY(0)",
     boxShadow:
       isHovered && !isOpen
-        ? `0 8px 22px ${withOpacity(accent.border, 0.18)}`
+        ? `0 8px 22px ${withOpacity(term.accentBorder, 0.18)}`
         : isOpen
-          ? `0 4px 14px ${withOpacity(accent.border, 0.15)}`
+          ? `0 4px 14px ${withOpacity(term.accentBorder, 0.15)}`
           : "0 0 0 transparent",
   };
 
@@ -91,9 +61,9 @@ export const TermCard: FC<Props> = ({ term }) => {
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
-    background: withOpacity(accent.text, isOpen ? 0.18 : 0.1),
-    border: `1px solid ${withOpacity(accent.border, 0.4)}`,
-    color: accent.text,
+    background: withOpacity(term.accentText, isOpen ? 0.18 : 0.1),
+    border: `1px solid ${withOpacity(term.accentBorder, 0.4)}`,
+    color: term.accentText,
     transition: "all 0.3s var(--ease-smooth)",
   };
 
@@ -111,7 +81,7 @@ export const TermCard: FC<Props> = ({ term }) => {
     fontWeight: 700,
     textTransform: "uppercase",
     letterSpacing: "0.06em",
-    color: accent.text,
+    color: term.accentText,
   };
 
   const summaryStyle: CSSProperties = {
@@ -122,7 +92,7 @@ export const TermCard: FC<Props> = ({ term }) => {
 
   const chevronStyle: CSSProperties = {
     flexShrink: 0,
-    color: withOpacity(accent.text, 0.7),
+    color: withOpacity(term.accentText, 0.7),
     transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
     transition: "transform 0.35s var(--ease-smooth)",
   };
@@ -147,7 +117,7 @@ export const TermCard: FC<Props> = ({ term }) => {
     display: "flex",
     flexDirection: "column",
     gap: "0.5rem",
-    borderTop: `1px dashed ${withOpacity(accent.border, 0.25)}`,
+    borderTop: `1px dashed ${withOpacity(term.accentBorder, 0.25)}`,
     paddingTop: "0.85rem",
     opacity: isOpen ? 1 : 0,
     transition: "opacity 0.3s var(--ease-smooth) 0.1s",

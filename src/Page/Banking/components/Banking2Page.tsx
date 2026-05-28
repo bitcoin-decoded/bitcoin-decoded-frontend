@@ -2,8 +2,9 @@ import { type FC } from "react";
 
 import { ChevronDown, Home } from "lucide-react";
 
-import { Callout, Disclosure, KeywordHighlight, Reference } from "../../../Design";
+import { Callout, Disclosure, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { MonetaryAggregates } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/";
 
@@ -63,43 +64,12 @@ export const Banking2Page: FC = () => {
           </>
         )}
       </p>
-      <Callout
-        title={
-          fr
-            ? "Les deux types de monnaie : celle que l'on utilise et celle réservée aux Banques"
-            : "The two kinds of money: the one you use, and the one reserved for banks"
-        }
-      >
-        <p>
-          {fr
-            ? "Avant d'aller plus loin, il faut comprendre qu'il existe deux types d'argent qui ne circulent jamais dans le même tuyau :"
-            : "Before we go any further, you need to grasp one thing: there are two kinds of money, and they never flow through the same pipe:"}
-        </p>
-        <p>
-          <KeywordHighlight>{fr ? "Monnaie M2" : "M2 money"}</KeywordHighlight>{" "}
-          {fr
-            ? "→ C'est l'argent que tu utilises tous les jours. Et l'essentiel est créé non pas par la Banque Centrale, mais par les banques commerciales quand elles accordent des crédits."
-            : "→ This is the money you use every day. And most of it is created not by the Central Bank, but by commercial banks when they hand out loans."}
-          <br />
-          <i>
-            {fr
-              ? "Quand on paie nos courses, notre essence, notre shopping ou encore quand on achète quelques cryptos parce qu'on ne sait jamais, ..."
-              : "When we pay for groceries, gas, a bit of shopping, or grab some crypto just in case you never know..."}
-          </i>
-        </p>
-        <p>
-          <KeywordHighlight>{fr ? "Monnaie M0" : "M0 money"}</KeywordHighlight>{" "}
-          {fr
-            ? "→ C'est la monnaie émise par la Banque Centrale. Les billets dans ton portefeuille en font partie. Mais le gros morceau, ce sont les réserves : la monnaie que les banques commerciales utilisent entre elles pour régler leurs dettes mutuelles."
-            : "→ This is the money issued by the Central Bank. The notes in your wallet are part of it. But the big chunk is the reserves: the money commercial banks use among themselves to settle what they owe each other."}
-          <br />
-          <i>
-            {fr
-              ? "Nous verrons juste après comment elles utilisent cet argent M0 pour régler leurs dettes nettes issues de toutes les transactions M2 de la journée."
-              : "We'll see in a moment how they use this M0 money to settle the net debts left over from all the day's M2 transactions."}
-          </i>
-        </p>
-      </Callout>
+      <p>
+        {fr
+          ? "Avant d'aller plus loin, il faut comprendre qu'il existe deux types d'argent qui ne circulent jamais dans le même tuyau :"
+          : "Before we go any further, you need to grasp one thing: there are two kinds of money, and they never flow through the same pipe:"}
+      </p>
+      <MonetaryAggregates />
       <p>
         {fr
           ? "Imagine maintenant des millions de virements en monnaie M2 chaque jour entre les banques."
