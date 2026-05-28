@@ -70,6 +70,12 @@ const en = {
   "monetaryAggregates.sectionTitle":
     "The two kinds of money: the one you use, and the one reserved for banks",
 
+  // MonetaryPillars
+  "monetaryPillars.sectionTitle": "The five pillars of money",
+  "monetaryPillars.keystoneBadge": "Structural pillar",
+  "monetaryPillars.prompt":
+    "Click each pillar to reveal its definition. The fifth one stands apart — it's the one that decides whether a currency can last through time.",
+
   // MonetaryProperties
   "monetaryProperties.sectionTitle": "Scarcity versus Hardness",
 
