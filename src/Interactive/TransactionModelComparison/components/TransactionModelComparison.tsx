@@ -2,9 +2,12 @@ import { type CSSProperties, type FC } from "react";
 
 import {
   ArrowDown,
+  ArrowRightLeft,
+  BookText,
   Building2,
   CircleDollarSign,
   KeyRound,
+  Lightbulb,
   Lock,
   Pickaxe,
   RefreshCw,
@@ -73,6 +76,29 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
     color: colors.base.text.secondary,
     fontStyle: "italic",
   };
+
+  // Info line: a lightbulb flags this as a "good to know" note (both modes).
+  const cardDescRow = (accent: string): CSSProperties => ({
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "0.4rem",
+    padding: "0.3rem 0.45rem",
+    borderRadius: "0.4rem",
+    background: withOpacity(accent, 0.05),
+  });
+
+  const scenarioBox = (accent: string): CSSProperties => ({
+    display: "flex",
+    alignItems: "center",
+    gap: "0.45rem",
+    padding: "0.45rem 0.65rem",
+    borderRadius: "0.45rem",
+    background: withOpacity(accent, 0.06),
+    border: `1px solid ${withOpacity(accent, 0.12)}`,
+    fontSize: "0.68rem",
+    fontStyle: "italic",
+    color: colors.base.text.secondary,
+  });
 
   const cardBody: CSSProperties = {
     padding: isMobile ? "0.55rem 0.75rem" : "0.85rem 1rem",
@@ -188,6 +214,67 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
     textTransform: "uppercase",
     letterSpacing: "0.06em",
   });
+
+  // After-state "ledger" panel: hidden behind a lock until the transaction
+  // runs, then reveals the balance update as an explicit equation per account.
+  const ledgerPanel: CSSProperties = {
+    padding: isMobile ? "0.55rem 0.65rem" : "0.7rem 0.85rem",
+    borderRadius: "0.55rem",
+    background: withOpacity(bankAccent, isAfter ? 0.07 : 0.03),
+    border: `1px solid ${withOpacity(bankAccent, isAfter ? 0.22 : 0.1)}`,
+    transition: "all 0.4s var(--ease-smooth)",
+  };
+
+  const lockedHint: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.4rem",
+    padding: "0.15rem 0",
+    fontSize: "0.66rem",
+    fontStyle: "italic",
+    textAlign: "center",
+    color: withOpacity(colors.base.text.secondary, 0.6),
+  };
+
+  const ledgerRows: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    gap: isMobile ? "0.5rem" : "0.55rem",
+  };
+
+  const ledgerRow: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.2rem",
+  };
+
+  const ledgerName: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.3rem",
+    fontSize: "0.68rem",
+    fontWeight: 600,
+    color: colors.base.text.primary,
+  };
+
+  const ledgerEquation: CSSProperties = {
+    ...mono,
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: "0.35rem",
+    fontSize: isMobile ? "0.72rem" : "0.74rem",
+    paddingLeft: "1.1rem",
+  };
+
+  const eqBefore: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.7) };
+  const eqDelta = (positive: boolean): CSSProperties => ({
+    fontWeight: 700,
+    color: positive ? successColor : errorColor,
+  });
+  const eqSign: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.45) };
+  const eqResult: CSSProperties = { fontWeight: 700, color: colors.base.text.primary };
 
   // ── Bitcoin-card styles ────────────────────────────────────────────────────
 
@@ -379,24 +466,26 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
           </Caption>
         </div>
         <span style={cardSubtitle}>{t("txComparison.bankSubtitle")}</span>
-        <span style={cardDescStyle}>{t("txComparison.bankDesc")}</span>
+        <div style={cardDescRow(bankAccent)}>
+          <Lightbulb
+            size={12}
+            strokeWidth={2}
+            style={{ color: bankAccent, flexShrink: 0, marginTop: "0.1rem" }}
+          />
+          <span style={cardDescStyle}>{t("txComparison.bankDesc")}</span>
+        </div>
       </div>
 
       <div style={cardBody}>
         <div style={sectionLabel(bankAccent)}>{t("txComparison.bankBefore")}</div>
 
         {/* Scenario context */}
-        <div
-          style={{
-            padding: "0.4rem 0.65rem",
-            borderRadius: "0.45rem",
-            background: withOpacity(bankAccent, 0.06),
-            border: `1px solid ${withOpacity(bankAccent, 0.12)}`,
-            fontSize: "0.68rem",
-            fontStyle: "italic",
-            color: colors.base.text.secondary,
-          }}
-        >
+        <div style={scenarioBox(bankAccent)}>
+          <ArrowRightLeft
+            size={13}
+            strokeWidth={2}
+            style={{ color: bankAccent, flexShrink: 0 }}
+          />
           {t("txComparison.bankScenario")}
         </div>
 
@@ -435,39 +524,52 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
           <div style={divLine(bankAccent)} />
         </div>
 
-        <div
-          style={{
-            ...sectionLabel(bankAccent, !isAfter),
-          }}
-        >
+        <div style={sectionLabel(bankAccent, !isAfter)}>
+          <BookText size={10} strokeWidth={2} />
           {t("txComparison.bankAfter")}
         </div>
-        <div
-          style={{
-            fontSize: "0.68rem",
-            color: colors.base.text.secondary,
-            padding: "0.4rem 0.6rem",
-            borderRadius: "0.45rem",
-            background: withOpacity(bankAccent, 0.04),
-            border: `1px solid ${withOpacity(bankAccent, 0.1)}`,
-            lineHeight: 1.5,
-            opacity: isAfter ? 1 : 0.2,
-            transition: "opacity 0.4s var(--ease-smooth)",
-          }}
-        >
-          {t("txComparison.bankSummary")}
-          <span
-            style={{
-              display: "block",
-              marginTop: "0.25rem",
-              fontSize: "0.62rem",
-              color: withOpacity(colors.base.text.secondary, 0.55),
-            }}
-          >
-            {isAfter
-              ? `${t("txComparison.nicolas")} : ${fmtEur(BANK.nicolasBefore)} → ${fmtEur(BANK.nicolasAfter)}   ${t("txComparison.michu")} : ${fmtEur(BANK.michuBefore)} → ${fmtEur(BANK.michuAfter)}`
-              : `${t("txComparison.nicolas")} : ${fmtEur(BANK.nicolasBefore)}   ${t("txComparison.michu")} : ${fmtEur(BANK.michuBefore)}`}
-          </span>
+        <div style={ledgerPanel}>
+          {isAfter ? (
+            <div style={ledgerRows} className="chain-field-reveal">
+              <div style={ledgerRow}>
+                <span style={ledgerName}>
+                  <User
+                    size={iconSm}
+                    strokeWidth={2}
+                    style={{ color: bankAccent, flexShrink: 0 }}
+                  />
+                  {t("txComparison.nicolas")}
+                </span>
+                <span style={ledgerEquation}>
+                  <span style={eqBefore}>{fmtEur(BANK.nicolasBefore)}</span>
+                  <span style={eqDelta(false)}>− {fmtEur(BANK.sent)}</span>
+                  <span style={eqSign}>=</span>
+                  <span style={eqResult}>{fmtEur(BANK.nicolasAfter)}</span>
+                </span>
+              </div>
+              <div style={ledgerRow}>
+                <span style={ledgerName}>
+                  <User
+                    size={iconSm}
+                    strokeWidth={2}
+                    style={{ color: bankAccent, flexShrink: 0 }}
+                  />
+                  {t("txComparison.michu")}
+                </span>
+                <span style={ledgerEquation}>
+                  <span style={eqBefore}>{fmtEur(BANK.michuBefore)}</span>
+                  <span style={eqDelta(true)}>+ {fmtEur(BANK.sent)}</span>
+                  <span style={eqSign}>=</span>
+                  <span style={eqResult}>{fmtEur(BANK.michuAfter)}</span>
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div style={lockedHint}>
+              <Lock size={12} strokeWidth={2} />
+              {t("txComparison.bankAfterHint")}
+            </div>
+          )}
         </div>
       </div>
 
@@ -500,22 +602,24 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
           </Caption>
         </div>
         <span style={cardSubtitle}>{t("txComparison.btcSubtitle")}</span>
-        <span style={cardDescStyle}>{t("txComparison.btcDesc")}</span>
+        <div style={cardDescRow(btcAccent)}>
+          <Lightbulb
+            size={12}
+            strokeWidth={2}
+            style={{ color: btcAccent, flexShrink: 0, marginTop: "0.1rem" }}
+          />
+          <span style={cardDescStyle}>{t("txComparison.btcDesc")}</span>
+        </div>
       </div>
 
       <div style={cardBody}>
         {/* Scenario context - same layout as bank card */}
-        <div
-          style={{
-            padding: "0.4rem 0.65rem",
-            borderRadius: "0.45rem",
-            background: withOpacity(btcAccent, 0.06),
-            border: `1px solid ${withOpacity(btcAccent, 0.12)}`,
-            fontSize: "0.68rem",
-            fontStyle: "italic",
-            color: colors.base.text.secondary,
-          }}
-        >
+        <div style={scenarioBox(btcAccent)}>
+          <ArrowRightLeft
+            size={13}
+            strokeWidth={2}
+            style={{ color: btcAccent, flexShrink: 0 }}
+          />
           {t("txComparison.btcScenario")}
         </div>
 

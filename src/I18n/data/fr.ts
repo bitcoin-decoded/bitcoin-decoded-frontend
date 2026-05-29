@@ -359,7 +359,7 @@ const fr = {
 
   // TransactionModelComparison
   "txComparison.bankTitle": "Banque",
-  "txComparison.bankSubtitle": "Une transaction bancaire",
+  "txComparison.bankSubtitle": "Simulation d'une transaction bancaire",
   "txComparison.bankDesc": "Un virement met à jour un solde de compte.",
   "txComparison.bankBefore": "Avant",
   "txComparison.bankAfter": "Après",
@@ -367,8 +367,9 @@ const fr = {
   "txComparison.bankAction": "Virement de 1 000 €",
   "txComparison.bankSummary": "Le solde est modifié dans le registre bancaire.",
   "txComparison.bankKeyText": "Une transaction bancaire déplace un solde.",
+  "txComparison.bankAfterHint": "Effectue la transaction pour révéler le registre mis à jour.",
   "txComparison.btcTitle": "Bitcoin",
-  "txComparison.btcSubtitle": "Une transaction Bitcoin",
+  "txComparison.btcSubtitle": "Simulation d'une transaction Bitcoin",
   "txComparison.btcDesc": "Une transaction consomme des UTXO et en crée de nouvelles.",
   "txComparison.btcScenario":
     "Nicolas souhaite envoyer 1,3 BTC à Mme Michu. Elle possède deux UTXO (0,8 et 1 BTC).",

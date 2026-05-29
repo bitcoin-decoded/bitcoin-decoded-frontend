@@ -356,7 +356,7 @@ const en = {
 
   // TransactionModelComparison
   "txComparison.bankTitle": "Bank",
-  "txComparison.bankSubtitle": "A bank transaction",
+  "txComparison.bankSubtitle": "Bank transaction simulation",
   "txComparison.bankDesc": "A transfer updates an account balance.",
   "txComparison.bankBefore": "Before",
   "txComparison.bankAfter": "After",
@@ -364,8 +364,9 @@ const en = {
   "txComparison.bankAction": "Transfer of €1,000",
   "txComparison.bankSummary": "The balance is updated in the bank ledger.",
   "txComparison.bankKeyText": "A bank transaction moves a balance.",
+  "txComparison.bankAfterHint": "Run the transaction to reveal the updated ledger.",
   "txComparison.btcTitle": "Bitcoin",
-  "txComparison.btcSubtitle": "A Bitcoin transaction",
+  "txComparison.btcSubtitle": "Bitcoin transaction simulation",
   "txComparison.btcDesc": "A transaction consumes UTXOs and creates new ones.",
   "txComparison.btcScenario":
     "Nicolas wants to send 1.3 BTC to Ms. Smith. She holds two UTXOs (0.8 and 1 BTC).",
