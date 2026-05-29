@@ -1,32 +1,25 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
-const COOLDOWN = 1000;
-
+/**
+ * Per-card flip + hover state. One hook instance per `FlipCard`, so cards are
+ * fully independent (any number can be open at once) and there is no shared
+ * grid bookkeeping. No artificial click cooldown either: the CSS flip
+ * transition absorbs rapid toggles on its own, always animating toward the
+ * latest target.
+ */
 export const useFlipCard = () => {
-  const [flippedSet, setFlippedSet] = useState<Set<number>>(new Set());
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const lockedRef = useRef(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const toggleFlip = useCallback((index: number) => {
-    if (lockedRef.current) return;
-    lockedRef.current = true;
-    setTimeout(() => (lockedRef.current = false), COOLDOWN);
+  const flip = useCallback(() => setIsFlipped((flipped) => !flipped), []);
 
-    setFlippedSet((prev) => {
-      const next = new Set(prev);
-      if (next.has(index)) next.delete(index);
-      else next.add(index);
-      return next;
-    });
-  }, []);
-
-  const hoverHandlers = useCallback(
-    (index: number) => ({
-      onMouseEnter: () => setHoveredIndex(index),
-      onMouseLeave: () => setHoveredIndex(null),
+  const hoverHandlers = useMemo(
+    () => ({
+      onMouseEnter: () => setIsHovered(true),
+      onMouseLeave: () => setIsHovered(false),
     }),
     [],
   );
 
-  return { flippedSet, toggleFlip, hoveredIndex, hoverHandlers };
+  return { isFlipped, isHovered, flip, hoverHandlers };
 };
