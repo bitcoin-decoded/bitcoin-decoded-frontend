@@ -1,4 +1,6 @@
-import { type FC, type ReactNode, type CSSProperties } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
+
+import { useTranslation } from "../../../I18n";
 import { usePageTheme } from "../../Theme/hooks/usePageTheme";
 import { useIdentityCard } from "../hooks";
 import type { IdentityCharacteristic } from "../types";
@@ -9,6 +11,12 @@ type Props = {
   profile: string;
   characteristics: IdentityCharacteristic[];
   isExpandable?: boolean;
+  /**
+   * Tighter type ramp + spacing, for dense multi-column grids (e.g. the
+   * monetary history gallery). Default `false` keeps the original roomy
+   * card used in the 2-up character layouts.
+   */
+  compact?: boolean;
 };
 
 export const IdentityCard: FC<Props> = ({
@@ -17,7 +25,9 @@ export const IdentityCard: FC<Props> = ({
   profile,
   characteristics,
   isExpandable = false,
+  compact = false,
 }) => {
+  const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const {
     isHovered,
@@ -29,17 +39,47 @@ export const IdentityCard: FC<Props> = ({
     setIsExpandButtonHovered,
   } = useIdentityCard(isExpandable);
 
+  // Single source for the two size tiers. `compact` drives the gallery look;
+  // the default keeps the original roomy card untouched.
+  const ramp = compact
+    ? {
+        avatarMarginTop: "3.25rem",
+        marginBottom: "1.5rem",
+        contentPadTop: "calc(15% + 1.35rem)",
+        contentPadX: "1.1rem",
+        contentPadBottom: "1.35rem",
+        baseFont: "0.85rem",
+        nameFont: "1rem",
+        profileFont: "0.7rem",
+        dividerMargin: "0 auto 1.15rem auto",
+        sectionGap: "1.4rem",
+        radius: "1rem",
+      }
+    : {
+        avatarMarginTop: "6rem",
+        marginBottom: "2rem",
+        contentPadTop: "calc(15% + 2rem)",
+        contentPadX: "1.5rem",
+        contentPadBottom: "2rem",
+        baseFont: "1rem",
+        nameFont: "1.25rem",
+        profileFont: "0.9rem",
+        dividerMargin: "0 auto 1.5rem auto",
+        sectionGap: "2rem",
+        radius: "1.25rem",
+      };
+
   const containerStyle: CSSProperties = {
     position: "relative",
-    marginTop: "6rem",
-    marginBottom: "2rem",
+    marginTop: ramp.avatarMarginTop,
+    marginBottom: ramp.marginBottom,
     background: `linear-gradient(190deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary})`,
-    borderRadius: "1.25rem",
+    borderRadius: ramp.radius,
     boxShadow: isHovered ? colors.boxShadow.strong : colors.boxShadow.soft,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    fontSize: "1rem",
+    fontSize: ramp.baseFont,
     transform: isHovered ? "scale(1.03)" : "scale(1)",
     transition: "transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth)",
     zIndex: isHovered ? 10 : 1,
@@ -47,24 +87,23 @@ export const IdentityCard: FC<Props> = ({
   };
 
   const contentStyle: CSSProperties = {
-    padding: "calc(15% + 2rem) 1.5rem 2rem 1.5rem",
+    padding: `${ramp.contentPadTop} ${ramp.contentPadX} ${ramp.contentPadBottom}`,
     width: "100%",
-    fontSize: "1rem",
+    fontSize: ramp.baseFont,
     textAlign: "center",
   };
 
   const animatedWrapperStyle: CSSProperties = {
     display: "grid",
     gridTemplateRows: showContent ? "1fr" : "0fr",
-    transition: "grid-template-rows 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
+    transition: "grid-template-rows 0.4s var(--ease-smooth)",
   };
 
   const minHeightFixStyle: CSSProperties = {
     overflow: "hidden",
     minHeight: 0,
-    paddingBottom: showContent ? "2rem" : "0",
-    opacity: showContent ? 1 : 0,
-    transition: "padding-bottom 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
+    paddingBottom: showContent ? ramp.contentPadBottom : "0",
+    transition: "padding-bottom 0.4s var(--ease-smooth)",
   };
 
   const avatarContainerStyle: CSSProperties = {
@@ -85,31 +124,35 @@ export const IdentityCard: FC<Props> = ({
   };
 
   const nameStyle: CSSProperties = {
-    fontSize: "1.25rem",
+    fontSize: ramp.nameFont,
     fontWeight: 700,
     letterSpacing: "0.05rem",
-    lineHeight: 1.625,
+    lineHeight: 1.4,
     margin: 0,
     color: colors.base.text.primary,
   };
 
   const profileStyle: CSSProperties = {
-    margin: "0.25rem 0 1.5rem 0",
-    fontSize: "0.9rem",
+    margin: compact ? "0.2rem 0 1.1rem 0" : "0.25rem 0 1.5rem 0",
+    fontSize: ramp.profileFont,
     letterSpacing: "0.1em",
     color: colors[moduleTheme].border.secondary,
     textTransform: "uppercase",
+    // In compact grids, reserve two profile lines so cards whose profile
+    // wraps and those that don't share the exact same collapsed height —
+    // a uniform baseline that, unlike `align-items: stretch`, never resizes
+    // neighbours when a card expands.
+    ...(compact ? { lineHeight: 1.4, minHeight: "2.8em" } : {}),
   };
 
   const sectionLabelStyle: CSSProperties = {
     color: colors[moduleTheme].text.primary,
     fontWeight: 700,
-    marginBottom: "1rem",
+    marginBottom: compact ? "0.6rem" : "1rem",
   };
 
   const sectionValueStyle: CSSProperties = {
     color: colors[moduleTheme].text.secondary,
-    marginBottom: "2rem",
     lineHeight: 1.6,
     fontStyle: "italic",
   };
@@ -120,19 +163,13 @@ export const IdentityCard: FC<Props> = ({
     alignItems: "center",
     gap: "0.5rem",
     cursor: "pointer",
-    margin: "0 auto 1rem auto",
+    margin: "0 auto",
     color: colors.base.text.secondary,
   };
 
   const toggleIconStyle: CSSProperties = {
-    backgroundColor: isExpandButtonHovered
-      ? colors[moduleTheme].background.primary
-      : "transparent",
-
-    borderColor: isExpandButtonHovered
-      ? "transparent"
-      : colors.base.border.primary,
-
+    backgroundColor: isExpandButtonHovered ? colors[moduleTheme].background.primary : "transparent",
+    borderColor: isExpandButtonHovered ? "transparent" : colors.base.border.primary,
     color: isExpandButtonHovered ? "#FFF" : colors.base.text.secondary,
     borderStyle: "solid",
     borderWidth: "1px",
@@ -144,7 +181,7 @@ export const IdentityCard: FC<Props> = ({
     justifyContent: "center",
     fontSize: "1.2rem",
     transform: isOpen ? "rotate(135deg)" : "rotate(0deg)",
-    transition: "transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)",
+    transition: "transform 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)",
   };
 
   const toggleTextStyle: CSSProperties = {
@@ -154,10 +191,28 @@ export const IdentityCard: FC<Props> = ({
     letterSpacing: "0.1rem",
   };
 
+  // Each section cascades in (fade + rise) when the card opens, staggered by
+  // index for a premium unfold. Last section carries no bottom gap.
+  const sectionStyle = (index: number): CSSProperties => ({
+    textAlign: "center",
+    marginBottom: index === characteristics.length - 1 ? 0 : ramp.sectionGap,
+    opacity: showContent ? 1 : 0,
+    transform: showContent ? "translateY(0)" : "translateY(10px)",
+    transition: "opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth)",
+    transitionDelay: showContent ? `${0.1 + index * 0.1}s` : "0s",
+  });
+
   return (
     <div
       className="gradient-border"
-      style={{ ...containerStyle, "--border-glow-color": isHovered ? colors[moduleTheme].text.secondary : colors[moduleTheme].border.secondary } as CSSProperties}
+      style={
+        {
+          ...containerStyle,
+          "--border-glow-color": isHovered
+            ? colors[moduleTheme].text.secondary
+            : colors[moduleTheme].border.secondary,
+        } as CSSProperties
+      }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -170,7 +225,7 @@ export const IdentityCard: FC<Props> = ({
             width: "50%",
             height: "0.0625rem",
             backgroundColor: colors.base.border.primary,
-            margin: "0 auto 1.5rem auto",
+            margin: ramp.dividerMargin,
           }}
         />
         {isExpandable && (
@@ -182,16 +237,16 @@ export const IdentityCard: FC<Props> = ({
           >
             <div style={toggleIconStyle}>+</div>
             <span style={toggleTextStyle}>
-              {isOpen ? "Replier" : "Déplier"}
+              {isOpen ? t("identityCard.collapse") : t("identityCard.expand")}
             </span>
           </div>
         )}
       </div>
       <div style={animatedWrapperStyle}>
         <div style={minHeightFixStyle}>
-          <div style={{ padding: "0 1.5rem" }}>
+          <div style={{ padding: `0 ${ramp.contentPadX}` }}>
             {characteristics.map((characteristic, index) => (
-              <div key={index} style={{ textAlign: "center" }}>
+              <div key={index} style={sectionStyle(index)}>
                 <div style={sectionLabelStyle}>{characteristic.label}</div>
                 <div style={sectionValueStyle}>{characteristic.value}</div>
               </div>

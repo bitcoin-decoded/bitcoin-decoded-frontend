@@ -1,23 +1,28 @@
-import type { FC } from "react";
+import { type CSSProperties, type FC } from "react";
 
 import type { IdentityCharacteristic, MonetaryItem } from "../../../Design";
-import { getMonetaryHistory, IdentityCard, RatingRow } from "../../../Design";
+import { getMonetaryHistory, IdentityCard, RatingRow, useBreakpoint } from "../../../Design";
 import { useLanguageContext, useTranslation } from "../../../I18n";
 
 export const MonetaryGallery: FC = () => {
   const { language } = useLanguageContext();
   const { t } = useTranslation();
+  const breakpoint = useBreakpoint();
+
+  // Large screens fit three trading-card-sized columns; tablets two; phones one.
+  const columns = breakpoint === "desktop" ? 3 : breakpoint === "tablet" ? 2 : 1;
+  const isMobile = breakpoint === "mobile";
+
+  const gridStyle: CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+    gap: isMobile ? "1.25rem" : "1.5rem",
+    padding: isMobile ? "1rem 0" : "1.5rem 0",
+    alignItems: "start",
+  };
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(15rem, 1fr))",
-        gap: "2rem",
-        padding: "2rem",
-        alignItems: "start",
-      }}
-    >
+    <div style={gridStyle}>
       {getMonetaryHistory(language).map((item: MonetaryItem, index: number) => {
         const characteristics: IdentityCharacteristic[] = [
           {
@@ -31,7 +36,7 @@ export const MonetaryGallery: FC = () => {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.25rem",
+                  gap: "0.35rem",
                   fontStyle: "normal",
                 }}
               >
@@ -41,6 +46,7 @@ export const MonetaryGallery: FC = () => {
                     icon={characteristic.icon}
                     label={characteristic.label}
                     score={characteristic.score}
+                    compact
                   />
                 ))}
               </div>
@@ -66,6 +72,7 @@ export const MonetaryGallery: FC = () => {
             }
             characteristics={characteristics}
             isExpandable
+            compact
           />
         );
       })}
