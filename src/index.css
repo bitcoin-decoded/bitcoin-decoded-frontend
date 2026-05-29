@@ -202,6 +202,16 @@ body {
   animation: chainHashEnter 0.9s var(--ease-smooth) both;
 }
 
+/* Network flywheel - cycle badge spins while energy propagates through it */
+@keyframes flywheelSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.flywheel-spin {
+  animation: flywheelSpin 1.9s linear infinite;
+}
+
 /* ── Styled lists - page content ──────────────────────────── */
 
 /* Unordered lists */
