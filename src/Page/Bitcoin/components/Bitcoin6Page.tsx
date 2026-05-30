@@ -125,81 +125,47 @@ export const Bitcoin6Page: FC = () => {
 
       <Disclosure
         title={
-          fr ? "Attends, Bitcoin ne déplace pas d'argent ?" : "Wait, Bitcoin doesn't move money?"
+          fr
+            ? "Attends tu racontes quoi, Bitcoin ne déplace pas d'argent. Mon pote il reçoit quoi alors, des fleurs ?!"
+            : "Hold on, Bitcoin doesn't move money? So what does my friend get, flowers?!"
         }
         icon={<ChevronDown size={13} strokeWidth={2} />}
       >
         <p>
-          {fr ? (
-            <>
-              Précision importante : la valeur économique, elle, est bien transférée à Mme Michu. Ce
-              qui ne bouge pas, c'est un solde.
-            </>
-          ) : (
-            <>
-              Important clarification: the economic value is in fact transferred to Ms. Smith. What
-              doesn't move is a balance.
-            </>
-          )}
+          {fr
+            ? "Alors oui, ton ami reçoit bien quelque chose qui a de la valeur, et ce ne sont pas des fleurs non plus je te rassure !"
+            : "Yes, your friend does get something with real value, and no, it's not flowers either, don't worry."}
         </p>
         <p>
           {fr
-            ? "Bitcoin ne met pas à jour un registre de comptes comme le fait une banque. Il consomme et recrée des droits de dépense. Le titre du chapitre est un raccourci volontaire pour t'aider à casser la mauvaise image mentale. Sur le fond, ton ami récupère bien quelque chose qui a de la valeur."
-            : "Bitcoin doesn't update an account ledger the way a bank does. It consumes and recreates spending rights. The chapter title is a deliberate shortcut to help you break the wrong mental picture. In substance, your friend does end up with something valuable."}
+            ? "Ce qui n'existe pas dans Bitcoin, c'est un solde central qu'on incrémente d'un côté et décrémente de l'autre. Il n'y a pas de registre de comptes comme dans une banque."
+            : "What doesn't exist in Bitcoin is a central balance you increment on one side and decrement on the other. There's no account ledger like in a bank."}
+        </p>
+        <p>
+          {fr
+            ? "La valeur change bien de mains, mais le mécanisme est très différent. Tu vas voir comment juste après."
+            : "Value does change hands, but the mechanism is very different. You'll see how just below."}
         </p>
       </Disclosure>
 
-      <Callout
-        title={fr ? "Le système UTXO expliqué simplement" : "The UTXO system explained simply"}
-      >
-        <p>{fr ? "Laisse-moi t'expliquer comment ça marche." : "Let me explain how it works."}</p>
-        <p>
-          {fr ? (
-            <>
-              Une transaction Bitcoin prend en entrée des sorties non dépensées issues de
-              transactions précédentes, puis crée de nouvelles sorties
-            </>
-          ) : (
-            <>
-              A Bitcoin transaction takes unspent outputs from previous transactions as inputs, and
-              then creates new outputs
-            </>
-          )}
-          .
-        </p>
-        <p>
-          {fr ? (
-            <>
-              Ces sorties non dépensées portent un nom :{" "}
-              <HighlightText>UTXO (Unspent Transaction Output)</HighlightText>. Tu peux les voir
-              comme des pièces rangées dans ton portefeuille. Chacune doit être dépensée en entier -
-              impossible de la couper en deux. Si tu veux en envoyer seulement une partie, la pièce
-              est cassée en plusieurs nouvelles pièces. Tu verras ça en pratique juste après.
-            </>
-          ) : (
-            <>
-              These unspent outputs have a name:{" "}
-              <HighlightText>UTXOs (Unspent Transaction Outputs)</HighlightText>. Think of them as
-              coins sitting in your wallet. Each one has to be spent in full - you can't cut it in
-              half. If you want to send only part of it, the coin gets broken into several new
-              coins. You'll see this in action right below.
-            </>
-          )}
-        </p>
-      </Callout>
       <p>
         {fr ? (
           <>
-            Le mieux pour comprendre, c'est de manipuler.
-            <br /> Tu es en possession du portefeuille de Nicolas, amuse-toi à simuler une
-            transaction :
+            Pour comprendre, le mieux c'est de le voir en pratique. Tu peux voir un{" "}
+            <HighlightText>UTXO</HighlightText> comme une pièce rangée dans ton portefeuille :
+            indivisible, prête à être dépensée.
           </>
         ) : (
           <>
-            The best way to understand is to play with it.
-            <br /> You're holding Nicolas's wallet. Have a go at simulating a transaction:
+            Best way to understand it: in practice. Think of a <HighlightText>UTXO</HighlightText>{" "}
+            as a coin sitting in your wallet: indivisible, ready to be spent.
           </>
         )}
+      </p>
+      <p>
+        {fr
+          ? "Tu es en possession du portefeuille de Nicolas, amuse-toi à simuler une transaction :"
+          : "You're holding Nicolas's wallet. Have a go at simulating a transaction:"}
       </p>
       <UTXOTransactionBuilder />
       <p>
