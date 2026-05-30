@@ -7,6 +7,7 @@ import {
   Building2,
   CircleCheck,
   CircleDollarSign,
+  Coins,
   KeyRound,
   Lightbulb,
   Lock,
@@ -141,10 +142,9 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
   });
 
   // ── Bank card: one living "ledger" that updates in place ────────────────────
-  // A single registry; no before/after split. The balances morph, the bars
-  // animate, and a per-account equation explains the change on the same row —
-  // so "before" never silently turns into "after".
-  const maxBalance = Math.max(BANK.nicolasBefore, BANK.michuAfter);
+  // A single registry; no before/after split. Each account shows its balance,
+  // and the honest visual is the transfer itself (money flowing sender →
+  // receiver) — not a bar measured against an arbitrary "max" balance.
 
   const ledgerLabelRow: CSSProperties = {
     display: "flex",
@@ -169,20 +169,14 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
 
   const ledgerEntry: CSSProperties = {
     display: "flex",
-    flexDirection: "column",
-    gap: "0.4rem",
-    padding: isMobile ? "0.5rem 0.6rem" : "0.6rem 0.75rem",
-    borderRadius: "0.55rem",
-    background: withOpacity(bankAccent, 0.05),
-    border: `1px solid ${withOpacity(bankAccent, 0.12)}`,
-  };
-
-  const ledgerTop: CSSProperties = {
-    display: "flex",
     alignItems: "baseline",
     justifyContent: "space-between",
     gap: "0.5rem 0.75rem",
     flexWrap: "wrap",
+    padding: isMobile ? "0.5rem 0.7rem" : "0.6rem 0.85rem",
+    borderRadius: "0.55rem",
+    background: withOpacity(bankAccent, 0.05),
+    border: `1px solid ${withOpacity(bankAccent, 0.12)}`,
   };
 
   const ledgerName: CSSProperties = {
@@ -195,22 +189,38 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
     flexShrink: 0,
   };
 
-  const balanceBar: CSSProperties = {
-    height: "0.3rem",
-    borderRadius: "0.2rem",
-    background: withOpacity(bankAccent, 0.12),
-    overflow: "hidden",
-    position: "relative",
+  // Transfer connector: the amount flowing from the sender (top entry) to the
+  // receiver (bottom entry). Faint while pending, lit once the transfer runs.
+  const transferConnector: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "0.15rem",
+    padding: "0.05rem 0",
   };
 
-  const balanceFill = (pct: number): CSSProperties => ({
-    position: "absolute",
-    inset: 0,
-    width: `${pct}%`,
-    background: bankAccent,
-    borderRadius: "0.2rem",
-    transition: "width 0.6s var(--ease-smooth)",
-  });
+  const transferStem: CSSProperties = {
+    width: "1.5px",
+    height: "0.5rem",
+    background: withOpacity(bankAccent, isAfter ? 0.5 : 0.18),
+    transition: "background 0.4s var(--ease-smooth)",
+  };
+
+  const transferPill: CSSProperties = {
+    ...mono,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.3rem",
+    fontSize: "0.62rem",
+    fontWeight: 700,
+    letterSpacing: "0.03em",
+    padding: "0.12rem 0.5rem",
+    borderRadius: "0.35rem",
+    color: isAfter ? bankAccent : withOpacity(colors.base.text.secondary, 0.5),
+    background: withOpacity(bankAccent, isAfter ? 0.14 : 0.05),
+    border: `1px solid ${withOpacity(bankAccent, isAfter ? 0.35 : 0.12)}`,
+    transition: "all 0.4s var(--ease-smooth)",
+  };
 
   const ledgerEquation: CSSProperties = {
     ...mono,
@@ -233,29 +243,24 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
 
   const renderLedgerEntry = (name: string, before: number, after: number, positive: boolean) => (
     <div style={ledgerEntry}>
-      <div style={ledgerTop}>
-        <span style={ledgerName}>
-          <User size={iconSm} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
-          {name}
-        </span>
-        <span style={ledgerEquation}>
-          {isAfter ? (
-            <>
-              <span style={eqBefore}>{fmtEur(before)}</span>
-              <span style={eqDelta(positive)}>
-                {positive ? "+" : "−"} {fmtEur(BANK.sent)}
-              </span>
-              <span style={eqSign}>=</span>
-              <span style={eqResult}>{fmtEur(after)}</span>
-            </>
-          ) : (
-            <span style={eqResult}>{fmtEur(before)}</span>
-          )}
-        </span>
-      </div>
-      <div style={balanceBar}>
-        <div style={balanceFill(((isAfter ? after : before) / maxBalance) * 100)} />
-      </div>
+      <span style={ledgerName}>
+        <User size={iconSm} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
+        {name}
+      </span>
+      <span style={ledgerEquation}>
+        {isAfter ? (
+          <>
+            <span style={eqBefore}>{fmtEur(before)}</span>
+            <span style={eqDelta(positive)}>
+              {positive ? "+" : "−"} {fmtEur(BANK.sent)}
+            </span>
+            <span style={eqSign}>=</span>
+            <span style={eqResult}>{fmtEur(after)}</span>
+          </>
+        ) : (
+          <span style={eqResult}>{fmtEur(before)}</span>
+        )}
+      </span>
     </div>
   );
 
@@ -481,13 +486,21 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
           )}
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
           {renderLedgerEntry(
             t("txComparison.nicolas"),
             BANK.nicolasBefore,
             BANK.nicolasAfter,
             false,
           )}
+          <div style={transferConnector}>
+            <div style={transferStem} />
+            <span style={transferPill}>
+              <Coins size={10} strokeWidth={2} />
+              {fmtEur(BANK.sent)}
+            </span>
+            <div style={transferStem} />
+          </div>
           {renderLedgerEntry(t("txComparison.michu"), BANK.michuBefore, BANK.michuAfter, true)}
         </div>
       </div>
