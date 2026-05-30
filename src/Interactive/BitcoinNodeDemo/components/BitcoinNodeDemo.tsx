@@ -26,6 +26,13 @@ export const BitcoinNodeDemo: FC = () => {
     transition: TRANSITION,
   };
 
+  // Paired cards (Computer / Bitcoin software) share a fixed width so the
+  // two never end up different sizes whatever the label length.
+  const pairCardStyle: CSSProperties = {
+    ...cardStyleOverride,
+    width: isMobile ? "100%" : "11rem",
+  };
+
   const iconCircle = (active: boolean): CSSProperties => ({
     width: isMobile ? "3.5rem" : "4.5rem",
     height: isMobile ? "3.5rem" : "4.5rem",
@@ -50,6 +57,13 @@ export const BitcoinNodeDemo: FC = () => {
     letterSpacing: "0.05em",
     color: colors.base.text.secondary,
     textAlign: "center",
+    // Reserve two lines so a one-word label ("Ordinateur") and a two-word
+    // one ("Logiciel Bitcoin") occupy the exact same height.
+    minHeight: "2.2em",
+    lineHeight: 1.2,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   const pulseRing: CSSProperties = {
@@ -90,7 +104,7 @@ export const BitcoinNodeDemo: FC = () => {
             <SurfaceCard
               gap="0.75rem"
               glowColor={colors.base.border.secondary}
-              style={cardStyleOverride}
+              style={pairCardStyle}
             >
               <div style={iconCircle(false)}>
                 <Monitor size={iconSize} strokeWidth={1.5} />
@@ -100,7 +114,7 @@ export const BitcoinNodeDemo: FC = () => {
             <SurfaceCard
               gap="0.75rem"
               glowColor={colors.base.border.secondary}
-              style={cardStyleOverride}
+              style={pairCardStyle}
             >
               <div style={iconCircle(false)}>
                 <Cpu size={iconSize} strokeWidth={1.5} />

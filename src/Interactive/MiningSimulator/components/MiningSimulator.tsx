@@ -133,6 +133,10 @@ export const MiningSimulator: FC = () => {
           {t("mining.headerLabel")}
         </Caption>
         <div>
+          <span style={fieldName}>bloc</span>{" "}
+          <span style={nonceVal}>#{headerFields.height}</span>
+        </div>
+        <div>
           <span style={fieldName}>prevHash</span>{" "}
           <span style={fieldValue}>{headerFields.prevHash}</span>
         </div>

@@ -121,27 +121,38 @@ export const MiningRewardBlock: FC = () => {
 
   const txRow: CSSProperties = {
     ...mono,
-    display: "grid",
-    gridTemplateColumns: "auto auto auto 1fr auto",
+    display: "flex",
     alignItems: "center",
-    gap: isMobile ? "0.3rem" : "0.4rem",
-    padding: isMobile ? "0.4rem 0.55rem" : "0.45rem 0.65rem",
+    justifyContent: "space-between",
+    gap: isMobile ? "0.4rem" : "0.6rem",
+    padding: isMobile ? "0.4rem 0.55rem" : "0.45rem 0.7rem",
     borderRadius: "0.5rem",
     fontSize: isMobile ? "0.58rem" : "0.63rem",
     background: withOpacity(world.border.secondary, 0.03),
     border: `1px solid ${withOpacity(world.border.secondary, 0.1)}`,
   };
-  const nameStyle: CSSProperties = { fontWeight: 600, color: colors.base.text.primary };
-  const amountStyle: CSSProperties = {
-    fontWeight: 700,
-    color: world.text.primary,
-    textAlign: "right",
+  const txParties: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.35rem",
+    minWidth: 0,
   };
+  const txAmounts: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+    gap: "0.05rem",
+    flexShrink: 0,
+  };
+  const nameStyle: CSSProperties = { fontWeight: 600, color: colors.base.text.primary };
+  const amountStyle: CSSProperties = { fontWeight: 700, color: world.text.primary };
   const feeStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.2rem",
     fontSize: isMobile ? "0.52rem" : "0.56rem",
     color: colors.base.text.secondary,
-    opacity: 0.75,
-    justifySelf: "end",
+    opacity: 0.78,
   };
 
   const rewardLine = (emphasize = false): CSSProperties => ({
@@ -260,13 +271,22 @@ export const MiningRewardBlock: FC = () => {
           <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
             {transactions.map((tx) => (
               <div key={tx.id} style={txRow}>
-                <span style={nameStyle}>{tx.from}</span>
-                <ArrowRight size={9} strokeWidth={2} style={{ opacity: 0.4 }} />
-                <span style={nameStyle}>{tx.to}</span>
-                <span style={amountStyle}>{fmtBTC(tx.amount)}</span>
-                <span style={feeStyle}>
-                  {t("miningReward.fees").toLowerCase()} {fmtBTC(tx.fee)}
-                </span>
+                <div style={txParties}>
+                  <span style={nameStyle}>{tx.from}</span>
+                  <ArrowRight
+                    size={10}
+                    strokeWidth={2}
+                    style={{ opacity: 0.45, flexShrink: 0 }}
+                  />
+                  <span style={nameStyle}>{tx.to}</span>
+                </div>
+                <div style={txAmounts}>
+                  <span style={amountStyle}>{fmtBTC(tx.amount)}</span>
+                  <span style={feeStyle} title={t("miningReward.fees")}>
+                    <Receipt size={9} strokeWidth={2} style={{ opacity: 0.7 }} />
+                    {fmtBTC(tx.fee)}
+                  </span>
+                </div>
               </div>
             ))}
           </div>

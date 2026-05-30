@@ -89,11 +89,9 @@ export const TrustComparisonDemo: FC = () => {
 
         {renderActionButton(
           fiat.createMoney,
-          danger,
           fiatCreateMoney,
           <CirclePlus size={iconSize} />,
           fr ? "Créer de la monnaie" : "Create money",
-          borderSecondary,
         )}
         {renderFeedback(
           fiat.createMoney,
@@ -107,11 +105,9 @@ export const TrustComparisonDemo: FC = () => {
 
         {renderActionButton(
           fiat.censorTx,
-          danger,
           fiatCensorTx,
           <Ban size={iconSize} />,
           fr ? "Censurer une transaction" : "Censor a transaction",
-          borderSecondary,
         )}
         {renderFeedback(
           fiat.censorTx,
@@ -156,11 +152,9 @@ export const TrustComparisonDemo: FC = () => {
 
         {renderActionButton(
           bitcoin.createMoney,
-          world.border.secondary,
           bitcoinCreateMoney,
           <CirclePlus size={iconSize} />,
           fr ? "Créer de la monnaie" : "Create money",
-          borderSecondary,
         )}
         {renderFeedback(
           bitcoin.createMoney,
@@ -174,11 +168,9 @@ export const TrustComparisonDemo: FC = () => {
 
         {renderActionButton(
           bitcoin.censorTx,
-          world.border.secondary,
           bitcoinCensorTx,
           <Ban size={iconSize} />,
           fr ? "Censurer une transaction" : "Censor a transaction",
-          borderSecondary,
         )}
         {renderFeedback(
           bitcoin.censorTx,
