@@ -319,6 +319,7 @@ export const Bitcoin1Page: FC = () => {
       <div style={PAGE_STYLES.cardsContainer}>
         <div style={cardWrapperStyle}>
           <IdentityCard
+            compact
             name={fr ? "Nœud simple" : "Simple node"}
             profile={fr ? "Le gardien des règles" : "The rule keeper"}
             profilePicture={
@@ -358,6 +359,7 @@ export const Bitcoin1Page: FC = () => {
         </div>
         <div style={cardWrapperStyle}>
           <IdentityCard
+            compact
             name={fr ? "Nœud mineur" : "Mining node"}
             profile={fr ? "Le bâtisseur de blocs" : "The block builder"}
             profilePicture={

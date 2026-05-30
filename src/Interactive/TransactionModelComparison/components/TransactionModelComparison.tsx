@@ -760,7 +760,6 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Button
           variant={isAfter ? "secondary" : "primary"}
-          color={btcAccent}
           icon={
             isAfter ? <RefreshCw size={12} strokeWidth={2} /> : <Zap size={12} strokeWidth={2} />
           }
