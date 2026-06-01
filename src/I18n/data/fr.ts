@@ -243,9 +243,7 @@ const fr = {
 
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas réalise sa première transaction",
-  "signaturePlayground.subtitle":
-    "Interagis avec les éléments ci-dessous pour comprendre le rôle de chacun.",
-  "signaturePlayground.sectionElements": "Les éléments",
+  "signaturePlayground.sectionElements": "Les trois éléments",
   "signaturePlayground.privateKeyLabel": "Clé privée (secrète)",
   "signaturePlayground.publicKeyLabel": "Clé publique",
   "signaturePlayground.messageLabel": "Message à signer",
@@ -254,6 +252,10 @@ const fr = {
   "signaturePlayground.publicKeyHint":
     "Permet au réseau de vérifier la signature. Peut être partagée.",
   "signaturePlayground.messageHint": "Le contenu de la transaction qui sera signée.",
+  "signaturePlayground.signatureLabel": "Signature",
+  "signaturePlayground.signatureHint": "Produite par la clé privée pour ce message précis.",
+  "signaturePlayground.publicKeyPending": "Dérive la clé privée pour la révéler.",
+  "signaturePlayground.signaturePending": "Signe le message pour la générer.",
   "signaturePlayground.editable": "Modifiable",
   "signaturePlayground.readOnly": "Lecture seule",
   "signaturePlayground.privateKeyOwner": "Connue uniquement de Nicolas",
@@ -263,20 +265,18 @@ const fr = {
   "signaturePlayground.message": "Nicolas envoie 1 BTC à Mme Michu",
   "signaturePlayground.statusValid": "Cette clé privée dérive bien vers cette clé publique",
   "signaturePlayground.statusInvalid": "Cette clé privée ne dérive plus vers cette clé publique",
-  "signaturePlayground.derivationArrowLabel": "dérivation",
-  "signaturePlayground.signAction": "Réaliser la transaction",
-  "signaturePlayground.signConsumed": "Transaction signée",
+  "signaturePlayground.edgeDerive": "calcule",
+  "signaturePlayground.edgeSign": "signe",
+  "signaturePlayground.edgeVerify": "vérifie",
+  "signaturePlayground.deriveAction": "Dériver la clé publique",
+  "signaturePlayground.deriveConsumed": "Clé dérivée",
+  "signaturePlayground.signAction": "Signer le message",
+  "signaturePlayground.signConsumed": "Message signé",
   "signaturePlayground.verifyAction": "Simuler la vérification par le réseau",
   "signaturePlayground.verifyConsumed": "Vérification simulée",
-  "signaturePlayground.signatureValidBadge": "Signature valide",
-  "signaturePlayground.signatureInvalidBadge": "Signature invalide",
-  "signaturePlayground.signValidExpl": "Cette signature correspond à la clé publique attendue.",
-  "signaturePlayground.signInvalidExpl":
-    "Cette signature ne correspond pas à la clé publique attendue.",
   "signaturePlayground.matchVerifyFn": "verify(message, signature, clé publique)",
   "signaturePlayground.matchYes": "correspondent",
   "signaturePlayground.matchNo": "ne correspondent pas",
-  "signaturePlayground.signaturePrefix": "Signature générée :",
   "signaturePlayground.verifyMoreInfo": "en savoir plus",
   "signaturePlayground.verifyMoreInfoUrl": "https://fr.wikipedia.org/wiki/ECDSA",
   "signaturePlayground.networkVerifies": "Le nœud vérifie 3 éléments",
@@ -302,7 +302,7 @@ const fr = {
     "Concrètement, même si tout le monde voit la clé publique, personne ne peut en déduire la clé privée ni fabriquer une signature valide à ta place.",
   "signaturePlayground.pedagogyAnalogy":
     "C'est comme une serrure : tout le monde peut vérifier qu'une clé ouvre la porte, mais seul celui qui possède la bonne clé peut l'utiliser.",
-  "signaturePlayground.reset": "Restaurer la clé",
+  "signaturePlayground.reset": "Réinitialiser",
 
   // SeedGenerator
   "seedGenerator.title": "Génères ta seed",

@@ -241,9 +241,7 @@ const en = {
 
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas the Payer makes his first transaction",
-  "signaturePlayground.subtitle":
-    "Interact with the elements below to understand the role of each.",
-  "signaturePlayground.sectionElements": "The elements",
+  "signaturePlayground.sectionElements": "The three elements",
   "signaturePlayground.privateKeyLabel": "Private key (secret)",
   "signaturePlayground.publicKeyLabel": "Public key",
   "signaturePlayground.messageLabel": "Message to sign",
@@ -251,6 +249,10 @@ const en = {
   "signaturePlayground.publicKeyHint":
     "Used by the network to verify the signature. Can be shared.",
   "signaturePlayground.messageHint": "The transaction content that will be signed.",
+  "signaturePlayground.signatureLabel": "Signature",
+  "signaturePlayground.signatureHint": "Produced by the private key for this specific message.",
+  "signaturePlayground.publicKeyPending": "Derive the private key to reveal it.",
+  "signaturePlayground.signaturePending": "Sign the message to generate it.",
   "signaturePlayground.editable": "Editable",
   "signaturePlayground.readOnly": "Read-only",
   "signaturePlayground.privateKeyOwner": "Known only by Nicolas",
@@ -260,19 +262,18 @@ const en = {
   "signaturePlayground.message": "Nicolas sends 1 BTC to Ms. Smith",
   "signaturePlayground.statusValid": "This private key correctly derives to this public key",
   "signaturePlayground.statusInvalid": "This private key no longer derives to this public key",
-  "signaturePlayground.derivationArrowLabel": "derivation",
-  "signaturePlayground.signAction": "Make the transaction",
-  "signaturePlayground.signConsumed": "Transaction signed",
+  "signaturePlayground.edgeDerive": "computes",
+  "signaturePlayground.edgeSign": "signs",
+  "signaturePlayground.edgeVerify": "verifies",
+  "signaturePlayground.deriveAction": "Derive the public key",
+  "signaturePlayground.deriveConsumed": "Key derived",
+  "signaturePlayground.signAction": "Sign the message",
+  "signaturePlayground.signConsumed": "Message signed",
   "signaturePlayground.verifyAction": "Simulate network verification",
   "signaturePlayground.verifyConsumed": "Verification simulated",
-  "signaturePlayground.signatureValidBadge": "Valid signature",
-  "signaturePlayground.signatureInvalidBadge": "Invalid signature",
-  "signaturePlayground.signValidExpl": "This signature matches the expected public key.",
-  "signaturePlayground.signInvalidExpl": "This signature does not match the expected public key.",
   "signaturePlayground.matchVerifyFn": "verify(message, signature, public key)",
   "signaturePlayground.matchYes": "match",
   "signaturePlayground.matchNo": "do not match",
-  "signaturePlayground.signaturePrefix": "Generated signature:",
   "signaturePlayground.verifyMoreInfo": "learn more",
   "signaturePlayground.verifyMoreInfoUrl":
     "https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm",
@@ -299,7 +300,7 @@ const en = {
     "In practice, even though everyone can see the public key, no one can derive the private key from it nor forge a valid signature on your behalf.",
   "signaturePlayground.pedagogyAnalogy":
     "It's like a lock: anyone can verify that a key opens the door, but only the holder of the right key can use it.",
-  "signaturePlayground.reset": "Restore the key",
+  "signaturePlayground.reset": "Reset",
 
   // SeedGenerator
   "seedGenerator.title": "Generate your seed",

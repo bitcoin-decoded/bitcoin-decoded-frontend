@@ -8,6 +8,8 @@ import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
 type Props = {
   icon: ReactNode;
   label: string;
+  /** Optional step number rendered as a small badge before the icon (1, 2, 3). */
+  number?: number;
   value: string;
   hint: string;
   tone: FieldTone;
@@ -36,6 +38,7 @@ type Props = {
 export const FieldCard: FC<Props> = ({
   icon,
   label,
+  number,
   value,
   hint,
   tone,
@@ -94,6 +97,21 @@ export const FieldCard: FC<Props> = ({
     minWidth: 0,
   };
 
+  const numberBadgeStyle: CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    width: "1.05rem",
+    height: "1.05rem",
+    borderRadius: "50%",
+    fontSize: "0.6rem",
+    fontWeight: 700,
+    color: accent,
+    background: withOpacity(accent, 0.14),
+    border: `1px solid ${withOpacity(accent, 0.4)}`,
+  };
+
   const inputBase: CSSProperties = {
     width: "100%",
     padding: "0.5rem 0.65rem",
@@ -146,6 +164,7 @@ export const FieldCard: FC<Props> = ({
   return (
     <div style={containerStyle}>
       <div style={labelStyle}>
+        {number !== undefined && <span style={numberBadgeStyle}>{number}</span>}
         {icon}
         <span style={{ minWidth: 0, overflowWrap: "break-word" }}>{label}</span>
       </div>
