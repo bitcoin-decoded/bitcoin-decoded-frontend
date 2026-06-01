@@ -235,9 +235,8 @@ const en = {
 
   // KeySignatureTrio
   "keyTrio.sectionTitle": "Three elements, three roles",
-  "keyTrio.prompt":
-    "Click each element to reveal its role — and watch the links that bind them.",
-  "keyTrio.emptyState": "Pick an element above to discover its role.",
+  "keyTrio.prompt": "Click on each element. You'll see how it all fits together.",
+  "keyTrio.emptyState": "Pick an element to discover its role.",
 
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas the Payer makes his first transaction",
@@ -290,7 +289,7 @@ const en = {
   "signaturePlayground.disclosurePrivateKeyTitle":
     "How does this prove possession of the private key without ever revealing it?",
   "signaturePlayground.derivationDefinition":
-    "Derivation is a one-way mathematical process: you create an element from a source but can never go backwards. It's the « toothpaste tube » effect: once it's out, you can't put it back in.",
+    "You've seen that the public key is calculated from the private key through a one-way operation. That calculation has a name: derivation. It's the 'toothpaste tube' effect: once it's out, it doesn't go back in.",
   "signaturePlayground.pedagogyBefore": "Because it is",
   "signaturePlayground.pedagogyHighlight": "mathematically impossible",
   "signaturePlayground.pedagogyAfter":

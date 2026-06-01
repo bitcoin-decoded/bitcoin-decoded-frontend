@@ -237,9 +237,8 @@ const fr = {
 
   // KeySignatureTrio
   "keyTrio.sectionTitle": "Trois éléments, trois rôles",
-  "keyTrio.prompt":
-    "Clique sur chaque élément pour révéler son rôle — et observe les liens qui les relient.",
-  "keyTrio.emptyState": "Sélectionne un élément ci-dessus pour découvrir son rôle.",
+  "keyTrio.prompt": "Clique sur chaque élément. Tu vas voir comment tout s'articule.",
+  "keyTrio.emptyState": "Choisis un élément pour découvrir son rôle.",
 
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas réalise sa première transaction",
@@ -293,7 +292,7 @@ const fr = {
   "signaturePlayground.disclosurePrivateKeyTitle":
     "Comment cela prouve-t-il que l'on détient la clé privée sans jamais l'exposer ?",
   "signaturePlayground.derivationDefinition":
-    "La dérivation est un procédé mathématique à sens unique : on crée un élément à partir d'une source sans jamais pouvoir revenir en arrière. C'est l'effet « tube de dentifrice » : une fois sorti, il ne rentre plus.",
+    "Tu as vu que la clé publique est calculée à partir de la clé privée par une opération à sens unique. Ce calcul a un nom : la dérivation. C'est l'effet « tube de dentifrice » : une fois sorti, il ne rentre plus.",
   "signaturePlayground.pedagogyBefore": "Parce qu'il est",
   "signaturePlayground.pedagogyHighlight": "mathématiquement impossible",
   "signaturePlayground.pedagogyAfter":
