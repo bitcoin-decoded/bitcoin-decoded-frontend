@@ -8,18 +8,16 @@ type Props = {
   isSelected: boolean;
   /** Another node is selected — this one steps back. */
   isDimmed: boolean;
-  /** Nothing selected yet — gently pulse to invite a first click. */
-  invite: boolean;
   onClick: () => void;
 };
 
 /**
- * One clickable element of the trio: an explicit icon in a glowing circle,
- * its title, and its one-word role. Dumb component — selection state is owned
- * by `useKeySignatureTrio`; only ephemeral hover lives here (same pattern as
+ * One clickable element of the trio: an explicit icon in a circle, its title,
+ * and its one-word role. Dumb component — selection state is owned by
+ * `useKeySignatureTrio`; only ephemeral hover lives here (same pattern as
  * PillarRow).
  */
-export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, invite, onClick }) => {
+export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) => {
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const [isHovered, setIsHovered] = useState(false);
@@ -97,10 +95,7 @@ export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, invite, onC
       aria-pressed={isSelected}
       style={buttonStyle}
     >
-      <span
-        className={invite ? "trio-invite" : undefined}
-        style={{ ...iconCircleStyle, ["--trio-glow" as string]: withOpacity(accent, 0.3) }}
-      >
+      <span style={iconCircleStyle}>
         <Icon size={isMobile ? 18 : 22} strokeWidth={2} />
       </span>
       <span style={titleStyle}>{element.title}</span>

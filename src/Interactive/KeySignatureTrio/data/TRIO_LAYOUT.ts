@@ -13,6 +13,12 @@ export const TRIO_LAYOUT: {
   viewWidth: number;
   viewHeight: number;
   nodes: Record<KeyElementId, Point>;
+  /**
+   * How far (in view-box units) each edge is trimmed at both ends so the
+   * line never touches a node's icon or label. Larger on mobile because the
+   * fixed-rem nodes occupy proportionally more of the smaller diagram.
+   */
+  clearance: { mobile: number; desktop: number };
 } = {
   viewWidth: 140,
   viewHeight: 104,
@@ -21,4 +27,5 @@ export const TRIO_LAYOUT: {
     publicKey: { x: 24, y: 88 },
     signature: { x: 116, y: 88 },
   },
+  clearance: { mobile: 21, desktop: 15 },
 };

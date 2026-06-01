@@ -5,6 +5,7 @@ import { Link2, MousePointerClick } from "lucide-react";
 import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getKeySignatureTrio, TRIO_LAYOUT } from "../data";
+import { trimSegment } from "../helpers";
 import { useKeySignatureTrio } from "../hooks";
 
 import { TrioNode } from "./TrioNode";
@@ -21,7 +22,8 @@ export const KeySignatureTrio: FC = () => {
   const { elements, connections } = getKeySignatureTrio(language);
   const { selectedId, hasSelection, select } = useKeySignatureTrio();
 
-  const { viewWidth, viewHeight, nodes } = TRIO_LAYOUT;
+  const { viewWidth, viewHeight, nodes, clearance } = TRIO_LAYOUT;
+  const edgeClearance = isMobile ? clearance.mobile : clearance.desktop;
   const pctX = (x: number) => `${(x / viewWidth) * 100}%`;
   const pctY = (y: number) => `${(y / viewHeight) * 100}%`;
 
@@ -183,16 +185,19 @@ export const KeySignatureTrio: FC = () => {
             aria-hidden
           >
             {connections.map((edge) => {
-              const a = nodes[edge.from];
-              const b = nodes[edge.to];
               const active = selectedId === edge.from || selectedId === edge.to;
+              const { x1, y1, x2, y2 } = trimSegment(
+                nodes[edge.from],
+                nodes[edge.to],
+                edgeClearance,
+              );
               return (
                 <line
                   key={`${edge.from}-${edge.to}`}
-                  x1={a.x}
-                  y1={a.y}
-                  x2={b.x}
-                  y2={b.y}
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
                   stroke={withOpacity(accent, active ? 0.9 : 0.28)}
                   strokeWidth={active ? 1.2 : 0.6}
                   strokeLinecap="round"
@@ -224,7 +229,6 @@ export const KeySignatureTrio: FC = () => {
                   element={el}
                   isSelected={selectedId === el.id}
                   isDimmed={hasSelection && selectedId !== el.id}
-                  invite={!hasSelection}
                   onClick={() => select(el.id)}
                 />
               </div>

@@ -212,27 +212,6 @@ body {
   animation: flywheelSpin 1.9s linear infinite;
 }
 
-/* Key/signature trio - nodes breathe gently to invite a first click */
-@keyframes trioInvite {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 var(--trio-glow, rgba(245, 158, 11, 0));
-    transform: translateY(0);
-  }
-  50% {
-    box-shadow: 0 0 0 6px var(--trio-glow, rgba(245, 158, 11, 0));
-    transform: translateY(-2px);
-  }
-}
-.trio-invite {
-  animation: trioInvite 2.6s var(--ease-smooth) infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .trio-invite {
-    animation: none;
-  }
-}
-
 /* ── Styled lists - page content ──────────────────────────── */
 
 /* Unordered lists */
