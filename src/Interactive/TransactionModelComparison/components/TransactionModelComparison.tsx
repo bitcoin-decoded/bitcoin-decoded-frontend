@@ -189,7 +189,10 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
   };
 
   // Transfer connector: the amount flowing from the sender (top entry) to the
-  // receiver (bottom entry). Faint while pending, lit once the transfer runs.
+  // receiver (bottom entry). Always labelled and contrasted — its tone shifts
+  // from "intent" (blue) while pending to "done" (green) once the transfer runs.
+  const transferTone = isAfter ? successColor : bankAccent;
+
   const transferConnector: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -201,26 +204,25 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
   const transferStem: CSSProperties = {
     width: "1.5px",
     height: "0.5rem",
-    background: withOpacity(bankAccent, isAfter ? 0.5 : 0.18),
+    background: withOpacity(transferTone, 0.45),
     transition: "background 0.4s var(--ease-smooth)",
   };
 
-  // Lit only once the transfer runs (rendered solely in the "after" state),
-  // and clearly labelled so its purpose is unambiguous.
+  // Always lit and clearly labelled: "veut envoyer …" before the click,
+  // "a envoyé …" once it runs — so the connector reads as a real action.
   const transferPill: CSSProperties = {
     ...mono,
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.3rem",
-    fontSize: "0.6rem",
+    gap: "0.35rem",
+    fontSize: isMobile ? "0.64rem" : "0.66rem",
     fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-    padding: "0.16rem 0.6rem",
-    borderRadius: "0.4rem",
-    color: bankAccent,
-    background: withOpacity(bankAccent, 0.14),
-    border: `1px solid ${withOpacity(bankAccent, 0.35)}`,
+    padding: "0.22rem 0.7rem",
+    borderRadius: "0.5rem",
+    color: transferTone,
+    background: withOpacity(transferTone, isAfter ? 0.14 : 0.1),
+    border: `1px solid ${withOpacity(transferTone, isAfter ? 0.45 : 0.3)}`,
+    transition: "all 0.4s var(--ease-smooth)",
   };
 
   const ledgerEquation: CSSProperties = {
@@ -496,18 +498,13 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
           )}
           <div style={transferConnector}>
             <div style={transferStem} />
-            {isAfter ? (
-              <span style={transferPill}>
-                <ArrowDown size={11} strokeWidth={2.5} />
-                {t("txComparison.bankTransferLabel")} {fmtEur(BANK.sent)}
-              </span>
-            ) : (
-              <ArrowDown
-                size={14}
-                strokeWidth={2}
-                style={{ color: withOpacity(bankAccent, 0.3) }}
-              />
-            )}
+            <span style={transferPill}>
+              <ArrowDown size={13} strokeWidth={2.5} />
+              {isAfter
+                ? t("txComparison.bankTransferDone")
+                : t("txComparison.bankTransferPending")}{" "}
+              {fmtEur(BANK.sent)}
+            </span>
             <div style={transferStem} />
           </div>
           {renderLedgerEntry(t("txComparison.michu"), BANK.michuBefore, BANK.michuAfter, true)}
