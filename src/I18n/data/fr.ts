@@ -239,6 +239,7 @@ const fr = {
   "keyTrio.sectionTitle": "Trois éléments, trois rôles",
   "keyTrio.prompt": "Clique sur chaque élément. Tu vas voir comment tout s'articule.",
   "keyTrio.emptyState": "Choisis un élément pour découvrir son rôle.",
+  "keyTrio.explored": "explorés",
 
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas réalise sa première transaction",

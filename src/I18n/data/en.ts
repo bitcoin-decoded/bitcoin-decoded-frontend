@@ -237,6 +237,7 @@ const en = {
   "keyTrio.sectionTitle": "Three elements, three roles",
   "keyTrio.prompt": "Click on each element. You'll see how it all fits together.",
   "keyTrio.emptyState": "Pick an element to discover its role.",
+  "keyTrio.explored": "explored",
 
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas the Payer makes his first transaction",
