@@ -5,7 +5,7 @@ import { Link2, MousePointerClick } from "lucide-react";
 import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getKeySignatureTrio, TRIO_LAYOUT } from "../data";
-import { trimSegment } from "../helpers";
+import { getArrowhead, trimSegment } from "../helpers";
 import { useKeySignatureTrio } from "../hooks";
 
 import { ExploredCounter } from "./ExploredCounter";
@@ -202,23 +202,38 @@ export const KeySignatureTrio: FC = () => {
           >
             {connections.map((edge) => {
               const active = selectedId === edge.from || selectedId === edge.to;
+              const stroke = withOpacity(accent, active ? 0.9 : 0.28);
+              const transition =
+                "stroke 0.35s var(--ease-smooth), stroke-width 0.35s var(--ease-smooth)";
               const { x1, y1, x2, y2 } = trimSegment(
                 nodes[edge.from],
                 nodes[edge.to],
                 edgeClearance,
               );
+              const head = getArrowhead(nodes[edge.from], nodes[edge.to], edgeClearance, 5.5, 26);
               return (
-                <line
-                  key={`${edge.from}-${edge.to}`}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
-                  stroke={withOpacity(accent, active ? 0.9 : 0.28)}
-                  strokeWidth={active ? 1.2 : 0.6}
-                  strokeLinecap="round"
-                  style={{ transition: "stroke 0.35s var(--ease-smooth), stroke-width 0.35s var(--ease-smooth)" }}
-                />
+                <g key={`${edge.from}-${edge.to}`}>
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke={stroke}
+                    strokeWidth={active ? 1.2 : 0.6}
+                    strokeLinecap="round"
+                    style={{ transition }}
+                  />
+                  {/* Arrowhead at the `to` end — shows the direction of the action. */}
+                  <polyline
+                    points={`${head.left.x},${head.left.y} ${head.tip.x},${head.tip.y} ${head.right.x},${head.right.y}`}
+                    fill="none"
+                    stroke={stroke}
+                    strokeWidth={active ? 1.4 : 1}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    style={{ transition }}
+                  />
+                </g>
               );
             })}
           </svg>
