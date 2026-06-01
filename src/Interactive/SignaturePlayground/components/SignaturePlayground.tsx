@@ -105,10 +105,11 @@ export const SignaturePlayground: FC = () => {
   };
 
   const msgHeaderValue: CSSProperties = {
-    fontSize: isMobile ? "0.7rem" : "0.74rem",
+    fontSize: "0.72rem",
     fontWeight: 600,
+    fontStyle: "italic",
     color: colors.basePrimaryText,
-    lineHeight: 1.35,
+    lineHeight: 1.4,
   };
 
   // Pyramid: privée (apex) / publique (base-left) / signature (base-right).
@@ -248,7 +249,7 @@ export const SignaturePlayground: FC = () => {
       />
       <div style={{ display: "flex", flexDirection: "column", gap: "0.05rem", minWidth: 0 }}>
         <span style={msgHeaderLabel}>{t("signaturePlayground.messageLabel")}</span>
-        <span style={msgHeaderValue}>{displayMessage}</span>
+        <span style={msgHeaderValue}>« {displayMessage} »</span>
       </div>
     </div>
   );
@@ -466,7 +467,7 @@ export const SignaturePlayground: FC = () => {
       {verifyStatus !== "idle" && (
         <FeedbackPanel
           tone={verifyStatus === "accepted" ? "success" : "error"}
-          style={{ gap: "0.85rem" }}
+          style={{ gap: "1.1rem" }}
         >
           <div
             style={{
@@ -477,90 +478,20 @@ export const SignaturePlayground: FC = () => {
           >
             {t("signaturePlayground.networkVerifies")}
           </div>
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.85rem",
-            }}
-          >
-            {[
-              {
-                label: t("signaturePlayground.rowMessage"),
-                value: displayMessage,
-                kind: "text" as const,
-                accent: withOpacity(colors.baseTextSecondary, 0.75),
-              },
-              {
-                label: t("signaturePlayground.rowSignature"),
-                value: signature ?? "",
-                kind: "hex" as const,
-                accent: colors.signatureColor,
-              },
-              {
-                label: t("signaturePlayground.rowPubkey"),
-                value: publicKey,
-                kind: "hex" as const,
-                accent: colors.publicColor,
-              },
-            ].map((row) => (
-              <li
-                key={row.label}
-                style={{
-                  display: "flex",
-                  flexDirection: isMobile ? "column" : "row",
-                  alignItems: isMobile ? "flex-start" : "baseline",
-                  gap: isMobile ? "0.2rem" : "0.5rem",
-                  fontSize: "0.62rem",
-                  lineHeight: 1.5,
-                  color: colors.baseTextSecondary,
-                  minWidth: 0,
-                }}
-              >
-                <span
-                  style={{
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                    fontSize: "0.55rem",
-                    color: row.accent,
-                    minWidth: isMobile ? "auto" : "5.5rem",
-                    flexShrink: 0,
-                  }}
-                >
-                  {row.label}
-                </span>
-                <span
-                  style={{
-                    flex: 1,
-                    minWidth: 0,
-                    color: colors.basePrimaryText,
-                    fontWeight: 600,
-                    wordBreak: row.kind === "hex" ? "break-all" : "normal",
-                    overflowWrap: row.kind === "hex" ? "anywhere" : "break-word",
-                  }}
-                >
-                  {row.value}
-                </span>
-              </li>
-            ))}
-          </ul>
 
           <MatchVisualizer
+            message={displayMessage}
+            messageLabel={t("signaturePlayground.rowMessage")}
             publicKey={publicKey}
+            publicKeyLabel={t("signaturePlayground.rowPubkey")}
             signature={signature ?? ""}
-            matches={isOriginalKey}
-            publicKeyLabel={t("signaturePlayground.publicKeyLabel")}
             signatureLabel={t("signaturePlayground.rowSignature")}
+            matches={isOriginalKey}
             verifyFnLabel={t("signaturePlayground.matchVerifyFn")}
             verifyMoreInfoLabel={t("signaturePlayground.verifyMoreInfo")}
             verifyMoreInfoUrl={t("signaturePlayground.verifyMoreInfoUrl")}
             matchLabel={t("signaturePlayground.matchYes")}
             noMatchLabel={t("signaturePlayground.matchNo")}
-            isMobile={isMobile}
             colors={colors}
           />
 

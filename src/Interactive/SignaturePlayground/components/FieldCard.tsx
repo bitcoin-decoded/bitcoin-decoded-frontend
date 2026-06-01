@@ -2,7 +2,6 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { PenLine } from "lucide-react";
 
-import { useBreakpoint } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { truncateHash } from "../../helpers";
 import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
@@ -64,7 +63,6 @@ export const FieldCard: FC<Props> = ({
   readOnlyLabel,
   colors,
 }) => {
-  const isMobile = useBreakpoint() === "mobile";
   const accent =
     tone === "secret"
       ? colors.secretColor
@@ -131,7 +129,7 @@ export const FieldCard: FC<Props> = ({
     padding: "0.5rem 0.65rem",
     borderRadius: "0.5rem",
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.7rem",
+    fontSize: "0.72rem",
     fontWeight: 600,
     color: colors.basePrimaryText,
     outline: "none",
@@ -147,8 +145,6 @@ export const FieldCard: FC<Props> = ({
     paddingRight: "1.85rem",
     border: `1.5px solid ${withOpacity(accent, 0.5)}`,
     background: withOpacity(colors.baseBackgroundSecondary, 0.06),
-    // 16px on mobile prevents iOS Safari auto-zoom; tighter on desktop.
-    fontSize: isMobile ? "16px" : "0.78rem",
   };
 
   const readOnlyValueStyle: CSSProperties = {
