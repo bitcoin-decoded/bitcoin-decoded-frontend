@@ -3,6 +3,10 @@ export type SigPlaygroundColors = {
   successColor: string;
   errorColor: string;
   neutralColor: string;
+  /** Private key tone (blue). */
+  secretColor: string;
+  /** Public key tone (lighter blue / info). */
+  publicColor: string;
   worldBorderSecondary: string;
   basePrimaryText: string;
   baseTextSecondary: string;

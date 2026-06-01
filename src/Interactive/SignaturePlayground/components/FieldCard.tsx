@@ -12,12 +12,12 @@ type Props = {
   label: string;
   /** Optional step number rendered as a small badge before the icon (1, 2, 3). */
   number?: number;
-  /** Optional element pinned to the right of the label row (e.g. a tick/cross). */
-  labelTrailing?: ReactNode;
-  /** Optional element rendered right under the label row, before the value. */
-  belowLabel?: ReactNode;
+  /** Optional block rendered at the very top of the card, above the label (e.g. the message to sign). */
+  header?: ReactNode;
   value: string;
   hint?: string;
+  /** Small caption rendered just above the value (e.g. "Clé publique générée :"). */
+  valuePrefix?: string;
   tone: FieldTone;
   valueKind: ValueKind;
   /** Truncate the read-only value (long hex) to first8…last6 so it stays on one line. */
@@ -47,10 +47,10 @@ export const FieldCard: FC<Props> = ({
   icon,
   label,
   number,
-  labelTrailing,
-  belowLabel,
+  header,
   value,
   hint,
+  valuePrefix,
   tone,
   valueKind,
   truncate,
@@ -67,12 +67,12 @@ export const FieldCard: FC<Props> = ({
   const isMobile = useBreakpoint() === "mobile";
   const accent =
     tone === "secret"
-      ? colors.errorColor
+      ? colors.secretColor
       : tone === "public"
-        ? colors.worldBorderSecondary
+        ? colors.publicColor
         : colors.neutralColor;
-  const accentOpacityBorder = tone === "secret" ? 0.3 : tone === "public" ? 0.22 : 0.18;
-  const accentOpacityBg = tone === "secret" ? 0.05 : tone === "public" ? 0.04 : 0.03;
+  const accentOpacityBorder = tone === "secret" ? 0.3 : tone === "public" ? 0.28 : 0.18;
+  const accentOpacityBg = tone === "secret" ? 0.06 : tone === "public" ? 0.05 : 0.03;
 
   const containerStyle: CSSProperties = embedded
     ? {
@@ -96,14 +96,6 @@ export const FieldCard: FC<Props> = ({
         boxSizing: "border-box",
         flex: 1,
       };
-
-  const labelRowStyle: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "0.5rem",
-    minWidth: 0,
-  };
 
   const labelStyle: CSSProperties = {
     display: "flex",
@@ -150,7 +142,7 @@ export const FieldCard: FC<Props> = ({
   const editableInputStyle: CSSProperties = {
     ...inputBase,
     paddingRight: "1.85rem",
-    border: `1.5px solid ${withOpacity(colors.successColor, 0.4)}`,
+    border: `1.5px solid ${withOpacity(accent, 0.5)}`,
     background: withOpacity(colors.baseBackgroundSecondary, 0.06),
     // 16px on mobile prevents iOS Safari auto-zoom; tighter on desktop.
     fontSize: isMobile ? "16px" : "0.78rem",
@@ -171,6 +163,14 @@ export const FieldCard: FC<Props> = ({
     fontStyle: "italic",
   };
 
+  const valuePrefixStyle: CSSProperties = {
+    fontSize: "0.55rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.05em",
+    color: withOpacity(colors.baseTextSecondary, 0.7),
+  };
+
   const footerStyle: CSSProperties = {
     display: "inline-flex",
     alignItems: "center",
@@ -183,18 +183,17 @@ export const FieldCard: FC<Props> = ({
 
   return (
     <div style={containerStyle}>
-      <div style={labelRowStyle}>
-        <span style={labelStyle}>
-          {number !== undefined && <span style={numberBadgeStyle}>{number}</span>}
-          {icon}
-          <span style={{ minWidth: 0, overflowWrap: "break-word" }}>{label}</span>
-        </span>
-        {labelTrailing}
+      {header}
+
+      <div style={labelStyle}>
+        {number !== undefined && <span style={numberBadgeStyle}>{number}</span>}
+        {icon}
+        <span style={{ minWidth: 0, overflowWrap: "break-word" }}>{label}</span>
       </div>
 
-      {belowLabel}
-
       {hint && <p style={hintStyle}>{hint}</p>}
+
+      {valuePrefix && <span style={valuePrefixStyle}>{valuePrefix}</span>}
 
       {editable ? (
         <div style={{ position: "relative", minWidth: 0 }}>
@@ -205,7 +204,7 @@ export const FieldCard: FC<Props> = ({
             aria-label={editableLabel}
             style={editableInputStyle}
             onFocus={(e) =>
-              (e.currentTarget.style.boxShadow = `0 0 0 3px ${withOpacity(colors.successColor, 0.18)}`)
+              (e.currentTarget.style.boxShadow = `0 0 0 3px ${withOpacity(accent, 0.18)}`)
             }
             onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
           />
@@ -217,7 +216,7 @@ export const FieldCard: FC<Props> = ({
               right: "0.65rem",
               top: "50%",
               transform: "translateY(-50%)",
-              color: withOpacity(colors.successColor, 0.55),
+              color: withOpacity(accent, 0.6),
               pointerEvents: "none",
             }}
             aria-hidden

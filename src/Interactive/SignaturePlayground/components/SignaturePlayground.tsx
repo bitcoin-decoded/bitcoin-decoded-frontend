@@ -4,7 +4,6 @@ import {
   ArrowDown,
   ArrowDownLeft,
   ArrowDownRight,
-  ArrowRight,
   CheckCircle,
   Globe,
   KeyRound,
@@ -47,6 +46,9 @@ export const SignaturePlayground: FC = () => {
     successColor: themeColors.semantic.success.text,
     errorColor: themeColors.semantic.error?.text ?? "#ef4444",
     neutralColor: themeColors.base.text.primary,
+    // Private key = blue, public key = lighter (info) blue, signature = neutral.
+    secretColor: themeColors.blue.text.secondary,
+    publicColor: themeColors.semantic.info?.text ?? themeColors.blue.text.primary,
     worldBorderSecondary: world.border.secondary,
     basePrimaryText: world.text.primary,
     baseTextSecondary: themeColors.base.text.secondary,
@@ -84,28 +86,28 @@ export const SignaturePlayground: FC = () => {
     marginBottom: "0.65rem",
   };
 
-  const messageStrip: CSSProperties = {
+  // Message-to-sign, rendered as the header of the signature block.
+  const msgHeaderStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
-    gap: "0.6rem",
-    padding: "0.6rem 0.8rem",
-    borderRadius: "0.6rem",
-    border: `1px solid ${withOpacity(colors.baseBorderSecondary, 0.18)}`,
-    background: withOpacity(colors.baseBackgroundSecondary, 0.05),
+    gap: "0.5rem",
+    paddingBottom: "0.6rem",
+    borderBottom: `1px solid ${withOpacity(colors.baseBorderSecondary, 0.15)}`,
   };
 
-  const messageStripLabel: CSSProperties = {
-    fontSize: "0.55rem",
+  const msgHeaderLabel: CSSProperties = {
+    fontSize: "0.52rem",
     fontWeight: 700,
     textTransform: "uppercase",
     letterSpacing: "0.06em",
     color: withOpacity(colors.baseTextSecondary, 0.7),
   };
 
-  const messageStripValue: CSSProperties = {
-    fontSize: isMobile ? "0.72rem" : "0.78rem",
+  const msgHeaderValue: CSSProperties = {
+    fontSize: isMobile ? "0.7rem" : "0.74rem",
     fontWeight: 600,
     color: colors.basePrimaryText,
+    lineHeight: 1.35,
   };
 
   // Pyramid: privée (apex) / publique (base-left) / signature (base-right).
@@ -118,14 +120,19 @@ export const SignaturePlayground: FC = () => {
 
   const apexWrap: CSSProperties = { display: "flex", justifyContent: "center" };
 
-  const apexNode: CSSProperties = { width: isMobile ? "100%" : "64%", display: "flex" };
+  // Same width as one base column, so the three blocks read as equal-width.
+  const apexNode: CSSProperties = {
+    width: isMobile ? "100%" : "calc(50% - 0.3rem)",
+    display: "flex",
+  };
 
   const fanRow: CSSProperties = {
     display: "flex",
     justifyContent: "space-between",
-    padding: "0 12%",
+    padding: "0 20%",
   };
 
+  // Two equal columns, each the same width as the apex (calc(50% - 0.3rem)).
   const baseRow: CSSProperties = {
     display: "flex",
     alignItems: "stretch",
@@ -169,6 +176,7 @@ export const SignaturePlayground: FC = () => {
     label: string,
     hint: string,
     accent: string,
+    header?: ReactNode,
   ) => (
     <div
       style={{
@@ -181,9 +189,9 @@ export const SignaturePlayground: FC = () => {
         borderRadius: "0.7rem",
         border: `1px dashed ${withOpacity(accent, 0.3)}`,
         background: withOpacity(accent, 0.02),
-        opacity: 0.7,
       }}
     >
+      {header}
       <div
         style={{
           display: "flex",
@@ -228,24 +236,20 @@ export const SignaturePlayground: FC = () => {
     </div>
   );
 
-  // The message being signed - shown right at the signing step (before the
-  // signature node), since it's the input the signature is produced for.
-  const messageStripEl = (
-    <div style={messageStrip}>
-      <Mail size={15} strokeWidth={2} style={{ color: colors.accentColor, flexShrink: 0 }} />
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem", minWidth: 0 }}>
-        <span style={messageStripLabel}>{t("signaturePlayground.messageLabel")}</span>
-        <span style={messageStripValue}>{displayMessage}</span>
+  // The message to sign - rendered as the header of the signature block, so
+  // it reads as "this message → produces → this signature".
+  const messageHeader = (
+    <div style={msgHeaderStyle}>
+      <Mail
+        size={13}
+        strokeWidth={2}
+        style={{ color: withOpacity(colors.neutralColor, 0.55), flexShrink: 0 }}
+      />
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.05rem", minWidth: 0 }}>
+        <span style={msgHeaderLabel}>{t("signaturePlayground.messageLabel")}</span>
+        <span style={msgHeaderValue}>{displayMessage}</span>
       </div>
     </div>
-  );
-
-  // Tick / cross pinned to the public-key label: does the current private key
-  // still derive to this public key?
-  const publicKeyTick = isOriginalKey ? (
-    <CheckCircle size={14} strokeWidth={2.5} style={{ color: colors.successColor, flexShrink: 0 }} />
-  ) : (
-    <XCircle size={14} strokeWidth={2.5} style={{ color: colors.errorColor, flexShrink: 0 }} />
   );
 
   const coherenceBadge = (
@@ -286,12 +290,12 @@ export const SignaturePlayground: FC = () => {
       icon={<KeyRound size={11} strokeWidth={2.5} />}
       number={2}
       label={t("signaturePlayground.publicKeyLabel")}
-      labelTrailing={publicKeyTick}
-      belowLabel={coherenceBadge}
+      valuePrefix={t("signaturePlayground.publicKeyGenerated")}
       value={publicKey}
       tone="public"
       valueKind="hex"
       truncate
+      badge={coherenceBadge}
       footerIcon={<Globe size={10} strokeWidth={2.5} />}
       footerLabel={t("signaturePlayground.publicKeyOwner")}
       editableLabel={t("signaturePlayground.editable")}
@@ -304,7 +308,7 @@ export const SignaturePlayground: FC = () => {
       <KeyRound size={11} strokeWidth={2.5} />,
       t("signaturePlayground.publicKeyLabel"),
       t("signaturePlayground.publicKeyPending"),
-      colors.accentColor,
+      colors.publicColor,
     )
   );
 
@@ -312,12 +316,13 @@ export const SignaturePlayground: FC = () => {
     <FieldCard
       icon={<PenLine size={11} strokeWidth={2.5} />}
       number={3}
+      header={messageHeader}
       label={t("signaturePlayground.signatureLabel")}
+      valuePrefix={t("signaturePlayground.signatureGenerated")}
       value={signature ?? ""}
       tone="neutral"
       valueKind="hex"
       truncate
-      hint={t("signaturePlayground.signatureHint")}
       editableLabel={t("signaturePlayground.editable")}
       readOnlyLabel={t("signaturePlayground.readOnly")}
       colors={colors}
@@ -329,6 +334,7 @@ export const SignaturePlayground: FC = () => {
       t("signaturePlayground.signatureLabel"),
       t("signaturePlayground.signaturePending"),
       colors.neutralColor,
+      messageHeader,
     )
   );
 
@@ -362,22 +368,12 @@ export const SignaturePlayground: FC = () => {
     />
   );
 
-  const verifie = (
-    <PyramidConnector
-      label={t("signaturePlayground.edgeVerify")}
-      icon={<ArrowRight size={12} strokeWidth={2.2} />}
-      active={verifyStatus !== "idle"}
-      colors={colors}
-    />
-  );
-
   const pyramid = isMobile ? (
     <div style={pyramidCol}>
       {privateNode}
       <div style={verticalConnector}>{calcule}</div>
       {publicNode}
       <div style={verticalConnector}>{signe}</div>
-      {messageStripEl}
       {signatureNode}
     </div>
   ) : (
@@ -389,12 +385,8 @@ export const SignaturePlayground: FC = () => {
         {calcule}
         {signe}
       </div>
-      <div style={apexWrap}>
-        <div style={{ width: "72%" }}>{messageStripEl}</div>
-      </div>
       <div style={baseRow}>
         {publicNode}
-        <div style={{ display: "flex", alignItems: "center" }}>{verifie}</div>
         {signatureNode}
       </div>
     </div>
