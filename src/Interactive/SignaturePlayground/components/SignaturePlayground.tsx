@@ -1,7 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import {
-  ArrowDown,
   ArrowDownLeft,
   ArrowDownRight,
   CheckCircle,
@@ -122,9 +121,11 @@ export const SignaturePlayground: FC = () => {
 
   const apexWrap: CSSProperties = { display: "flex", justifyContent: "center" };
 
-  // Same width as one base column, so the three blocks read as equal-width.
+  // Desktop: same width as one base column (equal-width blocks). Mobile: a bit
+  // wider so the full private key fits, but still narrower than the base span
+  // so it reads as a pyramid apex.
   const apexNode: CSSProperties = {
-    width: isMobile ? "100%" : "calc(50% - 0.3rem)",
+    width: isMobile ? "90%" : "calc(50% - 0.3rem)",
     display: "flex",
   };
 
@@ -139,11 +140,6 @@ export const SignaturePlayground: FC = () => {
     display: "flex",
     alignItems: "stretch",
     gap: "0.6rem",
-  };
-
-  const verticalConnector: CSSProperties = {
-    display: "flex",
-    justifyContent: "center",
   };
 
   const coherenceBanner: CSSProperties = {
@@ -343,13 +339,7 @@ export const SignaturePlayground: FC = () => {
   const calcule = (
     <PyramidConnector
       label={t("signaturePlayground.edgeDerive")}
-      icon={
-        isMobile ? (
-          <ArrowDown size={12} strokeWidth={2.2} />
-        ) : (
-          <ArrowDownLeft size={12} strokeWidth={2.2} />
-        )
-      }
+      icon={<ArrowDownLeft size={12} strokeWidth={2.2} />}
       active={isDerived}
       colors={colors}
     />
@@ -358,27 +348,16 @@ export const SignaturePlayground: FC = () => {
   const signe = (
     <PyramidConnector
       label={t("signaturePlayground.edgeSign")}
-      icon={
-        isMobile ? (
-          <ArrowDown size={12} strokeWidth={2.2} />
-        ) : (
-          <ArrowDownRight size={12} strokeWidth={2.2} />
-        )
-      }
+      icon={<ArrowDownRight size={12} strokeWidth={2.2} />}
       active={hasSignature}
       colors={colors}
     />
   );
 
-  const pyramid = isMobile ? (
-    <div style={pyramidCol}>
-      {privateNode}
-      <div style={verticalConnector}>{calcule}</div>
-      {publicNode}
-      <div style={verticalConnector}>{signe}</div>
-      {signatureNode}
-    </div>
-  ) : (
+  // Pyramid at every breakpoint: private key at the apex, public key +
+  // signature side by side at the base, calcule / signe fanning down from the
+  // apex — so the private key is unambiguously the one that signs.
+  const pyramid = (
     <div style={pyramidCol}>
       <div style={apexWrap}>
         <div style={apexNode}>{privateNode}</div>
