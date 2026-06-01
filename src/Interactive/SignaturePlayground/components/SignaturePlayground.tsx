@@ -253,6 +253,7 @@ export const SignaturePlayground: FC = () => {
       value={publicKey}
       tone="public"
       valueKind="hex"
+      truncate
       hint={t("signaturePlayground.publicKeyHint")}
       editableLabel={t("signaturePlayground.editable")}
       readOnlyLabel={t("signaturePlayground.readOnly")}
@@ -276,6 +277,7 @@ export const SignaturePlayground: FC = () => {
       value={signature ?? ""}
       tone="neutral"
       valueKind="hex"
+      truncate
       hint={t("signaturePlayground.signatureHint")}
       editableLabel={t("signaturePlayground.editable")}
       readOnlyLabel={t("signaturePlayground.readOnly")}

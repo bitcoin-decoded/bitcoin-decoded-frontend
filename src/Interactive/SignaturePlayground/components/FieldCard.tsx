@@ -2,7 +2,9 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { PenLine } from "lucide-react";
 
+import { useBreakpoint } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
+import { truncateHash } from "../../helpers";
 import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
 
 type Props = {
@@ -14,6 +16,8 @@ type Props = {
   hint: string;
   tone: FieldTone;
   valueKind: ValueKind;
+  /** Truncate the read-only value (long hex) to first8…last6 so it stays on one line. */
+  truncate?: boolean;
   editable?: boolean;
   onChange?: (next: string) => void;
   badge?: ReactNode;
@@ -43,6 +47,7 @@ export const FieldCard: FC<Props> = ({
   hint,
   tone,
   valueKind,
+  truncate,
   editable,
   onChange,
   badge,
@@ -53,6 +58,7 @@ export const FieldCard: FC<Props> = ({
   readOnlyLabel,
   colors,
 }) => {
+  const isMobile = useBreakpoint() === "mobile";
   const accent =
     tone === "secret"
       ? colors.errorColor
@@ -132,14 +138,14 @@ export const FieldCard: FC<Props> = ({
     paddingRight: "1.85rem",
     border: `1.5px solid ${withOpacity(colors.successColor, 0.4)}`,
     background: withOpacity(colors.baseBackgroundSecondary, 0.06),
-    fontSize: "1rem", // iOS Safari zoom prevention
+    // 16px on mobile prevents iOS Safari auto-zoom; tighter on desktop.
+    fontSize: isMobile ? "16px" : "0.78rem",
   };
 
   const readOnlyValueStyle: CSSProperties = {
     ...inputBase,
-    border: `1px dashed ${withOpacity(colors.baseBorderSecondary, 0.22)}`,
-    background: withOpacity(colors.baseBackgroundSecondary, 0.02),
-    opacity: 0.92,
+    border: `1px solid ${withOpacity(colors.baseBorderSecondary, 0.16)}`,
+    background: withOpacity(colors.baseBackgroundSecondary, 0.04),
     cursor: "default",
   };
 
@@ -199,8 +205,12 @@ export const FieldCard: FC<Props> = ({
           />
         </div>
       ) : (
-        <div style={readOnlyValueStyle} aria-label={readOnlyLabel}>
-          {value}
+        <div
+          style={readOnlyValueStyle}
+          aria-label={readOnlyLabel}
+          title={truncate ? value : undefined}
+        >
+          {truncate ? truncateHash(value) : value}
         </div>
       )}
 
