@@ -5,6 +5,7 @@ import {
   ArrowRightLeft,
   BookText,
   Building2,
+  CircleCheck,
   CircleDollarSign,
   KeyRound,
   Lightbulb,
@@ -139,142 +140,130 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
     transition: "color 0.35s var(--ease-smooth)",
   });
 
-  const divLine = (accent: string): CSSProperties => ({
-    flex: 1,
-    height: 1,
-    background: withOpacity(accent, 0.18),
-  });
+  // ── Bank card: one living "ledger" that updates in place ────────────────────
+  // A single registry; no before/after split. Each account shows its balance,
+  // and the honest visual is the transfer itself (money flowing sender →
+  // receiver) — not a bar measured against an arbitrary "max" balance.
 
-  // ── Bank-card styles ───────────────────────────────────────────────────────
-
-  const balanceRow: CSSProperties = {
+  const ledgerLabelRow: CSSProperties = {
     display: "flex",
     alignItems: "center",
+    justifyContent: "space-between",
     gap: "0.5rem",
-    padding: "0.45rem 0.6rem",
+  };
+
+  const ledgerBadge: CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.25rem",
+    fontSize: "0.55rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
+    color: successColor,
+    padding: "0.12rem 0.4rem",
+    borderRadius: "0.3rem",
+    background: withOpacity(successColor, 0.12),
+  };
+
+  const ledgerEntry: CSSProperties = {
+    display: "flex",
+    alignItems: "baseline",
+    justifyContent: "space-between",
+    gap: "0.5rem 0.75rem",
+    flexWrap: "wrap",
+    padding: isMobile ? "0.5rem 0.7rem" : "0.6rem 0.85rem",
     borderRadius: "0.55rem",
     background: withOpacity(bankAccent, 0.05),
     border: `1px solid ${withOpacity(bankAccent, 0.12)}`,
   };
 
-  const balanceName: CSSProperties = {
-    fontSize: "0.72rem",
-    fontWeight: 600,
-    color: world.text.primary,
-    minWidth: "2.5rem",
-  };
-
-  const balanceBar = (_pct: number, accent: string): CSSProperties => ({
-    flex: 1,
-    height: "0.3rem",
-    borderRadius: "0.2rem",
-    background: withOpacity(accent, 0.12),
-    overflow: "hidden",
-    position: "relative",
-  });
-
-  const balanceFill = (pct: number, accent: string): CSSProperties => ({
-    position: "absolute",
-    inset: 0,
-    width: `${pct}%`,
-    background: accent,
-    borderRadius: "0.2rem",
-    transition: "width 0.55s var(--ease-smooth)",
-  });
-
-  const balanceAmount = (color?: string): CSSProperties => ({
-    fontSize: isMobile ? "0.74rem" : "0.78rem",
-    fontWeight: 700,
-    color: color ?? world.text.primary,
-    minWidth: "2.8rem",
-    textAlign: "right",
-    transition: "color 0.4s var(--ease-smooth)",
-  });
-
-  const deltaBadge = (positive: boolean): CSSProperties => ({
-    fontSize: "0.62rem",
-    fontWeight: 700,
-    padding: "0.12rem 0.4rem",
-    borderRadius: "0.3rem",
-    color: positive ? successColor : errorColor,
-    background: withOpacity(positive ? successColor : errorColor, 0.1),
-    opacity: isAfter ? 1 : 0,
-    transform: isAfter ? "translateY(0)" : "translateY(4px)",
-    transition: "opacity 0.4s var(--ease-smooth) 0.15s, transform 0.4s var(--ease-smooth) 0.15s",
-  });
-
-  const actionDivider = (accent: string): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    padding: "0.15rem 0",
-    color: withOpacity(accent, 0.5),
-    fontSize: "0.64rem",
-    fontWeight: 600,
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
-  });
-
-  // After-state "ledger" panel: hidden behind a lock until the transaction
-  // runs, then reveals the balance update as an explicit equation per account.
-  const ledgerPanel: CSSProperties = {
-    padding: isMobile ? "0.55rem 0.65rem" : "0.7rem 0.85rem",
-    borderRadius: "0.55rem",
-    background: withOpacity(bankAccent, isAfter ? 0.07 : 0.03),
-    border: `1px solid ${withOpacity(bankAccent, isAfter ? 0.22 : 0.1)}`,
-    transition: "all 0.4s var(--ease-smooth)",
-  };
-
-  const lockedHint: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.4rem",
-    padding: "0.15rem 0",
-    fontSize: "0.66rem",
-    fontStyle: "italic",
-    textAlign: "center",
-    color: withOpacity(colors.base.text.secondary, 0.6),
-  };
-
-  const ledgerRows: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    gap: isMobile ? "0.5rem" : "0.55rem",
-  };
-
-  const ledgerRow: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.2rem",
-  };
-
   const ledgerName: CSSProperties = {
     display: "flex",
     alignItems: "center",
-    gap: "0.3rem",
-    fontSize: "0.68rem",
+    gap: "0.35rem",
+    fontSize: isMobile ? "0.72rem" : "0.74rem",
     fontWeight: 600,
     color: colors.base.text.primary,
+    flexShrink: 0,
+  };
+
+  // Transfer connector: the amount flowing from the sender (top entry) to the
+  // receiver (bottom entry). Faint while pending, lit once the transfer runs.
+  const transferConnector: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "0.15rem",
+    padding: "0.05rem 0",
+  };
+
+  const transferStem: CSSProperties = {
+    width: "1.5px",
+    height: "0.5rem",
+    background: withOpacity(bankAccent, isAfter ? 0.5 : 0.18),
+    transition: "background 0.4s var(--ease-smooth)",
+  };
+
+  // Lit only once the transfer runs (rendered solely in the "after" state),
+  // and clearly labelled so its purpose is unambiguous.
+  const transferPill: CSSProperties = {
+    ...mono,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.3rem",
+    fontSize: "0.6rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.05em",
+    padding: "0.16rem 0.6rem",
+    borderRadius: "0.4rem",
+    color: bankAccent,
+    background: withOpacity(bankAccent, 0.14),
+    border: `1px solid ${withOpacity(bankAccent, 0.35)}`,
   };
 
   const ledgerEquation: CSSProperties = {
     ...mono,
     display: "flex",
-    alignItems: "center",
+    alignItems: "baseline",
     flexWrap: "wrap",
-    gap: "0.35rem",
-    fontSize: isMobile ? "0.72rem" : "0.74rem",
-    paddingLeft: "1.1rem",
+    justifyContent: "flex-end",
+    gap: "0.3rem",
+    fontSize: isMobile ? "0.72rem" : "0.76rem",
+    textAlign: "right",
   };
 
-  const eqBefore: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.7) };
+  const eqBefore: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.75) };
   const eqDelta = (positive: boolean): CSSProperties => ({
     fontWeight: 700,
     color: positive ? successColor : errorColor,
   });
   const eqSign: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.45) };
   const eqResult: CSSProperties = { fontWeight: 700, color: colors.base.text.primary };
+
+  const renderLedgerEntry = (name: string, before: number, after: number, positive: boolean) => (
+    <div style={ledgerEntry}>
+      <span style={ledgerName}>
+        <User size={iconSm} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
+        {name}
+      </span>
+      <span style={ledgerEquation}>
+        {isAfter ? (
+          <>
+            <span style={eqBefore}>{fmtEur(before)}</span>
+            <span style={eqDelta(positive)}>
+              {positive ? "+" : "−"} {fmtEur(BANK.sent)}
+            </span>
+            <span style={eqSign}>=</span>
+            <span style={eqResult}>{fmtEur(after)}</span>
+          </>
+        ) : (
+          <span style={eqResult}>{fmtEur(before)}</span>
+        )}
+      </span>
+    </div>
+  );
 
   // ── Bitcoin-card styles ────────────────────────────────────────────────────
 
@@ -477,99 +466,51 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
       </div>
 
       <div style={cardBody}>
-        <div style={sectionLabel(bankAccent)}>{t("txComparison.bankBefore")}</div>
-
         {/* Scenario context */}
         <div style={scenarioBox(bankAccent)}>
-          <ArrowRightLeft
-            size={13}
-            strokeWidth={2}
-            style={{ color: bankAccent, flexShrink: 0 }}
-          />
+          <ArrowRightLeft size={13} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
           {t("txComparison.bankScenario")}
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-          {/* Nicolas */}
-          <div style={balanceRow}>
-            <User size={iconSm} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
-            <span style={balanceName}>{t("txComparison.nicolas")}</span>
-            <div style={balanceBar(100, bankAccent)}>
-              <div style={balanceFill(isAfter ? 60 : 100, bankAccent)} />
-            </div>
-            <span style={balanceAmount(isAfter ? errorColor : undefined)}>
-              {fmtEur(isAfter ? BANK.nicolasAfter : BANK.nicolasBefore)}
-            </span>
-            <span style={deltaBadge(false)}>−{fmtEur(BANK.sent)}</span>
+        {/* One living ledger — the same registry, updated in place. No
+            before/after split, so nothing is shown twice. */}
+        <div style={ledgerLabelRow}>
+          <div style={sectionLabel(bankAccent)}>
+            <BookText size={10} strokeWidth={2} />
+            {t("txComparison.bankLedger")}
           </div>
-          {/* Michu */}
-          <div style={balanceRow}>
-            <User size={iconSm} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
-            <span style={balanceName}>{t("txComparison.michu")}</span>
-            <div style={balanceBar(72, bankAccent)}>
-              <div style={balanceFill(isAfter ? 72 : 32, bankAccent)} />
-            </div>
-            <span style={balanceAmount(isAfter ? successColor : undefined)}>
-              {fmtEur(isAfter ? BANK.michuAfter : BANK.michuBefore)}
+          {isAfter && (
+            <span style={ledgerBadge}>
+              <CircleCheck size={9} strokeWidth={2.5} />
+              {t("txComparison.bankUpdated")}
             </span>
-            <span style={deltaBadge(true)}>+{fmtEur(BANK.sent)}</span>
-          </div>
-        </div>
-
-        <div style={actionDivider(bankAccent)}>
-          <div style={divLine(bankAccent)} />
-          <ArrowDown size={10} strokeWidth={2} />
-          <span>{t("txComparison.bankAction")}</span>
-          <ArrowDown size={10} strokeWidth={2} />
-          <div style={divLine(bankAccent)} />
-        </div>
-
-        <div style={sectionLabel(bankAccent, !isAfter)}>
-          <BookText size={10} strokeWidth={2} />
-          {t("txComparison.bankAfter")}
-        </div>
-        <div style={ledgerPanel}>
-          {isAfter ? (
-            <div style={ledgerRows} className="chain-field-reveal">
-              <div style={ledgerRow}>
-                <span style={ledgerName}>
-                  <User
-                    size={iconSm}
-                    strokeWidth={2}
-                    style={{ color: bankAccent, flexShrink: 0 }}
-                  />
-                  {t("txComparison.nicolas")}
-                </span>
-                <span style={ledgerEquation}>
-                  <span style={eqBefore}>{fmtEur(BANK.nicolasBefore)}</span>
-                  <span style={eqDelta(false)}>− {fmtEur(BANK.sent)}</span>
-                  <span style={eqSign}>=</span>
-                  <span style={eqResult}>{fmtEur(BANK.nicolasAfter)}</span>
-                </span>
-              </div>
-              <div style={ledgerRow}>
-                <span style={ledgerName}>
-                  <User
-                    size={iconSm}
-                    strokeWidth={2}
-                    style={{ color: bankAccent, flexShrink: 0 }}
-                  />
-                  {t("txComparison.michu")}
-                </span>
-                <span style={ledgerEquation}>
-                  <span style={eqBefore}>{fmtEur(BANK.michuBefore)}</span>
-                  <span style={eqDelta(true)}>+ {fmtEur(BANK.sent)}</span>
-                  <span style={eqSign}>=</span>
-                  <span style={eqResult}>{fmtEur(BANK.michuAfter)}</span>
-                </span>
-              </div>
-            </div>
-          ) : (
-            <div style={lockedHint}>
-              <Lock size={12} strokeWidth={2} />
-              {t("txComparison.bankAfterHint")}
-            </div>
           )}
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+          {renderLedgerEntry(
+            t("txComparison.nicolas"),
+            BANK.nicolasBefore,
+            BANK.nicolasAfter,
+            false,
+          )}
+          <div style={transferConnector}>
+            <div style={transferStem} />
+            {isAfter ? (
+              <span style={transferPill}>
+                <ArrowDown size={11} strokeWidth={2.5} />
+                {t("txComparison.bankTransferLabel")} {fmtEur(BANK.sent)}
+              </span>
+            ) : (
+              <ArrowDown
+                size={14}
+                strokeWidth={2}
+                style={{ color: withOpacity(bankAccent, 0.3) }}
+              />
+            )}
+            <div style={transferStem} />
+          </div>
+          {renderLedgerEntry(t("txComparison.michu"), BANK.michuBefore, BANK.michuAfter, true)}
         </div>
       </div>
 
