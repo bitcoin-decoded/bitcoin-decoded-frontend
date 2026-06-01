@@ -7,6 +7,8 @@ export type SigPlaygroundColors = {
   secretColor: string;
   /** Public key tone (lighter blue / info). */
   publicColor: string;
+  /** Signature tone (violet) — distinct from the blue keys and the gray/amber connectors. */
+  signatureColor: string;
   worldBorderSecondary: string;
   basePrimaryText: string;
   baseTextSecondary: string;

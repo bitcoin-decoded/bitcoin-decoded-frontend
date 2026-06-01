@@ -122,8 +122,8 @@ export const MatchVisualizer: FC<Props> = ({
           minWidth: 0,
         }}
       >
-        <div style={sideStyle(colors.worldBorderSecondary)}>
-          <span style={sideLabelStyle(colors.worldBorderSecondary)}>{publicKeyLabel}</span>
+        <div style={sideStyle(colors.publicColor)}>
+          <span style={sideLabelStyle(colors.publicColor)}>{publicKeyLabel}</span>
           <span style={sideValueStyle}>{truncateHash(publicKey)}</span>
         </div>
 
@@ -183,7 +183,8 @@ export const MatchVisualizer: FC<Props> = ({
               <hr
                 style={{
                   width: "1.5px",
-                  height: "0.6rem",
+                  flex: 1,
+                  minHeight: "0.5rem",
                   background: withOpacity(verdictColor, 0.4),
                   border: "none",
                   margin: 0,
@@ -208,7 +209,8 @@ export const MatchVisualizer: FC<Props> = ({
               <hr
                 style={{
                   width: "1.5px",
-                  height: "0.6rem",
+                  flex: 1,
+                  minHeight: "0.5rem",
                   background: withOpacity(verdictColor, 0.4),
                   border: "none",
                   margin: 0,
@@ -218,8 +220,8 @@ export const MatchVisualizer: FC<Props> = ({
           )}
         </div>
 
-        <div style={sideStyle(verdictColor)}>
-          <span style={sideLabelStyle(verdictColor)}>{signatureLabel}</span>
+        <div style={sideStyle(colors.signatureColor)}>
+          <span style={sideLabelStyle(colors.signatureColor)}>{signatureLabel}</span>
           <span style={sideValueStyle}>{truncateHash(signature)}</span>
         </div>
       </div>

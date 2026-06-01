@@ -46,9 +46,10 @@ export const SignaturePlayground: FC = () => {
     successColor: themeColors.semantic.success.text,
     errorColor: themeColors.semantic.error?.text ?? "#ef4444",
     neutralColor: themeColors.base.text.primary,
-    // Private key = blue, public key = lighter (info) blue, signature = neutral.
+    // Private key = blue, public key = lighter (info) blue, signature = violet.
     secretColor: themeColors.blue.text.secondary,
     publicColor: themeColors.semantic.info?.text ?? themeColors.blue.text.primary,
+    signatureColor: themeColors.violet.text.secondary,
     worldBorderSecondary: world.border.secondary,
     basePrimaryText: world.text.primary,
     baseTextSecondary: themeColors.base.text.secondary,
@@ -320,7 +321,7 @@ export const SignaturePlayground: FC = () => {
       label={t("signaturePlayground.signatureLabel")}
       valuePrefix={t("signaturePlayground.signatureGenerated")}
       value={signature ?? ""}
-      tone="neutral"
+      tone="signature"
       valueKind="hex"
       truncate
       editableLabel={t("signaturePlayground.editable")}
@@ -483,7 +484,7 @@ export const SignaturePlayground: FC = () => {
               margin: 0,
               display: "flex",
               flexDirection: "column",
-              gap: "0.55rem",
+              gap: "0.85rem",
             }}
           >
             {[
@@ -491,16 +492,19 @@ export const SignaturePlayground: FC = () => {
                 label: t("signaturePlayground.rowMessage"),
                 value: displayMessage,
                 kind: "text" as const,
+                accent: withOpacity(colors.baseTextSecondary, 0.75),
               },
               {
                 label: t("signaturePlayground.rowSignature"),
                 value: signature ?? "",
                 kind: "hex" as const,
+                accent: colors.signatureColor,
               },
               {
                 label: t("signaturePlayground.rowPubkey"),
                 value: publicKey,
                 kind: "hex" as const,
+                accent: colors.publicColor,
               },
             ].map((row) => (
               <li
@@ -509,8 +513,9 @@ export const SignaturePlayground: FC = () => {
                   display: "flex",
                   flexDirection: isMobile ? "column" : "row",
                   alignItems: isMobile ? "flex-start" : "baseline",
-                  gap: isMobile ? "0.15rem" : "0.5rem",
+                  gap: isMobile ? "0.2rem" : "0.5rem",
                   fontSize: "0.62rem",
+                  lineHeight: 1.5,
                   color: colors.baseTextSecondary,
                   minWidth: 0,
                 }}
@@ -521,7 +526,7 @@ export const SignaturePlayground: FC = () => {
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
                     fontSize: "0.55rem",
-                    color: withOpacity(colors.baseTextSecondary, 0.6),
+                    color: row.accent,
                     minWidth: isMobile ? "auto" : "5.5rem",
                     flexShrink: 0,
                   }}

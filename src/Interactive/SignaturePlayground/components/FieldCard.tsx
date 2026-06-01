@@ -70,9 +70,11 @@ export const FieldCard: FC<Props> = ({
       ? colors.secretColor
       : tone === "public"
         ? colors.publicColor
-        : colors.neutralColor;
-  const accentOpacityBorder = tone === "secret" ? 0.3 : tone === "public" ? 0.28 : 0.18;
-  const accentOpacityBg = tone === "secret" ? 0.06 : tone === "public" ? 0.05 : 0.03;
+        : tone === "signature"
+          ? colors.signatureColor
+          : colors.neutralColor;
+  const accentOpacityBorder = tone === "neutral" ? 0.18 : tone === "secret" ? 0.3 : 0.28;
+  const accentOpacityBg = tone === "neutral" ? 0.03 : tone === "secret" ? 0.06 : 0.05;
 
   const containerStyle: CSSProperties = embedded
     ? {
@@ -134,6 +136,7 @@ export const FieldCard: FC<Props> = ({
     color: colors.basePrimaryText,
     outline: "none",
     boxSizing: "border-box",
+    textAlign: "center",
     wordBreak: valueKind === "hex" ? "break-all" : "normal",
     overflowWrap: valueKind === "hex" ? "anywhere" : "break-word",
     transition: "border-color 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth)",
@@ -164,6 +167,8 @@ export const FieldCard: FC<Props> = ({
   };
 
   const valuePrefixStyle: CSSProperties = {
+    display: "block",
+    textAlign: "center",
     fontSize: "0.55rem",
     fontWeight: 700,
     textTransform: "uppercase",
