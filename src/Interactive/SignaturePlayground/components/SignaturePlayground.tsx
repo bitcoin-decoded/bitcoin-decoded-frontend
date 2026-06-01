@@ -6,6 +6,7 @@ import {
   ArrowDownRight,
   ArrowRight,
   CheckCircle,
+  Globe,
   KeyRound,
   Lightbulb,
   Lock,
@@ -139,12 +140,13 @@ export const SignaturePlayground: FC = () => {
   const coherenceBanner: CSSProperties = {
     display: "flex",
     alignItems: "center",
-    gap: "0.5rem",
-    padding: "0.55rem 0.7rem",
-    borderRadius: "0.55rem",
+    gap: "0.4rem",
+    padding: "0.4rem 0.55rem",
+    borderRadius: "0.5rem",
     ...mono,
-    fontSize: isMobile ? "0.66rem" : "0.7rem",
+    fontSize: "0.62rem",
     fontWeight: 700,
+    lineHeight: 1.4,
     ...(isOriginalKey
       ? {
           color: colors.successColor,
@@ -226,6 +228,41 @@ export const SignaturePlayground: FC = () => {
     </div>
   );
 
+  // The message being signed - shown right at the signing step (before the
+  // signature node), since it's the input the signature is produced for.
+  const messageStripEl = (
+    <div style={messageStrip}>
+      <Mail size={15} strokeWidth={2} style={{ color: colors.accentColor, flexShrink: 0 }} />
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem", minWidth: 0 }}>
+        <span style={messageStripLabel}>{t("signaturePlayground.messageLabel")}</span>
+        <span style={messageStripValue}>{displayMessage}</span>
+      </div>
+    </div>
+  );
+
+  // Tick / cross pinned to the public-key label: does the current private key
+  // still derive to this public key?
+  const publicKeyTick = isOriginalKey ? (
+    <CheckCircle size={14} strokeWidth={2.5} style={{ color: colors.successColor, flexShrink: 0 }} />
+  ) : (
+    <XCircle size={14} strokeWidth={2.5} style={{ color: colors.errorColor, flexShrink: 0 }} />
+  );
+
+  const coherenceBadge = (
+    <div style={coherenceBanner}>
+      {isOriginalKey ? (
+        <CheckCircle size={13} strokeWidth={2.5} style={{ flexShrink: 0 }} />
+      ) : (
+        <XCircle size={13} strokeWidth={2.5} style={{ flexShrink: 0 }} />
+      )}
+      <span style={{ minWidth: 0 }}>
+        {isOriginalKey
+          ? t("signaturePlayground.statusValid")
+          : t("signaturePlayground.statusInvalid")}
+      </span>
+    </div>
+  );
+
   const privateNode = (
     <FieldCard
       icon={<Lock size={11} strokeWidth={2.5} />}
@@ -236,7 +273,6 @@ export const SignaturePlayground: FC = () => {
       valueKind="hex"
       editable={isDerived}
       onChange={updatePrivateKey}
-      hint={t("signaturePlayground.privateKeyHint")}
       footerIcon={<User size={10} strokeWidth={2.5} />}
       footerLabel={t("signaturePlayground.privateKeyOwner")}
       editableLabel={t("signaturePlayground.editable")}
@@ -250,11 +286,14 @@ export const SignaturePlayground: FC = () => {
       icon={<KeyRound size={11} strokeWidth={2.5} />}
       number={2}
       label={t("signaturePlayground.publicKeyLabel")}
+      labelTrailing={publicKeyTick}
+      belowLabel={coherenceBadge}
       value={publicKey}
       tone="public"
       valueKind="hex"
       truncate
-      hint={t("signaturePlayground.publicKeyHint")}
+      footerIcon={<Globe size={10} strokeWidth={2.5} />}
+      footerLabel={t("signaturePlayground.publicKeyOwner")}
       editableLabel={t("signaturePlayground.editable")}
       readOnlyLabel={t("signaturePlayground.readOnly")}
       colors={colors}
@@ -338,6 +377,7 @@ export const SignaturePlayground: FC = () => {
       <div style={verticalConnector}>{calcule}</div>
       {publicNode}
       <div style={verticalConnector}>{signe}</div>
+      {messageStripEl}
       {signatureNode}
     </div>
   ) : (
@@ -348,6 +388,9 @@ export const SignaturePlayground: FC = () => {
       <div style={fanRow}>
         {calcule}
         {signe}
+      </div>
+      <div style={apexWrap}>
+        <div style={{ width: "72%" }}>{messageStripEl}</div>
       </div>
       <div style={baseRow}>
         {publicNode}
@@ -384,7 +427,7 @@ export const SignaturePlayground: FC = () => {
     <ActionButton
       onClick={verify}
       consumed={false}
-      variant="verify"
+      variant="primary"
       label={t("signaturePlayground.verifyAction")}
       consumedLabel={t("signaturePlayground.verifyConsumed")}
       icon={<ShieldCheck size={13} strokeWidth={2.2} />}
@@ -417,34 +460,10 @@ export const SignaturePlayground: FC = () => {
         {t("signaturePlayground.title")}
       </Caption>
 
-      {/* Message being signed - context for the whole flow */}
-      <div style={messageStrip}>
-        <Mail size={15} strokeWidth={2} style={{ color: colors.accentColor, flexShrink: 0 }} />
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem", minWidth: 0 }}>
-          <span style={messageStripLabel}>{t("signaturePlayground.messageLabel")}</span>
-          <span style={messageStripValue}>{displayMessage}</span>
-        </div>
-      </div>
-
       {/* The three elements, laid out as a pyramid */}
       <div style={{ minWidth: 0 }}>
         <div style={sectionLabel}>{t("signaturePlayground.sectionElements")}</div>
         {pyramid}
-
-        {isDerived && (
-          <div style={{ ...coherenceBanner, marginTop: "0.65rem" }}>
-            {isOriginalKey ? (
-              <CheckCircle size={14} strokeWidth={2.5} style={{ flexShrink: 0 }} />
-            ) : (
-              <XCircle size={14} strokeWidth={2.5} style={{ flexShrink: 0 }} />
-            )}
-            <span style={{ minWidth: 0 }}>
-              {isOriginalKey
-                ? t("signaturePlayground.statusValid")
-                : t("signaturePlayground.statusInvalid")}
-            </span>
-          </div>
-        )}
       </div>
 
       {/* Phase CTA */}
@@ -454,7 +473,7 @@ export const SignaturePlayground: FC = () => {
       {verifyStatus !== "idle" && (
         <FeedbackPanel
           tone={verifyStatus === "accepted" ? "success" : "error"}
-          style={{ gap: "0.5rem" }}
+          style={{ gap: "0.85rem" }}
         >
           <div
             style={{
@@ -472,7 +491,7 @@ export const SignaturePlayground: FC = () => {
               margin: 0,
               display: "flex",
               flexDirection: "column",
-              gap: "0.3rem",
+              gap: "0.55rem",
             }}
           >
             {[

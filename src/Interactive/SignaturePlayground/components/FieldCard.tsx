@@ -12,8 +12,12 @@ type Props = {
   label: string;
   /** Optional step number rendered as a small badge before the icon (1, 2, 3). */
   number?: number;
+  /** Optional element pinned to the right of the label row (e.g. a tick/cross). */
+  labelTrailing?: ReactNode;
+  /** Optional element rendered right under the label row, before the value. */
+  belowLabel?: ReactNode;
   value: string;
-  hint: string;
+  hint?: string;
   tone: FieldTone;
   valueKind: ValueKind;
   /** Truncate the read-only value (long hex) to first8…last6 so it stays on one line. */
@@ -43,6 +47,8 @@ export const FieldCard: FC<Props> = ({
   icon,
   label,
   number,
+  labelTrailing,
+  belowLabel,
   value,
   hint,
   tone,
@@ -90,6 +96,14 @@ export const FieldCard: FC<Props> = ({
         boxSizing: "border-box",
         flex: 1,
       };
+
+  const labelRowStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "0.5rem",
+    minWidth: 0,
+  };
 
   const labelStyle: CSSProperties = {
     display: "flex",
@@ -169,13 +183,18 @@ export const FieldCard: FC<Props> = ({
 
   return (
     <div style={containerStyle}>
-      <div style={labelStyle}>
-        {number !== undefined && <span style={numberBadgeStyle}>{number}</span>}
-        {icon}
-        <span style={{ minWidth: 0, overflowWrap: "break-word" }}>{label}</span>
+      <div style={labelRowStyle}>
+        <span style={labelStyle}>
+          {number !== undefined && <span style={numberBadgeStyle}>{number}</span>}
+          {icon}
+          <span style={{ minWidth: 0, overflowWrap: "break-word" }}>{label}</span>
+        </span>
+        {labelTrailing}
       </div>
 
-      <p style={hintStyle}>{hint}</p>
+      {belowLabel}
+
+      {hint && <p style={hintStyle}>{hint}</p>}
 
       {editable ? (
         <div style={{ position: "relative", minWidth: 0 }}>
