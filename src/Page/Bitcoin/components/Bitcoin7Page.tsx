@@ -2,7 +2,7 @@ import { type FC } from "react";
 
 import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { SignaturePlayground } from "../../../Interactive";
+import { KeySignatureTrio, SignaturePlayground } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared";
 
@@ -19,36 +19,12 @@ export const Bitcoin7Page: FC = () => {
           : "Your bank needs to know who you are. Bitcoin doesn't. No ID, no name, no account. And yet, no one can spend your bitcoins for you. How?"
       }
     >
-      <Callout title={fr ? "Trois éléments, trois rôles" : "Three elements, three roles"}>
-        <p>
-          {fr
-            ? "Une transaction Bitcoin repose sur trois objets qu'il faut bien distinguer :"
-            : "A Bitcoin transaction relies on three objects you need to clearly distinguish:"}
-        </p>
-        <ol>
-          <li>
-            <HighlightText>{fr ? "Clé privée" : "Private key"}</HighlightText>
-            {fr
-              ? " : ne doit jamais être divulguée, elle permet de produire une signature"
-              : ": must never be shared, it lets you produce a signature"}
-            .
-          </li>
-          <li>
-            <HighlightText>{fr ? "Clé publique" : "Public key"}</HighlightText>
-            {fr
-              ? " : dérivée de la clé privée, elle permet de vérifier une signature"
-              : ": derived from the private key, it lets you verify a signature"}
-            .
-          </li>
-          <li>
-            <HighlightText>{fr ? "Signature" : "Signature"}</HighlightText>
-            {fr
-              ? " : preuve produite à partir de la clé privée pour un message donné"
-              : ": a proof produced from the private key for a given message"}
-            .
-          </li>
-        </ol>
-      </Callout>
+      <p>
+        {fr
+          ? "Une transaction Bitcoin repose sur trois objets qu'il faut bien distinguer. Ils ne valent rien seuls : c'est ensemble qu'ils prouvent la propriété."
+          : "A Bitcoin transaction relies on three objects you need to clearly distinguish. None is worth much alone: it's together that they prove ownership."}
+      </p>
+      <KeySignatureTrio />
 
       <p>{fr ? "Passons à la pratique." : "Let's get practical."}</p>
 

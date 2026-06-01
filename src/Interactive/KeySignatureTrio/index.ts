@@ -1,0 +1,1 @@
+export { KeySignatureTrio } from "./components";

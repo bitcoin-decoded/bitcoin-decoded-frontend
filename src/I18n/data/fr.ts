@@ -235,6 +235,12 @@ const fr = {
   "sigVerifier.idle": "Clique sur « Vérifier » pour simuler la vérification.",
   "sigVerifier.reset": "Réinitialiser",
 
+  // KeySignatureTrio
+  "keyTrio.sectionTitle": "Trois éléments, trois rôles",
+  "keyTrio.prompt":
+    "Clique sur chaque élément pour révéler son rôle — et observe les liens qui les relient.",
+  "keyTrio.emptyState": "Sélectionne un élément ci-dessus pour découvrir son rôle.",
+
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas réalise sa première transaction",
   "signaturePlayground.subtitle":
