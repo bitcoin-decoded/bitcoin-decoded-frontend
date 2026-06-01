@@ -365,6 +365,7 @@ const fr = {
   "txComparison.bankSummary": "Le solde est modifié dans le registre bancaire.",
   "txComparison.bankLedger": "Registre bancaire",
   "txComparison.bankUpdated": "Mis à jour",
+  "txComparison.bankTransferLabel": "Virement",
   "txComparison.bankKeyText": "Une transaction bancaire déplace un solde.",
   "txComparison.btcTitle": "Bitcoin",
   "txComparison.btcSubtitle": "Simulation d'une transaction Bitcoin",

@@ -7,7 +7,6 @@ import {
   Building2,
   CircleCheck,
   CircleDollarSign,
-  Coins,
   KeyRound,
   Lightbulb,
   Lock,
@@ -206,20 +205,22 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
     transition: "background 0.4s var(--ease-smooth)",
   };
 
+  // Lit only once the transfer runs (rendered solely in the "after" state),
+  // and clearly labelled so its purpose is unambiguous.
   const transferPill: CSSProperties = {
     ...mono,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.3rem",
-    fontSize: "0.62rem",
+    fontSize: "0.6rem",
     fontWeight: 700,
-    letterSpacing: "0.03em",
-    padding: "0.12rem 0.5rem",
-    borderRadius: "0.35rem",
-    color: isAfter ? bankAccent : withOpacity(colors.base.text.secondary, 0.5),
-    background: withOpacity(bankAccent, isAfter ? 0.14 : 0.05),
-    border: `1px solid ${withOpacity(bankAccent, isAfter ? 0.35 : 0.12)}`,
-    transition: "all 0.4s var(--ease-smooth)",
+    textTransform: "uppercase",
+    letterSpacing: "0.05em",
+    padding: "0.16rem 0.6rem",
+    borderRadius: "0.4rem",
+    color: bankAccent,
+    background: withOpacity(bankAccent, 0.14),
+    border: `1px solid ${withOpacity(bankAccent, 0.35)}`,
   };
 
   const ledgerEquation: CSSProperties = {
@@ -495,10 +496,18 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
           )}
           <div style={transferConnector}>
             <div style={transferStem} />
-            <span style={transferPill}>
-              <Coins size={10} strokeWidth={2} />
-              {fmtEur(BANK.sent)}
-            </span>
+            {isAfter ? (
+              <span style={transferPill}>
+                <ArrowDown size={11} strokeWidth={2.5} />
+                {t("txComparison.bankTransferLabel")} {fmtEur(BANK.sent)}
+              </span>
+            ) : (
+              <ArrowDown
+                size={14}
+                strokeWidth={2}
+                style={{ color: withOpacity(bankAccent, 0.3) }}
+              />
+            )}
             <div style={transferStem} />
           </div>
           {renderLedgerEntry(t("txComparison.michu"), BANK.michuBefore, BANK.michuAfter, true)}

@@ -362,6 +362,7 @@ const en = {
   "txComparison.bankSummary": "The balance is updated in the bank ledger.",
   "txComparison.bankLedger": "Bank ledger",
   "txComparison.bankUpdated": "Updated",
+  "txComparison.bankTransferLabel": "Transfer",
   "txComparison.bankKeyText": "A bank transaction moves a balance.",
   "txComparison.btcTitle": "Bitcoin",
   "txComparison.btcSubtitle": "Bitcoin transaction simulation",
