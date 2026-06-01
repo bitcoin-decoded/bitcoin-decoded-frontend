@@ -8,6 +8,7 @@ import { getKeySignatureTrio, TRIO_LAYOUT } from "../data";
 import { trimSegment } from "../helpers";
 import { useKeySignatureTrio } from "../hooks";
 
+import { ExploredCounter } from "./ExploredCounter";
 import { TrioNode } from "./TrioNode";
 
 export const KeySignatureTrio: FC = () => {
@@ -20,7 +21,7 @@ export const KeySignatureTrio: FC = () => {
   const accentBorder = world.border.secondary;
 
   const { elements, connections } = getKeySignatureTrio(language);
-  const { selectedId, hasSelection, select } = useKeySignatureTrio();
+  const { selectedId, hasSelection, select, exploredCount } = useKeySignatureTrio();
 
   const { viewWidth, viewHeight, nodes, clearance } = TRIO_LAYOUT;
   const edgeClearance = isMobile ? clearance.mobile : clearance.desktop;
@@ -33,6 +34,14 @@ export const KeySignatureTrio: FC = () => {
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
   // ── styles ──────────────────────────────────────────────────────────────────
+
+  const headerRow: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "0.6rem 0.85rem",
+    flexWrap: "wrap",
+  };
 
   const promptStyle: CSSProperties = {
     fontSize: isMobile ? "0.85rem" : "0.9rem",
@@ -170,9 +179,16 @@ export const KeySignatureTrio: FC = () => {
       margin={isMobile ? "1.5rem 0" : "2rem 0"}
       style={{ textAlign: "left" }}
     >
-      <Caption tone="world" size="md" icon={<Link2 size={isMobile ? 16 : 18} strokeWidth={2} />}>
-        {t("keyTrio.sectionTitle")}
-      </Caption>
+      <div style={headerRow}>
+        <Caption tone="world" size="md" icon={<Link2 size={isMobile ? 16 : 18} strokeWidth={2} />}>
+          {t("keyTrio.sectionTitle")}
+        </Caption>
+        <ExploredCounter
+          explored={exploredCount}
+          total={elements.length}
+          label={t("keyTrio.explored")}
+        />
+      </div>
 
       <p style={promptStyle}>{t("keyTrio.prompt")}</p>
 
