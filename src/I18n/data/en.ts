@@ -233,6 +233,12 @@ const en = {
   "sigVerifier.idle": 'Click "Verify" to simulate the verification.',
   "sigVerifier.reset": "Reset",
 
+  // KeySignatureTrio
+  "keyTrio.sectionTitle": "Three elements, three roles",
+  "keyTrio.prompt":
+    "Click each element to reveal its role — and watch the links that bind them.",
+  "keyTrio.emptyState": "Pick an element above to discover its role.",
+
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas the Payer makes his first transaction",
   "signaturePlayground.subtitle":

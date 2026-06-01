@@ -13,6 +13,7 @@ export { FlipCardGrid, getBeerProductionChain } from "./FlipCard";
 export { HalvingChart } from "./HalvingChart";
 export { HashDemo } from "./HashDemo";
 export { Illustration } from "./Illustration";
+export { KeySignatureTrio } from "./KeySignatureTrio";
 export { M2MoneySupplyChart } from "./M2MoneySupplyChart";
 export { MempoolVisual } from "./MempoolVisual";
 export { MiningRewardBlock } from "./MiningRewardBlock";
