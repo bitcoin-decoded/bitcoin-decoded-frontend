@@ -181,18 +181,23 @@ const en = {
   // HalvingTimeMachine
   "halvingTimeMachine.title": "Halving time machine",
   "halvingTimeMachine.yearLabel": "Year",
-  "halvingTimeMachine.intro": "Dial a year, pull the lever, and discover that era's block reward.",
+  "halvingTimeMachine.intro":
+    "Set the dial. Pull the lever. Discover the block reward of that era.",
   "halvingTimeMachine.dialLabel": "Destination year",
-  "halvingTimeMachine.screenIdle": "Set the dial, then pull the lever to travel.",
+  "halvingTimeMachine.screenIdle": "Pull the lever to travel through time.",
   "halvingTimeMachine.traveling": "Time traveling…",
   "halvingTimeMachine.rewardLabel": "Reward per block",
-  "halvingTimeMachine.workTimePrefix": "What a miner earned in 10 minutes in 2009 now takes",
+  "halvingTimeMachine.workTimePrefix":
+    "What a miner earned in 10 minutes back in 2009 would now take them",
   "halvingTimeMachine.workTimeSuffix": "of work.",
   "halvingTimeMachine.workTimeGenesis": "The very first tier: 50 BTC per block, every 10 minutes.",
-  "halvingTimeMachine.exhausted": "Issuance complete — all 21 million bitcoins are in circulation.",
+  "halvingTimeMachine.workTimeSymbolic":
+    "By now, the subsidy is barely a token. It's the transaction fees that pick up the slack.",
+  "halvingTimeMachine.exhausted": "Issuance complete: all 21 million bitcoins are in circulation.",
   "halvingTimeMachine.lever": "Pull the lever",
-  "halvingTimeMachine.leverTraveling": "Traveling…",
-  "halvingTimeMachine.caption": "Rewards rounded to the nearest satoshi. Beyond ~2140, issuance is permanently zero.",
+  "halvingTimeMachine.leverTraveling": "Traveling...",
+  "halvingTimeMachine.caption":
+    "Rewards rounded to the nearest satoshi. Beyond ~2140, issuance drops to zero.",
 
   // NetworkFlywheel
   "flywheel.step.usage": "Network usage",

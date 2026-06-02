@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { BITCOIN_REFS } from "../../../References";
 import { TIME_MACHINE_MAX_YEAR } from "../data";
-import { getRewardForYear } from "../helpers";
+import { getRewardForYear, isSubsidySymbolic } from "../helpers";
 import type { TravelPhase } from "../types";
 
 const GENESIS = BITCOIN_REFS.HALVING_SCHEDULE[0];
@@ -78,6 +78,7 @@ export const useHalvingTimeMachine = () => {
   const reward = arrivedYear !== null ? getRewardForYear(arrivedYear) : null;
   const isExhausted = reward === 0;
   const isGenesisEra = reward === GENESIS.reward;
+  const subsidySymbolic = reward !== null && isSubsidySymbolic(reward);
 
   return {
     minYear: MIN_YEAR,
@@ -88,6 +89,7 @@ export const useHalvingTimeMachine = () => {
     phase,
     reward,
     isGenesisEra,
+    isSubsidySymbolic: subsidySymbolic,
     isExhausted,
     setTargetYear,
     travel,

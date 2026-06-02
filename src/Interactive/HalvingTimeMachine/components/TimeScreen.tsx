@@ -13,6 +13,7 @@ type Props = {
   phase: TravelPhase;
   reward: number | null;
   isGenesisEra: boolean;
+  isSubsidySymbolic: boolean;
   isExhausted: boolean;
 };
 
@@ -27,6 +28,7 @@ export const TimeScreen: FC<Props> = ({
   phase,
   reward,
   isGenesisEra,
+  isSubsidySymbolic,
   isExhausted,
 }) => {
   const { t, language } = useTranslation();
@@ -195,7 +197,9 @@ export const TimeScreen: FC<Props> = ({
                 <span style={{ fontSize: "0.78em", color: withOpacity(glow, 0.85) }}>BTC</span>
               </span>
               <p style={sublineStyle}>
-                {isGenesisEra ? (
+                {isSubsidySymbolic ? (
+                  t("halvingTimeMachine.workTimeSymbolic")
+                ) : isGenesisEra ? (
                   t("halvingTimeMachine.workTimeGenesis")
                 ) : (
                   <>

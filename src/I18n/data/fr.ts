@@ -182,18 +182,24 @@ const fr = {
   // HalvingTimeMachine
   "halvingTimeMachine.title": "Machine à explorer le halving",
   "halvingTimeMachine.yearLabel": "Année",
-  "halvingTimeMachine.intro": "Règle le cadran sur une année, tire le levier, et découvre la récompense par bloc de cette époque.",
+  "halvingTimeMachine.intro":
+    "Règle le cadran. Tire le levier. Découvre la récompense par bloc de l'époque.",
   "halvingTimeMachine.dialLabel": "Année de destination",
-  "halvingTimeMachine.screenIdle": "Règle le cadran, puis tire le levier pour voyager.",
+  "halvingTimeMachine.screenIdle": "Tire le levier pour voyager dans le temps.",
   "halvingTimeMachine.traveling": "Voyage temporel…",
   "halvingTimeMachine.rewardLabel": "Récompense par bloc",
   "halvingTimeMachine.workTimePrefix": "Ce qu'un mineur obtenait en 10 minutes en 2009 lui demande",
   "halvingTimeMachine.workTimeSuffix": "de travail.",
-  "halvingTimeMachine.workTimeGenesis": "Le tout premier palier : 50 BTC par bloc, toutes les 10 minutes.",
-  "halvingTimeMachine.exhausted": "Émission terminée — les 21 millions de bitcoins sont tous en circulation.",
-  "halvingTimeMachine.lever": "Tirez le levier",
-  "halvingTimeMachine.leverTraveling": "Voyage en cours…",
-  "halvingTimeMachine.caption": "Récompenses arrondies au satoshi près. Au-delà de ~2140, l'émission est définitivement nulle.",
+  "halvingTimeMachine.workTimeGenesis":
+    "Le tout premier palier : 50 BTC par bloc, toutes les 10 minutes.",
+  "halvingTimeMachine.workTimeSymbolic":
+    "À ce stade, la subvention est devenue symbolique. C'est désormais aux frais de transaction de prendre le relais.",
+  "halvingTimeMachine.exhausted":
+    "Émission terminée : les 21 millions de bitcoins sont tous en circulation.",
+  "halvingTimeMachine.lever": "Tire le levier",
+  "halvingTimeMachine.leverTraveling": "Voyage en cours...",
+  "halvingTimeMachine.caption":
+    "Récompenses arrondies au satoshi près. Au-delà de ~2140, l'émission tombe à zéro.",
 
   // NetworkFlywheel
   "flywheel.step.usage": "Utilisation du réseau",

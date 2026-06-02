@@ -37,6 +37,7 @@ export const HalvingTimeMachine: FC = () => {
     phase,
     reward,
     isGenesisEra,
+    isSubsidySymbolic,
     isExhausted,
     setTargetYear,
     travel,
@@ -87,6 +88,7 @@ export const HalvingTimeMachine: FC = () => {
         phase={phase}
         reward={reward}
         isGenesisEra={isGenesisEra}
+        isSubsidySymbolic={isSubsidySymbolic}
         isExhausted={isExhausted}
       />
 
