@@ -187,15 +187,12 @@ const fr = {
   "halvingTimeMachine.screenIdle": "Règle le cadran, puis tire le levier pour voyager.",
   "halvingTimeMachine.traveling": "Voyage temporel…",
   "halvingTimeMachine.rewardLabel": "Récompense par bloc",
-  "halvingTimeMachine.perBlock": "BTC par bloc",
-  "halvingTimeMachine.halvingsLabel": "halvings depuis 2009",
-  "halvingTimeMachine.ratioSuffix": "× moins qu'en 2009",
+  "halvingTimeMachine.workTimePrefix": "Ce qu'un mineur obtenait en 10 minutes en 2009 lui demande",
+  "halvingTimeMachine.workTimeSuffix": "de travail.",
+  "halvingTimeMachine.workTimeGenesis": "Le tout premier palier : 50 BTC par bloc, toutes les 10 minutes.",
   "halvingTimeMachine.exhausted": "Émission terminée — les 21 millions de bitcoins sont tous en circulation.",
   "halvingTimeMachine.lever": "Tirez le levier",
   "halvingTimeMachine.leverTraveling": "Voyage en cours…",
-  "halvingTimeMachine.chipGenesis": "Genèse",
-  "halvingTimeMachine.chipToday": "Aujourd'hui",
-  "halvingTimeMachine.chipEnd": "Fin ≈ 2140",
   "halvingTimeMachine.caption": "Récompenses arrondies au satoshi près. Au-delà de ~2140, l'émission est définitivement nulle.",
 
   // NetworkFlywheel

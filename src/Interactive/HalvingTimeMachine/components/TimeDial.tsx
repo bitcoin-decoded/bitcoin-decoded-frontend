@@ -28,10 +28,12 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   const baseBorderSecondary = colors.base.border.secondary;
 
   const currentYear = new Date().getFullYear();
+  // Plain years (genesis · today · end of issuance) — no "Fin" label, which
+  // could be misread as "the end of Bitcoin".
   const chips = [
-    { year: minYear, label: t("halvingTimeMachine.chipGenesis") },
-    { year: currentYear, label: t("halvingTimeMachine.chipToday") },
-    { year: TIME_MACHINE_END_YEAR, label: t("halvingTimeMachine.chipEnd") },
+    { year: minYear, label: String(minYear) },
+    { year: currentYear, label: String(currentYear) },
+    { year: TIME_MACHINE_END_YEAR, label: `≈ ${TIME_MACHINE_END_YEAR}` },
   ];
 
   const wrapStyle: CSSProperties = {
@@ -44,7 +46,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
 
   const headerLine: CSSProperties = {
     display: "flex",
-    alignItems: "baseline",
+    alignItems: "center",
     justifyContent: "center",
     gap: "0.55rem",
     flexWrap: "wrap",

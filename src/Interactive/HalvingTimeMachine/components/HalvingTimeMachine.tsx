@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { History } from "lucide-react";
+import { History, Info } from "lucide-react";
 
 import {
   Caption,
@@ -36,8 +36,7 @@ export const HalvingTimeMachine: FC = () => {
     arrivedYear,
     phase,
     reward,
-    halvings,
-    ratioVsGenesis,
+    isGenesisEra,
     isExhausted,
     setTargetYear,
     travel,
@@ -87,8 +86,7 @@ export const HalvingTimeMachine: FC = () => {
         arrivedYear={arrivedYear}
         phase={phase}
         reward={reward}
-        halvings={halvings}
-        ratioVsGenesis={ratioVsGenesis}
+        isGenesisEra={isGenesisEra}
         isExhausted={isExhausted}
       />
 
@@ -105,7 +103,9 @@ export const HalvingTimeMachine: FC = () => {
         <TravelLever traveling={phase === "traveling"} onPull={travel} />
       </div>
 
-      <FeedbackPanel tone="info">{t("halvingTimeMachine.caption")}</FeedbackPanel>
+      <FeedbackPanel tone="info" icon={<Info size={11} strokeWidth={2} />}>
+        {t("halvingTimeMachine.caption")}
+      </FeedbackPanel>
     </SurfaceCard>
   );
 };

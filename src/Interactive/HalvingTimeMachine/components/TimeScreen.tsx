@@ -4,7 +4,7 @@ import { Zap } from "lucide-react";
 
 import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { formatRewardBTC } from "../helpers";
+import { formatRewardBTC, getMinerWorkTime } from "../helpers";
 import type { TravelPhase } from "../types";
 
 type Props = {
@@ -12,8 +12,7 @@ type Props = {
   arrivedYear: number | null;
   phase: TravelPhase;
   reward: number | null;
-  halvings: number | null;
-  ratioVsGenesis: number | null;
+  isGenesisEra: boolean;
   isExhausted: boolean;
 };
 
@@ -27,8 +26,7 @@ export const TimeScreen: FC<Props> = ({
   arrivedYear,
   phase,
   reward,
-  halvings,
-  ratioVsGenesis,
+  isGenesisEra,
   isExhausted,
 }) => {
   const { t, language } = useTranslation();
@@ -136,11 +134,6 @@ export const TimeScreen: FC<Props> = ({
     lineHeight: 1.5,
   };
 
-  const ratioText =
-    ratioVsGenesis && ratioVsGenesis > 1
-      ? ` · ${ratioVsGenesis.toLocaleString(fr ? "fr-FR" : "en-US")}${t("halvingTimeMachine.ratioSuffix")}`
-      : "";
-
   return (
     <div className={phase === "traveling" ? "htm-screen--traveling" : undefined} style={screenStyle}>
       <div style={scanlineStyle} />
@@ -202,8 +195,15 @@ export const TimeScreen: FC<Props> = ({
                 <span style={{ fontSize: "0.78em", color: withOpacity(glow, 0.85) }}>BTC</span>
               </span>
               <p style={sublineStyle}>
-                {halvings} {t("halvingTimeMachine.halvingsLabel")}
-                {ratioText}
+                {isGenesisEra ? (
+                  t("halvingTimeMachine.workTimeGenesis")
+                ) : (
+                  <>
+                    {t("halvingTimeMachine.workTimePrefix")}{" "}
+                    <strong style={{ color: glow }}>{getMinerWorkTime(reward ?? 0, fr)}</strong>{" "}
+                    {t("halvingTimeMachine.workTimeSuffix")}
+                  </>
+                )}
               </p>
             </>
           )}

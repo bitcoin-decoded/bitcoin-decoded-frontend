@@ -186,15 +186,12 @@ const en = {
   "halvingTimeMachine.screenIdle": "Set the dial, then pull the lever to travel.",
   "halvingTimeMachine.traveling": "Time traveling…",
   "halvingTimeMachine.rewardLabel": "Reward per block",
-  "halvingTimeMachine.perBlock": "BTC per block",
-  "halvingTimeMachine.halvingsLabel": "halvings since 2009",
-  "halvingTimeMachine.ratioSuffix": "× less than in 2009",
+  "halvingTimeMachine.workTimePrefix": "What a miner earned in 10 minutes in 2009 now takes",
+  "halvingTimeMachine.workTimeSuffix": "of work.",
+  "halvingTimeMachine.workTimeGenesis": "The very first tier: 50 BTC per block, every 10 minutes.",
   "halvingTimeMachine.exhausted": "Issuance complete — all 21 million bitcoins are in circulation.",
   "halvingTimeMachine.lever": "Pull the lever",
   "halvingTimeMachine.leverTraveling": "Traveling…",
-  "halvingTimeMachine.chipGenesis": "Genesis",
-  "halvingTimeMachine.chipToday": "Today",
-  "halvingTimeMachine.chipEnd": "End ≈ 2140",
   "halvingTimeMachine.caption": "Rewards rounded to the nearest satoshi. Beyond ~2140, issuance is permanently zero.",
 
   // NetworkFlywheel
