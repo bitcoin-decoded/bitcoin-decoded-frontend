@@ -25,6 +25,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const accent = world.border.secondary;
+  const baseBorderSecondary = colors.base.border.secondary;
 
   const currentYear = new Date().getFullYear();
   const chips = [
@@ -82,24 +83,29 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     cursor: disabled ? "not-allowed" : "pointer",
   };
 
-  const chipsRow: CSSProperties = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "0.4rem",
+  // Connected segmented control (cf. SeedGenerator's 12/24 toggle), split into
+  // three sections: genesis · today · end of issuance.
+  const segmentedWrapStyle: CSSProperties = {
+    display: "inline-flex",
+    border: `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,
+    borderRadius: "0.75rem",
+    overflow: "hidden",
   };
 
-  const chipStyle = (active: boolean): CSSProperties => ({
+  const segmentBtnStyle = (active: boolean, first: boolean): CSSProperties => ({
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.58rem",
-    fontWeight: 700,
-    padding: "0.3rem 0.6rem",
-    borderRadius: "999px",
-    border: `1px solid ${withOpacity(accent, active ? 0.7 : 0.3)}`,
-    background: active ? withOpacity(accent, 0.16) : "transparent",
-    color: active ? accent : withOpacity(colors.base.text.secondary, 0.85),
     cursor: disabled ? "not-allowed" : "pointer",
-    transition: "all 0.2s var(--ease-smooth)",
+    padding: isMobile ? "0.5rem 0.7rem" : "0.55rem 1rem",
+    border: "none",
+    borderLeft: first ? "none" : `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,
+    fontSize: isMobile ? "0.62rem" : "0.7rem",
+    fontWeight: 700,
+    letterSpacing: "0.04em",
+    whiteSpace: "nowrap",
+    color: active ? "#fff" : withOpacity(colors.base.text.secondary, 0.85),
+    background: active ? accent : "transparent",
+    opacity: disabled ? 0.5 : 1,
+    transition: "all 0.25s var(--ease-smooth)",
   });
 
   const atMin = targetYear <= minYear;
@@ -146,14 +152,16 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
         </Button>
       </div>
 
-      <div style={chipsRow}>
-        {chips.map((chip) => (
+      <div role="tablist" aria-label={t("halvingTimeMachine.dialLabel")} style={segmentedWrapStyle}>
+        {chips.map((chip, i) => (
           <button
             key={chip.year}
             type="button"
+            role="tab"
+            aria-selected={targetYear === chip.year}
             disabled={disabled}
             onClick={() => onChange(chip.year)}
-            style={chipStyle(targetYear === chip.year)}
+            style={segmentBtnStyle(targetYear === chip.year, i === 0)}
           >
             {chip.label}
           </button>
