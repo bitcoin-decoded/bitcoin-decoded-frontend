@@ -179,6 +179,25 @@ const fr = {
   "halvingChart.caption":
     "Chaque palier correspond à un halving (~tous les 210 000 blocs, soit ~4 ans).",
 
+  // HalvingTimeMachine
+  "halvingTimeMachine.title": "Machine à explorer le halving",
+  "halvingTimeMachine.yearLabel": "Année",
+  "halvingTimeMachine.intro": "Règle le cadran sur une année, tire le levier, et découvre la récompense par bloc de cette époque.",
+  "halvingTimeMachine.dialLabel": "Année de destination",
+  "halvingTimeMachine.screenIdle": "Règle le cadran, puis tire le levier pour voyager.",
+  "halvingTimeMachine.traveling": "Voyage temporel…",
+  "halvingTimeMachine.rewardLabel": "Récompense par bloc",
+  "halvingTimeMachine.perBlock": "BTC par bloc",
+  "halvingTimeMachine.halvingsLabel": "halvings depuis 2009",
+  "halvingTimeMachine.ratioSuffix": "× moins qu'en 2009",
+  "halvingTimeMachine.exhausted": "Émission terminée — les 21 millions de bitcoins sont tous en circulation.",
+  "halvingTimeMachine.lever": "Tirer le levier",
+  "halvingTimeMachine.leverTraveling": "Voyage en cours…",
+  "halvingTimeMachine.chipGenesis": "Genèse",
+  "halvingTimeMachine.chipToday": "Aujourd'hui",
+  "halvingTimeMachine.chipEnd": "Fin ≈ 2140",
+  "halvingTimeMachine.caption": "Récompenses arrondies au satoshi près. Au-delà de ~2140, l'émission est définitivement nulle.",
+
   // NetworkFlywheel
   "flywheel.step.usage": "Utilisation du réseau",
   "flywheel.step.fees": "Frais générés (par bloc)",

@@ -101,8 +101,12 @@ export const BlockAnatomyVisual: FC = () => {
   return (
     <SurfaceCard
       gap="0.25rem"
-      margin={isMobile ? "1.5rem 0" : "2.5rem 0"}
-      style={{ padding: isMobile ? "0.8rem" : "0.95rem" }}
+      margin={isMobile ? "1.5rem auto" : "2.5rem auto"}
+      style={{
+        padding: isMobile ? "0.8rem" : "0.95rem",
+        width: "100%",
+        maxWidth: "26rem",
+      }}
     >
       <div style={titleStyle}>
         {fr ? "Exemple fictif : Bloc #100826" : "Fictional example: Block #100826"}

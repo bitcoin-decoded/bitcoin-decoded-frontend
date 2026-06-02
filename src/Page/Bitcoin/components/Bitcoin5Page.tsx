@@ -5,6 +5,7 @@ import { useTranslation } from "../../../I18n";
 import {
   getQuizDataHalving,
   HalvingChart,
+  HalvingTimeMachine,
   MiningRewardBlock,
   NetworkFlywheel,
   Quiz,
@@ -198,6 +199,8 @@ export const Bitcoin5Page: FC = () => {
           )}
         </p>
       </Callout>
+
+      <HalvingTimeMachine />
 
       <p>
         {fr

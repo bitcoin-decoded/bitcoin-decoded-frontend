@@ -178,6 +178,25 @@ const en = {
   "halvingChart.caption":
     "Each plateau corresponds to a halving (~every 210,000 blocks, i.e. ~4 years).",
 
+  // HalvingTimeMachine
+  "halvingTimeMachine.title": "Halving time machine",
+  "halvingTimeMachine.yearLabel": "Year",
+  "halvingTimeMachine.intro": "Dial a year, pull the lever, and discover that era's block reward.",
+  "halvingTimeMachine.dialLabel": "Destination year",
+  "halvingTimeMachine.screenIdle": "Set the dial, then pull the lever to travel.",
+  "halvingTimeMachine.traveling": "Time traveling…",
+  "halvingTimeMachine.rewardLabel": "Reward per block",
+  "halvingTimeMachine.perBlock": "BTC per block",
+  "halvingTimeMachine.halvingsLabel": "halvings since 2009",
+  "halvingTimeMachine.ratioSuffix": "× less than in 2009",
+  "halvingTimeMachine.exhausted": "Issuance complete — all 21 million bitcoins are in circulation.",
+  "halvingTimeMachine.lever": "Pull the lever",
+  "halvingTimeMachine.leverTraveling": "Traveling…",
+  "halvingTimeMachine.chipGenesis": "Genesis",
+  "halvingTimeMachine.chipToday": "Today",
+  "halvingTimeMachine.chipEnd": "End ≈ 2140",
+  "halvingTimeMachine.caption": "Rewards rounded to the nearest satoshi. Beyond ~2140, issuance is permanently zero.",
+
   // NetworkFlywheel
   "flywheel.step.usage": "Network usage",
   "flywheel.step.fees": "Fees generated (per block)",

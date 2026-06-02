@@ -1,0 +1,108 @@
+import { type CSSProperties, type FC } from "react";
+
+import { History } from "lucide-react";
+
+import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { useTranslation } from "../../../I18n";
+import { useHalvingTimeMachine } from "../hooks";
+
+import { TimeDial } from "./TimeDial";
+import { TimeScreen } from "./TimeScreen";
+import { TravelLever } from "./TravelLever";
+
+/**
+ * "Halving time machine": dial a destination year, pull the lever, and — after a
+ * brief temporal flux — the screen reveals the block reward in effect that year.
+ * Lets readers feel the staircase down to zero, well past 2040.
+ */
+export const HalvingTimeMachine: FC = () => {
+  const { t } = useTranslation();
+  const { colors, moduleTheme } = usePageTheme();
+  const isMobile = useBreakpoint() === "mobile";
+  const world = colors[moduleTheme];
+
+  const {
+    minYear,
+    maxYear,
+    targetYear,
+    displayYear,
+    arrivedYear,
+    phase,
+    reward,
+    halvings,
+    ratioVsGenesis,
+    isExhausted,
+    setTargetYear,
+    travel,
+  } = useHalvingTimeMachine();
+
+  const introStyle: CSSProperties = {
+    margin: 0,
+    fontSize: "0.8rem",
+    lineHeight: 1.55,
+    color: withOpacity(colors.base.text.secondary, 0.9),
+    textAlign: "center",
+  };
+
+  const controlsStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: isMobile ? "1.1rem" : "1.6rem",
+  };
+
+  const captionStyle: CSSProperties = {
+    margin: 0,
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.58rem",
+    lineHeight: 1.5,
+    color: withOpacity(colors.base.text.secondary, 0.6),
+    textAlign: "center",
+  };
+
+  return (
+    <SurfaceCard gap="1.1rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={{ overflow: "hidden" }}>
+      <Caption
+        tone="accent"
+        size="md"
+        icon={
+          <History
+            size={isMobile ? 17 : 18}
+            strokeWidth={2}
+            style={{ color: world.border.secondary, flexShrink: 0 }}
+          />
+        }
+      >
+        {t("halvingTimeMachine.title")}
+      </Caption>
+
+      <p style={introStyle}>{t("halvingTimeMachine.intro")}</p>
+
+      <TimeScreen
+        displayYear={displayYear}
+        arrivedYear={arrivedYear}
+        phase={phase}
+        reward={reward}
+        halvings={halvings}
+        ratioVsGenesis={ratioVsGenesis}
+        isExhausted={isExhausted}
+      />
+
+      <div style={controlsStyle}>
+        <div style={{ flex: 1, width: "100%", maxWidth: "26rem" }}>
+          <TimeDial
+            targetYear={targetYear}
+            minYear={minYear}
+            maxYear={maxYear}
+            disabled={phase === "traveling"}
+            onChange={setTargetYear}
+          />
+        </div>
+        <TravelLever traveling={phase === "traveling"} onPull={travel} />
+      </div>
+
+      <p style={captionStyle}>{t("halvingTimeMachine.caption")}</p>
+    </SurfaceCard>
+  );
+};

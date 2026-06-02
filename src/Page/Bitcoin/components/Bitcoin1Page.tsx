@@ -1,6 +1,16 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ChevronDown, Monitor, Pickaxe } from "lucide-react";
+import {
+  Bitcoin,
+  Blocks,
+  ChevronDown,
+  Cpu,
+  Laptop,
+  Monitor,
+  Pickaxe,
+  ScrollText,
+  ShieldCheck,
+} from "lucide-react";
 
 import { Callout, Disclosure, IdentityCard, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
@@ -16,7 +26,18 @@ export const Bitcoin1Page: FC = () => {
     flex: "1 1 300px",
     maxWidth: "25rem",
     minWidth: "17.5rem",
+    display: "flex",
+    flexDirection: "column",
   };
+
+  // Same row as PAGE_STYLES.cardsContainer, but stretched so the two cards
+  // share a uniform height (paired with each card's fillHeight).
+  const cardsRowStyle: CSSProperties = {
+    ...PAGE_STYLES.cardsContainer,
+    alignItems: "stretch",
+  };
+
+  const charIconProps = { size: 15, strokeWidth: 2 } as const;
 
   return (
     <PageTemplate
@@ -316,10 +337,11 @@ export const Bitcoin1Page: FC = () => {
           ? "Pour récapituler, voici les deux acteurs du réseau :"
           : "To recap, here are the two players in the network:"}
       </p>
-      <div style={PAGE_STYLES.cardsContainer}>
+      <div style={cardsRowStyle}>
         <div style={cardWrapperStyle}>
           <IdentityCard
             compact
+            fillHeight
             name={fr ? "Nœud simple" : "Simple node"}
             profile={fr ? "Le gardien des règles" : "The rule keeper"}
             profilePicture={
@@ -337,18 +359,21 @@ export const Bitcoin1Page: FC = () => {
             }
             characteristics={[
               {
+                icon: <ScrollText {...charIconProps} />,
                 label: fr ? "Son rôle :" : "Its role:",
                 value: fr
                   ? "Stocker une copie complète de la blockchain et vérifier que chaque transaction et chaque bloc respectent les règles du protocole."
                   : "Store a complete copy of the blockchain and check that every transaction and every block follows the protocol's rules.",
               },
               {
+                icon: <ShieldCheck {...charIconProps} />,
                 label: fr ? "Son super-pouvoir :" : "Its superpower:",
                 value: fr
                   ? "Rejeter tout bloc invalide, même s'il provient du mineur le plus puissant du monde."
                   : "Reject any invalid block, even from the most powerful miner on Earth.",
               },
               {
+                icon: <Laptop {...charIconProps} />,
                 label: fr ? "Accessible à tous :" : "Within reach of anyone:",
                 value: fr
                   ? "Un simple ordinateur et une connexion internet suffisent pour en faire tourner un."
@@ -360,6 +385,7 @@ export const Bitcoin1Page: FC = () => {
         <div style={cardWrapperStyle}>
           <IdentityCard
             compact
+            fillHeight
             name={fr ? "Nœud mineur" : "Mining node"}
             profile={fr ? "Le bâtisseur de blocs" : "The block builder"}
             profilePicture={
@@ -377,18 +403,21 @@ export const Bitcoin1Page: FC = () => {
             }
             characteristics={[
               {
+                icon: <Blocks {...charIconProps} />,
                 label: fr ? "Son rôle :" : "Its role:",
                 value: fr
                   ? "Proposer un nouveau bloc rempli de transactions en résolvant ce calcul le premier."
                   : "Propose a new block full of transactions by being the first to solve that calculation.",
               },
               {
+                icon: <Bitcoin {...charIconProps} />,
                 label: fr ? "Son super-pouvoir :" : "Its superpower:",
                 value: fr
                   ? "Créer de nouveaux bitcoins à chaque bloc validé, en quantité qui diminue de moitié tous les quatre ans environ, jusqu'à un plafond total de 21 millions."
                   : "Create new bitcoins with every validated block, in an amount that gets cut in half roughly every four years, up to a total cap of 21 million.",
               },
               {
+                icon: <Cpu {...charIconProps} />,
                 label: fr ? "Ce qu'il faut :" : "What it takes:",
                 value: fr
                   ? "Du matériel de calcul spécialisé (ASIC) et de l'électricité à moindre coût pour que cela soit rentable."

@@ -17,6 +17,11 @@ type Props = {
    * card used in the 2-up character layouts.
    */
   compact?: boolean;
+  /**
+   * Grow to fill the height of a stretched flex parent, so side-by-side cards
+   * share a uniform height. Opt-in: default `false` leaves layout untouched.
+   */
+  fillHeight?: boolean;
 };
 
 export const IdentityCard: FC<Props> = ({
@@ -26,6 +31,7 @@ export const IdentityCard: FC<Props> = ({
   characteristics,
   isExpandable = false,
   compact = false,
+  fillHeight = false,
 }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
@@ -71,6 +77,7 @@ export const IdentityCard: FC<Props> = ({
 
   const containerStyle: CSSProperties = {
     position: "relative",
+    ...(fillHeight ? { flex: 1 } : {}),
     marginTop: ramp.avatarMarginTop,
     marginBottom: ramp.marginBottom,
     background: `linear-gradient(190deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary})`,
@@ -146,6 +153,10 @@ export const IdentityCard: FC<Props> = ({
   };
 
   const sectionLabelStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.4rem",
     color: colors[moduleTheme].text.primary,
     fontWeight: 700,
     marginBottom: compact ? "0.6rem" : "1rem",
@@ -247,7 +258,10 @@ export const IdentityCard: FC<Props> = ({
           <div style={{ padding: `0 ${ramp.contentPadX}` }}>
             {characteristics.map((characteristic, index) => (
               <div key={index} style={sectionStyle(index)}>
-                <div style={sectionLabelStyle}>{characteristic.label}</div>
+                <div style={sectionLabelStyle}>
+                  {characteristic.icon}
+                  {characteristic.label}
+                </div>
                 <div style={sectionValueStyle}>{characteristic.value}</div>
               </div>
             ))}
