@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Zap } from "lucide-react";
 
-import { useBreakpoint, withOpacity } from "../../../Design";
+import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { formatRewardBTC, getMinerWorkTime } from "../helpers";
 import type { TravelPhase } from "../types";
@@ -33,14 +33,20 @@ export const TimeScreen: FC<Props> = ({
 }) => {
   const { t, language } = useTranslation();
   const fr = language === "fr";
+  const { theme, colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
+  const world = colors[moduleTheme];
+  const isLight = theme === "light";
 
-  // The screen is a fixed dark "CRT" in both light and dark mode, so its text
-  // uses fixed light inks — not theme base.text, which flips to dark in light
-  // mode and becomes unreadable on the black screen.
-  const glow = "#fbbf24"; // bright amber readout
-  const screenInk = "#f5f5f4"; // primary text on the screen
-  const screenInkMuted = "rgba(245, 245, 244, 0.72)"; // secondary text on the screen
+  // The "screen" adapts to the theme: a deep glowing CRT in dark mode, a light
+  // panel in light mode — never a black box on a white page. Text + accents use
+  // theme tokens, readable on whichever background.
+  const glow = world.text.secondary; // amber readout + accents
+  const screenInk = colors.base.text.primary; // reward value
+  const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85); // labels / subline / prompt
+  const screenBg = isLight
+    ? `linear-gradient(180deg, ${world.background.primary}, ${colors.base.background.primary})`
+    : "linear-gradient(180deg, #0c0b09, #08080a)";
   const localizeDecimal = (s: string) => (fr ? s.replace(".", ",") : s);
 
   const screenStyle: CSSProperties = {
@@ -48,7 +54,7 @@ export const TimeScreen: FC<Props> = ({
     overflow: "hidden",
     borderRadius: "0.85rem",
     padding: isMobile ? "1.25rem 1rem" : "1.6rem 1.25rem",
-    background: "linear-gradient(180deg, #0c0b09, #08080a)",
+    background: screenBg,
     border: `1px solid ${withOpacity(glow, 0.4)}`,
     boxShadow: `inset 0 0 30px ${withOpacity(glow, 0.12)}, 0 0 0 1px ${withOpacity(glow, 0.05)}`,
     display: "flex",
@@ -68,7 +74,7 @@ export const TimeScreen: FC<Props> = ({
       "#000000",
       0.25,
     )} 0px, ${withOpacity("#000000", 0.25)} 1px, transparent 1px, transparent 3px)`,
-    opacity: 0.5,
+    opacity: isLight ? 0.25 : 0.5,
   };
 
   const groupStyle: CSSProperties = {

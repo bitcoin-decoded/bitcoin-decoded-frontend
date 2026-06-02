@@ -21,7 +21,7 @@ type Props = {
  */
 export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, onChange }) => {
   const { t } = useTranslation();
-  const { colors, moduleTheme } = usePageTheme();
+  const { theme, colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const accent = world.border.secondary;
@@ -82,6 +82,8 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     flex: 1,
     maxWidth: "18rem",
     accentColor: accent,
+    // Match the page theme so the native track isn't a black bar in light mode.
+    colorScheme: theme,
     cursor: disabled ? "not-allowed" : "pointer",
   };
 
