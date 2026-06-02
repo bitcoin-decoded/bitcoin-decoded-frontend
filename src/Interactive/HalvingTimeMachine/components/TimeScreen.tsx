@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Zap } from "lucide-react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { useBreakpoint, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { formatRewardBTC, getMinerWorkTime } from "../helpers";
 import type { TravelPhase } from "../types";
@@ -33,11 +33,14 @@ export const TimeScreen: FC<Props> = ({
 }) => {
   const { t, language } = useTranslation();
   const fr = language === "fr";
-  const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
-  const world = colors[moduleTheme];
 
-  const glow = world.text.secondary;
+  // The screen is a fixed dark "CRT" in both light and dark mode, so its text
+  // uses fixed light inks — not theme base.text, which flips to dark in light
+  // mode and becomes unreadable on the black screen.
+  const glow = "#fbbf24"; // bright amber readout
+  const screenInk = "#f5f5f4"; // primary text on the screen
+  const screenInkMuted = "rgba(245, 245, 244, 0.72)"; // secondary text on the screen
   const localizeDecimal = (s: string) => (fr ? s.replace(".", ",") : s);
 
   const screenStyle: CSSProperties = {
@@ -114,7 +117,7 @@ export const TimeScreen: FC<Props> = ({
     fontSize: isMobile ? "1.4rem" : "1.7rem",
     fontWeight: 700,
     lineHeight: 1.1,
-    color: colors.base.text.primary,
+    color: screenInk,
     textShadow: `0 0 10px ${withOpacity(glow, 0.3)}`,
   };
 
@@ -124,14 +127,14 @@ export const TimeScreen: FC<Props> = ({
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: "0.6rem",
     lineHeight: 1.5,
-    color: withOpacity(colors.base.text.secondary, 0.85),
+    color: screenInkMuted,
   };
 
   const promptStyle: CSSProperties = {
     margin: 0,
     fontSize: "0.7rem",
     fontStyle: "italic",
-    color: withOpacity(colors.base.text.secondary, 0.7),
+    color: screenInkMuted,
     maxWidth: "18rem",
     lineHeight: 1.5,
   };
