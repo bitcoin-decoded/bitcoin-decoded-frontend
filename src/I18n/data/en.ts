@@ -240,7 +240,7 @@ const en = {
   "keyTrio.explored": "explored",
 
   // SignaturePlayground
-  "signaturePlayground.title": "Nicolas the Payer makes his first transaction",
+  "signaturePlayground.title": "Nicolas makes his first transaction",
   "signaturePlayground.sectionElements": "The three elements",
   "signaturePlayground.privateKeyLabel": "Private key (secret)",
   "signaturePlayground.publicKeyLabel": "Public key",
@@ -275,7 +275,7 @@ const en = {
   "signaturePlayground.verifyMoreInfo": "learn more",
   "signaturePlayground.verifyMoreInfoUrl":
     "https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm",
-  "signaturePlayground.networkVerifies": "Every node on the network checks 3 inputs",
+  "signaturePlayground.networkVerifies": "Each network node verifies 3 elements",
   "signaturePlayground.rowMessage": "message",
   "signaturePlayground.rowSignature": "signature",
   "signaturePlayground.rowPubkey": "public key",
@@ -284,18 +284,16 @@ const en = {
   "signaturePlayground.acceptedExpl":
     "The network can verify that this signature matches this message and this public key, without ever needing to know the private key.",
   "signaturePlayground.rejectedExpl":
-    "The network was expecting a signature corresponding to Nicolas's public key. No key is ever 'wrong' in itself: any other private key can sign its own transactions, but it can never substitute for Nicolas to sign his.",
-  "signaturePlayground.disclosureDerivationTitle": "What does derivation means ?",
+    "he network was expecting a signature corresponding to Nicolas's public key. No key is ever 'wrong' in itself: any other private key can sign its own transactions, but none of them can produce a signature that matches Nicolas's public key.",
+  "signaturePlayground.disclosureDerivationTitle": "What does derivation mean?",
   "signaturePlayground.disclosurePrivateKeyTitle":
     "How does this prove possession of the private key without ever revealing it?",
   "signaturePlayground.derivationDefinition":
     "You've seen that the public key is calculated from the private key through a one-way operation. That calculation has a name: derivation. It's the 'toothpaste tube' effect: once it's out, it doesn't go back in.",
-  "signaturePlayground.pedagogy":
-    "Because producing a valid signature without the matching private key would take longer than the age of the universe, even harnessing every computer on the planet. The network doesn't verify an identity: it verifies a proof.",
   "signaturePlayground.pedagogyConcretely":
-    "In practice, even though everyone can see the public key, no known method can derive the private key from it, nor forge a valid signature in your name.",
+    "No known method can derive the private key from the public key. And forging a valid signature without the right private key would take longer than the age of the universe, even harnessing every computer on the planet.",
   "signaturePlayground.pedagogyAnalogy":
-    "It's like a lock: anyone can verify that a key opens the door, but only the holder of the right key can use it.",
+    "It's like a lock: anyone can verify that a key opens the door, but only whoever holds the right key can use it.",
   "signaturePlayground.reset": "Reset",
 
   // SeedGenerator

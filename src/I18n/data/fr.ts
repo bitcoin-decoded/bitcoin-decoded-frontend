@@ -291,10 +291,8 @@ const fr = {
     "Comment cela prouve-t-il que l'on détient la clé privée sans jamais l'exposer ?",
   "signaturePlayground.derivationDefinition":
     "Tu as vu que la clé publique est calculée à partir de la clé privée par une opération à sens unique. Ce calcul a un nom : la dérivation. C'est l'effet « tube de dentifrice » : une fois sorti, il ne rentre plus.",
-  "signaturePlayground.pedagogy":
-    "Parce que produire une signature valide sans la clé privée correspondante demanderait plus de temps que l'âge de l'univers, même en mobilisant toute la puissance de calcul de la planète. Le réseau ne vérifie pas une identité : il vérifie une preuve.",
   "signaturePlayground.pedagogyConcretely":
-    "Concrètement, même si tout le monde voit la clé publique, aucune méthode connue ne permet d'en déduire la clé privée ni de fabriquer une signature valide à ta place.",
+    "Aucune méthode connue ne permet de remonter de la clé publique à la clé privée. Et créer une signature valide sans la bonne clé privée demanderait plus de temps que l'âge de l'univers, même en mobilisant toute la puissance de calcul de la planète.",
   "signaturePlayground.pedagogyAnalogy":
     "C'est comme une serrure : tout le monde peut vérifier qu'une clé ouvre la porte, mais seul celui qui possède la bonne clé peut l'utiliser.",
   "signaturePlayground.reset": "Réinitialiser",

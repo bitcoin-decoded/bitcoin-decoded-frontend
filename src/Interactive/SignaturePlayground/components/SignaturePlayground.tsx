@@ -548,7 +548,6 @@ export const SignaturePlayground: FC = () => {
         title={t("signaturePlayground.disclosurePrivateKeyTitle")}
         icon={<Lightbulb size={13} strokeWidth={2} />}
       >
-        <p style={{ margin: 0 }}>{t("signaturePlayground.pedagogy")}</p>
         <p style={{ margin: 0 }}>{t("signaturePlayground.pedagogyConcretely")}</p>
         <p
           style={{
