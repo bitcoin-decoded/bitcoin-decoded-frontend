@@ -29,7 +29,13 @@ import {
   withOpacity,
 } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { ActionButton, FieldCard, MatchVisualizer, PyramidConnector } from "../components";
+import {
+  ActionButton,
+  FieldCard,
+  MatchVisualizer,
+  ModifyKeyButton,
+  PyramidConnector,
+} from "../components";
 import { useSignaturePlayground } from "../hooks";
 import type { SigPlaygroundColors } from "../types";
 
@@ -65,11 +71,15 @@ export const SignaturePlayground: FC = () => {
     isOriginalKey,
     hasSignature,
     derive,
-    updatePrivateKey,
+    modifyKey,
     sign,
     verify,
     reset,
   } = useSignaturePlayground();
+
+  // Match state drives the value-text color: green when the private key still
+  // derives to the on-record public key, red once it has been swapped out.
+  const matchColor = isOriginalKey ? colors.successColor : colors.errorColor;
 
   const displayMessage = t("signaturePlayground.message");
 
@@ -121,11 +131,10 @@ export const SignaturePlayground: FC = () => {
 
   const apexWrap: CSSProperties = { display: "flex", justifyContent: "center" };
 
-  // Desktop: same width as one base column (equal-width blocks). Mobile: a bit
-  // wider so the full private key fits, but still narrower than the base span
-  // so it reads as a pyramid apex.
+  // Now that every value is truncated, the apex can stay narrow: one base
+  // column on desktop, a touch wider on mobile to fit the "modify key" button.
   const apexNode: CSSProperties = {
-    width: isMobile ? "90%" : "calc(50% - 0.3rem)",
+    width: isMobile ? "72%" : "calc(50% - 0.3rem)",
     display: "flex",
   };
 
@@ -265,6 +274,16 @@ export const SignaturePlayground: FC = () => {
     </div>
   );
 
+  const modifyButton = (
+    <ModifyKeyButton
+      onClick={modifyKey}
+      disabled={!isDerived}
+      label={t("signaturePlayground.modifyKeyAction")}
+      isMobile={isMobile}
+      colors={colors}
+    />
+  );
+
   const privateNode = (
     <FieldCard
       icon={<Lock size={11} strokeWidth={2.5} />}
@@ -273,11 +292,11 @@ export const SignaturePlayground: FC = () => {
       value={privateKey}
       tone="secret"
       valueKind="hex"
-      editable={isDerived}
-      onChange={updatePrivateKey}
+      truncate
+      valueColor={isDerived ? matchColor : undefined}
+      action={modifyButton}
       footerIcon={<User size={10} strokeWidth={2.5} />}
       footerLabel={t("signaturePlayground.privateKeyOwner")}
-      editableLabel={t("signaturePlayground.editable")}
       readOnlyLabel={t("signaturePlayground.readOnly")}
       colors={colors}
     />
@@ -293,10 +312,10 @@ export const SignaturePlayground: FC = () => {
       tone="public"
       valueKind="hex"
       truncate
+      valueColor={matchColor}
       badge={coherenceBadge}
       footerIcon={<Globe size={10} strokeWidth={2.5} />}
       footerLabel={t("signaturePlayground.publicKeyOwner")}
-      editableLabel={t("signaturePlayground.editable")}
       readOnlyLabel={t("signaturePlayground.readOnly")}
       colors={colors}
     />
@@ -321,7 +340,6 @@ export const SignaturePlayground: FC = () => {
       tone="signature"
       valueKind="hex"
       truncate
-      editableLabel={t("signaturePlayground.editable")}
       readOnlyLabel={t("signaturePlayground.readOnly")}
       colors={colors}
     />
@@ -490,7 +508,14 @@ export const SignaturePlayground: FC = () => {
               : t("signaturePlayground.rejectedBadge")}
           </Badge>
 
-          <p style={{ fontSize: "0.66rem", lineHeight: 1.55, color: colors.baseTextSecondary, margin: 0 }}>
+          <p
+            style={{
+              fontSize: "0.66rem",
+              lineHeight: 1.55,
+              color: colors.baseTextSecondary,
+              margin: 0,
+            }}
+          >
             {verifyStatus === "accepted"
               ? t("signaturePlayground.acceptedExpl")
               : t("signaturePlayground.rejectedExpl")}
@@ -522,11 +547,7 @@ export const SignaturePlayground: FC = () => {
         title={t("signaturePlayground.disclosurePrivateKeyTitle")}
         icon={<Lightbulb size={13} strokeWidth={2} />}
       >
-        <p style={{ margin: 0 }}>
-          {t("signaturePlayground.pedagogyBefore")}{" "}
-          <strong>{t("signaturePlayground.pedagogyHighlight")}</strong>{" "}
-          {t("signaturePlayground.pedagogyAfter")}
-        </p>
+        <p style={{ margin: 0 }}>{t("signaturePlayground.pedagogy")}</p>
         <p style={{ margin: 0 }}>{t("signaturePlayground.pedagogyConcretely")}</p>
         <p
           style={{

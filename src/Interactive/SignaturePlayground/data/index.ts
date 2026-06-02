@@ -1,3 +1,4 @@
+export { ALT_PRIVATE_KEYS } from "./ALT_PRIVATE_KEYS";
 export { INITIAL_PRIVATE_KEY } from "./INITIAL_PRIVATE_KEY";
 export { INVALID_SIGNATURE } from "./INVALID_SIGNATURE";
 export { PUBLIC_KEY } from "./PUBLIC_KEY";

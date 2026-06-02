@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { PenLine } from "lucide-react";
-
 import { withOpacity } from "../../../Design/helpers";
 import { truncateHash } from "../../helpers";
 import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
@@ -21,26 +19,23 @@ type Props = {
   valueKind: ValueKind;
   /** Truncate the read-only value (long hex) to first8…last6 so it stays on one line. */
   truncate?: boolean;
-  editable?: boolean;
-  onChange?: (next: string) => void;
+  /** Overrides the value text color (e.g. green when keys match, red when they don't). */
+  valueColor?: string;
   badge?: ReactNode;
+  /** Optional action rendered just below the value (e.g. the "modify key" button). */
+  action?: ReactNode;
   /** Optional footer line (e.g. "Connue uniquement de Nicolas"). */
   footerIcon?: ReactNode;
   footerLabel?: string;
-  /**
-   * When true, drops the outer border/background so the card can be
-   * embedded inside another container (e.g. the unified pair card).
-   */
-  embedded?: boolean;
-  /** Accessibility label for the editable / read-only state. */
-  editableLabel: string;
+  /** Accessibility label for the read-only value. */
   readOnlyLabel: string;
   colors: SigPlaygroundColors;
 };
 
 /**
- * One labelled field - used for the private key, public key and message.
- * Renders an editable input or a read-only display depending on `editable`.
+ * One labelled, read-only field - used for the private key, public key and
+ * signature. Long hex values are truncated to first8…last6 so they stay on a
+ * single line; the value text can be tinted (green/red) to signal a match.
  */
 export const FieldCard: FC<Props> = ({
   icon,
@@ -53,13 +48,11 @@ export const FieldCard: FC<Props> = ({
   tone,
   valueKind,
   truncate,
-  editable,
-  onChange,
+  valueColor,
   badge,
+  action,
   footerIcon,
   footerLabel,
-  embedded,
-  editableLabel,
   readOnlyLabel,
   colors,
 }) => {
@@ -74,28 +67,18 @@ export const FieldCard: FC<Props> = ({
   const accentOpacityBorder = tone === "neutral" ? 0.18 : tone === "secret" ? 0.3 : 0.28;
   const accentOpacityBg = tone === "neutral" ? 0.03 : tone === "secret" ? 0.06 : 0.05;
 
-  const containerStyle: CSSProperties = embedded
-    ? {
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.5rem",
-        padding: 0,
-        minWidth: 0,
-        boxSizing: "border-box",
-        flex: 1,
-      }
-    : {
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.55rem",
-        padding: "0.85rem 0.9rem",
-        borderRadius: "0.7rem",
-        border: `1px solid ${withOpacity(accent, accentOpacityBorder)}`,
-        background: withOpacity(accent, accentOpacityBg),
-        minWidth: 0,
-        boxSizing: "border-box",
-        flex: 1,
-      };
+  const containerStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.55rem",
+    padding: "0.85rem 0.9rem",
+    borderRadius: "0.7rem",
+    border: `1px solid ${withOpacity(accent, accentOpacityBorder)}`,
+    background: withOpacity(accent, accentOpacityBg),
+    minWidth: 0,
+    boxSizing: "border-box",
+    flex: 1,
+  };
 
   const labelStyle: CSSProperties = {
     display: "flex",
@@ -124,34 +107,22 @@ export const FieldCard: FC<Props> = ({
     border: `1px solid ${withOpacity(accent, 0.4)}`,
   };
 
-  const inputBase: CSSProperties = {
+  const readOnlyValueStyle: CSSProperties = {
     width: "100%",
     padding: "0.5rem 0.65rem",
     borderRadius: "0.5rem",
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: "0.72rem",
     fontWeight: 600,
-    color: colors.basePrimaryText,
-    outline: "none",
-    boxSizing: "border-box",
+    color: valueColor ?? colors.basePrimaryText,
     textAlign: "center",
     wordBreak: valueKind === "hex" ? "break-all" : "normal",
     overflowWrap: valueKind === "hex" ? "anywhere" : "break-word",
-    transition: "border-color 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth)",
-  };
-
-  const editableInputStyle: CSSProperties = {
-    ...inputBase,
-    paddingRight: "1.85rem",
-    border: `1.5px solid ${withOpacity(accent, 0.5)}`,
-    background: withOpacity(colors.baseBackgroundSecondary, 0.06),
-  };
-
-  const readOnlyValueStyle: CSSProperties = {
-    ...inputBase,
     border: `1px solid ${withOpacity(colors.baseBorderSecondary, 0.16)}`,
     background: withOpacity(colors.baseBackgroundSecondary, 0.04),
+    boxSizing: "border-box",
     cursor: "default",
+    transition: "color 0.3s var(--ease-smooth)",
   };
 
   const hintStyle: CSSProperties = {
@@ -196,42 +167,15 @@ export const FieldCard: FC<Props> = ({
 
       {valuePrefix && <span style={valuePrefixStyle}>{valuePrefix}</span>}
 
-      {editable ? (
-        <div style={{ position: "relative", minWidth: 0 }}>
-          <input
-            type="text"
-            value={value}
-            onChange={(e) => onChange?.(e.target.value)}
-            aria-label={editableLabel}
-            style={editableInputStyle}
-            onFocus={(e) =>
-              (e.currentTarget.style.boxShadow = `0 0 0 3px ${withOpacity(accent, 0.18)}`)
-            }
-            onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
-          />
-          <PenLine
-            size={12}
-            strokeWidth={2}
-            style={{
-              position: "absolute",
-              right: "0.65rem",
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: withOpacity(accent, 0.6),
-              pointerEvents: "none",
-            }}
-            aria-hidden
-          />
-        </div>
-      ) : (
-        <div
-          style={readOnlyValueStyle}
-          aria-label={readOnlyLabel}
-          title={truncate ? value : undefined}
-        >
-          {truncate ? truncateHash(value) : value}
-        </div>
-      )}
+      <div
+        style={readOnlyValueStyle}
+        aria-label={readOnlyLabel}
+        title={truncate ? value : undefined}
+      >
+        {truncate ? truncateHash(value) : value}
+      </div>
+
+      {action}
 
       {badge}
 

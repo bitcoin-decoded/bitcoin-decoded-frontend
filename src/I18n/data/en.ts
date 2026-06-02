@@ -251,7 +251,7 @@ const en = {
   "signaturePlayground.signatureGenerated": "Generated signature:",
   "signaturePlayground.publicKeyPending": "Not computed yet.",
   "signaturePlayground.signaturePending": "Message not signed yet.",
-  "signaturePlayground.editable": "Editable",
+  "signaturePlayground.modifyKeyAction": "Modify the private key",
   "signaturePlayground.readOnly": "Read-only",
   "signaturePlayground.privateKeyOwner": "Known only by Nicolas",
   "signaturePlayground.publicKeyOwner": "Known to the entire network",
@@ -259,8 +259,8 @@ const en = {
   "signaturePlayground.derivationCaption":
     "This example shows one of Nicolas's (private key ↔ public key) pairs. In Bitcoin, each user can hold several. And each pair is drawn from a space so vast that there are more possible keys than atoms in the observable universe. Good luck landing on the same one.",
   "signaturePlayground.message": "Nicolas sends 1 BTC to Ms. Smith",
-  "signaturePlayground.statusValid": "This private key correctly derives to this public key",
-  "signaturePlayground.statusInvalid": "This private key no longer derives to this public key",
+  "signaturePlayground.statusValid": "This public key is derived from the private key",
+  "signaturePlayground.statusInvalid": "This public key is no longer derived from the private key",
   "signaturePlayground.edgeDerive": "computes",
   "signaturePlayground.edgeSign": "signs",
   "signaturePlayground.deriveAction": "Compute the public key (derivation)",
@@ -282,20 +282,18 @@ const en = {
   "signaturePlayground.acceptedBadge": "Accepted by the network",
   "signaturePlayground.rejectedBadge": "Rejected by the network",
   "signaturePlayground.acceptedExpl":
-    "The network can verify that this signature was indeed produced for this message by the corresponding private key, without ever knowing the private key itself.",
+    "The network can verify that this signature matches this message and this public key, without ever needing to know the private key.",
   "signaturePlayground.rejectedExpl":
-    "The network was expecting a signature produced by Nicolas's private key. No key is ever 'wrong' in itself: any other private key can sign its own transactions, but it can never substitute for Nicolas to sign his.",
+    "The network was expecting a signature corresponding to Nicolas's public key. No key is ever 'wrong' in itself: any other private key can sign its own transactions, but it can never substitute for Nicolas to sign his.",
   "signaturePlayground.disclosureDerivationTitle": "What does derivation means ?",
   "signaturePlayground.disclosurePrivateKeyTitle":
     "How does this prove possession of the private key without ever revealing it?",
   "signaturePlayground.derivationDefinition":
     "You've seen that the public key is calculated from the private key through a one-way operation. That calculation has a name: derivation. It's the 'toothpaste tube' effect: once it's out, it doesn't go back in.",
-  "signaturePlayground.pedagogyBefore": "Because it is",
-  "signaturePlayground.pedagogyHighlight": "mathematically impossible",
-  "signaturePlayground.pedagogyAfter":
-    "to produce a valid signature without the corresponding private key. The network does not verify identity: it verifies proof.",
+  "signaturePlayground.pedagogy":
+    "Because producing a valid signature without the matching private key would take longer than the age of the universe, even harnessing every computer on the planet. The network doesn't verify an identity: it verifies a proof.",
   "signaturePlayground.pedagogyConcretely":
-    "In practice, even though everyone can see the public key, no one can derive the private key from it nor forge a valid signature on your behalf.",
+    "In practice, even though everyone can see the public key, no known method can derive the private key from it, nor forge a valid signature in your name.",
   "signaturePlayground.pedagogyAnalogy":
     "It's like a lock: anyone can verify that a key opens the door, but only the holder of the right key can use it.",
   "signaturePlayground.reset": "Reset",
