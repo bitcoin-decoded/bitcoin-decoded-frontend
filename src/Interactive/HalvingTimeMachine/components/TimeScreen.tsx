@@ -42,7 +42,7 @@ export const TimeScreen: FC<Props> = ({
   // panel in light mode — never a black box on a white page. Text + accents use
   // theme tokens, readable on whichever background.
   const glow = world.text.secondary; // amber readout + accents
-  const screenInk = colors.base.text.primary; // reward value
+  const screenInk = world.text.primary; // reward value — warm/amber, readable in both modes (never plain black)
   const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85); // labels / subline / prompt
   const screenBg = isLight
     ? `linear-gradient(180deg, ${world.background.primary}, ${colors.base.background.primary})`
@@ -156,8 +156,13 @@ export const TimeScreen: FC<Props> = ({
             position: "absolute",
             inset: 0,
             pointerEvents: "none",
-            background: `radial-gradient(circle at 50% 45%, ${withOpacity(glow, 0.55)}, transparent 70%)`,
-            mixBlendMode: "screen",
+            // On the dark CRT, a soft amber glow with "screen" blend pops. On the
+            // light panel, "screen" washes out — so use vivid yellow→orange with
+            // normal blend so the time-flux is clearly visible in both modes.
+            background: isLight
+              ? `radial-gradient(circle at 50% 45%, ${withOpacity("#fde047", 0.85)} 0%, ${withOpacity("#f7931a", 0.6)} 42%, ${withOpacity("#ea580c", 0.35)} 62%, transparent 80%)`
+              : `radial-gradient(circle at 50% 45%, ${withOpacity(glow, 0.55)}, transparent 70%)`,
+            mixBlendMode: isLight ? "normal" : "screen",
           }}
         />
       )}
