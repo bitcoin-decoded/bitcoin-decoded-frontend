@@ -191,7 +191,7 @@ const fr = {
   "halvingTimeMachine.halvingsLabel": "halvings depuis 2009",
   "halvingTimeMachine.ratioSuffix": "× moins qu'en 2009",
   "halvingTimeMachine.exhausted": "Émission terminée — les 21 millions de bitcoins sont tous en circulation.",
-  "halvingTimeMachine.lever": "Tirer le levier",
+  "halvingTimeMachine.lever": "Tirez le levier",
   "halvingTimeMachine.leverTraveling": "Voyage en cours…",
   "halvingTimeMachine.chipGenesis": "Genèse",
   "halvingTimeMachine.chipToday": "Aujourd'hui",

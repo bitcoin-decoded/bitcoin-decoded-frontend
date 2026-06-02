@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Minus, Plus } from "lucide-react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Button, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { TIME_MACHINE_END_YEAR } from "../data";
 
@@ -15,9 +15,9 @@ type Props = {
 };
 
 /**
- * The dial: a big destination-year readout flanked by ±1 steppers, a range
- * slider for long jumps across the whole timeline, and a few quick-jump chips
- * (genesis, today, end of issuance).
+ * The dial: a single centered "Année de destination — 2135" line, a slider
+ * flanked by ±1 steppers (reusing the app Button, like DifficultyAdjustment),
+ * and a few quick-jump chips (genesis, today, end of issuance).
  */
 export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, onChange }) => {
   const { t } = useTranslation();
@@ -37,53 +37,47 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "0.7rem",
+    gap: "0.85rem",
     width: "100%",
+  };
+
+  const headerLine: CSSProperties = {
+    display: "flex",
+    alignItems: "baseline",
+    justifyContent: "center",
+    gap: "0.55rem",
+    flexWrap: "wrap",
   };
 
   const labelStyle: CSSProperties = {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.58rem",
+    fontSize: "0.6rem",
     fontWeight: 700,
     textTransform: "uppercase",
-    letterSpacing: "0.12em",
-    color: withOpacity(colors.base.text.secondary, 0.7),
+    letterSpacing: "0.1em",
+    color: withOpacity(colors.base.text.secondary, 0.75),
   };
 
-  const readoutRow: CSSProperties = {
+  const yearValueStyle: CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: isMobile ? "1.15rem" : "1.3rem",
+    fontWeight: 700,
+    color: world.text.primary,
+    letterSpacing: "0.02em",
+    fontVariantNumeric: "tabular-nums",
+  };
+
+  const controlRow: CSSProperties = {
     display: "flex",
     alignItems: "center",
-    gap: "0.9rem",
-  };
-
-  const stepButton = (isDisabled: boolean): CSSProperties => ({
-    display: "inline-flex",
-    alignItems: "center",
     justifyContent: "center",
-    width: "2.1rem",
-    height: "2.1rem",
-    borderRadius: "50%",
-    border: `1.5px solid ${withOpacity(accent, isDisabled ? 0.2 : 0.55)}`,
-    background: withOpacity(accent, isDisabled ? 0.02 : 0.08),
-    color: isDisabled ? withOpacity(colors.base.text.secondary, 0.4) : accent,
-    cursor: isDisabled ? "not-allowed" : "pointer",
-    flexShrink: 0,
-    transition: "all 0.2s var(--ease-smooth)",
-  });
-
-  const yearWindowStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: isMobile ? "1.6rem" : "1.9rem",
-    fontWeight: 700,
-    color: colors.base.text.primary,
-    minWidth: isMobile ? "4.2rem" : "5rem",
-    textAlign: "center",
-    fontVariantNumeric: "tabular-nums",
-    letterSpacing: "0.02em",
+    gap: "0.85rem",
+    width: "100%",
   };
 
   const sliderStyle: CSSProperties = {
-    width: "100%",
+    flex: 1,
+    maxWidth: "18rem",
     accentColor: accent,
     cursor: disabled ? "not-allowed" : "pointer",
   };
@@ -113,43 +107,44 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
 
   return (
     <div style={wrapStyle}>
-      <span style={labelStyle}>{t("halvingTimeMachine.dialLabel")}</span>
-
-      <div style={readoutRow}>
-        <button
-          type="button"
-          aria-label="-1"
-          disabled={disabled || atMin}
-          onClick={() => onChange(targetYear - 1)}
-          style={stepButton(disabled || atMin)}
-        >
-          <Minus size={15} strokeWidth={2.5} />
-        </button>
-
-        <span style={yearWindowStyle}>{targetYear}</span>
-
-        <button
-          type="button"
-          aria-label="+1"
-          disabled={disabled || atMax}
-          onClick={() => onChange(targetYear + 1)}
-          style={stepButton(disabled || atMax)}
-        >
-          <Plus size={15} strokeWidth={2.5} />
-        </button>
+      <div style={headerLine}>
+        <span style={labelStyle}>{t("halvingTimeMachine.dialLabel")}</span>
+        <span style={yearValueStyle}>{targetYear}</span>
       </div>
 
-      <input
-        type="range"
-        min={minYear}
-        max={maxYear}
-        step={1}
-        value={targetYear}
-        disabled={disabled}
-        onChange={(e) => onChange(Number(e.target.value))}
-        aria-label={t("halvingTimeMachine.dialLabel")}
-        style={sliderStyle}
-      />
+      <div style={controlRow}>
+        <Button
+          variant="primary"
+          size="sm"
+          ariaLabel="-1"
+          onClick={() => onChange(targetYear - 1)}
+          disabled={disabled || atMin}
+        >
+          <Minus size={isMobile ? 12 : 14} strokeWidth={2.5} />
+        </Button>
+
+        <input
+          type="range"
+          min={minYear}
+          max={maxYear}
+          step={1}
+          value={targetYear}
+          disabled={disabled}
+          onChange={(e) => onChange(Number(e.target.value))}
+          aria-label={t("halvingTimeMachine.dialLabel")}
+          style={sliderStyle}
+        />
+
+        <Button
+          variant="primary"
+          size="sm"
+          ariaLabel="+1"
+          onClick={() => onChange(targetYear + 1)}
+          disabled={disabled || atMax}
+        >
+          <Plus size={isMobile ? 12 : 14} strokeWidth={2.5} />
+        </Button>
+      </div>
 
       <div style={chipsRow}>
         {chips.map((chip) => (

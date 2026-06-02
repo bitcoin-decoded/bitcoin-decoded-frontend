@@ -2,7 +2,14 @@ import { type CSSProperties, type FC } from "react";
 
 import { History } from "lucide-react";
 
-import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Caption,
+  FeedbackPanel,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useHalvingTimeMachine } from "../hooks";
 
@@ -46,19 +53,15 @@ export const HalvingTimeMachine: FC = () => {
 
   const controlsStyle: CSSProperties = {
     display: "flex",
-    flexDirection: isMobile ? "column" : "row",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: isMobile ? "1.1rem" : "1.6rem",
+    gap: "1.4rem",
   };
 
-  const captionStyle: CSSProperties = {
-    margin: 0,
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.58rem",
-    lineHeight: 1.5,
-    color: withOpacity(colors.base.text.secondary, 0.6),
-    textAlign: "center",
+  const dialWrapStyle: CSSProperties = {
+    width: "100%",
+    maxWidth: "26rem",
   };
 
   return (
@@ -90,7 +93,7 @@ export const HalvingTimeMachine: FC = () => {
       />
 
       <div style={controlsStyle}>
-        <div style={{ flex: 1, width: "100%", maxWidth: "26rem" }}>
+        <div style={dialWrapStyle}>
           <TimeDial
             targetYear={targetYear}
             minYear={minYear}
@@ -102,7 +105,7 @@ export const HalvingTimeMachine: FC = () => {
         <TravelLever traveling={phase === "traveling"} onPull={travel} />
       </div>
 
-      <p style={captionStyle}>{t("halvingTimeMachine.caption")}</p>
+      <FeedbackPanel tone="info">{t("halvingTimeMachine.caption")}</FeedbackPanel>
     </SurfaceCard>
   );
 };

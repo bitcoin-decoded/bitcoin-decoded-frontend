@@ -277,6 +277,24 @@ body {
   animation: htmMaterialize 0.7s var(--ease-smooth) both;
 }
 
+/* Lever - gentle lift/float on hover (disabled while traveling) */
+.htm-lever {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    transform 0.25s var(--ease-smooth),
+    filter 0.25s var(--ease-smooth);
+}
+.htm-lever:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.05);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+}
+.htm-lever:disabled {
+  cursor: wait;
+}
+
 /* ── Styled lists - page content ──────────────────────────── */
 
 /* Unordered lists */

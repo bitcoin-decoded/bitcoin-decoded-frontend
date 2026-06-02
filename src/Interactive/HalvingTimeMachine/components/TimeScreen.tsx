@@ -18,9 +18,9 @@ type Props = {
 };
 
 /**
- * The retro CRT display: a big glowing year, and — once you've travelled — the
- * block reward for that era. While traveling, a flux flash sweeps over a
- * shaking, year-scrambling screen.
+ * The retro CRT display: a glowing year, and — once you've travelled — the block
+ * reward for that era. Everything is centered vertically and horizontally.
+ * While traveling, a flux flash sweeps over a shaking, year-scrambling screen.
  */
 export const TimeScreen: FC<Props> = ({
   displayYear,
@@ -38,26 +38,25 @@ export const TimeScreen: FC<Props> = ({
   const world = colors[moduleTheme];
 
   const glow = world.text.secondary;
-  const localize = (s: string) => (fr ? s.replace(".", ",") : s);
+  const localizeDecimal = (s: string) => (fr ? s.replace(".", ",") : s);
 
   const screenStyle: CSSProperties = {
     position: "relative",
     overflow: "hidden",
     borderRadius: "0.85rem",
-    padding: isMobile ? "1.1rem 1rem" : "1.5rem 1.25rem",
+    padding: isMobile ? "1.25rem 1rem" : "1.6rem 1.25rem",
     background: "linear-gradient(180deg, #0c0b09, #08080a)",
     border: `1px solid ${withOpacity(glow, 0.4)}`,
     boxShadow: `inset 0 0 30px ${withOpacity(glow, 0.12)}, 0 0 0 1px ${withOpacity(glow, 0.05)}`,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "0.6rem",
-    textAlign: "center",
-    minHeight: isMobile ? "9.5rem" : "10.5rem",
     justifyContent: "center",
+    gap: isMobile ? "0.7rem" : "0.85rem",
+    textAlign: "center",
+    minHeight: isMobile ? "10.5rem" : "11.5rem",
   };
 
-  // Faint horizontal scanlines for the CRT feel.
   const scanlineStyle: CSSProperties = {
     position: "absolute",
     inset: 0,
@@ -69,9 +68,16 @@ export const TimeScreen: FC<Props> = ({
     opacity: 0.5,
   };
 
+  const groupStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "0.15rem",
+  };
+
   const eyebrowStyle: CSSProperties = {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.55rem",
+    fontSize: "0.52rem",
     fontWeight: 700,
     textTransform: "uppercase",
     letterSpacing: "0.25em",
@@ -80,39 +86,49 @@ export const TimeScreen: FC<Props> = ({
 
   const yearStyle: CSSProperties = {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: isMobile ? "2.6rem" : "3.2rem",
+    fontSize: isMobile ? "1.7rem" : "2rem",
     fontWeight: 700,
     lineHeight: 1,
     color: glow,
-    textShadow: `0 0 14px ${withOpacity(glow, 0.7)}, 0 0 2px ${withOpacity(glow, 0.9)}`,
+    textShadow: `0 0 12px ${withOpacity(glow, 0.6)}, 0 0 2px ${withOpacity(glow, 0.9)}`,
     fontVariantNumeric: "tabular-nums",
   };
 
-  const rewardValueStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: isMobile ? "1.5rem" : "1.85rem",
-    fontWeight: 700,
-    color: colors.base.text.primary,
-    textShadow: `0 0 10px ${withOpacity(glow, 0.35)}`,
+  const dividerStyle: CSSProperties = {
+    width: "2.5rem",
+    height: "1px",
+    background: withOpacity(glow, 0.25),
   };
 
   const rewardLabelStyle: CSSProperties = {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.6rem",
+    fontSize: "0.58rem",
     fontWeight: 700,
     textTransform: "uppercase",
     letterSpacing: "0.12em",
     color: withOpacity(glow, 0.8),
   };
 
-  const sublineStyle: CSSProperties = {
+  const rewardValueStyle: CSSProperties = {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.62rem",
+    fontSize: isMobile ? "1.4rem" : "1.7rem",
+    fontWeight: 700,
+    lineHeight: 1.1,
+    color: colors.base.text.primary,
+    textShadow: `0 0 10px ${withOpacity(glow, 0.3)}`,
+  };
+
+  const sublineStyle: CSSProperties = {
+    margin: 0,
+    marginTop: "0.5rem",
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.6rem",
     lineHeight: 1.5,
-    color: withOpacity(colors.base.text.secondary, 0.9),
+    color: withOpacity(colors.base.text.secondary, 0.85),
   };
 
   const promptStyle: CSSProperties = {
+    margin: 0,
     fontSize: "0.7rem",
     fontStyle: "italic",
     color: withOpacity(colors.base.text.secondary, 0.7),
@@ -120,17 +136,13 @@ export const TimeScreen: FC<Props> = ({
     lineHeight: 1.5,
   };
 
-  const dividerStyle: CSSProperties = {
-    width: "40%",
-    height: "1px",
-    background: withOpacity(glow, 0.25),
-  };
+  const ratioText =
+    ratioVsGenesis && ratioVsGenesis > 1
+      ? ` · ${ratioVsGenesis.toLocaleString(fr ? "fr-FR" : "en-US")}${t("halvingTimeMachine.ratioSuffix")}`
+      : "";
 
   return (
-    <div
-      className={phase === "traveling" ? "htm-screen--traveling" : undefined}
-      style={screenStyle}
-    >
+    <div className={phase === "traveling" ? "htm-screen--traveling" : undefined} style={screenStyle}>
       <div style={scanlineStyle} />
 
       {phase === "traveling" && (
@@ -140,14 +152,16 @@ export const TimeScreen: FC<Props> = ({
             position: "absolute",
             inset: 0,
             pointerEvents: "none",
-            background: `radial-gradient(circle at 50% 40%, ${withOpacity(glow, 0.55)}, transparent 70%)`,
+            background: `radial-gradient(circle at 50% 45%, ${withOpacity(glow, 0.55)}, transparent 70%)`,
             mixBlendMode: "screen",
           }}
         />
       )}
 
-      <span style={eyebrowStyle}>{t("halvingTimeMachine.yearLabel")}</span>
-      <span style={yearStyle}>{displayYear}</span>
+      <div style={groupStyle}>
+        <span style={eyebrowStyle}>{t("halvingTimeMachine.yearLabel")}</span>
+        <span style={yearStyle}>{displayYear}</span>
+      </div>
 
       <div style={dividerStyle} />
 
@@ -171,7 +185,7 @@ export const TimeScreen: FC<Props> = ({
         <div
           key={arrivedYear ?? "none"}
           className="htm-materialize"
-          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.35rem" }}
+          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.2rem" }}
         >
           {isExhausted ? (
             <>
@@ -184,18 +198,12 @@ export const TimeScreen: FC<Props> = ({
             <>
               <span style={rewardLabelStyle}>{t("halvingTimeMachine.rewardLabel")}</span>
               <span style={rewardValueStyle}>
-                {localize(formatRewardBTC(reward ?? 0))}{" "}
-                <span style={{ fontSize: "0.8em", color: withOpacity(glow, 0.85) }}>BTC</span>
+                {localizeDecimal(formatRewardBTC(reward ?? 0))}{" "}
+                <span style={{ fontSize: "0.78em", color: withOpacity(glow, 0.85) }}>BTC</span>
               </span>
               <p style={sublineStyle}>
                 {halvings} {t("halvingTimeMachine.halvingsLabel")}
-                {ratioVsGenesis && ratioVsGenesis > 1 ? (
-                  <>
-                    {" · "}
-                    {ratioVsGenesis}
-                    {t("halvingTimeMachine.ratioSuffix")}
-                  </>
-                ) : null}
+                {ratioText}
               </p>
             </>
           )}
