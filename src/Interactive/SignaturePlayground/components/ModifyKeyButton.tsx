@@ -15,8 +15,9 @@ type Props = {
 
 /**
  * Swaps the private key for a different one (cf. ModifyTxButton in
- * BlockchainChainVisual): always present, but disabled until the key has been
- * derived. Error-tinted, because changing the key is what breaks the match.
+ * BlockchainChainVisual): always present, but disabled when the key can't be
+ * changed — before derivation, and again after the single allowed edit.
+ * Error-tinted, because changing the key is what breaks the match.
  */
 export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, isMobile, colors }) => {
   const buttonStyle: CSSProperties = {

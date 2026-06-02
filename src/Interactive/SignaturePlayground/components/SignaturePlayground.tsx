@@ -70,6 +70,7 @@ export const SignaturePlayground: FC = () => {
     isDerived,
     isOriginalKey,
     hasSignature,
+    canModifyKey,
     derive,
     modifyKey,
     sign,
@@ -277,7 +278,7 @@ export const SignaturePlayground: FC = () => {
   const modifyButton = (
     <ModifyKeyButton
       onClick={modifyKey}
-      disabled={!isDerived}
+      disabled={!canModifyKey}
       label={t("signaturePlayground.modifyKeyAction")}
       isMobile={isMobile}
       colors={colors}

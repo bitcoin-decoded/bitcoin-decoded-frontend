@@ -1,12 +1,6 @@
 import { useState } from "react";
 
-import {
-  ALT_PRIVATE_KEYS,
-  INITIAL_PRIVATE_KEY,
-  INVALID_SIGNATURE,
-  PUBLIC_KEY,
-  VALID_SIGNATURE,
-} from "../data";
+import { ALTERED_PRIVATE_KEY, INITIAL_PRIVATE_KEY, INVALID_SIGNATURE, PUBLIC_KEY, VALID_SIGNATURE } from "../data";
 import type { VerifyStatus } from "../types";
 
 /**
@@ -16,12 +10,11 @@ import type { VerifyStatus } from "../types";
  *   3. verify()  → the network checks the (message, signature, public key) triple
  *
  * The public key is a fixed constant (Nicolas's on-record key). Swapping the
- * private key for any other one means it no longer derives to that public key,
+ * private key for another one means it no longer derives to that public key,
  * so the signature it produces is rejected — which is the whole lesson.
  */
 export const useSignaturePlayground = () => {
   const [privateKey, setPrivateKey] = useState(INITIAL_PRIVATE_KEY);
-  const [altIndex, setAltIndex] = useState(0);
   const [isDerived, setIsDerived] = useState(false);
   const [signature, setSignature] = useState<string | null>(null);
   const [verifyStatus, setVerifyStatus] = useState<VerifyStatus>("idle");
@@ -29,14 +22,18 @@ export const useSignaturePlayground = () => {
   const isOriginalKey = privateKey === INITIAL_PRIVATE_KEY;
   const hasSignature = signature !== null;
 
+  // Edit-once (cf. BlockchainChainVisual): modifiable only while the key has
+  // been derived and is still the original one. After one swap it locks again.
+  const canModifyKey = isDerived && isOriginalKey;
+
   const derive = () => setIsDerived(true);
 
-  // Swaps the private key for the next "wrong" key in the pool. Cycling keeps
-  // every click visibly changing the key while staying non-original, so the
-  // match stays broken (red) until reset. Invalidates downstream artifacts.
+  // Swaps the private key for the altered one. Invalidates downstream artifacts
+  // (signature + verdict) and, since the key is no longer original, re-disables
+  // the modify button.
   const modifyKey = () => {
-    setPrivateKey(ALT_PRIVATE_KEYS[altIndex % ALT_PRIVATE_KEYS.length]);
-    setAltIndex((i) => i + 1);
+    if (!canModifyKey) return;
+    setPrivateKey(ALTERED_PRIVATE_KEY);
     setSignature(null);
     setVerifyStatus("idle");
   };
@@ -54,7 +51,6 @@ export const useSignaturePlayground = () => {
 
   const reset = () => {
     setPrivateKey(INITIAL_PRIVATE_KEY);
-    setAltIndex(0);
     setIsDerived(false);
     setSignature(null);
     setVerifyStatus("idle");
@@ -68,6 +64,7 @@ export const useSignaturePlayground = () => {
     isDerived,
     isOriginalKey,
     hasSignature,
+    canModifyKey,
     derive,
     modifyKey,
     sign,
