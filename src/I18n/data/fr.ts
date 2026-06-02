@@ -243,66 +243,59 @@ const fr = {
 
   // SignaturePlayground
   "signaturePlayground.title": "Nicolas réalise sa première transaction",
-  "signaturePlayground.subtitle":
-    "Interagis avec les éléments ci-dessous pour comprendre le rôle de chacun.",
-  "signaturePlayground.sectionElements": "Les éléments",
+  "signaturePlayground.sectionElements": "Les trois éléments",
   "signaturePlayground.privateKeyLabel": "Clé privée (secrète)",
   "signaturePlayground.publicKeyLabel": "Clé publique",
   "signaturePlayground.messageLabel": "Message à signer",
-  "signaturePlayground.privateKeyHint":
-    "Permet de produire une signature. Ne doit jamais être partagée.",
-  "signaturePlayground.publicKeyHint":
-    "Permet au réseau de vérifier la signature. Peut être partagée.",
   "signaturePlayground.messageHint": "Le contenu de la transaction qui sera signée.",
-  "signaturePlayground.editable": "Modifiable",
+  "signaturePlayground.signatureLabel": "Signature",
+  "signaturePlayground.publicKeyGenerated": "Clé publique générée :",
+  "signaturePlayground.signatureGenerated": "Signature générée :",
+  "signaturePlayground.publicKeyPending": "Pas encore calculée.",
+  "signaturePlayground.signaturePending": "Message pas encore signé.",
+  "signaturePlayground.modifyKeyAction": "Modifier la clé privée",
   "signaturePlayground.readOnly": "Lecture seule",
   "signaturePlayground.privateKeyOwner": "Connue uniquement de Nicolas",
+  "signaturePlayground.publicKeyOwner": "Connue de l'ensemble du réseau",
   "signaturePlayground.publicKeyDerivation": "Dérivée de la clé privée",
   "signaturePlayground.derivationCaption":
     "Cet exemple présente l'un des couples (clé privée ↔ clé publique) de Nicolas. Dans Bitcoin, chaque utilisateur peut en posséder plusieurs. Et chaque couple est tiré d'un espace si vaste qu'il y a plus de clés possibles que d'atomes dans l'univers observable. Bonne chance pour tomber sur la même !",
   "signaturePlayground.message": "Nicolas envoie 1 BTC à Mme Michu",
-  "signaturePlayground.statusValid": "Cette clé privée dérive bien vers cette clé publique",
-  "signaturePlayground.statusInvalid": "Cette clé privée ne dérive plus vers cette clé publique",
-  "signaturePlayground.derivationArrowLabel": "dérivation",
-  "signaturePlayground.signAction": "Réaliser la transaction",
-  "signaturePlayground.signConsumed": "Transaction signée",
+  "signaturePlayground.statusValid": "Cette clé publique est bien dérivée de la clé privée",
+  "signaturePlayground.statusInvalid": "Cette clé publique n'est plus dérivée de cette clé privée",
+  "signaturePlayground.edgeDerive": "calcule",
+  "signaturePlayground.edgeSign": "signe",
+  "signaturePlayground.deriveAction": "Calculer la clé publique (dérivation)",
+  "signaturePlayground.deriveConsumed": "Clé dérivée",
+  "signaturePlayground.signAction": "Signer le message",
+  "signaturePlayground.signConsumed": "Message signé",
   "signaturePlayground.verifyAction": "Simuler la vérification par le réseau",
   "signaturePlayground.verifyConsumed": "Vérification simulée",
-  "signaturePlayground.signatureValidBadge": "Signature valide",
-  "signaturePlayground.signatureInvalidBadge": "Signature invalide",
-  "signaturePlayground.signValidExpl": "Cette signature correspond à la clé publique attendue.",
-  "signaturePlayground.signInvalidExpl":
-    "Cette signature ne correspond pas à la clé publique attendue.",
   "signaturePlayground.matchVerifyFn": "verify(message, signature, clé publique)",
   "signaturePlayground.matchYes": "correspondent",
   "signaturePlayground.matchNo": "ne correspondent pas",
-  "signaturePlayground.signaturePrefix": "Signature générée :",
   "signaturePlayground.verifyMoreInfo": "en savoir plus",
   "signaturePlayground.verifyMoreInfoUrl": "https://fr.wikipedia.org/wiki/ECDSA",
-  "signaturePlayground.networkVerifies": "Le nœud vérifie 3 éléments",
+  "signaturePlayground.networkVerifies": "Chaque nœud du réseau vérifie 3 éléments",
   "signaturePlayground.rowMessage": "message",
   "signaturePlayground.rowSignature": "signature",
   "signaturePlayground.rowPubkey": "clé publique",
   "signaturePlayground.acceptedBadge": "Acceptée par le réseau",
   "signaturePlayground.rejectedBadge": "Rejetée par le réseau",
   "signaturePlayground.acceptedExpl":
-    "Le réseau peut vérifier que cette signature a bien été produite pour ce message par la clé privée correspondante, sans connaître la clé privée elle-même.",
+    "Le réseau peut vérifier que cette signature correspond bien à ce message et à cette clé publique, sans jamais avoir besoin de connaître la clé privée.",
   "signaturePlayground.rejectedExpl":
-    "Le réseau attendait une signature produite par la clé privée de Nicolas. Aucune clé n'est « fausse » en soi : toute autre clé privée peut signer ses propres transactions, mais ne peut jamais se substituer à Nicolas pour signer la sienne.",
+    "Le réseau attendait une signature correspondant à la clé publique de Nicolas. Aucune clé n'est « fausse » en soi : toute autre clé privée peut signer ses propres transactions, mais ne peut jamais se substituer à Nicolas pour signer la sienne.",
   "signaturePlayground.disclosureDerivationTitle": "Qu'est-ce qu'une dérivation ?",
   "signaturePlayground.disclosurePrivateKeyTitle":
     "Comment cela prouve-t-il que l'on détient la clé privée sans jamais l'exposer ?",
   "signaturePlayground.derivationDefinition":
     "Tu as vu que la clé publique est calculée à partir de la clé privée par une opération à sens unique. Ce calcul a un nom : la dérivation. C'est l'effet « tube de dentifrice » : une fois sorti, il ne rentre plus.",
-  "signaturePlayground.pedagogyBefore": "Parce qu'il est",
-  "signaturePlayground.pedagogyHighlight": "mathématiquement impossible",
-  "signaturePlayground.pedagogyAfter":
-    "de produire une signature valide sans la clé privée correspondante. Le réseau ne vérifie pas une identité : il vérifie une preuve.",
   "signaturePlayground.pedagogyConcretely":
-    "Concrètement, même si tout le monde voit la clé publique, personne ne peut en déduire la clé privée ni fabriquer une signature valide à ta place.",
+    "Aucune méthode connue ne permet de remonter de la clé publique à la clé privée. Et créer une signature valide sans la bonne clé privée demanderait plus de temps que l'âge de l'univers, même en mobilisant toute la puissance de calcul de la planète.",
   "signaturePlayground.pedagogyAnalogy":
     "C'est comme une serrure : tout le monde peut vérifier qu'une clé ouvre la porte, mais seul celui qui possède la bonne clé peut l'utiliser.",
-  "signaturePlayground.reset": "Restaurer la clé",
+  "signaturePlayground.reset": "Réinitialiser",
 
   // SeedGenerator
   "seedGenerator.title": "Génères ta seed",

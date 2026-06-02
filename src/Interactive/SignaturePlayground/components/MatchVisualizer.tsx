@@ -7,69 +7,79 @@ import { truncateHash } from "../../helpers";
 import type { SigPlaygroundColors } from "../types";
 
 type Props = {
+  message: string;
+  messageLabel: string;
   publicKey: string;
-  signature: string;
-  matches: boolean;
   publicKeyLabel: string;
+  signature: string;
   signatureLabel: string;
+  matches: boolean;
   verifyFnLabel: string;
   verifyMoreInfoLabel: string;
   verifyMoreInfoUrl: string;
   matchLabel: string;
   noMatchLabel: string;
-  isMobile: boolean;
   colors: SigPlaygroundColors;
 };
 
 /**
- * Visual representation of the verify(message, signature, pubkey) function:
- * shows the public key and the signature side-by-side (or stacked on mobile),
- * with a connector that displays a check or cross icon plus a match label.
+ * The three inputs the network feeds to verify(message, signature, public key),
+ * shown side by side on a single line (each in its element color), followed by
+ * the verdict. Truncated hashes keep the public key / signature on one line; the
+ * message keeps its quotes + italics.
  */
 export const MatchVisualizer: FC<Props> = ({
+  message,
+  messageLabel,
   publicKey,
-  signature,
-  matches,
   publicKeyLabel,
+  signature,
   signatureLabel,
+  matches,
   verifyFnLabel,
   verifyMoreInfoLabel,
   verifyMoreInfoUrl,
   matchLabel,
   noMatchLabel,
-  isMobile,
   colors,
 }) => {
   const verdictColor = matches ? colors.successColor : colors.errorColor;
 
-  const sideStyle = (accent: string): CSSProperties => ({
+  const boxStyle = (accent: string): CSSProperties => ({
+    flex: 1,
+    minWidth: 0,
     display: "flex",
     flexDirection: "column",
-    gap: "0.2rem",
-    padding: "0.45rem 0.55rem",
+    gap: "0.3rem",
+    padding: "0.5rem 0.55rem",
     borderRadius: "0.5rem",
-    border: `1px solid ${withOpacity(accent, 0.25)}`,
-    background: withOpacity(colors.baseBackgroundSecondary, 0.05),
-    minWidth: 0,
-    flex: isMobile ? "0 0 auto" : 1,
-    width: isMobile ? "100%" : "auto",
+    border: `1px solid ${withOpacity(accent, 0.3)}`,
+    background: withOpacity(accent, 0.05),
     boxSizing: "border-box",
   });
 
-  const sideLabelStyle = (accent: string): CSSProperties => ({
+  const boxLabel = (accent: string): CSSProperties => ({
     fontSize: "0.5rem",
     fontWeight: 700,
     textTransform: "uppercase",
-    letterSpacing: "0.06em",
+    letterSpacing: "0.05em",
     color: accent,
   });
 
-  const sideValueStyle: CSSProperties = {
+  const monoValue: CSSProperties = {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: isMobile ? "0.62rem" : "0.66rem",
+    fontSize: "0.62rem",
     fontWeight: 600,
     color: colors.basePrimaryText,
     wordBreak: "break-all",
+  };
+
+  const messageValue: CSSProperties = {
+    fontSize: "0.62rem",
+    fontWeight: 600,
+    fontStyle: "italic",
+    lineHeight: 1.4,
+    color: colors.basePrimaryText,
   };
 
   return (
@@ -77,21 +87,20 @@ export const MatchVisualizer: FC<Props> = ({
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "0.4rem",
-        padding: "0.6rem 0.65rem",
+        gap: "0.7rem",
+        padding: "0.7rem",
         borderRadius: "0.6rem",
-        border: `1px dashed ${withOpacity(verdictColor, 0.25)}`,
-        background: withOpacity(verdictColor, 0.025),
+        border: `1px dashed ${withOpacity(verdictColor, 0.3)}`,
+        background: withOpacity(verdictColor, 0.03),
       }}
     >
-      {/* verify() function notation + hyperlink for the curious */}
+      {/* verify() notation + hyperlink for the curious */}
       <div
         style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: "0.55rem",
           color: withOpacity(colors.baseTextSecondary, 0.7),
           letterSpacing: "0.02em",
-          alignSelf: "center",
           textAlign: "center",
         }}
       >
@@ -112,116 +121,42 @@ export const MatchVisualizer: FC<Props> = ({
         </a>
       </div>
 
-      {/* Two halves (public key | connector | signature) */}
+      {/* The three inputs, side by side on one line */}
+      <div style={{ display: "flex", flexDirection: "row", gap: "0.4rem", alignItems: "stretch" }}>
+        <div style={boxStyle(colors.neutralColor)}>
+          <span style={boxLabel(withOpacity(colors.baseTextSecondary, 0.85))}>{messageLabel}</span>
+          <span style={messageValue}>« {message} »</span>
+        </div>
+        <div style={boxStyle(colors.publicColor)}>
+          <span style={boxLabel(colors.publicColor)}>{publicKeyLabel}</span>
+          <span style={monoValue}>{truncateHash(publicKey)}</span>
+        </div>
+        <div style={boxStyle(colors.signatureColor)}>
+          <span style={boxLabel(colors.signatureColor)}>{signatureLabel}</span>
+          <span style={monoValue}>{truncateHash(signature)}</span>
+        </div>
+      </div>
+
+      {/* Verdict */}
       <div
         style={{
           display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          alignItems: "stretch",
-          gap: "0.5rem",
-          minWidth: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.4rem",
+          color: verdictColor,
+          fontWeight: 700,
+          fontSize: "0.6rem",
+          textTransform: "uppercase",
+          letterSpacing: "0.06em",
         }}
       >
-        <div style={sideStyle(colors.worldBorderSecondary)}>
-          <span style={sideLabelStyle(colors.worldBorderSecondary)}>{publicKeyLabel}</span>
-          <span style={sideValueStyle}>{truncateHash(publicKey)}</span>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "0.25rem",
-            flexShrink: 0,
-            color: verdictColor,
-            width: isMobile ? "100%" : "auto",
-          }}
-        >
-          {isMobile ? (
-            <>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", width: "100%" }}>
-                <hr
-                  style={{
-                    flex: 1,
-                    height: "1.5px",
-                    background: withOpacity(verdictColor, 0.4),
-                    border: "none",
-                    margin: 0,
-                  }}
-                />
-                {matches ? (
-                  <CheckCircle size={16} strokeWidth={2.5} />
-                ) : (
-                  <XCircle size={16} strokeWidth={2.5} />
-                )}
-                <hr
-                  style={{
-                    flex: 1,
-                    height: "1.5px",
-                    background: withOpacity(verdictColor, 0.4),
-                    border: "none",
-                    margin: 0,
-                  }}
-                />
-              </div>
-              <span
-                style={{
-                  fontSize: "0.55rem",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em",
-                  color: verdictColor,
-                }}
-              >
-                {matches ? matchLabel : noMatchLabel}
-              </span>
-            </>
-          ) : (
-            <>
-              <hr
-                style={{
-                  width: "1.5px",
-                  height: "0.6rem",
-                  background: withOpacity(verdictColor, 0.4),
-                  border: "none",
-                  margin: 0,
-                }}
-              />
-              {matches ? (
-                <CheckCircle size={16} strokeWidth={2.5} />
-              ) : (
-                <XCircle size={16} strokeWidth={2.5} />
-              )}
-              <span
-                style={{
-                  fontSize: "0.5rem",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {matches ? matchLabel : noMatchLabel}
-              </span>
-              <hr
-                style={{
-                  width: "1.5px",
-                  height: "0.6rem",
-                  background: withOpacity(verdictColor, 0.4),
-                  border: "none",
-                  margin: 0,
-                }}
-              />
-            </>
-          )}
-        </div>
-
-        <div style={sideStyle(verdictColor)}>
-          <span style={sideLabelStyle(verdictColor)}>{signatureLabel}</span>
-          <span style={sideValueStyle}>{truncateHash(signature)}</span>
-        </div>
+        {matches ? (
+          <CheckCircle size={14} strokeWidth={2.5} />
+        ) : (
+          <XCircle size={14} strokeWidth={2.5} />
+        )}
+        {matches ? matchLabel : noMatchLabel}
       </div>
     </div>
   );
