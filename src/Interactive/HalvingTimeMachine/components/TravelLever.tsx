@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Zap } from "lucide-react";
 
-import { Button, useBreakpoint } from "../../../Design";
+import { Button, useBreakpoint, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 type Props = {
@@ -17,7 +17,9 @@ type Props = {
  */
 export const TravelLever: FC<Props> = ({ traveling, onPull }) => {
   const { t } = useTranslation();
+  const { theme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
+  const isLight = theme === "light";
 
   const wrapStyle: CSSProperties = {
     display: "flex",
@@ -40,9 +42,15 @@ export const TravelLever: FC<Props> = ({ traveling, onPull }) => {
     width: "1.9rem",
     height: "0.6rem",
     borderRadius: "0.4rem",
-    background: "linear-gradient(180deg, #54545a, #232327)",
-    border: "1px solid #15151a",
-    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18), 0 2px 4px rgba(0,0,0,0.4)",
+    // Brushed steel: light silver in light mode, dark gunmetal in dark mode
+    // (so the socle is never a black blob on a light page).
+    background: isLight
+      ? "linear-gradient(180deg, #d9dce1, #a8aeb8)"
+      : "linear-gradient(180deg, #54545a, #232327)",
+    border: `1px solid ${isLight ? "#9097a1" : "#15151a"}`,
+    boxShadow: isLight
+      ? "inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.18)"
+      : "inset 0 1px 0 rgba(255,255,255,0.18), 0 2px 4px rgba(0,0,0,0.4)",
   };
 
   // Metal shaft, pivoting from the base: up & ready, or pulled down.
