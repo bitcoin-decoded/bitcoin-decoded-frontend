@@ -11,6 +11,7 @@ export { DoubleSpendDemo } from "./DoubleSpendDemo";
 export { ExpandableDefinitions, type ExpandableTerm } from "./ExpandableDefinitions";
 export { FlipCardGrid, getBeerProductionChain } from "./FlipCard";
 export { HalvingChart } from "./HalvingChart";
+export { HalvingTimeMachine } from "./HalvingTimeMachine";
 export { HashDemo } from "./HashDemo";
 export { Illustration } from "./Illustration";
 export { KeySignatureTrio } from "./KeySignatureTrio";

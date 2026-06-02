@@ -212,6 +212,89 @@ body {
   animation: flywheelSpin 1.9s linear infinite;
 }
 
+/* Halving time machine - travel flux, screen shake, and arrival materialize */
+@keyframes htmFlux {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  26% {
+    opacity: 0.15;
+  }
+  48% {
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.htm-flux {
+  animation: htmFlux 1.3s ease-out forwards;
+}
+
+@keyframes htmShake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-1.5px, 1px);
+  }
+  40% {
+    transform: translate(1.5px, -1px);
+  }
+  60% {
+    transform: translate(-1px, -1.5px);
+  }
+  80% {
+    transform: translate(1px, 1.5px);
+  }
+}
+.htm-screen--traveling {
+  animation: htmShake 0.16s linear infinite;
+}
+
+@keyframes htmMaterialize {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(7px);
+    letter-spacing: 0.3em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    letter-spacing: normal;
+  }
+}
+.htm-materialize {
+  animation: htmMaterialize 0.7s var(--ease-smooth) both;
+}
+
+/* Lever - gentle lift/float on hover (disabled while traveling) */
+.htm-lever {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    transform 0.25s var(--ease-smooth),
+    filter 0.25s var(--ease-smooth);
+}
+.htm-lever:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.05);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+}
+.htm-lever:disabled {
+  cursor: wait;
+}
+
 /* ── Styled lists - page content ──────────────────────────── */
 
 /* Unordered lists */

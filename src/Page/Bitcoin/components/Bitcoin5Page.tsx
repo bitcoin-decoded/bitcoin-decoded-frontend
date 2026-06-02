@@ -5,6 +5,7 @@ import { useTranslation } from "../../../I18n";
 import {
   getQuizDataHalving,
   HalvingChart,
+  HalvingTimeMachine,
   MiningRewardBlock,
   NetworkFlywheel,
   Quiz,
@@ -140,64 +141,37 @@ export const Bitcoin5Page: FC = () => {
         <p>
           {fr ? (
             <>
-              La compréhension de ce mécanisme change radicalement la façon de voir Bitcoin. Pour la
-              première fois, une monnaie combine une rareté absolue (21 millions d'unités, pas une
-              de plus) avec une émission entièrement prévisible, sans autorité centrale qui pilote.
+              Pour la première fois, une monnaie combine une rareté absolue (21 millions d'unités,
+              pas une de plus) avec une émission entièrement prévisible, sans autorité centrale qui
+              pilote.
             </>
           ) : (
             <>
-              Once you grasp this mechanism, Bitcoin looks completely different. For the first time,
-              a currency combines absolute scarcity (21 million units, not one more) with a fully
-              predictable issuance, with no central authority steering it.
-            </>
-          )}
-        </p>
-        <p>
-          {fr ? (
-            <>
-              Du point de vue de l'acquéreur : avec le temps, obtenir des bitcoins ne passe plus par
-              la création, mais par l'échange. Il faut les acheter à quelqu'un d'autre.
-            </>
-          ) : (
-            <>
-              If you're a buyer: over time, getting bitcoin isn't about creation anymore, it's about
-              exchange. You buy them from someone else.
-            </>
-          )}
-        </p>
-        <p>
-          {fr ? (
-            <>
-              Du point de vue du mineur : à chaque halving, les revenus chutent, la pression monte,
-              et seuls les plus efficaces restent en course.
-            </>
-          ) : (
-            <>
-              If you're a miner: every halving, revenue drops, pressure climbs, and only the most
-              efficient stay in the race.
-            </>
-          )}
-        </p>
-        <p>
-          {fr
-            ? "Bitcoin devient donc plus rare pour tout le monde et plus exigeant pour ceux qui le produisent."
-            : "Bitcoin gets scarcer for everyone, and tougher for those who produce it."}
-        </p>
-
-        <p style={{ marginTop: "1rem" }}>
-          {fr ? (
-            <>
-              Dès 2032, la récompense ne sera plus que de <strong>0,78125 BTC par bloc</strong>,
-              soit 64 fois moins qu'à l'origine. La subvention tend inexorablement vers zéro.
-            </>
-          ) : (
-            <>
-              By 2032, the reward will be down to <strong>0.78125 BTC per block</strong>, 64 times
-              less than at the start. The subsidy heads inexorably toward zero.
+              For the first time, a currency combines absolute scarcity (21 million units, not one
+              more) with a fully predictable issuance, with no central authority steering it.
             </>
           )}
         </p>
       </Callout>
+      <p>
+        {fr ? (
+          <>
+            Et au-delà de la théorie ? Tire le levier ci-dessous, et voyage dans le temps pour
+            découvrir ce que ça donne concrètement.
+          </>
+        ) : (
+          <>
+            Enough theory. Pull the lever below and travel through time to see what it actually
+            looks like.
+          </>
+        )}
+      </p>
+      <HalvingTimeMachine />
+      <p>
+        {fr
+          ? "Bitcoin devient donc plus rare pour tout le monde et plus exigeant pour ceux qui le produisent."
+          : "Bitcoin gets scarcer for everyone, and tougher for those who produce it."}
+      </p>
 
       <p>
         {fr
