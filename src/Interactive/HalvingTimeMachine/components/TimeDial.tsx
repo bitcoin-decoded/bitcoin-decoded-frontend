@@ -21,11 +21,13 @@ type Props = {
  */
 export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, onChange }) => {
   const { t } = useTranslation();
-  const { colors, moduleTheme } = usePageTheme();
+  const { theme, colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const accent = world.border.secondary;
   const baseBorderSecondary = colors.base.border.secondary;
+  const isLight = theme === "light";
+  const sliderFill = world.background.secondary; // solid Bitcoin orange (#f7931a) in both modes
 
   const currentYear = new Date().getFullYear();
   // Plain years (genesis · today · end of issuance) — no "Fin" label, which
@@ -78,12 +80,14 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     width: "100%",
   };
 
-  const sliderStyle: CSSProperties = {
+  const sliderPct = ((targetYear - minYear) / (maxYear - minYear)) * 100;
+  const sliderTrackRest = isLight ? "#cbd5e1" : "rgba(242, 242, 242, 0.18)";
+  const sliderStyle = {
     flex: 1,
     maxWidth: "18rem",
-    accentColor: accent,
-    cursor: disabled ? "not-allowed" : "pointer",
-  };
+    "--htm-track": `linear-gradient(to right, ${sliderFill} ${sliderPct}%, ${sliderTrackRest} ${sliderPct}%)`,
+    "--htm-thumb": sliderFill,
+  } as CSSProperties;
 
   // Connected segmented control (cf. SeedGenerator's 12/24 toggle), split into
   // three sections: genesis · today · end of issuance.
@@ -133,6 +137,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
 
         <input
           type="range"
+          className="htm-slider"
           min={minYear}
           max={maxYear}
           step={1}

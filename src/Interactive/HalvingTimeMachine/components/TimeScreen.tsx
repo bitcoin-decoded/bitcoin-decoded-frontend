@@ -33,11 +33,20 @@ export const TimeScreen: FC<Props> = ({
 }) => {
   const { t, language } = useTranslation();
   const fr = language === "fr";
-  const { colors, moduleTheme } = usePageTheme();
+  const { theme, colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
+  const isLight = theme === "light";
 
-  const glow = world.text.secondary;
+  // The "screen" adapts to the theme: a deep glowing CRT in dark mode, a light
+  // panel in light mode — never a black box on a white page. Text + accents use
+  // theme tokens, readable on whichever background.
+  const glow = world.text.secondary; // amber readout + accents
+  const screenInk = world.text.primary; // reward value — warm/amber, readable in both modes (never plain black)
+  const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85); // labels / subline / prompt
+  const screenBg = isLight
+    ? `linear-gradient(180deg, ${world.background.primary}, ${colors.base.background.primary})`
+    : "linear-gradient(180deg, #0c0b09, #08080a)";
   const localizeDecimal = (s: string) => (fr ? s.replace(".", ",") : s);
 
   const screenStyle: CSSProperties = {
@@ -45,7 +54,7 @@ export const TimeScreen: FC<Props> = ({
     overflow: "hidden",
     borderRadius: "0.85rem",
     padding: isMobile ? "1.25rem 1rem" : "1.6rem 1.25rem",
-    background: "linear-gradient(180deg, #0c0b09, #08080a)",
+    background: screenBg,
     border: `1px solid ${withOpacity(glow, 0.4)}`,
     boxShadow: `inset 0 0 30px ${withOpacity(glow, 0.12)}, 0 0 0 1px ${withOpacity(glow, 0.05)}`,
     display: "flex",
@@ -65,7 +74,7 @@ export const TimeScreen: FC<Props> = ({
       "#000000",
       0.25,
     )} 0px, ${withOpacity("#000000", 0.25)} 1px, transparent 1px, transparent 3px)`,
-    opacity: 0.5,
+    opacity: isLight ? 0.25 : 0.5,
   };
 
   const groupStyle: CSSProperties = {
@@ -114,7 +123,7 @@ export const TimeScreen: FC<Props> = ({
     fontSize: isMobile ? "1.4rem" : "1.7rem",
     fontWeight: 700,
     lineHeight: 1.1,
-    color: colors.base.text.primary,
+    color: screenInk,
     textShadow: `0 0 10px ${withOpacity(glow, 0.3)}`,
   };
 
@@ -124,14 +133,14 @@ export const TimeScreen: FC<Props> = ({
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: "0.6rem",
     lineHeight: 1.5,
-    color: withOpacity(colors.base.text.secondary, 0.85),
+    color: screenInkMuted,
   };
 
   const promptStyle: CSSProperties = {
     margin: 0,
     fontSize: "0.7rem",
     fontStyle: "italic",
-    color: withOpacity(colors.base.text.secondary, 0.7),
+    color: screenInkMuted,
     maxWidth: "18rem",
     lineHeight: 1.5,
   };
@@ -147,8 +156,13 @@ export const TimeScreen: FC<Props> = ({
             position: "absolute",
             inset: 0,
             pointerEvents: "none",
-            background: `radial-gradient(circle at 50% 45%, ${withOpacity(glow, 0.55)}, transparent 70%)`,
-            mixBlendMode: "screen",
+            // On the dark CRT, a soft amber glow with "screen" blend pops. On the
+            // light panel, "screen" washes out — so use vivid yellow→orange with
+            // normal blend so the time-flux is clearly visible in both modes.
+            background: isLight
+              ? `radial-gradient(circle at 50% 45%, ${withOpacity("#fde047", 0.85)} 0%, ${withOpacity("#f7931a", 0.6)} 42%, ${withOpacity("#ea580c", 0.35)} 62%, transparent 80%)`
+              : `radial-gradient(circle at 50% 45%, ${withOpacity(glow, 0.55)}, transparent 70%)`,
+            mixBlendMode: isLight ? "normal" : "screen",
           }}
         />
       )}
