@@ -199,6 +199,13 @@ const en = {
   "halvingTimeMachine.caption":
     "Rewards rounded to the nearest satoshi. Beyond ~2140, issuance drops to zero.",
 
+  // DunbarSlider
+  "dunbar.sliderAria": "Group size",
+  "dunbar.peopleLabel": "people",
+  "dunbar.counterLabel": "Possible relationships to remember",
+  "dunbar.overloadTitle": "Cognitive overload",
+  "dunbar.overloadBody": "Individual memory maxed out. You need an external system: money.",
+
   // NetworkFlywheel
   "flywheel.step.usage": "Network usage",
   "flywheel.step.fees": "Fees generated (per block)",

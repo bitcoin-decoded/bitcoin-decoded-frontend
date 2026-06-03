@@ -87,8 +87,8 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   const sliderStyle = {
     flex: 1,
     maxWidth: "18rem",
-    "--htm-track": `linear-gradient(to right, ${sliderFill} ${sliderPct}%, ${sliderTrackRest} ${sliderPct}%)`,
-    "--htm-thumb": sliderFill,
+    "--slider-track": `linear-gradient(to right, ${sliderFill} ${sliderPct}%, ${sliderTrackRest} ${sliderPct}%)`,
+    "--slider-thumb": sliderFill,
   } as CSSProperties;
 
   // Connected segmented control (cf. SeedGenerator's 12/24 toggle), split into
@@ -139,7 +139,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
 
         <input
           type="range"
-          className="htm-slider"
+          className="app-slider"
           min={minYear}
           max={maxYear}
           step={1}

@@ -17,7 +17,7 @@ export const PAGE_METADATA: PageMetadataMap = {
   [ROUTE_NAME.Banking_7]: { wordCount: 644, interactiveCount: 4 },
 
   // MoneyLaws — Les lois de la monnaie
-  [ROUTE_NAME.MoneyLaws_1]: { wordCount: 827, interactiveCount: 3 },
+  [ROUTE_NAME.MoneyLaws_1]: { wordCount: 795, interactiveCount: 4 },
   [ROUTE_NAME.MoneyLaws_2]: { wordCount: 1836, interactiveCount: 5 },
   [ROUTE_NAME.MoneyLaws_3]: { wordCount: 1093, interactiveCount: 2 },
   [ROUTE_NAME.MoneyLaws_4]: { wordCount: 760, interactiveCount: 2 },

@@ -295,10 +295,11 @@ body {
   cursor: wait;
 }
 
-/* Halving time machine - year slider: track filled via the inline --htm-track
-   gradient (theme-aware) and an amber thumb. Replaces the native track, whose
-   unfilled portion stayed black in light mode (color-scheme alone didn't fix it). */
-.htm-slider {
+/* Generic app slider: track filled via the inline --slider-track gradient
+   (theme-aware) and an accent thumb via --slider-thumb. Replaces the native
+   track, whose unfilled portion stayed black in light mode (color-scheme alone
+   didn't fix it). Used by the halving time machine and the Dunbar slider. */
+.app-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -307,37 +308,37 @@ body {
   cursor: pointer;
   outline: none;
 }
-.htm-slider::-webkit-slider-runnable-track {
+.app-slider::-webkit-slider-runnable-track {
   height: 0.4rem;
   border-radius: 999px;
-  background: var(--htm-track);
+  background: var(--slider-track);
 }
-.htm-slider::-moz-range-track {
+.app-slider::-moz-range-track {
   height: 0.4rem;
   border-radius: 999px;
-  background: var(--htm-track);
+  background: var(--slider-track);
 }
-.htm-slider::-webkit-slider-thumb {
+.app-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 1.05rem;
   height: 1.05rem;
   margin-top: -0.325rem;
   border-radius: 50%;
-  background: var(--htm-thumb);
+  background: var(--slider-thumb);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   cursor: pointer;
 }
-.htm-slider::-moz-range-thumb {
+.app-slider::-moz-range-thumb {
   width: 1.05rem;
   height: 1.05rem;
   border: none;
   border-radius: 50%;
-  background: var(--htm-thumb);
+  background: var(--slider-thumb);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   cursor: pointer;
 }
-.htm-slider:disabled {
+.app-slider:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }

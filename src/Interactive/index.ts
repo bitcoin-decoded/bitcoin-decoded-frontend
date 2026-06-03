@@ -8,6 +8,7 @@ export { getKeynesianVsAustrian } from "./DebateArena";
 export { DebateArena } from "./DebateArena";
 export { DifficultyAdjustment } from "./DifficultyAdjustment";
 export { DoubleSpendDemo } from "./DoubleSpendDemo";
+export { DunbarSlider } from "./DunbarSlider";
 export { ExpandableDefinitions, type ExpandableTerm } from "./ExpandableDefinitions";
 export { FlipCardGrid, getBeerProductionChain } from "./FlipCard";
 export { HalvingChart } from "./HalvingChart";
