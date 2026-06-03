@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ChevronDown, Info, Sparkles, Sprout } from "lucide-react";
+import { Info, Sparkles, Sprout } from "lucide-react";
 
 import {
   Button,
@@ -235,7 +235,6 @@ export const SeedGenerator: FC = () => {
               on the human-readable form first. Power users can dive in. */}
           <Disclosure
             title={t("seedGenerator.binaryDisclosureTitle")}
-            icon={<ChevronDown size={13} strokeWidth={2} />}
           >
             <div>
               <div style={sectionLabelStyle}>

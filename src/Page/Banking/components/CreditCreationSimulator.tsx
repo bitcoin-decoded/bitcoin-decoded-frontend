@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC, useMemo } from "react";
 
-import { ChevronDown } from "lucide-react";
-
 import { Disclosure, Reference, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
@@ -81,7 +79,6 @@ export const CreditCreationSimulator: FC = () => {
       <div style={{ marginTop: "1rem" }}>
         <Disclosure
           title={fr ? "Note d'attention" : "A word of caution"}
-          icon={<ChevronDown size={13} strokeWidth={2} />}
         >
           {fr ? (
             <p>

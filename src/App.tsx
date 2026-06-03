@@ -1,7 +1,8 @@
 import { type FC } from "react";
+
 import { MainLayout, ThemeProvider } from "./Design";
-import { AppRouter, RouterProvider } from "./Routing";
 import { LanguageProvider } from "./I18n";
+import { AppRouter, RouterProvider } from "./Routing";
 
 export const App: FC = () => {
   return (

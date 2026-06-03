@@ -1,7 +1,5 @@
 import { type FC } from "react";
 
-import { ChevronDown } from "lucide-react";
-
 import { Callout, Disclosure, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
@@ -129,7 +127,6 @@ export const Bitcoin6Page: FC = () => {
             ? "Attends tu racontes quoi, Bitcoin ne déplace pas d'argent. Mon pote il reçoit quoi alors, des fleurs ?!"
             : "Hold on, Bitcoin doesn't move money? So what does my friend get, flowers?!"
         }
-        icon={<ChevronDown size={13} strokeWidth={2} />}
       >
         <p>
           {fr

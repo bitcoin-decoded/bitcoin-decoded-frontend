@@ -3,7 +3,6 @@ import { type CSSProperties, type FC } from "react";
 import {
   Bitcoin,
   Blocks,
-  ChevronDown,
   Cpu,
   Laptop,
   Monitor,
@@ -255,10 +254,7 @@ export const Bitcoin1Page: FC = () => {
             )}
           </li>
         </ol>
-        <Disclosure
-          title={fr ? "Note d'attention" : "A word of caution"}
-          icon={<ChevronDown size={13} strokeWidth={2} />}
-        >
+        <Disclosure title={fr ? "Note d'attention" : "A word of caution"}>
           {fr ? (
             <p>
               La création de nouveaux bitcoins n'est pas illimitée : elle est divisée par deux tous

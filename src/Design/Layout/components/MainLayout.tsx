@@ -1,12 +1,21 @@
-import { type FC, type ReactNode, type CSSProperties, useEffect, useState, useCallback } from "react";
-import { NavBar } from "./NavBar";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { NavDrawer } from "./NavDrawer";
+import {
+  type CSSProperties,
+  type FC,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+
 import { ReadingProgressBar, ScrollToTopButton } from "../../../Page";
-import { useThemeContext, THEME_COLORS } from "../../Theme";
+import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 import { useBreakpoint } from "../../Responsive";
-import { useRouterContext, ROUTE_NAME } from "../../../Routing";
+import { THEME_COLORS, useThemeContext } from "../../Theme";
+
+import { Footer } from "./Footer";
+import { Header } from "./Header";
+import { NavBar } from "./NavBar";
+import { NavDrawer } from "./NavDrawer";
 
 export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   const { theme } = useThemeContext();
@@ -29,7 +38,9 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = isDrawerOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isDrawerOpen]);
 
   // Close drawer when resizing to desktop
@@ -116,11 +127,7 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
       />
       {isChapterPage && <ReadingProgressBar />}
       {!isDesktop && (
-        <NavDrawer
-          isOpen={isDrawerOpen}
-          onClose={closeDrawer}
-          breakpoint={breakpoint}
-        />
+        <NavDrawer isOpen={isDrawerOpen} onClose={closeDrawer} breakpoint={breakpoint} />
       )}
       <div style={bodyContainerStyle}>
         {isDesktop && (
