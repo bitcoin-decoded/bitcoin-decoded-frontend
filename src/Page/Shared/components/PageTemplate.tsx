@@ -10,7 +10,7 @@ type Props = {
   title: string;
   prelude?: ReactNode;
   /**
-   * Show the "X min · flavor" reading-time badge under the title.
+   * Show the "X min" reading-time badge under the title.
    * Default `true`. Pass `false` for chapters that aren't a read (quizzes).
    */
   showReadingTime?: boolean;
