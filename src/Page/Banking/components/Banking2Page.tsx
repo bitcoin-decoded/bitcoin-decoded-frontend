@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { ChevronDown, Home } from "lucide-react";
+import { Home } from "lucide-react";
 
 import { Callout, Disclosure, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
@@ -137,7 +137,6 @@ export const Banking2Page: FC = () => {
         </p>
         <Disclosure
           title={fr ? "Note d'attention" : "A word of caution"}
-          icon={<ChevronDown size={13} strokeWidth={2} />}
         >
           {fr ? (
             <p>

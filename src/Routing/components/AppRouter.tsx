@@ -1,5 +1,13 @@
 import { type FC } from "react";
+
 import {
+  Banking1Page,
+  Banking2Page,
+  Banking3Page,
+  Banking4Page,
+  Banking5Page,
+  Banking6Page,
+  Banking7Page,
   Bitcoin1Page,
   Bitcoin2Page,
   Bitcoin3Page,
@@ -9,21 +17,14 @@ import {
   Bitcoin7Page,
   Bitcoin8Page,
   Bitcoin9Page,
-  Banking1Page,
-  Banking2Page,
-  Banking3Page,
-  Banking4Page,
-  Banking5Page,
-  Banking6Page,
-  Banking7Page,
   MoneyLaws1Page,
   MoneyLaws2Page,
   MoneyLaws3Page,
   MoneyLaws4Page,
   MoneyLaws5Page,
 } from "../../Page";
-import { ROUTE_NAME, useRouterContext } from "../../Routing";
 import { HomePage } from "../../Page";
+import { ROUTE_NAME, useRouterContext } from "../../Routing";
 
 export const AppRouter: FC = () => {
   const { currentPage } = useRouterContext();

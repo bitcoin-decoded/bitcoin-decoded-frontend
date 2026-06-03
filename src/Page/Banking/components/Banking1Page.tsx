@@ -53,58 +53,58 @@ export const Banking1Page: FC = () => {
             Read the next part carefully, you're in for a surprise:
           </>
         )}
-        <Callout title={fr ? "D'où vient l'argent ?" : "Where does money come from?"}>
-          {fr ? (
-            <>
-              <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-in-the-modern-economy-an-introduction.pdf">
-                Plus de 90%
-              </Reference>{" "}
-              de notre monnaie n'est ni imprimée par l'État ni créée par les Banques Centrales, mais
-              créée <i>comme par magie</i> par les banques commerciales (du style BNP Paribas,
-              Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent .
-              <p>
-                Dès qu'elles accordent un prêt, par une simple écriture comptable elles créent de
-                l'argent à partir de rien.
-              </p>
-              <p>
-                « À partir de rien, vraiment ? », me répondront les plus sceptiques ! Presque. À
-                partir d'une promesse : celle de l'emprunteur de rembourser. C'est tout ce qu'il
-                faut à une banque pour fabriquer de la monnaie.
-              </p>
-              <p>
-                Ces banques disposent d'un pouvoir quasi magique. Quasi seulement : ce pouvoir n'est
-                ni illimité ni gratuit. Il faut un emprunteur solvable, des règles à respecter, de
-                quoi se refinancer. Ces contraintes existent, mais elles sont plus souples qu'on ne
-                le croit. Dans les faits, quand la banque veut prêter, elle prête - et crée la
-                monnaie au passage.
-              </p>
-            </>
-          ) : (
-            <>
-              <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-in-the-modern-economy-an-introduction.pdf">
-                More than 90%
-              </Reference>{" "}
-              of our money is neither printed by the state nor created by central banks. It's
-              conjured up <i>as if by magic</i> by commercial banks (think JPMorgan, HSBC, ...)
-              every single time they lend money.
-              <p>
-                The moment they grant a loan, with one simple accounting entry, they create money
-                out of thin air.
-              </p>
-              <p>
-                "Out of thin air, really?", the skeptics will fire back. Almost. Out of a promise:
-                the borrower's promise to pay it back. That's all a bank needs to manufacture money.
-              </p>
-              <p>
-                These banks hold an almost magical power. Almost: this power is neither unlimited
-                nor free. It takes a creditworthy borrower, rules to follow, a way to refinance.
-                Those constraints are real, but looser than people think. In practice, when a bank
-                wants to lend, it lends - and creates the money along the way.
-              </p>
-            </>
-          )}
-        </Callout>
       </p>
+      <Callout title={fr ? "D'où vient l'argent ?" : "Where does money come from?"}>
+        {fr ? (
+          <>
+            <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-in-the-modern-economy-an-introduction.pdf">
+              Plus de 90%
+            </Reference>{" "}
+            de notre monnaie n'est ni imprimée par l'État ni créée par les Banques Centrales, mais
+            créée <i>comme par magie</i> par les banques commerciales (du style BNP Paribas, Caisse
+            d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent .
+            <p>
+              Dès qu'elles accordent un prêt, par une simple écriture comptable elles créent de
+              l'argent à partir de rien.
+            </p>
+            <p>
+              « À partir de rien, vraiment ? », me répondront les plus sceptiques ! Presque. À
+              partir d'une promesse : celle de l'emprunteur de rembourser. C'est tout ce qu'il faut
+              à une banque pour fabriquer de la monnaie.
+            </p>
+            <p>
+              Ces banques disposent d'un pouvoir quasi magique. Quasi seulement : ce pouvoir n'est
+              ni illimité ni gratuit. Il faut un emprunteur solvable, des règles à respecter, de
+              quoi se refinancer. Ces contraintes existent, mais elles sont plus souples qu'on ne le
+              croit. Dans les faits, quand la banque veut prêter, elle prête - et crée la monnaie au
+              passage.
+            </p>
+          </>
+        ) : (
+          <>
+            <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-in-the-modern-economy-an-introduction.pdf">
+              More than 90%
+            </Reference>{" "}
+            of our money is neither printed by the state nor created by central banks. It's conjured
+            up <i>as if by magic</i> by commercial banks (think JPMorgan, HSBC, ...) every single
+            time they lend money.
+            <p>
+              The moment they grant a loan, with one simple accounting entry, they create money out
+              of thin air.
+            </p>
+            <p>
+              "Out of thin air, really?", the skeptics will fire back. Almost. Out of a promise: the
+              borrower's promise to pay it back. That's all a bank needs to manufacture money.
+            </p>
+            <p>
+              These banks hold an almost magical power. Almost: this power is neither unlimited nor
+              free. It takes a creditworthy borrower, rules to follow, a way to refinance. Those
+              constraints are real, but looser than people think. In practice, when a bank wants to
+              lend, it lends - and creates the money along the way.
+            </p>
+          </>
+        )}
+      </Callout>
       <p>
         {fr ? (
           <>

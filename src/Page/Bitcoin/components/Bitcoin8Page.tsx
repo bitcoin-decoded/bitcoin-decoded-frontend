@@ -1,7 +1,5 @@
 import { type FC } from "react";
 
-import { ChevronDown } from "lucide-react";
-
 import { Callout, Disclosure, HighlightText } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { SeedGenerator, WalletDiscoveryGame } from "../../../Interactive";
@@ -206,7 +204,6 @@ export const Bitcoin8Page: FC = () => {
               ? "Avant de jouer : un mot sur la sécurité"
               : "Before you play: a quick word on security"
           }
-          icon={<ChevronDown size={13} strokeWidth={2} />}
         >
           <p>
             {fr
