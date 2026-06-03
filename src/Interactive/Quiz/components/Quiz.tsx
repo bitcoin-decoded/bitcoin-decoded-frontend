@@ -19,6 +19,8 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
   const { selectedIndex, isCorrectlySolved, handleSelect } = useQuiz(data.answers, onCorrectAnswer);
 
   const accentColor = colors[moduleTheme].border.secondary;
+  const success = colors.semantic.success;
+  const warning = colors.semantic.warning;
 
   const headerStyle: CSSProperties = {
     display: "flex",
@@ -64,12 +66,12 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
     let textColor = colors.base.text.secondary;
 
     if (showResult && isCorrect) {
-      borderColor = "#10B981";
-      bgColor = "rgba(16, 185, 129, 0.08)";
+      borderColor = success.border;
+      bgColor = success.background;
       textColor = colors.base.text.primary;
     } else if (showResult && !isCorrect) {
-      borderColor = "#F97316";
-      bgColor = "rgba(249, 115, 22, 0.08)";
+      borderColor = warning.border;
+      bgColor = warning.background;
       textColor = colors.base.text.primary;
     } else if (isSelected) {
       borderColor = accentColor;
@@ -98,7 +100,7 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
   const getRationaleStyle = (): CSSProperties => {
     if (selectedIndex === null) return {};
     const isCorrect = data.answers[selectedIndex].isCorrect;
-    const feedbackColor = isCorrect ? "#10B981" : "#F97316";
+    const feedbackColor = isCorrect ? success.text : warning.text;
 
     return {
       display: "flex",
@@ -107,7 +109,7 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       marginTop: "1.25rem",
       padding: isMobile ? "0.875rem 1rem" : "1rem 1.25rem",
       borderRadius: "0.75rem",
-      backgroundColor: isCorrect ? "rgba(16, 185, 129, 0.06)" : "rgba(249, 115, 22, 0.06)",
+      backgroundColor: isCorrect ? success.background : warning.background,
       borderLeft: `3px solid ${feedbackColor}`,
       color: colors.base.text.secondary,
       fontSize: isMobile ? "0.8125rem" : "0.875rem",
@@ -156,9 +158,9 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
         <div style={getRationaleStyle()}>
           <div style={feedbackIconStyle}>
             {data.answers[selectedIndex].isCorrect ? (
-              <CircleCheck size={18} strokeWidth={2} color="#10B981" />
+              <CircleCheck size={18} strokeWidth={2} color={success.text} />
             ) : (
-              <CircleX size={18} strokeWidth={2} color="#F97316" />
+              <CircleX size={18} strokeWidth={2} color={warning.text} />
             )}
           </div>
           <div>{data.answers[selectedIndex].rationale}</div>

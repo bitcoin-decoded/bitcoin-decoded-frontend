@@ -4,6 +4,7 @@ import { Zap } from "lucide-react";
 
 import { Button, useBreakpoint, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { getMachineColors } from "../data";
 
 type Props = {
   traveling: boolean;
@@ -20,6 +21,7 @@ export const TravelLever: FC<Props> = ({ traveling, onPull }) => {
   const { theme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const isLight = theme === "light";
+  const machine = getMachineColors(isLight);
 
   const wrapStyle: CSSProperties = {
     display: "flex",
@@ -42,15 +44,9 @@ export const TravelLever: FC<Props> = ({ traveling, onPull }) => {
     width: "1.9rem",
     height: "0.6rem",
     borderRadius: "0.4rem",
-    // Brushed steel: light silver in light mode, dark gunmetal in dark mode
-    // (so the socle is never a black blob on a light page).
-    background: isLight
-      ? "linear-gradient(180deg, #d9dce1, #a8aeb8)"
-      : "linear-gradient(180deg, #54545a, #232327)",
-    border: `1px solid ${isLight ? "#9097a1" : "#15151a"}`,
-    boxShadow: isLight
-      ? "inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.18)"
-      : "inset 0 1px 0 rgba(255,255,255,0.18), 0 2px 4px rgba(0,0,0,0.4)",
+    background: machine.leverBase,
+    border: `1px solid ${machine.leverBaseBorder}`,
+    boxShadow: machine.leverBaseShadow,
   };
 
   // Metal shaft, pivoting from the base: up & ready, or pulled down.
@@ -60,8 +56,8 @@ export const TravelLever: FC<Props> = ({ traveling, onPull }) => {
     width: "0.5rem",
     height: isMobile ? "2.3rem" : "2.6rem",
     borderRadius: "0.3rem",
-    background: "linear-gradient(90deg, #6f6f75 0%, #e6e6ea 45%, #b9b9bf 60%, #6f6f75 100%)",
-    boxShadow: "0 1px 2px rgba(0,0,0,0.45)",
+    background: machine.leverShaft,
+    boxShadow: machine.leverShaftShadow,
     transformOrigin: "bottom center",
     transform: traveling ? "rotate(34deg)" : "rotate(-30deg)",
     transition: "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
@@ -76,9 +72,9 @@ export const TravelLever: FC<Props> = ({ traveling, onPull }) => {
     width: "1.3rem",
     height: "1.3rem",
     borderRadius: "50%",
-    background: "radial-gradient(circle at 35% 30%, #fcd34d 0%, #f59e0b 55%, #b45309 100%)",
-    border: "1px solid #7c2d12",
-    boxShadow: "inset 0 1px 2px rgba(255,255,255,0.5), 0 2px 5px rgba(0,0,0,0.45)",
+    background: machine.leverKnob,
+    border: `1px solid ${machine.leverKnobBorder}`,
+    boxShadow: machine.leverKnobShadow,
   };
 
   return (

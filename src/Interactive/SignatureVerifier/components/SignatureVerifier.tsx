@@ -22,7 +22,7 @@ export const SignatureVerifier: FC = () => {
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
-  const errorColor = colors.semantic.error?.text ?? "#ef4444";
+  const errorColor = colors.semantic.error.text;
 
   const { tampered, status, toggle, verify, reset, getValue } = useSignatureVerifier();
 

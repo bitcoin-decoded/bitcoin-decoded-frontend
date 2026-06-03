@@ -50,7 +50,7 @@ export const SeedGenerator: FC = () => {
     fontSize: isMobile ? "0.72rem" : "0.78rem",
     fontWeight: 600,
     letterSpacing: "0.04em",
-    color: active ? "#fff" : withOpacity(baseTextSecondary, 0.85),
+    color: active ? themeColors.base.text.onAccent : withOpacity(baseTextSecondary, 0.85),
     background: active ? accentColor : "transparent",
     transition: "all 0.25s var(--ease-smooth)",
   });

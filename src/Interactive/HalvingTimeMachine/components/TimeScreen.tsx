@@ -4,6 +4,7 @@ import { Zap } from "lucide-react";
 
 import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { getMachineColors } from "../data";
 import { formatRewardBTC, getMinerWorkTime } from "../helpers";
 import type { TravelPhase } from "../types";
 
@@ -37,6 +38,7 @@ export const TimeScreen: FC<Props> = ({
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const isLight = theme === "light";
+  const machine = getMachineColors(isLight);
 
   // The "screen" adapts to the theme: a deep glowing CRT in dark mode, a light
   // panel in light mode — never a black box on a white page. Text + accents use
@@ -46,7 +48,7 @@ export const TimeScreen: FC<Props> = ({
   const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85); // labels / subline / prompt
   const screenBg = isLight
     ? `linear-gradient(180deg, ${world.background.primary}, ${colors.base.background.primary})`
-    : "linear-gradient(180deg, #0c0b09, #08080a)";
+    : machine.screenBgDark;
   const localizeDecimal = (s: string) => (fr ? s.replace(".", ",") : s);
 
   const screenStyle: CSSProperties = {
@@ -71,9 +73,9 @@ export const TimeScreen: FC<Props> = ({
     inset: 0,
     pointerEvents: "none",
     backgroundImage: `repeating-linear-gradient(0deg, ${withOpacity(
-      "#000000",
+      machine.scanline,
       0.25,
-    )} 0px, ${withOpacity("#000000", 0.25)} 1px, transparent 1px, transparent 3px)`,
+    )} 0px, ${withOpacity(machine.scanline, 0.25)} 1px, transparent 1px, transparent 3px)`,
     opacity: isLight ? 0.25 : 0.5,
   };
 
@@ -160,7 +162,7 @@ export const TimeScreen: FC<Props> = ({
             // light panel, "screen" washes out — so use vivid yellow→orange with
             // normal blend so the time-flux is clearly visible in both modes.
             background: isLight
-              ? `radial-gradient(circle at 50% 45%, ${withOpacity("#fde047", 0.85)} 0%, ${withOpacity("#f7931a", 0.6)} 42%, ${withOpacity("#ea580c", 0.35)} 62%, transparent 80%)`
+              ? machine.fluxLight
               : `radial-gradient(circle at 50% 45%, ${withOpacity(glow, 0.55)}, transparent 70%)`,
             mixBlendMode: isLight ? "normal" : "screen",
           }}

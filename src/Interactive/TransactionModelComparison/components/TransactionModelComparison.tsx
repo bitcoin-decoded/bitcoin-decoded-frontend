@@ -36,7 +36,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
   const bankAccent = colors.blue.border.secondary;
   const btcAccent = world.border.secondary;
   const successColor = colors.semantic.success.text;
-  const errorColor = colors.semantic.error?.text ?? "#ef4444";
+  const errorColor = colors.semantic.error.text;
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
   const isAfter = phase === "after";
   const iconSm = isMobile ? 11 : 12;

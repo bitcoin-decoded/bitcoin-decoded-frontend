@@ -49,7 +49,7 @@ export const SignaturePlayground: FC = () => {
   const colors: SigPlaygroundColors = {
     accentColor: world.border.secondary,
     successColor: themeColors.semantic.success.text,
-    errorColor: themeColors.semantic.error?.text ?? "#ef4444",
+    errorColor: themeColors.semantic.error.text,
     neutralColor: themeColors.base.text.primary,
     // Private key = blue, public key = lighter (info) blue, signature = violet.
     secretColor: themeColors.blue.text.secondary,

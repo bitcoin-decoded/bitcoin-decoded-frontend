@@ -42,7 +42,7 @@ export const UTXOTransactionBuilder: FC = () => {
 
   const accentColor = world.border.secondary;
   const successColor = colors.semantic.success.text;
-  const errorColor = colors.semantic.error?.text ?? "#ef4444";
+  const errorColor = colors.semantic.error.text;
   const mutedColor = withOpacity(colors.base.text.secondary, 0.7);
 
   const {
