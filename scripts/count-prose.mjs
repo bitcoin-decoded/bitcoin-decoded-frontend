@@ -117,22 +117,34 @@ const countProse = (src) => {
   return total;
 };
 
+// Every interactive that can appear in a chapter page: the public components of
+// src/Interactive/index.ts plus the page-local simulators/galleries under
+// src/Page/*/components. Update this set whenever one is added or removed.
 const INTERACTIVE_NAMES = new Set([
+  // src/Interactive
+  "AccountingTerms",
   "BitcoinNetworkMap",
   "BitcoinNodeDemo",
   "BlockAnatomyVisual",
   "BlockchainChainVisual",
-  "ByzantineGenerals",
   "CapitalStructureChain",
   "DebateArena",
   "DifficultyAdjustment",
+  "DoubleSpendDemo",
+  "ExpandableDefinitions",
   "FlipCardGrid",
   "HalvingChart",
+  "HalvingTimeMachine",
   "HashDemo",
+  "Illustration",
+  "KeySignatureTrio",
   "M2MoneySupplyChart",
   "MempoolVisual",
   "MiningRewardBlock",
   "MiningSimulator",
+  "MonetaryAggregates",
+  "MonetaryPillars",
+  "MonetaryProperties",
   "NetworkFlywheel",
   "Quiz",
   "SeedGenerator",
@@ -143,10 +155,13 @@ const INTERACTIVE_NAMES = new Set([
   "TrustComparisonDemo",
   "UTXOTransactionBuilder",
   "WalletDiscoveryGame",
-  "Illustration",
-  "CreditCreationSimulator",
+  // page-local interactives (Banking simulators + MoneyLaws gallery)
   "CompensationSimulator",
+  "CreditCreationSimulator",
+  "DefaultSimulator",
+  "MonetaryGallery",
   "QESimulator",
+  "YieldCurveSimulator",
 ]);
 
 const countInteractives = (src) => {

@@ -1,2 +1,1 @@
 export { PAGE_METADATA } from "./PAGE_METADATA";
-export { READING_TIME_FLAVORS } from "./READING_TIME_FLAVORS";
