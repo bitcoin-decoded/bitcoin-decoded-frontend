@@ -2,7 +2,7 @@ import { type FC } from "react";
 
 import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { MonetaryPillars, MonetaryProperties } from "../../../Interactive";
+import { DunbarSlider, MonetaryPillars, MonetaryProperties } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared/";
 
@@ -78,19 +78,57 @@ export const MoneyLaws1Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Dans un petit groupe de moins de 150 personnes, la monnaie n'est pas indispensable. On
-              se connaît, on se fait confiance, on utilise{" "}
-              <HighlightText>la dette sociale</HighlightText> : « je t'aide pour ta hutte, tu
-              m'aideras pour ma récolte ». Au-delà de ce seuil, notre cerveau ne suit plus : on ne
-              peut plus mémoriser qui doit quoi à qui. La mémoire individuelle ne suffit plus.
+              Notre cerveau n'est pas câblé pour gérer un nombre infini de relations. Dans un petit
+              groupe, on se connaît, on se fait confiance, on s'arrange :{" "}
+              <i>« je t'aide pour ta hutte, tu m'aideras pour ma récolte »</i>. Pas besoin de
+              monnaie.
             </>
           ) : (
             <>
-              In a small group of fewer than 150 people, money isn't really needed. Everyone knows
-              each other, trust is built in, and <HighlightText>social debt</HighlightText> does the
-              job: <i>"I'll help you build your hut, you'll help me with my harvest."</i> Past that
-              threshold, our brain can't keep up: we just can't remember who owes what to whom
-              anymore. Individual memory isn't enough.
+              Our brain isn't wired to handle an infinite number of relationships. In a small group,
+              everyone knows each other, trust is built in, things get arranged:{" "}
+              <i>"I'll help you build your hut, you'll help me with my harvest."</i> No money
+              needed.
+            </>
+          )}
+        </p>
+        <p>
+          {fr
+            ? "Mais le groupe grandit. Et là, la mécanique change. Regarde par toi-même."
+            : "But the group grows. And that's where the mechanics shift. See for yourself."}
+        </p>
+        <DunbarSlider />
+        <p>
+          {fr ? (
+            <>
+              Ce seuil autour de 150 personnes n'est pas choisi au hasard : c'est le{" "}
+              <Reference href="https://fr.wikipedia.org/wiki/Nombre_de_Dunbar">
+                <i>nombre de Dunbar</i>
+              </Reference>
+              , la limite cognitive estimée de notre cerveau pour entretenir des relations stables.
+            </>
+          ) : (
+            <>
+              That threshold around 150 isn't arbitrary: it's{" "}
+              <Reference href="https://en.wikipedia.org/wiki/Dunbar%27s_number">
+                <i>Dunbar's number</i>
+              </Reference>
+              , the estimated cognitive limit of our brain for keeping stable relationships going.
+            </>
+          )}
+        </p>
+        <p>
+          {fr ? (
+            <>
+              Ce n'est pas une frontière magique au-dessus de laquelle la monnaie « apparaît », mais
+              plutôt le seuil où la mémoire individuelle commence à coincer. Au-delà, il faut un{" "}
+              <HighlightText>système externe</HighlightText> pour tracer qui doit quoi à qui.
+            </>
+          ) : (
+            <>
+              It's not some magical line above which money suddenly "appears", rather the point
+              where individual memory starts to crack. Beyond it, you need an{" "}
+              <HighlightText>external system</HighlightText> to track who owes what to whom.
             </>
           )}
         </p>
@@ -105,32 +143,9 @@ export const MoneyLaws1Page: FC = () => {
           ) : (
             <>
               Money then steps in: it becomes <HighlightText>a collective memory</HighlightText>.
-              Owning money means holding a form of social recognition - usually the trace of work
+              Owning money means holding a form of social recognition, usually the trace of work
               you've done, sometimes credit extended to you. And the right to claim an equivalent
               service in return.
-            </>
-          )}
-        </p>
-        <p>
-          {fr ? (
-            <>
-              Ce nombre n'est pas choisi au hasard : c'est le{" "}
-              <Reference href="https://fr.wikipedia.org/wiki/Nombre_de_Dunbar">
-                <i>nombre de Dunbar</i>
-              </Reference>
-              , la limite cognitive estimée de notre cerveau pour entretenir des relations stables.
-              Ce n'est pas une frontière magique au-dessus de laquelle la monnaie « apparaît », mais
-              plutôt un seuil où la mémoire individuelle commence à coincer.
-            </>
-          ) : (
-            <>
-              This number isn't picked at random: it's{" "}
-              <Reference href="https://en.wikipedia.org/wiki/Dunbar%27s_number">
-                <i>Dunbar's number</i>
-              </Reference>
-              , the estimated cognitive limit of our brain for keeping stable relationships going.
-              It's not some magical threshold where money suddenly "appears" - more like the point
-              where individual memory starts to crack.
             </>
           )}
         </p>

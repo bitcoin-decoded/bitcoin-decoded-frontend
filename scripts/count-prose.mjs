@@ -131,6 +131,7 @@ const INTERACTIVE_NAMES = new Set([
   "DebateArena",
   "DifficultyAdjustment",
   "DoubleSpendDemo",
+  "DunbarSlider",
   "ExpandableDefinitions",
   "FlipCardGrid",
   "HalvingChart",

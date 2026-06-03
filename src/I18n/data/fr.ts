@@ -201,6 +201,14 @@ const fr = {
   "halvingTimeMachine.caption":
     "Récompenses arrondies au satoshi près. Au-delà de ~2140, l'émission tombe à zéro.",
 
+  // DunbarSlider
+  "dunbar.sliderAria": "Taille du groupe",
+  "dunbar.peopleLabel": "personnes",
+  "dunbar.counterLabel": "Relations possibles à mémoriser",
+  "dunbar.overloadTitle": "Surcharge cognitive",
+  "dunbar.overloadBody":
+    "Mémoire individuelle saturée. Il faut un système externe : la monnaie.",
+
   // NetworkFlywheel
   "flywheel.step.usage": "Utilisation du réseau",
   "flywheel.step.fees": "Frais générés (par bloc)",
