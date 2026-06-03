@@ -10,6 +10,7 @@ export const THEME_COLORS = {
       text: {
         primary: "#f2f2f2",
         secondary: "rgba(242, 242, 242, 0.5)",
+        onAccent: "#ffffff",
       },
       border: {
         primary: "rgba(242, 242, 242, 0.06)",
@@ -80,6 +81,11 @@ export const THEME_COLORS = {
         border: "#0284c7",
         background: "rgba(2, 132, 199, 0.12)",
       },
+      warning: {
+        text: "#fb923c",
+        border: "#ea580c",
+        background: "rgba(249, 115, 22, 0.12)",
+      },
     },
   },
   light: {
@@ -93,6 +99,7 @@ export const THEME_COLORS = {
       text: {
         primary: "#1e293b",
         secondary: "#64748b",
+        onAccent: "#ffffff",
       },
       border: {
         primary: "#e2e8f0",
@@ -163,6 +170,11 @@ export const THEME_COLORS = {
         text: "#0284c7",
         border: "#38bdf8",
         background: "rgba(56, 189, 248, 0.08)",
+      },
+      warning: {
+        text: "#c2410c",
+        border: "#f97316",
+        background: "rgba(249, 115, 22, 0.08)",
       },
     },
   },

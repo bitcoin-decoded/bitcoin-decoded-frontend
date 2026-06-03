@@ -81,7 +81,9 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   };
 
   const sliderPct = ((targetYear - minYear) / (maxYear - minYear)) * 100;
-  const sliderTrackRest = isLight ? "#cbd5e1" : "rgba(242, 242, 242, 0.18)";
+  const sliderTrackRest = isLight
+    ? colors.base.border.secondary
+    : withOpacity(colors.base.text.primary, 0.18);
   const sliderStyle = {
     flex: 1,
     maxWidth: "18rem",
@@ -108,7 +110,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     fontWeight: 700,
     letterSpacing: "0.04em",
     whiteSpace: "nowrap",
-    color: active ? "#fff" : withOpacity(colors.base.text.secondary, 0.85),
+    color: active ? colors.base.text.onAccent : withOpacity(colors.base.text.secondary, 0.85),
     background: active ? accent : "transparent",
     opacity: disabled ? 0.5 : 1,
     transition: "all 0.25s var(--ease-smooth)",

@@ -24,7 +24,7 @@ export const WalletDiscoveryGame: FC = () => {
 
   const accentColor = world.border.secondary;
   const successColor = themeColors.semantic.success.text;
-  const errorColor = themeColors.semantic.error?.text ?? "#ef4444";
+  const errorColor = themeColors.semantic.error.text;
   const basePrimaryText = world.text.primary;
   const baseTextSecondary = themeColors.base.text.secondary;
   const baseBorderSecondary = themeColors.base.border.secondary;

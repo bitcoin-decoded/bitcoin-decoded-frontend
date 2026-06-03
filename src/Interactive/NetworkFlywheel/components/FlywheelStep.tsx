@@ -40,7 +40,7 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
     background: `linear-gradient(180deg, ${withOpacity(accent, isActive ? 0.18 : 0.06)}, ${withOpacity(accent, isActive ? 0.08 : 0.02)})`,
     backdropFilter: "blur(2px)",
     border: `1px solid ${withOpacity(accent, isActive ? 0.65 : 0.2)}`,
-    boxShadow: isActive ? `0 0 22px ${withOpacity(accent, 0.45)}` : `0 2px 8px ${withOpacity("#000000", 0.25)}`,
+    boxShadow: isActive ? `0 0 22px ${withOpacity(accent, 0.45)}` : colors.boxShadow.soft,
     transform: isActive ? "scale(1.06)" : "scale(1)",
     transition: "all 0.35s var(--ease-smooth)",
   };

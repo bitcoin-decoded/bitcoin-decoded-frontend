@@ -75,7 +75,7 @@ export const CapitalStructureChain: FC = () => {
     fontSize: "1rem",
     fontWeight: "bold",
     lineHeight: 1,
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+    boxShadow: colors.boxShadow.soft,
   };
 
   const contentStyle: CSSProperties = {

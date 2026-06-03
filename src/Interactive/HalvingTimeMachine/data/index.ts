@@ -1,2 +1,3 @@
+export { getMachineColors } from "./getMachineColors";
 export { TIME_MACHINE_END_YEAR } from "./TIME_MACHINE_END_YEAR";
 export { TIME_MACHINE_MAX_YEAR } from "./TIME_MACHINE_MAX_YEAR";
