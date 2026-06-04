@@ -44,6 +44,8 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
   const bip21 = btc !== null ? buildBip21Uri(address, btc) : `bitcoin:${address}`;
   const feeSats = fees ? estimateOnchainFeeSats(fees.halfHourFeeSatPerVb) : null;
   const feeEur = feeSats !== null && rate ? satsToEur(feeSats, rate.eurPerBtc) : null;
+  // Informative nudge when fees eat a big chunk of a small donation (spec §2.4).
+  const highFees = feeEur !== null && amountEur !== null && feeEur > 0.33 * amountEur;
 
   const titleStyle: CSSProperties = {
     margin: 0,
@@ -132,9 +134,16 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
       )}
 
       {feeSats !== null && feeEur !== null ? (
-        <FeedbackPanel tone="warning" icon={<AlertTriangle size={14} strokeWidth={2.2} />}>
-          {copy.onchain.feeWarning(formatSats(feeSats, localeTag), formatEur(feeEur, localeTag))}
-        </FeedbackPanel>
+        <>
+          <FeedbackPanel tone="warning" icon={<AlertTriangle size={14} strokeWidth={2.2} />}>
+            {copy.onchain.feeWarning(formatSats(feeSats, localeTag), formatEur(feeEur, localeTag))}
+          </FeedbackPanel>
+          {highFees && (
+            <p style={{ ...mutedSmall, color: colors.semantic.warning.text, fontStyle: "italic" }}>
+              {copy.onchain.highFeesWarning}
+            </p>
+          )}
+        </>
       ) : (
         <p style={mutedSmall}>{copy.onchain.feesUnavailable}</p>
       )}

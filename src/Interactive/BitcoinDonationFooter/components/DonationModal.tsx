@@ -38,7 +38,7 @@ export const DonationModal: FC<Props> = ({ onClose, ariaLabel, closeLabel, child
     maxHeight: "90vh",
     overflowY: "auto",
     boxSizing: "border-box",
-    padding: "1.75rem 1.5rem 1.5rem",
+    padding: "3rem 1.5rem 1.5rem",
     borderRadius: "1rem",
     background: `linear-gradient(190deg, ${colors.amber.background.primary}, ${colors.base.background.primary})`,
     border: `1px solid ${withOpacity(colors.amber.border.secondary, 0.3)}`,

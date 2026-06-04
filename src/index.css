@@ -151,6 +151,12 @@ body {
 .donation-spin {
   animation: donationSpin 1s linear infinite;
 }
+.donation-link {
+  transition: filter 0.15s var(--ease-smooth);
+}
+.donation-link:hover {
+  filter: brightness(1.18);
+}
 
 @keyframes confettiBurst {
   0% {

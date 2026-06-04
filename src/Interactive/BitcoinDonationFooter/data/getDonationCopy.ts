@@ -21,13 +21,7 @@ export const getDonationCopy = (language: Language) => {
 
     gate: {
       title: fr ? "Soutenir Bitcoin.Decoded en bitcoin" : "Support Bitcoin.Decoded with bitcoin",
-      subtitle: fr ? "Comment veux-tu procéder ?" : "How would you like to proceed?",
-      lightningLabel: "Lightning",
-      lightningSub: fr ? "Pour les petits montants" : "For small amounts",
-      onchainLabel: "On-chain",
-      onchainSub: fr ? "Pour les montants plus élevés" : "For larger amounts",
-      noWalletLabel: fr ? "Je n'ai pas de wallet" : "I don't have a wallet",
-      noWalletSub: fr ? "Pas de panique" : "No worries",
+      noWalletLink: fr ? "Je n'ai pas de wallet" : "I don't have a wallet",
     },
 
     amount: {
@@ -37,7 +31,6 @@ export const getDonationCopy = (language: Language) => {
       rateLine: (eurStr: string) =>
         fr ? `taux du moment : 1 BTC = ${eurStr} €` : `current rate: 1 BTC = €${eurStr}`,
       refreshRate: fr ? "Actualiser le taux" : "Refresh rate",
-      generateInvoice: fr ? "Générer la facture" : "Generate invoice",
       showAddress: fr ? "Voir l'adresse de don" : "Show donation address",
       back: fr ? "Retour" : "Back",
       rateOutdated: fr ? "taux peut-être obsolète" : "rate may be outdated",
@@ -48,27 +41,8 @@ export const getDonationCopy = (language: Language) => {
       /** Coffee anchors. 21 is intentionally absent (silent easter egg). */
       presetSubs: {
         1: fr ? "le prix d'un expresso" : "the price of an espresso",
-        5: fr ? "le prix d'un café latte" : "the price of a latte",
-        10: fr ? "deux cafés à emporter" : "two coffees to go",
+        5: fr ? "le prix d'une bière en pression" : "the price of a draft beer",
       } as Record<number, string>,
-    },
-
-    lightning: {
-      title: fr ? "Voici ta facture Lightning" : "Here's your Lightning invoice",
-      amountMeta: (eurStr: string, satsStr: string) =>
-        fr ? `Montant : ${eurStr} € ≈ ${satsStr} sats` : `Amount: €${eurStr} ≈ ${satsStr} sats`,
-      expiresIn: (mmss: string) => (fr ? `Expire dans : ${mmss}` : `Expires in: ${mmss}`),
-      openWallet: fr ? "Ouvrir dans mon wallet" : "Open in my wallet",
-      waiting: fr ? "En attente du paiement..." : "Waiting for payment...",
-      qrAria: fr ? "QR code de la facture Lightning" : "Lightning invoice QR code",
-      generating: fr ? "Génération de la facture..." : "Generating invoice...",
-      error: fr
-        ? "Impossible de générer la facture pour le moment."
-        : "Couldn't generate the invoice right now.",
-      fallbackMsg: fr
-        ? "Copie cette adresse Lightning dans ton wallet"
-        : "Copy this Lightning address into your wallet",
-      paid: fr ? "J'ai payé" : "I've paid",
     },
 
     onchain: {
@@ -88,10 +62,9 @@ export const getDonationCopy = (language: Language) => {
         : "Once the payment is sent, confirmation usually takes 10 to 30 minutes. You can close this page without worry.",
       qrAria: fr ? "QR code de l'adresse bitcoin" : "Bitcoin address QR code",
       sent: fr ? "J'ai envoyé" : "I've sent it",
-      thresholdWarning: fr
-        ? "À ce montant, les frais réseau représentent une part importante du don. Tu gagnerais à passer par Lightning."
-        : "At this amount, network fees take a big chunk of the donation. You'd be better off using Lightning.",
-      switchToLightning: fr ? "Passer à Lightning" : "Switch to Lightning",
+      highFeesWarning: fr
+        ? "Les frais réseau sont élevés en ce moment, ce petit don paiera surtout les frais."
+        : "Network fees are high right now, this small donation will mostly cover fees.",
     },
 
     noWallet: {

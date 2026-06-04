@@ -8,5 +8,4 @@ export { formatBtc } from "./formatBtc";
 export { formatEur } from "./formatEur";
 export { formatSats } from "./formatSats";
 export { isDonationConfigured } from "./isDonationConfigured";
-export { resolveLightningInvoice } from "./resolveLightningInvoice";
 export { satsToEur } from "./satsToEur";
