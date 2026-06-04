@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { ArrowLeft, RefreshCw } from "lucide-react";
+import { ArrowLeft, HelpCircle, RefreshCw } from "lucide-react";
 
 import { Button, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
@@ -93,14 +93,21 @@ export const DonationAmountSelector: FC<Props> = ({
   };
 
   const noWalletLinkStyle: CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.4rem",
     alignSelf: "center",
     background: "transparent",
     border: "none",
-    padding: 0,
-    color: withOpacity(colors.base.text.secondary, 0.85),
-    fontSize: "0.75rem",
+    padding: "0.3rem 0.6rem",
+    color: accent,
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.82rem",
+    fontWeight: 600,
+    letterSpacing: "0.02em",
     textDecoration: "underline",
-    textUnderlineOffset: "2px",
+    textDecorationColor: withOpacity(accent, 0.45),
+    textUnderlineOffset: "3px",
     cursor: "pointer",
   };
 
@@ -244,7 +251,13 @@ export const DonationAmountSelector: FC<Props> = ({
         {copy.amount.disclaimer}
       </p>
 
-      <button type="button" style={noWalletLinkStyle} onClick={onNoWallet}>
+      <button
+        type="button"
+        className="donation-link"
+        style={noWalletLinkStyle}
+        onClick={onNoWallet}
+      >
+        <HelpCircle size={14} strokeWidth={2} />
         {copy.gate.noWalletLink}
       </button>
 
