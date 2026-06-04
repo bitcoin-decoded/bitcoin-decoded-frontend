@@ -123,7 +123,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
   const gridStyle: CSSProperties = {
     display: "grid",
     gridTemplateRows: isOpen ? "1fr" : "0fr",
-    transition: "grid-template-rows 0.4s var(--ease-smooth)",
+    transition: "grid-template-rows 0.45s var(--ease-smooth)",
   };
 
   const bodyWrapperStyle: CSSProperties = {
@@ -143,7 +143,10 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
     lineHeight: 1.65,
     fontStyle: "italic",
     opacity: isOpen ? 1 : 0,
-    transition: "opacity 0.3s var(--ease-smooth) 0.1s",
+    transform: isOpen ? "translateY(0)" : "translateY(-0.5rem)",
+    transition: isOpen
+      ? "opacity 0.45s var(--ease-smooth) 0.12s, transform 0.45s var(--ease-smooth) 0.12s"
+      : "opacity 0.2s var(--ease-smooth), transform 0.2s var(--ease-smooth)",
   };
 
   const Icon = pillar.icon;

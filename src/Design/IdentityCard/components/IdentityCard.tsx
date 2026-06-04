@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, type ReactNode } from "react";
+import { type CSSProperties, type FC, type KeyboardEvent, type ReactNode } from "react";
 
 import { useTranslation } from "../../../I18n";
 import { usePageTheme } from "../../Theme/hooks/usePageTheme";
@@ -213,6 +213,13 @@ export const IdentityCard: FC<Props> = ({
     transitionDelay: showContent ? `${0.1 + index * 0.1}s` : "0s",
   });
 
+  const onCardKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleOpen();
+    }
+  };
+
   return (
     <div
       className="gradient-border"
@@ -226,6 +233,11 @@ export const IdentityCard: FC<Props> = ({
       }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={isExpandable ? toggleOpen : undefined}
+      onKeyDown={isExpandable ? onCardKeyDown : undefined}
+      role={isExpandable ? "button" : undefined}
+      tabIndex={isExpandable ? 0 : undefined}
+      aria-expanded={isExpandable ? isOpen : undefined}
     >
       <div style={avatarContainerStyle}>{profilePicture}</div>
       <div style={contentStyle}>
@@ -242,7 +254,6 @@ export const IdentityCard: FC<Props> = ({
         {isExpandable && (
           <div
             style={toggleContainerStyle}
-            onClick={toggleOpen}
             onMouseEnter={() => setIsExpandButtonHovered(true)}
             onMouseLeave={() => setIsExpandButtonHovered(false)}
           >
