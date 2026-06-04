@@ -2,7 +2,11 @@ import { type FC } from "react";
 
 import { HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { getQuizDataModule2Synthesis, SynthesisQuiz } from "../../../Interactive";
+import {
+  BitcoinDonationFooter,
+  getQuizDataModule2Synthesis,
+  SynthesisQuiz,
+} from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
@@ -187,6 +191,7 @@ export const MoneyLaws5Page: FC = () => {
           </p>
         </>
       )}
+      <BitcoinDonationFooter display="inline" />
     </PageTemplate>
   );
 };

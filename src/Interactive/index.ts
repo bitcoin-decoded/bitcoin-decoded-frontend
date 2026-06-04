@@ -1,4 +1,5 @@
 export { AccountingTerms } from "./AccountingTerms";
+export { BitcoinDonationFooter } from "./BitcoinDonationFooter";
 export { BitcoinNetworkMap } from "./BitcoinNetworkMap";
 export { BitcoinNodeDemo } from "./BitcoinNodeDemo";
 export { BlockAnatomyVisual } from "./BlockAnatomyVisual";

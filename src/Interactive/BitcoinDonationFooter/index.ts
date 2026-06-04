@@ -1,0 +1,1 @@
+export { BitcoinDonationFooter } from "./components";

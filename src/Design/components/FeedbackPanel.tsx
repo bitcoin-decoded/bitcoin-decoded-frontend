@@ -4,7 +4,7 @@ import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
 import { usePageTheme } from "../Theme";
 
-type Tone = "success" | "error" | "info" | "neutral" | "world";
+type Tone = "success" | "error" | "info" | "warning" | "neutral" | "world";
 type Variant = "full" | "border-left";
 
 type Props = {
@@ -59,9 +59,11 @@ export const FeedbackPanel: FC<Props> = ({
         ? colors.semantic.error.text
         : tone === "info"
           ? colors.semantic.info.text
-          : tone === "world"
-            ? colors[moduleTheme].text.secondary
-            : colors.base.border.secondary;
+          : tone === "warning"
+            ? colors.semantic.warning.text
+            : tone === "world"
+              ? colors[moduleTheme].text.secondary
+              : colors.base.border.secondary;
 
   // Slightly bolder bg + border for `full` variant; lighter for `border-left`.
   const bgOpacity = variant === "border-left" ? 0.05 : 0.07;

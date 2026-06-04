@@ -5,7 +5,12 @@ import moneyCreationCodeline from "../../../../src/Design/img/money_creation_cod
 import moneyPrinting from "../../../../src/Design/img/money_printing.webp";
 import { HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { getQuizDataModule1Synthesis, Illustration, SynthesisQuiz } from "../../../Interactive";
+import {
+  BitcoinDonationFooter,
+  getQuizDataModule1Synthesis,
+  Illustration,
+  SynthesisQuiz,
+} from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
@@ -210,6 +215,7 @@ export const Banking7Page: FC = () => {
           </p>
         </>
       )}
+      <BitcoinDonationFooter display="inline" />
     </PageTemplate>
   );
 };

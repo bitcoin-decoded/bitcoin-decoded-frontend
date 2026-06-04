@@ -123,6 +123,7 @@ const countProse = (src) => {
 const INTERACTIVE_NAMES = new Set([
   // src/Interactive
   "AccountingTerms",
+  "BitcoinDonationFooter",
   "BitcoinNetworkMap",
   "BitcoinNodeDemo",
   "BlockAnatomyVisual",
