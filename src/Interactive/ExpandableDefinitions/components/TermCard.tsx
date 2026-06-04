@@ -109,7 +109,10 @@ export const TermCard: FC<Props> = ({ term }) => {
   };
 
   const bodyStyle: CSSProperties = {
-    padding: isMobile ? "0 0.95rem 1rem 0.95rem" : "0 1.1rem 1.15rem 1.1rem",
+    paddingTop: "0.85rem",
+    paddingRight: isMobile ? "0.95rem" : "1.1rem",
+    paddingBottom: isMobile ? "1rem" : "1.15rem",
+    paddingLeft: isMobile ? "0.95rem" : "1.1rem",
     color: colors.base.text.primary,
     fontSize: isMobile ? "0.85rem" : "0.9rem",
     lineHeight: 1.65,
@@ -118,7 +121,6 @@ export const TermCard: FC<Props> = ({ term }) => {
     flexDirection: "column",
     gap: "0.5rem",
     borderTop: `1px dashed ${withOpacity(term.accentBorder, 0.25)}`,
-    paddingTop: "0.85rem",
     opacity: isOpen ? 1 : 0,
     transition: "opacity 0.3s var(--ease-smooth) 0.1s",
   };
