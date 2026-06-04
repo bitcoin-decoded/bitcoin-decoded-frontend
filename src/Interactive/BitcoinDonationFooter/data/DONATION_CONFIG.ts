@@ -16,7 +16,7 @@ export const DONATION_CONFIG: {
   lightningAddress: string;
   walletChapterRoute: RouteName;
 } = {
-  onchainAddress: "TODO_ONCHAIN_BC1_ADDRESS",
+  onchainAddress: "bc1q3dncsvrejuspm2vvxg6rjmlgedtkeq3d47pvz4",
   lightningAddress: "TODO_LIGHTNING_ADDRESS",
   walletChapterRoute: ROUTE_NAME.Bitcoin_9,
 };
