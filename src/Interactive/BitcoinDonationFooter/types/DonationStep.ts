@@ -1,8 +1,2 @@
-/** Current screen in the donation journey state machine. */
-export type DonationStep =
-  | "gate"
-  | "amount"
-  | "lightning-invoice"
-  | "onchain-address"
-  | "no-wallet"
-  | "thank-you";
+/** Current screen in the donation journey state machine (v2, on-chain only). */
+export type DonationStep = "amount" | "onchain-address" | "no-wallet" | "thank-you";

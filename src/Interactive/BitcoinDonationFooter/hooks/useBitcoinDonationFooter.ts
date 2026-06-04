@@ -1,21 +1,19 @@
 import { useCallback, useState } from "react";
 
-import type { DonationGate, DonationStep } from "../types";
+import type { DonationStep } from "../types";
 
 /**
- * The donation journey state machine: which screen we're on, the chosen gate,
- * and the chosen EUR amount, plus the transitions between screens. Shared by
- * both the footer-modal and inline display modes.
+ * The donation journey state machine (v2, on-chain only). It opens straight on
+ * the amount selector — there is no gate-selection screen. The no-wallet screen
+ * is reached via a discreet link and returns to the amount selector.
  */
 export const useBitcoinDonationFooter = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [step, setStep] = useState<DonationStep>("gate");
-  const [gate, setGate] = useState<DonationGate | null>(null);
+  const [step, setStep] = useState<DonationStep>("amount");
   const [amountEur, setAmountEur] = useState<number | null>(null);
 
   const reset = useCallback(() => {
-    setStep("gate");
-    setGate(null);
+    setStep("amount");
     setAmountEur(null);
   }, []);
 
@@ -29,52 +27,28 @@ export const useBitcoinDonationFooter = () => {
     reset();
   }, [reset]);
 
-  const selectGate = useCallback((next: DonationGate) => {
-    setGate(next);
-    setStep(next === "no-wallet" ? "no-wallet" : "amount");
-  }, []);
-
   const setAmount = useCallback((eur: number | null) => setAmountEur(eur), []);
 
-  const proceedFromAmount = useCallback(() => {
-    setStep(gate === "onchain" ? "onchain-address" : "lightning-invoice");
-  }, [gate]);
+  const proceedFromAmount = useCallback(() => setStep("onchain-address"), []);
 
-  const switchToLightning = useCallback(() => {
-    setGate("lightning");
-    setStep("amount");
-  }, []);
+  const goToNoWallet = useCallback(() => setStep("no-wallet"), []);
 
-  const confirmPaid = useCallback(() => setStep("thank-you"), []);
+  const confirmSent = useCallback(() => setStep("thank-you"), []);
 
-  const back = useCallback(() => {
-    setStep((current) => {
-      switch (current) {
-        case "amount":
-        case "no-wallet":
-          return "gate";
-        case "lightning-invoice":
-        case "onchain-address":
-          return "amount";
-        default:
-          return current;
-      }
-    });
-  }, []);
+  /** From any sub-screen (address / no-wallet) back to the amount selector. */
+  const back = useCallback(() => setStep("amount"), []);
 
   return {
     isOpen,
     step,
-    gate,
     amountEur,
     open,
     close,
     reset,
-    selectGate,
     setAmount,
     proceedFromAmount,
-    switchToLightning,
-    confirmPaid,
+    goToNoWallet,
+    confirmSent,
     back,
   };
 };

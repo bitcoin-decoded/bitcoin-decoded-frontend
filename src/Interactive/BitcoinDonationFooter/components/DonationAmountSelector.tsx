@@ -1,32 +1,29 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { AlertTriangle, ArrowLeft, RefreshCw } from "lucide-react";
+import { ArrowLeft, RefreshCw } from "lucide-react";
 
-import { Button, FeedbackPanel, useBreakpoint, usePageTheme } from "../../../Design";
+import { Button, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy, PRESET_AMOUNTS } from "../data";
-import { estimateOnchainFeeSats, eurToSats, formatEur, formatSats, satsToEur } from "../helpers";
-import { useBtcRate, useNetworkFees } from "../hooks";
-import type { DonationGate } from "../types";
+import { eurToSats, formatEur, formatSats } from "../helpers";
+import { useBtcRate } from "../hooks";
 
 type Props = {
-  gate: DonationGate;
   amountEur: number | null;
   onAmount: (eur: number | null) => void;
   onProceed: () => void;
   onBack: () => void;
-  onSwitchToLightning: () => void;
+  onNoWallet: () => void;
 };
 
-/** Step 1 (spec §4.1 / §5.1), shared by the Lightning and on-chain gates. */
+/** Step 1 (spec §4.1 / §5.1): pick an amount, then proceed to the on-chain address. */
 export const DonationAmountSelector: FC<Props> = ({
-  gate,
   amountEur,
   onAmount,
   onProceed,
   onBack,
-  onSwitchToLightning,
+  onNoWallet,
 }) => {
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -34,8 +31,7 @@ export const DonationAmountSelector: FC<Props> = ({
   const copy = getDonationCopy(language);
   const localeTag = language === "fr" ? "fr-FR" : "en-US";
 
-  const { rate, loading, error, refresh, isStale } = useBtcRate();
-  const { fees } = useNetworkFees();
+  const { rate, loading, refresh, isStale } = useBtcRate();
 
   const [customStr, setCustomStr] = useState("");
 
@@ -54,13 +50,7 @@ export const DonationAmountSelector: FC<Props> = ({
   };
 
   const sats = rate && amountEur ? eurToSats(amountEur, rate.eurPerBtc) : null;
-  const feeSats = fees ? estimateOnchainFeeSats(fees.halfHourFeeSatPerVb) : null;
-  const feeEur = feeSats !== null && rate ? satsToEur(feeSats, rate.eurPerBtc) : null;
-  const belowThreshold =
-    gate === "onchain" && amountEur !== null && feeEur !== null && amountEur < 3 * feeEur;
-
   const canProceed = amountEur !== null && amountEur > 0;
-  const proceedLabel = gate === "lightning" ? copy.amount.generateInvoice : copy.amount.showAddress;
 
   const titleStyle: CSSProperties = {
     margin: 0,
@@ -100,6 +90,18 @@ export const DonationAmountSelector: FC<Props> = ({
   const mutedSmall: CSSProperties = {
     fontSize: "0.72rem",
     color: withOpacity(colors.base.text.secondary, 0.85),
+  };
+
+  const noWalletLinkStyle: CSSProperties = {
+    alignSelf: "center",
+    background: "transparent",
+    border: "none",
+    padding: 0,
+    color: withOpacity(colors.base.text.secondary, 0.85),
+    fontSize: "0.75rem",
+    textDecoration: "underline",
+    textUnderlineOffset: "2px",
+    cursor: "pointer",
   };
 
   return (
@@ -235,7 +237,6 @@ export const DonationAmountSelector: FC<Props> = ({
               </button>
             </div>
           )}
-          {error && !rate && null}
         </div>
       )}
 
@@ -243,23 +244,9 @@ export const DonationAmountSelector: FC<Props> = ({
         {copy.amount.disclaimer}
       </p>
 
-      {belowThreshold && (
-        <FeedbackPanel tone="warning" icon={<AlertTriangle size={14} strokeWidth={2.2} />}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.5rem",
-              alignItems: "flex-start",
-            }}
-          >
-            <span>{copy.onchain.thresholdWarning}</span>
-            <Button variant="secondary" size="sm" onClick={onSwitchToLightning}>
-              {copy.onchain.switchToLightning}
-            </Button>
-          </div>
-        </FeedbackPanel>
-      )}
+      <button type="button" style={noWalletLinkStyle} onClick={onNoWallet}>
+        {copy.gate.noWalletLink}
+      </button>
 
       <Button
         variant="primary"
@@ -269,7 +256,7 @@ export const DonationAmountSelector: FC<Props> = ({
         onClick={onProceed}
         style={{ marginTop: isMobile ? "0.1rem" : "0.25rem" }}
       >
-        {proceedLabel}
+        {copy.amount.showAddress}
       </Button>
     </div>
   );

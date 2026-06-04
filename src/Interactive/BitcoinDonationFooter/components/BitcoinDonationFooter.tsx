@@ -8,10 +8,8 @@ import type { DonationDisplayMode } from "../types";
 
 import { DonationAmountSelector } from "./DonationAmountSelector";
 import { DonationFooterButton } from "./DonationFooterButton";
-import { DonationGateSelector } from "./DonationGateSelector";
 import { DonationModal } from "./DonationModal";
 import { DonationThankYou } from "./DonationThankYou";
-import { LightningInvoiceDisplay } from "./LightningInvoiceDisplay";
 import { NoWalletRedirect } from "./NoWalletRedirect";
 import { OnchainAddressDisplay } from "./OnchainAddressDisplay";
 
@@ -21,9 +19,10 @@ type Props = {
 };
 
 /**
- * Orchestrates the donation journey (spec §17). Two display modes share one
- * state machine: a discreet footer button that opens a modal, or an expanded
- * inline block embedded at the end of a chapter.
+ * Orchestrates the donation journey (v2, on-chain only). Both display modes
+ * share one state machine and open straight on the amount selector: a discreet
+ * footer button that opens a modal, or an expanded inline block at the end of a
+ * chapter.
  */
 export const BitcoinDonationFooter: FC<Props> = ({ display = "footer" }) => {
   const { colors } = usePageTheme();
@@ -31,29 +30,20 @@ export const BitcoinDonationFooter: FC<Props> = ({ display = "footer" }) => {
   const copy = getDonationCopy(language);
   const journey = useBitcoinDonationFooter();
 
-  const finish = display === "footer" ? journey.close : journey.reset;
+  // Leaving the entry (amount) or finishing closes the modal in footer mode,
+  // and resets the flow in inline mode.
+  const exit = display === "footer" ? journey.close : journey.reset;
 
   const renderStep = (): ReactNode => {
     switch (journey.step) {
-      case "gate":
-        return <DonationGateSelector onSelect={journey.selectGate} />;
       case "amount":
         return (
           <DonationAmountSelector
-            gate={journey.gate ?? "lightning"}
             amountEur={journey.amountEur}
             onAmount={journey.setAmount}
             onProceed={journey.proceedFromAmount}
-            onBack={journey.back}
-            onSwitchToLightning={journey.switchToLightning}
-          />
-        );
-      case "lightning-invoice":
-        return (
-          <LightningInvoiceDisplay
-            amountEur={journey.amountEur}
-            onBack={journey.back}
-            onPaid={journey.confirmPaid}
+            onBack={exit}
+            onNoWallet={journey.goToNoWallet}
           />
         );
       case "onchain-address":
@@ -61,13 +51,13 @@ export const BitcoinDonationFooter: FC<Props> = ({ display = "footer" }) => {
           <OnchainAddressDisplay
             amountEur={journey.amountEur}
             onBack={journey.back}
-            onSent={journey.confirmPaid}
+            onSent={journey.confirmSent}
           />
         );
       case "no-wallet":
-        return <NoWalletRedirect onClose={finish} />;
+        return <NoWalletRedirect onClose={journey.back} />;
       case "thank-you":
-        return <DonationThankYou onContinue={finish} />;
+        return <DonationThankYou onContinue={exit} />;
       default:
         return null;
     }
