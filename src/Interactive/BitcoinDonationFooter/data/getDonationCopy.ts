@@ -42,7 +42,6 @@ export const getDonationCopy = (language: Language) => {
       presetSubs: {
         1: fr ? "le prix d'un expresso" : "the price of an espresso",
         5: fr ? "le prix d'une bière en pression" : "the price of a draft beer",
-        10: fr ? "le prix d'un menu Mcdo" : "the price of a McDonald's combo meal",
       } as Record<number, string>,
     },
 
