@@ -103,8 +103,12 @@ export const HomePage: FC = () => {
   };
 
   // Section vertical spacing - driven by the spacing tokens above.
+  // Longhand padding (not the `padding` shorthand) so sections that override
+  // only paddingTop / paddingBottom below don't mix shorthand + longhand,
+  // which React flags on re-render.
   const sectionStyle: CSSProperties = {
-    padding: `${space.sectionPadY} 0`,
+    paddingTop: space.sectionPadY,
+    paddingBottom: space.sectionPadY,
     display: "flex",
     flexDirection: "column",
     gap: space.sectionGap,
