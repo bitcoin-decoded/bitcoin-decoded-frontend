@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, type ReactNode } from "react";
+import { type CSSProperties, type FC, type KeyboardEvent, type ReactNode } from "react";
 
 import { useTranslation } from "../../../I18n";
 import { usePageTheme } from "../../Theme/hooks/usePageTheme";
@@ -47,11 +47,18 @@ export const IdentityCard: FC<Props> = ({
 
   // Single source for the two size tiers. `compact` drives the gallery look;
   // the default keeps the original roomy card untouched.
+  //
+  // The compact avatar is clamped (not a raw 33%) so it can't balloon on a
+  // wide single-column card. The top margin and content padding are derived
+  // from the same value, so the protruding halves always clear the content
+  // above and below whatever the card width.
+  const compactAvatarSize = "min(33%, 8.5rem)";
   const ramp = compact
     ? {
-        avatarMarginTop: "3.25rem",
+        avatarSize: compactAvatarSize,
+        avatarMarginTop: `calc(${compactAvatarSize} / 2 + 0.4rem)`,
         marginBottom: "1.5rem",
-        contentPadTop: "calc(15% + 1.35rem)",
+        contentPadTop: `calc(${compactAvatarSize} / 2 + 1.35rem)`,
         contentPadX: "1.1rem",
         contentPadBottom: "1.35rem",
         baseFont: "0.85rem",
@@ -62,6 +69,7 @@ export const IdentityCard: FC<Props> = ({
         radius: "1rem",
       }
     : {
+        avatarSize: "33%",
         avatarMarginTop: "6rem",
         marginBottom: "2rem",
         contentPadTop: "calc(15% + 2rem)",
@@ -118,7 +126,7 @@ export const IdentityCard: FC<Props> = ({
     top: 0,
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "33%",
+    width: ramp.avatarSize,
     aspectRatio: "1 / 1",
     borderRadius: "50%",
     backgroundColor: colors.base.background.secondary,
@@ -213,6 +221,13 @@ export const IdentityCard: FC<Props> = ({
     transitionDelay: showContent ? `${0.1 + index * 0.1}s` : "0s",
   });
 
+  const onCardKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleOpen();
+    }
+  };
+
   return (
     <div
       className="gradient-border"
@@ -226,6 +241,11 @@ export const IdentityCard: FC<Props> = ({
       }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={isExpandable ? toggleOpen : undefined}
+      onKeyDown={isExpandable ? onCardKeyDown : undefined}
+      role={isExpandable ? "button" : undefined}
+      tabIndex={isExpandable ? 0 : undefined}
+      aria-expanded={isExpandable ? isOpen : undefined}
     >
       <div style={avatarContainerStyle}>{profilePicture}</div>
       <div style={contentStyle}>
@@ -242,7 +262,6 @@ export const IdentityCard: FC<Props> = ({
         {isExpandable && (
           <div
             style={toggleContainerStyle}
-            onClick={toggleOpen}
             onMouseEnter={() => setIsExpandButtonHovered(true)}
             onMouseLeave={() => setIsExpandButtonHovered(false)}
           >

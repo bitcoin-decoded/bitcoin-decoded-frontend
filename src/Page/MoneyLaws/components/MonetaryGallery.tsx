@@ -15,7 +15,10 @@ export const MonetaryGallery: FC = () => {
 
   const gridStyle: CSSProperties = {
     display: "grid",
-    gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+    // A lone column (mobile / narrow viewports) is capped and centered so the
+    // card stays card-sized instead of stretching full-width on wide phones.
+    gridTemplateColumns: columns === 1 ? "minmax(0, 26rem)" : `repeat(${columns}, minmax(0, 1fr))`,
+    justifyContent: columns === 1 ? "center" : undefined,
     gap: isMobile ? "1.25rem" : "1.5rem",
     padding: isMobile ? "1rem 0" : "1.5rem 0",
     alignItems: "start",

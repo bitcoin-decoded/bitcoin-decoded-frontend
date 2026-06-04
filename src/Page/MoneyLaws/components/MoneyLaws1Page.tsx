@@ -101,19 +101,20 @@ export const MoneyLaws1Page: FC = () => {
         <p>
           {fr ? (
             <>
-              Ce seuil autour de 150 personnes n'est pas choisi au hasard : c'est le{" "}
+              Ce seuil autour de 150 personnes n'est pas choisi au hasard : le{" "}
               <Reference href="https://fr.wikipedia.org/wiki/Nombre_de_Dunbar">
                 <i>nombre de Dunbar</i>
-              </Reference>
-              , la limite cognitive estimée de notre cerveau pour entretenir des relations stables.
+              </Reference>{" "}
+              désigne la limite cognitive estimée de notre cerveau pour entretenir des relations
+              stables.
             </>
           ) : (
             <>
-              That threshold around 150 isn't arbitrary: it's{" "}
+              That threshold around 150 isn't arbitrary:{" "}
               <Reference href="https://en.wikipedia.org/wiki/Dunbar%27s_number">
                 <i>Dunbar's number</i>
-              </Reference>
-              , the estimated cognitive limit of our brain for keeping stable relationships going.
+              </Reference>{" "}
+              is the estimated cognitive limit of our brain for keeping stable relationships going.
             </>
           )}
         </p>

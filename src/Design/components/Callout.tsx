@@ -1,8 +1,10 @@
-import { type FC, type ReactNode, type CSSProperties } from "react";
-import { usePageTheme } from "../Theme";
-import { useBreakpoint } from "../Responsive";
-import { withOpacity } from "../helpers";
+import { type CSSProperties, type FC, type ReactNode } from "react";
+
 import { Info } from "lucide-react";
+
+import { withOpacity } from "../helpers";
+import { useBreakpoint } from "../Responsive";
+import { usePageTheme } from "../Theme";
 
 type Props = {
   icon?: ReactNode;
@@ -19,11 +21,14 @@ export const Callout: FC<Props> = ({ icon, title, children }) => {
 
   const containerStyle: CSSProperties = {
     display: "flex",
+    // On phones, stack the icon above the text so the prose uses the full
+    // width instead of being indented by the icon column on every line.
+    flexDirection: isMobile ? "column" : "row",
     alignItems: "flex-start",
-    gap: isMobile ? "0.75rem" : "1.25rem",
+    gap: isMobile ? "0.55rem" : "1.25rem",
     position: "relative",
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
-    padding: isMobile ? "1rem 1.25rem" : "1.5rem 2rem",
+    padding: isMobile ? "1rem 0.85rem" : "1.5rem 2rem",
     background: `linear-gradient(190deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary})`,
     borderRadius: "1rem",
   };
@@ -40,9 +45,7 @@ export const Callout: FC<Props> = ({ icon, title, children }) => {
 
   const titleStyle: CSSProperties = {
     display: "block",
-    color: moduleTheme === "base"
-      ? colors.base.text.primary
-      : colors[moduleTheme].text.primary,
+    color: moduleTheme === "base" ? colors.base.text.primary : colors[moduleTheme].text.primary,
     fontWeight: 600,
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: isMobile ? "0.8125rem" : "0.875rem",
@@ -58,20 +61,19 @@ export const Callout: FC<Props> = ({ icon, title, children }) => {
   };
 
   const textStyle: CSSProperties = {
-    color: moduleTheme === "base"
-      ? colors.base.text.secondary
-      : colors[moduleTheme].text.secondary,
+    color: moduleTheme === "base" ? colors.base.text.secondary : colors[moduleTheme].text.secondary,
     lineHeight: 1.7,
     fontSize: isMobile ? "0.875rem" : "0.9375rem",
     textAlign: "left",
   };
 
-  const defaultIcon = (
-    <Info size={isMobile ? 18 : 20} strokeWidth={2} />
-  );
+  const defaultIcon = <Info size={isMobile ? 16 : 20} strokeWidth={2} />;
 
   return (
-    <aside className="gradient-border" style={{ ...containerStyle, "--border-glow-color": accentColor } as CSSProperties}>
+    <aside
+      className="gradient-border"
+      style={{ ...containerStyle, "--border-glow-color": accentColor } as CSSProperties}
+    >
       <div style={iconContainerStyle}>{icon || defaultIcon}</div>
       <div style={contentContainerStyle}>
         <span style={titleStyle}>{title}</span>
