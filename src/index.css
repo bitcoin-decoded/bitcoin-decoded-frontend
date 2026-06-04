@@ -133,6 +133,25 @@ body {
   animation: metricPop 0.32s var(--ease-smooth) both;
 }
 
+/* Bitcoin donation flow — sober fade between screens / on the QR, and the
+   waiting-state loader rotation (spec §15). */
+@keyframes donationFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes donationSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.donation-spin {
+  animation: donationSpin 1s linear infinite;
+}
+
 @keyframes confettiBurst {
   0% {
     opacity: 1;

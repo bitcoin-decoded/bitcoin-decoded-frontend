@@ -1,0 +1,68 @@
+import { type CSSProperties, type FC, useState } from "react";
+
+import { Check, Copy } from "lucide-react";
+
+import { usePageTheme } from "../../../Design";
+import { withOpacity } from "../../../Design/helpers";
+import { useClipboard } from "../hooks";
+
+type Props = {
+  value: string;
+  copyLabel: string;
+  copiedLabel: string;
+};
+
+/** Copy-to-clipboard pill: Copy → Check swap for 1.5s, with an aria-live announce. */
+export const CopyButton: FC<Props> = ({ value, copyLabel, copiedLabel }) => {
+  const { colors } = usePageTheme();
+  const { copied, copy } = useClipboard();
+  const [hovered, setHovered] = useState(false);
+
+  const accent = colors.amber.text.secondary;
+  const success = colors.semantic.success.text;
+  const tone = copied ? success : accent;
+
+  const style: CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.35rem",
+    padding: "0.35rem 0.6rem",
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.72rem",
+    fontWeight: 600,
+    letterSpacing: "0.03em",
+    color: tone,
+    background: hovered && !copied ? withOpacity(accent, 0.08) : "transparent",
+    border: `1px solid ${withOpacity(tone, 0.4)}`,
+    borderRadius: "0.5rem",
+    cursor: "pointer",
+    flexShrink: 0,
+    transition: "color 0.15s, border-color 0.15s, background 0.15s",
+  };
+
+  return (
+    <button
+      type="button"
+      style={style}
+      onClick={() => void copy(value)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      aria-label={copied ? copiedLabel : copyLabel}
+    >
+      {copied ? <Check size={13} strokeWidth={2.5} /> : <Copy size={13} strokeWidth={2.2} />}
+      <span>{copied ? copiedLabel : copyLabel}</span>
+      <span
+        aria-live="polite"
+        style={{
+          position: "absolute",
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+          clip: "rect(0 0 0 0)",
+        }}
+      >
+        {copied ? copiedLabel : ""}
+      </span>
+    </button>
+  );
+};

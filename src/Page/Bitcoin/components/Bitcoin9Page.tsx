@@ -2,7 +2,11 @@ import { type FC } from "react";
 
 import { HighlightText } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { getQuizDataModule3Synthesis, SynthesisQuiz } from "../../../Interactive";
+import {
+  BitcoinDonationFooter,
+  getQuizDataModule3Synthesis,
+  SynthesisQuiz,
+} from "../../../Interactive";
 import { PageTemplate, useToggleSimulator } from "../../Shared/";
 
 export const Bitcoin9Page: FC = () => {
@@ -202,6 +206,7 @@ export const Bitcoin9Page: FC = () => {
           </p>
         </>
       )}
+      <BitcoinDonationFooter display="inline" />
     </PageTemplate>
   );
 };

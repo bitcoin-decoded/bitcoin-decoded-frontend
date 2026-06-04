@@ -1,0 +1,54 @@
+import { type CSSProperties, type FC, useState } from "react";
+
+import { Bitcoin } from "lucide-react";
+
+import { usePageTheme } from "../../../Design";
+import { withOpacity } from "../../../Design/helpers";
+import { useTranslation } from "../../../I18n";
+import { getDonationCopy } from "../data";
+
+type Props = {
+  onClick: () => void;
+};
+
+/** Discreet chrome button (spec §12.1) that opens the donation modal. */
+export const DonationFooterButton: FC<Props> = ({ onClick }) => {
+  const { colors } = usePageTheme();
+  const { language } = useTranslation();
+  const copy = getDonationCopy(language);
+  const [hovered, setHovered] = useState(false);
+
+  const accent = colors.amber.text.secondary;
+
+  const style: CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    padding: "0.5rem 1rem",
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.78rem",
+    fontWeight: 600,
+    letterSpacing: "0.03em",
+    color: accent,
+    background: hovered
+      ? `linear-gradient(135deg, ${withOpacity(accent, 0.16)}, ${withOpacity(accent, 0.04)})`
+      : "transparent",
+    border: `1px solid ${withOpacity(accent, hovered ? 0.7 : 0.4)}`,
+    borderRadius: "2rem",
+    cursor: "pointer",
+    transition: "all 0.15s var(--ease-smooth)",
+  };
+
+  return (
+    <button
+      type="button"
+      style={style}
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <Bitcoin size={15} strokeWidth={2} style={{ color: "#f7931a" }} />
+      {copy.footerCta}
+    </button>
+  );
+};
