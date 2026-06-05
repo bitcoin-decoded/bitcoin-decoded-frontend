@@ -1,0 +1,1 @@
+export { ScientificMethods } from "./components";

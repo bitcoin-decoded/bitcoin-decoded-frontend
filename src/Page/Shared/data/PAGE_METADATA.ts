@@ -20,7 +20,7 @@ export const PAGE_METADATA: PageMetadataMap = {
   [ROUTE_NAME.MoneyLaws_1]: { wordCount: 795, interactiveCount: 4 },
   [ROUTE_NAME.MoneyLaws_2]: { wordCount: 1836, interactiveCount: 5 },
   [ROUTE_NAME.MoneyLaws_3]: { wordCount: 1093, interactiveCount: 2 },
-  [ROUTE_NAME.MoneyLaws_4]: { wordCount: 760, interactiveCount: 2 },
+  [ROUTE_NAME.MoneyLaws_4]: { wordCount: 760, interactiveCount: 3 },
   [ROUTE_NAME.MoneyLaws_5]: { wordCount: 473, interactiveCount: 2 },
 
   // Bitcoin — La révolution Bitcoin

@@ -7,6 +7,7 @@ import {
   getKeynesianVsAustrian,
   getQuizDataAustrianAxiom,
   Quiz,
+  ScientificMethods,
 } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate, useToggleSimulator } from "../../Shared/";
@@ -102,6 +103,7 @@ export const MoneyLaws4Page: FC = () => {
           </li>
         </ul>
       </Callout>
+      <ScientificMethods />
       <p>
         {fr ? (
           <>

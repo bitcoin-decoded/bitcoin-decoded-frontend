@@ -37,6 +37,7 @@ export {
   getQuizDataUtxo,
   Quiz,
 } from "./Quiz";
+export { ScientificMethods } from "./ScientificMethods";
 export { SeedGenerator } from "./SeedGenerator";
 export { SignaturePlayground } from "./SignaturePlayground";
 export { SignatureVerifier } from "./SignatureVerifier";
