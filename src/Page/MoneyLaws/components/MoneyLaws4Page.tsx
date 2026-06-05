@@ -54,7 +54,7 @@ export const MoneyLaws4Page: FC = () => {
           </>
         )}
       </p>
-      <Callout title={fr ? "Le Physicien contre le Logicien" : "The Physicist versus the Logician"}>
+      <Callout title={fr ? "Le physicien contre le logicien" : "The Physicist versus the Logician"}>
         <p>
           {fr
             ? "Il existe deux manières radicalement opposées d'aborder l'économie :"
@@ -85,19 +85,14 @@ export const MoneyLaws4Page: FC = () => {
                 L'école autrichienne (<i>la méthode du logicien</i>) : là, on ne part pas de
                 l'observation, mais d'un point de départ qu'on tient pour indiscutable, puis on en
                 déduit tout le reste par la logique, exactement comme en géométrie.{" "}
-                <HighlightText>C'est la méthode axiomatique-déductive</HighlightText>.{" "}
-                <Reference href="https://mises.org/library/book/human-action">
-                  En savoir plus
-                </Reference>
-                .
+                <HighlightText>C'est la méthode axiomatique-déductive</HighlightText>.
               </span>
             ) : (
               <span>
                 The Austrian school (<i>the logician's method</i>): here, you don't start from
                 observation but from a premise you treat as indisputable, and you deduce everything
                 else through logic, exactly like in geometry.{" "}
-                <HighlightText>This is the axiomatic-deductive method</HighlightText>.{" "}
-                <Reference href="https://mises.org/library/book/human-action">Read more</Reference>.
+                <HighlightText>This is the axiomatic-deductive method</HighlightText>.
               </span>
             )}
           </li>
