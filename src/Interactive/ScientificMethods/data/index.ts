@@ -1,0 +1,1 @@
+export { getScientificMethodsCopy } from "./getScientificMethodsCopy";

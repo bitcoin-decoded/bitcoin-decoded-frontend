@@ -149,6 +149,7 @@ const INTERACTIVE_NAMES = new Set([
   "MonetaryProperties",
   "NetworkFlywheel",
   "Quiz",
+  "ScientificMethods",
   "SeedGenerator",
   "SignaturePlayground",
   "SignatureVerifier",
