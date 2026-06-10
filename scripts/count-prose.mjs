@@ -129,6 +129,7 @@ const INTERACTIVE_NAMES = new Set([
   "BlockAnatomyVisual",
   "BlockchainChainVisual",
   "CapitalStructureChain",
+  "CustodyOptions",
   "DebateArena",
   "DifficultyAdjustment",
   "DoubleSpendDemo",
@@ -148,6 +149,7 @@ const INTERACTIVE_NAMES = new Set([
   "MonetaryPillars",
   "MonetaryProperties",
   "NetworkFlywheel",
+  "PathFinder",
   "Quiz",
   "ScientificMethods",
   "SeedGenerator",
@@ -158,6 +160,7 @@ const INTERACTIVE_NAMES = new Set([
   "TrustComparisonDemo",
   "UTXOTransactionBuilder",
   "WalletDiscoveryGame",
+  "WalletFamilies",
   // page-local interactives (Banking simulators + MoneyLaws gallery)
   "CompensationSimulator",
   "CreditCreationSimulator",

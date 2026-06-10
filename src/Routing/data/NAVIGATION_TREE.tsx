@@ -129,6 +129,7 @@ export const getNavigationTree = (t: TranslationFn): NavigationItem[] => [
         kind: "challenge",
       },
       {
+        id: ROUTE_NAME.Bitcoin_10,
         label: t("nav.tree.getStarted"),
         isPage: true,
       },

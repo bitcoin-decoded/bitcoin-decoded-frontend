@@ -5,6 +5,7 @@ export { BitcoinNodeDemo } from "./BitcoinNodeDemo";
 export { BlockAnatomyVisual } from "./BlockAnatomyVisual";
 export { BlockchainChainVisual } from "./BlockchainChainVisual";
 export { CapitalStructureChain } from "./CapitalStructureChain";
+export { CustodyOptions } from "./CustodyOptions";
 export { getKeynesianVsAustrian } from "./DebateArena";
 export { DebateArena } from "./DebateArena";
 export { DifficultyAdjustment } from "./DifficultyAdjustment";
@@ -25,6 +26,7 @@ export { MonetaryAggregates } from "./MonetaryAggregates";
 export { MonetaryPillars } from "./MonetaryPillars";
 export { MonetaryProperties } from "./MonetaryProperties";
 export { NetworkFlywheel } from "./NetworkFlywheel";
+export { PathFinder } from "./PathFinder";
 export {
   getQuizDataAustrianAxiom,
   getQuizDataBridgeMaterial,
@@ -51,3 +53,4 @@ export { TransactionModelComparison } from "./TransactionModelComparison";
 export { TrustComparisonDemo } from "./TrustComparisonDemo";
 export { UTXOTransactionBuilder } from "./UTXOTransactionBuilder";
 export { WalletDiscoveryGame } from "./WalletDiscoveryGame";
+export { WalletFamilies } from "./WalletFamilies";
