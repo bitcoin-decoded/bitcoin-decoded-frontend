@@ -7,4 +7,4 @@ export { Bitcoin6Page } from "./Bitcoin6Page";
 export { Bitcoin7Page } from "./Bitcoin7Page";
 export { Bitcoin8Page } from "./Bitcoin8Page";
 export { Bitcoin9Page } from "./Bitcoin9Page";
-export { Bitcoin10Page } from "./Bitcoin10Page";
+export { GetStartedPage } from "./GetStartedPage";

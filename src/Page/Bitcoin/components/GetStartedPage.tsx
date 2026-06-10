@@ -4,7 +4,7 @@ import { useTranslation } from "../../../I18n";
 import { CustodyOptions, PathFinder, WalletFamilies } from "../../../Interactive";
 import { PageTemplate } from "../../Shared";
 
-export const Bitcoin10Page: FC = () => {
+export const GetStartedPage: FC = () => {
   const { t, language } = useTranslation();
   const fr = language === "fr";
 

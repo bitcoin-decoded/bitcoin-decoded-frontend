@@ -136,7 +136,7 @@ export const getNavigationTree = (t: TranslationFn): NavigationItem[] => [
   // icon is the singular visual marker for this special entry point (NavItem
   // only renders icons at level 0, so no chapter inside a module can carry one).
   {
-    id: ROUTE_NAME.Bitcoin_10,
+    id: ROUTE_NAME.GetStarted,
     label: t("nav.tree.getStarted"),
     isPage: true,
     icon: <Rabbit size={16} strokeWidth={2} color="#f7931a" />,
