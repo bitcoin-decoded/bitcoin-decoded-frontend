@@ -464,7 +464,7 @@ const en = {
   "nav.tree.utxoAndTransactions": "Bitcoin doesn't move money",
   "nav.tree.keysAndSignatures": "Proving without revealing oneself",
   "nav.tree.walletsAndSeed": "Bitcoin: not an account, not a vault",
-  "nav.tree.getStarted": "Get started with Bitcoin!",
+  "nav.tree.getStarted": "Down the Rabbit Hole",
 
   // Footer
   "footer.builtWith": "Built with",

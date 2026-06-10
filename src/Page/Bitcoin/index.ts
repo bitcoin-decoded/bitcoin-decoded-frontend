@@ -8,5 +8,5 @@ export {
   Bitcoin7Page,
   Bitcoin8Page,
   Bitcoin9Page,
-  Bitcoin10Page,
+  GetStartedPage,
 } from "./components";
