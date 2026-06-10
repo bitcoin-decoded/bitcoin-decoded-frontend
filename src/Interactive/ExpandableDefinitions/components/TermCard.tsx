@@ -97,6 +97,13 @@ export const TermCard: FC<Props> = ({ term }) => {
     transition: "transform 0.35s var(--ease-smooth)",
   };
 
+  const metaStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    gap: isMobile ? "0.45rem" : "0.5rem",
+    padding: isMobile ? "0 0.95rem 0.9rem" : "0.1rem 1.1rem 1rem",
+  };
+
   const gridStyle: CSSProperties = {
     display: "grid",
     gridTemplateRows: isOpen ? "1fr" : "0fr",
@@ -144,6 +151,8 @@ export const TermCard: FC<Props> = ({ term }) => {
         </div>
         <ChevronDown size={isMobile ? 16 : 18} strokeWidth={2.2} style={chevronStyle} />
       </button>
+
+      {term.meta && <div style={metaStyle}>{term.meta}</div>}
 
       <div style={gridStyle}>
         <div style={bodyWrapperStyle}>

@@ -8,13 +8,6 @@ export {
   Banking7Page,
 } from "./Banking";
 export {
-  MoneyLaws1Page,
-  MoneyLaws2Page,
-  MoneyLaws3Page,
-  MoneyLaws4Page,
-  MoneyLaws5Page,
-} from "./MoneyLaws";
-export {
   Bitcoin1Page,
   Bitcoin2Page,
   Bitcoin3Page,
@@ -24,21 +17,29 @@ export {
   Bitcoin7Page,
   Bitcoin8Page,
   Bitcoin9Page,
+  Bitcoin10Page,
 } from "./Bitcoin";
 export {
-  HomePage,
-  PageTemplate,
+  MoneyLaws1Page,
+  MoneyLaws2Page,
+  MoneyLaws3Page,
+  MoneyLaws4Page,
+  MoneyLaws5Page,
+} from "./MoneyLaws";
+export type { PageMetadata, PageMetadataMap, ReadingTimeEstimate } from "./Shared";
+export {
   ChapterPrelude,
-  PageNavigation,
-  ReadingTimeBadge,
-  ReadingProgressBar,
-  ScrollToTopButton,
-  PAGE_STYLES,
-  PAGE_METADATA,
-  useToggleSimulator,
-  useReadingTime,
-  useReadingProgress,
-  useScrollToTop,
   getReadingTime,
+  HomePage,
+  PAGE_METADATA,
+  PAGE_STYLES,
+  PageNavigation,
+  PageTemplate,
+  ReadingProgressBar,
+  ReadingTimeBadge,
+  ScrollToTopButton,
+  useReadingProgress,
+  useReadingTime,
+  useScrollToTop,
+  useToggleSimulator,
 } from "./Shared";
-export type { ReadingTimeEstimate, PageMetadata, PageMetadataMap } from "./Shared";

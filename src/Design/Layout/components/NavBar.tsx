@@ -1,12 +1,11 @@
-import { type FC, type CSSProperties, type JSX } from "react";
-import { useThemeContext } from "../../Theme/hooks/useThemeContext";
-import { THEME_COLORS } from "../../Theme/data";
-import {
-  useRouterContext,
-  type NavigationItem,
-} from "../../../Routing";
+import { type CSSProperties, type FC, type JSX } from "react";
+
 import { useTranslation } from "../../../I18n";
+import { type NavigationItem, useRouterContext } from "../../../Routing";
+import { THEME_COLORS } from "../../Theme/data";
+import { useThemeContext } from "../../Theme/hooks/useThemeContext";
 import { useHeaderHidden, useNavBar } from "../hooks";
+
 import { NavItem } from "./NavItem";
 
 export const NavBar: FC = () => {
@@ -75,9 +74,7 @@ export const NavBar: FC = () => {
       level={level}
       isDirectlyActive={currentPage === item.id}
       isExpanded={openModule === item.label}
-      isActiveAncestor={
-        level === 0 && activePath.includes(item.label) && currentPage !== item.id
-      }
+      isActiveAncestor={level === 0 && activePath.includes(item.label) && currentPage !== item.id}
       isInteracting={interactionId === (item.id || item.label)}
       colors={colors}
       onItemClick={handleMenuClick}

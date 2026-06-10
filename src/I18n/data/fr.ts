@@ -67,6 +67,15 @@ const fr = {
   // AccountingTerms
   "accountingTerms.sectionTitle": "Comptabilité : quelques définitions",
 
+  // CustodyOptions
+  "custodyOptions.sectionTitle": "Deux grandes manières de garder tes bitcoins",
+
+  // WalletFamilies
+  "walletFamilies.sectionTitle": "Deux familles de portefeuilles",
+
+  // PathFinder — Quelle voie pour toi ?
+  "pathFinder.step": "Étape",
+
   // MonetaryAggregates
   "monetaryAggregates.sectionTitle":
     "Les deux types de monnaie : celle que l'on utilise et celle réservée aux Banques",
@@ -206,8 +215,7 @@ const fr = {
   "dunbar.peopleLabel": "personnes",
   "dunbar.counterLabel": "Relations possibles à mémoriser",
   "dunbar.overloadTitle": "Surcharge cognitive",
-  "dunbar.overloadBody":
-    "Mémoire individuelle saturée. Il faut un système externe : la monnaie.",
+  "dunbar.overloadBody": "Mémoire individuelle saturée. Il faut un système externe : la monnaie.",
 
   // NetworkFlywheel
   "flywheel.step.usage": "Utilisation du réseau",

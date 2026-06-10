@@ -66,6 +66,15 @@ const en = {
   // AccountingTerms
   "accountingTerms.sectionTitle": "Accounting: a few key definitions",
 
+  // CustodyOptions
+  "custodyOptions.sectionTitle": "Two ways to hold your bitcoin",
+
+  // WalletFamilies
+  "walletFamilies.sectionTitle": "Three wallet families",
+
+  // PathFinder — Which path for you?
+  "pathFinder.step": "Step",
+
   // MonetaryAggregates
   "monetaryAggregates.sectionTitle":
     "The two kinds of money: the one you use, and the one reserved for banks",
