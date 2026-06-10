@@ -20,7 +20,10 @@ const PAGE_DIRS = [
   "src/Page/Bitcoin/components",
 ];
 
-const isPageFile = (name) => /^(Banking|MoneyLaws|Bitcoin)\d+Page\.tsx$/.test(name);
+// Numbered module chapters, plus the standalone "Get started" chapter that
+// lives in the Bitcoin dir without a chapter number.
+const isPageFile = (name) =>
+  /^(Banking|MoneyLaws|Bitcoin)\d+Page\.tsx$/.test(name) || name === "GetStartedPage.tsx";
 
 // Walk to the matching close of the current ternary branch.
 // Returns the index of the `:` (else separator) or `;`/EOF (else absent).
