@@ -78,8 +78,8 @@ export const getDonationCopy = (language: Language) => {
         ? "On en parle en détail dans le chapitre dédié."
         : "We cover it in detail in the dedicated chapter.",
       readChapter: fr
-        ? "Lire le chapitre « Démarrer avec Bitcoin »"
-        : "Read the « Getting started with Bitcoin » chapter",
+        ? "Lire le chapitre « Entrer dans le terrier »"
+        : "Read the « Down the Rabbit Hole » chapter",
       later: fr ? "Revenir plus tard" : "I'll come back later",
     },
 
