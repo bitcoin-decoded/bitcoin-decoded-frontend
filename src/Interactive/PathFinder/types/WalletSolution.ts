@@ -9,7 +9,6 @@ export type WalletSolution = {
   connexion: "hot" | "cold" | "n-a";
   free: boolean;
   multisig: boolean;
-  externalWithdrawal: boolean;
   subCategories: SubCategoryId[];
   sensitiveNote?: Record<Language, string>;
 };
