@@ -61,6 +61,14 @@ export const DonationAmountSelector: FC<Props> = ({
     textAlign: "center",
   };
 
+  const leadStyle: CSSProperties = {
+    margin: 0,
+    textAlign: "center",
+    fontSize: isMobile ? "0.92rem" : "0.98rem",
+    lineHeight: 1.45,
+    color: withOpacity(colors.base.text.secondary, 0.95),
+  };
+
   const presetBtn = (active: boolean): CSSProperties => ({
     display: "flex",
     flexDirection: "column",
@@ -123,7 +131,10 @@ export const DonationAmountSelector: FC<Props> = ({
         {copy.amount.back}
       </Button>
 
-      <h3 style={titleStyle}>{copy.amount.title}</h3>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+        <p style={leadStyle}>{copy.amount.lead}</p>
+        <h3 style={titleStyle}>{copy.amount.title}</h3>
+      </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.6rem" }}>
         {PRESET_AMOUNTS.map((preset) => (

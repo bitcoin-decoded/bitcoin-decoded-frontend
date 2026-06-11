@@ -1,4 +1,4 @@
-import { ArrowUpFromLine, GitBranch, Key, Tag, Users, WifiOff } from "lucide-react";
+import { GitBranch, Key, Tag, Users, WifiOff } from "lucide-react";
 
 import type { PathFinderCopy } from "../data";
 import type { CriterionDescriptor } from "../types";
@@ -26,11 +26,5 @@ export const getCriteriaDescriptors = (
   },
   { key: "cold", Icon: WifiOff, label: criteria.cold, isPresent: (s) => s.connexion === "cold" },
   { key: "multisig", Icon: Users, label: criteria.multisig, isPresent: (s) => s.multisig },
-  {
-    key: "withdrawal",
-    Icon: ArrowUpFromLine,
-    label: criteria.withdrawal,
-    isPresent: (s) => s.externalWithdrawal,
-  },
   { key: "free", Icon: Tag, label: criteria.free, isPresent: (s) => s.free },
 ];

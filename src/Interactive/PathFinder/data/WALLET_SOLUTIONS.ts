@@ -9,7 +9,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: true,
     multisig: false,
-    externalWithdrawal: true,
     subCategories: ["exchange", "custodial"],
   },
   {
@@ -19,7 +18,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: true,
     multisig: false,
-    externalWithdrawal: true,
     subCategories: ["exchange", "custodial"],
   },
   {
@@ -29,7 +27,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: true,
     multisig: false,
-    externalWithdrawal: true,
     subCategories: ["exchange", "custodial"],
   },
 
@@ -41,7 +38,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: true,
     multisig: false,
-    externalWithdrawal: true,
     subCategories: ["p2p"],
   },
   {
@@ -51,7 +47,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: true,
     multisig: false,
-    externalWithdrawal: true,
     subCategories: ["p2p"],
   },
   {
@@ -61,7 +56,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: true,
     multisig: false,
-    externalWithdrawal: true,
     subCategories: ["p2p"],
   },
 
@@ -73,7 +67,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: false,
     multisig: false,
-    externalWithdrawal: false,
     subCategories: ["etf"],
     sensitiveNote: {
       fr: "Tu détiens une part de fonds, pas de vrais bitcoins : aucun retrait on-chain.",
@@ -87,7 +80,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: false,
     multisig: false,
-    externalWithdrawal: false,
     subCategories: ["etf"],
     sensitiveNote: {
       fr: "Tu détiens une part de fonds, pas de vrais bitcoins : aucun retrait on-chain.",
@@ -103,7 +95,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "n-a",
     free: true,
     multisig: false,
-    externalWithdrawal: true,
     subCategories: ["atm"],
     sensitiveNote: {
       fr: "Frais souvent élevés ; vérifie le taux avant d'insérer tes espèces.",
@@ -119,7 +110,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "hot",
     free: true,
     multisig: false,
-    externalWithdrawal: true,
     subCategories: ["hot"],
   },
   {
@@ -129,7 +119,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "hot",
     free: true,
     multisig: true,
-    externalWithdrawal: true,
     subCategories: ["hot"],
   },
 
@@ -141,7 +130,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "cold",
     free: false,
     multisig: true,
-    externalWithdrawal: true,
     subCategories: ["cold"],
   },
   {
@@ -151,7 +139,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "cold",
     free: false,
     multisig: true,
-    externalWithdrawal: true,
     subCategories: ["cold"],
   },
   {
@@ -161,7 +148,6 @@ export const WALLET_SOLUTIONS: WalletSolution[] = [
     connexion: "cold",
     free: false,
     multisig: true,
-    externalWithdrawal: true,
     subCategories: ["cold"],
     sensitiveNote: {
       fr: "Firmware fermé ; la fonction Ledger Recover (2023) a relancé le débat sur l'extractibilité des clés.",
