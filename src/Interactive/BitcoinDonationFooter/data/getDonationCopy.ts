@@ -25,6 +25,9 @@ export const getDonationCopy = (language: Language) => {
     },
 
     amount: {
+      lead: fr
+        ? "Tu veux soutenir mon travail de pédagogie ?"
+        : "Want to support the teaching behind this?",
       title: fr ? "Combien veux-tu donner ?" : "How much would you like to give?",
       customPlaceholder: fr ? "autre montant..." : "other amount...",
       satsApprox: (satsStr: string) => `≈ ${satsStr} sats`,

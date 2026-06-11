@@ -155,16 +155,15 @@ export const getPathFinderCopy = (language: Language) => {
     // Boolean criteria (§5 ajusté) — each is a positive trait: amber when true,
     // red crossed-out cell when false.
     criteria: {
-      nonCustodial: fr ? "Clés à toi (non-custodial)" : "Your keys (non-custodial)",
+      nonCustodial: fr ? "Détention propre" : "Non-custodial",
       openSource: "Open source",
-      cold: fr ? "Hors ligne (cold)" : "Offline (cold)",
+      cold: fr ? "Fonctionne hors ligne" : "Works offline",
       multisig: "Multisig",
-      withdrawal: fr ? "Retrait externe" : "External withdrawal",
       free: fr ? "Gratuit" : "Free",
     },
 
     legend: {
-      title: fr ? "Légende des critères" : "Criteria legend",
+      title: fr ? "Critères" : "Criteria",
       yes: fr ? "oui" : "yes",
       no: fr ? "non" : "no",
       conventionYes: fr ? "présent" : "present",

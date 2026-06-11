@@ -28,6 +28,11 @@ export const GetStartedPage: FC = () => {
           : "Now that you've got the bearings you need, just answer 4 questions. From your answers, we'll put together a personalized onboarding plan."}
       </p>
       <PathFinder />
+      <p>
+        {fr
+          ? "Retiens une seule chose de tout ça : acheter, c'est l'étape facile. Détenir vraiment, c'est le vrai sujet. Le jour où tu tiens tes propres clés, tu n'as plus une promesse sur un écran. Tu as du bitcoin."
+          : "If you take away one thing: buying is the easy part. Truly holding is the real one. The day you hold your own keys, you no longer own a promise on a screen. You own bitcoin."}
+      </p>
     </PageTemplate>
   );
 };
