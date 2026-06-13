@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Disclosure, HighlightText, Reference } from "../../../Design";
+import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   getQuizDataUtxo,
