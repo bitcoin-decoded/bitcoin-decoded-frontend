@@ -249,7 +249,7 @@ const fr = {
     "Chaque pièce est indivisible dans le portefeuille de Nicolas, impossible de la découper.",
   "utxoBuilder.newUtxoRecipient": "Nouvelle pièce → Destinataire",
   "utxoBuilder.newUtxoNicolas": "Nouvelle pièce → Nicolas",
-  "utxoBuilder.recipientDesc": "Ce qu'il reçoit",
+  "utxoBuilder.recipientDesc": "Ce que Mme Michu reçoit",
   "utxoBuilder.changeDesc": "Monnaie rendue (entrées - montant - frais)",
   "utxoBuilder.feesImplicit": "Frais implicites → Mineur",
   "utxoBuilder.feesDesc": "Différence non attribuée, collectée par le mineur",

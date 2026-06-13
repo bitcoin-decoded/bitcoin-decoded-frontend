@@ -246,7 +246,7 @@ const en = {
   "utxoBuilder.utxoHint": "Each coin is indivisible in Nicolas's wallet, it can't be split.",
   "utxoBuilder.newUtxoRecipient": "New coin → Recipient",
   "utxoBuilder.newUtxoNicolas": "New coin → Nicolas",
-  "utxoBuilder.recipientDesc": "What they receive",
+  "utxoBuilder.recipientDesc": "What Ms. Smith receive",
   "utxoBuilder.changeDesc": "Change returned (inputs - amount - fees)",
   "utxoBuilder.feesImplicit": "Implicit fees → Miner",
   "utxoBuilder.feesDesc": "Unallocated difference, collected by the miner",

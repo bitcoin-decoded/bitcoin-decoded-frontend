@@ -300,16 +300,18 @@ export const UTXOTransactionBuilder: FC<{ lockedAmount?: string }> = ({ lockedAm
                 {t("utxoBuilder.outputs")}
               </Caption>
 
-              <TxCard
-                icon={<User size={12} strokeWidth={2} />}
-                title={t("utxoBuilder.newUtxoRecipient")}
-                desc={t("utxoBuilder.recipientDesc")}
-                amount={fmtBTC(parsedAmount)}
-                tone="success"
-                toneColors={toneColors}
-                amountFontSize={amountFont}
-                baseTextSecondary={colors.base.text.secondary}
-              />
+              {isValid && (
+                <TxCard
+                  icon={<User size={12} strokeWidth={2} />}
+                  title={t("utxoBuilder.newUtxoRecipient")}
+                  desc={isValid ? t("utxoBuilder.recipientDesc") : "test"}
+                  amount={fmtBTC(parsedAmount)}
+                  tone="success"
+                  toneColors={toneColors}
+                  amountFontSize={amountFont}
+                  baseTextSecondary={colors.base.text.secondary}
+                />
+              )}
 
               {isValid && change > 0 && (
                 <TxCard
