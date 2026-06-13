@@ -455,6 +455,7 @@ const fr = {
   "nav.tree.synthesis": "Tu as compris ? Prouve-le.",
   "nav.tree.moneyLaws": "Pourquoi le système échoue",
   "nav.tree.whatIsMoney": "5000 ans de batteries qui fuient",
+  "nav.tree.priceOfTime": "Quand le taux dit la vérité",
   "nav.tree.economicCycles": "La boussole truquée de l'économie",
   "nav.tree.socialismProblem": "Mises avait prévenu",
   "nav.tree.austrianMethod": "Le physicien contre le logicien",

@@ -18,10 +18,11 @@ export const PAGE_METADATA: PageMetadataMap = {
 
   // MoneyLaws — Les lois de la monnaie
   [ROUTE_NAME.MoneyLaws_1]: { wordCount: 795, interactiveCount: 4 },
-  [ROUTE_NAME.MoneyLaws_2]: { wordCount: 1836, interactiveCount: 5 },
-  [ROUTE_NAME.MoneyLaws_3]: { wordCount: 1093, interactiveCount: 2 },
-  [ROUTE_NAME.MoneyLaws_4]: { wordCount: 760, interactiveCount: 3 },
-  [ROUTE_NAME.MoneyLaws_5]: { wordCount: 473, interactiveCount: 2 },
+  [ROUTE_NAME.MoneyLaws_2]: { wordCount: 937, interactiveCount: 4 },
+  [ROUTE_NAME.MoneyLaws_3]: { wordCount: 850, interactiveCount: 1 },
+  [ROUTE_NAME.MoneyLaws_4]: { wordCount: 1093, interactiveCount: 2 },
+  [ROUTE_NAME.MoneyLaws_5]: { wordCount: 757, interactiveCount: 3 },
+  [ROUTE_NAME.MoneyLaws_6]: { wordCount: 473, interactiveCount: 2 },
 
   // Bitcoin — La révolution Bitcoin
   [ROUTE_NAME.Bitcoin_1]: { wordCount: 1396, interactiveCount: 2 },
@@ -29,8 +30,8 @@ export const PAGE_METADATA: PageMetadataMap = {
   [ROUTE_NAME.Bitcoin_3]: { wordCount: 873, interactiveCount: 3 },
   [ROUTE_NAME.Bitcoin_4]: { wordCount: 1069, interactiveCount: 6 },
   [ROUTE_NAME.Bitcoin_5]: { wordCount: 976, interactiveCount: 5 },
-  [ROUTE_NAME.Bitcoin_6]: { wordCount: 946, interactiveCount: 4 },
-  [ROUTE_NAME.Bitcoin_7]: { wordCount: 286, interactiveCount: 2 },
+  [ROUTE_NAME.Bitcoin_6]: { wordCount: 740, interactiveCount: 4 },
+  [ROUTE_NAME.Bitcoin_7]: { wordCount: 353, interactiveCount: 2 },
   [ROUTE_NAME.Bitcoin_8]: { wordCount: 486, interactiveCount: 2 },
   [ROUTE_NAME.Bitcoin_9]: { wordCount: 561, interactiveCount: 2 },
 };

@@ -106,19 +106,60 @@ export const Bitcoin6Page: FC = () => {
           ? "C'est un changement de perspective fondamental."
           : "It's a fundamental shift in perspective."}
       </p>
+
       <p>
         {fr ? (
           <>
-            Une transaction Bitcoin n'est pas un virement. Elle repose sur un principe appelé{" "}
-            <i>UTXO</i> (<i>Unspent Transaction Output</i>)
+            Avant de poser le moindre mot savant, manipule. Oublie le solde : imagine que le
+            portefeuille de Nicolas ne contient pas un nombre, mais des <i>pièces</i> de valeurs
+            fixes — 0,8, 1, 0,5 et 2 — et chacune est <HighlightText>indivisible</HighlightText>.
+            Pour payer, il faut piocher dans ces pièces et les combiner.
           </>
         ) : (
           <>
-            A Bitcoin transaction is not a wire transfer. It relies on a principle called{" "}
-            <i>UTXO</i> (<i>Unspent Transaction Output</i>)
+            Before we drop a single piece of jargon, get hands-on. Forget the balance: imagine
+            Nicolas's wallet doesn't hold a number, but <i>coins</i> of fixed values — 0.8, 1, 0.5
+            and 2 — each of them <HighlightText>indivisible</HighlightText>. To pay, you have to
+            pick from these coins and combine them.
           </>
         )}
-        .
+      </p>
+      <p>
+        {fr
+          ? "Nicolas veut envoyer 1,3 à Mme Michu. À toi de jouer : compose le paiement."
+          : "Nicolas wants to send 1.3 to Ms. Smith. Your turn: put the payment together."}
+      </p>
+      <UTXOTransactionBuilder />
+      <p>
+        {fr ? (
+          <>
+            Tu viens de le sentir : on ne coupe pas une pièce en deux. Pour atteindre 1,3, tu
+            assembles des pièces entières (0,8 + 0,5), et quand le compte n'est pas juste, le
+            surplus te revient en monnaie.
+          </>
+        ) : (
+          <>
+            You just felt it: you can't cut a coin in half. To reach 1.3, you assemble whole coins
+            (0.8 + 0.5), and when the amount isn't exact, the surplus comes back to you as change.
+          </>
+        )}
+      </p>
+      <p>
+        {fr ? (
+          <>
+            Ces « pièces » ont un nom : un <i>UTXO</i> (<i>Unspent Transaction Output</i>). Une
+            transaction Bitcoin n'est pas un virement : elle consomme des pièces existantes et en
+            recrée de nouvelles. Tu peux voir un <HighlightText>UTXO</HighlightText> comme une pièce
+            rangée dans ton portefeuille : indivisible, prête à être dépensée.
+          </>
+        ) : (
+          <>
+            These "coins" have a name: a <i>UTXO</i> (<i>Unspent Transaction Output</i>). A Bitcoin
+            transaction is not a wire transfer: it consumes existing coins and creates new ones.
+            Think of a <HighlightText>UTXO</HighlightText> as a coin sitting in your wallet:
+            indivisible, ready to be spent.
+          </>
+        )}
       </p>
 
       <Disclosure
@@ -140,31 +181,11 @@ export const Bitcoin6Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "La valeur change bien de mains, mais le mécanisme est très différent. Tu vas voir comment juste après."
-            : "Value does change hands, but the mechanism is very different. You'll see how just below."}
+            ? "La valeur change bien de mains, mais le mécanisme est très différent."
+            : "Value does change hands, but the mechanism is very different."}
         </p>
       </Disclosure>
 
-      <p>
-        {fr ? (
-          <>
-            Pour comprendre, le mieux c'est de le voir en pratique. Tu peux voir un{" "}
-            <HighlightText>UTXO</HighlightText> comme une pièce rangée dans ton portefeuille :
-            indivisible, prête à être dépensée.
-          </>
-        ) : (
-          <>
-            Best way to understand it: in practice. Think of a <HighlightText>UTXO</HighlightText>{" "}
-            as a coin sitting in your wallet: indivisible, ready to be spent.
-          </>
-        )}
-      </p>
-      <p>
-        {fr
-          ? "Tu es en possession du portefeuille de Nicolas, amuse-toi à simuler une transaction :"
-          : "You're holding Nicolas's wallet. Have a go at simulating a transaction:"}
-      </p>
-      <UTXOTransactionBuilder />
       <p>
         {fr
           ? "UTXO, c'est posé. On enchaîne sur un concept tout aussi central."
@@ -211,8 +232,8 @@ export const Bitcoin6Page: FC = () => {
       </Callout>
       <p>
         {fr
-          ? "Imagine maintenant que Nicolas veuille virer 1,3 bitcoin à Mme Michu. Exécute une transaction dans le système Bitcoin :"
-          : "Now imagine Nicolas wants to send 1.3 bitcoins to Ms. Smith. Run a transaction in the Bitcoin system:"}
+          ? "Reprenons la même transaction, vue cette fois côté entrées et sorties :"
+          : "Let's take the same transaction again, this time from the inputs-and-outputs angle:"}
       </p>
       <TransactionModelComparison mode="bitcoin" />
 
@@ -272,8 +293,8 @@ export const Bitcoin6Page: FC = () => {
         ) : (
           <>
             The answer sits in another fundamental mechanism of Bitcoin:{" "}
-            <Reference to={ROUTE_NAME.Bitcoin_7}>keys, signatures, and cryptography</Reference>
-            .<br /> On to the next chapter, you're nearly there!
+            <Reference to={ROUTE_NAME.Bitcoin_7}>keys, signatures, and cryptography</Reference>.
+            <br /> On to the next chapter, you're nearly there!
           </>
         )}
       </p>
