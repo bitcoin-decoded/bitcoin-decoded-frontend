@@ -112,8 +112,8 @@ export const Bitcoin6Page: FC = () => {
           <>
             Avant de poser le moindre mot savant, manipule. Oublie le solde : imagine que le
             portefeuille de Nicolas ne contient pas un nombre, mais des <i>pièces</i> de valeurs
-            fixes — 0,8, 1, 0,5 et 2 — et chacune est <HighlightText>indivisible</HighlightText>.
-            Pour payer, il faut piocher dans ces pièces et les combiner.
+            fixes (0.8, 1, 0.5 et 2), chacune <HighlightText>indivisible</HighlightText>. Pour
+            payer, il faut piocher dans ces pièces et les combiner.
           </>
         ) : (
           <>
@@ -129,7 +129,7 @@ export const Bitcoin6Page: FC = () => {
           ? "Nicolas veut envoyer 1,3 à Mme Michu. À toi de jouer : compose le paiement."
           : "Nicolas wants to send 1.3 to Ms. Smith. Your turn: put the payment together."}
       </p>
-      <UTXOTransactionBuilder />
+      <UTXOTransactionBuilder lockedAmount="1.3" />
       <p>
         {fr ? (
           <>

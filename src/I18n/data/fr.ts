@@ -232,7 +232,7 @@ const fr = {
 
   // UTXOTransactionBuilder
   "utxoBuilder.title": "Construis une transaction",
-  "utxoBuilder.step1": "1. Sélectionne les UTXO de Nicolas",
+  "utxoBuilder.step1": "1. Sélectionne les pièces de Nicolas",
   "utxoBuilder.step2": "2. Montant à envoyer (BTC)",
   "utxoBuilder.placeholder": "ex : 0.75",
   "utxoBuilder.totalInput": "Total entrées :",
@@ -243,17 +243,21 @@ const fr = {
   "utxoBuilder.fees": "Frais mineur",
   "utxoBuilder.valid": "Transaction valide",
   "utxoBuilder.insufficient": "Fonds insuffisants",
-  "utxoBuilder.selectHint": "Sélectionne des UTXO et entres un montant",
+  "utxoBuilder.selectHint": "Sélectionne des pièces à dépenser",
   "utxoBuilder.reset": "Tout effacer",
   "utxoBuilder.utxoHint":
-    "Chaque UTXO est comme une pièce indivisible dans le portefeuille de Nicolas - impossible de les découper.",
-  "utxoBuilder.newUtxoRecipient": "Nouvel UTXO → Destinataire",
-  "utxoBuilder.newUtxoNicolas": "Nouvel UTXO → Nicolas",
+    "Chaque pièce est indivisible dans le portefeuille de Nicolas, impossible de la découper.",
+  "utxoBuilder.newUtxoRecipient": "Nouvelle pièce → Destinataire",
+  "utxoBuilder.newUtxoNicolas": "Nouvelle pièce → Nicolas",
   "utxoBuilder.recipientDesc": "Ce qu'il reçoit",
   "utxoBuilder.changeDesc": "Monnaie rendue (entrées - montant - frais)",
   "utxoBuilder.feesImplicit": "Frais implicites → Mineur",
   "utxoBuilder.feesDesc": "Différence non attribuée, collectée par le mineur",
   "utxoBuilder.totalRow": "Total entrées",
+  "utxoBuilder.coinLabel": "Pièce",
+
+  // CapitalStructureChain
+  "capitalChain.traceBack": "REMONTER LE TEMPS ⌛ →",
 
   // SignatureVerifier
   "sigVerifier.title": "Vérification de signature",

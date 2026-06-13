@@ -230,7 +230,7 @@ const en = {
 
   // UTXOTransactionBuilder
   "utxoBuilder.title": "Build a transaction",
-  "utxoBuilder.step1": "1. Select Nicolas's UTXOs",
+  "utxoBuilder.step1": "1. Select Nicolas's coins",
   "utxoBuilder.step2": "2. Amount to send (BTC)",
   "utxoBuilder.placeholder": "e.g. 0.75",
   "utxoBuilder.totalInput": "Total inputs:",
@@ -241,17 +241,20 @@ const en = {
   "utxoBuilder.fees": "Miner fee",
   "utxoBuilder.valid": "Valid transaction",
   "utxoBuilder.insufficient": "Insufficient funds",
-  "utxoBuilder.selectHint": "Select UTXOs and enter an amount",
+  "utxoBuilder.selectHint": "Select coins to spend",
   "utxoBuilder.reset": "Clear all",
-  "utxoBuilder.utxoHint":
-    "Each UTXO is like an indivisible coin in Nicolas's wallet - they can't be split.",
-  "utxoBuilder.newUtxoRecipient": "New UTXO → Recipient",
-  "utxoBuilder.newUtxoNicolas": "New UTXO → Nicolas",
+  "utxoBuilder.utxoHint": "Each coin is indivisible in Nicolas's wallet, it can't be split.",
+  "utxoBuilder.newUtxoRecipient": "New coin → Recipient",
+  "utxoBuilder.newUtxoNicolas": "New coin → Nicolas",
   "utxoBuilder.recipientDesc": "What they receive",
   "utxoBuilder.changeDesc": "Change returned (inputs - amount - fees)",
   "utxoBuilder.feesImplicit": "Implicit fees → Miner",
   "utxoBuilder.feesDesc": "Unallocated difference, collected by the miner",
   "utxoBuilder.totalRow": "Total inputs",
+  "utxoBuilder.coinLabel": "Coin",
+
+  // CapitalStructureChain
+  "capitalChain.traceBack": "TRACE BACK IN TIME ⌛ →",
 
   // SignatureVerifier
   "sigVerifier.title": "Signature verification",

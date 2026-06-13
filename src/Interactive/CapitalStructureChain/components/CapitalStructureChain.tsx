@@ -1,11 +1,14 @@
 import { type CSSProperties, type FC } from "react";
 
 import { usePageTheme } from "../../../Design";
-import { SANDWICH_CHAIN } from "../data";
+import { useTranslation } from "../../../I18n";
+import { getSandwichChain } from "../data";
 import { useCapitalStructureChain } from "../hooks";
 
 export const CapitalStructureChain: FC = () => {
   const { colors, moduleTheme } = usePageTheme();
+  const { t, language } = useTranslation();
+  const steps = getSandwichChain(language);
 
   const {
     count,
@@ -14,7 +17,7 @@ export const CapitalStructureChain: FC = () => {
     hoveredCardIndex,
     setHoveredCardIndex,
     handleButtonClick,
-  } = useCapitalStructureChain(SANDWICH_CHAIN.length);
+  } = useCapitalStructureChain(steps.length);
 
   const wrapperStyle: CSSProperties = {
     display: "flex",
@@ -121,9 +124,9 @@ export const CapitalStructureChain: FC = () => {
           }
         `}
       </style>
-      {SANDWICH_CHAIN.slice(0, count).map((step, index) => {
+      {steps.slice(0, count).map((step, index) => {
         const isLast = index === count - 1;
-        const hasNext = count < SANDWICH_CHAIN.length;
+        const hasNext = count < steps.length;
 
         return (
           <div key={step.id} style={itemWrapperStyle}>
@@ -174,7 +177,7 @@ export const CapitalStructureChain: FC = () => {
                     onMouseEnter={() => setIsButtonHovered(true)}
                     onMouseLeave={() => setIsButtonHovered(false)}
                   >
-                    REMONTER LE TEMPS ⌛ →
+                    {t("capitalChain.traceBack")}
                   </button>
                 )}
               </div>

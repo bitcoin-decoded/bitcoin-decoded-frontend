@@ -18,15 +18,17 @@ export const MoneyLaws2Page: FC = () => {
       prelude={
         fr ? (
           <>
-            Épargne, taux d'intérêt, structure de capital : sous ces mots un peu secs se cache le
-            moteur réel de la prospérité. Avant de comprendre comment on le casse, voyons comment il
-            tourne et pourquoi le taux d'intérêt dit, normalement, la vérité.
+            La prospérité ne vient pas de ce qu'on dépense. Elle vient de ce qu'on choisit de ne pas
+            consommer tout de suite. Tu trouves ça contre-intuitif ? C'est pourtant le moteur réel
+            de l'économie ! Et il tourne sur un seul signal : le taux d'intérêt. Regardons comment
+            il dit la vérité, avant d'apprendre à le faire mentir.
           </>
         ) : (
           <>
-            Savings, interest rate, capital structure: behind these dry-sounding words hides the
-            real engine of prosperity. Before we see how it breaks, let's see how it runs - and why
-            the interest rate normally tells the truth.
+            Prosperity doesn't come from what you spend. It comes from what you choose not to
+            consume right now. Sounds backwards? And yet it's the real engine of the economy! It
+            runs on a single signal: the interest rate. Let's see how it tells the truth, before we
+            learn to make it lie.
           </>
         )
       }

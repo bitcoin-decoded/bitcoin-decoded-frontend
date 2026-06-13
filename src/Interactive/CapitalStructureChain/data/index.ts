@@ -1,1 +1,1 @@
-export { SANDWICH_CHAIN } from "./SANDWICH_CHAIN";
+export { getSandwichChain } from "./getSandwichChain";
