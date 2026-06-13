@@ -452,6 +452,7 @@ const en = {
   "nav.tree.synthesis": "Got it? Prove it.",
   "nav.tree.moneyLaws": "Why does the system fail?",
   "nav.tree.whatIsMoney": "5,000 years of leaky batteries",
+  "nav.tree.priceOfTime": "When Interest Rates Tell the Truth",
   "nav.tree.economicCycles": "Economy's rigged compass",
   "nav.tree.socialismProblem": "Mises saw it coming",
   "nav.tree.austrianMethod": "The physicist vs. the logician",

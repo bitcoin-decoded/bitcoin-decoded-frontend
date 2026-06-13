@@ -12,6 +12,7 @@ export const ROUTE_NAME = {
   MoneyLaws_3: "money-laws-3",
   MoneyLaws_4: "money-laws-4",
   MoneyLaws_5: "money-laws-5",
+  MoneyLaws_6: "money-laws-6",
   Bitcoin_1: "bitcoin-1",
   Bitcoin_2: "bitcoin-2",
   Bitcoin_3: "bitcoin-3",

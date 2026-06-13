@@ -59,21 +59,26 @@ export const getNavigationTree = (t: TranslationFn): NavigationItem[] => [
       },
       {
         id: ROUTE_NAME.MoneyLaws_2,
-        label: t("nav.tree.economicCycles"),
+        label: t("nav.tree.priceOfTime"),
         isPage: true,
       },
       {
         id: ROUTE_NAME.MoneyLaws_3,
-        label: t("nav.tree.socialismProblem"),
+        label: t("nav.tree.economicCycles"),
         isPage: true,
       },
       {
         id: ROUTE_NAME.MoneyLaws_4,
-        label: t("nav.tree.austrianMethod"),
+        label: t("nav.tree.socialismProblem"),
         isPage: true,
       },
       {
         id: ROUTE_NAME.MoneyLaws_5,
+        label: t("nav.tree.austrianMethod"),
+        isPage: true,
+      },
+      {
+        id: ROUTE_NAME.MoneyLaws_6,
         label: t("nav.tree.synthesis"),
         isPage: true,
         kind: "challenge",

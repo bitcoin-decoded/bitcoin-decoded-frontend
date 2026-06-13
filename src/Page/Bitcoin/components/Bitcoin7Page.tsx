@@ -19,6 +19,22 @@ export const Bitcoin7Page: FC = () => {
           : "Your bank needs to know who you are. Bitcoin doesn't. No ID, no name, no account. And yet, no one can spend your bitcoins for you. How?"
       }
     >
+      <Callout
+        title={
+          fr ? "L'image à garder : une serrure, une clé" : "The picture to keep: a lock and a key"
+        }
+      >
+        <p>
+          {fr
+            ? "Avant le moindre terme technique, une image. Tes bitcoins sont posés derrière une serrure, et une seule clé l'ouvre : la tienne."
+            : "Before a single technical term, a picture. Your bitcoins sit behind a lock, and a single key opens it: yours."}
+        </p>
+        <p>
+          {fr
+            ? "Tout le génie de Bitcoin tient là : tu peux prouver que tu détiens cette clé — donc le droit de dépenser — sans jamais la montrer à personne. Garde cette serrure en tête : les trois objets qui suivent ne font que la rendre concrète."
+            : "Bitcoin's whole trick is right there: you can prove you hold that key — and therefore the right to spend — without ever showing it to anyone. Keep that lock in mind: the three objects that follow just make it concrete."}
+        </p>
+      </Callout>
       <p>
         {fr
           ? "Une transaction Bitcoin repose sur trois objets qu'il faut bien distinguer. Ils ne valent rien seuls : c'est ensemble qu'ils prouvent la propriété."

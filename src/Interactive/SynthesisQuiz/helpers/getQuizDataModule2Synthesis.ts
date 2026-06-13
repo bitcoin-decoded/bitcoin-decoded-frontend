@@ -4,12 +4,13 @@ import type { ChapterReference, SynthesisQuizData } from "../types";
 
 const CHAPTERS = {
   whatIsMoney: { routeId: ROUTE_NAME.MoneyLaws_1, labelKey: "nav.tree.whatIsMoney" },
-  economicCycles: { routeId: ROUTE_NAME.MoneyLaws_2, labelKey: "nav.tree.economicCycles" },
+  priceOfTime: { routeId: ROUTE_NAME.MoneyLaws_2, labelKey: "nav.tree.priceOfTime" },
+  economicCycles: { routeId: ROUTE_NAME.MoneyLaws_3, labelKey: "nav.tree.economicCycles" },
   socialismProblem: {
-    routeId: ROUTE_NAME.MoneyLaws_3,
+    routeId: ROUTE_NAME.MoneyLaws_4,
     labelKey: "nav.tree.socialismProblem",
   },
-  austrianMethod: { routeId: ROUTE_NAME.MoneyLaws_4, labelKey: "nav.tree.austrianMethod" },
+  austrianMethod: { routeId: ROUTE_NAME.MoneyLaws_5, labelKey: "nav.tree.austrianMethod" },
 } as const satisfies Record<string, ChapterReference>;
 
 export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizData => {
@@ -146,7 +147,7 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
       },
       {
         question: fr ? "Qu'est-ce que la préférence temporelle ?" : "What is time preference?",
-        chapterRefs: [CHAPTERS.economicCycles],
+        chapterRefs: [CHAPTERS.priceOfTime],
         answers: [
           {
             text: fr
@@ -172,7 +173,7 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Dans une économie saine, quel rôle joue le taux d'intérêt ?"
           : "In a healthy economy, what role does the interest rate play?",
-        chapterRefs: [CHAPTERS.economicCycles],
+        chapterRefs: [CHAPTERS.priceOfTime],
         answers: [
           {
             text: fr
@@ -198,7 +199,7 @@ export const getQuizDataModule2Synthesis = (language: Language): SynthesisQuizDa
         question: fr
           ? "Qu'est-ce qu'un détour de production ?"
           : "What is a roundabout production process?",
-        chapterRefs: [CHAPTERS.economicCycles],
+        chapterRefs: [CHAPTERS.priceOfTime],
         answers: [
           {
             text: fr

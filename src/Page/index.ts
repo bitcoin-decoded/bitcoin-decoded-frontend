@@ -25,6 +25,7 @@ export {
   MoneyLaws3Page,
   MoneyLaws4Page,
   MoneyLaws5Page,
+  MoneyLaws6Page,
 } from "./MoneyLaws";
 export type { PageMetadata, PageMetadataMap, ReadingTimeEstimate } from "./Shared";
 export {

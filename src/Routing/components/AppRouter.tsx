@@ -18,13 +18,14 @@ import {
   Bitcoin8Page,
   Bitcoin9Page,
   GetStartedPage,
+  HomePage,
   MoneyLaws1Page,
   MoneyLaws2Page,
   MoneyLaws3Page,
   MoneyLaws4Page,
   MoneyLaws5Page,
+  MoneyLaws6Page,
 } from "../../Page";
-import { HomePage } from "../../Page";
 import { ROUTE_NAME, useRouterContext } from "../../Routing";
 
 export const AppRouter: FC = () => {
@@ -59,6 +60,8 @@ export const AppRouter: FC = () => {
         return <MoneyLaws4Page />;
       case ROUTE_NAME.MoneyLaws_5:
         return <MoneyLaws5Page />;
+      case ROUTE_NAME.MoneyLaws_6:
+        return <MoneyLaws6Page />;
 
       case ROUTE_NAME.Bitcoin_1:
         return <Bitcoin1Page />;
