@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, Disclosure, HighlightText, Reference } from "../../../Design";
+import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   getQuizDataUtxo,
@@ -112,8 +112,8 @@ export const Bitcoin6Page: FC = () => {
           <>
             Avant de poser le moindre mot savant, manipule. Oublie le solde : imagine que le
             portefeuille de Nicolas ne contient pas un nombre, mais des <i>pièces</i> de valeurs
-            fixes — 0,8, 1, 0,5 et 2 — et chacune est <HighlightText>indivisible</HighlightText>.
-            Pour payer, il faut piocher dans ces pièces et les combiner.
+            fixes (0.8, 1, 0.5 et 2), chacune <HighlightText>indivisible</HighlightText>. Pour
+            payer, il faut piocher dans ces pièces et les combiner.
           </>
         ) : (
           <>
@@ -129,18 +129,19 @@ export const Bitcoin6Page: FC = () => {
           ? "Nicolas veut envoyer 1,3 à Mme Michu. À toi de jouer : compose le paiement."
           : "Nicolas wants to send 1.3 to Ms. Smith. Your turn: put the payment together."}
       </p>
-      <UTXOTransactionBuilder />
+      <UTXOTransactionBuilder lockedAmount="1.3" />
       <p>
         {fr ? (
           <>
             Tu viens de le sentir : on ne coupe pas une pièce en deux. Pour atteindre 1,3, tu
-            assembles des pièces entières (0,8 + 0,5), et quand le compte n'est pas juste, le
-            surplus te revient en monnaie.
+            assembles des pièces entières (par exemple : 0,8 + 1), et quand le compte n'est pas
+            juste, le surplus te revient en monnaie.
           </>
         ) : (
           <>
             You just felt it: you can't cut a coin in half. To reach 1.3, you assemble whole coins
-            (0.8 + 0.5), and when the amount isn't exact, the surplus comes back to you as change.
+            (for example: 0.8 + 1), and when the amount isn't exact, the surplus comes back to you
+            as change.
           </>
         )}
       </p>
@@ -161,30 +162,6 @@ export const Bitcoin6Page: FC = () => {
           </>
         )}
       </p>
-
-      <Disclosure
-        title={
-          fr
-            ? "Attends tu racontes quoi, Bitcoin ne déplace pas d'argent. Mon pote il reçoit quoi alors, des fleurs ?!"
-            : "Hold on, Bitcoin doesn't move money? So what does my friend get, flowers?!"
-        }
-      >
-        <p>
-          {fr
-            ? "Alors oui, ton ami reçoit bien quelque chose qui a de la valeur, et ce ne sont pas des fleurs non plus je te rassure !"
-            : "Yes, your friend does get something with real value, and no, it's not flowers either, don't worry."}
-        </p>
-        <p>
-          {fr
-            ? "Ce qui n'existe pas dans Bitcoin, c'est un solde central qu'on incrémente d'un côté et décrémente de l'autre. Il n'y a pas de registre de comptes comme dans une banque."
-            : "What doesn't exist in Bitcoin is a central balance you increment on one side and decrement on the other. There's no account ledger like in a bank."}
-        </p>
-        <p>
-          {fr
-            ? "La valeur change bien de mains, mais le mécanisme est très différent."
-            : "Value does change hands, but the mechanism is very different."}
-        </p>
-      </Disclosure>
 
       <p>
         {fr

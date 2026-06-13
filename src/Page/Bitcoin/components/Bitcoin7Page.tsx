@@ -31,8 +31,8 @@ export const Bitcoin7Page: FC = () => {
         </p>
         <p>
           {fr
-            ? "Tout le génie de Bitcoin tient là : tu peux prouver que tu détiens cette clé — donc le droit de dépenser — sans jamais la montrer à personne. Garde cette serrure en tête : les trois objets qui suivent ne font que la rendre concrète."
-            : "Bitcoin's whole trick is right there: you can prove you hold that key — and therefore the right to spend — without ever showing it to anyone. Keep that lock in mind: the three objects that follow just make it concrete."}
+            ? "Tout le génie de Bitcoin tient là : tu peux prouver que tu détiens cette clé (donc le droit de dépenser) sans jamais la montrer à personne. Garde cette serrure en tête : les trois objets qui suivent ne font que la rendre concrète."
+            : "Bitcoin's whole trick is right there: you can prove you hold that key - and therefore the right to spend - without ever showing it to anyone. Keep that lock in mind: the three objects that follow just make it concrete."}
         </p>
       </Callout>
       <p>

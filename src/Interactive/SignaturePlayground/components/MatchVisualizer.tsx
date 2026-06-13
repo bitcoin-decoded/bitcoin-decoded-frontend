@@ -26,7 +26,7 @@ type Props = {
  * The three inputs the network feeds to verify(message, signature, public key),
  * shown side by side on a single line (each in its element color), followed by
  * the verdict. Truncated hashes keep the public key / signature on one line; the
- * message keeps its quotes + italics.
+ * message arrives already quoted by the caller (locale-aware).
  */
 export const MatchVisualizer: FC<Props> = ({
   message,
@@ -125,7 +125,7 @@ export const MatchVisualizer: FC<Props> = ({
       <div style={{ display: "flex", flexDirection: "row", gap: "0.4rem", alignItems: "stretch" }}>
         <div style={boxStyle(colors.neutralColor)}>
           <span style={boxLabel(withOpacity(colors.baseTextSecondary, 0.85))}>{messageLabel}</span>
-          <span style={messageValue}>« {message} »</span>
+          <span style={messageValue}>{message}</span>
         </div>
         <div style={boxStyle(colors.publicColor)}>
           <span style={boxLabel(colors.publicColor)}>{publicKeyLabel}</span>

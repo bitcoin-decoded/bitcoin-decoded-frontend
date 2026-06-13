@@ -3,9 +3,9 @@ import { useState } from "react";
 import { FIXED_FEE, NICOLAS_UTXOS } from "../data";
 import { round8 } from "../helpers";
 
-export const useUTXOTransactionBuilder = () => {
+export const useUTXOTransactionBuilder = (lockedAmount?: string) => {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const [rawAmount, setRawAmount] = useState("");
+  const [rawAmount, setRawAmount] = useState(lockedAmount ?? "");
 
   const toggle = (id: number) =>
     setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -28,7 +28,7 @@ export const useUTXOTransactionBuilder = () => {
 
   const reset = () => {
     setSelectedIds([]);
-    setRawAmount("");
+    setRawAmount(lockedAmount ?? "");
   };
 
   return {

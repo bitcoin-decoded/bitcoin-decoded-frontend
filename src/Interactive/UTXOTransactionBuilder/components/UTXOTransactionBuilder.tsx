@@ -33,7 +33,7 @@ import { TxCard } from "./TxCard";
 
 // ── Main component ──────────────────────────────────────────────────────────
 
-export const UTXOTransactionBuilder: FC = () => {
+export const UTXOTransactionBuilder: FC<{ lockedAmount?: string }> = ({ lockedAmount }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -60,7 +60,7 @@ export const UTXOTransactionBuilder: FC = () => {
     isInsufficient,
     isValid,
     reset,
-  } = useUTXOTransactionBuilder();
+  } = useUTXOTransactionBuilder(lockedAmount);
 
   const toneColors: Record<CardTone, { color: string; border: string; bg: string }> = {
     accent: {
@@ -178,6 +178,7 @@ export const UTXOTransactionBuilder: FC = () => {
           inputMode="decimal"
           placeholder={t("utxoBuilder.placeholder")}
           value={rawAmount}
+          readOnly={lockedAmount != null}
           onChange={(e) => setRawAmount(sanitizeAmount(e.target.value))}
           style={{
             ...mono,
@@ -218,7 +219,7 @@ export const UTXOTransactionBuilder: FC = () => {
                   <TxCard
                     key={id}
                     icon={<Coins size={12} strokeWidth={2} />}
-                    title={`UTXO #${id + 1}`}
+                    title={`${t("utxoBuilder.coinLabel")} #${id + 1}`}
                     desc="Nicolas"
                     amount={`+${fmtBTC(u.amount)}`}
                     tone="accent"

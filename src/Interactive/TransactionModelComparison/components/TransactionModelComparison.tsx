@@ -27,7 +27,7 @@ import type { ComparisonMode } from "../types";
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode = "compare" }) => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const { phase, trigger, reset } = useTransactionComparison();
@@ -251,15 +251,15 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
       <span style={ledgerEquation}>
         {isAfter ? (
           <>
-            <span style={eqBefore}>{fmtEur(before)}</span>
+            <span style={eqBefore}>{fmtEur(before, language)}</span>
             <span style={eqDelta(positive)}>
-              {positive ? "+" : "−"} {fmtEur(BANK.sent)}
+              {positive ? "+" : "−"} {fmtEur(BANK.sent, language)}
             </span>
             <span style={eqSign}>=</span>
-            <span style={eqResult}>{fmtEur(after)}</span>
+            <span style={eqResult}>{fmtEur(after, language)}</span>
           </>
         ) : (
-          <span style={eqResult}>{fmtEur(before)}</span>
+          <span style={eqResult}>{fmtEur(before, language)}</span>
         )}
       </span>
     </div>
@@ -499,7 +499,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
             {isAfter ? (
               <span style={transferPill}>
                 <ArrowDown size={11} strokeWidth={2.5} />
-                {t("txComparison.bankTransferLabel")} {fmtEur(BANK.sent)}
+                {t("txComparison.bankTransferLabel")} {fmtEur(BANK.sent, language)}
               </span>
             ) : (
               <ArrowDown
@@ -556,11 +556,7 @@ export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode
       <div style={cardBody}>
         {/* Scenario context - same layout as bank card */}
         <div style={scenarioBox(btcAccent)}>
-          <ArrowRightLeft
-            size={13}
-            strokeWidth={2}
-            style={{ color: btcAccent, flexShrink: 0 }}
-          />
+          <ArrowRightLeft size={13} strokeWidth={2} style={{ color: btcAccent, flexShrink: 0 }} />
           {t("txComparison.btcScenario")}
         </div>
 

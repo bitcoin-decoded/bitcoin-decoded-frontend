@@ -40,7 +40,7 @@ import { useSignaturePlayground } from "../hooks";
 import type { SigPlaygroundColors } from "../types";
 
 export const SignaturePlayground: FC = () => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { colors: themeColors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = themeColors[moduleTheme];
@@ -83,6 +83,7 @@ export const SignaturePlayground: FC = () => {
   const matchColor = isOriginalKey ? colors.successColor : colors.errorColor;
 
   const displayMessage = t("signaturePlayground.message");
+  const quotedMessage = language === "fr" ? `« ${displayMessage} »` : `"${displayMessage}"`;
 
   // ── styles ──────────────────────────────────────────────────────────────────
 
@@ -255,7 +256,7 @@ export const SignaturePlayground: FC = () => {
       />
       <div style={{ display: "flex", flexDirection: "column", gap: "0.05rem", minWidth: 0 }}>
         <span style={msgHeaderLabel}>{t("signaturePlayground.messageLabel")}</span>
-        <span style={msgHeaderValue}>« {displayMessage} »</span>
+        <span style={msgHeaderValue}>{quotedMessage}</span>
       </div>
     </div>
   );
@@ -478,7 +479,7 @@ export const SignaturePlayground: FC = () => {
           </div>
 
           <MatchVisualizer
-            message={displayMessage}
+            message={quotedMessage}
             messageLabel={t("signaturePlayground.rowMessage")}
             publicKey={publicKey}
             publicKeyLabel={t("signaturePlayground.rowPubkey")}
