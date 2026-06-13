@@ -126,22 +126,22 @@ export const Bitcoin6Page: FC = () => {
       </p>
       <p>
         {fr
-          ? "Nicolas veut envoyer 1,3 à Mme Michu. À toi de jouer : compose le paiement."
-          : "Nicolas wants to send 1.3 to Ms. Smith. Your turn: put the payment together."}
+          ? "Nicolas veut envoyer 1.3 BTC à Mme Michu. À toi de jouer : compose le paiement."
+          : "Nicolas wants to send 1.3 BTC to Ms. Smith. Your turn: put the payment together."}
       </p>
       <UTXOTransactionBuilder lockedAmount="1.3" />
       <p>
         {fr ? (
           <>
-            Tu viens de le sentir : on ne coupe pas une pièce en deux. Pour atteindre 1,3, tu
-            assembles des pièces entières (par exemple : 0,8 + 1), et quand le compte n'est pas
-            juste, le surplus te revient en monnaie.
+            Tu viens de le sentir : on ne coupe pas une pièce en deux. Pour atteindre un total de
+            1.3 BTC, tu assembles des pièces entières (par exemple : 0,8 BTC + 1 BTC), et quand le
+            compte n'est pas juste, le surplus te revient en monnaie.
           </>
         ) : (
           <>
-            You just felt it: you can't cut a coin in half. To reach 1.3, you assemble whole coins
-            (for example: 0.8 + 1), and when the amount isn't exact, the surplus comes back to you
-            as change.
+            You just felt it: you can't cut a coin in half. To reach a total of 1.3 BTC, you
+            assemble whole coins (for example: 0.8 BTC + 1 BTC), and when the amount isn't exact,
+            the surplus comes back to you as change.
           </>
         )}
       </p>
