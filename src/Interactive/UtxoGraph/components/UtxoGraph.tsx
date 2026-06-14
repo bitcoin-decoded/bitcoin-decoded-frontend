@@ -19,8 +19,8 @@ import { UtxoCoin } from "./UtxoCoin";
 
 const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
-/** Trim trailing zeros, suffix the bitcoin sign. 1 → "1 ₿", 0.4999 → "0.4999 ₿". */
-const fmt = (n: number) => `${+n.toFixed(8)} ₿`;
+/** Trim trailing zeros, suffix the bitcoin sign. 1 → "1 BTC", 0.4999 → "0.4999 BTC". */
+const fmt = (n: number) => `${+n.toFixed(8)} BTC`;
 
 export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
   const { t } = useTranslation();

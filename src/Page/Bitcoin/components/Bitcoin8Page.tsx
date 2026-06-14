@@ -209,18 +209,13 @@ export const Bitcoin8Page: FC = () => {
           title={
             fr
               ? "Avant de jouer : un mot sur la sécurité"
-              : "Before you play: a quick word on security"
+              : "Before you play: a quick wword on security"
           }
         >
           <p>
             {fr
-              ? "Dans un vrai portefeuille, tu ne vois jamais tes clés privées comme ici. Elles restent cachées."
-              : "In a real wallet, you never see your private keys like this. They stay hidden."}
-          </p>
-          <p>
-            {fr
-              ? "Si une application te les affiche en clair, fuis. Et ne les communique à personne, jamais."
-              : "If an app ever shows them to you in plain sight, walk away. And never share them with anyone, ever."}
+              ? "Dans un vrai portefeuille, tu ne vois jamais tes clés privées comme ici. Elles restent cachées. Si une application te les affiche en clair, fuis. Et ne les communique à personne, jamais."
+              : "In a real wallet, you never see your private keys like this. They stay hidden. If an app ever shows them to you in plain sight, walk away. And never share them with anyone, ever."}
           </p>
         </Disclosure>
       </Callout>
