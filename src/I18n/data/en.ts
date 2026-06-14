@@ -256,6 +256,27 @@ const en = {
   // CapitalStructureChain
   "capitalChain.traceBack": "TRACE BACK IN TIME ⌛ →",
 
+  // UtxoGraph
+  "utxoGraph.title": "The UTXO graph",
+  "utxoGraph.walletTitle": "Your wallet",
+  "utxoGraph.balance": "Balance:",
+  "utxoGraph.inputs": "Inputs (existing UTXOs)",
+  "utxoGraph.outputs": "Outputs (new UTXOs)",
+  "utxoGraph.tx": "transaction",
+  "utxoGraph.run": "Run the transaction",
+  "utxoGraph.replay": "Replay",
+  "utxoGraph.consumed": "consumed",
+  "utxoGraph.created": "created",
+  "utxoGraph.recipient": "recipient",
+  "utxoGraph.change": "change",
+  "utxoGraph.lockedBy": "locked",
+  "utxoGraph.captionIntro":
+    "Value doesn't rise or fall like a balance: the input coins are destroyed, and new coins (spending rights) are recreated.",
+  "utxoGraph.captionKeys":
+    "Each coin is locked by a key. Spending it means proving you own the key, not moving a balance.",
+  "utxoGraph.captionWallet":
+    'Your "balance" isn\'t a counter: it\'s the sum of the coins your keys control, recomputed after every transaction.',
+
   // SignatureVerifier
   "sigVerifier.title": "Signature verification",
   "sigVerifier.message": "Message",

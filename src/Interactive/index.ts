@@ -51,6 +51,7 @@ export {
 } from "./SynthesisQuiz";
 export { TransactionModelComparison } from "./TransactionModelComparison";
 export { TrustComparisonDemo } from "./TrustComparisonDemo";
+export { UtxoGraph } from "./UtxoGraph";
 export { UTXOTransactionBuilder } from "./UTXOTransactionBuilder";
 export { WalletDiscoveryGame } from "./WalletDiscoveryGame";
 export { WalletFamilies } from "./WalletFamilies";
