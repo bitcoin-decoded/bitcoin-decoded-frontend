@@ -2,7 +2,7 @@ import { type FC } from "react";
 
 import { Callout, Disclosure, HighlightText } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { SeedGenerator, WalletDiscoveryGame } from "../../../Interactive";
+import { SeedGenerator, UtxoGraph, WalletDiscoveryGame } from "../../../Interactive";
 import { PageTemplate } from "../../Shared";
 
 export const Bitcoin8Page: FC = () => {
@@ -137,6 +137,13 @@ export const Bitcoin8Page: FC = () => {
             : "In other words: in a classic wallet, everything starts with the seed. It rebuilds the keys, and through them, you control the UTXOs tied to the matching addresses."}
         </p>
       </Callout>
+
+      <p>
+        {fr
+          ? "Regarde ce que ton portefeuille appelle « solde » :"
+          : 'Here\'s what your wallet calls a "balance":'}
+      </p>
+      <UtxoGraph mode="wallet" />
 
       <p>
         {fr

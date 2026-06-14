@@ -6,6 +6,7 @@ import {
   getQuizDataUtxo,
   Quiz,
   TransactionModelComparison,
+  UtxoGraph,
   UTXOTransactionBuilder,
 } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
@@ -223,19 +224,11 @@ export const Bitcoin6Page: FC = () => {
       <Quiz {...getQuizDataUtxo(language)} onCorrectAnswer={() => {}} />
 
       <p>
-        {fr ? (
-          <>
-            Une transaction Bitcoin ne déplace pas un solde. Elle consomme des sorties non
-            dépensées, en crée de nouvelles, et transforme la valeur en droits de dépense
-            vérifiables.
-          </>
-        ) : (
-          <>
-            A Bitcoin transaction does not move a balance. It consumes unspent outputs, creates new
-            ones, and turns value into verifiable spending rights.
-          </>
-        )}
+        {fr
+          ? "Le modèle à garder en tête, en une image :"
+          : "The model to keep in mind, in one picture:"}
       </p>
+      <UtxoGraph mode="intro" />
       <p>
         {fr ? (
           <>

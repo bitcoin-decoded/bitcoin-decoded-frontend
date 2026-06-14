@@ -162,6 +162,7 @@ const INTERACTIVE_NAMES = new Set([
   "TransactionModelComparison",
   "TrustComparisonDemo",
   "UTXOTransactionBuilder",
+  "UtxoGraph",
   "WalletDiscoveryGame",
   "WalletFamilies",
   // page-local interactives (Banking simulators + MoneyLaws gallery)

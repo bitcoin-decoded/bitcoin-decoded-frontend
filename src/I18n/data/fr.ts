@@ -259,6 +259,27 @@ const fr = {
   // CapitalStructureChain
   "capitalChain.traceBack": "REMONTER LE TEMPS ⌛ →",
 
+  // UtxoGraph
+  "utxoGraph.title": "Le graphe des UTXO",
+  "utxoGraph.walletTitle": "Ton portefeuille",
+  "utxoGraph.balance": "Solde :",
+  "utxoGraph.inputs": "Entrées (UTXO existants)",
+  "utxoGraph.outputs": "Sorties (nouveaux UTXO)",
+  "utxoGraph.tx": "transaction",
+  "utxoGraph.run": "Exécuter la transaction",
+  "utxoGraph.replay": "Rejouer",
+  "utxoGraph.consumed": "consommé",
+  "utxoGraph.created": "créé",
+  "utxoGraph.recipient": "destinataire",
+  "utxoGraph.change": "monnaie",
+  "utxoGraph.lockedBy": "verrouillé",
+  "utxoGraph.captionIntro":
+    "La valeur ne monte ni ne descend comme un solde : les pièces d'entrée sont détruites, et de nouvelles pièces (des droits de dépense) sont recréées.",
+  "utxoGraph.captionKeys":
+    "Chaque pièce est verrouillée par une clé. La dépenser, c'est prouver qu'on possède la clé, pas déplacer un solde.",
+  "utxoGraph.captionWallet":
+    "Ton « solde » n'est pas un compteur : c'est la somme des pièces que tes clés contrôlent, recalculée après chaque transaction.",
+
   // SignatureVerifier
   "sigVerifier.title": "Vérification de signature",
   "sigVerifier.message": "Message",

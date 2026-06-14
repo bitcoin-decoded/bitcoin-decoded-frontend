@@ -2,7 +2,7 @@ import { type FC } from "react";
 
 import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { KeySignatureTrio, SignaturePlayground } from "../../../Interactive";
+import { KeySignatureTrio, SignaturePlayground, UtxoGraph } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { PageTemplate } from "../../Shared";
 
@@ -100,6 +100,12 @@ export const Bitcoin7Page: FC = () => {
           : "Ownership then becomes a cryptographic proof, not a declaration"}
         .
       </p>
+      <p>
+        {fr
+          ? "Reviens au graphe des pièces : chacune est verrouillée par une clé, et la dépenser, c'est prouver qu'on la possède."
+          : "Back to the coin graph: each one is locked by a key, and spending it means proving you own it."}
+      </p>
+      <UtxoGraph mode="keys" />
 
       <Callout title={fr ? "Et l'adresse dans tout ça ?" : "And what about the address?"}>
         <p>
