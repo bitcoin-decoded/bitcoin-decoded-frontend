@@ -2,21 +2,24 @@ import { type CSSProperties, type FC } from "react";
 
 import { CircleCheck, Compass } from "lucide-react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { withOpacity } from "../helpers";
+import { useBreakpoint } from "../Responsive";
+import { usePageTheme } from "../Theme";
 
 type Props = {
-  /** How many elements have been opened at least once. */
+  /** How many distinct items have been opened at least once. */
   explored: number;
-  /** Total number of elements (3). */
+  /** Total number of items to reach completion. */
   total: number;
-  /** Translated word, e.g. "explorés". */
+  /** Translated word, e.g. "explorés" / "explored". */
   label: string;
 };
 
 /**
- * Discreet "n/3 explored" progress chip shown next to the section title.
- * Pure mini-motivation — it never gates anything. The compass turns into a
- * check once every element has been opened.
+ * Discreet "n/N explored" progress chip, themed to the current module. Shown
+ * next to an interactive's title; the compass turns into a check once every
+ * item has been opened. On its own it is pure mini-motivation — gating is the
+ * caller's job (it pairs with `useExplorationGate`'s `onComplete`).
  */
 export const ExploredCounter: FC<Props> = ({ explored, total, label }) => {
   const { colors, moduleTheme } = usePageTheme();

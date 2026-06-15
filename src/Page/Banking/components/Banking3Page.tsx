@@ -16,8 +16,8 @@ export const Banking3Page: FC = () => {
   return (
     <PageTemplate title={t("nav.tree.qe")} showChapterNav={false}>
       <BlockReader chapterId={ROUTE_NAME.Banking_3}>
-        <Block title={fr ? "Deux principes acquis" : "Two principles so far"}>
-          <ChapterPrelude>
+        <Block>
+          <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
               <>
                 Une banque manque d'argent. Pas de problème : la Banque Centrale appuie sur un
@@ -52,9 +52,7 @@ export const Banking3Page: FC = () => {
           </p>
         </Block>
 
-        <Block
-          title={fr ? "Pourquoi le M0 tient tout l'édifice" : "Why M0 holds the whole structure"}
-        >
+        <Block>
           <Callout
             title={
               fr
@@ -105,17 +103,14 @@ export const Banking3Page: FC = () => {
         </Block>
 
         {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse. */}
-        <Block
-          kind="tool"
-          title={fr ? "D'où vient le manque de M0 ?" : "Where the M0 shortage comes from"}
-        >
+        <Block kind="tool">
           {({ markComplete }) => (
             <Quiz {...getQuizDataM0(language)} onCorrectAnswer={markComplete} />
           )}
         </Block>
 
         {/* Bloc-outil : déverrouillé quand la défaillance est simulée. */}
-        <Block kind="tool" title={fr ? "La réaction en chaîne" : "The chain reaction"}>
+        <Block kind="tool">
           {({ markComplete }) => (
             <>
               <p>
@@ -131,8 +126,9 @@ export const Banking3Page: FC = () => {
                   <>
                     Let's go back to <i>Nicolas</i>'s bank from{" "}
                     <Reference to={ROUTE_NAME.Banking_2}> the previous chapter</Reference>.
-                    Everything was fine - until the day several <i>Nicolas</i>-types (let's call them
-                    the <i>Nicolas-bis</i>) stop repaying their loans. Here's the chain reaction:
+                    Everything was fine - until the day several <i>Nicolas</i>-types (let's call
+                    them the <i>Nicolas-bis</i>) stop repaying their loans. Here's the chain
+                    reaction:
                   </>
                 )}
               </p>
@@ -168,13 +164,7 @@ export const Banking3Page: FC = () => {
           )}
         </Block>
 
-        <Block
-          title={
-            fr
-              ? "L'arme nucléaire : l'assouplissement quantitatif"
-              : "The nuclear weapon: quantitative easing"
-          }
-        >
+        <Block>
           {fr ? (
             <>
               Face à un risque d'effondrement complet, la Banque Centrale sort son arme nucléaire
@@ -251,7 +241,7 @@ export const Banking3Page: FC = () => {
           </Callout>
         </Block>
 
-        <Block title={fr ? "Trop beau pour être vrai" : "Too good to be true"}>
+        <Block last>
           <p>
             {fr
               ? "Tout cela semble merveilleux, n'est-ce pas ?"

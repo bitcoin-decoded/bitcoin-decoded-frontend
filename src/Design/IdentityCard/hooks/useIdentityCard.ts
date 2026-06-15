@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export const useIdentityCard = (isExpandable: boolean = false) => {
+export const useIdentityCard = (isExpandable: boolean = false, onOpen?: () => void) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const showContent = !isExpandable || isOpen;
   const [isExpandButtonHovered, setIsExpandButtonHovered] = useState(false);
+
+  // Notify on each open transition (idempotent for callers tracking a set).
+  const onOpenRef = useRef(onOpen);
+  onOpenRef.current = onOpen;
+  useEffect(() => {
+    if (isOpen) onOpenRef.current?.();
+  }, [isOpen]);
 
   const toggleOpen = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();

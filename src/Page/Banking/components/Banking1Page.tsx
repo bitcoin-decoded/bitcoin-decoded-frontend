@@ -18,7 +18,7 @@ export const Banking1Page: FC = () => {
       <BlockReader chapterId={ROUTE_NAME.Banking_1}>
         {/* BLOC 1 — Le piège : prélude + 1re prose forment une seule idée,
             close en tension sur « Lis attentivement ce qui suit ». */}
-        <Block title={fr ? "Le piège" : "The trap"}>
+        <Block>
           <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
               <>
@@ -60,7 +60,7 @@ export const Banking1Page: FC = () => {
 
         {/* BLOC 2 — La révélation : le Callout entier reste d'un bloc (le
             nuancement « ni illimité ni gratuit » fait partie de la révélation). */}
-        <Block title={fr ? "La révélation" : "The reveal"}>
+        <Block>
           <Callout title={fr ? "D'où vient l'argent ?" : "Where does money come from?"}>
             {fr ? (
               <>
@@ -117,7 +117,7 @@ export const Banking1Page: FC = () => {
 
         {/* BLOC 3 — Tu deviens banquier : la respiration « Tu veux le voir ? »
             introduit le setup de Nicolas, donc reste collée à lui. */}
-        <Block title={fr ? "Tu deviens banquier" : "You become the banker"}>
+        <Block>
           <p>
             {fr ? (
               <>
@@ -155,7 +155,7 @@ export const Banking1Page: FC = () => {
 
         {/* BLOC 4 — Le vocabulaire (outil) : la prose est la légende du
             composant ; on déroule les définitions avant d'agir. */}
-        <Block title={fr ? "Le vocabulaire" : "The vocabulary"}>
+        <Block>
           <p>
             {fr
               ? "Mais avant de prendre les commandes, faisons un petit rappel de vocabulaire en comptabilité."
@@ -167,7 +167,7 @@ export const Banking1Page: FC = () => {
         {/* BLOC 5 — Tu accordes le prêt (outil) : bloc-sommet. Les deux courtes
             proses sont l'amorce immédiate du simulateur ; la « ligne magique »
             est révélée par le composant lui-même, pas en prose. */}
-        <Block kind="tool" title={fr ? "Tu accordes le prêt" : "You grant the loan"}>
+        <Block kind="tool">
           {({ markComplete }) => (
             <>
               <p>
@@ -195,7 +195,7 @@ export const Banking1Page: FC = () => {
 
         {/* BLOC 6 — Ce qui manque (dernier) : clôture courte qui ouvre sur le
             chapitre 2, pas une synthèse bouclée. */}
-        <Block last title={fr ? "Ce qui manque" : "What's missing"}>
+        <Block last>
           <p>
             {fr
               ? "Mais il manque encore une pièce du puzzle : ce que la banque doit garder en réserve en face de ce crédit."

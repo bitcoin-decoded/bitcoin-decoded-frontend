@@ -2,13 +2,19 @@ import { type CSSProperties, type FC } from "react";
 
 import { Link2, MousePointerClick } from "lucide-react";
 
-import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Caption,
+  ExploredCounter,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getKeySignatureTrio, TRIO_LAYOUT } from "../data";
 import { getArrowhead, trimSegment } from "../helpers";
 import { useKeySignatureTrio } from "../hooks";
 
-import { ExploredCounter } from "./ExploredCounter";
 import { TrioNode } from "./TrioNode";
 
 export const KeySignatureTrio: FC = () => {
@@ -52,7 +58,11 @@ export const KeySignatureTrio: FC = () => {
     textAlign: "left",
   };
 
-  const diagramWrapper: CSSProperties = { display: "flex", justifyContent: "center", width: "100%" };
+  const diagramWrapper: CSSProperties = {
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+  };
 
   const diagramBox: CSSProperties = {
     position: "relative",

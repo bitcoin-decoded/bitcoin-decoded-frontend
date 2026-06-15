@@ -22,6 +22,11 @@ type Props = {
    * share a uniform height. Opt-in: default `false` leaves layout untouched.
    */
   fillHeight?: boolean;
+  /**
+   * Fired when an expandable card opens. Lets a gallery track which cards a
+   * reader has explored (e.g. to gate a block). No-op for non-expandable cards.
+   */
+  onExpand?: () => void;
 };
 
 export const IdentityCard: FC<Props> = ({
@@ -32,6 +37,7 @@ export const IdentityCard: FC<Props> = ({
   isExpandable = false,
   compact = false,
   fillHeight = false,
+  onExpand,
 }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
@@ -43,7 +49,7 @@ export const IdentityCard: FC<Props> = ({
     showContent,
     isExpandButtonHovered,
     setIsExpandButtonHovered,
-  } = useIdentityCard(isExpandable);
+  } = useIdentityCard(isExpandable, onExpand);
 
   // Single source for the two size tiers. `compact` drives the gallery look;
   // the default keeps the original roomy card untouched.

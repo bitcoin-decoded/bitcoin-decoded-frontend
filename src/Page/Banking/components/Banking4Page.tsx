@@ -16,8 +16,8 @@ export const Banking4Page: FC = () => {
   return (
     <PageTemplate title={t("nav.tree.brokenEngine")} showChapterNav={false}>
       <BlockReader chapterId={ROUTE_NAME.Banking_4}>
-        <Block title={fr ? "Le moteur qui tourne au ralenti" : "The engine running on fumes"}>
-          <ChapterPrelude>
+        <Block>
+          <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
               <>
                 T'es-tu déjà demandé pourquoi ton banquier te regarde de travers quand tu lui parles
@@ -55,7 +55,7 @@ export const Banking4Page: FC = () => {
           </p>
         </Block>
 
-        <Block title={fr ? "Comment une banque gagne de l'argent" : "How a bank makes money"}>
+        <Block>
           <Callout
             title={
               fr ? "Comment une banque gagne-t-elle de l'argent ?" : "How does a bank make money?"
@@ -128,7 +128,7 @@ export const Banking4Page: FC = () => {
         </Block>
 
         {/* Bloc-outil : déverrouillé quand l'opération de QE est lancée. */}
-        <Block kind="tool" title={fr ? "Le QE écrase les taux" : "How QE crushes rates"}>
+        <Block kind="tool">
           {({ markComplete }) => (
             <>
               <p>
@@ -170,17 +170,14 @@ export const Banking4Page: FC = () => {
           )}
         </Block>
 
-        <Block title={fr ? "La contagion a tous les taux" : "Contagion to every rate"}>
+        <Block>
           {fr
             ? "Et comme ce taux d'État (le prêt jugé le plus sûr) sert de référence, il met une pression à la baisse sur tous les autres types de prêts (immobiliers, entreprises, etc.)."
             : "And since the government rate (the loan considered the safest) serves as the benchmark, it drags down pretty much every other type of loan with it (mortgages, business loans, and so on)."}
         </Block>
 
         {/* Bloc-outil : déverrouillé quand le lecteur manipule la courbe des taux. */}
-        <Block
-          kind="tool"
-          title={fr ? "Pourquoi c'est grave, docteur ?" : "So why does this matter, doctor?"}
-        >
+        <Block kind="tool">
           {({ markComplete }) => (
             <>
               <p>
@@ -188,7 +185,8 @@ export const Banking4Page: FC = () => {
                   <>
                     Alors tu me répondras sans doute :{" "}
                     <i>« OK, super... et alors ? C'est grave, Docteur ? »</i>, je te réponds tout de
-                    suite : « Oui, car ça casse le modèle de rémunération des banques commerciales ».
+                    suite : « Oui, car ça casse le modèle de rémunération des banques commerciales
+                    ».
                   </>
                 ) : (
                   <>
@@ -213,11 +211,7 @@ export const Banking4Page: FC = () => {
           )}
         </Block>
 
-        <Block
-          title={
-            fr ? "Le virage vers l'économie patrimonial" : "The pivot to the asset economy"
-          }
-        >
+        <Block last>
           <p>
             {fr ? (
               <>
