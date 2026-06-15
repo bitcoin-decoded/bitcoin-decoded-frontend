@@ -277,6 +277,16 @@ const en = {
   "utxoGraph.captionWallet":
     'Your "balance" isn\'t a counter: it\'s the sum of the coins your keys control, recomputed after every transaction.',
 
+  // Reading (block-by-block chapters)
+  "reading.next": "Next block",
+  "reading.previous": "Previous block",
+  "reading.finish": "Finish",
+  "reading.lockHint": "Interact with the component to continue.",
+  "reading.completed": "Chapter complete",
+  "reading.replay": "Restart the chapter",
+  "reading.milestoneAria": "Chapter progress",
+  "reading.blockLabel": "Block",
+
   // SignatureVerifier
   "sigVerifier.title": "Signature verification",
   "sigVerifier.message": "Message",

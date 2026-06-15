@@ -280,6 +280,16 @@ const fr = {
   "utxoGraph.captionWallet":
     "Ton « solde » n'est pas un compteur : c'est la somme des pièces que tes clés contrôlent, recalculée après chaque transaction.",
 
+  // Reading (lecture par blocs)
+  "reading.next": "Bloc suivant",
+  "reading.previous": "Bloc précédent",
+  "reading.finish": "Terminer",
+  "reading.lockHint": "Manipule le composant pour continuer.",
+  "reading.completed": "Chapitre terminé",
+  "reading.replay": "Recommencer le chapitre",
+  "reading.milestoneAria": "Progression dans le chapitre",
+  "reading.blockLabel": "Bloc",
+
   // SignatureVerifier
   "sigVerifier.title": "Vérification de signature",
   "sigVerifier.message": "Message",

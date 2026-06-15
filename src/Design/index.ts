@@ -24,7 +24,7 @@ export {
 } from "./icons";
 export type { IdentityCharacteristic, MonetaryItem } from "./IdentityCard";
 export { getMonetaryHistory, IdentityCard, RatingRow, useIdentityCard } from "./IdentityCard";
-export { MainLayout } from "./Layout";
+export { MainLayout, useHeaderHidden } from "./Layout";
 export type { Breakpoint } from "./Responsive";
 export { useBreakpoint, useMediaQuery } from "./Responsive";
 export {
