@@ -96,6 +96,7 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
               isCurrent={isCurrent}
               revealing={isRevealing}
               title={block.props.title}
+              onActivate={() => jump(i)}
             >
               {content}
 

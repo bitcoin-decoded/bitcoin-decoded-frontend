@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, type ReactNode } from "react";
+import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
 import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
@@ -11,45 +11,74 @@ type Props = {
   revealing: boolean;
   /** Optional short label shown after the block index in the header. */
   title?: string;
+  /** Return to this block (clicking a read block refocuses it). */
+  onActivate?: () => void;
   children: ReactNode;
 };
 
 /**
- * The enclosure that turns a reading block into a visible "block": a rounded,
- * bordered card with a `Bloc #N` header (a blockchain-explorer nod) that the
- * chain link plugs into. The active block lifts (accent border + soft glow);
- * past blocks recede (neutral border, dimmed) and are made non-interactive —
- * you can only act inside the block you're on. Navigating back (prev /
- * milestone) refocuses a block and re-enables it.
+ * The enclosure that turns a reading block into a visible "block in a chain": a
+ * framed card (accent ring + lit top edge + a header seal line) with a
+ * `Bloc #N` header the chain link plugs into. The active block lifts (thicker
+ * accent ring + glow); past blocks recede (thin neutral ring, dimmed) and lock
+ * their content (`pointer-events: none`) while staying clickable as a whole to
+ * return to them — the second way back, alongside the milestone jalons.
  */
-export const BlockShell: FC<Props> = ({ index, isCurrent, revealing, title, children }) => {
+export const BlockShell: FC<Props> = ({
+  index,
+  isCurrent,
+  revealing,
+  title,
+  onActivate,
+  children,
+}) => {
   const { colors, moduleTheme } = usePageTheme();
   const { t } = useTranslation();
   const isMobile = useBreakpoint() === "mobile";
+  const [isHovered, setIsHovered] = useState(false);
+
   const accent = colors[moduleTheme].background.secondary;
+  const readable = !isCurrent; // dimmed + clickable to return
 
   const sectionStyle: CSSProperties = {
-    opacity: isCurrent ? 1 : 0.45,
-    pointerEvents: isCurrent ? "auto" : "none",
-    transition: "opacity 0.5s var(--ease-smooth)",
+    opacity: isCurrent ? 1 : isHovered ? 0.66 : 0.45,
+    cursor: readable ? "pointer" : "default",
+    transition: "opacity 0.4s var(--ease-smooth)",
     // Anchor offset: clears the sticky header (3.5rem) + the jalon sub-bar so a
     // jumped-to block lands with its header at the top, not under the chrome.
     scrollMarginTop: "6.5rem",
   };
 
   const cardStyle: CSSProperties = {
+    position: "relative",
     borderRadius: "1rem",
-    border: `1px solid ${isCurrent ? withOpacity(accent, 0.5) : colors.base.border.secondary}`,
     background: isCurrent
-      ? `linear-gradient(190deg, ${withOpacity(accent, 0.06)}, ${colors.base.background.primary})`
+      ? `linear-gradient(180deg, ${withOpacity(accent, 0.08)}, ${colors.base.background.primary} 60%)`
       : colors.base.background.primary,
-    boxShadow: isCurrent ? `0 8px 30px ${withOpacity(accent, 0.12)}` : "none",
-    padding: isMobile ? "1.15rem 1.2rem" : "1.5rem 1.65rem",
-    transition:
-      "border-color 0.5s var(--ease-smooth), background 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth)",
-    // Consumed by the blockConfirm "mined" pulse keyframe (theme-aware).
-    ["--reading-ring" as string]: withOpacity(accent, 0.55),
-    ["--reading-glow" as string]: withOpacity(accent, 0.22),
+    // Frame is a layered ring (crisp, accent-aware, thicker when active) + a lit
+    // top edge + depth glow on the active block. Reads as a sealed "block".
+    boxShadow: isCurrent
+      ? `0 0 0 1.5px ${withOpacity(accent, 0.55)}, inset 0 1px 0 ${withOpacity("#ffffff", 0.08)}, 0 18px 48px -16px ${withOpacity(accent, 0.28)}`
+      : `0 0 0 1px ${withOpacity(colors.base.text.primary, 0.1)}, inset 0 1px 0 ${withOpacity("#ffffff", 0.035)}`,
+    padding: isMobile ? "1.2rem 1.25rem" : "1.55rem 1.7rem",
+    transition: "box-shadow 0.5s var(--ease-smooth), background 0.5s var(--ease-smooth)",
+    // Glow color for the header-stamp confirm pulse (keyframe blockConfirm).
+    ["--reading-glow" as string]: withOpacity(accent, 0.55),
+    // Lock interactions inside read blocks; the click falls through to the
+    // section, which refocuses the block.
+    pointerEvents: isCurrent ? "auto" : "none",
+  };
+
+  const sealStyle: CSSProperties = {
+    position: "absolute",
+    top: 0,
+    left: "1.1rem",
+    right: "1.1rem",
+    height: 2,
+    borderRadius: "0 0 2px 2px",
+    background: isCurrent
+      ? `linear-gradient(90deg, transparent, ${withOpacity(accent, 0.85)}, transparent)`
+      : `linear-gradient(90deg, transparent, ${withOpacity(colors.base.text.primary, 0.12)}, transparent)`,
   };
 
   const headerStyle: CSSProperties = {
@@ -59,7 +88,7 @@ export const BlockShell: FC<Props> = ({ index, isCurrent, revealing, title, chil
     marginBottom: isMobile ? "0.85rem" : "1rem",
   };
 
-  const glyphStyle: CSSProperties = {
+  const stampStyle: CSSProperties = {
     width: 10,
     height: 10,
     flex: "0 0 auto",
@@ -71,13 +100,20 @@ export const BlockShell: FC<Props> = ({ index, isCurrent, revealing, title, chil
   const label = `${t("reading.blockLabel")} #${index + 1}${title ? ` · ${title}` : ""}`;
 
   return (
-    <section data-block={index} style={sectionStyle}>
+    <section
+      data-block={index}
+      style={sectionStyle}
+      onClick={readable ? onActivate : undefined}
+      onMouseEnter={readable ? () => setIsHovered(true) : undefined}
+      onMouseLeave={readable ? () => setIsHovered(false) : undefined}
+    >
       <div
         className={revealing ? "reading-block-inner revealing" : "reading-block-inner"}
         style={cardStyle}
       >
+        <span style={sealStyle} aria-hidden="true" />
         <div style={headerStyle}>
-          <span style={glyphStyle} />
+          <span className="reading-block-stamp" style={stampStyle} />
           <Caption size="xs" tone={isCurrent ? "world" : "muted"}>
             {label}
           </Caption>
