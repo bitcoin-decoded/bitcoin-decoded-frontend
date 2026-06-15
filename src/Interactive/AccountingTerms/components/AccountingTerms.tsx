@@ -5,7 +5,12 @@ import { useTranslation } from "../../../I18n";
 import { ExpandableDefinitions } from "../../ExpandableDefinitions";
 import { getAccountingTerms } from "../data";
 
-export const AccountingTerms: FC = () => {
+type Props = {
+  /** Fired once all three terms have been explored (the component's final state). */
+  onComplete?: () => void;
+};
+
+export const AccountingTerms: FC<Props> = ({ onComplete }) => {
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const terms = getAccountingTerms(language, colors, moduleTheme);
@@ -14,6 +19,7 @@ export const AccountingTerms: FC = () => {
     <ExpandableDefinitions
       sectionTitle={t("accountingTerms.sectionTitle")}
       terms={terms}
+      onAllExplored={onComplete}
     />
   );
 };

@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, type ReactNode } from "react";
+import { type CSSProperties, type FC, type ReactNode, useEffect, useState } from "react";
 
 import { BookOpenText } from "lucide-react";
 
@@ -14,6 +14,11 @@ type Props = {
   terms: ExpandableTerm[];
   /** Optional icon for the section header. Defaults to `BookOpenText`. */
   sectionIcon?: ReactNode;
+  /**
+   * Fired once every term has been expanded at least once — the component's
+   * "fully explored" final state. Used by the block reader to gate progress.
+   */
+  onAllExplored?: () => void;
 };
 
 /**
@@ -22,8 +27,18 @@ type Props = {
  * and Banking_2's M0/M2 explainer; designed to be reused for any future
  * "expand this term to learn more" pattern.
  */
-export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionIcon }) => {
+export const ExpandableDefinitions: FC<Props> = ({
+  sectionTitle,
+  terms,
+  sectionIcon,
+  onAllExplored,
+}) => {
   const isMobile = useBreakpoint() === "mobile";
+  const [explored, setExplored] = useState<Set<string>>(() => new Set());
+
+  useEffect(() => {
+    if (onAllExplored && terms.length > 0 && explored.size >= terms.length) onAllExplored();
+  }, [explored, terms.length, onAllExplored]);
 
   const stackStyle: CSSProperties = {
     display: "flex",
@@ -44,7 +59,13 @@ export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionI
 
       <div style={stackStyle}>
         {terms.map((term) => (
-          <TermCard key={term.key} term={term} />
+          <TermCard
+            key={term.key}
+            term={term}
+            onOpen={() =>
+              setExplored((prev) => (prev.has(term.key) ? prev : new Set(prev).add(term.key)))
+            }
+          />
         ))}
       </div>
     </SurfaceCard>

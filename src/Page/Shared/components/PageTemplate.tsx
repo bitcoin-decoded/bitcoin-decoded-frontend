@@ -14,6 +14,12 @@ type Props = {
    * Default `true`. Pass `false` for chapters that aren't a read (quizzes).
    */
   showReadingTime?: boolean;
+  /**
+   * Render the chapter prev/next navigation at the foot of the page.
+   * Default `true`. Block-reading chapters pass `false` and let `BlockReader`
+   * surface it only once the chapter is finished.
+   */
+  showChapterNav?: boolean;
   children: ReactNode;
 };
 
@@ -21,6 +27,7 @@ export const PageTemplate: FC<Props> = ({
   title,
   prelude,
   showReadingTime = true,
+  showChapterNav = true,
   children,
 }) => {
   const { colors, moduleTheme } = usePageTheme();
@@ -96,7 +103,7 @@ export const PageTemplate: FC<Props> = ({
       <section className="page-content" style={sectionStyle}>
         {children}
       </section>
-      <PageNavigation />
+      {showChapterNav && <PageNavigation />}
     </div>
   );
 };

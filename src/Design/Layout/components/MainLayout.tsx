@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-import { ReadingProgressBar, ScrollToTopButton } from "../../../Page";
+import { BLOCK_READING_CHAPTERS, ReadingProgressBar, ScrollToTopButton } from "../../../Page";
 import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 import { useBreakpoint } from "../../Responsive";
 import { THEME_COLORS, useThemeContext } from "../../Theme";
@@ -116,6 +116,9 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const isChapterPage = currentPage !== ROUTE_NAME.HomePage;
+  // Block-reading chapters carry their own always-visible jalon pill, so the
+  // scroll-percentage bar (which regresses as blocks reveal) is suppressed.
+  const isBlockChapter = BLOCK_READING_CHAPTERS.has(currentPage);
 
   return (
     <div style={rootStyle}>
@@ -125,7 +128,7 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
         onToggleDrawer={toggleDrawer}
         breakpoint={breakpoint}
       />
-      {isChapterPage && <ReadingProgressBar />}
+      {isChapterPage && !isBlockChapter && <ReadingProgressBar />}
       {!isDesktop && (
         <NavDrawer isOpen={isDrawerOpen} onClose={closeDrawer} breakpoint={breakpoint} />
       )}

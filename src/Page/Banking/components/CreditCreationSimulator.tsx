@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, useMemo } from "react";
+import { type CSSProperties, type FC, useEffect, useMemo } from "react";
 
 import { Disclosure, Reference, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
@@ -8,12 +8,21 @@ import { getUserBankCredit } from "../data";
 
 import { BalanceSheet } from "./BalanceSheet";
 
-export const CreditCreationSimulator: FC = () => {
+type Props = {
+  /** Fired once the loan has been granted (the simulator's final state). */
+  onComplete?: () => void;
+};
+
+export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
   const dataset = useMemo(() => getUserBankCredit(language), [language]);
   const { isActive, activate, reset, data } = useToggleSimulator(dataset);
+
+  useEffect(() => {
+    if (isActive) onComplete?.();
+  }, [isActive, onComplete]);
 
   const controlsStyle: CSSProperties = {
     display: "flex",

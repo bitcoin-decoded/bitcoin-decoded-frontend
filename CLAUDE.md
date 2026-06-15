@@ -161,6 +161,73 @@ Chaque interaction (simulateur, quiz, visualisation) dans son propre dossier fea
 
 ---
 
+## Lecture par blocs (Reading engine)
+
+### Principe
+
+Certains chapitres se lisent **bloc par bloc** (révélation progressive) au lieu d'un mur de texte. Pilote : Module 1 (Banking_1 à Banking_6). Hors périmètre : quiz de fin de module + « Entrer dans le terrier ».
+
+Domaine : `src/Page/Reading/` (structure DDD standard). Exposé : `BlockReader`, `Block`, `BLOCK_READING_CHAPTERS`.
+
+### Recette pour câbler un chapitre (à partir d'un découpage)
+
+Le découpage (quels blocs, quel ordre, lesquels sont `tool`, titres) est **fourni en amont** ; on ne le réinvente pas, on le câble. La prose **reste inline dans la page** (jamais déplacée vers `data`/`fr.ts`) et rien n'est retiré : le découpage = uniquement où tombent les frontières de blocs.
+
+1. `PageTemplate` : passer `showChapterNav={false}` (`BlockReader` rend lui-même la nav chapitre en fin). Si le découpage fond le prélude dans le bloc 1, retirer la prop `prelude` et rendre `<ChapterPrelude>` comme premier enfant du bloc 1.
+2. Envelopper le contenu existant dans `<BlockReader chapterId={ROUTE_NAME.X}>` + balises `<Block>` ordonnées.
+3. Chaque bloc : `title` (en-tête bilingue, ex. `title={fr ? "Le piège" : "The trap"}`). Bloc bâti autour d'un composant à manipuler : `kind="tool"`. Dernier bloc : `last`.
+4. Ajouter `ROUTE_NAME.X` à `BLOCK_READING_CHAPTERS` (`src/Page/Reading/data/`) pour masquer la barre de scroll (la sous-barre de jalons la remplace).
+5. `npm run audit:reading-time` puis recopier le compte dans `PAGE_METADATA` (les titres de blocs bilingues comptent).
+
+```tsx
+<PageTemplate title=... showChapterNav={false}>
+  <BlockReader chapterId={ROUTE_NAME.Banking_1}>
+    <Block title={fr ? "Le piège" : "The trap"}>{/* prose inline */}</Block>
+    <Block kind="tool" title={fr ? "..." : "..."}>
+      {({ markComplete }) => (
+        <>
+          <p>{/* légende */}</p>
+          <Sim onComplete={markComplete} />
+        </>
+      )}
+    </Block>
+    <Block last title={fr ? "..." : "..."}>{/* clôture */}</Block>
+  </BlockReader>
+</PageTemplate>
+```
+
+### Bloc-outil : déblocage sur l'état FINAL (contrat)
+
+Un `Block kind="tool"` reste **verrouillé** (« Bloc suivant » grisé) tant que son composant n'a pas atteint son **état final** : bloc en render-prop `({ markComplete }) => ...`, on câble `markComplete` au signal de complétion. **Ouvrir un disclosure ne débloque pas.** Le composant expose un `onComplete?: () => void` déclenché sur son état terminal :
+
+- `CreditCreationSimulator` → prêt accordé (`isActive`).
+- `AccountingTerms` / `ExpandableDefinitions` → toutes les définitions explorées (`onAllExplored`).
+- Tout nouveau composant-outil ajoute ce callback (additif, non breaking) sur son état final.
+
+### Chrome (jalons, ancres, animations)
+
+- **Jalons** (`BlockMilestones`) : sous-barre sticky centrée sur la colonne de contenu, calée sous le header et qui suit son auto-masquage (`useHeaderHidden`). Cliquables (saut vers un bloc déjà révélé).
+- **Ancres** : `scrollIntoView({ block: "start" })` + `scroll-margin-top` sur les blocs (dégage header + sous-barre). Pas de calcul JS de la hauteur du header.
+- **Bloc** (`BlockShell`) : carte enrobée + en-tête `Bloc #N · Titre`, reliée à la suivante par un maillon de chaîne (`BlockChainLink`). Bloc courant interactif ; blocs lus atténués + `pointer-events: none`.
+- **Animations** (`src/index.css`) : `blockSeal` + cascade `blockLineIn` + pulse `blockConfirm` à la révélation ; `chainLinkIn` pour le maillon. `prefers-reduced-motion` respecté.
+- **Overlay de fin** (`ChapterCompleteOverlay`) : plein écran, porté dans `document.body` (le wrapper `.page-enter` a un transform qui casserait `position: fixed`).
+
+### Persistance de session (localStorage)
+
+Clé `bd:reading:<chapterId>`, valeur `{ maxRevealed, current, done[], finished, blockCount }` (hook `useBlockReader`, même discipline try/catch que `useSynthesisQuiz`).
+
+- Reprise au bon bloc à la réouverture du chapitre (le routing n'est pas persisté : la reprise s'applique dès qu'on rouvre le chapitre).
+- `done[]` (blocs-outils complétés) persiste : revenir en arrière ne re-verrouille rien.
+- Garde : si `blockCount` enregistré diffère de l'actuel (contenu édité), l'état se réinitialise proprement.
+- `finished` rouvre le chapitre en état terminé sans rejouer l'overlay.
+
+### Deux niveaux de progression
+
+- Jalons en tête de chapitre (`BlockMilestones`, cliquables) = progression **dans le chapitre**.
+- Barre globale 20 chapitres + collection de badges = progression **inter-chapitres** (phase 2, non implémenté).
+
+---
+
 ## Quiz de synthèse
 
 ### Principe

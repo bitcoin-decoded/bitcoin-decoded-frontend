@@ -8,7 +8,7 @@ import type { PageMetadataMap } from "../types";
 
 export const PAGE_METADATA: PageMetadataMap = {
   // Banking — Le fonctionnement du système bancaire
-  [ROUTE_NAME.Banking_1]: { wordCount: 683, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_1]: { wordCount: 797, interactiveCount: 2 },
   [ROUTE_NAME.Banking_2]: { wordCount: 725, interactiveCount: 2 },
   [ROUTE_NAME.Banking_3]: { wordCount: 1044, interactiveCount: 2 },
   [ROUTE_NAME.Banking_4]: { wordCount: 787, interactiveCount: 2 },
