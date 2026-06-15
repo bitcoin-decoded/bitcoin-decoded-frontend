@@ -155,17 +155,13 @@ export const Banking1Page: FC = () => {
 
         {/* BLOC 4 — Le vocabulaire (outil) : la prose est la légende du
             composant ; on déroule les définitions avant d'agir. */}
-        <Block kind="tool" title={fr ? "Le vocabulaire" : "The vocabulary"}>
-          {({ markComplete }) => (
-            <>
-              <p>
-                {fr
-                  ? "Mais avant de prendre les commandes, faisons un petit rappel de vocabulaire en comptabilité."
-                  : "But before you take the controls, let's run through a quick accounting vocabulary refresher."}
-              </p>
-              <AccountingTerms onComplete={markComplete} />
-            </>
-          )}
+        <Block title={fr ? "Le vocabulaire" : "The vocabulary"}>
+          <p>
+            {fr
+              ? "Mais avant de prendre les commandes, faisons un petit rappel de vocabulaire en comptabilité."
+              : "But before you take the controls, let's run through a quick accounting vocabulary refresher."}
+          </p>
+          <AccountingTerms />
         </Block>
 
         {/* BLOC 5 — Tu accordes le prêt (outil) : bloc-sommet. Les deux courtes

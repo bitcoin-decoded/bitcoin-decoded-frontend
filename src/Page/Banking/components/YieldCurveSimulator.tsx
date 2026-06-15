@@ -15,7 +15,12 @@ import { usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useYieldCurve } from "../hooks/useYieldCurve";
 
-export const YieldCurveSimulator: FC = () => {
+type Props = {
+  /** Fired once the reader has moved the long-rate slider (manipulated). */
+  onComplete?: () => void;
+};
+
+export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
@@ -172,7 +177,10 @@ export const YieldCurveSimulator: FC = () => {
               max="4"
               step="0.1"
               value={longRate}
-              onChange={(e) => setLongRate(parseFloat(e.target.value))}
+              onChange={(e) => {
+                setLongRate(parseFloat(e.target.value));
+                onComplete?.();
+              }}
               style={{
                 width: "100%",
                 cursor: "pointer",

@@ -7,11 +7,9 @@ import type { ExpandableTerm } from "../types";
 
 type Props = {
   term: ExpandableTerm;
-  /** Fired when the card transitions from closed to open (each first expand). */
-  onOpen?: () => void;
 };
 
-export const TermCard: FC<Props> = ({ term, onOpen }) => {
+export const TermCard: FC<Props> = ({ term }) => {
   const { isOpen, toggle } = useDisclosure(false);
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -138,10 +136,7 @@ export const TermCard: FC<Props> = ({ term, onOpen }) => {
     <div style={containerStyle}>
       <button
         type="button"
-        onClick={() => {
-          if (!isOpen) onOpen?.();
-          toggle();
-        }}
+        onClick={toggle}
         aria-expanded={isOpen}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

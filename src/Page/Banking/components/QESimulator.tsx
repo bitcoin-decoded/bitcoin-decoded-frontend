@@ -1,14 +1,23 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, useEffect } from "react";
 
 import { usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
 
-export const QESimulator: FC = () => {
+type Props = {
+  /** Fired once the QE operation has been run (the simulator's final state). */
+  onComplete?: () => void;
+};
+
+export const QESimulator: FC<Props> = ({ onComplete }) => {
   const { theme, colors, moduleTheme } = usePageTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
   const { isActive, activate, reset } = useToggleSimulator();
+
+  useEffect(() => {
+    if (isActive) onComplete?.();
+  }, [isActive, onComplete]);
 
   const controlsStyle: CSSProperties = {
     display: "flex",

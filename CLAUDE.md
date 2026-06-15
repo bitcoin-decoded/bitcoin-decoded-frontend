@@ -196,13 +196,17 @@ Le découpage (quels blocs, quel ordre, lesquels sont `tool`, titres) est **four
 </PageTemplate>
 ```
 
-### Bloc-outil : déblocage sur l'état FINAL (contrat)
+### Bloc-outil : on verrouille uniquement sur les simulateurs (contrat)
 
-Un `Block kind="tool"` reste **verrouillé** (« Bloc suivant » grisé) tant que son composant n'a pas atteint son **état final** : bloc en render-prop `({ markComplete }) => ...`, on câble `markComplete` au signal de complétion. **Ouvrir un disclosure ne débloque pas.** Le composant expose un `onComplete?: () => void` déclenché sur son état terminal :
+Règle : **on ne verrouille un bloc que lorsque la manipulation EST l'action pédagogique** (lancer un simulateur, son climax). Les composants « à explorer à son rythme » (définitions, agrégats, disclosures) **ne verrouillent pas** : leur bloc est de la prose-avec-composant, sans `kind="tool"`.
 
-- `CreditCreationSimulator` → prêt accordé (`isActive`).
-- `AccountingTerms` / `ExpandableDefinitions` → toutes les définitions explorées (`onAllExplored`).
-- Tout nouveau composant-outil ajoute ce callback (additif, non breaking) sur son état final.
+Un `Block kind="tool"` reste **verrouillé** (« Bloc suivant » grisé) tant que son composant n'a pas atteint son **état final** : bloc en render-prop `({ markComplete }) => ...`, on câble `markComplete` au signal de complétion. Le composant expose un `onComplete?: () => void` déclenché sur son état terminal :
+
+- Simulateurs (`onComplete` sur l'état final) : `CreditCreationSimulator`, `CompensationSimulator`, `DefaultSimulator`, `QESimulator` → action lancée (`isActive`) ; `YieldCurveSimulator` → curseur manipulé.
+- `Quiz` → bonne réponse obligatoire : on câble `markComplete` sur la prop `onCorrectAnswer` (rien à ajouter au composant).
+- Tout nouveau composant d'action ajoute ce signal (additif, non breaking) sur son état final.
+
+Non verrouillants (exploration facultative, jamais `kind="tool"`) : `AccountingTerms`, `MonetaryAggregates`, `Disclosure`, etc.
 
 ### Chrome (jalons, ancres, animations)
 

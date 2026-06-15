@@ -8,12 +8,12 @@ import type { PageMetadataMap } from "../types";
 
 export const PAGE_METADATA: PageMetadataMap = {
   // Banking — Le fonctionnement du système bancaire
-  [ROUTE_NAME.Banking_1]: { wordCount: 797, interactiveCount: 2 },
-  [ROUTE_NAME.Banking_2]: { wordCount: 725, interactiveCount: 2 },
-  [ROUTE_NAME.Banking_3]: { wordCount: 1044, interactiveCount: 2 },
-  [ROUTE_NAME.Banking_4]: { wordCount: 787, interactiveCount: 2 },
-  [ROUTE_NAME.Banking_5]: { wordCount: 422, interactiveCount: 2 },
-  [ROUTE_NAME.Banking_6]: { wordCount: 595, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_1]: { wordCount: 796, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_2]: { wordCount: 807, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_3]: { wordCount: 1066, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_4]: { wordCount: 880, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_5]: { wordCount: 440, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_6]: { wordCount: 602, interactiveCount: 2 },
   [ROUTE_NAME.Banking_7]: { wordCount: 644, interactiveCount: 5 },
 
   // MoneyLaws — Les lois de la monnaie
