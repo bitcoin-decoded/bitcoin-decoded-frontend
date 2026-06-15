@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, useMemo } from "react";
+import { type CSSProperties, type FC, useEffect, useMemo } from "react";
 
 import { usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
@@ -7,12 +7,21 @@ import { getUserBankCompensation } from "../data";
 
 import { BalanceSheet } from "./BalanceSheet";
 
-export const CompensationSimulator: FC = () => {
+type Props = {
+  /** Fired once the compensation has been triggered (the simulator's final state). */
+  onComplete?: () => void;
+};
+
+export const CompensationSimulator: FC<Props> = ({ onComplete }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
   const dataset = useMemo(() => getUserBankCompensation(language), [language]);
   const { isActive, activate, reset, data } = useToggleSimulator(dataset);
+
+  useEffect(() => {
+    if (isActive) onComplete?.();
+  }, [isActive, onComplete]);
 
   const controlsStyle: CSSProperties = {
     display: "flex",
