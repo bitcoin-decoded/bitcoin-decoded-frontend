@@ -19,13 +19,19 @@ import type { MempoolVariant } from "../types";
 
 import { TxRow } from "./TxRow";
 
-export const MempoolVisual: FC<{ variant?: MempoolVariant }> = ({ variant = "intro" }) => {
+type Props = {
+  variant?: MempoolVariant;
+  /** Fired once the reader adds the block (resolution variant; gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const { transactions, blockHeader, blockTxIds, rejectedTxId, blockAdded, addBlock, reset } =
-    useMempoolVisual(language);
+    useMempoolVisual(language, onComplete);
 
   const isResolution = variant === "resolution";
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };

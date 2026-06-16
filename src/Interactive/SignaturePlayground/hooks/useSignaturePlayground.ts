@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { ALTERED_PRIVATE_KEY, INITIAL_PRIVATE_KEY, INVALID_SIGNATURE, PUBLIC_KEY, VALID_SIGNATURE } from "../data";
+import {
+  ALTERED_PRIVATE_KEY,
+  INITIAL_PRIVATE_KEY,
+  INVALID_SIGNATURE,
+  PUBLIC_KEY,
+  VALID_SIGNATURE,
+} from "../data";
 import type { VerifyStatus } from "../types";
 
 /**
@@ -13,7 +19,7 @@ import type { VerifyStatus } from "../types";
  * private key for another one means it no longer derives to that public key,
  * so the signature it produces is rejected — which is the whole lesson.
  */
-export const useSignaturePlayground = () => {
+export const useSignaturePlayground = (onComplete?: () => void) => {
   const [privateKey, setPrivateKey] = useState(INITIAL_PRIVATE_KEY);
   const [isDerived, setIsDerived] = useState(false);
   const [signature, setSignature] = useState<string | null>(null);
@@ -55,6 +61,19 @@ export const useSignaturePlayground = () => {
     setSignature(null);
     setVerifyStatus("idle");
   };
+
+  // Fires once the reader has gone through the full flow (derive → sign →
+  // verify); reaching a verdict means all three buttons were used. One-shot —
+  // resetting and replaying never re-fires.
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!firedRef.current && verifyStatus !== "idle") {
+      firedRef.current = true;
+      onCompleteRef.current?.();
+    }
+  }, [verifyStatus]);
 
   return {
     privateKey,

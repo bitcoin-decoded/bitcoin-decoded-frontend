@@ -8,7 +8,9 @@ import {
   Quiz,
   TrustComparisonDemo,
 } from "../../../Interactive";
-import { PageTemplate, useToggleSimulator } from "../../Shared/";
+import { ROUTE_NAME } from "../../../Routing";
+import { Block, BlockReader } from "../../Reading";
+import { ChapterPrelude, PageTemplate, useToggleSimulator } from "../../Shared/";
 
 export const Bitcoin2Page: FC = () => {
   const { t, language } = useTranslation();
@@ -16,55 +18,68 @@ export const Bitcoin2Page: FC = () => {
   const { isActive: isQuizSolved, activate: onQuizSolved } = useToggleSimulator();
 
   return (
-    <PageTemplate
-      title={t("nav.tree.whyBitcoin")}
-      prelude={
-        fr ? (
-          <>
-            En janvier 2009, un développeur anonyme lance un logiciel et grave un titre de presse
-            dans son tout premier bloc. Une référence au sauvetage des banques britanniques, ce
-            jour-là. Quinze ans plus tard, ce logiciel pèse plus de mille milliards de dollars et
-            personne ne sait qui l'a écrit. Avant de comprendre comment Bitcoin fonctionne, il faut
-            comprendre pourquoi quelqu'un a jugé nécessaire de l'écrire.
-          </>
-        ) : (
-          <>
-            In January 2009, an anonymous developer launched a piece of software and engraved a
-            newspaper headline into its very first block. A reference to the UK bank bailouts, on
-            that very day. Fifteen years later, that software is worth over a trillion dollars, and
-            no one knows who wrote it. Before understanding how Bitcoin works, you need to
-            understand why someone thought it had to be written in the first place.
-          </>
-        )
-      }
-    >
-      <p>
-        {fr
-          ? "Tu sais maintenant ce qu'est Bitcoin : un logiciel, un réseau, une monnaie. Reste la vraie question :"
-          : "You now know what Bitcoin is: a piece of software, a network, a currency. The real question remains:"}
-      </p>
-      <p>
-        {fr ? (
-          <>
-            Pourquoi Bitcoin existe-t-il ? <br />
-            Quel problème résout-il ?
-          </>
-        ) : (
-          <>
-            Why does Bitcoin exist? <br />
-            What problem does it solve?
-          </>
-        )}
-      </p>
+    <PageTemplate title={t("nav.tree.whyBitcoin")} showChapterNav={false}>
+      <BlockReader chapterId={ROUTE_NAME.Bitcoin_2}>
+        <Block>
+          <ChapterPrelude marginBottom="1.5rem">
+            {fr ? (
+              <>
+                En janvier 2009, un développeur anonyme lance un logiciel et grave un titre de
+                presse dans son tout premier bloc. Une référence au sauvetage des banques
+                britanniques, ce jour-là. Quinze ans plus tard, ce logiciel pèse plus de mille
+                milliards de dollars et personne ne sait qui l'a écrit. Avant de comprendre comment
+                Bitcoin fonctionne, il faut comprendre pourquoi quelqu'un a jugé nécessaire de
+                l'écrire.
+              </>
+            ) : (
+              <>
+                In January 2009, an anonymous developer launched a piece of software and engraved a
+                newspaper headline into its very first block. A reference to the UK bank bailouts,
+                on that very day. Fifteen years later, that software is worth over a trillion
+                dollars, and no one knows who wrote it. Before understanding how Bitcoin works, you
+                need to understand why someone thought it had to be written in the first place.
+              </>
+            )}
+          </ChapterPrelude>
+          <p>
+            {fr
+              ? "Tu sais maintenant ce qu'est Bitcoin : un logiciel, un réseau, une monnaie. Reste la vraie question :"
+              : "You now know what Bitcoin is: a piece of software, a network, a currency. The real question remains:"}
+          </p>
+          <p>
+            {fr ? (
+              <>
+                Pourquoi Bitcoin existe-t-il ? <br />
+                Quel problème résout-il ?
+              </>
+            ) : (
+              <>
+                Why does Bitcoin exist? <br />
+                What problem does it solve?
+              </>
+            )}
+          </p>
 
-      <p>{fr ? "Regarde ce graphique." : "Take a look at this chart."}</p>
+          <p>{fr ? "Regarde ce graphique." : "Take a look at this chart."}</p>
+        </Block>
 
-      <M2MoneySupplyChart showTitle={isQuizSolved} />
+        {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse (le titre du graphique se révèle alors). */}
+        <Block kind="tool">
+          {({ markComplete }) => (
+            <>
+              <M2MoneySupplyChart showTitle={isQuizSolved} />
+              <Quiz
+                {...getQuizDataM2Explosion(language)}
+                onCorrectAnswer={() => {
+                  onQuizSolved();
+                  markComplete();
+                }}
+              />
+            </>
+          )}
+        </Block>
 
-      <Quiz {...getQuizDataM2Explosion(language)} onCorrectAnswer={onQuizSolved} />
-
-      {isQuizSolved && (
-        <>
+        <Block>
           <p>{fr ? "Observe l'accélération." : "Notice the acceleration."}</p>
           <ol>
             <li>
@@ -170,6 +185,9 @@ export const Bitcoin2Page: FC = () => {
               </>
             )}
           </p>
+        </Block>
+
+        <Block>
           <Quote
             author="Satoshi Nakamoto"
             source={fr ? "Livre blanc de Bitcoin, 2008" : "Bitcoin White Paper, 2008"}
@@ -219,6 +237,9 @@ export const Bitcoin2Page: FC = () => {
               </>
             )}
           </p>
+        </Block>
+
+        <Block>
           <p>
             {fr ? (
               <>
@@ -309,7 +330,14 @@ export const Bitcoin2Page: FC = () => {
               )}
             </p>
           </Callout>
-          <TrustComparisonDemo />
+        </Block>
+
+        {/* Bloc-outil : déverrouillé quand 2 actions distinctes ont été essayées (compteur x/2). */}
+        <Block kind="tool">
+          {({ markComplete }) => <TrustComparisonDemo onComplete={markComplete} />}
+        </Block>
+
+        <Block last>
           <p>
             {fr ? (
               <>
@@ -348,8 +376,8 @@ export const Bitcoin2Page: FC = () => {
             )}
           </p>
           <p>{fr ? "C'est ce qu'on regarde dans la suite !" : "That's what we'll look at next!"}</p>
-        </>
-      )}
+        </Block>
+      </BlockReader>
     </PageTemplate>
   );
 };

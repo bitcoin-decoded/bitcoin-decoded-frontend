@@ -26,11 +26,17 @@ import type { ComparisonMode } from "../types";
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export const TransactionModelComparison: FC<{ mode?: ComparisonMode }> = ({ mode = "compare" }) => {
+type Props = {
+  mode?: ComparisonMode;
+  /** Fired once the reader runs the transaction (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComplete }) => {
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
-  const { phase, trigger, reset } = useTransactionComparison();
+  const { phase, trigger, reset } = useTransactionComparison(onComplete);
 
   const world = colors[moduleTheme];
   const bankAccent = colors.blue.border.secondary;

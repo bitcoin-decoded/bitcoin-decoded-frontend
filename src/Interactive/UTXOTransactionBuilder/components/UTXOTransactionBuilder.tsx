@@ -33,7 +33,13 @@ import { TxCard } from "./TxCard";
 
 // ── Main component ──────────────────────────────────────────────────────────
 
-export const UTXOTransactionBuilder: FC<{ lockedAmount?: string }> = ({ lockedAmount }) => {
+type Props = {
+  lockedAmount?: string;
+  /** Fired once the reader builds a valid transaction (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -60,7 +66,7 @@ export const UTXOTransactionBuilder: FC<{ lockedAmount?: string }> = ({ lockedAm
     isInsufficient,
     isValid,
     reset,
-  } = useUTXOTransactionBuilder(lockedAmount);
+  } = useUTXOTransactionBuilder(lockedAmount, onComplete);
 
   const toneColors: Record<CardTone, { color: string; border: string; bg: string }> = {
     accent: {

@@ -14,13 +14,18 @@ import {
 import { useTranslation } from "../../../I18n";
 import { useDifficultyAdjustment } from "../hooks";
 
-export const DifficultyAdjustment: FC = () => {
+type Props = {
+  /** Fired once the reader shifts the difficulty off baseline (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const { miners, target, canDecrease, canIncrease, decrease, increase, step } =
-    useDifficultyAdjustment();
+    useDifficultyAdjustment(onComplete);
 
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 

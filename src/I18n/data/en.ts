@@ -20,6 +20,8 @@ const en = {
   "synthesisQuiz.threshold": "Pass threshold:",
   "synthesisQuiz.passed": "Passed! The foundations are in place.",
   "synthesisQuiz.failed": "Not quite there. Try again to unlock the synthesis.",
+  "synthesisQuiz.next": "Next",
+  "synthesisQuiz.back": "Previous",
   "identityCard.expand": "Expand",
   "identityCard.collapse": "Collapse",
   "balanceSheet.assets": "ASSETS",
@@ -259,6 +261,7 @@ const en = {
   "capitalChain.explored": "explored",
   "flipCard.explored": "explored",
   "debateArena.explored": "explored",
+  "trustComparison.explored": "explored",
 
   // UtxoGraph
   "utxoGraph.title": "The UTXO graph",

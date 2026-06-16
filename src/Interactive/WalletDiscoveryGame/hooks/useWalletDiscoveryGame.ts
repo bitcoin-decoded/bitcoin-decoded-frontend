@@ -1,16 +1,28 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AMOUNT_TOLERANCE } from "../data";
 import { generateWalletSession, sanitizeAmount } from "../helpers";
 import type { WalletGameStage, WalletGameVerdict } from "../types";
 
-export const useWalletDiscoveryGame = () => {
+export const useWalletDiscoveryGame = (onComplete?: () => void) => {
   const [session, setSession] = useState(generateWalletSession);
   const [stage, setStage] = useState<WalletGameStage>("idle");
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [amountInput, setAmountInput] = useState("");
   const [verdict, setVerdict] = useState<WalletGameVerdict>(null);
   const isLocked = verdict === "correct";
+
+  // Fires once the reader has solved the challenge (the action this block is
+  // built around). One-shot.
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!firedRef.current && verdict === "correct") {
+      firedRef.current = true;
+      onCompleteRef.current?.();
+    }
+  }, [verdict]);
 
   const reveal = useCallback(() => setStage("revealed"), []);
 

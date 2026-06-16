@@ -9,6 +9,7 @@ export {
   FeedbackPanel,
   HighlightText,
   KeywordHighlight,
+  OptionButton,
   Quote,
   Reference,
   SurfaceCard,

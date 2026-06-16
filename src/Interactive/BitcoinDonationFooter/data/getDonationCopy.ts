@@ -28,7 +28,7 @@ export const getDonationCopy = (language: Language) => {
       lead: fr
         ? "Tu veux soutenir mon travail de pédagogie ?"
         : "Want to support the teaching behind this?",
-      title: fr ? "Combien veux-tu donner ?" : "How much would you like to give?",
+      title: fr ? "Chaque geste compte" : "Every contribution helps",
       customPlaceholder: fr ? "autre montant..." : "other amount...",
       satsApprox: (satsStr: string) => `≈ ${satsStr} sats`,
       rateLine: (eurStr: string) =>

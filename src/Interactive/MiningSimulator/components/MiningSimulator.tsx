@@ -15,13 +15,18 @@ import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 import { useMiningSimulator } from "../hooks";
 
-export const MiningSimulator: FC = () => {
+type Props = {
+  /** Fired once the reader tries at least one nonce (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const MiningSimulator: FC<Props> = ({ onComplete }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const { attempts, found, difficultyPrefix, headerFields, currentNonce, tryNonce, reset } =
-    useMiningSimulator();
+    useMiningSimulator(onComplete);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -133,8 +138,7 @@ export const MiningSimulator: FC = () => {
           {t("mining.headerLabel")}
         </Caption>
         <div>
-          <span style={fieldName}>bloc</span>{" "}
-          <span style={nonceVal}>#{headerFields.height}</span>
+          <span style={fieldName}>bloc</span> <span style={nonceVal}>#{headerFields.height}</span>
         </div>
         <div>
           <span style={fieldName}>prevHash</span>{" "}

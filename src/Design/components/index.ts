@@ -7,6 +7,7 @@ export { ExploredCounter } from "./ExploredCounter";
 export { FeedbackPanel } from "./FeedbackPanel";
 export { HighlightText } from "./HighlightText";
 export { KeywordHighlight } from "./KeywordHighlight";
+export { OptionButton } from "./OptionButton";
 export { Quote } from "./Quote";
 export { Reference } from "./Reference";
 export { SurfaceCard } from "./SurfaceCard";

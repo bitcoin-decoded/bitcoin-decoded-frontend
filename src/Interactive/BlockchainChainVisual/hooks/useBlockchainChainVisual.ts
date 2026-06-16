@@ -16,7 +16,7 @@ type UseBlockchainChainVisual = {
   reset: () => Promise<void>;
 };
 
-export const useBlockchainChainVisual = (): UseBlockchainChainVisual => {
+export const useBlockchainChainVisual = (onComplete?: () => void): UseBlockchainChainVisual => {
   const [blocks, setBlocks] = useState<BlockData[]>([]);
   const [addPhase, setAddPhase] = useState<AddPhase>("idle");
   const blocksRef = useRef<BlockData[]>([]);
@@ -28,6 +28,19 @@ export const useBlockchainChainVisual = (): UseBlockchainChainVisual => {
   useEffect(() => {
     buildInitialChain().then(setBlocks);
   }, []);
+
+  // Fires once the reader has added a block (the action this block is built
+  // around): the add cycle ends on the "done" phase. One-shot — resetting and
+  // adding again never re-fires.
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!firedRef.current && addPhase === "done") {
+      firedRef.current = true;
+      onCompleteRef.current?.();
+    }
+  }, [addPhase]);
 
   const editTx = useCallback(async (index: number, tx: string) => {
     const target = blocksRef.current[index];
@@ -62,8 +75,7 @@ export const useBlockchainChainVisual = (): UseBlockchainChainVisual => {
     setBlocks(chain);
   }, []);
 
-  const canAddBlock =
-    blocks.length < MAX_BLOCKS && (addPhase === "idle" || addPhase === "done");
+  const canAddBlock = blocks.length < MAX_BLOCKS && (addPhase === "idle" || addPhase === "done");
   const canEdit = addPhase === "done";
 
   return { blocks, addPhase, canAddBlock, canEdit, editTx, addBlock, reset };

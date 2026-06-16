@@ -16,7 +16,12 @@ import { groupBits } from "../helpers";
 import { useSeedGenerator } from "../hooks";
 import type { SeedLength } from "../types";
 
-export const SeedGenerator: FC = () => {
+type Props = {
+  /** Fired once the reader generates a seed (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const SeedGenerator: FC<Props> = ({ onComplete }) => {
   const { t } = useTranslation();
   const { colors: themeColors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -29,7 +34,7 @@ export const SeedGenerator: FC = () => {
   const baseBorderSecondary = themeColors.base.border.secondary;
   const baseBackgroundSecondary = themeColors.base.background.secondary;
 
-  const { length, seed, revealedCount, generate, setLength } = useSeedGenerator();
+  const { length, seed, revealedCount, generate, setLength } = useSeedGenerator(onComplete);
 
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
@@ -233,9 +238,7 @@ export const SeedGenerator: FC = () => {
 
           {/* Binary visualization - collapsed by default to keep the focus
               on the human-readable form first. Power users can dive in. */}
-          <Disclosure
-            title={t("seedGenerator.binaryDisclosureTitle")}
-          >
+          <Disclosure title={t("seedGenerator.binaryDisclosureTitle")}>
             <div>
               <div style={sectionLabelStyle}>
                 {t("seedGenerator.entropy")} ({seed.entropy.length} {t("seedGenerator.bitsUnit")})
