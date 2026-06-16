@@ -29,15 +29,17 @@ import type { Branch, TxId } from "../types";
 
 type Props = {
   scrollTargetId?: string;
+  /** Fired once the reader propagates the double-spend (gates the tool block). */
+  onComplete?: () => void;
 };
 
-export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId }) => {
+export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
 
-  const { phase, nodeFirstSeen, reveal, reset } = useDoubleSpendDemo();
+  const { phase, nodeFirstSeen, reveal, reset } = useDoubleSpendDemo(onComplete);
   const propagated = phase === "propagated";
 
   const accents: Record<TxId, string> = {

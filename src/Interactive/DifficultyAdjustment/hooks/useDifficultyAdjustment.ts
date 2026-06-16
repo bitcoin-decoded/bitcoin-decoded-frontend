@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const MIN_MINERS = 100;
 const MAX_MINERS = 1000;
@@ -6,7 +6,7 @@ const STEP = 100;
 const BASELINE_MINERS = 400;
 const BASELINE_ZEROS = 4;
 
-export const useDifficultyAdjustment = () => {
+export const useDifficultyAdjustment = (onComplete?: () => void) => {
   const [miners, setMiners] = useState(BASELINE_MINERS);
 
   const rawZeros = BASELINE_ZEROS + (miners - BASELINE_MINERS) / STEP;
@@ -18,6 +18,18 @@ export const useDifficultyAdjustment = () => {
 
   const decrease = useCallback(() => setMiners((m) => Math.max(MIN_MINERS, m - STEP)), []);
   const increase = useCallback(() => setMiners((m) => Math.min(MAX_MINERS, m + STEP)), []);
+
+  // Fires once the reader has shifted the difficulty off its baseline (the
+  // action this block is built around). One-shot — further clicks never re-fire.
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!firedRef.current && miners !== BASELINE_MINERS) {
+      firedRef.current = true;
+      onCompleteRef.current?.();
+    }
+  }, [miners]);
 
   return { miners, zeros, target, canDecrease, canIncrease, decrease, increase, step: STEP };
 };
