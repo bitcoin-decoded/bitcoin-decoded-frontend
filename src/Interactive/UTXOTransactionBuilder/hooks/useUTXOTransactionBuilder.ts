@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { FIXED_FEE, NICOLAS_UTXOS } from "../data";
 import { round8 } from "../helpers";
 
-export const useUTXOTransactionBuilder = (lockedAmount?: string) => {
+export const useUTXOTransactionBuilder = (lockedAmount?: string, onComplete?: () => void) => {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [rawAmount, setRawAmount] = useState(lockedAmount ?? "");
 
@@ -30,6 +30,18 @@ export const useUTXOTransactionBuilder = (lockedAmount?: string) => {
     setSelectedIds([]);
     setRawAmount(lockedAmount ?? "");
   };
+
+  // Fires once the reader has built a valid transaction (the success state this
+  // block is built around). One-shot — resetting never re-fires.
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!firedRef.current && isValid) {
+      firedRef.current = true;
+      onCompleteRef.current?.();
+    }
+  }, [isValid]);
 
   return {
     utxos: NICOLAS_UTXOS,
