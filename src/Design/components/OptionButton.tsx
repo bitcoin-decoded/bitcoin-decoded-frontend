@@ -1,6 +1,7 @@
 import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
-import { usePageTheme, withOpacity } from "../../../Design";
+import { withOpacity } from "../helpers";
+import { usePageTheme } from "../Theme";
 
 type Props = {
   label: ReactNode;
@@ -10,6 +11,12 @@ type Props = {
   disabled?: boolean;
 };
 
+/**
+ * Radio-style single-choice option. Shared by the one-question-at-a-time
+ * quizzes (PathFinder, SynthesisQuiz): a themed pill with a filling radio dot
+ * on selection. `disabled` keeps the selected option fully lit while dimming
+ * the others (review / locked state).
+ */
 export const OptionButton: FC<Props> = ({ label, selected, accent, onClick, disabled = false }) => {
   const { colors } = usePageTheme();
   const [hover, setHover] = useState(false);

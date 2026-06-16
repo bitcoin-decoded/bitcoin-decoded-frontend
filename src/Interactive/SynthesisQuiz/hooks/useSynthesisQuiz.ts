@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { SynthesisQuizQuestion } from "../types/";
 
@@ -45,6 +45,12 @@ export const useSynthesisQuiz = ({ questions, passThreshold, storageKey, onPass 
     () => readPersistedState(storageKey, questions.length)?.submitted ?? false,
   );
 
+  // One-question-at-a-time stepper (à la PathFinder). Not persisted: a re-open
+  // restarts at the first question, or lands straight on the recap if the quiz
+  // was already submitted.
+  const [step, setStep] = useState(0);
+  const lastStep = questions.length - 1;
+
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify({ selections, submitted }));
@@ -78,7 +84,16 @@ export const useSynthesisQuiz = ({ questions, passThreshold, storageKey, onPass 
       next[qIdx] = aIdx;
       return next;
     });
+    // Answering the current question slides to the next one (stays on the last).
+    setStep((s) => (qIdx === s && s < lastStep ? s + 1 : s));
   };
+
+  const back = useCallback(() => setStep((s) => Math.max(0, s - 1)), []);
+  const next = useCallback(() => setStep((s) => Math.min(lastStep, s + 1)), [lastStep]);
+  const goTo = useCallback(
+    (i: number) => setStep(() => Math.max(0, Math.min(lastStep, i))),
+    [lastStep],
+  );
 
   const handleSubmit = () => {
     if (!allAnswered) return;
@@ -88,6 +103,7 @@ export const useSynthesisQuiz = ({ questions, passThreshold, storageKey, onPass 
   const handleReset = () => {
     setSelections(defaultSelections);
     setSubmitted(false);
+    setStep(0);
     try {
       localStorage.removeItem(storageKey);
     } catch {
@@ -101,6 +117,11 @@ export const useSynthesisQuiz = ({ questions, passThreshold, storageKey, onPass 
     allAnswered,
     score,
     passed,
+    step,
+    lastStep,
+    back,
+    next,
+    goTo,
     handleSelect,
     handleSubmit,
     handleReset,

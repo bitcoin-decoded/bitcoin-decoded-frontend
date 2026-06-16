@@ -20,6 +20,8 @@ const fr = {
   "synthesisQuiz.threshold": "Seuil de validation :",
   "synthesisQuiz.passed": "Validé ! Tu maîtrises les fondations.",
   "synthesisQuiz.failed": "Pas tout à fait. Recommence pour valider.",
+  "synthesisQuiz.next": "Suivant",
+  "synthesisQuiz.back": "Précédent",
   "identityCard.expand": "Déplier",
   "identityCard.collapse": "Replier",
   "balanceSheet.assets": "ACTIF",

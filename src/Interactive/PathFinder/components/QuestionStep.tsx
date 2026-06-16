@@ -1,8 +1,6 @@
 import { type CSSProperties, type ReactNode } from "react";
 
-import { usePageTheme, withOpacity } from "../../../Design";
-
-import { OptionButton } from "./OptionButton";
+import { OptionButton, usePageTheme, withOpacity } from "../../../Design";
 
 type Option<T extends string> = { value: T; label: ReactNode };
 
