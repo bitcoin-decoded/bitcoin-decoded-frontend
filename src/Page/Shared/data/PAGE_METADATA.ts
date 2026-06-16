@@ -26,8 +26,8 @@ export const PAGE_METADATA: PageMetadataMap = {
 
   // Bitcoin — La révolution Bitcoin
   [ROUTE_NAME.Bitcoin_1]: { wordCount: 1396, interactiveCount: 2 },
-  [ROUTE_NAME.Bitcoin_2]: { wordCount: 1102, interactiveCount: 3 },
-  [ROUTE_NAME.Bitcoin_3]: { wordCount: 873, interactiveCount: 3 },
+  [ROUTE_NAME.Bitcoin_2]: { wordCount: 1121, interactiveCount: 3 },
+  [ROUTE_NAME.Bitcoin_3]: { wordCount: 893, interactiveCount: 3 },
   [ROUTE_NAME.Bitcoin_4]: { wordCount: 1069, interactiveCount: 6 },
   [ROUTE_NAME.Bitcoin_5]: { wordCount: 976, interactiveCount: 5 },
   [ROUTE_NAME.Bitcoin_6]: { wordCount: 653, interactiveCount: 5 },

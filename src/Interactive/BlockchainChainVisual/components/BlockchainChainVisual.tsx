@@ -18,14 +18,16 @@ import { ChainArrow } from "./ChainArrow";
 
 type Props = {
   resetScrollTargetId?: string;
+  /** Fired once the reader has added a block (gates the surrounding tool block). */
+  onComplete?: () => void;
 };
 
-export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId }) => {
+export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComplete }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const { blocks, addPhase, canAddBlock, canEdit, editTx, addBlock, reset } =
-    useBlockchainChainVisual();
+    useBlockchainChainVisual(onComplete);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

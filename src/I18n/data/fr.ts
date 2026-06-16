@@ -262,6 +262,7 @@ const fr = {
   "capitalChain.explored": "explorés",
   "flipCard.explored": "explorées",
   "debateArena.explored": "explorées",
+  "trustComparison.explored": "explorés",
 
   // UtxoGraph
   "utxoGraph.title": "Le graphe des UTXO",

@@ -13,13 +13,18 @@ import {
 import { useLanguageContext } from "../../../I18n";
 import { useHashDemo } from "../hooks";
 
-export const HashDemo: FC = () => {
+type Props = {
+  /** Fired once the reader hashes something (gates the surrounding tool block). */
+  onComplete?: () => void;
+};
+
+export const HashDemo: FC<Props> = ({ onComplete }) => {
   const { language } = useLanguageContext();
   const fr = language === "fr";
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
-  const { input, setInput, hash, hasHashed, handleHash, handleReset } = useHashDemo();
+  const { input, setInput, hash, hasHashed, handleHash, handleReset } = useHashDemo(onComplete);
 
   const disabled = hash !== null;
   const hashDisabled = input.length === 0 || disabled;

@@ -259,6 +259,7 @@ const en = {
   "capitalChain.explored": "explored",
   "flipCard.explored": "explored",
   "debateArena.explored": "explored",
+  "trustComparison.explored": "explored",
 
   // UtxoGraph
   "utxoGraph.title": "The UTXO graph",
