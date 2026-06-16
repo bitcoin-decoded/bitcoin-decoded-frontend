@@ -257,6 +257,8 @@ const en = {
   // CapitalStructureChain
   "capitalChain.traceBack": "TRACE BACK IN TIME ⌛ →",
   "capitalChain.explored": "explored",
+  "flipCard.explored": "explored",
+  "debateArena.explored": "explored",
 
   // UtxoGraph
   "utxoGraph.title": "The UTXO graph",
@@ -277,7 +279,7 @@ const en = {
   "utxoGraph.captionKeys":
     "Each coin is locked by a key. Spending it means proving you own the key, not moving a balance.",
   "utxoGraph.captionWallet":
-    'Your "balance" isn\'t a counter: it\'s the sum of the coins your keys control, recomputed after every transaction.',
+    "Your \"balance\" isn't a counter: it's the sum of the coins your keys control, recomputed after every transaction.",
 
   // Reading (block-by-block chapters)
   "reading.next": "Next block",

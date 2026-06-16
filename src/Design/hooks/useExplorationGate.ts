@@ -27,7 +27,7 @@ export const useExplorationGate = ({ threshold, onComplete }: Options) => {
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);
   useEffect(() => {
-    if (!firedRef.current && exploredCount >= threshold) {
+    if (!firedRef.current && threshold > 0 && exploredCount >= threshold) {
       firedRef.current = true;
       onCompleteRef.current?.();
     }

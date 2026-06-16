@@ -10,11 +10,13 @@ type FlipCardProps = {
   item: FlipCardItem;
   /** 0-based position in the chain, surfaced as a "01"–"06" step marker. */
   index: number;
+  /** Fired when the card flips to its back face (lets a grid gate on exploration). */
+  onReveal?: () => void;
 };
 
-export const FlipCard: FC<FlipCardProps> = ({ item, index }) => {
+export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
   const { colors, moduleTheme } = usePageTheme();
-  const { isFlipped, isHovered, flip, hoverHandlers } = useFlipCard();
+  const { isFlipped, isHovered, flip, hoverHandlers } = useFlipCard(onReveal);
   const world = colors[moduleTheme];
 
   const lifted = isHovered && !isFlipped;

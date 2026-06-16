@@ -260,6 +260,8 @@ const fr = {
   // CapitalStructureChain
   "capitalChain.traceBack": "REMONTER LE TEMPS ⌛ →",
   "capitalChain.explored": "explorés",
+  "flipCard.explored": "explorées",
+  "debateArena.explored": "explorées",
 
   // UtxoGraph
   "utxoGraph.title": "Le graphe des UTXO",

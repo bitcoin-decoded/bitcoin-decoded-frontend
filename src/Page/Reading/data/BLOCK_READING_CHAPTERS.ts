@@ -14,4 +14,6 @@ export const BLOCK_READING_CHAPTERS = new Set<string>([
   ROUTE_NAME.MoneyLaws_1,
   ROUTE_NAME.MoneyLaws_2,
   ROUTE_NAME.MoneyLaws_3,
+  ROUTE_NAME.MoneyLaws_4,
+  ROUTE_NAME.MoneyLaws_5,
 ]);
