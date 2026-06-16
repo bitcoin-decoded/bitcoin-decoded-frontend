@@ -10,7 +10,7 @@ import { buildFlywheelSteps } from "../helpers";
  * the highlight wave (`activeStep`) — so the user literally watches usage push
  * fees, fees push miner revenue, and so on around the loop.
  */
-export const useNetworkFlywheel = () => {
+export const useNetworkFlywheel = (onComplete?: () => void) => {
   const steps = useMemo(() => buildFlywheelSteps(), []);
   const [level, setLevel] = useState(0);
   const [stepLevels, setStepLevels] = useState<number[]>(() => steps.map(() => 0));
@@ -23,6 +23,18 @@ export const useNetworkFlywheel = () => {
   }, []);
 
   useEffect(() => clearPending, [clearPending]);
+
+  // Fires once the reader has turned the wheel at least once (the action this
+  // block is built around). One-shot — resetting never re-fires.
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!firedRef.current && level > 0) {
+      firedRef.current = true;
+      onCompleteRef.current?.();
+    }
+  }, [level]);
 
   const isAnimating = activeStep !== -1;
 

@@ -10,13 +10,18 @@ import { useNetworkFlywheel } from "../hooks";
 
 import { FlywheelStep } from "./FlywheelStep";
 
-export const NetworkFlywheel: FC = () => {
+type Props = {
+  /** Fired once the reader turns the wheel at least once (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const NetworkFlywheel: FC<Props> = ({ onComplete }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const { steps, level, stepLevels, activeStep, canIncrease, increase, reset } =
-    useNetworkFlywheel();
+    useNetworkFlywheel(onComplete);
 
   const tones = getStepTones(colors);
   const { vertices, edges } = getPentagonLayout(steps.length, WHEEL_RADIUS);

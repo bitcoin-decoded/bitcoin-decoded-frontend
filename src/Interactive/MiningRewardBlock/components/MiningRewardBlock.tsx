@@ -27,7 +27,12 @@ import { fmtBTC } from "../../helpers";
 import { CONFETTI_DATA } from "../data";
 import { useMiningRewardBlock } from "../hooks";
 
-export const MiningRewardBlock: FC = () => {
+type Props = {
+  /** Fired once the reader rewards the miner (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -42,7 +47,7 @@ export const MiningRewardBlock: FC = () => {
     rewarded,
     reward,
     reset,
-  } = useMiningRewardBlock();
+  } = useMiningRewardBlock(onComplete);
 
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
   const successColor = colors.semantic.success.text;
@@ -273,11 +278,7 @@ export const MiningRewardBlock: FC = () => {
               <div key={tx.id} style={txRow}>
                 <div style={txParties}>
                   <span style={nameStyle}>{tx.from}</span>
-                  <ArrowRight
-                    size={10}
-                    strokeWidth={2}
-                    style={{ opacity: 0.45, flexShrink: 0 }}
-                  />
+                  <ArrowRight size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                   <span style={nameStyle}>{tx.to}</span>
                 </div>
                 <div style={txAmounts}>

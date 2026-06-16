@@ -29,7 +29,7 @@ export const PAGE_METADATA: PageMetadataMap = {
   [ROUTE_NAME.Bitcoin_2]: { wordCount: 1121, interactiveCount: 3 },
   [ROUTE_NAME.Bitcoin_3]: { wordCount: 893, interactiveCount: 3 },
   [ROUTE_NAME.Bitcoin_4]: { wordCount: 1094, interactiveCount: 6 },
-  [ROUTE_NAME.Bitcoin_5]: { wordCount: 976, interactiveCount: 5 },
+  [ROUTE_NAME.Bitcoin_5]: { wordCount: 1001, interactiveCount: 5 },
   [ROUTE_NAME.Bitcoin_6]: { wordCount: 653, interactiveCount: 5 },
   [ROUTE_NAME.Bitcoin_7]: { wordCount: 373, interactiveCount: 3 },
   [ROUTE_NAME.Bitcoin_8]: { wordCount: 493, interactiveCount: 3 },
