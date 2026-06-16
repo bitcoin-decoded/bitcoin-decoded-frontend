@@ -4,10 +4,22 @@ import { REVEAL_STEP_MS } from "../data";
 import { generateSeed } from "../helpers";
 import type { SeedData, SeedLength } from "../types";
 
-export const useSeedGenerator = () => {
+export const useSeedGenerator = (onComplete?: () => void) => {
   const [length, setLengthState] = useState<SeedLength>(24);
   const [seed, setSeed] = useState<SeedData | null>(null);
   const [revealedCount, setRevealedCount] = useState(0);
+
+  // Fires once the reader has generated a seed (the action this block is built
+  // around). One-shot — regenerating or switching length never re-fires.
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!firedRef.current && seed !== null) {
+      firedRef.current = true;
+      onCompleteRef.current?.();
+    }
+  }, [seed]);
 
   // Track timeouts so we can cancel a previous reveal animation cleanly
   const timeoutsRef = useRef<number[]>([]);

@@ -39,7 +39,12 @@ import {
 import { useSignaturePlayground } from "../hooks";
 import type { SigPlaygroundColors } from "../types";
 
-export const SignaturePlayground: FC = () => {
+type Props = {
+  /** Fired once the reader completes the derive → sign → verify flow (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   const { t, language } = useTranslation();
   const { colors: themeColors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -76,7 +81,7 @@ export const SignaturePlayground: FC = () => {
     sign,
     verify,
     reset,
-  } = useSignaturePlayground();
+  } = useSignaturePlayground(onComplete);
 
   // Match state drives the value-text color: green when the private key still
   // derives to the on-record public key, red once it has been swapped out.

@@ -16,7 +16,12 @@ import { useWalletDiscoveryGame } from "../hooks";
 
 import { WalletCard } from "./WalletCard";
 
-export const WalletDiscoveryGame: FC = () => {
+type Props = {
+  /** Fired once the reader solves the challenge (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
   const { t } = useTranslation();
   const { colors: themeColors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -43,7 +48,7 @@ export const WalletDiscoveryGame: FC = () => {
     updateAmount,
     validate,
     restart,
-  } = useWalletDiscoveryGame();
+  } = useWalletDiscoveryGame(onComplete);
 
   const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 

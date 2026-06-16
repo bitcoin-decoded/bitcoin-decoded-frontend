@@ -17,7 +17,12 @@ import { useKeySignatureTrio } from "../hooks";
 
 import { TrioNode } from "./TrioNode";
 
-export const KeySignatureTrio: FC = () => {
+type Props = {
+  /** Fired once every node has been explored (gates the tool block). */
+  onComplete?: () => void;
+};
+
+export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -27,7 +32,10 @@ export const KeySignatureTrio: FC = () => {
   const accentBorder = world.border.secondary;
 
   const { elements, connections } = getKeySignatureTrio(language);
-  const { selectedId, hasSelection, select, exploredCount } = useKeySignatureTrio();
+  const { selectedId, hasSelection, select, exploredCount } = useKeySignatureTrio({
+    requiredExplored: onComplete ? elements.length : 0,
+    onComplete,
+  });
 
   const { viewWidth, viewHeight, nodes, clearance } = TRIO_LAYOUT;
   const edgeClearance = isMobile ? clearance.mobile : clearance.desktop;

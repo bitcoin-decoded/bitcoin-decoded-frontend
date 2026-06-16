@@ -22,4 +22,6 @@ export const BLOCK_READING_CHAPTERS = new Set<string>([
   ROUTE_NAME.Bitcoin_4,
   ROUTE_NAME.Bitcoin_5,
   ROUTE_NAME.Bitcoin_6,
+  ROUTE_NAME.Bitcoin_7,
+  ROUTE_NAME.Bitcoin_8,
 ]);
