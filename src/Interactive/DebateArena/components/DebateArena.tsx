@@ -1,19 +1,38 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Caption,
+  ExploredCounter,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
+import { useTranslation } from "../../../I18n";
 import { useDebateArena } from "../hooks";
 import type { DebateItem } from "../types";
 
 type DebateArenaProps = {
   items: DebateItem[];
+  /**
+   * When > 0, the arena gates: a "n/N explored" counter shows and `onComplete`
+   * fires once a side has been opened in that many distinct rows. Default 0 = no gate.
+   */
+  requiredExplored?: number;
+  /** Fired once `requiredExplored` distinct debate rows have been opened. */
+  onComplete?: () => void;
 };
 
-export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
+export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0, onComplete }) => {
   const { colors, moduleTheme } = usePageTheme();
+  const { t } = useTranslation();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const world = colors[moduleTheme];
-  const { activeSides, selectSide, isHovered, hoverHandlers } = useDebateArena(items.length);
+  const gated = requiredExplored > 0;
+  const { activeSides, selectSide, isHovered, hoverHandlers, exploredCount } = useDebateArena(
+    items.length,
+    { requiredExplored, onComplete },
+  );
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -22,8 +41,19 @@ export const DebateArena: FC<DebateArenaProps> = ({ items }) => {
     margin: isMobile ? "2rem 0" : "2.5rem 0",
   };
 
+  const headerRowStyle: CSSProperties = { display: "flex", justifyContent: "flex-end" };
+
   return (
     <div style={containerStyle}>
+      {gated && (
+        <div style={headerRowStyle}>
+          <ExploredCounter
+            explored={Math.min(exploredCount, requiredExplored)}
+            total={requiredExplored}
+            label={t("debateArena.explored")}
+          />
+        </div>
+      )}
       {items.map((item, i) => {
         const active = activeSides[i];
 

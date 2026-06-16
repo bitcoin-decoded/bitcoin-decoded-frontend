@@ -24,8 +24,8 @@ export const Banking5Page: FC = () => {
   return (
     <PageTemplate title={t("nav.tree.cantillon")} showChapterNav={false}>
       <BlockReader chapterId={ROUTE_NAME.Banking_5}>
-        <Block title={fr ? "Le dilemme du banquier" : "The banker's dilemma"}>
-          <ChapterPrelude>
+        <Block>
+          <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
               <>
                 T'es un banquier. Tes coffres débordent de M0, tes marges sont écrasées, et la
@@ -64,7 +64,7 @@ export const Banking5Page: FC = () => {
           </p>
         </Block>
 
-        <Block title={fr ? "Les deux clients" : "The two clients"}>
+        <Block>
           <Callout
             title={
               fr
@@ -157,13 +157,13 @@ export const Banking5Page: FC = () => {
         </Block>
 
         {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse. */}
-        <Block kind="tool" title={fr ? "À toi de choisir" : "Your call"}>
+        <Block kind="tool">
           {({ markComplete }) => (
             <Quiz {...getQuizDataProfileChoice(language)} onCorrectAnswer={markComplete} />
           )}
         </Block>
 
-        <Block title={fr ? "L'argent va à l'argent" : "Money goes to money"}>
+        <Block>
           <p>
             {fr
               ? "Le résultat des courses : L'argent va à l'argent"
@@ -207,7 +207,7 @@ export const Banking5Page: FC = () => {
           />
         </Block>
 
-        <Block title={fr ? "Ça déborde dans le caddie" : "It spills into the shopping cart"}>
+        <Block last>
           {fr ? (
             <>
               Mais quand les Picsou se sentent riches, ils finissent par dépenser. Cette demande en

@@ -5,6 +5,7 @@ export {
   Callout,
   Caption,
   Disclosure,
+  ExploredCounter,
   FeedbackPanel,
   HighlightText,
   KeywordHighlight,
@@ -13,7 +14,7 @@ export {
   SurfaceCard,
 } from "./components";
 export { withOpacity } from "./helpers";
-export { useDisclosure } from "./hooks";
+export { useDisclosure, useExplorationGate } from "./hooks";
 export {
   CloverLeafIcon,
   DivisionIcon,

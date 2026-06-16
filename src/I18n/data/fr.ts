@@ -56,6 +56,7 @@ const fr = {
   "monetaryGallery.history": "Son histoire :",
   "monetaryGallery.characteristics": "Ses caractéristiques :",
   "monetaryGallery.limitations": "Ses limitations :",
+  "monetaryGallery.explored": "explorées",
 
   // Monetary characteristics
   "characteristic.durability": "Durabilité",
@@ -258,6 +259,9 @@ const fr = {
 
   // CapitalStructureChain
   "capitalChain.traceBack": "REMONTER LE TEMPS ⌛ →",
+  "capitalChain.explored": "explorés",
+  "flipCard.explored": "explorées",
+  "debateArena.explored": "explorées",
 
   // UtxoGraph
   "utxoGraph.title": "Le graphe des UTXO",

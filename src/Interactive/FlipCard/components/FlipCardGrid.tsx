@@ -1,17 +1,42 @@
 import { type CSSProperties, type FC } from "react";
 
-import { useBreakpoint } from "../../../Design";
+import { ExploredCounter, useBreakpoint, useExplorationGate } from "../../../Design";
+import { useTranslation } from "../../../I18n";
 import type { FlipCardItem } from "../types";
 
 import { FlipCard } from "./FlipCard";
 
 type FlipCardGridProps = {
   items: FlipCardItem[];
+  /**
+   * When > 0, the grid gates: a "n/N explored" counter shows and `onComplete`
+   * fires once that many distinct cards have been flipped. Default 0 = no gate.
+   */
+  requiredExplored?: number;
+  /** Fired once `requiredExplored` distinct cards have been flipped. */
+  onComplete?: () => void;
 };
 
-export const FlipCardGrid: FC<FlipCardGridProps> = ({ items }) => {
+export const FlipCardGrid: FC<FlipCardGridProps> = ({
+  items,
+  requiredExplored = 0,
+  onComplete,
+}) => {
   const breakpoint = useBreakpoint();
+  const { t } = useTranslation();
   const columns = breakpoint === "mobile" ? 2 : 3;
+  const gated = requiredExplored > 0;
+  const { exploredCount, markExplored } = useExplorationGate({
+    threshold: requiredExplored,
+    onComplete,
+  });
+
+  const headerRowStyle: CSSProperties = {
+    display: "flex",
+    justifyContent: "flex-end",
+    maxWidth: "40rem",
+    margin: "1.5rem auto 0",
+  };
 
   const gridStyle: CSSProperties = {
     display: "grid",
@@ -22,10 +47,26 @@ export const FlipCardGrid: FC<FlipCardGridProps> = ({ items }) => {
   };
 
   return (
-    <div style={gridStyle}>
-      {items.map((item, index) => (
-        <FlipCard key={item.title} item={item} index={index} />
-      ))}
-    </div>
+    <>
+      {gated && (
+        <div style={headerRowStyle}>
+          <ExploredCounter
+            explored={Math.min(exploredCount, requiredExplored)}
+            total={requiredExplored}
+            label={t("flipCard.explored")}
+          />
+        </div>
+      )}
+      <div style={gridStyle}>
+        {items.map((item, index) => (
+          <FlipCard
+            key={item.title}
+            item={item}
+            index={index}
+            onReveal={gated ? () => markExplored(index) : undefined}
+          />
+        ))}
+      </div>
+    </>
   );
 };

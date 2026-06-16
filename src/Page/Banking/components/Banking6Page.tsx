@@ -17,14 +17,8 @@ export const Banking6Page: FC = () => {
   return (
     <PageTemplate title={t("nav.tree.inflation")} showChapterNav={false}>
       <BlockReader chapterId={ROUTE_NAME.Banking_6}>
-        <Block
-          title={
-            fr
-              ? "Tes prix montent, ton salaire suit mollement"
-              : "Your prices rise, your paycheck lags"
-          }
-        >
-          <ChapterPrelude>
+        <Block>
+          <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
               <>
                 Tes courses ont augmenté. Ton loyer aussi. Ton salaire, lui, suit mollement. Pendant
@@ -34,8 +28,8 @@ export const Banking6Page: FC = () => {
             ) : (
               <>
                 Your grocery bill has gone up. So has your rent. Your paycheck, meanwhile, is barely
-                keeping pace. At the same time, the NASDAQ is hitting record highs and real estate is
-                climbing into the absurd. You sense there's a link. You're right.
+                keeping pace. At the same time, the NASDAQ is hitting record highs and real estate
+                is climbing into the absurd. You sense there's a link. You're right.
               </>
             )}
           </ChapterPrelude>
@@ -46,13 +40,7 @@ export const Banking6Page: FC = () => {
           </p>
         </Block>
 
-        <Block
-          title={
-            fr
-              ? "L'argent brûle les doigts : l'effet de richesse"
-              : "Money burns a hole in your pocket: the wealth effect"
-          }
-        >
+        <Block>
           {fr ? (
             <>
               L'argent finit presque toujours par brûler les doigts. C'est ce qu'on appelle l'
@@ -70,7 +58,7 @@ export const Banking6Page: FC = () => {
           )}
         </Block>
 
-        <Block title={fr ? "Picsou se sent riche et dépense" : "Scrooge feels rich and spends"}>
+        <Block>
           <Callout
             title={
               fr
@@ -161,11 +149,7 @@ export const Banking6Page: FC = () => {
           </Callout>
         </Block>
 
-        <Block
-          title={
-            fr ? "Trop d'argent, pas plus de baguettes" : "Too much money, not more bread"
-          }
-        >
+        <Block>
           <p>
             {fr ? (
               <>OK. L'argent afflue dans l'économie réelle. Tu sens le problème arriver, non ?</>
@@ -182,13 +166,7 @@ export const Banking6Page: FC = () => {
           </p>
         </Block>
 
-        <Block
-          title={
-            fr
-              ? "Le moteur de l'inflation, signé Friedman"
-              : "Friedman's inflation engine"
-          }
-        >
+        <Block>
           {fr ? (
             <>
               Et ça, c'est le moteur principal de l'inflation.{" "}
@@ -220,13 +198,7 @@ export const Banking6Page: FC = () => {
           )}
         </Block>
 
-        <Block
-          title={
-            fr
-              ? "Premier module bouclé, direction le quiz"
-              : "Module one done, on to the quiz"
-          }
-        >
+        <Block last>
           {fr ? (
             <>
               Et voilà. Premier module bouclé. Avant de passer à la suite,{" "}

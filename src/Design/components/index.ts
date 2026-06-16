@@ -3,6 +3,7 @@ export { Button } from "./Button";
 export { Callout } from "./Callout";
 export { Caption } from "./Caption";
 export { Disclosure } from "./Disclosure";
+export { ExploredCounter } from "./ExploredCounter";
 export { FeedbackPanel } from "./FeedbackPanel";
 export { HighlightText } from "./HighlightText";
 export { KeywordHighlight } from "./KeywordHighlight";

@@ -19,8 +19,8 @@ export const Banking2Page: FC = () => {
     <PageTemplate title={t("nav.tree.twoLevels")} showChapterNav={false}>
       <BlockReader chapterId={ROUTE_NAME.Banking_2}>
         {/* BLOC 1 — Le virement fantôme : la question d'accroche (prélude). */}
-        <Block title={fr ? "Le virement fantôme" : "The phantom transfer"}>
-          <ChapterPrelude>
+        <Block>
+          <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
               <>
                 Nicolas vient de virer 200 000 € pour acheter sa maison. Sauf qu'aucune liasse de 200
@@ -38,7 +38,7 @@ export const Banking2Page: FC = () => {
         </Block>
 
         {/* BLOC 2 — Le décor : qui paie qui, et la question de la 2e banque. */}
-        <Block title={fr ? "Le décor : Nicolas paie la vendeuse" : "The setup: Nicolas pays the seller"}>
+        <Block>
           <p>
             {fr ? (
               <>
@@ -61,7 +61,7 @@ export const Banking2Page: FC = () => {
 
         {/* BLOC 3 — Deux monnaies, deux tuyaux : l'aparté reste collé au composant
             (exploration M0/M2 facultative, donc bloc non verrouillé). */}
-        <Block title={fr ? "Deux monnaies, deux tuyaux" : "Two monies, two pipes"}>
+        <Block>
           <p>
             {fr ? (
               <>
@@ -85,7 +85,7 @@ export const Banking2Page: FC = () => {
 
         {/* BLOC 4 — Compensation et règlement net : le principe (net = compensation
             + règlement). Les références restent dans la prose. */}
-        <Block title={fr ? "Compensation et règlement net" : "Clearing and net settlement"}>
+        <Block>
           <p>
             {fr
               ? "Imagine maintenant des millions de virements en monnaie M2 chaque jour entre les banques."
@@ -125,7 +125,7 @@ export const Banking2Page: FC = () => {
 
         {/* BLOC 5 — Le cas concret côté M2 puis M0 : le palier « passons à la
             pratique » est coulé dans le Callout. Disclosure facultatif, non verrouillé. */}
-        <Block title={fr ? "Le cas Nicolas / Mme Michu" : "The Nicolas / Ms. Smith case"}>
+        <Block>
           <p>
             {fr
               ? "Cela te parait abstrait ? Très bien, passons une fois de plus à la pratique !"
@@ -179,7 +179,7 @@ export const Banking2Page: FC = () => {
 
         {/* BLOC 6 — Le bilan qui bouge : cœur mécanique. Bloc-outil, déverrouillé
             quand la compensation est déclenchée. */}
-        <Block kind="tool" title={fr ? "Le bilan qui bouge" : "The balance sheet moves"}>
+        <Block kind="tool">
           {({ markComplete }) => (
             <>
               <p>
@@ -212,7 +212,7 @@ export const Banking2Page: FC = () => {
         </Block>
 
         {/* BLOC 7 — Ouverture vers le chapitre 3 (pas de synthèse bouclée). */}
-        <Block last title={fr ? "Tu as gratté une couche de plus" : "You scratched off another layer"}>
+        <Block last>
           <p>
             {fr
               ? "Tu viens encore de gratter une couche que la plupart des gens ne soupçonnent même pas. Et crois-moi, ça va servir pour la suite :"

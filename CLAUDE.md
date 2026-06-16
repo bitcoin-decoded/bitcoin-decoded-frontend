@@ -196,17 +196,18 @@ Le découpage (quels blocs, quel ordre, lesquels sont `tool`, titres) est **four
 </PageTemplate>
 ```
 
-### Bloc-outil : on verrouille uniquement sur les simulateurs (contrat)
+### Bloc-outil : on verrouille quand la manipulation EST l'action (contrat)
 
-Règle : **on ne verrouille un bloc que lorsque la manipulation EST l'action pédagogique** (lancer un simulateur, son climax). Les composants « à explorer à son rythme » (définitions, agrégats, disclosures) **ne verrouillent pas** : leur bloc est de la prose-avec-composant, sans `kind="tool"`.
+Règle : **on ne verrouille un bloc que lorsque la manipulation EST l'action pédagogique** (lancer un simulateur à son climax ; répondre à un quiz ; parcourir une exploration que le découpage déclare obligatoire). C'est l'**auteur du découpage** qui tranche : un même type de composant peut être verrouillant dans un chapitre (exploration obligatoire) et « à explorer à son rythme » ailleurs (sans `kind="tool"`).
 
 Un `Block kind="tool"` reste **verrouillé** (« Bloc suivant » grisé) tant que son composant n'a pas atteint son **état final** : bloc en render-prop `({ markComplete }) => ...`, on câble `markComplete` au signal de complétion. Le composant expose un `onComplete?: () => void` déclenché sur son état terminal :
 
 - Simulateurs (`onComplete` sur l'état final) : `CreditCreationSimulator`, `CompensationSimulator`, `DefaultSimulator`, `QESimulator` → action lancée (`isActive`) ; `YieldCurveSimulator` → curseur manipulé.
 - `Quiz` → bonne réponse obligatoire : on câble `markComplete` sur la prop `onCorrectAnswer` (rien à ajouter au composant).
+- **Exploration obligatoire** (compteur « x/N exploré » façon `KeySignatureTrio`) : le composant déclenche `onComplete` au franchissement du seuil. Primitives partagées : `ExploredCounter` (`Design/components`) + `useExplorationGate` (`Design/hooks`, set de N items distincts ; ne déclenche jamais si seuil = 0). Pour les composants génériques (paramétrés par `items`), le seuil est une **prop** (`requiredExplored`, défaut 0 = pas de gate) ; pour les composants à usage unique, c'est une const de module. Cas pilotes : `MonetaryGallery` (3 monnaies dépliées, signal via `IdentityCard onExpand`) ; `CapitalStructureChain` (2 détours remontés, compteur dérivé de `count`) ; `FlipCardGrid` (3 cartes retournées, signal via `FlipCard onReveal`) ; `DebateArena` (2 débats ouverts, signal sur `selectSide`).
 - Tout nouveau composant d'action ajoute ce signal (additif, non breaking) sur son état final.
 
-Non verrouillants (exploration facultative, jamais `kind="tool"`) : `AccountingTerms`, `MonetaryAggregates`, `Disclosure`, etc.
+Non verrouillants (exploration **facultative**, jamais `kind="tool"`) : `AccountingTerms`, `MonetaryAggregates`, `Disclosure`, `DunbarSlider`, `MonetaryProperties`, `MonetaryPillars`, etc. — sauf si le découpage les rend obligatoires (alors ils suivent le contrat ci-dessus).
 
 ### Chrome (jalons, ancres, animations)
 

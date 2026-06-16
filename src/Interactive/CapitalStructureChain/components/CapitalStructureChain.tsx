@@ -1,23 +1,40 @@
 import { type CSSProperties, type FC } from "react";
 
-import { usePageTheme } from "../../../Design";
+import { ExploredCounter, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getSandwichChain } from "../data";
 import { useCapitalStructureChain } from "../hooks";
 
-export const CapitalStructureChain: FC = () => {
+// Tracing the chain back is the pedagogical act, so the block gates on it:
+// reveal at least 2 production détours to unlock the rest of the chapter.
+const REQUIRED_DETOURS = 2;
+
+type Props = {
+  /** Fired once enough détours have been traced back (gates the reading block). */
+  onComplete?: () => void;
+};
+
+export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { t, language } = useTranslation();
   const steps = getSandwichChain(language);
 
   const {
     count,
+    exploredDetours,
     isButtonHovered,
     setIsButtonHovered,
     hoveredCardIndex,
     setHoveredCardIndex,
     handleButtonClick,
-  } = useCapitalStructureChain(steps.length);
+  } = useCapitalStructureChain(steps.length, { requiredDetours: REQUIRED_DETOURS, onComplete });
+
+  const headerRowStyle: CSSProperties = {
+    display: "flex",
+    justifyContent: "flex-end",
+    width: "100%",
+    paddingTop: "1rem",
+  };
 
   const wrapperStyle: CSSProperties = {
     display: "flex",
@@ -26,7 +43,7 @@ export const CapitalStructureChain: FC = () => {
     alignItems: "center",
     justifyContent: "start",
     width: "100%",
-    paddingTop: "2rem",
+    paddingTop: "1rem",
     paddingBottom: "2rem",
   };
 
@@ -115,76 +132,85 @@ export const CapitalStructureChain: FC = () => {
   };
 
   return (
-    <div style={wrapperStyle}>
-      <style>
-        {`
+    <>
+      <div style={headerRowStyle}>
+        <ExploredCounter
+          explored={Math.min(exploredDetours, REQUIRED_DETOURS)}
+          total={REQUIRED_DETOURS}
+          label={t("capitalChain.explored")}
+        />
+      </div>
+      <div style={wrapperStyle}>
+        <style>
+          {`
           @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
           }
         `}
-      </style>
-      {steps.slice(0, count).map((step, index) => {
-        const isLast = index === count - 1;
-        const hasNext = count < steps.length;
+        </style>
+        {steps.slice(0, count).map((step, index) => {
+          const isLast = index === count - 1;
+          const hasNext = count < steps.length;
 
-        return (
-          <div key={step.id} style={itemWrapperStyle}>
-            <div
-              className="gradient-border"
-              style={
-                {
-                  ...cardStyle(index),
-                  "--border-glow-color":
-                    hoveredCardIndex === index
-                      ? colors[moduleTheme].text.secondary
-                      : colors[moduleTheme].border.secondary,
-                } as CSSProperties
-              }
-              onMouseEnter={() => setHoveredCardIndex(index)}
-              onMouseLeave={() => setHoveredCardIndex(null)}
-            >
-              <div style={imgBoxStyle}>{step.image}</div>
-              <div style={numberBallStyle}>{step.id}</div>
-              <div style={contentStyle}>
-                <strong
-                  style={{
-                    display: "block",
-                    marginBottom: "0.25rem",
-                    fontSize: "0.85rem",
-                    color: colors.base.text.primary,
-                    fontStyle: "normal",
-                    letterSpacing: "0.1em",
-                    fontWeight: 400,
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {step.title}
-                </strong>
-                <div
-                  style={{
-                    color: colors.base.text.secondary,
-                    lineHeight: 1.3,
-                    fontSize: "0.8rem",
-                  }}
-                >
-                  {step.text}
-                </div>
-                {isLast && hasNext && (
-                  <button
-                    style={buttonStyle}
-                    onClick={handleButtonClick}
-                    onMouseEnter={() => setIsButtonHovered(true)}
-                    onMouseLeave={() => setIsButtonHovered(false)}
+          return (
+            <div key={step.id} style={itemWrapperStyle}>
+              <div
+                className="gradient-border"
+                style={
+                  {
+                    ...cardStyle(index),
+                    "--border-glow-color":
+                      hoveredCardIndex === index
+                        ? colors[moduleTheme].text.secondary
+                        : colors[moduleTheme].border.secondary,
+                  } as CSSProperties
+                }
+                onMouseEnter={() => setHoveredCardIndex(index)}
+                onMouseLeave={() => setHoveredCardIndex(null)}
+              >
+                <div style={imgBoxStyle}>{step.image}</div>
+                <div style={numberBallStyle}>{step.id}</div>
+                <div style={contentStyle}>
+                  <strong
+                    style={{
+                      display: "block",
+                      marginBottom: "0.25rem",
+                      fontSize: "0.85rem",
+                      color: colors.base.text.primary,
+                      fontStyle: "normal",
+                      letterSpacing: "0.1em",
+                      fontWeight: 400,
+                      textTransform: "uppercase",
+                    }}
                   >
-                    {t("capitalChain.traceBack")}
-                  </button>
-                )}
+                    {step.title}
+                  </strong>
+                  <div
+                    style={{
+                      color: colors.base.text.secondary,
+                      lineHeight: 1.3,
+                      fontSize: "0.8rem",
+                    }}
+                  >
+                    {step.text}
+                  </div>
+                  {isLast && hasNext && (
+                    <button
+                      style={buttonStyle}
+                      onClick={handleButtonClick}
+                      onMouseEnter={() => setIsButtonHovered(true)}
+                      onMouseLeave={() => setIsButtonHovered(false)}
+                    >
+                      {t("capitalChain.traceBack")}
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
