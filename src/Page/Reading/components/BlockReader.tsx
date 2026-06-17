@@ -12,7 +12,7 @@ import {
 import { Check, RotateCcw } from "lucide-react";
 
 import { useBadges } from "../../../Achievements";
-import { Button, Caption, usePageTheme } from "../../../Design";
+import { Button, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { PageNavigation } from "../../Shared";
 import { useBlockReader } from "../hooks";
@@ -125,16 +125,43 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
 
       {finished && (
         <>
-          <Caption
-            as="p"
-            color={colors.semantic.success.text}
-            icon={<Check size={14} strokeWidth={2.5} />}
-            style={{ marginTop: "2rem" }}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "2rem",
+              marginBottom: "1.25rem",
+            }}
           >
-            {t("reading.completed")}
-          </Caption>
-          <PageNavigation />
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.55rem",
+                padding: "0.55rem 1.1rem",
+                borderRadius: 999,
+                background: withOpacity(colors.semantic.success.text, 0.12),
+                border: `1px solid ${withOpacity(colors.semantic.success.text, 0.35)}`,
+                color: colors.semantic.success.text,
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                boxShadow: `0 6px 18px ${withOpacity(colors.semantic.success.text, 0.18)}`,
+              }}
+            >
+              <Check size={14} strokeWidth={2.5} />
+              {t("reading.completed")}
+            </span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "1.5rem",
+            }}
+          >
             <Button
               variant="ghost"
               size="sm"
@@ -144,6 +171,7 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
               {t("reading.replay")}
             </Button>
           </div>
+          <PageNavigation />
         </>
       )}
     </div>
