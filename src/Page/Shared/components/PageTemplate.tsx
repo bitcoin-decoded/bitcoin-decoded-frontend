@@ -1,6 +1,7 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { useBreakpoint, usePageTheme } from "../../../Design";
+import { FrText } from "../../../I18n";
 
 import { ChapterPrelude } from "./ChapterPrelude";
 import { PageNavigation } from "./PageNavigation";
@@ -99,9 +100,13 @@ export const PageTemplate: FC<Props> = ({
         <h1 style={titleStyle}>{title}</h1>
         {showReadingTime && <ReadingTimeBadge />}
       </header>
-      {prelude && <ChapterPrelude marginBottom={space.preludeToBody}>{prelude}</ChapterPrelude>}
+      {prelude && (
+        <ChapterPrelude marginBottom={space.preludeToBody}>
+          <FrText>{prelude}</FrText>
+        </ChapterPrelude>
+      )}
       <section className="page-content" style={sectionStyle}>
-        {children}
+        <FrText>{children}</FrText>
       </section>
       {showChapterNav && <PageNavigation />}
     </div>

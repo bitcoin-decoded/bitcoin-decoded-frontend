@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 
 import { en, fr } from "../data";
+import { fixFrenchPunctuation } from "../helpers";
 
 import { useLanguageContext } from "./useLanguageContext";
 
@@ -12,7 +13,13 @@ const dictionaries = { fr, en } as const;
 export const useTranslation = () => {
   const { language } = useLanguageContext();
 
-  const t: TranslationFn = useCallback((key) => dictionaries[language][key] ?? key, [language]);
+  const t: TranslationFn = useCallback(
+    (key) => {
+      const raw = dictionaries[language][key] ?? key;
+      return language === "fr" ? fixFrenchPunctuation(raw) : raw;
+    },
+    [language],
+  );
 
   return { t, language };
 };
