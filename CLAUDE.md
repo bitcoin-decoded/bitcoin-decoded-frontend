@@ -215,7 +215,7 @@ Non verrouillants (exploration **facultative**, jamais `kind="tool"`) : `Account
 - **Ancres** : `scrollIntoView({ block: "start" })` + `scroll-margin-top` sur les blocs (dégage header + sous-barre). Pas de calcul JS de la hauteur du header.
 - **Bloc** (`BlockShell`) : carte enrobée + en-tête `Bloc #N · Titre`, reliée à la suivante par un maillon de chaîne (`BlockChainLink`). Bloc courant interactif ; blocs lus atténués + `pointer-events: none`.
 - **Animations** (`src/index.css`) : `blockSeal` + cascade `blockLineIn` + pulse `blockConfirm` à la révélation ; `chainLinkIn` pour le maillon. `prefers-reduced-motion` respecté.
-- **Overlay de fin** (`ChapterCompleteOverlay`) : plein écran, porté dans `document.body` (le wrapper `.page-enter` a un transform qui casserait `position: fixed`).
+- **Overlay de fin** : la complétion d'un chapitre est célébrée par le déblocage de son **badge** (`BadgeUnlockOverlay`, cf. domaine `Achievements`), porté dans `document.body`. `finish()` ne fait que figer l'état terminal ; `BlockReader` appelle `award(chapterId)` sur `finished`.
 
 ### Persistance de session (localStorage)
 
@@ -229,7 +229,28 @@ Clé `bd:reading:<chapterId>`, valeur `{ maxRevealed, current, done[], finished,
 ### Deux niveaux de progression
 
 - Jalons en tête de chapitre (`BlockMilestones`, cliquables) = progression **dans le chapitre**.
-- Barre globale 20 chapitres + collection de badges = progression **inter-chapitres** (phase 2, non implémenté).
+- Collection de badges = progression **inter-chapitres** (domaine `Achievements`, cf. ci-dessous). Barre globale de progression : non implémentée.
+
+---
+
+## Badges / accomplissements
+
+### Principe
+
+Gamification inter-chapitres : un badge se débloque **une seule fois**, à la **première** complétion d'un chapitre (lecture par blocs terminée) et à la **première** validation d'un quiz de fin de module. Section dédiée (entrée header → page `Badges`) qui répertorie la collection (médailles obtenues vs à débloquer).
+
+### Domaine : `src/Achievements/` (structure DDD standard)
+
+- `data/` : `BADGES` (catalogue, ~22 : 1 par chapitre + 1 par quiz de module ; id d'un badge chapitre = son `ROUTE_NAME`, nom réutilise la clé `nav.tree.*` du chapitre, icône Lucide par thème) ; `MODULE_QUIZ_BADGE_ID`.
+- `hooks/` : `useBadgesStore` (état + persistance `localStorage` `bd:badges` = `Record<id, epochMs>` ; `award(id)` idempotent ; file de célébration) ; `useBadges` (consommateur du `BadgeContext`).
+- `components/` : `BadgeProvider` (monté autour du shell dans `App`, fournit le contexte + rend l'overlay global), `BadgeMedal` (médaille SVG/CSS thémée par module : bleu/violet/ambre ; verrouillée = grisée + cadenas), `BadgeGrid` (collection groupée par module), `BadgeUnlockOverlay` (célébration apparition→disparition, portée dans `document.body`), `BadgeNavButton` (entrée header avec compteur).
+- Surface publique (`index.ts`) : `BadgeProvider`, `BadgeNavButton`, `BadgeGrid`, `useBadges`, `MODULE_QUIZ_BADGE_ID`.
+
+### Intégration des récompenses
+
+- **Chapitre** : `BlockReader` appelle `award(chapterId)` sur `finished` (effet). Idempotent : une revisite ou un replay ne redonne rien, et seul le **premier** octroi déclenche l'overlay.
+- **Quiz de module** : les pages de synthèse (`Banking7`, `MoneyLaws6`, `Bitcoin9`) appellent `award(MODULE_QUIZ_BADGE_ID.<module>)` dans `onPass` du `SynthesisQuiz`.
+- L'entrée header est passée en prop (`headerAction`) `App → MainLayout → Header` pour éviter un cycle `Design → Achievements`.
 
 ---
 

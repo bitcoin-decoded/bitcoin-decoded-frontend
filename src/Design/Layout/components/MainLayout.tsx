@@ -17,7 +17,10 @@ import { Header } from "./Header";
 import { NavBar } from "./NavBar";
 import { NavDrawer } from "./NavDrawer";
 
-export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
+export const MainLayout: FC<{ children: ReactNode; headerAction?: ReactNode }> = ({
+  children,
+  headerAction,
+}) => {
   const { theme } = useThemeContext();
   const { currentPage } = useRouterContext();
   const breakpoint = useBreakpoint();
@@ -127,6 +130,7 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
         isDrawerOpen={isDrawerOpen}
         onToggleDrawer={toggleDrawer}
         breakpoint={breakpoint}
+        rightSlot={headerAction}
       />
       {isChapterPage && !isBlockChapter && <ReadingProgressBar />}
       {!isDesktop && (

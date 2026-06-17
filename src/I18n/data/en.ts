@@ -20,6 +20,17 @@ const en = {
   "synthesisQuiz.threshold": "Pass threshold:",
   "synthesisQuiz.passed": "Passed! The foundations are in place.",
   "synthesisQuiz.failed": "Not quite there. Try again to unlock the synthesis.",
+
+  // Badges / achievements
+  "badges.navLabel": "My badges",
+  "badges.title": "My badge collection",
+  "badges.intro":
+    "Every chapter you finish and every module quiz you pass unlocks a badge, once. Complete the journey to fill your collection.",
+  "badges.unlocked": "unlocked",
+  "badges.unlockedToast": "Badge unlocked",
+  "badges.moduleQuiz.banking": "Banking system decoded",
+  "badges.moduleQuiz.moneyLaws": "Money laws mastered",
+  "badges.moduleQuiz.bitcoin": "Bitcoin decoded",
   "synthesisQuiz.next": "Next",
   "synthesisQuiz.back": "Previous",
   "identityCard.expand": "Expand",

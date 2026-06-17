@@ -1,15 +1,17 @@
 import {
   Children,
-  Fragment,
-  isValidElement,
   type ComponentProps,
   type FC,
+  Fragment,
+  isValidElement,
   type ReactElement,
   type ReactNode,
+  useEffect,
 } from "react";
 
 import { Check, RotateCcw } from "lucide-react";
 
+import { useBadges } from "../../../Achievements";
 import { Button, Caption, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { PageNavigation } from "../../Shared";
@@ -20,7 +22,6 @@ import { BlockChainLink } from "./BlockChainLink";
 import { BlockMilestones } from "./BlockMilestones";
 import { BlockNav } from "./BlockNav";
 import { BlockShell } from "./BlockShell";
-import { ChapterCompleteOverlay } from "./ChapterCompleteOverlay";
 
 type BlockElement = ReactElement<ComponentProps<typeof Block>>;
 
@@ -54,7 +55,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     maxRevealed,
     current,
     finished,
-    celebrating,
     revealingIndex,
     isDone,
     markCompleteFns,
@@ -64,6 +64,14 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     finish,
     replay,
   } = useBlockReader({ chapterId, blockCount });
+
+  // First-ever completion of this chapter unlocks its badge (idempotent — a
+  // revisit or replay never re-awards). The badge's unlock overlay is the
+  // completion celebration.
+  const { award } = useBadges();
+  useEffect(() => {
+    if (finished) award(chapterId);
+  }, [finished, award, chapterId]);
 
   return (
     <div ref={containerRef}>
@@ -138,8 +146,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
           </div>
         </>
       )}
-
-      <ChapterCompleteOverlay show={celebrating} />
     </div>
   );
 };
