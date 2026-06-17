@@ -1,5 +1,6 @@
 import { type FC } from "react";
 
+import { MODULE_QUIZ_BADGE_ID, useBadges } from "../../../Achievements";
 import { HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getQuizDataModule1Synthesis, SynthesisQuiz } from "../../../Interactive";
@@ -9,6 +10,7 @@ import { PageTemplate, useToggleSimulator } from "../../Shared/";
 export const Banking7Page: FC = () => {
   const { t, language } = useTranslation();
   const fr = language === "fr";
+  const { award } = useBadges();
   const {
     isActive: isQuizPassed,
     activate: onQuizPassed,
@@ -42,7 +44,10 @@ export const Banking7Page: FC = () => {
       <SynthesisQuiz
         {...quiz}
         storageKey="synthesisQuiz.module1"
-        onPass={onQuizPassed}
+        onPass={() => {
+          onQuizPassed();
+          award(MODULE_QUIZ_BADGE_ID.banking);
+        }}
         onReset={onQuizReset}
       />
 

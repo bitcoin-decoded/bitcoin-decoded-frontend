@@ -20,6 +20,17 @@ const fr = {
   "synthesisQuiz.threshold": "Seuil de validation :",
   "synthesisQuiz.passed": "Validé ! Tu maîtrises les fondations.",
   "synthesisQuiz.failed": "Pas tout à fait. Recommence pour valider.",
+
+  // Badges / accomplissements
+  "badges.navLabel": "Mes badges",
+  "badges.title": "Ma collection de badges",
+  "badges.intro":
+    "Chaque chapitre terminé et chaque quiz de module validé débloque un badge, une seule fois. Termine le parcours pour compléter ta collection.",
+  "badges.unlocked": "débloqués",
+  "badges.unlockedToast": "Badge débloqué",
+  "badges.moduleQuiz.banking": "Système bancaire décodé",
+  "badges.moduleQuiz.moneyLaws": "Lois de la monnaie maîtrisées",
+  "badges.moduleQuiz.bitcoin": "Bitcoin décodé",
   "synthesisQuiz.next": "Suivant",
   "synthesisQuiz.back": "Précédent",
   "identityCard.expand": "Déplier",

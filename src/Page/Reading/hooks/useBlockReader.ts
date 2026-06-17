@@ -53,8 +53,6 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
   const [current, setCurrent] = useState(() => restored?.current ?? 0);
   const [done, setDone] = useState<number[]>(() => restored?.done ?? []);
   const [finished, setFinished] = useState(() => restored?.finished ?? false);
-  // Live celebration overlay — only on the in-session finish, never on restore.
-  const [celebrating, setCelebrating] = useState(false);
   // Block (and its incoming chain link) that just crossed the reveal frontier.
   const [revealingIndex, setRevealingIndex] = useState(() => restored?.current ?? 0);
 
@@ -129,11 +127,11 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
     [maxRevealed, scrollToBlock],
   );
 
+  // Completion is celebrated by the badge unlock overlay (awarded from
+  // BlockReader on `finished`), so finishing just commits the terminal state.
   const finish = useCallback(() => {
     setMaxRevealed(lastIndex);
     setFinished(true);
-    setCelebrating(true);
-    window.setTimeout(() => setCelebrating(false), prefersReducedMotion() ? 900 : 2000);
   }, [lastIndex]);
 
   const replay = useCallback(() => {
@@ -149,7 +147,6 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
     maxRevealed,
     current,
     finished,
-    celebrating,
     revealingIndex,
     isDone,
     markCompleteFns,

@@ -1,6 +1,7 @@
 import { type FC } from "react";
 
 import {
+  BadgesPage,
   Banking1Page,
   Banking2Page,
   Banking3Page,
@@ -83,6 +84,8 @@ export const AppRouter: FC = () => {
         return <Bitcoin9Page />;
       case ROUTE_NAME.GetStarted:
         return <GetStartedPage />;
+      case ROUTE_NAME.Badges:
+        return <BadgesPage />;
 
       default:
         return <HomePage />;

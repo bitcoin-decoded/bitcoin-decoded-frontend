@@ -23,4 +23,5 @@ export const ROUTE_NAME = {
   Bitcoin_8: "bitcoin-8",
   Bitcoin_9: "bitcoin-9",
   GetStarted: "get-started",
+  Badges: "badges",
 } as const;

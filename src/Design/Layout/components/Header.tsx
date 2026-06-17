@@ -1,12 +1,12 @@
-import { type CSSProperties, type FC, useState } from "react";
+import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
 import { LanguageToggle, useTranslation } from "../../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 import type { Breakpoint } from "../../Responsive";
 import { THEME_COLORS, ThemeToggle, useThemeContext } from "../../Theme";
+import { useHeaderHidden } from "../hooks";
 
 import { HamburgerButton } from "./HamburgerButton";
-import { useHeaderHidden } from "../hooks";
 
 // Brand "live indicator" red - distinct from the Bitcoin orange used
 // elsewhere on the page so the wordmark in the navbar reads as a
@@ -18,6 +18,8 @@ type Props = {
   isDrawerOpen?: boolean;
   onToggleDrawer?: () => void;
   breakpoint?: Breakpoint;
+  /** Optional action rendered at the start of the right-hand control group. */
+  rightSlot?: ReactNode;
 };
 
 export const Header: FC<Props> = ({
@@ -25,6 +27,7 @@ export const Header: FC<Props> = ({
   isDrawerOpen = false,
   onToggleDrawer,
   breakpoint = "desktop",
+  rightSlot,
 }) => {
   const { setCurrentPage } = useRouterContext();
   const { theme } = useThemeContext();
@@ -123,6 +126,7 @@ export const Header: FC<Props> = ({
       </button>
 
       <div style={rightGroupStyle}>
+        {rightSlot}
         <LanguageToggle />
         <ThemeToggle />
         {showHamburger && onToggleDrawer && (
