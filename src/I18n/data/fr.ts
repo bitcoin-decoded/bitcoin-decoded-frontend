@@ -45,7 +45,7 @@ const fr = {
   "simulator.compensation.start": "Démarrer la compensation",
   "simulator.compensation.retry": "Réessayer",
   "simulator.compensation.title": "BILAN COMPTABLE DE LA BANQUE DE NICOLAS",
-  "simulator.default.simulate": "Simuler un défaut de paiement d'une valeur totale de 30 000 000 €",
+  "simulator.default.simulate": "Simuler un défaut de 30 000 000 €",
   "simulator.default.retry": "Réessayer",
   "simulator.default.title": "ILLUSTRATION DES POINTS 1 ET 2 SUR LE BILAN COMPTABLE DE LA BANQUE",
   "simulator.qe.buy": "Acheter massivement des obligations",
@@ -53,6 +53,8 @@ const fr = {
   "simulator.qe.bondTitle": "Coupon d'obligation d'État",
   "simulator.qe.bondPrice": "Prix de l'obligation",
   "simulator.qe.bondYield": "Rendement (Taux d'intérêt)",
+  "simulator.qe.bondCaption":
+    "Le coupon (paiement annuel) de l'obligation est fixé à 40 € (4% de 1 000 €).",
   "simulator.capitalChain.button": "REMONTER LE TEMPS",
 
   // YieldCurve

@@ -143,6 +143,9 @@ export const Banking3Page: FC = () => {
                     ? "Le capital propre diminue à son tour, afin que le bilan de la banque soit équilibré."
                     : "Equity shrinks in turn, so the bank's balance sheet stays balanced."}
                 </li>
+              </ol>
+              <DefaultSimulator onComplete={markComplete} />
+              <ol start={3}>
                 <li>
                   {fr
                     ? "Les autres banques voient le capital propre de la banque fondre et commencent à paniquer."
@@ -159,7 +162,6 @@ export const Banking3Page: FC = () => {
                     : "The bank no longer has access to M0 and can't settle its debts with other banks: the whole system is paralyzed."}
                 </li>
               </ol>
-              <DefaultSimulator onComplete={markComplete} />
             </>
           )}
         </Block>

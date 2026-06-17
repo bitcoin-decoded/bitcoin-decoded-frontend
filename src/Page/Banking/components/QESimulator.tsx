@@ -1,8 +1,11 @@
 import { type CSSProperties, type FC, useEffect } from "react";
 
 import { usePageTheme } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { useBreakpoint } from "../../../Design/Responsive";
+import { FrText, useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
+
+import { SimulatorControls } from "./SimulatorControls";
 
 type Props = {
   /** Fired once the QE operation has been run (the simulator's final state). */
@@ -10,63 +13,64 @@ type Props = {
 };
 
 export const QESimulator: FC<Props> = ({ onComplete }) => {
-  const { theme, colors, moduleTheme } = usePageTheme();
+  const { theme, colors } = usePageTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
+  const isMobile = useBreakpoint() === "mobile";
   const { isActive, activate, reset } = useToggleSimulator();
 
   useEffect(() => {
     if (isActive) onComplete?.();
   }, [isActive, onComplete]);
 
-  const controlsStyle: CSSProperties = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "1rem",
-    marginBottom: "1rem",
-  };
-
-  const baseButtonStyle: CSSProperties = {
-    padding: "0.75rem 1.5rem",
-    fontWeight: 600,
-    borderRadius: "0.5rem",
-    border: `1px solid ${colors[moduleTheme].border.secondary}`,
-    cursor: "pointer",
-    transition: "background-color 0.2s",
-    backgroundColor: colors.base.background.secondary,
-    color: colors.base.text.primary,
-  };
-
-  const disabledStyle: CSSProperties = {
-    opacity: 0.5,
-    cursor: "not-allowed",
-  };
-
   const ticketContainerStyle: CSSProperties = {
     position: "relative",
-    backgroundColor: `${theme === "dark" ? "#172554" : "#fde68a"}`,
+    backgroundColor: theme === "dark" ? "#172554" : "#fde68a",
     border: `1px dashed ${theme === "dark" ? "#d97706" : "#451a03"}`,
     borderRadius: "0.5rem",
-    padding: "1.5rem",
+    padding: isMobile ? "1.25rem 1rem" : "1.5rem",
     marginBottom: "1rem",
     textAlign: "center",
   };
 
+  const captionStyle: CSSProperties = {
+    fontSize: isMobile ? "0.85rem" : "0.9rem",
+    color: colors.base.text.primary,
+    margin: "0.5rem 0 1.25rem",
+    lineHeight: 1.5,
+  };
+
+  const fieldsRowStyle: CSSProperties = {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: "1rem",
+  };
+
+  const fieldStyle: CSSProperties = {
+    flex: "1 1 0",
+    minWidth: "min(100%, 8rem)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "0.25rem",
+  };
+
   const labelStyle: CSSProperties = {
     color: colors.base.text.secondary,
-    fontSize: "0.875rem",
-    marginBottom: "0.25rem",
+    fontSize: isMobile ? "0.75rem" : "0.8rem",
+    fontWeight: 500,
+    textAlign: "center",
   };
 
   const valueStyle: CSSProperties = {
-    color: `${theme === "dark" ? "#f59e0b" : "#451a03"}`,
-    fontSize: "2rem",
-    fontWeight: "bold",
-    margin: 0,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "0.5rem",
+    color: theme === "dark" ? "#f59e0b" : "#451a03",
+    fontSize: isMobile ? "1.4rem" : "1.75rem",
+    fontWeight: 700,
+    fontVariantNumeric: "tabular-nums",
+    lineHeight: 1.2,
+    textAlign: "center",
+    whiteSpace: "nowrap",
   };
 
   const cutoutStyle: CSSProperties = {
@@ -75,100 +79,74 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
     transform: "translateY(-50%)",
     width: "1rem",
     height: "3rem",
-    backgroundColor: `${theme === "dark" ? "#d97706" : "#451a03"}`,
+    backgroundColor: theme === "dark" ? "#d97706" : "#451a03",
     borderRadius: "50%",
   };
 
   return (
-    <div style={{ marginTop: "2rem", marginBottom: "4rem" }}>
-      <div style={controlsStyle}>
-        <button
-          style={{ ...baseButtonStyle, ...(isActive ? disabledStyle : {}) }}
-          onClick={activate}
-          disabled={isActive}
-        >
-          {t("simulator.qe.buy")}
-        </button>
-        <button
-          style={{ ...baseButtonStyle, ...(!isActive ? disabledStyle : {}) }}
-          onClick={reset}
-          disabled={!isActive}
-        >
-          {t("simulator.qe.retry")}
-        </button>
-      </div>
-      <div style={ticketContainerStyle}>
-        <div style={{ ...cutoutStyle, left: "-0.5rem" }}></div>
-        <div style={{ ...cutoutStyle, right: "-0.5rem" }}></div>
-        <h4
-          style={{
-            margin: 0,
-            color: colors.base.text.primary,
-            fontSize: "1.25rem",
-          }}
-        >
-          {t("simulator.qe.bondTitle")}
-        </h4>
-        <div
-          style={{
-            fontSize: "0.9rem",
-            color: colors.base.text.primary,
-            marginBottom: "1.5rem",
-            marginTop: "0.25rem",
-          }}
-        >
-          {fr
-            ? "Le coupon (paiement annuel) de l'obligation est fixé à 40€ (4% de 1 000 €)"
-            : "The bond's coupon (its annual payment) is fixed at €40 (4% of €1,000)"}
+    <FrText>
+      <div style={{ marginTop: "2rem", marginBottom: "4rem" }}>
+        <SimulatorControls
+          primaryLabel={t("simulator.qe.buy")}
+          secondaryLabel={t("simulator.qe.retry")}
+          onPrimary={activate}
+          onSecondary={reset}
+          primaryDisabled={isActive}
+          secondaryDisabled={!isActive}
+        />
+        <div style={ticketContainerStyle}>
+          <div style={{ ...cutoutStyle, left: "-0.5rem" }}></div>
+          <div style={{ ...cutoutStyle, right: "-0.5rem" }}></div>
+          <h4
+            style={{
+              margin: 0,
+              color: colors.base.text.primary,
+              fontSize: isMobile ? "1.1rem" : "1.25rem",
+              lineHeight: 1.25,
+            }}
+          >
+            {t("simulator.qe.bondTitle")}
+          </h4>
+          <div style={captionStyle}>{t("simulator.qe.bondCaption")}</div>
+          <div style={fieldsRowStyle}>
+            <div style={fieldStyle}>
+              <div style={labelStyle}>{t("simulator.qe.bondPrice")}</div>
+              <div style={valueStyle}>{isActive ? "↗ 4 000 €" : "1 000 €"}</div>
+            </div>
+            <div style={fieldStyle}>
+              <div style={labelStyle}>{t("simulator.qe.bondYield")}</div>
+              <div style={valueStyle}>{isActive ? "↘ 1%" : "4%"}</div>
+            </div>
+          </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            gap: "1rem",
-          }}
-        >
-          <div style={{ flex: 1 }}>
-            <div style={labelStyle}>{t("simulator.qe.bondPrice")}</div>
-            {!isActive ? (
-              <div style={valueStyle}>1 000 €</div>
+        {isActive && (
+          <p style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
+            {fr ? (
+              <>
+                La Banque Centrale a inondé le marché pour acheter ces titres. En faisant s'envoler
+                le prix de l'obligation à 4 000 €, son rendement annuel s'écrase mécaniquement à 1%
+                : le coupon reste fixé à 40 €, mais rapporté à un prix d'achat de 4 000 €, cela ne
+                représente plus que 1% de rendement. C'est ainsi que l'
+                <strong>
+                  assouplissement quantitatif écrase artificiellement les taux, et de proche en
+                  proche, sur une grande partie de l'économie.
+                </strong>
+              </>
             ) : (
-              <div style={valueStyle}>↗ 4 000 €</div>
+              <>
+                The Central Bank flooded the market to snap up these securities. By sending the
+                bond's price soaring to €4,000, its annual yield mechanically collapses to 1%: the
+                coupon is still fixed at €40, but set against a €4,000 purchase price, that's no
+                more than a 1% return. This is how{" "}
+                <strong>
+                  Quantitative Easing artificially crushes rates, and step by step, spreads across
+                  a large part of the economy.
+                </strong>
+              </>
             )}
-          </div>
-          <div style={{ flex: 1 }}>
-            <div style={labelStyle}>{t("simulator.qe.bondYield")}</div>
-            {!isActive ? <div style={valueStyle}>4%</div> : <div style={valueStyle}>↘ 1%</div>}
-          </div>
-        </div>
+          </p>
+        )}
       </div>
-      {isActive && (
-        <p style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
-          {fr ? (
-            <>
-              La Banque Centrale a inondé le marché pour acheter ces titres. En faisant s'envoler le
-              prix de l'obligation à 4 000 €, son rendement annuel s'écrase mécaniquement à 1% : le
-              coupon reste fixé à 40 €, mais rapporté à un prix d'achat de 4 000 €, cela ne
-              représente plus que 1% de rendement. C'est ainsi que l'
-              <strong>
-                assouplissement quantitatif écrase artificiellement les taux, et de proche en
-                proche, sur une grande partie de l'économie.
-              </strong>
-            </>
-          ) : (
-            <>
-              The Central Bank flooded the market to snap up these securities. By sending the bond's
-              price soaring to €4,000, its annual yield mechanically collapses to 1%: the coupon is
-              still fixed at €40, but set against a €4,000 purchase price, that's no more than a 1%
-              return. This is how{" "}
-              <strong>
-                Quantitative Easing artificially crushes rates, and step by step, spreads across a
-                large part of the economy.
-              </strong>
-            </>
-          )}
-        </p>
-      )}
-    </div>
+    </FrText>
   );
 };

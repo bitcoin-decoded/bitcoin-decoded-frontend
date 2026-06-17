@@ -2,6 +2,7 @@ export { CreditCreationSimulator } from "./CreditCreationSimulator";
 export { CompensationSimulator } from "./CompensationSimulator";
 export { DefaultSimulator } from "./DefaultSimulator";
 export { BalanceSheet } from "./BalanceSheet";
+export { SimulatorControls } from "./SimulatorControls";
 export { YieldCurveSimulator } from "./YieldCurveSimulator";
 export { Banking1Page } from "./Banking1Page";
 export { Banking2Page } from "./Banking2Page";
