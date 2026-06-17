@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { usePageTheme } from "../../../Design";
+import { useBreakpoint, usePageTheme } from "../../../Design";
 import { useIllustration } from "../hooks";
 
 type IllustrationProps = {
@@ -28,6 +28,7 @@ export const Illustration: FC<IllustrationProps> = ({
 }) => {
   const { theme, colors, moduleTheme } = usePageTheme();
   const { isHovered, containerHandlers } = useIllustration();
+  const isMobile = useBreakpoint() === "mobile";
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -35,7 +36,7 @@ export const Illustration: FC<IllustrationProps> = ({
     alignItems: "center",
     margin,
     width: "100%",
-    maxWidth: width,
+    maxWidth: isMobile ? "100%" : width,
   };
 
   const frameStyle: CSSProperties = {
@@ -69,11 +70,17 @@ export const Illustration: FC<IllustrationProps> = ({
 
   const captionStyle: CSSProperties = {
     marginTop: "0.75rem",
-    fontSize: "0.85rem",
+    fontSize: isMobile ? "0.8rem" : "0.85rem",
+    lineHeight: 1.5,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     textAlign: "center",
-    maxWidth: "80%",
+    // Caption follows the figure width on mobile (no narrower than the
+    // image — visual mismatch). Slight inset on desktop to keep the eye
+    // anchored on the image.
+    maxWidth: isMobile ? "100%" : "85%",
+    paddingLeft: isMobile ? "0.25rem" : 0,
+    paddingRight: isMobile ? "0.25rem" : 0,
   };
 
   return (
