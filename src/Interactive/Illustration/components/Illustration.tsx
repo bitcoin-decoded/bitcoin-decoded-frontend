@@ -34,8 +34,8 @@ export const Illustration: FC<IllustrationProps> = ({
     flexDirection: "column",
     alignItems: "center",
     margin,
-    width: width,
-    minWidth: "min(100%, 17.5rem)",
+    width: "100%",
+    maxWidth: width,
   };
 
   const frameStyle: CSSProperties = {

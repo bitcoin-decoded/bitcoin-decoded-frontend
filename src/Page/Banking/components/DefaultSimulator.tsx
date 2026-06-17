@@ -1,11 +1,11 @@
-import { type CSSProperties, type FC, useEffect, useMemo } from "react";
+import { type FC, useEffect, useMemo } from "react";
 
-import { usePageTheme } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
 import { getUsersDebtsDefault } from "../data";
 
 import { BalanceSheet } from "./BalanceSheet";
+import { SimulatorControls } from "./SimulatorControls";
 
 type Props = {
   /** Fired once the default has been simulated (the simulator's final state). */
@@ -13,7 +13,6 @@ type Props = {
 };
 
 export const DefaultSimulator: FC<Props> = ({ onComplete }) => {
-  const { colors, moduleTheme } = usePageTheme();
   const { t, language } = useTranslation();
   const dataset = useMemo(() => getUsersDebtsDefault(language), [language]);
   const { isActive, activate, reset, data } = useToggleSimulator(dataset);
@@ -22,53 +21,25 @@ export const DefaultSimulator: FC<Props> = ({ onComplete }) => {
     if (isActive) onComplete?.();
   }, [isActive, onComplete]);
 
-  const controlsStyle: CSSProperties = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "1rem",
-    marginTop: "1rem",
-    marginBottom: "2rem",
-  };
-
-  const baseButtonStyle: CSSProperties = {
-    padding: "0.75rem 1.5rem",
-    fontWeight: 600,
-    borderRadius: "0.5rem",
-    border: `1px solid ${colors[moduleTheme].border.secondary}`,
-    cursor: "pointer",
-    transition: "background-color 0.2s",
-    backgroundColor: colors.base.background.secondary,
-    color: colors.base.text.primary,
-  };
-
-  const disabledStyle: CSSProperties = {
-    opacity: 0.5,
-    cursor: "not-allowed",
-  };
-
   return (
-    <>
-      <BalanceSheet
-        title={t("simulator.default.title")}
-        assets={data!.bank.assets}
-        liabilities={data!.bank.liabilities}
-      />
-      <div style={controlsStyle}>
-        <button
-          style={{ ...baseButtonStyle, ...(isActive ? disabledStyle : {}) }}
-          onClick={activate}
-          disabled={isActive}
-        >
-          {t("simulator.default.simulate")}
-        </button>
-        <button
-          style={{ ...baseButtonStyle, ...(!isActive ? disabledStyle : {}) }}
-          onClick={reset}
-          disabled={!isActive}
-        >
-          {t("simulator.default.retry")}
-        </button>
+    <FrText>
+      <div style={{ marginTop: "1rem", marginBottom: "1.5rem" }}>
+        <BalanceSheet
+          title={t("simulator.default.title")}
+          assets={data!.bank.assets}
+          liabilities={data!.bank.liabilities}
+        />
+        <div style={{ marginTop: "1rem" }}>
+          <SimulatorControls
+            primaryLabel={t("simulator.default.simulate")}
+            secondaryLabel={t("simulator.default.retry")}
+            onPrimary={activate}
+            onSecondary={reset}
+            primaryDisabled={isActive}
+            secondaryDisabled={!isActive}
+          />
+        </div>
       </div>
-    </>
+    </FrText>
   );
 };

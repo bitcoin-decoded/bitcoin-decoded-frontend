@@ -100,7 +100,6 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
             const asset = assets[index];
             const liability = liabilities[index];
             const isLast = index === rowCount - 1;
-            const isChanged = asset?.hasChanged || liability?.hasChanged;
 
             const buildCellContent = (line?: BalanceSheetLine) =>
               line ? (
@@ -113,16 +112,17 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
 
             const lastRowOverride: CSSProperties = isLast ? { borderBottom: "none" } : {};
 
-            const changedOverride: CSSProperties = isChanged
-              ? { color: changedColor, backgroundColor: changedBg, fontWeight: 600 }
-              : {};
+            const changedOverride = (line?: BalanceSheetLine): CSSProperties =>
+              line?.hasChanged
+                ? { color: changedColor, backgroundColor: changedBg, fontWeight: 600 }
+                : {};
 
             return (
               <tr key={index}>
-                <td style={{ ...cellLeftStyle, ...lastRowOverride, ...changedOverride }}>
+                <td style={{ ...cellLeftStyle, ...lastRowOverride, ...changedOverride(asset) }}>
                   {buildCellContent(asset)}
                 </td>
-                <td style={{ ...cellStyle, ...lastRowOverride, ...changedOverride }}>
+                <td style={{ ...cellStyle, ...lastRowOverride, ...changedOverride(liability) }}>
                   {buildCellContent(liability)}
                 </td>
               </tr>

@@ -45,7 +45,7 @@ const en = {
   "simulator.compensation.start": "Start compensation",
   "simulator.compensation.retry": "Retry",
   "simulator.compensation.title": "NICOLAS'S BANK BALANCE SHEET",
-  "simulator.default.simulate": "Simulate a loan default worth a total of €30,000,000",
+  "simulator.default.simulate": "Simulate a €30,000,000 default",
   "simulator.default.retry": "Retry",
   "simulator.default.title": "ILLUSTRATION OF POINTS 1 AND 2 ON THE BANK'S BALANCE SHEET",
   "simulator.qe.buy": "Buy bonds massively",
@@ -53,6 +53,8 @@ const en = {
   "simulator.qe.bondTitle": "Government Bond Coupon",
   "simulator.qe.bondPrice": "Bond price",
   "simulator.qe.bondYield": "Yield (Interest rate)",
+  "simulator.qe.bondCaption":
+    "The bond's coupon (its annual payment) is fixed at €40 (4% of €1,000).",
   "simulator.capitalChain.button": "GO BACK IN TIME",
 
   // YieldCurve
