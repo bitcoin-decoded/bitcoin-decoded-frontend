@@ -28,7 +28,14 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
   const isMobile = useBreakpoint() === "mobile";
   const headerHidden = useHeaderHidden();
 
-  const accent = colors[moduleTheme].background.secondary;
+  // On neutral pages (outside any module) the module accent collapses to
+  // the same dark/light grey as the pill background — dots and links
+  // vanish into the chrome. Fall back to base text colour so the
+  // milestones stay visible on both dark and light themes.
+  const accent =
+    moduleTheme === "base"
+      ? colors.base.text.secondary
+      : colors[moduleTheme].background.secondary;
   const reachedLink = withOpacity(accent, 0.55);
   const idle = withOpacity(colors.base.text.primary, 0.16);
   const size = isMobile ? 9 : 10;
