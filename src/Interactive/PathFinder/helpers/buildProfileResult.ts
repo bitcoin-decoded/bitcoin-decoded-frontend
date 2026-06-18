@@ -9,11 +9,9 @@ import type {
   SubCategoryId,
   SubCategoryItem,
   WalletSection,
-  WalletSolution,
 } from "../types";
 
 import { resolveProfile } from "./resolveProfile";
-import { selectSubCategorySolutions } from "./selectSubCategorySolutions";
 
 /**
  * Resolves the reader's profile and turns its plans into the two output
@@ -22,7 +20,6 @@ import { selectSubCategorySolutions } from "./selectSubCategorySolutions";
  */
 export const buildProfileResult = (
   answers: PathAnswers,
-  solutions: WalletSolution[],
   copy: PathFinderCopy,
   profiles: Record<ProfileKey, Profile>,
 ): ProfileResult | null => {
@@ -33,7 +30,6 @@ export const buildProfileResult = (
   const labelOf: Record<SubCategoryId, string> = {
     exchange: copy.sections.acquisition.sub.exchange.label,
     p2p: copy.sections.acquisition.sub.p2p.label,
-    etf: copy.sections.acquisition.sub.etf.label,
     atm: copy.sections.acquisition.sub.atm.label,
     custodial: copy.sections.detention.sub.custodial.label,
     hot: copy.sections.detention.sub.hot.label,
@@ -46,19 +42,12 @@ export const buildProfileResult = (
     sectionLabel: string,
     plans: { planA: ProfilePlan; planB?: ProfilePlan },
   ): SectionPlan => {
-    const seen = new Set<SubCategoryId>();
-    const toItem = (plan: ProfilePlan, letter: string): SubCategoryItem => {
-      const duplicate = seen.has(plan.subCategory);
-      seen.add(plan.subCategory);
-      return {
-        id: plan.subCategory,
-        label: plan.label ?? labelOf[plan.subCategory],
-        comment: plan.text,
-        plan: letter,
-        // A shared family lists its solutions once (on the first plan).
-        solutions: duplicate ? [] : selectSubCategorySolutions(solutions, plan.subCategory),
-      };
-    };
+    const toItem = (plan: ProfilePlan, letter: string): SubCategoryItem => ({
+      id: plan.subCategory,
+      label: plan.label ?? labelOf[plan.subCategory],
+      comment: plan.text,
+      plan: letter,
+    });
 
     const subCategories = [toItem(plans.planA, "A")];
     if (plans.planB) subCategories.push(toItem(plans.planB, "B"));

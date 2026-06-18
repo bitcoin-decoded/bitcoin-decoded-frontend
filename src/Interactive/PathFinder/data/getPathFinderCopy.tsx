@@ -66,7 +66,6 @@ export const getPathFinderCopy = (language: Language) => {
     planPrefix: fr ? "Plan" : "Plan",
     profileLead: fr ? "Ton profil" : "Your profile",
     whyLabel: fr ? "Pourquoi ce plan" : "Why this plan",
-    solutionsLabel: fr ? "Solutions proposées" : "Suggested solutions",
 
     questions: {
       q1: {
@@ -138,7 +137,6 @@ export const getPathFinderCopy = (language: Language) => {
         sub: {
           exchange: { label: fr ? "Plateforme d'échange" : "Exchange platform" },
           p2p: { label: fr ? "Pair-à-pair (P2P)" : "Peer-to-peer (P2P)" },
-          etf: { label: fr ? "ETF Bitcoin" : "Bitcoin ETF" },
           atm: { label: fr ? "Borne d'achat (ATM)" : "Bitcoin ATM" },
         },
       },
@@ -152,25 +150,6 @@ export const getPathFinderCopy = (language: Language) => {
       },
     },
 
-    // Boolean criteria (§5 ajusté) — each is a positive trait: amber when true,
-    // red crossed-out cell when false.
-    criteria: {
-      nonCustodial: fr ? "Détention propre" : "Non-custodial",
-      openSource: "Open source",
-      cold: fr ? "Fonctionne hors ligne" : "Works offline",
-      multisig: "Multisig",
-      free: fr ? "Gratuit" : "Free",
-    },
-
-    legend: {
-      title: fr ? "Critères" : "Criteria",
-      yes: fr ? "oui" : "yes",
-      no: fr ? "non" : "no",
-      conventionYes: fr ? "présent" : "present",
-      conventionNo: fr ? "absent" : "absent",
-    },
-
-    noteLabel: fr ? "À noter" : "Note",
   };
 };
 

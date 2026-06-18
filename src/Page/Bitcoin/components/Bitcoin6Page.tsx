@@ -134,7 +134,7 @@ export const Bitcoin6Page: FC = () => {
                   <>
                     Before we drop a single piece of jargon, get hands-on. Forget the balance:
                     imagine Nicolas's wallet doesn't hold a number, but <i>coins</i> of fixed values
-                    — 0.8, 1, 0.5 and 2 — each of them <HighlightText>indivisible</HighlightText>.
+                    (0.8, 1, 0.5 and 2), each of them <HighlightText>indivisible</HighlightText>.
                     To pay, you have to pick from these coins and combine them.
                   </>
                 )}

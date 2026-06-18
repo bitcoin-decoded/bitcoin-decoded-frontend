@@ -1,8 +1,9 @@
-# CLAUDE.md — Bitcoin.Decoded
+# CLAUDE.md - Bitcoin.Decoded
 
 App éducative interactive : comprendre Bitcoin via l'angle de l'économie autrichienne. Ton familier, pédagogique, rigoureux mais accessible, **sans marqueur IA** (éviter les cadratins). Public : francophones 25-50 ans, curieux non-bitcoiners, allergiques au jargon crypto.
 
 Trois modules progressifs, chacun = plusieurs chapitres + un quiz final de validation :
+
 1. Système bancaire · 2. Lois de la monnaie · 3. Bitcoin
 
 ## Stack
@@ -33,23 +34,23 @@ Domaines : `Design/` (primitives, theme, layout, icons), `Interactive/<Feature>/
 « Les composants portent le design, pas les pages. »
 
 - Primitives réutilisées **telles quelles**, jamais réimplémentées inline : `Button`, `Badge`, `Caption`, `FeedbackPanel`, `SurfaceCard`, `Reference`. `Reference` = unique système de navigation interne/externe.
-- Theming : `usePageTheme()` applique la couleur du module — Banking `blue`, MoneyLaws `violet`, Bitcoin `amber` (route hors module → `base`). Dark/light via `ThemeProvider`.
+- Theming : `usePageTheme()` applique la couleur du module - Banking `blue`, MoneyLaws `violet`, Bitcoin `amber` (route hors module → `base`). Dark/light via `ThemeProvider`.
 - Style : radius unique **1rem** ; transitions `--ease-smooth` ; gradients/glow/hover pilotés par variables CSS, pas d'ad hoc inline. Viser une finition UI haut de gamme (Apple/Notion : sobriété, mouvement discret).
 
 ## Routing & navigation
 
 Context-only (`RouterProvider`, `useRouterContext().setCurrentPage`). `ROUTE_NAME` = source des routes ; `AppRouter` mappe route → page ; `NAVIGATION_TREE` = arbre 3 niveaux de la sidebar (`kind: "challenge"` = quiz final, rendu en pill « Quiz »).
 
-## Lecture par blocs — `src/Page/Reading/`
+## Lecture par blocs - `src/Page/Reading/`
 
 Certains chapitres se lisent **bloc par bloc** (révélation progressive). Expose `BlockReader`, `Block`, `BLOCK_READING_CHAPTERS`.
 
 - **Câblage** : envelopper la prose **existante** (jamais déplacée vers `data`/`fr.ts`, rien retiré) dans `<BlockReader chapterId={ROUTE_NAME.X}>` + `<Block>` ordonnés ; `PageTemplate showChapterNav={false}` ; ajouter la route à `BLOCK_READING_CHAPTERS` ; `npm run audit:reading-time` → recopier dans `PAGE_METADATA`. Le **découpage** (frontières des blocs, lesquels sont `tool`) est fourni par l'utilisateur, on ne le réinvente pas.
-- **Bloc-outil** (`kind="tool"`) : verrouille « Bloc suivant » tant que la manipulation — qui **est** l'action pédagogique — n'est pas faite. Bloc en render-prop `({ markComplete }) => …` ; on câble `markComplete` au signal `onComplete` du composant à son état terminal (simulateur lancé, `Quiz` via `onCorrectAnswer`, etc.). Exploration obligatoire « x/N » via primitives partagées `useExplorationGate` + `ExploredCounter` (`Design`). Ne pas verrouiller si la manipulation n'est pas l'action (alors pas de `kind="tool"`).
+- **Bloc-outil** (`kind="tool"`) : verrouille « Bloc suivant » tant que la manipulation - qui **est** l'action pédagogique - n'est pas faite. Bloc en render-prop `({ markComplete }) => …` ; on câble `markComplete` au signal `onComplete` du composant à son état terminal (simulateur lancé, `Quiz` via `onCorrectAnswer`, etc.). Exploration obligatoire « x/N » via primitives partagées `useExplorationGate` + `ExploredCounter` (`Design`). Ne pas verrouiller si la manipulation n'est pas l'action (alors pas de `kind="tool"`).
 - **Persistance** : `localStorage` `bd:reading:<chapterId>` = `{maxRevealed, current, done[], finished, blockCount}` (garde sur `blockCount`, discipline try/catch). La fin de chapitre est célébrée par le **badge** du chapitre (cf. Achievements), pas d'overlay générique.
 - Détails (jalons `BlockMilestones`, `BlockShell`, animations `index.css`) : lire le code.
 
-## Badges — `src/Achievements/`
+## Badges - `src/Achievements/`
 
 Gamification inter-chapitres : un badge se débloque **une seule fois**, à la 1re complétion d'un chapitre et à la 1re validation d'un quiz de module. Entrée header → page `Badges` (collection groupée par module, médailles obtenues vs verrouillées).
 
@@ -57,7 +58,7 @@ Gamification inter-chapitres : un badge se débloque **une seule fois**, à la 1
 - Octroi : `BlockReader` appelle `award(chapterId)` sur `finished` ; les pages de synthèse appellent `award(MODULE_QUIZ_BADGE_ID.<module>)` dans `onPass`. Overlay `BadgeUnlockOverlay` (apparition→disparition, porté dans `document.body`).
 - Catalogue `BADGES` (~22) : id d'un badge chapitre = son `ROUTE_NAME`, nom = clé `nav.tree.*` du chapitre.
 
-## Quiz de synthèse — `src/Interactive/SynthesisQuiz/`
+## Quiz de synthèse - `src/Interactive/SynthesisQuiz/`
 
 Quiz final par module, **paginé** (une question à la fois, nav prev/next + jalons, bouton terminer). Seuils : Banking 10/15, MoneyLaws 10/15, Bitcoin 15/20. UX : pas de feedback immédiat, validation unique, persistance localStorage ; après validation, score + réussite/échec **sans dévoiler les bonnes réponses**.
 
@@ -66,7 +67,7 @@ Quiz final par module, **paginé** (une question à la fois, nav prev/next + jal
 - Prose des pages → ternaire inline `fr ? … : …`, **jamais** déplacée vers `fr.ts`.
 - Labels UI / composants réutilisables → `t()` ; titres de pages → `t("nav.tree.*")` ; data → getters language-aware. Parité FR/EN stricte (`src/I18n/data/{fr,en}.ts`).
 
-## Référentiel économique — `src/References/`
+## Référentiel économique - `src/References/`
 
 Source unique des chiffres : `BITCOIN_REFS` / `MACRO_REFS` / `MARKET_REFS` + helpers dérivés (`getCurrentBlockSubsidyBTC`…). Aucune valeur inventée, source en commentaire, valeurs dérivées prioritaires, recalibrage annuel.
 

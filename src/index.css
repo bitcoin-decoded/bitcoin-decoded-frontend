@@ -133,7 +133,7 @@ body {
   animation: metricPop 0.32s var(--ease-smooth) both;
 }
 
-/* Bitcoin donation flow — sober fade between screens / on the QR, and the
+/* Bitcoin donation flow - sober fade between screens / on the QR, and the
    waiting-state loader rotation (spec §15). */
 @keyframes donationFade {
   from {
@@ -431,7 +431,7 @@ body {
 /* ── Block reading - premium reveal + blockchain chain link ── */
 /* A freshly surfaced block "seals" into place: its blur clears, it slides up
    and settles, while its lines cascade in. The chain link joining it to the
-   previous block draws downward and its node confirms with a soft pop — a
+   previous block draws downward and its node confirms with a soft pop - a
    discreet nod to a block being appended to a chain. Only the block crossing
    the reveal frontier carries `.revealing`; past blocks rest via inline
    opacity, their links already drawn. */
@@ -460,7 +460,7 @@ body {
     transform: translateY(0);
   }
 }
-/* Block "confirmed" pulse — a one-shot mined-style glow as a block seals in.
+/* Block "confirmed" pulse - a one-shot mined-style glow as a block seals in.
    Colors come from CSS vars set inline on the card (theme-aware); no `forwards`
    so it settles back to the card's resting shadow. */
 @keyframes blockConfirm {
@@ -480,7 +480,7 @@ body {
 .reading-block-inner.revealing {
   animation: blockSeal 0.8s var(--ease-smooth) both;
 }
-/* The header stamp confirms (scale + glow) as the block seals — a "mined" beat
+/* The header stamp confirms (scale + glow) as the block seals - a "mined" beat
    that doesn't fight the card's resting ring shadow. */
 .reading-block-inner.revealing .reading-block-stamp {
   animation: blockConfirm 0.9s var(--ease-smooth) 0.25s both;

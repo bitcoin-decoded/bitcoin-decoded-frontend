@@ -6,12 +6,12 @@ import type { PathTier } from "./PathTier";
  * value stays hidden).
  */
 export type PathAnswers = {
-  /** Q1 — capital tier. */
+  /** Q1 - capital tier. */
   capital: PathTier | null;
-  /** Q2 — single buy vs recurring (DCA). Collected for the future DCA tool. */
+  /** Q2 - single buy vs recurring (DCA). Collected for the future DCA tool. */
   frequency: "single" | "dca" | null;
-  /** Q3 — self-custody intent. Drives the visual hierarchy. */
+  /** Q3 - self-custody intent. Drives the visual hierarchy. */
   custody: "simple" | "sovereign" | "unsure" | null;
-  /** Q4 — privacy. Gates the P2P path. */
+  /** Q4 - privacy. Gates the P2P path. */
   privacy: "discreet" | "dontcare" | null;
 };
