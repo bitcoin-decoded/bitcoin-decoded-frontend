@@ -139,7 +139,7 @@ export const HomePage: FC = () => {
     color: colors.base.text.secondary,
   };
 
-  // Single short line (used for the "Et pourtant…" / "Ici, on fait l'inverse." etc.)
+  // Single short accent line used at the end of a section to land the message.
   const punchLineStyle: CSSProperties = {
     fontSize: pick("1.05rem", "1.1rem", "1.2rem"),
     fontWeight: 600,
@@ -380,7 +380,6 @@ export const HomePage: FC = () => {
           >
             <span>{t("home.hook.line1")}</span>
             <span>{t("home.hook.line2")}</span>
-            <span>{t("home.hook.line3")}</span>
           </div>
           <p style={proseMutedStyle}>
             {t("home.hook.bridgeP1")}
@@ -487,7 +486,6 @@ export const HomePage: FC = () => {
               t("home.audience.item1"),
               t("home.audience.item2"),
               t("home.audience.item3"),
-              t("home.audience.item4"),
             ].map((item, i) => (
               <li key={i} style={audienceItemStyle}>
                 <span style={bulletStyle}>-</span>
@@ -495,28 +493,7 @@ export const HomePage: FC = () => {
               </li>
             ))}
           </ul>
-        </section>
-      </RevealOnScroll>
-
-      <RevealOnScroll>
-        <hr style={separatorStyle} />
-      </RevealOnScroll>
-
-      {/* ─────── SECTION 5 - PROMISE ─────── */}
-      <RevealOnScroll>
-        <section style={sectionStyle}>
-          <h2 style={sectionTitleStyle}>{t("home.promise.title")}</h2>
-          <p style={proseMutedStyle}>{t("home.promise.intro")}</p>
-          <ul style={audienceListStyle}>
-            {[t("home.promise.item1"), t("home.promise.item2"), t("home.promise.item3")].map(
-              (item, i) => (
-                <li key={i} style={audienceItemStyle}>
-                  <span style={bulletStyle}>-</span>
-                  {item}
-                </li>
-              ),
-            )}
-          </ul>
+          <p style={punchLineStyle}>{t("home.audience.payoff")}</p>
         </section>
       </RevealOnScroll>
 
