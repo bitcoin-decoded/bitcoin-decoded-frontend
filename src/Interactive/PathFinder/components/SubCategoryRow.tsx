@@ -1,13 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { type LucideIcon, Star, Wallet } from "lucide-react";
+import { type LucideIcon, Star } from "lucide-react";
 
-import { Badge, Disclosure, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, usePageTheme, withOpacity } from "../../../Design";
 import type { PathFinderCopy } from "../data";
 import type { SubCategoryItem } from "../types";
-
-import { CriteriaLegend } from "./CriteriaLegend";
-import { SolutionCard } from "./SolutionCard";
 
 type Props = {
   item: SubCategoryItem;
@@ -17,9 +14,10 @@ type Props = {
 };
 
 /**
- * One sub-category inside a section: icon + label, a "Plan A/B/C" rank badge on
- * the right (Plan A also carries the big filled star), the adaptive comment, and
- * its solutions folded into a collapsed-by-default disclosure.
+ * One sub-category inside a section: icon + label, a "Plan A/B" rank badge on
+ * the right (Plan A also carries the big filled star) and the adaptive
+ * descriptive comment underneath. No named products — the comment stays at
+ * the category level by design.
  */
 export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) => {
   const { colors } = usePageTheme();
@@ -111,18 +109,6 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
       </div>
 
       <p style={commentStyle}>{item.comment}</p>
-
-      {item.solutions.length > 0 && (
-        <Disclosure
-          title={`${copy.solutionsLabel} (${item.solutions.length})`}
-          icon={<Wallet size={14} strokeWidth={2} />}
-        >
-          {item.solutions.map((solution) => (
-            <SolutionCard key={solution.name} solution={solution} copy={copy} accent={accent} />
-          ))}
-          <CriteriaLegend copy={copy} accent={accent} />
-        </Disclosure>
-      )}
     </div>
   );
 };

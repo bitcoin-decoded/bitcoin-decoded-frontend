@@ -8,7 +8,6 @@ import {
   HardDrive,
   Hourglass,
   Landmark,
-  LineChart,
   type LucideIcon,
   Smartphone,
   TrendingUp,
@@ -29,7 +28,6 @@ const ICON_BY_SECTION: Record<WalletSection, LucideIcon> = {
 const ICON_BY_SUB: Record<SubCategoryId, LucideIcon> = {
   exchange: Building2,
   p2p: Handshake,
-  etf: LineChart,
   atm: Banknote,
   custodial: Landmark,
   hot: Smartphone,

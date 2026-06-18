@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 
 import { useTranslation } from "../../../I18n";
-import { getPathFinderCopy, getProfiles, WALLET_SOLUTIONS } from "../data";
+import { getPathFinderCopy, getProfiles } from "../data";
 import { buildProfileResult } from "../helpers";
 import type { PathAnswers } from "../types";
 
@@ -45,7 +45,7 @@ export const usePathFinder = () => {
 
   const profiles = useMemo(() => getProfiles(language), [language]);
   const result = useMemo(
-    () => buildProfileResult(answers, WALLET_SOLUTIONS, copy, profiles),
+    () => buildProfileResult(answers, copy, profiles),
     [answers, copy, profiles],
   );
 
