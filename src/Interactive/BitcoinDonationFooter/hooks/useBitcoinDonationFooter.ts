@@ -4,7 +4,7 @@ import type { DonationStep } from "../types";
 
 /**
  * The donation journey state machine (v2, on-chain only). It opens straight on
- * the amount selector — there is no gate-selection screen. The no-wallet screen
+ * the amount selector - there is no gate-selection screen. The no-wallet screen
  * is reached via a discreet link and returns to the amount selector.
  */
 export const useBitcoinDonationFooter = () => {

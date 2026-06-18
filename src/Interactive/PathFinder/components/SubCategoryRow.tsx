@@ -16,7 +16,7 @@ type Props = {
 /**
  * One sub-category inside a section: icon + label, a "Plan A/B" rank badge on
  * the right (Plan A also carries the big filled star) and the adaptive
- * descriptive comment underneath. No named products — the comment stays at
+ * descriptive comment underneath. No named products - the comment stays at
  * the category level by design.
  */
 export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) => {

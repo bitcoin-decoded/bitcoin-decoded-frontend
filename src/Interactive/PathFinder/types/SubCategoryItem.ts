@@ -5,6 +5,6 @@ export type SubCategoryItem = {
   id: SubCategoryId;
   label: string;
   comment: string;
-  /** Plan rank letter — "A" is always the recommended pick (filled star). */
+  /** Plan rank letter - "A" is always the recommended pick (filled star). */
   plan: string;
 };

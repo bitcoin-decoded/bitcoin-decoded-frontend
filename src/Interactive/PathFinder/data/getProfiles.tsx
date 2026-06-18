@@ -37,8 +37,8 @@ export const getProfiles = (language: Language): Record<ProfileKey, Profile> => 
         planB: {
           subCategory: "custodial",
           text: fr
-            ? "Laisser sur la plateforme tant que la gestion d'une seed paraît prématurée — acceptable à ces montants, à reconsidérer ensuite."
-            : "Leaving it on the platform while handling a seed still feels premature — acceptable at these amounts, to revisit afterward.",
+            ? "Laisser sur la plateforme tant que la gestion d'une seed paraît prématurée - acceptable à ces montants, à reconsidérer ensuite."
+            : "Leaving it on the platform while handling a seed still feels premature - acceptable at these amounts, to revisit afterward.",
         },
       },
     },
@@ -86,7 +86,7 @@ export const getProfiles = (language: Language): Record<ProfileKey, Profile> => 
       name: fr ? "Le Discret Frugal" : "The Frugal Privacy-Seeker",
       verdict: fr
         ? "Ce profil va souvent de pair avec une logique de cohérence vie privée : acquisition discrète sans collecte d'identité, puis conservation sous contrôle direct, le cold wallet venant en montée en gamme naturelle à mesure que le solde grandit."
-        : "This profile usually goes with a privacy-consistency mindset: discreet acquisition with no identity collection, then keys held under direct control — a cold wallet being the natural step up as the balance grows.",
+        : "This profile usually goes with a privacy-consistency mindset: discreet acquisition with no identity collection, then keys held under direct control - a cold wallet being the natural step up as the balance grows.",
       why: fr
         ? "Acheter sans KYC pour tout laisser ensuite sur une plateforme identifiante annulerait l'effort. Ici la cohérence prime : exposition discrète et garde propre. Pas de compromis sur la vie privée, c'est l'axe directeur."
         : "Buying without KYC only to dump everything afterward on an identifying platform would cancel the whole effort. Here consistency rules: discreet entry, keys held directly. No compromise on privacy, that's the guiding line.",

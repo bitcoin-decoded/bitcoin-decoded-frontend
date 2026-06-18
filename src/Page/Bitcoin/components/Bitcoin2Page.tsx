@@ -165,8 +165,8 @@ export const Bitcoin2Page: FC = () => {
                 immediately, not in the same proportion everywhere. But you don't need a Nobel Prize
                 to figure out that: when you multiply the dollars in circulation by 1.4 in 18
                 months, sooner or later it shows up in the real economy and creates inflation. You
-                have to be acting in seriously bad faith — or be Jerome Powell calling it
-                "transitory" — to act surprised when prices start moving.
+                have to be acting in seriously bad faith - or be Jerome Powell calling it
+                "transitory" - to act surprised when prices start moving.
               </>
             )}
           </p>

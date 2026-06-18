@@ -11,7 +11,7 @@ export const useClipboard = (resetMs = 1500) => {
         setCopied(true);
         window.setTimeout(() => setCopied(false), resetMs);
       } catch {
-        // Clipboard API blocked (rare) — silently no-op.
+        // Clipboard API blocked (rare) - silently no-op.
       }
     },
     [resetMs],
