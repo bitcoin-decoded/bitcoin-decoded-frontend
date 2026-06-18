@@ -533,18 +533,18 @@ const en = {
   "home.hero.ctaSecondary": "See the program",
 
   // HomePage - Section 1: Hook
-  "home.hook.title": "Something doesn't add up.",
-  "home.hook.line1": "Your savings shrink.",
-  "home.hook.line2": "Prices rise.",
-  "home.hook.line3": "The rules change.",
-  "home.hook.bridgeP1": "And yet…",
-  "home.hook.bridgeP2": "no one really explains why.",
+  "home.hook.title":
+    "You work as much as you used to, maybe more. Your grocery cart keeps shrinking.",
+  "home.hook.line1": "Rent, groceries, fuel: everything climbs.",
+  "home.hook.line2": "Your paycheck lags far behind.",
+  "home.hook.bridgeP1": "This is not fate. It's a mechanism.",
+  "home.hook.bridgeP2": "And it all starts with a loan.",
 
   // HomePage - Section 2: Positioning
-  "home.positioning.title": "This site doesn't explain Bitcoin. It goes back further.",
-  "home.positioning.comparisonP1": "Understanding Bitcoin without understanding money,",
-  "home.positioning.comparisonP2": "is like reading the ending without knowing the story.",
-  "home.positioning.flip": "Here, we do the opposite.",
+  "home.positioning.title": "Most people start with Bitcoin. We start with money.",
+  "home.positioning.comparisonP1": "Trying to understand Bitcoin without understanding money",
+  "home.positioning.comparisonP2": "is like reading the last page before the story.",
+  "home.positioning.flip": "So we take the story in order.",
 
   // HomePage - Section 3: Journey (3 cards)
   "home.journey.title": "A journey in 3 modules",
@@ -562,24 +562,18 @@ const en = {
 
   // HomePage - Section 4: Audience
   "home.audience.title": "This journey is for you if...",
-  "home.audience.item1": "You want to understand without getting lost",
-  "home.audience.item2": 'You sense that "money" is important... without knowing why',
-  "home.audience.item3": "You're tired of fuzzy explanations",
-  "home.audience.item4": "You'd rather understand before forming an opinion",
-
-  // HomePage - Section 5: Promise
-  "home.promise.title": "What you'll get",
-  "home.promise.intro": "By the end of the journey:",
-  "home.promise.item1": "You'll see Bitcoin more clearly.",
-  "home.promise.item2": "You'll understand what it really changes.",
-  "home.promise.item3": "And above all... why it exists",
+  "home.audience.item1": "You use money without knowing how it's made.",
+  "home.audience.item2": "You feel something is off, without being able to name it.",
+  "home.audience.item3": "You want to form your own opinion, not be sold one.",
+  "home.audience.payoff":
+    "By the end, you'll explain Bitcoin better than most people who talk about it.",
 
   // HomePage - Section 6: Differentiation
-  "home.differentiation.neg1": "No unnecessary jargon.",
-  "home.differentiation.neg2": "No ideology.",
-  "home.differentiation.neg3": "No misleading simplifications.",
-  "home.differentiation.posIntro": "Just one goal:",
-  "home.differentiation.pos": "to make you understand.",
+  "home.differentiation.neg1": "No hype.",
+  "home.differentiation.neg2": "No get-rich promises.",
+  "home.differentiation.neg3": 'No "just trust me".',
+  "home.differentiation.posIntro": "Just one rule:",
+  "home.differentiation.pos": "We simplify, but we never lie to you.",
 
   // HomePage - Section 7: Philosophy quote
   "home.philosophy.quote":

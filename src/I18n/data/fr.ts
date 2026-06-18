@@ -537,18 +537,17 @@ const fr = {
   "home.hero.ctaSecondary": "Voir le programme",
 
   // HomePage - Section 1: Hook
-  "home.hook.title": "Quelque chose ne colle pas.",
-  "home.hook.line1": "Ton épargne diminue.",
-  "home.hook.line2": "Les prix augmentent.",
-  "home.hook.line3": "Les règles changent.",
-  "home.hook.bridgeP1": "Et pourtant…",
-  "home.hook.bridgeP2": "personne ne t'explique vraiment pourquoi.",
+  "home.hook.title": "Tu bosses autant qu'avant, voire plus. Ton caddie, lui, s'amincit.",
+  "home.hook.line1": "Le loyer, les courses, l'essence : tout grimpe.",
+  "home.hook.line2": "Ta fiche de paie, elle traîne loin derrière.",
+  "home.hook.bridgeP1": "Ce n'est pas une fatalité. C'est une mécanique.",
+  "home.hook.bridgeP2": "Et tout commence par un prêt.",
 
   // HomePage - Section 2: Positioning
-  "home.positioning.title": "Ce site n'explique pas Bitcoin. Il remonte plus loin.",
+  "home.positioning.title": "La plupart commencent par Bitcoin. Nous, on commence par l'argent.",
   "home.positioning.comparisonP1": "Comprendre Bitcoin sans comprendre l'argent,",
-  "home.positioning.comparisonP2": "c'est comme lire la fin sans connaître l'histoire.",
-  "home.positioning.flip": "Ici, on fait l'inverse.",
+  "home.positioning.comparisonP2": "c'est lire la dernière page sans connaître l'histoire.",
+  "home.positioning.flip": "Alors on prend l'histoire dans l'ordre.",
 
   // HomePage - Section 3: Journey (3 cards)
   "home.journey.title": "Un parcours en 3 modules",
@@ -567,25 +566,19 @@ const fr = {
   "home.journey.cardCta": "Voir ce module",
 
   // HomePage - Section 4: Audience
-  "home.audience.title": "Ce parcours est pour toi si…",
-  "home.audience.item1": "Tu veux comprendre sans te perdre.",
-  "home.audience.item2": "Tu sens que « l'argent » est important... sans savoir pourquoi.",
-  "home.audience.item3": "Tu en as marre des explications floues.",
-  "home.audience.item4": "Tu préfères comprendre avant d'avoir un avis.",
-
-  // HomePage - Section 5: Promise
-  "home.promise.title": "Ce que tu vas obtenir",
-  "home.promise.intro": "À la fin du parcours :",
-  "home.promise.item1": "Tu verras Bitcoin beaucoup plus clairement.",
-  "home.promise.item2": "Tu comprendras ce qu'il change vraiment.",
-  "home.promise.item3": "Et surtout... pourquoi il existe.",
+  "home.audience.title": "Ce parcours est pour toi si...",
+  "home.audience.item1": "Tu utilises l'argent sans savoir comment il est fabriqué.",
+  "home.audience.item2": "Tu sens que quelque chose déraille, sans pouvoir mettre le doigt dessus.",
+  "home.audience.item3": "Tu veux te faire ton propre avis, pas qu'on te le vende.",
+  "home.audience.payoff":
+    "À la fin, tu sauras expliquer Bitcoin mieux que la plupart des gens qui en parlent.",
 
   // HomePage - Section 6: Differentiation
-  "home.differentiation.neg1": "Ici, pas de jargon inutile.",
-  "home.differentiation.neg2": "Pas de discours militant.",
-  "home.differentiation.neg3": "Pas de simplification trompeuse.",
-  "home.differentiation.posIntro": "Juste un objectif :",
-  "home.differentiation.pos": "Te faire comprendre.",
+  "home.differentiation.neg1": "Pas de hype.",
+  "home.differentiation.neg2": "Pas de promesse de devenir riche.",
+  "home.differentiation.neg3": "Pas de « fais-moi confiance ».",
+  "home.differentiation.posIntro": "Juste une règle :",
+  "home.differentiation.pos": "On simplifie, mais on ne te ment pas.",
 
   // HomePage - Section 7: Philosophy quote
   "home.philosophy.quote":
