@@ -11,7 +11,7 @@ import { MethodFrame } from "./MethodFrame";
 /**
  * The logician's method, read top-to-bottom: a single root of axioms branches
  * down into known theorems (Thales, Pythagoras), which branch again into more
- * conclusions. No observation feeds in, no arrow ever points back up — the flow
+ * conclusions. No observation feeds in, no arrow ever points back up - the flow
  * is strictly deductive and downward. Form carries the meaning: one source,
  * cascading certainty.
  */
@@ -62,7 +62,7 @@ export const LogicianMethod: FC = () => {
   };
 
   // Fork: a centered 50%-wide box so its left/right edges land at 25% / 75% of
-  // the tree — exactly above each child column's center. Plain connector lines
+  // the tree - exactly above each child column's center. Plain connector lines
   // (no arrowheads), the only arrows point down.
   const forkWrap: CSSProperties = { position: "relative", width: "50%", height: "1.25rem" };
   const busLine: CSSProperties = {

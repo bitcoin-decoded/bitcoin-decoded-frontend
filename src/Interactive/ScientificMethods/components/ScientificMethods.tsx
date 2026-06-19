@@ -8,7 +8,7 @@ import { PhysicistMethod } from "./PhysicistMethod";
 /**
  * The matched pair of method visuals for MoneyLaws4. Physicist first (a
  * horizontal, revisable timeline), logician second (a vertical deductive
- * tree) — the same order as the chapter's Callout. The opposition of forms is
+ * tree) - the same order as the chapter's Callout. The opposition of forms is
  * the whole point: one story moving through time, one structure descending
  * from a single point.
  */

@@ -11,7 +11,7 @@ type Props = {
 
 /**
  * Footer chrome: a discreet "Support with bitcoin" button (which opens the
- * full donation flow in a modal — see `BitcoinDonationFooter`) above the
+ * full donation flow in a modal - see `BitcoinDonationFooter`) above the
  * copyright line. The warm gradient + Bitcoin-orange halo give the footer a
  * "sunset horizon" feel rather than a flat slab.
  */

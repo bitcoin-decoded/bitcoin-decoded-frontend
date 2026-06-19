@@ -55,7 +55,7 @@ export const useSynthesisQuiz = ({ questions, passThreshold, storageKey, onPass 
     try {
       localStorage.setItem(storageKey, JSON.stringify({ selections, submitted }));
     } catch {
-      // storage full or unavailable — silently ignore
+      // storage full or unavailable - silently ignore
     }
   }, [storageKey, selections, submitted]);
 

@@ -18,7 +18,7 @@ type Props = {
  * eyebrow title, the diagram body, and a closing takeaway line. Keeping the
  * frame in one place guarantees the physicist / logician pair reads as a
  * matched set (same paddings, same title-and-closing rhythm) while each body
- * carries its own opposed geometry — horizontal vs vertical.
+ * carries its own opposed geometry - horizontal vs vertical.
  */
 export const MethodFrame: FC<Props> = ({ title, icon, accent, closingLine, children }) => {
   const { colors } = usePageTheme();

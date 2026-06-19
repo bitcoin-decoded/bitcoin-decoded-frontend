@@ -14,7 +14,7 @@ export const useDoubleSpendDemo = (onComplete?: () => void) => {
   }, []);
 
   // Fires once the reader has propagated the double-spend (the action this
-  // block is built around). One-shot — resetting and replaying never re-fires.
+  // block is built around). One-shot - resetting and replaying never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);

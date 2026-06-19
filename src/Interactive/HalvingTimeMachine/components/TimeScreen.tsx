@@ -19,7 +19,7 @@ type Props = {
 };
 
 /**
- * The retro CRT display: a glowing year, and — once you've travelled — the block
+ * The retro CRT display: a glowing year, and - once you've travelled - the block
  * reward for that era. Everything is centered vertically and horizontally.
  * While traveling, a flux flash sweeps over a shaking, year-scrambling screen.
  */
@@ -41,10 +41,10 @@ export const TimeScreen: FC<Props> = ({
   const machine = getMachineColors(isLight);
 
   // The "screen" adapts to the theme: a deep glowing CRT in dark mode, a light
-  // panel in light mode — never a black box on a white page. Text + accents use
+  // panel in light mode - never a black box on a white page. Text + accents use
   // theme tokens, readable on whichever background.
   const glow = world.text.secondary; // amber readout + accents
-  const screenInk = world.text.primary; // reward value — warm/amber, readable in both modes (never plain black)
+  const screenInk = world.text.primary; // reward value - warm/amber, readable in both modes (never plain black)
   const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85); // labels / subline / prompt
   const screenBg = isLight
     ? `linear-gradient(180deg, ${world.background.primary}, ${colors.base.background.primary})`
@@ -159,7 +159,7 @@ export const TimeScreen: FC<Props> = ({
             inset: 0,
             pointerEvents: "none",
             // On the dark CRT, a soft amber glow with "screen" blend pops. On the
-            // light panel, "screen" washes out — so use vivid yellow→orange with
+            // light panel, "screen" washes out - so use vivid yellow→orange with
             // normal blend so the time-flux is clearly visible in both modes.
             background: isLight
               ? machine.fluxLight

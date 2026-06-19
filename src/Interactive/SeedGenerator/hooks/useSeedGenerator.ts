@@ -10,7 +10,7 @@ export const useSeedGenerator = (onComplete?: () => void) => {
   const [revealedCount, setRevealedCount] = useState(0);
 
   // Fires once the reader has generated a seed (the action this block is built
-  // around). One-shot — regenerating or switching length never re-fires.
+  // around). One-shot - regenerating or switching length never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);

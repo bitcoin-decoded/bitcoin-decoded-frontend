@@ -11,7 +11,7 @@ export const useMempoolVisual = (language: Language, onComplete?: () => void) =>
   const reset = useCallback(() => setBlockAdded(false), []);
 
   // Fires once the reader has added the block (the action this block is built
-  // around, resolution variant only). One-shot — resetting never re-fires.
+  // around, resolution variant only). One-shot - resetting never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);

@@ -17,7 +17,7 @@ type Props = {
 };
 
 /**
- * Pedagogical card stack — N click-to-reveal definition cards inside a single
+ * Pedagogical card stack - N click-to-reveal definition cards inside a single
  * surface, each with its own accent. Used by Banking_1's accounting glossary
  * and Banking_2's M0/M2 explainer; designed to be reused for any future
  * "expand this term to learn more" pattern.

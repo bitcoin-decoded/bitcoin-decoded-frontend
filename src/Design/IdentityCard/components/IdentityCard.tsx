@@ -160,7 +160,7 @@ export const IdentityCard: FC<Props> = ({
     color: colors[moduleTheme].border.secondary,
     textTransform: "uppercase",
     // In compact grids, reserve two profile lines so cards whose profile
-    // wraps and those that don't share the exact same collapsed height —
+    // wraps and those that don't share the exact same collapsed height -
     // a uniform baseline that, unlike `align-items: stretch`, never resizes
     // neighbours when a card expands.
     ...(compact ? { lineHeight: 1.4, minHeight: "2.8em" } : {}),

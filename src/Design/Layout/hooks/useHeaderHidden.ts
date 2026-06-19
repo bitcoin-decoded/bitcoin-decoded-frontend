@@ -11,7 +11,7 @@ const SCROLL_DELTA_THRESHOLD_PX = 8;
 
 /**
  * Tracks the hide-on-scroll-down / reveal-on-scroll-up state of the
- * sticky Header. Returns a single boolean — `true` when the header
+ * sticky Header. Returns a single boolean - `true` when the header
  * should be visually hidden, `false` otherwise.
  *
  * Single source of truth shared by:
@@ -20,7 +20,7 @@ const SCROLL_DELTA_THRESHOLD_PX = 8;
  *                          its top doesn't sit in a vacant strip
  *
  * The hook does NOT factor in drawer / overlay states (those are
- * composition concerns left to the caller — e.g. Header forces itself
+ * composition concerns left to the caller - e.g. Header forces itself
  * visible when its own NavDrawer is open).
  */
 export const useHeaderHidden = (): boolean => {

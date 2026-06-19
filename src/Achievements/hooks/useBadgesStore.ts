@@ -47,13 +47,13 @@ export const useBadgesStore = (): BadgesStore => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(earned));
     } catch {
-      // storage full or unavailable — silently ignore
+      // storage full or unavailable - silently ignore
     }
   }, [earned]);
 
   const award = useCallback((id: string) => {
     if (!BADGE_BY_ID.has(id)) return; // not a real badge (e.g. a chapter with no badge)
-    if (earnedRef.current[id]) return; // already earned — no re-grant, no re-celebration
+    if (earnedRef.current[id]) return; // already earned - no re-grant, no re-celebration
     setEarned((prev) => (prev[id] ? prev : { ...prev, [id]: Date.now() }));
     setQueue((q) => (q.includes(id) ? q : [...q, id]));
   }, []);

@@ -30,7 +30,7 @@ export const useBlockchainChainVisual = (onComplete?: () => void): UseBlockchain
   }, []);
 
   // Fires once the reader has added a block (the action this block is built
-  // around): the add cycle ends on the "done" phase. One-shot — resetting and
+  // around): the add cycle ends on the "done" phase. One-shot - resetting and
   // adding again never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;

@@ -12,7 +12,7 @@ type Options = {
 /**
  * Selection + exploration state for the trio. Clicking a node selects it
  * (clicking the selected one toggles it back off) and, the first time it is
- * opened, marks it as explored. `exploredCount` only ever grows — it powers
+ * opened, marks it as explored. `exploredCount` only ever grows - it powers
  * the discreet "n/3 explored" progress counter. When `requiredExplored > 0`
  * it also gates the surrounding tool block (fires `onComplete` once at the
  * threshold).

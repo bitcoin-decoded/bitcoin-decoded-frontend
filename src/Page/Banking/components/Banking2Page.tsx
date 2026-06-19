@@ -18,7 +18,7 @@ export const Banking2Page: FC = () => {
   return (
     <PageTemplate title={t("nav.tree.twoLevels")} showChapterNav={false}>
       <BlockReader chapterId={ROUTE_NAME.Banking_2}>
-        {/* BLOC 1 — Le virement fantôme : la question d'accroche (prélude). */}
+        {/* BLOC 1 - Le virement fantôme : la question d'accroche (prélude). */}
         <Block>
           <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
@@ -37,7 +37,7 @@ export const Banking2Page: FC = () => {
           </ChapterPrelude>
         </Block>
 
-        {/* BLOC 2 — Le décor : qui paie qui, et la question de la 2e banque. */}
+        {/* BLOC 2 - Le décor : qui paie qui, et la question de la 2e banque. */}
         <Block>
           <p>
             {fr ? (
@@ -59,7 +59,7 @@ export const Banking2Page: FC = () => {
           </p>
         </Block>
 
-        {/* BLOC 3 — Deux monnaies, deux tuyaux : l'aparté reste collé au composant
+        {/* BLOC 3 - Deux monnaies, deux tuyaux : l'aparté reste collé au composant
             (exploration M0/M2 facultative, donc bloc non verrouillé). */}
         <Block>
           <p>
@@ -83,7 +83,7 @@ export const Banking2Page: FC = () => {
           <MonetaryAggregates />
         </Block>
 
-        {/* BLOC 4 — Compensation et règlement net : le principe (net = compensation
+        {/* BLOC 4 - Compensation et règlement net : le principe (net = compensation
             + règlement). Les références restent dans la prose. */}
         <Block>
           <p>
@@ -123,7 +123,7 @@ export const Banking2Page: FC = () => {
           </p>
         </Block>
 
-        {/* BLOC 5 — Le cas concret côté M2 puis M0 : le palier « passons à la
+        {/* BLOC 5 - Le cas concret côté M2 puis M0 : le palier « passons à la
             pratique » est coulé dans le Callout. Disclosure facultatif, non verrouillé. */}
         <Block>
           <p>
@@ -177,7 +177,7 @@ export const Banking2Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* BLOC 6 — Le bilan qui bouge : cœur mécanique. Bloc-outil, déverrouillé
+        {/* BLOC 6 - Le bilan qui bouge : cœur mécanique. Bloc-outil, déverrouillé
             quand la compensation est déclenchée. */}
         <Block kind="tool">
           {({ markComplete }) => (
@@ -211,7 +211,7 @@ export const Banking2Page: FC = () => {
           )}
         </Block>
 
-        {/* BLOC 7 — Ouverture vers le chapitre 3 (pas de synthèse bouclée). */}
+        {/* BLOC 7 - Ouverture vers le chapitre 3 (pas de synthèse bouclée). */}
         <Block last>
           <p>
             {fr

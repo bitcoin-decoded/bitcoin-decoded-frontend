@@ -76,7 +76,7 @@ export const Illustration: FC<IllustrationProps> = ({
     fontStyle: "italic",
     textAlign: "center",
     // Caption follows the figure width on mobile (no narrower than the
-    // image — visual mismatch). Slight inset on desktop to keep the eye
+    // image - visual mismatch). Slight inset on desktop to keep the eye
     // anchored on the image.
     maxWidth: isMobile ? "100%" : "85%",
     paddingLeft: isMobile ? "0.25rem" : 0,

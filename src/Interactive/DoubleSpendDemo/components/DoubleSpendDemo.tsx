@@ -227,7 +227,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
         {t("doubleSpend.title")}
       </Caption>
 
-      {/* Single Nicolas at the top — one person, two broadcasts below. */}
+      {/* Single Nicolas at the top - one person, two broadcasts below. */}
       <div style={nicolasRow}>
         <div
           style={{ ...partyCard(colors.base.border.secondary), width: isMobile ? "60%" : "40%" }}

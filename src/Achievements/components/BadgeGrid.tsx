@@ -10,7 +10,7 @@ import { BadgeMedal } from "./BadgeMedal";
 
 /**
  * The collection itself: badges grouped by module (each section titled + counted),
- * earned medals lit and locked ones quiet. Names stay visible when locked — they
+ * earned medals lit and locked ones quiet. Names stay visible when locked - they
  * read as goals, not spoilers (the chapter titles are already in the nav).
  */
 export const BadgeGrid: FC = () => {

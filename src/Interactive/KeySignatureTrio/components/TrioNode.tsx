@@ -6,14 +6,14 @@ import type { KeyElement } from "../types";
 type Props = {
   element: KeyElement;
   isSelected: boolean;
-  /** Another node is selected — this one steps back. */
+  /** Another node is selected - this one steps back. */
   isDimmed: boolean;
   onClick: () => void;
 };
 
 /**
  * One clickable element of the trio: an explicit icon in a circle, its title,
- * and its one-word role. Dumb component — selection state is owned by
+ * and its one-word role. Dumb component - selection state is owned by
  * `useKeySignatureTrio`; only ephemeral hover lives here (same pattern as
  * PillarRow).
  */

@@ -241,7 +241,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
                     strokeLinecap="round"
                     style={{ transition }}
                   />
-                  {/* Arrowhead at the `to` end — shows the direction of the action. */}
+                  {/* Arrowhead at the `to` end - shows the direction of the action. */}
                   <polyline
                     points={`${head.left.x},${head.left.y} ${head.tip.x},${head.tip.y} ${head.right.x},${head.right.y}`}
                     fill="none"

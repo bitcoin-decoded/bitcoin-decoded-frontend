@@ -15,7 +15,7 @@ type Props = {
 
 /**
  * A directional pyramid edge: a small chip carrying an arrow + a verb, so the
- * reader sees who acts on whom (private key —calcule→ public key, etc.). Faint
+ * reader sees who acts on whom (private key -calcule→ public key, etc.). Faint
  * until its action has run, then lit in the module accent.
  */
 export const PyramidConnector: FC<Props> = ({ label, icon, active, colors }) => {

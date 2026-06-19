@@ -25,7 +25,7 @@ type ExternalProps = CommonProps & {
 type Props = InternalProps | ExternalProps;
 
 /**
- * Inline cross-reference link. Polymorphic — choose the flavor by which
+ * Inline cross-reference link. Polymorphic - choose the flavor by which
  * prop you pass:
  *
  * @example
@@ -46,7 +46,7 @@ type Props = InternalProps | ExternalProps;
  *   • <HighlightText> → un passage entier (effet stabilo), sans lien
  *   • <Reference>     → cross-référence cliquable (interne OU externe)
  *
- * If the goal is purely visual emphasis, DON'T use Reference — its
+ * If the goal is purely visual emphasis, DON'T use Reference - its
  * dotted underline reads as "click me" and will frustrate the user.
  * Reach for <strong> or <HighlightText> instead.
  * ---------------------------------------------------------------------
