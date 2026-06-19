@@ -18,7 +18,7 @@ type Props = {
 /**
  * Discreet "n/N explored" progress chip, themed to the current module. Shown
  * next to an interactive's title; the compass turns into a check once every
- * item has been opened. On its own it is pure mini-motivation — gating is the
+ * item has been opened. On its own it is pure mini-motivation - gating is the
  * caller's job (it pairs with `useExplorationGate`'s `onComplete`).
  */
 export const ExploredCounter: FC<Props> = ({ explored, total, label }) => {

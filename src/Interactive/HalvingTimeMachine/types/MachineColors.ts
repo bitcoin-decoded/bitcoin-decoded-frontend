@@ -1,6 +1,6 @@
 /**
- * Device-specific colors for the time machine — the deep CRT screen and the
- * brushed-metal lever — which are deliberately NOT semantic theme tokens (they
+ * Device-specific colors for the time machine - the deep CRT screen and the
+ * brushed-metal lever - which are deliberately NOT semantic theme tokens (they
  * render a physical object, not UI surfaces). Theme-aware where the object's
  * finish changes (lever: light silver vs dark gunmetal), fixed otherwise.
  */

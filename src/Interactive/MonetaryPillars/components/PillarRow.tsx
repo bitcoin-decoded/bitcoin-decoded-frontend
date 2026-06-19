@@ -15,7 +15,7 @@ type Props = {
 
 /**
  * One pillar row inside the unified `MonetaryPillars` envelope. Flat by
- * design (no per-row border or shadow) — the visual unity comes from the
+ * design (no per-row border or shadow) - the visual unity comes from the
  * outer container and the shared internal dividers between rows.
  *
  * When `pillar.isKeystone` is true, the row is rendered with an amber

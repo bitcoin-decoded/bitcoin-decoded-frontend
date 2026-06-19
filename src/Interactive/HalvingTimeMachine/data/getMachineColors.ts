@@ -1,7 +1,7 @@
 import type { MachineColors } from "../types";
 
 /**
- * Device colors for the halving time machine — the deep CRT screen and the
+ * Device colors for the halving time machine - the deep CRT screen and the
  * brushed-metal lever. These render a physical object, so they live here as a
  * theme-aware device palette rather than as semantic THEME_COLORS tokens.
  * The light-mode screen *panel* is built from theme tokens in TimeScreen; only

@@ -100,7 +100,7 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
       {...hoverHandlers}
     >
       <div style={innerStyle}>
-        {/* Front — emoji + step title */}
+        {/* Front - emoji + step title */}
         <div
           className="gradient-border"
           style={
@@ -148,7 +148,7 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
           />
         </div>
 
-        {/* Back — the cascade of decisions, centered */}
+        {/* Back - the cascade of decisions, centered */}
         <div
           className="gradient-border"
           style={{ ...backStyle, "--border-glow-color": world.border.secondary } as CSSProperties}

@@ -13,7 +13,7 @@ type Props = {
 
 /**
  * Final screen (spec §7). Deliberately sober: a single quiet check, no
- * confetti, no exclamation — the pedagogical pact continues.
+ * confetti, no exclamation - the pedagogical pact continues.
  */
 export const DonationThankYou: FC<Props> = ({ onContinue }) => {
   const { colors } = usePageTheme();

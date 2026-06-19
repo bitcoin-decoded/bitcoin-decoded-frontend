@@ -9,7 +9,7 @@ export const useTransactionComparison = (onComplete?: () => void) => {
   const reset = () => setPhase("before");
 
   // Fires once the reader has run the transaction (the action this block is
-  // built around). One-shot — resetting and replaying never re-fires.
+  // built around). One-shot - resetting and replaying never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);

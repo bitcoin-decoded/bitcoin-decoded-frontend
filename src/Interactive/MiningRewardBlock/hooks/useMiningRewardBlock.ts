@@ -20,7 +20,7 @@ export const useMiningRewardBlock = (onComplete?: () => void) => {
   const reset = useCallback(() => setRewarded(false), []);
 
   // Fires once the reader has rewarded the miner (the action this block is
-  // built around). One-shot — resetting never re-fires.
+  // built around). One-shot - resetting never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);

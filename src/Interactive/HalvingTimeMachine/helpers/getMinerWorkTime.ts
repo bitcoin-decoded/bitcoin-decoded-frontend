@@ -6,7 +6,7 @@ const MIN_PER_YEAR = MIN_PER_DAY * 365;
 /**
  * How long a miner would need to earn what a single genesis block paid (50 BTC)
  * at `reward` per block, as a human-readable, language-aware duration that
- * scales from minutes to years — the payoff line ("…lui demande 2 h 40 de
+ * scales from minutes to years - the payoff line ("…lui demande 2 h 40 de
  * travail"). Beyond a century, the caller switches to the "symbolic" message
  * instead (see isSubsidySymbolic).
  */

@@ -10,7 +10,7 @@ type Props = {
   onJump: (index: number) => void;
 };
 
-// Header height it tucks under (see Header.tsx — sticky, 3.5rem).
+// Header height it tucks under (see Header.tsx - sticky, 3.5rem).
 const HEADER_OFFSET = "3.5rem";
 
 /**
@@ -29,7 +29,7 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
   const headerHidden = useHeaderHidden();
 
   // On neutral pages (outside any module) the module accent collapses to
-  // the same dark/light grey as the pill background — dots and links
+  // the same dark/light grey as the pill background - dots and links
   // vanish into the chrome. Fall back to base text colour so the
   // milestones stay visible on both dark and light themes.
   const accent =

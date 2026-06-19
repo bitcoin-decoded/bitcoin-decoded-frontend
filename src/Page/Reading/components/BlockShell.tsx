@@ -4,7 +4,7 @@ import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Desi
 import { useTranslation } from "../../../I18n";
 
 type Props = {
-  /** Block index — exposed as `data-block` for scroll/anchor targeting. */
+  /** Block index - exposed as `data-block` for scroll/anchor targeting. */
   index: number;
   isCurrent: boolean;
   /** Play the seal/confirm reveal (only the freshly surfaced block). */
@@ -22,7 +22,7 @@ type Props = {
  * `Bloc #N` header the chain link plugs into. The active block lifts (thicker
  * accent ring + glow); past blocks recede (thin neutral ring, dimmed) and lock
  * their content (`pointer-events: none`) while staying clickable as a whole to
- * return to them — the second way back, alongside the milestone jalons.
+ * return to them - the second way back, alongside the milestone jalons.
  */
 export const BlockShell: FC<Props> = ({
   index,

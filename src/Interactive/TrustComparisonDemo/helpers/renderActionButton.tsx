@@ -5,7 +5,7 @@ import type { ActionState } from "../types";
 
 /**
  * Standard primary CTA (same recipe as "Démarrer le nœud"): the module accent
- * with readable text. No per-call color override — overriding `color` with a
+ * with readable text. No per-call color override - overriding `color` with a
  * low-opacity border tone is exactly what made the label wash out before.
  */
 export const renderActionButton = (

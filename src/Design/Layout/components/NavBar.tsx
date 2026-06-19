@@ -35,11 +35,11 @@ export const NavBar: FC = () => {
   // never end up with a vacant strip above them.
   //
   // The "NAVIGATION" label + separator that used to sit at the top
-  // are gone — they were decorative chrome that ate ~3rem of vertical
+  // are gone - they were decorative chrome that ate ~3rem of vertical
   // space for no functional value. Notion / Linear / Stripe go
   // straight to the items; the <nav> element with aria-label preserves
   // screen-reader semantics.
-  // borderRight lives on the WRAPPER in MainLayout, not here — because
+  // borderRight lives on the WRAPPER in MainLayout, not here - because
   // this element translates by -3.5rem when the Header hides, and a
   // border drawn here would translate with it, leaving the bottom
   // 3.5rem of the sidebar column without a separator. The wrapper

@@ -12,7 +12,7 @@ type Props = {
 };
 
 /**
- * Single field row inside a block card — icon circle on the left, label and
+ * Single field row inside a block card - icon circle on the left, label and
  * optional inline action on the right header, value below. Extracted to its
  * own module so the FC reference stays stable across `BlockCard` re-renders,
  * preventing every child (including the animated linked-hash span) from

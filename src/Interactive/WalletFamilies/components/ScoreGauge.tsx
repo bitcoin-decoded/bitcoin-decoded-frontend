@@ -18,7 +18,7 @@ type Props = {
 };
 
 /**
- * A gamified stat row — an attribute label plus segmented pips, RPG-style.
+ * A gamified stat row - an attribute label plus segmented pips, RPG-style.
  * Stacked across the three wallet cards (filled counts aligned), the gauges
  * read as a simplicité ↘ / souveraineté ↗ trade-off matrix at a glance.
  */

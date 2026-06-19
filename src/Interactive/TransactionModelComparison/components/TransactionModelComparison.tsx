@@ -149,7 +149,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   // ── Bank card: one living "ledger" that updates in place ────────────────────
   // A single registry; no before/after split. Each account shows its balance,
   // and the honest visual is the transfer itself (money flowing sender →
-  // receiver) — not a bar measured against an arbitrary "max" balance.
+  // receiver) - not a bar measured against an arbitrary "max" balance.
 
   const ledgerLabelRow: CSSProperties = {
     display: "flex",
@@ -478,7 +478,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
           {t("txComparison.bankScenario")}
         </div>
 
-        {/* One living ledger — the same registry, updated in place. No
+        {/* One living ledger - the same registry, updated in place. No
             before/after split, so nothing is shown twice. */}
         <div style={ledgerLabelRow}>
           <div style={sectionLabel(bankAccent)}>

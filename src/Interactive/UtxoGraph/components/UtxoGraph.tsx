@@ -37,7 +37,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
   const { inputs, outputs } = UTXO_GRAPH_SCENARIO;
   const inputTotal = inputs.reduce((s, c) => s + c.amount, 0);
   const yourChange = outputs.filter((o) => o.kind === "change").reduce((s, c) => s + c.amount, 0);
-  // Wallet mode: the "balance" is recomputed from the UTXOs you still control —
+  // Wallet mode: the "balance" is recomputed from the UTXOs you still control -
   // your two coins before, just the change coin after the transaction.
   const walletBalance = ran ? yourChange : inputTotal;
 
@@ -153,7 +153,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
         </div>
       )}
 
-      {/* Inputs — existing UTXOs, consumed when the transaction runs */}
+      {/* Inputs - existing UTXOs, consumed when the transaction runs */}
       <div
         style={{ display: "flex", flexDirection: "column", gap: "0.4rem", alignItems: "center" }}
       >
@@ -185,7 +185,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
         <ArrowDown size={14} strokeWidth={2} />
       </div>
 
-      {/* Outputs — new UTXOs, created by the transaction */}
+      {/* Outputs - new UTXOs, created by the transaction */}
       <div
         style={{ display: "flex", flexDirection: "column", gap: "0.4rem", alignItems: "center" }}
       >

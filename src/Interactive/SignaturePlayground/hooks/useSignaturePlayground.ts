@@ -17,7 +17,7 @@ import type { VerifyStatus } from "../types";
  *
  * The public key is a fixed constant (Nicolas's on-record key). Swapping the
  * private key for another one means it no longer derives to that public key,
- * so the signature it produces is rejected — which is the whole lesson.
+ * so the signature it produces is rejected - which is the whole lesson.
  */
 export const useSignaturePlayground = (onComplete?: () => void) => {
   const [privateKey, setPrivateKey] = useState(INITIAL_PRIVATE_KEY);
@@ -63,7 +63,7 @@ export const useSignaturePlayground = (onComplete?: () => void) => {
   };
 
   // Fires once the reader has gone through the full flow (derive → sign →
-  // verify); reaching a verdict means all three buttons were used. One-shot —
+  // verify); reaching a verdict means all three buttons were used. One-shot -
   // resetting and replaying never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;

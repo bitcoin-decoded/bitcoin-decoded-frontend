@@ -381,7 +381,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
 
   // Pyramid at every breakpoint: private key at the apex, public key +
   // signature side by side at the base, calcule / signe fanning down from the
-  // apex — so the private key is unambiguously the one that signs.
+  // apex - so the private key is unambiguously the one that signs.
   const pyramid = (
     <div style={pyramidCol}>
       <div style={apexWrap}>

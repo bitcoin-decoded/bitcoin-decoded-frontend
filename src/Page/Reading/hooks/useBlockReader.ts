@@ -63,7 +63,7 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
         JSON.stringify({ maxRevealed, current, done, finished, blockCount }),
       );
     } catch {
-      // storage full or unavailable — silently ignore
+      // storage full or unavailable - silently ignore
     }
   }, [chapterId, maxRevealed, current, done, finished, blockCount]);
 
@@ -115,7 +115,7 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
     setCurrent((prev) => Math.max(0, prev - 1));
   }, []);
 
-  // Milestone jump — refocus AND scroll to a revealed block, even when it is
+  // Milestone jump - refocus AND scroll to a revealed block, even when it is
   // already current (a current-block click must still anchor).
   const jump = useCallback(
     (index: number) => {

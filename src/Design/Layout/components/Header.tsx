@@ -38,10 +38,10 @@ export const Header: FC<Props> = ({
 
   const [isWordmarkHovered, setIsWordmarkHovered] = useState(false);
 
-  // Hide-on-scroll-down / reveal-on-scroll-up — single source of truth
+  // Hide-on-scroll-down / reveal-on-scroll-up - single source of truth
   // shared with the sidebar in MainLayout (see useHeaderHidden).
   // When the drawer is open we FORCE the header visible so the user
-  // can always reach the close (X) button — the alternative (header
+  // can always reach the close (X) button - the alternative (header
   // hidden + drawer open) would trap the user.
   const isHidden = useHeaderHidden();
   const effectivelyHidden = isHidden && !isDrawerOpen;

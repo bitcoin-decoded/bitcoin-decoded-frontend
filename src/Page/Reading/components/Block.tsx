@@ -12,7 +12,7 @@ type Props = {
   /**
    * Block content. For a `tool` block, pass a render function: it receives
    * `{ markComplete }` to wire to the component's completion signal (e.g. the
-   * loan granted, all definitions explored) — opening a disclosure is not a
+   * loan granted, all definitions explored) - opening a disclosure is not a
    * completion. Prose blocks just pass children.
    */
   children: ReactNode | ((api: BlockApi) => ReactNode);
@@ -22,7 +22,7 @@ type Props = {
  * Declarative marker for one reading block. It renders nothing on its own;
  * `BlockReader` reads `kind` / `last` off the element and owns reveal, dim,
  * gating and navigation. Authoring a chapter is wrapping the existing page JSX
- * in ordered `<Block>` boundaries — no prose is moved out, nothing is removed.
+ * in ordered `<Block>` boundaries - no prose is moved out, nothing is removed.
  */
 export const Block: FC<Props> = ({ children }) => (
   <>{typeof children === "function" ? null : children}</>

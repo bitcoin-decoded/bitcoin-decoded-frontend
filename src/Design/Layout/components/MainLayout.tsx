@@ -69,19 +69,19 @@ export const MainLayout: FC<{ children: ReactNode; headerAction?: ReactNode }> =
   // pattern: the nav stays anchored in the viewport while the main
   // content scrolls.
   //
-  // The wrapper spans the FULL viewport (top: 0, height: 100vh) — it
+  // The wrapper spans the FULL viewport (top: 0, height: 100vh) - it
   // runs UNDERNEATH the Header (z-index 101) and never moves. Its
   // background fills the entire left column, top to bottom, regardless
-  // of scroll state — no exposed-body-bg gaps.
+  // of scroll state - no exposed-body-bg gaps.
   //
   // When the Header auto-hides on scroll, only the NavBar's CONTENT
   // slides up (it consumes `useHeaderHidden` itself), so the wrapper
   // stays put and the bottom of the sidebar column never reveals a
   // mismatched colour strip. The previous version translated the
-  // wrapper itself, which shifted the gap from top to bottom — fixed.
+  // wrapper itself, which shifted the gap from top to bottom - fixed.
   //
   // align-self: flex-start is required because the parent is a flex
-  // row with default `align-items: stretch` — without it the wrapper
+  // row with default `align-items: stretch` - without it the wrapper
   // would stretch to the main content's height and break sticky.
   //
   // Internal scroll is delegated to NavBar (its list container has
@@ -98,7 +98,7 @@ export const MainLayout: FC<{ children: ReactNode; headerAction?: ReactNode }> =
     height: "100vh",
     alignSelf: "flex-start",
     // Divider lives on the WRAPPER (not on NavBar) because NavBar
-    // translates -3.5rem when the Header hides — a border drawn there
+    // translates -3.5rem when the Header hides - a border drawn there
     // would slide with it, leaving the bottom 3.5rem of the column
     // without a separator. The wrapper stays full-height, so its right
     // edge always spans the entire viewport.

@@ -26,7 +26,7 @@ import { BlockShell } from "./BlockShell";
 type BlockElement = ReactElement<ComponentProps<typeof Block>>;
 
 type Props = {
-  /** Unique chapter id (ROUTE_NAME.*) — the localStorage namespace for progress. */
+  /** Unique chapter id (ROUTE_NAME.*) - the localStorage namespace for progress. */
   chapterId: string;
   /** Ordered `<Block>` children. */
   children: ReactNode;
@@ -38,7 +38,7 @@ type Props = {
  * interactive while past ones recede and lock, tool blocks gate the "next"
  * control until their component completes (via the render-prop `markComplete`),
  * jalons track position and jump to any revealed block, and a centered overlay
- * celebrates completion. All state lives in `useBlockReader`. Vertical flow —
+ * celebrates completion. All state lives in `useBlockReader`. Vertical flow -
  * never a carousel.
  */
 export const BlockReader: FC<Props> = ({ chapterId, children }) => {
@@ -65,7 +65,7 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     replay,
   } = useBlockReader({ chapterId, blockCount });
 
-  // First-ever completion of this chapter unlocks its badge (idempotent — a
+  // First-ever completion of this chapter unlocks its badge (idempotent - a
   // revisit or replay never re-awards). The badge's unlock overlay is the
   // completion celebration.
   const { award } = useBadges();

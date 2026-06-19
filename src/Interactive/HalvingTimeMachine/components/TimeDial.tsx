@@ -15,7 +15,7 @@ type Props = {
 };
 
 /**
- * The dial: a single centered "Année de destination — 2135" line, a slider
+ * The dial: a single centered "Année de destination - 2135" line, a slider
  * flanked by ±1 steppers (reusing the app Button, like DifficultyAdjustment),
  * and a few quick-jump chips (genesis, today, end of issuance).
  */
@@ -30,7 +30,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   const sliderFill = world.background.secondary; // solid Bitcoin orange (#f7931a) in both modes
 
   const currentYear = new Date().getFullYear();
-  // Plain years (genesis · today · end of issuance) — no "Fin" label, which
+  // Plain years (genesis · today · end of issuance) - no "Fin" label, which
   // could be misread as "the end of Bitcoin".
   const chips = [
     { year: minYear, label: String(minYear) },

@@ -14,7 +14,7 @@ type Theory = { year: string; name: string; observations: string };
  * The physicist's method, read left-to-right: a time arrow runs across two
  * successive theories (Newton then Einstein), each carrying its own pile of
  * observations. The newer theory keeps more of them, and a "replaces" chip
- * marks the revision. Form carries the meaning — a horizontal, revisable
+ * marks the revision. Form carries the meaning - a horizontal, revisable
  * timeline. On mobile the two theories stack vertically (time flows downward).
  */
 export const PhysicistMethod: FC = () => {
