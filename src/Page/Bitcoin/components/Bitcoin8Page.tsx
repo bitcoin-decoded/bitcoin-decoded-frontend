@@ -239,7 +239,7 @@ export const Bitcoin8Page: FC = () => {
                   title={
                     fr
                       ? "Avant de jouer : un mot sur la sécurité"
-                      : "Before you play: a quick wword on security"
+                      : "Before you play: a quick word on security"
                   }
                 >
                   <p>
@@ -257,8 +257,8 @@ export const Bitcoin8Page: FC = () => {
         <Block last>
           <p>
             {fr
-              ? "En conclusion, une seed permet de reconstruire tout un portefeuille."
-              : "To wrap up: a seed lets you rebuild an entire wallet."}
+              ? "Une seed permet de reconstruire tout un portefeuille."
+              : "A seed lets you rebuild an entire wallet."}
           </p>
           <p>
             {fr
@@ -269,11 +269,6 @@ export const Bitcoin8Page: FC = () => {
             {fr
               ? "Au niveau du protocole, Bitcoin ne fonctionne pas comme un système de comptes. C'est un système de clés, de droits de dépense et de preuves cryptographiques."
               : "At the protocol level, Bitcoin doesn't run on accounts. It runs on keys, spending rights, and cryptographic proofs."}
-          </p>
-          <p>
-            {fr
-              ? "Et c'est précisément ce qui le rend exigeant, élégant, radicalement différent d'un système bancaire."
-              : "And that's exactly what makes it demanding, elegant, and radically different from a banking system."}
           </p>
         </Block>
       </BlockReader>

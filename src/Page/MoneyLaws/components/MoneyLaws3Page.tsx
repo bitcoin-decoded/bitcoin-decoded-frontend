@@ -241,22 +241,32 @@ export const MoneyLaws3Page: FC = () => {
               : 'Because our money isn\'t "hard," we let banks sabotage our compass (the interest rate). We force the economy to live in a permanent lie that inevitably ends in a crash.'}
           </p>
           <p>
-            {fr
-              ? "Mais si le problème était encore plus profond ? Si le simple fait de vouloir « piloter » l'économie depuis un bureau central se heurtait à un mur informationnel infranchissable ? Avant de découvrir notre nouvel instrument de navigation, regardons pourquoi même le plus brillant des cartographes ne pourra jamais remplacer la vérité du marché."
-              : 'But what if the problem runs even deeper? What if the very act of trying to "steer" the economy from a central office hit an insurmountable wall of information? Before discovering our new navigation instrument, let\'s look at why even the most brilliant cartographer can never replace the truth of the market.'}
+            {fr ? (
+              <>
+                Et si le problème allait encore plus loin ? Le manque de dureté n'est peut-être
+                qu'un symptôme. La vraie cause : on tente de piloter l'économie depuis un bureau
+                central, sans avoir l'information pour le faire.
+              </>
+            ) : (
+              <>
+                What if the problem runs deeper still? The lack of hardness might be just a
+                symptom. The real cause: trying to steer the economy from a central office,
+                without having the information to do so.
+              </>
+            )}
           </p>
           <p>
             {fr ? (
               <>
                 Alors, prêt à comprendre pourquoi les{" "}
-                <Reference to={ROUTE_NAME.MoneyLaws_4}>systèmes planifiés</Reference> sont condamnés
-                à l'aveuglement ?
+                <Reference to={ROUTE_NAME.MoneyLaws_4}>systèmes planifiés</Reference> ne peuvent
+                pas voir ce qu'ils essaient de piloter ?
               </>
             ) : (
               <>
                 Ready to understand why{" "}
-                <Reference to={ROUTE_NAME.MoneyLaws_4}>planned systems</Reference> are doomed to
-                blindness?
+                <Reference to={ROUTE_NAME.MoneyLaws_4}>planned systems</Reference> can't see what
+                they're trying to steer?
               </>
             )}
           </p>

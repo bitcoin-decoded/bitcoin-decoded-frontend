@@ -43,8 +43,8 @@ export const Bitcoin2Page: FC = () => {
           </ChapterPrelude>
           <p>
             {fr
-              ? "Tu sais maintenant ce qu'est Bitcoin : un logiciel, un réseau, une monnaie. Reste la vraie question :"
-              : "You now know what Bitcoin is: a piece of software, a network, a currency. The real question remains:"}
+              ? "Bitcoin, tu as vu ce qu'il est : un logiciel, un réseau, une monnaie. Reste la vraie question :"
+              : "Bitcoin, you've seen what it is: a piece of software, a network, a currency. The real question remains:"}
           </p>
           <p>
             {fr ? (
@@ -199,8 +199,8 @@ export const Bitcoin2Page: FC = () => {
           <p>
             {fr ? (
               <>
-                C'est précisément dans ce contexte que Bitcoin a vu le jour. Le 3 janvier 2009, un
-                développeur anonyme utilisant le pseudonyme{" "}
+                Bitcoin attaque exactement ce problème. Le 3 janvier 2009, un développeur anonyme
+                utilisant le pseudonyme{" "}
                 <Reference href="https://fr.wikipedia.org/wiki/Satoshi_Nakamoto">
                   Satoshi Nakamoto
                 </Reference>{" "}
@@ -210,8 +210,8 @@ export const Bitcoin2Page: FC = () => {
               </>
             ) : (
               <>
-                It's in exactly this context that Bitcoin was born. On January 3, 2009, an anonymous
-                developer using the pseudonym{" "}
+                Bitcoin tackles exactly that problem. On January 3, 2009, an anonymous developer
+                using the pseudonym{" "}
                 <Reference href="https://en.wikipedia.org/wiki/Satoshi_Nakamoto">
                   Satoshi Nakamoto
                 </Reference>{" "}
@@ -227,13 +227,13 @@ export const Bitcoin2Page: FC = () => {
               <>
                 Un titre du journal <i>The Times</i>. Le chancelier britannique était sur le point
                 de renflouer les banques pour la deuxième fois. Ce message n'est pas anodin. C'est
-                une déclaration d'intention gravée à jamais dans la blockchain.
+                une déclaration d'intention coulée dans le bloc zéro.
               </>
             ) : (
               <>
                 A headline from <i>The Times</i>. The British chancellor was about to bail out the
-                banks for the second time. This message is no accident. It's a statement of intent,
-                etched into the blockchain forever.
+                banks for the second time. This message is no accident. It's a statement of intent
+                cast into block zero.
               </>
             )}
           </p>
@@ -341,23 +341,15 @@ export const Bitcoin2Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Bitcoin n'est pas une simple innovation technologique. C'est l'implémentation
-                concrète de la logique autrichienne dans le silicium : la première monnaie qui
-                combine dureté absolue et décentralisation.
+                Bitcoin n'est pas qu'une innovation technique. C'est l'école autrichienne grandeur
+                nature : un plafond monétaire qu'on ne peut pas bouger, et personne pour décider
+                d'en créer plus.
               </>
             ) : (
               <>
-                Bitcoin isn't just a piece of technology. It's the concrete implementation of
-                Austrian logic in silicon: the first currency to combine absolute hardness with
-                decentralization.
+                Bitcoin isn't just one more piece of tech. The Austrian school made real: a money
+                cap that can't be moved, and no one who can print more.
               </>
-            )}
-          </p>
-          <p>
-            {fr ? (
-              <>Tu sais maintenant pourquoi Bitcoin existe et quels problèmes il résout.</>
-            ) : (
-              <>You now know why Bitcoin exists and what problems it solves.</>
             )}
           </p>
           <p>

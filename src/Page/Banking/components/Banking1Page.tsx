@@ -40,8 +40,8 @@ export const Banking1Page: FC = () => {
               <p>Alors, sais-tu d'où vient l'argent ?</p>
               <p>
                 Si tu réponds <i>« de la planche à billets de la banque centrale »</i>, alors t'es
-                tombé dans le piège. Comme 95% des gens, y compris des diplômés en finance. Ce n'est
-                pas parce qu'on ne te l'a jamais expliqué correctement.
+                tombé dans le piège. Comme 95% des gens, y compris des diplômés en finance. C'est
+                simplement parce qu'on ne te l'a jamais expliqué correctement.
               </p>
               <p>Lis attentivement ce qui suit, tu vas être surpris :</p>
             </>
@@ -69,15 +69,15 @@ export const Banking1Page: FC = () => {
                 </Reference>{" "}
                 de notre monnaie n'est ni imprimée par l'État ni créée par les Banques Centrales,
                 mais créée <i>comme par magie</i> par les banques commerciales (du style BNP
-                Paribas, Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent .
+                Paribas, Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent.
                 <p>
                   Dès qu'elles accordent un prêt, par une simple écriture comptable elles créent de
                   l'argent à partir de rien.
                 </p>
                 <p>
-                  « À partir de rien, vraiment ? », me répondront les plus sceptiques ! Presque. À
-                  partir d'une promesse : celle de l'emprunteur de rembourser. C'est tout ce qu'il
-                  faut à une banque pour fabriquer de la monnaie.
+                  Les plus sceptiques répondront « à partir de rien, vraiment ? ». Pas tout à fait,
+                  c'est vrai. À partir d'une promesse : celle de l'emprunteur de rembourser. C'est
+                  tout ce qu'il faut à une banque pour fabriquer de la monnaie.
                 </p>
                 <p>
                   Ces banques disposent d'un pouvoir quasi magique. Quasi seulement : ce pouvoir
@@ -100,9 +100,9 @@ export const Banking1Page: FC = () => {
                   out of thin air.
                 </p>
                 <p>
-                  "Out of thin air, really?", the skeptics will fire back. Almost. Out of a promise:
-                  the borrower's promise to pay it back. That's all a bank needs to manufacture
-                  money.
+                  "Out of thin air, really?", the skeptics will fire back. That's true, but not
+                  quite. Out of a promise: the borrower's promise to pay it back. That's all a bank
+                  needs to manufacture money.
                 </p>
                 <p>
                   These banks hold an almost magical power. Almost: this power is neither unlimited
@@ -174,7 +174,7 @@ export const Banking1Page: FC = () => {
                 {fr ? (
                   <>
                     C'est bon ? Parfait. Regarde le bilan de la banque de Nicolas : elle a déjà
-                    octroyé des prêts à des clients pour une valeur de 1 000 000 €. <br />
+                    octroyé des prêts à des clients pour une valeur de 480 000 000 €. <br />
                   </>
                 ) : (
                   <>

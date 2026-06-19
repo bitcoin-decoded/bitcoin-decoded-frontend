@@ -276,16 +276,15 @@ export const MoneyLaws1Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Aujourd'hui, nous vivons une situation inédite. Pour la première fois dans
-                l'histoire, le monde entier utilise des monnaies dont la dureté tend vers zéro (les
-                monnaies Fiat). Nous avons choisi la vitesse de transaction au détriment de la
-                solidité de notre batterie.
+                Depuis 1971, plus aucune monnaie majeure n'est adossée à l'or. Le monde entier
+                tourne sur des monnaies dont la dureté tend vers zéro (les monnaies Fiat). Nous
+                avons choisi la vitesse de transaction au détriment de la solidité de notre batterie.
               </>
             ) : (
               <>
-                Today, we're living through something unprecedented. For the first time in history,
-                the entire world uses currencies whose hardness tends toward zero (fiat currencies).
-                We chose transaction speed over the solidity of our battery.
+                Since 1971, no major currency is backed by gold anymore. The whole world runs on
+                currencies whose hardness tends toward zero (fiat currencies). We chose transaction
+                speed over the solidity of our battery.
               </>
             )}
           </p>

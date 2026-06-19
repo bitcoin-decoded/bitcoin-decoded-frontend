@@ -152,15 +152,13 @@ export const Bitcoin5Page: FC = () => {
             <p>
               {fr ? (
                 <>
-                  Pour la première fois, une monnaie combine une rareté absolue (21 millions
-                  d'unités, pas une de plus) avec une émission entièrement prévisible, sans autorité
-                  centrale qui pilote.
+                  Résultat : Bitcoin verrouille à la fois la quantité (21 millions, pas une de
+                  plus) et le rythme d'émission. Aucun comité ne peut y toucher.
                 </>
               ) : (
                 <>
-                  For the first time, a currency combines absolute scarcity (21 million units, not
-                  one more) with a fully predictable issuance, with no central authority steering
-                  it.
+                  The upshot: Bitcoin locks down both the quantity (21 million, not one more) and
+                  the issuance schedule. No committee can touch it.
                 </>
               )}
             </p>
@@ -358,20 +356,10 @@ export const Bitcoin5Page: FC = () => {
         <Block last>
           <p>
             {fr ? (
-              <>
-                Tu sais maintenant <i>pourquoi les mineurs participent</i>,{" "}
-                <i>comment leur subvention évolue</i> et{" "}
-                <i>pourquoi elle disparaît progressivement</i>.
-              </>
+              <>Que sécurisent-ils exactement ?</>
             ) : (
-              <>
-                You now know <i>why miners take part</i>, <i>how their subsidy evolves</i>, and{" "}
-                <i>why it slowly fades out</i>.
-              </>
+              <>What exactly are they securing?</>
             )}
-          </p>
-          <p>
-            {fr ? <>Que sécurisent-ils exactement ?</> : <>But what exactly are they securing?</>}
           </p>
           <p>
             {fr
