@@ -41,7 +41,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     flexWrap: "wrap",
     gap: "2rem",
     alignItems: "center",
-    justifyContent: "start",
+    justifyContent: "center",
     width: "100%",
     paddingTop: "1rem",
     paddingBottom: "2rem",
