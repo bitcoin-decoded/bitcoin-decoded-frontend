@@ -1,37 +1,33 @@
-import { type FC, type ReactNode, type CSSProperties } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
+
 import { usePageTheme } from "../Theme";
-import { hexToRgb } from "../helpers";
 
 type HighlightTextProps = {
   children: ReactNode;
+  /** Override the module's accent color when the highlight needs to live outside the theme. */
   highLightColorHex?: string;
 };
 
-export const HighlightText: FC<HighlightTextProps> = ({
-  children,
-  highLightColorHex,
-}) => {
+/**
+ * Marks a word or phrase as worth noticing without the marketing-marker
+ * background pavé. Thin accent underline (Apple / Linear / Notion register),
+ * themed via the current module's secondary border color.
+ */
+export const HighlightText: FC<HighlightTextProps> = ({ children, highLightColorHex }) => {
   const { colors, moduleTheme } = usePageTheme();
 
-  const highlightColor =
+  const accentColor =
     highLightColorHex ||
     (moduleTheme === "base"
-      ? colors.base.border.tertiary
-      : colors[moduleTheme].background.secondary);
-  const rgbColor = hexToRgb(highlightColor);
+      ? colors.base.text.primary
+      : colors[moduleTheme].border.secondary);
 
   const highlightStyle: CSSProperties = {
-    borderRadius: "0.25em",
-    padding: "0.1em 0.35em",
-    boxDecorationBreak: "clone",
-    WebkitBoxDecorationBreak: "clone",
-    backgroundImage: rgbColor
-      ? `linear-gradient(
-          120deg,
-          rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, 0.15) 0%,
-          rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, 0.2) 100%
-        )`
-      : undefined,
+    fontWeight: 500,
+    textDecorationLine: "underline",
+    textDecorationColor: accentColor,
+    textDecorationThickness: "1.5px",
+    textUnderlineOffset: "3px",
   };
 
   return <span style={highlightStyle}>{children}</span>;

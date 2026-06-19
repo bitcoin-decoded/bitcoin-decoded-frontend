@@ -21,11 +21,7 @@ export const Callout: FC<Props> = ({ icon, title, children }) => {
 
   const containerStyle: CSSProperties = {
     display: "flex",
-    // On phones, stack the icon above the text so the prose uses the full
-    // width instead of being indented by the icon column on every line.
-    flexDirection: isMobile ? "column" : "row",
-    alignItems: "flex-start",
-    gap: isMobile ? "0.55rem" : "1.25rem",
+    flexDirection: "column",
     position: "relative",
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
     padding: isMobile ? "1rem 0.85rem" : "1.5rem 2rem",
@@ -33,18 +29,22 @@ export const Callout: FC<Props> = ({ icon, title, children }) => {
     borderRadius: "1rem",
   };
 
+  // Title row: icon and title sit on a single line so the body underneath
+  // takes the full container width on every breakpoint.
+  const headerRowStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.6rem",
+  };
+
   const iconContainerStyle: CSSProperties = {
     color: accentColor,
     flexShrink: 0,
-    marginTop: "0.125rem",
-  };
-
-  const contentContainerStyle: CSSProperties = {
-    flex: "1 1 auto",
+    display: "inline-flex",
+    alignItems: "center",
   };
 
   const titleStyle: CSSProperties = {
-    display: "block",
     color: moduleTheme === "base" ? colors.base.text.primary : colors[moduleTheme].text.primary,
     fontWeight: 600,
     fontFamily: "'JetBrains Mono', monospace",
@@ -74,12 +74,12 @@ export const Callout: FC<Props> = ({ icon, title, children }) => {
       className="gradient-border"
       style={{ ...containerStyle, "--border-glow-color": accentColor } as CSSProperties}
     >
-      <div style={iconContainerStyle}>{icon || defaultIcon}</div>
-      <div style={contentContainerStyle}>
+      <div style={headerRowStyle}>
+        <span style={iconContainerStyle}>{icon || defaultIcon}</span>
         <span style={titleStyle}>{title}</span>
-        <hr style={separatorStyle} />
-        <div style={textStyle}>{children}</div>
       </div>
+      <hr style={separatorStyle} />
+      <div style={textStyle}>{children}</div>
     </aside>
   );
 };
