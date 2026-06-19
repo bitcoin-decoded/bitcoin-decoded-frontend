@@ -234,8 +234,8 @@ export const MoneyLaws5Page: FC = () => {
             <>
               <p>
                 {fr
-                  ? "C'est ici que l'on comprend pourquoi les débats économiques sont souvent stériles : les deux camps ne parlent tout simplement pas la même langue. Ils n'utilisent pas les mêmes jumelles."
-                  : "This is where you start to see why economic debates are so often pointless: the two sides simply don't speak the same language. They're not even looking through the same binoculars."}
+                  ? "C'est ici que l'on comprend pourquoi les débats économiques sont souvent stériles : les deux camps ne parlent tout simplement pas la même langue."
+                  : "This is where you start to see why economic debates are so often pointless: the two sides simply don't speak the same language."}
               </p>
               <p>
                 {fr

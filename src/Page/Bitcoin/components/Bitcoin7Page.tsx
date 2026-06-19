@@ -150,8 +150,8 @@ export const Bitcoin7Page: FC = () => {
           </Callout>
           <p>
             {fr
-              ? "Tu sais maintenant comment Bitcoin transforme la propriété en preuve."
-              : "You now know how Bitcoin turns ownership into proof."}
+              ? "Dans Bitcoin, posséder, c'est prouver qu'on tient la clé."
+              : "In Bitcoin, owning means proving you hold the key."}
           </p>
           <p>
             {fr ? "Reste une dernière question : " : "One last question remains: "}
