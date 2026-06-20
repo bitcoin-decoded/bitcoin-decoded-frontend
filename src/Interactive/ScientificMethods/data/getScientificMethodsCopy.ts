@@ -14,7 +14,7 @@ export const getScientificMethodsCopy = (language: Language) => {
     physicist: {
       title: fr ? "La méthode du physicien" : "The physicist's method",
       timeLabel: fr ? "le temps" : "time",
-      replaces: fr ? "améliore" : "refines",
+      replaces: fr ? "amélioration" : "refinement",
       newton: {
         year: "1687",
         name: fr ? "Théorie de Newton" : "Newton's theory",

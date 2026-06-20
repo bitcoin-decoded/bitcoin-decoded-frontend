@@ -1,7 +1,5 @@
 import { type FC, useEffect, useMemo } from "react";
 
-import { Sparkles } from "lucide-react";
-
 import { Disclosure, FeedbackPanel, Reference } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
@@ -62,11 +60,7 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
           </Disclosure>
         </div>
         {isActive && (
-          <FeedbackPanel
-            tone="info"
-            title={fr ? "Ce qui vient de se passer" : "What just happened"}
-            icon={<Sparkles size={14} strokeWidth={2.2} />}
-          >
+          <FeedbackPanel tone="info" style={{ marginTop: "1.5rem" }}>
             <p style={{ margin: "0 0 0.6rem 0" }}>
               <strong>
                 {fr

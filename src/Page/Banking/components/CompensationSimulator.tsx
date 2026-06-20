@@ -1,7 +1,5 @@
 import { type FC, useEffect, useMemo } from "react";
 
-import { ArrowLeftRight } from "lucide-react";
-
 import { FeedbackPanel } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
@@ -42,11 +40,7 @@ export const CompensationSimulator: FC<Props> = ({ onComplete }) => {
           liabilities={data!.bank.liabilities}
         />
         {isActive && (
-          <FeedbackPanel
-            tone="info"
-            title={fr ? "Ce qui vient de se passer" : "What just happened"}
-            icon={<ArrowLeftRight size={14} strokeWidth={2.2} />}
-          >
+          <FeedbackPanel tone="info" style={{ marginTop: "1.5rem" }}>
             <p style={{ margin: "0 0 0.6rem 0" }}>
               {fr
                 ? "Et voilà ! La compensation est effectuée. Observe bien les changements en jaune."

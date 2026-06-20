@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC, useEffect } from "react";
 
-import { TrendingDown } from "lucide-react";
-
 import { FeedbackPanel, usePageTheme } from "../../../Design";
 import { useBreakpoint } from "../../../Design/Responsive";
 import { FrText, useTranslation } from "../../../I18n";
@@ -137,11 +135,7 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
           </div>
         </div>
         {isActive && (
-          <FeedbackPanel
-            tone="warning"
-            title={fr ? "Effet du QE" : "QE's effect"}
-            icon={<TrendingDown size={14} strokeWidth={2.2} />}
-          >
+          <FeedbackPanel tone="warning" style={{ marginTop: "1.5rem" }}>
             {fr ? (
               <p style={{ margin: 0 }}>
                 La Banque Centrale a inondé le marché pour acheter ces titres. En faisant s'envoler

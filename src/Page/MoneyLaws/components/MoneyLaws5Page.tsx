@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { Callout, HighlightText, Quote, Reference } from "../../../Design";
+import { Quote, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   DebateArena,
@@ -57,53 +57,11 @@ export const MoneyLaws5Page: FC = () => {
         </Block>
 
         <Block>
-          <Callout
-            title={fr ? "Le physicien contre le logicien" : "The Physicist versus the Logician"}
-          >
-            <p>
-              {fr
-                ? "Il existe deux manières radicalement opposées d'aborder l'économie :"
-                : "There are two radically opposed ways to approach economics:"}
-            </p>
-            <ul>
-              <li>
-                {fr ? (
-                  <span>
-                    L'école keynésienne (<i>la méthode du physicien</i>) : on observe des chiffres
-                    (genre le PIB, le chômage, ...), on fait une hypothèse et on regarde si les
-                    données du passé confirment la théorie.{" "}
-                    <HighlightText>C'est ce qu'on appelle l'empirisme</HighlightText> (ou le
-                    positivisme dans sa version méthodologique) .
-                  </span>
-                ) : (
-                  <span>
-                    The Keynesian school (<i>the physicist's method</i>): you watch the numbers
-                    (GDP, unemployment, that kind of thing), you form a hypothesis, and you check
-                    whether past data backs it up.{" "}
-                    <HighlightText>This is called empiricism</HighlightText> (or positivism, in its
-                    methodological flavor).
-                  </span>
-                )}
-              </li>
-              <li>
-                {fr ? (
-                  <span>
-                    L'école autrichienne (<i>la méthode du logicien</i>) : là, on ne part pas de
-                    l'observation, mais d'un point de départ qu'on tient pour indiscutable, puis on
-                    en déduit tout le reste par la logique, exactement comme en géométrie.{" "}
-                    <HighlightText>C'est la méthode axiomatique-déductive</HighlightText>.
-                  </span>
-                ) : (
-                  <span>
-                    The Austrian school (<i>the logician's method</i>): here, you don't start from
-                    observation but from a premise you treat as indisputable, and you deduce
-                    everything else through logic, exactly like in geometry.{" "}
-                    <HighlightText>This is the axiomatic-deductive method</HighlightText>.
-                  </span>
-                )}
-              </li>
-            </ul>
-          </Callout>
+          <p>
+            {fr
+              ? "Il existe deux manières radicalement opposées d'aborder l'économie."
+              : "There are two radically opposed ways to approach economics."}
+          </p>
           <ScientificMethods />
         </Block>
 

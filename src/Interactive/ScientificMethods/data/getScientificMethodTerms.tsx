@@ -1,20 +1,13 @@
 import { Sigma, Telescope } from "lucide-react";
 
-import type { THEME_COLORS } from "../../../Design";
+import { HighlightText, type THEME_COLORS } from "../../../Design";
 import type { Language } from "../../../I18n";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
-
 import { LogicianMethod } from "../components/LogicianMethod";
 import { PhysicistMethod } from "../components/PhysicistMethod";
 
 type ThemeColors = (typeof THEME_COLORS)["dark"];
 
-/**
- * Two click-to-reveal terms for the keynesian-vs-austrian / physicist-vs-logician
- * comparison. Each body carries a short framing line plus the matching visual
- * (PhysicistMethod / LogicianMethod), so the reader pulls them in one at a
- * time instead of being faced with both illustrations stacked vertically.
- */
 export const getScientificMethodTerms = (
   language: Language,
   colors: ThemeColors,
@@ -25,18 +18,28 @@ export const getScientificMethodTerms = (
     {
       key: "keynesian",
       title: fr ? "L'école keynésienne" : "The Keynesian school",
-      summary: fr
-        ? "La méthode du physicien : observer les données, valider la théorie."
-        : "The physicist's method: watch the data, validate the theory.",
+      summary: fr ? "La méthode du physicien" : "The physicist's method",
       icon: Telescope,
       accentText: colors.blue.text.secondary,
       accentBorder: colors.blue.border.secondary,
       body: (
         <>
           <p>
-            {fr
-              ? "On observe des chiffres (PIB, chômage, prix), on formule une hypothèse, on regarde si les données du passé la confirment. La théorie reste vraie tant que les nouvelles observations ne la cassent pas."
-              : "You watch the numbers (GDP, unemployment, prices), you form a hypothesis, you check whether past data backs it up. The theory holds as long as new observations don't break it."}
+            {fr ? (
+              <>
+                On observe des chiffres (genre le PIB, le chômage, ...), on fait une hypothèse et on
+                regarde si les données du passé confirment la théorie.{" "}
+                <HighlightText>C'est ce qu'on appelle l'empirisme</HighlightText> (ou le positivisme
+                dans sa version méthodologique).
+              </>
+            ) : (
+              <>
+                You watch the numbers (GDP, unemployment, that kind of thing), you form a
+                hypothesis, and you check whether past data backs it up.{" "}
+                <HighlightText>This is called empiricism</HighlightText>
+                (or positivism, in its methodological flavor).
+              </>
+            )}
           </p>
           <PhysicistMethod />
         </>
@@ -45,18 +48,26 @@ export const getScientificMethodTerms = (
     {
       key: "austrian",
       title: fr ? "L'école autrichienne" : "The Austrian school",
-      summary: fr
-        ? "La méthode du logicien : partir d'un axiome, déduire le reste."
-        : "The logician's method: start from an axiom, deduce the rest.",
+      summary: fr ? "La méthode du logicien" : "The logician's method",
       icon: Sigma,
       accentText: colors.violet.text.secondary,
       accentBorder: colors.violet.border.secondary,
       body: (
         <>
           <p>
-            {fr
-              ? "On part d'un point de départ tenu pour indiscutable, et on déduit tout le reste par la logique. Comme en géométrie : si les axiomes sont vrais, les conclusions le sont aussi, sans avoir besoin de mesurer."
-              : "You start from a premise treated as indisputable, and deduce everything else through logic. Same as geometry: if the axioms are true, the conclusions are too, no need to measure."}
+            {fr ? (
+              <>
+                Là, on ne part pas de l'observation, mais d'un point de départ qu'on tient pour
+                indiscutable, puis on en déduit tout le reste par la logique, exactement comme en
+                géométrie. <HighlightText>C'est la méthode axiomatique-déductive</HighlightText>.
+              </>
+            ) : (
+              <>
+                Here, you don't start from observation but from a premise you treat as indisputable,
+                and you deduce everything else through logic, exactly like in geometry.{" "}
+                <HighlightText>This is the axiomatic-deductive method</HighlightText>.
+              </>
+            )}
           </p>
           <LogicianMethod />
         </>
