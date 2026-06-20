@@ -53,15 +53,19 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
         isCorrect: true,
         rationale: fr ? (
           <>
-            Félicitations, tu viens de mettre le doigt sur l'argument de Mises ! Sans prix de
-            marché, tu ne peux pas comparer le « coût social » d'un matériau par rapport à un autre.
-            Tu n'as pas de dénominateur commun.
+            Bravo, tu viens de tomber sur l'argument de Mises. Sans prix, tu compares des choux et
+            des carottes. Combien de tonnes d'acier « valent » combien de tonnes de béton, plus
+            combien d'énergie, plus combien d'heures de travail ? Il te manque une unité commune
+            pour comparer des choses qui n'ont rien à voir. Le prix, c'est cette unité. Enlève-le,
+            et la question n'a tout simplement plus de réponse.
           </>
         ) : (
           <>
-            Congratulations - you've just put your finger on Mises's argument! Without market
-            prices, you can't compare the "social cost" of one material against another. You've got
-            no common denominator.
+            You've just put your finger on Mises's argument. Without prices, you're comparing apples
+            and oranges. How many tonnes of steel "are worth" how many tonnes of concrete, plus how
+            much energy, plus how many work hours? You're missing a common unit to compare things
+            that have nothing in common. The price is that unit. Take it away, and the question has
+            no answer at all.
           </>
         ),
       },

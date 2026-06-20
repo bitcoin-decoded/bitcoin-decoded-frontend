@@ -59,6 +59,11 @@ export const MoneyLaws4Page: FC = () => {
             )}
           </p>
           <p>
+            {fr
+              ? "On va pousser le curseur à fond, jusqu'à zéro prix. Pas parce que la France en est là, mais parce que le cas extrême rend la mécanique visible. Le réel, on le retrouvera juste après, en plus discret."
+              : "We're going to push the cursor all the way down, to zero prices. Not because France is there, but because the extreme case makes the mechanics visible. Reality comes back right after, in quieter form."}
+          </p>
+          <p>
             {fr ? (
               <>
                 Dans son ouvrage de 1920 <i>« Le calcul économique en régime socialiste »</i>,{" "}
@@ -144,104 +149,42 @@ export const MoneyLaws4Page: FC = () => {
         <Block>
           <p>
             {fr
-              ? "Le capitalisme fait face au même problème mais il parvient à le résoudre. Voyons ça de plus près."
-              : "Capitalism faces the exact same problem - and somehow gets through it. Let's see how."}
+              ? "Le capitalisme a exactement le même problème. Sauf qu'il a trouvé un truc pour le résoudre. Pas un coordinateur génial. Des gens qui parient."
+              : "Capitalism has exactly the same problem. Except it figured out a way around it. Not a genius coordinator. People placing bets."}
           </p>
-          <Callout title={fr ? "Le secret du Capitalisme" : "Capitalism's little secret"}>
-            <p>
-              {fr
-                ? "Quand t'es un entrepreneur et que tu construis un pont, tu te poses une vraie question : « Quel matériau maximise mon profit ? »"
-                : 'When you\'re an entrepreneur building that bridge, you ask yourself a very real question: "Which material makes me the most profit?"'}
-            </p>
-            <p>
-              {fr
-                ? "Tu regardes le prix de l'acier. Il est élevé ? OK pas grave tu explores celui du béton. Il est moins cher ? OK, tu réfléchis à la durée de vie du pont, au coût de sa maintenance, tu prends en compte tous ces éléments dans tes calculs et tu arbitres."
-                : "You check the price of steel. High? OK, no problem, you check concrete. Cheaper? OK, then you start thinking about how long the bridge needs to last, what maintenance will cost, you crunch it all together and you make the call."}
-            </p>
-            <p>
-              {fr ? (
-                <>
-                  L'intérêt personnel finit le plus souvent par servir l'intérêt collectif. Pas par
-                  bonté. Par pure mécanique.
-                  <br />
-                  Pourquoi ? Parce que le prix de l'acier reflète sa rareté du moment. Si beaucoup
-                  d'autres entrepreneurs ont besoin d'acier pour d'autres projets (par exemple pour
-                  des fusées), alors son prix va monter. Tu es donc « guidé » vers le matériau qui
-                  crée le moins de gaspillage pour la société.
-                </>
-              ) : (
-                <>
-                  Self-interest, more often than not, ends up serving the collective interest. Not
-                  out of kindness. Out of pure mechanics.
-                  <br />
-                  Why? Because the price of steel reflects how scarce it is right now. If plenty of
-                  other entrepreneurs need steel for their own projects (for rockets, say), the
-                  price climbs. You're nudged toward the material that wastes the least for society.
-                </>
-              )}
-            </p>
-            <p>
-              <HighlightText>
-                {fr
-                  ? "C'est une coordination sans coordinateur. Une intelligence distribuée."
-                  : "It's coordination without a coordinator. Distributed intelligence."}
-              </HighlightText>
-            </p>
-          </Callout>
-        </Block>
-
-        <Block>
+          <p>
+            {fr
+              ? "Quand un entrepreneur construit ce pont, il met sa fortune en jeu. Il dit « je parie que l'acier vaut plus ici qu'ailleurs ». S'il a raison, il gagne. S'il se trompe, il fait faillite. Cette peau dans le jeu, c'est ce qui crée une information neuve : le bon prix."
+              : 'When an entrepreneur builds that bridge, they put their fortune on the line. They say "I bet steel is worth more here than somewhere else." If they\'re right, they win. If they\'re wrong, they go bust. That skin in the game is what creates a new piece of information: the right price.'}
+          </p>
+          <p>
+            {fr
+              ? "Parce que le prix, ce n'est pas magique. C'est de la connaissance congelée. Le résultat visible de milliers de paris comme le sien. Quand l'acier est cher, c'est que plein d'autres en ont besoin au même moment, pour des fusées, des rails, des immeubles. Le prix te transmet ça sans que tu aies besoin de le savoir."
+              : "Because price isn't magic. It's frozen knowledge. The visible result of thousands of bets like theirs. When steel is expensive, it's because plenty of other people need it at the same time, for rockets, rails, buildings. The price carries that to you without you needing to know."}
+          </p>
+          <p>
+            {fr
+              ? "Attention, ça ne veut pas dire que le marché a toujours raison. Un entrepreneur qui rogne sur la qualité peut empoisonner son client. L'amiante a été vendue des décennies avant d'être interdite. Le marché se trompe, et parfois salement."
+              : "Careful, though: that doesn't mean the market is always right. An entrepreneur who cuts corners on quality can poison their customer. Asbestos was sold for decades before being banned. The market gets it wrong, and sometimes badly."}
+          </p>
+          <p>
+            {fr
+              ? "La différence est ailleurs. Le marché a un moyen de s'apercevoir qu'il s'est planté : la perte, la faillite, le procès, le client qui s'en va. L'amiante a fini interdite et les boîtes ruinées. Le planificateur, lui, n'a aucun de ces signaux. Il ne fait jamais faillite. Son erreur ne lui revient jamais. Elle s'accumule en silence, jusqu'au jour où tout casse d'un coup."
+              : "The difference lies elsewhere. The market has a way of noticing it messed up: loss, bankruptcy, lawsuits, customers walking out. Asbestos ended up banned, and the firms ruined. The planner has none of these signals. He never goes bust. His mistake never comes back to him. It piles up in silence, until the day it all breaks at once."}
+          </p>
           <p>
             {fr ? (
               <>
-                Mais voici l'astuce que les socialistes loupent : les prix ne font que transmettre
-                une information, les entrepreneurs, eux, créent cette information.
+                Voilà ce que les prix font et que le planificateur n'a pas.{" "}
+                <HighlightText>Pas un résultat parfait. Un moyen de corriger ses erreurs.</HighlightText>
               </>
             ) : (
               <>
-                But here's the trick socialists miss: prices only carry the information.
-                Entrepreneurs are the ones who create it.
+                That's what prices give you, and the planner has nothing like it.{" "}
+                <HighlightText>Not a perfect outcome. A way to correct mistakes.</HighlightText>
               </>
             )}
           </p>
-          <Callout
-            title={
-              fr
-                ? "L'Entrepreneur est créateur d'information"
-                : "The Entrepreneur as information creator"
-            }
-          >
-            <p>
-              {fr
-                ? "Quand un entrepreneur met sa fortune en jeu et dit « je parie que cette ressource vaut plus ici que là », il crée une donnée économique nouvelle."
-                : 'When an entrepreneur stakes their own fortune and says "I bet this resource is worth more here than there," they\'re creating a brand-new piece of economic data.'}
-            </p>
-            <ul>
-              <li>{fr ? "S'il a raison, il gagne." : "If they're right, they win."}</li>
-
-              <li>
-                {fr ? "S'il se trompe, il fait faillite." : "If they're wrong, they go bust."}
-              </li>
-            </ul>
-            <p>
-              {fr ? (
-                <span>
-                  C'est ce risque, cette peau dans le jeu (<i>« skin in the game »</i>), qui force
-                  la découverte des meilleures allocations possibles.
-                </span>
-              ) : (
-                <span>
-                  It's that risk - that <i>skin in the game</i> - which forces the discovery of the
-                  best possible allocations.
-                </span>
-              )}
-            </p>
-            <p>
-              {fr
-                ? "Sans entrepreneurs risquant leur capital, sans possibilité de profit ou de perte, il n'y a personne pour produire cette information. Juste du gaspillage."
-                : "No entrepreneurs putting their capital on the line, no possibility of profit or loss - and there's nobody producing that information. Just waste."}
-            </p>
-          </Callout>
         </Block>
 
         {/* Bloc-outil : déverrouillé quand 3 cartes de la chaîne ont été retournées (compteur x/3). */}
@@ -250,10 +193,9 @@ export const MoneyLaws4Page: FC = () => {
             <>
               <p>
                 {fr
-                  ? "Pour sentir l'ampleur du problème, prends la fabrication d'une simple bière. Pour un planificateur, c'est un cauchemar logistique !"
-                  : "To feel the scale of the problem, take something as simple as brewing a beer. For a planner, it's a logistical nightmare!"}
+                  ? "Et encore, là on a supposé que le planificateur pouvait au moins rassembler toute l'info. Deuxième problème, encore pire : l'info n'est nulle part en entier. Elle est éclatée dans des milliers de têtes. Prends un truc banal, une bière. Derrière, des milliers de décisions que personne n'orchestre. Clique sur chaque carte :"
+                  : "And that's still assuming the planner can at least gather all the info. Second problem, even worse: the info isn't anywhere in one piece. It's scattered across thousands of heads. Take something mundane, a beer. Behind it, thousands of decisions nobody orchestrates. Click on each card:"}
               </p>
-              <p>{fr ? "Clique sur chaque carte :" : "Click each card:"}</p>
               <FlipCardGrid
                 items={getBeerProductionChain(language)}
                 requiredExplored={3}
@@ -279,6 +221,11 @@ export const MoneyLaws4Page: FC = () => {
         </Block>
 
         <Block>
+          <p>
+            {fr
+              ? "Tu te dis peut-être : « mais nous, en France, on a des prix ». Oui. Sauf qu'on n'abolit jamais tous les prix d'un coup. On en tue un, ici ou là. Le chiffre reste affiché, mais on l'a vidé. C'est le problème du planificateur, en version locale."
+              : 'You might be thinking: "but here in France, we have prices." Right. Except we never abolish all prices at once. We kill one, here or there. The number stays on the label, but it\'s been hollowed out. It\'s the planner\'s problem, in local form.'}
+          </p>
           <Callout
             title={fr ? "Le cas de la Chine et de son eau" : "The case of China and its water"}
           >
@@ -333,11 +280,6 @@ export const MoneyLaws4Page: FC = () => {
                 : "All of this, because the price of that resource had been hollowed out. It existed on paper, sure - but it no longer said anything real."}
             </p>
           </Callout>
-          <p>
-            {fr
-              ? "Le même problème se joue en France, mais de manière plus soft et un peu plus subtile."
-              : "The same thing plays out in France - softer, a touch more subtle."}
-          </p>
           <Callout
             title={
               fr ? "Le cas de la France et de sa santé" : "The case of France and its healthcare"
@@ -345,13 +287,8 @@ export const MoneyLaws4Page: FC = () => {
           >
             <p>
               {fr
-                ? "L'État français fixe les tarifs des soins et encadre les revenus des médecins. Le résultat ? Une concurrence très partielle, donc des incitations à l'efficacité... mitigées !"
-                : "The French State sets the rates for care and caps doctors' earnings. The result? Very partial competition - so incentives to be efficient that are... let's say lukewarm!"}
-            </p>
-            <p>
-              {fr
-                ? "La bureaucratie s'épaissit pour essayer de gérer ce que les prix ne gèrent plus. Et une part croissante du budget part en couches administratives plutôt qu'en soins."
-                : "Bureaucracy keeps thickening to manage what prices no longer manage. And a growing share of the budget ends up in administrative layers rather than in actual care."}
+                ? "En France, c'est plus discret. L'État fixe le tarif d'une consultation et encadre les revenus des médecins. Résultat : le prix ne dit plus où le soin manque ni où il déborde. Impossible de savoir où il faudrait plus de médecins, ou quoi financer en priorité. Alors on rationne à coups de règles à la place du prix. La bureaucratie gonfle pour gérer ce que le prix ne gère plus. Et une part qui monte du budget part en paperasse plutôt qu'en soins."
+                : "In France, it's quieter. The State sets the price of a consultation and caps doctors' earnings. Result: the price no longer says where care is missing or where there's too much of it. Impossible to tell where more doctors are needed, or what to fund first. So we ration with rules instead of prices. Bureaucracy grows to manage what prices no longer manage. And a rising share of the budget goes to paperwork rather than care."}
             </p>
           </Callout>
           <p>
@@ -367,13 +304,18 @@ export const MoneyLaws4Page: FC = () => {
           <ul>
             <li>
               {fr
-                ? "La manipulation monétaire : la boussole ment."
-                : "Monetary manipulation: the compass lies."}
+                ? "Fausser la monnaie : la boussole ment."
+                : "Faking the money: the compass lies."}
             </li>
             <li>
               {fr
-                ? "La doctrine du socialisme : la boussole n'existe plus."
-                : "The socialist doctrine: the compass is gone."}
+                ? "Bloquer un prix : la boussole ment sur une seule route."
+                : "Blocking one price: the compass lies on a single road."}
+            </li>
+            <li>
+              {fr
+                ? "Abolir tous les prix : la boussole n'existe plus."
+                : "Abolishing all prices: the compass is gone."}
             </li>
           </ul>
         </Block>
@@ -395,6 +337,11 @@ export const MoneyLaws4Page: FC = () => {
                 human action.
               </>
             )}
+          </p>
+          <p>
+            {fr
+              ? "Et le pire, c'est que tu connais déjà un prix qu'on truque en permanence. Le plus important de tous. Le prix du temps : le taux d'intérêt. Celui que la banque centrale fixe à la main, pour toute l'économie, en même temps. La boussole de tous les projets longs, faussée par décret. Tu commences à voir où on va."
+              : "And the worst part is, you already know a price that gets faked all the time. The most important one of all. The price of time: the interest rate. The one a central bank sets by hand, for the whole economy, all at once. The compass of every long-term project, faked by decree. You're starting to see where we're heading."}
           </p>
           <p>{fr ? "Prêt à changer de lunettes ?" : "Ready to swap your glasses?"}</p>
         </Block>
