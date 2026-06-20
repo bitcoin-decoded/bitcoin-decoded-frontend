@@ -1,6 +1,8 @@
 import { type FC, useEffect, useMemo } from "react";
 
-import { Disclosure, Reference } from "../../../Design";
+import { Sparkles } from "lucide-react";
+
+import { Disclosure, FeedbackPanel, Reference } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
 import { useToggleSimulator } from "../../Shared/hooks";
@@ -60,21 +62,25 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
           </Disclosure>
         </div>
         {isActive && (
-          <>
-            <p>
+          <FeedbackPanel
+            tone="info"
+            title={fr ? "Ce qui vient de se passer" : "What just happened"}
+            icon={<Sparkles size={14} strokeWidth={2.2} />}
+          >
+            <p style={{ margin: "0 0 0.6rem 0" }}>
               <strong>
                 {fr
                   ? "ALAKAZAM ! 💥 Regarde attentivement la ligne en jaune."
                   : "ALAKAZAM! 💥 Look closely at the line in yellow."}
               </strong>
             </p>
-            <p>
+            <p style={{ margin: "0 0 0.6rem 0" }}>
               {fr
                 ? "Par un simple jeu d'écritures, en un seul clic, tu as en tant que banquier créé une ligne magique : une créance de 200 000 € (un actif car Nicolas te doit cet argent) et un dépôt de 200 000 € dans le compte de banque de Nicolas (un passif pour toi, car cet argent est dû au client : il peut le retirer ou le dépenser à tout moment)."
                 : "With one simple bookkeeping move, in a single click, you the banker just created a magic line: a €200,000 claim (an asset, because Nicolas owes you that money) and a €200,000 deposit in Nicolas's bank account (a liability for you, because that money is owed to the customer: he can withdraw it or spend it whenever he wants)."}
             </p>
 
-            <p>
+            <p style={{ margin: "0 0 0.6rem 0" }}>
               {fr ? (
                 <>
                   200 000 € viennent d'apparaître sur le compte de Nicolas. Ils sont sortis du
@@ -99,7 +105,7 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
               )}
             </p>
 
-            <p>
+            <p style={{ margin: 0 }}>
               {fr ? (
                 <>
                   Voilà.{" "}
@@ -123,7 +129,7 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
                 </>
               )}
             </p>
-          </>
+          </FeedbackPanel>
         )}
       </div>
     </FrText>

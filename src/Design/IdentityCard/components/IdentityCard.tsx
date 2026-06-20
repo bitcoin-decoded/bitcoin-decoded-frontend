@@ -1,6 +1,7 @@
 import { type CSSProperties, type FC, type KeyboardEvent, type ReactNode } from "react";
 
 import { useTranslation } from "../../../I18n";
+import { useBreakpoint } from "../../Responsive";
 import { usePageTheme } from "../../Theme/hooks/usePageTheme";
 import { useIdentityCard } from "../hooks";
 import type { IdentityCharacteristic } from "../types";
@@ -41,6 +42,7 @@ export const IdentityCard: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
+  const isMobile = useBreakpoint() === "mobile";
   const {
     isHovered,
     setIsHovered,
@@ -51,6 +53,11 @@ export const IdentityCard: FC<Props> = ({
     setIsExpandButtonHovered,
   } = useIdentityCard(isExpandable, onExpand);
 
+  // Force the compact ramp on mobile regardless of the prop: the roomy ramp
+  // (33% avatar, 6rem top margin) stretches a single-column card to nearly
+  // the full viewport height. Desktop opt-in remains driven by `compact`.
+  const effectiveCompact = compact || isMobile;
+
   // Single source for the two size tiers. `compact` drives the gallery look;
   // the default keeps the original roomy card untouched.
   //
@@ -59,7 +66,7 @@ export const IdentityCard: FC<Props> = ({
   // from the same value, so the protruding halves always clear the content
   // above and below whatever the card width.
   const compactAvatarSize = "min(33%, 8.5rem)";
-  const ramp = compact
+  const ramp = effectiveCompact
     ? {
         avatarSize: compactAvatarSize,
         avatarMarginTop: `calc(${compactAvatarSize} / 2 + 0.4rem)`,
@@ -154,7 +161,7 @@ export const IdentityCard: FC<Props> = ({
   };
 
   const profileStyle: CSSProperties = {
-    margin: compact ? "0.2rem 0 1.1rem 0" : "0.25rem 0 1.5rem 0",
+    margin: effectiveCompact ? "0.2rem 0 1.1rem 0" : "0.25rem 0 1.5rem 0",
     fontSize: ramp.profileFont,
     letterSpacing: "0.1em",
     color: colors[moduleTheme].border.secondary,
@@ -163,7 +170,7 @@ export const IdentityCard: FC<Props> = ({
     // wraps and those that don't share the exact same collapsed height -
     // a uniform baseline that, unlike `align-items: stretch`, never resizes
     // neighbours when a card expands.
-    ...(compact ? { lineHeight: 1.4, minHeight: "2.8em" } : {}),
+    ...(effectiveCompact ? { lineHeight: 1.4, minHeight: "2.8em" } : {}),
   };
 
   const sectionLabelStyle: CSSProperties = {
@@ -173,7 +180,7 @@ export const IdentityCard: FC<Props> = ({
     gap: "0.4rem",
     color: colors[moduleTheme].text.primary,
     fontWeight: 700,
-    marginBottom: compact ? "0.6rem" : "1rem",
+    marginBottom: effectiveCompact ? "0.6rem" : "1rem",
   };
 
   const sectionValueStyle: CSSProperties = {

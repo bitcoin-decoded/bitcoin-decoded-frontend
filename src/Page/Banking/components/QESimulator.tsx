@@ -1,6 +1,8 @@
 import { type CSSProperties, type FC, useEffect } from "react";
 
-import { usePageTheme } from "../../../Design";
+import { TrendingDown } from "lucide-react";
+
+import { FeedbackPanel, usePageTheme } from "../../../Design";
 import { useBreakpoint } from "../../../Design/Responsive";
 import { FrText, useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
@@ -44,6 +46,9 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
+    // Align fields by their bottom edge so the values stay on a single visual
+    // baseline even when one label wraps onto two lines.
+    alignItems: "flex-end",
     gap: "1rem",
   };
 
@@ -71,6 +76,11 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
     lineHeight: 1.2,
     textAlign: "center",
     whiteSpace: "nowrap",
+    // Brief background flash on the new value so the change registers,
+    // without permanently shifting the color (orange stays the field tone).
+    padding: "0.1rem 0.4rem",
+    borderRadius: "0.4rem",
+    animation: isActive ? "qeValuePulse 0.85s ease-out" : undefined,
   };
 
   const cutoutStyle: CSSProperties = {
@@ -85,6 +95,13 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
 
   return (
     <FrText>
+      <style>{`
+        @keyframes qeValuePulse {
+          0% { background-color: rgba(245, 158, 11, 0); }
+          15% { background-color: rgba(245, 158, 11, 0.32); }
+          100% { background-color: rgba(245, 158, 11, 0); }
+        }
+      `}</style>
       <div style={{ marginTop: "2rem", marginBottom: "4rem" }}>
         <SimulatorControls
           primaryLabel={t("simulator.qe.buy")}
@@ -120,9 +137,13 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
           </div>
         </div>
         {isActive && (
-          <p style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
+          <FeedbackPanel
+            tone="warning"
+            title={fr ? "Effet du QE" : "QE's effect"}
+            icon={<TrendingDown size={14} strokeWidth={2.2} />}
+          >
             {fr ? (
-              <>
+              <p style={{ margin: 0 }}>
                 La Banque Centrale a inondé le marché pour acheter ces titres. En faisant s'envoler
                 le prix de l'obligation à 4 000 €, son rendement annuel s'écrase mécaniquement à 1%
                 : le coupon reste fixé à 40 €, mais rapporté à un prix d'achat de 4 000 €, cela ne
@@ -131,9 +152,9 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
                   assouplissement quantitatif écrase artificiellement les taux, et de proche en
                   proche, sur une grande partie de l'économie.
                 </strong>
-              </>
+              </p>
             ) : (
-              <>
+              <p style={{ margin: 0 }}>
                 The Central Bank flooded the market to snap up these securities. By sending the
                 bond's price soaring to €4,000, its annual yield mechanically collapses to 1%: the
                 coupon is still fixed at €40, but set against a €4,000 purchase price, that's no
@@ -142,9 +163,9 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
                   Quantitative Easing artificially crushes rates, and step by step, spreads across
                   a large part of the economy.
                 </strong>
-              </>
+              </p>
             )}
-          </p>
+          </FeedbackPanel>
         )}
       </div>
     </FrText>
