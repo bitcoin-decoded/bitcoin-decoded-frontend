@@ -51,19 +51,9 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
           ? "c) Je n'en ai aucune fichtre idée, il me manque une information vitale pour trancher !"
           : "c) I haven't the foggiest - I'm missing a vital piece of information to decide!",
         isCorrect: true,
-        rationale: fr ? (
-          <>
-            Félicitations, tu viens de mettre le doigt sur l'argument de Mises ! Sans prix de
-            marché, tu ne peux pas comparer le « coût social » d'un matériau par rapport à un autre.
-            Tu n'as pas de dénominateur commun.
-          </>
-        ) : (
-          <>
-            Congratulations - you've just put your finger on Mises's argument! Without market
-            prices, you can't compare the "social cost" of one material against another. You've got
-            no common denominator.
-          </>
-        ),
+        rationale: fr
+          ? "Bravo, tu viens de tomber pile poil dans le mille sur l'argument de Mises."
+          : "You've just put your finger on Mises's argument.",
       },
     ],
   };
