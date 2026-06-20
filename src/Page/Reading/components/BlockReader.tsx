@@ -13,7 +13,7 @@ import { Check, RotateCcw } from "lucide-react";
 
 import { useBadges } from "../../../Achievements";
 import { Button, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
 import { PageNavigation } from "../../Shared";
 import { useBlockReader } from "../hooks";
 
@@ -93,8 +93,17 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
         const isRevealing = i === revealingIndex;
         const locked = kind === "tool" && !isDone(i);
 
+        // Render-prop blocks (tool blocks) are evaluated AFTER PageTemplate's
+        // top-level `<FrText>` has walked the static tree. Their output never
+        // sees the French-typography pass unless we re-wrap it here. Static
+        // children already went through the outer walk - no double-pass needed.
         const raw = block.props.children;
-        const content = typeof raw === "function" ? raw({ markComplete: markCompleteFns[i] }) : raw;
+        const content =
+          typeof raw === "function" ? (
+            <FrText>{raw({ markComplete: markCompleteFns[i] })}</FrText>
+          ) : (
+            raw
+          );
 
         return (
           <Fragment key={i}>
