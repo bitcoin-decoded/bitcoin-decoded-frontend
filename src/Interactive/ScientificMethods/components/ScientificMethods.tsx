@@ -1,31 +1,23 @@
-import { type CSSProperties, type FC } from "react";
+import { type FC } from "react";
 
-import { useBreakpoint } from "../../../Design";
-
-import { LogicianMethod } from "./LogicianMethod";
-import { PhysicistMethod } from "./PhysicistMethod";
+import { usePageTheme } from "../../../Design";
+import { useTranslation } from "../../../I18n";
+import { ExpandableDefinitions } from "../../ExpandableDefinitions";
+import { getScientificMethodTerms } from "../data";
 
 /**
- * The matched pair of method visuals for MoneyLaws4. Physicist first (a
- * horizontal, revisable timeline), logician second (a vertical deductive
- * tree) - the same order as the chapter's Callout. The opposition of forms is
- * the whole point: one story moving through time, one structure descending
- * from a single point.
+ * Two click-to-reveal cards (keynesian / austrian) wrapping the matched
+ * method illustrations. Mirrors the AccountingTerms pattern: the reader
+ * compares one school at a time rather than facing both visuals stacked
+ * vertically. The opposition of forms is preserved inside each body.
  */
 export const ScientificMethods: FC = () => {
-  const isMobile = useBreakpoint() === "mobile";
+  const { language } = useTranslation();
+  const { colors } = usePageTheme();
+  const terms = getScientificMethodTerms(language, colors);
 
-  const wrap: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.25rem",
-    margin: isMobile ? "1.5rem 0" : "2rem 0",
-  };
+  const fr = language === "fr";
+  const sectionTitle = fr ? "Les deux écoles, côte à côte" : "The two schools, side by side";
 
-  return (
-    <div style={wrap}>
-      <PhysicistMethod />
-      <LogicianMethod />
-    </div>
-  );
+  return <ExpandableDefinitions sectionTitle={sectionTitle} terms={terms} />;
 };
