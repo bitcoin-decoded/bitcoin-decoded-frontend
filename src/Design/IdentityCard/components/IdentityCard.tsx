@@ -69,30 +69,30 @@ export const IdentityCard: FC<Props> = ({
   const ramp = effectiveCompact
     ? {
         avatarSize: compactAvatarSize,
-        avatarMarginTop: `calc(${compactAvatarSize} / 2 + 0.4rem)`,
-        marginBottom: "1.5rem",
-        contentPadTop: `calc(${compactAvatarSize} / 2 + 1.35rem)`,
+        avatarMarginTop: `calc(${compactAvatarSize} / 2 + 0.2rem)`,
+        marginBottom: "0.75rem",
+        contentPadTop: `calc(${compactAvatarSize} / 2 + 0.9rem)`,
         contentPadX: "1.1rem",
-        contentPadBottom: "1.35rem",
+        contentPadBottom: "0.9rem",
         baseFont: "0.85rem",
         nameFont: "1rem",
         profileFont: "0.7rem",
-        dividerMargin: "0 auto 1.15rem auto",
-        sectionGap: "1.4rem",
+        dividerMargin: "0 auto 0.85rem auto",
+        sectionGap: "1rem",
         radius: "1rem",
       }
     : {
         avatarSize: "33%",
-        avatarMarginTop: "6rem",
-        marginBottom: "2rem",
-        contentPadTop: "calc(15% + 2rem)",
+        avatarMarginTop: "4rem",
+        marginBottom: "1rem",
+        contentPadTop: "calc(15% + 1.25rem)",
         contentPadX: "1.5rem",
-        contentPadBottom: "2rem",
+        contentPadBottom: "1.25rem",
         baseFont: "1rem",
         nameFont: "1.25rem",
         profileFont: "0.9rem",
-        dividerMargin: "0 auto 1.5rem auto",
-        sectionGap: "2rem",
+        dividerMargin: "0 auto 1rem auto",
+        sectionGap: "1.25rem",
         radius: "1.25rem",
       };
 
@@ -161,7 +161,7 @@ export const IdentityCard: FC<Props> = ({
   };
 
   const profileStyle: CSSProperties = {
-    margin: effectiveCompact ? "0.2rem 0 1.1rem 0" : "0.25rem 0 1.5rem 0",
+    margin: effectiveCompact ? "0.2rem 0 0.8rem 0" : "0.25rem 0 1rem 0",
     fontSize: ramp.profileFont,
     letterSpacing: "0.1em",
     color: colors[moduleTheme].border.secondary,
