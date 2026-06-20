@@ -51,23 +51,9 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
           ? "c) Je n'en ai aucune fichtre idée, il me manque une information vitale pour trancher !"
           : "c) I haven't the foggiest - I'm missing a vital piece of information to decide!",
         isCorrect: true,
-        rationale: fr ? (
-          <>
-            Bravo, tu viens de tomber sur l'argument de Mises. Sans prix, tu compares des choux et
-            des carottes. Combien de tonnes d'acier « valent » combien de tonnes de béton, plus
-            combien d'énergie, plus combien d'heures de travail ? Il te manque une unité commune
-            pour comparer des choses qui n'ont rien à voir. Le prix, c'est cette unité. Enlève-le,
-            et la question n'a tout simplement plus de réponse.
-          </>
-        ) : (
-          <>
-            You've just put your finger on Mises's argument. Without prices, you're comparing apples
-            and oranges. How many tonnes of steel "are worth" how many tonnes of concrete, plus how
-            much energy, plus how many work hours? You're missing a common unit to compare things
-            that have nothing in common. The price is that unit. Take it away, and the question has
-            no answer at all.
-          </>
-        ),
+        rationale: fr
+          ? "Bravo, tu viens de tomber pile poil dans le mille sur l'argument de Mises."
+          : "You've just put your finger on Mises's argument.",
       },
     ],
   };

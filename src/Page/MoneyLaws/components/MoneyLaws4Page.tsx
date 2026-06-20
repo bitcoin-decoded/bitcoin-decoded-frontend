@@ -46,7 +46,7 @@ export const MoneyLaws4Page: FC = () => {
               <>
                 Au chapitre précédent, on a vu que la{" "}
                 <Reference to={ROUTE_NAME.MoneyLaws_3}>manipulation de la monnaie</Reference> fausse
-                les signaux et provoque des krachs. Mais que se passe-t-il si l'état, un beau matin,
+                les signaux et provoque des krachs. Mais que se passe-t-il si l'État, un beau matin,
                 décide de supprimer totalement ces signaux ? Eh bien, le socialisme a essayé.
               </>
             ) : (
@@ -59,9 +59,21 @@ export const MoneyLaws4Page: FC = () => {
             )}
           </p>
           <p>
-            {fr
-              ? "On va pousser le curseur à fond, jusqu'à zéro prix. Pas parce que la France en est là, mais parce que le cas extrême rend la mécanique visible. Le réel, on le retrouvera juste après, en plus discret."
-              : "We're going to push the cursor all the way down, to zero prices. Not because France is there, but because the extreme case makes the mechanics visible. Reality comes back right after, in quieter form."}
+            {fr ? (
+              <>
+                On va pousser la logique à fond, jusqu'à zéro prix. Pas parce que la France en est
+                là, mais parce que{" "}
+                <HighlightText>le cas extrême rend la mécanique visible</HighlightText>. Le réel, on
+                le retrouvera juste après dans ce chapitre, en plus discret.
+              </>
+            ) : (
+              <>
+                We're going to push the logic all the way down, to zero prices. Not because any real
+                economy is fully there, but because{" "}
+                <HighlightText>the extreme case makes the mechanics visible</HighlightText>. Reality
+                comes back right after in this chapter, in quieter form."
+              </>
+            )}
           </p>
           <p>
             {fr ? (
@@ -114,76 +126,123 @@ export const MoneyLaws4Page: FC = () => {
                   ? "Tes ingénieurs te présentent deux options techniques :"
                   : "Your engineers lay out two technical options:"}
               </p>
-              <ul>
+              <ol>
                 <li>
                   {fr
-                    ? "L'Acier : ultra-résistant, mais sa production demande énormément d'énergie."
+                    ? "L'acier : ultra-résistant, mais sa production demande énormément d'énergie."
                     : "Steel: extremely strong, but it takes a huge amount of energy to produce."}
                 </li>
                 <li>
                   {fr
-                    ? "Le Béton : plus simple à fabriquer, mais il en faut vraiment beaucoup."
+                    ? "Le béton : plus simple à fabriquer, mais il en faut vraiment beaucoup."
                     : "Concrete: simpler to make, but you need an awful lot of it."}
                 </li>
-              </ul>
+              </ol>
               <p>
-                {fr
-                  ? "Le problème ? Tu n'as pas de prix. L'État possède tout, donc rien ne s'achète ni ne se vend. Tu n'as que des rapports techniques sur les quantités de minerai ou de sable."
-                  : "The catch? You have no prices. The State owns everything, so nothing is bought or sold. All you've got is technical reports on tonnes of ore or sand."}
+                {fr ? (
+                  <>
+                    Le problème ? <HighlightText>Tu n'as pas de prix</HighlightText>. L'État possède
+                    tout, donc rien ne s'achète ni ne se vend. Tu n'as que des rapports techniques
+                    sur les quantités de minerai ou de sable.
+                  </>
+                ) : (
+                  <>
+                    The catch? <HighlightText>You have no prices</HighlightText>. The State owns
+                    everything, so nothing is bought or sold. All you've got is technical reports on
+                    tonnes of ore or sand.
+                  </>
+                )}
               </p>
               <Quiz {...getQuizDataBridgeMaterial(language)} onCorrectAnswer={markComplete} />
-              <p>
-                {fr
-                  ? "Sans prix, l'économie devient une sorte de devinette géante. On peut techniquement construire le pont, ça OK, mais on ne peut pas savoir si les ressources mobilisées auraient mieux servi ailleurs."
-                  : "Without prices, the economy turns into one giant guessing game. Sure, you can technically build the bridge - but you can't know whether those resources would have done more good somewhere else."}
-              </p>
-              <p>
-                {fr
-                  ? "Comme le disait Mises, le planificateur est comme un capitaine de navire qui a les cartes, les voiles et l'équipage, mais à qui on aurait retiré la boussole et les étoiles. Il peut naviguer, mais il ne sait pas s'il va vers la terre ferme ou vers un récif. Un peu comme dans le film du Titanic dont on connaît tous la fin."
-                  : "As Mises put it, the planner is like a ship's captain who has the maps, the sails, and the crew - but no compass and no stars. He can sail. He just can't tell if he's heading for dry land or a reef. A bit like the Titanic, and we all know how that one ended."}
-              </p>
             </Callout>
           )}
+        </Block>
+        <Block>
+          <p>
+            {fr
+              ? "Sans prix, tu compares des choux et des carottes. Combien de tonnes d'acier « valent » combien de tonnes de béton, plus combien d'énergie, plus combien d'heures de travail ? Il te manque une unité commune pour comparer des choses qui n'ont rien à voir. Le prix, c'est cette unité. Enlève-le, et la question n'a tout simplement plus de réponse."
+              : "Without prices, you're comparing apples and oranges. How many tonnes of steel 'are worth' how many tonnes of concrete, plus how much energy, plus how many work hours? You're missing a common unit to compare things that have nothing in common. The price is that unit. Take it away, and the question has no answer at all."}
+          </p>
+          <p>
+            {fr
+              ? "Comme le disait Mises, le planificateur est comme un capitaine de navire qui a les cartes, les voiles et l'équipage, mais à qui on aurait retiré la boussole et les étoiles. Il peut naviguer, mais il ne sait pas s'il va vers la terre ferme ou vers un récif. Un peu comme dans le film du Titanic dont on connaît tous la fin."
+              : "As Mises put it, the planner is like a ship's captain who has the maps, the sails, and the crew - but no compass and no stars. He can sail. He just can't tell if he's heading for dry land or a reef. A bit like the Titanic, and we all know how that one ended."}
+          </p>
         </Block>
 
         <Block>
           <p>
-            {fr
-              ? "Le capitalisme a exactement le même problème. Sauf qu'il a trouvé un truc pour le résoudre. Pas un coordinateur génial. Des gens qui parient."
-              : "Capitalism has exactly the same problem. Except it figured out a way around it. Not a genius coordinator. People placing bets."}
-          </p>
-          <p>
-            {fr
-              ? "Quand un entrepreneur construit ce pont, il met sa fortune en jeu. Il dit « je parie que l'acier vaut plus ici qu'ailleurs ». S'il a raison, il gagne. S'il se trompe, il fait faillite. Cette peau dans le jeu, c'est ce qui crée une information neuve : le bon prix."
-              : 'When an entrepreneur builds that bridge, they put their fortune on the line. They say "I bet steel is worth more here than somewhere else." If they\'re right, they win. If they\'re wrong, they go bust. That skin in the game is what creates a new piece of information: the right price.'}
-          </p>
-          <p>
-            {fr
-              ? "Parce que le prix, ce n'est pas magique. C'est de la connaissance congelée. Le résultat visible de milliers de paris comme le sien. Quand l'acier est cher, c'est que plein d'autres en ont besoin au même moment, pour des fusées, des rails, des immeubles. Le prix te transmet ça sans que tu aies besoin de le savoir."
-              : "Because price isn't magic. It's frozen knowledge. The visible result of thousands of bets like theirs. When steel is expensive, it's because plenty of other people need it at the same time, for rockets, rails, buildings. The price carries that to you without you needing to know."}
-          </p>
-          <p>
-            {fr
-              ? "Attention, ça ne veut pas dire que le marché a toujours raison. Un entrepreneur qui rogne sur la qualité peut empoisonner son client. L'amiante a été vendue des décennies avant d'être interdite. Le marché se trompe, et parfois salement."
-              : "Careful, though: that doesn't mean the market is always right. An entrepreneur who cuts corners on quality can poison their customer. Asbestos was sold for decades before being banned. The market gets it wrong, and sometimes badly."}
-          </p>
-          <p>
-            {fr
-              ? "La différence est ailleurs. Le marché a un moyen de s'apercevoir qu'il s'est planté : la perte, la faillite, le procès, le client qui s'en va. L'amiante a fini interdite et les boîtes ruinées. Le planificateur, lui, n'a aucun de ces signaux. Il ne fait jamais faillite. Son erreur ne lui revient jamais. Elle s'accumule en silence, jusqu'au jour où tout casse d'un coup."
-              : "The difference lies elsewhere. The market has a way of noticing it messed up: loss, bankruptcy, lawsuits, customers walking out. Asbestos ended up banned, and the firms ruined. The planner has none of these signals. He never goes bust. His mistake never comes back to him. It piles up in silence, until the day it all breaks at once."}
+            {fr ? (
+              <>
+                Le capitalisme rencontre exactement le même problème. Sauf qu'il a trouvé un truc
+                pour le résoudre. Pas un coordinateur génial.{" "}
+                <HighlightText>Des gens qui parient</HighlightText>.
+              </>
+            ) : (
+              <>
+                Capitalism faces exactly the same problem. Except it figured out a way around it.
+                Not a genius coordinator. <HighlightText>People placing bets</HighlightText>.
+              </>
+            )}
           </p>
           <p>
             {fr ? (
               <>
-                Voilà ce que les prix font et que le planificateur n'a pas.{" "}
-                <HighlightText>Pas un résultat parfait. Un moyen de corriger ses erreurs.</HighlightText>
+                Quand un entrepreneur construit un pont, il met sa fortune en jeu. Il dit « je parie
+                que l'acier vaut plus ici qu'ailleurs ». S'il a raison, il gagne. S'il se trompe, il
+                fait faillite. Ce <i>skin in the game</i> (peau dans le jeu), c'est ce qui crée une
+                information neuve : <HighlightText>le bon prix</HighlightText>.
               </>
             ) : (
               <>
-                That's what prices give you, and the planner has nothing like it.{" "}
-                <HighlightText>Not a perfect outcome. A way to correct mistakes.</HighlightText>
+                When an entrepreneur builds a bridge, they put their fortune on the line. They say
+                \"I bet steel is worth more here than somewhere else.\" If they're right, they win.
+                If they're wrong, they go bust. That skin in the game is what creates a new piece of
+                information: <HighlightText>the right price</HighlightText>.
               </>
             )}
+          </p>
+          <p>
+            {fr
+              ? "Parce que le prix, ce n'est pas magique. C'est de la connaissance accumulée. Le résultat visible de milliers de paris comme le sien. Quand l'acier coûte une blinde, c'est que plein d'autres en ont besoin au même moment, pour des fusées, des rails, des immeubles. Le prix te transmet ça sans que tu aies besoin de le savoir."
+              : "Because price isn't magic. It's accumulated knowledge. The visible result of thousands of bets like theirs. When steel is ridiculously expensive, it's because plenty of other people need it at the same time, for rockets, rails, buildings. The price carries that to you without you needing to know."}
+          </p>
+        </Block>
+        <Block>
+          <p>
+            {fr
+              ? "Attention, ça ne veut pas dire que le marché a toujours raison : un entrepreneur qui rogne sur la qualité peut empoisonner son client. L'amiante a été vendue des décennies avant d'être interdite. Le marché se trompe, et parfois salement."
+              : "Careful, though: that doesn't mean the market is always right. An entrepreneur who cuts corners on quality can poison their customer. Asbestos was sold for decades before being banned. The market gets it wrong, and sometimes badly."}
+          </p>
+          <p>
+            {fr ? (
+              <>
+                La différence est ailleurs. Le marché a un moyen de s'apercevoir qu'il s'est planté
+                : la perte, la faillite, le procès, le client qui s'en va. L'amiante a fini
+                interdite et les boîtes ruinées.{" "}
+                <HighlightText>
+                  Le planificateur, lui, n'a aucun de ces signaux. Il ne fait jamais faillite. Son
+                  erreur ne lui revient jamais
+                </HighlightText>
+                . Elle s'accumule en silence, jusqu'au jour où tout casse d'un coup.
+              </>
+            ) : (
+              <>
+                The difference lies elsewhere. The market has a way of noticing it messed up: loss,
+                bankruptcy, lawsuits, customers walking out. Asbestos ended up banned, and the firms
+                ruined.{" "}
+                <HighlightText>
+                  The planner has none of these signals. He never goes bust. His mistake never comes
+                  back to him
+                </HighlightText>
+                . It piles up in silence, until the day it all breaks at once.
+              </>
+            )}
+          </p>
+          <p>
+            {fr
+              ? "Voilà ce que les prix font et que le planificateur n'a pas. Pas un résultat parfait. Un moyen de corriger ses erreurs."
+              : "That's what prices give you, and the planner has nothing like it. Not a perfect outcome. A way to correct mistakes."}
           </p>
         </Block>
 
@@ -223,8 +282,8 @@ export const MoneyLaws4Page: FC = () => {
         <Block>
           <p>
             {fr
-              ? "Tu te dis peut-être : « mais nous, en France, on a des prix ». Oui. Sauf qu'on n'abolit jamais tous les prix d'un coup. On en tue un, ici ou là. Le chiffre reste affiché, mais on l'a vidé. C'est le problème du planificateur, en version locale."
-              : 'You might be thinking: "but here in France, we have prices." Right. Except we never abolish all prices at once. We kill one, here or there. The number stays on the label, but it\'s been hollowed out. It\'s the planner\'s problem, in local form.'}
+              ? "Tu te dis peut-être : « mais nous, en France, on a des prix ». Oui. Sauf qu'on n'abolit jamais tous les prix d'un coup. On en tue un, ici ou là. Le chiffre reste affiché, mais on l'a vidé. C'est le problème du planificateur, façon locale."
+              : "You might be thinking: \"but we still have prices.\" Right. Except we never abolish all prices at once. We kill one, here or there. The number stays on the label, but it's been hollowed out. It's the planner's problem, locally."}
           </p>
           <Callout
             title={fr ? "Le cas de la Chine et de son eau" : "The case of China and its water"}
@@ -292,9 +351,17 @@ export const MoneyLaws4Page: FC = () => {
             </p>
           </Callout>
           <p>
-            {fr
-              ? "Le problème du socialisme n'est pas la méchanceté ou l'incompétence des planificateurs. Il est structurel."
-              : "The problem with socialism isn't the malice or incompetence of planners. It's structural."}
+            {fr ? (
+              <>
+                Le problème du socialisme n'est pas la méchanceté ou l'incompétence des
+                planificateurs. <HighlightText>Il est structurel</HighlightText>.
+              </>
+            ) : (
+              <>
+                The problem with socialism isn't the malice or incompetence of planners.{" "}
+                <HighlightText>It's structural</HighlightText>.
+              </>
+            )}
           </p>
           <p>
             {fr
@@ -309,8 +376,8 @@ export const MoneyLaws4Page: FC = () => {
             </li>
             <li>
               {fr
-                ? "Bloquer un prix : la boussole ment sur une seule route."
-                : "Blocking one price: the compass lies on a single road."}
+                ? "Bloquer un prix : la boussole ment à un endroit."
+                : "Blocking one price: the compass lies in one place."}
             </li>
             <li>
               {fr
@@ -339,9 +406,23 @@ export const MoneyLaws4Page: FC = () => {
             )}
           </p>
           <p>
-            {fr
-              ? "Et le pire, c'est que tu connais déjà un prix qu'on truque en permanence. Le plus important de tous. Le prix du temps : le taux d'intérêt. Celui que la banque centrale fixe à la main, pour toute l'économie, en même temps. La boussole de tous les projets longs, faussée par décret. Tu commences à voir où on va."
-              : "And the worst part is, you already know a price that gets faked all the time. The most important one of all. The price of time: the interest rate. The one a central bank sets by hand, for the whole economy, all at once. The compass of every long-term project, faked by decree. You're starting to see where we're heading."}
+            {fr ? (
+              <>
+                Et le pire, c'est que tu connais déjà un prix qu'on truque en permanence. Le plus
+                important de tous.{" "}
+                <HighlightText>Le prix du temps : le taux d'intérêt</HighlightText>. Celui que la
+                banque centrale fixe à la main, pour toute l'économie, en même temps. La boussole de
+                tous les projets longs, faussée par décret. Tu commences à voir où on va.
+              </>
+            ) : (
+              <>
+                And the worst part is, you already know a price that gets faked all the time. The
+                most important one of all.{" "}
+                <HighlightText>The price of time: the interest rate</HighlightText>. The one a
+                central bank sets by hand, for the whole economy, all at once. The compass of every
+                long-term project, faked by decree. You're starting to see where we're heading.
+              </>
+            )}
           </p>
           <p>{fr ? "Prêt à changer de lunettes ?" : "Ready to swap your glasses?"}</p>
         </Block>
