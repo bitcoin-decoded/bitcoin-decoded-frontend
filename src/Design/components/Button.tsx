@@ -8,27 +8,30 @@ import {
 
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { usePageTheme } from "../Theme";
+import { BRAND, usePageTheme } from "../Theme";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "stamped";
 type Size = "sm" | "md";
 
 type Props = {
   children: ReactNode;
   /**
    * Visual weight.
-   * - `primary`: accent gradient + accent border + accent text. The unmistakable "do the thing" CTA.
-   * - `secondary`: transparent fill + neutral border + muted text. Quiet sibling for "reset / cancel".
-   * - `ghost`: no border, no fill, just text. For tertiary actions (e.g. micro-toggles).
+   * - `primary`: bracketed mono small-caps (`[ label ]`) — the workhorse CTA.
+   *   Gold brackets, no fill, no gradient. Brackets brighten on hover.
+   * - `secondary`: mono small-caps with a dashed underline. Quiet sibling.
+   * - `ghost`: plain mono text, no decoration. Tertiary actions.
+   * - `stamped`: gold carré-bloc + label on a hairline rule baseline —
+   *   the "official stamp" CTA, reserved for critical actions (validate
+   *   a quiz, execute a simulation, seal a block). Use sparingly.
    * @default "primary"
    */
   variant?: Variant;
   /** @default "md" */
   size?: Size;
   /**
-   * Override the accent color used by the `primary` variant.
-   * Defaults to the current page's module accent (Banking blue, MoneyLaws
-   * violet, Bitcoin amber, etc., resolved via `usePageTheme()`).
+   * Override the bracket / stamp color. Defaults to brand gold. Keep `undefined`
+   * unless the surrounding context demands a different signal color.
    */
   color?: string;
   /** Optional icon rendered before or after the label. */
@@ -40,20 +43,20 @@ type Props = {
   ariaLabel?: string;
   /** Stretch to fill the parent's main axis. */
   fullWidth?: boolean;
-  /** Optional inline style escape hatch (merged after variant styles). */
+  /** Inline style escape hatch (merged last). */
   style?: CSSProperties;
 };
 
 /**
- * Theme- and module-aware button primitive. One source of truth for every
- * action button across simulators, games, and chrome - replaces ~30+
- * inline button-style blocks scattered across the Interactive domain
- * with a single, consistent recipe.
+ * Ledger-system button primitive. Replaces the previous gradient + accent
+ * border recipe with four variants derived from print and editorial
+ * convention: bracketed (primary), dashed underline (secondary), plain mono
+ * (ghost), and gold-carré stamp (stamped CTA). No gradients, no halos,
+ * sharp corners (radius 0), mono small-caps everywhere.
  *
- * Reads the current page's module accent from `usePageTheme()`, so a
- * `<Button>` rendered on a Banking page is blue, on a Bitcoin page it
- * is amber, etc. - without any caller awareness of the world theme.
- * Override with the `color` prop when needed.
+ * The `color` prop overrides the gold accent for surfaces that need to
+ * carry a specific semantic signal — kept opt-in so the default behavior
+ * stays uniform (most callers should pass nothing).
  */
 export const Button: FC<Props> = ({
   children,
@@ -69,69 +72,141 @@ export const Button: FC<Props> = ({
   fullWidth = false,
   style,
 }) => {
-  const { colors, moduleTheme } = usePageTheme();
+  const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
 
-  // Accent - module color by default, overridable via `color`.
-  const accent = color ?? colors[moduleTheme].border.secondary;
-  const accentText = color ?? colors[moduleTheme].text.primary;
-  const neutralBorder = colors.base.border.secondary;
+  const accent = color ?? BRAND.gold;
   const neutralText = colors.base.text.secondary;
   const neutralTextStrong = colors.base.text.primary;
+  const hoverable = !disabled;
+  const isLifted = isHovered && hoverable;
 
-  const padX = size === "sm" ? "0.85rem" : "1.25rem";
-  const padY = size === "sm" ? "0.5rem" : "0.65rem";
+  // Sizing — mono labels need a touch more horizontal padding than the
+  // previous Inter labels because mono is wider per glyph.
+  const padX = size === "sm" ? "0.9rem" : "1.25rem";
+  const padY = size === "sm" ? "0.45rem" : "0.6rem";
   const padXMd = size === "sm" ? "1rem" : "1.5rem";
-  const padYMd = size === "sm" ? "0.55rem" : "0.7rem";
+  const padYMd = size === "sm" ? "0.5rem" : "0.65rem";
 
   const baseStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: size === "sm" ? (isMobile ? "0.7rem" : "0.74rem") : isMobile ? "0.72rem" : "0.78rem",
-    fontWeight: 600,
-    padding: isMobile ? `${padY} ${padX}` : `${padYMd} ${padXMd}`,
-    borderRadius: size === "sm" ? "0.55rem" : "0.65rem",
-    letterSpacing: "0.04em",
+    fontFamily: BRAND.fonts.mono,
+    fontSize:
+      size === "sm" ? (isMobile ? "0.6875rem" : "0.7125rem") : isMobile ? "0.72rem" : "0.75rem",
+    fontWeight: 500,
+    letterSpacing: variant === "ghost" ? "0.08em" : "0.14em",
+    fontVariant: "small-caps",
     cursor: disabled ? "not-allowed" : "pointer",
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     gap: "0.5rem",
-    transition: "all 0.3s var(--ease-smooth)",
+    transition: "all 0.25s var(--ease-smooth)",
     opacity: disabled ? 0.4 : 1,
     width: fullWidth ? "100%" : "auto",
     whiteSpace: "nowrap",
     boxSizing: "border-box",
+    borderRadius: 0,
+    background: "transparent",
+    color: neutralTextStrong,
   };
 
-  // Hover-aware variant styles. Every variant gets a hover whisper -
-  // brightness lift on bg/border, no transform on `secondary`/`ghost`
-  // (only `primary` gets the 1px translateY for "click me" affordance).
-  const hoverable = !disabled;
-  const isLifted = isHovered && hoverable;
+  let variantStyle: CSSProperties = {};
+  let labelDecoration: { before?: ReactNode; after?: ReactNode } = {};
 
-  const variantStyle: CSSProperties =
-    variant === "primary"
-      ? {
-          color: accentText,
-          background: isLifted
-            ? `linear-gradient(135deg, ${withOpacity(accent, 0.22)}, ${withOpacity(accent, 0.06)})`
-            : `linear-gradient(135deg, ${withOpacity(accent, 0.14)}, transparent)`,
-          border: `1.5px solid ${withOpacity(accent, isLifted ? 0.75 : 0.55)}`,
-          transform: isLifted ? "translateY(-1px)" : "translateY(0)",
-        }
-      : variant === "secondary"
-        ? {
-            color: isLifted ? neutralTextStrong : neutralText,
-            background: isLifted ? withOpacity(neutralText, 0.06) : "transparent",
-            border: `1px solid ${withOpacity(neutralBorder, isLifted ? 0.6 : 0.4)}`,
-          }
-        : {
-            // ghost
-            color: isLifted ? neutralTextStrong : neutralText,
-            background: "transparent",
-            border: "none",
-          };
+  if (variant === "primary") {
+    const bracketColor = isLifted ? accent : withOpacity(accent, 0.7);
+    variantStyle = {
+      padding: isMobile ? `${padY} ${padX}` : `${padYMd} ${padXMd}`,
+      color: isLifted ? colors.base.text.primary : colors.base.text.secondary,
+    };
+    labelDecoration = {
+      before: (
+        <span aria-hidden="true" style={{ color: bracketColor, transition: "color 0.25s" }}>
+          [
+        </span>
+      ),
+      after: (
+        <span aria-hidden="true" style={{ color: bracketColor, transition: "color 0.25s" }}>
+          ]
+        </span>
+      ),
+    };
+  } else if (variant === "secondary") {
+    variantStyle = {
+      padding: isMobile ? `${padY} 0` : `${padYMd} 0`,
+      color: isLifted ? neutralTextStrong : neutralText,
+      borderBottom: `1px dashed ${withOpacity(neutralText, isLifted ? 0.55 : 0.35)}`,
+      paddingBottom: 2,
+    };
+  } else if (variant === "ghost") {
+    variantStyle = {
+      padding: isMobile ? `${padY} 0.4rem` : `${padYMd} 0.5rem`,
+      color: isLifted ? neutralTextStrong : neutralText,
+    };
+  } else if (variant === "stamped") {
+    // Stamp: a gold carré on the left, the label boxed to its right with a
+    // hairline rule on top/right/bottom. The whole thing reads as a stamped
+    // entry on a ledger. Pressing nudges it down 1px like a cachet.
+    const stampHeight = size === "sm" ? 24 : 28;
+    variantStyle = {
+      padding: 0,
+      height: stampHeight,
+      gap: 0,
+      background: "transparent",
+      transform: isPressed && hoverable ? "translateY(1px)" : "translateY(0)",
+    };
+    labelDecoration = {
+      before: (
+        <span
+          aria-hidden="true"
+          style={{
+            width: stampHeight,
+            height: stampHeight,
+            background: accent,
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: BRAND.cream,
+            fontFamily: BRAND.fonts.display,
+            fontSize: size === "sm" ? 16 : 18,
+            lineHeight: 1,
+            fontWeight: 500,
+          }}
+        >
+          ⌗
+        </span>
+      ),
+      after: null,
+    };
+    variantStyle = {
+      ...variantStyle,
+      color: colors.base.text.primary,
+    };
+  }
+
+  // Wrap label for stamped to box it with hairline borders next to the carré.
+  const renderedLabel =
+    variant === "stamped" ? (
+      <span
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          height: size === "sm" ? 24 : 28,
+          padding: `0 ${isMobile ? "0.85rem" : "1rem"}`,
+          border: `1px solid ${accent}`,
+          borderLeft: "none",
+          fontFamily: BRAND.fonts.mono,
+          letterSpacing: "0.14em",
+          fontVariant: "small-caps",
+        }}
+      >
+        {children}
+      </span>
+    ) : (
+      children
+    );
 
   return (
     <button
@@ -139,13 +214,20 @@ export const Button: FC<Props> = ({
       style={{ ...baseStyle, ...variantStyle, ...style }}
       onClick={disabled ? undefined : onClick}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setIsPressed(false);
+      }}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
       disabled={disabled}
       aria-label={ariaLabel}
     >
+      {labelDecoration.before}
       {icon && iconPosition === "left" && icon}
-      {children}
+      {renderedLabel}
       {icon && iconPosition === "right" && icon}
+      {labelDecoration.after}
     </button>
   );
 };
