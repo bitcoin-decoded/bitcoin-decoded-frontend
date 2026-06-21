@@ -16,8 +16,6 @@ export const Banking1Page: FC = () => {
   return (
     <PageTemplate title={t("nav.tree.moneyOrigin")} showChapterNav={false}>
       <BlockReader chapterId={ROUTE_NAME.Banking_1}>
-        {/* BLOC 1 - Le piège : prélude + 1re prose forment une seule idée,
-            close en tension sur « Lis attentivement ce qui suit ». */}
         <Block>
           <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
@@ -58,8 +56,6 @@ export const Banking1Page: FC = () => {
           )}
         </Block>
 
-        {/* BLOC 2 - La révélation : le Callout entier reste d'un bloc (le
-            nuancement « ni illimité ni gratuit » fait partie de la révélation). */}
         <Block>
           <Callout title={fr ? "D'où vient l'argent ?" : "Where does money come from?"}>
             {fr ? (
@@ -115,8 +111,6 @@ export const Banking1Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* BLOC 3 - Tu deviens banquier : la respiration « Tu veux le voir ? »
-            introduit le setup de Nicolas, donc reste collée à lui. */}
         <Block>
           <p>
             {fr ? (
@@ -153,8 +147,6 @@ export const Banking1Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* BLOC 4 - Le vocabulaire (outil) : la prose est la légende du
-            composant ; on déroule les définitions avant d'agir. */}
         <Block>
           <p>
             {fr
@@ -164,9 +156,6 @@ export const Banking1Page: FC = () => {
           <AccountingTerms />
         </Block>
 
-        {/* BLOC 5 - Tu accordes le prêt (outil) : bloc-sommet. Les deux courtes
-            proses sont l'amorce immédiate du simulateur ; la « ligne magique »
-            est révélée par le composant lui-même, pas en prose. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -193,8 +182,6 @@ export const Banking1Page: FC = () => {
           )}
         </Block>
 
-        {/* BLOC 6 - Ce qui manque (dernier) : clôture courte qui ouvre sur le
-            chapitre 2, pas une synthèse bouclée. */}
         <Block last>
           <p>
             {fr
