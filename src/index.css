@@ -5,6 +5,27 @@
 
 :root {
   --ease-smooth: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  /* ── Ledger design system — brand pigments & figures ────────
+   * Atemporal values (same in light and dark mode); the mode-aware mapping
+   * is in THEME_COLORS / Theme provider. TS mirror lives in
+   * src/Design/Theme/data/BRAND.ts — keep both in sync. */
+  --brand-gold: #c4a45a;
+  --brand-navy: #16213e;
+  --brand-cream: #f8f5ee;
+  --brand-orange: #f7931a;
+
+  /* Block-vs-coin dichotomy: square = structure (block), circle = value (coin).
+   * See feedback-design-refonte-rules (rule 9). */
+  --block-size: 12px;
+  --coin-size: 12px;
+  --rule-thickness: 0.75px;
+
+  /* Typography stack — display (titles, logo-derived), body (prose),
+   * mono (all ledger metadata: block ids, hashes, timestamps, kickers). */
+  --font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 *,
