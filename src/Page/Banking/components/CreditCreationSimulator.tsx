@@ -1,6 +1,6 @@
 import { type FC, useEffect, useMemo } from "react";
 
-import { Disclosure, FeedbackPanel, Reference } from "../../../Design";
+import { Disclosure, FeedbackPanel, HighlightText, Reference } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
 import { useToggleSimulator } from "../../Shared/hooks";
@@ -62,11 +62,9 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
         {isActive && (
           <FeedbackPanel tone="info" style={{ marginTop: "1.5rem" }}>
             <p style={{ margin: "0 0 0.6rem 0" }}>
-              <strong>
-                {fr
-                  ? "ALAKAZAM ! 💥 Regarde attentivement la ligne en jaune."
-                  : "ALAKAZAM! 💥 Look closely at the line in yellow."}
-              </strong>
+              {fr
+                ? "ALAKAZAM ! 💥 Regarde attentivement la ligne en jaune."
+                : "ALAKAZAM! 💥 Look closely at the line in yellow."}
             </p>
             <p style={{ margin: "0 0 0.6rem 0" }}>
               {fr
@@ -80,20 +78,20 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
                   200 000 € viennent d'apparaître sur le compte de Nicolas. Ils sont sortis du
                   chapeau, enfin... presque ! En face, Nicolas porte maintenant une dette de 200 000
                   €.{" "}
-                  <strong>
+                  <HighlightText>
                     La banque n'a absolument pas créé de richesse. Elle a juste créé de la monnaie
                     d'un côté et une dette de l'autre.
-                  </strong>
+                  </HighlightText>
                   {" Et c'est exactement ça, le tour de passe-passe."}
                 </>
               ) : (
                 <>
                   €200,000 just appeared in Nicolas's account. Pulled out of a hat, well... almost!
                   On the other side, Nicolas now carries a €200,000 debt.{" "}
-                  <strong>
+                  <HighlightText>
                     The bank created no wealth whatsoever. It just created money on one side and
                     debt on the other.
-                  </strong>
+                  </HighlightText>
                   {" And that, right there, is the sleight of hand."}
                 </>
               )}
@@ -103,12 +101,10 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
               {fr ? (
                 <>
                   Voilà.{" "}
-                  <strong>
-                    <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf">
-                      La monnaie scripturale que tu utilises tous les jours naît surtout du crédit
-                      bancaire
-                    </Reference>
-                  </strong>
+                  <Reference href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf">
+                    La monnaie scripturale que tu utilises tous les jours naît surtout du crédit
+                    bancaire
+                  </Reference>
                   {", bien plus que de la planche à billets."}
                 </>
               ) : (
