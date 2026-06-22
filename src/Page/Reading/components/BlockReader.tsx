@@ -44,9 +44,12 @@ type Props = {
  */
 export const BlockReader: FC<Props> = ({ chapterId, children }) => {
   const { t } = useTranslation();
-  const { colors } = usePageTheme();
+  const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
   const gold = getBrandGold(theme);
+  // Module identity color for the seal celebration (matches the seal button),
+  // falling back to gold on neutral pages.
+  const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
 
   const blocks = Children.toArray(children).filter(
     (child): child is BlockElement => isValidElement(child) && child.type === Block,
@@ -164,7 +167,7 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
               style={{
                 fontFamily: BRAND.fonts.mono,
                 fontSize: "1.6rem",
-                color: gold,
+                color: moduleAccent,
                 lineHeight: 1,
               }}
             >
@@ -175,7 +178,7 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
                 fontFamily: BRAND.fonts.display,
                 fontSize: "1.85rem",
                 fontWeight: 700,
-                color: colors.semantic.success.text,
+                color: moduleAccent,
                 lineHeight: 1.1,
               }}
             >

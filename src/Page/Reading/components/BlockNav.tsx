@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { ArrowDown, ArrowUp, Lock } from "lucide-react";
 
-import { Button, Caption } from "../../../Design";
+import { Button, Caption, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 type Props = {
@@ -23,6 +23,12 @@ type Props = {
  */
 export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, onFinish }) => {
   const { t } = useTranslation();
+  const { colors, moduleTheme } = usePageTheme();
+
+  // Bring the module identity color back onto the navigation controls (violet
+  // on MoneyLaws, blue on Banking, …). On neutral pages `undefined` lets the
+  // Button fall back to its gold default.
+  const moduleColor = moduleTheme === "base" ? undefined : colors[moduleTheme].text.secondary;
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -37,6 +43,7 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
       {!isFirst && (
         <Button
           variant="primary"
+          color={moduleColor}
           icon={<ArrowUp size={16} strokeWidth={2} />}
           onClick={onPrev}
           style={{ opacity: 0.75 }}
@@ -46,12 +53,13 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
       )}
       <div style={{ marginLeft: "auto" }}>
         {isLast ? (
-          <Button variant="stamped" disabled={locked} onClick={onFinish}>
+          <Button variant="stamped" color={moduleColor} disabled={locked} onClick={onFinish}>
             {t("reading.finish")}
           </Button>
         ) : (
           <Button
             variant="primary"
+            color={moduleColor}
             icon={<ArrowDown size={16} strokeWidth={2} />}
             iconPosition="right"
             disabled={locked}

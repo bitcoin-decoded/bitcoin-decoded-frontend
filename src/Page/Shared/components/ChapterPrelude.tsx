@@ -1,6 +1,13 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, getBrandGold, useBreakpoint, usePageTheme, useThemeContext } from "../../../Design";
+import {
+  BRAND,
+  getBrandGold,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 type ChapterPreludeProps = {
@@ -14,41 +21,46 @@ type ChapterPreludeProps = {
 };
 
 /**
- * The ledger-system chapter prelude — a kicker `prélude` in mono small-caps
- * over italic serif body, separated from the rest of the block by a thin
- * gold filet at the left. Same vocabulary as Callout's bracketed-frame
- * kicker and BlockShell's title kicker. The previous module-tinted card
- * with halo glow and AudioLines icon belonged to the AI-template era;
- * this version reads as a typographic intro, not a UI widget.
+ * The chapter prelude — a soft module-color background wash (no left filet,
+ * which was confusable with the block's top rule) holding a Patrick Hand
+ * heading in the module color over an italic intro. The wash brings the
+ * module identity back (violet on MoneyLaws, blue on Banking, …) and sets the
+ * prelude apart from the surrounding prose as "the opening" without an
+ * AI-card halo. Heading register is shared with Callout's title (point 3).
  */
 export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom }) => {
-  const { colors } = usePageTheme();
+  const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
   const { t } = useTranslation();
   const isMobile = useBreakpoint() === "mobile";
 
   const gold = getBrandGold(theme);
+  const isModule = moduleTheme !== "base";
+  const moduleAccent = isModule ? colors[moduleTheme].text.secondary : gold;
+  // Saturated module color for the wash (e.g. violet #8b5cf6), falling back to
+  // gold on neutral pages. Kept very faint so the prose reads cleanly on top.
+  const washSource = isModule ? colors[moduleTheme].background.secondary : gold;
+  const wash = withOpacity(washSource, theme === "dark" ? 0.12 : 0.08);
 
   const containerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    paddingLeft: isMobile ? "0.85rem" : "1.1rem",
-    borderLeft: `${BRAND.figures.ruleThickness}px solid ${gold}`,
+    background: wash,
+    padding: isMobile ? "1rem 1.1rem" : "1.25rem 1.5rem",
     marginBottom,
   };
 
-  // The prelude opens the chapter — it deserves a real heading, not a banal
-  // mono metadata label. Cabin Sketch, gold, sizeable: the teacher writing
-  // "Prélude" at the top of the board before the lesson begins.
+  // The prelude opens the chapter — a real heading, in Patrick Hand (the
+  // teacher's hand) emphasized by size + module color rather than a sketched
+  // display face that read rough at this small size.
   const labelStyle: CSSProperties = {
     display: "block",
-    fontFamily: BRAND.fonts.display,
-    fontWeight: 700,
-    fontSize: isMobile ? "1.5rem" : "1.75rem",
+    fontFamily: BRAND.fonts.body,
+    fontSize: isMobile ? "1.5rem" : "1.7rem",
     letterSpacing: "0.01em",
-    color: gold,
+    color: moduleAccent,
     lineHeight: 1.1,
-    marginBottom: "0.6rem",
+    marginBottom: "0.5rem",
   };
 
   // Readable body — the previous `text.secondary` was ton-sur-ton and hard
