@@ -22,11 +22,15 @@
   --coin-size: 14px;
   --rule-thickness: 1px;
 
-  /* Typography stack — display (titles, logo-derived), body (prose),
-   * mono (all ledger metadata: block ids, hashes, timestamps, kickers). */
-  --font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-  --font-body: "Source Serif 4", Georgia, serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Hand-made pedagogical type stack — "passionate professor at a chalkboard".
+   * Cabin Sketch (display): sketched serif with hatched chalk fill.
+   * Patrick Hand (body): neat printed teacher handwriting.
+   * Cutive Mono (mono): typewriter for technical metadata.
+   * Old fonts kept as fallbacks so legacy hardcoded refs degrade gracefully
+   * during Phase 6 sim migration. */
+  --font-display: "Cabin Sketch", "Cormorant Garamond", Georgia, serif;
+  --font-body: "Patrick Hand", "Source Serif 4", Georgia, serif;
+  --font-mono: "Cutive Mono", "JetBrains Mono", ui-monospace, monospace;
 }
 
 *,
@@ -42,14 +46,12 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  /* Source Serif 4 — the editorial body face. Loaded from Google Fonts in
-   * index.html. The whole "ledger" register depends on this being applied;
-   * keeping Inter here was what kept the site reading as "AI template" no
-   * matter what the chrome looked like. UI primitives that need sans-serif
-   * or mono override this via BRAND.fonts.mono explicitly. */
+  /* Patrick Hand — teacher handwriting register. Set globally so prose
+   * inherits without each consumer having to override. Slightly looser
+   * line-height because handwriting needs more vertical breathing room. */
   font-family: var(--font-body), Georgia, serif;
-  letter-spacing: 0.005em;
-  line-height: 1.6;
+  letter-spacing: 0;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Prevent Android Chrome from auto-inflating font sizes, which causes
