@@ -472,16 +472,19 @@ body {
   counter-increment: paragraph;
   position: relative;
 }
+/* Bracketed format `[ 01 ]` is the visual discriminator from the site's
+ * <ol> list items (which use "01."). Same digit, different convention —
+ * brackets read as a scholarly marginal annotation, periods as a list item. */
 .reading-block-body > p::before {
-  content: counter(paragraph, decimal-leading-zero);
+  content: "[ " counter(paragraph, decimal-leading-zero) " ]";
   position: absolute;
-  left: -2.75rem;
+  left: -2.85rem;
   top: 0.4em;
-  width: 2rem;
+  width: 2.3rem;
   text-align: right;
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
   color: var(--marginalia-color, rgba(127, 127, 127, 0.5));
   user-select: none;
   pointer-events: none;
@@ -605,30 +608,10 @@ body {
   animation-delay: 0.68s;
 }
 
-/* Chain link between consecutive blocks: a single link drops into place. */
-@keyframes chainLinkIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-6px) scale(0.6);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(0) scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-.reading-chain-link.revealing {
-  animation: chainLinkIn 0.5s var(--ease-smooth) both;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .reading-block-inner.revealing,
   .reading-block-inner.revealing > *,
-  .reading-block-inner.revealing .reading-block-stamp,
-  .reading-chain-link.revealing {
+  .reading-block-inner.revealing .reading-block-stamp {
     animation: none !important;
   }
 }

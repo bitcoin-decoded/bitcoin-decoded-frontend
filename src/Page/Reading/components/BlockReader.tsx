@@ -20,7 +20,6 @@ import { PAGE_METADATA, PageNavigation } from "../../Shared";
 import { useBlockReader } from "../hooks";
 
 import { Block } from "./Block";
-import { BlockChainLink } from "./BlockChainLink";
 import { BlockMilestones } from "./BlockMilestones";
 import { BlockNav } from "./BlockNav";
 import { BlockShell } from "./BlockShell";
@@ -121,7 +120,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
 
         return (
           <Fragment key={i}>
-            {i > 0 && <BlockChainLink revealing={isRevealing} />}
             <BlockShell
               index={i}
               isCurrent={isCurrent}
