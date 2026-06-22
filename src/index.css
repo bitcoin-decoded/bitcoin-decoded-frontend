@@ -450,6 +450,76 @@ body {
   background: rgba(59, 130, 246, 0.3);
 }
 
+/* ── Block reading - paragraph marginalia + drop-block lettrine ──
+ * Marginalia: each <p> inside a block body gets a small mono number in the
+ * left margin (001, 002, …), like verses in a scholarly edition. The counter
+ * is per-chapter (continuous across blocks), reset on the BlockReader root.
+ * The marginalia color is theme-aware via --marginalia-color set inline on
+ * the BlockReader container.
+ *
+ * The selector `.reading-block-body > p` matches only direct <p> children,
+ * which intentionally SKIPS the prelude (ChapterPrelude wraps its text in a
+ * nested div) and intentionally SKIPS Callouts/SurfaceCards which carry
+ * their own typographic register. */
+.reading-chapter-marginalia {
+  counter-reset: paragraph;
+}
+.reading-block-body {
+  padding-left: 2.75rem;
+  position: relative;
+}
+.reading-block-body > p {
+  counter-increment: paragraph;
+  position: relative;
+}
+.reading-block-body > p::before {
+  content: counter(paragraph, decimal-leading-zero);
+  position: absolute;
+  left: -2.75rem;
+  top: 0.4em;
+  width: 2rem;
+  text-align: right;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--marginalia-color, rgba(127, 127, 127, 0.5));
+  user-select: none;
+  pointer-events: none;
+}
+@media (max-width: 540px) {
+  .reading-block-body {
+    padding-left: 1.5rem;
+  }
+  .reading-block-body > p::before {
+    left: -1.5rem;
+    font-size: 0.625rem;
+  }
+}
+@media (max-width: 380px) {
+  .reading-block-body {
+    padding-left: 0;
+  }
+  .reading-block-body > p::before {
+    display: none;
+  }
+}
+
+/* Drop-block lettrine — opt-in via PAGE_METADATA.dropBlock. The first
+ * <p> child of Block 0's body gets a Cormorant Garamond first-letter
+ * rendered as a small gold square (the carré-bloc figure repeated at
+ * lettrine scale, third altitude after wordmark and rule signature). */
+.reading-block-drop-block > p:first-of-type::first-letter {
+  float: left;
+  font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 3.2em;
+  font-weight: 500;
+  line-height: 0.85;
+  color: var(--brand-cream);
+  background: var(--brand-gold);
+  padding: 0.12em 0.18em 0.06em;
+  margin: 0.12em 0.4em 0 0;
+}
+
 /* ── Block reading - premium reveal + blockchain chain link ── */
 /* A freshly surfaced block "seals" into place: its blur clears, it slides up
    and settles, while its lines cascade in. The chain link joining it to the
