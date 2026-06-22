@@ -111,32 +111,14 @@ export const Header: FC<Props> = ({
     flexShrink: 0,
   };
 
-  // The signature bottom edge: a gold hairline broken by a centered carré,
-  // identical in vocabulary to SurfaceCard's top rule. Reading from
-  // the top of the page downward, the user sees Bitcoin[carré]Decoded
-  // followed by a rule[carré] separator — the same composition the
-  // header text just made, now rendered as structure.
-  const ruleWrapperStyle: CSSProperties = {
-    position: "relative",
-    height: BRAND.figures.blockSize + 2,
-  };
+  // Just a gold hairline as the header's bottom edge — no carré. The carré
+  // is now reserved to the wordmark itself and the drop-block lettrine, so
+  // the signature stays rare and meaningful. Repetition on every rule
+  // turned it into wallpaper.
   const ruleLineStyle: CSSProperties = {
-    position: "absolute",
-    top: "50%",
-    left: 0,
-    right: 0,
     height: BRAND.figures.ruleThickness,
     background: gold,
-    transform: "translateY(-50%)",
-  };
-  const ruleBlockStyle: CSSProperties = {
-    position: "absolute",
-    top: 0,
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: BRAND.figures.blockSize,
-    height: BRAND.figures.blockSize,
-    background: gold,
+    width: "100%",
   };
 
   const rightGroupStyle: CSSProperties = {
@@ -170,10 +152,7 @@ export const Header: FC<Props> = ({
         </div>
       </div>
 
-      <div style={ruleWrapperStyle} aria-hidden="true">
-        <div style={ruleLineStyle} />
-        <div style={ruleBlockStyle} />
-      </div>
+      <div style={ruleLineStyle} aria-hidden="true" />
     </header>
   );
 };

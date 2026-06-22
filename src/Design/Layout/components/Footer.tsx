@@ -37,29 +37,12 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
     fontFamily: BRAND.fonts.mono,
   };
 
-  // Top edge signature — the same rule + carré vocabulary as Header's
-  // bottom edge, mirroring the document's two extremities.
-  const ruleWrapperStyle: CSSProperties = {
-    position: "relative",
-    height: BRAND.figures.blockSize + 2,
-  };
+  // Top edge: just a gold hairline mirroring the header's bottom edge.
+  // No carré — the signature stays reserved to wordmark + drop-block.
   const ruleLineStyle: CSSProperties = {
-    position: "absolute",
-    top: "50%",
-    left: 0,
-    right: 0,
     height: BRAND.figures.ruleThickness,
     background: gold,
-    transform: "translateY(-50%)",
-  };
-  const ruleBlockStyle: CSSProperties = {
-    position: "absolute",
-    top: 0,
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: BRAND.figures.blockSize,
-    height: BRAND.figures.blockSize,
-    background: gold,
+    width: "100%",
   };
 
   const innerStyle: CSSProperties = {
@@ -88,10 +71,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
 
   return (
     <footer style={footerStyle}>
-      <div style={ruleWrapperStyle} aria-hidden="true">
-        <div style={ruleLineStyle} />
-        <div style={ruleBlockStyle} />
-      </div>
+      <div style={ruleLineStyle} aria-hidden="true" />
       <div style={innerStyle}>
         <BitcoinDonationFooter display="footer" />
         <p style={copyrightStyle}>{t("footer.copyright")}</p>

@@ -72,63 +72,39 @@ export const BlockShell: FC<Props> = ({
     pointerEvents: isCurrent ? "auto" : "none",
   };
 
-  // Background color of the page behind the rules — used to mask the gold
-  // rule under the mono `# block NNNN` label so the label "interrupts" the
-  // rule cleanly, same trick as SurfaceCard's txLabel.
-  const maskBg = colors.base.background.primary;
-
-  const headerRowHeight = BRAND.figures.blockSize + 2;
-
-  const headerWrapperStyle: CSSProperties = {
-    position: "relative",
-    height: headerRowHeight,
+  // Editorial chapter-heading layout: mono label on the left, gold hairline
+  // extending to the right margin. No more centered carré on the rule —
+  // the carré is now reserved to wordmark + drop-block (rare = meaningful).
+  // The label and rule are siblings in a flex row, baseline-aligned.
+  const headerRowStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.85rem",
     marginBottom: title ? "0.4rem" : "1rem",
   };
 
-  const ruleLineStyle: CSSProperties = {
-    position: "absolute",
-    top: "50%",
-    left: 0,
-    right: 0,
-    height: BRAND.figures.ruleThickness,
-    background: gold,
-    transform: "translateY(-50%)",
-  };
-
-  const ruleBlockStyle: CSSProperties = {
-    position: "absolute",
-    top: 0,
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: BRAND.figures.blockSize,
-    height: BRAND.figures.blockSize,
-    background: gold,
-  };
-
-  // Block label: lowercase mono, no font-variant (JetBrains Mono synthesizes
-  // small-caps badly — synthetic caps make the label look "pattes de mouche"
-  // at small sizes). Lowercase ledger-style is already the correct register.
-  // Sized at 0.8125rem with more letter-spacing for readability on dark bg.
   const blockLabelStyle: CSSProperties = {
-    position: "absolute",
-    top: 0,
-    left: 0,
     fontFamily: BRAND.fonts.mono,
     fontSize: "0.8125rem",
     fontWeight: 500,
     letterSpacing: "0.08em",
     color: colors.base.text.primary,
-    lineHeight: `${headerRowHeight}px`,
-    background: maskBg,
-    paddingRight: "0.6rem",
+    flex: "0 0 auto",
+    whiteSpace: "nowrap",
+  };
+
+  const headerRuleStyle: CSSProperties = {
+    flex: "1 1 auto",
+    height: BRAND.figures.ruleThickness,
+    background: gold,
   };
 
   const titleKickerStyle: CSSProperties = {
     display: "block",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.75rem",
+    fontSize: "0.8125rem",
     fontWeight: 500,
-    letterSpacing: "0.12em",
+    letterSpacing: "0.1em",
     color: colors.base.text.secondary,
     fontVariant: "small-caps",
     marginBottom: "0.85rem",
@@ -172,10 +148,9 @@ export const BlockShell: FC<Props> = ({
         className={revealing ? "reading-block-inner revealing" : "reading-block-inner"}
         style={innerStyle}
       >
-        <div style={headerWrapperStyle} aria-hidden="true">
-          <div style={ruleLineStyle} />
-          <div style={ruleBlockStyle} className="reading-block-stamp" />
+        <div style={headerRowStyle}>
           <span style={blockLabelStyle}>{blockIdLabel}</span>
+          <span style={headerRuleStyle} aria-hidden="true" />
         </div>
         {title && <span style={titleKickerStyle}>· {title.toLowerCase()}</span>}
         <div className={bodyClassName} style={bodyStyle}>
