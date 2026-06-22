@@ -108,18 +108,19 @@ export const BlockShell: FC<Props> = ({
   // Block label: lowercase mono, no font-variant (JetBrains Mono synthesizes
   // small-caps badly — synthetic caps make the label look "pattes de mouche"
   // at small sizes). Lowercase ledger-style is already the correct register.
+  // Sized at 0.8125rem with more letter-spacing for readability on dark bg.
   const blockLabelStyle: CSSProperties = {
     position: "absolute",
     top: 0,
     left: 0,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.75rem",
+    fontSize: "0.8125rem",
     fontWeight: 500,
-    letterSpacing: "0.05em",
+    letterSpacing: "0.08em",
     color: colors.base.text.primary,
     lineHeight: `${headerRowHeight}px`,
     background: maskBg,
-    paddingRight: "0.5rem",
+    paddingRight: "0.6rem",
   };
 
   const titleKickerStyle: CSSProperties = {

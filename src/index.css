@@ -478,10 +478,11 @@ body {
 .reading-block-body > p::before {
   content: "[ " counter(paragraph, decimal-leading-zero) " ]";
   position: absolute;
-  left: -2.85rem;
+  left: -3rem;
   top: 0.4em;
-  width: 2.3rem;
+  width: 2.5rem;
   text-align: right;
+  white-space: nowrap;
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.68rem;
   letter-spacing: 0.02em;

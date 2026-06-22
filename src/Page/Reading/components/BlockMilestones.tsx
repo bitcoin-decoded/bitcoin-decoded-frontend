@@ -45,8 +45,12 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
   const linkColor = withOpacity(gold, 0.6);
   const linkIdle = withOpacity(colors.base.text.primary, 0.15);
 
-  const size = isMobile ? 9 : 10;
-  const linkWidth = isMobile ? 14 : 22;
+  // Smaller markers than the rule signature's 14px carré-bloc — these read
+  // as navigation dots, not as another structural block marker. Avoids the
+  // visual doublon with the BlockShell top-rule carré that appears right
+  // below this ribbon.
+  const size = isMobile ? 6 : 7;
+  const linkWidth = isMobile ? 12 : 18;
 
   const pillStyle: CSSProperties = {
     position: "sticky",
@@ -84,8 +88,8 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
     outline: "none",
     border: reached ? "none" : `${BRAND.figures.ruleThickness}px solid ${idleStroke}`,
     background: reached ? gold : "transparent",
-    transform: isCurrent ? "scale(1.4)" : "scale(1)",
-    boxShadow: isCurrent ? `0 0 0 3px ${withOpacity(gold, 0.22)}` : "none",
+    transform: isCurrent ? "scale(1.25)" : "scale(1)",
+    boxShadow: isCurrent ? `0 0 0 2px ${withOpacity(gold, 0.14)}` : "none",
     cursor: reachable ? "pointer" : "default",
     transition:
       "transform 0.4s var(--ease-smooth), background 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth)",
