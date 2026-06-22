@@ -1,7 +1,7 @@
 import { createElement, type CSSProperties, type FC, type ReactNode } from "react";
 
 import { useBreakpoint } from "../Responsive";
-import { BRAND, usePageTheme } from "../Theme";
+import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 type Size = "md" | "lg";
 type State = "default" | "success" | "error";
@@ -74,8 +74,10 @@ export const SurfaceCard: FC<Props> = ({
   className,
 }) => {
   const { colors } = usePageTheme();
+  const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
 
+  const gold = getBrandGold(theme);
   const padding = size === "lg" ? (isMobile ? "1.5rem" : "2rem") : isMobile ? "1.25rem" : "1.5rem";
 
   // The page background behind the rules — used to mask the rule under the
@@ -87,7 +89,7 @@ export const SurfaceCard: FC<Props> = ({
       ? colors.semantic.success.border
       : state === "error"
         ? colors.semantic.error.border
-        : BRAND.gold;
+        : gold;
   const bottomRuleOpacity = state === "default" ? 0.45 : 0.7;
 
   const containerStyle: CSSProperties = {
@@ -110,7 +112,7 @@ export const SurfaceCard: FC<Props> = ({
     left: 0,
     right: 0,
     height: BRAND.figures.ruleThickness,
-    background: BRAND.gold,
+    background: gold,
   };
 
   const topRuleBlock: CSSProperties = {
@@ -120,7 +122,7 @@ export const SurfaceCard: FC<Props> = ({
     transform: "translateX(-50%)",
     width: BRAND.figures.blockSize,
     height: BRAND.figures.blockSize,
-    background: BRAND.gold,
+    background: gold,
   };
 
   const labelHeight = BRAND.figures.blockSize + 2;

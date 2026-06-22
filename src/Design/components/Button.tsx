@@ -8,7 +8,7 @@ import {
 
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { BRAND, usePageTheme } from "../Theme";
+import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 type Variant = "primary" | "secondary" | "ghost" | "stamped";
 type Size = "sm" | "md";
@@ -73,11 +73,12 @@ export const Button: FC<Props> = ({
   style,
 }) => {
   const { colors } = usePageTheme();
+  const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
-  const accent = color ?? BRAND.gold;
+  const accent = color ?? getBrandGold(theme);
   const neutralText = colors.base.text.secondary;
   const neutralTextStrong = colors.base.text.primary;
   const hoverable = !disabled;

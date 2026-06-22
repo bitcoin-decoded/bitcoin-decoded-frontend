@@ -17,13 +17,19 @@
  */
 export const BRAND = {
   gold: "#C4A45A",
+  /**
+   * Slightly lightened/warmed gold for dark-mode surfaces — the base gold
+   * `#C4A45A` reads too dim against deep navy/black at hairline thicknesses.
+   * Use via `getBrandGold(theme)` so consumers don't branch inline.
+   */
+  goldDark: "#D4B469",
   navy: "#16213E",
   cream: "#F8F5EE",
   orange: "#F7931A", // reserved signal — Bitcoin module + on-chain validations only
   figures: {
-    blockSize: 12,
-    coinSize: 12,
-    ruleThickness: 0.75,
+    blockSize: 14,
+    coinSize: 14,
+    ruleThickness: 1,
   },
   fonts: {
     display: "'Cormorant Garamond', 'EB Garamond', Georgia, serif",

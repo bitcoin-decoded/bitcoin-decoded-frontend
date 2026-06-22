@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { useBreakpoint } from "../Responsive";
-import { BRAND, usePageTheme } from "../Theme";
+import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 type Props = {
   /**
@@ -28,7 +28,10 @@ type Props = {
  */
 export const Callout: FC<Props> = ({ title, children }) => {
   const { colors } = usePageTheme();
+  const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
+
+  const gold = getBrandGold(theme);
 
   const wrapperStyle: CSSProperties = {
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
@@ -50,7 +53,7 @@ export const Callout: FC<Props> = ({ title, children }) => {
   };
 
   const cornerSize = 14;
-  const stroke = `${BRAND.figures.ruleThickness}px solid ${BRAND.gold}`;
+  const stroke = `${BRAND.figures.ruleThickness}px solid ${gold}`;
 
   const topLeftStyle: CSSProperties = {
     position: "absolute",
