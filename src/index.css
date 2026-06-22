@@ -512,19 +512,20 @@ body {
 }
 
 /* Drop-block lettrine — opt-in via PAGE_METADATA.dropBlock. The first
- * <p> child of Block 0's body gets a Cormorant Garamond first-letter
- * rendered as a small gold square (the carré-bloc figure repeated at
- * lettrine scale, third altitude after wordmark and rule signature). */
+ * <p> child of Block 0's body gets a Cabin Sketch first-letter rendered
+ * BIG and gold without a background — like a chalkboard initial drawn by
+ * the teacher to open the lesson. The previous gold-square + cream-letter
+ * convention echoed medieval manuscripts; the chalkboard register makes
+ * a hand-drawn capital more coherent. The block-vs-coin square still
+ * lives in the wordmark, logo, milestones, and rule signatures. */
 .reading-block-drop-block > p:first-of-type::first-letter {
   float: left;
-  font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-  font-size: 3.2em;
-  font-weight: 500;
-  line-height: 0.85;
-  color: var(--brand-cream);
-  background: var(--brand-gold);
-  padding: 0.12em 0.18em 0.06em;
-  margin: 0.12em 0.4em 0 0;
+  font-family: "Cabin Sketch", "Cormorant Garamond", Georgia, serif;
+  font-size: 4.2em;
+  font-weight: 700;
+  line-height: 0.82;
+  color: var(--brand-gold);
+  margin: 0.05em 0.1em 0 0;
 }
 
 /* ── Block reading - premium reveal + blockchain chain link ── */
