@@ -1,6 +1,7 @@
 import {
   Children,
   type ComponentProps,
+  type CSSProperties,
   type FC,
   Fragment,
   isValidElement,
@@ -14,11 +15,11 @@ import { Check, RotateCcw } from "lucide-react";
 import { useBadges } from "../../../Achievements";
 import { Button, usePageTheme, withOpacity } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
-import { PageNavigation } from "../../Shared";
+import type { RouteName } from "../../../Routing";
+import { PAGE_METADATA, PageNavigation } from "../../Shared";
 import { useBlockReader } from "../hooks";
 
 import { Block } from "./Block";
-import { BlockChainLink } from "./BlockChainLink";
 import { BlockMilestones } from "./BlockMilestones";
 import { BlockNav } from "./BlockNav";
 import { BlockShell } from "./BlockShell";
@@ -50,6 +51,12 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
   );
   const blockCount = blocks.length;
 
+  // Opt-in drop-block lettrine: read from PAGE_METADATA so chapters that
+  // open on a short or punchy sentence keep their breathing room. Only
+  // applied to Block 0.
+  const chapterMeta = PAGE_METADATA[chapterId as RouteName];
+  const chapterDropBlock = chapterMeta?.dropBlock ?? false;
+
   const {
     containerRef,
     maxRevealed,
@@ -73,8 +80,14 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     if (finished) award(chapterId);
   }, [finished, award, chapterId]);
 
+  // Theme-aware marginalia color (consumed by .reading-block-body in
+  // index.css). Set inline so CSS pseudo-elements can read it.
+  const containerStyle: CSSProperties = {
+    ["--marginalia-color" as string]: withOpacity(colors.base.text.primary, 0.35),
+  };
+
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="reading-chapter-marginalia" style={containerStyle}>
       {blockCount > 1 && (
         <BlockMilestones
           count={blockCount}
@@ -107,12 +120,12 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
 
         return (
           <Fragment key={i}>
-            {i > 0 && <BlockChainLink revealing={isRevealing} />}
             <BlockShell
               index={i}
               isCurrent={isCurrent}
               revealing={isRevealing}
               title={block.props.title}
+              dropBlock={i === 0 && chapterDropBlock}
               onActivate={() => jump(i)}
             >
               {content}

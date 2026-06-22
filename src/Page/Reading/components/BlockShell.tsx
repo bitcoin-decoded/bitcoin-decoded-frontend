@@ -1,7 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
-import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { BRAND, getBrandGold, THEME_COLORS, useBreakpoint, useThemeContext } from "../../../Design";
 
 type Props = {
   /** Block index - exposed as `data-block` for scroll/anchor targeting. */
@@ -9,95 +8,133 @@ type Props = {
   isCurrent: boolean;
   /** Play the seal/confirm reveal (only the freshly surfaced block). */
   revealing: boolean;
-  /** Optional short label shown after the block index in the header. */
+  /** Optional short label appended to the block header (e.g. "Le piège"). */
   title?: string;
+  /**
+   * When `true`, the body's first paragraph receives the drop-block lettrine
+   * (gold carré + Cormorant Garamond first-letter). Set by `BlockReader`
+   * on Block 0 only, when the chapter opts in via `PAGE_METADATA.dropBlock`.
+   * @default false
+   */
+  dropBlock?: boolean;
   /** Return to this block (clicking a read block refocuses it). */
   onActivate?: () => void;
   children: ReactNode;
 };
 
 /**
- * The enclosure that turns a reading block into a visible "block in a chain": a
- * framed card (accent ring + lit top edge + a header seal line) with a
- * `Bloc #N` header the chain link plugs into. The active block lifts (thicker
- * accent ring + glow); past blocks recede (thin neutral ring, dimmed) and lock
- * their content (`pointer-events: none`) while staying clickable as a whole to
- * return to them - the second way back, alongside the milestone jalons.
+ * The ledger block-shell — a single block in the chapter's chain, rendered as a
+ * ledger row rather than a card. A mono block-header strip (`# block 0001`,
+ * optional title kicker) sits above a gold hairline broken by the centered
+ * carré-bloc signature (same vocabulary as SurfaceCard tops and the
+ * Header/Footer chrome). Open sides — content bleeds into the page margin
+ * like a book block, not a floating card. The bottom rule closes the block
+ * without ever announcing the next one (preserves discovery; see
+ * feedback-design-refonte-rules rule 2).
+ *
+ * Past blocks recede via opacity dimming and lock pointer events, but the
+ * shell stays clickable as a whole to return to them.
  */
 export const BlockShell: FC<Props> = ({
   index,
   isCurrent,
   revealing,
   title,
+  dropBlock = false,
   onActivate,
   children,
 }) => {
-  const { colors, moduleTheme } = usePageTheme();
-  const { t } = useTranslation();
+  const { theme } = useThemeContext();
+  const colors = THEME_COLORS[theme];
   const isMobile = useBreakpoint() === "mobile";
   const [isHovered, setIsHovered] = useState(false);
 
-  const accent = colors[moduleTheme].background.secondary;
-  const readable = !isCurrent; // dimmed + clickable to return
+  const gold = getBrandGold(theme);
+  const readable = !isCurrent;
 
   const sectionStyle: CSSProperties = {
-    opacity: isCurrent ? 1 : isHovered ? 0.66 : 0.45,
+    opacity: isCurrent ? 1 : isHovered ? 0.7 : 0.5,
     cursor: readable ? "pointer" : "default",
     transition: "opacity 0.4s var(--ease-smooth)",
-    // Anchor offset: clears the sticky header (3.5rem) + the jalon sub-bar so a
-    // jumped-to block lands with its header at the top, not under the chrome.
+    // Anchor offset: clears the sticky header (3.5rem + signature rule)
+    // and the chain-ribbon sub-bar so a jumped-to block lands cleanly.
     scrollMarginTop: "6.5rem",
+    margin: isMobile ? "2rem 0" : "2.5rem 0",
   };
 
-  const cardStyle: CSSProperties = {
+  const innerStyle: CSSProperties = {
     position: "relative",
-    borderRadius: "1rem",
-    background: isCurrent
-      ? `linear-gradient(180deg, ${withOpacity(accent, 0.08)}, ${colors.base.background.primary} 60%)`
-      : colors.base.background.primary,
-    // Frame is a layered ring (crisp, accent-aware, thicker when active) + a lit
-    // top edge + depth glow on the active block. Reads as a sealed "block".
-    boxShadow: isCurrent
-      ? `0 0 0 1.5px ${withOpacity(accent, 0.55)}, inset 0 1px 0 ${withOpacity("#ffffff", 0.08)}, 0 18px 48px -16px ${withOpacity(accent, 0.28)}`
-      : `0 0 0 1px ${withOpacity(colors.base.text.primary, 0.1)}, inset 0 1px 0 ${withOpacity("#ffffff", 0.035)}`,
-    padding: isMobile ? "1.2rem 1.25rem" : "1.55rem 1.7rem",
-    transition: "box-shadow 0.5s var(--ease-smooth), background 0.5s var(--ease-smooth)",
-    // Glow color for the header-stamp confirm pulse (keyframe blockConfirm).
-    ["--reading-glow" as string]: withOpacity(accent, 0.55),
-    // Lock interactions inside read blocks; the click falls through to the
-    // section, which refocuses the block.
+    padding: isMobile ? "0 0.25rem" : "0",
+    transition: "opacity 0.5s var(--ease-smooth)",
+    ["--reading-glow" as string]: "transparent",
+    // Lock interactions inside read blocks; the click falls through to
+    // the section, which refocuses the block via onActivate.
     pointerEvents: isCurrent ? "auto" : "none",
   };
 
-  const sealStyle: CSSProperties = {
-    position: "absolute",
-    top: 0,
-    left: "1.1rem",
-    right: "1.1rem",
-    height: 2,
-    borderRadius: "0 0 2px 2px",
-    background: isCurrent
-      ? `linear-gradient(90deg, transparent, ${withOpacity(accent, 0.85)}, transparent)`
-      : `linear-gradient(90deg, transparent, ${withOpacity(colors.base.text.primary, 0.12)}, transparent)`,
-  };
-
-  const headerStyle: CSSProperties = {
+  // Editorial chapter-heading layout: mono label on the left, gold hairline
+  // extending to the right margin. No more centered carré on the rule —
+  // the carré is now reserved to wordmark + drop-block (rare = meaningful).
+  // The label and rule are siblings in a flex row, baseline-aligned.
+  const headerRowStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
-    gap: "0.5rem",
-    marginBottom: isMobile ? "0.85rem" : "1rem",
+    gap: "0.85rem",
+    marginBottom: title ? "0.4rem" : "1rem",
   };
 
-  const stampStyle: CSSProperties = {
-    width: 10,
-    height: 10,
+  const blockLabelStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.mono,
+    fontSize: "0.8125rem",
+    fontWeight: 500,
+    letterSpacing: "0.08em",
+    color: colors.base.text.primary,
     flex: "0 0 auto",
-    borderRadius: 3,
-    background: isCurrent ? accent : "transparent",
-    border: `1.5px solid ${isCurrent ? accent : withOpacity(colors.base.text.primary, 0.25)}`,
+    whiteSpace: "nowrap",
   };
 
-  const label = `${t("reading.blockLabel")} #${index + 1}${title ? ` · ${title}` : ""}`;
+  const headerRuleStyle: CSSProperties = {
+    flex: "1 1 auto",
+    height: BRAND.figures.ruleThickness,
+    background: gold,
+  };
+
+  const titleKickerStyle: CSSProperties = {
+    display: "block",
+    fontFamily: BRAND.fonts.mono,
+    fontSize: "0.8125rem",
+    fontWeight: 500,
+    letterSpacing: "0.1em",
+    color: colors.base.text.secondary,
+    fontVariant: "small-caps",
+    marginBottom: "0.85rem",
+  };
+
+  // Use vertical-only padding (not shorthand) so the CSS class's
+  // padding-left for marginalia isn't overridden by this inline style.
+  const bodyStyle: CSSProperties = {
+    paddingTop: isMobile ? "0.1rem" : "0.25rem",
+    paddingBottom: isMobile ? "0.1rem" : "0.25rem",
+  };
+
+  // Two CSS hooks consumed by index.css:
+  // - `reading-block-body` enables paragraph marginalia (numbered prose
+  //   lines via CSS counter) for every direct <p> child
+  // - `reading-block-drop-block` enables the lettrine on first paragraph
+  const bodyClassName = dropBlock
+    ? "reading-block-body reading-block-drop-block"
+    : "reading-block-body";
+
+  const footerRuleStyle: CSSProperties = {
+    height: BRAND.figures.ruleThickness,
+    background: gold,
+    opacity: 0.4,
+    marginTop: "1.25rem",
+  };
+
+  // Pad the block id with leading zeros to four digits — visual rhythm with
+  // a real block height. `# block 0001` reads as "this is the first block".
+  const blockIdLabel = `# block ${String(index + 1).padStart(4, "0")}`;
 
   return (
     <section
@@ -109,16 +146,17 @@ export const BlockShell: FC<Props> = ({
     >
       <div
         className={revealing ? "reading-block-inner revealing" : "reading-block-inner"}
-        style={cardStyle}
+        style={innerStyle}
       >
-        <span style={sealStyle} aria-hidden="true" />
-        <div style={headerStyle}>
-          <span className="reading-block-stamp" style={stampStyle} />
-          <Caption size="xs" tone={isCurrent ? "world" : "muted"}>
-            {label}
-          </Caption>
+        <div style={headerRowStyle}>
+          <span style={blockLabelStyle}>{blockIdLabel}</span>
+          <span style={headerRuleStyle} aria-hidden="true" />
         </div>
-        {children}
+        {title && <span style={titleKickerStyle}>· {title.toLowerCase()}</span>}
+        <div className={bodyClassName} style={bodyStyle}>
+          {children}
+        </div>
+        <div style={footerRuleStyle} aria-hidden="true" />
       </div>
     </section>
   );

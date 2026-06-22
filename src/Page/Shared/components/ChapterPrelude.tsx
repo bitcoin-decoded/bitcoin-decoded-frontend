@@ -1,8 +1,7 @@
-import { type FC, type ReactNode, type CSSProperties } from "react";
-import { usePageTheme, useBreakpoint } from "../../../Design";
-import { withOpacity } from "../../../Design/helpers";
+import { type CSSProperties, type FC, type ReactNode } from "react";
+
+import { BRAND, getBrandGold, useBreakpoint, usePageTheme, useThemeContext } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { AudioLines } from "lucide-react";
 
 type ChapterPreludeProps = {
   children: ReactNode;
@@ -14,73 +13,55 @@ type ChapterPreludeProps = {
   marginBottom?: string;
 };
 
+/**
+ * The ledger-system chapter prelude — a kicker `prélude` in mono small-caps
+ * over italic serif body, separated from the rest of the block by a thin
+ * gold filet at the left. Same vocabulary as Callout's bracketed-frame
+ * kicker and BlockShell's title kicker. The previous module-tinted card
+ * with halo glow and AudioLines icon belonged to the AI-template era;
+ * this version reads as a typographic intro, not a UI widget.
+ */
 export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom }) => {
-  const { colors, moduleTheme } = usePageTheme();
+  const { colors } = usePageTheme();
+  const { theme } = useThemeContext();
   const { t } = useTranslation();
-  const breakpoint = useBreakpoint();
-  const isMobile = breakpoint === "mobile";
+  const isMobile = useBreakpoint() === "mobile";
 
-  const accentColor = colors[moduleTheme].border.secondary;
+  const gold = getBrandGold(theme);
 
   const containerStyle: CSSProperties = {
     display: "flex",
-    alignItems: "flex-start",
-    gap: isMobile ? "0.75rem" : "1rem",
-    padding: isMobile ? "1rem 1.25rem" : "1.25rem 1.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(135deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary} 70%)`,
-    borderLeft: `3px solid ${accentColor}`,
-    boxShadow: `0 4px 24px ${withOpacity(accentColor, 0.08)}, 0 1px 4px ${withOpacity(accentColor, 0.06)}`,
+    flexDirection: "column",
+    paddingLeft: isMobile ? "0.85rem" : "1.1rem",
+    borderLeft: `${BRAND.figures.ruleThickness}px solid ${gold}`,
     marginBottom,
-  };
-
-  const iconContainerStyle: CSSProperties = {
-    color: accentColor,
-    flexShrink: 0,
-    marginTop: "0.125rem",
-  };
-
-  const contentContainerStyle: CSSProperties = {
-    flex: "1 1 auto",
   };
 
   const labelStyle: CSSProperties = {
     display: "block",
-    fontFamily: "'JetBrains Mono', monospace",
-    fontWeight: 600,
-    fontSize: isMobile ? "0.75rem" : "0.8125rem",
-    letterSpacing: "0.04em",
-    textTransform: "uppercase",
-    color: accentColor,
-  };
-
-  const separatorStyle: CSSProperties = {
-    width: "100%",
-    height: "1px",
-    background: `linear-gradient(to right, ${withOpacity(accentColor, 0.25)}, transparent)`,
-    border: "none",
-    margin: isMobile ? "0.5rem 0" : "0.625rem 0",
+    fontFamily: BRAND.fonts.mono,
+    fontWeight: 500,
+    fontSize: "0.8125rem",
+    letterSpacing: "0.1em",
+    fontVariant: "small-caps",
+    color: colors.base.text.secondary,
+    marginBottom: "0.4rem",
   };
 
   const textStyle: CSSProperties = {
     margin: 0,
-    color: moduleTheme === "base" ? colors.base.text.secondary : colors[moduleTheme].text.primary,
+    color: colors.base.text.secondary,
+    fontFamily: BRAND.fonts.body,
     fontStyle: "italic",
     lineHeight: 1.7,
-    fontSize: isMobile ? "0.875rem" : "0.9375rem",
+    fontSize: isMobile ? "0.9375rem" : "1rem",
     textAlign: "left",
   };
 
   return (
     <div style={containerStyle}>
-      <div style={iconContainerStyle}>
-        <AudioLines size={isMobile ? 18 : 20} strokeWidth={2} />
-      </div>
-      <div style={contentContainerStyle}>
-        <span style={labelStyle}>{t("chapterPrelude.label")}</span>
-        <hr style={separatorStyle} />
-        <p style={textStyle}>{children}</p>
-      </div>
+      <span style={labelStyle}>{t("chapterPrelude.label").toLowerCase()}</span>
+      <p style={textStyle}>{children}</p>
     </div>
   );
 };

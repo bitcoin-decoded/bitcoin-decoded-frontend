@@ -3,46 +3,54 @@ import { type CSSProperties, type FC } from "react";
 import { useTranslation } from "../../../I18n";
 import { BitcoinDonationFooter } from "../../../Interactive";
 import type { Breakpoint } from "../../Responsive";
-import { THEME_COLORS, useThemeContext } from "../../Theme";
+import { BRAND, getBrandGold, THEME_COLORS, useThemeContext } from "../../Theme";
 
 type Props = {
   breakpoint?: Breakpoint;
 };
 
 /**
- * Footer chrome: a discreet "Support with bitcoin" button (which opens the
- * full donation flow in a modal - see `BitcoinDonationFooter`) above the
- * copyright line. The warm gradient + Bitcoin-orange halo give the footer a
- * "sunset horizon" feel rather than a flat slab.
+ * The ledger footer — mirrors the header's bottom edge. A gold hairline
+ * broken by a centered carré-bloc seals the bottom of every page, the
+ * "block footer" of the document considered as a chained registry. The
+ * previous orange sunrise halo is gone (orange is now a reserved
+ * Bitcoin-only signal). Content is intentionally minimal: the discreet
+ * donation flow and the copyright line, both in mono.
+ *
+ * Future Phase 2c (or Phase 3) will optionally surface a live Bitcoin
+ * block height here as a "the site beats with the chain" beacon.
  */
 export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
   const { theme } = useThemeContext();
   const { t } = useTranslation();
   const colors = THEME_COLORS[theme];
+  const gold = getBrandGold(theme);
 
   const isMobile = breakpoint === "mobile";
   const isDesktop = breakpoint === "desktop";
 
-  const haloOpacity = theme === "dark" ? 0.16 : 0.08;
   const footerStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    background: colors.base.background.primary,
+    color: colors.base.text.secondary,
+    fontFamily: BRAND.fonts.mono,
+  };
+
+  // Top edge: just a gold hairline mirroring the header's bottom edge.
+  // No carré — the signature stays reserved to wordmark + drop-block.
+  const ruleLineStyle: CSSProperties = {
+    height: BRAND.figures.ruleThickness,
+    background: gold,
+    width: "100%",
+  };
+
+  const innerStyle: CSSProperties = {
     padding: isDesktop
       ? "1.75rem 2.5rem 1.5rem calc(17rem + 2.5rem)"
       : isMobile
         ? "1.5rem 1rem 1.25rem"
         : "1.75rem 2.5rem 1.5rem",
-    background: `
-      radial-gradient(ellipse 70% 110% at 50% 115%, rgba(247, 147, 26, ${haloOpacity}) 0%, transparent 60%),
-      linear-gradient(to bottom,
-        ${colors.base.background.primary} 0%,
-        ${colors.base.background.tertiary} 55%,
-        ${colors.amber.background.primary} 100%)
-    `,
-    borderTop: `1px solid ${colors.base.border.primary}`,
-    color: colors.base.text.secondary,
-    fontFamily: "'JetBrains Mono', monospace",
-  };
-
-  const innerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -63,6 +71,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
 
   return (
     <footer style={footerStyle}>
+      <div style={ruleLineStyle} aria-hidden="true" />
       <div style={innerStyle}>
         <BitcoinDonationFooter display="footer" />
         <p style={copyrightStyle}>{t("footer.copyright")}</p>

@@ -8,7 +8,7 @@ import type { PageMetadataMap } from "../types";
 
 export const PAGE_METADATA: PageMetadataMap = {
   // Banking - Le fonctionnement du système bancaire
-  [ROUTE_NAME.Banking_1]: { wordCount: 796, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_1]: { wordCount: 796, interactiveCount: 2, dropBlock: true },
   [ROUTE_NAME.Banking_2]: { wordCount: 807, interactiveCount: 2 },
   [ROUTE_NAME.Banking_3]: { wordCount: 1066, interactiveCount: 2 },
   [ROUTE_NAME.Banking_4]: { wordCount: 880, interactiveCount: 2 },
@@ -17,7 +17,7 @@ export const PAGE_METADATA: PageMetadataMap = {
   [ROUTE_NAME.Banking_7]: { wordCount: 644, interactiveCount: 5 },
 
   // MoneyLaws - Les lois de la monnaie
-  [ROUTE_NAME.MoneyLaws_1]: { wordCount: 783, interactiveCount: 4 },
+  [ROUTE_NAME.MoneyLaws_1]: { wordCount: 783, interactiveCount: 4, dropBlock: true },
   [ROUTE_NAME.MoneyLaws_2]: { wordCount: 938, interactiveCount: 3 },
   [ROUTE_NAME.MoneyLaws_3]: { wordCount: 850, interactiveCount: 1 },
   [ROUTE_NAME.MoneyLaws_4]: { wordCount: 1093, interactiveCount: 2 },
@@ -25,7 +25,7 @@ export const PAGE_METADATA: PageMetadataMap = {
   [ROUTE_NAME.MoneyLaws_6]: { wordCount: 473, interactiveCount: 2 },
 
   // Bitcoin - La révolution Bitcoin
-  [ROUTE_NAME.Bitcoin_1]: { wordCount: 1396, interactiveCount: 2 },
+  [ROUTE_NAME.Bitcoin_1]: { wordCount: 1396, interactiveCount: 2, dropBlock: true },
   [ROUTE_NAME.Bitcoin_2]: { wordCount: 1121, interactiveCount: 3 },
   [ROUTE_NAME.Bitcoin_3]: { wordCount: 893, interactiveCount: 3 },
   [ROUTE_NAME.Bitcoin_4]: { wordCount: 1094, interactiveCount: 6 },
