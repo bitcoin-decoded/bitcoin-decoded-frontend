@@ -11,15 +11,16 @@
    * is in THEME_COLORS / Theme provider. TS mirror lives in
    * src/Design/Theme/data/BRAND.ts — keep both in sync. */
   --brand-gold: #c4a45a;
+  --brand-gold-dark: #d4b469; /* warmer/lighter for dark-mode hairlines */
   --brand-navy: #16213e;
   --brand-cream: #f8f5ee;
   --brand-orange: #f7931a;
 
   /* Block-vs-coin dichotomy: square = structure (block), circle = value (coin).
    * See feedback-design-refonte-rules (rule 9). */
-  --block-size: 12px;
-  --coin-size: 12px;
-  --rule-thickness: 0.75px;
+  --block-size: 14px;
+  --coin-size: 14px;
+  --rule-thickness: 1px;
 
   /* Typography stack — display (titles, logo-derived), body (prose),
    * mono (all ledger metadata: block ids, hashes, timestamps, kickers). */
