@@ -80,17 +80,13 @@ export const SurfaceCard: FC<Props> = ({
   const gold = getBrandGold(theme);
   const padding = size === "lg" ? (isMobile ? "1.5rem" : "2rem") : isMobile ? "1.25rem" : "1.5rem";
 
-  // The page background behind the rules — used to mask the rule under the
-  // tx-label and tx-hash spans, so the labels "interrupt" the rule cleanly.
-  const maskBg = colors.base.background.primary;
-
   const bottomRuleColor =
     state === "success"
       ? colors.semantic.success.border
       : state === "error"
         ? colors.semantic.error.border
         : gold;
-  const bottomRuleOpacity = state === "default" ? 0.45 : 0.7;
+  const bottomRuleOpacity = state === "default" ? 0.4 : 0.7;
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -101,57 +97,39 @@ export const SurfaceCard: FC<Props> = ({
     ...style,
   };
 
-  const topRuleWrapper: CSSProperties = {
-    position: "relative",
-    height: BRAND.figures.blockSize + 2,
+  // Editorial layout: optional mono label on the left, gold hairline rule
+  // extending to the right margin. No carré-bloc on the rule — that
+  // signature is now reserved to the wordmark and the drop-block lettrine.
+  // When no txLabel is passed, the row collapses to just the hairline.
+  const topRowStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.85rem",
   };
 
   const topRuleLine: CSSProperties = {
-    position: "absolute",
-    top: "50%",
-    left: 0,
-    right: 0,
+    flex: "1 1 auto",
     height: BRAND.figures.ruleThickness,
     background: gold,
   };
 
-  const topRuleBlock: CSSProperties = {
-    position: "absolute",
-    top: 0,
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: BRAND.figures.blockSize,
-    height: BRAND.figures.blockSize,
-    background: gold,
-  };
-
-  const labelHeight = BRAND.figures.blockSize + 2;
-
   const txLabelStyle: CSSProperties = {
-    position: "absolute",
-    top: 0,
-    left: 0,
+    flex: "0 0 auto",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.6875rem",
-    letterSpacing: "0.05em",
+    fontSize: "0.8125rem",
+    fontWeight: 500,
+    letterSpacing: "0.08em",
     color: colors.base.text.primary,
-    fontVariant: "small-caps",
-    lineHeight: `${labelHeight}px`,
-    background: maskBg,
-    paddingRight: "0.5rem",
+    whiteSpace: "nowrap",
   };
 
   const txHashStyle: CSSProperties = {
-    position: "absolute",
-    top: 0,
-    right: 0,
+    flex: "0 0 auto",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.6875rem",
+    fontSize: "0.8125rem",
     letterSpacing: "0.04em",
     color: colors.base.text.secondary,
-    lineHeight: `${labelHeight}px`,
-    background: maskBg,
-    paddingLeft: "0.5rem",
+    whiteSpace: "nowrap",
   };
 
   const bodyStyle: CSSProperties = {
@@ -179,10 +157,9 @@ export const SurfaceCard: FC<Props> = ({
   return createElement(
     as,
     { className, style: containerStyle },
-    <div style={topRuleWrapper} key="top">
-      <div style={topRuleLine} />
-      <div style={topRuleBlock} />
+    <div style={topRowStyle} key="top">
       {txLabel && <span style={txLabelStyle}>{txLabel}</span>}
+      <span style={topRuleLine} aria-hidden="true" />
       {txHash && <span style={txHashStyle}>⌗ {txHash}</span>}
     </div>,
     <div style={bodyStyle} key="body">

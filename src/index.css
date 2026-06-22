@@ -42,12 +42,13 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    sans-serif;
-  letter-spacing: 0.01em;
+  /* Source Serif 4 — the editorial body face. Loaded from Google Fonts in
+   * index.html. The whole "ledger" register depends on this being applied;
+   * keeping Inter here was what kept the site reading as "AI template" no
+   * matter what the chrome looked like. UI primitives that need sans-serif
+   * or mono override this via BRAND.fonts.mono explicitly. */
+  font-family: var(--font-body), Georgia, serif;
+  letter-spacing: 0.005em;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
