@@ -37,30 +37,35 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom
     marginBottom,
   };
 
+  // The prelude opens the chapter — it deserves a real heading, not a banal
+  // mono metadata label. Cabin Sketch, gold, sizeable: the teacher writing
+  // "Prélude" at the top of the board before the lesson begins.
   const labelStyle: CSSProperties = {
     display: "block",
-    fontFamily: BRAND.fonts.mono,
-    fontWeight: 500,
-    fontSize: "0.8125rem",
-    letterSpacing: "0.1em",
-    fontVariant: "small-caps",
-    color: colors.base.text.secondary,
-    marginBottom: "0.4rem",
+    fontFamily: BRAND.fonts.display,
+    fontWeight: 700,
+    fontSize: isMobile ? "1.5rem" : "1.75rem",
+    letterSpacing: "0.01em",
+    color: gold,
+    lineHeight: 1.1,
+    marginBottom: "0.6rem",
   };
 
+  // Readable body — the previous `text.secondary` was ton-sur-ton and hard
+  // to read in both modes. Use full primary ink at a slightly larger size.
   const textStyle: CSSProperties = {
     margin: 0,
-    color: colors.base.text.secondary,
+    color: colors.base.text.primary,
     fontFamily: BRAND.fonts.body,
     fontStyle: "italic",
     lineHeight: 1.7,
-    fontSize: isMobile ? "0.9375rem" : "1rem",
+    fontSize: isMobile ? "1.0625rem" : "1.15rem",
     textAlign: "left",
   };
 
   return (
     <div style={containerStyle}>
-      <span style={labelStyle}>{t("chapterPrelude.label").toLowerCase()}</span>
+      <span style={labelStyle}>{t("chapterPrelude.label")}</span>
       <p style={textStyle}>{children}</p>
     </div>
   );

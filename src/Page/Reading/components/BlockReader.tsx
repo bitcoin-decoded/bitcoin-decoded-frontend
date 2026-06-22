@@ -10,10 +10,10 @@ import {
   useEffect,
 } from "react";
 
-import { Check, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 
 import { useBadges } from "../../../Achievements";
-import { Button, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Button, getBrandGold, usePageTheme, useThemeContext, withOpacity } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import type { RouteName } from "../../../Routing";
 import { PAGE_METADATA, PageNavigation } from "../../Shared";
@@ -45,6 +45,8 @@ type Props = {
 export const BlockReader: FC<Props> = ({ chapterId, children }) => {
   const { t } = useTranslation();
   const { colors } = usePageTheme();
+  const { theme } = useThemeContext();
+  const gold = getBrandGold(theme);
 
   const blocks = Children.toArray(children).filter(
     (child): child is BlockElement => isValidElement(child) && child.type === Block,
@@ -151,29 +153,32 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: "2rem",
+              alignItems: "center",
+              gap: "0.7rem",
+              marginTop: "2.5rem",
               marginBottom: "1.25rem",
             }}
           >
             <span
+              aria-hidden="true"
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.55rem",
-                padding: "0.55rem 1.1rem",
-                borderRadius: 999,
-                background: withOpacity(colors.semantic.success.text, 0.12),
-                border: `1px solid ${withOpacity(colors.semantic.success.text, 0.35)}`,
-                color: colors.semantic.success.text,
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: "0.72rem",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-                boxShadow: `0 6px 18px ${withOpacity(colors.semantic.success.text, 0.18)}`,
+                fontFamily: BRAND.fonts.mono,
+                fontSize: "1.6rem",
+                color: gold,
+                lineHeight: 1,
               }}
             >
-              <Check size={14} strokeWidth={2.5} />
+              ⌗
+            </span>
+            <span
+              style={{
+                fontFamily: BRAND.fonts.display,
+                fontSize: "1.85rem",
+                fontWeight: 700,
+                color: colors.semantic.success.text,
+                lineHeight: 1.1,
+              }}
+            >
               {t("reading.completed")}
             </span>
           </div>

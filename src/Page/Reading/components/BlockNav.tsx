@@ -1,8 +1,8 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowDown, ArrowUp, Check, Lock } from "lucide-react";
+import { ArrowDown, ArrowUp, Lock } from "lucide-react";
 
-import { Button, Caption, usePageTheme } from "../../../Design";
+import { Button, Caption } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 type Props = {
@@ -15,19 +15,20 @@ type Props = {
 };
 
 /**
- * The single navigation set, rendered only under the active block. A discreet
- * "previous" (ghost), a primary "next" / "finish", and a lock hint shown while
- * a tool block has not been manipulated.
+ * The single navigation set, rendered only under the active block. Previous
+ * and next share the same bracketed primary treatment (same size, same shape)
+ * so the pair reads as a consistent control; the final block swaps "next" for
+ * a `stamped` seal CTA — the literal gold cachet that seals the chapter. A
+ * lock hint appears while a tool block hasn't been manipulated.
  */
 export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, onFinish }) => {
   const { t } = useTranslation();
-  const { colors } = usePageTheme();
 
   const containerStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     flexWrap: "wrap",
-    gap: "0.75rem",
+    gap: "0.85rem",
     marginTop: "1.75rem",
   };
 
@@ -35,31 +36,30 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
     <div style={containerStyle}>
       {!isFirst && (
         <Button
-          variant="ghost"
-          size="sm"
-          icon={<ArrowUp size={15} strokeWidth={2} />}
+          variant="primary"
+          icon={<ArrowUp size={16} strokeWidth={2} />}
           onClick={onPrev}
+          style={{ opacity: 0.75 }}
         >
           {t("reading.previous")}
         </Button>
       )}
       <div style={{ marginLeft: "auto" }}>
-        <Button
-          variant="primary"
-          color={isLast ? colors.semantic.success.text : undefined}
-          icon={
-            isLast ? (
-              <Check size={16} strokeWidth={2.5} />
-            ) : (
-              <ArrowDown size={16} strokeWidth={2} />
-            )
-          }
-          iconPosition="right"
-          disabled={locked}
-          onClick={isLast ? onFinish : onNext}
-        >
-          {isLast ? t("reading.finish") : t("reading.next")}
-        </Button>
+        {isLast ? (
+          <Button variant="stamped" disabled={locked} onClick={onFinish}>
+            {t("reading.finish")}
+          </Button>
+        ) : (
+          <Button
+            variant="primary"
+            icon={<ArrowDown size={16} strokeWidth={2} />}
+            iconPosition="right"
+            disabled={locked}
+            onClick={onNext}
+          >
+            {t("reading.next")}
+          </Button>
+        )}
       </div>
       {locked && (
         <Caption

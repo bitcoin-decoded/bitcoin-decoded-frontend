@@ -89,9 +89,11 @@ export const PageTemplate: FC<Props> = ({
   };
 
   const sectionStyle: CSSProperties = {
-    fontSize: "0.9375rem",
-    letterSpacing: "0.01em",
-    lineHeight: 1.8,
+    // Patrick Hand renders small per em; bump prose so the handwriting reads
+    // comfortably. The user found the earlier size cramped.
+    fontSize: isMobile ? "1.0625rem" : "1.1875rem",
+    letterSpacing: "0.005em",
+    lineHeight: 1.75,
     "--accent-color": accentColor,
   } as CSSProperties;
 
