@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { getBrandGold, useThemeContext } from "../Theme";
+import { getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 type HighlightTextProps = {
   children: ReactNode;
@@ -31,8 +31,11 @@ const handUnderline = (color: string): string => {
  */
 export const HighlightText: FC<HighlightTextProps> = ({ children, highLightColorHex }) => {
   const { theme } = useThemeContext();
+  const { colors, moduleTheme } = usePageTheme();
 
-  const color = highLightColorHex ?? getBrandGold(theme);
+  // Module identity color (violet on MoneyLaws, …), gold on neutral pages.
+  const moduleAccent = moduleTheme === "base" ? getBrandGold(theme) : colors[moduleTheme].text.secondary;
+  const color = highLightColorHex ?? moduleAccent;
 
   const highlightStyle: CSSProperties = {
     fontWeight: 600,

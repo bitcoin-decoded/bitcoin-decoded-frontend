@@ -46,6 +46,7 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom
     display: "flex",
     flexDirection: "column",
     background: wash,
+    border: `1px solid ${withOpacity(moduleAccent, 0.28)}`,
     padding: isMobile ? "1rem 1.1rem" : "1.25rem 1.5rem",
     marginBottom,
   };

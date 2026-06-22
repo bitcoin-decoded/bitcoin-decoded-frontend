@@ -13,7 +13,7 @@ import {
 import { RotateCcw } from "lucide-react";
 
 import { useBadges } from "../../../Achievements";
-import { BRAND, Button, getBrandGold, usePageTheme, useThemeContext, withOpacity } from "../../../Design";
+import { BRAND, Button, getBrandGold, usePageTheme, useThemeContext } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import type { RouteName } from "../../../Routing";
 import { PAGE_METADATA, PageNavigation } from "../../Shared";
@@ -85,10 +85,12 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     if (finished) award(chapterId);
   }, [finished, award, chapterId]);
 
-  // Theme-aware marginalia color (consumed by .reading-block-body in
-  // index.css). Set inline so CSS pseudo-elements can read it.
+  // Module accent flows to the marginalia `[ 01 ]` markers and the drop-block
+  // lettrine (both consumed in index.css). Replaces the previous ton-sur-ton
+  // gray, which read poorly. Set inline so CSS pseudo-elements can read it.
   const containerStyle: CSSProperties = {
-    ["--marginalia-color" as string]: withOpacity(colors.base.text.primary, 0.35),
+    ["--marginalia-color" as string]: moduleAccent,
+    ["--module-accent" as string]: moduleAccent,
   };
 
   return (

@@ -1,5 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
+import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
 import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
@@ -32,6 +33,12 @@ export const Callout: FC<Props> = ({ title, children }) => {
   // Module identity color (violet on MoneyLaws, blue on Banking, …), falling
   // back to gold on neutral/base pages where no module accent exists.
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
+  // Hyper-subtle module wash so the aside reads as "set apart" like the prose
+  // marginalia would mark it — fainter than the prelude wash so they stay
+  // distinct. Inner interactive components (e.g. a slider) sit on transparent
+  // ledger surfaces, so this uniform tint shows cleanly behind them.
+  const washSource = moduleTheme === "base" ? gold : colors[moduleTheme].background.secondary;
+  const wash = withOpacity(washSource, theme === "dark" ? 0.06 : 0.04);
 
   const wrapperStyle: CSSProperties = {
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
@@ -52,6 +59,7 @@ export const Callout: FC<Props> = ({ title, children }) => {
 
   const frameStyle: CSSProperties = {
     position: "relative",
+    background: wash,
     padding: isMobile ? "1rem 1rem" : "1.25rem 1.5rem",
   };
 

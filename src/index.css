@@ -531,7 +531,8 @@ body {
   font-size: 4.2em;
   font-weight: 700;
   line-height: 0.82;
-  color: var(--brand-gold);
+  /* Module identity color (set on the BlockReader root), gold fallback. */
+  color: var(--module-accent, var(--brand-gold));
   margin: 0.05em 0.1em 0 0;
 }
 
