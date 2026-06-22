@@ -10,6 +10,13 @@ type Props = {
   revealing: boolean;
   /** Optional short label appended to the block header (e.g. "Le piège"). */
   title?: string;
+  /**
+   * When `true`, the body's first paragraph receives the drop-block lettrine
+   * (gold carré + Cormorant Garamond first-letter). Set by `BlockReader`
+   * on Block 0 only, when the chapter opts in via `PAGE_METADATA.dropBlock`.
+   * @default false
+   */
+  dropBlock?: boolean;
   /** Return to this block (clicking a read block refocuses it). */
   onActivate?: () => void;
   children: ReactNode;
@@ -33,6 +40,7 @@ export const BlockShell: FC<Props> = ({
   isCurrent,
   revealing,
   title,
+  dropBlock = false,
   onActivate,
   children,
 }) => {
@@ -121,9 +129,20 @@ export const BlockShell: FC<Props> = ({
     marginBottom: "0.85rem",
   };
 
+  // Use vertical-only padding (not shorthand) so the CSS class's
+  // padding-left for marginalia isn't overridden by this inline style.
   const bodyStyle: CSSProperties = {
-    padding: isMobile ? "0.1rem 0" : "0.25rem 0",
+    paddingTop: isMobile ? "0.1rem" : "0.25rem",
+    paddingBottom: isMobile ? "0.1rem" : "0.25rem",
   };
+
+  // Two CSS hooks consumed by index.css:
+  // - `reading-block-body` enables paragraph marginalia (numbered prose
+  //   lines via CSS counter) for every direct <p> child
+  // - `reading-block-drop-block` enables the lettrine on first paragraph
+  const bodyClassName = dropBlock
+    ? "reading-block-body reading-block-drop-block"
+    : "reading-block-body";
 
   const footerRuleStyle: CSSProperties = {
     height: BRAND.figures.ruleThickness,
@@ -154,7 +173,9 @@ export const BlockShell: FC<Props> = ({
           <span style={blockLabelStyle}>{blockIdLabel}</span>
         </div>
         {title && <span style={titleKickerStyle}>· {title.toLowerCase()}</span>}
-        <div style={bodyStyle}>{children}</div>
+        <div className={bodyClassName} style={bodyStyle}>
+          {children}
+        </div>
         <div style={footerRuleStyle} aria-hidden="true" />
       </div>
     </section>
