@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getBrandGold, useThemeContext } from "../../../Design";
 
 type Props = {
   /** Play the drop-in animation (only the freshly revealed link). */
@@ -8,34 +8,38 @@ type Props = {
 };
 
 /**
- * Connector drawn between two consecutive blocks: a single chain link (two short
- * segments framing a capsule ring) so the chapter reads as a chain whose blocks
- * are appended one by one.
+ * The hairline connector between two consecutive blocks — a single vertical
+ * gold filet (1px). Distinct from the gold rule + carré signature that opens
+ * each block, so the chain reads as a thread linking blocks rather than as
+ * a repetition of block markers.
+ *
+ * The thin column matches the visual register of the ledger system: no
+ * bauble, no icon, just a line that says "this block follows that one".
  */
 export const BlockChainLink: FC<Props> = ({ revealing }) => {
-  const { colors, moduleTheme } = usePageTheme();
-  const accent = colors[moduleTheme].background.secondary;
+  const { theme } = useThemeContext();
+  const gold = getBrandGold(theme);
 
   return (
     <div
       className={revealing ? "reading-chain-link revealing" : "reading-chain-link"}
-      style={{ display: "flex", justifyContent: "center", padding: "0.1rem 0", userSelect: "none" }}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        padding: "0",
+        userSelect: "none",
+      }}
       aria-hidden="true"
     >
-      <svg width="16" height="34" viewBox="0 0 16 34" fill="none">
-        <line x1="8" y1="0" x2="8" y2="10" stroke={accent} strokeWidth="2" strokeLinecap="round" opacity="0.5" />
-        <rect
-          x="4.5"
-          y="10"
-          width="7"
-          height="14"
-          rx="3.5"
-          stroke={accent}
-          strokeWidth="2"
-          fill={withOpacity(accent, 0.12)}
-        />
-        <line x1="8" y1="24" x2="8" y2="34" stroke={accent} strokeWidth="2" strokeLinecap="round" opacity="0.5" />
-      </svg>
+      <span
+        style={{
+          display: "block",
+          width: BRAND.figures.ruleThickness,
+          height: 26,
+          background: gold,
+          opacity: 0.65,
+        }}
+      />
     </div>
   );
 };
