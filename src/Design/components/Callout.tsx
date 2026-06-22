@@ -40,11 +40,12 @@ export const Callout: FC<Props> = ({ title, children }) => {
   const kickerStyle: CSSProperties = {
     display: "block",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.6875rem",
-    letterSpacing: "0.14em",
+    fontSize: "0.75rem",
+    fontWeight: 500,
+    letterSpacing: "0.12em",
     color: colors.base.text.secondary,
     fontVariant: "small-caps",
-    marginBottom: "0.45rem",
+    marginBottom: "0.5rem",
   };
 
   const frameStyle: CSSProperties = {
