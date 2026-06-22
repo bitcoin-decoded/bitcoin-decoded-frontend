@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
 import { FrText } from "../../../I18n";
 
 import { ChapterPrelude } from "./ChapterPrelude";
@@ -79,11 +79,12 @@ export const PageTemplate: FC<Props> = ({
   };
 
   const titleStyle: CSSProperties = {
-    fontSize: isMobile ? "1.75rem" : "2.5rem",
+    fontFamily: BRAND.fonts.display,
+    fontSize: isMobile ? "1.85rem" : "2.75rem",
     lineHeight: 1.15,
     textAlign: "center",
-    fontWeight: 300,
-    letterSpacing: "-0.02em",
+    fontWeight: 400,
+    letterSpacing: 0,
     margin: 0, // spacing is now driven exclusively by the rhythm system above
   };
 

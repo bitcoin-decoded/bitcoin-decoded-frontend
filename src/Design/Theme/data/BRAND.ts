@@ -31,9 +31,18 @@ export const BRAND = {
     coinSize: 14,
     ruleThickness: 1,
   },
+  /**
+   * Hand-made pedagogical type stack — committed to the "passionate professor
+   * at a chalkboard" register. Cabin Sketch (display) is a sketched serif
+   * with hatched chalk-like fill; Patrick Hand (body) is neat printed teacher
+   * handwriting; Cutive Mono (mono) is a typewriter face for technical
+   * metadata. None of these is the AI-default ("Inter / Fraunces / JetBrains
+   * Mono") that you see on every editorial or fintech site since 2022. The
+   * stack is the typography of the site's voice, not its template.
+   */
   fonts: {
-    display: "'Cormorant Garamond', 'EB Garamond', Georgia, serif",
-    body: "'Source Serif 4', Georgia, serif",
-    mono: "'JetBrains Mono', ui-monospace, monospace",
+    display: "'Cabin Sketch', 'Cormorant Garamond', Georgia, serif",
+    body: "'Patrick Hand', 'Source Serif 4', Georgia, serif",
+    mono: "'Cutive Mono', 'JetBrains Mono', ui-monospace, monospace",
   },
 };
