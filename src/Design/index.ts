@@ -30,6 +30,8 @@ export { MainLayout, useHeaderHidden } from "./Layout";
 export type { Breakpoint } from "./Responsive";
 export { useBreakpoint, useMediaQuery } from "./Responsive";
 export {
+  BRAND,
+  getBrandGold,
   getModuleThemeColor,
   THEME_COLORS,
   ThemeProvider,

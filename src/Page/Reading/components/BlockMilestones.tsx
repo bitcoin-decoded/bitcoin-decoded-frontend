@@ -1,6 +1,14 @@
-import { Fragment, type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, Fragment } from "react";
 
-import { useBreakpoint, useHeaderHidden, usePageTheme, withOpacity } from "../../../Design";
+import {
+  BRAND,
+  getBrandGold,
+  THEME_COLORS,
+  useBreakpoint,
+  useHeaderHidden,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 type Props = {
@@ -10,36 +18,35 @@ type Props = {
   onJump: (index: number) => void;
 };
 
-// Header height it tucks under (see Header.tsx - sticky, 3.5rem).
+// Header height + signature rule it tucks under.
 const HEADER_OFFSET = "3.5rem";
 
 /**
- * Chapter progress as a sticky sub-bar centered on the content column. It tucks
- * just under the auto-hiding header and rides to the top edge when the header
- * slides away (sharing the header's `useHeaderHidden` source of truth), so it
- * stays visible while reading without colliding with the header or the footer.
- * A centered row of small linked "blocks": reached ones fill with the module
- * accent, the current one lifts with a soft ring, future ones stay faint.
- * Clicking an already-revealed block jumps and scrolls to it.
+ * Chapter progress rendered as a chain ribbon — a horizontal row of small
+ * carrés-bloc linked by hairline gold segments. Reached blocks are filled in
+ * gold; the current one carries a subtle outline ring; future blocks are
+ * hollow with a faint stroke. Clicking a revealed block jumps to it.
+ *
+ * Sits as a sticky sub-bar just under the auto-hiding header (sharing its
+ * useHeaderHidden source of truth) so it stays visible while reading. Per
+ * the block-vs-coin dichotomy (rule 9), each milestone is a STRUCTURAL
+ * marker — a carré-bloc, not a coin — because it represents a block in
+ * the chapter's chain, not a quantity being manipulated.
  */
 export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump }) => {
-  const { colors, moduleTheme } = usePageTheme();
+  const { theme } = useThemeContext();
+  const colors = THEME_COLORS[theme];
   const { t } = useTranslation();
   const isMobile = useBreakpoint() === "mobile";
   const headerHidden = useHeaderHidden();
 
-  // On neutral pages (outside any module) the module accent collapses to
-  // the same dark/light grey as the pill background - dots and links
-  // vanish into the chrome. Fall back to base text colour so the
-  // milestones stay visible on both dark and light themes.
-  const accent =
-    moduleTheme === "base"
-      ? colors.base.text.secondary
-      : colors[moduleTheme].background.secondary;
-  const reachedLink = withOpacity(accent, 0.55);
-  const idle = withOpacity(colors.base.text.primary, 0.16);
+  const gold = getBrandGold(theme);
+  const idleStroke = withOpacity(colors.base.text.primary, 0.22);
+  const linkColor = withOpacity(gold, 0.6);
+  const linkIdle = withOpacity(colors.base.text.primary, 0.15);
+
   const size = isMobile ? 9 : 10;
-  const linkWidth = isMobile ? 16 : 24;
+  const linkWidth = isMobile ? 14 : 22;
 
   const pillStyle: CSSProperties = {
     position: "sticky",
@@ -52,37 +59,33 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
     alignItems: "center",
     justifyContent: "center",
     gap: 0,
-    padding: isMobile ? "0.5rem 0.85rem" : "0.6rem 1.05rem",
-    borderRadius: 999,
-    background: withOpacity(colors.base.background.tertiary, 0.82),
+    padding: isMobile ? "0.45rem 0.8rem" : "0.55rem 1rem",
+    background: withOpacity(colors.base.background.primary, 0.85),
     backdropFilter: "blur(12px)",
     WebkitBackdropFilter: "blur(12px)",
-    border: `1px solid ${colors.base.border.secondary}`,
-    boxShadow: colors.boxShadow.soft,
+    border: `${BRAND.figures.ruleThickness}px solid ${withOpacity(colors.base.text.primary, 0.1)}`,
     transition: "top 0.3s var(--ease-smooth)",
   };
 
   const linkStyle = (filled: boolean): CSSProperties => ({
     width: linkWidth,
-    height: 2,
+    height: BRAND.figures.ruleThickness,
     flex: "0 0 auto",
-    borderRadius: 1,
-    background: filled ? reachedLink : idle,
+    background: filled ? linkColor : linkIdle,
     transition: "background 0.45s var(--ease-smooth)",
   });
 
-  const dotStyle = (reached: boolean, isCurrent: boolean, reachable: boolean): CSSProperties => ({
+  const blockStyle = (reached: boolean, isCurrent: boolean, reachable: boolean): CSSProperties => ({
     width: size,
     height: size,
     flex: "0 0 auto",
     padding: 0,
     appearance: "none",
     outline: "none",
-    borderRadius: 3,
-    border: reached ? "none" : `1.5px solid ${idle}`,
-    background: reached ? accent : "transparent",
-    transform: isCurrent ? "scale(1.35)" : "scale(1)",
-    boxShadow: isCurrent ? `0 0 0 4px ${withOpacity(accent, 0.16)}` : "none",
+    border: reached ? "none" : `${BRAND.figures.ruleThickness}px solid ${idleStroke}`,
+    background: reached ? gold : "transparent",
+    transform: isCurrent ? "scale(1.4)" : "scale(1)",
+    boxShadow: isCurrent ? `0 0 0 3px ${withOpacity(gold, 0.22)}` : "none",
     cursor: reachable ? "pointer" : "default",
     transition:
       "transform 0.4s var(--ease-smooth), background 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth)",
@@ -103,7 +106,7 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
               aria-current={isCurrent ? "step" : undefined}
               disabled={!reachable}
               onClick={() => reachable && onJump(i)}
-              style={dotStyle(reached, isCurrent, reachable)}
+              style={blockStyle(reached, isCurrent, reachable)}
             />
           </Fragment>
         );
