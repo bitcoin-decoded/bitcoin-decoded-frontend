@@ -15,6 +15,7 @@ export {
   Quote,
   RangeLedger,
   Reference,
+  Separator,
   SurfaceCard,
 } from "./components";
 export { withOpacity } from "./helpers";

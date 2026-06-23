@@ -94,11 +94,12 @@ export const PageTemplate: FC<Props> = ({
   };
 
   const sectionStyle: CSSProperties = {
-    // Patrick Hand renders small per em; bump prose so the handwriting reads
-    // comfortably. The user found the earlier size cramped.
-    fontSize: isMobile ? "1.0625rem" : "1.1875rem",
+    // 17px desktop / 16px mobile with a tighter line-height: reduces the
+    // height of text blocks without losing reading comfort (Patrick Hand at
+    // 19px read too tall). Line-height trimmed from 1.75 to 1.62.
+    fontSize: isMobile ? "1rem" : "1.0625rem",
     letterSpacing: "0.005em",
-    lineHeight: 1.75,
+    lineHeight: 1.62,
     "--accent-color": accentColor,
   } as CSSProperties;
 

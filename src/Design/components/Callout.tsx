@@ -33,34 +33,34 @@ export const Callout: FC<Props> = ({ title, children }) => {
   // Module identity color (violet on MoneyLaws, blue on Banking, …), falling
   // back to gold on neutral/base pages where no module accent exists.
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
-  // Hyper-subtle module wash so the aside reads as "set apart" like the prose
-  // marginalia would mark it — fainter than the prelude wash so they stay
-  // distinct. Inner interactive components (e.g. a slider) sit on transparent
-  // ledger surfaces, so this uniform tint shows cleanly behind them.
+  // Saturated module hue for the wash (gold on neutral pages), kept very faint
+  // so the prose still reads cleanly on top.
   const washSource = moduleTheme === "base" ? gold : colors[moduleTheme].background.secondary;
-  const wash = withOpacity(washSource, theme === "dark" ? 0.06 : 0.04);
 
   const wrapperStyle: CSSProperties = {
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
   };
 
-  // Shared heading register with ChapterPrelude: Patrick Hand, sizeable,
-  // module-colored. Patrick Hand has a single weight, so emphasis comes from
-  // size + color rather than font-weight.
+  // Shared heading register with ChapterPrelude: Patrick Hand, module-colored.
+  // Patrick Hand has a single weight, so emphasis comes from size + color.
   const titleStyle: CSSProperties = {
     display: "block",
     fontFamily: BRAND.fonts.body,
-    fontSize: isMobile ? "1.3rem" : "1.45rem",
+    fontSize: isMobile ? "1.15rem" : "1.25rem",
     lineHeight: 1.2,
     letterSpacing: "0.01em",
     color: moduleAccent,
     marginBottom: "0.55rem",
   };
 
+  // A faint module wash gives the aside a readable surface in both themes
+  // (light mode in particular felt unanchored without one). The bracketed gold
+  // corners + module-color title still carry its identity; the wash just sets
+  // it apart from the surrounding prose.
   const frameStyle: CSSProperties = {
     position: "relative",
-    background: wash,
     padding: isMobile ? "1rem 1rem" : "1.25rem 1.5rem",
+    background: withOpacity(washSource, theme === "dark" ? 0.1 : 0.07),
   };
 
   const cornerSize = 14;
@@ -103,12 +103,11 @@ export const Callout: FC<Props> = ({ title, children }) => {
     borderRight: stroke,
   };
 
-  // Body matches the surrounding prose size — the previous 0.9375rem was the
-  // pre-typo-swap value and read cramped next to the bumped Patrick Hand prose.
+  // Body matches the surrounding prose size (17px desktop / 16px mobile).
   const bodyStyle: CSSProperties = {
     color: colors.base.text.primary,
-    lineHeight: 1.75,
-    fontSize: isMobile ? "1.0625rem" : "1.1875rem",
+    lineHeight: 1.62,
+    fontSize: isMobile ? "1rem" : "1.0625rem",
     textAlign: "left",
   };
 

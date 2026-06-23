@@ -1,7 +1,8 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
+import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { BRAND, usePageTheme } from "../Theme";
+import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 type Props = {
   children: ReactNode;
@@ -9,50 +10,51 @@ type Props = {
   source?: string;
 };
 
+/**
+ * Editorial quote — a single big opening mark in the chapter-title face
+ * (Cabin Sketch) and module color, over a light module wash with sharp
+ * corners (same backdrop register as the prelude). The previous version's
+ * gradient-border + rounded card + paired quote marks belonged to the
+ * AI-template era; this one reads as a hand-set pull-quote.
+ */
 export const Quote: FC<Props> = ({ children, author, source }) => {
   const { colors, moduleTheme } = usePageTheme();
-  const breakpoint = useBreakpoint();
-  const isMobile = breakpoint === "mobile";
+  const { theme } = useThemeContext();
+  const isMobile = useBreakpoint() === "mobile";
 
-  const accentColor = colors[moduleTheme].text.primary;
+  const gold = getBrandGold(theme);
+  const isModule = moduleTheme !== "base";
+  const moduleAccent = isModule ? colors[moduleTheme].text.secondary : gold;
+  const washSource = isModule ? colors[moduleTheme].background.secondary : gold;
+  const wash = withOpacity(washSource, theme === "dark" ? 0.1 : 0.07);
 
   const blockquoteStyle: CSSProperties = {
     position: "relative",
     margin: isMobile ? "2rem 0" : "3rem 0",
-    padding: isMobile ? "1.5rem 1.25rem 1.25rem 2.5rem" : "2rem 2.5rem 2rem 3.5rem",
-    background: `linear-gradient(190deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary})`,
-    borderRadius: "1rem",
-    lineHeight: 1.7,
-    letterSpacing: "0.02em",
+    padding: isMobile ? "1.5rem 1.25rem 1.25rem 2.75rem" : "1.75rem 2rem 1.75rem 3.75rem",
+    background: wash,
+    border: `1px solid ${withOpacity(moduleAccent, 0.25)}`,
+    lineHeight: 1.62,
     textAlign: "left",
   };
 
-  const openingQuoteMarkStyle: CSSProperties = {
-    color: accentColor,
-    fontSize: isMobile ? "3.5rem" : "4rem",
+  // One big opening mark, in the title face + module color. Anchors the quote
+  // like a hand-drawn quotation the teacher chalked beside the lesson.
+  const openingMarkStyle: CSSProperties = {
+    color: moduleAccent,
+    fontSize: isMobile ? "3.25rem" : "3.75rem",
     fontFamily: BRAND.fonts.display,
+    fontWeight: 700,
     position: "absolute",
-    left: isMobile ? "0.5rem" : "0.75rem",
-    top: isMobile ? "0.25rem" : "0.5rem",
+    left: isMobile ? "0.65rem" : "1rem",
+    top: isMobile ? "0.35rem" : "0.4rem",
     lineHeight: 1,
-    opacity: 0.8,
-  };
-
-  const closingQuoteMarkStyle: CSSProperties = {
-    color: accentColor,
-    fontSize: isMobile ? "3.5rem" : "4rem",
-    fontFamily: BRAND.fonts.display,
-    position: "absolute",
-    right: isMobile ? "0.75rem" : "1rem",
-    bottom: isMobile ? "0.25rem" : "0.5rem",
-    lineHeight: 1,
-    opacity: 0.6,
   };
 
   const contentStyle: CSSProperties = {
-    color: colors[moduleTheme].text.secondary,
+    color: colors.base.text.primary,
     fontStyle: "italic",
-    fontSize: isMobile ? "0.9375rem" : "1rem",
+    fontSize: isMobile ? "1rem" : "1.0625rem",
   };
 
   const hasAttribution = author || source;
@@ -62,32 +64,30 @@ export const Quote: FC<Props> = ({ children, author, source }) => {
     alignItems: "baseline",
     gap: "0.4rem",
     flexWrap: "wrap",
-    marginTop: "1rem",
+    marginTop: "0.85rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.875rem",
+    fontSize: "0.8125rem",
     letterSpacing: "0.03em",
     opacity: 0.85,
   };
 
   const authorStyle: CSSProperties = {
-    color: accentColor,
+    color: moduleAccent,
     fontStyle: "normal",
-    fontWeight: 600,
+    fontWeight: 500,
   };
 
   const sourceStyle: CSSProperties = {
-    color: colors[moduleTheme].text.secondary,
+    color: colors.base.text.secondary,
     fontStyle: "italic",
     fontWeight: 400,
   };
 
   return (
-    <blockquote
-      className="gradient-border"
-      style={{ ...blockquoteStyle, "--border-glow-color": accentColor } as CSSProperties}
-    >
-      <span style={openingQuoteMarkStyle}>&ldquo;</span>
-      <span style={closingQuoteMarkStyle}>&rdquo;</span>
+    <blockquote style={blockquoteStyle}>
+      <span style={openingMarkStyle} aria-hidden="true">
+        &ldquo;
+      </span>
       <div style={contentStyle}>{children}</div>
       {hasAttribution && (
         <span style={attributionStyle}>

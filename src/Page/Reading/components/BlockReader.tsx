@@ -15,8 +15,7 @@ import { RotateCcw } from "lucide-react";
 import { useBadges } from "../../../Achievements";
 import { BRAND, Button, getBrandGold, usePageTheme, useThemeContext } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
-import type { RouteName } from "../../../Routing";
-import { PAGE_METADATA, PageNavigation } from "../../Shared";
+import { PageNavigation } from "../../Shared";
 import { useBlockReader } from "../hooks";
 
 import { Block } from "./Block";
@@ -56,12 +55,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
   );
   const blockCount = blocks.length;
 
-  // Opt-in drop-block lettrine: read from PAGE_METADATA so chapters that
-  // open on a short or punchy sentence keep their breathing room. Only
-  // applied to Block 0.
-  const chapterMeta = PAGE_METADATA[chapterId as RouteName];
-  const chapterDropBlock = chapterMeta?.dropBlock ?? false;
-
   const {
     containerRef,
     maxRevealed,
@@ -85,12 +78,11 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     if (finished) award(chapterId);
   }, [finished, award, chapterId]);
 
-  // Module accent flows to the marginalia `[ 01 ]` markers and the drop-block
-  // lettrine (both consumed in index.css). Replaces the previous ton-sur-ton
-  // gray, which read poorly. Set inline so CSS pseudo-elements can read it.
+  // Module accent flows to the marginalia `[ Tx 01 ]` markers (consumed in
+  // index.css). Replaces the previous ton-sur-ton gray, which read poorly.
+  // Set inline so the CSS pseudo-element can read it.
   const containerStyle: CSSProperties = {
     ["--marginalia-color" as string]: moduleAccent,
-    ["--module-accent" as string]: moduleAccent,
   };
 
   return (
@@ -132,7 +124,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
               isCurrent={isCurrent}
               revealing={isRevealing}
               title={block.props.title}
-              dropBlock={i === 0 && chapterDropBlock}
               onActivate={() => jump(i)}
             >
               {content}
