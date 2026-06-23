@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { CheckCircle, Coins, KeyRound, Lock, XCircle } from "lucide-react";
 
-import { withOpacity } from "../../../Design";
+import { BRAND, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import type { UtxoGraphMode } from "../types";
 
@@ -18,7 +18,7 @@ type Props = {
   baseTextSecondary: string;
 };
 
-const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
 export const UtxoCoin: FC<Props> = ({
   amount,

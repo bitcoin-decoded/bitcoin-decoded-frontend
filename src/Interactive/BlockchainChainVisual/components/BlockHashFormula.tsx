@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { HighlightText, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, HighlightText, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 
@@ -30,7 +30,7 @@ export const BlockHashFormula: FC<Props> = ({
   const accentBorder = isEdited ? colors.semantic.error.border : colors.violet.border.secondary;
   const labelColor = colors.violet.text.secondary;
 
-  const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
+  const mono = { fontFamily: BRAND.fonts.mono } as const;
 
   const container: CSSProperties = {
     display: "flex",

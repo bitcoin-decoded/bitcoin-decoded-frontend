@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 
 import { BadgeGrid, useBadges } from "../../../Achievements";
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { PageTemplate } from "../../Shared";
 
@@ -36,7 +36,7 @@ export const BadgesPage: FC = () => {
     justifyContent: "center",
     alignItems: "baseline",
     gap: "0.4rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
   };
 
   const trackStyle: CSSProperties = {

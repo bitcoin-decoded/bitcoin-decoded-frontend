@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { Caption, useBreakpoint, useRechartsTheme } from "../../../Design";
+import { BRAND, Caption, useBreakpoint, useRechartsTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { BITCOIN_REFS } from "../../../References";
 
@@ -31,7 +31,7 @@ export const HalvingChart: FC = () => {
   };
 
   const captionStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.65rem",
     color: chart.axisTickColor,
     textAlign: "center",

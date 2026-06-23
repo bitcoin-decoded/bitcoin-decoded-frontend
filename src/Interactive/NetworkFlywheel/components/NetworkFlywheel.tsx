@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { PlusCircle, RefreshCw, RotateCcw } from "lucide-react";
 
-import { Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { MAX_LEVEL, STEP_ICONS, WHEEL_RADIUS } from "../data";
 import { getPentagonLayout, getStepTones } from "../helpers";
@@ -25,7 +25,7 @@ export const NetworkFlywheel: FC<Props> = ({ onComplete }) => {
 
   const tones = getStepTones(colors);
   const { vertices, edges } = getPentagonLayout(steps.length, WHEEL_RADIUS);
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
   const idleEdge = withOpacity(world.text.secondary, 0.28);
 
   const wheelStyle: CSSProperties = {

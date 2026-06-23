@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Coins, KeyRound, Lock, MapPin } from "lucide-react";
 
-import { withOpacity } from "../../../Design";
+import { BRAND, withOpacity } from "../../../Design";
 import { fmtBTC, truncateHash } from "../../helpers";
 import type { WalletCardData } from "../types";
 
@@ -118,7 +118,7 @@ export const WalletCard: FC<Props> = ({
     gap: "0.25rem",
     padding: "0.2rem 0.4rem",
     borderRadius: "0.35rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.55rem",
     fontWeight: 700,
     letterSpacing: "0.04em",
@@ -153,7 +153,7 @@ export const WalletCard: FC<Props> = ({
   });
 
   const fieldValueStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.62rem",
     fontWeight: 600,
     color: basePrimaryText,
@@ -165,7 +165,7 @@ export const WalletCard: FC<Props> = ({
     justifyContent: "space-between",
     alignItems: "center",
     gap: "0.4rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.62rem",
     padding: "0.3rem 0.45rem",
     borderRadius: "0.35rem",

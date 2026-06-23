@@ -1,7 +1,7 @@
 import { AlertTriangle, ArrowRight } from "lucide-react";
 import type { CSSProperties, FC } from "react";
 
-import { type usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, type usePageTheme, withOpacity } from "../../../Design";
 import type { MempoolTransaction, TxState } from "../types";
 
 export const TxRow: FC<{
@@ -11,7 +11,7 @@ export const TxRow: FC<{
   moduleTheme: ReturnType<typeof usePageTheme>["moduleTheme"];
   isMobile: boolean;
 }> = ({ tx, state, colors, moduleTheme, isMobile }) => {
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
   const world = colors[moduleTheme];
   const isConflict = state === "conflict";
   const isRejected = state === "rejected";

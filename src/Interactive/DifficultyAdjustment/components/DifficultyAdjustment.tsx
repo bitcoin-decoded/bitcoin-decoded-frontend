@@ -2,15 +2,13 @@ import { type CSSProperties, type FC } from "react";
 
 import { Minus, Plus, Target, Timer, Users } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useDifficultyAdjustment } from "../hooks";
 
@@ -27,7 +25,7 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
   const { miners, target, canDecrease, canIncrease, decrease, increase, step } =
     useDifficultyAdjustment(onComplete);
 
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const controlRow: CSSProperties = {
     display: "flex",

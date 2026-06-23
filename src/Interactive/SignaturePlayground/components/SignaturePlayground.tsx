@@ -17,17 +17,15 @@ import {
   XCircle,
 } from "lucide-react";
 
-import {
-  Badge,
-  Button,
+import { Badge,
+BRAND,   Button,
   Caption,
   Disclosure,
   FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   ActionButton,
@@ -92,7 +90,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
 
   // ── styles ──────────────────────────────────────────────────────────────────
 
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const sectionLabel: CSSProperties = {
     fontSize: "0.6rem",

@@ -1,7 +1,7 @@
 import { createElement, type CSSProperties, type FC, type ReactNode } from "react";
 
 import { useBreakpoint } from "../Responsive";
-import { usePageTheme } from "../Theme";
+import { BRAND, usePageTheme } from "../Theme";
 
 type Tone = "world" | "muted" | "accent";
 type Size = "xs" | "sm" | "md";
@@ -73,7 +73,7 @@ export const Caption: FC<Props> = ({
         : colors.base.text.secondary);
 
   const finalStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize,
     fontWeight: 700,
     textTransform: "uppercase",

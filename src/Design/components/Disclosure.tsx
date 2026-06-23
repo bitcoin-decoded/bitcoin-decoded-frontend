@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 
 import { withOpacity } from "../helpers";
 import { useDisclosure } from "../hooks";
-import { usePageTheme } from "../Theme";
+import { BRAND, usePageTheme } from "../Theme";
 
 type Props = {
   title: string;
@@ -48,7 +48,7 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     border: "none",
     cursor: "pointer",
     color: accentColor,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.7rem",
     fontWeight: 700,
     textAlign: "left",

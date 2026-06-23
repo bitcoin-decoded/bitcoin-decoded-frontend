@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { usePageTheme } from "../../../Design";
+import { BRAND, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useBreakpoint } from "../../../Design/Responsive";
 import { useTranslation } from "../../../I18n";
@@ -33,7 +33,7 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   const titleStyle: CSSProperties = {
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.5rem",
     fontWeight: 600,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.75rem" : "0.8125rem",
     letterSpacing: "0.08em",
     textAlign: "center",
@@ -53,7 +53,7 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   const tableHeaderStyle: CSSProperties = {
     padding: isMobile ? "0.625rem 0.75rem" : "0.75rem 1.25rem",
     fontWeight: 700,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.75rem" : "0.8125rem",
     letterSpacing: "0.06em",
     textTransform: "uppercase",

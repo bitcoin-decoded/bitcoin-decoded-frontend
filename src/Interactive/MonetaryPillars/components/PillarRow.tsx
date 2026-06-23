@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { ChevronDown } from "lucide-react";
 
-import { useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import type { MonetaryPillar } from "../types";
 
 type Props = {
@@ -32,7 +32,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
   const accentText = pillar.isKeystone ? colors.amber.text.secondary : world.text.secondary;
   const accentBorder = pillar.isKeystone ? colors.amber.border.secondary : world.border.secondary;
 
-  const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
+  const mono = { fontFamily: BRAND.fonts.mono } as const;
   const numberLabel = String(index + 1).padStart(2, "0");
 
   const rowStyle: CSSProperties = {

@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { Bitcoin } from "lucide-react";
 
-import { usePageTheme } from "../../../Design";
+import { BRAND, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy } from "../data";
@@ -25,7 +25,7 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
     alignItems: "center",
     gap: "0.5rem",
     padding: "0.5rem 1rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.78rem",
     fontWeight: 600,
     letterSpacing: "0.03em",

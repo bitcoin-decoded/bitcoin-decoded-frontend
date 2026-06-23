@@ -2,6 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { CheckCircle, XCircle } from "lucide-react";
 
+import { BRAND } from "../../../Design";
 import { withOpacity } from "../../../Design/";
 import { truncateHash } from "../../helpers";
 import type { SigPlaygroundColors } from "../types";
@@ -67,7 +68,7 @@ export const MatchVisualizer: FC<Props> = ({
   });
 
   const monoValue: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.62rem",
     fontWeight: 600,
     color: colors.basePrimaryText,
@@ -97,7 +98,7 @@ export const MatchVisualizer: FC<Props> = ({
       {/* verify() notation + hyperlink for the curious */}
       <div
         style={{
-          fontFamily: "'JetBrains Mono', monospace",
+          fontFamily: BRAND.fonts.mono,
           fontSize: "0.55rem",
           color: withOpacity(colors.baseTextSecondary, 0.7),
           letterSpacing: "0.02em",

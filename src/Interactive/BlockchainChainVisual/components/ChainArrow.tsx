@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { ArrowDown } from "lucide-react";
 
-import { usePageTheme } from "../../../Design";
+import { BRAND, usePageTheme } from "../../../Design";
 
 type Props = {
   isBroken?: boolean;
@@ -24,7 +24,7 @@ export const ChainArrow: FC<Props> = ({ isBroken = false, caption }) => {
   };
 
   const captionStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.6rem",
     fontWeight: 700,
     textTransform: "uppercase",

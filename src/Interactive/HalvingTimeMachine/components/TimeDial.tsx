@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Minus, Plus } from "lucide-react";
 
-import { Button, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Button, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { TIME_MACHINE_END_YEAR } from "../data";
 
@@ -55,7 +55,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   };
 
   const labelStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.6rem",
     fontWeight: 700,
     textTransform: "uppercase",
@@ -64,7 +64,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   };
 
   const yearValueStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.15rem" : "1.3rem",
     fontWeight: 700,
     color: world.text.primary,
@@ -101,7 +101,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   };
 
   const segmentBtnStyle = (active: boolean, first: boolean): CSSProperties => ({
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     cursor: disabled ? "not-allowed" : "pointer",
     padding: isMobile ? "0.5rem 0.7rem" : "0.55rem 1rem",
     border: "none",

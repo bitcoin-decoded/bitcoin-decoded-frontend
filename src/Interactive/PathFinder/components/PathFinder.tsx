@@ -17,16 +17,14 @@ import {
   Telescope,
 } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   Disclosure,
   FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { usePathFinder } from "../hooks";
 import type { ProfileKey, WalletSection } from "../types";
 
@@ -124,7 +122,7 @@ export const PathFinder: FC = () => {
   };
 
   const profileLeadStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.62rem",
     fontWeight: 700,
     textTransform: "uppercase",

@@ -2,6 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Shuffle } from "lucide-react";
 
+import { BRAND } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
 
@@ -22,7 +23,7 @@ type Props = {
 export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, isMobile, colors }) => {
   const buttonStyle: CSSProperties = {
     alignSelf: "center",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.55rem" : "0.6rem",
     fontWeight: 700,
     color: colors.errorColor,

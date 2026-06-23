@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { M2_MONEY_SUPPLY } from "../data";
 
@@ -41,7 +41,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
   };
 
   const sourceStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.6rem",
     color: colors.base.text.secondary,
     textAlign: "center",
@@ -103,7 +103,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
                 background: colors.base.background.primary,
                 border: `1px solid ${world.border.primary}`,
                 borderRadius: "0.5rem",
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: BRAND.fonts.mono,
                 fontSize: "0.75rem",
               }}
               formatter={(value: number) => [`${value.toFixed(2)}T $`, "M2"]}

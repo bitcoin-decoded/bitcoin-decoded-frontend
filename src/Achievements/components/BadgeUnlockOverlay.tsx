@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { usePageTheme, withOpacity } from "../../Design";
+import { BRAND, usePageTheme, withOpacity } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { getModuleRamp } from "../helpers";
 import type { Badge } from "../types";
@@ -77,7 +77,7 @@ export const BadgeUnlockOverlay: FC<Props> = ({ badge, onDismiss }) => {
   };
 
   const leadStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.72rem",
     fontWeight: 700,
     letterSpacing: "0.14em",

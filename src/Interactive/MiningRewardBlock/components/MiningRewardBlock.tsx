@@ -13,15 +13,13 @@ import {
   Wallet,
 } from "lucide-react";
 
-import {
-  Badge,
-  Button,
+import { Badge,
+BRAND,   Button,
   Caption,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { fmtBTC } from "../../helpers";
 import { CONFETTI_DATA } from "../data";
@@ -49,7 +47,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     reset,
   } = useMiningRewardBlock(onComplete);
 
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
   const successColor = colors.semantic.success.text;
 
   const panelsRow: CSSProperties = {
@@ -178,7 +176,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
   };
   const rewardValue: CSSProperties = {
     marginLeft: "auto",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
   };
 
   const walletBox: CSSProperties = {

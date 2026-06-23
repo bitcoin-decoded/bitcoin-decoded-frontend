@@ -1,6 +1,6 @@
 import { type CSSProperties, type ReactNode } from "react";
 
-import { OptionButton, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, OptionButton, usePageTheme, withOpacity } from "../../../Design";
 
 type Option<T extends string> = { value: T; label: ReactNode };
 
@@ -50,7 +50,7 @@ export const QuestionStep = <T extends string>({
     background: withOpacity(accent, 0.12),
     border: `1px solid ${withOpacity(accent, 0.4)}`,
     color: accent,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.78rem",
     fontWeight: 700,
   };

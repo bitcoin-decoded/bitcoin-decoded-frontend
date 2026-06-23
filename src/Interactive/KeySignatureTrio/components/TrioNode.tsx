@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import type { KeyElement } from "../types";
 
 type Props = {
@@ -66,7 +66,7 @@ export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) 
   };
 
   const titleStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.66rem" : "0.74rem",
     fontWeight: 700,
     textTransform: "uppercase",

@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Zap } from "lucide-react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getMachineColors } from "../data";
 import { formatRewardBTC, getMinerWorkTime } from "../helpers";
@@ -87,7 +87,7 @@ export const TimeScreen: FC<Props> = ({
   };
 
   const eyebrowStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.52rem",
     fontWeight: 700,
     textTransform: "uppercase",
@@ -96,7 +96,7 @@ export const TimeScreen: FC<Props> = ({
   };
 
   const yearStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.7rem" : "2rem",
     fontWeight: 700,
     lineHeight: 1,
@@ -112,7 +112,7 @@ export const TimeScreen: FC<Props> = ({
   };
 
   const rewardLabelStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.58rem",
     fontWeight: 700,
     textTransform: "uppercase",
@@ -121,7 +121,7 @@ export const TimeScreen: FC<Props> = ({
   };
 
   const rewardValueStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.4rem" : "1.7rem",
     fontWeight: 700,
     lineHeight: 1.1,
@@ -132,7 +132,7 @@ export const TimeScreen: FC<Props> = ({
   const sublineStyle: CSSProperties = {
     margin: 0,
     marginTop: "0.5rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.6rem",
     lineHeight: 1.5,
     color: screenInkMuted,

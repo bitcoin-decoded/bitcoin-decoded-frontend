@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 
 type Props = {
   icon: ReactNode;
@@ -30,7 +30,7 @@ export const BlockRow: FC<Props> = ({
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
 
-  const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
+  const mono = { fontFamily: BRAND.fonts.mono } as const;
 
   const rowStyle: CSSProperties = {
     display: "flex",

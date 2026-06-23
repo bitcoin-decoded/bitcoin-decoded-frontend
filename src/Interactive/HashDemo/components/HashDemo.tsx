@@ -2,14 +2,12 @@ import { type CSSProperties, type FC } from "react";
 
 import { CircleCheck, Hash, RotateCcw } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { useHashDemo } from "../hooks";
 
@@ -30,7 +28,7 @@ export const HashDemo: FC<Props> = ({ onComplete }) => {
   const hashDisabled = input.length === 0 || disabled;
 
   const inputStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.8rem" : "0.85rem",
     padding: isMobile ? "0.7rem 1rem" : "0.75rem 1.25rem",
     borderRadius: "0.75rem",
@@ -45,7 +43,7 @@ export const HashDemo: FC<Props> = ({ onComplete }) => {
   };
 
   const outputBox: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.62rem" : "0.7rem",
     lineHeight: 1.6,
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.25rem",

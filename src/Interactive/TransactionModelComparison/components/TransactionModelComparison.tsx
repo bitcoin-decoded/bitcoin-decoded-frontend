@@ -17,7 +17,7 @@ import {
   Zap,
 } from "lucide-react";
 
-import { Badge, Button, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, BRAND, Button, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { fmtBTC, fmtEur } from "../../helpers";
 import { BANK, BTC } from "../data";
@@ -43,7 +43,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   const btcAccent = world.border.secondary;
   const successColor = colors.semantic.success.text;
   const errorColor = colors.semantic.error.text;
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
   const isAfter = phase === "after";
   const iconSm = isMobile ? 11 : 12;
 

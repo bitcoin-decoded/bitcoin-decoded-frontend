@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import type { LucideIcon } from "lucide-react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 
 type Props = {
   /** Attribute name (e.g. "Simplicité"). */
@@ -38,7 +38,7 @@ export const ScoreGauge: FC<Props> = ({ label, icon: Icon, score, accent, max = 
     display: "inline-flex",
     alignItems: "center",
     gap: "0.4rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.58rem" : "0.62rem",
     fontWeight: 700,
     textTransform: "uppercase",

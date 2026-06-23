@@ -1,7 +1,9 @@
-import { type FC, type CSSProperties, useState } from "react";
+import { type CSSProperties, type FC, useState } from "react";
+
+import { BRAND } from "../../Design";
+import { THEME_COLORS,useThemeContext } from "../../Design/Theme";
 import { useLanguageContext } from "../hooks";
 import { useTranslation } from "../hooks";
-import { useThemeContext, THEME_COLORS } from "../../Design/Theme";
 
 export const LanguageToggle: FC = () => {
   const { language, toggleLanguage } = useLanguageContext();
@@ -24,7 +26,7 @@ export const LanguageToggle: FC = () => {
     borderRadius: "0.5rem",
     cursor: "pointer",
     color: isHovered ? colors.base.text.primary : colors.base.text.secondary,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontWeight: 600,
     fontSize: "0.6875rem",
     letterSpacing: "0.06em",

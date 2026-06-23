@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { ChevronDown } from "lucide-react";
 
-import { useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import type { ExpandableTerm } from "../types";
 
 type Props = {
@@ -15,7 +15,7 @@ export const TermCard: FC<Props> = ({ term }) => {
   const isMobile = useBreakpoint() === "mobile";
   const [isHovered, setIsHovered] = useState(false);
 
-  const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
+  const mono = { fontFamily: BRAND.fonts.mono } as const;
 
   const containerStyle: CSSProperties = {
     display: "flex",

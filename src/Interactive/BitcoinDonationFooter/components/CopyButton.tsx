@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { Check, Copy } from "lucide-react";
 
-import { usePageTheme } from "../../../Design";
+import { BRAND, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useClipboard } from "../hooks";
 
@@ -27,7 +27,7 @@ export const CopyButton: FC<Props> = ({ value, copyLabel, copiedLabel }) => {
     alignItems: "center",
     gap: "0.35rem",
     padding: "0.35rem 0.6rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.72rem",
     fontWeight: 600,
     letterSpacing: "0.03em",

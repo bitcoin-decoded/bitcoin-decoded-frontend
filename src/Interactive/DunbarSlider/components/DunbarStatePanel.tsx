@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { AlertTriangle, type LucideIcon } from "lucide-react";
 
-import { Caption, FeedbackPanel, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, Caption, FeedbackPanel, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 
 type Props = {
@@ -56,7 +56,7 @@ export const DunbarStatePanel: FC<Props> = ({
   };
 
   const labelStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.95rem" : "1.05rem",
     fontWeight: 700,
     letterSpacing: "0.01em",
@@ -78,7 +78,7 @@ export const DunbarStatePanel: FC<Props> = ({
   };
 
   const counterValueStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.6rem" : "2rem",
     fontWeight: 700,
     color,

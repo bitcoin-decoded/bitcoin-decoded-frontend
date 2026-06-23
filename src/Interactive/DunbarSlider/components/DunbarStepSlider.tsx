@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 
 type Props = {
@@ -61,7 +61,7 @@ export const DunbarStepSlider: FC<Props> = ({
   };
 
   const segmentBtnStyle = (active: boolean, first: boolean): CSSProperties => ({
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     cursor: "pointer",
     padding: isMobile ? "0.45rem 0.6rem" : "0.5rem 0.95rem",
     border: "none",

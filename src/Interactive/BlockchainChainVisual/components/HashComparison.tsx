@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 
@@ -16,7 +16,7 @@ export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => 
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
 
-  const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
+  const mono = { fontFamily: BRAND.fonts.mono } as const;
 
   const wrapper: CSSProperties = {
     display: "flex",

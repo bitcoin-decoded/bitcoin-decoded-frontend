@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { type LucideIcon, Star } from "lucide-react";
 
-import { Badge, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, BRAND, usePageTheme, withOpacity } from "../../../Design";
 import type { PathFinderCopy } from "../data";
 import type { SubCategoryItem } from "../types";
 
@@ -53,7 +53,7 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
   const labelStyle: CSSProperties = {
     flex: 1,
     minWidth: 0,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.82rem",
     fontWeight: 700,
     textTransform: "uppercase",

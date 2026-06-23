@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { ArrowDown, MoreHorizontal, ScrollText, Sigma, Triangle } from "lucide-react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getScientificMethodsCopy } from "../data";
 
@@ -23,7 +23,7 @@ export const LogicianMethod: FC = () => {
 
   const accent = colors.violet.text.secondary;
   const line = withOpacity(accent, 0.35);
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const treeWrap: CSSProperties = {
     display: "flex",

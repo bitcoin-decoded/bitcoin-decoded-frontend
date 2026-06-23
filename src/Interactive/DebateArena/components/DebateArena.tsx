@@ -1,12 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  Caption,
+import { BRAND, Caption,
   ExploredCounter,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useDebateArena } from "../hooks";
 import type { DebateItem } from "../types";
@@ -69,7 +67,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
           alignItems: "center",
           justifyContent: "center",
           padding: "0 1rem",
-          fontFamily: "'JetBrains Mono', monospace",
+          fontFamily: BRAND.fonts.mono,
           fontSize: "0.75rem",
           fontWeight: 700,
           color: colors.base.text.secondary,
@@ -119,7 +117,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
             display: "flex",
             alignItems: "center",
             gap: "0.5rem",
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: BRAND.fonts.mono,
             fontSize: isMobile ? "0.7rem" : "0.75rem",
             fontWeight: 600,
             color:

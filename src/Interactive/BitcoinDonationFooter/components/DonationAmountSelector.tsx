@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { ArrowLeft, HelpCircle, RefreshCw } from "lucide-react";
 
-import { Button, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, Button, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy, PRESET_AMOUNTS } from "../data";
@@ -54,7 +54,7 @@ export const DonationAmountSelector: FC<Props> = ({
 
   const titleStyle: CSSProperties = {
     margin: 0,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "1.05rem",
     fontWeight: 700,
     color: colors.base.text.primary,
@@ -86,7 +86,7 @@ export const DonationAmountSelector: FC<Props> = ({
     width: "100%",
     boxSizing: "border-box",
     padding: "0.6rem 0.8rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.9rem",
     color: colors.base.text.primary,
     background: withOpacity(colors.base.text.secondary, 0.04),
@@ -109,7 +109,7 @@ export const DonationAmountSelector: FC<Props> = ({
     border: "none",
     padding: "0.3rem 0.6rem",
     color: accent,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.82rem",
     fontWeight: 600,
     letterSpacing: "0.02em",
@@ -146,7 +146,7 @@ export const DonationAmountSelector: FC<Props> = ({
           >
             <span
               style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: BRAND.fonts.mono,
                 fontSize: "1rem",
                 fontWeight: 700,
                 color: colors.base.text.primary,
@@ -181,7 +181,7 @@ export const DonationAmountSelector: FC<Props> = ({
             <>
               <div
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: BRAND.fonts.mono,
                   fontSize: "0.95rem",
                   fontWeight: 700,
                   color: accent,

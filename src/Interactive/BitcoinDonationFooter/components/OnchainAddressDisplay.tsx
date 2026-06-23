@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { AlertTriangle, ArrowLeft } from "lucide-react";
 
-import { Button, FeedbackPanel, usePageTheme } from "../../../Design";
+import { BRAND, Button, FeedbackPanel, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { DONATION_CONFIG, getDonationCopy } from "../data";
@@ -49,7 +49,7 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
 
   const titleStyle: CSSProperties = {
     margin: 0,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "1.05rem",
     fontWeight: 700,
     color: colors.base.text.primary,
@@ -108,7 +108,7 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
       >
         <span
           style={{
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: BRAND.fonts.mono,
             fontSize: "0.72rem",
             color: colors.base.text.primary,
             overflow: "hidden",

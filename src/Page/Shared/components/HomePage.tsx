@@ -3,13 +3,11 @@ import { type CSSProperties, type FC } from "react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import type React from "react";
 
-import {
-  BitcoinDecodedLogo,
-  Quote,
+import { BitcoinDecodedLogo,
+BRAND,   Quote,
   THEME_COLORS,
   useBreakpoint,
-  useThemeContext,
-} from "../../../Design";
+  useThemeContext, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 
@@ -171,7 +169,7 @@ export const HomePage: FC = () => {
     justifyContent: "center",
     gap: "0.55rem",
     padding: isMobile ? "0.7rem 1.3rem" : "0.75rem 1.6rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.82rem" : "0.9rem",
     fontWeight: 600,
     letterSpacing: "0.03em",
@@ -190,7 +188,7 @@ export const HomePage: FC = () => {
     alignItems: "center",
     gap: "0.4rem",
     padding: "0.5rem 0.9rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.75rem" : "0.8rem",
     fontWeight: 500,
     letterSpacing: "0.04em",
@@ -229,7 +227,7 @@ export const HomePage: FC = () => {
   // with "Decoded" in the lockup; the "." separator borrows the kit's gold
   // accent for a discrete brand callback.
   const sloganStyle: CSSProperties = {
-    fontFamily: "'Cormorant Garamond', Georgia, serif",
+    fontFamily: BRAND.fonts.display,
     fontStyle: "italic",
     fontSize: pick("1rem", "1.1rem", "1.2rem"),
     fontWeight: 400,
@@ -249,7 +247,7 @@ export const HomePage: FC = () => {
 
   const headlineStyle: CSSProperties = {
     fontSize: pick("1.85rem", "2.35rem", "2.85rem"),
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontWeight: 700,
     letterSpacing: "-0.02em",
     lineHeight: 1.15,
@@ -298,7 +296,7 @@ export const HomePage: FC = () => {
     left: 0,
     top: 0,
     color: "#f7931a",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontWeight: 700,
   };
 
