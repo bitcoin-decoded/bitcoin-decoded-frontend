@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Cpu, Monitor } from "lucide-react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { LINKS, NODES } from "../data";
 
@@ -34,7 +34,7 @@ export const BitcoinNetworkMap: FC = () => {
   const cpuSize = isMobile ? 9 : 11;
 
   const titleStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.8rem" : "0.875rem",
     fontWeight: 700,
     textTransform: "uppercase",
@@ -95,7 +95,7 @@ export const BitcoinNetworkMap: FC = () => {
           };
 
           const labelNodeStyle: CSSProperties = {
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: BRAND.fonts.mono,
             fontSize: isMobile ? "0.5rem" : "0.55rem",
             fontWeight: 600,
             color: colors.base.text.secondary,

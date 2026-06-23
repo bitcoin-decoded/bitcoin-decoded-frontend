@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import type { LucideIcon } from "lucide-react";
 
-import { usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, usePageTheme, withOpacity } from "../../../Design";
 
 type FlywheelStepProps = {
   icon: LucideIcon;
@@ -27,7 +27,7 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   const world = colors[moduleTheme];
 
   const nodeStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     width: "100%",
     minWidth: 0,
     display: "flex",

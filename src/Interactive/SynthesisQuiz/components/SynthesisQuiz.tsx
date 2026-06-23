@@ -10,16 +10,14 @@ import {
   RotateCcw,
 } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   FeedbackPanel,
   OptionButton,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useSynthesisQuiz } from "../hooks";
 import type { SynthesisQuizData } from "../types";
@@ -102,7 +100,7 @@ export const SynthesisQuiz: FC<Props> = ({
   };
 
   const indexStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.7rem" : "0.75rem",
     fontWeight: 700,
     color: accent,
@@ -220,7 +218,7 @@ export const SynthesisQuiz: FC<Props> = ({
           >
             <div
               style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: BRAND.fonts.mono,
                 fontSize: isMobile ? "0.95rem" : "1.05rem",
                 fontWeight: 700,
                 color: scoreColor,

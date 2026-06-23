@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Cpu, Monitor } from "lucide-react";
 
-import { Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { useBitcoinNodeDemo } from "../hooks";
 
@@ -50,7 +50,7 @@ export const BitcoinNodeDemo: FC = () => {
   });
 
   const label: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.65rem" : "0.7rem",
     fontWeight: 600,
     textTransform: "uppercase",

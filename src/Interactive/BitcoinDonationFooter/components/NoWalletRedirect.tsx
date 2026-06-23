@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { BookOpen } from "lucide-react";
 
-import { Button, Reference, usePageTheme } from "../../../Design";
+import { BRAND, Button, Reference, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { DONATION_CONFIG, getDonationCopy } from "../data";
 
@@ -18,7 +18,7 @@ export const NoWalletRedirect: FC<Props> = ({ onClose }) => {
 
   const titleStyle: CSSProperties = {
     margin: 0,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "1.05rem",
     fontWeight: 700,
     color: colors.base.text.primary,

@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { usePageTheme } from "../Theme";
+import { BRAND, usePageTheme } from "../Theme";
 
 type Tone = "success" | "error" | "info" | "warning" | "neutral" | "world";
 type Variant = "full" | "border-left";
@@ -90,7 +90,7 @@ export const FeedbackPanel: FC<Props> = ({
     display: "inline-flex",
     alignItems: "center",
     gap: "0.4rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.78rem" : "0.85rem",
     fontWeight: 700,
     color: accent,

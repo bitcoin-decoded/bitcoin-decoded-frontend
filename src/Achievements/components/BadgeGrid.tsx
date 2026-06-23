@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { BADGES } from "../data";
 import { getModuleLabelKey, getModuleRamp, groupBadgesByModule } from "../helpers";
@@ -76,7 +76,7 @@ export const BadgeGrid: FC = () => {
               </h2>
               <span
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: BRAND.fonts.mono,
                   fontSize: "0.75rem",
                   fontWeight: 700,
                   color: colors.base.text.secondary,

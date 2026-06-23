@@ -2,14 +2,12 @@ import { type CSSProperties, type FC } from "react";
 
 import { ArrowDown, RefreshCw, Wallet, Zap } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { UTXO_GRAPH_SCENARIO } from "../data";
 import { useUtxoGraph } from "../hooks";
@@ -17,7 +15,7 @@ import type { UtxoGraphMode } from "../types";
 
 import { UtxoCoin } from "./UtxoCoin";
 
-const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
 /** Trim trailing zeros, suffix the bitcoin sign. 1 → "1 BTC", 0.4999 → "0.4999 BTC". */
 const fmt = (n: number) => `${+n.toFixed(8)} BTC`;

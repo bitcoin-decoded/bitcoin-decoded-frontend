@@ -1,5 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
+import { BRAND } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
 
@@ -29,7 +30,7 @@ export const PyramidConnector: FC<Props> = ({ label, icon, active, colors }) => 
     flexShrink: 0,
     padding: "0.16rem 0.5rem",
     borderRadius: "0.45rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.58rem",
     fontWeight: 700,
     textTransform: "uppercase",

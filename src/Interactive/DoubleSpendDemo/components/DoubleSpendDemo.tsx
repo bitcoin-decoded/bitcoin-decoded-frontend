@@ -12,16 +12,14 @@ import {
   Wallet,
 } from "lucide-react";
 
-import {
-  Badge,
-  Button,
+import { Badge,
+BRAND,   Button,
   Caption,
   FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { BRANCHES, CITIES } from "../data";
 import { useDoubleSpendDemo } from "../hooks";
@@ -47,7 +45,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     b: colors.violet.text.secondary, // violet
   };
 
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   // ── styles ────────────────────────────────────────────────────────────
   const nicolasRow: CSSProperties = {

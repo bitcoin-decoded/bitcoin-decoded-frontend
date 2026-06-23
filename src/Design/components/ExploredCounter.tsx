@@ -4,7 +4,7 @@ import { CircleCheck, Compass } from "lucide-react";
 
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { usePageTheme } from "../Theme";
+import { BRAND, usePageTheme } from "../Theme";
 
 type Props = {
   /** How many distinct items have been opened at least once. */
@@ -37,7 +37,7 @@ export const ExploredCounter: FC<Props> = ({ explored, total, label }) => {
     flexShrink: 0,
     padding: "0.2rem 0.55rem",
     borderRadius: "0.5rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     border: `1px solid ${withOpacity(accentBorder, complete ? 0.45 : 0.2)}`,
     background: withOpacity(accent, complete ? 0.1 : 0.04),
     transition: "all 0.35s var(--ease-smooth)",

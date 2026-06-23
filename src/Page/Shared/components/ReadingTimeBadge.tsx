@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Clock } from "lucide-react";
 
-import { useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useReadingTime } from "../hooks";
 
@@ -23,7 +23,7 @@ export const ReadingTimeBadge: FC = () => {
     borderRadius: "2rem",
     background: withOpacity(accent, 0.06),
     border: `1px solid ${withOpacity(accent, 0.12)}`,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.68rem" : "0.72rem",
     color: colors[moduleTheme].text.primary,
     letterSpacing: "0.02em",

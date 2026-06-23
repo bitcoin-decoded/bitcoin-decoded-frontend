@@ -2,15 +2,13 @@ import { type CSSProperties, type FC } from "react";
 
 import { Info, Sparkles, Sprout } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   Disclosure,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { groupBits } from "../helpers";
 import { useSeedGenerator } from "../hooks";
@@ -36,7 +34,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
 
   const { length, seed, revealedCount, generate, setLength } = useSeedGenerator(onComplete);
 
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const stepLabelStyle: CSSProperties = {
     fontSize: "0.6rem",
@@ -92,7 +90,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
   };
 
   const wordTextStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.74rem",
     fontWeight: 600,
     color: basePrimaryText,
@@ -104,7 +102,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
     borderRadius: "0.5rem",
     background: withOpacity(baseBackgroundSecondary, 0.06),
     border: `1px solid ${withOpacity(color, 0.25)}`,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.6rem",
     fontWeight: 500,
     color: withOpacity(basePrimaryText, 0.85),

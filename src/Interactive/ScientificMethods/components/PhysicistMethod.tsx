@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { ArrowDown, ArrowRight, Telescope } from "lucide-react";
 
-import { Badge, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getScientificMethodsCopy } from "../data";
 
@@ -24,7 +24,7 @@ export const PhysicistMethod: FC = () => {
   const { physicist } = getScientificMethodsCopy(language);
 
   const accent = colors.blue.text.secondary;
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const axisRow: CSSProperties = { display: "flex", alignItems: "center", gap: "0.6rem" };
   const timeLabel: CSSProperties = {

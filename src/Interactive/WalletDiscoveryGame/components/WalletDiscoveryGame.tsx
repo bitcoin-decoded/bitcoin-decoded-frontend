@@ -2,15 +2,13 @@ import { type CSSProperties, type FC } from "react";
 
 import { CheckCircle, KeyRound, RefreshCw, Sparkles, Wallet, XCircle } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
 
@@ -50,7 +48,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
     restart,
   } = useWalletDiscoveryGame(onComplete);
 
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const introStyle: CSSProperties = {
     fontSize: "0.7rem",

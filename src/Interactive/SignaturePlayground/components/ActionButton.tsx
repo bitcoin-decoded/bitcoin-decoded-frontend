@@ -2,6 +2,7 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { Check } from "lucide-react";
 
+import { BRAND } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { ActionButtonVariant, SigPlaygroundColors } from "../types";
 
@@ -57,7 +58,7 @@ export const ActionButton: FC<Props> = ({
       onClick={consumed ? undefined : onClick}
       disabled={consumed}
       style={{
-        fontFamily: "'JetBrains Mono', monospace",
+        fontFamily: BRAND.fonts.mono,
         alignSelf: "flex-start",
         padding: isMobile ? "0.5rem 0.85rem" : "0.55rem 1rem",
         borderRadius: "0.55rem",

@@ -2,15 +2,13 @@ import { type CSSProperties, type FC, useEffect, useRef } from "react";
 
 import { CircleCheck, CircleX, Pickaxe, RotateCcw } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 import { useMiningSimulator } from "../hooks";
@@ -33,7 +31,7 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [attempts.length]);
 
-  const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
+  const mono = { fontFamily: BRAND.fonts.mono } as const;
 
   const targetBox: CSSProperties = {
     ...mono,

@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { useBreakpoint } from "../Responsive";
-import { usePageTheme } from "../Theme";
+import { BRAND, usePageTheme } from "../Theme";
 
 type Props = {
   children: ReactNode;
@@ -63,7 +63,7 @@ export const Quote: FC<Props> = ({ children, author, source }) => {
     gap: "0.4rem",
     flexWrap: "wrap",
     marginTop: "1rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.875rem",
     letterSpacing: "0.03em",
     opacity: 0.85,

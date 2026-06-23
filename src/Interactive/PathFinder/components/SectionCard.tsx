@@ -13,7 +13,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-import { Caption, SurfaceCard, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Caption, SurfaceCard, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import type { PathFinderCopy } from "../data";
 import type { SectionPlan, SubCategoryId, WalletSection } from "../types";
@@ -67,7 +67,7 @@ export const SectionCard: FC<Props> = ({ plan, copy, accent }) => {
     background: withOpacity(accent, 0.14),
     border: `1px solid ${withOpacity(accent, 0.45)}`,
     color: accent,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.64rem",
     fontWeight: 700,
     textTransform: "uppercase",

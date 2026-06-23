@@ -1,6 +1,7 @@
-import { type FC, type ReactNode, type CSSProperties } from "react";
-import { usePageTheme } from "../Theme";
+import { type CSSProperties,type FC, type ReactNode } from "react";
+
 import { hexToRgb } from "../helpers";
+import { BRAND, usePageTheme } from "../Theme";
 
 type KeywordHighlightProps = {
   children: ReactNode;
@@ -47,7 +48,7 @@ export const KeywordHighlight: FC<KeywordHighlightProps> = ({ children }) => {
     position: "relative",
     zIndex: 1,
     fontWeight: 600,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.875em",
     letterSpacing: "0.03em",
   };

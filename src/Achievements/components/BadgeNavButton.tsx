@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { Award } from "lucide-react";
 
-import { THEME_COLORS, useThemeContext } from "../../Design";
+import { BRAND, THEME_COLORS, useThemeContext } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../Routing";
 import { useBadges } from "../hooks";
@@ -38,7 +38,7 @@ export const BadgeNavButton: FC = () => {
   };
 
   const countStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "0.75rem",
     fontWeight: 700,
     lineHeight: 1,

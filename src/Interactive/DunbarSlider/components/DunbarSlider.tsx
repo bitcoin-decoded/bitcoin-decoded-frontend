@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { DUNBAR_TIERS, getDunbarPalette, getDunbarTierText } from "../data";
 import { useDunbarSlider } from "../hooks";
@@ -36,7 +36,7 @@ export const DunbarSlider: FC = () => {
   };
 
   const populationStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.7rem" : "2.1rem",
     fontWeight: 700,
     color,

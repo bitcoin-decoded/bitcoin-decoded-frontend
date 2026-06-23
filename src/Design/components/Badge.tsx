@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { withOpacity } from "../helpers";
-import { usePageTheme } from "../Theme";
+import { BRAND, usePageTheme } from "../Theme";
 
 type Tone = "success" | "error" | "info" | "neutral" | "world";
 type Size = "xs" | "sm";
@@ -72,7 +72,7 @@ export const Badge: FC<Props> = ({
     gap: "0.35rem",
     padding,
     borderRadius: "0.45rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize,
     fontWeight: 700,
     textTransform: "uppercase",

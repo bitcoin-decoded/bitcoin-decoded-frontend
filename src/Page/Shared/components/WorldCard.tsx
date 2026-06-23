@@ -2,6 +2,7 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { ArrowRight } from "lucide-react";
 
+import { BRAND } from "../../../Design";
 import { useBreakpoint } from "../../../Design/Responsive";
 
 type Props = {
@@ -56,7 +57,7 @@ export const WorldCard: FC<Props> = ({
 
   const subtitleStyle: CSSProperties = {
     fontSize: isMobile ? "0.65rem" : "0.7rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontWeight: 500,
     color: color,
     opacity: 0.7,
@@ -67,7 +68,7 @@ export const WorldCard: FC<Props> = ({
 
   const titleStyle: CSSProperties = {
     fontSize: isMobile ? "0.95rem" : "1.1rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontWeight: 600,
     color: color,
     letterSpacing: "0.02em",
@@ -91,7 +92,7 @@ export const WorldCard: FC<Props> = ({
   // Inline CTA label rendered just before the arrow pill ("Voir cette partie").
   const ctaLabelStyle: CSSProperties = {
     fontSize: isMobile ? "0.7rem" : "0.75rem",
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontWeight: 600,
     color: color,
     letterSpacing: "0.04em",

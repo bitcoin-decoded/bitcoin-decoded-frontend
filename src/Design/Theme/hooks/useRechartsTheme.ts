@@ -109,7 +109,7 @@ export const useRechartsTheme = (): RechartsTheme => {
     },
     tickProp: {
       fontSize: 11,
-      fontFamily: "'JetBrains Mono', monospace",
+      fontFamily: BRAND.fonts.mono,
       fill: axisTickColor,
     },
     gradientStops: {

@@ -1,10 +1,12 @@
-import { type FC, type CSSProperties } from "react";
-import { usePageTheme, useBreakpoint } from "../../../Design";
-import { withOpacity } from "../../../Design/helpers";
-import { useRouterContext, useNavigationLogic } from "../../../Routing/";
-import { type RouteName } from "../../../Routing/";
-import { useTranslation } from "../../../I18n";
+import { type CSSProperties,type FC } from "react";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import { BRAND, useBreakpoint,usePageTheme } from "../../../Design";
+import { withOpacity } from "../../../Design/helpers";
+import { useTranslation } from "../../../I18n";
+import { useNavigationLogic,useRouterContext } from "../../../Routing/";
+import { type RouteName } from "../../../Routing/";
 
 export const PageNavigation: FC = () => {
   const { colors, moduleTheme } = usePageTheme();
@@ -54,7 +56,7 @@ export const PageNavigation: FC = () => {
   };
 
   const labelStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.6rem" : "0.65rem",
     fontWeight: 600,
     textTransform: "uppercase",

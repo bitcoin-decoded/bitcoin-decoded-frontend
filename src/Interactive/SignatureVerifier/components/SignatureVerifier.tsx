@@ -2,15 +2,13 @@ import { type CSSProperties, type FC } from "react";
 
 import { CheckCircle, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
 
-import {
-  Button,
+import { BRAND, Button,
   Caption,
   FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ORIGINAL_VALUES } from "../data";
 import { useSignatureVerifier } from "../hooks";
@@ -21,7 +19,7 @@ export const SignatureVerifier: FC = () => {
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
   const errorColor = colors.semantic.error.text;
 
   const { tampered, status, toggle, verify, reset, getValue } = useSignatureVerifier();
@@ -123,7 +121,7 @@ export const SignatureVerifier: FC = () => {
             <span
               key={f.key}
               style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: BRAND.fonts.mono,
                 fontSize: "0.54rem",
                 opacity: 0.6,
               }}

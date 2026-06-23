@@ -2,14 +2,12 @@ import { type CSSProperties, type FC } from "react";
 
 import { Clock, GitMerge, Hash, Link2, Pickaxe } from "lucide-react";
 
-import {
-  Badge,
-  HighlightText,
+import { Badge,
+BRAND,   HighlightText,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 import { randomizeTx } from "../helpers";
@@ -56,7 +54,7 @@ export const BlockCard: FC<Props> = ({
   const prevHashAccent = isBrokenLink ? colors.semantic.error.text : colors.violet.text.secondary;
   const highlightHex = colors.violet.text.secondary;
 
-  const mono = { fontFamily: "'JetBrains Mono', monospace" } as const;
+  const mono = { fontFamily: BRAND.fonts.mono } as const;
 
   const titleStyle: CSSProperties = {
     ...mono,

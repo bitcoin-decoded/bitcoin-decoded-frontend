@@ -2,16 +2,14 @@ import { type CSSProperties, type FC } from "react";
 
 import { AlertTriangle, Box, CircleCheck, Inbox, PlusCircle, RotateCcw } from "lucide-react";
 
-import {
-  Badge,
-  Button,
+import { Badge,
+BRAND,   Button,
   Caption,
   FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getTxState } from "../helpers/";
 import { useMempoolVisual } from "../hooks";
@@ -34,7 +32,7 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
     useMempoolVisual(language, onComplete);
 
   const isResolution = variant === "resolution";
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const panelsRow: CSSProperties = {
     display: "flex",

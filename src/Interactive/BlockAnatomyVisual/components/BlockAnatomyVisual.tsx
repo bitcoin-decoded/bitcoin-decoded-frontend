@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { BODY_FIELDS, HEADER_FIELDS } from "../data";
 import type { BlockField } from "../types";
@@ -16,7 +16,7 @@ export const BlockAnatomyVisual: FC = () => {
   // Sizing kept in lockstep with BlockchainChainVisual's BlockCard so this
   // "anatomy" reads as the very same block (#100826), just annotated.
   const titleStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.65rem" : "0.72rem",
     fontWeight: 700,
     textTransform: "uppercase",
@@ -28,7 +28,7 @@ export const BlockAnatomyVisual: FC = () => {
   };
 
   const sectionLabel: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.55rem" : "0.6rem",
     fontWeight: 700,
     textTransform: "uppercase",
@@ -65,7 +65,7 @@ export const BlockAnatomyVisual: FC = () => {
   };
 
   const labelStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.6rem" : "0.66rem",
     fontWeight: 600,
     color: colors.base.text.primary,
@@ -73,7 +73,7 @@ export const BlockAnatomyVisual: FC = () => {
   };
 
   const valueStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.55rem" : "0.6rem",
     color: colors.base.text.secondary,
     wordBreak: "break-all",

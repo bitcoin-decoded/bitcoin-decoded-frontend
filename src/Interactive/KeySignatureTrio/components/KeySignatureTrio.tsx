@@ -2,14 +2,12 @@ import { type CSSProperties, type FC } from "react";
 
 import { Link2, MousePointerClick } from "lucide-react";
 
-import {
-  Caption,
+import { BRAND, Caption,
   ExploredCounter,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getKeySignatureTrio, TRIO_LAYOUT } from "../data";
 import { getArrowhead, trimSegment } from "../helpers";
@@ -45,7 +43,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
   const selected = elements.find((el) => el.id === selectedId) ?? null;
   const SelectedIcon = selected?.icon ?? null;
 
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   // ── styles ──────────────────────────────────────────────────────────────────
 

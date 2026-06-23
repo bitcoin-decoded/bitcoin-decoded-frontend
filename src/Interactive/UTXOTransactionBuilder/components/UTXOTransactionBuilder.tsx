@@ -13,15 +13,13 @@ import {
   XCircle,
 } from "lucide-react";
 
-import {
-  Badge,
-  Button,
+import { Badge,
+BRAND,   Button,
   Caption,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
-} from "../../../Design";
+  withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { fmtBTC, sanitizeAmount } from "../helpers";
 import { useUTXOTransactionBuilder } from "../hooks";
@@ -44,7 +42,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
-  const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const accentColor = world.border.secondary;
   const successColor = colors.semantic.success.text;

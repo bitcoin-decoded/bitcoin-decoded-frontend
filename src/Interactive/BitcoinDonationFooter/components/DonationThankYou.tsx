@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { ArrowRight, BadgeCheck } from "lucide-react";
 
-import { Button, usePageTheme } from "../../../Design";
+import { BRAND, Button, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy } from "../data";
@@ -24,7 +24,7 @@ export const DonationThankYou: FC<Props> = ({ onContinue }) => {
 
   const titleStyle: CSSProperties = {
     margin: 0,
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: "1.1rem",
     fontWeight: 700,
     color: colors.base.text.primary,

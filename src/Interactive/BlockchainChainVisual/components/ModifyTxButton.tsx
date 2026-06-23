@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Shuffle } from "lucide-react";
 
-import { useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 type Props = {
@@ -17,7 +17,7 @@ export const ModifyTxButton: FC<Props> = ({ onClick, blockNumber, disabled = fal
   const isMobile = useBreakpoint() === "mobile";
 
   const buttonStyle: CSSProperties = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.55rem" : "0.6rem",
     fontWeight: 700,
     color: colors.semantic.error.text,
