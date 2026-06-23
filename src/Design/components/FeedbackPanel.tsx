@@ -74,7 +74,7 @@ export const FeedbackPanel: FC<Props> = ({
     flexDirection: "column",
     gap: "0.4rem",
     padding: isMobile ? "0.75rem 0.9rem" : "0.85rem 1rem",
-    borderRadius: "0.65rem",
+    borderRadius: 0,
     background: withOpacity(accent, bgOpacity),
     border:
       variant === "border-left" ? "none" : `1px solid ${withOpacity(accent, borderOpacity + 0.1)}`,
@@ -92,10 +92,10 @@ export const FeedbackPanel: FC<Props> = ({
     gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.78rem" : "0.85rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: accent,
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
   };
 
   // Two render modes:

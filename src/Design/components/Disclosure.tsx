@@ -30,9 +30,10 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
   const containerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    borderRadius: "0.75rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(accentColor, 0.22)}`,
-    background: `linear-gradient(190deg, ${withOpacity(accentColor, 0.07)}, ${withOpacity(accentColor, 0.02)})`,
+    // Flat faint module wash — no gradient (the directional glow was a SaaS tell).
+    background: withOpacity(accentColor, 0.05),
     overflow: "hidden",
     minWidth: 0,
     boxSizing: "border-box",
@@ -50,7 +51,9 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     color: accentColor,
     fontFamily: BRAND.fonts.mono,
     fontSize: "0.7rem",
-    fontWeight: 700,
+    fontWeight: 500,
+    fontVariant: "small-caps",
+    letterSpacing: "0.06em",
     textAlign: "left",
     width: "100%",
     transition: "background 0.2s var(--ease-smooth)",

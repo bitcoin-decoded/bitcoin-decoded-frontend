@@ -32,12 +32,13 @@ type Props = {
 };
 
 /**
- * Uppercase mono "eyebrow" / section-label primitive.
+ * Mono small-caps "eyebrow" / section-label primitive.
  *
- * The recipe `JetBrains Mono` + `font-weight 700` + `text-transform
- * uppercase` + tracked-out letter-spacing appears 60+ times across the
- * Interactive domain. This primitive collapses every variant to a
- * single, theme-aware component.
+ * The ledger register: `Cutive Mono` + `font-variant: small-caps` (NOT
+ * `text-transform: uppercase` — rule 8) + weight 500 (Cutive Mono ships a
+ * single weight, so anything heavier synthesizes a crude faux-bold) +
+ * tracked-out letter-spacing. Collapses the 60+ hand-rolled eyebrows across
+ * the Interactive domain into one theme-aware component.
  */
 export const Caption: FC<Props> = ({
   children,
@@ -75,9 +76,9 @@ export const Caption: FC<Props> = ({
   const finalStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize,
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
+    fontWeight: 500,
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
     color: resolvedColor,
     display: icon ? "inline-flex" : "inline",
     alignItems: icon ? "center" : undefined,
