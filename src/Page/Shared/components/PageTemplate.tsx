@@ -36,6 +36,10 @@ export const PageTemplate: FC<Props> = ({
   const isMobile = breakpoint === "mobile";
   const isTablet = breakpoint === "tablet";
   const accentColor = colors[moduleTheme].border.secondary;
+  // Chapter title carries the module identity color (violet on MoneyLaws,
+  // blue on Banking, amber on Bitcoin), falling back to ink on neutral pages.
+  const titleColor =
+    moduleTheme === "base" ? colors.base.text.primary : colors[moduleTheme].text.secondary;
 
   // ── Vertical rhythm - single source of truth for the page header.
   // Three tiers (mobile / tablet / desktop). Same philosophy as HomePage:
@@ -85,6 +89,7 @@ export const PageTemplate: FC<Props> = ({
     textAlign: "center",
     fontWeight: 400,
     letterSpacing: 0,
+    color: titleColor,
     margin: 0, // spacing is now driven exclusively by the rhythm system above
   };
 

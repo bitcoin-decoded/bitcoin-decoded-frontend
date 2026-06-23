@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { BRAND, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Caption, useBreakpoint, useRechartsTheme } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { M2_MONEY_SUPPLY } from "../data";
 
@@ -22,10 +22,9 @@ type Props = {
 export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
   const { language } = useLanguageContext();
   const fr = language === "fr";
-  const { colors, moduleTheme } = usePageTheme();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
-  const world = colors[moduleTheme];
+  const chart = useRechartsTheme();
 
   const containerStyle: CSSProperties = {
     width: "100%",
@@ -35,32 +34,24 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
 
   const chartWrapperStyle: CSSProperties = {
     padding: isMobile ? "0.75rem 0.25rem" : "1rem 0.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-    border: `1px solid ${withOpacity(world.border.primary, 0.3)}`,
   };
 
   const sourceStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.6rem",
-    color: colors.base.text.secondary,
+    fontSize: "0.65rem",
+    color: chart.axisTickColor,
     textAlign: "center",
     marginTop: "0.5rem",
     opacity: 0.7,
   };
 
-  const accentColor = world.border.secondary;
-  const gridColor = withOpacity(colors.base.text.secondary, 0.1);
-  const axisColor = colors.base.text.secondary;
+  // Fiat money-supply line in ink (navy/cream); reserved orange stays for
+  // Bitcoin charts only. The dramatic curve speaks for itself.
+  const accentColor = chart.primary;
 
   return (
     <div style={containerStyle}>
-      <div
-        className="gradient-border"
-        style={
-          { ...chartWrapperStyle, "--border-glow-color": world.border.primary } as CSSProperties
-        }
-      >
+      <div style={chartWrapperStyle}>
         {showTitle && (
           <Caption
             tone="world"
@@ -82,53 +73,51 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
                 <stop offset="95%" stopColor={accentColor} stopOpacity={0.02} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+            <CartesianGrid strokeDasharray={chart.gridStrokeDasharray} stroke={chart.gridColor} />
             <XAxis
               dataKey="year"
               type="number"
               domain={[1960, 2024]}
-              tick={{ fontSize: isMobile ? 10 : 12, fill: axisColor }}
+              tick={chart.tickProp}
               tickLine={false}
-              axisLine={{ stroke: gridColor }}
+              axisLine={{ stroke: chart.axisLineColor }}
               tickFormatter={(v: number) => `${v}`}
             />
             <YAxis
-              tick={{ fontSize: isMobile ? 10 : 12, fill: axisColor }}
+              tick={chart.tickProp}
               tickLine={false}
-              axisLine={{ stroke: gridColor }}
+              axisLine={{ stroke: chart.axisLineColor }}
               tickFormatter={(v: number) => `${v}T`}
             />
             <Tooltip
-              contentStyle={{
-                background: colors.base.background.primary,
-                border: `1px solid ${world.border.primary}`,
-                borderRadius: "0.5rem",
-                fontFamily: BRAND.fonts.mono,
-                fontSize: "0.75rem",
-              }}
+              contentStyle={chart.tooltipContentStyle}
+              labelStyle={chart.tooltipLabelStyle}
+              itemStyle={chart.tooltipItemStyle}
               formatter={(value: number) => [`${value.toFixed(2)}T $`, "M2"]}
               labelFormatter={(label: number) => `${label}`}
             />
             <ReferenceLine
               x={2008}
-              stroke={withOpacity(colors.base.text.secondary, 0.4)}
-              strokeDasharray="4 4"
+              stroke={chart.accent}
+              strokeDasharray="2 4"
               label={{
                 value: "2008",
                 position: "top",
                 fontSize: isMobile ? 9 : 11,
-                fill: axisColor,
+                fill: chart.axisTickColor,
+                fontFamily: chart.tickProp.fontFamily,
               }}
             />
             <ReferenceLine
               x={2020}
-              stroke={withOpacity(colors.base.text.secondary, 0.4)}
-              strokeDasharray="4 4"
+              stroke={chart.accent}
+              strokeDasharray="2 4"
               label={{
                 value: "Covid",
                 position: "top",
                 fontSize: isMobile ? 9 : 11,
-                fill: axisColor,
+                fill: chart.axisTickColor,
+                fontFamily: chart.tickProp.fontFamily,
               }}
             />
             <Area
