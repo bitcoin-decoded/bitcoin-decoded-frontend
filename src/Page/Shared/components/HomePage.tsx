@@ -3,11 +3,15 @@ import { type CSSProperties, type FC } from "react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import type React from "react";
 
-import { BitcoinDecodedLogo,
-BRAND,   Quote,
+import {
+  BitcoinDecodedLogo,
+  BRAND,
+  Quote,
+  Separator,
   THEME_COLORS,
   useBreakpoint,
-  useThemeContext, } from "../../../Design";
+  useThemeContext,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 
@@ -144,17 +148,6 @@ export const HomePage: FC = () => {
     color: "#f7931a",
     margin: 0,
     letterSpacing: "-0.005em",
-  };
-
-  // Soft separator - narrow gradient bar, used between sections. Margin
-  // is small because the surrounding section padding already handles
-  // section-to-section breathing.
-  const separatorStyle: CSSProperties = {
-    width: "3.5rem",
-    height: "1px",
-    background: "linear-gradient(to right, transparent, #f7931a, transparent)",
-    border: "none",
-    margin: "0 auto",
   };
 
   // ── Buttons ──────────────────────────────────────────────────────────────
@@ -359,7 +352,7 @@ export const HomePage: FC = () => {
       </section>
 
       <RevealOnScroll>
-        <hr style={separatorStyle} />
+        <Separator margin="0" />
       </RevealOnScroll>
 
       {/* ─────── SECTION 1 - HOOK ─────── */}
@@ -388,7 +381,7 @@ export const HomePage: FC = () => {
       </RevealOnScroll>
 
       <RevealOnScroll>
-        <hr style={separatorStyle} />
+        <Separator margin="0" />
       </RevealOnScroll>
 
       {/* ─────── SECTION 2 - POSITIONING ─────── */}
@@ -405,7 +398,7 @@ export const HomePage: FC = () => {
       </RevealOnScroll>
 
       <RevealOnScroll>
-        <hr style={separatorStyle} />
+        <Separator margin="0" />
       </RevealOnScroll>
 
       {/* ─────── SECTION 3 - JOURNEY (cards) ─────── */}
@@ -472,7 +465,7 @@ export const HomePage: FC = () => {
       </section>
 
       <RevealOnScroll>
-        <hr style={separatorStyle} />
+        <Separator margin="0" />
       </RevealOnScroll>
 
       {/* ─────── SECTION 4 - AUDIENCE ─────── */}
@@ -496,7 +489,7 @@ export const HomePage: FC = () => {
       </RevealOnScroll>
 
       <RevealOnScroll>
-        <hr style={separatorStyle} />
+        <Separator margin="0" />
       </RevealOnScroll>
 
       {/* ─────── SECTION 6 - DIFFERENTIATION ─────── */}
@@ -522,7 +515,7 @@ export const HomePage: FC = () => {
       </RevealOnScroll>
 
       <RevealOnScroll>
-        <hr style={separatorStyle} />
+        <Separator margin="0" />
       </RevealOnScroll>
 
       {/* ─────── SECTION 7 - PHILOSOPHY ─────── */}

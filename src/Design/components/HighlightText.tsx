@@ -38,7 +38,9 @@ export const HighlightText: FC<HighlightTextProps> = ({ children, highLightColor
   const color = highLightColorHex ?? moduleAccent;
 
   const highlightStyle: CSSProperties = {
-    fontWeight: 600,
+    // Softer than the previous 600 — the hand-drawn underline already carries
+    // the emphasis, so the text only needs a gentle weight lift.
+    fontWeight: 500,
     backgroundImage: handUnderline(color),
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center bottom",

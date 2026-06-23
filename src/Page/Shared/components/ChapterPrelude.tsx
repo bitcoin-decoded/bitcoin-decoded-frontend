@@ -1,14 +1,12 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import {
-  BRAND,
   getBrandGold,
   useBreakpoint,
   usePageTheme,
   useThemeContext,
   withOpacity,
 } from "../../../Design";
-import { useTranslation } from "../../../I18n";
 
 type ChapterPreludeProps = {
   children: ReactNode;
@@ -21,17 +19,15 @@ type ChapterPreludeProps = {
 };
 
 /**
- * The chapter prelude — a soft module-color background wash (no left filet,
- * which was confusable with the block's top rule) holding a Patrick Hand
- * heading in the module color over an italic intro. The wash brings the
- * module identity back (violet on MoneyLaws, blue on Banking, …) and sets the
- * prelude apart from the surrounding prose as "the opening" without an
- * AI-card halo. Heading register is shared with Callout's title (point 3).
+ * The chapter prelude — a soft module-color wash (the only backdrop in the
+ * reading flow; asides dropped theirs) with a module-color Cabin Sketch
+ * lettrine on the intro's first letter. The written word "Prélude" is gone:
+ * the lettrine, the wash, and the italic voice signal "the opening" on their
+ * own. The lettrine is the chalk initial the teacher draws to start the lesson.
  */
 export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
-  const { t } = useTranslation();
   const isMobile = useBreakpoint() === "mobile";
 
   const gold = getBrandGold(theme);
@@ -51,35 +47,25 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom
     marginBottom,
   };
 
-  // The prelude opens the chapter — a real heading, in Patrick Hand (the
-  // teacher's hand) emphasized by size + module color rather than a sketched
-  // display face that read rough at this small size.
-  const labelStyle: CSSProperties = {
-    display: "block",
-    fontFamily: BRAND.fonts.body,
-    fontSize: isMobile ? "1.5rem" : "1.7rem",
-    letterSpacing: "0.01em",
-    color: moduleAccent,
-    lineHeight: 1.1,
-    marginBottom: "0.5rem",
-  };
-
-  // Readable body — the previous `text.secondary` was ton-sur-ton and hard
-  // to read in both modes. Use full primary ink at a slightly larger size.
+  // The intro voice. The big module-color drop-cap is rendered by CSS
+  // (.chapter-prelude-text::first-letter in index.css), fed the module color
+  // through the --prelude-lettrine-color variable.
   const textStyle: CSSProperties = {
     margin: 0,
     color: colors.base.text.primary,
-    fontFamily: BRAND.fonts.body,
+    fontFamily: "var(--font-body)",
     fontStyle: "italic",
-    lineHeight: 1.7,
-    fontSize: isMobile ? "1.0625rem" : "1.15rem",
+    lineHeight: 1.62,
+    fontSize: isMobile ? "1rem" : "1.0625rem",
     textAlign: "left",
+    ["--prelude-lettrine-color" as string]: moduleAccent,
   };
 
   return (
     <div style={containerStyle}>
-      <span style={labelStyle}>{t("chapterPrelude.label")}</span>
-      <p style={textStyle}>{children}</p>
+      <p className="chapter-prelude-text" style={textStyle}>
+        {children}
+      </p>
     </div>
   );
 };

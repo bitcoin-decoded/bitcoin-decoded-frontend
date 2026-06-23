@@ -481,45 +481,43 @@ body {
   counter-reset: paragraph;
 }
 .reading-block-body {
-  padding-left: 2.75rem;
+  padding-left: 3.6rem;
   position: relative;
 }
 .reading-block-body > p {
   counter-increment: paragraph;
   position: relative;
 }
-/* Bracketed format `[ 01 ]` is the visual discriminator from the site's
- * <ol> list items (which use "01."). Same digit, different convention —
- * brackets read as a scholarly marginal annotation, periods as a list item. */
+/* Each prose paragraph is one transaction in the block: `[ Tx 01 ]` in the
+ * left gutter. The `Tx` prefix + brackets read as a ledger annotation,
+ * distinct from the site's <ol> list items (which use "01."). */
 .reading-block-body > p::before {
-  content: "[ " counter(paragraph, decimal-leading-zero) " ]";
+  content: "[ Tx " counter(paragraph, decimal-leading-zero) " ]";
   position: absolute;
-  left: -3rem;
-  top: 0.4em;
-  width: 2.5rem;
+  left: -3.6rem;
+  top: 0.45em;
+  width: 3.2rem;
   text-align: right;
   white-space: nowrap;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.68rem;
+  font-family: "Cutive Mono", ui-monospace, monospace;
+  font-size: 0.66rem;
   letter-spacing: 0.02em;
   color: var(--marginalia-color, rgba(127, 127, 127, 0.5));
   user-select: none;
   pointer-events: none;
 }
-/* On narrow screens the bracketed `[ 01 ]` marker is wider than a tight
- * gutter, so it overflowed the viewport and wrapped (the Samsung Galaxy bug).
- * Drop the brackets (show just the number) and match the gutter width to the
- * marker. Its position in the negative-left gutter already distinguishes it
- * from an <ol> item, so the brackets aren't needed at this size. */
+/* On narrow screens the bracketed marker is wider than a tight gutter, so it
+ * overflowed and wrapped. Drop the brackets (just `Tx 01`) and shrink the
+ * gutter; the negative-left position already distinguishes it from a list. */
 @media (max-width: 540px) {
   .reading-block-body {
-    padding-left: 1.85rem;
+    padding-left: 2.5rem;
   }
   .reading-block-body > p::before {
-    content: counter(paragraph, decimal-leading-zero);
-    left: -1.85rem;
-    width: 1.35rem;
-    font-size: 0.6rem;
+    content: "Tx " counter(paragraph, decimal-leading-zero);
+    left: -2.5rem;
+    width: 2rem;
+    font-size: 0.58rem;
   }
 }
 @media (max-width: 360px) {
@@ -549,6 +547,20 @@ body {
   margin: 0.05em 0.1em 0 0;
 }
 
+/* Prelude lettrine — replaces the written word "Prélude". The prelude's first
+ * letter is rendered as a big module-color Cabin Sketch drop-cap, the chalk
+ * initial the teacher draws to open the chapter. The module color is set
+ * inline via --prelude-lettrine-color on the prelude paragraph. */
+.chapter-prelude-text::first-letter {
+  float: left;
+  font-family: "Cabin Sketch", "Cormorant Garamond", Georgia, serif;
+  font-size: 3.4em;
+  font-weight: 700;
+  line-height: 0.78;
+  color: var(--prelude-lettrine-color, var(--brand-gold));
+  margin: 0.06em 0.12em 0 0;
+}
+
 /* ── Block reading - premium reveal + blockchain chain link ── */
 /* A freshly surfaced block "seals" into place: its blur clears, it slides up
    and settles, while its lines cascade in. The chain link joining it to the
@@ -556,88 +568,66 @@ body {
    discreet nod to a block being appended to a chain. Only the block crossing
    the reveal frontier carries `.revealing`; past blocks rest via inline
    opacity, their links already drawn. */
-@keyframes blockSeal {
-  0% {
-    opacity: 0;
-    transform: translateY(22px) scale(0.985);
-    filter: blur(7px);
-  }
-  55% {
-    filter: blur(0);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-@keyframes blockLineIn {
+/* Gentle two-step reveal. Step 1 (anchor) is the smooth scroll handled in
+ * useBlockReader. Step 2 — for a block crossing the reveal frontier for the
+ * first time — its lines surface in reading order: each child fades in from
+ * slightly left (left-to-right feel) with a top-to-bottom stagger. No blur,
+ * no scale, no glow pulse: the previous version read as choppy/brutal. */
+@keyframes blockReveal {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-/* Block "confirmed" pulse - a one-shot mined-style glow as a block seals in.
-   Colors come from CSS vars set inline on the card (theme-aware); no `forwards`
-   so it settles back to the card's resting shadow. */
-@keyframes blockConfirm {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 transparent;
+@keyframes blockLineIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
   }
-  40% {
-    transform: scale(1.3);
-    box-shadow: 0 0 10px 2px var(--reading-glow, transparent);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 transparent;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
+/* Small lead delay so the anchor scroll (step 1) settles before the reveal. */
 .reading-block-inner.revealing {
-  animation: blockSeal 0.8s var(--ease-smooth) both;
-}
-/* The header stamp confirms (scale + glow) as the block seals - a "mined" beat
-   that doesn't fight the card's resting ring shadow. */
-.reading-block-inner.revealing .reading-block-stamp {
-  animation: blockConfirm 0.9s var(--ease-smooth) 0.25s both;
+  animation: blockReveal 0.45s var(--ease-smooth) 0.12s both;
 }
 .reading-block-inner.revealing > * {
-  animation: blockLineIn 0.6s var(--ease-smooth) both;
+  animation: blockLineIn 0.5s var(--ease-smooth) both;
 }
 .reading-block-inner.revealing > *:nth-child(1) {
-  animation-delay: 0.12s;
+  animation-delay: 0.16s;
 }
 .reading-block-inner.revealing > *:nth-child(2) {
-  animation-delay: 0.2s;
+  animation-delay: 0.24s;
 }
 .reading-block-inner.revealing > *:nth-child(3) {
-  animation-delay: 0.28s;
+  animation-delay: 0.32s;
 }
 .reading-block-inner.revealing > *:nth-child(4) {
-  animation-delay: 0.36s;
+  animation-delay: 0.4s;
 }
 .reading-block-inner.revealing > *:nth-child(5) {
-  animation-delay: 0.44s;
+  animation-delay: 0.48s;
 }
 .reading-block-inner.revealing > *:nth-child(6) {
-  animation-delay: 0.52s;
+  animation-delay: 0.56s;
 }
 .reading-block-inner.revealing > *:nth-child(7) {
-  animation-delay: 0.6s;
+  animation-delay: 0.64s;
 }
 .reading-block-inner.revealing > *:nth-child(8) {
-  animation-delay: 0.68s;
+  animation-delay: 0.72s;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reading-block-inner.revealing,
-  .reading-block-inner.revealing > *,
-  .reading-block-inner.revealing .reading-block-stamp {
+  .reading-block-inner.revealing > * {
     animation: none !important;
   }
 }

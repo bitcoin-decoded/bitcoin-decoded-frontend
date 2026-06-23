@@ -93,10 +93,17 @@ export const BlockShell: FC<Props> = ({
     whiteSpace: "nowrap",
   };
 
+  // Top and bottom rules are harmonized — same weight + opacity, driven by
+  // whether the block is active. The active block frames itself with two thick,
+  // full-strength gold rules; past blocks recede to thin, faint ones.
+  const ruleHeight = isCurrent ? 1.5 : 1;
+  const ruleOpacity = isCurrent ? 1 : 0.4;
+
   const headerRuleStyle: CSSProperties = {
     flex: "1 1 auto",
-    height: BRAND.figures.ruleThickness,
+    height: ruleHeight,
     background: gold,
+    opacity: ruleOpacity,
   };
 
   const titleKickerStyle: CSSProperties = {
@@ -126,9 +133,9 @@ export const BlockShell: FC<Props> = ({
     : "reading-block-body";
 
   const footerRuleStyle: CSSProperties = {
-    height: BRAND.figures.ruleThickness,
+    height: ruleHeight,
     background: gold,
-    opacity: 0.4,
+    opacity: ruleOpacity,
     marginTop: "1.25rem",
   };
 
