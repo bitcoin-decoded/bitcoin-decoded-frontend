@@ -19,11 +19,13 @@ type ChapterPreludeProps = {
 };
 
 /**
- * The chapter prelude — a soft module-color wash (the only backdrop in the
- * reading flow; asides dropped theirs) with a module-color Cabin Sketch
- * lettrine on the intro's first letter. The written word "Prélude" is gone:
- * the lettrine, the wash, and the italic voice signal "the opening" on their
- * own. The lettrine is the chalk initial the teacher draws to start the lesson.
+ * The chapter prelude — a soft module-color wash with a module-color Cabin
+ * Sketch lettrine on the intro's first letter, and the whole intro voice set
+ * in the module color (no italic). The written word "Prélude" is gone: the
+ * upright lettrine + the colored overture signal "the opening" on their own,
+ * and the monochrome-module treatment sets it cleanly apart from the ink prose
+ * that follows. The lettrine is the chalk initial the teacher draws to start
+ * the lesson — and it is the ONLY lettrine in the reading flow.
  */
 export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom }) => {
   const { colors, moduleTheme } = usePageTheme();
@@ -47,14 +49,16 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom
     marginBottom,
   };
 
-  // The intro voice. The big module-color drop-cap is rendered by CSS
-  // (.chapter-prelude-text::first-letter in index.css), fed the module color
-  // through the --prelude-lettrine-color variable.
+  // The intro voice, set in the module color (no italic) so the prelude reads
+  // as a colored overture distinct from the ink prose. The big drop-cap is
+  // rendered by CSS (.chapter-prelude-text::first-letter in index.css), fed the
+  // same module color through the --prelude-lettrine-color variable — size +
+  // weight (Cabin Sketch 700) keep it distinct from the body it shares a hue
+  // with.
   const textStyle: CSSProperties = {
     margin: 0,
-    color: colors.base.text.primary,
+    color: moduleAccent,
     fontFamily: "var(--font-body)",
-    fontStyle: "italic",
     lineHeight: 1.62,
     fontSize: isMobile ? "1rem" : "1.0625rem",
     textAlign: "left",

@@ -481,7 +481,7 @@ body {
   counter-reset: paragraph;
 }
 .reading-block-body {
-  padding-left: 3.6rem;
+  padding-left: 4rem;
   position: relative;
 }
 .reading-block-body > p {
@@ -490,13 +490,16 @@ body {
 }
 /* Each prose paragraph is one transaction in the block: `[ Tx 01 ]` in the
  * left gutter. The `Tx` prefix + brackets read as a ledger annotation,
- * distinct from the site's <ol> list items (which use "01."). */
+ * distinct from the site's <ol> list items (which use "01."). The gutter is
+ * wider than the label box so a clear ~1rem channel separates the marker from
+ * the prose (the box is right-aligned; any overflow falls left into the
+ * margin, never against the text). */
 .reading-block-body > p::before {
   content: "[ Tx " counter(paragraph, decimal-leading-zero) " ]";
   position: absolute;
-  left: -3.6rem;
+  left: -4rem;
   top: 0.45em;
-  width: 3.2rem;
+  width: 3rem;
   text-align: right;
   white-space: nowrap;
   font-family: "Cutive Mono", ui-monospace, monospace;
@@ -511,11 +514,11 @@ body {
  * gutter; the negative-left position already distinguishes it from a list. */
 @media (max-width: 540px) {
   .reading-block-body {
-    padding-left: 2.5rem;
+    padding-left: 3rem;
   }
   .reading-block-body > p::before {
     content: "Tx " counter(paragraph, decimal-leading-zero);
-    left: -2.5rem;
+    left: -3rem;
     width: 2rem;
     font-size: 0.58rem;
   }
@@ -529,36 +532,22 @@ body {
   }
 }
 
-/* Drop-block lettrine — opt-in via PAGE_METADATA.dropBlock. The first
- * <p> child of Block 0's body gets a Cabin Sketch first-letter rendered
- * BIG and gold without a background — like a chalkboard initial drawn by
- * the teacher to open the lesson. The previous gold-square + cream-letter
- * convention echoed medieval manuscripts; the chalkboard register makes
- * a hand-drawn capital more coherent. The block-vs-coin square still
- * lives in the wordmark, logo, milestones, and rule signatures. */
-.reading-block-drop-block > p:first-of-type::first-letter {
-  float: left;
-  font-family: "Cabin Sketch", "Cormorant Garamond", Georgia, serif;
-  font-size: 4.2em;
-  font-weight: 700;
-  line-height: 0.82;
-  /* Module identity color (set on the BlockReader root), gold fallback. */
-  color: var(--module-accent, var(--brand-gold));
-  margin: 0.05em 0.1em 0 0;
-}
-
-/* Prelude lettrine — replaces the written word "Prélude". The prelude's first
- * letter is rendered as a big module-color Cabin Sketch drop-cap, the chalk
- * initial the teacher draws to open the chapter. The module color is set
- * inline via --prelude-lettrine-color on the prelude paragraph. */
+/* Prelude lettrine — the ONE lettrine in the whole reading flow (chapter
+ * prose never carries one; that would compete with this opening signal). It
+ * replaces the written word "Prélude": the prelude's first letter is a big
+ * module-color Cabin Sketch drop-cap, the chalk initial the teacher draws to
+ * open the chapter. Rendered upright (the surrounding prelude voice is no
+ * longer italic) and given a touch more right margin so it breathes. The
+ * module color is set inline via --prelude-lettrine-color on the paragraph. */
 .chapter-prelude-text::first-letter {
   float: left;
   font-family: "Cabin Sketch", "Cormorant Garamond", Georgia, serif;
+  font-style: normal;
   font-size: 3.4em;
   font-weight: 700;
   line-height: 0.78;
   color: var(--prelude-lettrine-color, var(--brand-gold));
-  margin: 0.06em 0.12em 0 0;
+  margin: 0.04em 0.18em 0 0;
 }
 
 /* ── Block reading - premium reveal + blockchain chain link ── */

@@ -1,5 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
+import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
 import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
@@ -32,6 +33,9 @@ export const Callout: FC<Props> = ({ title, children }) => {
   // Module identity color (violet on MoneyLaws, blue on Banking, …), falling
   // back to gold on neutral/base pages where no module accent exists.
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
+  // Saturated module hue for the wash (gold on neutral pages), kept very faint
+  // so the prose still reads cleanly on top.
+  const washSource = moduleTheme === "base" ? gold : colors[moduleTheme].background.secondary;
 
   const wrapperStyle: CSSProperties = {
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
@@ -49,11 +53,14 @@ export const Callout: FC<Props> = ({ title, children }) => {
     marginBottom: "0.55rem",
   };
 
-  // No background wash: the only backdrop in the reading flow is the prelude.
-  // The aside is set apart by its bracketed corners + module-color title alone.
+  // A faint module wash gives the aside a readable surface in both themes
+  // (light mode in particular felt unanchored without one). The bracketed gold
+  // corners + module-color title still carry its identity; the wash just sets
+  // it apart from the surrounding prose.
   const frameStyle: CSSProperties = {
     position: "relative",
     padding: isMobile ? "1rem 1rem" : "1.25rem 1.5rem",
+    background: withOpacity(washSource, theme === "dark" ? 0.1 : 0.07),
   };
 
   const cornerSize = 14;

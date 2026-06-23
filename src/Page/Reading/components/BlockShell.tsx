@@ -10,13 +10,6 @@ type Props = {
   revealing: boolean;
   /** Optional short label appended to the block header (e.g. "Le piège"). */
   title?: string;
-  /**
-   * When `true`, the body's first paragraph receives the drop-block lettrine
-   * (gold carré + Cormorant Garamond first-letter). Set by `BlockReader`
-   * on Block 0 only, when the chapter opts in via `PAGE_METADATA.dropBlock`.
-   * @default false
-   */
-  dropBlock?: boolean;
   /** Return to this block (clicking a read block refocuses it). */
   onActivate?: () => void;
   children: ReactNode;
@@ -40,7 +33,6 @@ export const BlockShell: FC<Props> = ({
   isCurrent,
   revealing,
   title,
-  dropBlock = false,
   onActivate,
   children,
 }) => {
@@ -73,9 +65,9 @@ export const BlockShell: FC<Props> = ({
   };
 
   // Editorial chapter-heading layout: mono label on the left, gold hairline
-  // extending to the right margin. No more centered carré on the rule —
-  // the carré is now reserved to wordmark + drop-block (rare = meaningful).
-  // The label and rule are siblings in a flex row, baseline-aligned.
+  // extending to the right margin. No centered carré on the rule — the carré
+  // signature stays reserved to the wordmark (rare = meaningful). The label
+  // and rule are siblings in a flex row, baseline-aligned.
   const headerRowStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
@@ -124,14 +116,6 @@ export const BlockShell: FC<Props> = ({
     paddingBottom: isMobile ? "0.1rem" : "0.25rem",
   };
 
-  // Two CSS hooks consumed by index.css:
-  // - `reading-block-body` enables paragraph marginalia (numbered prose
-  //   lines via CSS counter) for every direct <p> child
-  // - `reading-block-drop-block` enables the lettrine on first paragraph
-  const bodyClassName = dropBlock
-    ? "reading-block-body reading-block-drop-block"
-    : "reading-block-body";
-
   const footerRuleStyle: CSSProperties = {
     height: ruleHeight,
     background: gold,
@@ -160,7 +144,7 @@ export const BlockShell: FC<Props> = ({
           <span style={headerRuleStyle} aria-hidden="true" />
         </div>
         {title && <span style={titleKickerStyle}>· {title.toLowerCase()}</span>}
-        <div className={bodyClassName} style={bodyStyle}>
+        <div className="reading-block-body" style={bodyStyle}>
           {children}
         </div>
         <div style={footerRuleStyle} aria-hidden="true" />
