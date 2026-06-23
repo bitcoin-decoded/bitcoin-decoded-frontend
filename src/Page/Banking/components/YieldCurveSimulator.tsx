@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { FeedbackPanel, usePageTheme } from "../../../Design";
+import { FeedbackPanel, usePageTheme, useRechartsTheme } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { useYieldCurve } from "../hooks/useYieldCurve";
 
@@ -22,15 +22,16 @@ type Props = {
 
 export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
   const { colors, moduleTheme } = usePageTheme();
+  const chart = useRechartsTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
   const { longRate, setLongRate, chartData, fixedShortRate } = useYieldCurve();
   const marginIsHealthy = longRate > 1.5;
+  // Semantic margin color (healthy spread = success, thin/inverted = error) is
+  // meaningful pedagogy — kept. Only the chart chrome moves to the ledger theme.
   const marginColor = marginIsHealthy
     ? colors.semantic.success.text
     : colors.semantic.error.text;
-  const longLineColor = colors[moduleTheme].border.secondary;
-  const shortLineColor = colors[moduleTheme].border.primary;
 
   const containerStyle: CSSProperties = {
     marginTop: "2rem",
@@ -86,42 +87,38 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
               </defs>
 
               <CartesianGrid
-                strokeDasharray="3 3"
-                stroke={colors.base.border.secondary}
+                strokeDasharray={chart.gridStrokeDasharray}
+                stroke={chart.gridColor}
                 vertical={false}
               />
 
               <XAxis
                 dataKey="term"
-                stroke={colors.base.text.primary}
-                fontSize={12}
+                tick={chart.tickProp}
                 tickLine={false}
-                axisLine={true}
+                axisLine={{ stroke: chart.axisLineColor }}
                 label={{
                   value: t("yieldCurve.years"),
                   position: "bottom",
                   offset: 0,
-                  fill: colors.base.text.primary,
+                  fill: chart.axisTickColor,
                   fontSize: 12,
+                  fontFamily: chart.tickProp.fontFamily,
                 }}
               />
 
               <YAxis
                 domain={[0, 5]}
-                stroke={colors.base.text.primary}
-                fontSize={12}
+                tick={chart.tickProp}
                 tickLine={false}
-                axisLine={true}
+                axisLine={{ stroke: chart.axisLineColor }}
                 unit="%"
               />
 
               <Tooltip
-                contentStyle={{
-                  backgroundColor: colors.base.background.secondary,
-                  borderColor: colors.base.border.primary,
-                  borderRadius: "0.5rem",
-                }}
-                itemStyle={{ color: colors.base.text.primary }}
+                contentStyle={chart.tooltipContentStyle}
+                labelStyle={chart.tooltipLabelStyle}
+                itemStyle={chart.tooltipItemStyle}
                 labelFormatter={(value) => (fr ? `Terme : ${value} ans` : `Term: ${value} years`)}
                 formatter={(value, name) => [`${(value as number).toFixed(2)}%`, name]}
               />
@@ -139,8 +136,9 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
               <Line
                 type="monotone"
                 dataKey="shortRate"
-                stroke={shortLineColor}
-                strokeWidth={2}
+                stroke={chart.axisTickColor}
+                strokeWidth={1.5}
+                strokeDasharray="4 4"
                 dot={false}
                 name={t("yieldCurve.shortRateName")}
               />
@@ -148,7 +146,7 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
               <Line
                 type="monotone"
                 dataKey="longRate"
-                stroke={longLineColor}
+                stroke={marginColor}
                 strokeWidth={2}
                 dot={false}
                 name={t("yieldCurve.longRateName")}
