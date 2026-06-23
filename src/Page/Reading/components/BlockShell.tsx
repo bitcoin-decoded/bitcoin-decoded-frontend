@@ -109,8 +109,9 @@ export const BlockShell: FC<Props> = ({
     marginBottom: "0.85rem",
   };
 
-  // Use vertical-only padding (not shorthand) so the CSS class's
-  // padding-left for marginalia isn't overridden by this inline style.
+  // Vertical-only padding: the block body spans the full column width (the Tx
+  // gutter now lives on the prose paragraphs themselves, not here — see
+  // index.css), so non-prose children break out to full width.
   const bodyStyle: CSSProperties = {
     paddingTop: isMobile ? "0.1rem" : "0.25rem",
     paddingBottom: isMobile ? "0.1rem" : "0.25rem",
