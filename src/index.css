@@ -39,6 +39,19 @@
   box-sizing: border-box;
 }
 
+/* Native form controls (<button>, <input>, <select>, <textarea>) do NOT
+ * inherit font-family by default — browsers render them in the UA default
+ * (Arial/Helvetica on Windows). That's why un-styled buttons like "réessayer"
+ * and some sub-labels stayed sans-serif while the rest of the site moved to
+ * Patrick Hand. This reset makes them inherit the body font; components that
+ * need a specific face (e.g. the Button primitive → mono) still override it. */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
 html,
 body,
 #root {

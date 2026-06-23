@@ -30,7 +30,7 @@ export const Quote: FC<Props> = ({ children, author, source }) => {
   const openingQuoteMarkStyle: CSSProperties = {
     color: accentColor,
     fontSize: isMobile ? "3.5rem" : "4rem",
-    fontFamily: "Georgia, serif",
+    fontFamily: BRAND.fonts.display,
     position: "absolute",
     left: isMobile ? "0.5rem" : "0.75rem",
     top: isMobile ? "0.25rem" : "0.5rem",
@@ -41,7 +41,7 @@ export const Quote: FC<Props> = ({ children, author, source }) => {
   const closingQuoteMarkStyle: CSSProperties = {
     color: accentColor,
     fontSize: isMobile ? "3.5rem" : "4rem",
-    fontFamily: "Georgia, serif",
+    fontFamily: BRAND.fonts.display,
     position: "absolute",
     right: isMobile ? "0.75rem" : "1rem",
     bottom: isMobile ? "0.25rem" : "0.5rem",
