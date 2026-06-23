@@ -300,9 +300,9 @@ const en = {
   // Reading (block-by-block chapters)
   "reading.next": "Next block",
   "reading.previous": "Previous block",
-  "reading.finish": "Finish",
+  "reading.finish": "Seal the chapter",
   "reading.lockHint": "Interact with the component to continue.",
-  "reading.completed": "Chapter complete",
+  "reading.completed": "Chapter sealed",
   "reading.replay": "Restart the chapter",
   "reading.milestoneAria": "Chapter progress",
   "reading.blockLabel": "Block",

@@ -303,9 +303,9 @@ const fr = {
   // Reading (lecture par blocs)
   "reading.next": "Bloc suivant",
   "reading.previous": "Bloc précédent",
-  "reading.finish": "Terminer",
+  "reading.finish": "Sceller le chapitre",
   "reading.lockHint": "Manipule le composant pour continuer.",
-  "reading.completed": "Chapitre terminé",
+  "reading.completed": "Chapitre scellé",
   "reading.replay": "Recommencer le chapitre",
   "reading.milestoneAria": "Progression dans le chapitre",
   "reading.blockLabel": "Bloc",

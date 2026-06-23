@@ -94,7 +94,7 @@ export const Button: FC<Props> = ({
   const baseStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize:
-      size === "sm" ? (isMobile ? "0.6875rem" : "0.7125rem") : isMobile ? "0.72rem" : "0.75rem",
+      size === "sm" ? (isMobile ? "0.8rem" : "0.85rem") : isMobile ? "0.9rem" : "0.95rem",
     fontWeight: 500,
     letterSpacing: variant === "ghost" ? "0.08em" : "0.14em",
     fontVariant: "small-caps",
@@ -108,6 +108,11 @@ export const Button: FC<Props> = ({
     width: fullWidth ? "100%" : "auto",
     whiteSpace: "nowrap",
     boxSizing: "border-box",
+    // Kill the browser-default <button> border. Without this, every variant
+    // that doesn't set its own border leaked a crude ~2px outset border
+    // (visible especially in light mode). Variants that need a border
+    // (secondary's dashed underline, stamped's boxed label) set it explicitly.
+    border: "none",
     borderRadius: 0,
     background: "transparent",
     color: neutralTextStrong,
@@ -117,10 +122,12 @@ export const Button: FC<Props> = ({
   let labelDecoration: { before?: ReactNode; after?: ReactNode } = {};
 
   if (variant === "primary") {
-    const bracketColor = isLifted ? accent : withOpacity(accent, 0.7);
+    // Brackets at full strength at rest; label in primary ink (the previous
+    // text.secondary resting color read ton-sur-ton and hard to read).
+    const bracketColor = isLifted ? accent : withOpacity(accent, 0.9);
     variantStyle = {
       padding: isMobile ? `${padY} ${padX}` : `${padYMd} ${padXMd}`,
-      color: isLifted ? colors.base.text.primary : colors.base.text.secondary,
+      color: colors.base.text.primary,
     };
     labelDecoration = {
       before: (

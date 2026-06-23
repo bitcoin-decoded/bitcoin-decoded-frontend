@@ -493,16 +493,23 @@ body {
   user-select: none;
   pointer-events: none;
 }
+/* On narrow screens the bracketed `[ 01 ]` marker is wider than a tight
+ * gutter, so it overflowed the viewport and wrapped (the Samsung Galaxy bug).
+ * Drop the brackets (show just the number) and match the gutter width to the
+ * marker. Its position in the negative-left gutter already distinguishes it
+ * from an <ol> item, so the brackets aren't needed at this size. */
 @media (max-width: 540px) {
   .reading-block-body {
-    padding-left: 1.5rem;
+    padding-left: 1.85rem;
   }
   .reading-block-body > p::before {
-    left: -1.5rem;
-    font-size: 0.625rem;
+    content: counter(paragraph, decimal-leading-zero);
+    left: -1.85rem;
+    width: 1.35rem;
+    font-size: 0.6rem;
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 360px) {
   .reading-block-body {
     padding-left: 0;
   }
@@ -524,7 +531,8 @@ body {
   font-size: 4.2em;
   font-weight: 700;
   line-height: 0.82;
-  color: var(--brand-gold);
+  /* Module identity color (set on the BlockReader root), gold fallback. */
+  color: var(--module-accent, var(--brand-gold));
   margin: 0.05em 0.1em 0 0;
 }
 

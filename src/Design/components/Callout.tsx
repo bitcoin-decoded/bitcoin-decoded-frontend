@@ -1,55 +1,65 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
+import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
 import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 type Props = {
   /**
-   * Optional icon. **Ignored** in the ledger design system — the mono kicker
-   * label ("note · {title}") already signals an aside. Kept in the API so the
-   * existing 21 callers compile without modification.
+   * Optional icon. **Ignored** in the ledger design system — the title heading
+   * already signals an aside. Kept in the API so the existing callers compile.
    */
   icon?: ReactNode;
-  /** Aside title; becomes the kicker text rendered above the frame. */
+  /** Aside title; rendered as a Patrick Hand heading in the module color. */
   title: string;
   children: ReactNode;
 };
 
 /**
  * The bracketed frame — silhouette reserved for asides (the former Callout).
- * Four corner brackets in hairline gold define a focus area without forming
- * a closed rectangle, giving asides a distinct silhouette from the
- * SurfaceCard transaction frame (top-rule + carré + bottom-rule). The user
- * never confuses "thing I read" with "thing I manipulate".
- *
- * The icon prop is preserved for API compatibility but no longer rendered;
- * the mono small-caps kicker `note · {title}` already carries the aside
- * signal in the editorial register.
+ * Four corner brackets in hairline gold define a focus area without forming a
+ * closed rectangle, giving asides a distinct silhouette from the SurfaceCard
+ * transaction frame. The title is a Patrick Hand heading in the module color
+ * (the same heading treatment as ChapterPrelude — see point 3), so asides and
+ * preludes read as one consistent title system. The gold corners stay
+ * structural; the module color carries identity.
  */
 export const Callout: FC<Props> = ({ title, children }) => {
-  const { colors } = usePageTheme();
+  const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
 
   const gold = getBrandGold(theme);
+  // Module identity color (violet on MoneyLaws, blue on Banking, …), falling
+  // back to gold on neutral/base pages where no module accent exists.
+  const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
+  // Hyper-subtle module wash so the aside reads as "set apart" like the prose
+  // marginalia would mark it — fainter than the prelude wash so they stay
+  // distinct. Inner interactive components (e.g. a slider) sit on transparent
+  // ledger surfaces, so this uniform tint shows cleanly behind them.
+  const washSource = moduleTheme === "base" ? gold : colors[moduleTheme].background.secondary;
+  const wash = withOpacity(washSource, theme === "dark" ? 0.06 : 0.04);
 
   const wrapperStyle: CSSProperties = {
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
   };
 
-  const kickerStyle: CSSProperties = {
+  // Shared heading register with ChapterPrelude: Patrick Hand, sizeable,
+  // module-colored. Patrick Hand has a single weight, so emphasis comes from
+  // size + color rather than font-weight.
+  const titleStyle: CSSProperties = {
     display: "block",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: "0.8125rem",
-    fontWeight: 500,
-    letterSpacing: "0.1em",
-    color: colors.base.text.secondary,
-    fontVariant: "small-caps",
-    marginBottom: "0.5rem",
+    fontFamily: BRAND.fonts.body,
+    fontSize: isMobile ? "1.3rem" : "1.45rem",
+    lineHeight: 1.2,
+    letterSpacing: "0.01em",
+    color: moduleAccent,
+    marginBottom: "0.55rem",
   };
 
   const frameStyle: CSSProperties = {
     position: "relative",
+    background: wash,
     padding: isMobile ? "1rem 1rem" : "1.25rem 1.5rem",
   };
 
@@ -93,16 +103,18 @@ export const Callout: FC<Props> = ({ title, children }) => {
     borderRight: stroke,
   };
 
+  // Body matches the surrounding prose size — the previous 0.9375rem was the
+  // pre-typo-swap value and read cramped next to the bumped Patrick Hand prose.
   const bodyStyle: CSSProperties = {
     color: colors.base.text.primary,
-    lineHeight: 1.7,
-    fontSize: isMobile ? "0.875rem" : "0.9375rem",
+    lineHeight: 1.75,
+    fontSize: isMobile ? "1.0625rem" : "1.1875rem",
     textAlign: "left",
   };
 
   return (
     <aside style={wrapperStyle}>
-      <span style={kickerStyle}>note · {title.toLowerCase()}</span>
+      <span style={titleStyle}>{title}</span>
       <div style={frameStyle}>
         <div style={topLeftStyle} />
         <div style={topRightStyle} />
