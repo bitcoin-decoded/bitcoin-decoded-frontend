@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { ArrowDown, ArrowUp, Lock } from "lucide-react";
 
-import { Button, Caption, usePageTheme } from "../../../Design";
+import { Button, Caption, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 type Props = {
@@ -71,9 +71,12 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
       </div>
       {locked && (
         <Caption
-          tone="muted"
-          size="xs"
-          icon={<Lock size={12} strokeWidth={2} />}
+          variant="note"
+          size="sm"
+          // A gating instruction must read clearly — lift it above the 0.5
+          // muted secondary to a readable-but-quiet ~0.72.
+          color={withOpacity(colors.base.text.primary, 0.72)}
+          icon={<Lock size={13} strokeWidth={2} />}
           style={{ flexBasis: "100%" }}
         >
           {t("reading.lockHint")}
