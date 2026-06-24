@@ -23,16 +23,21 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
   const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
 
-  const accentColor = world.border.secondary;
-  const baseTextSecondary = colors.base.text.secondary;
+  // The header text reads in the module's secondary TEXT color (legible), not
+  // the much fainter border color the whole component used to share. The border
+  // color stays for the frame + divider.
+  const headerText = world.text.secondary;
+  const borderColor = world.border.secondary;
   const basePrimaryText = world.text.primary;
 
   const containerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    borderRadius: "0.75rem",
-    border: `1px solid ${withOpacity(accentColor, 0.22)}`,
-    background: `linear-gradient(190deg, ${withOpacity(accentColor, 0.07)}, ${withOpacity(accentColor, 0.02)})`,
+    borderRadius: 0,
+    border: `1px solid ${withOpacity(borderColor, 0.3)}`,
+    // No gradient (the directional glow was a SaaS tell) and no body wash —
+    // hierarchy is carried by a tinted header BAR + a divider above the body.
+    background: "transparent",
     overflow: "hidden",
     minWidth: 0,
     boxSizing: "border-box",
@@ -43,14 +48,20 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     alignItems: "center",
     justifyContent: "space-between",
     gap: "0.75rem",
-    padding: "0.85rem 1.05rem",
-    background: "transparent",
+    padding: "0.8rem 1.05rem",
+    // Faint module-tinted bar so the header reads as a distinct clickable strip.
+    background: withOpacity(headerText, 0.08),
     border: "none",
     cursor: "pointer",
-    color: accentColor,
+    color: headerText,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.7rem",
-    fontWeight: 700,
+    // Interactive header at the body scale (14px) so the title reads clearly —
+    // it was a near-invisible 11.8px. Distinguished from the body by small-caps
+    // + module color + the tinted bar + its icon, not by size.
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
+    fontVariant: "small-caps",
+    letterSpacing: "0.06em",
     textAlign: "left",
     width: "100%",
     transition: "background 0.2s var(--ease-smooth)",
@@ -77,9 +88,13 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
   };
 
   const bodyStyle: CSSProperties = {
-    padding: "0 1.05rem 0.95rem 1.05rem",
+    // Hairline divider under the header bar restores the header/body hierarchy
+    // the gradient used to imply.
+    borderTop: `1px solid ${withOpacity(borderColor, 0.22)}`,
+    padding: "0.85rem 1.05rem 0.95rem 1.05rem",
     color: basePrimaryText,
-    fontSize: "0.7rem",
+    // Component body scale (14px) — matches table cells / feedback bodies.
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.6,
     // Reset MainLayout's desktop "text-align: justify"
     textAlign: "left",
@@ -90,7 +105,7 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
 
   const chevronStyle: CSSProperties = {
     flexShrink: 0,
-    color: withOpacity(baseTextSecondary, 0.7),
+    color: withOpacity(headerText, 0.75),
     transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
     transition: "transform 0.3s var(--ease-smooth)",
   };

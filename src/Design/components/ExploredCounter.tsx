@@ -36,7 +36,7 @@ export const ExploredCounter: FC<Props> = ({ explored, total, label }) => {
     gap: "0.4rem",
     flexShrink: 0,
     padding: "0.2rem 0.55rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     fontFamily: BRAND.fonts.mono,
     border: `1px solid ${withOpacity(accentBorder, complete ? 0.45 : 0.2)}`,
     background: withOpacity(accent, complete ? 0.1 : 0.04),
@@ -45,13 +45,13 @@ export const ExploredCounter: FC<Props> = ({ explored, total, label }) => {
 
   const textStyle: CSSProperties = {
     fontSize: isMobile ? "0.58rem" : "0.62rem",
-    fontWeight: 700,
+    fontWeight: 500,
     letterSpacing: "0.03em",
     whiteSpace: "nowrap",
     color: withOpacity(colors.base.text.secondary, complete ? 0.95 : 0.7),
   };
 
-  const countStyle: CSSProperties = { color: accent, fontWeight: 700 };
+  const countStyle: CSSProperties = { color: accent, fontWeight: 500 };
 
   return (
     <span style={container}>

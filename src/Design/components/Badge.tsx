@@ -30,11 +30,12 @@ type Props = {
 };
 
 /**
- * Compact uppercase mono pill for status / verdicts / consumed flags.
+ * Compact mono small-caps tag for status / verdicts / consumed flags.
  *
  * Replaces ~15+ hand-rolled status-pill styles across the Interactive
  * domain. Theme- and module-aware via `usePageTheme()` so the `world`
- * tone adapts to Banking blue, Bitcoin amber, etc.
+ * tone adapts to Banking blue, Bitcoin amber, etc. Ledger register: sharp
+ * corners, small-caps (not uppercase), weight 500 (Cutive Mono is single-weight).
  */
 export const Badge: FC<Props> = ({
   children,
@@ -71,12 +72,12 @@ export const Badge: FC<Props> = ({
     alignItems: "center",
     gap: "0.35rem",
     padding,
-    borderRadius: "0.45rem",
+    borderRadius: 0,
     fontFamily: BRAND.fonts.mono,
     fontSize,
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
+    fontWeight: 500,
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
     color: accent,
     background: withOpacity(accent, tone === "neutral" ? 0.06 : 0.1),
     border: `1px solid ${withOpacity(borderAccent, tone === "neutral" ? 0.18 : 0.3)}`,

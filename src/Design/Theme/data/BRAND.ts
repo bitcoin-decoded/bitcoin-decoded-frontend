@@ -32,6 +32,23 @@ export const BRAND = {
     ruleThickness: 1,
   },
   /**
+   * Component type scale — the single source for font sizes INSIDE interactive
+   * components (sims, panels, tables). Deliberately one step below the chapter
+   * prose (17px): components read as a distinct, denser "instrument" register.
+   * Route every component font-size through these tokens instead of hardcoding
+   * ad-hoc values, so the whole sim layer shares one consistent scale.
+   *   body  14px — primary content (paragraphs, table cells, feedback/disclosure bodies)
+   *   label 13px — mono small-caps labels, interactive headers
+   *   note  12px — secondary notes / instructions (lock hint, hints)
+   *   micro 11px — tiny chips (badges, counters)
+   */
+  fontSize: {
+    body: "0.875rem",
+    label: "0.8125rem",
+    note: "0.75rem",
+    micro: "0.6875rem",
+  },
+  /**
    * Hand-made pedagogical type stack — committed to the "passionate professor
    * at a chalkboard" register. Cabin Sketch (display) is a sketched serif
    * with hatched chalk-like fill; Patrick Hand (body) is neat printed teacher

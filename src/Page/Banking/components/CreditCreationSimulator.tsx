@@ -1,5 +1,7 @@
 import { type FC, useEffect, useMemo } from "react";
 
+import { Feather } from "lucide-react";
+
 import { Disclosure, FeedbackPanel, HighlightText, Reference } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
@@ -41,7 +43,10 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
           liabilities={data!.bank.liabilities}
         />
         <div style={{ marginTop: "1rem" }}>
-          <Disclosure title={fr ? "Note d'attention" : "A word of caution"}>
+          <Disclosure
+            title={fr ? "Note d'attention" : "A word of caution"}
+            icon={<Feather size={15} strokeWidth={2} />}
+          >
             {fr ? (
               <p>
                 Petite triche pédagogique : j'ai laissé de côté le capital propre, les réserves, les
