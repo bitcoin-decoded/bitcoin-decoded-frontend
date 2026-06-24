@@ -168,7 +168,10 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
               key={i}
               style={{
                 fontSize: BRAND.fontSize.note,
-                color: colors.base.text.secondary,
+                // Primary text — these questions are the card's payload, so
+                // they must read clearly in both themes (were too faint at
+                // text.secondary).
+                color: colors.base.text.primary,
                 textAlign: "center",
                 lineHeight: 1.35,
               }}

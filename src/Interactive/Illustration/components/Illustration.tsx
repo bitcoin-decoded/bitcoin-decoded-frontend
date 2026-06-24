@@ -38,7 +38,10 @@ export const Illustration: FC<IllustrationProps> = ({
     alignItems: "center",
     margin,
     width: "100%",
-    maxWidth: isMobile ? "100%" : width,
+    // On narrow screens the per-page `width` (e.g. "35%") would be tiny, so we
+    // widen — but cap at ~22rem so the figure stays a figure and never balloons
+    // to a full-bleed image on tablets / large phones.
+    maxWidth: isMobile ? "min(100%, 22rem)" : width,
   };
 
   // Ledger frame: sharp corners, a single gold hairline (structure), no drop
