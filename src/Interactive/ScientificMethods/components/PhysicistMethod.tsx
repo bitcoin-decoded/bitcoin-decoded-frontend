@@ -30,8 +30,8 @@ export const PhysicistMethod: FC = () => {
   const timeLabel: CSSProperties = {
     ...mono,
     fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: withOpacity(accent, 0.7),
     whiteSpace: "nowrap",
@@ -40,7 +40,6 @@ export const PhysicistMethod: FC = () => {
     position: "relative",
     flex: 1,
     height: "2px",
-    borderRadius: "2px",
     background: withOpacity(accent, 0.25),
   };
   const arrowHead: CSSProperties = {
@@ -64,9 +63,9 @@ export const PhysicistMethod: FC = () => {
     flexDirection: "column",
     gap: "0.55rem",
     padding: "0.9rem 1rem",
-    borderRadius: "0.85rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(accent, 0.25)}`,
-    background: `linear-gradient(170deg, ${withOpacity(accent, 0.07)}, ${colors.base.background.primary})`,
+    background: withOpacity(accent, 0.05),
   };
   const theoryHeader: CSSProperties = {
     display: "flex",
@@ -77,7 +76,7 @@ export const PhysicistMethod: FC = () => {
   const theoryName: CSSProperties = {
     ...mono,
     fontSize: "0.9rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: colors.base.text.primary,
   };
   const dotRow: CSSProperties = {
@@ -112,13 +111,13 @@ export const PhysicistMethod: FC = () => {
     alignItems: "center",
     gap: "0.35rem",
     padding: "0.28rem 0.6rem",
-    borderRadius: "999px",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(accent, 0.3)}`,
     background: withOpacity(accent, 0.1),
     color: accent,
     fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     whiteSpace: "nowrap",
   };

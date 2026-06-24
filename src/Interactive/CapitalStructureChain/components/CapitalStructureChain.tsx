@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ExploredCounter, usePageTheme } from "../../../Design";
+import { BRAND, ExploredCounter, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getSandwichChain } from "../data";
 import { useCapitalStructureChain } from "../hooks";
@@ -52,19 +52,21 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     animation: "fadeInUp 0.5s ease-out forwards",
   };
 
+  // Sharp ledger card: flat surface, a single module hairline that brightens
+  // on hover. No gradient fill, no drop shadow.
   const cardStyle = (index: number): CSSProperties => {
     const isHovered = hoveredCardIndex === index;
     return {
       width: "10rem",
       display: "flex",
       flexDirection: "column",
-      background: `linear-gradient(190deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary})`,
-      borderRadius: "1rem",
+      background: colors.base.background.secondary,
+      borderRadius: 0,
+      border: `1px solid ${withOpacity(colors[moduleTheme].border.secondary, isHovered ? 0.55 : 0.3)}`,
       overflow: "visible",
       position: "relative",
       transform: isHovered ? "scale(1.03)" : "scale(1)",
-      boxShadow: isHovered ? colors.boxShadow.strong : colors.boxShadow.soft,
-      transition: "transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth)",
+      transition: "transform 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)",
       cursor: "pointer",
       zIndex: isHovered ? 10 : 1,
     };
@@ -75,8 +77,6 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderTopLeftRadius: "1rem",
-    borderTopRightRadius: "1rem",
     borderBottom: `1px solid ${colors[moduleTheme].border.primary}`,
     backgroundColor: colors[moduleTheme].background.secondary,
   };
@@ -92,10 +92,10 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     border: `1px solid ${colors[moduleTheme].border.secondary}`,
     margin: "-1rem auto 0 auto",
     zIndex: 2,
-    fontSize: "1rem",
-    fontWeight: "bold",
+    fontFamily: BRAND.fonts.mono,
+    fontSize: "0.9rem",
+    fontWeight: 500,
     lineHeight: 1,
-    boxShadow: colors.boxShadow.soft,
   };
 
   const contentStyle: CSSProperties = {
@@ -115,7 +115,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     alignSelf: "center",
     color: colors.base.text.primary,
     border: `1px solid ${colors[moduleTheme].border.secondary}`,
-    borderRadius: "0.25rem",
+    borderRadius: 0,
     marginTop: "auto",
     paddingTop: "0.4rem",
     paddingLeft: "0.7rem",
@@ -156,16 +156,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
           return (
             <div key={step.id} style={itemWrapperStyle}>
               <div
-                className="gradient-border"
-                style={
-                  {
-                    ...cardStyle(index),
-                    "--border-glow-color":
-                      hoveredCardIndex === index
-                        ? colors[moduleTheme].text.secondary
-                        : colors[moduleTheme].border.secondary,
-                  } as CSSProperties
-                }
+                style={cardStyle(index)}
                 onMouseEnter={() => setHoveredCardIndex(index)}
                 onMouseLeave={() => setHoveredCardIndex(null)}
               >
@@ -176,12 +167,12 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
                     style={{
                       display: "block",
                       marginBottom: "0.25rem",
-                      fontSize: "0.85rem",
+                      fontSize: BRAND.fontSize.label,
                       color: colors.base.text.primary,
                       fontStyle: "normal",
-                      letterSpacing: "0.1em",
-                      fontWeight: 400,
-                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      fontWeight: 500,
+                      fontVariant: "small-caps",
                     }}
                   >
                     {step.title}

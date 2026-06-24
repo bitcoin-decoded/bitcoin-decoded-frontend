@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, RangeLedger, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   sizes: number[];
   activeIndex: number;
   onChange: (index: number) => void;
-  /** Dominant tier accent (fill + active chip). */
+  /** Dominant tier accent (slider trail + active chip) — the green→red Dunbar scale. */
   color: string;
   ariaLabel: string;
   /** Intl locale tag for number grouping. */
@@ -16,9 +16,10 @@ type Props = {
 };
 
 /**
- * Discrete 5-step control: a styled range input (snaps to integer steps, so a
- * click jumps rather than slides) plus a connected segmented row of quick-jump
- * chips. Reuses the generic `.app-slider` track and the segmented pattern.
+ * Discrete 5-step control: the ledger `RangeLedger` primitive (coin thumb,
+ * hairline track) snapping to integer steps, plus a connected segmented row of
+ * quick-jump chips for direct selection. The dominant `color` is the tier's
+ * Dunbar-scale shade, so the slider trail tracks the calm→overload gradient.
  */
 export const DunbarStepSlider: FC<Props> = ({
   sizes,
@@ -28,15 +29,10 @@ export const DunbarStepSlider: FC<Props> = ({
   ariaLabel,
   localeTag,
 }) => {
-  const { theme, colors } = usePageTheme();
+  const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
-  const isLight = theme === "light";
 
   const lastIndex = sizes.length - 1;
-  const pct = lastIndex > 0 ? (activeIndex / lastIndex) * 100 : 0;
-  const trackRest = isLight
-    ? colors.base.border.secondary
-    : withOpacity(colors.base.text.primary, 0.18);
 
   const wrapStyle: CSSProperties = {
     display: "flex",
@@ -45,17 +41,10 @@ export const DunbarStepSlider: FC<Props> = ({
     width: "100%",
   };
 
-  const sliderStyle = {
-    width: "100%",
-    "--slider-track": `linear-gradient(to right, ${color} ${pct}%, ${trackRest} ${pct}%)`,
-    "--slider-thumb": color,
-  } as CSSProperties;
-
   const segmentedWrapStyle: CSSProperties = {
     display: "flex",
     alignSelf: "center",
     border: `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
-    borderRadius: "0.75rem",
     overflow: "hidden",
     maxWidth: "100%",
   };
@@ -67,7 +56,7 @@ export const DunbarStepSlider: FC<Props> = ({
     border: "none",
     borderLeft: first ? "none" : `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
     fontSize: isMobile ? "0.62rem" : "0.7rem",
-    fontWeight: 700,
+    fontWeight: 500,
     letterSpacing: "0.03em",
     whiteSpace: "nowrap",
     color: active ? colors.base.text.onAccent : withOpacity(colors.base.text.secondary, 0.85),
@@ -77,16 +66,14 @@ export const DunbarStepSlider: FC<Props> = ({
 
   return (
     <div style={wrapStyle}>
-      <input
-        type="range"
-        className="app-slider"
+      <RangeLedger
+        value={activeIndex}
+        onChange={onChange}
         min={0}
         max={lastIndex}
         step={1}
-        value={activeIndex}
-        onChange={(e) => onChange(Number(e.target.value))}
-        aria-label={ariaLabel}
-        style={sliderStyle}
+        color={color}
+        ariaLabel={ariaLabel}
       />
 
       <div role="tablist" aria-label={ariaLabel} style={segmentedWrapStyle}>

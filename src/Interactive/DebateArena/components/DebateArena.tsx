@@ -69,7 +69,8 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
           padding: "0 1rem",
           fontFamily: BRAND.fonts.mono,
           fontSize: "0.75rem",
-          fontWeight: 700,
+          fontWeight: 500,
+          fontVariant: "small-caps",
           color: colors.base.text.secondary,
           letterSpacing: "0.1em",
         };
@@ -83,16 +84,12 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
           return {
             position: "relative",
             padding: isMobile ? "1rem" : "1.25rem",
-            borderRadius: "1rem",
+            borderRadius: 0,
             cursor: "pointer",
             background: isActive
-              ? `linear-gradient(190deg, ${withOpacity(sideColor, isAustrian ? 0.1 : 0.05)}, ${colors.base.background.primary})`
+              ? withOpacity(sideColor, isAustrian ? 0.1 : 0.05)
               : colors.base.background.secondary,
             transform: hovering && !isActive ? "translateY(-2px)" : "translateY(0)",
-            boxShadow:
-              hovering && !isActive
-                ? `0 4px 16px ${withOpacity(isAustrian ? world.background.secondary : colors.base.text.secondary, 0.12)}`
-                : "none",
             transition: "all 0.3s var(--ease-smooth)",
             overflow: "hidden",
           };
@@ -119,14 +116,14 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
             gap: "0.5rem",
             fontFamily: BRAND.fonts.mono,
             fontSize: isMobile ? "0.7rem" : "0.75rem",
-            fontWeight: 600,
+            fontWeight: 500,
             color:
               isActive || hovering
                 ? isAustrian
                   ? world.text.secondary
                   : colors.base.text.primary
                 : colors.base.text.secondary,
-            textTransform: "uppercase",
+            fontVariant: "small-caps",
             letterSpacing: "0.05em",
             transition: "color 0.3s var(--ease-smooth)",
           };
@@ -172,20 +169,13 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
                 display: "block",
                 textAlign: "center",
                 marginBottom: isMobile ? "0.75rem" : "1rem",
-                fontWeight: 600,
               }}
             >
               {item.topic}
             </Caption>
             <div style={rowStyle}>
               <div
-                className="gradient-border"
-                style={
-                  {
-                    ...makeSideStyle(0),
-                    "--border-glow-color": makeBorderColor(0),
-                  } as CSSProperties
-                }
+                style={{ ...makeSideStyle(0), border: `1px solid ${makeBorderColor(0)}` }}
                 onClick={() => selectSide(i, 0)}
                 {...hoverHandlers(i, 0)}
                 role="button"
@@ -199,13 +189,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
               </div>
               <div style={vsStyle}>VS</div>
               <div
-                className="gradient-border"
-                style={
-                  {
-                    ...makeSideStyle(1),
-                    "--border-glow-color": makeBorderColor(1),
-                  } as CSSProperties
-                }
+                style={{ ...makeSideStyle(1), border: `1px solid ${makeBorderColor(1)}` }}
                 onClick={() => selectSide(i, 1)}
                 {...hoverHandlers(i, 1)}
                 role="button"

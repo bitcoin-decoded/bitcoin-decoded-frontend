@@ -58,14 +58,14 @@ export const DunbarStatePanel: FC<Props> = ({
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.95rem" : "1.05rem",
-    fontWeight: 700,
+    fontWeight: 500,
     letterSpacing: "0.01em",
   };
 
   const phraseStyle: CSSProperties = {
     margin: 0,
     color: colors.base.text.primary,
-    fontSize: isMobile ? "0.85rem" : "0.9rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.6,
   };
 
@@ -80,7 +80,7 @@ export const DunbarStatePanel: FC<Props> = ({
   const counterValueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.6rem" : "2rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color,
     letterSpacing: "0.01em",
     fontVariantNumeric: "tabular-nums",
