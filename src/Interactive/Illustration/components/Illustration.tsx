@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, getBrandGold, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useIllustration } from "../hooks";
 
 type IllustrationProps = {
@@ -26,9 +26,11 @@ export const Illustration: FC<IllustrationProps> = ({
   caption,
   margin = "2.5rem auto",
 }) => {
-  const { theme, colors, moduleTheme } = usePageTheme();
+  const { theme, colors } = usePageTheme();
   const { isHovered, containerHandlers } = useIllustration();
   const isMobile = useBreakpoint() === "mobile";
+
+  const gold = getBrandGold(theme);
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -36,20 +38,25 @@ export const Illustration: FC<IllustrationProps> = ({
     alignItems: "center",
     margin,
     width: "100%",
-    maxWidth: isMobile ? "100%" : width,
+    // On narrow screens the per-page `width` (e.g. "35%") would be tiny, so we
+    // widen — but cap at ~22rem so the figure stays a figure and never balloons
+    // to a full-bleed image on tablets / large phones.
+    maxWidth: isMobile ? "min(100%, 22rem)" : width,
   };
 
+  // Ledger frame: sharp corners, a single gold hairline (structure), no drop
+  // shadow and no gradient-border glow. The frame brightens on hover instead.
   const frameStyle: CSSProperties = {
     width: "100%",
     height: "auto",
-    borderRadius: "1.5rem",
-    boxShadow: isHovered ? colors.boxShadow.strong : colors.boxShadow.soft,
+    borderRadius: 0,
+    border: `1px solid ${withOpacity(gold, isHovered ? 0.55 : 0.3)}`,
     backgroundColor: colors.base.background.secondary,
     overflow: "hidden",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    transition: "box-shadow 0.3s var(--ease-smooth)",
+    transition: "border-color 0.3s var(--ease-smooth)",
     cursor: "pointer",
   };
 
@@ -70,7 +77,7 @@ export const Illustration: FC<IllustrationProps> = ({
 
   const captionStyle: CSSProperties = {
     marginTop: "0.75rem",
-    fontSize: isMobile ? "0.8rem" : "0.85rem",
+    fontSize: BRAND.fontSize.label,
     lineHeight: 1.5,
     color: colors.base.text.secondary,
     fontStyle: "italic",
@@ -85,18 +92,7 @@ export const Illustration: FC<IllustrationProps> = ({
 
   return (
     <figure style={containerStyle}>
-      <div
-        className="gradient-border"
-        style={
-          {
-            ...frameStyle,
-            "--border-glow-color": isHovered
-              ? colors[moduleTheme].text.secondary
-              : colors[moduleTheme].border.secondary,
-          } as CSSProperties
-        }
-        {...containerHandlers}
-      >
+      <div style={frameStyle} {...containerHandlers}>
         {src ? (
           <img src={src} alt={alt || "Illustration"} style={contentTransitionStyle} />
         ) : (

@@ -2,7 +2,15 @@ import { type CSSProperties, type FC } from "react";
 
 import { CircleCheck, CircleHelp, CircleX } from "lucide-react";
 
-import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  BRAND,
+  Caption,
+  FeedbackPanel,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useQuiz } from "../hooks";
 import { type QuizData } from "../types";
@@ -34,20 +42,12 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
     marginTop: "0.125rem",
   };
 
-  const separatorStyle: CSSProperties = {
-    width: "100%",
-    height: "1px",
-    background: `linear-gradient(to right, ${withOpacity(accentColor, 0.25)}, transparent)`,
-    border: "none",
-    margin: isMobile ? "0.625rem 0" : "0.75rem 0",
-  };
-
   const questionStyle: CSSProperties = {
-    color: colors.base.text.secondary,
-    fontSize: isMobile ? "0.875rem" : "0.9375rem",
+    color: colors.base.text.primary,
+    fontSize: BRAND.fontSize.body,
     fontStyle: "italic",
     lineHeight: 1.7,
-    margin: "0 0 1.25rem 0",
+    margin: "0.5rem 0 1.25rem 0",
   };
 
   const optionsContainerStyle: CSSProperties = {
@@ -82,44 +82,19 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       display: "block",
       width: isMobile ? "100%" : `${100 / data.answers.length}%`,
       padding: isMobile ? "0.875rem 1rem" : "1rem",
-      borderRadius: "0.75rem",
+      borderRadius: 0,
       textAlign: "left",
       cursor: isCorrectlySolved ? "default" : "pointer",
       backgroundColor: bgColor,
       border: `1px solid ${borderColor}`,
       color: textColor,
-      fontSize: isMobile ? "0.8125rem" : "0.875rem",
+      fontSize: BRAND.fontSize.body,
       lineHeight: 1.6,
       transition: "all 0.2s var(--ease-smooth)",
       outline: "none",
       opacity: isCorrectlySolved && !isSelected ? 0.4 : 1,
       fontFamily: "inherit",
     };
-  };
-
-  const getRationaleStyle = (): CSSProperties => {
-    if (selectedIndex === null) return {};
-    const isCorrect = data.answers[selectedIndex].isCorrect;
-    const feedbackColor = isCorrect ? success.text : warning.text;
-
-    return {
-      display: "flex",
-      alignItems: "flex-start",
-      gap: "0.75rem",
-      marginTop: "1.25rem",
-      padding: isMobile ? "0.875rem 1rem" : "1rem 1.25rem",
-      borderRadius: "0.75rem",
-      backgroundColor: isCorrect ? success.background : warning.background,
-      borderLeft: `3px solid ${feedbackColor}`,
-      color: colors.base.text.secondary,
-      fontSize: isMobile ? "0.8125rem" : "0.875rem",
-      lineHeight: 1.7,
-    };
-  };
-
-  const feedbackIconStyle: CSSProperties = {
-    flexShrink: 0,
-    marginTop: "0.125rem",
   };
 
   return (
@@ -136,7 +111,6 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
           <Caption tone="accent" size="md">
             {t("quiz.label")}
           </Caption>
-          <hr style={separatorStyle} />
           <p style={questionStyle}>{data.question}</p>
         </div>
       </div>
@@ -155,16 +129,20 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       </div>
 
       {selectedIndex !== null && (
-        <div style={getRationaleStyle()}>
-          <div style={feedbackIconStyle}>
-            {data.answers[selectedIndex].isCorrect ? (
+        <FeedbackPanel
+          tone={data.answers[selectedIndex].isCorrect ? "success" : "warning"}
+          variant="border-left"
+          icon={
+            data.answers[selectedIndex].isCorrect ? (
               <CircleCheck size={18} strokeWidth={2} color={success.text} />
             ) : (
               <CircleX size={18} strokeWidth={2} color={warning.text} />
-            )}
-          </div>
-          <div>{data.answers[selectedIndex].rationale}</div>
-        </div>
+            )
+          }
+          style={{ marginTop: "1.25rem" }}
+        >
+          {data.answers[selectedIndex].rationale}
+        </FeedbackPanel>
       )}
     </SurfaceCard>
   );

@@ -101,16 +101,19 @@ export const SynthesisQuiz: FC<Props> = ({
 
   const indexStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.7rem" : "0.75rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     color: accent,
-    letterSpacing: "0.05em",
+    letterSpacing: "0.08em",
   };
 
   const questionTitleStyle: CSSProperties = {
     color: colors.base.text.primary,
     fontSize: isMobile ? "0.9rem" : "0.95rem",
-    fontWeight: 600,
+    // Patrick Hand is single-weight, so 600 synthesized a crude faux-bold;
+    // prominence comes from size + primary color instead.
+    fontWeight: 500,
     lineHeight: 1.5,
     margin: 0,
   };
@@ -220,7 +223,7 @@ export const SynthesisQuiz: FC<Props> = ({
               style={{
                 fontFamily: BRAND.fonts.mono,
                 fontSize: isMobile ? "0.95rem" : "1.05rem",
-                fontWeight: 700,
+                fontWeight: 500,
                 color: scoreColor,
               }}
             >
