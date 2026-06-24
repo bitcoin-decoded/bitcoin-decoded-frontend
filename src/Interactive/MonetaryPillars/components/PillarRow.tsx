@@ -66,8 +66,8 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
 
   const numberStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.7rem" : "0.78rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: accentText,
     letterSpacing: "0.08em",
     flexShrink: 0,
@@ -78,7 +78,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
   const iconCircleStyle: CSSProperties = {
     width: isMobile ? "2.1rem" : "2.4rem",
     height: isMobile ? "2.1rem" : "2.4rem",
-    borderRadius: "50%",
+    borderRadius: 0,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -106,10 +106,10 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.78rem" : "0.85rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
     color: pillar.isKeystone ? accentText : world.text.primary,
   };
 
@@ -139,7 +139,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
   const bodyStyle: CSSProperties = {
     padding: isMobile ? `0 0.95rem 1rem ${bodyLeftPad}` : `0 1.1rem 1.15rem ${bodyLeftPad}`,
     color: colors.base.text.primary,
-    fontSize: isMobile ? "0.85rem" : "0.9rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.65,
     fontStyle: "italic",
     opacity: isOpen ? 1 : 0,

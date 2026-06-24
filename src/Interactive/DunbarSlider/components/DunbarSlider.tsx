@@ -38,7 +38,7 @@ export const DunbarSlider: FC = () => {
   const populationStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.7rem" : "2.1rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color,
     fontVariantNumeric: "tabular-nums",
     lineHeight: 1.1,

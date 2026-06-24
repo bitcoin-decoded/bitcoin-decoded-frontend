@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { usePageTheme } from "../../../Design";
+import { Button, usePageTheme } from "../../../Design";
 
 type Props = {
   primaryLabel: string;
@@ -11,6 +11,11 @@ type Props = {
   secondaryDisabled: boolean;
 };
 
+/**
+ * The two simulator actions (run / reset), rendered with the ledger `Button`
+ * primitive: a bracketed module-color primary and a quiet dashed-underline
+ * secondary. No hand-rolled rounded boxes.
+ */
 export const SimulatorControls: FC<Props> = ({
   primaryLabel,
   secondaryLabel,
@@ -20,53 +25,25 @@ export const SimulatorControls: FC<Props> = ({
   secondaryDisabled,
 }) => {
   const { colors, moduleTheme } = usePageTheme();
+  const moduleColor = moduleTheme === "base" ? undefined : colors[moduleTheme].text.secondary;
 
   const containerStyle: CSSProperties = {
     display: "flex",
     flexWrap: "wrap",
-    gap: "0.75rem",
+    gap: "1.25rem",
+    alignItems: "center",
     justifyContent: "center",
     marginBottom: "1rem",
   };
 
-  const buttonStyle: CSSProperties = {
-    flex: "1 1 0",
-    minWidth: "min(100%, 9rem)",
-    padding: "0.7rem 1rem",
-    fontWeight: 600,
-    fontSize: "0.875rem",
-    lineHeight: 1.3,
-    borderRadius: "0.5rem",
-    border: `1px solid ${colors[moduleTheme].border.secondary}`,
-    backgroundColor: colors.base.background.secondary,
-    color: colors.base.text.primary,
-    cursor: "pointer",
-    transition: "background-color 0.2s, opacity 0.2s",
-    textAlign: "center",
-    whiteSpace: "normal",
-  };
-
-  const disabledStyle: CSSProperties = {
-    opacity: 0.5,
-    cursor: "not-allowed",
-  };
-
   return (
     <div style={containerStyle}>
-      <button
-        style={{ ...buttonStyle, ...(primaryDisabled ? disabledStyle : {}) }}
-        onClick={onPrimary}
-        disabled={primaryDisabled}
-      >
+      <Button variant="primary" color={moduleColor} onClick={onPrimary} disabled={primaryDisabled}>
         {primaryLabel}
-      </button>
-      <button
-        style={{ ...buttonStyle, ...(secondaryDisabled ? disabledStyle : {}) }}
-        onClick={onSecondary}
-        disabled={secondaryDisabled}
-      >
+      </Button>
+      <Button variant="secondary" onClick={onSecondary} disabled={secondaryDisabled}>
         {secondaryLabel}
-      </button>
+      </Button>
     </div>
   );
 };

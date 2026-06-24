@@ -32,21 +32,20 @@ export const BRAND = {
     ruleThickness: 1,
   },
   /**
-   * Component type scale — the single source for font sizes INSIDE interactive
-   * components (sims, panels, tables). Deliberately one step below the chapter
-   * prose (17px): components read as a distinct, denser "instrument" register.
-   * Route every component font-size through these tokens instead of hardcoding
-   * ad-hoc values, so the whole sim layer shares one consistent scale.
-   *   body  14px — primary content (paragraphs, table cells, feedback/disclosure bodies)
-   *   label 13px — mono small-caps labels, interactive headers
-   *   note  12px — secondary notes / instructions (lock hint, hints)
-   *   micro 11px — tiny chips (badges, counters)
+   * Component type scale — the SINGLE source for font sizes INSIDE interactive
+   * components (sims, panels, tables). Just TWO sizes, one step below the 17px
+   * chapter prose: components read as a distinct, denser "instrument" register.
+   * Route EVERY component font-size through these tokens — never hardcode a rem
+   * value, and never go below 12px (the legibility floor the user set).
+   *   body = 14px — PRIMARY: content, table cells, panel bodies, component titles
+   *   label / note / micro = 12px — SECONDARY: labels, captions, units, chips,
+   *     hints. (Three names kept for code clarity; all resolve to the 12px floor.)
    */
   fontSize: {
     body: "0.875rem",
-    label: "0.8125rem",
+    label: "0.75rem",
     note: "0.75rem",
-    micro: "0.6875rem",
+    micro: "0.75rem",
   },
   /**
    * Hand-made pedagogical type stack — committed to the "passionate professor

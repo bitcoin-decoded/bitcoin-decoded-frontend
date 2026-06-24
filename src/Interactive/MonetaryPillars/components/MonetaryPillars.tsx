@@ -2,7 +2,14 @@ import { type CSSProperties, type FC } from "react";
 
 import { Columns3 } from "lucide-react";
 
-import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  BRAND,
+  Caption,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getMonetaryPillars } from "../data";
 
@@ -20,18 +27,16 @@ export const MonetaryPillars: FC = () => {
    * "thread" that visually ties the pillars together; the internal dashed
    * dividers reinforce that they belong to one coherent block.
    */
+  // Sharp ledger envelope: flat module wash + a single hairline. No gradient
+  // fill, no drop shadow.
   const envelopeStyle: CSSProperties = {
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    borderRadius: "0.85rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(world.border.secondary, 0.3)}`,
-    background: `linear-gradient(180deg, ${withOpacity(
-      world.text.secondary,
-      0.05,
-    )}, ${withOpacity(world.text.secondary, 0.01)})`,
+    background: withOpacity(world.text.secondary, 0.04),
     overflow: "hidden",
-    boxShadow: `0 4px 18px ${withOpacity(world.border.secondary, 0.12)}`,
   };
 
   const threadStyle: CSSProperties = {
@@ -40,17 +45,12 @@ export const MonetaryPillars: FC = () => {
     bottom: "0.85rem",
     left: 0,
     width: "3px",
-    background: `linear-gradient(180deg, ${withOpacity(world.text.secondary, 0.05)}, ${withOpacity(
-      world.text.secondary,
-      0.55,
-    )} 50%, ${withOpacity(world.text.secondary, 0.05)})`,
-    borderTopRightRadius: "3px",
-    borderBottomRightRadius: "3px",
+    background: withOpacity(world.text.secondary, 0.4),
     pointerEvents: "none",
   };
 
   const promptStyle: CSSProperties = {
-    fontSize: isMobile ? "0.85rem" : "0.9rem",
+    fontSize: BRAND.fontSize.body,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     lineHeight: 1.5,

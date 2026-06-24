@@ -22,22 +22,23 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   const rowCount = Math.max(assets.length, liabilities.length);
   const rows = Array.from({ length: rowCount });
 
+  // Ledger frame: sharp corners + a single module hairline. No gradient fill
+  // and no gradient-border glow.
   const containerStyle: CSSProperties = {
     width: "100%",
     overflow: "hidden",
-    background: `linear-gradient(190deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary})`,
-    borderRadius: "1rem",
-    "--border-glow-color": accentColor,
-  } as CSSProperties;
+    borderRadius: 0,
+    border: `1px solid ${withOpacity(accentColor, 0.3)}`,
+  };
 
   const titleStyle: CSSProperties = {
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.5rem",
-    fontWeight: 600,
+    fontWeight: 500,
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.75rem" : "0.8125rem",
+    fontSize: BRAND.fontSize.body,
     letterSpacing: "0.08em",
     textAlign: "center",
-    textTransform: "uppercase",
+    fontVariant: "small-caps",
     color: colors[moduleTheme].text.primary,
   };
 
@@ -52,11 +53,11 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
 
   const tableHeaderStyle: CSSProperties = {
     padding: isMobile ? "0.625rem 0.75rem" : "0.75rem 1.25rem",
-    fontWeight: 700,
+    fontWeight: 500,
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.75rem" : "0.8125rem",
-    letterSpacing: "0.06em",
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.label,
+    letterSpacing: "0.08em",
+    fontVariant: "small-caps",
     color: colors[moduleTheme].text.primary,
     backgroundColor: withOpacity(accentColor, 0.1),
     borderBottom: `1px solid ${withOpacity(accentColor, 0.3)}`,
@@ -71,7 +72,7 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     padding: isMobile ? "0.625rem 0.75rem" : "0.75rem 1.25rem",
     width: "50%",
     whiteSpace: "pre-line",
-    fontSize: isMobile ? "0.8125rem" : "0.875rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.6,
     color: colors.base.text.secondary,
     borderBottom: `1px solid ${withOpacity(accentColor, 0.1)}`,
@@ -86,7 +87,7 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   const changedBg = withOpacity(colors.amber.text.secondary, 0.08);
 
   return (
-    <div className="gradient-border" style={containerStyle}>
+    <div style={containerStyle}>
       <h3 style={titleStyle}>{title}</h3>
       <table style={tableStyle}>
         <thead>
@@ -104,7 +105,10 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
             const buildCellContent = (line?: BalanceSheetLine) =>
               line ? (
                 <>
-                  <strong style={{ fontWeight: 600 }}>{line.amount}</strong>
+                  {/* Amounts are ledger figures — mono, no faux-bold. */}
+                  <strong style={{ fontFamily: BRAND.fonts.mono, fontWeight: 500 }}>
+                    {line.amount}
+                  </strong>
                   <br />
                   {line.description}
                 </>
@@ -113,9 +117,7 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
             const lastRowOverride: CSSProperties = isLast ? { borderBottom: "none" } : {};
 
             const changedOverride = (line?: BalanceSheetLine): CSSProperties =>
-              line?.hasChanged
-                ? { color: changedColor, backgroundColor: changedBg, fontWeight: 600 }
-                : {};
+              line?.hasChanged ? { color: changedColor, backgroundColor: changedBg } : {};
 
             return (
               <tr key={index}>
