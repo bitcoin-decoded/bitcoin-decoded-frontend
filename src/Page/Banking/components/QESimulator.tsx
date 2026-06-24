@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useEffect } from "react";
 
-import { FeedbackPanel, usePageTheme } from "../../../Design";
+import { BRAND, FeedbackPanel, usePageTheme, withOpacity } from "../../../Design";
 import { useBreakpoint } from "../../../Design/Responsive";
 import { FrText, useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../Shared/hooks";
@@ -23,18 +23,20 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
     if (isActive) onComplete?.();
   }, [isActive, onComplete]);
 
+  // Bond-coupon ticket — amber routed through the theme (was hardcoded
+  // navy/amber hex), sharp corners.
   const ticketContainerStyle: CSSProperties = {
     position: "relative",
-    backgroundColor: theme === "dark" ? "#172554" : "#fde68a",
-    border: `1px dashed ${theme === "dark" ? "#d97706" : "#451a03"}`,
-    borderRadius: "0.5rem",
+    backgroundColor: withOpacity(colors.amber.text.secondary, theme === "dark" ? 0.14 : 0.18),
+    border: `1px dashed ${withOpacity(colors.amber.text.secondary, 0.55)}`,
+    borderRadius: 0,
     padding: isMobile ? "1.25rem 1rem" : "1.5rem",
     marginBottom: "1rem",
     textAlign: "center",
   };
 
   const captionStyle: CSSProperties = {
-    fontSize: isMobile ? "0.85rem" : "0.9rem",
+    fontSize: BRAND.fontSize.body,
     color: colors.base.text.primary,
     margin: "0.5rem 0 1.25rem",
     lineHeight: 1.5,
@@ -67,27 +69,29 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
   };
 
   const valueStyle: CSSProperties = {
-    color: theme === "dark" ? "#f59e0b" : "#451a03",
+    color: colors.amber.text.secondary,
+    fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.4rem" : "1.75rem",
-    fontWeight: 700,
+    fontWeight: 500,
     fontVariantNumeric: "tabular-nums",
     lineHeight: 1.2,
     textAlign: "center",
     whiteSpace: "nowrap",
     // Brief background flash on the new value so the change registers,
-    // without permanently shifting the color (orange stays the field tone).
+    // without permanently shifting the color (amber stays the field tone).
     padding: "0.1rem 0.4rem",
-    borderRadius: "0.4rem",
+    borderRadius: 0,
     animation: isActive ? "qeValuePulse 0.85s ease-out" : undefined,
   };
 
+  // Coupon perforation notches at the ticket's edges.
   const cutoutStyle: CSSProperties = {
     position: "absolute",
     top: "50%",
     transform: "translateY(-50%)",
     width: "1rem",
     height: "3rem",
-    backgroundColor: theme === "dark" ? "#d97706" : "#451a03",
+    backgroundColor: withOpacity(colors.amber.text.secondary, 0.5),
     borderRadius: "50%",
   };
 

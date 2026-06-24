@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { FeedbackPanel, usePageTheme, useRechartsTheme } from "../../../Design";
+import { FeedbackPanel, RangeLedger, usePageTheme, useRechartsTheme } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { useYieldCurve } from "../hooks/useYieldCurve";
 
@@ -35,14 +35,13 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
 
   const containerStyle: CSSProperties = {
     marginTop: "2rem",
-    padding: "0.75rem 0.5rem",
-    borderRadius: "0.75rem",
+    padding: "1rem 0.75rem",
+    borderRadius: 0,
     border: `1px dashed ${colors[moduleTheme].border.primary}`,
     display: "flex",
     flexDirection: "column",
     gap: "1.25rem",
     width: "100%",
-    boxShadow: colors.boxShadow.strong,
   };
 
   const titleStyle: CSSProperties = {
@@ -55,15 +54,9 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
   };
 
   const controlsContainerStyle: CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))",
-    gap: "1rem",
-  };
-
-  const controlBoxStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    gap: "0.5rem",
+    gap: "0.85rem",
   };
 
   const labelStyle: CSSProperties = {
@@ -156,44 +149,23 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
         </div>
 
         <div style={controlsContainerStyle}>
-          <div style={controlBoxStyle}>
-            <label
-              style={{
-                ...labelStyle,
-                color: colors[moduleTheme].text.primary,
-              }}
-            >
-              {t("yieldCurve.shortRate")} : <strong>{fixedShortRate}%</strong>
-            </label>
+          <div style={{ ...labelStyle, color: colors[moduleTheme].text.primary }}>
+            {t("yieldCurve.shortRate")} : <strong>{fixedShortRate}%</strong>
           </div>
-          <div style={controlBoxStyle}>
-            <label
-              style={{
-                ...labelStyle,
-                color: colors[moduleTheme].border.secondary,
-              }}
-            >
-              {t("yieldCurve.longRate")} : <strong>{longRate}%</strong>
-            </label>
-            <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
-              <input
-                type="range"
-                min="1"
-                max="4"
-                step="0.1"
-                value={longRate}
-                onChange={(e) => {
-                  setLongRate(parseFloat(e.target.value));
-                  onComplete?.();
-                }}
-                style={{
-                  width: "100%",
-                  cursor: "pointer",
-                  accentColor: colors[moduleTheme].border.secondary,
-                }}
-              />
-            </div>
-          </div>
+          <RangeLedger
+            value={longRate}
+            onChange={(value) => {
+              setLongRate(value);
+              onComplete?.();
+            }}
+            min={1}
+            max={4}
+            step={0.1}
+            label={t("yieldCurve.longRate")}
+            valueDisplay={`${longRate}%`}
+            color={colors[moduleTheme].text.secondary}
+            ariaLabel={t("yieldCurve.longRate")}
+          />
         </div>
 
         <FeedbackPanel tone={marginIsHealthy ? "success" : "error"} title={t("yieldCurve.evaluation")}>

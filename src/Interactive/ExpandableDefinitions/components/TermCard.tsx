@@ -17,26 +17,18 @@ export const TermCard: FC<Props> = ({ term }) => {
 
   const mono = { fontFamily: BRAND.fonts.mono } as const;
 
+  // Sharp ledger card: flat module wash, a single hairline that brightens on
+  // hover/open. No gradient fill, no lift, no drop shadow.
   const containerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    borderRadius: "0.85rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(term.accentBorder, isHovered || isOpen ? 0.55 : 0.28)}`,
-    background: `linear-gradient(180deg, ${withOpacity(term.accentText, 0.06)}, ${withOpacity(
-      term.accentText,
-      0.015,
-    )})`,
+    background: withOpacity(term.accentText, 0.05),
     overflow: "hidden",
     minWidth: 0,
     boxSizing: "border-box",
-    transition: "all 0.35s var(--ease-smooth)",
-    transform: isHovered && !isOpen ? "translateY(-1.5px)" : "translateY(0)",
-    boxShadow:
-      isHovered && !isOpen
-        ? `0 8px 22px ${withOpacity(term.accentBorder, 0.18)}`
-        : isOpen
-          ? `0 4px 14px ${withOpacity(term.accentBorder, 0.15)}`
-          : "0 0 0 transparent",
+    transition: "border-color 0.35s var(--ease-smooth)",
   };
 
   const headerStyle: CSSProperties = {
@@ -56,7 +48,7 @@ export const TermCard: FC<Props> = ({ term }) => {
   const iconCircleStyle: CSSProperties = {
     width: isMobile ? "2.1rem" : "2.4rem",
     height: isMobile ? "2.1rem" : "2.4rem",
-    borderRadius: "50%",
+    borderRadius: 0,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -77,15 +69,15 @@ export const TermCard: FC<Props> = ({ term }) => {
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.78rem" : "0.85rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
+    fontSize: BRAND.fontSize.label,
+    fontWeight: 500,
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
     color: term.accentText,
   };
 
   const summaryStyle: CSSProperties = {
-    fontSize: isMobile ? "0.78rem" : "0.85rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.45,
     color: colors.base.text.secondary,
   };
@@ -121,7 +113,7 @@ export const TermCard: FC<Props> = ({ term }) => {
     paddingBottom: isMobile ? "1rem" : "1.15rem",
     paddingLeft: isMobile ? "0.95rem" : "1.1rem",
     color: colors.base.text.primary,
-    fontSize: isMobile ? "0.85rem" : "0.9rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.65,
     textAlign: "left",
     display: "flex",
