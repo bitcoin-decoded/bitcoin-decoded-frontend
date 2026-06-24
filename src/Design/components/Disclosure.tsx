@@ -55,7 +55,10 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     cursor: "pointer",
     color: headerText,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.74rem",
+    // Interactive header at the body scale (14px) so the title reads clearly —
+    // it was a near-invisible 11.8px. Distinguished from the body by small-caps
+    // + module color + the tinted bar + its icon, not by size.
+    fontSize: BRAND.fontSize.body,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -90,7 +93,8 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     borderTop: `1px solid ${withOpacity(borderColor, 0.22)}`,
     padding: "0.85rem 1.05rem 0.95rem 1.05rem",
     color: basePrimaryText,
-    fontSize: "0.7rem",
+    // Component body scale (14px) — matches table cells / feedback bodies.
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.6,
     // Reset MainLayout's desktop "text-align: justify"
     textAlign: "left",
