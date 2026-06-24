@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, type KeyboardEvent } from "react";
 
 import { RotateCw } from "lucide-react";
 
-import { usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, usePageTheme, withOpacity } from "../../../Design";
 import { useFlipCard } from "../hooks";
 import type { FlipCardItem } from "../types";
 
@@ -21,7 +21,7 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
 
   const lifted = isHovered && !isFlipped;
   const step = String(index + 1).padStart(2, "0");
-  const mono = "'JetBrains Mono', monospace";
+  const mono = BRAND.fonts.mono;
 
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -47,35 +47,35 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
     willChange: "transform",
   };
 
+  // Ledger card face: sharp corners, a flat surface, a single hairline border
+  // (no gradient fill, no drop shadow, no gradient-border glow).
   const faceStyle: CSSProperties = {
     position: "absolute",
     inset: 0,
     backfaceVisibility: "hidden",
     WebkitBackfaceVisibility: "hidden",
-    borderRadius: "1rem",
+    borderRadius: 0,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     padding: "1rem",
     overflow: "hidden",
+    background: colors.base.background.secondary,
+    transition: "border-color 0.35s var(--ease-smooth)",
   };
 
   const frontStyle: CSSProperties = {
     ...faceStyle,
-    background: `linear-gradient(190deg, ${world.background.primary}, ${colors.base.background.primary})`,
-    boxShadow: lifted
-      ? `0 10px 30px ${withOpacity(world.background.secondary, 0.25)}`
-      : colors.boxShadow.soft,
-    transition: "box-shadow 0.35s var(--ease-smooth)",
+    border: `1px solid ${withOpacity(world.border.secondary, lifted ? 0.6 : 0.32)}`,
   };
 
   const backStyle: CSSProperties = {
     ...faceStyle,
     transform: "rotateY(180deg)",
     gap: "0.4rem",
-    background: `linear-gradient(190deg, ${withOpacity(world.background.secondary, 0.12)}, ${colors.base.background.primary})`,
-    boxShadow: colors.boxShadow.soft,
+    background: withOpacity(world.background.secondary, 0.1),
+    border: `1px solid ${withOpacity(world.border.secondary, 0.35)}`,
   };
 
   const stepStyle: CSSProperties = {
@@ -83,8 +83,8 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
     top: "0.6rem",
     left: "0.7rem",
     fontFamily: mono,
-    fontSize: "0.62rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.micro,
+    fontWeight: 500,
     letterSpacing: "0.08em",
     color: withOpacity(world.text.secondary, 0.6),
   };
@@ -101,22 +101,13 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
     >
       <div style={innerStyle}>
         {/* Front - emoji + step title */}
-        <div
-          className="gradient-border"
-          style={
-            {
-              ...frontStyle,
-              "--border-glow-color": lifted ? world.text.secondary : world.border.primary,
-            } as CSSProperties
-          }
-        >
+        <div style={frontStyle}>
           <span style={stepStyle}>{step}</span>
           <span
             style={{
               fontSize: "2.6rem",
               lineHeight: 1,
               marginBottom: "0.6rem",
-              filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.3))",
               transform: lifted ? "scale(1.08)" : "scale(1)",
               transition: "transform 0.35s var(--ease-smooth)",
             }}
@@ -126,11 +117,12 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
           <span
             style={{
               fontFamily: mono,
-              fontSize: "0.82rem",
-              fontWeight: 600,
+              fontSize: BRAND.fontSize.label,
+              fontWeight: 500,
               color: lifted ? world.text.secondary : world.text.primary,
-              textTransform: "uppercase",
+              fontVariant: "small-caps",
               letterSpacing: "0.05em",
+              textAlign: "center",
               transition: "color 0.3s var(--ease-smooth)",
             }}
           >
@@ -149,18 +141,16 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
         </div>
 
         {/* Back - the cascade of decisions, centered */}
-        <div
-          className="gradient-border"
-          style={{ ...backStyle, "--border-glow-color": world.border.secondary } as CSSProperties}
-        >
+        <div style={backStyle}>
           <span
             style={{
               fontFamily: mono,
-              fontSize: "0.66rem",
-              fontWeight: 700,
+              fontSize: BRAND.fontSize.note,
+              fontWeight: 500,
               color: world.text.secondary,
-              textTransform: "uppercase",
+              fontVariant: "small-caps",
               letterSpacing: "0.08em",
+              textAlign: "center",
             }}
           >
             {item.title}
@@ -169,7 +159,6 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
             style={{
               width: "1.5rem",
               height: "2px",
-              borderRadius: "2px",
               background: withOpacity(world.background.secondary, 0.5),
               marginBottom: "0.2rem",
             }}
@@ -178,7 +167,7 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
             <span
               key={i}
               style={{
-                fontSize: "0.74rem",
+                fontSize: BRAND.fontSize.note,
                 color: colors.base.text.secondary,
                 textAlign: "center",
                 lineHeight: 1.35,
