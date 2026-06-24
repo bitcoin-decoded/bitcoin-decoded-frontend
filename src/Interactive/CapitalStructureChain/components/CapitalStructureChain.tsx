@@ -122,7 +122,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     paddingRight: "0.7rem",
     paddingBottom: "0.4rem",
     cursor: "pointer",
-    fontSize: "0.7rem",
+    fontSize: BRAND.fontSize.note,
     letterSpacing: "0.05rem",
     lineHeight: 1.6,
     fontWeight: 400,
@@ -167,7 +167,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
                     style={{
                       display: "block",
                       marginBottom: "0.25rem",
-                      fontSize: BRAND.fontSize.label,
+                      fontSize: BRAND.fontSize.body,
                       color: colors.base.text.primary,
                       fontStyle: "normal",
                       letterSpacing: "0.08em",

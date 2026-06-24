@@ -29,7 +29,7 @@ export const PhysicistMethod: FC = () => {
   const axisRow: CSSProperties = { display: "flex", alignItems: "center", gap: "0.6rem" };
   const timeLabel: CSSProperties = {
     ...mono,
-    fontSize: "0.6rem",
+    fontSize: BRAND.fontSize.note,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -93,7 +93,7 @@ export const PhysicistMethod: FC = () => {
     flexShrink: 0,
   });
   const obsCaption: CSSProperties = {
-    fontSize: "0.7rem",
+    fontSize: BRAND.fontSize.note,
     fontStyle: "italic",
     lineHeight: 1.45,
     color: withOpacity(colors.base.text.secondary, 0.9),
@@ -115,7 +115,7 @@ export const PhysicistMethod: FC = () => {
     border: `1px solid ${withOpacity(accent, 0.3)}`,
     background: withOpacity(accent, 0.1),
     color: accent,
-    fontSize: "0.6rem",
+    fontSize: BRAND.fontSize.note,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",

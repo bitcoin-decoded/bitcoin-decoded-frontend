@@ -55,7 +55,7 @@ export const DunbarStepSlider: FC<Props> = ({
     padding: isMobile ? "0.45rem 0.6rem" : "0.5rem 0.95rem",
     border: "none",
     borderLeft: first ? "none" : `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
-    fontSize: isMobile ? "0.62rem" : "0.7rem",
+    fontSize: BRAND.fontSize.note,
     fontWeight: 500,
     letterSpacing: "0.03em",
     whiteSpace: "nowrap",

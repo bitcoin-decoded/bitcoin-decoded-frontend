@@ -66,7 +66,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
 
   const numberStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.7rem" : "0.78rem",
+    fontSize: BRAND.fontSize.note,
     fontWeight: 500,
     color: accentText,
     letterSpacing: "0.08em",
@@ -106,7 +106,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.label,
+    fontSize: BRAND.fontSize.body,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",

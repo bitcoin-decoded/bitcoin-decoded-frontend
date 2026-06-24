@@ -63,7 +63,7 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
 
   const labelStyle: CSSProperties = {
     color: colors.base.text.secondary,
-    fontSize: isMobile ? "0.75rem" : "0.8rem",
+    fontSize: BRAND.fontSize.note,
     fontWeight: 500,
     textAlign: "center",
   };

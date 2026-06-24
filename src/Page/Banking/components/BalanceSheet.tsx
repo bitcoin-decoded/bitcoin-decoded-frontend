@@ -35,7 +35,7 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.5rem",
     fontWeight: 500,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.label,
+    fontSize: BRAND.fontSize.body,
     letterSpacing: "0.08em",
     textAlign: "center",
     fontVariant: "small-caps",

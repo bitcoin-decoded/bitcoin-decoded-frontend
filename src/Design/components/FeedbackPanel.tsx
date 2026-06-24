@@ -92,7 +92,7 @@ export const FeedbackPanel: FC<Props> = ({
     alignItems: "center",
     gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.label,
+    fontSize: BRAND.fontSize.body,
     fontWeight: 500,
     color: accent,
     fontVariant: "small-caps",

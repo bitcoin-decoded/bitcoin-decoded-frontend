@@ -55,7 +55,7 @@ export const LogicianMethod: FC = () => {
     color: colors.base.text.primary,
   };
   const rootSubtitle: CSSProperties = {
-    fontSize: "0.74rem",
+    fontSize: BRAND.fontSize.note,
     fontStyle: "italic",
     lineHeight: 1.45,
     color: colors.base.text.secondary,
@@ -107,7 +107,7 @@ export const LogicianMethod: FC = () => {
     borderRadius: 0,
     border: `1px solid ${withOpacity(accent, 0.3)}`,
     background: withOpacity(accent, 0.07),
-    fontSize: isMobile ? "0.72rem" : "0.78rem",
+    fontSize: BRAND.fontSize.note,
     fontWeight: 500,
     color: colors.base.text.primary,
     textAlign: "center",
@@ -121,7 +121,7 @@ export const LogicianMethod: FC = () => {
     padding: "0.35rem 0.6rem",
     borderRadius: 0,
     border: `1px dashed ${withOpacity(accent, 0.3)}`,
-    fontSize: "0.6rem",
+    fontSize: BRAND.fontSize.note,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",

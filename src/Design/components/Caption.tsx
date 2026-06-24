@@ -1,6 +1,5 @@
 import { createElement, type CSSProperties, type FC, type ReactNode } from "react";
 
-import { useBreakpoint } from "../Responsive";
 import { BRAND, usePageTheme } from "../Theme";
 
 type Tone = "world" | "muted" | "accent";
@@ -63,20 +62,10 @@ export const Caption: FC<Props> = ({
   color,
 }) => {
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
 
-  const fontSize =
-    size === "xs"
-      ? isMobile
-        ? "0.55rem"
-        : "0.6rem"
-      : size === "md"
-        ? isMobile
-          ? "0.78rem"
-          : "0.85rem"
-        : isMobile
-          ? "0.7rem"
-          : "0.75rem";
+  // Component scale: secondary labels at 12px (the floor — never smaller),
+  // `md` headers at 14px. `xs` no longer means "tiny"; it's just the 12px floor.
+  const fontSize = size === "md" ? BRAND.fontSize.body : BRAND.fontSize.note;
 
   const resolvedColor =
     color ??

@@ -69,7 +69,7 @@ export const TermCard: FC<Props> = ({ term }) => {
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.label,
+    fontSize: BRAND.fontSize.body,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
