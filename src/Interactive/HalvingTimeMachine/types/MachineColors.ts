@@ -1,19 +1,10 @@
 /**
- * Device-specific colors for the time machine - the deep CRT screen and the
- * brushed-metal lever - which are deliberately NOT semantic theme tokens (they
- * render a physical object, not UI surfaces). Theme-aware where the object's
- * finish changes (lever: light silver vs dark gunmetal), fixed otherwise.
+ * Device-specific colors for the time machine's readout screen — deliberately
+ * NOT semantic theme tokens (they render a physical readout, not UI surfaces).
+ * After the ledger refonte only the flat dark screen and the travel-flux remain;
+ * the brushed-metal lever and CRT scanlines/glow were removed.
  */
 export type MachineColors = {
   screenBgDark: string;
-  scanline: string;
   fluxLight: string;
-  leverBase: string;
-  leverBaseBorder: string;
-  leverBaseShadow: string;
-  leverShaft: string;
-  leverShaftShadow: string;
-  leverKnob: string;
-  leverKnobBorder: string;
-  leverKnobShadow: string;
 };

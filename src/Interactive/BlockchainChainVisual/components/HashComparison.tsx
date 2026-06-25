@@ -1,20 +1,19 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 
 type Props = {
   originalHash: string;
   newHash: string;
-  /** Zone color (e.g. violet for hashes, blue for merkle root). Original is dimmed via opacity, new stays full strength + bold. */
+  /** Zone color (e.g. violet for hashes, blue for merkle root). Original is dimmed via opacity, new stays full strength. */
   accent: string;
 };
 
 export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => {
   const { t } = useTranslation();
   const { colors } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
 
   const mono = { fontFamily: BRAND.fonts.mono } as const;
 
@@ -34,19 +33,21 @@ export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => 
 
   const labelBase: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.5rem" : "0.55rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: colors.base.text.secondary,
   };
 
   const valueBase: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.6rem" : "0.65rem",
+    fontSize: BRAND.fontSize.note,
     wordBreak: "break-all",
   };
 
+  // Emphasis is carried by color + opacity, not weight (Cutive Mono is
+  // single-weight; the "before" is dimmed, the "after" stays full strength).
   return (
     <div style={wrapper}>
       <div style={row}>
@@ -57,7 +58,7 @@ export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => 
       </div>
       <div style={row}>
         <span style={{ ...labelBase, color: accent }}>{t("chain.newHash")}</span>
-        <span style={{ ...valueBase, color: accent, fontWeight: 700 }}>
+        <span style={{ ...valueBase, color: accent, fontWeight: 500 }}>
           {truncateHash(newHash)}
         </span>
       </div>

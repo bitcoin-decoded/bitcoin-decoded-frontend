@@ -37,7 +37,7 @@ export const BlockHashFormula: FC<Props> = ({
     flexDirection: "column",
     gap: "0.3rem",
     padding: isMobile ? "0.55rem 0.7rem" : "0.7rem 0.85rem",
-    borderRadius: "0.55rem",
+    borderRadius: 0,
     background: withOpacity(accent, 0.08),
     border: `1px solid ${withOpacity(accentBorder, 0.3)}`,
     transition: "all 0.3s var(--ease-smooth)",
@@ -47,8 +47,8 @@ export const BlockHashFormula: FC<Props> = ({
 
   const formulaLine: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.6rem" : "0.7rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: labelColor,
     letterSpacing: "0.02em",
     whiteSpace: "nowrap",
@@ -59,7 +59,7 @@ export const BlockHashFormula: FC<Props> = ({
 
   const hashValueStyle: CSSProperties = {
     ...mono,
-    fontWeight: 700,
+    fontWeight: 500,
     color: accent,
   };
 

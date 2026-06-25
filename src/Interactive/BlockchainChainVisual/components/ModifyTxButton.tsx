@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Shuffle } from "lucide-react";
 
-import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 type Props = {
@@ -14,22 +14,25 @@ type Props = {
 export const ModifyTxButton: FC<Props> = ({ onClick, blockNumber, disabled = false }) => {
   const { t } = useTranslation();
   const { colors } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
 
+  // Inline destructive micro-action that lives in a field-row header (not a
+  // CTA) — too small for the bracketed `Button` primitive, so it stays a
+  // bespoke chip but on the ledger register: sharp corners, mono small-caps,
+  // weight 500, 12px floor. The error tint is the "tamper" signal.
   const buttonStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.55rem" : "0.6rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: colors.semantic.error.text,
     padding: "0.3rem 0.5rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     background: withOpacity(colors.semantic.error.text, 0.1),
     border: `1px solid ${withOpacity(colors.semantic.error.border, 0.4)}`,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.3rem",
     cursor: disabled ? "not-allowed" : "pointer",
-    textTransform: "uppercase",
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     whiteSpace: "nowrap",
     flexShrink: 0,
@@ -45,7 +48,7 @@ export const ModifyTxButton: FC<Props> = ({ onClick, blockNumber, disabled = fal
       aria-label={`${t("chain.editTx")} #${blockNumber}`}
       style={buttonStyle}
     >
-      <Shuffle size={10} strokeWidth={2.5} />
+      <Shuffle size={12} strokeWidth={2.5} />
       {t("chain.modifyTx")}
     </button>
   );

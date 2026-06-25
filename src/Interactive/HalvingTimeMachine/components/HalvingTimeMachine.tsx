@@ -3,6 +3,7 @@ import { type CSSProperties, type FC } from "react";
 import { History, Info } from "lucide-react";
 
 import {
+  BRAND,
   Caption,
   FeedbackPanel,
   SurfaceCard,
@@ -45,7 +46,7 @@ export const HalvingTimeMachine: FC = () => {
 
   const introStyle: CSSProperties = {
     margin: 0,
-    fontSize: "0.8rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.55,
     color: withOpacity(colors.base.text.secondary, 0.9),
     textAlign: "center",

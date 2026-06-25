@@ -26,6 +26,8 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
 
+  // Flat ledger node — active state is signalled by a stronger flat tint +
+  // border + a subtle scale, not a gradient fill, glow or backdrop blur.
   const nodeStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     width: "100%",
@@ -35,23 +37,22 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
     alignItems: "center",
     gap: "0.3rem",
     padding: isMobile ? "0.45rem 0.35rem" : "0.55rem 0.45rem",
-    borderRadius: "0.7rem",
+    borderRadius: 0,
     textAlign: "center",
-    background: `linear-gradient(180deg, ${withOpacity(accent, isActive ? 0.18 : 0.06)}, ${withOpacity(accent, isActive ? 0.08 : 0.02)})`,
-    backdropFilter: "blur(2px)",
+    background: withOpacity(accent, isActive ? 0.14 : 0.05),
     border: `1px solid ${withOpacity(accent, isActive ? 0.65 : 0.2)}`,
-    boxShadow: isActive ? `0 0 22px ${withOpacity(accent, 0.45)}` : colors.boxShadow.soft,
     transform: isActive ? "scale(1.06)" : "scale(1)",
     transition: "all 0.35s var(--ease-smooth)",
   };
 
+  // Structural icon badge — a square (radius 0), per the block-vs-coin rule.
   const iconWrapStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     width: isMobile ? "1.6rem" : "1.85rem",
     height: isMobile ? "1.6rem" : "1.85rem",
-    borderRadius: "50%",
+    borderRadius: 0,
     flexShrink: 0,
     background: withOpacity(accent, isActive ? 0.25 : 0.12),
     color: accent,
@@ -59,17 +60,17 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   };
 
   const labelStyle: CSSProperties = {
-    fontSize: isMobile ? "0.5rem" : "0.55rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     letterSpacing: "0.02em",
-    textTransform: "uppercase",
+    fontVariant: "small-caps",
     lineHeight: 1.2,
     color: colors.base.text.secondary,
   };
 
   const metricStyle: CSSProperties = {
-    fontSize: isMobile ? "0.68rem" : "0.74rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: isActive ? accent : world.text.primary,
     transition: "color 0.35s var(--ease-smooth)",
   };

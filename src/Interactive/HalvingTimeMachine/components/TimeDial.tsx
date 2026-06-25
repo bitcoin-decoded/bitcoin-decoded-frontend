@@ -2,7 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { Minus, Plus } from "lucide-react";
 
-import { BRAND, Button, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Button, RangeLedger, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { TIME_MACHINE_END_YEAR } from "../data";
 
@@ -21,12 +21,11 @@ type Props = {
  */
 export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, onChange }) => {
   const { t } = useTranslation();
-  const { theme, colors, moduleTheme } = usePageTheme();
+  const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const accent = world.border.secondary;
   const baseBorderSecondary = colors.base.border.secondary;
-  const isLight = theme === "light";
   const sliderFill = world.background.secondary; // solid Bitcoin orange (#f7931a) in both modes
 
   const currentYear = new Date().getFullYear();
@@ -56,9 +55,9 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
 
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.1em",
     color: withOpacity(colors.base.text.secondary, 0.75),
   };
@@ -66,7 +65,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   const yearValueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.15rem" : "1.3rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: world.text.primary,
     letterSpacing: "0.02em",
     fontVariantNumeric: "tabular-nums",
@@ -80,23 +79,12 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     width: "100%",
   };
 
-  const sliderPct = ((targetYear - minYear) / (maxYear - minYear)) * 100;
-  const sliderTrackRest = isLight
-    ? colors.base.border.secondary
-    : withOpacity(colors.base.text.primary, 0.18);
-  const sliderStyle = {
-    flex: 1,
-    maxWidth: "18rem",
-    "--slider-track": `linear-gradient(to right, ${sliderFill} ${sliderPct}%, ${sliderTrackRest} ${sliderPct}%)`,
-    "--slider-thumb": sliderFill,
-  } as CSSProperties;
-
   // Connected segmented control (cf. SeedGenerator's 12/24 toggle), split into
-  // three sections: genesis · today · end of issuance.
+  // three sections: genesis · today · end of issuance. Sharp corners (radius 0).
   const segmentedWrapStyle: CSSProperties = {
     display: "inline-flex",
     border: `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,
-    borderRadius: "0.75rem",
+    borderRadius: 0,
     overflow: "hidden",
   };
 
@@ -106,8 +94,8 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     padding: isMobile ? "0.5rem 0.7rem" : "0.55rem 1rem",
     border: "none",
     borderLeft: first ? "none" : `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,
-    fontSize: isMobile ? "0.62rem" : "0.7rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     letterSpacing: "0.04em",
     whiteSpace: "nowrap",
     color: active ? colors.base.text.onAccent : withOpacity(colors.base.text.secondary, 0.85),
@@ -137,18 +125,18 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
           <Minus size={isMobile ? 12 : 14} strokeWidth={2.5} />
         </Button>
 
-        <input
-          type="range"
-          className="app-slider"
-          min={minYear}
-          max={maxYear}
-          step={1}
-          value={targetYear}
-          disabled={disabled}
-          onChange={(e) => onChange(Number(e.target.value))}
-          aria-label={t("halvingTimeMachine.dialLabel")}
-          style={sliderStyle}
-        />
+        <div style={{ flex: 1, maxWidth: "18rem" }}>
+          <RangeLedger
+            value={targetYear}
+            onChange={onChange}
+            min={minYear}
+            max={maxYear}
+            step={1}
+            disabled={disabled}
+            color={sliderFill}
+            ariaLabel={t("halvingTimeMachine.dialLabel")}
+          />
+        </div>
 
         <Button
           variant="primary"

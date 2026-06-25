@@ -37,15 +37,16 @@ export const BlockRow: FC<Props> = ({
     alignItems: "center",
     gap: isMobile ? "0.5rem" : "0.6rem",
     padding: isMobile ? "0.35rem 0.45rem" : "0.4rem 0.55rem",
-    borderRadius: "0.45rem",
+    borderRadius: 0,
     background: zebra ? withOpacity(world.background.secondary, 0.04) : "transparent",
     transition: "background 0.2s ease",
   };
 
-  const iconCircleStyle: CSSProperties = {
+  // Structural field marker — a square (radius 0), per the block-vs-coin rule.
+  const iconBadgeStyle: CSSProperties = {
     width: isMobile ? "1.5rem" : "1.65rem",
     height: isMobile ? "1.5rem" : "1.65rem",
-    borderRadius: "50%",
+    borderRadius: 0,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -57,8 +58,8 @@ export const BlockRow: FC<Props> = ({
 
   const labelStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.6rem" : "0.66rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: colors.base.text.primary,
     letterSpacing: "0.02em",
   };
@@ -80,7 +81,7 @@ export const BlockRow: FC<Props> = ({
 
   return (
     <div style={rowStyle}>
-      <div style={iconCircleStyle}>{icon}</div>
+      <div style={iconBadgeStyle}>{icon}</div>
       <div style={columnStyle}>
         <div style={headerStyle}>
           <span style={labelStyle}>{label}</span>

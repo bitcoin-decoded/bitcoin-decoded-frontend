@@ -101,13 +101,11 @@ export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComple
     alignItems: "flex-start",
     gap: "0.5rem",
     padding: "0.65rem 0.9rem",
-    borderRadius: "0.65rem",
+    borderRadius: 0,
     background: withOpacity(colors[moduleTheme].background.secondary, 0.08),
     border: `1px dashed ${withOpacity(colors[moduleTheme].border.secondary, 0.4)}`,
     color: colors[moduleTheme].text.primary,
-    textTransform: "none",
     letterSpacing: "0.01em",
-    fontWeight: 500,
     lineHeight: 1.4,
     textAlign: "left",
     whiteSpace: "pre-line",
@@ -166,7 +164,7 @@ export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComple
       </div>
 
       {showInvitation && (
-        <Caption tone="world" size="sm" as="p" style={invitationStyle}>
+        <Caption tone="world" variant="note" size="sm" as="p" style={invitationStyle}>
           <Sparkles size={14} strokeWidth={2} style={{ flexShrink: 0, marginTop: "0.15rem" }} />
           <span>{t("chain.invitation")}</span>
         </Caption>

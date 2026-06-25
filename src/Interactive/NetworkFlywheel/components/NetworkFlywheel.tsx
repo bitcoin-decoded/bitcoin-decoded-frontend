@@ -75,10 +75,10 @@ export const NetworkFlywheel: FC<Props> = ({ onComplete }) => {
   const isOn = level > 0;
   const taglineStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.7rem" : "0.72rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.5,
     padding: "0.6rem 0.85rem",
-    borderRadius: "0.6rem",
+    borderRadius: 0,
     textAlign: "center",
     color: isOn ? world.text.primary : colors.base.text.secondary,
     background: withOpacity(isOn ? world.border.secondary : colors.base.border.secondary, 0.06),
