@@ -29,7 +29,7 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
     flexDirection: "column",
     gap: "0.6rem",
     padding: "0.9rem 1rem",
-    borderRadius: "0.85rem",
+    borderRadius: 0,
     border: `1px solid ${isPlanA ? withOpacity(accent, 0.5) : withOpacity(neutral, 0.14)}`,
     background: isPlanA ? withOpacity(accent, 0.06) : withOpacity(neutral, 0.02),
     transition: "all 0.3s var(--ease-smooth)",
@@ -37,10 +37,11 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
 
   const headerStyle: CSSProperties = { display: "flex", alignItems: "center", gap: "0.65rem" };
 
+  // Structural icon badge — a square (radius 0), per the block-vs-coin rule.
   const iconChipStyle: CSSProperties = {
     width: "2rem",
     height: "2rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     flexShrink: 0,
     display: "flex",
     alignItems: "center",
@@ -54,9 +55,9 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
     flex: 1,
     minWidth: 0,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.82rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.04em",
     color: accent,
   };
@@ -68,14 +69,14 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
     flexShrink: 0,
   };
 
+  // The recommended star carries no glow (ledger surfaces stay flat).
   const starStyle: CSSProperties = {
     flexShrink: 0,
-    filter: `drop-shadow(0 0 6px ${withOpacity(accent, 0.55)})`,
   };
 
   const commentStyle: CSSProperties = {
     margin: 0,
-    fontSize: "0.86rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.5,
     color: colors.base.text.primary,
   };

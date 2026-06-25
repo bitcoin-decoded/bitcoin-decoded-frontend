@@ -56,7 +56,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
   };
 
   const promptStyle: CSSProperties = {
-    fontSize: isMobile ? "0.85rem" : "0.9rem",
+    fontSize: BRAND.fontSize.body,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     lineHeight: 1.5,
@@ -101,18 +101,17 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
     left: pctX(x),
     top: pctY(y),
     transform: "translate(-50%, -50%)",
-    fontSize: isMobile ? "0.5rem" : "0.55rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     padding: "0.12rem 0.42rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     whiteSpace: "nowrap",
     pointerEvents: "none",
     color: active ? accent : withOpacity(colors.base.text.secondary, 0.7),
     background: colors.base.background.primary,
     border: `1px solid ${withOpacity(accentBorder, active ? 0.6 : 0.22)}`,
-    boxShadow: active ? `0 2px 10px ${withOpacity(accent, 0.25)}` : "none",
     transition: "all 0.35s var(--ease-smooth)",
   });
 
@@ -122,20 +121,21 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
     flexDirection: "column",
     gap: "0.6rem",
     padding: isMobile ? "0.85rem 0.95rem" : "1rem 1.1rem",
-    borderRadius: "0.85rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(accentBorder, selected ? 0.4 : 0.18)}`,
     background: selected
-      ? `linear-gradient(160deg, ${withOpacity(accent, 0.08)}, ${withOpacity(accent, 0.01)})`
+      ? withOpacity(accent, 0.06)
       : withOpacity(colors.base.text.secondary, 0.03),
     transition: "border-color 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth)",
   };
 
   const detailHeader: CSSProperties = { display: "flex", alignItems: "center", gap: "0.6rem" };
 
+  // Structural icon badge — a square (radius 0), per the block-vs-coin rule.
   const detailIconBox: CSSProperties = {
     width: "2.1rem",
     height: "2.1rem",
-    borderRadius: "0.6rem",
+    borderRadius: 0,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -147,21 +147,21 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   const detailTitle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.82rem" : "0.9rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: accent,
   };
 
   const roleTag: CSSProperties = {
     ...mono,
-    fontSize: "0.56rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     padding: "0.14rem 0.45rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     color: accent,
     background: withOpacity(accent, 0.12),
     border: `1px solid ${withOpacity(accentBorder, 0.35)}`,
@@ -169,7 +169,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   const detailDesc: CSSProperties = {
     margin: 0,
-    fontSize: isMobile ? "0.82rem" : "0.88rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.6,
     color: colors.base.text.primary,
   };
@@ -182,7 +182,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
     height: "100%",
     flex: 1,
     color: withOpacity(colors.base.text.secondary, 0.75),
-    fontSize: isMobile ? "0.8rem" : "0.85rem",
+    fontSize: BRAND.fontSize.body,
     fontStyle: "italic",
     textAlign: "center",
   };

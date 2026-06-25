@@ -40,8 +40,8 @@ export const ActionButton: FC<Props> = ({
   const activeStyle: CSSProperties = {
     cursor: "pointer",
     color: variant === "primary" ? colors.basePrimaryText : palette,
-    background: `linear-gradient(135deg, ${withOpacity(palette, 0.12)}, transparent)`,
-    border: `1.5px solid ${withOpacity(palette, 0.55)}`,
+    background: withOpacity(palette, 0.1),
+    border: `1px solid ${withOpacity(palette, 0.55)}`,
     boxShadow: "none",
   };
 
@@ -61,9 +61,9 @@ export const ActionButton: FC<Props> = ({
         fontFamily: BRAND.fonts.mono,
         alignSelf: "flex-start",
         padding: isMobile ? "0.5rem 0.85rem" : "0.55rem 1rem",
-        borderRadius: "0.55rem",
-        fontSize: isMobile ? "0.7rem" : "0.74rem",
-        fontWeight: 600,
+        borderRadius: 0,
+        fontSize: BRAND.fontSize.body,
+        fontWeight: 500,
         letterSpacing: "0.01em",
         display: "inline-flex",
         alignItems: "center",

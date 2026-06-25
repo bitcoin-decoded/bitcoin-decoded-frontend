@@ -35,9 +35,9 @@ export const BitcoinNetworkMap: FC = () => {
 
   const titleStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.8rem" : "0.875rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: world.text.secondary,
     textAlign: "center",
@@ -89,15 +89,15 @@ export const BitcoinNetworkMap: FC = () => {
             alignItems: "center",
             justifyContent: "center",
             position: "relative",
-            background: `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.12)}, ${colors.base.background.primary})`,
-            border: `1.5px solid ${world.border.primary}`,
+            background: withOpacity(world.background.secondary, 0.12),
+            border: `1px solid ${world.border.primary}`,
             color: world.text.secondary,
           };
 
           const labelNodeStyle: CSSProperties = {
             fontFamily: BRAND.fonts.mono,
-            fontSize: isMobile ? "0.5rem" : "0.55rem",
-            fontWeight: 600,
+            fontSize: BRAND.fontSize.note,
+            fontWeight: 500,
             color: colors.base.text.secondary,
             letterSpacing: "0.05em",
           };

@@ -36,7 +36,7 @@ export const SignatureVerifier: FC = () => {
     alignItems: isMobile ? "flex-start" : "center",
     gap: isMobile ? "0.4rem" : "0.75rem",
     padding: "0.65rem 0.85rem",
-    borderRadius: "0.65rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.03),
     border: `1px solid ${withOpacity(world.border.secondary, 0.12)}`,
     transition: "border-color 0.3s var(--ease-smooth)",
@@ -49,9 +49,9 @@ export const SignatureVerifier: FC = () => {
   };
 
   const fieldLabel: CSSProperties = {
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.07em",
     color: colors.base.text.secondary,
     minWidth: isMobile ? "auto" : "5rem",
@@ -60,8 +60,8 @@ export const SignatureVerifier: FC = () => {
 
   const fieldValue = (isTampered: boolean): CSSProperties => ({
     flex: 1,
-    fontSize: isMobile ? "0.62rem" : "0.66rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: isTampered ? errorColor : world.text.primary,
     wordBreak: "break-all",
     transition: "color 0.3s var(--ease-smooth)",
@@ -73,11 +73,11 @@ export const SignatureVerifier: FC = () => {
     flexShrink: 0,
     cursor: "pointer",
     padding: "0.3rem 0.6rem",
-    borderRadius: "0.45rem",
-    fontSize: "0.6rem",
-    fontWeight: 700,
+    borderRadius: 0,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     letterSpacing: "0.05em",
-    textTransform: "uppercase",
+    fontVariant: "small-caps",
     border: `1px solid ${withOpacity(isTampered ? errorColor : world.border.secondary, isTampered ? 0.5 : 0.25)}`,
     background: isTampered ? withOpacity(errorColor, 0.1) : "transparent",
     color: isTampered ? errorColor : colors.base.text.secondary,
@@ -108,21 +108,21 @@ export const SignatureVerifier: FC = () => {
       {tampered.size > 0 && (
         <div
           style={{
-            fontSize: "0.58rem",
+            fontSize: BRAND.fontSize.note,
             color: withOpacity(colors.base.text.secondary, 0.5),
             display: "flex",
             alignItems: "center",
             gap: "0.35rem",
           }}
         >
-          <CheckCircle size={10} strokeWidth={2} />
+          <CheckCircle size={12} strokeWidth={2} />
           {t("sigVerifier.originalHint")}
           {FIELDS.filter((f) => tampered.has(f.key)).map((f) => (
             <span
               key={f.key}
               style={{
                 fontFamily: BRAND.fonts.mono,
-                fontSize: "0.54rem",
+                fontSize: BRAND.fontSize.note,
                 opacity: 0.6,
               }}
             >
@@ -137,7 +137,7 @@ export const SignatureVerifier: FC = () => {
         variant="primary"
         icon={<ShieldCheck size={14} strokeWidth={2} />}
         onClick={verify}
-        style={{ letterSpacing: "0.05em", textTransform: "uppercase" }}
+        style={{ letterSpacing: "0.05em" }}
       >
         {t("sigVerifier.verify")}
       </Button>

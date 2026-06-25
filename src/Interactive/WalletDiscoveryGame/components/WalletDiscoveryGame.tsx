@@ -51,16 +51,16 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const introStyle: CSSProperties = {
-    fontSize: "0.7rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.55,
     color: withOpacity(baseTextSecondary, 0.85),
     margin: 0,
   };
 
   const sectionLabelStyle: CSSProperties = {
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: withOpacity(baseTextSecondary, 0.55),
     marginBottom: "0.55rem",
@@ -71,10 +71,10 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
     width: "100%",
     maxWidth: isMobile ? "100%" : "16rem",
     padding: "0.5rem 0.7rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     fontSize: "1rem",
-    fontWeight: 600,
-    border: `1.5px solid ${withOpacity(accentColor, 0.4)}`,
+    fontWeight: 500,
+    border: `1px solid ${withOpacity(accentColor, 0.4)}`,
     background: withOpacity(baseBackgroundSecondary, 0.05),
     color: basePrimaryText,
     outline: "none",
@@ -227,13 +227,13 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
               title={t("walletGame.correctTitle")}
             >
               <p
-                style={{ fontSize: "0.7rem", lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
+                style={{ fontSize: BRAND.fontSize.body, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
               >
                 {t("walletGame.correctMain")}
               </p>
               <p
                 style={{
-                  fontSize: "0.66rem",
+                  fontSize: BRAND.fontSize.note,
                   lineHeight: 1.55,
                   color: withOpacity(baseTextSecondary, 0.85),
                   margin: "0.4rem 0 0 0",
@@ -251,7 +251,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
               title={t("walletGame.incorrectTitle")}
             >
               <p
-                style={{ fontSize: "0.7rem", lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
+                style={{ fontSize: BRAND.fontSize.body, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
               >
                 {t("walletGame.incorrectMain")}
               </p>
@@ -274,7 +274,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
       {/* Discreet pedagogical disclaimer */}
       <p
         style={{
-          fontSize: "0.55rem",
+          fontSize: BRAND.fontSize.note,
           fontStyle: "italic",
           color: withOpacity(baseTextSecondary, 0.55),
           margin: 0,

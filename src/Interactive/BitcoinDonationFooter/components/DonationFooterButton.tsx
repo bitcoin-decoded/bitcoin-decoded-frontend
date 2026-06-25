@@ -26,15 +26,14 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
     gap: "0.5rem",
     padding: "0.5rem 1rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.78rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.03em",
     color: accent,
-    background: hovered
-      ? `linear-gradient(135deg, ${withOpacity(accent, 0.16)}, ${withOpacity(accent, 0.04)})`
-      : "transparent",
+    background: hovered ? withOpacity(accent, 0.1) : "transparent",
     border: `1px solid ${withOpacity(accent, hovered ? 0.7 : 0.4)}`,
-    borderRadius: "2rem",
+    borderRadius: 0,
     cursor: "pointer",
     transition: "all 0.15s var(--ease-smooth)",
   };
@@ -47,7 +46,7 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Bitcoin size={15} strokeWidth={2} style={{ color: "#f7931a" }} />
+      <Bitcoin size={15} strokeWidth={2} style={{ color: BRAND.orange }} />
       {copy.footerCta}
     </button>
   );

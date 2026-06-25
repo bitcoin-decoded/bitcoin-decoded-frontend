@@ -44,10 +44,9 @@ export const UtxoCoin: FC<Props> = ({
     gap: "0.1rem",
     minWidth: "4.6rem",
     padding: "0.55rem 0.7rem 0.45rem",
-    borderRadius: "0.7rem",
-    border: `1.5px solid ${withOpacity(color, consumed ? 0.28 : 0.45)}`,
+    borderRadius: 0,
+    border: `1px solid ${withOpacity(color, consumed ? 0.28 : 0.45)}`,
     background: withOpacity(color, consumed ? 0.03 : 0.09),
-    boxShadow: created ? `0 0 12px ${withOpacity(successColor, 0.25)}` : "none",
     transition: "all 0.45s var(--ease-smooth)",
   };
 
@@ -67,17 +66,17 @@ export const UtxoCoin: FC<Props> = ({
   };
 
   const amountStyle: CSSProperties = {
-    fontSize: "0.85rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: consumed ? withOpacity(errorColor, 0.55) : color,
     textDecoration: consumed ? "line-through" : "none",
     transition: "all 0.45s var(--ease-smooth)",
   };
 
   const sublabelStyle: CSSProperties = {
-    fontSize: "0.56rem",
-    fontWeight: 600,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.04em",
     color: withOpacity(baseTextSecondary, 0.7),
   };
@@ -87,9 +86,9 @@ export const UtxoCoin: FC<Props> = ({
     alignItems: "center",
     gap: "0.2rem",
     marginTop: "0.2rem",
-    fontSize: "0.52rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: badgeColor,
   });

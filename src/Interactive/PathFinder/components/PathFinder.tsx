@@ -101,11 +101,12 @@ export const PathFinder: FC = () => {
     gap: "0.9rem",
   };
 
+  // Structural icon badge — a square (radius 0), per the block-vs-coin rule.
   const profileIconChipStyle: CSSProperties = {
     flexShrink: 0,
     width: isMobile ? "3rem" : "3.4rem",
     height: isMobile ? "3rem" : "3.4rem",
-    borderRadius: "0.9rem",
+    borderRadius: 0,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -123,9 +124,9 @@ export const PathFinder: FC = () => {
 
   const profileLeadStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.62rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: withOpacity(accent, 0.85),
   };
@@ -133,14 +134,14 @@ export const PathFinder: FC = () => {
   const profileNameStyle: CSSProperties = {
     margin: 0,
     fontSize: isMobile ? "1.25rem" : "1.5rem",
-    fontWeight: 700,
+    fontWeight: 500,
     lineHeight: 1.15,
     color: accent,
   };
 
   const verdictStyle: CSSProperties = {
     margin: 0,
-    fontSize: isMobile ? "0.95rem" : "1rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.6,
     fontWeight: 500,
     color: colors.base.text.primary,

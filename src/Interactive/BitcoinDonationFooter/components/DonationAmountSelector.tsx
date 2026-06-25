@@ -56,7 +56,7 @@ export const DonationAmountSelector: FC<Props> = ({
     margin: 0,
     fontFamily: BRAND.fonts.mono,
     fontSize: "1.05rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: colors.base.text.primary,
     textAlign: "center",
   };
@@ -64,7 +64,7 @@ export const DonationAmountSelector: FC<Props> = ({
   const leadStyle: CSSProperties = {
     margin: 0,
     textAlign: "center",
-    fontSize: isMobile ? "0.92rem" : "0.98rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.45,
     color: withOpacity(colors.base.text.secondary, 0.95),
   };
@@ -75,7 +75,7 @@ export const DonationAmountSelector: FC<Props> = ({
     gap: "0.1rem",
     alignItems: "center",
     padding: "0.6rem 0.5rem",
-    borderRadius: "0.7rem",
+    borderRadius: 0,
     cursor: "pointer",
     background: active ? withOpacity(accent, 0.14) : withOpacity(colors.base.text.secondary, 0.03),
     border: `1px solid ${withOpacity(accent, active ? 0.6 : 0.2)}`,
@@ -87,16 +87,16 @@ export const DonationAmountSelector: FC<Props> = ({
     boxSizing: "border-box",
     padding: "0.6rem 0.8rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.9rem",
+    fontSize: BRAND.fontSize.body,
     color: colors.base.text.primary,
     background: withOpacity(colors.base.text.secondary, 0.04),
     border: `1px solid ${withOpacity(accent, customStr !== "" ? 0.6 : 0.22)}`,
-    borderRadius: "0.7rem",
+    borderRadius: 0,
     outline: "none",
   };
 
   const mutedSmall: CSSProperties = {
-    fontSize: "0.72rem",
+    fontSize: BRAND.fontSize.note,
     color: withOpacity(colors.base.text.secondary, 0.85),
   };
 
@@ -110,8 +110,8 @@ export const DonationAmountSelector: FC<Props> = ({
     padding: "0.3rem 0.6rem",
     color: accent,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.82rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     letterSpacing: "0.02em",
     textDecoration: "underline",
     textDecorationColor: withOpacity(accent, 0.45),
@@ -148,14 +148,14 @@ export const DonationAmountSelector: FC<Props> = ({
               style={{
                 fontFamily: BRAND.fonts.mono,
                 fontSize: "1rem",
-                fontWeight: 700,
+                fontWeight: 500,
                 color: colors.base.text.primary,
               }}
             >
               {preset} €
             </span>
             {copy.amount.presetSubs[preset] && (
-              <span style={{ fontSize: "0.68rem", color: colors.base.text.secondary }}>
+              <span style={{ fontSize: BRAND.fontSize.note, color: colors.base.text.secondary }}>
                 {copy.amount.presetSubs[preset]}
               </span>
             )}
@@ -183,7 +183,7 @@ export const DonationAmountSelector: FC<Props> = ({
                 style={{
                   fontFamily: BRAND.fonts.mono,
                   fontSize: "0.95rem",
-                  fontWeight: 700,
+                  fontWeight: 500,
                   color: accent,
                 }}
               >
@@ -212,7 +212,7 @@ export const DonationAmountSelector: FC<Props> = ({
                     border: "none",
                     color: accent,
                     cursor: "pointer",
-                    fontSize: "0.7rem",
+                    fontSize: BRAND.fontSize.note,
                     padding: 0,
                   }}
                 >

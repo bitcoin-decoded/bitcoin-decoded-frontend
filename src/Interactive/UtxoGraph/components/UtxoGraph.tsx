@@ -47,9 +47,10 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
         : t("utxoGraph.captionIntro");
 
   const sectionLabel: CSSProperties = {
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontFamily: BRAND.fonts.mono,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: withOpacity(baseTextSecondary, 0.6),
   };
@@ -67,10 +68,10 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
     alignItems: "center",
     gap: "0.35rem",
     padding: "0.3rem 0.8rem",
-    borderRadius: "0.5rem",
-    fontSize: "0.66rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    borderRadius: 0,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.07em",
     color: ran ? accent : withOpacity(accent, 0.5),
     border: `1px solid ${withOpacity(accent, ran ? 0.4 : 0.18)}`,
@@ -93,9 +94,9 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
     alignItems: "center",
     gap: "0.35rem",
     padding: "0.25rem 0.6rem",
-    borderRadius: "999px",
-    fontSize: "0.74rem",
-    fontWeight: 700,
+    borderRadius: 0,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: accent,
     border: `1px solid ${withOpacity(accent, 0.35)}`,
     background: withOpacity(accent, 0.1),
@@ -104,7 +105,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
 
   const captionStyle: CSSProperties = {
     margin: 0,
-    fontSize: isMobile ? "0.78rem" : "0.82rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.55,
     fontStyle: "italic",
     textAlign: "center",
@@ -135,13 +136,13 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
             gap: "0.5rem",
             flexWrap: "wrap",
             padding: "0.5rem 0.7rem",
-            borderRadius: "0.6rem",
+            borderRadius: 0,
             border: `1px solid ${withOpacity(accent, 0.16)}`,
             background: withOpacity(accent, 0.03),
           }}
         >
           <span
-            style={{ ...mono, fontSize: "0.72rem", fontWeight: 600, color: world.text.primary }}
+            style={{ ...mono, fontSize: BRAND.fontSize.body, fontWeight: 500, color: world.text.primary }}
           >
             {t("utxoGraph.walletTitle")}
           </span>

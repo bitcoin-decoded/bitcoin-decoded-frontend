@@ -42,18 +42,18 @@ export const BitcoinNodeDemo: FC = () => {
     justifyContent: "center",
     position: "relative",
     background: active
-      ? `linear-gradient(135deg, ${withOpacity(world.background.secondary, 0.2)}, ${withOpacity(world.background.secondary, 0.05)})`
+      ? withOpacity(world.background.secondary, 0.15)
       : colors.base.background.tertiary,
-    border: `1.5px solid ${active ? world.border.secondary : colors.base.border.secondary}`,
+    border: `1px solid ${active ? world.border.secondary : colors.base.border.secondary}`,
     color: active ? world.text.secondary : colors.base.text.secondary,
     transition: TRANSITION,
   });
 
   const label: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.65rem" : "0.7rem",
-    fontWeight: 600,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: colors.base.text.secondary,
     textAlign: "center",
@@ -148,7 +148,7 @@ export const BitcoinNodeDemo: FC = () => {
             <span
               style={{
                 ...label,
-                fontWeight: 700,
+                fontWeight: 500,
                 color: world.text.secondary,
                 marginTop: "0.5rem",
               }}

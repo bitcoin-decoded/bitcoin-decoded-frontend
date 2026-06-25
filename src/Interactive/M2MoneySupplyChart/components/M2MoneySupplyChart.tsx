@@ -38,7 +38,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
 
   const sourceStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.65rem",
+    fontSize: BRAND.fontSize.note,
     color: chart.axisTickColor,
     textAlign: "center",
     marginTop: "0.5rem",
@@ -103,7 +103,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
               label={{
                 value: "2008",
                 position: "top",
-                fontSize: isMobile ? 9 : 11,
+                fontSize: 12,
                 fill: chart.axisTickColor,
                 fontFamily: chart.tickProp.fontFamily,
               }}
@@ -115,7 +115,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
               label={{
                 value: "Covid",
                 position: "top",
-                fontSize: isMobile ? 9 : 11,
+                fontSize: 12,
                 fill: chart.axisTickColor,
                 fontFamily: chart.tickProp.fontFamily,
               }}

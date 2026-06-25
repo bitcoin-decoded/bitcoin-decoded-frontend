@@ -73,7 +73,7 @@ export const FieldCard: FC<Props> = ({
     flexDirection: "column",
     gap: "0.55rem",
     padding: "0.85rem 0.9rem",
-    borderRadius: "0.7rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(accent, accentOpacityBorder)}`,
     background: withOpacity(accent, accentOpacityBg),
     minWidth: 0,
@@ -85,14 +85,15 @@ export const FieldCard: FC<Props> = ({
     display: "flex",
     alignItems: "center",
     gap: "0.35rem",
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.04em",
     color: accent,
     minWidth: 0,
   };
 
+  // Step-number badge stays a circle — it is a count marker (block-vs-coin rule).
   const numberBadgeStyle: CSSProperties = {
     display: "inline-flex",
     alignItems: "center",
@@ -101,8 +102,8 @@ export const FieldCard: FC<Props> = ({
     width: "1.05rem",
     height: "1.05rem",
     borderRadius: "50%",
-    fontSize: "0.6rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: accent,
     background: withOpacity(accent, 0.14),
     border: `1px solid ${withOpacity(accent, 0.4)}`,
@@ -111,10 +112,10 @@ export const FieldCard: FC<Props> = ({
   const readOnlyValueStyle: CSSProperties = {
     width: "100%",
     padding: "0.5rem 0.65rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.72rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: valueColor ?? colors.basePrimaryText,
     textAlign: "center",
     wordBreak: valueKind === "hex" ? "break-all" : "normal",
@@ -127,7 +128,7 @@ export const FieldCard: FC<Props> = ({
   };
 
   const hintStyle: CSSProperties = {
-    fontSize: "0.62rem",
+    fontSize: BRAND.fontSize.note,
     lineHeight: 1.5,
     color: withOpacity(colors.baseTextSecondary, 0.8),
     margin: 0,
@@ -137,9 +138,9 @@ export const FieldCard: FC<Props> = ({
   const valuePrefixStyle: CSSProperties = {
     display: "block",
     textAlign: "center",
-    fontSize: "0.55rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: withOpacity(colors.baseTextSecondary, 0.7),
   };
@@ -148,9 +149,9 @@ export const FieldCard: FC<Props> = ({
     display: "inline-flex",
     alignItems: "center",
     gap: "0.35rem",
-    fontSize: "0.58rem",
+    fontSize: BRAND.fontSize.note,
     color: withOpacity(colors.baseTextSecondary, 0.85),
-    fontWeight: 600,
+    fontWeight: 500,
     marginTop: "0.1rem",
   };
 

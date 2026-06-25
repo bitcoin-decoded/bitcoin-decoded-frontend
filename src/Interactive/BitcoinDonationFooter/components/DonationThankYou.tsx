@@ -26,14 +26,14 @@ export const DonationThankYou: FC<Props> = ({ onContinue }) => {
     margin: 0,
     fontFamily: BRAND.fonts.mono,
     fontSize: "1.1rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: colors.base.text.primary,
     textAlign: "center",
   };
 
   const bodyStyle: CSSProperties = {
     margin: 0,
-    fontSize: "0.9rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.65,
     color: colors.base.text.secondary,
     textAlign: "center",
