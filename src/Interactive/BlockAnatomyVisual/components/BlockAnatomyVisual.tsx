@@ -17,9 +17,9 @@ export const BlockAnatomyVisual: FC = () => {
   // "anatomy" reads as the very same block (#100826), just annotated.
   const titleStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.65rem" : "0.72rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: world.text.secondary,
     textAlign: "center",
@@ -29,13 +29,13 @@ export const BlockAnatomyVisual: FC = () => {
 
   const sectionLabel: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.55rem" : "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: world.text.primary,
     padding: "0.2rem 0.45rem",
-    borderRadius: "0.3rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.1),
     border: `1px solid ${withOpacity(world.border.secondary, 0.2)}`,
     alignSelf: "flex-start",
@@ -47,14 +47,16 @@ export const BlockAnatomyVisual: FC = () => {
     alignItems: "center",
     gap: isMobile ? "0.5rem" : "0.6rem",
     padding: isMobile ? "0.35rem 0.45rem" : "0.4rem 0.55rem",
-    borderRadius: "0.45rem",
+    borderRadius: 0,
     transition: "background 0.2s ease",
   };
 
-  const iconCircle: CSSProperties = {
+  // Structural icon badge — a square (radius 0), per the block-vs-coin rule:
+  // squares mark structure, circles are reserved for value being manipulated.
+  const iconBadge: CSSProperties = {
     width: isMobile ? "1.5rem" : "1.65rem",
     height: isMobile ? "1.5rem" : "1.65rem",
-    borderRadius: "50%",
+    borderRadius: 0,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -66,15 +68,15 @@ export const BlockAnatomyVisual: FC = () => {
 
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.6rem" : "0.66rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: colors.base.text.primary,
     letterSpacing: "0.02em",
   };
 
   const valueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.55rem" : "0.6rem",
+    fontSize: BRAND.fontSize.note,
     color: colors.base.text.secondary,
     wordBreak: "break-all",
   };
@@ -88,8 +90,8 @@ export const BlockAnatomyVisual: FC = () => {
           background: i % 2 === 0 ? withOpacity(world.background.secondary, 0.04) : "transparent",
         }}
       >
-        <div style={iconCircle}>
-          <field.icon size={isMobile ? 10 : 12} strokeWidth={1.8} />
+        <div style={iconBadge}>
+          <field.icon size={isMobile ? 12 : 14} strokeWidth={1.8} />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem", minWidth: 0 }}>
           <span style={labelStyle}>{fr ? field.labelFr : field.labelEn}</span>

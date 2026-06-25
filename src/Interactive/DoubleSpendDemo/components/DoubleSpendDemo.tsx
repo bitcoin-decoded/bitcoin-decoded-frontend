@@ -80,7 +80,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     alignItems: "center",
     gap: "0.25rem",
     padding: isMobile ? "0.6rem 0.5rem" : "0.75rem 1rem",
-    borderRadius: "0.75rem",
+    borderRadius: 0,
     background: withOpacity(accent, 0.06),
     border: `1px solid ${withOpacity(accent, 0.25)}`,
     width: "100%",
@@ -88,8 +88,8 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
 
   const partyLabel: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.7rem" : "0.78rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: colors.base.text.primary,
   };
 
@@ -99,24 +99,24 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     flexDirection: "column",
     alignItems: "center",
     gap: "0.15rem",
-    fontSize: "0.62rem",
+    fontSize: BRAND.fontSize.note,
     lineHeight: 1.35,
     color: accent,
     textAlign: "center",
   });
 
   const txTitle: CSSProperties = {
-    fontWeight: 700,
+    fontWeight: 500,
     letterSpacing: "0.04em",
-    textTransform: "uppercase",
-    fontSize: "0.6rem",
+    fontVariant: "small-caps",
+    fontSize: BRAND.fontSize.note,
   };
 
   const txOrigin: CSSProperties = {
     color: colors.base.text.secondary,
-    fontSize: "0.55rem",
+    fontSize: BRAND.fontSize.note,
     letterSpacing: "0.04em",
-    textTransform: "uppercase",
+    fontVariant: "small-caps",
     opacity: 0.85,
   };
 
@@ -126,10 +126,10 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     alignItems: "center",
     justifyContent: "center",
     gap: "0.4rem",
-    fontSize: "0.7rem",
+    fontSize: BRAND.fontSize.note,
     color: colors.base.text.secondary,
     padding: "0.5rem 0.75rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.06),
     border: `1px dashed ${withOpacity(world.border.secondary, 0.3)}`,
     textAlign: "center",
@@ -147,7 +147,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     alignItems: "center",
     gap: "0.35rem",
     padding: "0.65rem 0.4rem",
-    borderRadius: "0.6rem",
+    borderRadius: 0,
     background: withOpacity(accent, 0.04),
     border: `1px solid ${withOpacity(accent, 0.22)}`,
     transition: "all 0.4s var(--ease-smooth)",
@@ -194,7 +194,12 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
       <div key={city} style={nodeCard(accent)}>
         <Monitor size={isMobile ? 18 : 20} strokeWidth={1.5} color={accent} />
         <span
-          style={{ ...mono, fontSize: "0.6rem", fontWeight: 600, color: colors.base.text.primary }}
+          style={{
+            ...mono,
+            fontSize: BRAND.fontSize.note,
+            fontWeight: 500,
+            color: colors.base.text.primary,
+          }}
         >
           {city}
         </span>

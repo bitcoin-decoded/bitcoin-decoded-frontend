@@ -64,8 +64,11 @@ export const Badge: FC<Props> = ({
   // than the text color), every other tone uses the accent itself.
   const borderAccent = tone === "neutral" ? colors.base.border.secondary : accent;
 
+  // `xs` and `sm` differ only in padding now — both sit at the 12px legibility
+  // floor (the user's hard rule: no component text below 12px). `xs` stays the
+  // compact-padding variant, not a smaller-type one.
   const padding = size === "xs" ? "0.2rem 0.5rem" : "0.3rem 0.55rem";
-  const fontSize = size === "xs" ? "0.55rem" : "0.6rem";
+  const fontSize = BRAND.fontSize.note;
 
   const finalStyle: CSSProperties = {
     display: "inline-flex",

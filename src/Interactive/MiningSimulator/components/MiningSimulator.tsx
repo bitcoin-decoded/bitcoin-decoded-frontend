@@ -35,10 +35,10 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
 
   const targetBox: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.7rem" : "0.75rem",
+    fontSize: BRAND.fontSize.body,
     color: colors.base.text.primary,
     padding: "0.6rem 0.85rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.06),
     border: `1px solid ${withOpacity(world.border.secondary, 0.2)}`,
     display: "flex",
@@ -48,7 +48,7 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
 
   const targetPrefix: CSSProperties = {
     ...mono,
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: isMobile ? "0.85rem" : "0.95rem",
     color: world.text.secondary,
     letterSpacing: "0.1em",
@@ -56,10 +56,10 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
 
   const headerBox: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.65rem" : "0.7rem",
+    fontSize: BRAND.fontSize.note,
     color: colors.base.text.secondary,
     padding: "0.75rem 1rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.04),
     border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
     display: "flex",
@@ -75,7 +75,7 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
   };
 
   const fieldValue: CSSProperties = { color: colors.base.text.primary };
-  const nonceVal: CSSProperties = { color: world.text.secondary, fontWeight: 700 };
+  const nonceVal: CSSProperties = { color: world.text.secondary, fontWeight: 500 };
 
   const logBox: CSSProperties = {
     display: "flex",
@@ -84,15 +84,15 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
     maxHeight: "14rem",
     overflowY: "auto",
     padding: "0.5rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     background: colors.base.background.secondary,
   };
 
   const logHeader: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.55rem" : "0.6rem",
-    fontWeight: 600,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.04em",
     color: colors.base.text.secondary,
     opacity: 0.5,
@@ -106,12 +106,12 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
 
   const row = (valid: boolean): CSSProperties => ({
     ...mono,
-    fontSize: isMobile ? "0.6rem" : "0.65rem",
+    fontSize: BRAND.fontSize.note,
     display: "flex",
     alignItems: "center",
     gap: "0.5rem",
     padding: "0.3rem 0.5rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     background: valid ? withOpacity(colors.semantic.success.text, 0.08) : "transparent",
     color: valid ? colors.semantic.success.text : colors.base.text.secondary,
   });

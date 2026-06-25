@@ -24,8 +24,8 @@ export const TxRow: FC<{
     alignItems: "center",
     gap: isMobile ? "0.35rem" : "0.5rem",
     padding: isMobile ? "0.4rem 0.55rem" : "0.45rem 0.65rem",
-    borderRadius: "0.5rem",
-    fontSize: isMobile ? "0.58rem" : "0.63rem",
+    borderRadius: 0,
+    fontSize: BRAND.fontSize.note,
     background: withOpacity(borderColor, flagged ? 0.08 : 0.03),
     border: `1px solid ${withOpacity(borderColor, flagged ? 0.3 : 0.1)}`,
     transition: "all 0.4s var(--ease-smooth)",
@@ -33,9 +33,9 @@ export const TxRow: FC<{
     opacity: isRejected ? 0.6 : 1,
   };
 
-  const nameStyle: CSSProperties = { fontWeight: 600, color: colors.base.text.primary };
+  const nameStyle: CSSProperties = { fontWeight: 500, color: colors.base.text.primary };
   const amountStyle: CSSProperties = {
-    fontWeight: 700,
+    fontWeight: 500,
     color: world.text.primary,
     marginLeft: "auto",
   };
@@ -51,7 +51,7 @@ export const TxRow: FC<{
         />
       )}
       <span style={nameStyle}>{tx.from}</span>
-      <ArrowRight size={9} strokeWidth={2} style={{ opacity: 0.4, flexShrink: 0 }} />
+      <ArrowRight size={12} strokeWidth={2} style={{ opacity: 0.4, flexShrink: 0 }} />
       <span style={nameStyle}>{tx.to}</span>
       <span style={amountStyle}>{tx.amount}</span>
     </div>

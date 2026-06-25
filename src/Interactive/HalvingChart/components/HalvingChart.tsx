@@ -32,7 +32,7 @@ export const HalvingChart: FC = () => {
 
   const captionStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.65rem",
+    fontSize: BRAND.fontSize.note,
     color: chart.axisTickColor,
     textAlign: "center",
     marginTop: "0.5rem",
@@ -107,7 +107,7 @@ export const HalvingChart: FC = () => {
               label={{
                 value: t("halvingChart.today"),
                 position: "top",
-                fontSize: isMobile ? 9 : 11,
+                fontSize: 12,
                 fill: chart.axisTickColor,
                 fontFamily: chart.tickProp.fontFamily,
               }}

@@ -59,6 +59,8 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
 
   // ── Block panel (highlights on reward) ────────────────────────────────────
 
+  // Reward state is signalled by the border strengthening to success green —
+  // no glow/shadow and no gradient fill (ledger surfaces stay flat + sharp).
   const blockPanel: CSSProperties = {
     ...mono,
     flex: 1,
@@ -66,10 +68,9 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     flexDirection: "column",
     gap: "0.4rem",
     padding: "0.85rem",
-    borderRadius: "0.75rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.04),
     border: `1px solid ${withOpacity(rewarded ? successColor : world.border.secondary, rewarded ? 0.45 : 0.15)}`,
-    boxShadow: rewarded ? `0 0 18px ${withOpacity(successColor, 0.22)}` : "none",
     transition: "all 0.5s var(--ease-smooth)",
     minWidth: 0,
   };
@@ -83,12 +84,9 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     flexDirection: "column",
     gap: "0.4rem",
     padding: "0.85rem",
-    borderRadius: "0.75rem",
-    background: rewarded
-      ? `linear-gradient(170deg, ${withOpacity(successColor, 0.08)}, ${colors.base.background.primary})`
-      : withOpacity(successColor, 0.025),
+    borderRadius: 0,
+    background: withOpacity(successColor, rewarded ? 0.08 : 0.025),
     border: `1px solid ${withOpacity(successColor, rewarded ? 0.42 : 0.2)}`,
-    boxShadow: rewarded ? `0 0 22px ${withOpacity(successColor, 0.22)}` : "none",
     transition: "all 0.5s var(--ease-smooth)",
     minWidth: 0,
     position: "relative",
@@ -97,7 +95,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
 
   const subtitle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.58rem" : "0.62rem",
+    fontSize: BRAND.fontSize.note,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     marginBottom: "0.15rem",
@@ -105,7 +103,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
 
   const headerField: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.56rem" : "0.6rem",
+    fontSize: BRAND.fontSize.note,
     display: "flex",
     gap: "0.35rem",
   };
@@ -129,8 +127,8 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     justifyContent: "space-between",
     gap: isMobile ? "0.4rem" : "0.6rem",
     padding: isMobile ? "0.4rem 0.55rem" : "0.45rem 0.7rem",
-    borderRadius: "0.5rem",
-    fontSize: isMobile ? "0.58rem" : "0.63rem",
+    borderRadius: 0,
+    fontSize: BRAND.fontSize.note,
     background: withOpacity(world.border.secondary, 0.03),
     border: `1px solid ${withOpacity(world.border.secondary, 0.1)}`,
   };
@@ -147,26 +145,27 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     gap: "0.05rem",
     flexShrink: 0,
   };
-  const nameStyle: CSSProperties = { fontWeight: 600, color: colors.base.text.primary };
-  const amountStyle: CSSProperties = { fontWeight: 700, color: world.text.primary };
+  const nameStyle: CSSProperties = { fontWeight: 500, color: colors.base.text.primary };
+  const amountStyle: CSSProperties = { fontWeight: 500, color: world.text.primary };
   const feeStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     gap: "0.2rem",
-    fontSize: isMobile ? "0.52rem" : "0.56rem",
+    fontSize: BRAND.fontSize.note,
     color: colors.base.text.secondary,
     opacity: 0.78,
   };
 
+  // Total line is set apart by color (mono is single-weight — no faux-bold).
   const rewardLine = (emphasize = false): CSSProperties => ({
     ...mono,
     display: "flex",
     alignItems: "center",
     gap: "0.5rem",
-    fontSize: isMobile ? "0.62rem" : "0.68rem",
+    fontSize: BRAND.fontSize.note,
     padding: "0.3rem 0",
     color: emphasize ? world.text.primary : colors.base.text.primary,
-    fontWeight: emphasize ? 700 : 500,
+    fontWeight: 500,
   });
   const rewardLabel: CSSProperties = {
     display: "flex",
@@ -185,7 +184,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     alignItems: "center",
     gap: "0.55rem",
     padding: "0.65rem 0.8rem",
-    borderRadius: "0.6rem",
+    borderRadius: 0,
     background: rewarded
       ? withOpacity(successColor, 0.08)
       : withOpacity(world.border.secondary, 0.05),
@@ -193,15 +192,15 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     transition: "all 0.5s var(--ease-smooth)",
   };
   const walletLabel: CSSProperties = {
-    fontSize: isMobile ? "0.56rem" : "0.6rem",
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: colors.base.text.secondary,
   };
   const walletAmount: CSSProperties = {
     ...mono,
     fontSize: isMobile ? "0.9rem" : "1rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: rewarded ? successColor : world.text.primary,
     marginLeft: "auto",
     transition: "color 0.5s var(--ease-smooth)",
@@ -209,11 +208,11 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
 
   const rewardNoteStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.59rem" : "0.62rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     lineHeight: 1.65,
     padding: "0.55rem 0.7rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     background: withOpacity(successColor, 0.06),
     border: `1px solid ${withOpacity(successColor, 0.18)}`,
     color: successColor,
@@ -242,7 +241,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
                   alignItems: "center",
                   gap: "0.25rem",
                   color: successColor,
-                  fontSize: isMobile ? "0.55rem" : "0.6rem",
+                  fontSize: BRAND.fontSize.note,
                 }}
               >
                 <Lock size={12} strokeWidth={2} />
@@ -276,13 +275,13 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
               <div key={tx.id} style={txRow}>
                 <div style={txParties}>
                   <span style={nameStyle}>{tx.from}</span>
-                  <ArrowRight size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
+                  <ArrowRight size={12} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                   <span style={nameStyle}>{tx.to}</span>
                 </div>
                 <div style={txAmounts}>
                   <span style={amountStyle}>{fmtBTC(tx.amount)}</span>
                   <span style={feeStyle} title={t("miningReward.fees")}>
-                    <Receipt size={9} strokeWidth={2} style={{ opacity: 0.7 }} />
+                    <Receipt size={12} strokeWidth={2} style={{ opacity: 0.7 }} />
                     {fmtBTC(tx.fee)}
                   </span>
                 </div>
@@ -323,7 +322,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
           <div style={divider} />
 
           <div style={rewardLine(true)}>
-            <span style={{ ...rewardLabel, color: world.text.primary, fontWeight: 700 }}>
+            <span style={{ ...rewardLabel, color: world.text.primary, fontWeight: 500 }}>
               {t("miningReward.total")}
             </span>
             <span style={rewardValue}>{fmtBTC(totalReward)}</span>
@@ -414,7 +413,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
               {fmtBTC(totalFees)} {t("miningReward.rewardNoteFees")} + {fmtBTC(subsidy)}{" "}
               {t("miningReward.rewardNoteSubsidy")}
               <br />
-              <span style={{ opacity: 0.65, fontSize: "0.54rem" }}>
+              <span style={{ opacity: 0.65, fontSize: BRAND.fontSize.note }}>
                 ({t("miningReward.rewardNoteNewBitcoin")})
               </span>
             </div>

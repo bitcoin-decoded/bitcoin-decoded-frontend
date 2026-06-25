@@ -33,7 +33,7 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
     justifyContent: "space-between",
     gap: isMobile ? "0.5rem" : "0.75rem",
     padding: "0.85rem 1rem",
-    borderRadius: "0.75rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.04),
     border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
   };
@@ -52,16 +52,16 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
   const minerNumber: CSSProperties = {
     ...mono,
     fontSize: isMobile ? "1.2rem" : "1.5rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: world.text.primary,
     letterSpacing: "0.03em",
   };
 
   const minerLabel: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.55rem" : "0.6rem",
+    fontSize: BRAND.fontSize.note,
     color: colors.base.text.secondary,
-    textTransform: "uppercase",
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
   };
 
@@ -78,7 +78,7 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
     flexDirection: "column",
     gap: "0.35rem",
     padding: "0.75rem 0.9rem",
-    borderRadius: "0.65rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.04),
     border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
     minWidth: 0,
@@ -87,7 +87,7 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
   const metricValue: CSSProperties = {
     ...mono,
     fontSize: isMobile ? "0.95rem" : "1.05rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: world.text.primary,
     letterSpacing: "0.05em",
     transition: "all 0.3s var(--ease-smooth)",

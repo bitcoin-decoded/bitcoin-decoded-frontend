@@ -38,7 +38,7 @@ export const TimeScreen: FC<Props> = ({
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const isLight = theme === "light";
-  const machine = getMachineColors(isLight);
+  const machine = getMachineColors();
 
   // The "screen" adapts to the theme: a deep glowing CRT in dark mode, a light
   // panel in light mode - never a black box on a white page. Text + accents use
@@ -46,19 +46,19 @@ export const TimeScreen: FC<Props> = ({
   const glow = world.text.secondary; // amber readout + accents
   const screenInk = world.text.primary; // reward value - warm/amber, readable in both modes (never plain black)
   const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85); // labels / subline / prompt
-  const screenBg = isLight
-    ? `linear-gradient(180deg, ${world.background.primary}, ${colors.base.background.primary})`
-    : machine.screenBgDark;
+  // Flat instrument panel — a faint amber tint in light mode, a solid dark
+  // screen in dark mode. No gradient, no glow, no scanlines (the CRT chrome was
+  // a gimmick the ledger refonte removes); the amber mono figures carry it.
+  const screenBg = isLight ? withOpacity(glow, 0.08) : machine.screenBgDark;
   const localizeDecimal = (s: string) => (fr ? s.replace(".", ",") : s);
 
   const screenStyle: CSSProperties = {
     position: "relative",
     overflow: "hidden",
-    borderRadius: "0.85rem",
+    borderRadius: 0,
     padding: isMobile ? "1.25rem 1rem" : "1.6rem 1.25rem",
     background: screenBg,
     border: `1px solid ${withOpacity(glow, 0.4)}`,
-    boxShadow: `inset 0 0 30px ${withOpacity(glow, 0.12)}, 0 0 0 1px ${withOpacity(glow, 0.05)}`,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -66,17 +66,6 @@ export const TimeScreen: FC<Props> = ({
     gap: isMobile ? "0.7rem" : "0.85rem",
     textAlign: "center",
     minHeight: isMobile ? "10.5rem" : "11.5rem",
-  };
-
-  const scanlineStyle: CSSProperties = {
-    position: "absolute",
-    inset: 0,
-    pointerEvents: "none",
-    backgroundImage: `repeating-linear-gradient(0deg, ${withOpacity(
-      machine.scanline,
-      0.25,
-    )} 0px, ${withOpacity(machine.scanline, 0.25)} 1px, transparent 1px, transparent 3px)`,
-    opacity: isLight ? 0.25 : 0.5,
   };
 
   const groupStyle: CSSProperties = {
@@ -88,9 +77,9 @@ export const TimeScreen: FC<Props> = ({
 
   const eyebrowStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.52rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.25em",
     color: withOpacity(glow, 0.65),
   };
@@ -98,10 +87,9 @@ export const TimeScreen: FC<Props> = ({
   const yearStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.7rem" : "2rem",
-    fontWeight: 700,
+    fontWeight: 500,
     lineHeight: 1,
     color: glow,
-    textShadow: `0 0 12px ${withOpacity(glow, 0.6)}, 0 0 2px ${withOpacity(glow, 0.9)}`,
     fontVariantNumeric: "tabular-nums",
   };
 
@@ -113,9 +101,9 @@ export const TimeScreen: FC<Props> = ({
 
   const rewardLabelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.58rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.12em",
     color: withOpacity(glow, 0.8),
   };
@@ -123,24 +111,23 @@ export const TimeScreen: FC<Props> = ({
   const rewardValueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "1.4rem" : "1.7rem",
-    fontWeight: 700,
+    fontWeight: 500,
     lineHeight: 1.1,
     color: screenInk,
-    textShadow: `0 0 10px ${withOpacity(glow, 0.3)}`,
   };
 
   const sublineStyle: CSSProperties = {
     margin: 0,
     marginTop: "0.5rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.6rem",
+    fontSize: BRAND.fontSize.note,
     lineHeight: 1.5,
     color: screenInkMuted,
   };
 
   const promptStyle: CSSProperties = {
     margin: 0,
-    fontSize: "0.7rem",
+    fontSize: BRAND.fontSize.note,
     fontStyle: "italic",
     color: screenInkMuted,
     maxWidth: "18rem",
@@ -149,8 +136,6 @@ export const TimeScreen: FC<Props> = ({
 
   return (
     <div className={phase === "traveling" ? "htm-screen--traveling" : undefined} style={screenStyle}>
-      <div style={scanlineStyle} />
-
       {phase === "traveling" && (
         <div
           className="htm-flux"

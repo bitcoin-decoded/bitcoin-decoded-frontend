@@ -4,6 +4,7 @@ import { CircleCheck, Hash, RotateCcw } from "lucide-react";
 
 import { BRAND, Button,
   Caption,
+  FeedbackPanel,
   SurfaceCard,
   useBreakpoint,
   usePageTheme,
@@ -29,10 +30,10 @@ export const HashDemo: FC<Props> = ({ onComplete }) => {
 
   const inputStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.8rem" : "0.85rem",
+    fontSize: BRAND.fontSize.body,
     padding: isMobile ? "0.7rem 1rem" : "0.75rem 1.25rem",
-    borderRadius: "0.75rem",
-    border: `1.5px solid ${hash ? world.border.secondary : colors.base.border.secondary}`,
+    borderRadius: 0,
+    border: `1px solid ${hash ? world.border.secondary : colors.base.border.secondary}`,
     background: colors.base.background.secondary,
     color: disabled ? colors.base.text.secondary : colors.base.text.primary,
     outline: "none",
@@ -44,28 +45,15 @@ export const HashDemo: FC<Props> = ({ onComplete }) => {
 
   const outputBox: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.62rem" : "0.7rem",
+    fontSize: BRAND.fontSize.note,
     lineHeight: 1.6,
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.25rem",
-    borderRadius: "0.75rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.06),
     border: `1px solid ${withOpacity(world.border.secondary, 0.3)}`,
     color: world.text.secondary,
     wordBreak: "break-all",
     textAlign: "left",
-  };
-
-  const hintStyle: CSSProperties = {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: "0.5rem",
-    fontSize: isMobile ? "0.72rem" : "0.78rem",
-    lineHeight: 1.5,
-    color: colors.base.text.primary,
-    padding: "0.75rem 1rem",
-    borderRadius: "0.75rem",
-    background: withOpacity(colors.semantic.success.text, 0.06),
-    border: `1px solid ${withOpacity(colors.semantic.success.text, 0.15)}`,
   };
 
   return (
@@ -107,19 +95,14 @@ export const HashDemo: FC<Props> = ({ onComplete }) => {
       )}
 
       {hasHashed && hash && (
-        <div style={hintStyle}>
-          <CircleCheck
-            size={18}
-            strokeWidth={2}
-            color={colors.semantic.success.text}
-            style={{ flexShrink: 0, marginTop: "0.1rem" }}
-          />
-          <span>
-            {fr
-              ? "En pratique, il est impossible de retrouver le texte d'origine à partir de son hash. Chaque empreinte est déterministe, de taille fixe (64 caractères hexadécimaux pour SHA-256) et conçue pour que deux entrées différentes produisent quasiment jamais la même empreinte."
-              : "In practice, there's no way to recover the original text from its hash. Each fingerprint is deterministic, fixed in size (64 hexadecimal characters for SHA-256), and built so that two different inputs are vanishingly unlikely to land on the same fingerprint."}
-          </span>
-        </div>
+        <FeedbackPanel
+          tone="success"
+          icon={<CircleCheck size={18} strokeWidth={2} color={colors.semantic.success.text} />}
+        >
+          {fr
+            ? "En pratique, il est impossible de retrouver le texte d'origine à partir de son hash. Chaque empreinte est déterministe, de taille fixe (64 caractères hexadécimaux pour SHA-256) et conçue pour que deux entrées différentes produisent quasiment jamais la même empreinte."
+            : "In practice, there's no way to recover the original text from its hash. Each fingerprint is deterministic, fixed in size (64 hexadecimal characters for SHA-256), and built so that two different inputs are vanishingly unlikely to land on the same fingerprint."}
+        </FeedbackPanel>
       )}
     </SurfaceCard>
   );

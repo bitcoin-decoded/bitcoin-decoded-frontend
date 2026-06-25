@@ -48,7 +48,7 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
     flexDirection: "column",
     gap: "0.4rem",
     padding: "0.85rem",
-    borderRadius: "0.75rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.04),
     border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
     minWidth: 0,
@@ -56,7 +56,7 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
 
   const subtitle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.58rem" : "0.62rem",
+    fontSize: BRAND.fontSize.note,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     marginBottom: "0.15rem",
@@ -64,7 +64,7 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
 
   const headerField: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.56rem" : "0.6rem",
+    fontSize: BRAND.fontSize.note,
     display: "flex",
     gap: "0.35rem",
   };
@@ -105,7 +105,7 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
             {visibleMempool.length === 0 ? (
               <span
                 style={{
-                  fontSize: isMobile ? "0.58rem" : "0.63rem",
+                  fontSize: BRAND.fontSize.note,
                   opacity: 0.5,
                   fontStyle: "italic",
                 }}

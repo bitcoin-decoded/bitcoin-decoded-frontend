@@ -25,9 +25,9 @@ export const ChainArrow: FC<Props> = ({ isBroken = false, caption }) => {
 
   const captionStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color,
   };

@@ -58,9 +58,9 @@ export const BlockCard: FC<Props> = ({
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.65rem" : "0.72rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: world.text.secondary,
     textAlign: "center",
@@ -74,13 +74,13 @@ export const BlockCard: FC<Props> = ({
 
   const sectionLabel: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.55rem" : "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: world.text.primary,
     padding: "0.2rem 0.45rem",
-    borderRadius: "0.3rem",
+    borderRadius: 0,
     background: withOpacity(world.background.secondary, 0.1),
     border: `1px solid ${withOpacity(world.border.secondary, 0.2)}`,
     alignSelf: "flex-start",
@@ -89,18 +89,20 @@ export const BlockCard: FC<Props> = ({
 
   const valueStyle: CSSProperties = {
     ...mono,
-    fontSize: isMobile ? "0.55rem" : "0.6rem",
+    fontSize: BRAND.fontSize.note,
     color: colors.base.text.secondary,
     wordBreak: "break-all",
   };
 
-  const accentValueStyle = (accent: string, strong = false): CSSProperties => ({
+  // Cutive Mono ships a single weight — keep everything at 500 (heavier
+  // synthesizes a crude faux-bold). Emphasis comes from color, not weight.
+  const accentValueStyle = (accent: string): CSSProperties => ({
     ...valueStyle,
     color: accent,
-    fontWeight: strong ? 700 : 600,
+    fontWeight: 500,
   });
 
-  const iconSize = isMobile ? 10 : 12;
+  const iconSize = isMobile ? 12 : 14;
 
   const stagger = (i: number): CSSProperties =>
     revealStage === "revealing" ? { animationDelay: `${i * 0.16}s` } : {};
@@ -117,13 +119,13 @@ export const BlockCard: FC<Props> = ({
     ) : highlightChainLink && !isFirstBlock ? (
       <span className="chain-hash-focus" style={{ alignSelf: "flex-start" }}>
         <HighlightText highLightColorHex={highlightHex}>
-          <span style={accentValueStyle(prevHashAccent, true)}>
+          <span style={accentValueStyle(prevHashAccent)}>
             {truncateHash(block.prevHash)}
           </span>
         </HighlightText>
       </span>
     ) : (
-      <span style={accentValueStyle(prevHashAccent, true)}>{truncateHash(block.prevHash)}</span>
+      <span style={accentValueStyle(prevHashAccent)}>{truncateHash(block.prevHash)}</span>
     );
 
   const merkleContent = block.isEdited ? (
@@ -133,7 +135,7 @@ export const BlockCard: FC<Props> = ({
       accent={merkleAccent}
     />
   ) : (
-    <span style={accentValueStyle(merkleAccent, false)}>{truncateHash(block.merkleRoot)}</span>
+    <span style={accentValueStyle(merkleAccent)}>{truncateHash(block.merkleRoot)}</span>
   );
 
   return (
@@ -142,7 +144,7 @@ export const BlockCard: FC<Props> = ({
       glowColor={isOrphaned || block.isEdited ? colors.semantic.error.border : undefined}
       style={{
         padding: isMobile ? "0.8rem" : "0.95rem",
-        borderRadius: "1rem",
+        borderRadius: 0,
         width: "100%",
         transition: "all 0.3s var(--ease-smooth)",
       }}

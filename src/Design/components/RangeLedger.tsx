@@ -41,8 +41,8 @@ type Props = {
 };
 
 /**
- * The ledger-system slider — replaces the Material-style sliders that ship
- * with default range inputs and the existing `.app-slider` styling. A
+ * The ledger-system slider — the single slider primitive, replacing the
+ * Material-style native range inputs used across the sims. A
  * hairline navy/cream track with regularly-marked ticks, a gold circle
  * (cercle-coin) thumb, and a gold trail filling from `min` to the current
  * value. Per the block-vs-coin dichotomy (rule 9), the thumb is a CIRCLE
@@ -89,7 +89,7 @@ export const RangeLedger: FC<Props> = ({
     justifyContent: "space-between",
     alignItems: "baseline",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.75rem",
+    fontSize: BRAND.fontSize.note,
     letterSpacing: "0.05em",
   };
 
@@ -214,7 +214,7 @@ export const RangeLedger: FC<Props> = ({
             position: "relative",
             height: "1rem",
             fontFamily: BRAND.fonts.mono,
-            fontSize: "0.625rem",
+            fontSize: BRAND.fontSize.note,
             color: colors.base.text.secondary,
             letterSpacing: "0.04em",
           }}
