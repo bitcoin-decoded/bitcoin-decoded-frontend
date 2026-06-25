@@ -37,9 +37,9 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const stepLabelStyle: CSSProperties = {
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: withOpacity(baseTextSecondary, 0.7),
     marginBottom: "0.4rem",
@@ -50,8 +50,8 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
     cursor: "pointer",
     padding: isMobile ? "0.6rem 1rem" : "0.7rem 1.2rem",
     border: "none",
-    fontSize: isMobile ? "0.72rem" : "0.78rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     letterSpacing: "0.04em",
     color: active ? themeColors.base.text.onAccent : withOpacity(baseTextSecondary, 0.85),
     background: active ? accentColor : "transparent",
@@ -59,9 +59,9 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
   });
 
   const sectionLabelStyle: CSSProperties = {
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: withOpacity(baseTextSecondary, 0.6),
     marginBottom: "0.5rem",
@@ -72,7 +72,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
     flexDirection: "column",
     gap: "0.15rem",
     padding: "0.45rem 0.55rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(accentColor, revealed ? 0.3 : 0.12)}`,
     background: withOpacity(accentColor, revealed ? 0.06 : 0.02),
     minWidth: 0,
@@ -83,27 +83,27 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
   });
 
   const wordIndexStyle: CSSProperties = {
-    fontSize: "0.5rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: withOpacity(baseTextSecondary, 0.55),
     letterSpacing: "0.04em",
   };
 
   const wordTextStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.74rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: basePrimaryText,
     wordBreak: "break-word",
   };
 
   const binaryBlockStyle = (color: string): CSSProperties => ({
     padding: "0.55rem 0.7rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     background: withOpacity(baseBackgroundSecondary, 0.06),
     border: `1px solid ${withOpacity(color, 0.25)}`,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.6rem",
+    fontSize: BRAND.fontSize.note,
     fontWeight: 500,
     color: withOpacity(basePrimaryText, 0.85),
     wordBreak: "break-all",
@@ -115,20 +115,20 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
     flexDirection: "column",
     gap: "0.4rem",
     padding: "0.85rem 1rem",
-    borderRadius: "0.65rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(accentColor, 0.22)}`,
-    background: `linear-gradient(190deg, ${withOpacity(accentColor, 0.06)}, ${withOpacity(accentColor, 0.02)})`,
+    background: withOpacity(accentColor, 0.05),
   };
 
   const heroQuoteStyle: CSSProperties = {
     fontStyle: "italic",
-    fontSize: "0.68rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.55,
     color: withOpacity(basePrimaryText, 0.85),
     padding: "0.7rem 0.85rem",
     borderLeft: `3px solid ${withOpacity(accentColor, 0.45)}`,
     background: withOpacity(accentColor, 0.04),
-    borderRadius: "0 0.4rem 0.4rem 0",
+    borderRadius: 0,
     margin: 0,
   };
 
@@ -156,7 +156,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
         </Caption>
         <p
           style={{
-            fontSize: "0.66rem",
+            fontSize: BRAND.fontSize.note,
             fontStyle: "italic",
             color: withOpacity(baseTextSecondary, 0.75),
             margin: 0,
@@ -184,7 +184,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
             style={{
               display: "inline-flex",
               border: `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,
-              borderRadius: "0.75rem",
+              borderRadius: 0,
               overflow: "hidden",
             }}
           >
@@ -285,7 +285,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
             display: "flex",
             flexDirection: "column",
             gap: "0.25rem",
-            fontSize: "0.66rem",
+            fontSize: BRAND.fontSize.body,
             lineHeight: 1.55,
             color: withOpacity(baseTextSecondary, 0.9),
           }}

@@ -45,6 +45,9 @@ export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) 
     transition: "opacity 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth)",
   };
 
+  // Graph node stays a circle — the SVG connectors trim to a circular clearance
+  // radius. Flattened: no radial-gradient fill, no glow; selection reads via the
+  // stronger border + scale.
   const iconCircleStyle: CSSProperties = {
     width: circle,
     height: circle,
@@ -54,22 +57,17 @@ export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) 
     justifyContent: "center",
     flexShrink: 0,
     color: accent,
-    background: active
-      ? `radial-gradient(circle at 50% 35%, ${withOpacity(accent, 0.32)}, ${withOpacity(accent, 0.12)})`
-      : withOpacity(accent, 0.1),
-    border: `1.5px solid ${withOpacity(accentBorder, active ? 0.85 : 0.4)}`,
-    boxShadow: isSelected
-      ? `0 0 0 4px ${withOpacity(accent, 0.12)}, 0 8px 22px ${withOpacity(accent, 0.35)}`
-      : "none",
+    background: withOpacity(accent, active ? 0.18 : 0.1),
+    border: `1px solid ${withOpacity(accentBorder, active ? 0.85 : 0.4)}`,
     transform: active ? "scale(1.06)" : "scale(1)",
     transition: "all 0.3s var(--ease-smooth)",
   };
 
   const titleStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.66rem" : "0.74rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     lineHeight: 1.25,
     color: isSelected ? accent : world.text.primary,
@@ -77,7 +75,7 @@ export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) 
   };
 
   const roleStyle: CSSProperties = {
-    fontSize: isMobile ? "0.58rem" : "0.62rem",
+    fontSize: BRAND.fontSize.note,
     fontStyle: "italic",
     lineHeight: 1.2,
     color: withOpacity(colors.base.text.secondary, isSelected ? 0.95 : 0.6),

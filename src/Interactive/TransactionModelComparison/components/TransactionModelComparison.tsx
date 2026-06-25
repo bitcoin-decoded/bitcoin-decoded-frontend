@@ -55,10 +55,10 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     minWidth: 0,
     display: "flex",
     flexDirection: "column",
-    borderRadius: "1rem",
+    borderRadius: 0,
     overflow: "hidden",
     border: `1px solid ${withOpacity(accent, 0.25)}`,
-    background: `linear-gradient(170deg, ${withOpacity(accent, 0.06)}, ${colors.base.background.primary})`,
+    background: withOpacity(accent, 0.04),
   });
 
   const cardHeader = (accent: string): CSSProperties => ({
@@ -72,13 +72,13 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   const cardHeaderRow: CSSProperties = { display: "flex", alignItems: "center", gap: "0.5rem" };
 
   const cardSubtitle: CSSProperties = {
-    fontSize: isMobile ? "0.7rem" : "0.74rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: world.text.primary,
   };
 
   const cardDescStyle: CSSProperties = {
-    fontSize: "0.68rem",
+    fontSize: BRAND.fontSize.note,
     lineHeight: 1.5,
     color: colors.base.text.secondary,
     fontStyle: "italic",
@@ -90,7 +90,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     alignItems: "flex-start",
     gap: "0.4rem",
     padding: "0.3rem 0.45rem",
-    borderRadius: "0.4rem",
+    borderRadius: 0,
     background: withOpacity(accent, 0.05),
   });
 
@@ -99,10 +99,10 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     alignItems: "center",
     gap: "0.45rem",
     padding: "0.45rem 0.65rem",
-    borderRadius: "0.45rem",
+    borderRadius: 0,
     background: withOpacity(accent, 0.06),
     border: `1px solid ${withOpacity(accent, 0.12)}`,
-    fontSize: "0.68rem",
+    fontSize: BRAND.fontSize.note,
     fontStyle: "italic",
     color: colors.base.text.secondary,
   });
@@ -119,7 +119,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     padding: isMobile ? "0.55rem 0.8rem" : "0.7rem 1rem",
     borderTop: `1px solid ${withOpacity(accent, 0.1)}`,
     background: withOpacity(accent, 0.04),
-    fontSize: "0.68rem",
+    fontSize: BRAND.fontSize.note,
     lineHeight: 1.55,
     color: colors.base.text.secondary,
     fontStyle: "italic",
@@ -127,8 +127,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
 
   const keyText = (accent: string): CSSProperties => ({
     marginTop: "0.3rem",
-    fontSize: isMobile ? "0.7rem" : "0.72rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     fontStyle: "normal",
     color: accent,
     lineHeight: 1.4,
@@ -138,9 +138,9 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "flex",
     alignItems: "center",
     gap: "0.3rem",
-    fontSize: "0.62rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.09em",
     color: withOpacity(accent, dimmed ? 0.35 : 0.65),
     transition: "color 0.35s var(--ease-smooth)",
@@ -162,13 +162,13 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "inline-flex",
     alignItems: "center",
     gap: "0.25rem",
-    fontSize: "0.55rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: successColor,
     padding: "0.12rem 0.4rem",
-    borderRadius: "0.3rem",
+    borderRadius: 0,
     background: withOpacity(successColor, 0.12),
   };
 
@@ -179,7 +179,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     gap: "0.5rem 0.75rem",
     flexWrap: "wrap",
     padding: isMobile ? "0.5rem 0.7rem" : "0.6rem 0.85rem",
-    borderRadius: "0.55rem",
+    borderRadius: 0,
     background: withOpacity(bankAccent, 0.05),
     border: `1px solid ${withOpacity(bankAccent, 0.12)}`,
   };
@@ -188,8 +188,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "flex",
     alignItems: "center",
     gap: "0.35rem",
-    fontSize: isMobile ? "0.72rem" : "0.74rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: colors.base.text.primary,
     flexShrink: 0,
   };
@@ -218,12 +218,12 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "inline-flex",
     alignItems: "center",
     gap: "0.3rem",
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     padding: "0.16rem 0.6rem",
-    borderRadius: "0.4rem",
+    borderRadius: 0,
     color: bankAccent,
     background: withOpacity(bankAccent, 0.14),
     border: `1px solid ${withOpacity(bankAccent, 0.35)}`,
@@ -236,17 +236,17 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     flexWrap: "wrap",
     justifyContent: "flex-end",
     gap: "0.3rem",
-    fontSize: isMobile ? "0.72rem" : "0.76rem",
+    fontSize: BRAND.fontSize.body,
     textAlign: "right",
   };
 
   const eqBefore: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.75) };
   const eqDelta = (positive: boolean): CSSProperties => ({
-    fontWeight: 700,
+    fontWeight: 500,
     color: positive ? successColor : errorColor,
   });
   const eqSign: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.45) };
-  const eqResult: CSSProperties = { fontWeight: 700, color: colors.base.text.primary };
+  const eqResult: CSSProperties = { fontWeight: 500, color: colors.base.text.primary };
 
   const renderLedgerEntry = (name: string, before: number, after: number, positive: boolean) => (
     <div style={ledgerEntry}>
@@ -279,8 +279,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     alignItems: "center",
     gap: "0.4rem",
     padding: isMobile ? "0.35rem 0.5rem" : "0.5rem 0.65rem",
-    borderRadius: "0.6rem",
-    border: `1.5px solid ${withOpacity(isAfter ? errorColor : btcAccent, isAfter ? 0.3 : 0.4)}`,
+    borderRadius: 0,
+    border: `1px solid ${withOpacity(isAfter ? errorColor : btcAccent, isAfter ? 0.3 : 0.4)}`,
     background: withOpacity(isAfter ? errorColor : btcAccent, isAfter ? 0.05 : 0.08),
     transition: "all 0.45s var(--ease-smooth)",
   });
@@ -291,7 +291,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     justifyContent: "center",
     width: isMobile ? "1.25rem" : "1.5rem",
     height: isMobile ? "1.25rem" : "1.5rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     background: withOpacity(isAfter ? errorColor : btcAccent, 0.12),
     color: isAfter ? withOpacity(errorColor, 0.55) : btcAccent,
     flexShrink: 0,
@@ -307,8 +307,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   };
 
   const inputAmountStyle = (): CSSProperties => ({
-    fontSize: isMobile ? "0.76rem" : "0.8rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: isAfter ? withOpacity(errorColor, 0.5) : btcAccent,
     textDecoration: isAfter ? "line-through" : "none",
     transition: "all 0.45s var(--ease-smooth)",
@@ -318,8 +318,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "flex",
     alignItems: "center",
     gap: "0.25rem",
-    fontSize: "0.64rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: isAfter ? withOpacity(errorColor, 0.35) : withOpacity(colors.base.text.secondary, 0.65),
     transition: "color 0.45s var(--ease-smooth)",
   });
@@ -344,12 +344,12 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     alignItems: "center",
     gap: "0.3rem",
     padding: isMobile ? "0.3rem 0.6rem" : "0.35rem 0.8rem",
-    borderRadius: "0.45rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(btcAccent, 0.2)}`,
     background: withOpacity(btcAccent, 0.06),
-    fontSize: "0.66rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.07em",
     color: withOpacity(btcAccent, 0.8),
   };
@@ -360,8 +360,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     alignItems: "center",
     gap: "0.4rem",
     padding: isMobile ? "0.3rem 0.5rem" : "0.45rem 0.65rem",
-    borderRadius: "0.55rem",
-    border: `1.5px solid ${withOpacity(accent, isAfter ? 0.35 : 0.08)}`,
+    borderRadius: 0,
+    border: `1px solid ${withOpacity(accent, isAfter ? 0.35 : 0.08)}`,
     background: withOpacity(accent, isAfter ? 0.06 : 0.015),
     opacity: isAfter ? 1 : 0.12,
     transform: isAfter ? "translateY(0)" : "translateY(6px)",
@@ -374,7 +374,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     justifyContent: "center",
     width: isMobile ? "1.25rem" : "1.5rem",
     height: isMobile ? "1.25rem" : "1.5rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     background: withOpacity(accent, 0.12),
     color: isAfter ? accent : withOpacity(accent, 0.3),
     flexShrink: 0,
@@ -390,8 +390,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   };
 
   const outputAmountStyle = (accent: string): CSSProperties => ({
-    fontSize: isMobile ? "0.76rem" : "0.8rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: isAfter ? accent : withOpacity(accent, 0.3),
     transition: "color 0.4s var(--ease-smooth)",
   });
@@ -400,8 +400,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "flex",
     alignItems: "center",
     gap: "0.25rem",
-    fontSize: "0.64rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: isAfter ? withOpacity(accent, 0.7) : withOpacity(accent, 0.2),
     transition: "color 0.4s var(--ease-smooth)",
   });
@@ -409,11 +409,11 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   // Pedagogical phrase
   const pedagogyPhrase: CSSProperties = {
     padding: isMobile ? "0.45rem 0.6rem" : "0.6rem 0.8rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(btcAccent, isAfter ? 0.22 : 0.05)}`,
     background: withOpacity(btcAccent, isAfter ? 0.06 : 0),
-    fontSize: "0.68rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     fontStyle: "italic",
     color: isAfter ? btcAccent : withOpacity(btcAccent, 0.15),
     lineHeight: 1.5,
@@ -707,7 +707,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
             isAfter ? <RefreshCw size={12} strokeWidth={2} /> : <Zap size={12} strokeWidth={2} />
           }
           onClick={isAfter ? reset : trigger}
-          style={{ letterSpacing: "0.05em", textTransform: "uppercase" }}
+          style={{ letterSpacing: "0.05em" }}
         >
           {isAfter ? t("txComparison.reset") : t("txComparison.simulate")}
         </Button>

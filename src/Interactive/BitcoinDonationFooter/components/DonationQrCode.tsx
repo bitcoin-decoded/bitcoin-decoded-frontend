@@ -21,9 +21,8 @@ export const DonationQrCode: FC<Props> = ({ value, ariaLabel, size = 200 }) => {
   const frameStyle: CSSProperties = {
     background: "#ffffff",
     padding: "0.6rem",
-    borderRadius: "0.85rem",
+    borderRadius: 0,
     display: "inline-flex",
-    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.18)",
     animation: "donationFade 300ms var(--ease-smooth) both",
   };
 
@@ -36,7 +35,7 @@ export const DonationQrCode: FC<Props> = ({ value, ariaLabel, size = 200 }) => {
         aria-label={ariaLabel}
         width={size}
         height={size}
-        style={{ display: "block", width: size, height: size, borderRadius: "0.25rem" }}
+        style={{ display: "block", width: size, height: size, borderRadius: 0 }}
       />
     </div>
   );

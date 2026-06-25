@@ -3,6 +3,7 @@ import { type CSSProperties, type FC } from "react";
 import { Ban, Bitcoin, CirclePlus, Landmark, ShieldCheck, ShieldOff } from "lucide-react";
 
 import {
+  BRAND,
   Caption,
   ExploredCounter,
   SurfaceCard,
@@ -44,35 +45,45 @@ export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
 
   const danger = colors.semantic.error.text;
   const success = colors.semantic.success.text;
-  const dangerBg = colors.semantic.error.background;
   const textPrimary = colors.base.text.primary;
   const textSecondary = colors.base.text.secondary;
   const borderSecondary = colors.base.border.secondary;
   const iconSize = isMobile ? 14 : 16;
+
+  // The two déclinaisons (Fiat vs Bitcoin) live inside ONE SurfaceCard, so the
+  // comparison gets a SINGLE three-square separator bracket — not one pair per
+  // column (which read as four separators). Each side is a bordered ledger panel.
+  const fiatAccent = fiatTrustBroken ? danger : borderSecondary;
+  const bitcoinAccent = bitcoinAttempted ? success : world.border.secondary;
+
+  const panel = (accent: string): CSSProperties => ({
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
+    padding: isMobile ? "1rem" : "1.25rem",
+    borderRadius: 0,
+    border: `1px solid ${withOpacity(accent, 0.25)}`,
+    background: withOpacity(accent, 0.03),
+    transition: "all 0.35s var(--ease-smooth)",
+  });
 
   const infoBox = (accent: string): CSSProperties => ({
     display: "flex",
     alignItems: "flex-start",
     gap: "0.5rem",
     padding: "0.75rem 1rem",
-    borderRadius: "0.75rem",
+    borderRadius: 0,
     background: withOpacity(accent, 0.06),
     border: `1px solid ${withOpacity(accent, 0.15)}`,
-    fontSize: isMobile ? "0.75rem" : "0.8rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.5,
     color: textPrimary,
   });
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        width: "100%",
-        margin: isMobile ? "1.5rem 0" : "2rem 0",
-      }}
-    >
+    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2rem 0"} gap="1rem">
       {gated && (
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <ExploredCounter
@@ -90,11 +101,7 @@ export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
           width: "100%",
         }}
       >
-        <SurfaceCard
-          fillColor={withOpacity(dangerBg, 0.08)}
-          glowColor={fiatTrustBroken ? danger : borderSecondary}
-          style={{ flex: 1, minWidth: 0 }}
-        >
+        <div style={panel(fiatAccent)}>
           <Caption
             icon={<Landmark size={isMobile ? 16 : 18} />}
             tone="accent"
@@ -152,12 +159,9 @@ export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
             success,
             danger,
           )}
-        </SurfaceCard>
+        </div>
 
-        <SurfaceCard
-          glowColor={bitcoinAttempted ? success : world.border.secondary}
-          style={{ flex: 1, minWidth: 0 }}
-        >
+        <div style={panel(bitcoinAccent)}>
           <Caption
             icon={<Bitcoin size={isMobile ? 16 : 18} color={world.text.secondary} />}
             tone="accent"
@@ -215,8 +219,8 @@ export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
             success,
             danger,
           )}
-        </SurfaceCard>
+        </div>
       </div>
-    </div>
+    </SurfaceCard>
   );
 };

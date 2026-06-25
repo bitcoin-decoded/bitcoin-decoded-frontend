@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 
-import { withOpacity } from "../../../Design";
+import { BRAND, withOpacity } from "../../../Design";
 import type { CardTone } from "../types";
 
 type TxCardProps = {
@@ -34,7 +34,7 @@ export const TxCard: FC<TxCardProps> = ({
         alignItems: "center",
         gap: "0.6rem",
         padding: "0.55rem 0.7rem",
-        borderRadius: "0.6rem",
+        borderRadius: 0,
         border: `1px solid ${border}`,
         background: bg,
         width: "100%",
@@ -50,7 +50,7 @@ export const TxCard: FC<TxCardProps> = ({
           justifyContent: "center",
           width: "1.6rem",
           height: "1.6rem",
-          borderRadius: "0.4rem",
+          borderRadius: 0,
           background: withOpacity(color, 0.12),
           color,
           flexShrink: 0,
@@ -69,8 +69,8 @@ export const TxCard: FC<TxCardProps> = ({
       >
         <span
           style={{
-            fontSize: "0.68rem",
-            fontWeight: 700,
+            fontSize: BRAND.fontSize.body,
+            fontWeight: 500,
             color,
             overflowWrap: "anywhere",
             lineHeight: 1.3,
@@ -80,7 +80,7 @@ export const TxCard: FC<TxCardProps> = ({
         </span>
         <span
           style={{
-            fontSize: "0.56rem",
+            fontSize: BRAND.fontSize.note,
             color: withOpacity(baseTextSecondary, 0.6),
             overflowWrap: "anywhere",
             lineHeight: 1.3,
@@ -91,7 +91,7 @@ export const TxCard: FC<TxCardProps> = ({
       </div>
       <span
         style={{
-          fontWeight: 700,
+          fontWeight: 500,
           fontSize: amountFontSize,
           color,
           opacity: amountOpacity,

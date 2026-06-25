@@ -53,31 +53,31 @@ export const MatchVisualizer: FC<Props> = ({
     flexDirection: "column",
     gap: "0.3rem",
     padding: "0.5rem 0.55rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     border: `1px solid ${withOpacity(accent, 0.3)}`,
     background: withOpacity(accent, 0.05),
     boxSizing: "border-box",
   });
 
   const boxLabel = (accent: string): CSSProperties => ({
-    fontSize: "0.5rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: accent,
   });
 
   const monoValue: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.62rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: colors.basePrimaryText,
     wordBreak: "break-all",
   };
 
   const messageValue: CSSProperties = {
-    fontSize: "0.62rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     fontStyle: "italic",
     lineHeight: 1.4,
     color: colors.basePrimaryText,
@@ -90,7 +90,7 @@ export const MatchVisualizer: FC<Props> = ({
         flexDirection: "column",
         gap: "0.7rem",
         padding: "0.7rem",
-        borderRadius: "0.6rem",
+        borderRadius: 0,
         border: `1px dashed ${withOpacity(verdictColor, 0.3)}`,
         background: withOpacity(verdictColor, 0.03),
       }}
@@ -99,7 +99,7 @@ export const MatchVisualizer: FC<Props> = ({
       <div
         style={{
           fontFamily: BRAND.fonts.mono,
-          fontSize: "0.55rem",
+          fontSize: BRAND.fontSize.note,
           color: withOpacity(colors.baseTextSecondary, 0.7),
           letterSpacing: "0.02em",
           textAlign: "center",
@@ -146,9 +146,9 @@ export const MatchVisualizer: FC<Props> = ({
           justifyContent: "center",
           gap: "0.4rem",
           color: verdictColor,
-          fontWeight: 700,
-          fontSize: "0.6rem",
-          textTransform: "uppercase",
+          fontWeight: 500,
+          fontSize: BRAND.fontSize.note,
+          fontVariant: "small-caps",
           letterSpacing: "0.06em",
         }}
       >

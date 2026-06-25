@@ -39,9 +39,9 @@ export const ScoreGauge: FC<Props> = ({ label, icon: Icon, score, accent, max = 
     alignItems: "center",
     gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.58rem" : "0.62rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: colors.base.text.secondary,
     whiteSpace: "nowrap",
@@ -52,7 +52,7 @@ export const ScoreGauge: FC<Props> = ({ label, icon: Icon, score, accent, max = 
   const pipStyle = (filled: boolean): CSSProperties => ({
     width: isMobile ? "0.8rem" : "0.95rem",
     height: "0.4rem",
-    borderRadius: "0.2rem",
+    borderRadius: 0,
     background: filled ? accent : empty,
     transition: "background 0.3s var(--ease-smooth)",
   });

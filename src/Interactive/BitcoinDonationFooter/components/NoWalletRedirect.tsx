@@ -20,14 +20,14 @@ export const NoWalletRedirect: FC<Props> = ({ onClose }) => {
     margin: 0,
     fontFamily: BRAND.fonts.mono,
     fontSize: "1.05rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: colors.base.text.primary,
     textAlign: "center",
   };
 
   const bodyStyle: CSSProperties = {
     margin: 0,
-    fontSize: "0.9rem",
+    fontSize: BRAND.fontSize.body,
     lineHeight: 1.65,
     color: colors.base.text.secondary,
     textAlign: "center",
@@ -39,7 +39,7 @@ export const NoWalletRedirect: FC<Props> = ({ onClose }) => {
       <p style={bodyStyle}>{copy.noWallet.body1}</p>
       <p style={bodyStyle}>{copy.noWallet.body2}</p>
 
-      <div style={{ fontSize: "0.95rem", marginTop: "0.25rem" }}>
+      <div style={{ fontSize: BRAND.fontSize.body, marginTop: "0.25rem" }}>
         <Reference to={DONATION_CONFIG.walletChapterRoute}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
             <BookOpen size={15} strokeWidth={2} />

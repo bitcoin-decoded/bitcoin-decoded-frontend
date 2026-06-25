@@ -93,9 +93,9 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const sectionLabel: CSSProperties = {
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: withOpacity(colors.baseTextSecondary, 0.55),
     marginBottom: "0.65rem",
@@ -111,16 +111,16 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   };
 
   const msgHeaderLabel: CSSProperties = {
-    fontSize: "0.52rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: withOpacity(colors.baseTextSecondary, 0.7),
   };
 
   const msgHeaderValue: CSSProperties = {
-    fontSize: "0.72rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     fontStyle: "italic",
     color: colors.basePrimaryText,
     lineHeight: 1.4,
@@ -161,10 +161,10 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     alignItems: "center",
     gap: "0.4rem",
     padding: "0.4rem 0.55rem",
-    borderRadius: "0.5rem",
+    borderRadius: 0,
     ...mono,
-    fontSize: "0.62rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     lineHeight: 1.4,
     ...(isOriginalKey
       ? {
@@ -198,7 +198,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         flexDirection: "column",
         gap: "0.5rem",
         padding: "0.85rem 0.9rem",
-        borderRadius: "0.7rem",
+        borderRadius: 0,
         border: `1px dashed ${withOpacity(accent, 0.3)}`,
         background: withOpacity(accent, 0.02),
       }}
@@ -209,9 +209,9 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
           display: "flex",
           alignItems: "center",
           gap: "0.35rem",
-          fontSize: "0.6rem",
-          fontWeight: 700,
-          textTransform: "uppercase",
+          fontSize: BRAND.fontSize.note,
+          fontWeight: 500,
+          fontVariant: "small-caps",
           letterSpacing: "0.04em",
           color: withOpacity(accent, 0.7),
         }}
@@ -224,7 +224,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
             width: "1.05rem",
             height: "1.05rem",
             borderRadius: "50%",
-            fontSize: "0.6rem",
+            fontSize: BRAND.fontSize.note,
             color: withOpacity(accent, 0.8),
             border: `1px dashed ${withOpacity(accent, 0.5)}`,
           }}
@@ -237,7 +237,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       <p
         style={{
           margin: 0,
-          fontSize: "0.62rem",
+          fontSize: BRAND.fontSize.note,
           lineHeight: 1.5,
           fontStyle: "italic",
           color: withOpacity(colors.baseTextSecondary, 0.7),
@@ -284,7 +284,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       onClick={modifyKey}
       disabled={!canModifyKey}
       label={t("signaturePlayground.modifyKeyAction")}
-      isMobile={isMobile}
       colors={colors}
     />
   );
@@ -515,7 +514,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
 
           <p
             style={{
-              fontSize: "0.66rem",
+              fontSize: BRAND.fontSize.body,
               lineHeight: 1.55,
               color: colors.baseTextSecondary,
               margin: 0,
@@ -532,7 +531,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       <p
         style={{
           margin: 0,
-          fontSize: "0.62rem",
+          fontSize: BRAND.fontSize.note,
           lineHeight: 1.55,
           fontStyle: "italic",
           color: withOpacity(colors.baseTextSecondary, 0.75),
@@ -558,7 +557,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
             margin: 0,
             fontStyle: "italic",
             color: withOpacity(colors.baseTextSecondary, 0.85),
-            fontSize: "0.66rem",
+            fontSize: BRAND.fontSize.note,
             lineHeight: 1.55,
           }}
         >

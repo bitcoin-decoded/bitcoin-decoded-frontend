@@ -51,13 +51,13 @@ export const QuestionStep = <T extends string>({
     border: `1px solid ${withOpacity(accent, 0.4)}`,
     color: accent,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.78rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
   };
 
   const questionStyle: CSSProperties = {
-    fontSize: "0.95rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.body,
+    fontWeight: 500,
     color: colors.base.text.primary,
     lineHeight: 1.4,
   };

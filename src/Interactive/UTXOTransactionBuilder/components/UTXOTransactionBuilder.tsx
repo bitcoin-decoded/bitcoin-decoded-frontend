@@ -84,7 +84,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
     },
   };
 
-  const amountFont = isMobile ? "0.7rem" : "0.76rem";
+  const amountFont = BRAND.fontSize.body;
   const iconSize = isMobile ? 12 : 13;
 
   return (
@@ -128,16 +128,15 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
                   alignItems: "center",
                   gap: "0.35rem",
                   padding: "0.4rem 0.7rem",
-                  borderRadius: "0.5rem",
-                  fontSize: isMobile ? "0.72rem" : "0.76rem",
-                  fontWeight: 700,
-                  border: `1.5px solid ${withOpacity(selected ? accentColor : world.border.secondary, selected ? 0.7 : 0.25)}`,
+                  borderRadius: 0,
+                  fontSize: BRAND.fontSize.note,
+                  fontWeight: 500,
+                  border: `1px solid ${withOpacity(selected ? accentColor : world.border.secondary, selected ? 0.7 : 0.25)}`,
                   background: selected
                     ? withOpacity(accentColor, 0.12)
                     : withOpacity(world.background.secondary, 0.04),
                   color: selected ? accentColor : world.text.primary,
                   transition: "all 0.25s var(--ease-smooth)",
-                  boxShadow: selected ? `0 0 10px ${withOpacity(accentColor, 0.2)}` : "none",
                   whiteSpace: "nowrap",
                   maxWidth: "100%",
                 }}
@@ -154,7 +153,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             alignItems: "flex-start",
             gap: "0.4rem",
             marginTop: "0.55rem",
-            fontSize: "0.62rem",
+            fontSize: BRAND.fontSize.note,
             lineHeight: 1.5,
             color: withOpacity(colors.base.text.secondary, 0.65),
             minWidth: 0,
@@ -189,10 +188,10 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             width: "100%",
             maxWidth: "100%",
             padding: "0.55rem 0.85rem",
-            borderRadius: "0.6rem",
-            fontSize: isMobile ? "1rem" : "0.85rem",
-            fontWeight: 600,
-            border: `1.5px solid ${withOpacity(isInsufficient ? errorColor : accentColor, isInsufficient ? 0.6 : 0.3)}`,
+            borderRadius: 0,
+            fontSize: isMobile ? "1rem" : BRAND.fontSize.body,
+            fontWeight: 500,
+            border: `1px solid ${withOpacity(isInsufficient ? errorColor : accentColor, isInsufficient ? 0.6 : 0.3)}`,
             background: withOpacity(world.background.secondary, 0.05),
             color: world.text.primary,
             outline: "none",
@@ -239,7 +238,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
                   justifyContent: "space-between",
                   alignItems: "center",
                   gap: "0.5rem",
-                  fontSize: "0.64rem",
+                  fontSize: BRAND.fontSize.note,
                   color: colors.base.text.secondary,
                   padding: "0 0.1rem",
                   minWidth: 0,
@@ -250,7 +249,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
                 </span>
                 <span
                   style={{
-                    fontWeight: 700,
+                    fontWeight: 500,
                     color: accentColor,
                     flexShrink: 0,
                     whiteSpace: "nowrap",
@@ -338,7 +337,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
                   amount={fmtBTC(fees)}
                   tone="muted"
                   toneColors={toneColors}
-                  amountFontSize="0.66rem"
+                  amountFontSize={BRAND.fontSize.note}
                   amountOpacity={0.75}
                   baseTextSecondary={colors.base.text.secondary}
                 />

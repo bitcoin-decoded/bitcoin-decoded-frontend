@@ -51,13 +51,13 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
     margin: 0,
     fontFamily: BRAND.fonts.mono,
     fontSize: "1.05rem",
-    fontWeight: 700,
+    fontWeight: 500,
     color: colors.base.text.primary,
     textAlign: "center",
   };
-  const metaStyle: CSSProperties = { fontSize: "0.78rem", color: colors.base.text.secondary };
+  const metaStyle: CSSProperties = { fontSize: BRAND.fontSize.note, color: colors.base.text.secondary };
   const mutedSmall: CSSProperties = {
-    fontSize: "0.72rem",
+    fontSize: BRAND.fontSize.note,
     color: withOpacity(colors.base.text.secondary, 0.85),
     textAlign: "center",
   };
@@ -101,7 +101,7 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
           gap: "0.5rem",
           width: "100%",
           padding: "0.5rem 0.6rem",
-          borderRadius: "0.6rem",
+          borderRadius: 0,
           background: withOpacity(colors.base.text.secondary, 0.05),
           border: `1px solid ${withOpacity(colors.base.border.secondary, 0.3)}`,
         }}
@@ -109,7 +109,7 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
         <span
           style={{
             fontFamily: BRAND.fonts.mono,
-            fontSize: "0.72rem",
+            fontSize: BRAND.fontSize.note,
             color: colors.base.text.primary,
             overflow: "hidden",
             textOverflow: "ellipsis",

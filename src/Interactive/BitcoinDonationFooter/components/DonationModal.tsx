@@ -27,7 +27,6 @@ export const DonationModal: FC<Props> = ({ onClose, ariaLabel, closeLabel, child
     justifyContent: "center",
     padding: "1rem",
     background: "rgba(0, 0, 0, 0.6)",
-    backdropFilter: "blur(2px)",
     animation: "donationFade 200ms var(--ease-smooth) both",
   };
 
@@ -39,10 +38,9 @@ export const DonationModal: FC<Props> = ({ onClose, ariaLabel, closeLabel, child
     overflowY: "auto",
     boxSizing: "border-box",
     padding: "3rem 1.5rem 1.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(190deg, ${colors.amber.background.primary}, ${colors.base.background.primary})`,
+    borderRadius: 0,
+    background: colors.amber.background.primary,
     border: `1px solid ${withOpacity(colors.amber.border.secondary, 0.3)}`,
-    boxShadow: colors.boxShadow.strong,
   };
 
   const closeBtnStyle: CSSProperties = {
@@ -54,7 +52,7 @@ export const DonationModal: FC<Props> = ({ onClose, ariaLabel, closeLabel, child
     justifyContent: "center",
     width: "2rem",
     height: "2rem",
-    borderRadius: "50%",
+    borderRadius: 0,
     background: "transparent",
     border: "none",
     color: colors.base.text.secondary,

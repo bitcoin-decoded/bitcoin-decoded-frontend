@@ -10,7 +10,6 @@ type Props = {
   onClick: () => void;
   disabled: boolean;
   label: string;
-  isMobile: boolean;
   colors: SigPlaygroundColors;
 };
 
@@ -20,22 +19,22 @@ type Props = {
  * changed - before derivation, and again after the single allowed edit.
  * Error-tinted, because changing the key is what breaks the match.
  */
-export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, isMobile, colors }) => {
+export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, colors }) => {
   const buttonStyle: CSSProperties = {
     alignSelf: "center",
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.55rem" : "0.6rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: colors.errorColor,
     padding: "0.3rem 0.55rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     background: withOpacity(colors.errorColor, 0.1),
     border: `1px solid ${withOpacity(colors.errorColor, 0.4)}`,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.35rem",
     cursor: disabled ? "not-allowed" : "pointer",
-    textTransform: "uppercase",
+    fontVariant: "small-caps",
     letterSpacing: "0.05em",
     textAlign: "center",
     opacity: disabled ? 0.4 : 1,
@@ -50,7 +49,7 @@ export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, isMobile,
       aria-label={label}
       style={buttonStyle}
     >
-      <Shuffle size={10} strokeWidth={2.5} style={{ flexShrink: 0 }} />
+      <Shuffle size={12} strokeWidth={2.5} style={{ flexShrink: 0 }} />
       {label}
     </button>
   );

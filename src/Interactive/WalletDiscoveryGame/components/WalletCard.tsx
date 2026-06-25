@@ -75,8 +75,8 @@ export const WalletCard: FC<Props> = ({
     flexDirection: "column",
     gap: "0.6rem",
     padding: "0.85rem 0.9rem",
-    borderRadius: "0.7rem",
-    border: `1.5px solid ${withOpacity(
+    borderRadius: 0,
+    border: `1px solid ${withOpacity(
       highlightAsAnswer
         ? successColor
         : highlightAsWrong
@@ -105,9 +105,9 @@ export const WalletCard: FC<Props> = ({
   };
 
   const headerLabelStyle: CSSProperties = {
-    fontSize: "0.62rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: selected || highlightAsAnswer ? accentColor : withOpacity(baseTextSecondary, 0.7),
   };
@@ -117,10 +117,10 @@ export const WalletCard: FC<Props> = ({
     alignItems: "center",
     gap: "0.25rem",
     padding: "0.2rem 0.4rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.55rem",
-    fontWeight: 700,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     letterSpacing: "0.04em",
     color: card.utxos.length > 0 ? accentColor : withOpacity(baseTextSecondary, 0.55),
     background:
@@ -145,17 +145,17 @@ export const WalletCard: FC<Props> = ({
     display: "inline-flex",
     alignItems: "center",
     gap: "0.3rem",
-    fontSize: "0.5rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
+    fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color,
   });
 
   const fieldValueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.62rem",
-    fontWeight: 600,
+    fontSize: BRAND.fontSize.note,
+    fontWeight: 500,
     color: basePrimaryText,
     wordBreak: "break-all",
   };
@@ -166,9 +166,9 @@ export const WalletCard: FC<Props> = ({
     alignItems: "center",
     gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.62rem",
+    fontSize: BRAND.fontSize.note,
     padding: "0.3rem 0.45rem",
-    borderRadius: "0.35rem",
+    borderRadius: 0,
     background: withOpacity(accentColor, 0.06),
     border: `1px solid ${withOpacity(accentColor, 0.18)}`,
     color: basePrimaryText,
@@ -176,7 +176,7 @@ export const WalletCard: FC<Props> = ({
 
   const utxoEmptyStyle: CSSProperties = {
     fontStyle: "italic",
-    fontSize: "0.6rem",
+    fontSize: BRAND.fontSize.note,
     color: withOpacity(baseTextSecondary, 0.6),
     padding: "0.3rem 0.1rem",
   };
@@ -188,28 +188,28 @@ export const WalletCard: FC<Props> = ({
           {addressPrefix} #{index + 1}
         </span>
         <span style={utxoBadgeStyle}>
-          <Coins size={9} strokeWidth={2.5} />
+          <Coins size={12} strokeWidth={2.5} />
           {card.utxos.length} UTXO
         </span>
       </div>
 
       <div style={fieldRowStyle}>
         <span style={fieldLabelStyle(withOpacity(errorColor, 0.85))}>
-          <Lock size={8} strokeWidth={2.5} /> {privateKeyLabel}
+          <Lock size={12} strokeWidth={2.5} /> {privateKeyLabel}
         </span>
         <span style={fieldValueStyle}>{truncateHash(card.privateKey)}</span>
       </div>
 
       <div style={fieldRowStyle}>
         <span style={fieldLabelStyle(withOpacity(accentColor, 0.85))}>
-          <KeyRound size={8} strokeWidth={2.5} /> {publicKeyLabel}
+          <KeyRound size={12} strokeWidth={2.5} /> {publicKeyLabel}
         </span>
         <span style={fieldValueStyle}>{truncateHash(card.publicKey)}</span>
       </div>
 
       <div style={fieldRowStyle}>
         <span style={fieldLabelStyle(withOpacity(basePrimaryText, 0.7))}>
-          <MapPin size={8} strokeWidth={2.5} /> {addressLabel}
+          <MapPin size={12} strokeWidth={2.5} /> {addressLabel}
         </span>
         <span style={fieldValueStyle}>{card.address}</span>
       </div>
@@ -225,7 +225,7 @@ export const WalletCard: FC<Props> = ({
                 <span style={{ opacity: 0.7 }}>
                   {utxoPrefix} #{i + 1}
                 </span>
-                <span style={{ fontWeight: 700 }}>{fmtBTC(u.amount)}</span>
+                <span style={{ fontWeight: 500 }}>{fmtBTC(u.amount)}</span>
               </div>
             ))}
           </div>
