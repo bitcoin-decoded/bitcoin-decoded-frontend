@@ -1,11 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
 import { ArrowDown, ArrowRight } from "lucide-react";
-import type React from "react";
 
 import {
   BitcoinDecodedLogo,
   BRAND,
+  Button,
+  getBrandGold,
   Quote,
   Separator,
   THEME_COLORS,
@@ -26,6 +27,7 @@ export const HomePage: FC = () => {
   const { t } = useTranslation();
   const breakpoint = useBreakpoint();
   const colors = THEME_COLORS[theme];
+  const gold = getBrandGold(theme);
 
   const isMobile = breakpoint === "mobile";
   const isTablet = breakpoint === "tablet";
@@ -79,21 +81,6 @@ export const HomePage: FC = () => {
     el?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Subtle hover/leave handlers shared by every primary CTA - gentle bg
-  // shift + 1px lift, no big shadow swing.
-  const onCtaEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.style.background =
-      "linear-gradient(135deg, rgba(247, 147, 26, 0.2), rgba(247, 147, 26, 0.08))";
-    e.currentTarget.style.borderColor = "rgba(247, 147, 26, 0.75)";
-    e.currentTarget.style.transform = "translateY(-1px)";
-  };
-  const onCtaLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.style.background =
-      "linear-gradient(135deg, rgba(247, 147, 26, 0.12), rgba(247, 147, 26, 0.04))";
-    e.currentTarget.style.borderColor = "rgba(247, 147, 26, 0.5)";
-    e.currentTarget.style.transform = "translateY(0)";
-  };
-
   // ── Shared style tokens ──────────────────────────────────────────────────
 
   const containerStyle: CSSProperties = {
@@ -145,51 +132,11 @@ export const HomePage: FC = () => {
   const punchLineStyle: CSSProperties = {
     fontSize: pick("1.05rem", "1.1rem", "1.2rem"),
     fontWeight: 600,
-    color: "#f7931a",
+    // Orange is reserved for the Bitcoin module + on-chain validations; the
+    // homepage accent is the structural gold.
+    color: gold,
     margin: 0,
     letterSpacing: "-0.005em",
-  };
-
-  // ── Buttons ──────────────────────────────────────────────────────────────
-
-  // Aligned with the rest of the Bitcoin section (cf. DoubleSpendDemo
-  // chapter 4): subtle accent-tinted gradient + accent border, accent text.
-  // Quiet on the page yet unmistakably the primary action - no more
-  // saturated solid orange that read as "aggressive".
-  const primaryCtaStyle: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.55rem",
-    padding: isMobile ? "0.7rem 1.3rem" : "0.75rem 1.6rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.82rem" : "0.9rem",
-    fontWeight: 600,
-    letterSpacing: "0.03em",
-    color: "#f7931a",
-    background: "linear-gradient(135deg, rgba(247, 147, 26, 0.12), rgba(247, 147, 26, 0.04))",
-    border: "1.5px solid rgba(247, 147, 26, 0.5)",
-    borderRadius: "0.65rem",
-    cursor: "pointer",
-    boxShadow: "none",
-    transition:
-      "background 0.25s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.25s, transform 0.25s",
-  };
-
-  const secondaryCtaStyle: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    padding: "0.5rem 0.9rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.75rem" : "0.8rem",
-    fontWeight: 500,
-    letterSpacing: "0.04em",
-    color: colors.base.text.secondary,
-    background: "transparent",
-    border: "none",
-    cursor: "pointer",
-    transition: "color 0.2s",
   };
 
   // ── Hero ─────────────────────────────────────────────────────────────────
@@ -212,8 +159,6 @@ export const HomePage: FC = () => {
     display: "inline-flex",
     alignItems: "center",
     color: colors.base.text.primary,
-    // Subtle warm halo behind the logo for premium presence on the page bg.
-    filter: "drop-shadow(0 0 24px rgba(247, 147, 26, 0.18))",
   };
 
   // English-only tagline rendered just under the logo. Serif italic pairs
@@ -231,7 +176,7 @@ export const HomePage: FC = () => {
     textTransform: "lowercase",
   };
   const sloganDotStyle: CSSProperties = {
-    color: "#C4A45A",
+    color: gold,
     fontStyle: "normal",
     fontWeight: 700,
     margin: "0 0.45em",
@@ -241,7 +186,9 @@ export const HomePage: FC = () => {
   const headlineStyle: CSSProperties = {
     fontSize: pick("1.85rem", "2.35rem", "2.85rem"),
     fontFamily: BRAND.fonts.mono,
-    fontWeight: 700,
+    // Cutive Mono is single-weight — 500 (not 700) avoids a synthetic faux-bold;
+    // the hero size carries the presence.
+    fontWeight: 500,
     letterSpacing: "-0.02em",
     lineHeight: 1.15,
     margin: 0,
@@ -288,9 +235,9 @@ export const HomePage: FC = () => {
     position: "absolute",
     left: 0,
     top: 0,
-    color: "#f7931a",
+    color: gold,
     fontFamily: BRAND.fonts.mono,
-    fontWeight: 700,
+    fontWeight: 500,
   };
 
   // ── Section 3: Cards row ─────────────────────────────────────────────────
@@ -327,26 +274,22 @@ export const HomePage: FC = () => {
 
         <RevealOnScroll delay={480} duration={700}>
           <div style={ctaGroupStyle}>
-            <button
-              type="button"
-              style={primaryCtaStyle}
+            <Button
+              variant="primary"
+              icon={<ArrowRight size={isMobile ? 16 : 18} strokeWidth={2} />}
+              iconPosition="right"
               onClick={startJourney}
-              onMouseEnter={onCtaEnter}
-              onMouseLeave={onCtaLeave}
             >
               {t("home.hero.ctaPrimary")}
-              <ArrowRight size={isMobile ? 16 : 18} strokeWidth={2.2} />
-            </button>
-            <button
-              type="button"
-              style={secondaryCtaStyle}
+            </Button>
+            <Button
+              variant="ghost"
+              icon={<ArrowDown size={isMobile ? 14 : 15} strokeWidth={2} />}
+              iconPosition="right"
               onClick={scrollToJourney}
-              onMouseEnter={(e) => (e.currentTarget.style.color = colors.base.text.primary)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = colors.base.text.secondary)}
             >
               {t("home.hero.ctaSecondary")}
-              <ArrowDown size={isMobile ? 14 : 15} strokeWidth={2} />
-            </button>
+            </Button>
           </div>
         </RevealOnScroll>
       </section>
@@ -421,7 +364,7 @@ export const HomePage: FC = () => {
               title={t("home.journey.step1.title")}
               description={t("home.journey.step1.desc")}
               cta={t("home.journey.cardCta")}
-              color="#3b82f6"
+              module="blue"
               onClick={() => setCurrentPage(ROUTE_NAME.Banking_1)}
             />
           </RevealOnScroll>
@@ -439,7 +382,7 @@ export const HomePage: FC = () => {
               title={t("home.journey.step2.title")}
               description={t("home.journey.step2.desc")}
               cta={t("home.journey.cardCta")}
-              color="#8b5cf6"
+              module="violet"
               onClick={() => setCurrentPage(ROUTE_NAME.MoneyLaws_1)}
             />
           </RevealOnScroll>
@@ -457,7 +400,7 @@ export const HomePage: FC = () => {
               title={t("home.journey.step3.title")}
               description={t("home.journey.step3.desc")}
               cta={t("home.journey.cardCta")}
-              color="#f7931a"
+              module="amber"
               onClick={() => setCurrentPage(ROUTE_NAME.Bitcoin_1)}
             />
           </RevealOnScroll>
@@ -535,16 +478,9 @@ export const HomePage: FC = () => {
             <br />
             <p style={proseMutedStyle}>{t("home.finalCta.titleP2")}</p>
           </h2>
-          <button
-            type="button"
-            style={primaryCtaStyle}
-            onClick={startJourney}
-            onMouseEnter={onCtaEnter}
-            onMouseLeave={onCtaLeave}
-          >
+          <Button variant="stamped" onClick={startJourney}>
             {t("home.finalCta.button")}
-            <ArrowRight size={isMobile ? 16 : 18} strokeWidth={2.2} />
-          </button>
+          </Button>
         </section>
       </RevealOnScroll>
     </div>
