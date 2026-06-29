@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { useThemeContext } from "../../Theme";
+import { BRAND, useThemeContext } from "../../Theme";
 
 type Props = {
   /** Rendered side length in px (the avatar is 1:1). Default 28. */
@@ -13,7 +13,7 @@ const NAVY = "#16213E";
 const CREAM = "#F8F5EE";
 const GOLD = "#C4A45A";
 
-const FONT_FAMILY = "'Cormorant Garamond', Georgia, serif";
+const FONT_FAMILY = BRAND.fonts.wordmark;
 
 /**
  * 1:1 square avatar mark - large serif "B" + gold accent bar.

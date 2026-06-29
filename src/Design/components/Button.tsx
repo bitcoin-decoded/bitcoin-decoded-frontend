@@ -8,7 +8,7 @@ import {
 
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
+import { BRAND, getBrandGold, getTypography, usePageTheme, useThemeContext } from "../Theme";
 
 type Variant = "primary" | "secondary" | "ghost" | "stamped";
 type Size = "sm" | "md";
@@ -74,7 +74,9 @@ export const Button: FC<Props> = ({
 }) => {
   const { colors } = usePageTheme();
   const { theme } = useThemeContext();
-  const isMobile = useBreakpoint() === "mobile";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
@@ -93,8 +95,9 @@ export const Button: FC<Props> = ({
 
   const baseStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize:
-      size === "sm" ? (isMobile ? "0.8rem" : "0.85rem") : isMobile ? "0.9rem" : "0.95rem",
+    // Label size centralized in the `button` typography role (md = 16px desktop,
+    // the size the block nav prev/next controls want); sm stays compact.
+    fontSize: size === "sm" ? typo.buttonSmall.fontSize : typo.button.fontSize,
     fontWeight: 500,
     letterSpacing: variant === "ghost" ? "0.08em" : "0.14em",
     fontVariant: "small-caps",

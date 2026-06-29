@@ -38,9 +38,11 @@ export {
   BRAND,
   getBrandGold,
   getModuleThemeColor,
+  getTypography,
   THEME_COLORS,
   ThemeProvider,
   usePageTheme,
   useRechartsTheme,
   useThemeContext,
+  useTypography,
 } from "./Theme";

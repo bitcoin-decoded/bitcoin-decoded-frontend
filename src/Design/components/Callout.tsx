@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
+import { BRAND, getBrandGold, getTypography, usePageTheme, useThemeContext } from "../Theme";
 
 type Props = {
   /**
@@ -10,7 +10,7 @@ type Props = {
    * already signals an aside. Kept in the API so the existing callers compile.
    */
   icon?: ReactNode;
-  /** Aside title; rendered as a Patrick Hand heading in the module color. */
+  /** Aside title; rendered as a mono ledger heading in the module color. */
   title: string;
   children: ReactNode;
 };
@@ -19,15 +19,16 @@ type Props = {
  * The bracketed frame — silhouette reserved for asides (the former Callout).
  * Four corner brackets in hairline gold define a focus area without forming a
  * closed rectangle, giving asides a distinct silhouette from the SurfaceCard
- * transaction frame. The title is a Patrick Hand heading in the module color
- * (the same heading treatment as ChapterPrelude — see point 3), so asides and
- * preludes read as one consistent title system. The gold corners stay
- * structural; the module color carries identity.
+ * transaction frame. The title is a mono ledger heading in the module color, so
+ * asides read in the same instrument register as the rest of the components.
+ * The gold corners stay structural; the module color carries identity.
  */
 export const Callout: FC<Props> = ({ title, children }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
-  const isMobile = useBreakpoint() === "mobile";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typography = getTypography(breakpoint);
 
   const gold = getBrandGold(theme);
   // Module identity color (violet on MoneyLaws, blue on Banking, …), falling
@@ -41,14 +42,12 @@ export const Callout: FC<Props> = ({ title, children }) => {
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
   };
 
-  // Shared heading register with ChapterPrelude: Patrick Hand, module-colored.
-  // Patrick Hand has a single weight, so emphasis comes from size + color.
+  // Aside title in the mono `heading` role (16px, weight 500): prominence comes
+  // from size + module color, not weight (Cutive Mono is single-weight, so a
+  // heavier value would synthesize a crude faux-bold).
   const titleStyle: CSSProperties = {
+    ...typography.heading,
     display: "block",
-    fontFamily: BRAND.fonts.body,
-    fontSize: isMobile ? "1.15rem" : "1.25rem",
-    lineHeight: 1.2,
-    letterSpacing: "0.01em",
     color: moduleAccent,
     marginBottom: "0.55rem",
   };

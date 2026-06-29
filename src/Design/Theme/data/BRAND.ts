@@ -48,17 +48,21 @@ export const BRAND = {
     micro: "0.75rem",
   },
   /**
-   * Hand-made pedagogical type stack — committed to the "passionate professor
-   * at a chalkboard" register. Cabin Sketch (display) is a sketched serif
-   * with hatched chalk-like fill; Patrick Hand (body) is neat printed teacher
-   * handwriting; Cutive Mono (mono) is a typewriter face for technical
-   * metadata. None of these is the AI-default ("Inter / Fraunces / JetBrains
-   * Mono") that you see on every editorial or fintech site since 2022. The
-   * stack is the typography of the site's voice, not its template.
+   * Readable pedagogical type stack, chosen for sustained reading. Literata
+   * (display) is a screen-first reading serif designed for Google Play Books;
+   * Source Serif 4 (body) is a highly legible text serif; Cutive Mono (mono)
+   * is a typewriter face for technical metadata. None of these is the
+   * AI-default ("Inter / Satoshi / Fraunces / JetBrains Mono") that you see on
+   * every editorial or fintech site since 2022. The stack is the typography of
+   * the site's voice, not its template.
    */
   fonts: {
-    display: "'Cabin Sketch', 'Cormorant Garamond', Georgia, serif",
-    body: "'Patrick Hand', 'Source Serif 4', Georgia, serif",
+    display: "'Literata', 'Cormorant Garamond', Georgia, serif",
+    body: "'Source Serif 4', Georgia, serif",
     mono: "'Cutive Mono', 'JetBrains Mono', ui-monospace, monospace",
+    /** Logotype wordmark only (the "Bitcoin Decoded" lockup + avatar "B"). A
+     * deliberate high-contrast Garamond kept distinct from the UI display face,
+     * so the brand mark never shifts when the reading stack changes. */
+    wordmark: "'Cormorant Garamond', Georgia, serif",
   },
 };

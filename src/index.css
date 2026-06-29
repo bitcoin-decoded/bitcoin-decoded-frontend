@@ -22,14 +22,12 @@
   --coin-size: 14px;
   --rule-thickness: 1px;
 
-  /* Hand-made pedagogical type stack — "passionate professor at a chalkboard".
-   * Cabin Sketch (display): sketched serif with hatched chalk fill.
-   * Patrick Hand (body): neat printed teacher handwriting.
-   * Cutive Mono (mono): typewriter for technical metadata.
-   * Old fonts kept as fallbacks so legacy hardcoded refs degrade gracefully
-   * during Phase 6 sim migration. */
-  --font-display: "Cabin Sketch", "Cormorant Garamond", Georgia, serif;
-  --font-body: "Patrick Hand", "Source Serif 4", Georgia, serif;
+  /* Readable pedagogical type stack, chosen for sustained reading.
+   * Literata (display): screen-first reading serif (Google Play Books).
+   * Source Serif 4 (body): highly legible text serif.
+   * Cutive Mono (mono): typewriter for technical metadata. */
+  --font-display: "Literata", "Cormorant Garamond", Georgia, serif;
+  --font-body: "Source Serif 4", Georgia, serif;
   --font-mono: "Cutive Mono", "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -43,7 +41,7 @@
  * inherit font-family by default — browsers render them in the UA default
  * (Arial/Helvetica on Windows). That's why un-styled buttons like "réessayer"
  * and some sub-labels stayed sans-serif while the rest of the site moved to
- * Patrick Hand. This reset makes them inherit the body font; components that
+ * the body serif. This reset makes them inherit the body font; components that
  * need a specific face (e.g. the Button primitive → mono) still override it. */
 button,
 input,
@@ -59,12 +57,12 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  /* Patrick Hand — teacher handwriting register. Set globally so prose
-   * inherits without each consumer having to override. Slightly looser
-   * line-height because handwriting needs more vertical breathing room. */
+  /* Source Serif 4 — text-serif reading register. Set globally so prose
+   * inherits without each consumer having to override. A reading serif sits
+   * comfortably tighter than the old handwriting face needed. */
   font-family: var(--font-body), Georgia, serif;
   letter-spacing: 0;
-  line-height: 1.75;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Prevent Android Chrome from auto-inflating font sizes, which causes
@@ -358,8 +356,8 @@ body {
   content: "-";
   position: absolute;
   left: 0;
-  font-family: "JetBrains Mono", monospace;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-weight: 500;
   font-size: 0.875em;
   color: var(--accent-color, rgba(242, 242, 242, 0.4));
 }
@@ -382,8 +380,8 @@ body {
   content: counter(styled-counter, decimal-leading-zero) ".";
   position: absolute;
   left: 0;
-  font-family: "JetBrains Mono", monospace;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-weight: 500;
   font-size: 0.8125em;
   color: var(--accent-color, rgba(242, 242, 242, 0.4));
   letter-spacing: 0.02em;
@@ -445,7 +443,7 @@ body {
   width: 3rem;
   text-align: right;
   white-space: nowrap;
-  font-family: "Cutive Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.02em;
   color: var(--marginalia-color, rgba(127, 127, 127, 0.5));
@@ -478,13 +476,13 @@ body {
 /* Prelude lettrine — the ONE lettrine in the whole reading flow (chapter
  * prose never carries one; that would compete with this opening signal). It
  * replaces the written word "Prélude": the prelude's first letter is a big
- * module-color Cabin Sketch drop-cap, the chalk initial the teacher draws to
- * open the chapter. Rendered upright (the surrounding prelude voice is no
- * longer italic) and given a touch more right margin so it breathes. The
- * module color is set inline via --prelude-lettrine-color on the paragraph. */
+ * module-color display drop-cap that opens the chapter. Rendered upright (the
+ * surrounding prelude voice is no longer italic) and given a touch more right
+ * margin so it breathes. The module color is set inline via
+ * --prelude-lettrine-color on the paragraph. */
 .chapter-prelude-text::first-letter {
   float: left;
-  font-family: "Cabin Sketch", "Cormorant Garamond", Georgia, serif;
+  font-family: var(--font-display);
   font-style: normal;
   font-size: 3.4em;
   font-weight: 700;

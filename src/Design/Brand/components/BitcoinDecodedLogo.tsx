@@ -1,6 +1,6 @@
-import { type FC, type CSSProperties } from "react";
+import { type CSSProperties,type FC } from "react";
 
-import { useThemeContext } from "../../Theme";
+import { BRAND, useThemeContext } from "../../Theme";
 
 type Props = {
   /** Rendered SVG width (CSS value or px number). Aspect ratio is preserved. */
@@ -13,7 +13,7 @@ const NAVY = "#16213E";
 const CREAM = "#F8F5EE";
 const GOLD = "#C4A45A";
 
-const FONT_FAMILY = "'Cormorant Garamond', Georgia, serif";
+const FONT_FAMILY = BRAND.fonts.wordmark;
 
 /**
  * Bitcoin.Decoded logo lockup ("Bitcoin" + gold rule + small gold square +

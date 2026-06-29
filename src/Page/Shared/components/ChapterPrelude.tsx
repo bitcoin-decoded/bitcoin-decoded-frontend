@@ -2,6 +2,7 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import {
   getBrandGold,
+  getTypography,
   useBreakpoint,
   usePageTheme,
   useThemeContext,
@@ -19,8 +20,8 @@ type ChapterPreludeProps = {
 };
 
 /**
- * The chapter prelude — a soft module-color wash with a module-color Cabin
- * Sketch lettrine on the intro's first letter, and the whole intro voice set
+ * The chapter prelude — a soft module-color wash with a module-color display
+ * lettrine on the intro's first letter, and the whole intro voice set
  * in the module color (no italic). The written word "Prélude" is gone: the
  * upright lettrine + the colored overture signal "the opening" on their own,
  * and the monochrome-module treatment sets it cleanly apart from the ink prose
@@ -30,7 +31,9 @@ type ChapterPreludeProps = {
 export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
-  const isMobile = useBreakpoint() === "mobile";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typography = getTypography(breakpoint);
 
   const gold = getBrandGold(theme);
   const isModule = moduleTheme !== "base";
@@ -49,18 +52,16 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom
     marginBottom,
   };
 
-  // The intro voice, set in the module color (no italic) so the prelude reads
-  // as a colored overture distinct from the ink prose. The big drop-cap is
-  // rendered by CSS (.chapter-prelude-text::first-letter in index.css), fed the
-  // same module color through the --prelude-lettrine-color variable — size +
-  // weight (Cabin Sketch 700) keep it distinct from the body it shares a hue
-  // with.
+  // The intro voice shares the chapter `prose` role (16px body serif), set in
+  // the module color (no italic) so the prelude reads as a colored overture
+  // distinct from the ink prose. The big drop-cap is rendered by CSS
+  // (.chapter-prelude-text::first-letter in index.css), fed the same module
+  // color through --prelude-lettrine-color — size + weight (display 700) keep
+  // it distinct from the body it shares a hue with.
   const textStyle: CSSProperties = {
+    ...typography.prose,
     margin: 0,
     color: moduleAccent,
-    fontFamily: "var(--font-body)",
-    lineHeight: 1.62,
-    fontSize: isMobile ? "1rem" : "1.0625rem",
     textAlign: "left",
     ["--prelude-lettrine-color" as string]: moduleAccent,
   };

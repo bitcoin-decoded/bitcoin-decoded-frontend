@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import { FrText } from "../../../I18n";
 
 import { ChapterPrelude } from "./ChapterPrelude";
@@ -35,6 +35,7 @@ export const PageTemplate: FC<Props> = ({
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const isTablet = breakpoint === "tablet";
+  const typography = getTypography(breakpoint);
   const accentColor = colors[moduleTheme].border.secondary;
   // Chapter title carries the module identity color (violet on MoneyLaws,
   // blue on Banking, amber on Bitcoin), falling back to ink on neutral pages.
@@ -94,12 +95,9 @@ export const PageTemplate: FC<Props> = ({
   };
 
   const sectionStyle: CSSProperties = {
-    // 17px desktop / 16px mobile with a tighter line-height: reduces the
-    // height of text blocks without losing reading comfort (Patrick Hand at
-    // 19px read too tall). Line-height trimmed from 1.75 to 1.62.
-    fontSize: isMobile ? "1rem" : "1.0625rem",
-    letterSpacing: "0.005em",
-    lineHeight: 1.62,
+    // Chapter reading prose — centralized in the `prose` typography role
+    // (16px body serif, line-height 1.6). The accent var feeds list markers.
+    ...typography.prose,
     "--accent-color": accentColor,
   } as CSSProperties;
 
