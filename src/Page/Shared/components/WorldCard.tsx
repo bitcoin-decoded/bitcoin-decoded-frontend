@@ -28,7 +28,8 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
   const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
 
-  const accent = THEME_COLORS[theme][module].text.secondary;
+  const colors = THEME_COLORS[theme];
+  const accent = colors[module].text.secondary;
 
   const cardStyle: CSSProperties = {
     position: "relative",
@@ -44,6 +45,10 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     flexDirection: "column",
     gap: isMobile ? "0.45rem" : "0.6rem",
     textAlign: "left",
+    // A <button> does NOT inherit text color by default (it uses the system
+    // buttontext, ~black) — set it explicitly so the description reads in the
+    // page ink, not black-on-near-black.
+    color: colors.base.text.primary,
   };
 
   const iconStyle: CSSProperties = {
@@ -79,6 +84,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     fontSize: BRAND.fontSize.body,
     fontFamily: BRAND.fonts.body,
     lineHeight: 1.55,
+    color: colors.base.text.primary,
     opacity: 0.8,
     margin: 0,
     // Multi-line descriptions split via "\n" render naturally.
