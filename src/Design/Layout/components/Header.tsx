@@ -69,10 +69,11 @@ export const Header: FC<Props> = ({
     gap: "0.75rem",
   };
 
-  // The horizontal wordmark composition: "Bitcoin" in Cormorant Garamond
-  // (matches the logo display face), centered carré-bloc separator
-  // (replaces the previous red dot — single-figure vocabulary), "Decoded"
-  // in italic. On hover the carré subtly brightens; the text stays still.
+  // The horizontal wordmark composition: "Bitcoin" in the wordmark face
+  // (BRAND.fonts.wordmark = Cormorant Garamond, the SAME face as the
+  // BitcoinDecodedLogo lockup so the header and homepage marks match),
+  // centered carré-bloc separator (single-figure vocabulary), "Decoded" in
+  // italic. On hover the carré subtly brightens; the text stays still.
   const wordmarkButtonStyle: CSSProperties = {
     background: "none",
     border: "none",
@@ -86,7 +87,7 @@ export const Header: FC<Props> = ({
   };
 
   const wordmarkTextBitcoinStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.display,
+    fontFamily: BRAND.fonts.wordmark,
     fontWeight: 500,
     fontSize: isMobile ? "1.05rem" : "1.2rem",
     letterSpacing: "0.04em",
@@ -94,7 +95,7 @@ export const Header: FC<Props> = ({
   };
 
   const wordmarkTextDecodedStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.display,
+    fontFamily: BRAND.fonts.wordmark,
     fontStyle: "italic",
     fontWeight: 400,
     fontSize: isMobile ? "1.05rem" : "1.2rem",
