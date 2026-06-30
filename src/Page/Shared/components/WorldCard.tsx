@@ -2,52 +2,53 @@ import { type CSSProperties, type FC, useState } from "react";
 
 import { ArrowRight } from "lucide-react";
 
-import { BRAND } from "../../../Design";
-import { useBreakpoint } from "../../../Design/Responsive";
+import { BRAND, THEME_COLORS, useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
 
 type Props = {
   title: string;
   subtitle: string;
   /** Multi-line description supported via `\n` (rendered with pre-line). */
   description: string;
-  color: string;
+  /** Module identity — resolves to its themed accent in THEME_COLORS. */
+  module: "blue" | "violet" | "amber";
   icon: string;
   onClick: () => void;
   /** Optional CTA label rendered inline next to the arrow. */
   cta?: string;
 };
 
-export const WorldCard: FC<Props> = ({
-  title,
-  subtitle,
-  description,
-  color,
-  icon,
-  onClick,
-  cta,
-}) => {
+/**
+ * A journey navigation tile, in the ledger register: a sharp hairline frame in
+ * the module color (radius 0, no gradient, no shadow), a mono small-caps kicker,
+ * a mono title, serif description, and a module-colored arrow that nudges on
+ * hover. Replaces the previous rounded gradient card + lift/glow recipe.
+ */
+export const WorldCard: FC<Props> = ({ title, subtitle, description, module, icon, onClick, cta }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const breakpoint = useBreakpoint();
-  const isMobile = breakpoint === "mobile";
+  const { theme } = useThemeContext();
+  const isMobile = useBreakpoint() === "mobile";
+
+  const colors = THEME_COLORS[theme];
+  const accent = colors[module].text.secondary;
 
   const cardStyle: CSSProperties = {
     position: "relative",
     flex: isMobile ? "1 1 100%" : "1 1 0",
     minWidth: isMobile ? "100%" : "14rem",
-    // Tighter padding on mobile keeps the card compact in the stack
-    padding: isMobile ? "1rem 1.1rem" : "1.85rem 1.5rem",
-    borderRadius: "1rem",
-    background: `linear-gradient(160deg, ${color}18, ${color}08)`,
-    border: `1px solid ${isHovered ? `${color}80` : `${color}30`}`,
+    padding: isMobile ? "1.1rem 1.2rem" : "1.6rem 1.5rem",
+    borderRadius: 0,
+    background: withOpacity(accent, isHovered ? 0.08 : 0.04),
+    border: `1px solid ${withOpacity(accent, isHovered ? 0.6 : 0.28)}`,
     cursor: "pointer",
-    transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
-    transform: isHovered ? "translateY(-4px)" : "translateY(0)",
-    boxShadow: isHovered ? `0 12px 32px ${color}20` : "none",
+    transition: "background 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)",
     display: "flex",
     flexDirection: "column",
-    gap: isMobile ? "0.45rem" : "0.65rem",
-    overflow: "hidden",
+    gap: isMobile ? "0.45rem" : "0.6rem",
     textAlign: "left",
+    // A <button> does NOT inherit text color by default (it uses the system
+    // buttontext, ~black) — set it explicitly so the description reads in the
+    // page ink, not black-on-near-black.
+    color: colors.base.text.primary,
   };
 
   const iconStyle: CSSProperties = {
@@ -56,81 +57,67 @@ export const WorldCard: FC<Props> = ({
   };
 
   const subtitleStyle: CSSProperties = {
-    fontSize: isMobile ? "0.65rem" : "0.7rem",
+    fontSize: BRAND.fontSize.label,
     fontFamily: BRAND.fonts.mono,
     fontWeight: 500,
-    color: color,
-    opacity: 0.7,
+    color: accent,
+    opacity: 0.85,
     letterSpacing: "0.08em",
-    textTransform: "uppercase",
+    fontVariant: "small-caps",
     margin: 0,
   };
 
   const titleStyle: CSSProperties = {
-    fontSize: isMobile ? "0.95rem" : "1.1rem",
+    fontSize: isMobile ? "0.95rem" : "1rem",
     fontFamily: BRAND.fonts.mono,
-    fontWeight: 600,
-    color: color,
-    letterSpacing: "0.02em",
+    fontWeight: 500,
+    color: accent,
+    letterSpacing: "0.01em",
     margin: 0,
-    // Reserve 2 lines so all sibling titles take the same vertical space -
-    // ensures the description (and arrow) align across cards regardless of
-    // whether a title wraps to one or two lines.
-    lineHeight: 1.25,
-    minHeight: "2.5em",
+    // Reserve 2 lines so sibling titles take the same vertical space — keeps
+    // descriptions and arrows aligned across cards whether or not a title wraps.
+    lineHeight: 1.3,
+    minHeight: "2.6em",
   };
 
   const descStyle: CSSProperties = {
-    fontSize: isMobile ? "0.8rem" : "0.875rem",
+    fontSize: BRAND.fontSize.body,
+    fontFamily: BRAND.fonts.body,
     lineHeight: 1.55,
-    opacity: 0.78,
+    color: colors.base.text.primary,
+    opacity: 0.8,
     margin: 0,
     // Multi-line descriptions split via "\n" render naturally.
     whiteSpace: "pre-line",
   };
 
-  // Inline CTA label rendered just before the arrow pill ("Voir cette partie").
   const ctaLabelStyle: CSSProperties = {
-    fontSize: isMobile ? "0.7rem" : "0.75rem",
+    fontSize: BRAND.fontSize.label,
     fontFamily: BRAND.fonts.mono,
-    fontWeight: 600,
-    color: color,
+    fontWeight: 500,
+    color: accent,
     letterSpacing: "0.04em",
+    fontVariant: "small-caps",
     opacity: isHovered ? 1 : 0.85,
-    transition: "opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)",
+    transition: "opacity 0.3s var(--ease-smooth)",
   };
 
   const ctaRowStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
-    gap: "0.55rem",
+    gap: "0.5rem",
     marginTop: "auto",
-  };
-
-  // Arrow pill - sits at the bottom-right of the card. The shared
-  // ctaRowStyle (with marginTop: auto) keeps arrows aligned across cards
-  // regardless of description length (cards stretch to equal heights via
-  // the parent's flex layout).
-  const arrowWrapperStyle: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: isMobile ? "2rem" : "2.25rem",
-    height: isMobile ? "2rem" : "2.25rem",
-    borderRadius: "999px",
-    color: color,
-    background: `${color}${isHovered ? "20" : "10"}`,
-    border: `1px solid ${color}${isHovered ? "55" : "25"}`,
-    transition: "all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)",
-    transform: isHovered ? "translateX(4px)" : "translateX(0)",
-    flexShrink: 0,
+    paddingTop: "0.4rem",
+    color: accent,
+    transform: isHovered ? "translateX(3px)" : "translateX(0)",
+    transition: "transform 0.3s var(--ease-smooth)",
   };
 
   return (
     <button
       type="button"
-      style={{ ...cardStyle, fontFamily: "inherit", color: "inherit" }}
+      style={{ ...cardStyle, fontFamily: "inherit" }}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -141,9 +128,7 @@ export const WorldCard: FC<Props> = ({
       <p style={descStyle}>{description}</p>
       <div style={ctaRowStyle}>
         {cta && <span style={ctaLabelStyle}>{cta}</span>}
-        <span style={arrowWrapperStyle} aria-hidden>
-          <ArrowRight size={isMobile ? 18 : 20} strokeWidth={2.2} />
-        </span>
+        <ArrowRight size={isMobile ? 16 : 18} strokeWidth={2} aria-hidden />
       </div>
     </button>
   );
