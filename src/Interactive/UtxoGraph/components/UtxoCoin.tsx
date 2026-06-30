@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { CheckCircle, Coins, KeyRound, Lock, XCircle } from "lucide-react";
-
 import { BRAND, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import type { UtxoGraphMode } from "../types";
+
+import { CheckCircle, Coins, KeyRound, Lock, XCircle } from "@icons";
 
 type Props = {
   amount: string;

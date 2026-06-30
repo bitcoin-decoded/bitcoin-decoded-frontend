@@ -1,11 +1,11 @@
 import { type FC } from "react";
 
-import { Wallet } from "lucide-react";
-
 import { usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ExpandableDefinitions } from "../../ExpandableDefinitions";
 import { getWalletFamilies } from "../data";
+
+import { Wallet } from "@icons";
 
 /** Thin wrapper (mirrors `AccountingTerms`): the three wallet families as
  *  expand-to-learn cards, each carrying a simplicité / souveraineté score

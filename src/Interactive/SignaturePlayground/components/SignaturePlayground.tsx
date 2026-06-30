@@ -1,22 +1,5 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import {
-  ArrowDownLeft,
-  ArrowDownRight,
-  CheckCircle,
-  Globe,
-  KeyRound,
-  Lightbulb,
-  Lock,
-  Mail,
-  PenLine,
-  RefreshCw,
-  ShieldCheck,
-  User,
-  UserCheck,
-  XCircle,
-} from "lucide-react";
-
 import { Badge,
 BRAND,   Button,
   Caption,
@@ -36,6 +19,23 @@ import {
 } from "../components";
 import { useSignaturePlayground } from "../hooks";
 import type { SigPlaygroundColors } from "../types";
+
+import {
+  ArrowDownLeft,
+  ArrowDownRight,
+  CheckCircle,
+  Globe,
+  KeyRound,
+  Lightbulb,
+  Lock,
+  Mail,
+  PenLine,
+  RefreshCw,
+  ShieldCheck,
+  User,
+  UserCheck,
+  XCircle,
+} from "@icons";
 
 type Props = {
   /** Fired once the reader completes the derive → sign → verify flow (gates the tool block). */

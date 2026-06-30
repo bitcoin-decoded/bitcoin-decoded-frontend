@@ -1,18 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  ArrowRight,
-  Box,
-  CircleCheck,
-  Coins,
-  Gift,
-  Lock,
-  PlusCircle,
-  Receipt,
-  RotateCcw,
-  Wallet,
-} from "lucide-react";
-
 import { Badge,
 BRAND,   Button,
   Caption,
@@ -24,6 +11,19 @@ import { useTranslation } from "../../../I18n";
 import { fmtBTC } from "../../helpers";
 import { CONFETTI_DATA } from "../data";
 import { useMiningRewardBlock } from "../hooks";
+
+import {
+  ArrowRight,
+  Box,
+  CircleCheck,
+  Coins,
+  Gift,
+  Lock,
+  PlusCircle,
+  Receipt,
+  RotateCcw,
+  Wallet,
+} from "@icons";
 
 type Props = {
   /** Fired once the reader rewards the miner (gates the tool block). */

@@ -1,6 +1,6 @@
-import { Building2, Globe, Home, Landmark, Tent } from "lucide-react";
-
 import type { DunbarTier } from "../types";
+
+import { Building2, Globe, Home, Landmark, Tent } from "@icons";
 
 /**
  * The five discrete group sizes, smallest to largest. The icons follow a

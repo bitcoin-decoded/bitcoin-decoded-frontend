@@ -1,15 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  CircleCheck,
-  CircleHelp,
-  CircleX,
-  RotateCcw,
-} from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   FeedbackPanel,
@@ -21,6 +11,16 @@ import { BRAND, Button,
 import { useTranslation } from "../../../I18n";
 import { useSynthesisQuiz } from "../hooks";
 import type { SynthesisQuizData } from "../types";
+
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  CircleCheck,
+  CircleHelp,
+  CircleX,
+  RotateCcw,
+} from "@icons";
 
 type Props = SynthesisQuizData & {
   /** localStorage key used to persist selections + submitted across page navigations. */

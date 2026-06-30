@@ -1,11 +1,11 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BookOpenText } from "lucide-react";
-
 import { Caption, SurfaceCard, useBreakpoint } from "../../../Design";
 import type { ExpandableTerm } from "../types";
 
 import { TermCard } from "./TermCard";
+
+import { BookOpenText } from "@icons";
 
 type Props = {
   /** Section heading rendered above the term stack. */

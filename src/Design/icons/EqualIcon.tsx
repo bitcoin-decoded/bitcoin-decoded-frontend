@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import { Equal } from "lucide-react";
+
+import { Equal } from "@icons";
 
 type Props = {
   size?: string;

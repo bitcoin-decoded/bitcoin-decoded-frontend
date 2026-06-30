@@ -1,11 +1,11 @@
 import { type CSSProperties, type FC } from "react";
 
-import { CheckCircle, XCircle } from "lucide-react";
-
 import { BRAND } from "../../../Design";
 import { withOpacity } from "../../../Design/";
 import { truncateHash } from "../../helpers";
 import type { SigPlaygroundColors } from "../types";
+
+import { CheckCircle, XCircle } from "@icons";
 
 type Props = {
   message: string;

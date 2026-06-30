@@ -1,11 +1,11 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { Award } from "lucide-react";
-
 import { BRAND, THEME_COLORS, useThemeContext } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../Routing";
 import { useBadges } from "../hooks";
+
+import { Award } from "@icons";
 
 /**
  * Header entry to the badge collection: a quiet pill mirroring the theme/lang

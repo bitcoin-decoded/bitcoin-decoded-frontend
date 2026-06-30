@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Clock, GitMerge, Hash, Link2, Pickaxe } from "lucide-react";
-
 import { Badge,
 BRAND,   HighlightText,
   SurfaceCard,
@@ -18,6 +16,8 @@ import { BlockRow } from "./BlockRow";
 import { HashComparison } from "./HashComparison";
 import { ModifyTxButton } from "./ModifyTxButton";
 import { TransactionInput } from "./TransactionInput";
+
+import { Clock, GitMerge, Hash, Link2, Pickaxe } from "@icons";
 
 type Props = {
   block: BlockData;

@@ -1,6 +1,6 @@
-import { Clock, GitMerge, Hash, Pickaxe } from "lucide-react";
-
 import type { BlockField } from "../types";
+
+import { Clock, GitMerge, Hash, Pickaxe } from "@icons";
 
 export const HEADER_FIELDS: BlockField[] = [
   {

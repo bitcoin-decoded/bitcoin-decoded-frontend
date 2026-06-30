@@ -1,3 +1,6 @@
+import { ROUTE_NAME } from "../../Routing";
+import type { Badge } from "../types";
+
 import {
   ArrowLeftRight,
   Bitcoin,
@@ -19,10 +22,7 @@ import {
   Waves,
   Wrench,
   Zap,
-} from "lucide-react";
-
-import { ROUTE_NAME } from "../../Routing";
-import type { Badge } from "../types";
+} from "@icons";
 
 /**
  * The full catalog, in display order (each module's chapters, then its

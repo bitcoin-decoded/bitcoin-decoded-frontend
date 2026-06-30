@@ -1,14 +1,14 @@
 import { type CSSProperties, type FC } from "react";
 
-import { type LucideIcon, Star } from "lucide-react";
-
 import { Badge, BRAND, usePageTheme, withOpacity } from "../../../Design";
 import type { PathFinderCopy } from "../data";
 import type { SubCategoryItem } from "../types";
 
+import { type IconType, Star } from "@icons";
+
 type Props = {
   item: SubCategoryItem;
-  icon: LucideIcon;
+  icon: IconType;
   copy: PathFinderCopy;
   accent: string;
 };

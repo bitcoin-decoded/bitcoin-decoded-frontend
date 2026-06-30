@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { CircleCheck, CircleHelp, CircleX } from "lucide-react";
-
 import {
   BRAND,
   Caption,
@@ -14,6 +12,8 @@ import {
 import { useTranslation } from "../../../I18n";
 import { useQuiz } from "../hooks";
 import { type QuizData } from "../types";
+
+import { CircleCheck, CircleHelp, CircleX } from "@icons";
 
 type QuizProps = QuizData & {
   onCorrectAnswer: () => void;

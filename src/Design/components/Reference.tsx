@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
-import { ArrowUpRight } from "lucide-react";
-
 import { type RouteName, useRouterContext } from "../../Routing";
 import { withOpacity } from "../helpers";
 import { usePageTheme } from "../Theme";
+
+import { ArrowUpRight } from "@icons";
 
 type CommonProps = {
   children: ReactNode;

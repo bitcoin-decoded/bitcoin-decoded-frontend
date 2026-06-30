@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ChevronRight } from "lucide-react";
+import { ChevronRight } from "@icons";
 
 type ChevronIconProps = {
   isExpanded: boolean;

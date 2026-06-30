@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Minus, Plus } from "lucide-react";
-
 import { BRAND, Button, RangeLedger, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { TIME_MACHINE_END_YEAR } from "../data";
+
+import { Minus, Plus } from "@icons";
 
 type Props = {
   targetYear: number;

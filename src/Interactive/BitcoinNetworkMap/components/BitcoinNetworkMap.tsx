@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Cpu, Monitor } from "lucide-react";
-
 import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { LINKS, NODES } from "../data";
+
+import { Cpu, Monitor } from "@icons";
 
 export const BitcoinNetworkMap: FC = () => {
   const { language } = useLanguageContext();

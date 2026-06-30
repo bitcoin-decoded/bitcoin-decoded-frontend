@@ -1,7 +1,7 @@
-import { KeyRound, Lock, PenLine } from "lucide-react";
-
 import type { Language } from "../../../I18n";
 import type { KeyElement, TrioConnection } from "../types";
+
+import { KeyRound, Lock, PenLine } from "@icons";
 
 /**
  * Language-aware content for the trio. Geometry lives in TRIO_LAYOUT; this

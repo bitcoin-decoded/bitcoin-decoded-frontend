@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Shuffle } from "lucide-react";
-
 import { BRAND } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
+
+import { Shuffle } from "@icons";
 
 type Props = {
   onClick: () => void;

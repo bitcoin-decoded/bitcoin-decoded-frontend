@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import { Scissors } from "lucide-react";
+
+import { Scissors } from "@icons";
 
 type Props = {
   size?: string;

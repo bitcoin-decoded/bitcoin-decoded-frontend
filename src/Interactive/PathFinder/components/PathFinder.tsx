@@ -1,22 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  ArrowLeft,
-  Briefcase,
-  Check,
-  Compass,
-  Fish,
-  Ghost,
-  GraduationCap,
-  Handshake,
-  HelpCircle,
-  Info,
-  type LucideIcon,
-  RotateCcw,
-  ShieldCheck,
-  Telescope,
-} from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   Disclosure,
@@ -31,7 +14,24 @@ import type { ProfileKey, WalletSection } from "../types";
 import { QuestionStep } from "./QuestionStep";
 import { SectionCard } from "./SectionCard";
 
-const ICON_BY_PROFILE: Record<ProfileKey, LucideIcon> = {
+import {
+  ArrowLeft,
+  Briefcase,
+  Check,
+  Compass,
+  Fish,
+  Ghost,
+  GraduationCap,
+  Handshake,
+  HelpCircle,
+  type IconType,
+  Info,
+  RotateCcw,
+  ShieldCheck,
+  Telescope,
+} from "@icons";
+
+const ICON_BY_PROFILE: Record<ProfileKey, IconType> = {
   curieux: Telescope,
   debutant: GraduationCap,
   discretFrugal: Ghost,

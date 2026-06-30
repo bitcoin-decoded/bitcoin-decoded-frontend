@@ -1,11 +1,11 @@
 import { type CSSProperties, type FC } from "react";
 
-import type { LucideIcon } from "lucide-react";
-
 import { BRAND, usePageTheme, withOpacity } from "../../../Design";
 
+import type { IconType } from "@icons";
+
 type FlywheelStepProps = {
-  icon: LucideIcon;
+  icon: IconType;
   label: string;
   metric: string;
   /** Category accent (see `getStepTones`). */

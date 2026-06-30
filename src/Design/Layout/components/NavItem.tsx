@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC, Fragment, type JSX } from "react";
 
-import { ClipboardCheck } from "lucide-react";
-
 import { type NavigationItem } from "../../../Routing";
 import { Badge } from "../../components";
 import { ChevronIcon } from "../../icons";
+
+import { ClipboardCheck } from "@icons";
 
 type Props = {
   item: NavigationItem;

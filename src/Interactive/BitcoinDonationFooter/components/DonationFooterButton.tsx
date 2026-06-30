@@ -1,11 +1,11 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { Bitcoin } from "lucide-react";
-
 import { BRAND, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy } from "../data";
+
+import { Bitcoin } from "@icons";
 
 type Props = {
   onClick: () => void;

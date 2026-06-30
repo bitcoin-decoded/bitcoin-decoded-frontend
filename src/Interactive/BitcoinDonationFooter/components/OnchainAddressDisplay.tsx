@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { AlertTriangle, ArrowLeft } from "lucide-react";
-
 import { BRAND, Button, FeedbackPanel, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
@@ -20,6 +18,8 @@ import { useBtcRate, useNetworkFees } from "../hooks";
 
 import { CopyButton } from "./CopyButton";
 import { DonationQrCode } from "./DonationQrCode";
+
+import { AlertTriangle, ArrowLeft } from "@icons";
 
 type Props = {
   amountEur: number | null;

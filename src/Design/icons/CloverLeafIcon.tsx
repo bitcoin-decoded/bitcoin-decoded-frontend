@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import { ShieldCheck } from "lucide-react";
+
+import { ShieldCheck } from "@icons";
 
 type Props = {
   size?: string;

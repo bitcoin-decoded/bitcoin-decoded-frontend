@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Columns3 } from "lucide-react";
-
 import {
   BRAND,
   Caption,
@@ -14,6 +12,8 @@ import { useTranslation } from "../../../I18n";
 import { getMonetaryPillars } from "../data";
 
 import { PillarRow } from "./PillarRow";
+
+import { Columns3 } from "@icons";
 
 export const MonetaryPillars: FC = () => {
   const { t, language } = useTranslation();

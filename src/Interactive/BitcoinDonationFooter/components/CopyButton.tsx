@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { Check, Copy } from "lucide-react";
-
 import { BRAND, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useClipboard } from "../hooks";
+
+import { Check, Copy } from "@icons";
 
 type Props = {
   value: string;

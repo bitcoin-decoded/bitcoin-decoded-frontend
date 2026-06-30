@@ -1,12 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Zap } from "lucide-react";
-
 import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getMachineColors } from "../data";
 import { formatRewardBTC, getMinerWorkTime } from "../helpers";
 import type { TravelPhase } from "../types";
+
+import { Zap } from "@icons";
 
 type Props = {
   displayYear: number;

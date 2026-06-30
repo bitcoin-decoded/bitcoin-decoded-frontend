@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Ban, Bitcoin, CirclePlus, Landmark, ShieldCheck, ShieldOff } from "lucide-react";
-
 import {
   BRAND,
   Caption,
@@ -14,6 +12,8 @@ import {
 import { useTranslation } from "../../../I18n";
 import { renderActionButton, renderFeedback } from "../helpers";
 import { useTrustComparisonDemo } from "../hooks";
+
+import { Ban, Bitcoin, CirclePlus, Landmark, ShieldCheck, ShieldOff } from "@icons";
 
 // Try at least two of the four action buttons to clear the gate.
 const REQUIRED_EXPLORED = 2;

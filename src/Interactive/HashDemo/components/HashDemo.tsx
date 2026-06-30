@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { CircleCheck, Hash, RotateCcw } from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   FeedbackPanel,
@@ -11,6 +9,8 @@ import { BRAND, Button,
   withOpacity, } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { useHashDemo } from "../hooks";
+
+import { CircleCheck, Hash, RotateCcw } from "@icons";
 
 type Props = {
   /** Fired once the reader hashes something (gates the surrounding tool block). */

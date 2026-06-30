@@ -1,11 +1,11 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
 import { BRAND, getBrandGold, useBreakpoint, usePageTheme, useThemeContext } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { type RouteName, useRouterContext } from "../../../Routing/";
+
+import { ChevronLeft, ChevronRight } from "@icons";
 
 type Props = {
   page: { id: RouteName; label: string };

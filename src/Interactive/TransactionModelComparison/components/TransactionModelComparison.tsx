@@ -1,5 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
+import { Badge, BRAND, Button, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { useTranslation } from "../../../I18n";
+import { fmtBTC, fmtEur } from "../../helpers";
+import { BANK, BTC } from "../data";
+import { useTransactionComparison } from "../hooks";
+import type { ComparisonMode } from "../types";
+
 import {
   ArrowDown,
   ArrowRightLeft,
@@ -15,14 +22,7 @@ import {
   User,
   Wallet,
   Zap,
-} from "lucide-react";
-
-import { Badge, BRAND, Button, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
-import { fmtBTC, fmtEur } from "../../helpers";
-import { BANK, BTC } from "../data";
-import { useTransactionComparison } from "../hooks";
-import type { ComparisonMode } from "../types";
+} from "@icons";
 
 // ── Component ─────────────────────────────────────────────────────────────────
 

@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC, useEffect, useRef } from "react";
 
-import { CircleCheck, CircleX, Pickaxe, RotateCcw } from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   FeedbackPanel,
@@ -12,6 +10,8 @@ import { BRAND, Button,
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 import { useMiningSimulator } from "../hooks";
+
+import { CircleCheck, CircleX, Pickaxe, RotateCcw } from "@icons";
 
 type Props = {
   /** Fired once the reader tries at least one nonce (gates the tool block). */

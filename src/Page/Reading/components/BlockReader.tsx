@@ -10,8 +10,6 @@ import {
   useEffect,
 } from "react";
 
-import { RotateCcw } from "lucide-react";
-
 import { useBadges } from "../../../Achievements";
 import { BRAND, Button, getBrandGold, usePageTheme, useThemeContext } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
@@ -22,6 +20,8 @@ import { Block } from "./Block";
 import { BlockMilestones } from "./BlockMilestones";
 import { BlockNav } from "./BlockNav";
 import { BlockShell } from "./BlockShell";
+
+import { RotateCcw } from "@icons";
 
 type BlockElement = ReactElement<ComponentProps<typeof Block>>;
 

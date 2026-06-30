@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowDown, ArrowRight } from "lucide-react";
-
 import {
   BitcoinDecodedLogo,
   BRAND,
@@ -18,6 +16,8 @@ import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 
 import { RevealOnScroll } from "./RevealOnScroll";
 import { WorldCard } from "./WorldCard";
+
+import { ArrowDown, ArrowRight } from "@icons";
 
 const JOURNEY_SECTION_ID = "home-journey";
 

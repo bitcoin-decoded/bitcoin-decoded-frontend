@@ -1,8 +1,9 @@
-import { AlertTriangle, ArrowRight } from "lucide-react";
 import type { CSSProperties, FC } from "react";
 
 import { BRAND, type usePageTheme, withOpacity } from "../../../Design";
 import type { MempoolTransaction, TxState } from "../types";
+
+import { AlertTriangle, ArrowRight } from "@icons";
 
 export const TxRow: FC<{
   tx: MempoolTransaction;

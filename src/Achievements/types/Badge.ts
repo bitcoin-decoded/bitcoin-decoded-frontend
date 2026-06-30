@@ -1,9 +1,9 @@
-import type { LucideIcon } from "lucide-react";
-
 import type { TranslationKey } from "../../I18n";
 
 import type { BadgeKind } from "./BadgeKind";
 import type { BadgeModule } from "./BadgeModule";
+
+import type { IconType } from "@icons";
 
 export type Badge = {
   /**
@@ -15,7 +15,7 @@ export type Badge = {
   kind: BadgeKind;
   module: BadgeModule;
   /** Topic icon (chapter) or trophy (module). */
-  icon: LucideIcon;
+  icon: IconType;
   /** Reuses the chapter's nav title (chapter badges) or a dedicated key (module). */
   nameKey: TranslationKey;
 };

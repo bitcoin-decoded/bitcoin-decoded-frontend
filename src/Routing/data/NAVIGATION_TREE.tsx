@@ -1,9 +1,9 @@
-import { Rabbit } from "lucide-react";
-
 import type { TranslationFn } from "../../I18n";
 import type { NavigationItem } from "../types";
 
 import { ROUTE_NAME } from "./ROUTE_NAME";
+
+import { Rabbit } from "@icons";
 
 export const getNavigationTree = (t: TranslationFn): NavigationItem[] => [
   {

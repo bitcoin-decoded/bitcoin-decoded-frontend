@@ -1,8 +1,9 @@
-import { CircleCheck, CircleX } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { FeedbackPanel } from "../../../Design";
 import type { ActionState } from "../types";
+
+import { CircleCheck, CircleX } from "@icons";
 
 export const renderFeedback = (
   state: ActionState,

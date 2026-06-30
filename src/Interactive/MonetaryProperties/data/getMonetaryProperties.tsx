@@ -1,10 +1,10 @@
-import { Gem, Mountain } from "lucide-react";
-
 import type { THEME_COLORS } from "../../../Design";
 import petrole from "../../../Design/img/Petroleum_sample.jpg";
 import pikachuIllustratorCard from "../../../Design/img/Pikachu_Illustrator_Card.webp";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
 import { Illustration } from "../../Illustration";
+
+import { Gem, Mountain } from "@icons";
 
 type Language = "fr" | "en";
 type ThemeColors = (typeof THEME_COLORS)["dark"];

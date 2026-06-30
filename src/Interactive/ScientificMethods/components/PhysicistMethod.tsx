@@ -1,12 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowDown, ArrowRight, Telescope } from "lucide-react";
-
 import { Badge, BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getScientificMethodsCopy } from "../data";
 
 import { MethodFrame } from "./MethodFrame";
+
+import { ArrowDown, ArrowRight, Telescope } from "@icons";
 
 type Theory = { year: string; name: string; observations: string };
 

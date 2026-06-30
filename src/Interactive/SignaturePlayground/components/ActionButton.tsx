@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { Check } from "lucide-react";
-
 import { BRAND } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { ActionButtonVariant, SigPlaygroundColors } from "../types";
+
+import { Check } from "@icons";
 
 type Props = {
   onClick: () => void;

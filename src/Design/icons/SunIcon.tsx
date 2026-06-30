@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import { Sun } from "lucide-react";
+
+import { Sun } from "@icons";
 
 /**
  * Sun icon for the light theme toggle.

@@ -1,7 +1,5 @@
 import { type FC } from "react";
 
-import { Home } from "lucide-react";
-
 import { Callout, Disclosure, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { MonetaryAggregates } from "../../../Interactive";
@@ -10,6 +8,8 @@ import { Block, BlockReader } from "../../Reading";
 import { ChapterPrelude, PageTemplate } from "../../Shared/";
 
 import { CompensationSimulator } from "./CompensationSimulator";
+
+import { Home } from "@icons";
 
 export const Banking2Page: FC = () => {
   const { t, language } = useTranslation();

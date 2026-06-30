@@ -1,8 +1,8 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowDown } from "lucide-react";
-
 import { BRAND, usePageTheme } from "../../../Design";
+
+import { ArrowDown } from "@icons";
 
 type Props = {
   isBroken?: boolean;

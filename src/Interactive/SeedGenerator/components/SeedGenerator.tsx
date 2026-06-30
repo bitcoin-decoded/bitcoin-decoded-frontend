@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Info, Sparkles, Sprout } from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   Disclosure,
@@ -13,6 +11,8 @@ import { useTranslation } from "../../../I18n";
 import { groupBits } from "../helpers";
 import { useSeedGenerator } from "../hooks";
 import type { SeedLength } from "../types";
+
+import { Info, Sparkles, Sprout } from "@icons";
 
 type Props = {
   /** Fired once the reader generates a seed (gates the tool block). */

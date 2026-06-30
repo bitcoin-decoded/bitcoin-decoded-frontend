@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Link2, MousePointerClick } from "lucide-react";
-
 import { BRAND, Caption,
   ExploredCounter,
   SurfaceCard,
@@ -14,6 +12,8 @@ import { getArrowhead, trimSegment } from "../helpers";
 import { useKeySignatureTrio } from "../hooks";
 
 import { TrioNode } from "./TrioNode";
+
+import { Link2, MousePointerClick } from "@icons";
 
 type Props = {
   /** Fired once every node has been explored (gates the tool block). */
