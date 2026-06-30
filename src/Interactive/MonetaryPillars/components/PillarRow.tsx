@@ -1,9 +1,9 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { ChevronDown } from "lucide-react";
-
 import { BRAND, useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import type { MonetaryPillar } from "../types";
+
+import { ChevronDown } from "@icons";
 
 type Props = {
   pillar: MonetaryPillar;

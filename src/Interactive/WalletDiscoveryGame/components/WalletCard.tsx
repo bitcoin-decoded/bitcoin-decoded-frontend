@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Coins, KeyRound, Lock, MapPin } from "lucide-react";
-
 import { BRAND, withOpacity } from "../../../Design";
 import { fmtBTC, truncateHash } from "../../helpers";
 import type { WalletCardData } from "../types";
+
+import { Coins, KeyRound, Lock, MapPin } from "@icons";
 
 type Props = {
   card: WalletCardData;

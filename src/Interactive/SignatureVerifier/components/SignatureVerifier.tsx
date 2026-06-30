@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { CheckCircle, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   FeedbackPanel,
@@ -13,6 +11,8 @@ import { useTranslation } from "../../../I18n";
 import { ORIGINAL_VALUES } from "../data";
 import { useSignatureVerifier } from "../hooks";
 import type { SigField } from "../types";
+
+import { CheckCircle, RefreshCw, ShieldAlert, ShieldCheck } from "@icons";
 
 export const SignatureVerifier: FC = () => {
   const { t } = useTranslation();

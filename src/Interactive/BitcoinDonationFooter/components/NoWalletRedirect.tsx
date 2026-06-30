@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BookOpen } from "lucide-react";
-
 import { BRAND, Button, Reference, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { DONATION_CONFIG, getDonationCopy } from "../data";
+
+import { BookOpen } from "@icons";
 
 type Props = {
   onClose: () => void;

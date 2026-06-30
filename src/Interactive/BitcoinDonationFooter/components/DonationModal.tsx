@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { X } from "lucide-react";
-
 import { usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useModalDismiss } from "../hooks";
+
+import { X } from "@icons";
 
 type Props = {
   onClose: () => void;

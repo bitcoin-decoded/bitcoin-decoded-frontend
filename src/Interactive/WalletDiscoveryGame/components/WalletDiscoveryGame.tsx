@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { CheckCircle, KeyRound, RefreshCw, Sparkles, Wallet, XCircle } from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   FeedbackPanel,
@@ -13,6 +11,8 @@ import { useTranslation } from "../../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
 
 import { WalletCard } from "./WalletCard";
+
+import { CheckCircle, KeyRound, RefreshCw, Sparkles, Wallet, XCircle } from "@icons";
 
 type Props = {
   /** Fired once the reader solves the challenge (gates the tool block). */

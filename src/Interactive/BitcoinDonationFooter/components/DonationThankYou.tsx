@@ -1,11 +1,11 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowRight, BadgeCheck } from "lucide-react";
-
 import { BRAND, Button, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy } from "../data";
+
+import { ArrowRight, BadgeCheck } from "@icons";
 
 type Props = {
   onContinue: () => void;

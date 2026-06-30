@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowDown, RefreshCw, Wallet, Zap } from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   SurfaceCard,
@@ -14,6 +12,8 @@ import { useUtxoGraph } from "../hooks";
 import type { UtxoGraphMode } from "../types";
 
 import { UtxoCoin } from "./UtxoCoin";
+
+import { ArrowDown, RefreshCw, Wallet, Zap } from "@icons";
 
 const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 

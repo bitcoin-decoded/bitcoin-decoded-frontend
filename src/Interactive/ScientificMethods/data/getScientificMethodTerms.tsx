@@ -1,10 +1,10 @@
-import { Sigma, Telescope } from "lucide-react";
-
 import { HighlightText, type THEME_COLORS } from "../../../Design";
 import type { Language } from "../../../I18n";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
 import { LogicianMethod } from "../components/LogicianMethod";
 import { PhysicistMethod } from "../components/PhysicistMethod";
+
+import { Sigma, Telescope } from "@icons";
 
 type ThemeColors = (typeof THEME_COLORS)["dark"];
 

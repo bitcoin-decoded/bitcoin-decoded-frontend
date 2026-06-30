@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { PlusCircle, RefreshCw, RotateCcw } from "lucide-react";
-
 import { BRAND, Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { MAX_LEVEL, STEP_ICONS, WHEEL_RADIUS } from "../data";
@@ -9,6 +7,8 @@ import { getPentagonLayout, getStepTones } from "../helpers";
 import { useNetworkFlywheel } from "../hooks";
 
 import { FlywheelStep } from "./FlywheelStep";
+
+import { PlusCircle, RefreshCw, RotateCcw } from "@icons";
 
 type Props = {
   /** Fired once the reader turns the wheel at least once (gates the tool block). */

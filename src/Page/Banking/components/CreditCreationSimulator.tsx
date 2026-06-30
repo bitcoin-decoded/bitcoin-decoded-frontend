@@ -1,7 +1,5 @@
 import { type FC, useEffect, useMemo } from "react";
 
-import { Feather } from "lucide-react";
-
 import { Disclosure, FeedbackPanel, HighlightText, Reference } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
@@ -10,6 +8,8 @@ import { getUserBankCredit } from "../data";
 
 import { BalanceSheet } from "./BalanceSheet";
 import { SimulatorControls } from "./SimulatorControls";
+
+import { Feather } from "@icons";
 
 type Props = {
   /** Fired once the loan has been granted (the simulator's final state). */

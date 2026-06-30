@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { History, Info } from "lucide-react";
-
 import {
   BRAND,
   Caption,
@@ -17,6 +15,8 @@ import { useHalvingTimeMachine } from "../hooks";
 import { TimeDial } from "./TimeDial";
 import { TimeScreen } from "./TimeScreen";
 import { TravelLever } from "./TravelLever";
+
+import { History, Info } from "@icons";
 
 /**
  * "Halving time machine": dial a destination year, pull the lever, and - after a

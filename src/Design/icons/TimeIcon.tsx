@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import { Hourglass } from "lucide-react";
+
+import { Hourglass } from "@icons";
 
 type Props = {
   size?: string;

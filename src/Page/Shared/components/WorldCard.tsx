@@ -1,8 +1,8 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { ArrowRight } from "lucide-react";
-
 import { BRAND, THEME_COLORS, useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
+
+import { ArrowRight } from "@icons";
 
 type Props = {
   title: string;

@@ -1,7 +1,7 @@
-import { Building2, KeyRound } from "lucide-react";
-
 import type { THEME_COLORS } from "../../../Design";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
+
+import { Building2, KeyRound } from "@icons";
 
 type Language = "fr" | "en";
 type ThemeColors = (typeof THEME_COLORS)["dark"];

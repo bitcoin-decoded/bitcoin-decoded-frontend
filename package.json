@@ -14,7 +14,7 @@
     "audit:reading-time": "node scripts/count-prose.mjs"
   },
   "dependencies": {
-    "lucide-react": "^1.7.0",
+    "@phosphor-icons/react": "^2.1.10",
     "qrcode": "^1.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

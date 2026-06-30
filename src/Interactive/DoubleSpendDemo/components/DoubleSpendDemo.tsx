@@ -1,17 +1,5 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import {
-  ArrowDown,
-  ArrowDownLeft,
-  ArrowDownRight,
-  Coins,
-  Eye,
-  Monitor,
-  RotateCcw,
-  User,
-  Wallet,
-} from "lucide-react";
-
 import { Badge,
 BRAND,   Button,
   Caption,
@@ -24,6 +12,18 @@ import { useTranslation } from "../../../I18n";
 import { BRANCHES, CITIES } from "../data";
 import { useDoubleSpendDemo } from "../hooks";
 import type { Branch, TxId } from "../types";
+
+import {
+  ArrowDown,
+  ArrowDownLeft,
+  ArrowDownRight,
+  Coins,
+  Eye,
+  Monitor,
+  RotateCcw,
+  User,
+  Wallet,
+} from "@icons";
 
 type Props = {
   scrollTargetId?: string;

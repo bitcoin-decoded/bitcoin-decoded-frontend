@@ -1,6 +1,6 @@
-import { List } from "lucide-react";
-
 import type { BlockField } from "../types";
+
+import { List } from "@icons";
 
 export const BODY_FIELDS: BlockField[] = [
   {

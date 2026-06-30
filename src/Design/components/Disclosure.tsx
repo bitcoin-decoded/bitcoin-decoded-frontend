@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { ChevronDown } from "lucide-react";
-
 import { withOpacity } from "../helpers";
 import { useDisclosure } from "../hooks";
 import { BRAND, usePageTheme } from "../Theme";
+
+import { ChevronDown } from "@icons";
 
 type Props = {
   title: string;

@@ -1,8 +1,8 @@
-import { Feather, KeyRound, Smartphone, Vault } from "lucide-react";
-
 import type { THEME_COLORS } from "../../../Design";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
 import { ScoreGauge } from "../components/ScoreGauge";
+
+import { Feather, KeyRound, Smartphone, Vault } from "@icons";
 
 type Language = "fr" | "en";
 type ThemeColors = (typeof THEME_COLORS)["dark"];

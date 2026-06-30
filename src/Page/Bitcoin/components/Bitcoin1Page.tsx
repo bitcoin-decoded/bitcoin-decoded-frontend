@@ -1,5 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
+import { Callout, Disclosure, IdentityCard, Reference } from "../../../Design";
+import { useTranslation } from "../../../I18n";
+import { BitcoinNetworkMap, BitcoinNodeDemo } from "../../../Interactive";
+import { ROUTE_NAME } from "../../../Routing";
+import { Block, BlockReader } from "../../Reading";
+import { ChapterPrelude, PAGE_STYLES, PageTemplate } from "../../Shared/";
+
 import {
   Bitcoin,
   Blocks,
@@ -9,14 +16,7 @@ import {
   Pickaxe,
   ScrollText,
   ShieldCheck,
-} from "lucide-react";
-
-import { Callout, Disclosure, IdentityCard, Reference } from "../../../Design";
-import { useTranslation } from "../../../I18n";
-import { BitcoinNetworkMap, BitcoinNodeDemo } from "../../../Interactive";
-import { ROUTE_NAME } from "../../../Routing";
-import { Block, BlockReader } from "../../Reading";
-import { ChapterPrelude, PAGE_STYLES, PageTemplate } from "../../Shared/";
+} from "@icons";
 
 export const Bitcoin1Page: FC = () => {
   const { t, language } = useTranslation();

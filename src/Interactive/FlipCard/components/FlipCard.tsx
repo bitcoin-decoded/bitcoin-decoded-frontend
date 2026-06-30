@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC, type KeyboardEvent } from "react";
 
-import { RotateCw } from "lucide-react";
-
 import { BRAND, usePageTheme, withOpacity } from "../../../Design";
 import { useFlipCard } from "../hooks";
 import type { FlipCardItem } from "../types";
+
+import { RotateCw } from "@icons";
 
 type FlipCardProps = {
   item: FlipCardItem;

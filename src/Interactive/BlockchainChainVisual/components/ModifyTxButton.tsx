@@ -1,9 +1,9 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Shuffle } from "lucide-react";
-
 import { BRAND, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+
+import { Shuffle } from "@icons";
 
 type Props = {
   onClick: () => void;

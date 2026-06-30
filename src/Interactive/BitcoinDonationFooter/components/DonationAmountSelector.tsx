@@ -1,13 +1,13 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { ArrowLeft, HelpCircle, RefreshCw } from "lucide-react";
-
 import { BRAND, Button, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy, PRESET_AMOUNTS } from "../data";
 import { eurToSats, formatEur, formatSats } from "../helpers";
 import { useBtcRate } from "../hooks";
+
+import { ArrowLeft, HelpCircle, RefreshCw } from "@icons";
 
 type Props = {
   amountEur: number | null;

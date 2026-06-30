@@ -1,12 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowDown, MoreHorizontal, ScrollText, Sigma, Triangle } from "lucide-react";
-
 import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getScientificMethodsCopy } from "../data";
 
 import { MethodFrame } from "./MethodFrame";
+
+import { ArrowDown, MoreHorizontal, ScrollText, Sigma, Triangle } from "@icons";
 
 /**
  * The logician's method, read top-to-bottom: a single root of axioms branches

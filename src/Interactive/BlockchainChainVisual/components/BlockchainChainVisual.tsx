@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC, useEffect, useRef } from "react";
 
-import { Info, Plus, RotateCcw, Sparkles } from "lucide-react";
-
 import {
   Button,
   Caption,
@@ -15,6 +13,8 @@ import { useBlockchainChainVisual } from "../hooks";
 
 import { BlockCard } from "./BlockCard";
 import { ChainArrow } from "./ChainArrow";
+
+import { Info, Plus, RotateCcw, Sparkles } from "@icons";
 
 type Props = {
   resetScrollTargetId?: string;

@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Cpu, Monitor } from "lucide-react";
-
 import { BRAND, Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { useBitcoinNodeDemo } from "../hooks";
+
+import { Cpu, Monitor } from "@icons";
 
 const TRANSITION = "all 0.8s var(--ease-smooth)";
 

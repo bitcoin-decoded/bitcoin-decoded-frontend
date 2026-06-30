@@ -10,7 +10,7 @@ export type MonetaryPillar = {
   title: string;
   /** Explanation rendered when the row is expanded. */
   description: string;
-  /** Icon component (Design custom icon or lucide). Receives a `size` prop. */
+  /** Icon component (a Design custom icon or one from @icons). Receives a `size` prop. */
   icon: FC<IconProps>;
   /**
    * Marks the pillar as the structural one (the keystone of a sound

@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Minus, Plus, Target, Timer, Users } from "lucide-react";
-
 import { BRAND, Button,
   Caption,
   FeedbackPanel,
@@ -11,6 +9,8 @@ import { BRAND, Button,
   withOpacity, } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useDifficultyAdjustment } from "../hooks";
+
+import { Minus, Plus, Target, Timer, Users } from "@icons";
 
 type Props = {
   /** Fired once the reader shifts the difficulty off baseline (gates the tool block). */

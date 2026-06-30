@@ -1,18 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  ArrowDown,
-  CheckCircle,
-  Coins,
-  Info,
-  Pickaxe,
-  RefreshCw,
-  Send,
-  User,
-  Wallet,
-  XCircle,
-} from "lucide-react";
-
 import { Badge,
 BRAND,   Button,
   Caption,
@@ -26,6 +13,19 @@ import { useUTXOTransactionBuilder } from "../hooks";
 import type { CardTone } from "../types";
 
 import { TxCard } from "./TxCard";
+
+import {
+  ArrowDown,
+  CheckCircle,
+  Coins,
+  Info,
+  Pickaxe,
+  RefreshCw,
+  Send,
+  User,
+  Wallet,
+  XCircle,
+} from "@icons";
 
 // ── Card (unified, used for inputs, outputs, fees) ──────────────────────────
 

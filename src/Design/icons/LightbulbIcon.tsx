@@ -1,5 +1,6 @@
-import { type FC, type CSSProperties } from "react";
-import { Lightbulb } from "lucide-react";
+import { type CSSProperties,type FC } from "react";
+
+import { Lightbulb } from "@icons";
 
 type LightbulbIconProps = {
   style?: CSSProperties;

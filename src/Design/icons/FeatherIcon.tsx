@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import { Feather } from "lucide-react";
+
+import { Feather } from "@icons";
 
 type Props = {
   size?: string;

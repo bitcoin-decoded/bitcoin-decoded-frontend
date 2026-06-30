@@ -1,12 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
-import { AlertTriangle, type LucideIcon } from "lucide-react";
-
 import { BRAND, Caption, FeedbackPanel, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 
+import { AlertTriangle, type IconType } from "@icons";
+
 type Props = {
-  icon: LucideIcon;
+  icon: IconType;
   label: string;
   statePhrase: string;
   relations: number;

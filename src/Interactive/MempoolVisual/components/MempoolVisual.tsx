@@ -1,7 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import { AlertTriangle, Box, CircleCheck, Inbox, PlusCircle, RotateCcw } from "lucide-react";
-
 import { Badge,
 BRAND,   Button,
   Caption,
@@ -16,6 +14,8 @@ import { useMempoolVisual } from "../hooks";
 import type { MempoolVariant } from "../types";
 
 import { TxRow } from "./TxRow";
+
+import { AlertTriangle, Box, CircleCheck, Inbox, PlusCircle, RotateCcw } from "@icons";
 
 type Props = {
   variant?: MempoolVariant;

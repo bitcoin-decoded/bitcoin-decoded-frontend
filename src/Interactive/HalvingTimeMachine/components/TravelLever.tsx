@@ -1,9 +1,9 @@
 import { type FC } from "react";
 
-import { Zap } from "lucide-react";
-
 import { Button } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+
+import { Zap } from "@icons";
 
 type Props = {
   traveling: boolean;

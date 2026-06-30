@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { CircleCheck, Compass } from "lucide-react";
-
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
 import { BRAND, usePageTheme } from "../Theme";
+
+import { CircleCheck, Compass } from "@icons";
 
 type Props = {
   /** How many distinct items have been opened at least once. */

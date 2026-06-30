@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Lock } from "lucide-react";
-
 import { usePageTheme, withOpacity } from "../../Design";
 import { getModuleRamp } from "../helpers";
 import type { Badge } from "../types";
+
+import { Lock } from "@icons";
 
 type Size = "sm" | "md" | "lg";
 

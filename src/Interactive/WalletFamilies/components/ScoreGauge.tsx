@@ -1,14 +1,14 @@
 import { type CSSProperties, type FC } from "react";
 
-import type { LucideIcon } from "lucide-react";
-
 import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+
+import type { IconType } from "@icons";
 
 type Props = {
   /** Attribute name (e.g. "Simplicité"). */
   label: string;
   /** Lucide glyph prefixing the label. */
-  icon: LucideIcon;
+  icon: IconType;
   /** Filled segments, 0..max. */
   score: number;
   /** Filled-pip color (the wallet card's accent). */

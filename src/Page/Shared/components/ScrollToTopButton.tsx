@@ -1,10 +1,10 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowUp } from "lucide-react";
-
 import { useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useScrollToTop } from "../hooks";
+
+import { ArrowUp } from "@icons";
 
 /**
  * Floating chevron at the bottom-right of the viewport that fades in once

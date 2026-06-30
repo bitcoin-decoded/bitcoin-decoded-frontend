@@ -1,18 +1,5 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  Banknote,
-  Building2,
-  ChevronDown,
-  Handshake,
-  HardDrive,
-  Hourglass,
-  Landmark,
-  type LucideIcon,
-  Smartphone,
-  TrendingUp,
-} from "lucide-react";
-
 import { BRAND, Caption, SurfaceCard, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import type { PathFinderCopy } from "../data";
@@ -20,12 +7,25 @@ import type { SectionPlan, SubCategoryId, WalletSection } from "../types";
 
 import { SubCategoryRow } from "./SubCategoryRow";
 
-const ICON_BY_SECTION: Record<WalletSection, LucideIcon> = {
+import {
+  Banknote,
+  Building2,
+  ChevronDown,
+  Handshake,
+  HardDrive,
+  Hourglass,
+  type IconType,
+  Landmark,
+  Smartphone,
+  TrendingUp,
+} from "@icons";
+
+const ICON_BY_SECTION: Record<WalletSection, IconType> = {
   acquisition: TrendingUp,
   detention: Hourglass,
 };
 
-const ICON_BY_SUB: Record<SubCategoryId, LucideIcon> = {
+const ICON_BY_SUB: Record<SubCategoryId, IconType> = {
   exchange: Building2,
   p2p: Handshake,
   atm: Banknote,

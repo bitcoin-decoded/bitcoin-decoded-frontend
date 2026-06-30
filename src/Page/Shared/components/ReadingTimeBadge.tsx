@@ -1,9 +1,9 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Clock } from "lucide-react";
-
 import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
 import { useReadingTime } from "../hooks";
+
+import { Clock } from "@icons";
 
 /**
  * Reading-time estimate, ledger register: a quiet mono `~ N min` under the

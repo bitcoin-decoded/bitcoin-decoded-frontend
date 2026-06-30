@@ -1,9 +1,9 @@
 import { type CSSProperties, type FC } from "react";
 
-import { ArrowDown, ArrowUp, Lock } from "lucide-react";
-
 import { Button, Caption, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+
+import { ArrowDown, ArrowUp, Lock } from "@icons";
 
 type Props = {
   isFirst: boolean;

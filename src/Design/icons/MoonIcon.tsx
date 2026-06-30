@@ -1,5 +1,6 @@
 import { type FC } from "react";
-import { Moon } from "lucide-react";
+
+import { Moon } from "@icons";
 
 /**
  * Moon icon for the dark theme toggle.
