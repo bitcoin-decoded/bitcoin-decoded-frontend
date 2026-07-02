@@ -24,14 +24,7 @@ import {
   Zap,
 } from "@icons";
 
-/**
- * The full catalog, in display order (each module's chapters, then its
- * synthesis-quiz trophy). Chapter badge ids ARE the chapter route names, so the
- * reading engine can award by `chapterId`; names reuse the chapter's nav title.
- * Module-quiz badges use dedicated ids + names.
- */
 export const BADGES: Badge[] = [
-  // ── Module 1 - Le système bancaire (blue) ─────────────────────────────────
   {
     id: ROUTE_NAME.Banking_1,
     kind: "chapter",
@@ -81,8 +74,6 @@ export const BADGES: Badge[] = [
     icon: Trophy,
     nameKey: "badges.moduleQuiz.banking",
   },
-
-  // ── Module 2 - Les lois de la monnaie (violet) ────────────────────────────
   {
     id: ROUTE_NAME.MoneyLaws_1,
     kind: "chapter",
@@ -125,8 +116,6 @@ export const BADGES: Badge[] = [
     icon: Trophy,
     nameKey: "badges.moduleQuiz.moneyLaws",
   },
-
-  // ── Module 3 - Bitcoin (amber) ────────────────────────────────────────────
   {
     id: ROUTE_NAME.Bitcoin_1,
     kind: "chapter",
