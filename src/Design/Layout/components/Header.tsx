@@ -1,10 +1,10 @@
-import { type CSSProperties, type FC, type ReactNode, useState } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { LanguageToggle, useTranslation } from "../../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 import type { Breakpoint } from "../../Responsive";
 import { BRAND, getBrandGold, THEME_COLORS, ThemeToggle, useThemeContext } from "../../Theme";
-import { useHeaderHidden } from "../hooks";
+import { useHeader, useHeaderHidden } from "../hooks";
 
 import { HamburgerButton } from "./HamburgerButton";
 
@@ -13,7 +13,6 @@ type Props = {
   isDrawerOpen?: boolean;
   onToggleDrawer?: () => void;
   breakpoint?: Breakpoint;
-  /** Optional action rendered at the start of the right-hand control group. */
   rightSlot?: ReactNode;
 };
 
@@ -32,19 +31,11 @@ export const Header: FC<Props> = ({
 
   const isMobile = breakpoint === "mobile";
 
-  const [isWordmarkHovered, setIsWordmarkHovered] = useState(false);
+  const { isWordmarkHovered, setIsWordmarkHovered } = useHeader();
 
-  // Hide-on-scroll-down behavior preserved (shared with the sidebar via
-  // useHeaderHidden). When the drawer is open we FORCE the header visible
-  // so the user can always reach the close (X) button.
   const isHidden = useHeaderHidden();
   const effectivelyHidden = isHidden && !isDrawerOpen;
 
-  // The ledger header drops the orange sunrise halo (orange is now a
-  // reserved Bitcoin-only signal). Instead, the brand signature itself —
-  // the gold rule broken by a centered carré-bloc, identical to the one on
-  // SurfaceCard tops — forms the header's bottom edge. The chrome reads
-  // as part of the same vocabulary as the page bodies.
   const headerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -69,11 +60,6 @@ export const Header: FC<Props> = ({
     gap: "0.75rem",
   };
 
-  // The horizontal wordmark composition: "Bitcoin" in the wordmark face
-  // (BRAND.fonts.wordmark = Cormorant Garamond, the SAME face as the
-  // BitcoinDecodedLogo lockup so the header and homepage marks match),
-  // centered carré-bloc separator (single-figure vocabulary), "Decoded" in
-  // italic. On hover the carré subtly brightens; the text stays still.
   const wordmarkButtonStyle: CSSProperties = {
     background: "none",
     border: "none",
@@ -112,10 +98,6 @@ export const Header: FC<Props> = ({
     flexShrink: 0,
   };
 
-  // Just a gold hairline as the header's bottom edge — no carré. The carré
-  // is now reserved to the wordmark itself and the drop-block lettrine, so
-  // the signature stays rare and meaningful. Repetition on every rule
-  // turned it into wallpaper.
   const ruleLineStyle: CSSProperties = {
     height: BRAND.figures.ruleThickness,
     background: gold,

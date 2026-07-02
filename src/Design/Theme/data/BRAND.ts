@@ -31,38 +31,16 @@ export const BRAND = {
     coinSize: 14,
     ruleThickness: 1,
   },
-  /**
-   * Component type scale — the SINGLE source for font sizes INSIDE interactive
-   * components (sims, panels, tables). Just TWO sizes, one step below the 17px
-   * chapter prose: components read as a distinct, denser "instrument" register.
-   * Route EVERY component font-size through these tokens — never hardcode a rem
-   * value, and never go below 12px (the legibility floor the user set).
-   *   body = 14px — PRIMARY: content, table cells, panel bodies, component titles
-   *   label / note / micro = 12px — SECONDARY: labels, captions, units, chips,
-   *     hints. (Three names kept for code clarity; all resolve to the 12px floor.)
-   */
   fontSize: {
     body: "0.875rem",
     label: "0.75rem",
     note: "0.75rem",
     micro: "0.75rem",
   },
-  /**
-   * Readable pedagogical type stack, chosen for sustained reading. Literata
-   * (display) is a screen-first reading serif designed for Google Play Books;
-   * Source Serif 4 (body) is a highly legible text serif; Cutive Mono (mono)
-   * is a typewriter face for technical metadata. None of these is the
-   * AI-default ("Inter / Satoshi / Fraunces / JetBrains Mono") that you see on
-   * every editorial or fintech site since 2022. The stack is the typography of
-   * the site's voice, not its template.
-   */
   fonts: {
     display: "'Literata', 'Cormorant Garamond', Georgia, serif",
     body: "'Source Serif 4', Georgia, serif",
     mono: "'Cutive Mono', 'JetBrains Mono', ui-monospace, monospace",
-    /** Logotype wordmark only (the "Bitcoin Decoded" lockup + avatar "B"). A
-     * deliberate high-contrast Garamond kept distinct from the UI display face,
-     * so the brand mark never shifts when the reading stack changes. */
     wordmark: "'Cormorant Garamond', Georgia, serif",
   },
 };

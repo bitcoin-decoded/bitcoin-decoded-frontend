@@ -6,14 +6,10 @@ import type { BadgesStore, EarnedBadges } from "../types";
 
 type State = {
   earned: EarnedBadges;
-  /** FIFO of badge ids awaiting their unlock celebration. */
   queue: string[];
 };
 
 export const useBadgesStore = (): BadgesStore => {
-  // earned + queue are one atomic state: a grant that enqueues a celebration is
-  // a single transition, so the functional updater reads the current `earned`
-  // straight from `prev` — no ref mirror, and `award` stays identity-stable.
   const [{ earned, queue }, setState] = useState<State>(() => ({
     earned: readEarnedBadges(),
     queue: [],
@@ -28,9 +24,9 @@ export const useBadgesStore = (): BadgesStore => {
   }, [earned]);
 
   const award = useCallback((id: string) => {
-    if (!BADGE_BY_ID.has(id)) return; // not a real badge (e.g. a chapter with no badge)
+    if (!BADGE_BY_ID.has(id)) return;
     setState((prev) => {
-      if (prev.earned[id]) return prev; // already earned - no re-grant, no re-celebration
+      if (prev.earned[id]) return prev;
       return {
         earned: { ...prev.earned, [id]: Date.now() },
         queue: [...prev.queue, id],

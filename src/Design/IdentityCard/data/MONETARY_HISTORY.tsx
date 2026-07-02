@@ -5,8 +5,10 @@ import or from "../../../Design/img/Or.png";
 import sel from "../../../Design/img/sel.jpg";
 import pierreYap from "../../../Design/img/yap_stone.jpg";
 import type { Language } from "../../../I18n";
-import { CloverLeafIcon, DivisionIcon, EqualIcon, FeatherIcon, Reference, TimeIcon } from "../..";
+import { Reference } from "../..";
 import type { MonetaryItem } from "../types";
+
+import { Equal, Feather, Hourglass, Scissors, ShieldCheck } from "@icons";
 
 export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
   const fr = language === "fr";
@@ -31,19 +33,19 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
       imgSrc: grainOrge,
       characteristics: [
         {
-          icon: <TimeIcon />,
+          icon: <Hourglass size={20} />,
           label: fr ? "Durabilité" : "Durability",
           score: 1,
         },
         {
-          icon: <FeatherIcon />,
+          icon: <Feather size={20} />,
           label: fr ? "Portabilité" : "Portability",
           score: 2,
         },
-        { icon: <DivisionIcon />, label: fr ? "Divisibilité" : "Divisibility", score: 5 },
-        { icon: <EqualIcon />, label: fr ? "Fongibilité" : "Fungibility", score: 4 },
+        { icon: <Scissors size={20} />, label: fr ? "Divisibilité" : "Divisibility", score: 5 },
+        { icon: <Equal size={20} />, label: fr ? "Fongibilité" : "Fungibility", score: 4 },
         {
-          icon: <CloverLeafIcon />,
+          icon: <ShieldCheck size={20} />,
           label: fr ? "Dureté" : "Hardness",
           score: 3,
         },
@@ -74,15 +76,15 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
       imgSrc: sel,
       characteristics: [
         {
-          icon: <TimeIcon />,
+          icon: <Hourglass size={20} />,
           label: fr ? "Durabilité" : "Durability",
           score: 2,
         },
-        { icon: <FeatherIcon />, label: fr ? "Portabilité" : "Portability", score: 4 },
-        { icon: <DivisionIcon />, label: fr ? "Divisibilité" : "Divisibility", score: 5 },
-        { icon: <EqualIcon />, label: fr ? "Fongibilité" : "Fungibility", score: 5 },
+        { icon: <Feather size={20} />, label: fr ? "Portabilité" : "Portability", score: 4 },
+        { icon: <Scissors size={20} />, label: fr ? "Divisibilité" : "Divisibility", score: 5 },
+        { icon: <Equal size={20} />, label: fr ? "Fongibilité" : "Fungibility", score: 5 },
         {
-          icon: <CloverLeafIcon />,
+          icon: <ShieldCheck size={20} />,
           label: fr ? "Dureté" : "Hardness",
           score: 1,
         },
@@ -114,19 +116,19 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
       imgSrc: pierreYap,
       characteristics: [
         {
-          icon: <TimeIcon />,
+          icon: <Hourglass size={20} />,
           label: fr ? "Durabilité" : "Durability",
           score: 5,
         },
         {
-          icon: <FeatherIcon />,
+          icon: <Feather size={20} />,
           label: fr ? "Portabilité" : "Portability",
           score: 0,
         },
-        { icon: <DivisionIcon />, label: fr ? "Divisibilité" : "Divisibility", score: 1 },
-        { icon: <EqualIcon />, label: fr ? "Fongibilité" : "Fungibility", score: 3 },
+        { icon: <Scissors size={20} />, label: fr ? "Divisibilité" : "Divisibility", score: 1 },
+        { icon: <Equal size={20} />, label: fr ? "Fongibilité" : "Fungibility", score: 3 },
         {
-          icon: <CloverLeafIcon />,
+          icon: <ShieldCheck size={20} />,
           label: fr ? "Dureté" : "Hardness",
           score: 3,
         },
@@ -171,12 +173,12 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
       ),
       imgSrc: cauris,
       characteristics: [
-        { icon: <TimeIcon />, label: fr ? "Durabilité" : "Durability", score: 4 },
-        { icon: <FeatherIcon />, label: fr ? "Portabilité" : "Portability", score: 5 },
-        { icon: <DivisionIcon />, label: fr ? "Divisibilité" : "Divisibility", score: 5 },
-        { icon: <EqualIcon />, label: fr ? "Fongibilité" : "Fungibility", score: 5 },
+        { icon: <Hourglass size={20} />, label: fr ? "Durabilité" : "Durability", score: 4 },
+        { icon: <Feather size={20} />, label: fr ? "Portabilité" : "Portability", score: 5 },
+        { icon: <Scissors size={20} />, label: fr ? "Divisibilité" : "Divisibility", score: 5 },
+        { icon: <Equal size={20} />, label: fr ? "Fongibilité" : "Fungibility", score: 5 },
         {
-          icon: <CloverLeafIcon />,
+          icon: <ShieldCheck size={20} />,
           label: fr ? "Dureté" : "Hardness",
           score: 2,
         },
@@ -193,20 +195,20 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
         : "Gold - imperishable and rare across the world - is still the superstar of stores of value. Mining it takes serious work, time, and resources.",
       imgSrc: or,
       characteristics: [
-        { icon: <TimeIcon />, label: fr ? "Durabilité" : "Durability", score: 5 },
+        { icon: <Hourglass size={20} />, label: fr ? "Durabilité" : "Durability", score: 5 },
         {
-          icon: <FeatherIcon />,
+          icon: <Feather size={20} />,
           label: fr ? "Portabilité" : "Portability",
           score: 2,
         },
         {
-          icon: <DivisionIcon />,
+          icon: <Scissors size={20} />,
           label: fr ? "Divisibilité" : "Divisibility",
           score: 2,
         },
-        { icon: <EqualIcon />, label: fr ? "Fongibilité" : "Fungibility", score: 5 },
+        { icon: <Equal size={20} />, label: fr ? "Fongibilité" : "Fungibility", score: 5 },
         {
-          icon: <CloverLeafIcon />,
+          icon: <ShieldCheck size={20} />,
           label: fr ? "Dureté" : "Hardness",
           score: 5,
         },
@@ -240,19 +242,19 @@ export const getMonetaryHistory = (language: Language): MonetaryItem[] => {
       imgSrc: oneDollar,
       characteristics: [
         {
-          icon: <TimeIcon />,
+          icon: <Hourglass size={20} />,
           label: fr ? "Durabilité" : "Durability",
           score: 3,
         },
         {
-          icon: <FeatherIcon />,
+          icon: <Feather size={20} />,
           label: fr ? "Portabilité" : "Portability",
           score: 5,
         },
-        { icon: <DivisionIcon />, label: fr ? "Divisibilité" : "Divisibility", score: 5 },
-        { icon: <EqualIcon />, label: fr ? "Fongibilité" : "Fungibility", score: 5 },
+        { icon: <Scissors size={20} />, label: fr ? "Divisibilité" : "Divisibility", score: 5 },
+        { icon: <Equal size={20} />, label: fr ? "Fongibilité" : "Fungibility", score: 5 },
         {
-          icon: <CloverLeafIcon />,
+          icon: <ShieldCheck size={20} />,
           label: fr ? "Dureté" : "Hardness",
           score: 0,
         },

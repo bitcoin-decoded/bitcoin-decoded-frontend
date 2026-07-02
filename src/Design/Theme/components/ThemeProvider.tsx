@@ -1,8 +1,11 @@
+import { useEffect, useMemo, useState } from "react";
+
 import type { FC, ReactNode } from "react";
-import { useState, useMemo, useEffect } from "react";
-import { ThemeContext } from "./ThemeContext";
-import type { Theme } from "../types";
+
 import { THEME_COLORS } from "../data";
+import type { Theme } from "../types";
+
+import { ThemeContext } from "./ThemeContext";
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
@@ -23,10 +26,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     const colors = THEME_COLORS[theme];
     document.body.style.backgroundColor = colors.base.background.primary;
-  }, [theme]); // Cet effet se déclenche à chaque changement de thème
+  }, [theme]);
 
-
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };

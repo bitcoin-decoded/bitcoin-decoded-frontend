@@ -10,13 +10,6 @@ type Props = {
   source?: string;
 };
 
-/**
- * Editorial quote — a single big opening mark in the chapter-title face
- * (Cabin Sketch) and module color, over a light module wash with sharp
- * corners (same backdrop register as the prelude). The previous version's
- * gradient-border + rounded card + paired quote marks belonged to the
- * AI-template era; this one reads as a hand-set pull-quote.
- */
 export const Quote: FC<Props> = ({ children, author, source }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
@@ -38,8 +31,6 @@ export const Quote: FC<Props> = ({ children, author, source }) => {
     textAlign: "left",
   };
 
-  // One big opening mark, in the title face + module color. Anchors the quote
-  // like a hand-drawn quotation the teacher chalked beside the lesson.
   const openingMarkStyle: CSSProperties = {
     color: moduleAccent,
     fontSize: isMobile ? "3.25rem" : "3.75rem",

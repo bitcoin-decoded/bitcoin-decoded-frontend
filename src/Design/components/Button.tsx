@@ -15,49 +15,19 @@ type Size = "sm" | "md";
 
 type Props = {
   children: ReactNode;
-  /**
-   * Visual weight.
-   * - `primary`: bracketed mono small-caps (`[ label ]`) — the workhorse CTA.
-   *   Gold brackets, no fill, no gradient. Brackets brighten on hover.
-   * - `secondary`: mono small-caps with a dashed underline. Quiet sibling.
-   * - `ghost`: plain mono text, no decoration. Tertiary actions.
-   * - `stamped`: gold carré-bloc + label on a hairline rule baseline —
-   *   the "official stamp" CTA, reserved for critical actions (validate
-   *   a quiz, execute a simulation, seal a block). Use sparingly.
-   * @default "primary"
-   */
   variant?: Variant;
-  /** @default "md" */
   size?: Size;
-  /**
-   * Override the bracket / stamp color. Defaults to brand gold. Keep `undefined`
-   * unless the surrounding context demands a different signal color.
-   */
   color?: string;
-  /** Optional icon rendered before or after the label. */
   icon?: ReactNode;
   iconPosition?: "left" | "right";
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
   ariaLabel?: string;
-  /** Stretch to fill the parent's main axis. */
   fullWidth?: boolean;
-  /** Inline style escape hatch (merged last). */
   style?: CSSProperties;
 };
 
-/**
- * Ledger-system button primitive. Replaces the previous gradient + accent
- * border recipe with four variants derived from print and editorial
- * convention: bracketed (primary), dashed underline (secondary), plain mono
- * (ghost), and gold-carré stamp (stamped CTA). No gradients, no halos,
- * sharp corners (radius 0), mono small-caps everywhere.
- *
- * The `color` prop overrides the gold accent for surfaces that need to
- * carry a specific semantic signal — kept opt-in so the default behavior
- * stays uniform (most callers should pass nothing).
- */
 export const Button: FC<Props> = ({
   children,
   variant = "primary",
@@ -85,9 +55,6 @@ export const Button: FC<Props> = ({
   const neutralTextStrong = colors.base.text.primary;
   const hoverable = !disabled;
   const isLifted = isHovered && hoverable;
-
-  // Sizing — mono labels need a touch more horizontal padding than the
-  // previous Inter labels because mono is wider per glyph.
   const padX = size === "sm" ? "0.9rem" : "1.25rem";
   const padY = size === "sm" ? "0.45rem" : "0.6rem";
   const padXMd = size === "sm" ? "1rem" : "1.5rem";
@@ -95,8 +62,6 @@ export const Button: FC<Props> = ({
 
   const baseStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    // Label size centralized in the `button` typography role (md = 16px desktop,
-    // the size the block nav prev/next controls want); sm stays compact.
     fontSize: size === "sm" ? typo.buttonSmall.fontSize : typo.button.fontSize,
     fontWeight: 500,
     letterSpacing: variant === "ghost" ? "0.08em" : "0.14em",
@@ -111,26 +76,25 @@ export const Button: FC<Props> = ({
     width: fullWidth ? "100%" : "auto",
     whiteSpace: "nowrap",
     boxSizing: "border-box",
-    // Kill the browser-default <button> border. Without this, every variant
-    // that doesn't set its own border leaked a crude ~2px outset border
-    // (visible especially in light mode). Variants that need a border
-    // (secondary's dashed underline, stamped's boxed label) set it explicitly.
     border: "none",
     borderRadius: 0,
     background: "transparent",
     color: neutralTextStrong,
+    // Hover lifts the button a hair; a press settles it back down for a
+    // tactile click. Stamped overrides this with its own press transform.
+    transform: isPressed && hoverable ? "translateY(0)" : isLifted ? "translateY(-1px)" : "none",
   };
 
   let variantStyle: CSSProperties = {};
   let labelDecoration: { before?: ReactNode; after?: ReactNode } = {};
 
   if (variant === "primary") {
-    // Brackets at full strength at rest; label in primary ink (the previous
-    // text.secondary resting color read ton-sur-ton and hard to read).
     const bracketColor = isLifted ? accent : withOpacity(accent, 0.9);
     variantStyle = {
       padding: isMobile ? `${padY} ${padX}` : `${padYMd} ${padXMd}`,
       color: colors.base.text.primary,
+      // A faint gold ledger-cell fills in on hover, behind the [ brackets ].
+      background: withOpacity(accent, isLifted ? 0.08 : 0),
     };
     labelDecoration = {
       before: (
@@ -155,11 +119,9 @@ export const Button: FC<Props> = ({
     variantStyle = {
       padding: isMobile ? `${padY} 0.4rem` : `${padYMd} 0.5rem`,
       color: isLifted ? neutralTextStrong : neutralText,
+      background: withOpacity(neutralText, isLifted ? 0.06 : 0),
     };
   } else if (variant === "stamped") {
-    // Stamp: a gold carré on the left, the label boxed to its right with a
-    // hairline rule on top/right/bottom. The whole thing reads as a stamped
-    // entry on a ledger. Pressing nudges it down 1px like a cachet.
     const stampHeight = size === "sm" ? 24 : 28;
     variantStyle = {
       padding: 0,
@@ -197,7 +159,6 @@ export const Button: FC<Props> = ({
     };
   }
 
-  // Wrap label for stamped to box it with hairline borders next to the carré.
   const renderedLabel =
     variant === "stamped" ? (
       <span

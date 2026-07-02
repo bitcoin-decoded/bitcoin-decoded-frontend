@@ -1,11 +1,6 @@
 import { BADGE_BY_ID, BADGES_STORAGE_KEY } from "../data";
 import type { EarnedBadges } from "../types";
 
-/**
- * Reads the persisted earned-badges map, dropping unknown ids (catalog edits)
- * and malformed timestamps. Mirrors the try/catch discipline of the other
- * localStorage readers (useSynthesisQuiz, useBlockReader).
- */
 export const readEarnedBadges = (): EarnedBadges => {
   try {
     const raw = localStorage.getItem(BADGES_STORAGE_KEY);

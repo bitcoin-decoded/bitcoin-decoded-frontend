@@ -4,55 +4,24 @@ import { useBreakpoint } from "../Responsive";
 import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 export type RangeLedgerTick = {
-  /** Value at this tick position. */
   value: number;
-  /** Optional label below the tick (e.g. "village", "tribu"). */
   label?: string;
 };
 
 type Props = {
-  /** Current value. */
   value: number;
-  /** Setter called with each change. */
   onChange: (value: number) => void;
-  /** Minimum range value. */
   min: number;
-  /** Maximum range value. */
   max: number;
-  /** Step size. @default 1 */
   step?: number;
-  /**
-   * Optional labelled ticks. Their positions are computed from the value
-   * within `[min, max]`. The endpoints (`min` and `max`) are rendered
-   * automatically as bookends — don't list them here unless you want a
-   * label below them.
-   */
   ticks?: RangeLedgerTick[];
-  /** Top-left label (e.g. "taux réserve", "taille du groupe"). */
   label?: string;
-  /** Right-aligned value/unit (e.g. "10 %", "150 personnes"). */
   valueDisplay?: string;
-  /** Override the thumb + trail color. Defaults to brand gold. */
   color?: string;
-  /** Disabled state. */
   disabled?: boolean;
-  /** Optional aria-label for the underlying input. */
   ariaLabel?: string;
 };
 
-/**
- * The ledger-system slider — the single slider primitive, replacing the
- * Material-style native range inputs used across the sims. A
- * hairline navy/cream track with regularly-marked ticks, a gold circle
- * (cercle-coin) thumb, and a gold trail filling from `min` to the current
- * value. Per the block-vs-coin dichotomy (rule 9), the thumb is a CIRCLE
- * because it represents a value being manipulated — squares are reserved
- * to structural markers (block-header rules, drop-block, wordmark).
- *
- * Built on a native `<input type="range">` for accessibility (keyboard,
- * touch, screen reader) with a visual overlay rendered as CSS variables
- * inline. The native input is invisible but still drives the value.
- */
 export const RangeLedger: FC<Props> = ({
   value,
   onChange,
@@ -106,9 +75,6 @@ export const RangeLedger: FC<Props> = ({
   const trackHeight = 14;
   const thumbSize = isMobile ? 13 : BRAND.figures.coinSize;
 
-  // The visual layer — a relative-positioned container holding the track
-  // line, ticks, trail, and thumb. The native input sits on top with
-  // opacity 0 to handle interaction.
   const visualLayerStyle: CSSProperties = {
     position: "relative",
     height: trackHeight,
@@ -147,7 +113,6 @@ export const RangeLedger: FC<Props> = ({
     pointerEvents: "none",
   };
 
-  // The native input — visually hidden but fully functional.
   const inputStyle: CSSProperties = {
     position: "absolute",
     top: 0,

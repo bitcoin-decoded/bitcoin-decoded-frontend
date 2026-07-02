@@ -11,13 +11,6 @@ type Props = {
   disabled?: boolean;
 };
 
-/**
- * Radio-style single-choice option. Shared by the one-question-at-a-time
- * quizzes (PathFinder, SynthesisQuiz): a sharp ledger tag (radius 0) with a
- * filling coin-dot on selection (the circle = the value chosen, per the
- * block-vs-coin rule). `disabled` keeps the selected option fully lit while
- * dimming the others (review / locked state).
- */
 export const OptionButton: FC<Props> = ({ label, selected, accent, onClick, disabled = false }) => {
   const { colors } = usePageTheme();
   const [hover, setHover] = useState(false);

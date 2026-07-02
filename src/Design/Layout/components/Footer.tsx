@@ -9,17 +9,6 @@ type Props = {
   breakpoint?: Breakpoint;
 };
 
-/**
- * The ledger footer — mirrors the header's bottom edge. A gold hairline
- * broken by a centered carré-bloc seals the bottom of every page, the
- * "block footer" of the document considered as a chained registry. The
- * previous orange sunrise halo is gone (orange is now a reserved
- * Bitcoin-only signal). Content is intentionally minimal: the discreet
- * donation flow and the copyright line, both in mono.
- *
- * Future Phase 2c (or Phase 3) will optionally surface a live Bitcoin
- * block height here as a "the site beats with the chain" beacon.
- */
 export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
   const { theme } = useThemeContext();
   const { t } = useTranslation();
@@ -37,8 +26,6 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
     fontFamily: BRAND.fonts.mono,
   };
 
-  // Top edge: just a gold hairline mirroring the header's bottom edge.
-  // No carré — the signature stays reserved to wordmark + drop-block.
   const ruleLineStyle: CSSProperties = {
     height: BRAND.figures.ruleThickness,
     background: gold,

@@ -1,16 +1,3 @@
-// Central icon set — Phosphor icons re-exported under the names the app uses.
-// This is the ONE place the icon library is bound: the rest of the app imports
-// from "@icons" (alias → this file) and never from the underlying package, so a
-// future library swap touches only this file. The app-facing names are kept
-// stable (identical to the previous lucide ones) so call sites only change their
-// import path.
-//
-// Phosphor v2 deprecated the bare exports (e.g. `Bank`) in favour of the
-// `*Icon`-suffixed ones (`BankIcon`); we import the suffixed exports and alias
-// them back to the app-facing names.
-//
-// A handful have no direct Phosphor twin and use the closest match:
-//   Pickaxe → Hammer, Activity → Pulse, Telescope → Binoculars.
 export type { Icon as IconType } from "@phosphor-icons/react";
 export {
   PulseIcon as Activity,

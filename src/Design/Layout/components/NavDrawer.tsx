@@ -1,7 +1,9 @@
-import { type FC, type CSSProperties } from "react";
-import { NavBar } from "./NavBar";
-import { useThemeContext, THEME_COLORS } from "../../Theme";
+import { type CSSProperties, type FC } from "react";
+
 import type { Breakpoint } from "../../Responsive";
+import { THEME_COLORS, useThemeContext } from "../../Theme";
+
+import { NavBar } from "./NavBar";
 
 type Props = {
   isOpen: boolean;
@@ -49,17 +51,8 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose, breakpoint }) => {
 
   return (
     <>
-      <div
-        style={backdropStyle}
-        onClick={onClose}
-        aria-hidden="true"
-      />
-      <nav
-        style={drawerStyle}
-        role="dialog"
-        aria-modal={isOpen}
-        aria-hidden={!isOpen}
-      >
+      <div style={backdropStyle} onClick={onClose} aria-hidden="true" />
+      <nav style={drawerStyle} role="dialog" aria-modal={isOpen} aria-hidden={!isOpen}>
         <NavBar />
       </nav>
     </>

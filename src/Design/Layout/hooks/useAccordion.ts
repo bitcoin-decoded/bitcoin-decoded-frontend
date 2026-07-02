@@ -1,11 +1,5 @@
 import { useCallback, useState } from "react";
 
-/**
- * Single-open accordion state. At most one key is open at a time;
- * toggling the open key closes it, toggling a different key swaps it.
- * Generic over the key type so it can be reused outside the navbar
- * (any list of mutually exclusive disclosure panels).
- */
 export const useAccordion = <K>(initialKey: K | null = null) => {
   const [openKey, setOpenKey] = useState<K | null>(initialKey);
 

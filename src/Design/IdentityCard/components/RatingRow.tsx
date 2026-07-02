@@ -6,7 +6,6 @@ type Props = {
   icon: ReactNode;
   label: string;
   score: number;
-  /** Smaller label + icon + stars, for dense gallery cards. */
   compact?: boolean;
 };
 

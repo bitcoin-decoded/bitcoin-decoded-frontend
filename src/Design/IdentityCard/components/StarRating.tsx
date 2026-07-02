@@ -4,7 +4,6 @@ import { usePageTheme } from "../../Theme/hooks/usePageTheme";
 
 type Props = {
   score: number;
-  /** Smaller stars + tighter gap, for dense gallery cards. */
   compact?: boolean;
 };
 

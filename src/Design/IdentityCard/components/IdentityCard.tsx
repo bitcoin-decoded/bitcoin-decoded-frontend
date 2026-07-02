@@ -3,6 +3,7 @@ import { type CSSProperties, type FC, type KeyboardEvent, type ReactNode } from 
 import { useTranslation } from "../../../I18n";
 import { useBreakpoint } from "../../Responsive";
 import { usePageTheme } from "../../Theme/hooks/usePageTheme";
+import { getIdentityCardRamp } from "../helpers";
 import { useIdentityCard } from "../hooks";
 import type { IdentityCharacteristic } from "../types";
 
@@ -12,21 +13,8 @@ type Props = {
   profile: string;
   characteristics: IdentityCharacteristic[];
   isExpandable?: boolean;
-  /**
-   * Tighter type ramp + spacing, for dense multi-column grids (e.g. the
-   * monetary history gallery). Default `false` keeps the original roomy
-   * card used in the 2-up character layouts.
-   */
   compact?: boolean;
-  /**
-   * Grow to fill the height of a stretched flex parent, so side-by-side cards
-   * share a uniform height. Opt-in: default `false` leaves layout untouched.
-   */
   fillHeight?: boolean;
-  /**
-   * Fired when an expandable card opens. Lets a gallery track which cards a
-   * reader has explored (e.g. to gate a block). No-op for non-expandable cards.
-   */
   onExpand?: () => void;
 };
 
@@ -53,48 +41,8 @@ export const IdentityCard: FC<Props> = ({
     setIsExpandButtonHovered,
   } = useIdentityCard(isExpandable, onExpand);
 
-  // Force the compact ramp on mobile regardless of the prop: the roomy ramp
-  // (33% avatar, 6rem top margin) stretches a single-column card to nearly
-  // the full viewport height. Desktop opt-in remains driven by `compact`.
   const effectiveCompact = compact || isMobile;
-
-  // Single source for the two size tiers. `compact` drives the gallery look;
-  // the default keeps the original roomy card untouched.
-  //
-  // The compact avatar is clamped (not a raw 33%) so it can't balloon on a
-  // wide single-column card. The top margin and content padding are derived
-  // from the same value, so the protruding halves always clear the content
-  // above and below whatever the card width.
-  const compactAvatarSize = "min(33%, 8.5rem)";
-  const ramp = effectiveCompact
-    ? {
-        avatarSize: compactAvatarSize,
-        avatarMarginTop: `calc(${compactAvatarSize} / 2 + 0.2rem)`,
-        marginBottom: "0.75rem",
-        contentPadTop: `calc(${compactAvatarSize} / 2 + 0.9rem)`,
-        contentPadX: "1.1rem",
-        contentPadBottom: "0.9rem",
-        baseFont: "0.85rem",
-        nameFont: "1rem",
-        profileFont: "0.7rem",
-        dividerMargin: "0 auto 0.85rem auto",
-        sectionGap: "1rem",
-        radius: "1rem",
-      }
-    : {
-        avatarSize: "33%",
-        avatarMarginTop: "4rem",
-        marginBottom: "1rem",
-        contentPadTop: "calc(15% + 1.25rem)",
-        contentPadX: "1.5rem",
-        contentPadBottom: "1.25rem",
-        baseFont: "1rem",
-        nameFont: "1.25rem",
-        profileFont: "0.9rem",
-        dividerMargin: "0 auto 1rem auto",
-        sectionGap: "1.25rem",
-        radius: "1.25rem",
-      };
+  const ramp = getIdentityCardRamp(effectiveCompact);
 
   const containerStyle: CSSProperties = {
     position: "relative",
@@ -166,10 +114,6 @@ export const IdentityCard: FC<Props> = ({
     letterSpacing: "0.1em",
     color: colors[moduleTheme].border.secondary,
     textTransform: "uppercase",
-    // In compact grids, reserve two profile lines so cards whose profile
-    // wraps and those that don't share the exact same collapsed height -
-    // a uniform baseline that, unlike `align-items: stretch`, never resizes
-    // neighbours when a card expands.
     ...(effectiveCompact ? { lineHeight: 1.4, minHeight: "2.8em" } : {}),
   };
 
@@ -223,8 +167,6 @@ export const IdentityCard: FC<Props> = ({
     letterSpacing: "0.1rem",
   };
 
-  // Each section cascades in (fade + rise) when the card opens, staggered by
-  // index for a premium unfold. Last section carries no bottom gap.
   const sectionStyle = (index: number): CSSProperties => ({
     textAlign: "center",
     marginBottom: index === characteristics.length - 1 ? 0 : ramp.sectionGap,
