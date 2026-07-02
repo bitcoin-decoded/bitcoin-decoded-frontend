@@ -12,8 +12,6 @@ export const LanguageToggle: FC = () => {
   const colors = THEME_COLORS[theme];
   const [isHovered, setIsHovered] = useState(false);
 
-  // Aligned with ThemeToggle and HamburgerButton - same height (2rem),
-  // same border, same hover behavior (subtle bg lift + text brighten).
   const buttonStyle: CSSProperties = {
     height: "2rem",
     minWidth: "2rem",

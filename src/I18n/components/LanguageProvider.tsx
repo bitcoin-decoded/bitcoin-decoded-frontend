@@ -1,7 +1,10 @@
+import { useMemo, useState } from "react";
+
 import type { FC, ReactNode } from "react";
-import { useState, useMemo } from "react";
-import { LanguageContext } from "./LanguageContext";
+
 import type { Language } from "../types";
+
+import { LanguageContext } from "./LanguageContext";
 
 const STORAGE_KEY = "bitcoin-decoded-language";
 
@@ -24,7 +27,5 @@ export const LanguageProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const value = useMemo(() => ({ language, toggleLanguage }), [language]);
 
-  return (
-    <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };

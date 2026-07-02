@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
+import { fixFrenchPunctuation } from "../../FrenchPunctuation";
 import { en, fr } from "../data";
-import { fixFrenchPunctuation } from "../helpers";
 import type { Language } from "../types";
 
 import { useLanguageContext } from "./useLanguageContext";
