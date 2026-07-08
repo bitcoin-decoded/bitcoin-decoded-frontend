@@ -2,11 +2,10 @@ import { type FC, useEffect, useMemo } from "react";
 
 import { FeedbackPanel } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
-import { useToggleSimulator } from "../../Shared/hooks";
+import { BalanceSheet } from "../../BalanceSheet";
+import { useToggleSimulator } from "../../hooks";
+import { SimulatorControls } from "../../SimulatorControls";
 import { getUserBankCompensation } from "../data";
-
-import { BalanceSheet } from "./BalanceSheet";
-import { SimulatorControls } from "./SimulatorControls";
 
 type Props = {
   /** Fired once the compensation has been triggered (the simulator's final state). */

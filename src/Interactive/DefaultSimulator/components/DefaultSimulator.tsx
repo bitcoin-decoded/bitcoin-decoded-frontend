@@ -1,11 +1,10 @@
 import { type FC, useEffect, useMemo } from "react";
 
 import { FrText, useTranslation } from "../../../I18n";
-import { useToggleSimulator } from "../../Shared/hooks";
+import { BalanceSheet } from "../../BalanceSheet";
+import { useToggleSimulator } from "../../hooks";
+import { SimulatorControls } from "../../SimulatorControls";
 import { getUsersDebtsDefault } from "../data";
-
-import { BalanceSheet } from "./BalanceSheet";
-import { SimulatorControls } from "./SimulatorControls";
 
 type Props = {
   /** Fired once the default has been simulated (the simulator's final state). */

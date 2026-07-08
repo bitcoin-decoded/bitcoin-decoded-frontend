@@ -3,11 +3,10 @@ import { type FC, useEffect, useMemo } from "react";
 import { Disclosure, FeedbackPanel, HighlightText, Reference } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { ROUTE_NAME } from "../../../Routing";
-import { useToggleSimulator } from "../../Shared/hooks";
+import { BalanceSheet } from "../../BalanceSheet";
+import { useToggleSimulator } from "../../hooks";
+import { SimulatorControls } from "../../SimulatorControls";
 import { getUserBankCredit } from "../data";
-
-import { BalanceSheet } from "./BalanceSheet";
-import { SimulatorControls } from "./SimulatorControls";
 
 import { Feather } from "@icons";
 

@@ -2,12 +2,11 @@ import { type FC } from "react";
 
 import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { DunbarSlider, MonetaryPillars, MonetaryProperties } from "../../../Interactive";
+import { DunbarSlider, MonetaryGallery, MonetaryPillars, MonetaryProperties } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { Block, BlockReader } from "../../Reading";
 import { ChapterPrelude, PageTemplate } from "../../Shared/";
 
-import { MonetaryGallery } from "./MonetaryGallery";
 
 export const MoneyLaws1Page: FC = () => {
   const { t, language } = useTranslation();

@@ -2,12 +2,11 @@ import { type FC } from "react";
 
 import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { getQuizDataM0, Quiz } from "../../../Interactive";
+import { DefaultSimulator, getQuizDataM0, Quiz } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { Block, BlockReader } from "../../Reading";
 import { ChapterPrelude, PageTemplate } from "../../Shared/";
 
-import { DefaultSimulator } from "./DefaultSimulator";
 
 export const Banking3Page: FC = () => {
   const { t, language } = useTranslation();

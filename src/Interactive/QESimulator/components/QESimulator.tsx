@@ -3,9 +3,8 @@ import { type CSSProperties, type FC, useEffect } from "react";
 import { BRAND, FeedbackPanel, usePageTheme, withOpacity } from "../../../Design";
 import { useBreakpoint } from "../../../Design/Responsive";
 import { FrText, useTranslation } from "../../../I18n";
-import { useToggleSimulator } from "../../Shared/hooks";
-
-import { SimulatorControls } from "./SimulatorControls";
+import { useToggleSimulator } from "../../hooks";
+import { SimulatorControls } from "../../SimulatorControls";
 
 type Props = {
   /** Fired once the QE operation has been run (the simulator's final state). */

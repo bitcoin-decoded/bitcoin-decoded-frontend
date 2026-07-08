@@ -3,9 +3,9 @@ import { type FC } from "react";
 import { MODULE_QUIZ_BADGE_ID, useBadges } from "../../../Achievements";
 import { HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { getQuizDataModule2Synthesis, SynthesisQuiz } from "../../../Interactive";
+import { getQuizDataModule2Synthesis, SynthesisQuiz, useToggleSimulator } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
-import { PageTemplate, useToggleSimulator } from "../../Shared/";
+import { PageTemplate } from "../../Shared/";
 
 export const MoneyLaws6Page: FC = () => {
   const { t, language } = useTranslation();

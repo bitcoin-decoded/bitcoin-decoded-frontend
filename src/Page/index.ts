@@ -28,7 +28,7 @@ export {
   MoneyLaws5Page,
   MoneyLaws6Page,
 } from "./MoneyLaws";
-export { Block, BlockReader, BLOCK_READING_CHAPTERS } from "./Reading";
+export { Block, BLOCK_READING_CHAPTERS,BlockReader } from "./Reading";
 export type { PageMetadata, PageMetadataMap, ReadingTimeEstimate } from "./Shared";
 export {
   ChapterPrelude,
@@ -44,5 +44,4 @@ export {
   useReadingProgress,
   useReadingTime,
   useScrollToTop,
-  useToggleSimulator,
 } from "./Shared";
