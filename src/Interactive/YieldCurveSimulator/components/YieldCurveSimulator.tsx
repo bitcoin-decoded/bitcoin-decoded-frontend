@@ -11,7 +11,8 @@ import {
   YAxis,
 } from "recharts";
 
-import { FeedbackPanel, RangeLedger, usePageTheme, useRechartsTheme } from "../../../Design";
+import { FeedbackPanel, getTypography, RangeLedger, usePageTheme, useRechartsTheme } from "../../../Design";
+import { useBreakpoint } from "../../../Design/Responsive";
 import { FrText, useTranslation } from "../../../I18n";
 import { useYieldCurve } from "../hooks/useYieldCurve";
 
@@ -25,6 +26,7 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
   const chart = useRechartsTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
+  const typo = getTypography(useBreakpoint());
   const { longRate, setLongRate, chartData, fixedShortRate } = useYieldCurve();
   const marginIsHealthy = longRate > 1.5;
   // Semantic margin color (healthy spread = success, thin/inverted = error) is
@@ -45,9 +47,7 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
   };
 
   const titleStyle: CSSProperties = {
-    fontSize: "1rem",
-    letterSpacing: "0.04em",
-    lineHeight: 1.25,
+    ...typo.heading,
     color: colors.base.text.primary,
     textAlign: "center",
     margin: 0,

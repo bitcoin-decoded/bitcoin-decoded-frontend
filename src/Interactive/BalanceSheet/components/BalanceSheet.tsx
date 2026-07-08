@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, usePageTheme } from "../../../Design";
+import { getTypography, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useBreakpoint } from "../../../Design/Responsive";
 import { useTranslation } from "../../../I18n";
@@ -17,6 +17,7 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   const { t } = useTranslation();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
 
   const accentColor = colors[moduleTheme].border.secondary;
   const rowCount = Math.max(assets.length, liabilities.length);
@@ -32,10 +33,8 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   };
 
   const titleStyle: CSSProperties = {
+    ...typo.heading,
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.5rem",
-    fontWeight: 500,
-    fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
     letterSpacing: "0.08em",
     textAlign: "center",
     fontVariant: "small-caps",
@@ -52,10 +51,8 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   };
 
   const tableHeaderStyle: CSSProperties = {
+    ...typo.label,
     padding: isMobile ? "0.625rem 0.75rem" : "0.75rem 1.25rem",
-    fontWeight: 500,
-    fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.label,
     letterSpacing: "0.08em",
     fontVariant: "small-caps",
     color: colors[moduleTheme].text.primary,
@@ -72,8 +69,10 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     padding: isMobile ? "0.625rem 0.75rem" : "0.75rem 1.25rem",
     width: "50%",
     whiteSpace: "pre-line",
-    fontSize: BRAND.fontSize.body,
-    lineHeight: 1.6,
+    // Elevated from the old 14px: the parenthetical descriptions (e.g.
+    // "créance sur Nicolas") were too small to read comfortably.
+    fontSize: isMobile ? "0.875rem" : "0.9375rem",
+    lineHeight: 1.55,
     color: colors.base.text.secondary,
     borderBottom: `1px solid ${withOpacity(accentColor, 0.1)}`,
   };
@@ -105,10 +104,8 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
             const buildCellContent = (line?: BalanceSheetLine) =>
               line ? (
                 <>
-                  {/* Amounts are ledger figures — mono, no faux-bold. */}
-                  <strong style={{ fontFamily: BRAND.fonts.mono, fontWeight: 500 }}>
-                    {line.amount}
-                  </strong>
+                  {/* Amounts are ledger figures — mono, tabular, no faux-bold. */}
+                  <strong style={{ ...typo.figure }}>{line.amount}</strong>
                   <br />
                   {line.description}
                 </>

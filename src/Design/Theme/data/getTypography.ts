@@ -21,6 +21,23 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
       lineHeight: 1.35,
       letterSpacing: "0.01em",
     },
+    // Mono kicker / table-header / small-caps label. Elevated from the old 12px
+    // BRAND.fontSize.label — Cutive Mono needs the extra size to stay legible.
+    label: {
+      fontFamily: BRAND.fonts.mono,
+      fontSize: compact ? "0.8125rem" : "0.875rem",
+      fontWeight: 500,
+      lineHeight: 1.4,
+      letterSpacing: "0.06em",
+    },
+    // Mono numeric figure (ledger amounts). Tabular for column alignment.
+    figure: {
+      fontFamily: BRAND.fonts.mono,
+      fontSize: compact ? "0.9375rem" : "1rem",
+      fontWeight: 500,
+      lineHeight: 1.3,
+      fontVariantNumeric: "tabular-nums",
+    },
     button: {
       fontSize: compact ? "0.9375rem" : "1rem",
       fontWeight: 500,

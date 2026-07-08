@@ -1,6 +1,7 @@
 import { createElement, type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, usePageTheme } from "../Theme";
+import { useBreakpoint } from "../Responsive";
+import { BRAND, getTypography, usePageTheme } from "../Theme";
 
 type Tone = "world" | "muted" | "accent";
 type Size = "xs" | "sm" | "md";
@@ -28,8 +29,16 @@ export const Caption: FC<Props> = ({
   color,
 }) => {
   const { colors, moduleTheme } = usePageTheme();
+  const typo = getTypography(useBreakpoint());
 
-  const fontSize = size === "md" ? BRAND.fontSize.body : BRAND.fontSize.note;
+  // Sizes come from the central type scale (elevated mono): md = section title
+  // (aligned with Callout headings), sm = kicker/label, xs = the smallest note.
+  const fontSize =
+    size === "md"
+      ? typo.heading.fontSize
+      : size === "sm"
+        ? typo.label.fontSize
+        : BRAND.fontSize.micro;
 
   const resolvedColor =
     color ??
