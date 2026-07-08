@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, Button, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, Button, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy, PRESET_AMOUNTS } from "../data";
@@ -25,6 +25,7 @@ export const DonationAmountSelector: FC<Props> = ({
   onBack,
   onNoWallet,
 }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const { language } = useTranslation();
@@ -64,7 +65,7 @@ export const DonationAmountSelector: FC<Props> = ({
   const leadStyle: CSSProperties = {
     margin: 0,
     textAlign: "center",
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.45,
     color: withOpacity(colors.base.text.secondary, 0.95),
   };
@@ -87,7 +88,7 @@ export const DonationAmountSelector: FC<Props> = ({
     boxSizing: "border-box",
     padding: "0.6rem 0.8rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     color: colors.base.text.primary,
     background: withOpacity(colors.base.text.secondary, 0.04),
     border: `1px solid ${withOpacity(accent, customStr !== "" ? 0.6 : 0.22)}`,
@@ -96,7 +97,7 @@ export const DonationAmountSelector: FC<Props> = ({
   };
 
   const mutedSmall: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: withOpacity(colors.base.text.secondary, 0.85),
   };
 
@@ -110,7 +111,7 @@ export const DonationAmountSelector: FC<Props> = ({
     padding: "0.3rem 0.6rem",
     color: accent,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     letterSpacing: "0.02em",
     textDecoration: "underline",
@@ -155,7 +156,7 @@ export const DonationAmountSelector: FC<Props> = ({
               {preset} €
             </span>
             {copy.amount.presetSubs[preset] && (
-              <span style={{ fontSize: BRAND.fontSize.note, color: colors.base.text.secondary }}>
+              <span style={{ fontSize: typo.micro.fontSize, color: colors.base.text.secondary }}>
                 {copy.amount.presetSubs[preset]}
               </span>
             )}
@@ -212,7 +213,7 @@ export const DonationAmountSelector: FC<Props> = ({
                     border: "none",
                     color: accent,
                     cursor: "pointer",
-                    fontSize: BRAND.fontSize.note,
+                    fontSize: typo.micro.fontSize,
                     padding: 0,
                   }}
                 >

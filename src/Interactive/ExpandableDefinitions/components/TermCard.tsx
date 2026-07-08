@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import type { ExpandableTerm } from "../types";
 
 import { ChevronDown } from "@icons";
@@ -10,6 +10,7 @@ type Props = {
 };
 
 export const TermCard: FC<Props> = ({ term }) => {
+  const typo = getTypography();
   const { isOpen, toggle } = useDisclosure(false);
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -69,7 +70,7 @@ export const TermCard: FC<Props> = ({ term }) => {
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -77,7 +78,7 @@ export const TermCard: FC<Props> = ({ term }) => {
   };
 
   const summaryStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.45,
     color: colors.base.text.secondary,
   };
@@ -113,7 +114,7 @@ export const TermCard: FC<Props> = ({ term }) => {
     paddingBottom: isMobile ? "1rem" : "1.15rem",
     paddingLeft: isMobile ? "0.95rem" : "1.1rem",
     color: colors.base.text.primary,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.65,
     textAlign: "left",
     display: "flex",

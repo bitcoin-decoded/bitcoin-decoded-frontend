@@ -1,12 +1,13 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { LINKS, NODES } from "../data";
 
 import { Cpu, Monitor } from "@icons";
 
 export const BitcoinNetworkMap: FC = () => {
+  const typo = getTypography();
   const { language } = useLanguageContext();
   const fr = language === "fr";
   const { colors, moduleTheme } = usePageTheme();
@@ -35,7 +36,7 @@ export const BitcoinNetworkMap: FC = () => {
 
   const titleStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -96,7 +97,7 @@ export const BitcoinNetworkMap: FC = () => {
 
           const labelNodeStyle: CSSProperties = {
             fontFamily: BRAND.fonts.mono,
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             fontWeight: 500,
             color: colors.base.text.secondary,
             letterSpacing: "0.05em",

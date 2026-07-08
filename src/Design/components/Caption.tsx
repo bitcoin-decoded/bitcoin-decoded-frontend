@@ -38,7 +38,7 @@ export const Caption: FC<Props> = ({
       ? typo.heading.fontSize
       : size === "sm"
         ? typo.label.fontSize
-        : BRAND.fontSize.micro;
+        : typo.micro.fontSize;
 
   const resolvedColor =
     color ??

@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Button, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { useBitcoinNodeDemo } from "../hooks";
 
@@ -9,6 +9,7 @@ import { Cpu, Monitor } from "@icons";
 const TRANSITION = "all 0.8s var(--ease-smooth)";
 
 export const BitcoinNodeDemo: FC = () => {
+  const typo = getTypography();
   const { language } = useLanguageContext();
   const fr = language === "fr";
   const { colors, moduleTheme } = usePageTheme();
@@ -51,7 +52,7 @@ export const BitcoinNodeDemo: FC = () => {
 
   const label: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",

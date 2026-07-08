@@ -1,14 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  BRAND,
-  Caption,
-  ExploredCounter,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity,
-} from "../../../Design";
+import { Caption, ExploredCounter, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { renderActionButton, renderFeedback } from "../helpers";
 import { useTrustComparisonDemo } from "../hooks";
@@ -24,6 +16,7 @@ type Props = {
 };
 
 export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t, language } = useTranslation();
   const fr = language === "fr";
   const { colors, moduleTheme } = usePageTheme();
@@ -77,7 +70,7 @@ export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
     borderRadius: 0,
     background: withOpacity(accent, 0.06),
     border: `1px solid ${withOpacity(accent, 0.15)}`,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.5,
     color: textPrimary,
   });

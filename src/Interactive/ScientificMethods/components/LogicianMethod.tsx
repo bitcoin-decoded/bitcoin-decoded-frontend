@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getScientificMethodsCopy } from "../data";
 
@@ -16,6 +16,7 @@ import { ArrowDown, MoreHorizontal, ScrollText, Sigma, Triangle } from "@icons";
  * cascading certainty.
  */
 export const LogicianMethod: FC = () => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const { language } = useTranslation();
@@ -55,7 +56,7 @@ export const LogicianMethod: FC = () => {
     color: colors.base.text.primary,
   };
   const rootSubtitle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontStyle: "italic",
     lineHeight: 1.45,
     color: colors.base.text.secondary,
@@ -107,7 +108,7 @@ export const LogicianMethod: FC = () => {
     borderRadius: 0,
     border: `1px solid ${withOpacity(accent, 0.3)}`,
     background: withOpacity(accent, 0.07),
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: colors.base.text.primary,
     textAlign: "center",
@@ -121,7 +122,7 @@ export const LogicianMethod: FC = () => {
     padding: "0.35rem 0.6rem",
     borderRadius: 0,
     border: `1px dashed ${withOpacity(accent, 0.3)}`,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",

@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, HighlightText, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, HighlightText, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 
@@ -22,6 +22,7 @@ export const BlockHashFormula: FC<Props> = ({
   isAnchor = false,
   highlightHash = false,
 }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -47,7 +48,7 @@ export const BlockHashFormula: FC<Props> = ({
 
   const formulaLine: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: labelColor,
     letterSpacing: "0.02em",

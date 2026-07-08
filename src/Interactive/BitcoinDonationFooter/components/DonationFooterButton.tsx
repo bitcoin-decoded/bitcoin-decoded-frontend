@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, usePageTheme } from "../../../Design";
+import { BRAND, getTypography, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy } from "../data";
@@ -13,6 +13,7 @@ type Props = {
 
 /** Discreet chrome button (spec §12.1) that opens the donation modal. */
 export const DonationFooterButton: FC<Props> = ({ onClick }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const { language } = useTranslation();
   const copy = getDonationCopy(language);
@@ -26,7 +27,7 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
     gap: "0.5rem",
     padding: "0.5rem 1rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.03em",

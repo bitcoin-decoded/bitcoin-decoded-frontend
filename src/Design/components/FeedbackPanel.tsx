@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { BRAND, usePageTheme } from "../Theme";
+import { BRAND, getTypography, usePageTheme } from "../Theme";
 
 type Tone = "success" | "error" | "info" | "warning" | "neutral" | "world";
 type Variant = "full" | "border-left";
@@ -24,6 +24,7 @@ export const FeedbackPanel: FC<Props> = ({
   title,
   style,
 }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
 
@@ -54,7 +55,7 @@ export const FeedbackPanel: FC<Props> = ({
       variant === "border-left" ? "none" : `1px solid ${withOpacity(accent, borderOpacity + 0.1)}`,
     borderLeft: variant === "border-left" ? `3px solid ${withOpacity(accent, 0.5)}` : undefined,
     color: colors.base.text.primary,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.55,
     transition: "all 0.35s var(--ease-smooth)",
     ...style,
@@ -65,7 +66,7 @@ export const FeedbackPanel: FC<Props> = ({
     alignItems: "center",
     gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: accent,
     fontVariant: "small-caps",

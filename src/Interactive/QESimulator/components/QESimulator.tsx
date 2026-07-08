@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useEffect } from "react";
 
-import { BRAND, FeedbackPanel, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, FeedbackPanel, getTypography, usePageTheme, withOpacity } from "../../../Design";
 import { useBreakpoint } from "../../../Design/Responsive";
 import { FrText, useTranslation } from "../../../I18n";
 import { useToggleSimulator } from "../../hooks";
@@ -12,6 +12,7 @@ type Props = {
 };
 
 export const QESimulator: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { theme, colors } = usePageTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
@@ -35,7 +36,7 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
   };
 
   const captionStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     color: colors.base.text.primary,
     margin: "0.5rem 0 1.25rem",
     lineHeight: 1.5,
@@ -62,7 +63,7 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
 
   const labelStyle: CSSProperties = {
     color: colors.base.text.secondary,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     textAlign: "center",
   };

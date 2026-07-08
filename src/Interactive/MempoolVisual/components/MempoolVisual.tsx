@@ -1,13 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge,
-BRAND,   Button,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { Badge, BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getTxState } from "../helpers/";
 import { useMempoolVisual } from "../hooks";
@@ -24,6 +17,7 @@ type Props = {
 };
 
 export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
+  const typo = getTypography();
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -56,7 +50,7 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
 
   const subtitle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     marginBottom: "0.15rem",
@@ -64,7 +58,7 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
 
   const headerField: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     display: "flex",
     gap: "0.35rem",
   };
@@ -105,7 +99,7 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
             {visibleMempool.length === 0 ? (
               <span
                 style={{
-                  fontSize: BRAND.fontSize.note,
+                  fontSize: typo.micro.fontSize,
                   opacity: 0.5,
                   fontStyle: "italic",
                 }}

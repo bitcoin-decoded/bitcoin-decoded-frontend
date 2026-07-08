@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getMachineColors } from "../data";
 import { formatRewardBTC, getMinerWorkTime } from "../helpers";
@@ -32,6 +32,7 @@ export const TimeScreen: FC<Props> = ({
   isSubsidySymbolic,
   isExhausted,
 }) => {
+  const typo = getTypography();
   const { t, language } = useTranslation();
   const fr = language === "fr";
   const { theme, colors, moduleTheme } = usePageTheme();
@@ -77,7 +78,7 @@ export const TimeScreen: FC<Props> = ({
 
   const eyebrowStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.25em",
@@ -101,7 +102,7 @@ export const TimeScreen: FC<Props> = ({
 
   const rewardLabelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.12em",
@@ -120,14 +121,14 @@ export const TimeScreen: FC<Props> = ({
     margin: 0,
     marginTop: "0.5rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     lineHeight: 1.5,
     color: screenInkMuted,
   };
 
   const promptStyle: CSSProperties = {
     margin: 0,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontStyle: "italic",
     color: screenInkMuted,
     maxWidth: "18rem",

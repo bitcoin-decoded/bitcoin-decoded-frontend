@@ -1,12 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { ORIGINAL_VALUES } from "../data";
 import { useSignatureVerifier } from "../hooks";
@@ -15,6 +9,7 @@ import type { SigField } from "../types";
 import { CheckCircle, RefreshCw, ShieldAlert, ShieldCheck } from "@icons";
 
 export const SignatureVerifier: FC = () => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -49,7 +44,7 @@ export const SignatureVerifier: FC = () => {
   };
 
   const fieldLabel: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.07em",
@@ -60,7 +55,7 @@ export const SignatureVerifier: FC = () => {
 
   const fieldValue = (isTampered: boolean): CSSProperties => ({
     flex: 1,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: isTampered ? errorColor : world.text.primary,
     wordBreak: "break-all",
@@ -74,7 +69,7 @@ export const SignatureVerifier: FC = () => {
     cursor: "pointer",
     padding: "0.3rem 0.6rem",
     borderRadius: 0,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     letterSpacing: "0.05em",
     fontVariant: "small-caps",
@@ -108,7 +103,7 @@ export const SignatureVerifier: FC = () => {
       {tampered.size > 0 && (
         <div
           style={{
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             color: withOpacity(colors.base.text.secondary, 0.5),
             display: "flex",
             alignItems: "center",
@@ -122,7 +117,7 @@ export const SignatureVerifier: FC = () => {
               key={f.key}
               style={{
                 fontFamily: BRAND.fonts.mono,
-                fontSize: BRAND.fontSize.note,
+                fontSize: typo.micro.fontSize,
                 opacity: 0.6,
               }}
             >

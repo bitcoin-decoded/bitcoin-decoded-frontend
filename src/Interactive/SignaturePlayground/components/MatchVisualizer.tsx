@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND } from "../../../Design";
+import { BRAND, getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/";
 import { truncateHash } from "../../helpers";
 import type { SigPlaygroundColors } from "../types";
@@ -44,6 +44,7 @@ export const MatchVisualizer: FC<Props> = ({
   noMatchLabel,
   colors,
 }) => {
+  const typo = getTypography();
   const verdictColor = matches ? colors.successColor : colors.errorColor;
 
   const boxStyle = (accent: string): CSSProperties => ({
@@ -60,7 +61,7 @@ export const MatchVisualizer: FC<Props> = ({
   });
 
   const boxLabel = (accent: string): CSSProperties => ({
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
@@ -69,14 +70,14 @@ export const MatchVisualizer: FC<Props> = ({
 
   const monoValue: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: colors.basePrimaryText,
     wordBreak: "break-all",
   };
 
   const messageValue: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontStyle: "italic",
     lineHeight: 1.4,
@@ -99,7 +100,7 @@ export const MatchVisualizer: FC<Props> = ({
       <div
         style={{
           fontFamily: BRAND.fonts.mono,
-          fontSize: BRAND.fontSize.note,
+          fontSize: typo.micro.fontSize,
           color: withOpacity(colors.baseTextSecondary, 0.7),
           letterSpacing: "0.02em",
           textAlign: "center",
@@ -147,7 +148,7 @@ export const MatchVisualizer: FC<Props> = ({
           gap: "0.4rem",
           color: verdictColor,
           fontWeight: 500,
-          fontSize: BRAND.fontSize.note,
+          fontSize: typo.micro.fontSize,
           fontVariant: "small-caps",
           letterSpacing: "0.06em",
         }}

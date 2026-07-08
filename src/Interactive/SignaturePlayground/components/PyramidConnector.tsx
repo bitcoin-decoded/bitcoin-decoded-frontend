@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND } from "../../../Design";
+import { BRAND, getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
 
@@ -20,6 +20,7 @@ type Props = {
  * until its action has run, then lit in the module accent.
  */
 export const PyramidConnector: FC<Props> = ({ label, icon, active, colors }) => {
+  const typo = getTypography();
   const tone = active ? colors.accentColor : withOpacity(colors.baseTextSecondary, 0.6);
 
   const style: CSSProperties = {
@@ -31,7 +32,7 @@ export const PyramidConnector: FC<Props> = ({ label, icon, active, colors }) => 
     padding: "0.16rem 0.5rem",
     borderRadius: 0,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",

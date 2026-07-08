@@ -1,12 +1,6 @@
 import { type CSSProperties, type FC, useEffect, useRef } from "react";
 
-import { BRAND, Button,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 import { useMiningSimulator } from "../hooks";
@@ -19,6 +13,7 @@ type Props = {
 };
 
 export const MiningSimulator: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -35,7 +30,7 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
 
   const targetBox: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     color: colors.base.text.primary,
     padding: "0.6rem 0.85rem",
     borderRadius: 0,
@@ -56,7 +51,7 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
 
   const headerBox: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.secondary,
     padding: "0.75rem 1rem",
     borderRadius: 0,
@@ -90,7 +85,7 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
 
   const logHeader: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.04em",
@@ -106,7 +101,7 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
 
   const row = (valid: boolean): CSSProperties => ({
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     display: "flex",
     alignItems: "center",
     gap: "0.5rem",

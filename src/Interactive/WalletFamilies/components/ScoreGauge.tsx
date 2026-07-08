@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 
 import type { IconType } from "@icons";
 
@@ -23,6 +23,7 @@ type Props = {
  * read as a simplicité ↘ / souveraineté ↗ trade-off matrix at a glance.
  */
 export const ScoreGauge: FC<Props> = ({ label, icon: Icon, score, accent, max = 5 }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const empty = withOpacity(colors.base.text.secondary, 0.16);
@@ -39,7 +40,7 @@ export const ScoreGauge: FC<Props> = ({ label, icon: Icon, score, accent, max = 
     alignItems: "center",
     gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",

@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND } from "../../../Design";
+import { BRAND, getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
 
@@ -20,10 +20,11 @@ type Props = {
  * Error-tinted, because changing the key is what breaks the match.
  */
 export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, colors }) => {
+  const typo = getTypography();
   const buttonStyle: CSSProperties = {
     alignSelf: "center",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: colors.errorColor,
     padding: "0.3rem 0.55rem",

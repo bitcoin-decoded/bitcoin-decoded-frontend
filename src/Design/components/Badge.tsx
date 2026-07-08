@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { withOpacity } from "../helpers";
-import { BRAND, usePageTheme } from "../Theme";
+import { BRAND, getTypography, usePageTheme } from "../Theme";
 
 type Tone = "success" | "error" | "info" | "neutral" | "world";
 type Size = "xs" | "sm";
@@ -23,6 +23,7 @@ export const Badge: FC<Props> = ({
   color,
   style,
 }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
 
   const accent =
@@ -40,7 +41,7 @@ export const Badge: FC<Props> = ({
   const borderAccent = tone === "neutral" ? colors.base.border.secondary : accent;
 
   const padding = size === "xs" ? "0.2rem 0.5rem" : "0.3rem 0.55rem";
-  const fontSize = BRAND.fontSize.note;
+  const fontSize = typo.micro.fontSize;
 
   const finalStyle: CSSProperties = {
     display: "inline-flex",

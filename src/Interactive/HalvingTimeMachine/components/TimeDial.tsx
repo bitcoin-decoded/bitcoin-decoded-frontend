@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, RangeLedger, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Button, getTypography, RangeLedger, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { TIME_MACHINE_END_YEAR } from "../data";
 
@@ -20,6 +20,7 @@ type Props = {
  * and a few quick-jump chips (genesis, today, end of issuance).
  */
 export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, onChange }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -55,7 +56,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
 
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.1em",
@@ -94,7 +95,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     padding: isMobile ? "0.5rem 0.7rem" : "0.55rem 1rem",
     border: "none",
     borderLeft: first ? "none" : `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     letterSpacing: "0.04em",
     whiteSpace: "nowrap",

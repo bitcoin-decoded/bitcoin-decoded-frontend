@@ -1,18 +1,20 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, usePageTheme, withOpacity } from "../../../Design";
+
 
 type Props = {
   value: string;
 };
 
 export const TransactionInput: FC<Props> = ({ value }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
 
   const style: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.primary,
     padding: "0.4rem 0.55rem",
     borderRadius: 0,

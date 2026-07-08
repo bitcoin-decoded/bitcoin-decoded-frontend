@@ -11,11 +11,12 @@ import {
   YAxis,
 } from "recharts";
 
-import { BRAND, Caption, useBreakpoint, useRechartsTheme } from "../../../Design";
+import { BRAND, Caption, getTypography, useBreakpoint, useRechartsTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { BITCOIN_REFS } from "../../../References";
 
 export const HalvingChart: FC = () => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const isMobile = useBreakpoint() === "mobile";
   const chart = useRechartsTheme();
@@ -32,7 +33,7 @@ export const HalvingChart: FC = () => {
 
   const captionStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: chart.axisTickColor,
     textAlign: "center",
     marginTop: "0.5rem",

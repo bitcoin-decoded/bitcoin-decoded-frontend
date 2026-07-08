@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, usePageTheme } from "../../../Design";
+import { BRAND, Button, getTypography, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy } from "../data";
@@ -16,6 +16,7 @@ type Props = {
  * confetti, no exclamation - the pedagogical pact continues.
  */
 export const DonationThankYou: FC<Props> = ({ onContinue }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const { language } = useTranslation();
   const copy = getDonationCopy(language);
@@ -33,7 +34,7 @@ export const DonationThankYou: FC<Props> = ({ onContinue }) => {
 
   const bodyStyle: CSSProperties = {
     margin: 0,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.65,
     color: colors.base.text.secondary,
     textAlign: "center",

@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, RangeLedger, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, getTypography, RangeLedger, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 
 type Props = {
@@ -29,6 +29,7 @@ export const DunbarStepSlider: FC<Props> = ({
   ariaLabel,
   localeTag,
 }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
 
@@ -55,7 +56,7 @@ export const DunbarStepSlider: FC<Props> = ({
     padding: isMobile ? "0.45rem 0.6rem" : "0.5rem 0.95rem",
     border: "none",
     borderLeft: first ? "none" : `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     letterSpacing: "0.03em",
     whiteSpace: "nowrap",

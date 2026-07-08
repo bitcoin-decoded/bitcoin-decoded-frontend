@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, withOpacity } from "../../../Design";
+import { BRAND, getTypography, withOpacity } from "../../../Design";
 import { fmtBTC, truncateHash } from "../../helpers";
 import type { WalletCardData } from "../types";
 
@@ -59,6 +59,7 @@ export const WalletCard: FC<Props> = ({
   baseBorderSecondary,
   baseBackgroundSecondary,
 }) => {
+  const typo = getTypography();
   // Border color logic:
   //   answer (success) > wrong (error) > selected (accent) > idle
   const borderOpacity = highlightAsAnswer || highlightAsWrong || selected ? 0.55 : 0.2;
@@ -105,7 +106,7 @@ export const WalletCard: FC<Props> = ({
   };
 
   const headerLabelStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -119,7 +120,7 @@ export const WalletCard: FC<Props> = ({
     padding: "0.2rem 0.4rem",
     borderRadius: 0,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     letterSpacing: "0.04em",
     color: card.utxos.length > 0 ? accentColor : withOpacity(baseTextSecondary, 0.55),
@@ -145,7 +146,7 @@ export const WalletCard: FC<Props> = ({
     display: "inline-flex",
     alignItems: "center",
     gap: "0.3rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -154,7 +155,7 @@ export const WalletCard: FC<Props> = ({
 
   const fieldValueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: basePrimaryText,
     wordBreak: "break-all",
@@ -166,7 +167,7 @@ export const WalletCard: FC<Props> = ({
     alignItems: "center",
     gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     padding: "0.3rem 0.45rem",
     borderRadius: 0,
     background: withOpacity(accentColor, 0.06),
@@ -176,7 +177,7 @@ export const WalletCard: FC<Props> = ({
 
   const utxoEmptyStyle: CSSProperties = {
     fontStyle: "italic",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: withOpacity(baseTextSecondary, 0.6),
     padding: "0.3rem 0.1rem",
   };

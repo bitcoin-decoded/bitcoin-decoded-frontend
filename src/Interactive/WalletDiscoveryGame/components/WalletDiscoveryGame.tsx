@@ -1,12 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
 
@@ -20,6 +14,7 @@ type Props = {
 };
 
 export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors: themeColors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -51,14 +46,14 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const introStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.55,
     color: withOpacity(baseTextSecondary, 0.85),
     margin: 0,
   };
 
   const sectionLabelStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -227,13 +222,13 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
               title={t("walletGame.correctTitle")}
             >
               <p
-                style={{ fontSize: BRAND.fontSize.body, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
+                style={{ fontSize: typo.note.fontSize, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
               >
                 {t("walletGame.correctMain")}
               </p>
               <p
                 style={{
-                  fontSize: BRAND.fontSize.note,
+                  fontSize: typo.micro.fontSize,
                   lineHeight: 1.55,
                   color: withOpacity(baseTextSecondary, 0.85),
                   margin: "0.4rem 0 0 0",
@@ -251,7 +246,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
               title={t("walletGame.incorrectTitle")}
             >
               <p
-                style={{ fontSize: BRAND.fontSize.body, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
+                style={{ fontSize: typo.note.fontSize, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
               >
                 {t("walletGame.incorrectMain")}
               </p>
@@ -274,7 +269,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
       {/* Discreet pedagogical disclaimer */}
       <p
         style={{
-          fontSize: BRAND.fontSize.note,
+          fontSize: typo.micro.fontSize,
           fontStyle: "italic",
           color: withOpacity(baseTextSecondary, 0.55),
           margin: 0,

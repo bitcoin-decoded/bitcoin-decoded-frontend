@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { withOpacity } from "../helpers";
 import { useDisclosure } from "../hooks";
-import { BRAND, usePageTheme } from "../Theme";
+import { BRAND, getTypography, usePageTheme } from "../Theme";
 
 import { ChevronDown } from "@icons";
 
@@ -14,6 +14,7 @@ type Props = {
 };
 
 export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, children }) => {
+  const typo = getTypography();
   const { isOpen, toggle } = useDisclosure(defaultOpen);
   const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
@@ -43,7 +44,7 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     cursor: "pointer",
     color: headerText,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -75,7 +76,7 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     borderTop: `1px solid ${withOpacity(borderColor, 0.22)}`,
     padding: "0.85rem 1.05rem 0.95rem 1.05rem",
     color: basePrimaryText,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.6,
     textAlign: "left",
     display: "flex",

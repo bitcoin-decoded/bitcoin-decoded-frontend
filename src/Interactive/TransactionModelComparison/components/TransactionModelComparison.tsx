@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge, BRAND, Button, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, BRAND, Button, Caption, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { fmtBTC, fmtEur } from "../../helpers";
 import { BANK, BTC } from "../data";
@@ -33,6 +33,7 @@ type Props = {
 };
 
 export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComplete }) => {
+  const typo = getTypography();
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -72,13 +73,13 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   const cardHeaderRow: CSSProperties = { display: "flex", alignItems: "center", gap: "0.5rem" };
 
   const cardSubtitle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: world.text.primary,
   };
 
   const cardDescStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     lineHeight: 1.5,
     color: colors.base.text.secondary,
     fontStyle: "italic",
@@ -102,7 +103,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     borderRadius: 0,
     background: withOpacity(accent, 0.06),
     border: `1px solid ${withOpacity(accent, 0.12)}`,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontStyle: "italic",
     color: colors.base.text.secondary,
   });
@@ -119,7 +120,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     padding: isMobile ? "0.55rem 0.8rem" : "0.7rem 1rem",
     borderTop: `1px solid ${withOpacity(accent, 0.1)}`,
     background: withOpacity(accent, 0.04),
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     lineHeight: 1.55,
     color: colors.base.text.secondary,
     fontStyle: "italic",
@@ -127,7 +128,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
 
   const keyText = (accent: string): CSSProperties => ({
     marginTop: "0.3rem",
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontStyle: "normal",
     color: accent,
@@ -138,7 +139,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "flex",
     alignItems: "center",
     gap: "0.3rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.09em",
@@ -162,7 +163,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "inline-flex",
     alignItems: "center",
     gap: "0.25rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -188,7 +189,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "flex",
     alignItems: "center",
     gap: "0.35rem",
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: colors.base.text.primary,
     flexShrink: 0,
@@ -218,7 +219,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "inline-flex",
     alignItems: "center",
     gap: "0.3rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
@@ -236,7 +237,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     flexWrap: "wrap",
     justifyContent: "flex-end",
     gap: "0.3rem",
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     textAlign: "right",
   };
 
@@ -307,7 +308,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   };
 
   const inputAmountStyle = (): CSSProperties => ({
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: isAfter ? withOpacity(errorColor, 0.5) : btcAccent,
     textDecoration: isAfter ? "line-through" : "none",
@@ -318,7 +319,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "flex",
     alignItems: "center",
     gap: "0.25rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: isAfter ? withOpacity(errorColor, 0.35) : withOpacity(colors.base.text.secondary, 0.65),
     transition: "color 0.45s var(--ease-smooth)",
@@ -347,7 +348,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     borderRadius: 0,
     border: `1px solid ${withOpacity(btcAccent, 0.2)}`,
     background: withOpacity(btcAccent, 0.06),
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.07em",
@@ -390,7 +391,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   };
 
   const outputAmountStyle = (accent: string): CSSProperties => ({
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: isAfter ? accent : withOpacity(accent, 0.3),
     transition: "color 0.4s var(--ease-smooth)",
@@ -400,7 +401,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     display: "flex",
     alignItems: "center",
     gap: "0.25rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: isAfter ? withOpacity(accent, 0.7) : withOpacity(accent, 0.2),
     transition: "color 0.4s var(--ease-smooth)",
@@ -412,7 +413,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     borderRadius: 0,
     border: `1px solid ${withOpacity(btcAccent, isAfter ? 0.22 : 0.05)}`,
     background: withOpacity(btcAccent, isAfter ? 0.06 : 0),
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontStyle: "italic",
     color: isAfter ? btcAccent : withOpacity(btcAccent, 0.15),

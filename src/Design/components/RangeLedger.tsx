@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 
 import { useBreakpoint } from "../Responsive";
-import { BRAND, getBrandGold, usePageTheme, useThemeContext } from "../Theme";
+import { BRAND, getBrandGold, getTypography, usePageTheme, useThemeContext } from "../Theme";
 
 export type RangeLedgerTick = {
   value: number;
@@ -35,6 +35,7 @@ export const RangeLedger: FC<Props> = ({
   disabled = false,
   ariaLabel,
 }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
@@ -58,7 +59,7 @@ export const RangeLedger: FC<Props> = ({
     justifyContent: "space-between",
     alignItems: "baseline",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     letterSpacing: "0.05em",
   };
 
@@ -179,7 +180,7 @@ export const RangeLedger: FC<Props> = ({
             position: "relative",
             height: "1rem",
             fontFamily: BRAND.fonts.mono,
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             color: colors.base.text.secondary,
             letterSpacing: "0.04em",
           }}

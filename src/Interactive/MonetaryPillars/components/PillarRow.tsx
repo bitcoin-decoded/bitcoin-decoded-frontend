@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import type { MonetaryPillar } from "../types";
 
 import { ChevronDown } from "@icons";
@@ -23,6 +23,7 @@ type Props = {
  * (hardness, in the current dataset).
  */
 export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
+  const typo = getTypography();
   const { isOpen, toggle } = useDisclosure(false);
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -66,7 +67,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
 
   const numberStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: accentText,
     letterSpacing: "0.08em",
@@ -106,7 +107,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -139,7 +140,7 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
   const bodyStyle: CSSProperties = {
     padding: isMobile ? `0 0.95rem 1rem ${bodyLeftPad}` : `0 1.1rem 1.15rem ${bodyLeftPad}`,
     color: colors.base.text.primary,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.65,
     fontStyle: "italic",
     opacity: isOpen ? 1 : 0,

@@ -1,13 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  BRAND,
-  Caption,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity,
-} from "../../../Design";
+import { Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getMonetaryPillars } from "../data";
 
@@ -16,6 +9,7 @@ import { PillarRow } from "./PillarRow";
 import { Columns3 } from "@icons";
 
 export const MonetaryPillars: FC = () => {
+  const typo = getTypography();
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -50,7 +44,7 @@ export const MonetaryPillars: FC = () => {
   };
 
   const promptStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     lineHeight: 1.5,

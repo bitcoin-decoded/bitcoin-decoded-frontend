@@ -1,6 +1,7 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+
 
 type Props = {
   icon: ReactNode;
@@ -26,6 +27,7 @@ export const BlockRow: FC<Props> = ({
   headerAction,
   children,
 }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
@@ -58,7 +60,7 @@ export const BlockRow: FC<Props> = ({
 
   const labelStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: colors.base.text.primary,
     letterSpacing: "0.02em",

@@ -1,11 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Caption,
-  ExploredCounter,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Caption, ExploredCounter, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getKeySignatureTrio, TRIO_LAYOUT } from "../data";
 import { getArrowhead, trimSegment } from "../helpers";
@@ -21,6 +16,7 @@ type Props = {
 };
 
 export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -56,7 +52,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
   };
 
   const promptStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     lineHeight: 1.5,
@@ -101,7 +97,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
     left: pctX(x),
     top: pctY(y),
     transform: "translate(-50%, -50%)",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -147,7 +143,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   const detailTitle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
@@ -156,7 +152,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   const roleTag: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -169,7 +165,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   const detailDesc: CSSProperties = {
     margin: 0,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.6,
     color: colors.base.text.primary,
   };
@@ -182,7 +178,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
     height: "100%",
     flex: 1,
     color: withOpacity(colors.base.text.secondary, 0.75),
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontStyle: "italic",
     textAlign: "center",
   };

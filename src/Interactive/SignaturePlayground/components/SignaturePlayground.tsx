@@ -1,14 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { Badge,
-BRAND,   Button,
-  Caption,
-  Disclosure,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { Badge, BRAND, Button, Caption, Disclosure, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import {
   ActionButton,
@@ -43,6 +35,7 @@ type Props = {
 };
 
 export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t, language } = useTranslation();
   const { colors: themeColors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -93,7 +86,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const sectionLabel: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -111,7 +104,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   };
 
   const msgHeaderLabel: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -119,7 +112,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   };
 
   const msgHeaderValue: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontStyle: "italic",
     color: colors.basePrimaryText,
@@ -163,7 +156,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     padding: "0.4rem 0.55rem",
     borderRadius: 0,
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     lineHeight: 1.4,
     ...(isOriginalKey
@@ -209,7 +202,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
           display: "flex",
           alignItems: "center",
           gap: "0.35rem",
-          fontSize: BRAND.fontSize.note,
+          fontSize: typo.micro.fontSize,
           fontWeight: 500,
           fontVariant: "small-caps",
           letterSpacing: "0.04em",
@@ -224,7 +217,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
             width: "1.05rem",
             height: "1.05rem",
             borderRadius: "50%",
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             color: withOpacity(accent, 0.8),
             border: `1px dashed ${withOpacity(accent, 0.5)}`,
           }}
@@ -237,7 +230,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       <p
         style={{
           margin: 0,
-          fontSize: BRAND.fontSize.note,
+          fontSize: typo.micro.fontSize,
           lineHeight: 1.5,
           fontStyle: "italic",
           color: withOpacity(colors.baseTextSecondary, 0.7),
@@ -514,7 +507,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
 
           <p
             style={{
-              fontSize: BRAND.fontSize.body,
+              fontSize: typo.note.fontSize,
               lineHeight: 1.55,
               color: colors.baseTextSecondary,
               margin: 0,
@@ -531,7 +524,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       <p
         style={{
           margin: 0,
-          fontSize: BRAND.fontSize.note,
+          fontSize: typo.micro.fontSize,
           lineHeight: 1.55,
           fontStyle: "italic",
           color: withOpacity(colors.baseTextSecondary, 0.75),
@@ -557,7 +550,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
             margin: 0,
             fontStyle: "italic",
             color: withOpacity(colors.baseTextSecondary, 0.85),
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             lineHeight: 1.55,
           }}
         >

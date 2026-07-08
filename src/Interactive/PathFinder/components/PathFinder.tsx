@@ -1,13 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button,
-  Caption,
-  Disclosure,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, Disclosure, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { usePathFinder } from "../hooks";
 import type { ProfileKey, WalletSection } from "../types";
 
@@ -43,6 +36,7 @@ const ICON_BY_PROFILE: Record<ProfileKey, IconType> = {
 };
 
 export const PathFinder: FC = () => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const {
@@ -124,7 +118,7 @@ export const PathFinder: FC = () => {
 
   const profileLeadStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -141,7 +135,7 @@ export const PathFinder: FC = () => {
 
   const verdictStyle: CSSProperties = {
     margin: 0,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.6,
     fontWeight: 500,
     color: colors.base.text.primary,

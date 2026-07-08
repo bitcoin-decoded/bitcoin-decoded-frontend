@@ -31,12 +31,6 @@ export const BRAND = {
     coinSize: 14,
     ruleThickness: 1,
   },
-  fontSize: {
-    body: "0.875rem",
-    label: "0.75rem",
-    note: "0.75rem",
-    micro: "0.75rem",
-  },
   fonts: {
     display: "'Literata', 'Cormorant Garamond', Georgia, serif",
     body: "'Source Serif 4', Georgia, serif",

@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Caption, SurfaceCard, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Caption, getTypography, SurfaceCard, useDisclosure, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import type { PathFinderCopy } from "../data";
 import type { SectionPlan, SubCategoryId, WalletSection } from "../types";
@@ -41,6 +41,7 @@ type Props = {
 };
 
 export const SectionCard: FC<Props> = ({ plan, copy, accent }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const { t } = useTranslation();
   const { isOpen, toggle } = useDisclosure(false);
@@ -68,7 +69,7 @@ export const SectionCard: FC<Props> = ({ plan, copy, accent }) => {
     border: `1px solid ${withOpacity(accent, 0.45)}`,
     color: accent,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",

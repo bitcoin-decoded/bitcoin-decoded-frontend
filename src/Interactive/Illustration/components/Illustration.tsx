@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, getBrandGold, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { getBrandGold, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useIllustration } from "../hooks";
 
 type IllustrationProps = {
@@ -26,6 +26,7 @@ export const Illustration: FC<IllustrationProps> = ({
   caption,
   margin = "2.5rem auto",
 }) => {
+  const typo = getTypography();
   const { theme, colors } = usePageTheme();
   const { isHovered, containerHandlers } = useIllustration();
   const isMobile = useBreakpoint() === "mobile";
@@ -77,7 +78,7 @@ export const Illustration: FC<IllustrationProps> = ({
 
   const captionStyle: CSSProperties = {
     marginTop: "0.75rem",
-    fontSize: BRAND.fontSize.label,
+    fontSize: typo.label.fontSize,
     lineHeight: 1.5,
     color: colors.base.text.secondary,
     fontStyle: "italic",

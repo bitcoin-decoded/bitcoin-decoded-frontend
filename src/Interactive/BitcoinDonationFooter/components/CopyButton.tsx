@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, usePageTheme } from "../../../Design";
+import { BRAND, getTypography, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useClipboard } from "../hooks";
 
@@ -14,6 +14,7 @@ type Props = {
 
 /** Copy-to-clipboard pill: Copy → Check swap for 1.5s, with an aria-live announce. */
 export const CopyButton: FC<Props> = ({ value, copyLabel, copiedLabel }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const { copied, copy } = useClipboard();
   const [hovered, setHovered] = useState(false);
@@ -28,7 +29,7 @@ export const CopyButton: FC<Props> = ({ value, copyLabel, copiedLabel }) => {
     gap: "0.35rem",
     padding: "0.35rem 0.6rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.03em",

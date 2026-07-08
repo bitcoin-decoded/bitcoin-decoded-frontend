@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND } from "../../../Design";
+import { BRAND, getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { ActionButtonVariant, SigPlaygroundColors } from "../types";
 
@@ -32,6 +32,7 @@ export const ActionButton: FC<Props> = ({
   isMobile,
   colors,
 }) => {
+  const typo = getTypography();
   const palette = variant === "primary" ? colors.accentColor : colors.successColor;
 
   // Style aligned with the rest of the Bitcoin section (cf. DoubleSpendDemo,
@@ -62,7 +63,7 @@ export const ActionButton: FC<Props> = ({
         alignSelf: "flex-start",
         padding: isMobile ? "0.5rem 0.85rem" : "0.55rem 1rem",
         borderRadius: 0,
-        fontSize: BRAND.fontSize.body,
+        fontSize: typo.note.fontSize,
         fontWeight: 500,
         letterSpacing: "0.01em",
         display: "inline-flex",

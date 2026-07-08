@@ -1,11 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { BODY_FIELDS, HEADER_FIELDS } from "../data";
 import type { BlockField } from "../types";
 
 export const BlockAnatomyVisual: FC = () => {
+  const typo = getTypography();
   const { language } = useLanguageContext();
   const fr = language === "fr";
   const { colors, moduleTheme } = usePageTheme();
@@ -17,7 +18,7 @@ export const BlockAnatomyVisual: FC = () => {
   // "anatomy" reads as the very same block (#100826), just annotated.
   const titleStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
@@ -29,7 +30,7 @@ export const BlockAnatomyVisual: FC = () => {
 
   const sectionLabel: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -68,7 +69,7 @@ export const BlockAnatomyVisual: FC = () => {
 
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: colors.base.text.primary,
     letterSpacing: "0.02em",
@@ -76,7 +77,7 @@ export const BlockAnatomyVisual: FC = () => {
 
   const valueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.secondary,
     wordBreak: "break-all",
   };
