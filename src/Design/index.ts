@@ -15,6 +15,7 @@ export {
   Quote,
   RangeLedger,
   Reference,
+  SectionLabel,
   Separator,
   SurfaceCard,
 } from "./components";

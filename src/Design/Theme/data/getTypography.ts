@@ -55,6 +55,16 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
       lineHeight: 1.3,
       letterSpacing: "0.04em",
     },
+    // Numbered section eyebrow (e.g. "CHAPITRE 03 · …"). Mono UPPERCASE with
+    // generous tracking — the editorial "part label" register.
+    kicker: {
+      fontFamily: BRAND.fonts.mono,
+      fontSize: compact ? "0.75rem" : "0.8125rem",
+      fontWeight: 500,
+      lineHeight: 1.4,
+      letterSpacing: "0.2em",
+      textTransform: "uppercase",
+    },
     button: {
       fontSize: compact ? "0.9375rem" : "1rem",
       fontWeight: 500,

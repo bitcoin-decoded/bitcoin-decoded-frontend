@@ -1,7 +1,8 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, getTypography, SectionLabel, useBreakpoint, usePageTheme } from "../../../Design";
 import { FrText } from "../../../I18n";
+import { useChapterKicker } from "../hooks";
 
 import { ChapterPrelude } from "./ChapterPrelude";
 import { PageNavigation } from "./PageNavigation";
@@ -36,6 +37,7 @@ export const PageTemplate: FC<Props> = ({
   const isMobile = breakpoint === "mobile";
   const isTablet = breakpoint === "tablet";
   const typography = getTypography(breakpoint);
+  const kicker = useChapterKicker();
   const accentColor = colors[moduleTheme].border.secondary;
   // Chapter title carries the module identity color (violet on MoneyLaws,
   // blue on Banking, amber on Bitcoin), falling back to ink on neutral pages.
@@ -104,6 +106,7 @@ export const PageTemplate: FC<Props> = ({
   return (
     <div style={containerStyle}>
       <header style={headerStyle}>
+        {kicker && <SectionLabel marker={kicker.marker} label={kicker.label} />}
         <h1 style={titleStyle}>{title}</h1>
         {showReadingTime && <ReadingTimeBadge />}
       </header>
