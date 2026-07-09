@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect,useState } from "react";
 
 /**
  * Reading progress (0 → 1) of the page.

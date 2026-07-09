@@ -8,20 +8,11 @@ import { TermCard } from "./TermCard";
 import { BookOpenText } from "@icons";
 
 type Props = {
-  /** Section heading rendered above the term stack. */
   sectionTitle: string;
-  /** Pre-resolved terms (caller is responsible for mapping accents against the theme). */
   terms: ExpandableTerm[];
-  /** Optional icon for the section header. Defaults to `BookOpenText`. */
   sectionIcon?: ReactNode;
 };
 
-/**
- * Pedagogical card stack - N click-to-reveal definition cards inside a single
- * surface, each with its own accent. Used by Banking_1's accounting glossary
- * and Banking_2's M0/M2 explainer; designed to be reused for any future
- * "expand this term to learn more" pattern.
- */
 export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionIcon }) => {
   const isMobile = useBreakpoint() === "mobile";
 
