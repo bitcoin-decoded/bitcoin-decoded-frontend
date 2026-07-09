@@ -1,12 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useDifficultyAdjustment } from "../hooks";
 
@@ -18,6 +12,7 @@ type Props = {
 };
 
 export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -59,7 +54,7 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
 
   const minerLabel: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.secondary,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",

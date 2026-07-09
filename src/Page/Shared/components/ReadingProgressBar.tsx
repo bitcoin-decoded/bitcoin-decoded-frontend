@@ -1,6 +1,7 @@
-import { type FC, type CSSProperties } from "react";
-import { usePageTheme } from "../../../Design/Theme";
+import { type CSSProperties,type FC } from "react";
+
 import { withOpacity } from "../../../Design/helpers";
+import { usePageTheme } from "../../../Design/Theme";
 import { useReadingProgress } from "../hooks";
 
 export const ReadingProgressBar: FC = () => {

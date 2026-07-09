@@ -7,10 +7,11 @@ import {
   M2MoneySupplyChart,
   Quiz,
   TrustComparisonDemo,
+  useToggleSimulator,
 } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { Block, BlockReader } from "../../Reading";
-import { ChapterPrelude, PageTemplate, useToggleSimulator } from "../../Shared/";
+import { ChapterPrelude, PageTemplate } from "../../Shared/";
 
 export const Bitcoin2Page: FC = () => {
   const { t, language } = useTranslation();

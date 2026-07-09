@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge, BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getScientificMethodsCopy } from "../data";
 
@@ -18,6 +18,7 @@ type Theory = { year: string; name: string; observations: string };
  * timeline. On mobile the two theories stack vertically (time flows downward).
  */
 export const PhysicistMethod: FC = () => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const { language } = useTranslation();
@@ -29,7 +30,7 @@ export const PhysicistMethod: FC = () => {
   const axisRow: CSSProperties = { display: "flex", alignItems: "center", gap: "0.6rem" };
   const timeLabel: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -93,7 +94,7 @@ export const PhysicistMethod: FC = () => {
     flexShrink: 0,
   });
   const obsCaption: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontStyle: "italic",
     lineHeight: 1.45,
     color: withOpacity(colors.base.text.secondary, 0.9),
@@ -115,7 +116,7 @@ export const PhysicistMethod: FC = () => {
     border: `1px solid ${withOpacity(accent, 0.3)}`,
     background: withOpacity(accent, 0.1),
     color: accent,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",

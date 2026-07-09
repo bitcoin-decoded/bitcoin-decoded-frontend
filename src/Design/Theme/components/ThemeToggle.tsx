@@ -1,8 +1,10 @@
-import { type FC, type CSSProperties } from "react";
-import { useThemeContext, useThemeToggle } from "../hooks";
-import { THEME_COLORS } from "../data";
-import { SunIcon, MoonIcon } from "../../icons";
+import { type CSSProperties, type FC } from "react";
+
 import { useTranslation } from "../../../I18n";
+import { THEME_COLORS } from "../data";
+import { useThemeContext, useThemeToggle } from "../hooks";
+
+import { Moon, Sun } from "@icons";
 
 export const ThemeToggle: FC = () => {
   const { theme, toggleTheme } = useThemeContext();
@@ -10,8 +12,6 @@ export const ThemeToggle: FC = () => {
   const { t } = useTranslation();
   const colors = THEME_COLORS[theme];
 
-  // Aligned with LanguageToggle and HamburgerButton - same 2rem square
-  // footprint, same border + hover treatment.
   const buttonStyle: CSSProperties = {
     width: "2rem",
     height: "2rem",
@@ -37,7 +37,11 @@ export const ThemeToggle: FC = () => {
         theme === "light" ? t("theme.toggleAriaLabel.light") : t("theme.toggleAriaLabel.dark")
       }
     >
-      {theme === "light" ? <MoonIcon /> : <SunIcon />}
+      {theme === "light" ? (
+        <Moon size={16} strokeWidth={2} />
+      ) : (
+        <Sun size={16} strokeWidth={2} />
+      )}
     </button>
   );
 };

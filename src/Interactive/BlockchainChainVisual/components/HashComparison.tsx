@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, usePageTheme } from "../../../Design";
+import { BRAND, getTypography, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 
@@ -12,6 +12,7 @@ type Props = {
 };
 
 export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors } = usePageTheme();
 
@@ -33,7 +34,7 @@ export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => 
 
   const labelBase: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -42,7 +43,7 @@ export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => 
 
   const valueBase: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     wordBreak: "break-all",
   };
 

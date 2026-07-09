@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, FeedbackPanel, usePageTheme } from "../../../Design";
+import { BRAND, Button, FeedbackPanel, getTypography, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { DONATION_CONFIG, getDonationCopy } from "../data";
@@ -29,6 +29,7 @@ type Props = {
 
 /** Step 2, on-chain (spec §5.2). */
 export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const { language } = useTranslation();
   const copy = getDonationCopy(language);
@@ -55,9 +56,9 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
     color: colors.base.text.primary,
     textAlign: "center",
   };
-  const metaStyle: CSSProperties = { fontSize: BRAND.fontSize.note, color: colors.base.text.secondary };
+  const metaStyle: CSSProperties = { fontSize: typo.micro.fontSize, color: colors.base.text.secondary };
   const mutedSmall: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: withOpacity(colors.base.text.secondary, 0.85),
     textAlign: "center",
   };
@@ -109,7 +110,7 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
         <span
           style={{
             fontFamily: BRAND.fonts.mono,
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             color: colors.base.text.primary,
             overflow: "hidden",
             textOverflow: "ellipsis",

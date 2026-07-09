@@ -7,15 +7,9 @@ import {
   type ReactNode,
 } from "react";
 
+import { fixFrenchPunctuation } from "../../FrenchPunctuation";
 import { SKIPPED_INTRINSICS } from "../data";
 
-import { fixFrenchPunctuation } from "./fixFrenchPunctuation";
-
-/**
- * Recursively walks a React subtree and applies French-typography
- * normalization to every plain-string child. Elements whose tag is in
- * SKIPPED_INTRINSICS are returned as-is (URLs, code blocks, SVG).
- */
 export const transformFrText = (node: ReactNode): ReactNode => {
   if (typeof node === "string") return fixFrenchPunctuation(node);
 

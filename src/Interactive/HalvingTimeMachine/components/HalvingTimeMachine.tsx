@@ -1,14 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  BRAND,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity,
-} from "../../../Design";
+import { Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useHalvingTimeMachine } from "../hooks";
 
@@ -24,6 +16,7 @@ import { History, Info } from "@icons";
  * Lets readers feel the staircase down to zero, well past 2040.
  */
 export const HalvingTimeMachine: FC = () => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -46,7 +39,7 @@ export const HalvingTimeMachine: FC = () => {
 
   const introStyle: CSSProperties = {
     margin: 0,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.55,
     color: withOpacity(colors.base.text.secondary, 0.9),
     textAlign: "center",

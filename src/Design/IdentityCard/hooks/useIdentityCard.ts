@@ -6,7 +6,6 @@ export const useIdentityCard = (isExpandable: boolean = false, onOpen?: () => vo
   const showContent = !isExpandable || isOpen;
   const [isExpandButtonHovered, setIsExpandButtonHovered] = useState(false);
 
-  // Notify on each open transition (idempotent for callers tracking a set).
   const onOpenRef = useRef(onOpen);
   onOpenRef.current = onOpen;
   useEffect(() => {

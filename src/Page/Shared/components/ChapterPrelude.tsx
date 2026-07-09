@@ -11,23 +11,9 @@ import {
 
 type ChapterPreludeProps = {
   children: ReactNode;
-  /**
-   * Bottom margin between the prelude and whatever follows. Driven by
-   * `PageTemplate`'s vertical rhythm system - passing `undefined` leaves
-   * spacing to the parent flow.
-   */
   marginBottom?: string;
 };
 
-/**
- * The chapter prelude — a soft module-color wash with a module-color display
- * lettrine on the intro's first letter, and the whole intro voice set
- * in the module color (no italic). The written word "Prélude" is gone: the
- * upright lettrine + the colored overture signal "the opening" on their own,
- * and the monochrome-module treatment sets it cleanly apart from the ink prose
- * that follows. The lettrine is the chalk initial the teacher draws to start
- * the lesson — and it is the ONLY lettrine in the reading flow.
- */
 export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
@@ -38,8 +24,6 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom
   const gold = getBrandGold(theme);
   const isModule = moduleTheme !== "base";
   const moduleAccent = isModule ? colors[moduleTheme].text.secondary : gold;
-  // Saturated module color for the wash (e.g. violet #8b5cf6), falling back to
-  // gold on neutral pages. Kept very faint so the prose reads cleanly on top.
   const washSource = isModule ? colors[moduleTheme].background.secondary : gold;
   const wash = withOpacity(washSource, theme === "dark" ? 0.12 : 0.08);
 
@@ -52,12 +36,6 @@ export const ChapterPrelude: FC<ChapterPreludeProps> = ({ children, marginBottom
     marginBottom,
   };
 
-  // The intro voice shares the chapter `prose` role (16px body serif), set in
-  // the module color (no italic) so the prelude reads as a colored overture
-  // distinct from the ink prose. The big drop-cap is rendered by CSS
-  // (.chapter-prelude-text::first-letter in index.css), fed the same module
-  // color through --prelude-lettrine-color — size + weight (display 700) keep
-  // it distinct from the body it shares a hue with.
   const textStyle: CSSProperties = {
     ...typography.prose,
     margin: 0,

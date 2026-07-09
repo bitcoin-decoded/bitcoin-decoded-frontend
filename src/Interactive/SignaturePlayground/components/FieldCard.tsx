@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND } from "../../../Design";
+import { BRAND, getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { truncateHash } from "../../helpers";
 import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
@@ -57,6 +57,7 @@ export const FieldCard: FC<Props> = ({
   readOnlyLabel,
   colors,
 }) => {
+  const typo = getTypography();
   const accent =
     tone === "secret"
       ? colors.secretColor
@@ -85,7 +86,7 @@ export const FieldCard: FC<Props> = ({
     display: "flex",
     alignItems: "center",
     gap: "0.35rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.04em",
@@ -102,7 +103,7 @@ export const FieldCard: FC<Props> = ({
     width: "1.05rem",
     height: "1.05rem",
     borderRadius: "50%",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: accent,
     background: withOpacity(accent, 0.14),
@@ -114,7 +115,7 @@ export const FieldCard: FC<Props> = ({
     padding: "0.5rem 0.65rem",
     borderRadius: 0,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: valueColor ?? colors.basePrimaryText,
     textAlign: "center",
@@ -128,7 +129,7 @@ export const FieldCard: FC<Props> = ({
   };
 
   const hintStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     lineHeight: 1.5,
     color: withOpacity(colors.baseTextSecondary, 0.8),
     margin: 0,
@@ -138,7 +139,7 @@ export const FieldCard: FC<Props> = ({
   const valuePrefixStyle: CSSProperties = {
     display: "block",
     textAlign: "center",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
@@ -149,7 +150,7 @@ export const FieldCard: FC<Props> = ({
     display: "inline-flex",
     alignItems: "center",
     gap: "0.35rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: withOpacity(colors.baseTextSecondary, 0.85),
     fontWeight: 500,
     marginTop: "0.1rem",

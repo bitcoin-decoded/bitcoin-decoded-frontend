@@ -8,13 +8,6 @@ type HighlightTextProps = {
   highLightColorHex?: string;
 };
 
-/**
- * Builds a hand-drawn underline stroke as an inline SVG data URI. The path is
- * a confident, slightly irregular marker line (not a ruler-straight rule), so
- * it reads as something the teacher underlined by hand — coherent with the
- * Patrick Hand / Cabin Sketch chalkboard register. `preserveAspectRatio=none`
- * lets it stretch to the full width of the highlighted phrase.
- */
 const handUnderline = (color: string): string => {
   const encoded = encodeURIComponent(color);
   const svg =
@@ -24,22 +17,14 @@ const handUnderline = (color: string): string => {
   return `url("data:image/svg+xml,${svg}")`;
 };
 
-/**
- * Marks a word or phrase as worth noticing. A hand-drawn gold marker stroke
- * sits under the text — punchier and warmer than the previous thin module
- * accent underline, and on-register with the handwriting type stack.
- */
 export const HighlightText: FC<HighlightTextProps> = ({ children, highLightColorHex }) => {
   const { theme } = useThemeContext();
   const { colors, moduleTheme } = usePageTheme();
 
-  // Module identity color (violet on MoneyLaws, …), gold on neutral pages.
   const moduleAccent = moduleTheme === "base" ? getBrandGold(theme) : colors[moduleTheme].text.secondary;
   const color = highLightColorHex ?? moduleAccent;
 
   const highlightStyle: CSSProperties = {
-    // Softer than the previous 600 — the hand-drawn underline already carries
-    // the emphasis, so the text only needs a gentle weight lift.
     fontWeight: 500,
     backgroundImage: handUnderline(color),
     backgroundRepeat: "no-repeat",

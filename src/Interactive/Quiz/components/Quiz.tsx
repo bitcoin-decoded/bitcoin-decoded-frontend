@@ -1,14 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  BRAND,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity,
-} from "../../../Design";
+import { Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useQuiz } from "../hooks";
 import { type QuizData } from "../types";
@@ -20,6 +12,7 @@ type QuizProps = QuizData & {
 };
 
 export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const { t } = useTranslation();
   const breakpoint = useBreakpoint();
@@ -44,7 +37,7 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
 
   const questionStyle: CSSProperties = {
     color: colors.base.text.primary,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontStyle: "italic",
     lineHeight: 1.7,
     margin: "0.5rem 0 1.25rem 0",
@@ -88,7 +81,7 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       backgroundColor: bgColor,
       border: `1px solid ${borderColor}`,
       color: textColor,
-      fontSize: BRAND.fontSize.body,
+      fontSize: typo.note.fontSize,
       lineHeight: 1.6,
       transition: "all 0.2s var(--ease-smooth)",
       outline: "none",

@@ -1,3 +1,3 @@
-export { MainLayout, Header, Footer, NavBar } from "./components";
+export { Footer, Header, MainLayout, NavBar } from "./components";
 export { findPathToId } from "./helpers";
-export { useNavBar, useAccordion, useHeaderHidden } from "./hooks";
+export { useAccordion, useHeaderHidden,useNavBar } from "./hooks";

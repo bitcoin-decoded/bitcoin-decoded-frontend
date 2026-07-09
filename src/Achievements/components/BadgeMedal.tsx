@@ -20,11 +20,6 @@ const DIMS: Record<Size, { box: number; icon: number; ring: number }> = {
   lg: { box: 104, icon: 44, ring: 4 },
 };
 
-/**
- * A single themed medal. Earned = module-colored radial face with an inset
- * hairline rim and a restrained outer glow; locked = a quiet dashed disc with a
- * lock. The icon is the chapter's topic (or a trophy for module badges).
- */
 export const BadgeMedal: FC<Props> = ({ badge, earned, size = "md" }) => {
   const { colors } = usePageTheme();
   const { box, icon, ring } = DIMS[size];

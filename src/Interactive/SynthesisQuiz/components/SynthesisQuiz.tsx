@@ -1,13 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button,
-  Caption,
-  FeedbackPanel,
-  OptionButton,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, FeedbackPanel, getTypography, OptionButton, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useSynthesisQuiz } from "../hooks";
 import type { SynthesisQuizData } from "../types";
@@ -36,6 +29,7 @@ export const SynthesisQuiz: FC<Props> = ({
   onPass,
   onReset,
 }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -101,7 +95,7 @@ export const SynthesisQuiz: FC<Props> = ({
 
   const indexStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     color: accent,

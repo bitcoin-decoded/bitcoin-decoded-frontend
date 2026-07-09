@@ -2,25 +2,18 @@ import { type CSSProperties, type FC, Fragment, type JSX } from "react";
 
 import { type NavigationItem } from "../../../Routing";
 import { Badge } from "../../components";
-import { ChevronIcon } from "../../icons";
+import type { ThemeColors } from "../../Theme";
 
-import { ClipboardCheck } from "@icons";
+import { ChevronRight, ClipboardCheck } from "@icons";
 
 type Props = {
   item: NavigationItem;
   level?: number;
   isDirectlyActive: boolean;
-  /** Module is expanded (only meaningful at level 0). */
   isExpanded: boolean;
-  /**
-   * Module contains the current page but isn't the page itself.
-   * Used to keep the parent module subtly highlighted when it's
-   * been collapsed by another module opening (so the user keeps a
-   * sense of "where am I").
-   */
   isActiveAncestor: boolean;
   isInteracting: boolean;
-  colors: Record<string, any>;
+  colors: ThemeColors;
   onItemClick: (item: NavigationItem) => void;
   onInteractionStart: (id: string) => void;
   onInteractionEnd: () => void;
@@ -80,9 +73,6 @@ export const NavItem: FC<Props> = ({
     transition: "opacity 0.2s",
   };
 
-  // grid-template-rows: 0fr ↔ 1fr animates the natural height of the
-  // child without needing a max-height cap. The inner <ul> has
-  // overflow: hidden so the rows clip cleanly during the transition.
   const submenuWrapperStyle: CSSProperties = {
     display: "grid",
     gridTemplateRows: isExpanded ? "1fr" : "0fr",
@@ -144,7 +134,14 @@ export const NavItem: FC<Props> = ({
               transition: "opacity 0.2s",
             }}
           >
-            <ChevronIcon isExpanded={isExpanded} />
+            <ChevronRight
+              size={16}
+              strokeWidth={2}
+              style={{
+                transition: "transform 0.2s ease-in-out",
+                transform: isExpanded ? "rotate(90deg)" : "rotate(0deg)",
+              }}
+            />
           </div>
         )}
       </button>

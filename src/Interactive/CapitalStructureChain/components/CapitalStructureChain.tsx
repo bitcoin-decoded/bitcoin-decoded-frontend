@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, ExploredCounter, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, ExploredCounter, getTypography, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { getSandwichChain } from "../data";
 import { useCapitalStructureChain } from "../hooks";
@@ -15,6 +15,7 @@ type Props = {
 };
 
 export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const { t, language } = useTranslation();
   const steps = getSandwichChain(language);
@@ -122,7 +123,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     paddingRight: "0.7rem",
     paddingBottom: "0.4rem",
     cursor: "pointer",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     letterSpacing: "0.05rem",
     lineHeight: 1.6,
     fontWeight: 400,
@@ -167,7 +168,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
                     style={{
                       display: "block",
                       marginBottom: "0.25rem",
-                      fontSize: BRAND.fontSize.body,
+                      fontSize: typo.note.fontSize,
                       color: colors.base.text.primary,
                       fontStyle: "normal",
                       letterSpacing: "0.08em",

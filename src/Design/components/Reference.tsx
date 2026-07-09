@@ -11,54 +11,22 @@ type CommonProps = {
 };
 
 type InternalProps = CommonProps & {
-  /** Route id to navigate to (in-app navigation via the router context). */
   to: RouteName;
   href?: never;
 };
 
 type ExternalProps = CommonProps & {
-  /** Absolute URL. Opens in a new tab with rel=noopener noreferrer. */
   href: string;
   to?: never;
 };
 
 type Props = InternalProps | ExternalProps;
 
-/**
- * Inline cross-reference link. Polymorphic - choose the flavor by which
- * prop you pass:
- *
- * @example
- *   // Internal: jump to another chapter / module
- *   <Reference to={ROUTE_NAME.Banking_4}>le module qui casse le moteur</Reference>
- *
- *   // External: open a deep-dive in a new tab
- *   <Reference href="https://en.wikipedia.org/wiki/Byzantine_fault">
- *     les généraux byzantins
- *   </Reference>
- *
- * Visual: dotted underline + the page's world accent color (Banking blue,
- * MoneyLaws violet, Bitcoin amber). External links get a trailing ↗ icon.
- * Underline opacity intensifies on hover / focus.
- *
- * --- When to use which primitive --------------------------------------
- *   • <strong>        → un mot / concept à faire ressortir, sans lien
- *   • <HighlightText> → un passage entier (effet stabilo), sans lien
- *   • <Reference>     → cross-référence cliquable (interne OU externe)
- *
- * If the goal is purely visual emphasis, DON'T use Reference - its
- * dotted underline reads as "click me" and will frustrate the user.
- * Reach for <strong> or <HighlightText> instead.
- * ---------------------------------------------------------------------
- */
 export const Reference: FC<Props> = ({ children, ...rest }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { setCurrentPage } = useRouterContext();
   const [hovered, setHovered] = useState(false);
 
-  // text.secondary on a world page, base.text.primary on neutral pages.
-  // The dotted underline carries the "interactive" signal; the color is
-  // only there to confirm it.
   const accent =
     moduleTheme === "base" ? colors.base.text.primary : colors[moduleTheme].text.secondary;
 

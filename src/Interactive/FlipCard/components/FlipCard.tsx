@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type KeyboardEvent } from "react";
 
-import { BRAND, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, usePageTheme, withOpacity } from "../../../Design";
 import { useFlipCard } from "../hooks";
 import type { FlipCardItem } from "../types";
 
@@ -15,6 +15,7 @@ type FlipCardProps = {
 };
 
 export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const { isFlipped, isHovered, flip, hoverHandlers } = useFlipCard(onReveal);
   const world = colors[moduleTheme];
@@ -83,7 +84,7 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
     top: "0.6rem",
     left: "0.7rem",
     fontFamily: mono,
-    fontSize: BRAND.fontSize.micro,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     letterSpacing: "0.08em",
     color: withOpacity(world.text.secondary, 0.6),
@@ -117,7 +118,7 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
           <span
             style={{
               fontFamily: mono,
-              fontSize: BRAND.fontSize.label,
+              fontSize: typo.label.fontSize,
               fontWeight: 500,
               color: lifted ? world.text.secondary : world.text.primary,
               fontVariant: "small-caps",
@@ -145,7 +146,7 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
           <span
             style={{
               fontFamily: mono,
-              fontSize: BRAND.fontSize.note,
+              fontSize: typo.micro.fontSize,
               fontWeight: 500,
               color: world.text.secondary,
               fontVariant: "small-caps",
@@ -167,7 +168,7 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
             <span
               key={i}
               style={{
-                fontSize: BRAND.fontSize.note,
+                fontSize: typo.micro.fontSize,
                 // Primary text — these questions are the card's payload, so
                 // they must read clearly in both themes (were too faint at
                 // text.secondary).

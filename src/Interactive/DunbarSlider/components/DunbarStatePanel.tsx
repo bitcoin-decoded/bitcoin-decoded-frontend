@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Caption, FeedbackPanel, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, Caption, FeedbackPanel, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 
 import { AlertTriangle, type IconType } from "@icons";
@@ -35,6 +35,7 @@ export const DunbarStatePanel: FC<Props> = ({
   overloadBody,
   localeTag,
 }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
 
@@ -65,7 +66,7 @@ export const DunbarStatePanel: FC<Props> = ({
   const phraseStyle: CSSProperties = {
     margin: 0,
     color: colors.base.text.primary,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.6,
   };
 

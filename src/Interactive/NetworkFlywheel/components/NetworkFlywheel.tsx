@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, Button, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { MAX_LEVEL, STEP_ICONS, WHEEL_RADIUS } from "../data";
 import { getPentagonLayout, getStepTones } from "../helpers";
@@ -16,6 +16,7 @@ type Props = {
 };
 
 export const NetworkFlywheel: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -75,7 +76,7 @@ export const NetworkFlywheel: FC<Props> = ({ onComplete }) => {
   const isOn = level > 0;
   const taglineStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.5,
     padding: "0.6rem 0.85rem",
     borderRadius: 0,

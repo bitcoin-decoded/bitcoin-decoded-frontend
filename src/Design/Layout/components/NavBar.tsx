@@ -21,29 +21,9 @@ export const NavBar: FC = () => {
     interactionId,
     setInteractionId,
   } = useNavBar();
-  // Slide the nav content up by 3.5rem when the Header auto-hides so
-  // the modules visually follow the chrome instead of leaving a vacant
-  // strip at the top. The sticky wrapper around us stays at 100vh, so
-  // sliding the content shifts the modules without exposing a gap at
-  // the bottom of the sidebar.
+
   const isHeaderHidden = useHeaderHidden();
 
-  // Padding-top accounts for the Header height (3.5rem) so the first
-  // nav item never sits under the Header. The sidebar wrapper in
-  // MainLayout spans the full viewport (top: 0, height: 100vh) and
-  // slides up by 3.5rem when the Header auto-hides, so the modules
-  // never end up with a vacant strip above them.
-  //
-  // The "NAVIGATION" label + separator that used to sit at the top
-  // are gone - they were decorative chrome that ate ~3rem of vertical
-  // space for no functional value. Notion / Linear / Stripe go
-  // straight to the items; the <nav> element with aria-label preserves
-  // screen-reader semantics.
-  // borderRight lives on the WRAPPER in MainLayout, not here - because
-  // this element translates by -3.5rem when the Header hides, and a
-  // border drawn here would translate with it, leaving the bottom
-  // 3.5rem of the sidebar column without a separator. The wrapper
-  // stays at full 100vh and owns the divider instead.
   const navStyle: CSSProperties = {
     padding: "calc(3.5rem + 0.75rem) 0 1.5rem",
     display: "flex",

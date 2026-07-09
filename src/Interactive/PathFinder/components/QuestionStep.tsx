@@ -1,6 +1,7 @@
 import { type CSSProperties, type ReactNode } from "react";
 
-import { BRAND, OptionButton, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, OptionButton, usePageTheme, withOpacity } from "../../../Design";
+
 
 type Option<T extends string> = { value: T; label: ReactNode };
 
@@ -25,6 +26,7 @@ export const QuestionStep = <T extends string>({
   disabled = false,
   footer,
 }: Props<T>) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
 
   const wrapStyle: CSSProperties = {
@@ -51,12 +53,12 @@ export const QuestionStep = <T extends string>({
     border: `1px solid ${withOpacity(accent, 0.4)}`,
     color: accent,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
   };
 
   const questionStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: colors.base.text.primary,
     lineHeight: 1.4,

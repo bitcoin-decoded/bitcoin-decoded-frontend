@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, THEME_COLORS, useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
+import { BRAND, getTypography, THEME_COLORS, useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
 
 import { ArrowRight } from "@icons";
 
@@ -24,6 +24,7 @@ type Props = {
  * hover. Replaces the previous rounded gradient card + lift/glow recipe.
  */
 export const WorldCard: FC<Props> = ({ title, subtitle, description, module, icon, onClick, cta }) => {
+  const typo = getTypography();
   const [isHovered, setIsHovered] = useState(false);
   const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
@@ -57,7 +58,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
   };
 
   const subtitleStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.label,
+    fontSize: typo.label.fontSize,
     fontFamily: BRAND.fonts.mono,
     fontWeight: 500,
     color: accent,
@@ -81,7 +82,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
   };
 
   const descStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontFamily: BRAND.fonts.body,
     lineHeight: 1.55,
     color: colors.base.text.primary,
@@ -92,7 +93,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
   };
 
   const ctaLabelStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.label,
+    fontSize: typo.label.fontSize,
     fontFamily: BRAND.fonts.mono,
     fontWeight: 500,
     color: accent,

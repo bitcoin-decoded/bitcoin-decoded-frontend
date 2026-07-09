@@ -1,10 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Caption,
-  ExploredCounter,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Caption, ExploredCounter, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useDebateArena } from "../hooks";
 import type { DebateItem } from "../types";
@@ -21,6 +17,7 @@ type DebateArenaProps = {
 };
 
 export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0, onComplete }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const { t } = useTranslation();
   const breakpoint = useBreakpoint();
@@ -68,7 +65,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
           justifyContent: "center",
           padding: "0 1rem",
           fontFamily: BRAND.fonts.mono,
-          fontSize: BRAND.fontSize.note,
+          fontSize: typo.micro.fontSize,
           fontWeight: 500,
           fontVariant: "small-caps",
           color: colors.base.text.secondary,
@@ -115,7 +112,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
             alignItems: "center",
             gap: "0.5rem",
             fontFamily: BRAND.fonts.mono,
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             fontWeight: 500,
             color:
               isActive || hovering
@@ -155,7 +152,7 @@ export const DebateArena: FC<DebateArenaProps> = ({ items, requiredExplored = 0,
             marginTop: isActive ? "0.75rem" : "0",
             overflow: "hidden",
             transition: "all 0.4s var(--ease-smooth)",
-            fontSize: BRAND.fontSize.body,
+            fontSize: typo.note.fontSize,
             lineHeight: 1.6,
             color: colors.base.text.secondary,
           };

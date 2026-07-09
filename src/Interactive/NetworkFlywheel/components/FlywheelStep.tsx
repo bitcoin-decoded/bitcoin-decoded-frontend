@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, usePageTheme, withOpacity } from "../../../Design";
 
 import type { IconType } from "@icons";
 
@@ -23,6 +23,7 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   isActive,
   isMobile,
 }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
 
@@ -60,7 +61,7 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   };
 
   const labelStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     letterSpacing: "0.02em",
     fontVariant: "small-caps",
@@ -69,7 +70,7 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   };
 
   const metricStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: isActive ? accent : world.text.primary,
     transition: "color 0.35s var(--ease-smooth)",

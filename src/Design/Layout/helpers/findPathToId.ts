@@ -1,6 +1,5 @@
 import type { NavigationItem, RouteName } from "../../../Routing";
 
-// Helper function to find the path of labels leading to a specific page ID
 export const findPathToId = (
   nodes: NavigationItem[],
   id: RouteName,

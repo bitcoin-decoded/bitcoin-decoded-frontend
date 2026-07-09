@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import type { KeyElement } from "../types";
 
 type Props = {
@@ -18,6 +18,7 @@ type Props = {
  * PillarRow).
  */
 export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) => {
+  const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const [isHovered, setIsHovered] = useState(false);
@@ -65,7 +66,7 @@ export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) 
 
   const titleStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
@@ -75,7 +76,7 @@ export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) 
   };
 
   const roleStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontStyle: "italic",
     lineHeight: 1.2,
     color: withOpacity(colors.base.text.secondary, isSelected ? 0.95 : 0.6),

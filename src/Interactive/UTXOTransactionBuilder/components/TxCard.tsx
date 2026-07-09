@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 
-import { BRAND, withOpacity } from "../../../Design";
+import { getTypography, withOpacity } from "../../../Design";
 import type { CardTone } from "../types";
 
 type TxCardProps = {
@@ -26,6 +26,7 @@ export const TxCard: FC<TxCardProps> = ({
   amountOpacity,
   baseTextSecondary,
 }) => {
+  const typo = getTypography();
   const { color, border, bg } = toneColors[tone];
   return (
     <div
@@ -69,7 +70,7 @@ export const TxCard: FC<TxCardProps> = ({
       >
         <span
           style={{
-            fontSize: BRAND.fontSize.body,
+            fontSize: typo.note.fontSize,
             fontWeight: 500,
             color,
             overflowWrap: "anywhere",
@@ -80,7 +81,7 @@ export const TxCard: FC<TxCardProps> = ({
         </span>
         <span
           style={{
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             color: withOpacity(baseTextSecondary, 0.6),
             overflowWrap: "anywhere",
             lineHeight: 1.3,

@@ -1,5 +1,5 @@
+export { Footer } from './Footer';
+export { Header } from './Header';
+export { MainLayout } from './MainLayout';
 export { NavBar } from './NavBar';
 export { NavItem } from './NavItem';
-export { MainLayout } from './MainLayout';
-export { Header } from './Header';
-export { Footer } from './Footer';

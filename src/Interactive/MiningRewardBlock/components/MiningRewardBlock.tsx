@@ -1,12 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge,
-BRAND,   Button,
-  Caption,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { Badge, BRAND, Button, Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { fmtBTC } from "../../helpers";
 import { CONFETTI_DATA } from "../data";
@@ -31,6 +25,7 @@ type Props = {
 };
 
 export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -95,7 +90,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
 
   const subtitle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.secondary,
     fontStyle: "italic",
     marginBottom: "0.15rem",
@@ -103,7 +98,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
 
   const headerField: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     display: "flex",
     gap: "0.35rem",
   };
@@ -128,7 +123,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     gap: isMobile ? "0.4rem" : "0.6rem",
     padding: isMobile ? "0.4rem 0.55rem" : "0.45rem 0.7rem",
     borderRadius: 0,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     background: withOpacity(world.border.secondary, 0.03),
     border: `1px solid ${withOpacity(world.border.secondary, 0.1)}`,
   };
@@ -151,7 +146,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     display: "flex",
     alignItems: "center",
     gap: "0.2rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.secondary,
     opacity: 0.78,
   };
@@ -162,7 +157,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     display: "flex",
     alignItems: "center",
     gap: "0.5rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     padding: "0.3rem 0",
     color: emphasize ? world.text.primary : colors.base.text.primary,
     fontWeight: 500,
@@ -192,7 +187,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     transition: "all 0.5s var(--ease-smooth)",
   };
   const walletLabel: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: colors.base.text.secondary,
@@ -208,7 +203,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
 
   const rewardNoteStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     lineHeight: 1.65,
     padding: "0.55rem 0.7rem",
@@ -241,7 +236,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
                   alignItems: "center",
                   gap: "0.25rem",
                   color: successColor,
-                  fontSize: BRAND.fontSize.note,
+                  fontSize: typo.micro.fontSize,
                 }}
               >
                 <Lock size={12} strokeWidth={2} />
@@ -413,7 +408,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
               {fmtBTC(totalFees)} {t("miningReward.rewardNoteFees")} + {fmtBTC(subsidy)}{" "}
               {t("miningReward.rewardNoteSubsidy")}
               <br />
-              <span style={{ opacity: 0.65, fontSize: BRAND.fontSize.note }}>
+              <span style={{ opacity: 0.65, fontSize: typo.micro.fontSize }}>
                 ({t("miningReward.rewardNoteNewBitcoin")})
               </span>
             </div>

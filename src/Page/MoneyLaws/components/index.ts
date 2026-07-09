@@ -1,4 +1,3 @@
-export { MonetaryGallery } from "./MonetaryGallery";
 export { MoneyLaws1Page } from "./MoneyLaws1Page";
 export { MoneyLaws2Page } from "./MoneyLaws2Page";
 export { MoneyLaws3Page } from "./MoneyLaws3Page";

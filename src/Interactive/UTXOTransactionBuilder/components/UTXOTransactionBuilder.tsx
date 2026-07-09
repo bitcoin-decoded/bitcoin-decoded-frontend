@@ -1,12 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge,
-BRAND,   Button,
-  Caption,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { Badge, BRAND, Button, Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { fmtBTC, sanitizeAmount } from "../helpers";
 import { useUTXOTransactionBuilder } from "../hooks";
@@ -38,6 +32,7 @@ type Props = {
 };
 
 export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -84,7 +79,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
     },
   };
 
-  const amountFont = BRAND.fontSize.body;
+  const amountFont = typo.note.fontSize;
   const iconSize = isMobile ? 12 : 13;
 
   return (
@@ -129,7 +124,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
                   gap: "0.35rem",
                   padding: "0.4rem 0.7rem",
                   borderRadius: 0,
-                  fontSize: BRAND.fontSize.note,
+                  fontSize: typo.micro.fontSize,
                   fontWeight: 500,
                   border: `1px solid ${withOpacity(selected ? accentColor : world.border.secondary, selected ? 0.7 : 0.25)}`,
                   background: selected
@@ -153,7 +148,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             alignItems: "flex-start",
             gap: "0.4rem",
             marginTop: "0.55rem",
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             lineHeight: 1.5,
             color: withOpacity(colors.base.text.secondary, 0.65),
             minWidth: 0,
@@ -189,7 +184,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             maxWidth: "100%",
             padding: "0.55rem 0.85rem",
             borderRadius: 0,
-            fontSize: isMobile ? "1rem" : BRAND.fontSize.body,
+            fontSize: isMobile ? "1rem" : typo.note.fontSize,
             fontWeight: 500,
             border: `1px solid ${withOpacity(isInsufficient ? errorColor : accentColor, isInsufficient ? 0.6 : 0.3)}`,
             background: withOpacity(world.background.secondary, 0.05),
@@ -238,7 +233,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
                   justifyContent: "space-between",
                   alignItems: "center",
                   gap: "0.5rem",
-                  fontSize: BRAND.fontSize.note,
+                  fontSize: typo.micro.fontSize,
                   color: colors.base.text.secondary,
                   padding: "0 0.1rem",
                   minWidth: 0,
@@ -337,7 +332,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
                   amount={fmtBTC(fees)}
                   tone="muted"
                   toneColors={toneColors}
-                  amountFontSize={BRAND.fontSize.note}
+                  amountFontSize={typo.micro.fontSize}
                   amountOpacity={0.75}
                   baseTextSecondary={colors.base.text.secondary}
                 />

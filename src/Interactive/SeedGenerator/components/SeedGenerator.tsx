@@ -1,12 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button,
-  Caption,
-  Disclosure,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, Disclosure, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { groupBits } from "../helpers";
 import { useSeedGenerator } from "../hooks";
@@ -20,6 +14,7 @@ type Props = {
 };
 
 export const SeedGenerator: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors: themeColors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -37,7 +32,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
   const stepLabelStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -50,7 +45,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
     cursor: "pointer",
     padding: isMobile ? "0.6rem 1rem" : "0.7rem 1.2rem",
     border: "none",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     letterSpacing: "0.04em",
     color: active ? themeColors.base.text.onAccent : withOpacity(baseTextSecondary, 0.85),
@@ -59,7 +54,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
   });
 
   const sectionLabelStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -83,7 +78,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
   });
 
   const wordIndexStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: withOpacity(baseTextSecondary, 0.55),
     letterSpacing: "0.04em",
@@ -91,7 +86,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
 
   const wordTextStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: basePrimaryText,
     wordBreak: "break-word",
@@ -103,7 +98,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
     background: withOpacity(baseBackgroundSecondary, 0.06),
     border: `1px solid ${withOpacity(color, 0.25)}`,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: withOpacity(basePrimaryText, 0.85),
     wordBreak: "break-all",
@@ -122,7 +117,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
 
   const heroQuoteStyle: CSSProperties = {
     fontStyle: "italic",
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.55,
     color: withOpacity(basePrimaryText, 0.85),
     padding: "0.7rem 0.85rem",
@@ -156,7 +151,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
         </Caption>
         <p
           style={{
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             fontStyle: "italic",
             color: withOpacity(baseTextSecondary, 0.75),
             margin: 0,
@@ -285,7 +280,7 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
             display: "flex",
             flexDirection: "column",
             gap: "0.25rem",
-            fontSize: BRAND.fontSize.body,
+            fontSize: typo.note.fontSize,
             lineHeight: 1.55,
             color: withOpacity(baseTextSecondary, 0.9),
           }}

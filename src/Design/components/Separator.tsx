@@ -7,14 +7,6 @@ type Props = {
   margin?: string;
 };
 
-/**
- * In-component section separator — three small FILLED squares (solid block
- * figures) in the module color, close together and centered. Filled (not
- * hollow) so they read as ledger blocks rather than an "step 1 of 3" progress
- * dot row. Deliberately NOT a horizontal rule: a line would read as a block
- * top/bottom delimiter and confuse the chapter's chain structure. Gold on
- * neutral pages.
- */
 export const Separator: FC<Props> = ({ margin = "1.5rem 0" }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();

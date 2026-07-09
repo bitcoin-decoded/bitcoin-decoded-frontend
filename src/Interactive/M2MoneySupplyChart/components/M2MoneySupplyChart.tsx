@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { BRAND, Caption, useBreakpoint, useRechartsTheme } from "../../../Design";
+import { BRAND, Caption, getTypography, useBreakpoint, useRechartsTheme } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { M2_MONEY_SUPPLY } from "../data";
 
@@ -20,6 +20,7 @@ type Props = {
 };
 
 export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
+  const typo = getTypography();
   const { language } = useLanguageContext();
   const fr = language === "fr";
   const breakpoint = useBreakpoint();
@@ -38,7 +39,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
 
   const sourceStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: chart.axisTickColor,
     textAlign: "center",
     marginTop: "0.5rem",

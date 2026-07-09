@@ -1,13 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { Badge,
-BRAND,   Button,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { Badge, BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { BRANCHES, CITIES } from "../data";
 import { useDoubleSpendDemo } from "../hooks";
@@ -32,6 +25,7 @@ type Props = {
 };
 
 export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -88,7 +82,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
 
   const partyLabel: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: colors.base.text.primary,
   };
@@ -99,7 +93,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     flexDirection: "column",
     alignItems: "center",
     gap: "0.15rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     lineHeight: 1.35,
     color: accent,
     textAlign: "center",
@@ -109,12 +103,12 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     fontWeight: 500,
     letterSpacing: "0.04em",
     fontVariant: "small-caps",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
   };
 
   const txOrigin: CSSProperties = {
     color: colors.base.text.secondary,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     letterSpacing: "0.04em",
     fontVariant: "small-caps",
     opacity: 0.85,
@@ -126,7 +120,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     alignItems: "center",
     justifyContent: "center",
     gap: "0.4rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.secondary,
     padding: "0.5rem 0.75rem",
     borderRadius: 0,
@@ -196,7 +190,7 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
         <span
           style={{
             ...mono,
-            fontSize: BRAND.fontSize.note,
+            fontSize: typo.micro.fontSize,
             fontWeight: 500,
             color: colors.base.text.primary,
           }}

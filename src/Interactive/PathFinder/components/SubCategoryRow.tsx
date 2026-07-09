@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge, BRAND, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, BRAND, getTypography, usePageTheme, withOpacity } from "../../../Design";
 import type { PathFinderCopy } from "../data";
 import type { SubCategoryItem } from "../types";
 
@@ -20,6 +20,7 @@ type Props = {
  * the category level by design.
  */
 export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) => {
+  const typo = getTypography();
   const { colors } = usePageTheme();
   const neutral = colors.base.text.secondary;
   const isPlanA = item.plan === "A";
@@ -55,7 +56,7 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
     flex: 1,
     minWidth: 0,
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.04em",
@@ -76,7 +77,7 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
 
   const commentStyle: CSSProperties = {
     margin: 0,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.5,
     color: colors.base.text.primary,
   };

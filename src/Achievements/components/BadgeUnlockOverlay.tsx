@@ -16,12 +16,6 @@ type Props = {
 const reduced = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/**
- * Full-screen, one-shot celebration of a freshly unlocked badge: fades in with a
- * gentle scale, holds, then fades out and advances the queue. Portaled to
- * <body> so `position: fixed` resolves against the viewport (a transformed
- * ancestor would otherwise become its containing block).
- */
 export const BadgeUnlockOverlay: FC<Props> = ({ badge, onDismiss }) => {
   const { t } = useTranslation();
   const { colors } = usePageTheme();

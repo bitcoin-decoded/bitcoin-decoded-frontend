@@ -7,11 +7,6 @@ import { useBadges } from "../hooks";
 
 import { Award } from "@icons";
 
-/**
- * Header entry to the badge collection: a quiet pill mirroring the theme/lang
- * toggles (2rem tall, same border + hover), with the earned count alongside an
- * award glyph. Active when the collection page is open.
- */
 export const BadgeNavButton: FC = () => {
   const { theme } = useThemeContext();
   const { t } = useTranslation();

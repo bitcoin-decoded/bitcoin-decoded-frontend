@@ -1,27 +1,18 @@
-import { type FC, type CSSProperties, useState } from "react";
+import { type CSSProperties, type FC, useState } from "react";
 
-import { useThemeContext, THEME_COLORS } from "../../Theme";
+import { THEME_COLORS, useThemeContext } from "../../Theme";
 
 type Props = {
   isOpen: boolean;
   onToggle: () => void;
 };
 
-/**
- * Hamburger / close toggle for the mobile-tablet drawer.
- *
- * Visual chrome aligned with `LanguageToggle` and `ThemeToggle`: same
- * 2rem square footprint, same border, same subtle hover (bg lift +
- * stroke brighten). The animated 3-line / X transition is preserved.
- */
 export const HamburgerButton: FC<Props> = ({ isOpen, onToggle }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
   const [isHovered, setIsHovered] = useState(false);
 
-  const lineColor = isHovered
-    ? colors.base.text.primary
-    : colors.base.text.secondary;
+  const lineColor = isHovered ? colors.base.text.primary : colors.base.text.secondary;
 
   const buttonStyle: CSSProperties = {
     width: "2rem",

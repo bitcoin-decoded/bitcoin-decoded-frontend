@@ -20,14 +20,6 @@ export {
 } from "./components";
 export { withOpacity } from "./helpers";
 export { useDisclosure, useExplorationGate } from "./hooks";
-export {
-  CloverLeafIcon,
-  DivisionIcon,
-  EqualIcon,
-  FeatherIcon,
-  LightbulbIcon,
-  TimeIcon,
-} from "./icons";
 export type { IdentityCharacteristic, MonetaryItem } from "./IdentityCard";
 export { getMonetaryHistory, IdentityCard, RatingRow, useIdentityCard } from "./IdentityCard";
 export { MainLayout, useHeaderHidden } from "./Layout";

@@ -7,57 +7,25 @@ import { usePageTheme } from "./usePageTheme";
 import { useThemeContext } from "./useThemeContext";
 
 export type RechartsTheme = {
-  /** Stroke color for grid lines (faint). */
   gridColor: string;
-  /** Stroke color for axis lines (same hairline gold as section rules). */
   axisLineColor: string;
-  /** Color for axis tick labels. */
   axisTickColor: string;
-  /** Stroke pattern for grid lines. `"3 3"` matches the Recharts default but
-   *  softer when the gridColor is faint. */
   gridStrokeDasharray: string;
-  /** Primary data-line color — defaults to navy on light, cream on dark. */
   primary: string;
-  /** Accent color for highlights and selected states (brand gold). */
   accent: string;
   /** Reserved Bitcoin signal — only use when chart is specifically about BTC. */
   bitcoinOrange: string;
-  /** Ready-to-use style object for <Tooltip contentStyle>. */
   tooltipContentStyle: CSSProperties;
-  /** Ready-to-use style object for <Tooltip labelStyle> (the row above values). */
   tooltipLabelStyle: CSSProperties;
-  /** Ready-to-use style object for <Tooltip itemStyle> (each value row). */
   tooltipItemStyle: CSSProperties;
-  /** Tick prop value for <XAxis tick={...}> and <YAxis tick={...}>. */
   tickProp: {
     fontSize: number;
     fontFamily: string;
     fill: string;
   };
-  /**
-   * Area fill gradient stops — for callers that still want an area gradient.
-   * Per the refonte rules (Recharts is light-touch), we keep the chart's
-   * visual type unchanged; this just retints the gradient with brand colors.
-   */
   gradientStops: { start: string; end: string };
 };
 
-/**
- * Ledger-system Recharts theme — palette + label font + tooltip styling.
- * Per the validated feedback rule, this is a LIGHT TOUCH on charts:
- *
- * - We do NOT force straight lines on smooth curves
- * - We do NOT replace area fills with hatching
- * - We do NOT change chart types
- *
- * We only change:
- * - Color palette (navy/gold/Bitcoin orange instead of Tailwind blue/violet/amber)
- * - Axis tick font (JetBrains Mono)
- * - Tooltip styling (block-header register: dark navy bg, mono content)
- * - Grid + axis line colors (hairline gold for axis, faint navy for grid)
- *
- * Consumers thread these tokens into the chart components as-is.
- */
 export const useRechartsTheme = (): RechartsTheme => {
   const { theme } = useThemeContext();
   const { colors } = usePageTheme();

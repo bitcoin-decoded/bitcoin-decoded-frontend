@@ -1,12 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button,
-  Caption,
-  FeedbackPanel,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { useHashDemo } from "../hooks";
 
@@ -18,6 +12,7 @@ type Props = {
 };
 
 export const HashDemo: FC<Props> = ({ onComplete }) => {
+  const typo = getTypography();
   const { language } = useLanguageContext();
   const fr = language === "fr";
   const { colors, moduleTheme } = usePageTheme();
@@ -30,7 +25,7 @@ export const HashDemo: FC<Props> = ({ onComplete }) => {
 
   const inputStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     padding: isMobile ? "0.7rem 1rem" : "0.75rem 1.25rem",
     borderRadius: 0,
     border: `1px solid ${hash ? world.border.secondary : colors.base.border.secondary}`,
@@ -45,7 +40,7 @@ export const HashDemo: FC<Props> = ({ onComplete }) => {
 
   const outputBox: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     lineHeight: 1.6,
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.25rem",
     borderRadius: 0,

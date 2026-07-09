@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, usePageTheme, withOpacity } from "../../../Design";
+import { BRAND, getTypography, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 import { Shuffle } from "@icons";
@@ -12,6 +12,7 @@ type Props = {
 };
 
 export const ModifyTxButton: FC<Props> = ({ onClick, blockNumber, disabled = false }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors } = usePageTheme();
 
@@ -21,7 +22,7 @@ export const ModifyTxButton: FC<Props> = ({ onClick, blockNumber, disabled = fal
   // weight 500, 12px floor. The error tint is the "tamper" signal.
   const buttonStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: colors.semantic.error.text,
     padding: "0.3rem 0.5rem",

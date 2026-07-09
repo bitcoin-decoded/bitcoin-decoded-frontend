@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, withOpacity } from "../../../Design";
+import { BRAND, getTypography, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import type { UtxoGraphMode } from "../types";
 
@@ -30,6 +30,7 @@ export const UtxoCoin: FC<Props> = ({
   errorColor,
   baseTextSecondary,
 }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const consumed = state === "consumed";
   const created = state === "created";
@@ -66,7 +67,7 @@ export const UtxoCoin: FC<Props> = ({
   };
 
   const amountStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     color: consumed ? withOpacity(errorColor, 0.55) : color,
     textDecoration: consumed ? "line-through" : "none",
@@ -74,7 +75,7 @@ export const UtxoCoin: FC<Props> = ({
   };
 
   const sublabelStyle: CSSProperties = {
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.04em",
@@ -86,7 +87,7 @@ export const UtxoCoin: FC<Props> = ({
     alignItems: "center",
     gap: "0.2rem",
     marginTop: "0.2rem",
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",

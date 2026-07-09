@@ -1,11 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button,
-  Caption,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { BRAND, Button, Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { UTXO_GRAPH_SCENARIO } from "../data";
 import { useUtxoGraph } from "../hooks";
@@ -21,6 +16,7 @@ const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 const fmt = (n: number) => `${+n.toFixed(8)} BTC`;
 
 export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
+  const typo = getTypography();
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -48,7 +44,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
 
   const sectionLabel: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
@@ -69,7 +65,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
     gap: "0.35rem",
     padding: "0.3rem 0.8rem",
     borderRadius: 0,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.07em",
@@ -95,7 +91,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
     gap: "0.35rem",
     padding: "0.25rem 0.6rem",
     borderRadius: 0,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     color: accent,
     border: `1px solid ${withOpacity(accent, 0.35)}`,
@@ -105,7 +101,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
 
   const captionStyle: CSSProperties = {
     margin: 0,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     lineHeight: 1.55,
     fontStyle: "italic",
     textAlign: "center",
@@ -142,7 +138,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
           }}
         >
           <span
-            style={{ ...mono, fontSize: BRAND.fontSize.body, fontWeight: 500, color: world.text.primary }}
+            style={{ ...mono, fontSize: typo.note.fontSize, fontWeight: 500, color: world.text.primary }}
           >
             {t("utxoGraph.walletTitle")}
           </span>

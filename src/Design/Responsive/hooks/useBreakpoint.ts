@@ -1,5 +1,6 @@
-import { useMediaQuery } from "./useMediaQuery";
 import type { Breakpoint } from "../types/Breakpoint";
+
+import { useMediaQuery } from "./useMediaQuery";
 
 export const useBreakpoint = (): Breakpoint => {
   const isDesktop = useMediaQuery("(min-width: 1280px)");

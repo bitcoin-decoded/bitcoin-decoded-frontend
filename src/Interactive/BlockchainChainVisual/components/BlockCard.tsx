@@ -1,11 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge,
-BRAND,   HighlightText,
-  SurfaceCard,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity, } from "../../../Design";
+import { Badge, BRAND, getTypography, HighlightText, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 import { randomizeTx } from "../helpers";
@@ -43,6 +38,7 @@ export const BlockCard: FC<Props> = ({
   isFirstBlock = false,
   highlightChainLink = false,
 }) => {
+  const typo = getTypography();
   const { t, language } = useTranslation();
   const fr = language === "fr";
   const { colors, moduleTheme } = usePageTheme();
@@ -58,7 +54,7 @@ export const BlockCard: FC<Props> = ({
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.body,
+    fontSize: typo.note.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
@@ -74,7 +70,7 @@ export const BlockCard: FC<Props> = ({
 
   const sectionLabel: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
@@ -89,7 +85,7 @@ export const BlockCard: FC<Props> = ({
 
   const valueStyle: CSSProperties = {
     ...mono,
-    fontSize: BRAND.fontSize.note,
+    fontSize: typo.micro.fontSize,
     color: colors.base.text.secondary,
     wordBreak: "break-all",
   };

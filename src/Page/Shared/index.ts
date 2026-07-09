@@ -1,20 +1,19 @@
 export {
-  HomePage,
-  PageTemplate,
   ChapterPrelude,
+  HomePage,
   PageNavigation,
-  ReadingTimeBadge,
+  PageTemplate,
   ReadingProgressBar,
+  ReadingTimeBadge,
   ScrollToTopButton,
 } from "./components";
-export { PAGE_STYLES } from "./styles";
 export { PAGE_METADATA } from "./data";
+export type { ReadingTimeEstimate } from "./helpers";
+export { getReadingTime } from "./helpers";
 export {
-  useToggleSimulator,
-  useReadingTime,
   useReadingProgress,
+  useReadingTime,
   useScrollToTop,
 } from "./hooks";
-export { getReadingTime } from "./helpers";
-export type { ReadingTimeEstimate } from "./helpers";
+export { PAGE_STYLES } from "./styles";
 export type { PageMetadata, PageMetadataMap } from "./types";
