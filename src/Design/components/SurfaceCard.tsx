@@ -2,8 +2,6 @@ import { createElement, type CSSProperties, type FC, type ReactNode } from "reac
 
 import { useBreakpoint } from "../Responsive";
 
-import { Separator } from "./Separator";
-
 type Size = "md" | "lg";
 
 type Props = {
@@ -47,13 +45,5 @@ export const SurfaceCard: FC<Props> = ({
     padding,
   };
 
-  return createElement(
-    as,
-    { className, style: containerStyle },
-    <Separator key="top" margin="0" />,
-    <div style={bodyStyle} key="body">
-      {children}
-    </div>,
-    <Separator key="bottom" margin="0" />,
-  );
+  return createElement(as, { className, style: containerStyle }, <div style={bodyStyle}>{children}</div>);
 };
