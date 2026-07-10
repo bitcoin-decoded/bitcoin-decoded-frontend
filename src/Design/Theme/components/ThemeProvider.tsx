@@ -26,6 +26,8 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     const colors = THEME_COLORS[theme];
     document.body.style.backgroundColor = colors.base.background.primary;
+    // Lets index.css branch on the mode (font smoothing, keyframes, pseudo-elements).
+    document.documentElement.dataset.theme = theme;
   }, [theme]);
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

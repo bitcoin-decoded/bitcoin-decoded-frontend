@@ -1,3 +1,9 @@
+/**
+ * Per-mode ramps. Invariant: every `text.*` token must clear WCAG AA (4.5:1)
+ * against its own mode's `base.background.primary`. In dark mode the module
+ * accents are tints (light on black); in light mode they must be shades (dark
+ * on white), never the same mid-tone — a mid-tone only ever passes on one side.
+ */
 export const THEME_COLORS = {
   dark: {
     base: {
@@ -114,7 +120,7 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#1e40af",
-        secondary: "#3b82f6",
+        secondary: "#1d4ed8",
       },
       border: {
         primary: "#bfdbfe",
@@ -128,7 +134,7 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#92400e",
-        secondary: "#d97706",
+        secondary: "#b45309",
       },
       border: {
         primary: "#fde68a",
@@ -142,11 +148,11 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#5b21b6",
-        secondary: "#7c3aed",
+        secondary: "#6d28d9",
       },
       border: {
         primary: "#ddd6fe",
-        secondary: "#7c3aed",
+        secondary: "#6d28d9",
       },
     },
     boxShadow: {
@@ -157,7 +163,7 @@ export const THEME_COLORS = {
     },
     semantic: {
       success: {
-        text: "#059669",
+        text: "#047857",
         border: "#10b981",
         background: "rgba(16, 185, 129, 0.08)",
       },
@@ -167,7 +173,7 @@ export const THEME_COLORS = {
         background: "rgba(244, 63, 94, 0.08)",
       },
       info: {
-        text: "#0284c7",
+        text: "#0369a1",
         border: "#38bdf8",
         background: "rgba(56, 189, 248, 0.08)",
       },

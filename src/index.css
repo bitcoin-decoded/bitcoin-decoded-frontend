@@ -63,12 +63,22 @@ body,
   font-family: var(--font-body), Georgia, serif;
   letter-spacing: 0;
   line-height: 1.6;
+  /* Grayscale smoothing thins glyphs. That rescues light-on-dark text, which
+     otherwise blooms, but starves dark-on-light text, and our serif/mono stack
+     has no stroke weight to spare. So: opt out in light mode and let the
+     platform apply subpixel rendering. Dark stays the default, so there is no
+     flash before ThemeProvider stamps data-theme. */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Prevent Android Chrome from auto-inflating font sizes, which causes
      layout reflow and horizontal overflow on mobile */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+:root[data-theme="light"] #root {
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
 }
 
 body {
