@@ -80,14 +80,14 @@ export const NavItem: FC<Props> = ({
     outline: "none",
   };
 
-  // Module header: Roman numeral (gold) + uppercase mono label in the module color.
+  // Module header: Roman numeral (gold) + uppercase mono label in the module
+  // color. Wraps onto a second line rather than truncating (the sidebar is
+  // narrow and the module titles are long).
   const moduleLabelStyle: CSSProperties = {
     ...typo.kicker,
     color: isActiveAncestor || isExpanded ? moduleColor : withOpacity(moduleColor, 0.75),
+    flex: 1,
     minWidth: 0,
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
   };
 
   // Chapter row: readable serif label, lit brighter when active.

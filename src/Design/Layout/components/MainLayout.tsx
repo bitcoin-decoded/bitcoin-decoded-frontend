@@ -44,7 +44,7 @@ export const MainLayout: FC<{
   const navContainerStyle: CSSProperties = {
     backgroundColor: colors.base.background.primary,
     color: colors.base.text.secondary,
-    width: "17rem",
+    width: "18rem",
     flexShrink: 0,
     fontSize: "0.8125rem",
     lineHeight: "1.25rem",
@@ -82,7 +82,6 @@ export const MainLayout: FC<{
         <NavDrawer
           isOpen={isDrawerOpen}
           onClose={closeDrawer}
-          breakpoint={breakpoint}
           isChapterComplete={isChapterComplete}
         />
       )}
