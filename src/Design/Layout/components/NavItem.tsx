@@ -4,7 +4,7 @@ import { type NavigationItem } from "../../../Routing";
 import { Badge } from "../../components";
 import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
-import { getTypography, type ThemeColors } from "../../Theme";
+import { BRAND, getTypography, type ThemeColors } from "../../Theme";
 import { toRoman } from "../helpers";
 
 import { Check, ChevronRight, ClipboardCheck } from "@icons";
@@ -20,7 +20,6 @@ type Props = {
   gold: string;
   isDirectlyActive: boolean;
   isExpanded: boolean;
-  isActiveAncestor: boolean;
   isInteracting: boolean;
   /** Chapter is finished (its badge is earned). Drives the completion check. */
   isComplete?: boolean;
@@ -39,7 +38,6 @@ export const NavItem: FC<Props> = ({
   gold,
   isDirectlyActive,
   isExpanded,
-  isActiveAncestor,
   isInteracting,
   isComplete = false,
   colors,
@@ -82,10 +80,11 @@ export const NavItem: FC<Props> = ({
 
   // Module header: Roman numeral (gold) + uppercase mono label in the module
   // color. Wraps onto a second line rather than truncating (the sidebar is
-  // narrow and the module titles are long).
+  // narrow and the module titles are long). Never dimmed: tracked 13px mono has
+  // no contrast to give away, and the chevron already carries the open state.
   const moduleLabelStyle: CSSProperties = {
     ...typo.kicker,
-    color: isActiveAncestor || isExpanded ? moduleColor : withOpacity(moduleColor, 0.75),
+    color: moduleColor,
     flex: 1,
     minWidth: 0,
   };
@@ -97,12 +96,30 @@ export const NavItem: FC<Props> = ({
     color: isDirectlyActive ? colors.base.text.primary : colors.base.text.secondary,
   };
 
+  // Chapter number: quiet mono figure, in the ledger register.
   const numberStyle = (color: string): CSSProperties => ({
     ...typo.micro,
     color,
     flexShrink: 0,
     minWidth: "1.35rem",
   });
+
+  // Module numeral: an editorial display-serif Roman, echoing the chapter
+  // prelude drop-cap (same face, same gold). A hairline gold rule underneath
+  // reads as a ledger entry — the "[ I ]" idea, done as structure not brackets.
+  const moduleNumeralStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.display,
+    fontSize: "1.35rem",
+    fontWeight: 600,
+    lineHeight: 1,
+    color: gold,
+    flexShrink: 0,
+    minWidth: "1.9rem",
+    paddingBottom: "0.15rem",
+    textAlign: "center",
+    borderBottom: `1px solid ${withOpacity(gold, 0.5)}`,
+    fontVariantNumeric: "lining-nums",
+  };
 
   const activeBarStyle: CSSProperties = {
     position: "absolute",
@@ -120,7 +137,7 @@ export const NavItem: FC<Props> = ({
     height: "1rem",
     marginLeft: "auto",
     color: moduleColor,
-    opacity: isExpanded ? 1 : 0.5,
+    opacity: isExpanded ? 1 : 0.7,
     flexShrink: 0,
     transition: "opacity 0.2s",
   };
@@ -152,7 +169,7 @@ export const NavItem: FC<Props> = ({
       >
         {isChapter && <span style={activeBarStyle} />}
 
-        {isModule && <span style={numberStyle(gold)}>{toRoman(index + 1)}</span>}
+        {isModule && <span style={moduleNumeralStyle}>{toRoman(index + 1)}</span>}
         {isChapter && !isChallenge && (
           <span style={numberStyle(isDirectlyActive ? moduleColor : colors.base.text.secondary)}>
             {String(index + 1).padStart(2, "0")}
