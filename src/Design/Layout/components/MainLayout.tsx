@@ -9,10 +9,12 @@ import { Header } from "./Header";
 import { NavBar } from "./NavBar";
 import { NavDrawer } from "./NavDrawer";
 
-export const MainLayout: FC<{ children: ReactNode; headerAction?: ReactNode }> = ({
-  children,
-  headerAction,
-}) => {
+export const MainLayout: FC<{
+  children: ReactNode;
+  headerAction?: ReactNode;
+  /** Injected from App (badge access) so the nav can mark finished chapters. */
+  isChapterComplete?: (id: string) => boolean;
+}> = ({ children, headerAction, isChapterComplete }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
   const {
@@ -77,12 +79,17 @@ export const MainLayout: FC<{ children: ReactNode; headerAction?: ReactNode }> =
       />
       {isChapterPage && !isBlockChapter && <ReadingProgressBar />}
       {!isDesktop && (
-        <NavDrawer isOpen={isDrawerOpen} onClose={closeDrawer} breakpoint={breakpoint} />
+        <NavDrawer
+          isOpen={isDrawerOpen}
+          onClose={closeDrawer}
+          breakpoint={breakpoint}
+          isChapterComplete={isChapterComplete}
+        />
       )}
       <div style={bodyContainerStyle}>
         {isDesktop && (
           <div style={navContainerStyle}>
-            <NavBar />
+            <NavBar isChapterComplete={isChapterComplete} />
           </div>
         )}
         <main style={mainContentStyle}>{children}</main>

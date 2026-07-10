@@ -9,9 +9,10 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   breakpoint: Breakpoint;
+  isChapterComplete?: (id: string) => boolean;
 };
 
-export const NavDrawer: FC<Props> = ({ isOpen, onClose, breakpoint }) => {
+export const NavDrawer: FC<Props> = ({ isOpen, onClose, breakpoint, isChapterComplete }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
 
@@ -53,7 +54,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose, breakpoint }) => {
     <>
       <div style={backdropStyle} onClick={onClose} aria-hidden="true" />
       <nav style={drawerStyle} role="dialog" aria-modal={isOpen} aria-hidden={!isOpen}>
-        <NavBar />
+        <NavBar isChapterComplete={isChapterComplete} />
       </nav>
     </>
   );

@@ -2,13 +2,19 @@ import { type CSSProperties, type FC, type JSX } from "react";
 
 import { useTranslation } from "../../../I18n";
 import { type NavigationItem, useRouterContext } from "../../../Routing";
+import { getBrandGold, getModuleThemeColor } from "../../Theme";
 import { THEME_COLORS } from "../../Theme/data";
 import { useThemeContext } from "../../Theme/hooks/useThemeContext";
 import { useHeaderHidden, useNavBar } from "../hooks";
 
 import { NavItem } from "./NavItem";
 
-export const NavBar: FC = () => {
+type Props = {
+  /** Injected from App (which has badge access) so Design stays free of Achievements. */
+  isChapterComplete?: (id: string) => boolean;
+};
+
+export const NavBar: FC<Props> = ({ isChapterComplete }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
   const { t } = useTranslation();
@@ -23,6 +29,15 @@ export const NavBar: FC = () => {
   } = useNavBar();
 
   const isHeaderHidden = useHeaderHidden();
+  const gold = getBrandGold(theme);
+
+  // A module's accent is its theme color (blue/violet/amber), read off its first
+  // chapter's route; standalone entries fall back to the structural gold.
+  const moduleColorFor = (item: NavigationItem): string => {
+    const firstChildId = item.children?.find((child) => child.id)?.id;
+    const name = firstChildId ? getModuleThemeColor(firstChildId) : "base";
+    return name === "base" ? gold : colors[name].text.secondary;
+  };
 
   const navStyle: CSSProperties = {
     padding: "calc(3.5rem + 0.75rem) 0 1.5rem",
@@ -48,10 +63,19 @@ export const NavBar: FC = () => {
     gap: "0.125rem",
   };
 
-  const renderNavItem = (item: NavigationItem, level = 0): JSX.Element => (
+  const renderNavItem = (
+    item: NavigationItem,
+    level = 0,
+    index = 0,
+    moduleColor = gold,
+  ): JSX.Element => (
     <NavItem
       item={item}
       level={level}
+      index={index}
+      moduleColor={moduleColor}
+      gold={gold}
+      isComplete={item.id ? (isChapterComplete?.(item.id) ?? false) : false}
       isDirectlyActive={currentPage === item.id}
       isExpanded={openModule === item.label}
       isActiveAncestor={level === 0 && activePath.includes(item.label) && currentPage !== item.id}
@@ -68,8 +92,8 @@ export const NavBar: FC = () => {
     <nav style={navStyle} aria-label={t("nav.title")}>
       <div style={listContainerStyle}>
         <ul style={listStyle}>
-          {navigationTree.map((mainItem) => (
-            <li key={mainItem.label}>{renderNavItem(mainItem)}</li>
+          {navigationTree.map((mainItem, i) => (
+            <li key={mainItem.label}>{renderNavItem(mainItem, 0, i, moduleColorFor(mainItem))}</li>
           ))}
         </ul>
       </div>
