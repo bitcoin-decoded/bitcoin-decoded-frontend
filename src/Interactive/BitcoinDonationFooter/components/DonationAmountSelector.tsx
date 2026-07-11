@@ -93,7 +93,6 @@ export const DonationAmountSelector: FC<Props> = ({
     background: withOpacity(colors.base.text.secondary, 0.04),
     border: `1px solid ${withOpacity(accent, customStr !== "" ? 0.6 : 0.22)}`,
     borderRadius: 0,
-    outline: "none",
   };
 
   const mutedSmall: CSSProperties = {

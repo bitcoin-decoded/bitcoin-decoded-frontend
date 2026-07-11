@@ -59,7 +59,7 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     maxRevealed,
     current,
     finished,
-    revealingIndex,
+    getRevealPhase,
     isDone,
     markCompleteFns,
     advance,
@@ -94,7 +94,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
         const kind = block.props.kind ?? "prose";
         const isLast = block.props.last ?? i === blockCount - 1;
         const isCurrent = i === current;
-        const isRevealing = i === revealingIndex;
         const locked = kind === "tool" && !isDone(i);
 
         // Render-prop blocks (tool blocks) are evaluated AFTER PageTemplate's
@@ -114,7 +113,7 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
             <BlockShell
               index={i}
               isCurrent={isCurrent}
-              revealing={isRevealing}
+              revealPhase={getRevealPhase(i)}
               title={block.props.title}
               onActivate={() => jump(i)}
             >

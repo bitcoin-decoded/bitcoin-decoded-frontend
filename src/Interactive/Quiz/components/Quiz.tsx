@@ -84,7 +84,6 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       fontSize: typo.note.fontSize,
       lineHeight: 1.6,
       transition: "all 0.2s var(--ease-smooth)",
-      outline: "none",
       opacity: isCorrectlySolved && !isSelected ? 0.4 : 1,
       fontFamily: "inherit",
     };

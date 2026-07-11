@@ -55,11 +55,12 @@ export const Quote: FC<Props> = ({ children, author, source }) => {
     alignItems: "baseline",
     gap: "0.4rem",
     flexWrap: "wrap",
-    marginTop: "0.85rem",
+    marginTop: "0.9rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.8125rem",
+    // Was 13px at 0.85 opacity — far too small against the 17px quote body.
+    // 15px at full opacity; the muted source colour already keeps it quiet.
+    fontSize: "0.9375rem",
     letterSpacing: "0.03em",
-    opacity: 0.85,
   };
 
   const authorStyle: CSSProperties = {

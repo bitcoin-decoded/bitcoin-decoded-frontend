@@ -132,7 +132,9 @@ export const Button: FC<Props> = ({
       height: stampHeight,
       gap: 0,
       background: "transparent",
-      transform: isPressed && hoverable ? "translateY(1px)" : "translateY(0)",
+      // Hover lifts the seal a hair (press settles it back) — it had no hover
+      // feedback at all before.
+      transform: isPressed && hoverable ? "translateY(1px)" : isLifted ? "translateY(-1px)" : "translateY(0)",
     };
     labelDecoration = {
       before: (
@@ -150,6 +152,8 @@ export const Button: FC<Props> = ({
             fontSize: size === "sm" ? 16 : 18,
             lineHeight: 1,
             fontWeight: 500,
+            filter: isLifted ? "brightness(1.1)" : "none",
+            transition: "filter 0.2s var(--ease-smooth)",
           }}
         >
           ⌗
@@ -173,6 +177,8 @@ export const Button: FC<Props> = ({
           padding: `0 ${isMobile ? "0.85rem" : "1rem"}`,
           border: `1px solid ${accent}`,
           borderLeft: "none",
+          background: isLifted ? withOpacity(accent, 0.12) : "transparent",
+          transition: "background-color 0.2s var(--ease-smooth)",
           fontFamily: BRAND.fonts.mono,
           letterSpacing: "0.14em",
           fontVariant: "small-caps",

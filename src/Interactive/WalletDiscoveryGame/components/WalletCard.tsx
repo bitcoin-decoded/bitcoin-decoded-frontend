@@ -92,7 +92,6 @@ export const WalletCard: FC<Props> = ({
     minWidth: 0,
     boxSizing: "border-box",
     transition: "all 0.25s var(--ease-smooth)",
-    outline: "none",
     textAlign: "left",
     fontFamily: "inherit",
     color: "inherit",

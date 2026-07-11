@@ -1,12 +1,20 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { prefersReducedMotion } from "../helpers";
-import type { ReadingProgress } from "../types";
+import { prefersReducedMotion, smoothScrollTo } from "../helpers";
+import type { ReadingProgress, RevealPhase } from "../types";
 
 type Options = {
   chapterId: string;
   blockCount: number;
 };
+
+type Reveal = { index: number; phase: RevealPhase };
+
+// The mechanical scroll to the next block, then the content reveal. Long enough
+// to read as a deliberate, automaton-like travel before the page composes.
+const REVEAL_SCROLL_MS = 750;
+// Sticky-header clearance, mirrors BlockShell's scrollMarginTop (6.5rem).
+const HEADER_OFFSET_PX = 104;
 
 // localStorage persistence mirrors src/Interactive/SynthesisQuiz/hooks/useSynthesisQuiz.ts:
 // same try/catch discipline, plus a blockCount guard so a content edit (different
@@ -53,8 +61,17 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
   const [current, setCurrent] = useState(() => restored?.current ?? 0);
   const [done, setDone] = useState<number[]>(() => restored?.done ?? []);
   const [finished, setFinished] = useState(() => restored?.finished ?? false);
-  // Block (and its incoming chain link) that just crossed the reveal frontier.
-  const [revealingIndex, setRevealingIndex] = useState(() => restored?.current ?? 0);
+
+  // The block currently performing its entrance, and its phase. Null on load
+  // and whenever we move back / jump to an already-seen block (those just
+  // focus + scroll, no animation). A ref mirror lets the scroll effects read it
+  // synchronously without re-subscribing.
+  const [reveal, setReveal] = useState<Reveal | null>(null);
+  const revealRef = useRef<Reveal | null>(null);
+  const setRevealState = useCallback((next: Reveal | null) => {
+    revealRef.current = next;
+    setReveal(next);
+  }, []);
 
   useEffect(() => {
     try {
@@ -68,29 +85,48 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
   }, [chapterId, maxRevealed, current, done, finished, blockCount]);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const scrollToBlock = useCallback((index: number) => {
-    const el = containerRef.current?.querySelector(`[data-block="${index}"]`);
-    el?.scrollIntoView({
-      behavior: prefersReducedMotion() ? "auto" : "smooth",
-      block: "start",
-    });
-  }, []);
+  const blockEl = useCallback(
+    (index: number): Element | null =>
+      containerRef.current?.querySelector(`[data-block="${index}"]`) ?? null,
+    [],
+  );
+  const scrollToBlock = useCallback(
+    (index: number) => {
+      blockEl(index)?.scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        block: "start",
+      });
+    },
+    [blockEl],
+  );
 
-  const prevMax = useRef(maxRevealed);
-  useEffect(() => {
-    if (maxRevealed > prevMax.current) setRevealingIndex(maxRevealed);
-    prevMax.current = maxRevealed;
-  }, [maxRevealed]);
-
-  // Smooth-scroll to the focused block on navigation (not on first paint).
+  // Focus-scroll on back / jump / advancing into an already-seen block. A fresh
+  // reveal owns its own (longer, mechanical) scroll, so don't double-scroll it.
   const mounted = useRef(false);
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
       return;
     }
+    if (revealRef.current?.index === current) return;
     scrollToBlock(current);
   }, [current, scrollToBlock]);
+
+  // A newly surfaced block: hold it hidden ("arriving"), mechanically scroll to
+  // it, then flip to "playing" so its content composes in — no flash, and the
+  // reveal never starts until the travel has finished.
+  useEffect(() => {
+    if (!reveal || reveal.phase !== "arriving") return;
+    const el = blockEl(reveal.index);
+    if (!el) return;
+    smoothScrollTo(el, REVEAL_SCROLL_MS, HEADER_OFFSET_PX);
+    const timer = window.setTimeout(() => {
+      if (revealRef.current?.index === reveal.index) {
+        setRevealState({ index: reveal.index, phase: "playing" });
+      }
+    }, REVEAL_SCROLL_MS);
+    return () => window.clearTimeout(timer);
+  }, [reveal, blockEl, setRevealState]);
 
   const isDone = useCallback((index: number) => done.includes(index), [done]);
 
@@ -107,24 +143,30 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
 
   const advance = useCallback(() => {
     const next = Math.min(lastIndex, current + 1);
+    // Only a block crossing the frontier for the first time gets the reveal;
+    // advancing into an already-seen block just focuses + scrolls.
+    const isNew = next > maxRevealed;
     setCurrent(next);
     setMaxRevealed((max) => Math.max(max, next));
-  }, [current, lastIndex]);
+    setRevealState(isNew && !prefersReducedMotion() ? { index: next, phase: "arriving" } : null);
+  }, [current, lastIndex, maxRevealed, setRevealState]);
 
   const back = useCallback(() => {
+    setRevealState(null);
     setCurrent((prev) => Math.max(0, prev - 1));
-  }, []);
+  }, [setRevealState]);
 
   // Milestone jump - refocus AND scroll to a revealed block, even when it is
   // already current (a current-block click must still anchor).
   const jump = useCallback(
     (index: number) => {
       if (index >= 0 && index <= maxRevealed) {
+        setRevealState(null);
         setCurrent(index);
         scrollToBlock(index);
       }
     },
-    [maxRevealed, scrollToBlock],
+    [maxRevealed, scrollToBlock, setRevealState],
   );
 
   // Completion is celebrated by the badge unlock overlay (awarded from
@@ -139,15 +181,20 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
     setCurrent(0);
     setDone([]);
     setFinished(false);
-    setRevealingIndex(0);
-  }, []);
+    setRevealState(null);
+  }, [setRevealState]);
+
+  const getRevealPhase = useCallback(
+    (index: number): RevealPhase | null => (reveal?.index === index ? reveal.phase : null),
+    [reveal],
+  );
 
   return {
     containerRef,
     maxRevealed,
     current,
     finished,
-    revealingIndex,
+    getRevealPhase,
     isDone,
     markCompleteFns,
     advance,
