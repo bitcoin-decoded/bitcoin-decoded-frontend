@@ -109,7 +109,10 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#2a2620",
-        secondary: "#625b4e",
+        // Warm-neutral gray. The prior #625b4e leaned olive-taupe (blue channel
+        // dragged well below red/green), which read muddy; #605c57 keeps the
+        // warmth but sits near-neutral, cleaner against the cream paper.
+        secondary: "#605c57",
         onAccent: "#ffffff",
       },
       border: {

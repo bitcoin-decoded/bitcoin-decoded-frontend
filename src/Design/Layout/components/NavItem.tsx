@@ -104,22 +104,32 @@ export const NavItem: FC<Props> = ({
   });
 
   // Module numeral: an editorial display-serif figure in the module's own
-  // colour, echoing the chapter prelude drop-cap (same face). The large size
-  // carries it — no bold needed — and a hairline rule underneath reads as a
-  // ledger entry. Arabic, single digit: the three modules are 1 · 2 · 3.
+  // colour, framed by the four right-angle corner brackets of the Callout (gold
+  // = structure). Arabic, single digit: the three modules are 1 · 2 · 3.
+  const numeralCornerStroke = `1px solid ${gold}`;
+  const moduleNumeralFrameStyle: CSSProperties = {
+    position: "relative",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "1.85rem",
+    height: "1.85rem",
+    flexShrink: 0,
+  };
   const moduleNumeralStyle: CSSProperties = {
     fontFamily: BRAND.fonts.display,
-    fontSize: "1.35rem",
+    fontSize: "1.2rem",
     fontWeight: 400,
     lineHeight: 1,
     color: moduleColor,
-    flexShrink: 0,
-    minWidth: "1.5rem",
-    paddingBottom: "0.15rem",
-    textAlign: "center",
-    borderBottom: `1px solid ${withOpacity(moduleColor, 0.5)}`,
     fontVariantNumeric: "lining-nums",
   };
+  const numeralCorner = (edges: CSSProperties): CSSProperties => ({
+    position: "absolute",
+    width: 6,
+    height: 6,
+    ...edges,
+  });
 
   const activeBarStyle: CSSProperties = {
     position: "absolute",
@@ -169,7 +179,15 @@ export const NavItem: FC<Props> = ({
       >
         {isChapter && <span style={activeBarStyle} />}
 
-        {isModule && <span style={moduleNumeralStyle}>{index + 1}</span>}
+        {isModule && (
+          <span style={moduleNumeralFrameStyle}>
+            <span style={numeralCorner({ top: 0, left: 0, borderTop: numeralCornerStroke, borderLeft: numeralCornerStroke })} />
+            <span style={numeralCorner({ top: 0, right: 0, borderTop: numeralCornerStroke, borderRight: numeralCornerStroke })} />
+            <span style={numeralCorner({ bottom: 0, left: 0, borderBottom: numeralCornerStroke, borderLeft: numeralCornerStroke })} />
+            <span style={numeralCorner({ bottom: 0, right: 0, borderBottom: numeralCornerStroke, borderRight: numeralCornerStroke })} />
+            <span style={moduleNumeralStyle}>{index + 1}</span>
+          </span>
+        )}
         {isChapter && !isChallenge && (
           <span style={numberStyle(isDirectlyActive ? moduleColor : colors.base.text.secondary)}>
             {String(index + 1).padStart(2, "0")}

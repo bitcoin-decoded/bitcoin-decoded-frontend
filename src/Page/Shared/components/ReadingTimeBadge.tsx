@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, useBreakpoint, usePageTheme } from "../../../Design";
+import { BRAND, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import { useReadingTime } from "../hooks";
 
 import { Clock } from "@icons";
@@ -12,7 +12,9 @@ import { Clock } from "@icons";
  */
 export const ReadingTimeBadge: FC = () => {
   const { colors } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const estimate = useReadingTime();
 
   if (!estimate) return null;
@@ -22,7 +24,9 @@ export const ReadingTimeBadge: FC = () => {
     alignItems: "center",
     gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.72rem" : "0.78rem",
+    // The mono meta was ~11.5px and read too small for its register; the label
+    // role (13/14px) matches the chapter kicker above it.
+    fontSize: typo.label.fontSize,
     letterSpacing: "0.08em",
     color: colors.base.text.secondary,
   };

@@ -61,7 +61,7 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
     // read as "hard" in light mode; 0.13em keeps the eyebrow feel and legibility.
     kicker: {
       fontFamily: BRAND.fonts.mono,
-      fontSize: compact ? "0.75rem" : "0.8125rem",
+      fontSize: compact ? "0.8125rem" : "0.875rem",
       fontWeight: 500,
       lineHeight: 1.4,
       letterSpacing: "0.13em",

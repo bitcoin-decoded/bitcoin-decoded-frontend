@@ -1,7 +1,6 @@
 import {
   Children,
   type ComponentProps,
-  type CSSProperties,
   type FC,
   Fragment,
   isValidElement,
@@ -78,15 +77,8 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     if (finished) award(chapterId);
   }, [finished, award, chapterId]);
 
-  // Module accent flows to the marginalia `[ Tx 01 ]` markers (consumed in
-  // index.css). Replaces the previous ton-sur-ton gray, which read poorly.
-  // Set inline so the CSS pseudo-element can read it.
-  const containerStyle: CSSProperties = {
-    ["--marginalia-color" as string]: moduleAccent,
-  };
-
   return (
-    <div ref={containerRef} className="reading-chapter-marginalia" style={containerStyle}>
+    <div ref={containerRef}>
       {blockCount > 1 && (
         <BlockMilestones
           count={blockCount}
