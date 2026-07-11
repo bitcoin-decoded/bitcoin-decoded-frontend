@@ -16,6 +16,9 @@
   --brand-cream: #f8f5ee;
   --brand-orange: #f7931a;
 
+  /* Keyboard-focus ring colour (mode-aware; the light override is below). */
+  --focus-ring: #d4b469;
+
   /* Block-vs-coin dichotomy: square = structure (block), circle = value (coin).
    * See feedback-design-refonte-rules (rule 9). */
   --block-size: 14px;
@@ -50,6 +53,18 @@ textarea {
   font-family: inherit;
 }
 
+/* Focus handling, app-wide. The browser's default outline is heavy and fires on
+ * mouse clicks too (the "grosses bordures" on the header). Show a clean ledger
+ * ring ONLY for keyboard navigation (:focus-visible), and nothing on click.
+ * Components must NOT set `outline: none` — this is the single source of truth. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 html,
 body,
 #root {
@@ -79,6 +94,10 @@ body,
 :root[data-theme="light"] #root {
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
+}
+
+:root[data-theme="light"] {
+  --focus-ring: #7d6428; /* deepened gold, visible on cream paper */
 }
 
 body {
@@ -430,73 +449,59 @@ body {
   margin: 0.04em 0.18em 0 0;
 }
 
-/* ── Block reading - premium reveal + blockchain chain link ── */
-/* A freshly surfaced block "seals" into place: its blur clears, it slides up
-   and settles, while its lines cascade in. The chain link joining it to the
-   previous block draws downward and its node confirms with a soft pop - a
-   discreet nod to a block being appended to a chain. Only the block crossing
-   the reveal frontier carries `.revealing`; past blocks rest via inline
-   opacity, their links already drawn. */
-/* Gentle two-step reveal. Step 1 (anchor) is the smooth scroll handled in
- * useBlockReader. Step 2 — for a block crossing the reveal frontier for the
- * first time — its lines surface in reading order: each child fades in from
- * slightly left (left-to-right feel) with a top-to-bottom stagger. No blur,
- * no scale, no glow pulse: the previous version read as choppy/brutal. */
+/* ── Block reading - mechanical reveal ──
+ * Two clean phases, orchestrated by useBlockReader:
+ *   1. ARRIVING — the freshly surfaced block is held hidden (opacity 0) from
+ *      its very first frame while the page mechanically scrolls down to it.
+ *      Holding it hidden here is what kills the old flash (content appearing,
+ *      vanishing, then re-appearing).
+ *   2. REVEALING — once the scroll settles, the frame fades in and the content
+ *      writes itself in like a book: top-to-bottom, each element easing from
+ *      slightly left. Applies to prose paragraphs AND embedded components. */
+.reading-block-inner.arriving {
+  opacity: 0;
+}
 @keyframes blockReveal {
   from {
     opacity: 0;
-    transform: translateY(6px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 @keyframes blockLineIn {
   from {
     opacity: 0;
-    transform: translateX(-8px);
+    transform: translateX(-10px);
   }
   to {
     opacity: 1;
     transform: translateX(0);
   }
 }
-/* Small lead delay so the anchor scroll (step 1) settles before the reveal. */
 .reading-block-inner.revealing {
-  animation: blockReveal 0.45s var(--ease-smooth) 0.12s both;
+  animation: blockReveal 0.4s var(--ease-smooth) both;
 }
-.reading-block-inner.revealing > * {
-  animation: blockLineIn 0.5s var(--ease-smooth) both;
+.reading-block-inner.revealing .reading-block-body > * {
+  opacity: 0;
+  animation: blockLineIn 0.55s var(--ease-smooth) both;
 }
-.reading-block-inner.revealing > *:nth-child(1) {
-  animation-delay: 0.16s;
-}
-.reading-block-inner.revealing > *:nth-child(2) {
-  animation-delay: 0.24s;
-}
-.reading-block-inner.revealing > *:nth-child(3) {
-  animation-delay: 0.32s;
-}
-.reading-block-inner.revealing > *:nth-child(4) {
-  animation-delay: 0.4s;
-}
-.reading-block-inner.revealing > *:nth-child(5) {
-  animation-delay: 0.48s;
-}
-.reading-block-inner.revealing > *:nth-child(6) {
-  animation-delay: 0.56s;
-}
-.reading-block-inner.revealing > *:nth-child(7) {
-  animation-delay: 0.64s;
-}
-.reading-block-inner.revealing > *:nth-child(8) {
-  animation-delay: 0.72s;
-}
+.reading-block-inner.revealing .reading-block-body > *:nth-child(1) { animation-delay: 0.1s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(2) { animation-delay: 0.19s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(3) { animation-delay: 0.28s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(4) { animation-delay: 0.37s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(5) { animation-delay: 0.46s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(6) { animation-delay: 0.55s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(7) { animation-delay: 0.64s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(8) { animation-delay: 0.73s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(9) { animation-delay: 0.82s; }
+.reading-block-inner.revealing .reading-block-body > *:nth-child(n + 10) { animation-delay: 0.91s; }
 
 @media (prefers-reduced-motion: reduce) {
+  .reading-block-inner.arriving,
   .reading-block-inner.revealing,
-  .reading-block-inner.revealing > * {
+  .reading-block-inner.revealing .reading-block-body > * {
     animation: none !important;
+    opacity: 1 !important;
   }
 }

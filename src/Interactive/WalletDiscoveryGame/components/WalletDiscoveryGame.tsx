@@ -72,7 +72,6 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
     border: `1px solid ${withOpacity(accentColor, 0.4)}`,
     background: withOpacity(baseBackgroundSecondary, 0.05),
     color: basePrimaryText,
-    outline: "none",
     boxSizing: "border-box",
     touchAction: "manipulation",
     transition: "border-color 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth)",

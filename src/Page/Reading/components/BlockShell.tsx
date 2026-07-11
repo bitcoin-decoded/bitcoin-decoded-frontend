@@ -1,13 +1,18 @@
 import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
 import { BRAND, getBrandGold, THEME_COLORS, useBreakpoint, useThemeContext } from "../../../Design";
+import type { RevealPhase } from "../types";
 
 type Props = {
   /** Block index - exposed as `data-block` for scroll/anchor targeting. */
   index: number;
   isCurrent: boolean;
-  /** Play the seal/confirm reveal (only the freshly surfaced block). */
-  revealing: boolean;
+  /**
+   * The freshly surfaced block's entrance phase: "arriving" holds it hidden
+   * during the scroll, "playing" composes its content in; null = no animation
+   * (already seen). Drives the `.arriving` / `.revealing` classes (index.css).
+   */
+  revealPhase: RevealPhase | null;
   /** Optional short label appended to the block header (e.g. "Le piège"). */
   title?: string;
   /** Return to this block (clicking a read block refocuses it). */
@@ -31,7 +36,7 @@ type Props = {
 export const BlockShell: FC<Props> = ({
   index,
   isCurrent,
-  revealing,
+  revealPhase,
   title,
   onActivate,
   children,
@@ -137,7 +142,9 @@ export const BlockShell: FC<Props> = ({
       onMouseLeave={readable ? () => setIsHovered(false) : undefined}
     >
       <div
-        className={revealing ? "reading-block-inner revealing" : "reading-block-inner"}
+        className={`reading-block-inner${
+          revealPhase === "arriving" ? " arriving" : revealPhase === "playing" ? " revealing" : ""
+        }`}
         style={innerStyle}
       >
         <div style={headerRowStyle}>
@@ -145,7 +152,9 @@ export const BlockShell: FC<Props> = ({
           <span style={headerRuleStyle} aria-hidden="true" />
         </div>
         {title && <span style={titleKickerStyle}>· {title.toLowerCase()}</span>}
-        <div style={bodyStyle}>{children}</div>
+        <div className="reading-block-body" style={bodyStyle}>
+          {children}
+        </div>
         <div style={footerRuleStyle} aria-hidden="true" />
       </div>
     </section>

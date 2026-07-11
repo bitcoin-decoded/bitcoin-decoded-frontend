@@ -74,7 +74,6 @@ export const NavItem: FC<Props> = ({
           : "transparent",
     transition: "background-color 0.15s, color 0.15s",
     WebkitTapHighlightColor: "transparent",
-    outline: "none",
   };
 
   // Module header: Arabic numeral + uppercase mono label, both in the module
@@ -160,7 +159,10 @@ export const NavItem: FC<Props> = ({
 
   const submenuListStyle: CSSProperties = {
     listStyle: "none",
-    padding: "0 0 0.4rem",
+    // Bottom breathing room only while expanded. When collapsed the padding
+    // must be 0, otherwise it leaks ~6px through the `grid 0fr` collapse and
+    // leaves a hoverable dead band between modules.
+    padding: isExpanded ? "0 0 0.4rem" : 0,
     margin: 0,
     overflow: "hidden",
     minHeight: 0,

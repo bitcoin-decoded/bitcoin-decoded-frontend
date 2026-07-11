@@ -189,7 +189,6 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             border: `1px solid ${withOpacity(isInsufficient ? errorColor : accentColor, isInsufficient ? 0.6 : 0.3)}`,
             background: withOpacity(world.background.secondary, 0.05),
             color: world.text.primary,
-            outline: "none",
             transition: "border-color 0.25s var(--ease-smooth)",
             boxSizing: "border-box",
             touchAction: "manipulation",

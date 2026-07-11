@@ -31,7 +31,6 @@ export const HashDemo: FC<Props> = ({ onComplete }) => {
     border: `1px solid ${hash ? world.border.secondary : colors.base.border.secondary}`,
     background: colors.base.background.secondary,
     color: disabled ? colors.base.text.secondary : colors.base.text.primary,
-    outline: "none",
     width: "100%",
     transition: "all 0.3s var(--ease-smooth)",
     opacity: disabled ? 0.5 : 1,

@@ -85,7 +85,6 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
     flex: "0 0 auto",
     padding: 0,
     appearance: "none",
-    outline: "none",
     border: reached ? "none" : `${BRAND.figures.ruleThickness}px solid ${idleStroke}`,
     background: reached ? gold : "transparent",
     transform: isCurrent ? "scale(1.25)" : "scale(1)",
