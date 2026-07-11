@@ -5,7 +5,6 @@ import { Badge } from "../../components";
 import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
 import { BRAND, getTypography, type ThemeColors } from "../../Theme";
-import { toRoman } from "../helpers";
 
 import { Check, ChevronRight, ClipboardCheck } from "@icons";
 
@@ -16,7 +15,7 @@ type Props = {
   index: number;
   /** The parent module's accent hex; modules pass it down to their chapters. */
   moduleColor: string;
-  /** Structural gold, for the Roman module numerals. */
+  /** Structural gold, for the chapter-complete check mark. */
   gold: string;
   isDirectlyActive: boolean;
   isExpanded: boolean;
@@ -78,7 +77,7 @@ export const NavItem: FC<Props> = ({
     outline: "none",
   };
 
-  // Module header: Roman numeral (gold) + uppercase mono label in the module
+  // Module header: Arabic numeral + uppercase mono label, both in the module
   // color. Wraps onto a second line rather than truncating (the sidebar is
   // narrow and the module titles are long). Never dimmed: tracked 13px mono has
   // no contrast to give away, and the chevron already carries the open state.
@@ -104,20 +103,21 @@ export const NavItem: FC<Props> = ({
     minWidth: "1.35rem",
   });
 
-  // Module numeral: an editorial display-serif Roman, echoing the chapter
-  // prelude drop-cap (same face, same gold). A hairline gold rule underneath
-  // reads as a ledger entry — the "[ I ]" idea, done as structure not brackets.
+  // Module numeral: an editorial display-serif figure in the module's own
+  // colour, echoing the chapter prelude drop-cap (same face). The large size
+  // carries it — no bold needed — and a hairline rule underneath reads as a
+  // ledger entry. Arabic, single digit: the three modules are 1 · 2 · 3.
   const moduleNumeralStyle: CSSProperties = {
     fontFamily: BRAND.fonts.display,
     fontSize: "1.35rem",
-    fontWeight: 600,
+    fontWeight: 400,
     lineHeight: 1,
-    color: gold,
+    color: moduleColor,
     flexShrink: 0,
-    minWidth: "1.9rem",
+    minWidth: "1.5rem",
     paddingBottom: "0.15rem",
     textAlign: "center",
-    borderBottom: `1px solid ${withOpacity(gold, 0.5)}`,
+    borderBottom: `1px solid ${withOpacity(moduleColor, 0.5)}`,
     fontVariantNumeric: "lining-nums",
   };
 
@@ -169,7 +169,7 @@ export const NavItem: FC<Props> = ({
       >
         {isChapter && <span style={activeBarStyle} />}
 
-        {isModule && <span style={moduleNumeralStyle}>{toRoman(index + 1)}</span>}
+        {isModule && <span style={moduleNumeralStyle}>{index + 1}</span>}
         {isChapter && !isChallenge && (
           <span style={numberStyle(isDirectlyActive ? moduleColor : colors.base.text.secondary)}>
             {String(index + 1).padStart(2, "0")}
