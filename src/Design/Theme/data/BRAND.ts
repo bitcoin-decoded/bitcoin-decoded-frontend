@@ -16,6 +16,8 @@
  * keyframes and pseudo-elements.
  */
 export const BRAND = {
+  /** Canonical logo pigment. Never render it as text: it fails WCAG on both
+   * cream and navy. Use the mode-aware pair below via `getBrandGold(theme)`. */
   gold: "#C4A45A",
   /**
    * Slightly lightened/warmed gold for dark-mode surfaces — the base gold
@@ -23,6 +25,12 @@ export const BRAND = {
    * Use via `getBrandGold(theme)` so consumers don't branch inline.
    */
   goldDark: "#D4B469",
+  /**
+   * Deepened bronze-gold for light-mode surfaces — the symmetric problem: the
+   * base gold sits at 2.4:1 on white, so numerals, kickers and rules dissolve.
+   * Same hue family, dropped in luminance until it clears AA (5.6:1).
+   */
+  goldLight: "#7D6428",
   navy: "#16213E",
   cream: "#F8F5EE",
   orange: "#F7931A", // reserved signal — Bitcoin module + on-chain validations only

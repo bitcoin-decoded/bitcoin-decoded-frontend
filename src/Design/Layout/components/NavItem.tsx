@@ -4,8 +4,7 @@ import { type NavigationItem } from "../../../Routing";
 import { Badge } from "../../components";
 import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
-import { getTypography, type ThemeColors } from "../../Theme";
-import { toRoman } from "../helpers";
+import { BRAND, getTypography, type ThemeColors } from "../../Theme";
 
 import { Check, ChevronRight, ClipboardCheck } from "@icons";
 
@@ -16,11 +15,10 @@ type Props = {
   index: number;
   /** The parent module's accent hex; modules pass it down to their chapters. */
   moduleColor: string;
-  /** Structural gold, for the Roman module numerals. */
+  /** Structural gold, for the chapter-complete check mark. */
   gold: string;
   isDirectlyActive: boolean;
   isExpanded: boolean;
-  isActiveAncestor: boolean;
   isInteracting: boolean;
   /** Chapter is finished (its badge is earned). Drives the completion check. */
   isComplete?: boolean;
@@ -39,7 +37,6 @@ export const NavItem: FC<Props> = ({
   gold,
   isDirectlyActive,
   isExpanded,
-  isActiveAncestor,
   isInteracting,
   isComplete = false,
   colors,
@@ -80,12 +77,13 @@ export const NavItem: FC<Props> = ({
     outline: "none",
   };
 
-  // Module header: Roman numeral (gold) + uppercase mono label in the module
+  // Module header: Arabic numeral + uppercase mono label, both in the module
   // color. Wraps onto a second line rather than truncating (the sidebar is
-  // narrow and the module titles are long).
+  // narrow and the module titles are long). Never dimmed: tracked 13px mono has
+  // no contrast to give away, and the chevron already carries the open state.
   const moduleLabelStyle: CSSProperties = {
     ...typo.kicker,
-    color: isActiveAncestor || isExpanded ? moduleColor : withOpacity(moduleColor, 0.75),
+    color: moduleColor,
     flex: 1,
     minWidth: 0,
   };
@@ -97,12 +95,31 @@ export const NavItem: FC<Props> = ({
     color: isDirectlyActive ? colors.base.text.primary : colors.base.text.secondary,
   };
 
+  // Chapter number: quiet mono figure, in the ledger register.
   const numberStyle = (color: string): CSSProperties => ({
     ...typo.micro,
     color,
     flexShrink: 0,
     minWidth: "1.35rem",
   });
+
+  // Module numeral: an editorial display-serif figure in the module's own
+  // colour, echoing the chapter prelude drop-cap (same face). The large size
+  // carries it — no bold needed — and a hairline rule underneath reads as a
+  // ledger entry. Arabic, single digit: the three modules are 1 · 2 · 3.
+  const moduleNumeralStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.display,
+    fontSize: "1.35rem",
+    fontWeight: 400,
+    lineHeight: 1,
+    color: moduleColor,
+    flexShrink: 0,
+    minWidth: "1.5rem",
+    paddingBottom: "0.15rem",
+    textAlign: "center",
+    borderBottom: `1px solid ${withOpacity(moduleColor, 0.5)}`,
+    fontVariantNumeric: "lining-nums",
+  };
 
   const activeBarStyle: CSSProperties = {
     position: "absolute",
@@ -120,7 +137,7 @@ export const NavItem: FC<Props> = ({
     height: "1rem",
     marginLeft: "auto",
     color: moduleColor,
-    opacity: isExpanded ? 1 : 0.5,
+    opacity: isExpanded ? 1 : 0.7,
     flexShrink: 0,
     transition: "opacity 0.2s",
   };
@@ -152,7 +169,7 @@ export const NavItem: FC<Props> = ({
       >
         {isChapter && <span style={activeBarStyle} />}
 
-        {isModule && <span style={numberStyle(gold)}>{toRoman(index + 1)}</span>}
+        {isModule && <span style={moduleNumeralStyle}>{index + 1}</span>}
         {isChapter && !isChallenge && (
           <span style={numberStyle(isDirectlyActive ? moduleColor : colors.base.text.secondary)}>
             {String(index + 1).padStart(2, "0")}

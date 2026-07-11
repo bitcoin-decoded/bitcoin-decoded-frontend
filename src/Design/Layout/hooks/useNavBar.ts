@@ -34,7 +34,6 @@ export const useNavBar = () => {
     navigationTree,
     openModule,
     handleMenuClick,
-    activePath,
     interactionId,
     setInteractionId,
   };

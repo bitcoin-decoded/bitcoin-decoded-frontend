@@ -93,8 +93,12 @@ export const Button: FC<Props> = ({
     variantStyle = {
       padding: isMobile ? `${padY} ${padX}` : `${padYMd} ${padXMd}`,
       color: colors.base.text.primary,
-      // A faint gold ledger-cell fills in on hover, behind the [ brackets ].
-      background: withOpacity(accent, isLifted ? 0.08 : 0),
+      // A persistent accent ledger-cell gives the button body at rest — the
+      // bracketed mono label alone read too airy, especially on white — and it
+      // deepens on hover. Border + wash share the accent so the whole control
+      // reads as one weighted cell.
+      background: withOpacity(accent, isLifted ? 0.12 : 0.06),
+      border: `1px solid ${withOpacity(accent, isLifted ? 0.55 : 0.32)}`,
     };
     labelDecoration = {
       before: (

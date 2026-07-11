@@ -15,12 +15,17 @@ type Props = {
 /**
  * A numbered section eyebrow — "CHAPITRE 03 · LA RÉVOLUTION BITCOIN" — set in
  * the mono `kicker` register (uppercase, wide tracking). The marker takes the
- * structural gold; the dot + label sit in quiet ink.
+ * structural gold; the label wears the module's own identity colour (it *is*
+ * the module name), which also gives it real presence — neutral ink at this
+ * size only just clears AA and reads timid, especially in light mode.
  */
 export const SectionLabel: FC<Props> = ({ marker, label, accent }) => {
-  const { colors } = usePageTheme();
+  const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
   const typo = getTypography(useBreakpoint());
+
+  const labelColor =
+    moduleTheme === "base" ? colors.base.text.secondary : colors[moduleTheme].text.secondary;
 
   const wrapperStyle: CSSProperties = {
     ...typo.kicker,
@@ -31,7 +36,7 @@ export const SectionLabel: FC<Props> = ({ marker, label, accent }) => {
   return (
     <span style={wrapperStyle}>
       <span style={{ color: accent ?? getBrandGold(theme) }}>{marker}</span>
-      <span style={{ color: colors.base.text.secondary }}>{` · ${label}`}</span>
+      <span style={{ color: labelColor }}>{` · ${label}`}</span>
     </span>
   );
 };

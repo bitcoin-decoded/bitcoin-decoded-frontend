@@ -23,7 +23,6 @@ export const NavBar: FC<Props> = ({ isChapterComplete }) => {
     navigationTree,
     openModule,
     handleMenuClick,
-    activePath,
     interactionId,
     setInteractionId,
   } = useNavBar();
@@ -78,7 +77,6 @@ export const NavBar: FC<Props> = ({ isChapterComplete }) => {
       isComplete={item.id ? (isChapterComplete?.(item.id) ?? false) : false}
       isDirectlyActive={currentPage === item.id}
       isExpanded={openModule === item.label}
-      isActiveAncestor={level === 0 && activePath.includes(item.label) && currentPage !== item.id}
       isInteracting={interactionId === (item.id || item.label)}
       colors={colors}
       onItemClick={handleMenuClick}
