@@ -595,6 +595,7 @@ const fr = {
   "footer.copy": "Copier",
   "footer.copied": "Copié !",
   "footer.copyright": "© 2026 - Bitcoin.Decoded",
+  "footer.iconCredit": "Icônes doodle : Streamline (CC BY 4.0)",
 } as const;
 
 export default fr;

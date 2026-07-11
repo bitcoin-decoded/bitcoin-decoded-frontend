@@ -590,6 +590,7 @@ const en = {
   "footer.copy": "Copy",
   "footer.copied": "Copied!",
   "footer.copyright": "© 2026 - Bitcoin.Decoded",
+  "footer.iconCredit": "Doodle icons: Streamline (CC BY 4.0)",
 } as const;
 
 export default en;

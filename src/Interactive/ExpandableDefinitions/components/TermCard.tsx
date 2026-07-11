@@ -46,18 +46,16 @@ export const TermCard: FC<Props> = ({ term }) => {
     transition: "background 0.25s var(--ease-smooth)",
   };
 
-  const iconCircleStyle: CSSProperties = {
-    width: isMobile ? "2.1rem" : "2.4rem",
-    height: isMobile ? "2.1rem" : "2.4rem",
-    borderRadius: 0,
+  // A large, borderless doodle marker — no box, no hairline frame. The glyph
+  // itself carries the term; it brightens/settles subtly with the open state.
+  const iconWrapStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
-    background: withOpacity(term.accentText, isOpen ? 0.18 : 0.1),
-    border: `1px solid ${withOpacity(term.accentBorder, 0.4)}`,
     color: term.accentText,
-    transition: "all 0.3s var(--ease-smooth)",
+    opacity: isOpen || isHovered ? 1 : 0.9,
+    transition: "opacity 0.3s var(--ease-smooth)",
   };
 
   const labelColumnStyle: CSSProperties = {
@@ -135,8 +133,8 @@ export const TermCard: FC<Props> = ({ term }) => {
         onMouseLeave={() => setIsHovered(false)}
         style={headerStyle}
       >
-        <div style={iconCircleStyle}>
-          <term.icon size={isMobile ? 14 : 16} strokeWidth={1.8} />
+        <div style={iconWrapStyle}>
+          <term.icon size={isMobile ? 40 : 48} strokeWidth={1.6} />
         </div>
         <div style={labelColumnStyle}>
           <span style={titleStyle}>{term.title}</span>

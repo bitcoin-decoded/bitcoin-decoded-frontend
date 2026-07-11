@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 
-import type { IconType } from "@icons";
+import type { TermIcon } from "./TermIcon";
 
 export type ExpandableTerm = {
   key: string;
   title: string;
   summary: ReactNode | string;
   body: ReactNode;
-  icon: IconType;
+  icon: TermIcon;
   accentText: string;
   accentBorder: string;
   meta?: ReactNode;

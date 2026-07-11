@@ -1,7 +1,7 @@
 import type { THEME_COLORS } from "../../../Design";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
 
-import { Banknote, Handshake, Wallet } from "@icons";
+import { DoodleBanknote, DoodleHandshake, DoodleWallet } from "@doodle";
 
 type Language = "fr" | "en";
 type ThemeColors = (typeof THEME_COLORS)["dark"];
@@ -24,7 +24,7 @@ export const getAccountingTerms = (
       summary: fr
         ? "Ce que tu possèdes, ou ce qu'on te doit."
         : "What you own, or what you're owed.",
-      icon: Wallet,
+      icon: DoodleWallet,
       accentText: colors.semantic.success.text,
       accentBorder: colors.semantic.success.border,
       body: fr ? (
@@ -49,7 +49,7 @@ export const getAccountingTerms = (
       summary: fr
         ? "D'où vient l'argent qui a financé tout ça."
         : "Where the money that financed all of it came from.",
-      icon: Banknote,
+      icon: DoodleBanknote,
       accentText: worldText,
       accentBorder: worldBorder,
       body: fr ? (
@@ -94,7 +94,7 @@ export const getAccountingTerms = (
       summary: fr
         ? "Le droit d'exiger que quelqu'un te rende l'argent qu'il te doit."
         : "Your right to be paid back the money someone owes you.",
-      icon: Handshake,
+      icon: DoodleHandshake,
       accentText: colors.violet.text.secondary,
       accentBorder: colors.violet.border.secondary,
       body: fr ? (

@@ -17,6 +17,7 @@ import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 import { RevealOnScroll } from "./RevealOnScroll";
 import { WorldCard } from "./WorldCard";
 
+import { DoodleBalance, DoodleBank, DoodleBitcoin } from "@doodle";
 import { ArrowDown, ArrowRight } from "@icons";
 
 const JOURNEY_SECTION_ID = "home-journey";
@@ -359,7 +360,7 @@ export const HomePage: FC = () => {
             }}
           >
             <WorldCard
-              icon="🏦"
+              icon={<DoodleBank size={isMobile ? 54 : 66} />}
               subtitle={t("home.journey.step1.label")}
               title={t("home.journey.step1.title")}
               description={t("home.journey.step1.desc")}
@@ -377,7 +378,7 @@ export const HomePage: FC = () => {
             }}
           >
             <WorldCard
-              icon="⚖️"
+              icon={<DoodleBalance size={isMobile ? 54 : 66} />}
               subtitle={t("home.journey.step2.label")}
               title={t("home.journey.step2.title")}
               description={t("home.journey.step2.desc")}
@@ -395,7 +396,7 @@ export const HomePage: FC = () => {
             }}
           >
             <WorldCard
-              icon="₿"
+              icon={<DoodleBitcoin size={isMobile ? 54 : 66} />}
               subtitle={t("home.journey.step3.label")}
               title={t("home.journey.step3.title")}
               description={t("home.journey.step3.desc")}

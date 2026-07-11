@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, useState } from "react";
+import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
 import { BRAND, getTypography, THEME_COLORS, useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
 
@@ -11,7 +11,8 @@ type Props = {
   description: string;
   /** Module identity — resolves to its themed accent in THEME_COLORS. */
   module: "blue" | "violet" | "amber";
-  icon: string;
+  /** A large centered doodle glyph (rendered in the module colour). */
+  icon: ReactNode;
   onClick: () => void;
   /** Optional CTA label rendered inline next to the arrow. */
   cta?: string;
@@ -44,17 +45,25 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     transition: "background 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)",
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
     gap: isMobile ? "0.45rem" : "0.6rem",
-    textAlign: "left",
+    textAlign: "center",
     // A <button> does NOT inherit text color by default (it uses the system
     // buttontext, ~black) — set it explicitly so the description reads in the
     // page ink, not black-on-near-black.
     color: colors.base.text.primary,
   };
 
-  const iconStyle: CSSProperties = {
-    fontSize: isMobile ? "1.5rem" : "1.85rem",
-    lineHeight: 1,
+  // Large centered doodle glyph, painted in the module colour (the glyph is
+  // currentColor). It nudges up a hair on hover, echoing the card's arrow.
+  const iconWrapStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: accent,
+    marginBottom: isMobile ? "0.2rem" : "0.4rem",
+    transform: isHovered ? "translateY(-2px)" : "translateY(0)",
+    transition: "transform 0.3s var(--ease-smooth)",
   };
 
   const subtitleStyle: CSSProperties = {
@@ -106,7 +115,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
   const ctaRowStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     gap: "0.5rem",
     marginTop: "auto",
     paddingTop: "0.4rem",
@@ -123,7 +132,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <span style={iconStyle}>{icon}</span>
+      <span style={iconWrapStyle}>{icon}</span>
       <p style={subtitleStyle}>{subtitle}</p>
       <h3 style={titleStyle}>{title}</h3>
       <p style={descStyle}>{description}</p>

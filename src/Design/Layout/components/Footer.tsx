@@ -62,7 +62,10 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
       <div style={ruleLineStyle} aria-hidden="true" />
       <div style={innerStyle}>
         <BitcoinDonationFooter display="footer" />
-        <p style={copyrightStyle}>{t("footer.copyright")}</p>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.25rem" }}>
+          <p style={copyrightStyle}>{t("footer.copyright")}</p>
+          <p style={{ ...copyrightStyle, opacity: 0.7 }}>{t("footer.iconCredit")}</p>
+        </div>
       </div>
     </footer>
   );
