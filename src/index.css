@@ -449,12 +449,16 @@ body {
    * ancestor): the 3rem-wide right-aligned box sits in the 4rem inset, leaving
    * a ~1rem channel before the text. */
   left: 0;
-  top: 0.45em;
+  top: 0.4em;
   width: 3rem;
   text-align: right;
   white-space: nowrap;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  /* Cutive Mono is a thin single-weight face; at the old 0.66rem the ledger
+     marker read faint, especially on white. Nudge the size up for legibility
+     while staying clearly subordinate to the prose. */
+  font-size: 0.72rem;
+  font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--marginalia-color, rgba(127, 127, 127, 0.5));
   user-select: none;
@@ -471,7 +475,7 @@ body {
     content: "Tx " counter(paragraph, decimal-leading-zero);
     left: 0;
     width: 2rem;
-    font-size: 0.58rem;
+    font-size: 0.64rem;
   }
 }
 @media (max-width: 360px) {
