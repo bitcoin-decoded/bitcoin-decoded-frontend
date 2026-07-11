@@ -48,9 +48,10 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
   };
 
   const copyrightStyle: CSSProperties = {
-    fontSize: isMobile ? "0.62rem" : "0.68rem",
+    // Quiet, but never sub-12px nor further dimmed by opacity — the two stacked
+    // to ~10px at 0.65α, which is where the footer became unreadable.
+    fontSize: "0.75rem",
     color: colors.base.text.secondary,
-    opacity: 0.65,
     letterSpacing: "0.05em",
     margin: 0,
     whiteSpace: "nowrap",

@@ -27,7 +27,7 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
     gap: "0.5rem",
     padding: "0.5rem 1rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
+    fontSize: typo.label.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.03em",

@@ -15,14 +15,19 @@ const SEMANTIC_ROLES = ["success", "error", "info", "warning"] as const;
  * The app was built dark-first, which let every light-mode accent sit at a
  * mid-tone that only ever passed on black. This pins the fix: every opaque
  * text token, in both modes, must clear WCAG AA against the surface it is
- * actually painted on.
+ * actually painted on — and that includes the reading CANVAS (`bg.secondary`),
+ * not only `bg.primary`. Prose and kickers live on the canvas, which is darker;
+ * checking primary alone once let the burnt-orange amber slip to 4.41 there.
  *
- * `base.text.secondary` is excluded on purpose: it carries an alpha channel
- * and is composited by the browser, so it has no standalone ratio.
+ * `base.text.secondary` is excluded on purpose: in dark mode it carries an
+ * alpha channel and is composited by the browser, so it has no standalone ratio.
  */
 describe.each(THEMES)("THEME_COLORS.%s text tokens", (theme) => {
   const ramp = THEME_COLORS[theme];
-  const background = ramp.base.background.primary;
+  const surfaces: [string, string][] = [
+    ["bg.primary", ramp.base.background.primary],
+    ["bg.secondary (canvas)", ramp.base.background.secondary],
+  ];
 
   const tokens: [string, string][] = [
     ["gold (getBrandGold)", getBrandGold(theme)],
@@ -41,7 +46,12 @@ describe.each(THEMES)("THEME_COLORS.%s text tokens", (theme) => {
     expect(tokens).toHaveLength(12);
   });
 
-  it.each(tokens)("%s clears WCAG AA on the page background", (_name, color) => {
-    expect(getContrastRatio(color, background) ?? 0).toBeGreaterThanOrEqual(AA_BODY);
+  const cases = tokens.flatMap(([name, color]) =>
+    surfaces.map<[string, string, string]>(([surfaceName, bg]) => [name, surfaceName, `${color}|${bg}`]),
+  );
+
+  it.each(cases)("%s clears WCAG AA on %s", (_name, _surface, pair) => {
+    const [color, bg] = pair.split("|");
+    expect(getContrastRatio(color, bg) ?? 0).toBeGreaterThanOrEqual(AA_BODY);
   });
 });

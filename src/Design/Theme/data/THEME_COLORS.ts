@@ -95,22 +95,27 @@ export const THEME_COLORS = {
     },
   },
   light: {
+    // Warm paper, not clinical white. The brand spec is "cream → bg in light"
+    // (see BRAND.ts) but the theme had shipped pure #fff + cool slate ink —
+    // maximum luminance + cold hue, which glares and fatigues the eye even at
+    // high contrast. These are warm off-whites and a warm near-black; contrast
+    // is preserved (all AA, guarded by THEME_COLORS.test.ts), the glare is not.
     base: {
       background: {
-        primary: "#ffffff",
-        secondary: "#f8fafc",
-        tertiary: "#f1f5f9",
-        hover: "rgba(15, 23, 42, 0.04)",
+        primary: "#faf8f2",
+        secondary: "#f3f0e7",
+        tertiary: "#eae6da",
+        hover: "rgba(43, 38, 32, 0.05)",
       },
       text: {
-        primary: "#1e293b",
-        secondary: "#64748b",
+        primary: "#2a2620",
+        secondary: "#625b4e",
         onAccent: "#ffffff",
       },
       border: {
-        primary: "#e2e8f0",
-        secondary: "#cbd5e1",
-        tertiary: "#94a3b8",
+        primary: "#e7e1d4",
+        secondary: "#d5ccba",
+        tertiary: "#b0a793",
       },
     },
     blue: {
@@ -134,7 +139,9 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#92400e",
-        secondary: "#b45309",
+        // Deepened from #b45309: burnt orange is the lightest accent, and on the
+        // warm canvas (#f3f0e7) the old value fell to 4.41 — just under AA.
+        secondary: "#9e4409",
       },
       border: {
         primary: "#fde68a",
@@ -168,7 +175,7 @@ export const THEME_COLORS = {
         background: "rgba(16, 185, 129, 0.08)",
       },
       error: {
-        text: "#e11d48",
+        text: "#be123c",
         border: "#f43f5e",
         background: "rgba(244, 63, 94, 0.08)",
       },
