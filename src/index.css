@@ -63,12 +63,22 @@ body,
   font-family: var(--font-body), Georgia, serif;
   letter-spacing: 0;
   line-height: 1.6;
+  /* Grayscale smoothing thins glyphs. That rescues light-on-dark text, which
+     otherwise blooms, but starves dark-on-light text, and our serif/mono stack
+     has no stroke weight to spare. So: opt out in light mode and let the
+     platform apply subpixel rendering. Dark stays the default, so there is no
+     flash before ThemeProvider stamps data-theme. */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Prevent Android Chrome from auto-inflating font sizes, which causes
      layout reflow and horizontal overflow on mobile */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+:root[data-theme="light"] #root {
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
 }
 
 body {
@@ -398,80 +408,9 @@ body {
   background: rgba(59, 130, 246, 0.3);
 }
 
-/* ── Block reading - paragraph marginalia ──
- * Marginalia: each <p> inside a block body gets a small mono marker in the
- * left margin (Tx 01, Tx 02, …), like verses in a scholarly edition. The
- * counter is per-chapter (continuous across blocks), reset on the BlockReader
- * root. The marginalia color is theme-aware via --marginalia-color set inline
- * on the BlockReader container.
- *
- * CRUCIAL: the Tx gutter lives ON the prose paragraphs, NOT on the block body.
- * Only `> p` carries a `[ Tx ]` marker, so only `> p` is inset to make room for
- * it. Every OTHER direct child — the ChapterPrelude, Callouts, interactive
- * components (SurfaceCard & co), lists — keeps the FULL column width, its left
- * edge flush with the Tx marker (x = 0). Were the gutter on the body instead,
- * every block would be shoved right and wide components would overflow on
- * narrow screens (the Bitcoin chapters in particular). The selector matches
- * only direct <p> children, so it SKIPS the prelude (its text sits in a nested
- * div) and Callouts/SurfaceCards (which carry their own register). */
-.reading-chapter-marginalia {
-  counter-reset: paragraph;
-}
-.reading-block-body {
-  position: relative;
-}
-.reading-block-body > p {
-  counter-increment: paragraph;
-  position: relative;
-  /* The Tx gutter — ONLY prose paragraphs are inset; see the note above. */
-  padding-left: 4rem;
-}
-/* Each prose paragraph is one transaction in the block: `[ Tx 01 ]` in the
- * left gutter. The `Tx` prefix + brackets read as a ledger annotation,
- * distinct from the site's <ol> list items (which use "01."). The gutter is
- * wider than the label box so a clear ~1rem channel separates the marker from
- * the prose (the box is right-aligned; any overflow falls left into the
- * margin, never against the text). */
-.reading-block-body > p::before {
-  content: "[ Tx " counter(paragraph, decimal-leading-zero) " ]";
-  position: absolute;
-  /* Anchored to the paragraph's own padding box (the <p> is the positioned
-   * ancestor): the 3rem-wide right-aligned box sits in the 4rem inset, leaving
-   * a ~1rem channel before the text. */
-  left: 0;
-  top: 0.45em;
-  width: 3rem;
-  text-align: right;
-  white-space: nowrap;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.02em;
-  color: var(--marginalia-color, rgba(127, 127, 127, 0.5));
-  user-select: none;
-  pointer-events: none;
-}
-/* On narrow screens the bracketed marker is wider than a tight gutter, so it
- * overflowed and wrapped. Drop the brackets (just `Tx 01`) and shrink the
- * gutter; the negative-left position already distinguishes it from a list. */
-@media (max-width: 540px) {
-  .reading-block-body > p {
-    padding-left: 3rem;
-  }
-  .reading-block-body > p::before {
-    content: "Tx " counter(paragraph, decimal-leading-zero);
-    left: 0;
-    width: 2rem;
-    font-size: 0.58rem;
-  }
-}
-@media (max-width: 360px) {
-  .reading-block-body > p {
-    padding-left: 0;
-  }
-  .reading-block-body > p::before {
-    display: none;
-  }
-}
+/* The per-paragraph `[ Tx 01 ]` marginalia was removed: numbering every prose
+ * paragraph added cognitive load without pedagogical value. Block prose now
+ * spans the full column, flush like any reading text. */
 
 /* Prelude lettrine — the ONE lettrine in the whole reading flow (chapter
  * prose never carries one; that would compete with this opening signal). It

@@ -1,6 +1,6 @@
 ---
 name: component-ledger-check
-description: Quality checklist for the ledger-design refactor of interactive components (sims). **MUST be invoked before any `git push` of a branch that redesigns or restyles components under `src/Interactive/` or the page-local sims under `src/Page/*/components/` (simulators, visuals, cards).** Verifies the 14/12 type scale + no hardcoding, the three brand fonts, the top/bottom three-square separators (one pair per component, even with two déclinaisons), use of the shared primitives (no duplication), and the absence of SaaS tells. Pairs with `ddd-pr-check` (structure) — this one covers visual/ledger quality.
+description: Quality checklist for the ledger-design refactor of interactive components (sims). **MUST be invoked before any `git push` of a branch that redesigns or restyles components under `src/Interactive/` or the page-local sims under `src/Page/*/components/` (simulators, visuals, cards).** Verifies the centralized `getTypography` scale + no hardcoding, the three brand fonts, use of the shared primitives (no duplication), and the absence of SaaS tells. Pairs with `ddd-pr-check` (structure) — this one covers visual/ledger quality.
 ---
 
 # Component ledger check
@@ -31,22 +31,24 @@ Run both before a component-refactor push.
 For every touched component, verify each. The fastest path is a grep for the anti-pattern, then
 read the hits in context.
 
-### 1. Type scale — 14/12, centralized, nothing below 12px
+### 1. Type scale — centralized via `getTypography`, nothing below 12px
 
-The user re-specified this repeatedly; it is the most-missed rule. Inside components there are
-exactly **two** sizes: **14px = primary** (content, table cells, panel bodies, component/item
-TITLES) and **12px = secondary** (labels, captions, units, chips, hints). **NOTHING below 12px.**
+The user re-specified this repeatedly; it is the most-missed rule. The type scale is owned by
+`getTypography(breakpoint)` (in `Design/Theme`) — the old raw `BRAND.fontSize` tokens were
+DELETED. A component NEVER sets a raw `fontSize`; it spreads a role:
 
-- Every `fontSize` routes through `BRAND.fontSize`: `body` (14px) or `label`/`note`/`micro`
-  (all 12px). NO hardcoded rem values.
-- Grep the touched files for `fontSize:\s*["']` and `fontSize:\s*isMobile` — every hit that
-  isn't a `BRAND.fontSize.*` token is a violation. Pay special attention to `0.5`–`0.74rem`
-  values (these render below 12px) — they are the recurring illegibility (e.g. the old `Caption`
+- `prose`/`figure` = 16px content, `heading` = 16px (titles), `label`/`note` = 14px sublabels,
+  `kicker` = 13px eyebrow, `micro` = 12px fine print (chips, ticks, tags). **NOTHING below 12px.**
+- Every text style spreads a `getTypography(...)` role (`...typo.heading`, `...typo.label`, …).
+  NO hardcoded `fontSize` rem values.
+- Grep the touched files for `fontSize:\s*["']` and `fontSize:\s*isMobile` — every hit that isn't
+  coming from a `getTypography` role is a violation. Pay special attention to `0.5`–`0.74rem`
+  literals (these render below 12px) — they are the recurring illegibility (e.g. the old `Caption`
   `xs` at 10px, the Dunbar chips at 11px).
-- Item/panel TITLES use `body` (14px) so they read ABOVE their 12px sub-labels.
+- Item/panel TITLES use `heading` (16px) so they read ABOVE their 14px/12px sub-labels.
 - Mono labels: `font-variant: small-caps` (never `text-transform: uppercase`), `font-weight: 500`
   (never 600/700 — Cutive Mono is single-weight, heavier values synthesize a crude faux-bold).
-- Sane `line-height` / `letter-spacing` (not the old tight values).
+- Sane `line-height` / `letter-spacing` come with the role — do not re-tighten them.
 
 ### 2. Fonts — only the three brand faces
 
@@ -56,16 +58,17 @@ TITLES) and **12px = secondary** (labels, captions, units, chips, hints). **NOTH
   face string is a violation. (FlipCard shipped a hardcoded `'JetBrains Mono'` that survived a
   whole review — this is exactly what this check catches.)
 
-### 3. Separators — the three-square pattern, ONE pair per component
+### 3. Separators — components carry NONE
 
-- An interactive surface is bracketed top + bottom by the three-square `Separator` (this comes
-  for free from `SurfaceCard`).
-- **A component shown in two (or more) déclinaisons — e.g. two side-by-side cards (Fiat vs
-  Bitcoin) — must NOT have a separator pair per sub-card** (that yields 4+ separator rows). One
-  pair brackets the whole component. Fix by wrapping the déclinaisons in a SINGLE `SurfaceCard`,
-  or by giving the sub-cards a plain frame and only the outer surface the separators.
-- Check: count the three-square separator rows the component renders — there should be exactly
-  two (one top, one bottom) for the whole component.
+- **The three-square `Separator` pair was removed from `SurfaceCard` (PR #129, judged too heavy).**
+  Interactive components and their cards therefore render **zero** separators — no top/bottom
+  bracket, no per-sub-card pair. The `Separator` primitive still exists but is reserved to the
+  homepage, which renders it directly.
+- Check: grep the touched files for `Separator` and `role="separator"` — an interactive
+  component should have **no** hits. A component that hand-rolls its own top/bottom rule pair to
+  imitate the old separators is a violation; remove it.
+- The block-reading shell (`BlockShell`) keeps its own gold hairline rules — those are the block
+  chain frame, not the three-square separator, and are fine.
 
 ### 4. Shared primitives — no duplication
 
@@ -120,7 +123,7 @@ Controls use the shared primitives, never hand-rolled equivalents:
 Components touched: DunbarSlider, MonetaryPillars, …
 
 ### DunbarSlider - ❌ 2 issues
-- Check 1 (type scale): `DunbarStepSlider.tsx:69` chips at `0.62rem` (<12px) → BRAND.fontSize.note.
+- Check 1 (type scale): `DunbarStepSlider.tsx:69` chips at `0.62rem` (<12px) → spread `typo.micro`.
 - Check 5 (SaaS tells): `getDunbarPalette` uses `linear-gradient` track → flat.
 
 ### MonetaryPillars - ✅ pass

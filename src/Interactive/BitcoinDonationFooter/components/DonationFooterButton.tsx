@@ -25,9 +25,11 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
     display: "inline-flex",
     alignItems: "center",
     gap: "0.5rem",
-    padding: "0.5rem 1rem",
+    padding: "0.55rem 1.1rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
+    // A donation CTA is a primary message, not chrome — size it up (16px). Mono
+    // small-caps shrinks the visual x-height, so it needs the larger step.
+    fontSize: typo.heading.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.03em",

@@ -14,5 +14,6 @@ export { Quote } from "./Quote";
 export type { RangeLedgerTick } from "./RangeLedger";
 export { RangeLedger } from "./RangeLedger";
 export { Reference } from "./Reference";
+export { SectionLabel } from "./SectionLabel";
 export { Separator } from "./Separator";
 export { SurfaceCard } from "./SurfaceCard";

@@ -1,3 +1,9 @@
+/**
+ * Per-mode ramps. Invariant: every `text.*` token must clear WCAG AA (4.5:1)
+ * against its own mode's `base.background.primary`. In dark mode the module
+ * accents are tints (light on black); in light mode they must be shades (dark
+ * on white), never the same mid-tone — a mid-tone only ever passes on one side.
+ */
 export const THEME_COLORS = {
   dark: {
     base: {
@@ -89,22 +95,30 @@ export const THEME_COLORS = {
     },
   },
   light: {
+    // Warm paper, not clinical white. The brand spec is "cream → bg in light"
+    // (see BRAND.ts) but the theme had shipped pure #fff + cool slate ink —
+    // maximum luminance + cold hue, which glares and fatigues the eye even at
+    // high contrast. These are warm off-whites and a warm near-black; contrast
+    // is preserved (all AA, guarded by THEME_COLORS.test.ts), the glare is not.
     base: {
       background: {
-        primary: "#ffffff",
-        secondary: "#f8fafc",
-        tertiary: "#f1f5f9",
-        hover: "rgba(15, 23, 42, 0.04)",
+        primary: "#faf8f2",
+        secondary: "#f3f0e7",
+        tertiary: "#eae6da",
+        hover: "rgba(43, 38, 32, 0.05)",
       },
       text: {
-        primary: "#1e293b",
-        secondary: "#64748b",
+        primary: "#2a2620",
+        // Warm-neutral gray. The prior #625b4e leaned olive-taupe (blue channel
+        // dragged well below red/green), which read muddy; #605c57 keeps the
+        // warmth but sits near-neutral, cleaner against the cream paper.
+        secondary: "#605c57",
         onAccent: "#ffffff",
       },
       border: {
-        primary: "#e2e8f0",
-        secondary: "#cbd5e1",
-        tertiary: "#94a3b8",
+        primary: "#e7e1d4",
+        secondary: "#d5ccba",
+        tertiary: "#b0a793",
       },
     },
     blue: {
@@ -114,7 +128,7 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#1e40af",
-        secondary: "#3b82f6",
+        secondary: "#1d4ed8",
       },
       border: {
         primary: "#bfdbfe",
@@ -128,7 +142,9 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#92400e",
-        secondary: "#d97706",
+        // Deepened from #b45309: burnt orange is the lightest accent, and on the
+        // warm canvas (#f3f0e7) the old value fell to 4.41 — just under AA.
+        secondary: "#9e4409",
       },
       border: {
         primary: "#fde68a",
@@ -142,11 +158,11 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#5b21b6",
-        secondary: "#7c3aed",
+        secondary: "#6d28d9",
       },
       border: {
         primary: "#ddd6fe",
-        secondary: "#7c3aed",
+        secondary: "#6d28d9",
       },
     },
     boxShadow: {
@@ -157,17 +173,17 @@ export const THEME_COLORS = {
     },
     semantic: {
       success: {
-        text: "#059669",
+        text: "#047857",
         border: "#10b981",
         background: "rgba(16, 185, 129, 0.08)",
       },
       error: {
-        text: "#e11d48",
+        text: "#be123c",
         border: "#f43f5e",
         background: "rgba(244, 63, 94, 0.08)",
       },
       info: {
-        text: "#0284c7",
+        text: "#0369a1",
         border: "#38bdf8",
         background: "rgba(56, 189, 248, 0.08)",
       },

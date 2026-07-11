@@ -10,6 +10,7 @@ const fr = {
 
   // Components
   "chapterPrelude.label": "Prélude",
+  "chapterLabel.chapter": "Chapitre",
   "quiz.label": "Quiz",
   "synthesisQuiz.label": "Quiz de synthèse",
   "synthesisQuiz.question": "Question",

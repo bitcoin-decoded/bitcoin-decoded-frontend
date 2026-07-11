@@ -145,9 +145,7 @@ export const BlockShell: FC<Props> = ({
           <span style={headerRuleStyle} aria-hidden="true" />
         </div>
         {title && <span style={titleKickerStyle}>· {title.toLowerCase()}</span>}
-        <div className="reading-block-body" style={bodyStyle}>
-          {children}
-        </div>
+        <div style={bodyStyle}>{children}</div>
         <div style={footerRuleStyle} aria-hidden="true" />
       </div>
     </section>
