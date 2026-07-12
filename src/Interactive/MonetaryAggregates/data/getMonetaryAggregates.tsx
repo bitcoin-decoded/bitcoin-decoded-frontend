@@ -1,7 +1,7 @@
 import type { THEME_COLORS } from "../../../Design";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
 
-import { Building2, ShoppingCart } from "@icons";
+import { DoodleBank, DoodleCart } from "@doodle";
 
 type Language = "fr" | "en";
 type ThemeColors = (typeof THEME_COLORS)["dark"];
@@ -19,7 +19,7 @@ export const getMonetaryAggregates = (
       summary: fr
         ? "L'argent que tu utilises tous les jours, créé par les banques commerciales."
         : "The money you use every day, created by commercial banks.",
-      icon: ShoppingCart,
+      icon: DoodleCart,
       accentText: colors.semantic.info.text,
       accentBorder: colors.semantic.info.border,
       body: fr ? (
@@ -48,7 +48,7 @@ export const getMonetaryAggregates = (
       summary: fr
         ? "La monnaie émise par la Banque Centrale, dont les réserves interbancaires."
         : "The money issued by the Central Bank, including interbank reserves.",
-      icon: Building2,
+      icon: DoodleBank,
       accentText: colors.violet.text.secondary,
       accentBorder: colors.violet.border.secondary,
       body: fr ? (

@@ -1,7 +1,7 @@
 import type { THEME_COLORS } from "../../../Design";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
 
-import { Building2, KeyRound } from "@icons";
+import { DoodleBank, DoodleKey } from "@doodle";
 
 type Language = "fr" | "en";
 type ThemeColors = (typeof THEME_COLORS)["dark"];
@@ -16,7 +16,7 @@ export const getCustodyOptions = (language: Language, colors: ThemeColors): Expa
       summary: fr
         ? "Simple et rapide. Sauf qu'il y a un hic."
         : "Simple and fast. Except there's a catch.",
-      icon: Building2,
+      icon: DoodleBank,
       accentText: colors.base.text.primary,
       accentBorder: colors.base.border.primary,
       body: fr ? (
@@ -58,7 +58,7 @@ export const getCustodyOptions = (language: Language, colors: ThemeColors): Expa
       summary: fr
         ? "Tu détiens les clés toi-même. Personne ne peut déplacer tes bitcoins sans ton autorisation, mais attention."
         : "You hold the keys yourself. No one can move your bitcoin without your say-so, but watch out.",
-      icon: KeyRound,
+      icon: DoodleKey,
       accentText: colors.violet.text.secondary,
       accentBorder: colors.violet.border.secondary,
       body: fr ? (

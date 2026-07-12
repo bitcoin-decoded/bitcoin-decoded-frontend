@@ -2,7 +2,8 @@ import type { THEME_COLORS } from "../../../Design";
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
 import { ScoreGauge } from "../components/ScoreGauge";
 
-import { Feather, KeyRound, Smartphone, Vault } from "@icons";
+import { DoodlePhone, DoodleSafe } from "@doodle";
+import { Feather, KeyRound } from "@icons";
 
 type Language = "fr" | "en";
 type ThemeColors = (typeof THEME_COLORS)["dark"];
@@ -31,7 +32,7 @@ export const getWalletFamilies = (language: Language, colors: ThemeColors): Expa
       summary: fr
         ? "Une appli sur ton téléphone ou ton ordinateur. Tes clés sont générées sur ton appareil et elles y restent. C'est toi qui les héberges, pas un tiers."
         : "An app on your phone or computer. Your keys are generated on your device and stay there. You host them, not a third party.",
-      icon: Smartphone,
+      icon: DoodlePhone,
       accentText: violetText,
       accentBorder: violetBorder,
       meta: gauges(violetText, 4, 4),
@@ -61,7 +62,7 @@ export const getWalletFamilies = (language: Language, colors: ThemeColors): Expa
           reach. <i>Scrooge McDuck</i>'s vault, if you like.
         </>
       ),
-      icon: Vault,
+      icon: DoodleSafe,
       accentText: violetTextAlt,
       accentBorder: violetBorderAlt,
       meta: gauges(violetTextAlt, 2, 5),
