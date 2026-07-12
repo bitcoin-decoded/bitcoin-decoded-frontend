@@ -51,6 +51,11 @@ export const NavBar: FC<Props> = ({ isChapterComplete }) => {
   const listContainerStyle: CSSProperties = {
     overflowY: "auto",
     flex: "1 1 auto",
+    // Reserve the scrollbar gutter permanently. Otherwise, expanding a module
+    // adds its chapters, the list overflows, a scrollbar appears and steals
+    // ~6px of width — enough to reflow the tracked mono module title from 2 to
+    // 3 lines. A stable gutter keeps the usable width constant open or closed.
+    scrollbarGutter: "stable",
   };
 
   const listStyle: CSSProperties = {

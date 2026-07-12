@@ -2,6 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { useTranslation } from "../../../I18n";
 import { BitcoinDonationFooter } from "../../../Interactive";
+import { withOpacity } from "../../helpers";
 import type { Breakpoint } from "../../Responsive";
 import { BRAND, getBrandGold, THEME_COLORS, useThemeContext } from "../../Theme";
 
@@ -47,14 +48,27 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
     textAlign: "center",
   };
 
+  // Footer legibility was fixed on three axes, not just one:
+  //   • Font — the body SERIF, not Cutive Mono. Thin single-weight mono at ~12px
+  //     is the recurring illegibility (see the light-mode work); a reading serif
+  //     is far clearer at this size.
+  //   • Colour — the PRIMARY ink (not muted `text.secondary`, ~0.5α on dark).
+  //     Copyright ≈ 11:1, credit ≈ 7:1 on the worse (light) ground. The earlier
+  //     0.72/0.56 values sat at 5.8/3.6 — the credit failed AA outright.
+  //   • Size — nudged up so the meta doesn't read as fine print.
   const copyrightStyle: CSSProperties = {
-    // Quiet, but never sub-12px nor further dimmed by opacity — the two stacked
-    // to ~10px at 0.65α, which is where the footer became unreadable.
-    fontSize: "0.75rem",
-    color: colors.base.text.secondary,
-    letterSpacing: "0.05em",
+    fontFamily: BRAND.fonts.body,
+    fontSize: "0.85rem",
+    color: withOpacity(colors.base.text.primary, 0.92),
+    letterSpacing: "0.01em",
     margin: 0,
     whiteSpace: "nowrap",
+  };
+
+  const creditStyle: CSSProperties = {
+    ...copyrightStyle,
+    fontSize: "0.8rem",
+    color: withOpacity(colors.base.text.primary, 0.78),
   };
 
   return (
@@ -64,7 +78,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
         <BitcoinDonationFooter display="footer" />
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.25rem" }}>
           <p style={copyrightStyle}>{t("footer.copyright")}</p>
-          <p style={{ ...copyrightStyle, opacity: 0.7 }}>{t("footer.iconCredit")}</p>
+          <p style={creditStyle}>{t("footer.iconCredit")}</p>
         </div>
       </div>
     </footer>
