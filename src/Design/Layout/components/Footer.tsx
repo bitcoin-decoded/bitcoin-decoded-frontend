@@ -33,19 +33,33 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
     width: "100%",
   };
 
+  // Desolidarise the donation from the legal text: on a wide screen they sit on
+  // opposite ends of one row (donation left, copyright/credit right) instead of
+  // three stacked lines; on mobile they stack and centre.
   const innerStyle: CSSProperties = {
     padding: isDesktop
-      ? "1.75rem 2.5rem 1.5rem calc(17rem + 2.5rem)"
+      ? "1.5rem 2.5rem 1.35rem calc(18rem + 2.5rem)"
       : isMobile
         ? "1.5rem 1rem 1.25rem"
-        : "1.75rem 2.5rem 1.5rem",
+        : "1.5rem 2.5rem 1.35rem",
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    alignItems: "center",
+    justifyContent: isMobile ? "center" : "space-between",
+    gap: isMobile ? "0.85rem" : "1.5rem",
+    maxWidth: isMobile ? "44rem" : "56rem",
+    margin: "0 auto",
+    width: "100%",
+    boxSizing: "border-box",
+    textAlign: isMobile ? "center" : "left",
+  };
+
+  const legalBlockStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    gap: isMobile ? "0.85rem" : "0.9rem",
-    maxWidth: "44rem",
-    margin: "0 auto",
-    textAlign: "center",
+    alignItems: isMobile ? "center" : "flex-end",
+    gap: "0.2rem",
+    flexShrink: 0,
   };
 
   // Footer legibility was fixed on three axes, not just one:
@@ -76,7 +90,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
       <div style={ruleLineStyle} aria-hidden="true" />
       <div style={innerStyle}>
         <BitcoinDonationFooter display="footer" />
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.25rem" }}>
+        <div style={legalBlockStyle}>
           <p style={copyrightStyle}>{t("footer.copyright")}</p>
           <p style={creditStyle}>{t("footer.iconCredit")}</p>
         </div>

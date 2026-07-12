@@ -229,7 +229,10 @@ export const NavItem: FC<Props> = ({
         )}
       </button>
       {item.children && (
-        <div style={submenuWrapperStyle} aria-hidden={!isExpanded}>
+        // `inert` while collapsed: the chapters are visually hidden (grid 0fr)
+        // but stay in the DOM, so without this the keyboard tab order and the
+        // focus ring would land on invisible sub-chapters of a folded module.
+        <div style={submenuWrapperStyle} aria-hidden={!isExpanded} inert={!isExpanded}>
           <ul style={submenuListStyle}>
             {item.children.map((subItem, subIndex) => (
               <li key={subItem.id || subItem.label}>

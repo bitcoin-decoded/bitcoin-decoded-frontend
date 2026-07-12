@@ -362,7 +362,7 @@ export const HomePage: FC = () => {
             <WorldCard
               icon={<DoodleBank size={isMobile ? 54 : 66} />}
               subtitle={t("home.journey.step1.label")}
-              title={t("home.journey.step1.title")}
+              title={t("nav.tree.bankingSystem")}
               description={t("home.journey.step1.desc")}
               cta={t("home.journey.cardCta")}
               module="blue"
@@ -380,7 +380,7 @@ export const HomePage: FC = () => {
             <WorldCard
               icon={<DoodleBalance size={isMobile ? 54 : 66} />}
               subtitle={t("home.journey.step2.label")}
-              title={t("home.journey.step2.title")}
+              title={t("nav.tree.moneyLaws")}
               description={t("home.journey.step2.desc")}
               cta={t("home.journey.cardCta")}
               module="violet"
@@ -398,7 +398,7 @@ export const HomePage: FC = () => {
             <WorldCard
               icon={<DoodleBitcoin size={isMobile ? 54 : 66} />}
               subtitle={t("home.journey.step3.label")}
-              title={t("home.journey.step3.title")}
+              title={t("nav.tree.bitcoinRevolution")}
               description={t("home.journey.step3.desc")}
               cta={t("home.journey.cardCta")}
               module="amber"

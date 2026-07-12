@@ -24,18 +24,19 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
   const style: CSSProperties = {
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.5rem",
-    padding: "0.55rem 1.1rem",
+    gap: "0.55rem",
+    padding: "0.6rem 1.25rem",
     fontFamily: BRAND.fonts.mono,
-    // A donation CTA is a primary message, not chrome — size it up (16px). Mono
-    // small-caps shrinks the visual x-height, so it needs the larger step.
+    // A donation CTA is a primary message, not chrome. Cutive Mono is
+    // single-weight (no real bold), so presence comes from a persistent filled
+    // amber cell + a firm border + size, not from font-weight.
     fontSize: typo.heading.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",
-    letterSpacing: "0.03em",
+    letterSpacing: "0.04em",
     color: accent,
-    background: hovered ? withOpacity(accent, 0.1) : "transparent",
-    border: `1px solid ${withOpacity(accent, hovered ? 0.7 : 0.4)}`,
+    background: withOpacity(accent, hovered ? 0.2 : 0.12),
+    border: `1.5px solid ${withOpacity(accent, hovered ? 1 : 0.7)}`,
     borderRadius: 0,
     cursor: "pointer",
     transition: "all 0.15s var(--ease-smooth)",
@@ -49,7 +50,7 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Bitcoin size={15} strokeWidth={2} style={{ color: BRAND.orange }} />
+      <Bitcoin size={17} strokeWidth={2.2} style={{ color: BRAND.orange }} />
       {copy.footerCta}
     </button>
   );

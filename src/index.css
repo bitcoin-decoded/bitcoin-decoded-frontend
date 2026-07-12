@@ -64,6 +64,12 @@ textarea {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
+/* Nav items are full-width and flush to the sidebar edge, so a 2px-outset ring
+ * gets clipped on the left. Inset it slightly so the whole ring — left edge
+ * included — stays visible. */
+nav[aria-label] button:focus-visible {
+  outline-offset: -3px;
+}
 
 html,
 body,
