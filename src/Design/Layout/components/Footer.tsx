@@ -2,6 +2,7 @@ import { type CSSProperties, type FC } from "react";
 
 import { useTranslation } from "../../../I18n";
 import { BitcoinDonationFooter } from "../../../Interactive";
+import { withOpacity } from "../../helpers";
 import type { Breakpoint } from "../../Responsive";
 import { BRAND, getBrandGold, THEME_COLORS, useThemeContext } from "../../Theme";
 
@@ -16,7 +17,6 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
   const gold = getBrandGold(theme);
 
   const isMobile = breakpoint === "mobile";
-  const isDesktop = breakpoint === "desktop";
 
   const footerStyle: CSSProperties = {
     display: "flex",
@@ -32,29 +32,55 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
     width: "100%",
   };
 
+  // Desolidarise the donation from the legal text: on a wide screen they sit on
+  // opposite ends of one row (donation left, copyright/credit right) instead of
+  // three stacked lines; on mobile they stack and centre. Symmetric padding (no
+  // sidebar offset) so the row centres on the WHOLE page — the footer spans the
+  // full width below the nav, so it should read centred against it, not against
+  // the content column alone.
   const innerStyle: CSSProperties = {
-    padding: isDesktop
-      ? "1.75rem 2.5rem 1.5rem calc(17rem + 2.5rem)"
-      : isMobile
-        ? "1.5rem 1rem 1.25rem"
-        : "1.75rem 2.5rem 1.5rem",
+    padding: isMobile ? "1.5rem 1rem 1.25rem" : "1.5rem 2.5rem 1.35rem",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: isMobile ? "column" : "row",
     alignItems: "center",
-    gap: isMobile ? "0.85rem" : "0.9rem",
-    maxWidth: "44rem",
+    justifyContent: isMobile ? "center" : "space-between",
+    gap: isMobile ? "0.85rem" : "1.5rem",
+    maxWidth: isMobile ? "44rem" : "56rem",
     margin: "0 auto",
-    textAlign: "center",
+    width: "100%",
+    boxSizing: "border-box",
+    textAlign: isMobile ? "center" : "left",
   };
 
+  const legalBlockStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: isMobile ? "center" : "flex-end",
+    gap: "0.2rem",
+    flexShrink: 0,
+  };
+
+  // Footer legibility was fixed on three axes, not just one:
+  //   • Font — the body SERIF, not Cutive Mono. Thin single-weight mono at ~12px
+  //     is the recurring illegibility (see the light-mode work); a reading serif
+  //     is far clearer at this size.
+  //   • Colour — the PRIMARY ink (not muted `text.secondary`, ~0.5α on dark).
+  //     Copyright ≈ 11:1, credit ≈ 7:1 on the worse (light) ground. The earlier
+  //     0.72/0.56 values sat at 5.8/3.6 — the credit failed AA outright.
+  //   • Size — nudged up so the meta doesn't read as fine print.
   const copyrightStyle: CSSProperties = {
-    // Quiet, but never sub-12px nor further dimmed by opacity — the two stacked
-    // to ~10px at 0.65α, which is where the footer became unreadable.
-    fontSize: "0.75rem",
-    color: colors.base.text.secondary,
-    letterSpacing: "0.05em",
+    fontFamily: BRAND.fonts.body,
+    fontSize: "0.85rem",
+    color: withOpacity(colors.base.text.primary, 0.92),
+    letterSpacing: "0.01em",
     margin: 0,
     whiteSpace: "nowrap",
+  };
+
+  const creditStyle: CSSProperties = {
+    ...copyrightStyle,
+    fontSize: "0.8rem",
+    color: withOpacity(colors.base.text.primary, 0.78),
   };
 
   return (
@@ -62,7 +88,10 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
       <div style={ruleLineStyle} aria-hidden="true" />
       <div style={innerStyle}>
         <BitcoinDonationFooter display="footer" />
-        <p style={copyrightStyle}>{t("footer.copyright")}</p>
+        <div style={legalBlockStyle}>
+          <p style={copyrightStyle}>{t("footer.copyright")}</p>
+          <p style={creditStyle}>{t("footer.iconCredit")}</p>
+        </div>
       </div>
     </footer>
   );

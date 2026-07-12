@@ -1,6 +1,6 @@
-import { type CSSProperties, type FC, useState } from "react";
+import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
-import { BRAND, getTypography, THEME_COLORS, useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
+import { BRAND, getBrandGold, getTypography, THEME_COLORS, useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
 
 import { ArrowRight } from "@icons";
 
@@ -11,7 +11,8 @@ type Props = {
   description: string;
   /** Module identity — resolves to its themed accent in THEME_COLORS. */
   module: "blue" | "violet" | "amber";
-  icon: string;
+  /** A large centered doodle glyph (rendered in the module colour). */
+  icon: ReactNode;
   onClick: () => void;
   /** Optional CTA label rendered inline next to the arrow. */
   cta?: string;
@@ -31,6 +32,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
 
   const colors = THEME_COLORS[theme];
   const accent = colors[module].text.secondary;
+  const gold = getBrandGold(theme);
 
   const cardStyle: CSSProperties = {
     position: "relative",
@@ -44,42 +46,39 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     transition: "background 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)",
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
     gap: isMobile ? "0.45rem" : "0.6rem",
-    textAlign: "left",
+    textAlign: "center",
     // A <button> does NOT inherit text color by default (it uses the system
     // buttontext, ~black) — set it explicitly so the description reads in the
     // page ink, not black-on-near-black.
     color: colors.base.text.primary,
   };
 
-  const iconStyle: CSSProperties = {
-    fontSize: isMobile ? "1.5rem" : "1.85rem",
-    lineHeight: 1,
+  // Large centered doodle glyph, painted in the module colour (the glyph is
+  // currentColor). It nudges up a hair on hover, echoing the card's arrow.
+  const iconWrapStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: accent,
+    marginBottom: isMobile ? "0.2rem" : "0.4rem",
+    transform: isHovered ? "translateY(-2px)" : "translateY(0)",
+    transition: "transform 0.3s var(--ease-smooth)",
   };
 
-  const subtitleStyle: CSSProperties = {
-    fontSize: typo.label.fontSize,
-    fontFamily: BRAND.fonts.mono,
-    fontWeight: 500,
-    color: accent,
-    opacity: 0.85,
-    letterSpacing: "0.08em",
-    fontVariant: "small-caps",
+  // The chapter-kicker device, reused for the card head: "MODULE 1 · <full
+  // module title, exactly as in the left navbar>". Gold marker (structure),
+  // module-coloured title (identity). Replaces the vague short titles.
+  const kickerStyle: CSSProperties = {
+    ...typo.kicker,
     margin: 0,
+    lineHeight: 1.5,
+    // Reserve 3 lines so cards align regardless of module-title length.
+    minHeight: "4.5em",
   };
-
-  const titleStyle: CSSProperties = {
-    fontSize: isMobile ? "0.95rem" : "1rem",
-    fontFamily: BRAND.fonts.mono,
-    fontWeight: 500,
-    color: accent,
-    letterSpacing: "0.01em",
-    margin: 0,
-    // Reserve 2 lines so sibling titles take the same vertical space — keeps
-    // descriptions and arrows aligned across cards whether or not a title wraps.
-    lineHeight: 1.3,
-    minHeight: "2.6em",
-  };
+  const markerStyle: CSSProperties = { color: gold };
+  const titlePartStyle: CSSProperties = { color: accent };
 
   const descStyle: CSSProperties = {
     fontSize: typo.note.fontSize,
@@ -106,7 +105,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
   const ctaRowStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     gap: "0.5rem",
     marginTop: "auto",
     paddingTop: "0.4rem",
@@ -123,9 +122,11 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <span style={iconStyle}>{icon}</span>
-      <p style={subtitleStyle}>{subtitle}</p>
-      <h3 style={titleStyle}>{title}</h3>
+      <span style={iconWrapStyle}>{icon}</span>
+      <h3 style={kickerStyle}>
+        <span style={markerStyle}>{subtitle}</span>
+        <span style={titlePartStyle}>{` · ${title}`}</span>
+      </h3>
       <p style={descStyle}>{description}</p>
       <div style={ctaRowStyle}>
         {cta && <span style={ctaLabelStyle}>{cta}</span>}

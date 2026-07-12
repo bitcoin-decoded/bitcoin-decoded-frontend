@@ -9,6 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@icons': fileURLToPath(new URL('./src/Design/icons/ICON_SET.ts', import.meta.url)),
+      '@doodle': fileURLToPath(new URL('./src/Design/icons/doodle/index.ts', import.meta.url)),
     },
   },
 })

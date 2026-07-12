@@ -10,7 +10,8 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "paths": {
-      "@icons": ["./src/Design/icons/ICON_SET.ts"]
+      "@icons": ["./src/Design/icons/ICON_SET.ts"],
+      "@doodle": ["./src/Design/icons/doodle/index.ts"]
     },
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
