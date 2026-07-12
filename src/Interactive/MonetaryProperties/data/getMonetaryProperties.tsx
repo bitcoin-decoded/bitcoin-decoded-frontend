@@ -4,7 +4,7 @@ import pikachuIllustratorCard from "../../../Design/img/Pikachu_Illustrator_Card
 import type { ExpandableTerm } from "../../ExpandableDefinitions";
 import { Illustration } from "../../Illustration";
 
-import { Gem, Mountain } from "@icons";
+import { DoodleGold, DoodleShield } from "@doodle";
 
 type Language = "fr" | "en";
 type ThemeColors = (typeof THEME_COLORS)["dark"];
@@ -22,7 +22,7 @@ export const getMonetaryProperties = (
       summary: fr
         ? "Une photographie à l'instant T du stock existant."
         : "A snapshot, at a given moment, of the existing stock.",
-      icon: Gem,
+      icon: DoodleGold,
       accentText: colors.semantic.info.text,
       accentBorder: colors.semantic.info.border,
       body: fr ? (
@@ -61,7 +61,7 @@ export const getMonetaryProperties = (
       summary: fr
         ? "La résistance de la monnaie à la production de nouvelles unités."
         : "How much a currency resists the production of new units.",
-      icon: Mountain,
+      icon: DoodleShield,
       accentText: colors.amber.text.secondary,
       accentBorder: colors.amber.border.secondary,
       body: fr ? (
