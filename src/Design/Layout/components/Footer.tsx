@@ -17,7 +17,6 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
   const gold = getBrandGold(theme);
 
   const isMobile = breakpoint === "mobile";
-  const isDesktop = breakpoint === "desktop";
 
   const footerStyle: CSSProperties = {
     display: "flex",
@@ -35,13 +34,12 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
 
   // Desolidarise the donation from the legal text: on a wide screen they sit on
   // opposite ends of one row (donation left, copyright/credit right) instead of
-  // three stacked lines; on mobile they stack and centre.
+  // three stacked lines; on mobile they stack and centre. Symmetric padding (no
+  // sidebar offset) so the row centres on the WHOLE page — the footer spans the
+  // full width below the nav, so it should read centred against it, not against
+  // the content column alone.
   const innerStyle: CSSProperties = {
-    padding: isDesktop
-      ? "1.5rem 2.5rem 1.35rem calc(18rem + 2.5rem)"
-      : isMobile
-        ? "1.5rem 1rem 1.25rem"
-        : "1.5rem 2.5rem 1.35rem",
+    padding: isMobile ? "1.5rem 1rem 1.25rem" : "1.5rem 2.5rem 1.35rem",
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
     alignItems: "center",
