@@ -8,8 +8,6 @@ import { useToggleSimulator } from "../../hooks";
 import { SimulatorControls } from "../../SimulatorControls";
 import { getUserBankCredit } from "../data";
 
-import { Feather } from "@icons";
-
 type Props = {
   /** Fired once the loan has been granted (the simulator's final state). */
   onComplete?: () => void;
@@ -42,10 +40,7 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
           liabilities={data!.bank.liabilities}
         />
         <div style={{ marginTop: "1rem" }}>
-          <Disclosure
-            title={fr ? "Note d'attention" : "A word of caution"}
-            icon={<Feather size={15} strokeWidth={2} />}
-          >
+          <Disclosure title={fr ? "Note d'attention" : "A word of caution"}>
             {fr ? (
               <p>
                 Petite triche pédagogique : j'ai laissé de côté le capital propre, les réserves, les

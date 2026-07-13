@@ -12,13 +12,13 @@ import {
 import { useSignaturePlayground } from "../hooks";
 import type { SigPlaygroundColors } from "../types";
 
+import { DoodleBulb } from "@doodle";
 import {
   ArrowDownLeft,
   ArrowDownRight,
   CheckCircle,
   Globe,
   KeyRound,
-  Lightbulb,
   Lock,
   Mail,
   PenLine,
@@ -536,13 +536,13 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       {/* Pedagogy disclosures */}
       <Disclosure
         title={t("signaturePlayground.disclosureDerivationTitle")}
-        icon={<Lightbulb size={13} strokeWidth={2} />}
+        icon={<DoodleBulb size={28} />}
       >
         <p style={{ margin: 0 }}>{t("signaturePlayground.derivationDefinition")}</p>
       </Disclosure>
       <Disclosure
         title={t("signaturePlayground.disclosurePrivateKeyTitle")}
-        icon={<Lightbulb size={13} strokeWidth={2} />}
+        icon={<DoodleBulb size={28} />}
       >
         <p style={{ margin: 0 }}>{t("signaturePlayground.pedagogyConcretely")}</p>
         <p

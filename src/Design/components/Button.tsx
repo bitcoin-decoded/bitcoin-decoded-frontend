@@ -25,6 +25,9 @@ type Props = {
   type?: "button" | "submit" | "reset";
   ariaLabel?: string;
   fullWidth?: boolean;
+  /** Drop the primary variant's `[ … ]` bracket framing (e.g. when the icon
+   *  already carries a bracket motif). No effect on other variants. */
+  hideBrackets?: boolean;
   style?: CSSProperties;
 };
 
@@ -40,6 +43,7 @@ export const Button: FC<Props> = ({
   type = "button",
   ariaLabel,
   fullWidth = false,
+  hideBrackets = false,
   style,
 }) => {
   const { colors } = usePageTheme();
@@ -100,18 +104,20 @@ export const Button: FC<Props> = ({
       background: withOpacity(accent, isLifted ? 0.12 : 0.06),
       border: `1px solid ${withOpacity(accent, isLifted ? 0.55 : 0.32)}`,
     };
-    labelDecoration = {
-      before: (
-        <span aria-hidden="true" style={{ color: bracketColor, transition: "color 0.25s" }}>
-          [
-        </span>
-      ),
-      after: (
-        <span aria-hidden="true" style={{ color: bracketColor, transition: "color 0.25s" }}>
-          ]
-        </span>
-      ),
-    };
+    if (!hideBrackets) {
+      labelDecoration = {
+        before: (
+          <span aria-hidden="true" style={{ color: bracketColor, transition: "color 0.25s" }}>
+            [
+          </span>
+        ),
+        after: (
+          <span aria-hidden="true" style={{ color: bracketColor, transition: "color 0.25s" }}>
+            ]
+          </span>
+        ),
+      };
+    }
   } else if (variant === "secondary") {
     variantStyle = {
       padding: isMobile ? `${padY} 0` : `${padYMd} 0`,

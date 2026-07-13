@@ -2,8 +2,10 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { withOpacity } from "../helpers";
 import { useDisclosure } from "../hooks";
-import { BRAND, getTypography, usePageTheme } from "../Theme";
+import { useBreakpoint } from "../Responsive";
+import { getTypography, usePageTheme } from "../Theme";
 
+import { DoodleNotes } from "@doodle";
 import { ChevronDown } from "@icons";
 
 type Props = {
@@ -14,7 +16,8 @@ type Props = {
 };
 
 export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, children }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const typo = getTypography(breakpoint);
   const { isOpen, toggle } = useDisclosure(defaultOpen);
   const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
@@ -43,11 +46,8 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     border: "none",
     cursor: "pointer",
     color: headerText,
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
+    ...typo.label,
     fontVariant: "small-caps",
-    letterSpacing: "0.06em",
     textAlign: "left",
     width: "100%",
     transition: "background 0.2s var(--ease-smooth)",
@@ -95,7 +95,7 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     <div style={containerStyle}>
       <button type="button" onClick={toggle} aria-expanded={isOpen} style={headerStyle}>
         <span style={headerLabelStyle}>
-          {icon}
+          {icon ?? <DoodleNotes size={breakpoint === "mobile" ? 22 : 26} />}
           <span style={{ minWidth: 0 }}>{title}</span>
         </span>
         <ChevronDown size={14} strokeWidth={2.2} style={chevronStyle} />

@@ -6,7 +6,8 @@ import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
 import { BRAND, getTypography, type ThemeColors } from "../../Theme";
 
-import { Check, ChevronRight, ClipboardCheck } from "@icons";
+import { DoodleCheck, DoodleStamp } from "@doodle";
+import { ChevronRight } from "@icons";
 
 type Props = {
   item: NavigationItem;
@@ -206,14 +207,14 @@ export const NavItem: FC<Props> = ({
           <Badge
             size="sm"
             color={moduleColor}
-            icon={<ClipboardCheck size={13} strokeWidth={2} />}
+            icon={<DoodleStamp size={16} />}
             style={{ flexShrink: 0, marginLeft: "auto" }}
           >
             Quiz
           </Badge>
         )}
         {isChapter && !isChallenge && isComplete && (
-          <Check size={14} strokeWidth={2.5} color={gold} style={{ marginLeft: "auto", flexShrink: 0 }} />
+          <DoodleCheck size={18} style={{ marginLeft: "auto", flexShrink: 0, color: gold }} />
         )}
         {item.children && (
           <div style={chevronStyle}>

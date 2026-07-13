@@ -7,6 +7,7 @@ import type { ProfileKey, WalletSection } from "../types";
 import { QuestionStep } from "./QuestionStep";
 import { SectionCard } from "./SectionCard";
 
+import { DoodleQuestion } from "@doodle";
 import {
   ArrowLeft,
   Briefcase,
@@ -212,7 +213,7 @@ export const PathFinder: FC = () => {
               footer={
                 <Disclosure
                   title={questions.q4.disclosureTitle}
-                  icon={<HelpCircle size={14} strokeWidth={2} />}
+                  icon={<DoodleQuestion size={28} />}
                 >
                   {questions.q4.disclosureBody}
                 </Disclosure>

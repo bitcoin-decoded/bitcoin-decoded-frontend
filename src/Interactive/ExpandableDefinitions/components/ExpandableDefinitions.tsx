@@ -22,13 +22,10 @@ export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionI
     gap: isMobile ? "0.65rem" : "0.75rem",
   };
 
-  const defaultIcon = <BookOpenText size={isMobile ? 16 : 18} strokeWidth={2} />;
+  const defaultIcon = <BookOpenText size={isMobile ? 20 : 24} strokeWidth={2} />;
 
   return (
-    <SurfaceCard
-      margin={isMobile ? "1.5rem 0" : "2.25rem 0"}
-      gap={isMobile ? "1rem" : "1.15rem"}
-    >
+    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "1rem" : "1.15rem"}>
       <Caption tone="world" size="md" icon={sectionIcon ?? defaultIcon}>
         {sectionTitle}
       </Caption>

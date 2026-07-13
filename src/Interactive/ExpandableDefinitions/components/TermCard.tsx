@@ -18,8 +18,6 @@ export const TermCard: FC<Props> = ({ term }) => {
 
   const mono = { fontFamily: BRAND.fonts.mono } as const;
 
-  // Sharp ledger card: flat module wash, a single hairline that brightens on
-  // hover/open. No gradient fill, no lift, no drop shadow.
   const containerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -46,8 +44,6 @@ export const TermCard: FC<Props> = ({ term }) => {
     transition: "background 0.25s var(--ease-smooth)",
   };
 
-  // A large, borderless doodle marker — no box, no hairline frame. The glyph
-  // itself carries the term; it brightens/settles subtly with the open state.
   const iconWrapStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
@@ -68,8 +64,7 @@ export const TermCard: FC<Props> = ({ term }) => {
 
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
+    fontSize: typo.heading.fontSize,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: term.accentText,
