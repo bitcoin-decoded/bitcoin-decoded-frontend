@@ -52,7 +52,6 @@ export const Caption: FC<Props> = ({
   const finalStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize,
-    fontWeight: 500,
     fontVariant: isNote ? "normal" : "small-caps",
     letterSpacing: isNote ? "0.02em" : "0.08em",
     color: resolvedColor,

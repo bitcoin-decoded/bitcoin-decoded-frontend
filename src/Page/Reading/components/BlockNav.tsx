@@ -3,7 +3,8 @@ import { type CSSProperties, type FC } from "react";
 import { Button, Caption, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
-import { ArrowDown, ArrowUp, Lock } from "@icons";
+import { DoodleArrowDown, DoodleArrowUp } from "@doodle";
+import { Lock } from "@icons";
 
 type Props = {
   isFirst: boolean;
@@ -67,7 +68,8 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
           <Button
             variant="primary"
             color={moduleColor}
-            icon={<ArrowUp size={16} strokeWidth={2} />}
+            icon={<DoodleArrowUp size={18} />}
+            hideBrackets
             onClick={onPrev}
             style={{ opacity: 0.75 }}
           >
@@ -83,8 +85,9 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
             <Button
               variant="primary"
               color={moduleColor}
-              icon={<ArrowDown size={16} strokeWidth={2} />}
+              icon={<DoodleArrowDown size={18} />}
               iconPosition="right"
+              hideBrackets
               disabled={locked}
               onClick={onNext}
             >

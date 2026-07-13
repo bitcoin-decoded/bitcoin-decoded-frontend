@@ -16,17 +16,17 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
     },
     heading: {
       fontFamily: BRAND.fonts.mono,
-      fontSize: compact ? "0.9375rem" : "1rem",
-      fontWeight: 500,
-      lineHeight: 1.35,
-      letterSpacing: "0.01em",
+      fontSize: compact ? "1.125rem" : "1.25rem",
+      fontWeight: 400,
+      lineHeight: 1.3,
+      letterSpacing: "0.02em",
     },
     // Mono kicker / table-header / small-caps label. Elevated to 14px — Cutive
     // Mono needs the extra size to stay legible.
     label: {
       fontFamily: BRAND.fonts.mono,
-      fontSize: compact ? "0.8125rem" : "0.875rem",
-      fontWeight: 500,
+      fontSize: compact ? "0.9375rem" : "1rem",
+      fontWeight: 400,
       lineHeight: 1.4,
       letterSpacing: "0.06em",
     },
@@ -34,7 +34,7 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
     figure: {
       fontFamily: BRAND.fonts.mono,
       fontSize: compact ? "0.9375rem" : "1rem",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: 1.3,
       fontVariantNumeric: "tabular-nums",
     },
@@ -51,7 +51,7 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
     micro: {
       fontFamily: BRAND.fonts.mono,
       fontSize: "0.75rem",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: 1.3,
       letterSpacing: "0.04em",
     },
@@ -62,7 +62,7 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
     kicker: {
       fontFamily: BRAND.fonts.mono,
       fontSize: compact ? "0.8125rem" : "0.875rem",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: 1.4,
       letterSpacing: "0.13em",
       textTransform: "uppercase",

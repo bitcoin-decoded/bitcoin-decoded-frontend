@@ -18,9 +18,9 @@ export const Callout: FC<Props> = ({ title, children }) => {
   const typography = getTypography(breakpoint);
 
   const gold = getBrandGold(theme);
-  
+
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
-  
+
   const washSource = moduleTheme === "base" ? gold : colors[moduleTheme].background.secondary;
 
   const wrapperStyle: CSSProperties = {

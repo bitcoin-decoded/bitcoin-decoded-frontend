@@ -1,12 +1,11 @@
 import { type FC } from "react";
 
-import { Callout, Reference } from "../../../Design";
+import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { AccountingTerms, CreditCreationSimulator } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { Block, BlockReader } from "../../Reading";
 import { ChapterPrelude, PageTemplate } from "../../Shared/";
-
 
 export const Banking1Page: FC = () => {
   const { t, language } = useTranslation();
@@ -40,7 +39,7 @@ export const Banking1Page: FC = () => {
                 tombé dans le piège. Comme 95% des gens, y compris des diplômés en finance. C'est
                 simplement parce qu'on ne te l'a jamais expliqué correctement.
               </p>
-              <p>Lis attentivement ce qui suit, tu vas être surpris :</p>
+              <p>Lis attentivement ce qui suit, tu vas être surpris.</p>
             </>
           ) : (
             <>
@@ -50,7 +49,7 @@ export const Banking1Page: FC = () => {
                 right into it. Like 95% of people, finance graduates included. No one ever explained
                 it to you properly.
               </p>
-              <p>Read the next part carefully, you're in for a surprise:</p>
+              <p>Read the next part carefully, you're in for a surprise.</p>
             </>
           )}
         </Block>
@@ -63,23 +62,27 @@ export const Banking1Page: FC = () => {
                   Plus de 90%
                 </Reference>{" "}
                 de notre monnaie n'est ni imprimée par l'État ni créée par les Banques Centrales,
-                mais créée <i>comme par magie</i> par les banques commerciales (du style BNP
-                Paribas, Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent.
+                mais créée comme par magie par les banques commerciales (du style BNP Paribas,
+                Caisse d'Épargne, ...) à chaque fois qu'elles prêtent de l'argent.
                 <p>
                   Dès qu'elles accordent un prêt, par une simple écriture comptable elles créent de
                   l'argent à partir de rien.
                 </p>
                 <p>
-                  Les plus sceptiques répondront « à partir de rien, vraiment ? ». Pas tout à fait,
-                  c'est vrai. À partir d'une promesse : celle de l'emprunteur de rembourser. C'est
-                  tout ce qu'il faut à une banque pour fabriquer de la monnaie.
+                  Les plus sceptiques diront <i>« à partir de rien, vraiment ? »</i>. Pas tout à
+                  fait, c'est vrai. À partir d'une promesse : celle de l'emprunteur de rembourser.
+                  C'est tout ce qu'il faut à une banque pour fabriquer de la monnaie.
                 </p>
                 <p>
                   Ces banques disposent d'un pouvoir quasi magique. Quasi seulement : ce pouvoir
                   n'est ni illimité ni gratuit. Il faut un emprunteur solvable, des règles à
                   respecter, de quoi se refinancer. Ces contraintes existent, mais elles sont plus
-                  souples qu'on ne le croit. Dans les faits, quand la banque veut prêter, elle prête
-                  - et crée la monnaie au passage.
+                  souples qu'on ne le croit.{" "}
+                  <HighlightText>
+                    Dans les faits, quand la banque veut prêter, elle prête, et crée la monnaie au
+                    passage
+                  </HighlightText>
+                  .
                 </p>
               </>
             ) : (
@@ -102,8 +105,12 @@ export const Banking1Page: FC = () => {
                 <p>
                   These banks hold an almost magical power. Almost: this power is neither unlimited
                   nor free. It takes a creditworthy borrower, rules to follow, a way to refinance.
-                  Those constraints are real, but looser than people think. In practice, when a bank
-                  wants to lend, it lends - and creates the money along the way.
+                  Those constraints are real, but looser than people think.{" "}
+                  <HighlightText>
+                    In practice, when a bank wants to lend, it lends - and creates the money along
+                    the way
+                  </HighlightText>
+                  .
                 </p>
               </>
             )}
@@ -129,8 +136,8 @@ export const Banking1Page: FC = () => {
           <Callout
             title={
               fr
-                ? "Illustration concrète : Nicolas veut acheter une maison"
-                : "A concrete example: Nicolas wants to buy a house"
+                ? "Nicolas veut acheter une maison"
+                : "Nicolas wants to buy a house"
             }
           >
             <p>
@@ -140,8 +147,8 @@ export const Banking1Page: FC = () => {
             </p>
             <p>
               {fr
-                ? "Et c'est là que tu entres en scène : Tu es son banquier, tu as le pouvoir d'accomplir son rêve en lui accordant ce prêt."
-                : "And this is where you step in: you're his banker, and you hold the power to make his dream happen by granting that loan."}
+                ? "Et c'est là que tu entres en scène : tu es son banquier, tu as le pouvoir d'accomplir son rêve en lui accordant ce prêt."
+                : "And this is where you step in: you're his banker and you hold the power to make his dream happen by granting that loan."}
             </p>
           </Callout>
         </Block>

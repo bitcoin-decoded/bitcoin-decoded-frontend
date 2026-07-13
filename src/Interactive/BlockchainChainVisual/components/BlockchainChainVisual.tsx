@@ -14,7 +14,7 @@ import { useBlockchainChainVisual } from "../hooks";
 import { BlockCard } from "./BlockCard";
 import { ChainArrow } from "./ChainArrow";
 
-import { Info, Plus, RotateCcw, Sparkles } from "@icons";
+import { Plus, RotateCcw, Sparkles } from "@icons";
 
 type Props = {
   resetScrollTargetId?: string;
@@ -140,7 +140,7 @@ export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComple
         ))}
       </div>
 
-      <Disclosure title={t("chain.disclosureTitle")} icon={<Info size={14} strokeWidth={2} />}>
+      <Disclosure title={t("chain.disclosureTitle")}>
         {t("chain.disclosureBody")}
       </Disclosure>
 
