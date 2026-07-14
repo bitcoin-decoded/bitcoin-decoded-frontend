@@ -76,7 +76,9 @@ export const Disclosure: FC<Props> = ({ title, icon, defaultOpen = false, childr
     borderTop: `1px solid ${withOpacity(borderColor, 0.22)}`,
     padding: "0.85rem 1.05rem 0.95rem 1.05rem",
     color: basePrimaryText,
-    fontSize: typo.note.fontSize,
+    // Disclosure content is part of the chapter's core reading, not an aside —
+    // size it like the body prose, not the smaller note role.
+    fontSize: typo.prose.fontSize,
     lineHeight: 1.6,
     textAlign: "left",
     display: "flex",

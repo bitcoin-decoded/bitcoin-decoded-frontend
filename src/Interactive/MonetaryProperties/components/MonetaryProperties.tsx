@@ -15,7 +15,7 @@ export const MonetaryProperties: FC = () => {
   return (
     <ExpandableDefinitions
       sectionTitle={t("monetaryProperties.sectionTitle")}
-      sectionIcon={<Scale size={18} strokeWidth={2} />}
+      sectionIcon={Scale}
       terms={terms}
     />
   );

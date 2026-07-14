@@ -63,5 +63,11 @@ export const Caption: FC<Props> = ({
     ...style,
   };
 
-  return createElement(as, { style: finalStyle }, icon, icon ? <span>{children}</span> : children);
+  // The icon must never be squeezed by a long label: as a flex child it would
+  // otherwise shrink in width (keeping its height) and distort. Pin it.
+  const iconNode = icon
+    ? createElement("span", { style: { display: "inline-flex", flexShrink: 0 } }, icon)
+    : null;
+
+  return createElement(as, { style: finalStyle }, iconNode, icon ? <span>{children}</span> : children);
 };

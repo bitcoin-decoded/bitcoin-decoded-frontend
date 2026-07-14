@@ -21,8 +21,8 @@ export const Banking2Page: FC = () => {
           <ChapterPrelude marginBottom="1.5rem">
             {fr ? (
               <>
-                Nicolas vient de virer 200 000 € pour acheter sa maison. Sauf qu'aucune liasse de 200
-                000 € n'a bougé d'une banque à l'autre. Et pourtant, Mme Michu a bien reçu son
+                Nicolas vient de virer 200 000 € pour acheter sa maison. Sauf qu'aucune liasse de
+                200 000 € n'a bougé d'une banque à l'autre. Et pourtant, Mme Michu a bien reçu son
                 virement. Comment c'est possible ?
               </>
             ) : (
@@ -41,24 +41,31 @@ export const Banking2Page: FC = () => {
             {fr ? (
               <>
                 <i>Nicolas</i> est content puisqu'il a reçu 200 000 €, prêtés par sa banque pour
-                l'achat d'une résidence principale. <br />
-                Cet argent ne va pas rester très longtemps sur le compte de Nicolas : il va payer la
-                vendeuse de la maison, <i>Mme Michu</i>. Et que se passe-t-il si le compte de{" "}
-                <i>Mme Michu</i> est dans une autre banque ?
+                l'achat d'une résidence principale. Cet argent ne va pas rester très longtemps sur
+                le compte de Nicolas : il va payer la vendeuse de la maison, <i>Mme Michu</i>. Et
+                que se passe-t-il si le compte de <i>Mme Michu</i> est dans une autre banque ?
               </>
             ) : (
               <>
-                <i>Nicolas</i> is a happy man: his bank just lent him €200,000 to buy his main home.{" "}
-                <br />
+                <i>Nicolas</i> is a happy man: his bank just lent him €200,000 to buy his main home.
                 That money won't sit in Nicolas's account for long: he's using it to pay the seller,{" "}
                 <i>Ms. Smith</i>. So what happens if <i>Ms. Smith</i> banks somewhere else?
               </>
             )}
           </p>
+          <p>
+            {fr ? (
+              <>
+                Et que se passe-t-il si le compte de <i>Mme Michu</i> est dans une autre banque ?
+              </>
+            ) : (
+              <>
+                So what happens if <i>Ms. Smith</i> banks somewhere else?
+              </>
+            )}
+          </p>
         </Block>
 
-        {/* BLOC 3 - Deux monnaies, deux tuyaux : l'aparté reste collé au composant
-            (exploration M0/M2 facultative, donc bloc non verrouillé). */}
         <Block>
           <p>
             {fr ? (
@@ -106,8 +113,8 @@ export const Banking2Page: FC = () => {
               </>
             ) : (
               <>
-                At regular intervals (say, at the end of the day), banks tally up everything they owe
-                one another: that's the{" "}
+                At regular intervals (say, at the end of the day), banks tally up everything they
+                owe one another: that's the{" "}
                 <Reference href="https://en.wikipedia.org/wiki/Clearing_(finance)">
                   clearing
                 </Reference>
@@ -133,8 +140,8 @@ export const Banking2Page: FC = () => {
             icon={<Home size={20} strokeWidth={2} />}
             title={
               fr
-                ? "Illustration concrète : Le mécanisme de compensation pour la transaction entre Nicolas et Mme Michu"
-                : "A concrete walkthrough: the clearing mechanism for the Nicolas-Ms. Smith transaction"
+                ? "Le mécanisme de compensation pour la transaction entre Nicolas et Mme Michu"
+                : "The clearing mechanism for the Nicolas-Ms. Smith transaction"
             }
           >
             <p>
@@ -167,8 +174,8 @@ export const Banking2Page: FC = () => {
               ) : (
                 <p>
                   We've simplified: just one transaction today. In real life it's millions of
-                  transfers, all netted, and only the net balance changes hands. But the mechanism is
-                  exactly the same.
+                  transfers, all netted, and only the net balance changes hands. But the mechanism
+                  is exactly the same.
                 </p>
               )}
             </Disclosure>
@@ -183,8 +190,8 @@ export const Banking2Page: FC = () => {
               <p>
                 {fr ? (
                   <>
-                    Maintenant, observons le bilan complet de la banque de <i>Nicolas</i>, cette fois
-                    avec tout ce qu'on avait laissé de côté{" "}
+                    Maintenant, observons le bilan complet de la banque de <i>Nicolas</i>, cette
+                    fois avec tout ce qu'on avait laissé de côté{" "}
                     <Reference to={ROUTE_NAME.Banking_1}>au chapitre précédent</Reference> : les
                     réserves M0, les dettes envers la Banque Centrale, le capital propre. Note la
                     dette de 200 000 € en M0 au passif.

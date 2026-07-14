@@ -178,8 +178,8 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
           >
             <Button
               variant="ghost"
-              size="sm"
-              icon={<RotateCcw size={14} strokeWidth={2} />}
+              size="md"
+              icon={<RotateCcw size={16} strokeWidth={2} />}
               onClick={replay}
             >
               {t("reading.replay")}

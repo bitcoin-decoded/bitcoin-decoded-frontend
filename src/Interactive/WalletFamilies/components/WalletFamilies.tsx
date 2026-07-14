@@ -18,7 +18,7 @@ export const WalletFamilies: FC = () => {
   return (
     <ExpandableDefinitions
       sectionTitle={t("walletFamilies.sectionTitle")}
-      sectionIcon={<Wallet size={18} strokeWidth={2} />}
+      sectionIcon={Wallet}
       terms={terms}
     />
   );
