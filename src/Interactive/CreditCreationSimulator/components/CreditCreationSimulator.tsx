@@ -8,6 +8,8 @@ import { useToggleSimulator } from "../../hooks";
 import { SimulatorControls } from "../../SimulatorControls";
 import { getUserBankCredit } from "../data";
 
+import { DoodleMagicHat } from "@doodle";
+
 type Props = {
   /** Fired once the loan has been granted (the simulator's final state). */
   onComplete?: () => void;
@@ -59,11 +61,16 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
           </Disclosure>
         </div>
         {isActive && (
-          <FeedbackPanel tone="info" style={{ marginTop: "1.5rem" }}>
+          <FeedbackPanel
+            tone="info"
+            style={{ marginTop: "1.5rem" }}
+            icon={<DoodleMagicHat size={20} />}
+            title={fr ? "Alakazam !" : "Alakazam!"}
+          >
             <p style={{ margin: "0 0 0.6rem 0" }}>
               {fr
-                ? "ALAKAZAM ! 💥 Regarde attentivement la ligne en jaune."
-                : "ALAKAZAM! 💥 Look closely at the line in yellow."}
+                ? "Regarde attentivement la ligne dorée."
+                : "Look closely at the golden line."}
             </p>
             <p style={{ margin: "0 0 0.6rem 0" }}>
               {fr

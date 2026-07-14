@@ -53,7 +53,12 @@ export const FeedbackPanel: FC<Props> = ({
     background: withOpacity(accent, bgOpacity),
     border:
       variant === "border-left" ? "none" : `1px solid ${withOpacity(accent, borderOpacity + 0.1)}`,
-    borderLeft: variant === "border-left" ? `3px solid ${withOpacity(accent, 0.5)}` : undefined,
+    // Every "full" panel also carries a bold accent liséré on its left edge — a
+    // polished alert-box tell (the faint 1px left border read as absent before).
+    borderLeft:
+      variant === "border-left"
+        ? `3px solid ${withOpacity(accent, 0.5)}`
+        : `3px solid ${withOpacity(accent, 0.8)}`,
     color: colors.base.text.primary,
     fontSize: typo.note.fontSize,
     lineHeight: 1.55,

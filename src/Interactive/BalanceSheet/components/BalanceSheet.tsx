@@ -6,6 +6,8 @@ import { useBreakpoint } from "../../../Design/Responsive";
 import { useTranslation } from "../../../I18n";
 import type { BalanceSheetLine } from "../types";
 
+import { DoodleBalance } from "@doodle";
+
 type Props = {
   title: string;
   assets: BalanceSheetLine[];
@@ -36,7 +38,10 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     ...typo.heading,
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.5rem",
     letterSpacing: "0.08em",
-    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: isMobile ? "0.5rem" : "0.7rem",
     fontVariant: "small-caps",
     color: colors[moduleTheme].text.primary,
   };
@@ -83,11 +88,14 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   };
 
   const changedColor = colors.amber.text.secondary;
-  const changedBg = withOpacity(colors.amber.text.secondary, 0.08);
+  const changedBg = withOpacity(colors.amber.text.secondary, 0.16);
 
   return (
     <div style={containerStyle}>
-      <h3 style={titleStyle}>{title}</h3>
+      <h3 style={titleStyle}>
+        <DoodleBalance size={isMobile ? 24 : 30} style={{ flexShrink: 0 }} />
+        <span style={{ textAlign: "center" }}>{title}</span>
+      </h3>
       <table style={tableStyle}>
         <thead>
           <tr>

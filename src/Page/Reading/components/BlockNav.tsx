@@ -68,7 +68,7 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
           <Button
             variant="primary"
             color={moduleColor}
-            icon={<DoodleArrowUp size={18} />}
+            icon={<DoodleArrowUp size={24} />}
             hideBrackets
             onClick={onPrev}
             style={{ opacity: 0.75 }}
@@ -85,7 +85,7 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
             <Button
               variant="primary"
               color={moduleColor}
-              icon={<DoodleArrowDown size={18} />}
+              icon={<DoodleArrowDown size={24} />}
               iconPosition="right"
               hideBrackets
               disabled={locked}

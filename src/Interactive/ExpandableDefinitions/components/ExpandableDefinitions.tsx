@@ -5,7 +5,7 @@ import type { ExpandableTerm } from "../types";
 
 import { TermCard } from "./TermCard";
 
-import { BookOpenText } from "@icons";
+import { DoodleBook } from "@doodle";
 
 type Props = {
   sectionTitle: string;
@@ -22,7 +22,7 @@ export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionI
     gap: isMobile ? "0.65rem" : "0.75rem",
   };
 
-  const defaultIcon = <BookOpenText size={isMobile ? 20 : 24} strokeWidth={2} />;
+  const defaultIcon = <DoodleBook size={isMobile ? 24 : 30} />;
 
   return (
     <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "1rem" : "1.15rem"}>
