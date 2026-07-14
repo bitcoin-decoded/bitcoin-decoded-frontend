@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
-import { BRAND, getTypography, usePageTheme } from "../Theme";
+import { getTypography, usePageTheme } from "../Theme";
 
 type Tone = "success" | "error" | "info" | "warning" | "neutral" | "world";
 type Variant = "full" | "border-left";
@@ -24,7 +24,8 @@ export const FeedbackPanel: FC<Props> = ({
   title,
   style,
 }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const typo = getTypography(breakpoint);
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
 
@@ -53,10 +54,12 @@ export const FeedbackPanel: FC<Props> = ({
     background: withOpacity(accent, bgOpacity),
     border:
       variant === "border-left" ? "none" : `1px solid ${withOpacity(accent, borderOpacity + 0.1)}`,
-    borderLeft: variant === "border-left" ? `3px solid ${withOpacity(accent, 0.5)}` : undefined,
+    borderLeft:
+      variant === "border-left"
+        ? `3px solid ${withOpacity(accent, 0.5)}`
+        : `3px solid ${withOpacity(accent, 0.8)}`,
     color: colors.base.text.primary,
-    fontSize: typo.note.fontSize,
-    lineHeight: 1.55,
+    ...typo.note,
     transition: "all 0.35s var(--ease-smooth)",
     ...style,
   };
@@ -65,12 +68,9 @@ export const FeedbackPanel: FC<Props> = ({
     display: "inline-flex",
     alignItems: "center",
     gap: "0.4rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
+    ...typo.heading,
     color: accent,
     fontVariant: "small-caps",
-    letterSpacing: "0.08em",
   };
 
   const hasTitle = Boolean(title);
