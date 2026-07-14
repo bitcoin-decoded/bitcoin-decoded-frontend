@@ -65,7 +65,7 @@ export const CreditCreationSimulator: FC<Props> = ({ onComplete }) => {
             tone="info"
             style={{ marginTop: "1.5rem" }}
             icon={<DoodleMagicHat size={20} />}
-            title={fr ? "Alakazam !" : "Alakazam!"}
+            title={fr ? "alakazam !" : "alakazam!"}
           >
             <p style={{ margin: "0 0 0.6rem 0" }}>
               {fr

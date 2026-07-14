@@ -79,7 +79,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
 
   const creditStyle: CSSProperties = {
     ...copyrightStyle,
-    fontSize: "0.8rem",
+    fontSize: "0.7rem",
     color: withOpacity(colors.base.text.primary, 0.78),
   };
 
