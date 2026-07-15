@@ -121,25 +121,17 @@ export const Banking1Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Tu veux le voir de tes propres yeux ? Parfait. Passons à la pratique.
-                <br />
-                Tu es maintenant banquier, toutes mes félicitations ! (ou pas)
+                Tu veux le voir de tes propres yeux ? Parfait. Passons à la pratique. Tu es
+                maintenant banquier, toutes mes félicitations (ou pas) !
               </>
             ) : (
               <>
-                Want to see it with your own eyes? Perfect. Let's get our hands dirty.
-                <br />
-                You're a banker now. Congratulations! (or not)
+                Want to see it with your own eyes? Perfect. Let's get our hands dirty. You're a
+                banker now. Congratulations (or not)!
               </>
             )}
           </p>
-          <Callout
-            title={
-              fr
-                ? "Nicolas veut acheter une maison"
-                : "Nicolas wants to buy a house"
-            }
-          >
+          <Callout title={fr ? "Nicolas veut acheter une maison" : "Nicolas wants to buy a house"}>
             <p>
               {fr
                 ? "Nicolas a un super projet : être propriétaire de sa résidence principale. Pour cela, il va faire une demande de prêt à sa banque pour un montant de 200 000 €."

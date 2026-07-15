@@ -1,7 +1,7 @@
-import { type CSSProperties, type FC, type ReactNode } from "react";
+import { type CSSProperties, type FC } from "react";
 
 import { Caption, SurfaceCard, useBreakpoint } from "../../../Design";
-import type { ExpandableTerm } from "../types";
+import type { ExpandableTerm, TermIcon } from "../types";
 
 import { TermCard } from "./TermCard";
 
@@ -10,7 +10,9 @@ import { DoodleBook } from "@doodle";
 type Props = {
   sectionTitle: string;
   terms: ExpandableTerm[];
-  sectionIcon?: ReactNode;
+  /** A component (not an element) so this owns the size — default and
+   *  prop-supplied markers render identically, responsively. */
+  sectionIcon?: TermIcon;
 };
 
 export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionIcon }) => {
@@ -22,11 +24,12 @@ export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionI
     gap: isMobile ? "0.65rem" : "0.75rem",
   };
 
-  const defaultIcon = <DoodleBook size={isMobile ? 24 : 30} />;
+  const Icon = sectionIcon ?? DoodleBook;
+  const iconSize = isMobile ? 24 : 30;
 
   return (
     <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "1rem" : "1.15rem"}>
-      <Caption tone="world" size="md" icon={sectionIcon ?? defaultIcon}>
+      <Caption tone="world" size="md" icon={<Icon size={iconSize} strokeWidth={2} />}>
         {sectionTitle}
       </Caption>
 

@@ -15,7 +15,7 @@ export const MonetaryAggregates: FC = () => {
   return (
     <ExpandableDefinitions
       sectionTitle={t("monetaryAggregates.sectionTitle")}
-      sectionIcon={<Coins size={18} strokeWidth={2} />}
+      sectionIcon={Coins}
       terms={terms}
     />
   );

@@ -15,7 +15,7 @@ export const CustodyOptions: FC = () => {
   return (
     <ExpandableDefinitions
       sectionTitle={t("custodyOptions.sectionTitle")}
-      sectionIcon={<DoorOpen size={18} strokeWidth={2} />}
+      sectionIcon={DoorOpen}
       terms={terms}
     />
   );
