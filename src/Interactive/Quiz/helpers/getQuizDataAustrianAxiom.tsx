@@ -10,8 +10,8 @@ export const getQuizDataAustrianAxiom = (language: Language): QuizData => {
     answers: [
       {
         text: fr
-          ? "a) J'ai trouvé ! Je vais rester immobile et ne rien faire."
-          : "a) Got it! I'll stay still and do nothing.",
+          ? "J'ai trouvé ! Je vais rester immobile et ne rien faire."
+          : "Got it! I'll stay still and do nothing.",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -26,7 +26,7 @@ export const getQuizDataAustrianAxiom = (language: Language): QuizData => {
         ),
       },
       {
-        text: fr ? "b) C'est impossible à réfuter." : "b) It's impossible to refute.",
+        text: fr ? "C'est impossible à réfuter." : "It's impossible to refute.",
         isCorrect: true,
         rationale: fr ? (
           <>

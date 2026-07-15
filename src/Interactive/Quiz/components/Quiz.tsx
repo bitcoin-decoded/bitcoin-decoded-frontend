@@ -1,11 +1,23 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  BRAND,
+  Caption,
+  FeedbackPanel,
+  getBrandGold,
+  getTypography,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useQuiz } from "../hooks";
 import { type QuizData } from "../types";
 
-import { CircleCheck, CircleHelp, CircleX } from "@icons";
+import { DoodleQuestion } from "@doodle";
+import { CircleCheck, CircleX } from "@icons";
 
 type QuizProps = QuizData & {
   onCorrectAnswer: () => void;
@@ -14,12 +26,18 @@ type QuizProps = QuizData & {
 export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
   const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
+  const { theme } = useThemeContext();
   const { t } = useTranslation();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
-  const { selectedIndex, isCorrectlySolved, handleSelect } = useQuiz(data.answers, onCorrectAnswer);
+  const { selectedIndex, isCorrectlySolved, hoveredIndex, setHoveredIndex, handleSelect } = useQuiz(
+    data.answers,
+    onCorrectAnswer,
+  );
 
-  const accentColor = colors[moduleTheme].border.secondary;
+  const gold = getBrandGold(theme);
+  const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
+  const washSource = moduleTheme === "base" ? gold : colors[moduleTheme].background.secondary;
   const success = colors.semantic.success;
   const warning = colors.semantic.warning;
 
@@ -30,7 +48,7 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
   };
 
   const iconStyle: CSSProperties = {
-    color: accentColor,
+    color: moduleAccent,
     flexShrink: 0,
     marginTop: "0.125rem",
   };
@@ -46,47 +64,79 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
   const optionsContainerStyle: CSSProperties = {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
-    gap: "0.625rem",
+    alignItems: "stretch",
+    gap: isMobile ? "0.6rem" : "0.7rem",
   };
 
-  const getOptionStyle = (index: number): CSSProperties => {
+  // Each answer is a ledger cell: four gold corner brackets around a module-tinted
+  // wash (mirrors Callout and the navbar module numerals), coloured by state.
+  const cornerSize = 12;
+  const corners = (color: string): ReactNode => {
+    const s = `${BRAND.figures.ruleThickness}px solid ${color}`;
+    const base: CSSProperties = {
+      position: "absolute",
+      width: cornerSize,
+      height: cornerSize,
+      transition: "border-color 0.2s var(--ease-smooth)",
+      pointerEvents: "none",
+    };
+    return (
+      <>
+        <span style={{ ...base, top: 0, left: 0, borderTop: s, borderLeft: s }} />
+        <span style={{ ...base, top: 0, right: 0, borderTop: s, borderRight: s }} />
+        <span style={{ ...base, bottom: 0, left: 0, borderBottom: s, borderLeft: s }} />
+        <span style={{ ...base, bottom: 0, right: 0, borderBottom: s, borderRight: s }} />
+      </>
+    );
+  };
+
+  const getOptionVisual = (index: number) => {
     const isSelected = selectedIndex === index;
     const isCorrect = data.answers[index].isCorrect;
-    const showResult = isSelected && selectedIndex !== null;
+    const showResult = isSelected;
+    const isHovered = hoveredIndex === index && selectedIndex === null && !isCorrectlySolved;
 
-    let borderColor = withOpacity(accentColor, 0.3);
-    let bgColor = colors.base.background.primary;
-    let textColor = colors.base.text.secondary;
+    let bracket = withOpacity(gold, 0.85);
+    let wash = withOpacity(washSource, theme === "dark" ? 0.08 : 0.05);
+    let text = colors.base.text.secondary;
 
     if (showResult && isCorrect) {
-      borderColor = success.border;
-      bgColor = success.background;
-      textColor = colors.base.text.primary;
+      bracket = success.border;
+      wash = success.background;
+      text = colors.base.text.primary;
     } else if (showResult && !isCorrect) {
-      borderColor = warning.border;
-      bgColor = warning.background;
-      textColor = colors.base.text.primary;
-    } else if (isSelected) {
-      borderColor = accentColor;
-      textColor = colors.base.text.primary;
+      bracket = warning.border;
+      wash = warning.background;
+      text = colors.base.text.primary;
+    } else if (isHovered) {
+      bracket = moduleAccent;
+      wash = withOpacity(washSource, theme === "dark" ? 0.16 : 0.1);
+      text = colors.base.text.primary;
     }
 
-    return {
-      display: "block",
+    const style: CSSProperties = {
+      position: "relative",
+      // A flex column anchored to the top so the A/B/C letters line up across
+      // options regardless of text length (a bare <button> centres its content).
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-start",
       width: isMobile ? "100%" : `${100 / data.answers.length}%`,
-      padding: isMobile ? "0.875rem 1rem" : "1rem",
+      padding: isMobile ? "1rem 1.1rem" : "1.1rem 1.15rem",
       borderRadius: 0,
+      border: "none",
+      background: wash,
+      color: text,
       textAlign: "left",
       cursor: isCorrectlySolved ? "default" : "pointer",
-      backgroundColor: bgColor,
-      border: `1px solid ${borderColor}`,
-      color: textColor,
       fontSize: typo.note.fontSize,
       lineHeight: 1.6,
-      transition: "all 0.2s var(--ease-smooth)",
-      opacity: isCorrectlySolved && !isSelected ? 0.4 : 1,
       fontFamily: "inherit",
+      transition: "all 0.2s var(--ease-smooth)",
+      transform: isHovered ? "translateY(-2px)" : "none",
+      opacity: isCorrectlySolved && !isSelected ? 0.4 : 1,
     };
+    return { style, bracket };
   };
 
   return (
@@ -97,7 +147,7 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
     >
       <div style={headerStyle}>
         <div style={iconStyle}>
-          <CircleHelp size={isMobile ? 18 : 20} strokeWidth={2} />
+          <DoodleQuestion size={isMobile ? 24 : 28} />
         </div>
         <div style={{ flex: "1 1 auto" }}>
           <Caption tone="accent" size="md">
@@ -108,16 +158,37 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       </div>
 
       <div style={optionsContainerStyle}>
-        {data.answers.map((answer, index) => (
-          <button
-            key={index}
-            style={getOptionStyle(index)}
-            onClick={() => handleSelect(index)}
-            disabled={isCorrectlySolved}
-          >
-            {answer.text}
-          </button>
-        ))}
+        {data.answers.map((answer, index) => {
+          const { style, bracket } = getOptionVisual(index);
+          return (
+            <button
+              key={index}
+              style={style}
+              onClick={() => handleSelect(index)}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              disabled={isCorrectlySolved}
+            >
+              {corners(bracket)}
+              <span
+                style={{
+                  display: "block",
+                  textAlign: "center",
+                  fontFamily: BRAND.fonts.mono,
+                  fontSize: isMobile ? "1.5rem" : "1.75rem",
+                  fontWeight: 400,
+                  lineHeight: 1,
+                  color: bracket,
+                  marginBottom: "0.65rem",
+                  transition: "color 0.2s var(--ease-smooth)",
+                }}
+              >
+                {String.fromCharCode(65 + index)}
+              </span>
+              <span style={{ display: "block" }}>{answer.text}</span>
+            </button>
+          );
+        })}
       </div>
 
       {selectedIndex !== null && (

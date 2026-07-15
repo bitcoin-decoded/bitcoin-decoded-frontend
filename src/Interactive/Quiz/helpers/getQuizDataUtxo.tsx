@@ -10,7 +10,7 @@ export const getQuizDataUtxo = (language: Language): QuizData => {
       : "In the Bitcoin model, what does the difference between the sum of inputs and the sum of outputs represent?",
     answers: [
       {
-        text: fr ? "a) Les frais de transaction" : "a) The transaction fees",
+        text: fr ? "Les frais de transaction" : "The transaction fees",
         isCorrect: true,
         rationale: fr ? (
           <>
@@ -27,7 +27,7 @@ export const getQuizDataUtxo = (language: Language): QuizData => {
         ),
       },
       {
-        text: fr ? "b) La monnaie rendue à l'expéditeur" : "b) The change returned to the sender",
+        text: fr ? "La monnaie rendue à l'expéditeur" : "The change returned to the sender",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -45,8 +45,8 @@ export const getQuizDataUtxo = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "c) La valeur effectivement transférée au destinataire"
-          : "c) The value actually transferred to the recipient",
+          ? "La valeur effectivement transférée au destinataire"
+          : "The value actually transferred to the recipient",
         isCorrect: false,
         rationale: fr ? (
           <>

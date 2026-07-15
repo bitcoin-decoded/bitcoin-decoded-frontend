@@ -9,7 +9,7 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
       : "So, which profile would you rather lend to?",
     answers: [
       {
-        text: fr ? "a) M. Géo Trouve-Tout" : "a) Mr. Gyro Gearloose",
+        text: fr ? "M. Géo Trouve-Tout" : "Mr. Gyro Gearloose",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -26,7 +26,7 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
         ),
       },
       {
-        text: fr ? "b) M. Balthazar Picsou" : "b) Mr. Scrooge McDuck",
+        text: fr ? "M. Balthazar Picsou" : "Mr. Scrooge McDuck",
         isCorrect: true,
         rationale: fr ? (
           <>
@@ -44,7 +44,7 @@ export const getQuizDataProfileChoice = (language: Language): QuizData => {
         ),
       },
       {
-        text: fr ? "c) Mme Michu pour sûr !" : "c) Ms. Smith for sure!",
+        text: fr ? "Mme Michu pour sûr !" : "Ms. Smith for sure!",
         isCorrect: false,
         rationale: fr ? (
           <>

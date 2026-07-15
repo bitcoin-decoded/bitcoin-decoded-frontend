@@ -10,8 +10,8 @@ export const getQuizDataHalving = (language: Language): QuizData => {
     answers: [
       {
         text: fr
-          ? "a) L'ajustement automatique de la difficulté et la concurrence entre les mineurs"
-          : "a) Automatic difficulty adjustment and competition among miners",
+          ? "L'ajustement automatique de la difficulté et la concurrence entre les mineurs"
+          : "Automatic difficulty adjustment and competition among miners",
         isCorrect: true,
         rationale: fr ? (
           <>
@@ -43,7 +43,7 @@ export const getQuizDataHalving = (language: Language): QuizData => {
         ),
       },
       {
-        text: fr ? "b) La hausse du prix du bitcoin" : "b) A rise in the price of bitcoin",
+        text: fr ? "La hausse du prix du bitcoin" : "A rise in the price of bitcoin",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -63,8 +63,8 @@ export const getQuizDataHalving = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "c) La diminution du nombre de transactions"
-          : "c) A drop in the number of transactions",
+          ? "La diminution du nombre de transactions"
+          : "A drop in the number of transactions",
         isCorrect: false,
         rationale: fr ? (
           <>
