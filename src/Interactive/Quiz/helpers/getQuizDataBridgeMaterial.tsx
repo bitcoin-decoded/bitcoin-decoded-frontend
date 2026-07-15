@@ -8,8 +8,8 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
     answers: [
       {
         text: fr
-          ? "a) Je choisis l'acier, c'est le matériau du futur, il faut bien que ce pont dure 100 ans !"
-          : "a) I'll go with steel - it's the material of the future, this bridge has to last 100 years!",
+          ? "Je choisis l'acier, c'est le matériau du futur, il faut bien que ce pont dure 100 ans !"
+          : "I'll go with steel - it's the material of the future, this bridge has to last 100 years!",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -28,8 +28,8 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "b) Je choisis le béton, c'est plus simple et moins cher, et on en trouvera toujours plus facilement."
-          : "b) I'll go with concrete - it's simpler, cheaper, and easier to come by.",
+          ? "Je choisis le béton, c'est plus simple et moins cher, et on en trouvera toujours plus facilement."
+          : "I'll go with concrete - it's simpler, cheaper, and easier to come by.",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -48,8 +48,8 @@ export const getQuizDataBridgeMaterial = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "c) Je n'en ai aucune fichtre idée, il me manque une information vitale pour trancher !"
-          : "c) I haven't the foggiest - I'm missing a vital piece of information to decide!",
+          ? "Je n'en ai aucune fichtre idée, il me manque une information vitale pour trancher !"
+          : "I haven't the foggiest - I'm missing a vital piece of information to decide!",
         isCorrect: true,
         rationale: fr
           ? "Bravo, tu viens de tomber pile poil dans le mille sur l'argument de Mises."

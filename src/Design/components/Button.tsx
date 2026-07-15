@@ -101,8 +101,8 @@ export const Button: FC<Props> = ({
       // bracketed mono label alone read too airy, especially on white — and it
       // deepens on hover. Border + wash share the accent so the whole control
       // reads as one weighted cell.
-      background: withOpacity(accent, isLifted ? 0.12 : 0.06),
-      border: `1px solid ${withOpacity(accent, isLifted ? 0.55 : 0.32)}`,
+      background: withOpacity(accent, isLifted ? 0.2 : 0.11),
+      border: `1px solid ${withOpacity(accent, isLifted ? 0.8 : 0.5)}`,
     };
     if (!hideBrackets) {
       labelDecoration = {
@@ -121,8 +121,8 @@ export const Button: FC<Props> = ({
   } else if (variant === "secondary") {
     variantStyle = {
       padding: isMobile ? `${padY} 0` : `${padYMd} 0`,
-      color: isLifted ? neutralTextStrong : neutralText,
-      borderBottom: `1px dashed ${withOpacity(neutralText, isLifted ? 0.55 : 0.35)}`,
+      color: neutralTextStrong,
+      borderBottom: `1px dashed ${withOpacity(neutralText, isLifted ? 0.7 : 0.5)}`,
       paddingBottom: 2,
     };
   } else if (variant === "ghost") {

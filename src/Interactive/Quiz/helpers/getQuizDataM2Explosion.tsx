@@ -11,8 +11,8 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
     answers: [
       {
         text: fr
-          ? "a) L'évolution du cours de l'or en dollars."
-          : "a) The evolution of gold prices in dollars.",
+          ? "L'évolution du cours de l'or en dollars."
+          : "The evolution of gold prices in dollars.",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -28,8 +28,8 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "b) L'évolution de la masse monétaire américaine (M2)"
-          : "b) The evolution of the US money supply (M2)",
+          ? "L'évolution de la masse monétaire américaine (M2)"
+          : "The evolution of the US money supply (M2)",
         isCorrect: true,
         rationale: fr ? (
           <>
@@ -45,8 +45,8 @@ export const getQuizDataM2Explosion = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "c) Le nombre de fonctionnaires en France depuis 1960."
-          : "c) The number of civil servants in France since 1960.",
+          ? "Le nombre de fonctionnaires en France depuis 1960."
+          : "The number of civil servants in France since 1960.",
         isCorrect: false,
         rationale: fr ? (
           <>

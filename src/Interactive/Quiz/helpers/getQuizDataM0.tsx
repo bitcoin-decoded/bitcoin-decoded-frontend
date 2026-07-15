@@ -10,8 +10,8 @@ export const getQuizDataM0 = (language: Language): QuizData => {
     answers: [
       {
         text: fr
-          ? "a) La banque commerciale a commis des infractions et la banque centrale lui a ponctionné du M0 en guise de contravention."
-          : "a) The commercial bank broke the rules and the central bank docked its M0 as a fine.",
+          ? "La banque commerciale a commis des infractions et la banque centrale lui a ponctionné du M0 en guise de contravention."
+          : "The commercial bank broke the rules and the central bank docked its M0 as a fine.",
         isCorrect: false,
         rationale: fr ? (
           <>Bien tenté mais non, la Banque Centrale ne peut pas 'ponctionner' le M0 comme ça.</>
@@ -21,8 +21,8 @@ export const getQuizDataM0 = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "b) La banque commerciale a créé trop d'argent M2 (pour Nicolas et d'autres) et n'a plus assez de M0 en proportion du M2 créé."
-          : "b) The commercial bank created too much M2 money (for Nicolas and others) and no longer has enough M0 relative to the M2 it created.",
+          ? "La banque commerciale a créé trop d'argent M2 (pour Nicolas et d'autres) et n'a plus assez de M0 en proportion du M2 créé."
+          : "The commercial bank created too much M2 money (for Nicolas and others) and no longer has enough M0 relative to the M2 it created.",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -39,8 +39,8 @@ export const getQuizDataM0 = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "c) La banque commerciale a accordé trop de prêts M2 (dits 'prêts pourris') qui ne sont jamais remboursés."
-          : "c) The commercial bank handed out too many M2 loans (so-called 'bad loans') that never get repaid.",
+          ? "La banque commerciale a accordé trop de prêts M2 (dits 'prêts pourris') qui ne sont jamais remboursés."
+          : "The commercial bank handed out too many M2 loans (so-called 'bad loans') that never get repaid.",
         isCorrect: true,
         rationale: fr ? (
           <>

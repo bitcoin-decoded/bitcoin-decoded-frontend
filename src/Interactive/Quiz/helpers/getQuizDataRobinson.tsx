@@ -10,8 +10,8 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
     answers: [
       {
         text: fr
-          ? "a) Laisser tomber le projet, la situation ne peut pas évoluer !"
-          : "a) Give up the project - the situation can't improve!",
+          ? "Laisser tomber le projet, la situation ne peut pas évoluer !"
+          : "Give up the project - the situation can't improve!",
         isCorrect: false,
         rationale: fr ? (
           <>Allons, en es-tu bien certain ? N'y a-t-il pas une marge de manœuvre pour Robinson ?</>
@@ -21,8 +21,8 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "b) Se constituer un stock de poissons en pêchant un peu plus longtemps ou en mangeant un peu moins chaque jour."
-          : "b) Build up a fish reserve by fishing a little longer or eating a little less each day.",
+          ? "Se constituer un stock de poissons en pêchant un peu plus longtemps ou en mangeant un peu moins chaque jour."
+          : "Build up a fish reserve by fishing a little longer or eating a little less each day.",
         isCorrect: true,
         rationale: fr ? (
           <>
@@ -38,8 +38,8 @@ export const getQuizDataRobinson = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "c) Se lancer tête baissée dans le tressage du filet : avec de la volonté, on peut tout faire !"
-          : "c) Dive headfirst into weaving the net: with enough willpower, anything is possible!",
+          ? "Se lancer tête baissée dans le tressage du filet : avec de la volonté, on peut tout faire !"
+          : "Dive headfirst into weaving the net: with enough willpower, anything is possible!",
         isCorrect: false,
         rationale: fr ? (
           <>

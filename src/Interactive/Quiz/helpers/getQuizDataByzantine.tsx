@@ -10,8 +10,8 @@ export const getQuizDataByzantine = (language: Language): QuizData => {
     answers: [
       {
         text: fr
-          ? "a) Compter les nœuds qui ont reçu chaque transaction en premier, et prendre l'avis de la majorité"
-          : "a) Count the nodes that received each transaction first, and go with the majority",
+          ? "Compter les nœuds qui ont reçu chaque transaction en premier, et prendre l'avis de la majorité"
+          : "Count the nodes that received each transaction first, and go with the majority",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -27,8 +27,8 @@ export const getQuizDataByzantine = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "b) Faire confiance à la première transaction reçue par chaque nœud"
-          : "b) Trust the first transaction each node happens to receive",
+          ? "Faire confiance à la première transaction reçue par chaque nœud"
+          : "Trust the first transaction each node happens to receive",
         isCorrect: false,
         rationale: fr ? (
           <>
@@ -44,8 +44,8 @@ export const getQuizDataByzantine = (language: Language): QuizData => {
       },
       {
         text: fr
-          ? "c) Exiger une preuve coûteuse à produire avant d'inscrire la transaction dans le registre"
-          : "c) Require a costly proof before the transaction can be written into the ledger",
+          ? "Exiger une preuve coûteuse à produire avant d'inscrire la transaction dans le registre"
+          : "Require a costly proof before the transaction can be written into the ledger",
         isCorrect: true,
         rationale: fr ? (
           <>
