@@ -1,5 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
+import { FrText } from "../../I18n";
 import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
 import { BRAND, getBrandGold, getTypography, usePageTheme, useThemeContext } from "../Theme";
@@ -89,7 +90,12 @@ export const Callout: FC<Props> = ({ title, children }) => {
 
   return (
     <aside style={wrapperStyle}>
-      <span style={titleStyle}>{title}</span>
+      {/* The title arrives as a prop, which `FrText` cannot reach from the page
+       *  (it only walks children) — so the Callout applies it itself, and the
+       *  narrow no-break space keeps "?" / "!" glued to the last word. */}
+      <span style={titleStyle}>
+        <FrText>{title}</FrText>
+      </span>
       <div style={frameStyle}>
         <div style={topLeftStyle} />
         <div style={topRightStyle} />

@@ -1,6 +1,13 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { getBrandGold, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  BRAND,
+  getBrandGold,
+  getTypography,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useIllustration } from "../hooks";
 
 type IllustrationProps = {
@@ -32,6 +39,9 @@ export const Illustration: FC<IllustrationProps> = ({
   const isMobile = useBreakpoint() === "mobile";
 
   const gold = getBrandGold(theme);
+  const cornerSize = isMobile ? 10 : 14;
+  // Gap between the picture edge and the brackets.
+  const bracketInset = 5;
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -45,20 +55,51 @@ export const Illustration: FC<IllustrationProps> = ({
     maxWidth: isMobile ? "min(100%, 22rem)" : width,
   };
 
-  // Ledger frame: sharp corners, a single gold hairline (structure), no drop
-  // shadow and no gradient-border glow. The frame brightens on hover instead.
+  // The gold corner brackets sit in this wrapper's padding — just outside the
+  // picture rather than on top of it, where gold-on-artwork would be unreadable.
+  const frameWrapStyle: CSSProperties = {
+    position: "relative",
+    padding: bracketInset,
+    // On mobile the wrap hugs the (height-capped) image, so a portrait figure
+    // doesn't leave empty bars either side of it.
+    width: isMobile && src ? "fit-content" : "100%",
+    maxWidth: "100%",
+    cursor: "pointer",
+  };
+
+  // Ledger frame: sharp corners, a hairline that merely seats the picture — the
+  // brackets carry the structure. No drop shadow, no gradient-border glow.
   const frameStyle: CSSProperties = {
     width: "100%",
     height: "auto",
     borderRadius: 0,
-    border: `1px solid ${withOpacity(gold, isHovered ? 0.55 : 0.3)}`,
+    border: `1px solid ${withOpacity(gold, isHovered ? 0.4 : 0.22)}`,
     backgroundColor: colors.base.background.secondary,
     overflow: "hidden",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     transition: "border-color 0.3s var(--ease-smooth)",
-    cursor: "pointer",
+  };
+
+  // Same four L-shaped corners as Callout / the Quiz cells / the navbar numerals.
+  const corners = (): ReactNode => {
+    const s = `${BRAND.figures.ruleThickness}px solid ${withOpacity(gold, isHovered ? 0.9 : 0.55)}`;
+    const base: CSSProperties = {
+      position: "absolute",
+      width: cornerSize,
+      height: cornerSize,
+      transition: "border-color 0.3s var(--ease-smooth)",
+      pointerEvents: "none",
+    };
+    return (
+      <>
+        <span style={{ ...base, top: 0, left: 0, borderTop: s, borderLeft: s }} />
+        <span style={{ ...base, top: 0, right: 0, borderTop: s, borderRight: s }} />
+        <span style={{ ...base, bottom: 0, left: 0, borderBottom: s, borderLeft: s }} />
+        <span style={{ ...base, bottom: 0, right: 0, borderBottom: s, borderRight: s }} />
+      </>
+    );
   };
 
   const contentTransitionStyle: CSSProperties = {
@@ -74,6 +115,20 @@ export const Illustration: FC<IllustrationProps> = ({
         : isHovered
           ? "brightness(0.95)"
           : "none",
+  };
+
+  // Width alone can't bound a figure: a tall image at 22rem wide still ate most
+  // of a phone screen. Cap the height too and let the width follow the ratio.
+  const imgStyle: CSSProperties = {
+    ...contentTransitionStyle,
+    ...(isMobile
+      ? {
+          width: "auto",
+          maxWidth: "100%",
+          maxHeight: "min(38vh, 15rem)",
+          objectFit: "contain",
+        }
+      : {}),
   };
 
   const captionStyle: CSSProperties = {
@@ -93,21 +148,24 @@ export const Illustration: FC<IllustrationProps> = ({
 
   return (
     <figure style={containerStyle}>
-      <div style={frameStyle} {...containerHandlers}>
-        {src ? (
-          <img src={src} alt={alt || "Illustration"} style={contentTransitionStyle} />
-        ) : (
-          <div
-            style={{
-              ...contentTransitionStyle,
-              display: "flex",
-              justifyContent: "center",
-              padding: "1rem",
-            }}
-          >
-            {children}
-          </div>
-        )}
+      <div style={frameWrapStyle} {...containerHandlers}>
+        {corners()}
+        <div style={frameStyle}>
+          {src ? (
+            <img src={src} alt={alt || "Illustration"} style={imgStyle} />
+          ) : (
+            <div
+              style={{
+                ...contentTransitionStyle,
+                display: "flex",
+                justifyContent: "center",
+                padding: "1rem",
+              }}
+            >
+              {children}
+            </div>
+          )}
+        </div>
       </div>
 
       {caption && <figcaption style={captionStyle}>{caption}</figcaption>}
