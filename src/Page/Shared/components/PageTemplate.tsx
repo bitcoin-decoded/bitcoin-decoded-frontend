@@ -1,6 +1,13 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, getTypography, SectionLabel, useBreakpoint, usePageTheme } from "../../../Design";
+import {
+  BRAND,
+  getTypography,
+  SectionLabel,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { FrText } from "../../../I18n";
 import { useChapterKicker } from "../hooks";
 
@@ -38,7 +45,12 @@ export const PageTemplate: FC<Props> = ({
   const isTablet = breakpoint === "tablet";
   const typography = getTypography(breakpoint);
   const kicker = useChapterKicker();
-  const accentColor = colors[moduleTheme].border.secondary;
+  // List markers take the module's readable text accent. `border.secondary` is
+  // a 50%-alpha tint that dissolves in dark mode — fine for a rule, not for a
+  // mark the eye has to catch. `--accent-soft` is its hairline companion.
+  const accentColor =
+    moduleTheme === "base" ? colors.base.text.secondary : colors[moduleTheme].text.secondary;
+  const accentSoft = withOpacity(accentColor, 0.45);
   // Chapter title carries the module identity color (violet on MoneyLaws,
   // blue on Banking, amber on Bitcoin), falling back to ink on neutral pages.
   const titleColor =
@@ -101,6 +113,7 @@ export const PageTemplate: FC<Props> = ({
     // (16px body serif, line-height 1.6). The accent var feeds list markers.
     ...typography.prose,
     "--accent-color": accentColor,
+    "--accent-soft": accentSoft,
   } as CSSProperties;
 
   return (

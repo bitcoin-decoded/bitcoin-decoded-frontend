@@ -76,6 +76,10 @@ export const Reference: FC<Props> = ({ children, ...rest }) => {
       {...interactionHandlers}
     >
       {children}
+      {/* Word joiner: the arrow is an atomic inline, so the browser was free to
+       *  break the line right before it and strand it on its own row. U+2060
+       *  forbids a break at that position without adding any width. */}
+      {"\u2060"}
       <ArrowUpRight
         strokeWidth={2}
         style={{

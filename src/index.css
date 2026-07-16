@@ -387,14 +387,15 @@ body {
   position: relative;
   padding-left: 1.5rem;
 }
+/* A small module-coloured block, aligned to the first line's optical centre. */
 .page-content ul > li::before {
-  content: "-";
+  content: "";
   position: absolute;
-  left: 0;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 0.875em;
-  color: var(--accent-color, rgba(242, 242, 242, 0.4));
+  left: 0.15em;
+  top: 0.62em;
+  width: 0.4em;
+  height: 0.4em;
+  background: var(--accent-color, rgba(242, 242, 242, 0.4));
 }
 
 /* Ordered lists */
@@ -408,18 +409,27 @@ body {
 }
 .page-content ol > li {
   position: relative;
-  padding-left: 2rem;
+  padding-left: 2.75rem;
   counter-increment: styled-counter;
 }
+/* The numeral sits in its own ledger cell — the page-level echo of the module
+   numerals in the navbar. Cutive Mono is single-weight, so no 500 here. */
 .page-content ol > li::before {
-  content: counter(styled-counter, decimal-leading-zero) ".";
+  content: counter(styled-counter, decimal-leading-zero);
   position: absolute;
   left: 0;
+  top: 0.15em;
+  min-width: 1.9em;
+  padding: 0.1em 0.3em;
+  text-align: center;
   font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 0.8125em;
+  font-weight: 400;
+  font-size: 0.75em;
+  line-height: 1.4;
   color: var(--accent-color, rgba(242, 242, 242, 0.4));
+  border: 1px solid var(--accent-soft, rgba(242, 242, 242, 0.2));
   letter-spacing: 0.02em;
+  font-variant-numeric: lining-nums;
 }
 
 /* Nested lists - slightly dimmer marker */
