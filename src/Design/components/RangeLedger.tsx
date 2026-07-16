@@ -58,8 +58,11 @@ export const RangeLedger: FC<Props> = ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "baseline",
+    gap: "0.75rem",
     fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
+    // The slider caption + live value sit at the `label` role (16px) — the mono
+    // small-caps label register. 12px Cutive was illegible, worst in light mode.
+    fontSize: typo.label.fontSize,
     letterSpacing: "0.05em",
   };
 
@@ -68,13 +71,17 @@ export const RangeLedger: FC<Props> = ({
     fontVariant: "small-caps",
   };
 
+  // Prominence via the stronger primary color, not weight — Cutive Mono is
+  // single-weight, so a heavier value would only synthesise a crude faux-bold.
   const valueStyle: CSSProperties = {
     color: colors.base.text.primary,
-    fontWeight: 500,
+    fontVariantNumeric: "tabular-nums",
   };
 
   const trackHeight = 14;
-  const thumbSize = isMobile ? 13 : BRAND.figures.coinSize;
+  // A square block rides the ledger line rather than a coin — the thumb reads as
+  // "the block you drag along the chain", consistent with the block identity.
+  const thumbSize = isMobile ? 15 : BRAND.figures.blockSize + 3;
 
   const visualLayerStyle: CSSProperties = {
     position: "relative",
@@ -108,9 +115,8 @@ export const RangeLedger: FC<Props> = ({
     transform: "translate(-50%, -50%)",
     width: thumbSize,
     height: thumbSize,
-    borderRadius: "50%",
+    borderRadius: 0,
     background: accent,
-    boxShadow: `0 0 0 3px ${accent}22`,
     pointerEvents: "none",
   };
 
@@ -199,7 +205,6 @@ export const RangeLedger: FC<Props> = ({
                   whiteSpace: "nowrap",
                   fontVariant: "small-caps",
                   color: tickIsCurrent ? colors.base.text.primary : colors.base.text.secondary,
-                  fontWeight: tickIsCurrent ? 500 : 400,
                 }}
               >
                 {tick.label}

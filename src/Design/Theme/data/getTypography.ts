@@ -45,12 +45,13 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
       lineHeight: 1.5,
       letterSpacing: "0.005em",
     },
-    // Smallest mono type — chip/badge text, chart ticks, tags. Deliberately
-    // stays at 12px; this is the one role that does NOT scale up (the "fine
-    // print" of the ledger), so it lives here rather than as a stray literal.
+    // Smallest mono type — chip/badge text, chart ticks, tags. The "fine print"
+    // of the ledger, but 12px Cutive Mono reads too faint (worst in light mode),
+    // so the floor sits at 13px — the smallest size the single-weight mono stays
+    // comfortably legible.
     micro: {
       fontFamily: BRAND.fonts.mono,
-      fontSize: "0.75rem",
+      fontSize: "0.8125rem",
       fontWeight: 400,
       lineHeight: 1.3,
       letterSpacing: "0.04em",
