@@ -226,8 +226,10 @@ const en = {
     "Rewards rounded to the nearest satoshi. Beyond ~2140, issuance drops to zero.",
 
   // DunbarSlider
+  // Stays descriptive: it is the slider's aria-label, never shown on screen.
   "dunbar.sliderAria": "Group size",
-  "dunbar.peopleLabel": "people",
+  // The on-screen caption, kept short so the header reads on one line.
+  "dunbar.sizeLabel": "Size",
   "dunbar.counterLabel": "Possible relationships to remember",
   "dunbar.overloadTitle": "Cognitive overload",
   "dunbar.overloadBody": "Individual memory maxed out. You need an external system: money.",

@@ -3,7 +3,7 @@ import { type CSSProperties, type FC } from "react";
 import { BRAND, Caption, FeedbackPanel, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 
-import { AlertTriangle } from "@icons";
+import { DoodleWarningTriangle } from "@doodle";
 
 type Props = {
   /** Tier name — not rendered here (it sits in the card header); keys the
@@ -94,7 +94,7 @@ export const DunbarStatePanel: FC<Props> = ({
           <FeedbackPanel
             tone="error"
             title={overloadTitle}
-            icon={<AlertTriangle size={isMobile ? 13 : 14} strokeWidth={2.2} />}
+            icon={<DoodleWarningTriangle size={isMobile ? 22 : 26} />}
           >
             {overloadBody}
           </FeedbackPanel>

@@ -38,11 +38,12 @@ export const DunbarSlider: FC = () => {
   const localeTag = language === "fr" ? "fr-FR" : "en-US";
 
   // One line: caption, size, then the tier that size qualifies as — the reading
-  // is "group size: 5 people, a family". Wraps on narrow screens.
+  // is "size: 150, a village". Every item sits on a shared baseline; centring
+  // instead left the caption floating against the much larger numeral.
   const headerStyle: CSSProperties = {
     display: "flex",
     flexWrap: "wrap",
-    alignItems: "center",
+    alignItems: "baseline",
     justifyContent: "center",
     gap: isMobile ? "0.4rem 0.65rem" : "0.5rem 0.85rem",
     textAlign: "center",
@@ -59,24 +60,29 @@ export const DunbarSlider: FC = () => {
     transition: "color 0.5s var(--ease-smooth)",
   };
 
-  const peopleStyle: CSSProperties = {
-    ...typo.note,
-    color: colors.base.text.secondary,
-  };
-
+  // Plain inline, not inline-flex: a flex box takes its baseline from its first
+  // item — the icon — which would drag the whole tier off the shared baseline.
+  // As inline content the baseline stays the text's, and the glyph rides it.
   const tierStyle: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.45rem",
     fontFamily: BRAND.fonts.mono,
     fontSize: typo.label.fontSize,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
+    whiteSpace: "nowrap",
     color,
     transition: "color 0.5s var(--ease-smooth)",
   };
 
+  const tierIconStyle: CSSProperties = {
+    verticalAlign: "middle",
+    marginRight: "0.45rem",
+  };
+
+  // Mono like its neighbours: inheriting the body serif gave the dot different
+  // metrics from everything else on the line.
   const separatorStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.mono,
+    fontSize: typo.label.fontSize,
     color: withOpacity(colors.base.text.secondary, 0.45),
   };
 
@@ -102,17 +108,14 @@ export const DunbarSlider: FC = () => {
     <SurfaceCard glowColor={color} size="lg" gap="1.5rem" margin="2rem 0">
       <div style={headerStyle}>
         <Caption tone="muted" size="sm">
-          {t("dunbar.sliderAria")}
+          {t("dunbar.sizeLabel")}
         </Caption>
-        <span style={{ display: "inline-flex", alignItems: "baseline", gap: "0.35rem" }}>
-          <span style={populationStyle}>{size.toLocaleString(localeTag)}</span>
-          <span style={peopleStyle}>{t("dunbar.peopleLabel")}</span>
-        </span>
+        <span style={populationStyle}>{size.toLocaleString(localeTag)}</span>
         <span style={separatorStyle} aria-hidden>
           ·
         </span>
         <span style={tierStyle}>
-          <TierIcon size={isMobile ? 18 : 20} strokeWidth={2} />
+          <TierIcon size={isMobile ? 26 : 30} style={tierIconStyle} />
           {activeText.label}
         </span>
       </div>
