@@ -181,7 +181,12 @@ export const SynthesisQuiz: FC<Props> = ({
             <Button
               onClick={handleSubmit}
               disabled={!allAnswered}
+              fullWidth={isMobile}
               icon={<Check size={14} strokeWidth={2.4} />}
+              // The "answer them all (n/N)" label is long, and Button defaults to
+              // `white-space: nowrap` — that set a ~456px min-content floor on the
+              // card, overflowing the whole frame on a phone. Let it wrap.
+              style={{ whiteSpace: "normal" }}
             >
               {allAnswered
                 ? t("synthesisQuiz.submit")
