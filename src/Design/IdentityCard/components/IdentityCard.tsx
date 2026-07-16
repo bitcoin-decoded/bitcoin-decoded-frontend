@@ -1,8 +1,9 @@
 import { type CSSProperties, type FC, type KeyboardEvent, type ReactNode } from "react";
 
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
+import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
-import { usePageTheme } from "../../Theme/hooks/usePageTheme";
+import { BRAND, getBrandGold, getTypography, usePageTheme, useThemeContext } from "../../Theme";
 import { getIdentityCardRamp } from "../helpers";
 import { useIdentityCard } from "../hooks";
 import type { IdentityCharacteristic } from "../types";
@@ -30,7 +31,10 @@ export const IdentityCard: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const { theme } = useThemeContext();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const {
     isHovered,
     setIsHovered,
@@ -43,21 +47,24 @@ export const IdentityCard: FC<Props> = ({
 
   const effectiveCompact = compact || isMobile;
   const ramp = getIdentityCardRamp(effectiveCompact);
+  const gold = getBrandGold(theme);
 
+  // A ledger registry entry: flat surface, square, gold hairline that warms on
+  // hover. No gradient / drop shadow / glow border — those were the old look.
   const containerStyle: CSSProperties = {
     position: "relative",
     ...(fillHeight ? { flex: 1 } : {}),
     marginTop: ramp.avatarMarginTop,
     marginBottom: ramp.marginBottom,
-    background: `linear-gradient(190deg, ${colors[moduleTheme].background.primary}, ${colors.base.background.primary})`,
-    borderRadius: ramp.radius,
-    boxShadow: isHovered ? colors.boxShadow.strong : colors.boxShadow.soft,
+    background: colors.base.background.secondary,
+    border: `1px solid ${withOpacity(gold, isHovered ? 0.6 : 0.3)}`,
+    borderRadius: 0,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     fontSize: ramp.baseFont,
-    transform: isHovered ? "scale(1.03)" : "scale(1)",
-    transition: "transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth)",
+    transform: isHovered ? "translateY(-2px)" : "translateY(0)",
+    transition: "transform 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)",
     zIndex: isHovered ? 10 : 1,
     cursor: "pointer",
   };
@@ -82,6 +89,11 @@ export const IdentityCard: FC<Props> = ({
     transition: "padding-bottom 0.4s var(--ease-smooth)",
   };
 
+  // The portrait is a stamped block straddling the card's top edge. The art is
+  // fully transparent, and the block overhangs onto the page, so it needs an
+  // opaque backing or a seam shows through the character — but that backing
+  // must follow the theme: a fixed cream one burns a white square into dark
+  // mode. Matching the card surface keeps the overlap seamless in both.
   const avatarContainerStyle: CSSProperties = {
     position: "absolute",
     top: 0,
@@ -89,31 +101,34 @@ export const IdentityCard: FC<Props> = ({
     transform: "translate(-50%, -50%)",
     width: ramp.avatarSize,
     aspectRatio: "1 / 1",
-    borderRadius: "50%",
+    borderRadius: 0,
     backgroundColor: colors.base.background.secondary,
-    border: `2px solid ${colors[moduleTheme].border.primary}`,
+    border: `1px solid ${withOpacity(gold, 0.55)}`,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
-    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
   };
 
   const nameStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.display,
     fontSize: ramp.nameFont,
-    fontWeight: 700,
-    letterSpacing: "0.05rem",
+    fontWeight: 500,
+    letterSpacing: "0.01em",
     lineHeight: 1.4,
     margin: 0,
     color: colors.base.text.primary,
   };
 
+  // Was `border.secondary` — a 50%-alpha module tint that dissolved in dark
+  // mode. The module's text accent is the readable register in both themes.
   const profileStyle: CSSProperties = {
     margin: effectiveCompact ? "0.2rem 0 0.8rem 0" : "0.25rem 0 1rem 0",
+    fontFamily: BRAND.fonts.mono,
     fontSize: ramp.profileFont,
+    fontVariant: "small-caps",
     letterSpacing: "0.1em",
-    color: colors[moduleTheme].border.secondary,
-    textTransform: "uppercase",
+    color: colors[moduleTheme].text.secondary,
     ...(effectiveCompact ? { lineHeight: 1.4, minHeight: "2.8em" } : {}),
   };
 
@@ -122,13 +137,13 @@ export const IdentityCard: FC<Props> = ({
     alignItems: "center",
     justifyContent: "center",
     gap: "0.4rem",
-    color: colors[moduleTheme].text.primary,
-    fontWeight: 700,
+    color: colors[moduleTheme].text.secondary,
+    fontWeight: 600,
     marginBottom: effectiveCompact ? "0.6rem" : "1rem",
   };
 
   const sectionValueStyle: CSSProperties = {
-    color: colors[moduleTheme].text.secondary,
+    color: colors.base.text.secondary,
     lineHeight: 1.6,
     fontStyle: "italic",
   };
@@ -144,27 +159,29 @@ export const IdentityCard: FC<Props> = ({
   };
 
   const toggleIconStyle: CSSProperties = {
-    backgroundColor: isExpandButtonHovered ? colors[moduleTheme].background.primary : "transparent",
-    borderColor: isExpandButtonHovered ? "transparent" : colors.base.border.primary,
-    color: isExpandButtonHovered ? "#FFF" : colors.base.text.secondary,
+    backgroundColor: isExpandButtonHovered ? withOpacity(gold, 0.14) : "transparent",
+    borderColor: withOpacity(gold, isExpandButtonHovered ? 0.7 : 0.35),
+    color: isExpandButtonHovered ? colors.base.text.primary : colors.base.text.secondary,
     borderStyle: "solid",
     borderWidth: "1px",
-    borderRadius: "50%",
+    borderRadius: 0,
     width: "2rem",
     height: "2rem",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "1.2rem",
+    fontFamily: BRAND.fonts.mono,
+    fontSize: "1.1rem",
+    lineHeight: 1,
     transform: isOpen ? "rotate(135deg)" : "rotate(0deg)",
-    transition: "transform 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)",
+    transition:
+      "transform 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth), background-color 0.3s var(--ease-smooth)",
   };
 
   const toggleTextStyle: CSSProperties = {
-    fontSize: "0.75rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.1rem",
+    ...typo.micro,
+    fontVariant: "small-caps",
+    letterSpacing: "0.1em",
   };
 
   const sectionStyle = (index: number): CSSProperties => ({
@@ -185,15 +202,7 @@ export const IdentityCard: FC<Props> = ({
 
   return (
     <div
-      className="gradient-border"
-      style={
-        {
-          ...containerStyle,
-          "--border-glow-color": isHovered
-            ? colors[moduleTheme].text.secondary
-            : colors[moduleTheme].border.secondary,
-        } as CSSProperties
-      }
+      style={containerStyle}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={isExpandable ? toggleOpen : undefined}
@@ -204,13 +213,19 @@ export const IdentityCard: FC<Props> = ({
     >
       <div style={avatarContainerStyle}>{profilePicture}</div>
       <div style={contentStyle}>
-        <div style={nameStyle}>{name}</div>
-        <div style={profileStyle}>{profile}</div>
+        {/* This card takes its copy through props, which `FrText` cannot reach
+         *  from the page (it only walks children) — so it applies it here. */}
+        <div style={nameStyle}>
+          <FrText>{name}</FrText>
+        </div>
+        <div style={profileStyle}>
+          <FrText>{profile}</FrText>
+        </div>
         <div
           style={{
             width: "50%",
             height: "0.0625rem",
-            backgroundColor: colors.base.border.primary,
+            backgroundColor: withOpacity(gold, 0.3),
             margin: ramp.dividerMargin,
           }}
         />
@@ -234,9 +249,11 @@ export const IdentityCard: FC<Props> = ({
               <div key={index} style={sectionStyle(index)}>
                 <div style={sectionLabelStyle}>
                   {characteristic.icon}
-                  {characteristic.label}
+                  <FrText>{characteristic.label}</FrText>
                 </div>
-                <div style={sectionValueStyle}>{characteristic.value}</div>
+                <div style={sectionValueStyle}>
+                  <FrText>{characteristic.value}</FrText>
+                </div>
               </div>
             ))}
           </div>

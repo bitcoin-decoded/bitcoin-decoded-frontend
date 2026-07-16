@@ -10,7 +10,6 @@ type IdentityCardRamp = {
   profileFont: string;
   dividerMargin: string;
   sectionGap: string;
-  radius: string;
 };
 
 /** Size/spacing scale for the identity card, in its compact vs full register. */
@@ -24,12 +23,12 @@ export const getIdentityCardRamp = (compact: boolean): IdentityCardRamp => {
       contentPadTop: `calc(${avatarSize} / 2 + 0.9rem)`,
       contentPadX: "1.1rem",
       contentPadBottom: "0.9rem",
-      baseFont: "0.85rem",
+      baseFont: "0.875rem",
       nameFont: "1rem",
-      profileFont: "0.7rem",
+      // 13px floor: this label is Cutive Mono, which dissolves below it.
+      profileFont: "0.8125rem",
       dividerMargin: "0 auto 0.85rem auto",
       sectionGap: "1rem",
-      radius: "1rem",
     };
   }
   return {
@@ -44,6 +43,5 @@ export const getIdentityCardRamp = (compact: boolean): IdentityCardRamp => {
     profileFont: "0.9rem",
     dividerMargin: "0 auto 1rem auto",
     sectionGap: "1.25rem",
-    radius: "1.25rem",
   };
 };
