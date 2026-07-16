@@ -89,9 +89,11 @@ export const IdentityCard: FC<Props> = ({
     transition: "padding-bottom 0.4s var(--ease-smooth)",
   };
 
-  // The portrait is a stamped photo on the card: a square block on constant
-  // cream "photo paper", so the (light-drawn) characters keep the same
-  // background in dark mode instead of flashing a pale disc.
+  // The portrait is a stamped block straddling the card's top edge. The art is
+  // fully transparent, and the block overhangs onto the page, so it needs an
+  // opaque backing or a seam shows through the character — but that backing
+  // must follow the theme: a fixed cream one burns a white square into dark
+  // mode. Matching the card surface keeps the overlap seamless in both.
   const avatarContainerStyle: CSSProperties = {
     position: "absolute",
     top: 0,
@@ -100,7 +102,7 @@ export const IdentityCard: FC<Props> = ({
     width: ramp.avatarSize,
     aspectRatio: "1 / 1",
     borderRadius: 0,
-    backgroundColor: BRAND.cream,
+    backgroundColor: colors.base.background.secondary,
     border: `1px solid ${withOpacity(gold, 0.55)}`,
     display: "flex",
     justifyContent: "center",

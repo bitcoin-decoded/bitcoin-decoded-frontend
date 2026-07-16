@@ -14,12 +14,17 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
       lineHeight: 1.6,
       letterSpacing: "0.005em",
     },
+    // The main content column is justified (MainLayout), and everything inside
+    // inherits it — including titles, where a wrapped line gets stretched into
+    // rivers of space. Titles opt out here, centrally; a consumer that wants
+    // another alignment just sets it after the spread.
     heading: {
       fontFamily: BRAND.fonts.mono,
       fontSize: compact ? "1.125rem" : "1.25rem",
       fontWeight: 400,
       lineHeight: 1.3,
       letterSpacing: "0.02em",
+      textAlign: "left",
     },
     // Mono kicker / table-header / small-caps label. Elevated to 14px — Cutive
     // Mono needs the extra size to stay legible.
