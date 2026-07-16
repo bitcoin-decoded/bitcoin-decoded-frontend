@@ -1,7 +1,8 @@
 import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
 import { withOpacity } from "../helpers";
-import { usePageTheme } from "../Theme";
+import { useBreakpoint } from "../Responsive";
+import { BRAND, getBrandGold, getTypography, usePageTheme, useThemeContext } from "../Theme";
 
 type Props = {
   label: ReactNode;
@@ -9,31 +10,95 @@ type Props = {
   accent: string;
   onClick: () => void;
   disabled?: boolean;
+  /** When set, the option renders as a lettered ledger cell (gold corner
+   *  brackets + a big A/B/C/… mono letter) instead of the radio-coin row —
+   *  the treatment shared with the `Quiz`. Omit for the plain radio option. */
+  index?: number;
 };
 
-export const OptionButton: FC<Props> = ({ label, selected, accent, onClick, disabled = false }) => {
+export const OptionButton: FC<Props> = ({
+  label,
+  selected,
+  accent,
+  onClick,
+  disabled = false,
+  index,
+}) => {
   const { colors } = usePageTheme();
+  const { theme } = useThemeContext();
+  const typo = getTypography(useBreakpoint());
   const [hover, setHover] = useState(false);
   const active = selected || (hover && !disabled);
+  const ledger = index !== undefined;
+
+  const gold = getBrandGold(theme);
+  const isDark = theme === "dark";
+
+  // Ledger cell: four gold corner brackets around a module-tinted wash, coloured
+  // by state (mirrors the `Quiz` options + `Callout`).
+  const bracket = active ? accent : withOpacity(gold, 0.85);
+  const wash = selected
+    ? withOpacity(accent, isDark ? 0.18 : 0.1)
+    : hover && !disabled
+      ? withOpacity(accent, isDark ? 0.12 : 0.07)
+      : withOpacity(accent, isDark ? 0.06 : 0.04);
+
+  const cornerSize = 12;
+  const corners = (color: string): ReactNode => {
+    const s = `${BRAND.figures.ruleThickness}px solid ${color}`;
+    const base: CSSProperties = {
+      position: "absolute",
+      width: cornerSize,
+      height: cornerSize,
+      transition: "border-color 0.2s var(--ease-smooth)",
+      pointerEvents: "none",
+    };
+    return (
+      <>
+        <span style={{ ...base, top: 0, left: 0, borderTop: s, borderLeft: s }} />
+        <span style={{ ...base, top: 0, right: 0, borderTop: s, borderRight: s }} />
+        <span style={{ ...base, bottom: 0, left: 0, borderBottom: s, borderLeft: s }} />
+        <span style={{ ...base, bottom: 0, right: 0, borderBottom: s, borderRight: s }} />
+      </>
+    );
+  };
 
   const buttonStyle: CSSProperties = {
+    position: "relative",
     display: "flex",
     alignItems: "center",
-    gap: "0.7rem",
+    gap: ledger ? "0.85rem" : "0.7rem",
     width: "100%",
     textAlign: "left",
-    padding: "0.7rem 0.85rem",
+    padding: ledger ? "0.85rem 1rem" : "0.7rem 0.85rem",
     borderRadius: 0,
     cursor: disabled ? "default" : "pointer",
-    background: selected
-      ? withOpacity(accent, 0.12)
-      : withOpacity(colors.base.text.secondary, 0.03),
-    border: `1px solid ${withOpacity(accent, selected ? 0.6 : active ? 0.35 : 0.18)}`,
-    color: colors.base.text.primary,
-    fontSize: "0.85rem",
-    lineHeight: 1.4,
+    background: ledger
+      ? wash
+      : selected
+        ? withOpacity(accent, 0.12)
+        : withOpacity(colors.base.text.secondary, 0.03),
+    border: ledger
+      ? "none"
+      : `1px solid ${withOpacity(accent, selected ? 0.6 : active ? 0.35 : 0.18)}`,
+    color: ledger && !active ? colors.base.text.secondary : colors.base.text.primary,
+    fontSize: typo.note.fontSize,
+    lineHeight: 1.5,
     opacity: disabled && !selected ? 0.5 : 1,
     transition: "all 0.2s var(--ease-smooth)",
+  };
+
+  const letterStyle: CSSProperties = {
+    flexShrink: 0,
+    alignSelf: "flex-start",
+    width: "1.5rem",
+    textAlign: "center",
+    fontFamily: BRAND.fonts.mono,
+    fontSize: "1.35rem",
+    fontWeight: 400,
+    lineHeight: 1.15,
+    color: bracket,
+    transition: "color 0.2s var(--ease-smooth)",
   };
 
   const radioStyle: CSSProperties = {
@@ -67,10 +132,17 @@ export const OptionButton: FC<Props> = ({ label, selected, accent, onClick, disa
       aria-pressed={selected}
       disabled={disabled}
     >
-      <span style={radioStyle}>
-        <span style={dotStyle} />
-      </span>
-      <span>{label}</span>
+      {ledger ? (
+        <>
+          {corners(bracket)}
+          <span style={letterStyle}>{String.fromCharCode(65 + (index ?? 0))}</span>
+        </>
+      ) : (
+        <span style={radioStyle}>
+          <span style={dotStyle} />
+        </span>
+      )}
+      <span style={{ flex: 1, minWidth: 0, overflowWrap: "anywhere" }}>{label}</span>
     </button>
   );
 };

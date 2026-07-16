@@ -5,15 +5,8 @@ import { useTranslation } from "../../../I18n";
 import { useSynthesisQuiz } from "../hooks";
 import type { SynthesisQuizData } from "../types";
 
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  CircleCheck,
-  CircleHelp,
-  CircleX,
-  RotateCcw,
-} from "@icons";
+import { DoodleQuestion } from "@doodle";
+import { ArrowLeft, ArrowRight, Check, CircleCheck, CircleX, RotateCcw } from "@icons";
 
 type Props = SynthesisQuizData & {
   /** localStorage key used to persist selections + submitted across page navigations. */
@@ -63,11 +56,14 @@ export const SynthesisQuiz: FC<Props> = ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    flexWrap: "wrap",
     gap: "0.5rem",
   };
 
   const dotsStyle: CSSProperties = {
     display: "flex",
+    flex: "1 1 auto",
+    minWidth: 0,
     gap: "0.4rem",
     alignItems: "center",
     flexWrap: "wrap",
@@ -94,21 +90,21 @@ export const SynthesisQuiz: FC<Props> = ({
   };
 
   const indexStyle: CSSProperties = {
+    // Cutive Mono is single-weight, so no 500 (that synthesises a faux-bold).
     fontFamily: BRAND.fonts.mono,
     fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     fontVariant: "small-caps",
     color: accent,
     letterSpacing: "0.08em",
   };
 
   const questionTitleStyle: CSSProperties = {
+    // The question is the focal point of the page, so it sits at the 16px prose
+    // register (bigger than the 14px options). Source Serif 4 has a real medium
+    // weight — this is not a synthesised faux-bold.
+    ...typo.prose,
     color: colors.base.text.primary,
-    fontSize: isMobile ? "0.9rem" : "0.95rem",
-    // Patrick Hand is single-weight, so 600 synthesized a crude faux-bold;
-    // prominence comes from size + primary color instead.
     fontWeight: 500,
-    lineHeight: 1.5,
     margin: 0,
   };
 
@@ -121,11 +117,7 @@ export const SynthesisQuiz: FC<Props> = ({
       margin={isMobile ? "1.5rem 0" : "2.5rem 0"}
       style={{ padding: isMobile ? "1rem 1.15rem" : "1.5rem 2rem" }}
     >
-      <Caption
-        icon={<CircleHelp size={isMobile ? 16 : 18} strokeWidth={2} />}
-        tone="accent"
-        size="md"
-      >
+      <Caption icon={<DoodleQuestion size={isMobile ? 20 : 22} />} tone="accent" size="md">
         {t("synthesisQuiz.label")}
       </Caption>
 
@@ -175,6 +167,7 @@ export const SynthesisQuiz: FC<Props> = ({
               {current.answers.map((answer, aIdx) => (
                 <OptionButton
                   key={aIdx}
+                  index={aIdx}
                   label={answer.text}
                   selected={selections[step] === aIdx}
                   accent={accent}
@@ -215,21 +208,17 @@ export const SynthesisQuiz: FC<Props> = ({
           >
             <div
               style={{
-                fontFamily: BRAND.fonts.mono,
-                fontSize: isMobile ? "0.95rem" : "1.05rem",
-                fontWeight: 500,
-                color: scoreColor,
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "baseline",
+                gap: "0.2rem 0.6rem",
               }}
             >
-              {score} / {questions.length}
-              <span
-                style={{
-                  marginLeft: "0.6rem",
-                  fontSize: isMobile ? "0.7rem" : "0.75rem",
-                  fontWeight: 500,
-                  color: colors.base.text.secondary,
-                }}
-              >
+              {/* Prominence from the 20px heading size, not a mono faux-bold. */}
+              <span style={{ ...typo.heading, color: scoreColor }}>
+                {score} / {questions.length}
+              </span>
+              <span style={{ ...typo.micro, color: colors.base.text.secondary }}>
                 {t("synthesisQuiz.threshold")} {passThreshold}/{questions.length}
               </span>
             </div>
