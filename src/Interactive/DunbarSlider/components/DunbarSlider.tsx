@@ -1,6 +1,14 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Caption, SurfaceCard, useBreakpoint, usePageTheme } from "../../../Design";
+import {
+  BRAND,
+  Caption,
+  getTypography,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { DUNBAR_TIERS, getDunbarPalette, getDunbarTierText } from "../data";
 import { useDunbarSlider } from "../hooks";
@@ -18,7 +26,9 @@ import { DunbarVisual } from "./DunbarVisual";
 export const DunbarSlider: FC = () => {
   const { t, language } = useTranslation();
   const { theme, colors } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { tierIndex, setTierIndex, tier, size, relations, isOverload } = useDunbarSlider();
 
   const palette = getDunbarPalette(theme === "light");
@@ -27,18 +37,22 @@ export const DunbarSlider: FC = () => {
   const activeText = texts[tier.key];
   const localeTag = language === "fr" ? "fr-FR" : "en-US";
 
+  // One line: caption, size, then the tier that size qualifies as — the reading
+  // is "group size: 5 people, a family". Wraps on narrow screens.
   const headerStyle: CSSProperties = {
     display: "flex",
-    flexDirection: "column",
+    flexWrap: "wrap",
     alignItems: "center",
-    gap: "0.15rem",
+    justifyContent: "center",
+    gap: isMobile ? "0.4rem 0.65rem" : "0.5rem 0.85rem",
     textAlign: "center",
   };
 
   const populationStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "1.7rem" : "2.1rem",
-    fontWeight: 500,
+    // Was 1.7/2.1rem — the readout dominated a card that is already tall.
+    fontSize: isMobile ? "1.3rem" : "1.55rem",
+    fontWeight: 400,
     color,
     fontVariantNumeric: "tabular-nums",
     lineHeight: 1.1,
@@ -46,10 +60,27 @@ export const DunbarSlider: FC = () => {
   };
 
   const peopleStyle: CSSProperties = {
-    fontSize: isMobile ? "0.8rem" : "0.9rem",
-    fontWeight: 500,
+    ...typo.note,
     color: colors.base.text.secondary,
   };
+
+  const tierStyle: CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.45rem",
+    fontFamily: BRAND.fonts.mono,
+    fontSize: typo.label.fontSize,
+    fontVariant: "small-caps",
+    letterSpacing: "0.06em",
+    color,
+    transition: "color 0.5s var(--ease-smooth)",
+  };
+
+  const separatorStyle: CSSProperties = {
+    color: withOpacity(colors.base.text.secondary, 0.45),
+  };
+
+  const TierIcon = tier.icon;
 
   const bodyStyle: CSSProperties = {
     display: "flex",
@@ -70,13 +101,20 @@ export const DunbarSlider: FC = () => {
   return (
     <SurfaceCard glowColor={color} size="lg" gap="1.5rem" margin="2rem 0">
       <div style={headerStyle}>
-        <Caption tone="muted" size="xs">
+        <Caption tone="muted" size="sm">
           {t("dunbar.sliderAria")}
         </Caption>
-        <div style={populationStyle}>
-          {size.toLocaleString(localeTag)}{" "}
+        <span style={{ display: "inline-flex", alignItems: "baseline", gap: "0.35rem" }}>
+          <span style={populationStyle}>{size.toLocaleString(localeTag)}</span>
           <span style={peopleStyle}>{t("dunbar.peopleLabel")}</span>
-        </div>
+        </span>
+        <span style={separatorStyle} aria-hidden>
+          ·
+        </span>
+        <span style={tierStyle}>
+          <TierIcon size={isMobile ? 18 : 20} strokeWidth={2} />
+          {activeText.label}
+        </span>
       </div>
 
       <div style={bodyStyle}>
@@ -84,7 +122,6 @@ export const DunbarSlider: FC = () => {
           <DunbarVisual size={size} relations={relations} color={color} />
         </div>
         <DunbarStatePanel
-          icon={tier.icon}
           label={activeText.label}
           statePhrase={activeText.statePhrase}
           relations={relations}
