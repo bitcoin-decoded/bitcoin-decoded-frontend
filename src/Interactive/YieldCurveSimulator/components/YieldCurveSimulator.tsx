@@ -16,6 +16,8 @@ import { useBreakpoint } from "../../../Design/Responsive";
 import { FrText, useTranslation } from "../../../I18n";
 import { useYieldCurve } from "../hooks/useYieldCurve";
 
+import { DoodleSmileyGrumpy, DoodleSmileyThumbsUp } from "@doodle";
+
 type Props = {
   /** Fired once the reader has moved the long-rate slider (manipulated). */
   onComplete?: () => void;
@@ -26,7 +28,9 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
   const chart = useRechartsTheme();
   const { t, language } = useTranslation();
   const fr = language === "fr";
-  const typo = getTypography(useBreakpoint());
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { longRate, setLongRate, chartData, fixedShortRate } = useYieldCurve();
   const marginIsHealthy = longRate > 1.5;
   // Semantic margin color (healthy spread = success, thin/inverted = error) is
@@ -60,8 +64,7 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
   };
 
   const labelStyle: CSSProperties = {
-    fontSize: "0.875rem",
-    fontWeight: 500,
+    ...typo.note,
     textAlign: "center",
   };
 
@@ -95,7 +98,7 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
                   position: "bottom",
                   offset: 0,
                   fill: chart.axisTickColor,
-                  fontSize: 12,
+                  fontSize: 13,
                   fontFamily: chart.tickProp.fontFamily,
                 }}
               />
@@ -168,7 +171,16 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
           />
         </div>
 
-        <FeedbackPanel tone={marginIsHealthy ? "success" : "error"} title={t("yieldCurve.evaluation")}>
+        <FeedbackPanel
+          tone={marginIsHealthy ? "success" : "error"}
+          icon={
+            marginIsHealthy ? (
+              <DoodleSmileyThumbsUp size={isMobile ? 36 : 44} style={{ color: marginColor }} />
+            ) : (
+              <DoodleSmileyGrumpy size={isMobile ? 36 : 44} style={{ color: marginColor }} />
+            )
+          }
+        >
           {marginIsHealthy
             ? fr
               ? "Le moteur tourne ! La marge est suffisante pour couvrir les risques. La banque prête à l'économie réelle avec le sourire."

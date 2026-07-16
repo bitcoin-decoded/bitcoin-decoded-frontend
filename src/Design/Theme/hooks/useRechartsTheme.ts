@@ -64,7 +64,7 @@ export const useRechartsTheme = (): RechartsTheme => {
     tooltipLabelStyle: {
       color: colors.base.text.secondary,
       fontFamily: BRAND.fonts.mono,
-      fontSize: "0.6875rem",
+      fontSize: "0.75rem",
       fontVariant: "small-caps",
       letterSpacing: "0.08em",
       marginBottom: "0.25rem",
@@ -76,7 +76,9 @@ export const useRechartsTheme = (): RechartsTheme => {
       padding: 0,
     },
     tickProp: {
-      fontSize: 11,
+      // 13px: Cutive Mono axis graduations read too faint below this, worst in
+      // light mode (matches the `micro` typography floor).
+      fontSize: 13,
       fontFamily: BRAND.fonts.mono,
       fill: axisTickColor,
     },
