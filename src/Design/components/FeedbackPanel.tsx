@@ -88,7 +88,9 @@ export const FeedbackPanel: FC<Props> = ({
           style={{
             display: "flex",
             alignItems: "flex-start",
-            gap: "0.5rem",
+            // A leading icon needs room to read as its own column — at 0.5rem
+            // the doodle smileys crowded the verdict text.
+            gap: isMobile ? "0.85rem" : "1.1rem",
             color: colors.base.text.primary,
           }}
         >

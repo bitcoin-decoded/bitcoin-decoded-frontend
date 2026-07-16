@@ -16,8 +16,7 @@ import { useTranslation } from "../../../I18n";
 import { useQuiz } from "../hooks";
 import { type QuizData } from "../types";
 
-import { DoodleQuestion } from "@doodle";
-import { CircleCheck, CircleX } from "@icons";
+import { DoodleQuestion, DoodleSmileyGrumpy, DoodleSmileyThumbsUp } from "@doodle";
 
 type QuizProps = QuizData & {
   onCorrectAnswer: () => void;
@@ -127,7 +126,10 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       border: "none",
       background: wash,
       color: text,
-      textAlign: "left",
+      // Centred: the answers are short and sat left-aligned under a centred
+      // letter, which read as a misalignment.
+      textAlign: "center",
+      alignItems: "center",
       cursor: isCorrectlySolved ? "default" : "pointer",
       fontSize: typo.note.fontSize,
       lineHeight: 1.6,
@@ -197,9 +199,9 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
           variant="border-left"
           icon={
             data.answers[selectedIndex].isCorrect ? (
-              <CircleCheck size={18} strokeWidth={2} color={success.text} />
+              <DoodleSmileyThumbsUp size={isMobile ? 34 : 40} style={{ color: success.text }} />
             ) : (
-              <CircleX size={18} strokeWidth={2} color={warning.text} />
+              <DoodleSmileyGrumpy size={isMobile ? 34 : 40} style={{ color: warning.text }} />
             )
           }
           style={{ marginTop: "1.25rem" }}
