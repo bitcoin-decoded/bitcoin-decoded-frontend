@@ -10,11 +10,9 @@ type Options = {
 export const useCapitalStructureChain = (totalSteps: number, options: Options = {}) => {
   const { requiredDetours = 0, onComplete } = options;
   const [count, setCount] = useState(1);
-  const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
 
   const handleButtonClick = () => {
-    setIsButtonHovered(false);
     if (count < totalSteps) setCount((prev) => prev + 1);
   };
 
@@ -32,12 +30,11 @@ export const useCapitalStructureChain = (totalSteps: number, options: Options = 
     }
   }, [exploredDetours, requiredDetours]);
 
+  // No button-hover state here: the shared `Button` primitive owns its own.
   return {
     count,
     exploredDetours,
     handleButtonClick,
-    isButtonHovered,
-    setIsButtonHovered,
     hoveredCardIndex,
     setHoveredCardIndex,
   };

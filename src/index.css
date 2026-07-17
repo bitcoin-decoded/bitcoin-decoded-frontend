@@ -485,6 +485,20 @@ body {
     opacity: 1;
   }
 }
+
+/* A newly traced production step settling into the chain. The old inline
+   keyframe threw the card 20px up the page; the détour is a step backwards in
+   time, so it now arrives from the side, briefly and without bouncing. */
+@keyframes chainStepIn {
+  from {
+    opacity: 0;
+    transform: translateX(-0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 @keyframes blockLineIn {
   from {
     opacity: 0;

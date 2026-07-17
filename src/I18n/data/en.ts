@@ -273,7 +273,8 @@ const en = {
   "utxoBuilder.coinLabel": "Coin",
 
   // CapitalStructureChain
-  "capitalChain.traceBack": "TRACE BACK IN TIME ⌛ →",
+  // No glyph in the string: the button renders the hourglass itself.
+  "capitalChain.traceBack": "Trace back in time",
   "capitalChain.explored": "explored",
   "flipCard.explored": "explored",
   "debateArena.explored": "explored",
