@@ -205,7 +205,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
                       size="sm"
                       color={accent}
                       hideBrackets
-                      icon={<DoodleHourglass size={isMobile ? 16 : 18} />}
+                      icon={<DoodleHourglass size={isMobile ? 22 : 26} />}
                       onClick={handleButtonClick}
                       style={{ marginTop: "auto", whiteSpace: "normal" }}
                     >
