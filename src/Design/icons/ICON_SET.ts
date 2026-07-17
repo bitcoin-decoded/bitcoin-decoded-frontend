@@ -1,4 +1,18 @@
+import type { ComponentType, CSSProperties } from "react";
+
 export type { Icon as IconType } from "@phosphor-icons/react";
+
+/**
+ * Structural icon type satisfied by both the Phosphor set above and the
+ * hand-drawn `@doodle` set. Use it in any dataset that may carry either kind,
+ * rather than pinning the field to Phosphor's own `IconType`. Both render an
+ * `<svg>`, so both take a `style` — needed to seat a glyph on a text baseline.
+ */
+export type IconComponent = ComponentType<{
+  size?: number;
+  strokeWidth?: number | string;
+  style?: CSSProperties;
+}>;
 export {
   PulseIcon as Activity,
   WarningIcon as AlertTriangle,

@@ -1,5 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
+import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
 import { BRAND, getBrandGold, getTypography, usePageTheme, useThemeContext } from "../Theme";
 
@@ -42,7 +43,11 @@ export const RangeLedger: FC<Props> = ({
 
   const accent = color ?? getBrandGold(theme);
   const trackColor = colors.base.text.secondary;
-  const trackIdle = `${trackColor}55`;
+  // Was `${trackColor}55` — string concatenation that only works when the token
+  // happens to be hex. In dark mode it is `rgba(242, 242, 242, 0.5)`, so this
+  // produced `rgba(...)55`, an invalid colour the browser dropped: the track
+  // vanished entirely. `withOpacity` parses both forms.
+  const trackIdle = withOpacity(trackColor, 0.4);
 
   const range = max - min;
   const percent = range > 0 ? ((value - min) / range) * 100 : 0;

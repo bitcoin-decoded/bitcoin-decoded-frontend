@@ -1,14 +1,20 @@
 import type { Language } from "../../../I18n";
 import type { MonetaryPillar } from "../types";
 
-import { Equal, Feather, Hourglass, Scissors, ShieldCheck } from "@icons";
+import {
+  DoodleCouponCut,
+  DoodleEquals,
+  DoodleHourglass,
+  DoodlePaperPlane,
+  DoodleShield,
+} from "@doodle";
 
 export const getMonetaryPillars = (language: Language): MonetaryPillar[] => {
   const fr = language === "fr";
   return [
     {
       key: "durability",
-      icon: Hourglass,
+      icon: DoodleHourglass,
       title: fr ? "Durabilité" : "Durability",
       description: fr
         ? "Elle doit pouvoir se conserver, c'est-à-dire survivre physiquement à l'épreuve du temps."
@@ -16,13 +22,13 @@ export const getMonetaryPillars = (language: Language): MonetaryPillar[] => {
     },
     {
       key: "portability",
-      icon: Feather,
+      icon: DoodlePaperPlane,
       title: fr ? "Portabilité" : "Portability",
       description: fr ? "Elle doit être facile à déplacer." : "It must be easy to carry.",
     },
     {
       key: "divisibility",
-      icon: Scissors,
+      icon: DoodleCouponCut,
       title: fr ? "Divisibilité" : "Divisibility",
       description: fr
         ? "Elle doit être facilement fractionnable, afin de permettre des petits achats (un café) comme des gros (une maison)."
@@ -30,7 +36,7 @@ export const getMonetaryPillars = (language: Language): MonetaryPillar[] => {
     },
     {
       key: "fungibility",
-      icon: Equal,
+      icon: DoodleEquals,
       title: fr ? "Fongibilité" : "Fungibility",
       description: fr
         ? "Chaque unité doit être identique (1€ = 1€). Pas de discrimination."
@@ -38,7 +44,7 @@ export const getMonetaryPillars = (language: Language): MonetaryPillar[] => {
     },
     {
       key: "hardness",
-      icon: ShieldCheck,
+      icon: DoodleShield,
       title: fr ? "Dureté" : "Hardness",
       description: fr
         ? "Comme vu plus haut, c'est la résistance à la création de nouvelles unités. C'est un peu le patron. Tu vas le voir à l'œuvre dans la galerie juste en dessous."

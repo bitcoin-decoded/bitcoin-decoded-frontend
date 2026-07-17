@@ -79,7 +79,10 @@ export const FeedbackPanel: FC<Props> = ({
     <div style={baseStyle}>
       {hasTitle && (
         <div style={titleStyle}>
-          {icon}
+          {/* Pinned like `Caption` does: a bare flex child would be free to
+           *  shrink below its own size once a title grows long enough to
+           *  overflow the row. */}
+          {icon && <span style={{ display: "inline-flex", flexShrink: 0 }}>{icon}</span>}
           {title}
         </div>
       )}

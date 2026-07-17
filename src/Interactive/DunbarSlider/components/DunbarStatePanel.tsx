@@ -3,10 +3,11 @@ import { type CSSProperties, type FC } from "react";
 import { BRAND, Caption, FeedbackPanel, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 
-import { AlertTriangle, type IconType } from "@icons";
+import { DoodleWarningTriangle } from "@doodle";
 
 type Props = {
-  icon: IconType;
+  /** Tier name — not rendered here (it sits in the card header); keys the
+   *  overload alert's entry animation. */
   label: string;
   statePhrase: string;
   relations: number;
@@ -20,11 +21,11 @@ type Props = {
 };
 
 /**
- * Reads out the current tier: icon + label, the one-line state phrase, the
- * live relationship counter, and (past the Dunbar ceiling) an overload alert.
+ * Reads out the current tier: the one-line state phrase, the live relationship
+ * counter, and (past the Dunbar ceiling) an overload alert. The tier's icon and
+ * name live in the card header, alongside the group size.
  */
 export const DunbarStatePanel: FC<Props> = ({
-  icon: Icon,
   label,
   statePhrase,
   relations,
@@ -48,21 +49,6 @@ export const DunbarStatePanel: FC<Props> = ({
     justifyContent: "center",
   };
 
-  const headerStyle: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.6rem",
-    color,
-    transition: "color 0.5s var(--ease-smooth)",
-  };
-
-  const labelStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.95rem" : "1.05rem",
-    fontWeight: 500,
-    letterSpacing: "0.01em",
-  };
-
   const phraseStyle: CSSProperties = {
     margin: 0,
     color: colors.base.text.primary,
@@ -80,8 +66,9 @@ export const DunbarStatePanel: FC<Props> = ({
 
   const counterValueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "1.6rem" : "2rem",
-    fontWeight: 500,
+    // Was 1.6/2rem, matching an already-oversized header readout.
+    fontSize: isMobile ? "1.3rem" : "1.55rem",
+    fontWeight: 400,
     color,
     letterSpacing: "0.01em",
     fontVariantNumeric: "tabular-nums",
@@ -91,17 +78,12 @@ export const DunbarStatePanel: FC<Props> = ({
 
   return (
     <div style={panelStyle}>
-      <div style={headerStyle}>
-        <Icon size={isMobile ? 18 : 20} strokeWidth={2} />
-        <span style={labelStyle}>{label}</span>
-      </div>
-
       <p style={phraseStyle}>{statePhrase}</p>
 
       <hr style={dividerStyle} />
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-        <Caption tone="muted" size="xs">
+        <Caption tone="muted" size="sm">
           {counterLabel}
         </Caption>
         <span style={counterValueStyle}>{relations.toLocaleString(localeTag)}</span>
@@ -112,7 +94,7 @@ export const DunbarStatePanel: FC<Props> = ({
           <FeedbackPanel
             tone="error"
             title={overloadTitle}
-            icon={<AlertTriangle size={isMobile ? 13 : 14} strokeWidth={2.2} />}
+            icon={<DoodleWarningTriangle size={isMobile ? 22 : 26} />}
           >
             {overloadBody}
           </FeedbackPanel>

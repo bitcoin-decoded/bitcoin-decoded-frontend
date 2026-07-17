@@ -228,8 +228,10 @@ const fr = {
     "Récompenses arrondies au satoshi près. Au-delà de ~2140, l'émission tombe à zéro.",
 
   // DunbarSlider
+  // Stays descriptive: it is the slider's aria-label, never shown on screen.
   "dunbar.sliderAria": "Taille du groupe",
-  "dunbar.peopleLabel": "personnes",
+  // The on-screen caption, kept short so the header reads on one line.
+  "dunbar.sizeLabel": "Taille",
   "dunbar.counterLabel": "Relations possibles à mémoriser",
   "dunbar.overloadTitle": "Surcharge cognitive",
   "dunbar.overloadBody": "Mémoire individuelle saturée. Il faut un système externe : la monnaie.",

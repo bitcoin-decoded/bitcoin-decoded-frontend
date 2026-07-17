@@ -35,6 +35,11 @@ export const DunbarStepSlider: FC<Props> = ({
 
   const lastIndex = sizes.length - 1;
 
+  // `border.secondary` at 0.25 is a whisper on cream — the segmented control
+  // read as floating numbers with no frame in light mode. The ink token holds
+  // its own on both surfaces.
+  const segmentBorder = withOpacity(colors.base.text.secondary, 0.32);
+
   const wrapStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -45,7 +50,7 @@ export const DunbarStepSlider: FC<Props> = ({
   const segmentedWrapStyle: CSSProperties = {
     display: "flex",
     alignSelf: "center",
-    border: `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
+    border: `1px solid ${segmentBorder}`,
     overflow: "hidden",
     maxWidth: "100%",
   };
@@ -55,9 +60,9 @@ export const DunbarStepSlider: FC<Props> = ({
     cursor: "pointer",
     padding: isMobile ? "0.45rem 0.6rem" : "0.5rem 0.95rem",
     border: "none",
-    borderLeft: first ? "none" : `1px solid ${withOpacity(colors.base.border.secondary, 0.25)}`,
+    borderLeft: first ? "none" : `1px solid ${segmentBorder}`,
     fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    fontWeight: 400,
     letterSpacing: "0.03em",
     whiteSpace: "nowrap",
     color: active ? colors.base.text.onAccent : withOpacity(colors.base.text.secondary, 0.85),

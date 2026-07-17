@@ -6,7 +6,6 @@ import { getMonetaryPillars } from "../data";
 
 import { PillarRow } from "./PillarRow";
 
-import { Columns3 } from "@icons";
 
 export const MonetaryPillars: FC = () => {
   const typo = getTypography();
@@ -54,7 +53,9 @@ export const MonetaryPillars: FC = () => {
 
   return (
     <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "0.85rem" : "1rem"}>
-      <Caption tone="world" size="md" icon={<Columns3 size={isMobile ? 16 : 18} strokeWidth={2} />}>
+      {/* No marker on the section title — same call as the expandable
+       *  definitions: each row already carries its own glyph. */}
+      <Caption tone="world" size="md">
         {t("monetaryPillars.sectionTitle")}
       </Caption>
 

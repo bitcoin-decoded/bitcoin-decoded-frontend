@@ -31,7 +31,6 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
 
   const world = colors[moduleTheme];
   const accentText = pillar.isKeystone ? colors.amber.text.secondary : world.text.secondary;
-  const accentBorder = pillar.isKeystone ? colors.amber.border.secondary : world.border.secondary;
 
   const mono = { fontFamily: BRAND.fonts.mono } as const;
   const numberLabel = String(index + 1).padStart(2, "0");
@@ -68,7 +67,8 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
   const numberStyle: CSSProperties = {
     ...mono,
     fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    // Cutive Mono is single-weight — 500 synthesised a faux-bold.
+    fontWeight: 400,
     color: accentText,
     letterSpacing: "0.08em",
     flexShrink: 0,
@@ -76,18 +76,16 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
     opacity: pillar.isKeystone ? 1 : 0.7,
   };
 
-  const iconCircleStyle: CSSProperties = {
-    width: isMobile ? "2.1rem" : "2.4rem",
-    height: isMobile ? "2.1rem" : "2.4rem",
-    borderRadius: 0,
+  // The doodle carries itself: no box, no border — the glyph just gets bigger
+  // (same move as the expandable definitions).
+  const iconStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
-    background: withOpacity(accentText, isOpen ? 0.18 : 0.1),
-    border: `1px solid ${withOpacity(accentBorder, 0.4)}`,
     color: accentText,
-    transition: "all 0.3s var(--ease-smooth)",
+    opacity: isOpen || isHovered ? 1 : 0.85,
+    transition: "opacity 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth)",
   };
 
   const titleColumnStyle: CSSProperties = {
@@ -105,10 +103,12 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
     flexWrap: "wrap",
   };
 
+  // Aligned with the expandable-definition card titles: same heading size, same
+  // small-caps mono register (was `note`, which read a tier too small here).
   const titleStyle: CSSProperties = {
     ...mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
+    fontSize: typo.heading.fontSize,
+    fontWeight: 400,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: pillar.isKeystone ? accentText : world.text.primary,
@@ -134,8 +134,8 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
 
   // Indent body to align with the title column (icon + number + gaps).
   const bodyLeftPad = isMobile
-    ? `calc(0.95rem + ${numberStyle.minWidth} + 0.7rem + 2.1rem + 0.7rem)`
-    : `calc(1.1rem + ${numberStyle.minWidth} + 0.85rem + 2.4rem + 0.85rem)`;
+    ? `calc(0.95rem + ${numberStyle.minWidth} + 0.7rem + 30px + 0.7rem)`
+    : `calc(1.1rem + ${numberStyle.minWidth} + 0.85rem + 36px + 0.85rem)`;
 
   const bodyStyle: CSSProperties = {
     padding: isMobile ? `0 0.95rem 1rem ${bodyLeftPad}` : `0 1.1rem 1.15rem ${bodyLeftPad}`,
@@ -160,8 +160,8 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
     >
       <button type="button" onClick={toggle} aria-expanded={isOpen} style={headerStyle}>
         <span style={numberStyle}>{numberLabel}</span>
-        <div style={iconCircleStyle}>
-          <Icon size={isMobile ? "1.05rem" : "1.2rem"} />
+        <div style={iconStyle}>
+          <Icon size={isMobile ? 30 : 36} />
         </div>
         <div style={titleColumnStyle}>
           <div style={titleRowStyle}>

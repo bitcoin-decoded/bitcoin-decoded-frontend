@@ -1,4 +1,4 @@
-import type { IconType } from "@icons";
+import type { IconComponent } from "@icons";
 
 type PillarKey = "durability" | "portability" | "divisibility" | "fungibility" | "hardness";
 
@@ -8,8 +8,8 @@ export type MonetaryPillar = {
   title: string;
   /** Explanation rendered when the row is expanded. */
   description: string;
-  /** Phosphor icon component; PillarRow renders it with a `size` prop. */
-  icon: IconType;
+  /** Doodle or Phosphor glyph; PillarRow renders it with a `size` prop. */
+  icon: IconComponent;
   /**
    * Marks the pillar as the structural one (the keystone of a sound
    * money). Rendered with an amber accent + a small "STRUCTUREL" tag

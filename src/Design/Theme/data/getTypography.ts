@@ -26,11 +26,11 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
       letterSpacing: "0.02em",
       textAlign: "left",
     },
-    // Mono kicker / table-header / small-caps label. Elevated to 14px — Cutive
-    // Mono needs the extra size to stay legible.
+    // Mono kicker / table-header / small-caps label — the register just above
+    // the micro floor, for text the eye reads rather than glances at.
     label: {
       fontFamily: BRAND.fonts.mono,
-      fontSize: compact ? "0.9375rem" : "1rem",
+      fontSize: compact ? "1rem" : "1.0625rem",
       fontWeight: 400,
       lineHeight: 1.4,
       letterSpacing: "0.06em",
@@ -50,13 +50,13 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
       lineHeight: 1.5,
       letterSpacing: "0.005em",
     },
-    // Smallest mono type — chip/badge text, chart ticks, tags. The "fine print"
-    // of the ledger, but 12px Cutive Mono reads too faint (worst in light mode),
-    // so the floor sits at 13px — the smallest size the single-weight mono stays
-    // comfortably legible.
+    // Smallest mono type — chip/badge text, chart ticks, tags. Cutive Mono has a
+    // small x-height and one weight, so it needs more room than a UI sans at the
+    // same nominal size: the floor has walked 12 -> 13 -> 14px as each pass
+    // proved the previous one still too faint. Nothing in the app goes below it.
     micro: {
       fontFamily: BRAND.fonts.mono,
-      fontSize: "0.8125rem",
+      fontSize: "0.875rem",
       fontWeight: 400,
       lineHeight: 1.3,
       letterSpacing: "0.04em",
