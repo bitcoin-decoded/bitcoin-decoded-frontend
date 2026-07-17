@@ -5,7 +5,6 @@ import { useTranslation } from "../../../I18n";
 import { ExpandableDefinitions } from "../../ExpandableDefinitions";
 import { getWalletFamilies } from "../data";
 
-import { Wallet } from "@icons";
 
 /** Thin wrapper (mirrors `AccountingTerms`): the three wallet families as
  *  expand-to-learn cards, each carrying a simplicité / souveraineté score
@@ -18,7 +17,6 @@ export const WalletFamilies: FC = () => {
   return (
     <ExpandableDefinitions
       sectionTitle={t("walletFamilies.sectionTitle")}
-      sectionIcon={Wallet}
       terms={terms}
     />
   );

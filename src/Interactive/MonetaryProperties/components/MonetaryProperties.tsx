@@ -5,7 +5,6 @@ import { useTranslation } from "../../../I18n";
 import { ExpandableDefinitions } from "../../ExpandableDefinitions";
 import { getMonetaryProperties } from "../data";
 
-import { Scale } from "@icons";
 
 export const MonetaryProperties: FC = () => {
   const { t, language } = useTranslation();
@@ -15,7 +14,6 @@ export const MonetaryProperties: FC = () => {
   return (
     <ExpandableDefinitions
       sectionTitle={t("monetaryProperties.sectionTitle")}
-      sectionIcon={Scale}
       terms={terms}
     />
   );

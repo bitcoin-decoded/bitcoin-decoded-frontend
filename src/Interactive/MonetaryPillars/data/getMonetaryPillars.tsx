@@ -4,9 +4,9 @@ import type { MonetaryPillar } from "../types";
 import {
   DoodleCouponCut,
   DoodleEquals,
-  DoodleGoldBars,
   DoodleHourglass,
   DoodlePaperPlane,
+  DoodleShield,
 } from "@doodle";
 
 export const getMonetaryPillars = (language: Language): MonetaryPillar[] => {
@@ -44,7 +44,7 @@ export const getMonetaryPillars = (language: Language): MonetaryPillar[] => {
     },
     {
       key: "hardness",
-      icon: DoodleGoldBars,
+      icon: DoodleShield,
       title: fr ? "Dureté" : "Hardness",
       description: fr
         ? "Comme vu plus haut, c'est la résistance à la création de nouvelles unités. C'est un peu le patron. Tu vas le voir à l'œuvre dans la galerie juste en dessous."

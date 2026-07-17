@@ -1,21 +1,18 @@
 import { type CSSProperties, type FC } from "react";
 
 import { Caption, SurfaceCard, useBreakpoint } from "../../../Design";
-import type { ExpandableTerm, TermIcon } from "../types";
+import type { ExpandableTerm } from "../types";
 
 import { TermCard } from "./TermCard";
-
-import { DoodleBook } from "@doodle";
 
 type Props = {
   sectionTitle: string;
   terms: ExpandableTerm[];
-  /** A component (not an element) so this owns the size — default and
-   *  prop-supplied markers render identically, responsively. */
-  sectionIcon?: TermIcon;
 };
 
-export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionIcon }) => {
+/** The section title carries no marker: the cards below already each have one,
+ *  and a second glyph on the heading only weighed the block down. */
+export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms }) => {
   const isMobile = useBreakpoint() === "mobile";
 
   const stackStyle: CSSProperties = {
@@ -24,12 +21,9 @@ export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms, sectionI
     gap: isMobile ? "0.65rem" : "0.75rem",
   };
 
-  const Icon = sectionIcon ?? DoodleBook;
-  const iconSize = isMobile ? 24 : 30;
-
   return (
     <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "1rem" : "1.15rem"}>
-      <Caption tone="world" size="md" icon={<Icon size={iconSize} strokeWidth={2} />}>
+      <Caption tone="world" size="md">
         {sectionTitle}
       </Caption>
 
