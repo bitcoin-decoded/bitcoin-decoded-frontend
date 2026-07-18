@@ -13,6 +13,8 @@ import { useTranslation } from "../../../I18n";
 import type { RouteName } from "../../../Routing";
 import { useModuleProgress } from "../hooks";
 
+import { DoodleCursorClick } from "@doodle";
+
 /**
  * The module's chapters as one ledger entry — [ 01 — 02 — 03 — QUIZ ] — sitting
  * directly above the block ribbon so the two rails read as a pair: this one
@@ -55,6 +57,15 @@ export const ModuleProgress: FC = () => {
   // Source Serif 4 rather than the mono: it ships a real 600, so this reads as
   // bold instead of the synthetic smear Cutive would give. Module colour, to
   // match the weight of the brackets it introduces.
+  // Icon + word travel together: the cursor says "this row is clickable".
+  const labelWrapStyle: CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: isMobile ? "0.3rem" : "0.4rem",
+    color: moduleAccent,
+    marginRight: isMobile ? "0.25rem" : "0.4rem",
+  };
+
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
     fontSize: typo.micro.fontSize,
@@ -62,21 +73,6 @@ export const ModuleProgress: FC = () => {
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: moduleAccent,
-    marginRight: isMobile ? "0.25rem" : "0.4rem",
-  };
-
-  /** The entry brackets: thick, in the module colour, drawn from borders since
-   *  Cutive has one weight and a typed "[" could not be made heavy. */
-  const bracketStyle = (side: "left" | "right"): CSSProperties => {
-    const edge = `2px solid ${moduleAccent}`;
-    return {
-      flex: "0 0 auto",
-      width: isMobile ? 6 : 8,
-      height: isMobile ? "1.4rem" : "1.6rem",
-      borderTop: edge,
-      borderBottom: edge,
-      ...(side === "left" ? { borderLeft: edge } : { borderRight: edge }),
-    };
   };
 
   // The same hairline the block ribbon links its markers with — the chain motif.
@@ -104,6 +100,8 @@ export const ModuleProgress: FC = () => {
     alignItems: "center",
     justifyContent: "center",
     padding: isMobile ? "0.3rem 0.45rem" : "0.35rem 0.55rem",
+    // The same wash the navbar puts behind the chapter you are reading.
+    background: withOpacity(moduleAccent, 0.1),
   };
 
   const cornerSize = 5;
@@ -138,8 +136,10 @@ export const ModuleProgress: FC = () => {
 
   return (
     <nav aria-label={progress.moduleLabel} style={railStyle}>
-      <span style={labelStyle}>{t("moduleProgress.label")}</span>
-      <span style={bracketStyle("left")} aria-hidden />
+      <span style={labelWrapStyle}>
+        <DoodleCursorClick size={isMobile ? 20 : 22} aria-hidden />
+        <span style={labelStyle}>{t("moduleProgress.label")}</span>
+      </span>
 
       {progress.chapters.map((chapter, index) => {
         const isCurrent = chapter.id === currentId;
@@ -150,7 +150,6 @@ export const ModuleProgress: FC = () => {
             {index > 0 && <span style={linkStyle} aria-hidden />}
             <button
               type="button"
-              title={chapter.label}
               aria-current={isCurrent ? "page" : undefined}
               onClick={() => !isCurrent && progress.goTo(chapter.id)}
               onMouseEnter={() => setHovered(chapter.id)}
@@ -178,7 +177,6 @@ export const ModuleProgress: FC = () => {
         );
       })}
 
-      <span style={bracketStyle("right")} aria-hidden />
     </nav>
   );
 };

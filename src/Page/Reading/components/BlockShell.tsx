@@ -50,10 +50,9 @@ export const BlockShell: FC<Props> = ({
   const readable = !isCurrent;
 
   const sectionStyle: CSSProperties = {
-    // Past blocks stay properly readable — 0.5 washed the text out. They are
-    // still told apart from the active one, but by the gold rules below
-    // (1.5px at full strength vs 1px at 0.4), not by dimming the prose.
-    opacity: isCurrent ? 1 : isHovered ? 1 : 0.9,
+    // A read block should all but disappear: the eye belongs on the current
+    // one. Hover brings it back enough to read before clicking into it.
+    opacity: isCurrent ? 1 : isHovered ? 0.7 : 0.25,
     cursor: readable ? "pointer" : "default",
     transition: "opacity 0.4s var(--ease-smooth)",
     // Anchor offset: clears the sticky header (3.5rem + signature rule)

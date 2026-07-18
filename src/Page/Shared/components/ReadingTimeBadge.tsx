@@ -3,7 +3,7 @@ import { type CSSProperties, type FC } from "react";
 import { BRAND, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import { useReadingTime } from "../hooks";
 
-import { Clock } from "@icons";
+import { DoodleClock } from "@doodle";
 
 /**
  * Reading-time estimate, ledger register: a quiet mono `~ N min` under the
@@ -34,7 +34,7 @@ export const ReadingTimeBadge: FC = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <span style={labelStyle}>
-        <Clock size={isMobile ? 12 : 13} strokeWidth={2} style={{ opacity: 0.65 }} />
+        <DoodleClock size={isMobile ? 18 : 20} style={{ opacity: 0.75 }} />
         {estimate.minutes} min
       </span>
     </div>
