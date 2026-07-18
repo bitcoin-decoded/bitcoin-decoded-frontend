@@ -112,9 +112,6 @@ export const PageTemplate: FC<Props> = ({
 
   return (
     <div style={containerStyle}>
-      {/* Above the title, just under the navbar: a reader landing on a chapter
-       *  can move to another one without first reaching the foot of the page. */}
-      <ModuleProgress />
       <header style={headerStyle}>
         {kicker && <SectionLabel marker={kicker.marker} label={kicker.label} />}
         <h1 style={titleStyle}>{title}</h1>
@@ -125,6 +122,9 @@ export const PageTemplate: FC<Props> = ({
           <FrText>{prelude}</FrText>
         </ChapterPrelude>
       )}
+      {/* Directly above the block ribbon: the two rails read as a pair — this
+       *  one moves between chapters, the one below between blocks. */}
+      <ModuleProgress />
       <section className="page-content" style={sectionStyle}>
         <FrText>{children}</FrText>
       </section>

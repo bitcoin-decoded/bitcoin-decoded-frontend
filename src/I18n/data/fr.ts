@@ -11,8 +11,11 @@ const fr = {
   // Components
   "chapterPrelude.label": "Prélude",
   "chapterLabel.chapter": "Chapitre",
-  // Module progress rail — the word sits once, ahead of the numerals.
-  "moduleProgress.word": "Chapitre",
+  // Rail prefixes: they name what each rail navigates, so the chapter rail and
+  // the block ribbon sitting under it cannot be mistaken for one another.
+  "moduleProgress.label": "Chapitre",
+  "moduleProgress.quiz": "Quiz",
+  "reading.railLabel": "Bloc",
   "quiz.label": "Quiz",
   "synthesisQuiz.label": "Quiz de synthèse",
   "synthesisQuiz.question": "Question",

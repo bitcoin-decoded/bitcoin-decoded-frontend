@@ -71,6 +71,18 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
     transition: "top 0.3s var(--ease-smooth)",
   };
 
+  // Names what this rail navigates, so it cannot be mistaken for the chapter
+  // rail sitting right above it.
+  const railLabelStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.mono,
+    fontSize: "0.8125rem",
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
+    color: withOpacity(colors.base.text.secondary, 0.75),
+    marginRight: isMobile ? "0.4rem" : "0.55rem",
+    flex: "0 0 auto",
+  };
+
   const linkStyle = (filled: boolean): CSSProperties => ({
     width: linkWidth,
     height: BRAND.figures.ruleThickness,
@@ -96,6 +108,7 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
 
   return (
     <div role="group" aria-label={t("reading.milestoneAria")} style={pillStyle}>
+      <span style={railLabelStyle}>{t("reading.railLabel")}</span>
       {Array.from({ length: count }).map((_, i) => {
         const reached = i <= maxRevealed;
         const reachable = i <= maxRevealed;
