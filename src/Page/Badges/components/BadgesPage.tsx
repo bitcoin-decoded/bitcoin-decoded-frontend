@@ -55,7 +55,7 @@ export const BadgesPage: FC = () => {
   };
 
   return (
-    <PageTemplate title={t("badges.title")} showReadingTime={false} showChapterNav={false}>
+    <PageTemplate title={t("badges.title")} showReadingTime={false}>
       <p style={introStyle}>{t("badges.intro")}</p>
 
       <div style={progressWrapStyle}>

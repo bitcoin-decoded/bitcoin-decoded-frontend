@@ -12,7 +12,7 @@ export const Bitcoin8Page: FC = () => {
   const fr = language === "fr";
 
   return (
-    <PageTemplate title={t("nav.tree.walletsAndSeed")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.walletsAndSeed")}>
       <BlockReader chapterId={ROUTE_NAME.Bitcoin_8}>
         <Block>
           <ChapterPrelude marginBottom="1.5rem">

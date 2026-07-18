@@ -29,7 +29,7 @@ export const Bitcoin4Page: FC = () => {
   });
 
   return (
-    <PageTemplate title={t("nav.tree.proofOfWork")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.proofOfWork")}>
       <BlockReader chapterId={ROUTE_NAME.Bitcoin_4}>
         <Block>
           <ChapterPrelude marginBottom="1.5rem">

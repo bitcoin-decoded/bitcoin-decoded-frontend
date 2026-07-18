@@ -1,6 +1,13 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, getBrandGold, useBreakpoint, usePageTheme, useThemeContext } from "../../../Design";
+import {
+  BRAND,
+  getBrandGold,
+  getTypography,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+} from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { type RouteName, useRouterContext } from "../../../Routing/";
@@ -15,13 +22,15 @@ type Props = {
 /**
  * One chapter-level nav button, ledger register: a sharp hairline frame (no
  * gradient-border, no rounded card, no circle icon), a mono small-caps kicker
- * label, the destination title in Patrick Hand, a chevron in the module color.
+ * label, the destination title in the body serif, a chevron in the module color.
  * The frame + label brighten to the module accent on hover.
  */
 export const NavButton: FC<Props> = ({ page, type }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
-  const isMobile = useBreakpoint() === "mobile";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t } = useTranslation();
   const { setCurrentPage } = useRouterContext();
   const [hovered, setHovered] = useState(false);
@@ -47,8 +56,9 @@ export const NavButton: FC<Props> = ({ page, type }) => {
 
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.62rem" : "0.66rem",
-    fontWeight: 500,
+    // Was 10px and faux-bold on single-weight Cutive.
+    fontSize: typo.micro.fontSize,
+    fontWeight: 400,
     fontVariant: "small-caps",
     letterSpacing: "0.1em",
     color: hovered ? moduleAccent : colors.base.text.secondary,

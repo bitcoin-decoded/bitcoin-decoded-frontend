@@ -11,6 +11,9 @@ const en = {
   // Components
   "chapterPrelude.label": "Prelude",
   "chapterLabel.chapter": "Chapter",
+  // Module progress rail: "CH01", and the seal for the end-of-module quiz.
+  "moduleProgress.short": "CH",
+  "moduleProgress.quiz": "Quiz",
   "quiz.label": "Quiz",
   "synthesisQuiz.label": "Synthesis quiz",
   "synthesisQuiz.question": "Question",

@@ -22,7 +22,7 @@ export const Banking5Page: FC = () => {
   };
 
   return (
-    <PageTemplate title={t("nav.tree.cantillon")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.cantillon")}>
       <BlockReader chapterId={ROUTE_NAME.Banking_5}>
         <Block>
           <ChapterPrelude marginBottom="1.5rem">

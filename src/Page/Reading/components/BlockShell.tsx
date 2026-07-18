@@ -50,7 +50,8 @@ export const BlockShell: FC<Props> = ({
   const readable = !isCurrent;
 
   const sectionStyle: CSSProperties = {
-    opacity: isCurrent ? 1 : isHovered ? 0.7 : 0.5,
+    // Past blocks recede but stay readable — 0.5 washed the text out.
+    opacity: isCurrent ? 1 : isHovered ? 0.92 : 0.75,
     cursor: readable ? "pointer" : "default",
     transition: "opacity 0.4s var(--ease-smooth)",
     // Anchor offset: clears the sticky header (3.5rem + signature rule)
