@@ -35,14 +35,17 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose, isChapterComplete }) => 
     left: 0,
     width: "100vw",
     height: "calc(100vh - 3.5rem)",
-    backgroundColor: colors.base.background.primary,
+    // Same cream paper as the desktop nav and the reading column (see
+    // MainLayout): `background.primary` glares in light mode.
+    backgroundColor:
+      theme === "dark" ? colors.base.background.primary : colors.base.background.secondary,
     zIndex: 100,
     transform: isOpen ? "translateX(0)" : "translateX(-100%)",
     transition: "transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1)",
     overflowY: "auto",
     display: "flex",
     flexDirection: "column",
-    fontSize: "0.8125rem",
+    fontSize: "0.875rem",
     lineHeight: "1.25rem",
     color: colors.base.text.secondary,
   };

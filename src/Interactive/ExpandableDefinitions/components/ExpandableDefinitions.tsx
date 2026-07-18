@@ -1,6 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 
 import { Caption, SurfaceCard, useBreakpoint } from "../../../Design";
+import { FrText } from "../../../I18n";
 import type { ExpandableTerm } from "../types";
 
 import { TermCard } from "./TermCard";
@@ -21,17 +22,23 @@ export const ExpandableDefinitions: FC<Props> = ({ sectionTitle, terms }) => {
     gap: isMobile ? "0.65rem" : "0.75rem",
   };
 
+  // Wrapped here, not by the page: `FrText` can only walk the tree it is
+  // handed, and these terms are usually built inside the calling component
+  // (AccountingTerms, MonetaryProperties…), so the page-level wrapper never
+  // sees them. A component that renders copy it sourced itself fixes its own.
   return (
-    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "1rem" : "1.15rem"}>
-      <Caption tone="world" size="md">
-        {sectionTitle}
-      </Caption>
+    <FrText>
+      <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "1rem" : "1.15rem"}>
+        <Caption tone="world" size="md">
+          {sectionTitle}
+        </Caption>
 
-      <div style={stackStyle}>
-        {terms.map((term) => (
-          <TermCard key={term.key} term={term} />
-        ))}
-      </div>
-    </SurfaceCard>
+        <div style={stackStyle}>
+          {terms.map((term) => (
+            <TermCard key={term.key} term={term} />
+          ))}
+        </div>
+      </SurfaceCard>
+    </FrText>
   );
 };

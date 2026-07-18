@@ -41,12 +41,18 @@ export const MainLayout: FC<{
     flex: "1 1 auto",
   };
 
+  // The nav is chrome: it must never be brighter than the column it frames.
+  // `background.primary` is the darkest surface in dark mode but the lightest
+  // in light mode, so the one token recedes in dark and glares in light. In
+  // light the nav takes the same cream paper as the reading column instead.
   const navContainerStyle: CSSProperties = {
-    backgroundColor: colors.base.background.primary,
+    backgroundColor:
+      theme === "dark" ? colors.base.background.primary : colors.base.background.secondary,
     color: colors.base.text.secondary,
     width: "18rem",
     flexShrink: 0,
-    fontSize: "0.8125rem",
+    // Was 13px — the nav is a long list of chapter titles, read at a glance.
+    fontSize: "0.875rem",
     lineHeight: "1.25rem",
     position: "sticky",
     top: 0,

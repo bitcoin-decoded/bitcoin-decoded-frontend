@@ -1,13 +1,7 @@
-import type { ReactNode } from "react";
-
 import type { Language } from "../../../I18n";
+import type { ProductionStep } from "../types";
 
-export type ProductionStep = {
-  id: string;
-  image: ReactNode;
-  title: string;
-  text: string;
-};
+import { Crane, Factory, Grains, Mountain, Oven, Sandwich, Tractor } from "@icons";
 
 /** The sandwich production chain, language-aware (mirrors getBeerProductionChain). */
 export const getSandwichChain = (language: Language): ProductionStep[] => {
@@ -15,13 +9,13 @@ export const getSandwichChain = (language: Language): ProductionStep[] => {
   return [
     {
       id: "1",
-      image: <div style={{ fontSize: "1.5rem" }}>🥪</div>,
+      icon: Sandwich,
       title: fr ? "Sandwich" : "Sandwich",
       text: fr ? "Notre bien de consommation final" : "Our final consumer good",
     },
     {
       id: "2",
-      image: <div style={{ fontSize: "1.5rem" }}>🔥🎛️🔥</div>,
+      icon: Oven,
       title: fr ? "Four" : "Oven",
       text: fr
         ? "Pour produire le pain du sandwich, il faut un four"
@@ -29,7 +23,7 @@ export const getSandwichChain = (language: Language): ProductionStep[] => {
     },
     {
       id: "3",
-      image: <div style={{ fontSize: "1.5rem" }}>⛰️</div>,
+      icon: Mountain,
       title: fr ? "Carrière" : "Quarry",
       text: fr
         ? "Pour construire un four, il faut des pierres"
@@ -37,7 +31,7 @@ export const getSandwichChain = (language: Language): ProductionStep[] => {
     },
     {
       id: "4",
-      image: <div style={{ fontSize: "1.5rem" }}>🏗️⛏️</div>,
+      icon: Crane,
       title: fr ? "Extraction" : "Extraction",
       text: fr
         ? "Pour extraire ces pierres, il faut des machines"
@@ -45,7 +39,7 @@ export const getSandwichChain = (language: Language): ProductionStep[] => {
     },
     {
       id: "5",
-      image: <div style={{ fontSize: "1.5rem" }}>🏭</div>,
+      icon: Factory,
       title: fr ? "Usine" : "Factory",
       text: fr
         ? "Pour produire ces machines, il faut des usines"
@@ -53,7 +47,7 @@ export const getSandwichChain = (language: Language): ProductionStep[] => {
     },
     {
       id: "6",
-      image: <div style={{ fontSize: "1.5rem" }}>🌾</div>,
+      icon: Grains,
       title: fr ? "Blé" : "Wheat",
       text: fr
         ? "Pour produire du pain, il faut également du blé"
@@ -61,7 +55,7 @@ export const getSandwichChain = (language: Language): ProductionStep[] => {
     },
     {
       id: "7",
-      image: <div style={{ fontSize: "1.5rem" }}>🚜</div>,
+      icon: Tractor,
       title: fr ? "Tracteur" : "Tractor",
       text: fr ? "Pour semer le blé, il faut des tracteurs" : "To sow the wheat, you need tractors",
     },

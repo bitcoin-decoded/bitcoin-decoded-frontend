@@ -1,9 +1,21 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, ExploredCounter, getTypography, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import {
+  BRAND,
+  Button,
+  ExploredCounter,
+  getBrandGold,
+  getTypography,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
+import { FrText, useTranslation } from "../../../I18n";
 import { getSandwichChain } from "../data";
 import { useCapitalStructureChain } from "../hooks";
+
+import { DoodleHourglass } from "@doodle";
 
 // Tracing the chain back is the pedagogical act, so the block gates on it:
 // reveal at least 2 production détours to unlock the rest of the chapter.
@@ -15,16 +27,20 @@ type Props = {
 };
 
 export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { colors, moduleTheme } = usePageTheme();
+  const { theme } = useThemeContext();
   const { t, language } = useTranslation();
   const steps = getSandwichChain(language);
+
+  const gold = getBrandGold(theme);
+  const accent = colors[moduleTheme].text.secondary;
 
   const {
     count,
     exploredDetours,
-    isButtonHovered,
-    setIsButtonHovered,
     hoveredCardIndex,
     setHoveredCardIndex,
     handleButtonClick,
@@ -40,169 +56,173 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
   const wrapperStyle: CSSProperties = {
     display: "flex",
     flexWrap: "wrap",
-    gap: "2rem",
-    alignItems: "center",
+    gap: isMobile ? "1.25rem" : "1.75rem",
+    alignItems: "stretch",
     justifyContent: "center",
     width: "100%",
     paddingTop: "1rem",
     paddingBottom: "2rem",
   };
 
+  // Two per row on a phone, a fixed figure width beyond — the old flat 10rem
+  // left a lone card stranded mid-row on narrow screens.
   const itemWrapperStyle: CSSProperties = {
     display: "flex",
-    animation: "fadeInUp 0.5s ease-out forwards",
+    flex: isMobile ? "1 1 calc(50% - 0.625rem)" : "0 0 auto",
+    minWidth: 0,
+    maxWidth: isMobile ? "calc(50% - 0.625rem)" : "none",
+    animation: "chainStepIn 0.35s var(--ease-smooth) both",
   };
 
-  // Sharp ledger card: flat surface, a single module hairline that brightens
-  // on hover. No gradient fill, no drop shadow.
+  const cornerSize = 10;
+  const corners = (color: string): ReactNode => {
+    const s = `${BRAND.figures.ruleThickness}px solid ${color}`;
+    const base: CSSProperties = {
+      position: "absolute",
+      width: cornerSize,
+      height: cornerSize,
+      transition: "border-color 0.25s var(--ease-smooth)",
+      pointerEvents: "none",
+    };
+    return (
+      <>
+        <span style={{ ...base, top: 0, left: 0, borderTop: s, borderLeft: s }} />
+        <span style={{ ...base, top: 0, right: 0, borderTop: s, borderRight: s }} />
+        <span style={{ ...base, bottom: 0, left: 0, borderBottom: s, borderLeft: s }} />
+        <span style={{ ...base, bottom: 0, right: 0, borderBottom: s, borderRight: s }} />
+      </>
+    );
+  };
+
+  // Ledger cell: flat surface, gold corner brackets, and a lift on hover — the
+  // old scale(1.03) zoom belonged to the previous design language.
   const cardStyle = (index: number): CSSProperties => {
     const isHovered = hoveredCardIndex === index;
     return {
-      width: "10rem",
+      width: isMobile ? "100%" : "10.5rem",
       display: "flex",
       flexDirection: "column",
       background: colors.base.background.secondary,
       borderRadius: 0,
-      border: `1px solid ${withOpacity(colors[moduleTheme].border.secondary, isHovered ? 0.55 : 0.3)}`,
-      overflow: "visible",
+      border: "none",
       position: "relative",
-      transform: isHovered ? "scale(1.03)" : "scale(1)",
-      transition: "transform 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)",
-      cursor: "pointer",
-      zIndex: isHovered ? 10 : 1,
+      transform: isHovered ? "translateY(-2px)" : "translateY(0)",
+      transition: "transform 0.25s var(--ease-smooth)",
+      cursor: "default",
     };
   };
 
-  const imgBoxStyle: CSSProperties = {
-    height: "6rem",
+  // The glyph sits on a quiet module wash, not the saturated block the old
+  // card used as a header.
+  const iconBoxStyle: CSSProperties = {
+    height: isMobile ? "4.5rem" : "5rem",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderBottom: `1px solid ${colors[moduleTheme].border.primary}`,
-    backgroundColor: colors[moduleTheme].background.secondary,
+    background: withOpacity(accent, theme === "dark" ? 0.1 : 0.06),
+    borderBottom: `1px solid ${withOpacity(gold, 0.25)}`,
+    color: accent,
   };
 
-  const numberBallStyle: CSSProperties = {
+  // Square, like every other index in the app (the ordered-list cells, the
+  // navbar numerals) — a circle reads as a coin, and this is a step number.
+  const numberCellStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "2rem",
-    height: "2rem",
-    borderRadius: "50%",
-    background: colors[moduleTheme].background.primary,
-    border: `1px solid ${colors[moduleTheme].border.secondary}`,
-    margin: "-1rem auto 0 auto",
+    minWidth: "1.6rem",
+    height: "1.6rem",
+    padding: "0 0.3rem",
+    borderRadius: 0,
+    background: colors.base.background.secondary,
+    border: `1px solid ${withOpacity(gold, 0.45)}`,
+    margin: "-0.8rem auto 0 auto",
+    position: "relative",
     zIndex: 2,
-    fontFamily: BRAND.fonts.mono,
-    fontSize: "0.9rem",
-    fontWeight: 500,
+    ...typo.micro,
+    color: accent,
     lineHeight: 1,
   };
 
   const contentStyle: CSSProperties = {
-    paddingTop: "1.25rem",
-    paddingLeft: "0.5rem",
-    paddingRight: "0.5rem",
-    paddingBottom: "1.25rem",
+    padding: isMobile ? "0.9rem 0.7rem 1rem" : "1rem 0.75rem 1.15rem",
     textAlign: "center",
     display: "flex",
     flexDirection: "column",
-    gap: "0.5rem",
+    alignItems: "center",
+    gap: "0.4rem",
     flex: 1,
+  };
+
+  const titleStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.mono,
+    fontSize: typo.label.fontSize,
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
+    color: colors.base.text.primary,
+  };
+
+  const textStyle: CSSProperties = {
+    ...typo.note,
+    color: colors.base.text.secondary,
     fontStyle: "italic",
   };
 
-  const buttonStyle: CSSProperties = {
-    alignSelf: "center",
-    color: colors.base.text.primary,
-    border: `1px solid ${colors[moduleTheme].border.secondary}`,
-    borderRadius: 0,
-    marginTop: "auto",
-    paddingTop: "0.4rem",
-    paddingLeft: "0.7rem",
-    paddingRight: "0.7rem",
-    paddingBottom: "0.4rem",
-    cursor: "pointer",
-    fontSize: typo.micro.fontSize,
-    letterSpacing: "0.05rem",
-    lineHeight: 1.6,
-    fontWeight: 400,
-    backgroundColor: colors[moduleTheme].background.primary,
-    filter: isButtonHovered ? "brightness(0.8)" : "brightness(1)",
-    transition: "filter 0.2s ease",
-  };
-
+  // `FrText` only walks the tree it is handed, and this component builds its
+  // own copy from a language-aware getter — so the page-level wrapper never
+  // sees it. It fixes its own French punctuation here.
   return (
-    <>
-      <div style={headerRowStyle}>
-        <ExploredCounter
-          explored={Math.min(exploredDetours, REQUIRED_DETOURS)}
-          total={REQUIRED_DETOURS}
-          label={t("capitalChain.explored")}
-        />
-      </div>
-      <div style={wrapperStyle}>
-        <style>
-          {`
-          @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-        `}
-        </style>
-        {steps.slice(0, count).map((step, index) => {
-          const isLast = index === count - 1;
-          const hasNext = count < steps.length;
+    <FrText>
+      <>
+        <div style={headerRowStyle}>
+          <ExploredCounter
+            explored={Math.min(exploredDetours, REQUIRED_DETOURS)}
+            total={REQUIRED_DETOURS}
+            label={t("capitalChain.explored")}
+          />
+        </div>
+        <div style={wrapperStyle}>
+          {steps.slice(0, count).map((step, index) => {
+            const isLast = index === count - 1;
+            const hasNext = count < steps.length;
+            const isHovered = hoveredCardIndex === index;
+            const Icon = step.icon;
 
-          return (
-            <div key={step.id} style={itemWrapperStyle}>
-              <div
-                style={cardStyle(index)}
-                onMouseEnter={() => setHoveredCardIndex(index)}
-                onMouseLeave={() => setHoveredCardIndex(null)}
-              >
-                <div style={imgBoxStyle}>{step.image}</div>
-                <div style={numberBallStyle}>{step.id}</div>
-                <div style={contentStyle}>
-                  <strong
-                    style={{
-                      display: "block",
-                      marginBottom: "0.25rem",
-                      fontSize: typo.note.fontSize,
-                      color: colors.base.text.primary,
-                      fontStyle: "normal",
-                      letterSpacing: "0.08em",
-                      fontWeight: 500,
-                      fontVariant: "small-caps",
-                    }}
-                  >
-                    {step.title}
-                  </strong>
-                  <div
-                    style={{
-                      color: colors.base.text.secondary,
-                      lineHeight: 1.3,
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {step.text}
+            return (
+              <div key={step.id} style={itemWrapperStyle}>
+                <div
+                  style={cardStyle(index)}
+                  onMouseEnter={() => setHoveredCardIndex(index)}
+                  onMouseLeave={() => setHoveredCardIndex(null)}
+                >
+                  {corners(withOpacity(gold, isHovered ? 0.85 : 0.5))}
+                  <div style={iconBoxStyle}>
+                    <Icon size={isMobile ? 30 : 36} />
                   </div>
-                  {isLast && hasNext && (
-                    <button
-                      style={buttonStyle}
-                      onClick={handleButtonClick}
-                      onMouseEnter={() => setIsButtonHovered(true)}
-                      onMouseLeave={() => setIsButtonHovered(false)}
-                    >
-                      {t("capitalChain.traceBack")}
-                    </button>
-                  )}
+                  <div style={numberCellStyle}>{step.id}</div>
+                  <div style={contentStyle}>
+                    <span style={titleStyle}>{step.title}</span>
+                    <span style={textStyle}>{step.text}</span>
+                    {isLast && hasNext && (
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        color={accent}
+                        hideBrackets
+                        icon={<DoodleHourglass size={isMobile ? 22 : 26} />}
+                        onClick={handleButtonClick}
+                        style={{ marginTop: "auto", whiteSpace: "normal" }}
+                      >
+                        {t("capitalChain.traceBack")}
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-    </>
+            );
+          })}
+        </div>
+      </>
+    </FrText>
   );
 };

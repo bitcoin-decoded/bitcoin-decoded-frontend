@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 
 import { Badge, BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
 import { getScientificMethodsCopy } from "../data";
 
 import { MethodFrame } from "./MethodFrame";
@@ -140,36 +140,41 @@ export const PhysicistMethod: FC = () => {
     </div>
   );
 
+  // `FrText` only walks the tree it is handed, and this component builds its
+  // own copy from a language-aware getter — so the page-level wrapper never
+  // sees it. It fixes its own French punctuation here.
   return (
-    <MethodFrame
-      title={physicist.title}
-      icon={<Telescope size={16} strokeWidth={2} />}
-      accent={accent}
-      closingLine={physicist.closing}
-    >
-      {!isMobile && (
-        <div style={axisRow}>
-          <span style={timeLabel}>{physicist.timeLabel}</span>
-          <div style={axisLine}>
-            <ArrowRight size={15} strokeWidth={2.2} style={arrowHead} />
+    <FrText>
+      <MethodFrame
+        title={physicist.title}
+        icon={<Telescope size={16} strokeWidth={2} />}
+        accent={accent}
+        closingLine={physicist.closing}
+      >
+        {!isMobile && (
+          <div style={axisRow}>
+            <span style={timeLabel}>{physicist.timeLabel}</span>
+            <div style={axisLine}>
+              <ArrowRight size={15} strokeWidth={2.2} style={arrowHead} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div style={blocksWrap}>
-        {renderTheory(physicist.newton, 4, 0.4)}
-        <div style={chipWrap}>
-          <span style={replaceChip}>
-            {isMobile ? (
-              <ArrowDown size={12} strokeWidth={2.4} />
-            ) : (
-              <ArrowRight size={12} strokeWidth={2.4} />
-            )}
-            {physicist.replaces}
-          </span>
+        <div style={blocksWrap}>
+          {renderTheory(physicist.newton, 4, 0.4)}
+          <div style={chipWrap}>
+            <span style={replaceChip}>
+              {isMobile ? (
+                <ArrowDown size={12} strokeWidth={2.4} />
+              ) : (
+                <ArrowRight size={12} strokeWidth={2.4} />
+              )}
+              {physicist.replaces}
+            </span>
+          </div>
+          {renderTheory(physicist.einstein, 6, 0.8)}
         </div>
-        {renderTheory(physicist.einstein, 6, 0.8)}
-      </div>
-    </MethodFrame>
+      </MethodFrame>
+    </FrText>
   );
 };

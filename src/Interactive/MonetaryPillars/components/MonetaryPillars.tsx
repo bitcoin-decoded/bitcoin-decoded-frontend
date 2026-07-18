@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 
 import { Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
 import { getMonetaryPillars } from "../data";
 
 import { PillarRow } from "./PillarRow";
@@ -51,27 +51,32 @@ export const MonetaryPillars: FC = () => {
     textAlign: "left",
   };
 
+  // `FrText` only walks the tree it is handed, and this component builds its
+  // own copy from a language-aware getter — so the page-level wrapper never
+  // sees it. It fixes its own French punctuation here.
   return (
-    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "0.85rem" : "1rem"}>
-      {/* No marker on the section title — same call as the expandable
-       *  definitions: each row already carries its own glyph. */}
-      <Caption tone="world" size="md">
-        {t("monetaryPillars.sectionTitle")}
-      </Caption>
+    <FrText>
+      <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "0.85rem" : "1rem"}>
+        {/* No marker on the section title — same call as the expandable
+         *  definitions: each row already carries its own glyph. */}
+        <Caption tone="world" size="md">
+          {t("monetaryPillars.sectionTitle")}
+        </Caption>
 
-      <p style={promptStyle}>{t("monetaryPillars.prompt")}</p>
+        <p style={promptStyle}>{t("monetaryPillars.prompt")}</p>
 
-      <div style={envelopeStyle}>
-        <div style={threadStyle} aria-hidden />
-        {pillars.map((pillar, i) => (
-          <PillarRow
-            key={pillar.key}
-            pillar={pillar}
-            index={i}
-            isLast={i === pillars.length - 1}
-          />
-        ))}
-      </div>
-    </SurfaceCard>
+        <div style={envelopeStyle}>
+          <div style={threadStyle} aria-hidden />
+          {pillars.map((pillar, i) => (
+            <PillarRow
+              key={pillar.key}
+              pillar={pillar}
+              index={i}
+              isLast={i === pillars.length - 1}
+            />
+          ))}
+        </div>
+      </SurfaceCard>
+    </FrText>
   );
 };

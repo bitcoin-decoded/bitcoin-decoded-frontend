@@ -133,7 +133,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
           </AreaChart>
         </ResponsiveContainer>
         <div style={sourceStyle}>
-          Source : Federal Reserve (FRED) - fred.stlouisfed.org/series/M2SL
+          Source : Federal Reserve (FRED) - fred.stlouisfed.org/series/M2SL
         </div>
       </div>
     </div>

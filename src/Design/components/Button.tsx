@@ -173,6 +173,13 @@ export const Button: FC<Props> = ({
     };
   }
 
+  // Pinned, as `Caption` and `FeedbackPanel` do: as a bare flex child the icon
+  // shrinks in width while keeping its height the moment the label wraps or the
+  // row overflows — a 26px hourglass rendered 16px wide and still 26 tall.
+  const pinnedIcon = icon ? (
+    <span style={{ display: "inline-flex", flexShrink: 0 }}>{icon}</span>
+  ) : null;
+
   const renderedLabel =
     variant === "stamped" ? (
       <span
@@ -212,9 +219,9 @@ export const Button: FC<Props> = ({
       aria-label={ariaLabel}
     >
       {labelDecoration.before}
-      {icon && iconPosition === "left" && icon}
+      {icon && iconPosition === "left" && pinnedIcon}
       {renderedLabel}
-      {icon && iconPosition === "right" && icon}
+      {icon && iconPosition === "right" && pinnedIcon}
       {labelDecoration.after}
     </button>
   );

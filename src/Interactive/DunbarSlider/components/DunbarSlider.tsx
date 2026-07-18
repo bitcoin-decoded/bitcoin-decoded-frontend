@@ -9,7 +9,7 @@ import {
   usePageTheme,
   withOpacity,
 } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
 import { DUNBAR_TIERS, getDunbarPalette, getDunbarTierText } from "../data";
 import { useDunbarSlider } from "../hooks";
 
@@ -104,47 +104,52 @@ export const DunbarSlider: FC = () => {
     width: "100%",
   };
 
+  // `FrText` only walks the tree it is handed, and this component builds its
+  // own copy from a language-aware getter — so the page-level wrapper never
+  // sees it. It fixes its own French punctuation here.
   return (
-    <SurfaceCard glowColor={color} size="lg" gap="1.5rem" margin="2rem 0">
-      <div style={headerStyle}>
-        <Caption tone="muted" size="sm">
-          {t("dunbar.sizeLabel")}
-        </Caption>
-        <span style={populationStyle}>{size.toLocaleString(localeTag)}</span>
-        <span style={separatorStyle} aria-hidden>
-          ·
-        </span>
-        <span style={tierStyle}>
-          <TierIcon size={isMobile ? 26 : 30} style={tierIconStyle} />
-          {activeText.label}
-        </span>
-      </div>
-
-      <div style={bodyStyle}>
-        <div style={visualWrapStyle}>
-          <DunbarVisual size={size} relations={relations} color={color} />
+    <FrText>
+      <SurfaceCard glowColor={color} size="lg" gap="1.5rem" margin="2rem 0">
+        <div style={headerStyle}>
+          <Caption tone="muted" size="sm">
+            {t("dunbar.sizeLabel")}
+          </Caption>
+          <span style={populationStyle}>{size.toLocaleString(localeTag)}</span>
+          <span style={separatorStyle} aria-hidden>
+            ·
+          </span>
+          <span style={tierStyle}>
+            <TierIcon size={isMobile ? 26 : 30} style={tierIconStyle} />
+            {activeText.label}
+          </span>
         </div>
-        <DunbarStatePanel
-          label={activeText.label}
-          statePhrase={activeText.statePhrase}
-          relations={relations}
-          counterLabel={t("dunbar.counterLabel")}
+
+        <div style={bodyStyle}>
+          <div style={visualWrapStyle}>
+            <DunbarVisual size={size} relations={relations} color={color} />
+          </div>
+          <DunbarStatePanel
+            label={activeText.label}
+            statePhrase={activeText.statePhrase}
+            relations={relations}
+            counterLabel={t("dunbar.counterLabel")}
+            color={color}
+            isOverload={isOverload}
+            overloadTitle={t("dunbar.overloadTitle")}
+            overloadBody={t("dunbar.overloadBody")}
+            localeTag={localeTag}
+          />
+        </div>
+
+        <DunbarStepSlider
+          sizes={DUNBAR_TIERS.map((tierItem) => tierItem.size)}
+          activeIndex={tierIndex}
+          onChange={setTierIndex}
           color={color}
-          isOverload={isOverload}
-          overloadTitle={t("dunbar.overloadTitle")}
-          overloadBody={t("dunbar.overloadBody")}
+          ariaLabel={t("dunbar.sliderAria")}
           localeTag={localeTag}
         />
-      </div>
-
-      <DunbarStepSlider
-        sizes={DUNBAR_TIERS.map((tierItem) => tierItem.size)}
-        activeIndex={tierIndex}
-        onChange={setTierIndex}
-        color={color}
-        ariaLabel={t("dunbar.sliderAria")}
-        localeTag={localeTag}
-      />
-    </SurfaceCard>
+      </SurfaceCard>
+    </FrText>
   );
 };

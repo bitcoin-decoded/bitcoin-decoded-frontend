@@ -13,6 +13,8 @@ export const RatingRow: FC<Props> = ({ icon, label, score, compact = false }) =>
   const iconWrapperStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
+    // Pinned: without it the glyph loses width (but not height) to a long label.
+    flexShrink: 0,
     transform: compact ? "scale(0.8)" : "none",
     transformOrigin: "center",
   };

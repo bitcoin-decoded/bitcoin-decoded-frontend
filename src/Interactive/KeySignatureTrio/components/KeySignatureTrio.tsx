@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 
 import { BRAND, Caption, ExploredCounter, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
 import { getKeySignatureTrio, TRIO_LAYOUT } from "../data";
 import { getArrowhead, trimSegment } from "../helpers";
 import { useKeySignatureTrio } from "../hooks";
@@ -185,128 +185,133 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   // ── render ────────────────────────────────────────────────────────────────────
 
+  // `FrText` only walks the tree it is handed, and this component builds its
+  // own copy from a language-aware getter — so the page-level wrapper never
+  // sees it. It fixes its own French punctuation here.
   return (
-    <SurfaceCard
-      gap={isMobile ? "0.85rem" : "1.1rem"}
-      margin={isMobile ? "1.5rem 0" : "2rem 0"}
-      style={{ textAlign: "left" }}
-    >
-      <div style={headerRow}>
-        <Caption tone="world" size="md" icon={<Link2 size={isMobile ? 16 : 18} strokeWidth={2} />}>
-          {t("keyTrio.sectionTitle")}
-        </Caption>
-        <ExploredCounter
-          explored={exploredCount}
-          total={elements.length}
-          label={t("keyTrio.explored")}
-        />
-      </div>
+    <FrText>
+      <SurfaceCard
+        gap={isMobile ? "0.85rem" : "1.1rem"}
+        margin={isMobile ? "1.5rem 0" : "2rem 0"}
+        style={{ textAlign: "left" }}
+      >
+        <div style={headerRow}>
+          <Caption tone="world" size="md" icon={<Link2 size={isMobile ? 16 : 18} strokeWidth={2} />}>
+            {t("keyTrio.sectionTitle")}
+          </Caption>
+          <ExploredCounter
+            explored={exploredCount}
+            total={elements.length}
+            label={t("keyTrio.explored")}
+          />
+        </div>
 
-      <p style={promptStyle}>{t("keyTrio.prompt")}</p>
+        <p style={promptStyle}>{t("keyTrio.prompt")}</p>
 
-      <div style={diagramWrapper}>
-        <div style={diagramBox}>
-          <svg
-            viewBox={`0 0 ${viewWidth} ${viewHeight}`}
-            preserveAspectRatio="none"
-            style={svgStyle}
-            aria-hidden
-          >
+        <div style={diagramWrapper}>
+          <div style={diagramBox}>
+            <svg
+              viewBox={`0 0 ${viewWidth} ${viewHeight}`}
+              preserveAspectRatio="none"
+              style={svgStyle}
+              aria-hidden
+            >
+              {connections.map((edge) => {
+                const active = selectedId === edge.from || selectedId === edge.to;
+                const stroke = withOpacity(accent, active ? 0.9 : 0.28);
+                const transition =
+                  "stroke 0.35s var(--ease-smooth), stroke-width 0.35s var(--ease-smooth)";
+                const { x1, y1, x2, y2 } = trimSegment(
+                  nodes[edge.from],
+                  nodes[edge.to],
+                  edgeClearance,
+                );
+                const head = getArrowhead(nodes[edge.from], nodes[edge.to], edgeClearance, 5.5, 26);
+                return (
+                  <g key={`${edge.from}-${edge.to}`}>
+                    <line
+                      x1={x1}
+                      y1={y1}
+                      x2={x2}
+                      y2={y2}
+                      stroke={stroke}
+                      strokeWidth={active ? 1.2 : 0.6}
+                      strokeLinecap="round"
+                      style={{ transition }}
+                    />
+                    {/* Arrowhead at the `to` end - shows the direction of the action. */}
+                    <polyline
+                      points={`${head.left.x},${head.left.y} ${head.tip.x},${head.tip.y} ${head.right.x},${head.right.y}`}
+                      fill="none"
+                      stroke={stroke}
+                      strokeWidth={active ? 1.4 : 1}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ transition }}
+                    />
+                  </g>
+                );
+              })}
+            </svg>
+
             {connections.map((edge) => {
+              const a = nodes[edge.from];
+              const b = nodes[edge.to];
               const active = selectedId === edge.from || selectedId === edge.to;
-              const stroke = withOpacity(accent, active ? 0.9 : 0.28);
-              const transition =
-                "stroke 0.35s var(--ease-smooth), stroke-width 0.35s var(--ease-smooth)";
-              const { x1, y1, x2, y2 } = trimSegment(
-                nodes[edge.from],
-                nodes[edge.to],
-                edgeClearance,
-              );
-              const head = getArrowhead(nodes[edge.from], nodes[edge.to], edgeClearance, 5.5, 26);
               return (
-                <g key={`${edge.from}-${edge.to}`}>
-                  <line
-                    x1={x1}
-                    y1={y1}
-                    x2={x2}
-                    y2={y2}
-                    stroke={stroke}
-                    strokeWidth={active ? 1.2 : 0.6}
-                    strokeLinecap="round"
-                    style={{ transition }}
-                  />
-                  {/* Arrowhead at the `to` end - shows the direction of the action. */}
-                  <polyline
-                    points={`${head.left.x},${head.left.y} ${head.tip.x},${head.tip.y} ${head.right.x},${head.right.y}`}
-                    fill="none"
-                    stroke={stroke}
-                    strokeWidth={active ? 1.4 : 1}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{ transition }}
-                  />
-                </g>
+                <span
+                  key={`label-${edge.from}-${edge.to}`}
+                  style={labelChip(active, (a.x + b.x) / 2, (a.y + b.y) / 2)}
+                >
+                  {edge.label}
+                </span>
               );
             })}
-          </svg>
 
-          {connections.map((edge) => {
-            const a = nodes[edge.from];
-            const b = nodes[edge.to];
-            const active = selectedId === edge.from || selectedId === edge.to;
-            return (
-              <span
-                key={`label-${edge.from}-${edge.to}`}
-                style={labelChip(active, (a.x + b.x) / 2, (a.y + b.y) / 2)}
-              >
-                {edge.label}
-              </span>
-            );
-          })}
-
-          {elements.map((el) => {
-            const p = nodes[el.id];
-            return (
-              <div key={el.id} style={nodeWrapper(p.x, p.y)}>
-                <TrioNode
-                  element={el}
-                  isSelected={selectedId === el.id}
-                  isDimmed={hasSelection && selectedId !== el.id}
-                  onClick={() => select(el.id)}
-                />
-              </div>
-            );
-          })}
+            {elements.map((el) => {
+              const p = nodes[el.id];
+              return (
+                <div key={el.id} style={nodeWrapper(p.x, p.y)}>
+                  <TrioNode
+                    element={el}
+                    isSelected={selectedId === el.id}
+                    isDimmed={hasSelection && selectedId !== el.id}
+                    onClick={() => select(el.id)}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      <div style={detailPanel}>
-        {selected && SelectedIcon ? (
-          <div
-            key={selected.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.6rem",
-              animation: "chainFieldReveal 0.5s var(--ease-smooth) both",
-            }}
-          >
-            <div style={detailHeader}>
-              <span style={detailIconBox}>
-                <SelectedIcon size={18} strokeWidth={2} />
-              </span>
-              <span style={detailTitle}>{selected.title}</span>
-              <span style={roleTag}>{selected.role}</span>
+        <div style={detailPanel}>
+          {selected && SelectedIcon ? (
+            <div
+              key={selected.id}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.6rem",
+                animation: "chainFieldReveal 0.5s var(--ease-smooth) both",
+              }}
+            >
+              <div style={detailHeader}>
+                <span style={detailIconBox}>
+                  <SelectedIcon size={18} strokeWidth={2} />
+                </span>
+                <span style={detailTitle}>{selected.title}</span>
+                <span style={roleTag}>{selected.role}</span>
+              </div>
+              <p style={detailDesc}>{selected.description}</p>
             </div>
-            <p style={detailDesc}>{selected.description}</p>
-          </div>
-        ) : (
-          <div style={emptyState}>
-            <MousePointerClick size={16} strokeWidth={2} style={{ flexShrink: 0 }} />
-            <span>{t("keyTrio.emptyState")}</span>
-          </div>
-        )}
-      </div>
-    </SurfaceCard>
+          ) : (
+            <div style={emptyState}>
+              <MousePointerClick size={16} strokeWidth={2} style={{ flexShrink: 0 }} />
+              <span>{t("keyTrio.emptyState")}</span>
+            </div>
+          )}
+        </div>
+      </SurfaceCard>
+    </FrText>
   );
 };

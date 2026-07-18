@@ -8,6 +8,7 @@ import {
   usePageTheme,
   withOpacity,
 } from "../../../Design";
+import { FrText } from "../../../I18n";
 import { useIllustration } from "../hooks";
 
 type IllustrationProps = {
@@ -168,7 +169,14 @@ export const Illustration: FC<IllustrationProps> = ({
         </div>
       </div>
 
-      {caption && <figcaption style={captionStyle}>{caption}</figcaption>}
+      {/* The caption arrives as a prop, which `FrText` cannot reach from the
+       *  page (it only walks children) — so the figure applies it itself, and
+       *  ":" / "?" / "!" stay glued to the word before them. */}
+      {caption && (
+        <figcaption style={captionStyle}>
+          <FrText>{caption}</FrText>
+        </figcaption>
+      )}
     </figure>
   );
 };
