@@ -78,7 +78,12 @@ export const Button: FC<Props> = ({
     transition: "all 0.25s var(--ease-smooth)",
     opacity: disabled ? 0.4 : 1,
     width: fullWidth ? "100%" : "auto",
-    whiteSpace: "nowrap",
+    // NOT `nowrap`. An unbreakable label sets a min-content floor on every
+    // ancestor up to the page: "Acheter massivement des obligations" alone
+    // pinned the document at 417px, so any screen narrower than that scrolled
+    // sideways. The button is inline-flex, so the brackets and icon stay put as
+    // their own flex items — only the label text wraps, and only when it must.
+    whiteSpace: "normal",
     boxSizing: "border-box",
     border: "none",
     borderRadius: 0,

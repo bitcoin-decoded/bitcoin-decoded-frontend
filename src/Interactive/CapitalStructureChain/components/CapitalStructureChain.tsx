@@ -211,7 +211,7 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
                         hideBrackets
                         icon={<DoodleHourglass size={isMobile ? 22 : 26} />}
                         onClick={handleButtonClick}
-                        style={{ marginTop: "auto", whiteSpace: "normal" }}
+                        style={{ marginTop: "auto" }}
                       >
                         {t("capitalChain.traceBack")}
                       </Button>
