@@ -35,7 +35,6 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     // page, which is what broke the chapter on a phone. It scrolls inside its
     // own frame instead — the page body never scrolls sideways.
     overflowX: "auto",
-    overflowY: "hidden",
     borderRadius: 0,
     border: `1px solid ${withOpacity(accentColor, 0.3)}`,
   };
@@ -54,9 +53,6 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
 
   const tableStyle: CSSProperties = {
     width: "100%",
-    // Keeps the two columns readable while the frame scrolls, rather than
-    // letting them collapse into slivers.
-    minWidth: isMobile ? "34rem" : undefined,
     borderCollapse: "separate",
     borderSpacing: 0,
     maxWidth: "50rem",
