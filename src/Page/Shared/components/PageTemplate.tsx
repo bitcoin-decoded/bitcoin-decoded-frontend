@@ -112,14 +112,14 @@ export const PageTemplate: FC<Props> = ({
 
   return (
     <div style={containerStyle}>
+      {/* Above the title, just under the navbar: a reader landing on a chapter
+       *  can move to another one without first reaching the foot of the page. */}
+      <ModuleProgress />
       <header style={headerStyle}>
         {kicker && <SectionLabel marker={kicker.marker} label={kicker.label} />}
         <h1 style={titleStyle}>{title}</h1>
         {showReadingTime && <ReadingTimeBadge />}
       </header>
-      {/* Jump between the module's chapters from the top of the page: reaching
-       *  the bottom nav used to require reading every block first. */}
-      <ModuleProgress />
       {prelude && (
         <ChapterPrelude marginBottom={space.preludeToBody}>
           <FrText>{prelude}</FrText>

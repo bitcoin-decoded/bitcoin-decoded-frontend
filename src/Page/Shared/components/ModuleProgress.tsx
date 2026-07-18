@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, useState } from "react";
+import { type CSSProperties, type FC, Fragment, useState } from "react";
 
 import {
   BRAND,
@@ -13,18 +13,24 @@ import { useTranslation } from "../../../I18n";
 import type { RouteName } from "../../../Routing";
 import { useModuleProgress } from "../hooks";
 
+import { DoodleStamp } from "@doodle";
+
 /**
- * The module's chapters as a row of ledger cells — CH01 · CH02 · … — so a
- * reader can move between chapters from the top of the page instead of having
- * to reach the bottom, which previously meant finishing every block first.
+ * The module's chapters as a single quiet line — CHAPITRE 01 02 03 … ⌗ — sat
+ * just under the navbar so a reader can move between chapters without first
+ * reaching the foot of the page (which, on block-reading chapters, meant
+ * revealing every block).
  *
- * The current cell is filled in the module accent; finished chapters keep a
- * gold rule under them; the rest are quiet outlines. The end-of-module quiz is
- * marked with a seal rather than a number — it is not a chapter.
+ * Deliberately not a row of boxes: it echoes the page's own eyebrow
+ * (`SectionLabel`) — the word in structural gold, then bare numerals. The
+ * current chapter is the only filled cell, so "where am I" is unmistakable;
+ * finished ones keep the gold, the rest recede into quiet ink. The
+ * end-of-module quiz carries the navbar's stamp rather than a number, because
+ * it is not a chapter.
  */
 export const ModuleProgress: FC = () => {
   const progress = useModuleProgress();
-  const { colors, moduleTheme } = usePageTheme();
+  const { colors } = usePageTheme();
   const { theme } = useThemeContext();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
@@ -35,64 +41,86 @@ export const ModuleProgress: FC = () => {
   if (!progress || progress.chapters.length < 2) return null;
 
   const gold = getBrandGold(theme);
-  const accent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
+  const currentId = progress.chapters[progress.currentIndex].id;
 
   const railStyle: CSSProperties = {
     display: "flex",
     flexWrap: "wrap",
-    alignItems: "center",
+    alignItems: "baseline",
     justifyContent: "center",
-    gap: isMobile ? "0.3rem" : "0.4rem",
-    margin: isMobile ? "0 0 1.5rem" : "0 0 1.75rem",
+    gap: isMobile ? "0.15rem 0.4rem" : "0.2rem 0.55rem",
+    margin: isMobile ? "0 0 1.75rem" : "0 0 2rem",
   };
 
-  const cellStyle = (isCurrent: boolean, isDone: boolean, isHovered: boolean): CSSProperties => ({
-    ...typo.micro,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    minWidth: isMobile ? "2.6rem" : "2.9rem",
-    padding: isMobile ? "0.3rem 0.4rem" : "0.35rem 0.5rem",
-    borderRadius: 0,
-    cursor: isCurrent ? "default" : "pointer",
-    fontVariant: "small-caps",
-    letterSpacing: "0.06em",
-    background: isCurrent
-      ? withOpacity(accent, theme === "dark" ? 0.18 : 0.12)
-      : isHovered
-        ? withOpacity(accent, theme === "dark" ? 0.1 : 0.06)
-        : "transparent",
-    border: `1px solid ${
-      isCurrent ? withOpacity(accent, 0.7) : withOpacity(colors.base.text.primary, 0.16)
-    }`,
-    // A finished chapter keeps a gold underline — the ledger's "settled" mark.
-    borderBottom: isDone && !isCurrent ? `2px solid ${withOpacity(gold, 0.75)}` : undefined,
-    color: isCurrent ? accent : isHovered ? colors.base.text.primary : colors.base.text.secondary,
-    transition: "all 0.2s var(--ease-smooth)",
-  });
+  // The same register as the chapter eyebrow: mono, tracked, structural gold.
+  const wordStyle: CSSProperties = {
+    ...typo.kicker,
+    color: gold,
+    marginRight: isMobile ? "0.15rem" : "0.35rem",
+  };
+
+  const cellStyle = (isCurrent: boolean, isDone: boolean, isHovered: boolean): CSSProperties => {
+    const ink = isCurrent
+      ? colors.base.text.primary
+      : isDone
+        ? withOpacity(gold, 0.95)
+        : withOpacity(colors.base.text.secondary, isHovered ? 0.95 : 0.55);
+
+    return {
+      ...typo.kicker,
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "0.3rem",
+      padding: isMobile ? "0.15rem 0.35rem" : "0.2rem 0.45rem",
+      border: "none",
+      borderRadius: 0,
+      // Only the current chapter is filled — that is the whole "you are here".
+      background: isCurrent ? withOpacity(gold, theme === "dark" ? 0.22 : 0.16) : "transparent",
+      color: ink,
+      cursor: isCurrent ? "default" : "pointer",
+      transition: "color 0.2s var(--ease-smooth), background 0.2s var(--ease-smooth)",
+    };
+  };
+
+  const separatorStyle: CSSProperties = {
+    ...typo.kicker,
+    color: withOpacity(colors.base.text.secondary, 0.3),
+  };
 
   return (
     <nav aria-label={progress.moduleLabel} style={railStyle}>
-      {progress.chapters.map((chapter) => {
-        const isCurrent = chapter.id === progress.chapters[progress.currentIndex].id;
+      <span style={wordStyle}>{t("moduleProgress.word")}</span>
+
+      {progress.chapters.map((chapter, index) => {
+        const isCurrent = chapter.id === currentId;
         const isDone = progress.isDone(chapter.id);
-        const label = chapter.isChallenge
-          ? t("moduleProgress.quiz")
-          : `${t("moduleProgress.short")}${String(chapter.number).padStart(2, "0")}`;
 
         return (
-          <button
-            key={chapter.id}
-            type="button"
-            title={chapter.label}
-            aria-current={isCurrent ? "page" : undefined}
-            onClick={() => !isCurrent && progress.goTo(chapter.id)}
-            onMouseEnter={() => setHovered(chapter.id)}
-            onMouseLeave={() => setHovered(null)}
-            style={cellStyle(isCurrent, isDone, hovered === chapter.id)}
-          >
-            <span style={{ fontFamily: BRAND.fonts.mono }}>{label}</span>
-          </button>
+          <Fragment key={chapter.id}>
+            {index > 0 && (
+              <span style={separatorStyle} aria-hidden>
+                ·
+              </span>
+            )}
+            <button
+              type="button"
+              title={chapter.label}
+              aria-current={isCurrent ? "page" : undefined}
+              onClick={() => !isCurrent && progress.goTo(chapter.id)}
+              onMouseEnter={() => setHovered(chapter.id)}
+              onMouseLeave={() => setHovered(null)}
+              style={cellStyle(isCurrent, isDone, hovered === chapter.id)}
+            >
+              {chapter.isChallenge ? (
+                <DoodleStamp size={isMobile ? 17 : 19} />
+              ) : (
+                <span style={{ fontFamily: BRAND.fonts.mono }}>
+                  {String(chapter.number).padStart(2, "0")}
+                </span>
+              )}
+            </button>
+          </Fragment>
         );
       })}
     </nav>
