@@ -9,7 +9,7 @@ import {
   useBreakpoint,
   useExplorationGate,
 } from "../../../Design";
-import { useLanguageContext, useTranslation } from "../../../I18n";
+import { FrText, useLanguageContext, useTranslation } from "../../../I18n";
 
 // Reading a few cards is the pedagogical act here, so the block gates on it:
 // explore any 3 of the monetary specimens to unlock the rest of the chapter.
@@ -50,71 +50,76 @@ export const MonetaryGallery: FC<Props> = ({ onComplete }) => {
     alignItems: "start",
   };
 
+  // `FrText` only walks the tree it is handed, and this component builds its
+  // own copy from a language-aware getter — so the page-level wrapper never
+  // sees it. It fixes its own French punctuation here.
   return (
-    <>
-      <div style={headerRowStyle}>
-        <ExploredCounter
-          explored={Math.min(exploredCount, REQUIRED_EXPLORED)}
-          total={REQUIRED_EXPLORED}
-          label={t("monetaryGallery.explored")}
-        />
-      </div>
-      <div style={gridStyle}>
-        {getMonetaryHistory(language).map((item: MonetaryItem, index: number) => {
-          const characteristics: IdentityCharacteristic[] = [
-            {
-              label: t("monetaryGallery.history"),
-              value: <>{item.history}</>,
-            },
-            {
-              label: t("monetaryGallery.characteristics"),
-              value: (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.35rem",
-                    fontStyle: "normal",
-                  }}
-                >
-                  {item.characteristics.map((characteristic, i) => (
-                    <RatingRow
-                      key={i}
-                      icon={characteristic.icon}
-                      label={characteristic.label}
-                      score={characteristic.score}
-                      compact
-                    />
-                  ))}
-                </div>
-              ),
-            },
-            {
-              label: t("monetaryGallery.limitations"),
-              value: <>{item.death}</>,
-            },
-          ];
+    <FrText>
+      <>
+        <div style={headerRowStyle}>
+          <ExploredCounter
+            explored={Math.min(exploredCount, REQUIRED_EXPLORED)}
+            total={REQUIRED_EXPLORED}
+            label={t("monetaryGallery.explored")}
+          />
+        </div>
+        <div style={gridStyle}>
+          {getMonetaryHistory(language).map((item: MonetaryItem, index: number) => {
+            const characteristics: IdentityCharacteristic[] = [
+              {
+                label: t("monetaryGallery.history"),
+                value: <>{item.history}</>,
+              },
+              {
+                label: t("monetaryGallery.characteristics"),
+                value: (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "0.35rem",
+                      fontStyle: "normal",
+                    }}
+                  >
+                    {item.characteristics.map((characteristic, i) => (
+                      <RatingRow
+                        key={i}
+                        icon={characteristic.icon}
+                        label={characteristic.label}
+                        score={characteristic.score}
+                        compact
+                      />
+                    ))}
+                  </div>
+                ),
+              },
+              {
+                label: t("monetaryGallery.limitations"),
+                value: <>{item.death}</>,
+              },
+            ];
 
-          return (
-            <IdentityCard
-              key={index}
-              name={item.name}
-              profile={item.profile}
-              profilePicture={
-                <img
-                  src={item.imgSrc}
-                  alt={item.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              }
-              characteristics={characteristics}
-              isExpandable
-              compact
-              onExpand={() => markExplored(index)}
-            />
-          );
-        })}
-      </div>
-    </>
+            return (
+              <IdentityCard
+                key={index}
+                name={item.name}
+                profile={item.profile}
+                profilePicture={
+                  <img
+                    src={item.imgSrc}
+                    alt={item.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                }
+                characteristics={characteristics}
+                isExpandable
+                compact
+                onExpand={() => markExplored(index)}
+              />
+            );
+          })}
+        </div>
+      </>
+    </FrText>
   );
 };

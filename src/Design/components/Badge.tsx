@@ -65,7 +65,9 @@ export const Badge: FC<Props> = ({
 
   return (
     <span style={finalStyle}>
-      {icon}
+      {/* Pinned: a bare flex child shrinks in width but keeps its height, so a
+       *  long label renders the glyph as a squashed sliver. */}
+      {icon && <span style={{ display: "inline-flex", flexShrink: 0 }}>{icon}</span>}
       {children}
     </span>
   );

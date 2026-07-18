@@ -1,6 +1,7 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { Badge, BRAND, Button, Caption, Disclosure, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { fixFrenchPunctuation } from "../../../FrenchPunctuation";
 import { useTranslation } from "../../../I18n";
 import {
   ActionButton,
@@ -79,7 +80,12 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   const matchColor = isOriginalKey ? colors.successColor : colors.errorColor;
 
   const displayMessage = t("signaturePlayground.message");
-  const quotedMessage = language === "fr" ? `« ${displayMessage} »` : `"${displayMessage}"`;
+  // Re-run the fixer: `t()` fixed the message, but the guillemets are added
+  // here, after the fact, with plain spaces that nothing else would tighten.
+  const quotedMessage =
+    language === "fr"
+      ? fixFrenchPunctuation(`« ${displayMessage} »`)
+      : `"${displayMessage}"`;
 
   // ── styles ──────────────────────────────────────────────────────────────────
 

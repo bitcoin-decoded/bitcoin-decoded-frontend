@@ -61,6 +61,9 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    // Pinned: without it the glyph loses width (but not height) when the card
+    // gets tight.
+    flexShrink: 0,
     color: accent,
     marginBottom: isMobile ? "0.2rem" : "0.4rem",
     transform: isHovered ? "translateY(-2px)" : "translateY(0)",

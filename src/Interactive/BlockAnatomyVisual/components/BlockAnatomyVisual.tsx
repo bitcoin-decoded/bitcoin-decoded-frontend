@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 
 import { BRAND, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
-import { useLanguageContext } from "../../../I18n";
+import { FrText, useLanguageContext } from "../../../I18n";
 import { BODY_FIELDS, HEADER_FIELDS } from "../data";
 import type { BlockField } from "../types";
 
@@ -101,32 +101,36 @@ export const BlockAnatomyVisual: FC = () => {
       </div>
     ));
 
+  // `FrText` only walks the tree it is handed, and this component holds its
+  // own inline French copy — the page-level wrapper never sees it.
   return (
-    <SurfaceCard
-      gap="0.25rem"
-      margin={isMobile ? "1.5rem auto" : "2.5rem auto"}
-      style={{
-        padding: isMobile ? "0.8rem" : "0.95rem",
-        width: "100%",
-        maxWidth: "26rem",
-      }}
-    >
-      <div style={titleStyle}>
-        {fr ? "Exemple fictif : Bloc #100826" : "Fictional example: Block #100826"}
-      </div>
-
-      <span style={sectionLabel}>{fr ? "En-tête" : "Header"}</span>
-      {renderFields(HEADER_FIELDS)}
-
-      <div
+    <FrText>
+      <SurfaceCard
+        gap="0.25rem"
+        margin={isMobile ? "1.5rem auto" : "2.5rem auto"}
         style={{
-          borderTop: `1px dashed ${withOpacity(world.border.secondary, 0.3)}`,
-          margin: "0.3rem 0 0.15rem",
+          padding: isMobile ? "0.8rem" : "0.95rem",
+          width: "100%",
+          maxWidth: "26rem",
         }}
-      />
+      >
+        <div style={titleStyle}>
+          {fr ? "Exemple fictif : Bloc #100826" : "Fictional example: Block #100826"}
+        </div>
 
-      <span style={sectionLabel}>{fr ? "Corps" : "Body"}</span>
-      {renderFields(BODY_FIELDS)}
-    </SurfaceCard>
+        <span style={sectionLabel}>{fr ? "En-tête" : "Header"}</span>
+        {renderFields(HEADER_FIELDS)}
+
+        <div
+          style={{
+            borderTop: `1px dashed ${withOpacity(world.border.secondary, 0.3)}`,
+            margin: "0.3rem 0 0.15rem",
+          }}
+        />
+
+        <span style={sectionLabel}>{fr ? "Corps" : "Body"}</span>
+        {renderFields(BODY_FIELDS)}
+      </SurfaceCard>
+    </FrText>
   );
 };

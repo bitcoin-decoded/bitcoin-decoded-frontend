@@ -11,7 +11,7 @@ import {
   useThemeContext,
   withOpacity,
 } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
 import { getSandwichChain } from "../data";
 import { useCapitalStructureChain } from "../hooks";
 
@@ -168,56 +168,61 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     fontStyle: "italic",
   };
 
+  // `FrText` only walks the tree it is handed, and this component builds its
+  // own copy from a language-aware getter — so the page-level wrapper never
+  // sees it. It fixes its own French punctuation here.
   return (
-    <>
-      <div style={headerRowStyle}>
-        <ExploredCounter
-          explored={Math.min(exploredDetours, REQUIRED_DETOURS)}
-          total={REQUIRED_DETOURS}
-          label={t("capitalChain.explored")}
-        />
-      </div>
-      <div style={wrapperStyle}>
-        {steps.slice(0, count).map((step, index) => {
-          const isLast = index === count - 1;
-          const hasNext = count < steps.length;
-          const isHovered = hoveredCardIndex === index;
-          const Icon = step.icon;
+    <FrText>
+      <>
+        <div style={headerRowStyle}>
+          <ExploredCounter
+            explored={Math.min(exploredDetours, REQUIRED_DETOURS)}
+            total={REQUIRED_DETOURS}
+            label={t("capitalChain.explored")}
+          />
+        </div>
+        <div style={wrapperStyle}>
+          {steps.slice(0, count).map((step, index) => {
+            const isLast = index === count - 1;
+            const hasNext = count < steps.length;
+            const isHovered = hoveredCardIndex === index;
+            const Icon = step.icon;
 
-          return (
-            <div key={step.id} style={itemWrapperStyle}>
-              <div
-                style={cardStyle(index)}
-                onMouseEnter={() => setHoveredCardIndex(index)}
-                onMouseLeave={() => setHoveredCardIndex(null)}
-              >
-                {corners(withOpacity(gold, isHovered ? 0.85 : 0.5))}
-                <div style={iconBoxStyle}>
-                  <Icon size={isMobile ? 30 : 36} />
-                </div>
-                <div style={numberCellStyle}>{step.id}</div>
-                <div style={contentStyle}>
-                  <span style={titleStyle}>{step.title}</span>
-                  <span style={textStyle}>{step.text}</span>
-                  {isLast && hasNext && (
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      color={accent}
-                      hideBrackets
-                      icon={<DoodleHourglass size={isMobile ? 22 : 26} />}
-                      onClick={handleButtonClick}
-                      style={{ marginTop: "auto", whiteSpace: "normal" }}
-                    >
-                      {t("capitalChain.traceBack")}
-                    </Button>
-                  )}
+            return (
+              <div key={step.id} style={itemWrapperStyle}>
+                <div
+                  style={cardStyle(index)}
+                  onMouseEnter={() => setHoveredCardIndex(index)}
+                  onMouseLeave={() => setHoveredCardIndex(null)}
+                >
+                  {corners(withOpacity(gold, isHovered ? 0.85 : 0.5))}
+                  <div style={iconBoxStyle}>
+                    <Icon size={isMobile ? 30 : 36} />
+                  </div>
+                  <div style={numberCellStyle}>{step.id}</div>
+                  <div style={contentStyle}>
+                    <span style={titleStyle}>{step.title}</span>
+                    <span style={textStyle}>{step.text}</span>
+                    {isLast && hasNext && (
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        color={accent}
+                        hideBrackets
+                        icon={<DoodleHourglass size={isMobile ? 22 : 26} />}
+                        onClick={handleButtonClick}
+                        style={{ marginTop: "auto", whiteSpace: "normal" }}
+                      >
+                        {t("capitalChain.traceBack")}
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-    </>
+            );
+          })}
+        </div>
+      </>
+    </FrText>
   );
 };

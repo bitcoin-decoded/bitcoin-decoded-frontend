@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC } from "react";
 
 import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
-import { useTranslation } from "../../../I18n";
+import { FrText, useTranslation } from "../../../I18n";
 import { getScientificMethodsCopy } from "../data";
 
 import { MethodFrame } from "./MethodFrame";
@@ -144,35 +144,40 @@ export const LogicianMethod: FC = () => {
     </div>
   );
 
+  // `FrText` only walks the tree it is handed, and this component builds its
+  // own copy from a language-aware getter — so the page-level wrapper never
+  // sees it. It fixes its own French punctuation here.
   return (
-    <MethodFrame
-      title={logician.title}
-      icon={<Sigma size={16} strokeWidth={2} />}
-      accent={accent}
-      closingLine={logician.closing}
-    >
-      <div style={treeWrap}>
-        <div style={rootNode}>
-          <span style={rootLabel}>
-            <ScrollText size={15} strokeWidth={2} style={{ color: accent, flexShrink: 0 }} />
-            {logician.root.label}
-          </span>
-          <span style={rootSubtitle}>{logician.root.subtitle}</span>
-        </div>
+    <FrText>
+      <MethodFrame
+        title={logician.title}
+        icon={<Sigma size={16} strokeWidth={2} />}
+        accent={accent}
+        closingLine={logician.closing}
+      >
+        <div style={treeWrap}>
+          <div style={rootNode}>
+            <span style={rootLabel}>
+              <ScrollText size={15} strokeWidth={2} style={{ color: accent, flexShrink: 0 }} />
+              {logician.root.label}
+            </span>
+            <span style={rootSubtitle}>{logician.root.subtitle}</span>
+          </div>
 
-        <ArrowDown size={16} strokeWidth={2} style={{ color: withOpacity(accent, 0.5) }} />
+          <ArrowDown size={16} strokeWidth={2} style={{ color: withOpacity(accent, 0.5) }} />
 
-        <div style={forkWrap}>
-          <div style={busLine} />
-          <div style={drop("left")} />
-          <div style={drop("right")} />
-        </div>
+          <div style={forkWrap}>
+            <div style={busLine} />
+            <div style={drop("left")} />
+            <div style={drop("right")} />
+          </div>
 
-        <div style={childrenGrid}>
-          {renderChild(logician.thales)}
-          {renderChild(logician.pythagoras)}
+          <div style={childrenGrid}>
+            {renderChild(logician.thales)}
+            {renderChild(logician.pythagoras)}
+          </div>
         </div>
-      </div>
-    </MethodFrame>
+      </MethodFrame>
+    </FrText>
   );
 };
