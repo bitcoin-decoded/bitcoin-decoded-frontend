@@ -4,4 +4,4 @@
 // `isChapterLocked` stay internal on purpose: four surfaces gate on this rule,
 // and every extra export is a place where a fifth reading could grow.
 export { useChapterLock, useLockedRouteGuard } from "./hooks";
-export type { ChapterLock, LockReason } from "./types";
+export type { ChapterLock } from "./types";

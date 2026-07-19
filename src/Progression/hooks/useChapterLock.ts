@@ -4,7 +4,7 @@ import { useBadges } from "../../Achievements";
 import { useTranslation } from "../../I18n";
 import { getNavigationTree, type RouteName } from "../../Routing";
 import { getModuleFrontier, isChapterLocked } from "../helpers";
-import type { ChapterLock, LockReason } from "../types";
+import type { ChapterLock } from "../types";
 
 /**
  * The single reading of sequential progression.
@@ -34,20 +34,5 @@ export const useChapterLock = (): ChapterLock => {
     [tree, isSealed],
   );
 
-  const lockReason = useCallback(
-    (id: RouteName): LockReason | null => {
-      const frontier = getModuleFrontier(tree, isSealed, id);
-      if (!frontier) return null;
-
-      const index = frontier.chapters.indexOf(id);
-      if (index <= frontier.frontierIndex) return null;
-
-      // What stands in the way is the frontier itself: seal it and the way
-      // moves one chapter further.
-      return { blockedBy: frontier.frontierId };
-    },
-    [tree, isSealed],
-  );
-
-  return { isLocked, nextAvailableChapter, lockReason };
+  return { isLocked, nextAvailableChapter };
 };

@@ -1,7 +1,5 @@
 import type { RouteName } from "../../Routing";
 
-import type { LockReason } from "./LockReason";
-
 /**
  * The domain's whole public surface. Every gated surface — navbar, chapter
  * rail, next button, route guard — answers its question through these, so the
@@ -15,6 +13,4 @@ export type ChapterLock = {
    * link redirects. Null for pages outside any module.
    */
   nextAvailableChapter: (id: RouteName) => RouteName | null;
-  /** Null when the chapter is open. */
-  lockReason: (id: RouteName) => LockReason | null;
 };
