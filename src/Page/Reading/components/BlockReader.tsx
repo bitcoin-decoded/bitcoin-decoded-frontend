@@ -53,6 +53,11 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
   );
   const blockCount = blocks.length;
 
+  // The badge is read *before* the reader hook, because it is what decides
+  // where an arriving reader lands (see `getChapterState`).
+  const { award, isEarned } = useBadges();
+  const badgeEarned = isEarned(chapterId);
+
   const {
     containerRef,
     maxRevealed,
@@ -66,12 +71,11 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     jump,
     finish,
     replay,
-  } = useBlockReader({ chapterId, blockCount });
+  } = useBlockReader({ chapterId, blockCount, badgeEarned });
 
   // First-ever completion of this chapter unlocks its badge (idempotent - a
   // revisit or replay never re-awards). The badge's unlock overlay is the
   // completion celebration.
-  const { award } = useBadges();
   useEffect(() => {
     if (finished) award(chapterId);
   }, [finished, award, chapterId]);
