@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 import { useTranslation } from "../../I18n";
-import { ROUTE_NAME, useRouterContext } from "../../Routing";
-import { getPageSeo } from "../data";
+import { useRouterContext } from "../../Routing";
+import { BRANDED_ROUTES, getPageSeo } from "../data";
 import { buildPageTitle } from "../helpers";
 
 /**
@@ -17,14 +17,14 @@ export const usePageHead = () => {
   const { language } = useTranslation();
 
   const seo = getPageSeo(currentPage, language);
-  const isHome = currentPage === ROUTE_NAME.HomePage;
+  const withBrand = BRANDED_ROUTES.has(currentPage);
 
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
   return {
-    title: buildPageTitle(seo.title, isHome),
+    title: buildPageTitle(seo.title, withBrand),
     description: seo.description,
     locale: language === "fr" ? "fr_FR" : "en_US",
   };
