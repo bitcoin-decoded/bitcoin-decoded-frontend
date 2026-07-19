@@ -1,7 +1,6 @@
 import { type CSSProperties, type FC, Fragment, type JSX } from "react";
 
 import { type NavigationItem } from "../../../Routing";
-import { Badge } from "../../components";
 import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
 import { BRAND, getTypography, type ThemeColors } from "../../Theme";
@@ -203,15 +202,12 @@ export const NavItem: FC<Props> = ({
 
         <span style={isModule ? moduleLabelStyle : chapterLabelStyle}>{item.label}</span>
 
+        {/* The stamp alone says "quiz" — the word beside it was redundant. */}
         {isChallenge && (
-          <Badge
-            size="sm"
-            color={moduleColor}
-            icon={<DoodleStamp size={16} />}
-            style={{ flexShrink: 0, marginLeft: "auto" }}
-          >
-            Quiz
-          </Badge>
+          <DoodleStamp
+            size={22}
+            style={{ flexShrink: 0, marginLeft: "auto", color: moduleColor }}
+          />
         )}
         {isChapter && !isChallenge && isComplete && (
           <DoodleCheck size={18} style={{ marginLeft: "auto", flexShrink: 0, color: gold }} />

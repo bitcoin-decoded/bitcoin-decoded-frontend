@@ -38,7 +38,7 @@ export const Bitcoin1Page: FC = () => {
   const charIconProps = { size: 15, strokeWidth: 2 } as const;
 
   return (
-    <PageTemplate title={t("nav.tree.howBitcoinWorks")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.howBitcoinWorks")}>
       <BlockReader chapterId={ROUTE_NAME.Bitcoin_1}>
         <Block>
           <ChapterPrelude marginBottom="1.5rem">

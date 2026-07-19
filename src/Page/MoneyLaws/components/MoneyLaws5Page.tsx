@@ -18,7 +18,7 @@ export const MoneyLaws5Page: FC = () => {
   const fr = language === "fr";
 
   return (
-    <PageTemplate title={t("nav.tree.austrianMethod")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.austrianMethod")}>
       <BlockReader chapterId={ROUTE_NAME.MoneyLaws_5}>
         <Block>
           <ChapterPrelude marginBottom="1.5rem">

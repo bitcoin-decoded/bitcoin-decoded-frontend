@@ -19,7 +19,7 @@ export const Bitcoin2Page: FC = () => {
   const { isActive: isQuizSolved, activate: onQuizSolved } = useToggleSimulator();
 
   return (
-    <PageTemplate title={t("nav.tree.whyBitcoin")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.whyBitcoin")}>
       <BlockReader chapterId={ROUTE_NAME.Bitcoin_2}>
         <Block>
           <ChapterPrelude marginBottom="1.5rem">

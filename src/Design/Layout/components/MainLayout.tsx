@@ -44,10 +44,11 @@ export const MainLayout: FC<{
   // The nav is chrome: it must never be brighter than the column it frames.
   // `background.primary` is the darkest surface in dark mode but the lightest
   // in light mode, so the one token recedes in dark and glares in light. In
-  // light the nav takes the same cream paper as the reading column instead.
+  // light it takes the deepest cream, a step below the reading column — the
+  // two shared a tone before, which read flat against the lighter header.
   const navContainerStyle: CSSProperties = {
     backgroundColor:
-      theme === "dark" ? colors.base.background.primary : colors.base.background.secondary,
+      theme === "dark" ? colors.base.background.primary : colors.base.background.tertiary,
     color: colors.base.text.secondary,
     width: "18rem",
     flexShrink: 0,

@@ -35,10 +35,9 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose, isChapterComplete }) => 
     left: 0,
     width: "100vw",
     height: "calc(100vh - 3.5rem)",
-    // Same cream paper as the desktop nav and the reading column (see
-    // MainLayout): `background.primary` glares in light mode.
+    // Same deep cream as the desktop nav (see MainLayout).
     backgroundColor:
-      theme === "dark" ? colors.base.background.primary : colors.base.background.secondary,
+      theme === "dark" ? colors.base.background.primary : colors.base.background.tertiary,
     zIndex: 100,
     transform: isOpen ? "translateX(0)" : "translateX(-100%)",
     transition: "transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1)",

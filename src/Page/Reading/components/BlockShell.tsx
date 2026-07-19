@@ -50,7 +50,9 @@ export const BlockShell: FC<Props> = ({
   const readable = !isCurrent;
 
   const sectionStyle: CSSProperties = {
-    opacity: isCurrent ? 1 : isHovered ? 0.7 : 0.5,
+    // A read block should all but disappear: the eye belongs on the current
+    // one. Hover brings it back enough to read before clicking into it.
+    opacity: isCurrent ? 1 : isHovered ? 0.7 : 0.25,
     cursor: readable ? "pointer" : "default",
     transition: "opacity 0.4s var(--ease-smooth)",
     // Anchor offset: clears the sticky header (3.5rem + signature rule)

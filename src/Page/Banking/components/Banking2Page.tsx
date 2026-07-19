@@ -14,7 +14,7 @@ export const Banking2Page: FC = () => {
   const fr = language === "fr";
 
   return (
-    <PageTemplate title={t("nav.tree.twoLevels")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.twoLevels")}>
       <BlockReader chapterId={ROUTE_NAME.Banking_2}>
         {/* BLOC 1 - Le virement fantôme : la question d'accroche (prélude). */}
         <Block>

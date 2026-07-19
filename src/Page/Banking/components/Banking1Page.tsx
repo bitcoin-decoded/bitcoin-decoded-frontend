@@ -12,7 +12,7 @@ export const Banking1Page: FC = () => {
   const fr = language === "fr";
 
   return (
-    <PageTemplate title={t("nav.tree.moneyOrigin")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.moneyOrigin")}>
       <BlockReader chapterId={ROUTE_NAME.Banking_1}>
         <Block>
           <ChapterPrelude marginBottom="1.5rem">

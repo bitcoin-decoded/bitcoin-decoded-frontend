@@ -11,7 +11,7 @@ export const GetStartedPage: FC = () => {
   const fr = language === "fr";
 
   return (
-    <PageTemplate title={t("nav.tree.getStarted")} showChapterNav={false}>
+    <PageTemplate title={t("nav.tree.getStarted")}>
       <BlockReader chapterId={ROUTE_NAME.GetStarted}>
         <Block>
           <p>

@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Button, Caption, usePageTheme, withOpacity } from "../../../Design";
+import { Button, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
 import { DoodleArrowDown, DoodleArrowUp } from "@doodle";
@@ -25,6 +25,7 @@ type Props = {
 export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, onFinish }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
+  const isMobile = useBreakpoint() === "mobile";
 
   // Bring the module identity color back onto the navigation controls (violet
   // on MoneyLaws, blue on Banking, …). On neutral pages `undefined` lets the
@@ -41,10 +42,13 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
     marginTop: "1.75rem",
   };
 
+  // Stacked and edge-aligned on a phone. The old single row wrapped, and the
+  // next button carried `margin-left: auto`, so the two ended up staggered on
+  // opposite sides instead of reading as a pair.
   const rowStyle: CSSProperties = {
     display: "flex",
-    alignItems: "center",
-    flexWrap: "wrap",
+    flexDirection: isMobile ? "column" : "row",
+    alignItems: isMobile ? "stretch" : "center",
     gap: "0.85rem",
   };
 
@@ -70,15 +74,22 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
             color={moduleColor}
             icon={<DoodleArrowUp size={24} />}
             hideBrackets
+            fullWidth={isMobile}
             onClick={onPrev}
             style={{ opacity: 0.75 }}
           >
             {t("reading.previous")}
           </Button>
         )}
-        <div style={{ marginLeft: "auto" }}>
+        <div style={{ marginLeft: isMobile ? undefined : "auto" }}>
           {isLast ? (
-            <Button variant="stamped" color={moduleColor} disabled={locked} onClick={onFinish}>
+            <Button
+              variant="stamped"
+              color={moduleColor}
+              disabled={locked}
+              fullWidth={isMobile}
+              onClick={onFinish}
+            >
               {t("reading.finish")}
             </Button>
           ) : (
@@ -88,6 +99,7 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
               icon={<DoodleArrowDown size={24} />}
               iconPosition="right"
               hideBrackets
+              fullWidth={isMobile}
               disabled={locked}
               onClick={onNext}
             >

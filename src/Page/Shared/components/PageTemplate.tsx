@@ -12,6 +12,7 @@ import { FrText } from "../../../I18n";
 import { useChapterKicker } from "../hooks";
 
 import { ChapterPrelude } from "./ChapterPrelude";
+import { ModuleProgress } from "./ModuleProgress";
 import { PageNavigation } from "./PageNavigation";
 import { ReadingTimeBadge } from "./ReadingTimeBadge";
 
@@ -22,21 +23,14 @@ type Props = {
    * Show the "X min" reading-time badge under the title.
    * Default `true`. Pass `false` for chapters that aren't a read (quizzes).
    */
-  showReadingTime?: boolean;
-  /**
-   * Render the chapter prev/next navigation at the foot of the page.
-   * Default `true`. Block-reading chapters pass `false` and let `BlockReader`
-   * surface it only once the chapter is finished.
-   */
-  showChapterNav?: boolean;
+  showReadingTime?: boolean;
   children: ReactNode;
 };
 
 export const PageTemplate: FC<Props> = ({
   title,
   prelude,
-  showReadingTime = true,
-  showChapterNav = true,
+  showReadingTime = true,
   children,
 }) => {
   const { colors, moduleTheme } = usePageTheme();
@@ -128,10 +122,15 @@ export const PageTemplate: FC<Props> = ({
           <FrText>{prelude}</FrText>
         </ChapterPrelude>
       )}
+      {/* Directly above the block ribbon: the two rails read as a pair — this
+       *  one moves between chapters, the one below between blocks. */}
+      <ModuleProgress />
       <section className="page-content" style={sectionStyle}>
         <FrText>{children}</FrText>
       </section>
-      {showChapterNav && <PageNavigation />}
+      {/* Always rendered. It used to be hidden on block-reading chapters, which
+       *  left no way out of a chapter until every block had been revealed. */}
+      <PageNavigation />
     </div>
   );
 };
