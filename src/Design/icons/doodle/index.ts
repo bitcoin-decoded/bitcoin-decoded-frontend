@@ -41,6 +41,7 @@ export { DoodleHandshake } from "./DoodleHandshake";
 export { DoodleHourglass } from "./DoodleHourglass";
 export { DoodleIcon, type DoodleIconProps } from "./DoodleIcon";
 export { DoodleKey } from "./DoodleKey";
+export { DoodleLock } from "./DoodleLock";
 export { DoodleMagicHat } from "./DoodleMagicHat";
 export { DoodleMining } from "./DoodleMining";
 export { DoodleMoneyBag } from "./DoodleMoneyBag";
