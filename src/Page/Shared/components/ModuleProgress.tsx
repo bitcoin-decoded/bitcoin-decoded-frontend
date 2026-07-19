@@ -90,16 +90,22 @@ export const ModuleProgress: FC = () => {
   ): CSSProperties => ({
     ...typo.figure,
     fontFamily: BRAND.fonts.mono,
-    // Only the chapter being read wears the module colour; the others are gold.
-    // A locked one is dimmed well below both: that dimming, with the dead click,
-    // is what carries the state. The padlock beside it only confirms it.
+    // Only the chapter being read wears the module colour; the others carry the
+    // block ribbon's full gold, which is what makes that rail readable at a
+    // glance.
+    //
+    // A locked one steps down only slightly. That deliberately shifts the weight
+    // of the state onto the padlock and the dead click: dimming far enough to
+    // signal "closed" on its own also dimmed it far enough to have to hunt for
+    // the number, and a number you cannot read is not a quieter number, it is a
+    // missing one.
     color: isLocked
-      ? withOpacity(gold, 0.4)
+      ? withOpacity(gold, 0.8)
       : isCurrent
         ? moduleAccent
         : isHovered
           ? gold
-          : withOpacity(gold, 0.72),
+          : withOpacity(gold, 0.95),
     letterSpacing: "0.06em",
     transition: "color 0.2s var(--ease-smooth)",
   });
@@ -117,7 +123,7 @@ export const ModuleProgress: FC = () => {
     position: "absolute",
     right: -lockSize * 0.6,
     bottom: -lockSize * 0.35,
-    color: withOpacity(gold, 0.55),
+    color: withOpacity(gold, 0.8),
     pointerEvents: "none",
   };
 

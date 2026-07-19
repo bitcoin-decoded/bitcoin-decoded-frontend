@@ -55,10 +55,10 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     flexDirection: align === "left" ? "row" : "row-reverse",
     flex: 1,
     padding: isMobile ? "0.85rem 1rem" : "0.95rem 1.15rem",
-    border: `1px solid ${isHovered ? withOpacity(moduleAccent, 0.6) : withOpacity(colors.base.text.primary, 0.14)}`,
+    border: `1px solid ${isHovered ? withOpacity(moduleAccent, 0.7) : withOpacity(colors.base.text.primary, 0.3)}`,
     background: "transparent",
     cursor: locked ? "not-allowed" : "pointer",
-    opacity: locked ? 0.55 : 1,
+    opacity: locked ? 0.85 : 1,
     transition: "border-color 0.25s var(--ease-smooth)",
     textAlign: align,
   };
@@ -70,7 +70,7 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     fontWeight: 400,
     fontVariant: "small-caps",
     letterSpacing: "0.1em",
-    color: isHovered ? moduleAccent : colors.base.text.secondary,
+    color: isHovered ? moduleAccent : withOpacity(colors.base.text.primary, 0.75),
     transition: "color 0.25s var(--ease-smooth)",
   };
 
@@ -85,8 +85,8 @@ export const NavButton: FC<Props> = ({ page, type }) => {
   };
 
   const titleStyle: CSSProperties = {
+    ...typo.label,
     fontFamily: BRAND.fonts.body,
-    fontSize: isMobile ? "0.95rem" : "1.05rem",
     color: colors.base.text.primary,
     lineHeight: 1.25,
   };
