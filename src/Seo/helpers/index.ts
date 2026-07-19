@@ -1,0 +1,1 @@
+export { buildPageTitle } from "./buildPageTitle";
