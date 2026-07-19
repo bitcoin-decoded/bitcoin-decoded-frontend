@@ -1,7 +1,8 @@
 // Sequential progression, stated once.
 //
-// Only the hooks cross the domain boundary. `getModuleFrontier` and
-// `isChapterLocked` stay internal on purpose: four surfaces gate on this rule,
-// and every extra export is a place where a fifth reading could grow.
-export { useChapterLock, useLockedRouteGuard } from "./hooks";
-export type { ChapterLock } from "./types";
+// `getModuleFrontier` and `isChapterOutOfSequence` stay internal on purpose:
+// several surfaces gate on this rule, and every extra export is a place where a
+// second reading of it could grow.
+export { OutOfSequenceNotice } from "./components";
+export { useChapterProgression, useResumeOffer } from "./hooks";
+export type { ChapterProgression, ResumePoint } from "./types";

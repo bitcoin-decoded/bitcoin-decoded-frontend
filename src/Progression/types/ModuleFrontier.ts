@@ -6,6 +6,6 @@ export type ModuleFrontier = {
   chapters: RouteName[];
   /** Index of the deepest chapter the reader may open. */
   frontierIndex: number;
-  /** The chapter at that index — where a locked link sends the reader. */
+  /** The chapter at that index, which is what an out-of-order reader is offered. */
   frontierId: RouteName;
 };

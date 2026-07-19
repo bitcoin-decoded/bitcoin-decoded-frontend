@@ -24,10 +24,11 @@ type Props = {
   /** Chapter is finished (its badge is earned). Drives the completion check. */
   isComplete?: boolean;
   /**
-   * Chapter sits past its module's frontier. The rule itself is computed once in
-   * `Progression` and injected by the shell — Design only renders the verdict.
+   * Chapter sits past its module's frontier. Reading it is never refused, but
+   * the in-app path to it is not offered. The rule is computed once in
+   * `Progression` and injected by the shell; Design only renders the verdict.
    */
-  isLocked?: boolean;
+  isOutOfSequence?: boolean;
   colors: ThemeColors;
   onItemClick: (item: NavigationItem) => void;
   onInteractionStart: (id: string) => void;
@@ -45,7 +46,7 @@ export const NavItem: FC<Props> = ({
   isExpanded,
   isInteracting,
   isComplete = false,
-  isLocked = false,
+  isOutOfSequence = false,
   colors,
   onItemClick,
   onInteractionStart,
@@ -71,10 +72,10 @@ export const NavItem: FC<Props> = ({
     paddingLeft: isChapter ? "1.5rem" : "1.25rem",
     paddingRight: "1rem",
     textAlign: "left",
-    cursor: isLocked ? "not-allowed" : "pointer",
+    cursor: isOutOfSequence ? "not-allowed" : "pointer",
     // The state is carried by the dimming and the dead click; the padlock is a
     // redundant cue on top, not the thing doing the work.
-    opacity: isLocked ? 0.45 : 1,
+    opacity: isOutOfSequence ? 0.45 : 1,
     border: "none",
     borderRadius: 0,
     background:
@@ -183,9 +184,9 @@ export const NavItem: FC<Props> = ({
     <Fragment key={itemId}>
       <button
         style={buttonStyle}
-        onClick={() => !isLocked && onItemClick(item)}
-        aria-disabled={isLocked || undefined}
-        aria-label={isLocked ? `${item.label}, ${t("nav.locked")}` : undefined}
+        onClick={() => !isOutOfSequence && onItemClick(item)}
+        aria-disabled={isOutOfSequence || undefined}
+        aria-label={isOutOfSequence ? `${item.label}, ${t("nav.locked")}` : undefined}
         onMouseEnter={() => onInteractionStart(itemId)}
         onMouseLeave={onInteractionEnd}
         onFocus={() => onInteractionStart(itemId)}
@@ -225,7 +226,7 @@ export const NavItem: FC<Props> = ({
         {isChapter && !isChallenge && isComplete && (
           <DoodleCheck size={18} style={{ marginLeft: "auto", flexShrink: 0, color: gold }} />
         )}
-        {isChapter && isLocked && (
+        {isChapter && isOutOfSequence && (
           <DoodleLock
             size={18}
             aria-hidden

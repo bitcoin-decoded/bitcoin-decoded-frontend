@@ -1,2 +1,2 @@
 export { getModuleFrontier } from "./getModuleFrontier";
-export { isChapterLocked } from "./isChapterLocked";
+export { isChapterOutOfSequence } from "./isChapterOutOfSequence";
