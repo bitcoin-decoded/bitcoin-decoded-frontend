@@ -3,7 +3,6 @@ const fr = {
   "header.homeAriaLabel": "Retour à la page d'accueil",
   "nav.title": "Navigation",
   "nav.locked": "Termine le chapitre précédent pour débloquer",
-  "nav.lockedHere": "Termine ce chapitre pour débloquer",
   "nav.lockedShort": "Verrouillé",
   "nav.previous": "Précédent",
   "nav.next": "Suivant",

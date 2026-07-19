@@ -34,16 +34,13 @@ export const NavButton: FC<Props> = ({ page, type }) => {
   const isMobile = breakpoint === "mobile";
   const typo = getTypography(breakpoint);
   const { t } = useTranslation();
-  const { currentPage, setCurrentPage } = useRouterContext();
-  const { isLocked, lockReason } = useChapterLock();
+  const { setCurrentPage } = useRouterContext();
+  const { isLocked } = useChapterLock();
   const [hovered, setHovered] = useState(false);
 
   // Same verdict as the navbar and the rail, read from the one place that
   // states it.
   const locked = isLocked(page.id);
-  // What stands in the way is usually the chapter being read right now, so
-  // "finish the previous one" would be wrong exactly where this button sits.
-  const blockedByThisPage = lockReason(page.id)?.blockedBy === currentPage;
 
   const gold = getBrandGold(theme);
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
@@ -77,6 +74,16 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     transition: "color 0.25s var(--ease-smooth)",
   };
 
+  // The chevron keeps the outer edge in both directions, so it still reads as
+  // "back" on the left and "forward" on the right with the padlock beside it.
+  const iconGroupStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: align === "left" ? "row" : "row-reverse",
+    gap: "0.4rem",
+    flexShrink: 0,
+  };
+
   const titleStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
     fontSize: isMobile ? "0.95rem" : "1.05rem",
@@ -92,11 +99,16 @@ export const NavButton: FC<Props> = ({ page, type }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {locked ? (
-        <DoodleLock size={isMobile ? 18 : 20} style={{ flexShrink: 0, color: moduleAccent }} />
-      ) : (
-        <Icon size={isMobile ? 17 : 19} strokeWidth={2} style={{ flexShrink: 0, color: moduleAccent }} />
-      )}
+      <span style={iconGroupStyle}>
+        <Icon
+          size={isMobile ? 17 : 19}
+          strokeWidth={2}
+          style={{ flexShrink: 0, color: moduleAccent }}
+        />
+        {locked && (
+          <DoodleLock size={isMobile ? 16 : 18} style={{ flexShrink: 0, color: moduleAccent }} />
+        )}
+      </span>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem", flex: 1 }}>
         <span style={labelStyle}>
           {locked
@@ -105,9 +117,7 @@ export const NavButton: FC<Props> = ({ page, type }) => {
               ? t("nav.previous")
               : t("nav.next")}
         </span>
-        <span style={titleStyle}>
-          {locked ? t(blockedByThisPage ? "nav.lockedHere" : "nav.locked") : page.label}
-        </span>
+        <span style={titleStyle}>{locked ? t("nav.locked") : page.label}</span>
       </div>
     </button>
   );

@@ -88,7 +88,7 @@ export const ModuleProgress: FC = () => {
     isHovered: boolean,
     isLocked: boolean,
   ): CSSProperties => ({
-    ...typo.micro,
+    ...typo.figure,
     fontFamily: BRAND.fonts.mono,
     // Only the chapter being read wears the module colour; the others are gold.
     // A locked one is dimmed well below both: that dimming, with the dead click,
@@ -104,10 +104,9 @@ export const ModuleProgress: FC = () => {
     transition: "color 0.2s var(--ease-smooth)",
   });
 
-  // Sits at the numeral's bottom-right corner. It reads as secondary through
-  // its position and its 55% gold, not through a size below the 12px floor:
-  // freehand strokes are irregular by design, and under that they stop looking
-  // like a padlock and start looking like a rendering fault.
+  // Sits at the numeral's bottom-right corner, deliberately left at 12 while the
+  // figures moved up a step: the size gap is what makes the padlock read as an
+  // annotation on the number rather than as its equal.
   const lockSize = 12;
   const numeralWrapStyle: CSSProperties = {
     position: "relative",
@@ -169,8 +168,8 @@ export const ModuleProgress: FC = () => {
   return (
     <nav aria-label={progress.moduleLabel} style={railStyle}>
       <span style={labelWrapStyle}>
-        <DoodleCursorClick size={isMobile ? 20 : 22} aria-hidden />
         <span style={labelStyle}>{t("moduleProgress.label")}</span>
+        <DoodleCursorClick size={isMobile ? 20 : 22} aria-hidden />
       </span>
 
       {progress.chapters.map((chapter, index) => {
