@@ -21,19 +21,19 @@ const anchorFor = (stored: {
 };
 
 describe("getChapterState", () => {
-  it("state 1 — never started", () => {
+  it("state 1: never started", () => {
     expect(getChapterState({ badgeEarned: false, lastVisitedBlock: null })).toBe("unvisited");
   });
 
-  it("state 2 — started, badge not earned", () => {
+  it("state 2: started, badge not earned", () => {
     expect(getChapterState({ badgeEarned: false, lastVisitedBlock: 3 })).toBe("inProgress");
   });
 
-  it("state 2 — started and back on block 01 is still started", () => {
+  it("state 2: started and back on block 01 is still started", () => {
     expect(getChapterState({ badgeEarned: false, lastVisitedBlock: 0 })).toBe("inProgress");
   });
 
-  it("state 3 — badge earned wins over any reading position", () => {
+  it("state 3: badge earned wins over any reading position", () => {
     expect(getChapterState({ badgeEarned: true, lastVisitedBlock: null })).toBe("completed");
     expect(getChapterState({ badgeEarned: true, lastVisitedBlock: 4 })).toBe("completed");
   });
@@ -57,7 +57,7 @@ describe("getArrivalAnchor", () => {
   });
 });
 
-describe("readLastVisitedBlock — migrating records written before the field", () => {
+describe("readLastVisitedBlock: migrating records written before the field", () => {
   it("treats a chapter merely opened as never started", () => {
     expect(
       readLastVisitedBlock({ maxRevealed: 0, current: 0, done: [], finished: false }),

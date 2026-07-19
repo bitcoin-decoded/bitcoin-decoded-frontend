@@ -140,7 +140,7 @@ const en = {
     "A teaching simplification. In reality, a Bitcoin block contains thousands of transactions, all summed up in the Merkle root. Here we show only one so the mechanism stays readable. Don't worry, the principle is exactly the same.",
   "chain.noteTitle": "Why editing one transaction breaks the whole chain",
   "chain.note":
-    "Each block's hash is computed by applying SHA-256 twice to its header — not directly to its transactions. Transactions are first condensed into a Merkle root, which is then placed in the header. Modifying a single transaction changes the Merkle root, hence the header, hence the block hash — and every subsequent block now points to a hash that no longer exists. The whole chain collapses.",
+    "Each block's hash is computed by applying SHA-256 twice to its header, not directly to its transactions. Transactions are first condensed into a Merkle root, which is then placed in the header. Modifying a single transaction changes the Merkle root, hence the header, hence the block hash. Every subsequent block now points to a hash that no longer exists. The whole chain collapses.",
 
   // MiningSimulator
   "mining.title": "Mining simulator",

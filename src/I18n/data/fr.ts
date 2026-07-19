@@ -141,7 +141,7 @@ const fr = {
     "Simplification pédagogique. Dans la réalité, un bloc Bitcoin contient des milliers de transactions, toutes résumées dans la racine de Merkle. Ici, on n'en met qu'une pour que le mécanisme reste lisible. Rassure-toi, le principe est exactement le même.",
   "chain.noteTitle": "Pourquoi modifier une transaction casse toute la chaîne",
   "chain.note":
-    "Le hash de chaque bloc est calculé en appliquant un double SHA-256 à son en-tête — pas directement à ses transactions. Les transactions sont d'abord condensées en une racine de Merkle, qui est placée dans l'en-tête. Modifier une seule transaction change la racine de Merkle, donc l'en-tête, donc le hash du bloc — et tous les blocs suivants pointent alors vers un hash qui n'existe plus. La chaîne entière s'effondre.",
+    "Le hash de chaque bloc est calculé en appliquant un double SHA-256 à son en-tête, pas directement à ses transactions. Les transactions sont d'abord condensées en une racine de Merkle, qui est placée dans l'en-tête. Modifier une seule transaction change la racine de Merkle, donc l'en-tête, donc le hash du bloc. Tous les blocs suivants pointent alors vers un hash qui n'existe plus. La chaîne entière s'effondre.",
 
   // MiningSimulator
   "mining.title": "Simulateur de minage",
