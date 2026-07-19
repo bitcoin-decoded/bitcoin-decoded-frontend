@@ -5,6 +5,7 @@ import { MainLayout, ThemeProvider } from "./Design";
 import { LanguageProvider } from "./I18n";
 import { useChapterLock, useLockedRouteGuard } from "./Progression";
 import { AppRouter, type RouteName, RouterProvider } from "./Routing";
+import { PageHead } from "./Seo";
 
 // Composition bridge: sits inside BadgeProvider so it can read badge state and
 // inject "is this chapter finished?" into the layout — this is how the nav marks
@@ -24,6 +25,8 @@ const AppShell: FC = () => {
          from a NavigationItem, so it is a route. */
       isChapterLocked={(id) => isLocked(id as RouteName)}
     >
+      {/* React 19 hoists what this renders into <head>. */}
+      <PageHead />
       {/* A refused chapter is never rendered, not even for the frame it would
           take the guard to redirect. */}
       {isRedirecting ? null : <AppRouter />}

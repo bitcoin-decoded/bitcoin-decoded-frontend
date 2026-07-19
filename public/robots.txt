@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Sitemap declared once the static prerender ships it (phase 5).
