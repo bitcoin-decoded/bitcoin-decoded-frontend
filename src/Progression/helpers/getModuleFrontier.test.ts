@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import type { NavigationItem, RouteName } from "../../Routing";
 
 import { getModuleFrontier } from "./getModuleFrontier";
-import { isChapterLocked } from "./isChapterLocked";
+import { isChapterOutOfSequence } from "./isChapterOutOfSequence";
 
 const chapter = (id: string): NavigationItem => ({ id: id as RouteName, label: id, isPage: true });
 
@@ -30,8 +30,8 @@ const sealedBy =
 const frontierOf = (routeId: string, ...sealed: string[]) =>
   getModuleFrontier(TREE, sealedBy(...sealed), routeId as RouteName);
 
-const locked = (routeId: string, ...sealed: string[]) =>
-  isChapterLocked(TREE, sealedBy(...sealed), routeId as RouteName);
+const ahead = (routeId: string, ...sealed: string[]) =>
+  isChapterOutOfSequence(TREE, sealedBy(...sealed), routeId as RouteName);
 
 describe("getModuleFrontier", () => {
   it("puts an untouched module's frontier on its first chapter", () => {
@@ -51,10 +51,10 @@ describe("getModuleFrontier", () => {
   });
 
   it("reads each module independently", () => {
-    // Module A fully sealed must not open module B past its first chapter...
+    // Module A fully sealed must not advance module B past its first chapter...
     expect(frontierOf("b-1", "a-1", "a-2", "a-3", "a-quiz")).toMatchObject({ frontierId: "b-1" });
-    // ...and an untouched module A must not close module B either.
-    expect(locked("b-1")).toBe(false);
+    // ...and an untouched module A must not hold module B back either.
+    expect(ahead("b-1")).toBe(false);
   });
 
   it("returns null for a page outside any module", () => {
@@ -63,36 +63,37 @@ describe("getModuleFrontier", () => {
   });
 });
 
-describe("isChapterLocked", () => {
-  it("opens chapter 01 of every module from the start", () => {
-    expect(locked("a-1")).toBe(false);
-    expect(locked("b-1")).toBe(false);
+describe("isChapterOutOfSequence", () => {
+  it("puts chapter 01 of every module in sequence from the start", () => {
+    expect(ahead("a-1")).toBe(false);
+    expect(ahead("b-1")).toBe(false);
   });
 
-  it("closes the chapter after the frontier", () => {
-    expect(locked("a-2")).toBe(true);
-    expect(locked("a-2", "a-1")).toBe(false);
+  it("puts the chapter after the frontier out of sequence", () => {
+    expect(ahead("a-2")).toBe(true);
+    expect(ahead("a-2", "a-1")).toBe(false);
   });
 
-  it("closes everything past the frontier, not just the next one", () => {
-    expect(locked("a-3")).toBe(true);
-    expect(locked("a-quiz")).toBe(true);
+  it("puts everything past the frontier out of sequence, not just the next one", () => {
+    expect(ahead("a-3")).toBe(true);
+    expect(ahead("a-quiz")).toBe(true);
   });
 
-  it("gates the end-of-module quiz behind the last chapter, with no special case", () => {
-    expect(locked("a-quiz", "a-1", "a-2")).toBe(true);
-    expect(locked("a-quiz", "a-1", "a-2", "a-3")).toBe(false);
+  it("places the end-of-module quiz behind the last chapter, with no special case", () => {
+    expect(ahead("a-quiz", "a-1", "a-2")).toBe(true);
+    expect(ahead("a-quiz", "a-1", "a-2", "a-3")).toBe(false);
   });
 
-  it("never gates a page outside a module", () => {
-    expect(locked("home")).toBe(false);
+  it("never puts a page outside a module out of sequence", () => {
+    expect(ahead("home")).toBe(false);
   });
 
   it("keeps one boundary when the sealed history has a hole", () => {
-    // Sealed 1 and 3 but not 2 — the per-chapter reading ("is my predecessor
-    // sealed?") would open a-quiz while a-3 stays shut. The frontier does not.
-    expect(locked("a-2", "a-1", "a-3")).toBe(false);
-    expect(locked("a-3", "a-1", "a-3")).toBe(true);
-    expect(locked("a-quiz", "a-1", "a-3")).toBe(true);
+    // Sealed 1 and 3 but not 2. The per-chapter reading ("is my predecessor
+    // sealed?") would place a-quiz in sequence while a-3 stays out of it. The
+    // frontier cannot: it is a single boundary.
+    expect(ahead("a-2", "a-1", "a-3")).toBe(false);
+    expect(ahead("a-3", "a-1", "a-3")).toBe(true);
+    expect(ahead("a-quiz", "a-1", "a-3")).toBe(true);
   });
 });

@@ -1,2 +1,2 @@
-export { useChapterLock } from "./useChapterLock";
-export { useLockedRouteGuard } from "./useLockedRouteGuard";
+export { useChapterProgression } from "./useChapterProgression";
+export { useResumeOffer } from "./useResumeOffer";

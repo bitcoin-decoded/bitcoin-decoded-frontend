@@ -2,6 +2,10 @@ const en = {
   // Layout
   "header.homeAriaLabel": "Back to homepage",
   "nav.title": "Navigation",
+  "progression.notice.title": "You are joining a course midway",
+  "progression.notice.body": "This chapter builds on the ones before it. You can read it now, but it will not count towards your progress until the earlier chapters are done.",
+  "progression.notice.resume": "Resume at chapter",
+  "progression.notice.start": "Start from the beginning",
   "nav.locked": "Finish the previous chapter to unlock",
   "nav.lockedShort": "Locked",
   "nav.previous": "Previous",

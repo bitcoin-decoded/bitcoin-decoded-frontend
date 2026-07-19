@@ -12,6 +12,7 @@ import {
 import { useBadges } from "../../../Achievements";
 import { BRAND, Button, getBrandGold, usePageTheme, useThemeContext } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
+import { useResumeOffer } from "../../../Progression";
 import { useBlockReader } from "../hooks";
 
 import { Block } from "./Block";
@@ -57,6 +58,10 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
   // where an arriving reader lands (see `getChapterState`).
   const { award, isEarned } = useBadges();
   const badgeEarned = isEarned(chapterId);
+  // Reading is free, progressing is not. A chapter reached out of order can be
+  // read end to end without ever counting, which is what keeps the sequence
+  // meaningful now that no URL is refused.
+  const { show: outOfSequence, actionLabel: resumeLabel, onAction: onResume } = useResumeOffer();
 
   const {
     containerRef,
@@ -75,10 +80,12 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
 
   // First-ever completion of this chapter unlocks its badge (idempotent - a
   // revisit or replay never re-awards). The badge's unlock overlay is the
-  // completion celebration.
+  // completion celebration. Skipped out of order: the badge is what moves the
+  // frontier, so awarding it here would let a single deep link unlock a whole
+  // module.
   useEffect(() => {
-    if (finished) award(chapterId);
-  }, [finished, award, chapterId]);
+    if (finished && !outOfSequence) award(chapterId);
+  }, [finished, outOfSequence, award, chapterId]);
 
   return (
     <div ref={containerRef}>
@@ -127,9 +134,12 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
                   isFirst={i === 0}
                   isLast={isLast}
                   locked={locked}
+                  outOfSequence={outOfSequence}
+                  resumeLabel={resumeLabel}
                   onPrev={back}
                   onNext={advance}
                   onFinish={finish}
+                  onResume={onResume}
                 />
               )}
             </BlockShell>

@@ -2,6 +2,10 @@ const fr = {
   // Layout
   "header.homeAriaLabel": "Retour à la page d'accueil",
   "nav.title": "Navigation",
+  "progression.notice.title": "Tu entres au milieu d'un parcours",
+  "progression.notice.body": "Ce chapitre s'appuie sur ceux qui le précèdent. Tu peux le lire maintenant, mais il ne comptera pas dans ta progression tant que les précédents ne sont pas terminés.",
+  "progression.notice.resume": "Reprendre au chapitre",
+  "progression.notice.start": "Commencer par le début",
   "nav.locked": "Termine le chapitre précédent pour débloquer",
   "nav.lockedShort": "Verrouillé",
   "nav.previous": "Précédent",

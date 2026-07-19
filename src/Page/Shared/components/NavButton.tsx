@@ -10,7 +10,7 @@ import {
 } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
-import { useChapterLock } from "../../../Progression";
+import { useChapterProgression } from "../../../Progression";
 import { type RouteName, useRouterContext } from "../../../Routing/";
 
 import { DoodleLock } from "@doodle";
@@ -35,12 +35,12 @@ export const NavButton: FC<Props> = ({ page, type }) => {
   const typo = getTypography(breakpoint);
   const { t } = useTranslation();
   const { setCurrentPage } = useRouterContext();
-  const { isLocked } = useChapterLock();
+  const { isOutOfSequence } = useChapterProgression();
   const [hovered, setHovered] = useState(false);
 
   // Same verdict as the navbar and the rail, read from the one place that
   // states it.
-  const locked = isLocked(page.id);
+  const locked = isOutOfSequence(page.id);
 
   const gold = getBrandGold(theme);
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;

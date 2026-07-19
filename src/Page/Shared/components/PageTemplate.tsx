@@ -9,6 +9,7 @@ import {
   withOpacity,
 } from "../../../Design";
 import { FrText } from "../../../I18n";
+import { OutOfSequenceNotice } from "../../../Progression";
 import { useChapterKicker } from "../hooks";
 
 import { ChapterPrelude } from "./ChapterPrelude";
@@ -117,6 +118,7 @@ export const PageTemplate: FC<Props> = ({
         <h1 style={titleStyle}>{title}</h1>
         {showReadingTime && <ReadingTimeBadge />}
       </header>
+      <OutOfSequenceNotice />
       {prelude && (
         <ChapterPrelude marginBottom={space.preludeToBody}>
           <FrText>{prelude}</FrText>

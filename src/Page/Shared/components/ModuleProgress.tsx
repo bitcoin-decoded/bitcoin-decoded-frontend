@@ -86,7 +86,7 @@ export const ModuleProgress: FC = () => {
   const numberStyle = (
     isCurrent: boolean,
     isHovered: boolean,
-    isLocked: boolean,
+    isOutOfSequence: boolean,
   ): CSSProperties => ({
     ...typo.figure,
     fontFamily: BRAND.fonts.mono,
@@ -99,7 +99,7 @@ export const ModuleProgress: FC = () => {
     // signal "closed" on its own also dimmed it far enough to have to hunt for
     // the number, and a number you cannot read is not a quieter number, it is a
     // missing one.
-    color: isLocked
+    color: isOutOfSequence
       ? withOpacity(gold, 0.8)
       : isCurrent
         ? moduleAccent
@@ -158,7 +158,7 @@ export const ModuleProgress: FC = () => {
     );
   };
 
-  const cellStyle = (isCurrent: boolean, isLocked: boolean): CSSProperties => ({
+  const cellStyle = (isCurrent: boolean, isOutOfSequence: boolean): CSSProperties => ({
     display: "inline-flex",
     alignItems: "center",
     gap: isCurrent ? "0.3rem" : 0,
@@ -166,9 +166,9 @@ export const ModuleProgress: FC = () => {
     border: "none",
     borderRadius: 0,
     background: "transparent",
-    cursor: isLocked ? "not-allowed" : isCurrent ? "default" : "pointer",
+    cursor: isOutOfSequence ? "not-allowed" : isCurrent ? "default" : "pointer",
     // Room for the padlock to overhang without colliding with the next link.
-    marginRight: isLocked ? lockSize * 0.5 : 0,
+    marginRight: isOutOfSequence ? lockSize * 0.5 : 0,
   });
 
   return (
@@ -180,7 +180,7 @@ export const ModuleProgress: FC = () => {
 
       {progress.chapters.map((chapter, index) => {
         const isCurrent = chapter.id === currentId;
-        const isLocked = progress.isLocked(chapter.id);
+        const isLocked = progress.isOutOfSequence(chapter.id);
         const isHovered = hovered === chapter.id && !isLocked;
         const figure = chapter.isChallenge
           ? t("moduleProgress.quiz")

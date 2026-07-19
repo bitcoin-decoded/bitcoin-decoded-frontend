@@ -10,9 +10,17 @@ type Props = {
   isFirst: boolean;
   isLast: boolean;
   locked: boolean;
+  /**
+   * The chapter was reached out of order, so it cannot be sealed. The seal CTA
+   * gives way to the offer to join the course, which is the moment the reader
+   * is most likely to accept it: they have just read a whole chapter.
+   */
+  outOfSequence: boolean;
+  resumeLabel: string;
   onPrev: () => void;
   onNext: () => void;
   onFinish: () => void;
+  onResume: () => void;
 };
 
 /**
@@ -22,7 +30,17 @@ type Props = {
  * a `stamped` seal CTA — the literal gold cachet that seals the chapter. A
  * lock hint appears while a tool block hasn't been manipulated.
  */
-export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, onFinish }) => {
+export const BlockNav: FC<Props> = ({
+  isFirst,
+  isLast,
+  locked,
+  outOfSequence,
+  resumeLabel,
+  onPrev,
+  onNext,
+  onFinish,
+  onResume,
+}) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
@@ -82,7 +100,16 @@ export const BlockNav: FC<Props> = ({ isFirst, isLast, locked, onPrev, onNext, o
           </Button>
         )}
         <div style={{ marginLeft: isMobile ? undefined : "auto" }}>
-          {isLast ? (
+          {isLast && outOfSequence ? (
+            <Button
+              variant="primary"
+              color={moduleColor}
+              fullWidth={isMobile}
+              onClick={onResume}
+            >
+              {resumeLabel}
+            </Button>
+          ) : isLast ? (
             <Button
               variant="stamped"
               color={moduleColor}
