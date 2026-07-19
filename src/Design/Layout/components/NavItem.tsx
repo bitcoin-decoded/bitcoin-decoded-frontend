@@ -1,11 +1,12 @@
 import { type CSSProperties, type FC, Fragment, type JSX } from "react";
 
+import { useTranslation } from "../../../I18n";
 import { type NavigationItem } from "../../../Routing";
 import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
 import { BRAND, getTypography, type ThemeColors } from "../../Theme";
 
-import { DoodleCheck, DoodleStamp } from "@doodle";
+import { DoodleCheck, DoodleLock, DoodleStamp } from "@doodle";
 import { ChevronRight } from "@icons";
 
 type Props = {
@@ -22,6 +23,11 @@ type Props = {
   isInteracting: boolean;
   /** Chapter is finished (its badge is earned). Drives the completion check. */
   isComplete?: boolean;
+  /**
+   * Chapter sits past its module's frontier. The rule itself is computed once in
+   * `Progression` and injected by the shell — Design only renders the verdict.
+   */
+  isLocked?: boolean;
   colors: ThemeColors;
   onItemClick: (item: NavigationItem) => void;
   onInteractionStart: (id: string) => void;
@@ -39,6 +45,7 @@ export const NavItem: FC<Props> = ({
   isExpanded,
   isInteracting,
   isComplete = false,
+  isLocked = false,
   colors,
   onItemClick,
   onInteractionStart,
@@ -46,6 +53,7 @@ export const NavItem: FC<Props> = ({
   renderItem,
 }) => {
   const typo = getTypography(useBreakpoint());
+  const { t } = useTranslation();
   const itemId = item.id || item.label;
 
   const isModule = level === 0 && !!item.children;
@@ -63,7 +71,10 @@ export const NavItem: FC<Props> = ({
     paddingLeft: isChapter ? "1.5rem" : "1.25rem",
     paddingRight: "1rem",
     textAlign: "left",
-    cursor: "pointer",
+    cursor: isLocked ? "not-allowed" : "pointer",
+    // The state is carried by the dimming and the dead click; the padlock is a
+    // redundant cue on top, not the thing doing the work.
+    opacity: isLocked ? 0.45 : 1,
     border: "none",
     borderRadius: 0,
     background:
@@ -172,7 +183,9 @@ export const NavItem: FC<Props> = ({
     <Fragment key={itemId}>
       <button
         style={buttonStyle}
-        onClick={() => onItemClick(item)}
+        onClick={() => !isLocked && onItemClick(item)}
+        aria-disabled={isLocked || undefined}
+        aria-label={isLocked ? `${item.label}, ${t("nav.locked")}` : undefined}
         onMouseEnter={() => onInteractionStart(itemId)}
         onMouseLeave={onInteractionEnd}
         onFocus={() => onInteractionStart(itemId)}
@@ -211,6 +224,17 @@ export const NavItem: FC<Props> = ({
         )}
         {isChapter && !isChallenge && isComplete && (
           <DoodleCheck size={18} style={{ marginLeft: "auto", flexShrink: 0, color: gold }} />
+        )}
+        {isChapter && isLocked && (
+          <DoodleLock
+            size={18}
+            aria-hidden
+            style={{
+              marginLeft: isChallenge ? "0.4rem" : "auto",
+              flexShrink: 0,
+              color: colors.base.text.secondary,
+            }}
+          />
         )}
         {item.children && (
           <div style={chevronStyle}>

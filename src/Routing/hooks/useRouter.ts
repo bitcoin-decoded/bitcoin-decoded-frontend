@@ -20,10 +20,15 @@ export const useRouter = (): RouterContextState => {
   // effect here would fire *after* the arriving page had placed itself and would
   // silently undo it. A page that wants another anchor (a part-read chapter,
   // say) can now simply set it on mount and keep it, with nothing to race.
-  const setCurrentPage = useCallback((page: RouteName) => {
+  const setCurrentPage = useCallback((page: RouteName, options?: { replace?: boolean }) => {
     setCurrentPageState(page);
     const hash = page === ROUTE_NAME.HomePage ? "" : `#${page}`;
-    window.history.pushState({ page }, "", `${window.location.pathname}${hash}`);
+    const url = `${window.location.pathname}${hash}`;
+    if (options?.replace) {
+      window.history.replaceState({ page }, "", url);
+    } else {
+      window.history.pushState({ page }, "", url);
+    }
     scrollToTop();
   }, []);
 

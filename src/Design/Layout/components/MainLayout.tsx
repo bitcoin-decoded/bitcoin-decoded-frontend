@@ -14,7 +14,9 @@ export const MainLayout: FC<{
   headerAction?: ReactNode;
   /** Injected from App (badge access) so the nav can mark finished chapters. */
   isChapterComplete?: (id: string) => boolean;
-}> = ({ children, headerAction, isChapterComplete }) => {
+  /** Injected by the shell — Design never reads the progression rule itself. */
+  isChapterLocked?: (id: string) => boolean;
+}> = ({ children, headerAction, isChapterComplete, isChapterLocked }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
   const {
@@ -90,12 +92,13 @@ export const MainLayout: FC<{
           isOpen={isDrawerOpen}
           onClose={closeDrawer}
           isChapterComplete={isChapterComplete}
+          isChapterLocked={isChapterLocked}
         />
       )}
       <div style={bodyContainerStyle}>
         {isDesktop && (
           <div style={navContainerStyle}>
-            <NavBar isChapterComplete={isChapterComplete} />
+            <NavBar isChapterComplete={isChapterComplete} isChapterLocked={isChapterLocked} />
           </div>
         )}
         <main style={mainContentStyle}>{children}</main>

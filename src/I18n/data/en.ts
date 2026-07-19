@@ -2,6 +2,9 @@ const en = {
   // Layout
   "header.homeAriaLabel": "Back to homepage",
   "nav.title": "Navigation",
+  "nav.locked": "Finish the previous chapter to unlock",
+  "nav.lockedHere": "Finish this chapter to unlock",
+  "nav.lockedShort": "Locked",
   "nav.previous": "Previous",
   "nav.next": "Next",
   "theme.toggleAriaLabel.light": "Switch to dark mode",

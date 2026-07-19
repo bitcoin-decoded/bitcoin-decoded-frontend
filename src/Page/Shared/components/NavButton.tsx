@@ -10,8 +10,10 @@ import {
 } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
+import { useChapterLock } from "../../../Progression";
 import { type RouteName, useRouterContext } from "../../../Routing/";
 
+import { DoodleLock } from "@doodle";
 import { ChevronLeft, ChevronRight } from "@icons";
 
 type Props = {
@@ -32,13 +34,22 @@ export const NavButton: FC<Props> = ({ page, type }) => {
   const isMobile = breakpoint === "mobile";
   const typo = getTypography(breakpoint);
   const { t } = useTranslation();
-  const { setCurrentPage } = useRouterContext();
+  const { currentPage, setCurrentPage } = useRouterContext();
+  const { isLocked, lockReason } = useChapterLock();
   const [hovered, setHovered] = useState(false);
+
+  // Same verdict as the navbar and the rail, read from the one place that
+  // states it.
+  const locked = isLocked(page.id);
+  // What stands in the way is usually the chapter being read right now, so
+  // "finish the previous one" would be wrong exactly where this button sits.
+  const blockedByThisPage = lockReason(page.id)?.blockedBy === currentPage;
 
   const gold = getBrandGold(theme);
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
   const align = type === "prev" ? "left" : "right";
   const Icon = type === "prev" ? ChevronLeft : ChevronRight;
+  const isHovered = hovered && !locked;
 
   const btnStyle: CSSProperties = {
     display: "flex",
@@ -47,9 +58,10 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     flexDirection: align === "left" ? "row" : "row-reverse",
     flex: 1,
     padding: isMobile ? "0.85rem 1rem" : "0.95rem 1.15rem",
-    border: `1px solid ${hovered ? withOpacity(moduleAccent, 0.6) : withOpacity(colors.base.text.primary, 0.14)}`,
+    border: `1px solid ${isHovered ? withOpacity(moduleAccent, 0.6) : withOpacity(colors.base.text.primary, 0.14)}`,
     background: "transparent",
-    cursor: "pointer",
+    cursor: locked ? "not-allowed" : "pointer",
+    opacity: locked ? 0.55 : 1,
     transition: "border-color 0.25s var(--ease-smooth)",
     textAlign: align,
   };
@@ -61,7 +73,7 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     fontWeight: 400,
     fontVariant: "small-caps",
     letterSpacing: "0.1em",
-    color: hovered ? moduleAccent : colors.base.text.secondary,
+    color: isHovered ? moduleAccent : colors.base.text.secondary,
     transition: "color 0.25s var(--ease-smooth)",
   };
 
@@ -75,14 +87,27 @@ export const NavButton: FC<Props> = ({ page, type }) => {
   return (
     <button
       style={btnStyle}
-      onClick={() => setCurrentPage(page.id)}
+      onClick={() => !locked && setCurrentPage(page.id)}
+      aria-disabled={locked || undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Icon size={isMobile ? 17 : 19} strokeWidth={2} style={{ flexShrink: 0, color: moduleAccent }} />
+      {locked ? (
+        <DoodleLock size={isMobile ? 18 : 20} style={{ flexShrink: 0, color: moduleAccent }} />
+      ) : (
+        <Icon size={isMobile ? 17 : 19} strokeWidth={2} style={{ flexShrink: 0, color: moduleAccent }} />
+      )}
       <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem", flex: 1 }}>
-        <span style={labelStyle}>{type === "prev" ? t("nav.previous") : t("nav.next")}</span>
-        <span style={titleStyle}>{page.label}</span>
+        <span style={labelStyle}>
+          {locked
+            ? t("nav.lockedShort")
+            : type === "prev"
+              ? t("nav.previous")
+              : t("nav.next")}
+        </span>
+        <span style={titleStyle}>
+          {locked ? t(blockedByThisPage ? "nav.lockedHere" : "nav.locked") : page.label}
+        </span>
       </div>
     </button>
   );

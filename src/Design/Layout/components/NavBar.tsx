@@ -12,9 +12,11 @@ import { NavItem } from "./NavItem";
 type Props = {
   /** Injected from App (which has badge access) so Design stays free of Achievements. */
   isChapterComplete?: (id: string) => boolean;
+  /** Injected by the shell — Design never reads the progression rule itself. */
+  isChapterLocked?: (id: string) => boolean;
 };
 
-export const NavBar: FC<Props> = ({ isChapterComplete }) => {
+export const NavBar: FC<Props> = ({ isChapterComplete, isChapterLocked }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
   const { t } = useTranslation();
@@ -80,6 +82,7 @@ export const NavBar: FC<Props> = ({ isChapterComplete }) => {
       moduleColor={moduleColor}
       gold={gold}
       isComplete={item.id ? (isChapterComplete?.(item.id) ?? false) : false}
+      isLocked={item.id ? (isChapterLocked?.(item.id) ?? false) : false}
       isDirectlyActive={currentPage === item.id}
       isExpanded={openModule === item.label}
       isInteracting={interactionId === (item.id || item.label)}

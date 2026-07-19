@@ -8,9 +8,11 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   isChapterComplete?: (id: string) => boolean;
+  /** Injected by the shell — Design never reads the progression rule itself. */
+  isChapterLocked?: (id: string) => boolean;
 };
 
-export const NavDrawer: FC<Props> = ({ isOpen, onClose, isChapterComplete }) => {
+export const NavDrawer: FC<Props> = ({ isOpen, onClose, isChapterComplete, isChapterLocked }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
 
@@ -53,7 +55,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose, isChapterComplete }) => 
     <>
       <div style={backdropStyle} onClick={onClose} aria-hidden="true" />
       <nav style={drawerStyle} role="dialog" aria-modal={isOpen} aria-hidden={!isOpen}>
-        <NavBar isChapterComplete={isChapterComplete} />
+        <NavBar isChapterComplete={isChapterComplete} isChapterLocked={isChapterLocked} />
       </nav>
     </>
   );
