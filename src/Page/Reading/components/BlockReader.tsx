@@ -12,7 +12,6 @@ import {
 import { useBadges } from "../../../Achievements";
 import { BRAND, Button, getBrandGold, usePageTheme, useThemeContext } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
-import { PageNavigation } from "../../Shared";
 import { useBlockReader } from "../hooks";
 
 import { Block } from "./Block";
@@ -185,7 +184,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
               {t("reading.replay")}
             </Button>
           </div>
-          <PageNavigation />
         </>
       )}
     </div>

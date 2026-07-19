@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { prefersReducedMotion, smoothScrollTo } from "../helpers";
+import { getArrivalAnchor, prefersReducedMotion, smoothScrollTo } from "../helpers";
 import type { ReadingProgress, RevealPhase } from "../types";
 
 type Options = {
@@ -91,14 +91,20 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
     [],
   );
   const scrollToBlock = useCallback(
-    (index: number) => {
+    (index: number, behavior?: ScrollBehavior) => {
       blockEl(index)?.scrollIntoView({
-        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        behavior: behavior ?? (prefersReducedMotion() ? "auto" : "smooth"),
         block: "start",
       });
     },
     [blockEl],
   );
+
+  // The chapter progress as it stood on arrival — captured at first render, so
+  // the anchor is decided from where the reader actually left off, not from
+  // whatever the state has become since.
+  const arrival = useRef(getArrivalAnchor({ finished, current }));
+  const arrivalBlock = useRef(current);
 
   // Focus-scroll on back / jump / advancing into an already-seen block. A fresh
   // reveal owns its own (longer, mechanical) scroll, so don't double-scroll it.
@@ -106,6 +112,23 @@ export const useBlockReader = ({ chapterId, blockCount }: Options) => {
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
+      // Both branches are applied here, explicitly: the anchor is the rule's
+      // output, never a side effect of what the router or the browser did.
+      const applyAnchor = () => {
+        if (arrival.current === "activeBlock") {
+          scrollToBlock(arrivalBlock.current, "instant");
+        } else {
+          window.scrollTo({ top: 0, behavior: "instant" });
+        }
+      };
+
+      applyAnchor();
+      // Safeguard for a cold load: an image above the anchor finishing late
+      // shifts everything under it. Re-applying once the page is fully laid out
+      // costs nothing and keeps the same decision on a settled document.
+      if (document.readyState !== "complete") {
+        window.addEventListener("load", applyAnchor, { once: true });
+      }
       return;
     }
     if (revealRef.current?.index === current) return;
