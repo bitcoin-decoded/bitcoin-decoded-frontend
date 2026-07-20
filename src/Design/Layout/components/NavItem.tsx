@@ -6,7 +6,8 @@ import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
 import { BRAND, getTypography, type ThemeColors } from "../../Theme";
 
-import { DoodleCheck, DoodleLock, DoodleStamp } from "@doodle";
+import { DoodleLock } from "@doodle";
+import { Check, CircleHelp } from "@icons";
 import { ChevronRight } from "@icons";
 
 type Props = {
@@ -16,7 +17,7 @@ type Props = {
   index: number;
   /** The parent module's accent hex; modules pass it down to their chapters. */
   moduleColor: string;
-  /** Structural gold, for the chapter-complete check mark. */
+  /** Structural gold, for the module numeral's corner brackets. */
   gold: string;
   isDirectlyActive: boolean;
   isExpanded: boolean;
@@ -35,6 +36,19 @@ type Props = {
   onInteractionEnd: () => void;
   renderItem: (item: NavigationItem, level: number, index: number, moduleColor: string) => JSX.Element;
 };
+
+// The trailing marks, kept together because they are read together.
+//
+// The two sizes differ on purpose. The check fills its box; the question is a
+// mark inside a circle, so the same box gives it a visibly smaller symbol.
+// Matching the numbers would have looked mismatched, which is the opposite of
+// what a shared constant is for: what has to agree is the optical weight, not
+// the figure.
+const CHECK_SIZE = 15;
+const QUIZ_SIZE = 18;
+const MARK_WEIGHT = "bold" as const;
+// The pair belongs to one row, so it travels as one block.
+const MARK_GAP = "0.2rem";
 
 export const NavItem: FC<Props> = ({
   item,
@@ -216,15 +230,30 @@ export const NavItem: FC<Props> = ({
 
         <span style={isModule ? moduleLabelStyle : chapterLabelStyle}>{item.label}</span>
 
-        {/* The stamp alone says "quiz" — the word beside it was redundant. */}
-        {isChallenge && (
-          <DoodleStamp
-            size={22}
-            style={{ flexShrink: 0, marginLeft: "auto", color: moduleColor }}
-          />
-        )}
-        {isChapter && !isChallenge && isComplete && (
-          <DoodleCheck size={18} style={{ marginLeft: "auto", flexShrink: 0, color: gold }} />
+        {/* The mark alone says "quiz"; the word beside it was redundant. Both
+            are Phosphor, which carries real weights: the freehand check could
+            not have been made heavier at all, being a filled shape with no
+            stroke to thicken. A passed quiz shows both, so they sit in one
+            block rather than being placed separately and drifting apart. */}
+        {isChapter && (isChallenge || isComplete) && (
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: MARK_GAP,
+              marginLeft: "auto",
+              flexShrink: 0,
+            }}
+          >
+            {isChallenge && (
+              <CircleHelp size={QUIZ_SIZE} weight={MARK_WEIGHT} style={{ color: moduleColor }} />
+            )}
+            {isComplete && (
+              // The module colour, not gold: gold is the structure of the
+              // ledger, while finishing a chapter belongs to its module.
+              <Check size={CHECK_SIZE} weight={MARK_WEIGHT} style={{ color: moduleColor }} />
+            )}
+          </span>
         )}
         {isChapter && isOutOfSequence && (
           <DoodleLock

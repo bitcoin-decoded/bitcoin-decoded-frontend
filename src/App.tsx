@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { BadgeNavButton, BadgeProvider, useBadges } from "./Achievements";
+import { BadgeNavButton, BadgeProvider, getBadgeIdForRoute, useBadges } from "./Achievements";
 import { MainLayout, ThemeProvider } from "./Design";
 import { LanguageProvider } from "./I18n";
 import { BitcoinDonationFooter } from "./Interactive";
@@ -20,7 +20,9 @@ const AppShell: FC = () => {
   return (
     <MainLayout
       headerAction={<BadgeNavButton />}
-      isChapterComplete={isEarned}
+      /* A quiz awards its module's trophy, not a badge named after its route,
+         so the id is translated before the layout asks. */
+      isChapterComplete={(id) => isEarned(getBadgeIdForRoute(id))}
       /* The layout is typed on plain ids because completion also covers module
          quiz badges, which are not routes. Every id it hands back here comes
          from a NavigationItem, so it is a route. */
