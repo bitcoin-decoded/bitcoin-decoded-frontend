@@ -17,6 +17,19 @@ type Props = {
   title?: string;
   /** Return to this block (clicking a read block refocuses it). */
   onActivate?: () => void;
+  /**
+   * The reader has not reached this block yet.
+   *
+   * It is still rendered, and hidden with `display: none` rather than left out
+   * of the tree: the build renders every chapter to HTML for search engines,
+   * and a block that is not mounted has no prose to index. Hidden content is
+   * indexed; absent content is not there to be.
+   *
+   * `display: none` also keeps it out of the accessibility tree, so a screen
+   * reader is not read chapters ahead of where its user has got to. The anchor
+   * is unaffected: it only ever scrolls to a block already reached.
+   */
+  isUnreached?: boolean;
   children: ReactNode;
 };
 
@@ -39,6 +52,7 @@ export const BlockShell: FC<Props> = ({
   revealPhase,
   title,
   onActivate,
+  isUnreached = false,
   children,
 }) => {
   const { theme } = useThemeContext();
@@ -50,6 +64,9 @@ export const BlockShell: FC<Props> = ({
   const readable = !isCurrent;
 
   const sectionStyle: CSSProperties = {
+    // In the document, out of the page. Not a quieter block, an absent one: the
+    // reader has not got here yet and must not see it, hear it or tab into it.
+    display: isUnreached ? "none" : undefined,
     // A read block should all but disappear: the eye belongs on the current
     // one. Hover brings it back enough to read before clicking into it.
     opacity: isCurrent ? 1 : isHovered ? 0.7 : 0.25,
