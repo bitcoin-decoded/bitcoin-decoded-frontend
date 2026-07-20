@@ -3,6 +3,7 @@ import { type FC } from "react";
 import { BadgeNavButton, BadgeProvider, useBadges } from "./Achievements";
 import { MainLayout, ThemeProvider } from "./Design";
 import { LanguageProvider } from "./I18n";
+import { BitcoinDonationFooter } from "./Interactive";
 import { useChapterProgression } from "./Progression";
 import { type RouteName, RouterProvider } from "./Routing";
 import { AppRouter } from "./Routing/components";
@@ -24,6 +25,7 @@ const AppShell: FC = () => {
          quiz badges, which are not routes. Every id it hands back here comes
          from a NavigationItem, so it is a route. */
       isChapterOutOfSequence={(id) => isOutOfSequence(id as RouteName)}
+      footerAside={<BitcoinDonationFooter display="footer" />}
     >
       {/* React 19 hoists what this renders into <head>. */}
       <PageHead />

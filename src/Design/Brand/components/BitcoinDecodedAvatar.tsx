@@ -13,8 +13,6 @@ const NAVY = "#16213E";
 const CREAM = "#F8F5EE";
 const GOLD = "#C4A45A";
 
-const FONT_FAMILY = BRAND.fonts.wordmark;
-
 /**
  * 1:1 square avatar mark - large serif "B" + gold accent bar.
  *
@@ -49,7 +47,7 @@ export const BitcoinDecodedAvatar: FC<Props> = ({ size = 28, style }) => {
       <text
         x="90"
         y="138"
-        fontFamily={FONT_FAMILY}
+        fontFamily={BRAND.fonts.wordmark}
         fontSize="172"
         fontWeight="500"
         fill={letterFill}

@@ -18,7 +18,9 @@ type Props = {
   baseTextSecondary: string;
 };
 
-const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
+// Read on call, not on import: a module-level dereference of an imported
+// binding is what turns an import cycle from harmless into fatal.
+const mono = (): CSSProperties => ({ fontFamily: BRAND.fonts.mono });
 
 export const UtxoCoin: FC<Props> = ({
   amount,
@@ -37,7 +39,7 @@ export const UtxoCoin: FC<Props> = ({
   const color = consumed ? errorColor : created ? successColor : accent;
 
   const chip: CSSProperties = {
-    ...mono,
+    ...mono(),
     position: "relative",
     display: "flex",
     flexDirection: "column",

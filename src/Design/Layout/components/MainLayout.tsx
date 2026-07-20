@@ -14,9 +14,11 @@ export const MainLayout: FC<{
   headerAction?: ReactNode;
   /** Injected from App (badge access) so the nav can mark finished chapters. */
   isChapterComplete?: (id: string) => boolean;
+  /** Rendered at the footer's leading edge. Keeps Design ignorant of Interactive. */
+  footerAside?: ReactNode;
   /** Injected by the shell — Design never reads the progression rule itself. */
   isChapterOutOfSequence?: (id: string) => boolean;
-}> = ({ children, headerAction, isChapterComplete, isChapterOutOfSequence }) => {
+}> = ({ children, headerAction, isChapterComplete, isChapterOutOfSequence, footerAside }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
   const {
@@ -103,7 +105,7 @@ export const MainLayout: FC<{
         )}
         <main style={mainContentStyle}>{children}</main>
       </div>
-      <Footer breakpoint={breakpoint} />
+      <Footer breakpoint={breakpoint} aside={footerAside} />
       {isChapterPage && <ScrollToTopButton />}
     </div>
   );

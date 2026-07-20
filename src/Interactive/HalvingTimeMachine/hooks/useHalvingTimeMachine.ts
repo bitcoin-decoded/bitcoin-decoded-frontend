@@ -5,13 +5,15 @@ import { TIME_MACHINE_MAX_YEAR } from "../data";
 import { getRewardForYear, isSubsidySymbolic } from "../helpers";
 import type { TravelPhase } from "../types";
 
-const GENESIS = BITCOIN_REFS.HALVING_SCHEDULE[0];
-const MIN_YEAR = GENESIS.year;
+// Read on call, not on import: a module-level dereference of an imported
+// binding is what turns an import cycle from harmless into fatal.
+const genesis = () => BITCOIN_REFS.HALVING_SCHEDULE[0];
+const minYear = () => genesis().year;
 const MAX_YEAR = TIME_MACHINE_MAX_YEAR;
 const TRAVEL_MS = 1300;
 const SCRAMBLE_MS = 70;
 
-const clampYear = (year: number) => Math.min(MAX_YEAR, Math.max(MIN_YEAR, Math.round(year)));
+const clampYear = (year: number) => Math.min(MAX_YEAR, Math.max(minYear(), Math.round(year)));
 
 /**
  * Drives the halving time machine: the user dials a `targetYear`, then pulls the
@@ -67,7 +69,7 @@ export const useHalvingTimeMachine = () => {
     setPhase("traveling");
     clearTimers();
     intervalRef.current = setInterval(() => {
-      setDisplayYear(MIN_YEAR + Math.floor(Math.random() * (MAX_YEAR - MIN_YEAR + 1)));
+      setDisplayYear(minYear() + Math.floor(Math.random() * (MAX_YEAR - minYear() + 1)));
     }, SCRAMBLE_MS);
     timeoutRef.current = setTimeout(() => {
       clearTimers();
@@ -77,11 +79,11 @@ export const useHalvingTimeMachine = () => {
 
   const reward = arrivedYear !== null ? getRewardForYear(arrivedYear) : null;
   const isExhausted = reward === 0;
-  const isGenesisEra = reward === GENESIS.reward;
+  const isGenesisEra = reward === genesis().reward;
   const subsidySymbolic = reward !== null && isSubsidySymbolic(reward);
 
   return {
-    minYear: MIN_YEAR,
+    minYear: minYear(),
     maxYear: MAX_YEAR,
     targetYear,
     displayYear,
