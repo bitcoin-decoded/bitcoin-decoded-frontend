@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && npm run build:ssr && node scripts/prerender.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write src",
     "preview": "vite preview",
     "test": "vitest run",
-    "audit:reading-time": "node scripts/count-prose.mjs"
+    "audit:reading-time": "node scripts/count-prose.mjs",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr --logLevel warn"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
