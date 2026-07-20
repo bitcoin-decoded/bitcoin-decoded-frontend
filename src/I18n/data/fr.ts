@@ -2,6 +2,11 @@ const fr = {
   // Layout
   "header.homeAriaLabel": "Retour à la page d'accueil",
   "nav.title": "Navigation",
+  "notFound.title": "Cette adresse ne mène nulle part",
+  "notFound.body": "Le lien est peut-être incomplet, ou la page a changé d'adresse. Le parcours, lui, n'a pas bougé.",
+  "notFound.home": "Retour à l'accueil",
+  "notFound.start": "Commencer le parcours",
+  "notFound.alt": "Un marcheur perdu dans le désert consulte sa carte devant un panneau indiquant Bitcoin Decoded",
   "progression.notice.title": "Tu entres au milieu d'un parcours",
   "progression.notice.body": "Ce chapitre s'appuie sur ceux qui le précèdent. Tu peux le lire maintenant, mais il ne comptera pas dans ta progression tant que les précédents ne sont pas terminés.",
   "progression.notice.resume": "Reprendre au chapitre",

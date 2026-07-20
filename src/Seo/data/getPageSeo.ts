@@ -140,6 +140,10 @@ const FR: Record<RouteName, PageSeo> = {
     description:
       "Ta collection Bitcoin.Decoded : les chapitres terminés et les quiz de module validés, module par module.",
   },
+  [ROUTE_NAME.NotFound]: {
+    title: "Page introuvable",
+    description: "Cette adresse ne mène nulle part. Le parcours, lui, est toujours là.",
+  },
 };
 
 const EN: Record<RouteName, PageSeo> = {
@@ -267,6 +271,10 @@ const EN: Record<RouteName, PageSeo> = {
     title: "Your badges",
     description:
       "Your Bitcoin.Decoded collection: chapters completed and module quizzes passed, module by module.",
+  },
+  [ROUTE_NAME.NotFound]: {
+    title: "Page not found",
+    description: "This address leads nowhere. The course, however, is still here.",
   },
 };
 

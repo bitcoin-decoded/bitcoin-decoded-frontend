@@ -17,8 +17,7 @@ import { ROUTE_NAME, useRouterContext } from "../../../Routing";
 import { RevealOnScroll } from "./RevealOnScroll";
 import { WorldCard } from "./WorldCard";
 
-import { DoodleBank, DoodleBitcoinGlobe, DoodleMoneyBag } from "@doodle";
-import { ArrowDown, ArrowRight } from "@icons";
+import { DoodleArrowDown, DoodleBank, DoodleBitcoinGlobe, DoodleMoneyBag } from "@doodle";
 
 const JOURNEY_SECTION_ID = "home-journey";
 
@@ -275,17 +274,12 @@ export const HomePage: FC = () => {
 
         <RevealOnScroll delay={480} duration={700}>
           <div style={ctaGroupStyle}>
-            <Button
-              variant="primary"
-              icon={<ArrowRight size={isMobile ? 16 : 18} strokeWidth={2} />}
-              iconPosition="right"
-              onClick={startJourney}
-            >
+            <Button variant="primary" onClick={startJourney}>
               {t("home.hero.ctaPrimary")}
             </Button>
             <Button
-              variant="ghost"
-              icon={<ArrowDown size={isMobile ? 14 : 15} strokeWidth={2} />}
+              variant="secondary"
+              icon={<DoodleArrowDown size={isMobile ? 20 : 22} />}
               iconPosition="right"
               onClick={scrollToJourney}
             >

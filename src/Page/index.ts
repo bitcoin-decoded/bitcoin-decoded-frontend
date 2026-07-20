@@ -28,6 +28,7 @@ export {
   MoneyLaws5Page,
   MoneyLaws6Page,
 } from "./MoneyLaws";
+export { NotFoundPage } from "./NotFound";
 export { Block, BLOCK_READING_CHAPTERS,BlockReader } from "./Reading";
 export type { PageMetadata, PageMetadataMap, ReadingTimeEstimate } from "./Shared";
 export {

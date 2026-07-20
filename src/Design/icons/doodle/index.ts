@@ -56,6 +56,7 @@ export { DoodleSafe } from "./DoodleSafe";
 export { DoodleSeedling } from "./DoodleSeedling";
 export { DoodleShield } from "./DoodleShield";
 export { DoodleSkull } from "./DoodleSkull";
+export { DoodleSmileyCheeky } from "./DoodleSmileyCheeky";
 export { DoodleSmileyGrumpy } from "./DoodleSmileyGrumpy";
 export { DoodleSmileyThumbsUp } from "./DoodleSmileyThumbsUp";
 export { DoodleStamp } from "./DoodleStamp";

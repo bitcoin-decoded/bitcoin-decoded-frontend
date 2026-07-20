@@ -14,12 +14,13 @@ import { usePageHead } from "../hooks";
  * page at the same address, which is worse than saying nothing.
  */
 export const PageHead: FC = () => {
-  const { title, description, locale } = usePageHead();
+  const { title, description, locale, noindex } = usePageHead();
 
   return (
     <>
       <title>{title}</title>
       <meta name="description" content={description} />
+      {noindex && <meta name="robots" content="noindex" />}
 
       <meta property="og:site_name" content={SITE.name} />
       <meta property="og:type" content="article" />
