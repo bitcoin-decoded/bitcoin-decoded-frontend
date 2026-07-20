@@ -3,6 +3,7 @@ import { type CSSProperties, type FC, Fragment } from "react";
 import {
   BRAND,
   getBrandGold,
+  getTypography,
   THEME_COLORS,
   useBreakpoint,
   useHeaderHidden,
@@ -37,7 +38,9 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
   const { t } = useTranslation();
-  const isMobile = useBreakpoint() === "mobile";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const headerHidden = useHeaderHidden();
 
   const gold = getBrandGold(theme);
@@ -78,7 +81,7 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
   // the reached markers wear — so the two rails read as equals.
   const railLabelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
-    fontSize: "0.875rem",
+    fontSize: typo.label.fontSize,
     fontWeight: 600,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",

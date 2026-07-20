@@ -13,7 +13,7 @@ import { useTranslation } from "../../../I18n";
 import type { RouteName } from "../../../Routing";
 import { useModuleProgress } from "../hooks";
 
-import { DoodleCursorClick, DoodleLock } from "@doodle";
+import { DoodleLock } from "@doodle";
 
 /**
  * The module's chapters as one ledger entry — [ 01 — 02 — 03 — QUIZ ] — sitting
@@ -55,9 +55,7 @@ export const ModuleProgress: FC = () => {
   };
 
   // Source Serif 4 rather than the mono: it ships a real 600, so this reads as
-  // bold instead of the synthetic smear Cutive would give. Module colour, to
-  // match the weight of the brackets it introduces.
-  // Icon + word travel together: the cursor says "this row is clickable".
+  // bold instead of the synthetic smear Cutive would give.
   const labelWrapStyle: CSSProperties = {
     display: "inline-flex",
     alignItems: "center",
@@ -66,13 +64,17 @@ export const ModuleProgress: FC = () => {
     marginRight: isMobile ? "0.25rem" : "0.4rem",
   };
 
+  // Gold, like the "Bloc" label on the rail below, and the same size: the two
+  // name what they navigate and must read as a pair. Wearing the module colour
+  // made this one look quieter than its neighbour rather than different from
+  // it, which is not what the pair is for.
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
-    fontSize: typo.micro.fontSize,
+    fontSize: typo.label.fontSize,
     fontWeight: 600,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
-    color: moduleAccent,
+    color: gold,
   };
 
   // The same hairline the block ribbon links its markers with — the chain motif.
@@ -175,7 +177,6 @@ export const ModuleProgress: FC = () => {
     <nav aria-label={progress.moduleLabel} style={railStyle}>
       <span style={labelWrapStyle}>
         <span style={labelStyle}>{t("moduleProgress.label")}</span>
-        <DoodleCursorClick size={isMobile ? 20 : 22} aria-hidden />
       </span>
 
       {progress.chapters.map((chapter, index) => {
