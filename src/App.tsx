@@ -4,7 +4,8 @@ import { BadgeNavButton, BadgeProvider, useBadges } from "./Achievements";
 import { MainLayout, ThemeProvider } from "./Design";
 import { LanguageProvider } from "./I18n";
 import { useChapterProgression } from "./Progression";
-import { AppRouter, type RouteName, RouterProvider } from "./Routing";
+import { type RouteName, RouterProvider } from "./Routing";
+import { AppRouter } from "./Routing/components";
 import { PageHead } from "./Seo";
 
 // Composition bridge: sits inside BadgeProvider so it can read badge state and
@@ -31,11 +32,11 @@ const AppShell: FC = () => {
   );
 };
 
-export const App: FC = () => {
+export const App: FC<{ route?: RouteName }> = ({ route }) => {
   return (
     <LanguageProvider>
       <ThemeProvider>
-        <RouterProvider>
+        <RouterProvider route={route}>
           <BadgeProvider>
             <AppShell />
           </BadgeProvider>
