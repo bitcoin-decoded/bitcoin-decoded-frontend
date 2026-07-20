@@ -1,34 +1,29 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  BRAND,
-  Button,
-  getBrandGold,
-  getTypography,
-  useBreakpoint,
-  usePageTheme,
-  useThemeContext,
-  withOpacity,
-} from "../../../Design";
+import { BRAND, Button, getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import notFoundDark from "../../../Design/img/not_found_dark.webp";
 import notFoundLight from "../../../Design/img/not_found_light.webp";
+import { Illustration } from "../../../Interactive";
 import { useNotFoundPage } from "../hooks";
 
 /**
  * The dead end, drawn rather than apologised for.
  *
- * The illustration is swapped on the theme instead of being tinted by CSS: both
- * versions are lit differently, and a filter over the light one would give a
- * grey desert at midnight rather than a night sky.
+ * The figure goes through `Illustration` rather than reproducing its frame, so
+ * the corner brackets, the hairline, the hover and the mobile height cap are
+ * the same here as in every chapter, and stay the same when they change there.
+ *
+ * The artwork itself is swapped on the theme instead of being tinted, which is
+ * the one thing the component cannot do: the two versions are lit differently,
+ * and a filter over the daylight one would give a grey desert at midnight
+ * rather than a night sky.
  */
 export const NotFoundPage: FC = () => {
   const { title, body, imageAlt, homeLabel, startLabel, goHome, goStart } = useNotFoundPage();
-  const { colors } = usePageTheme();
-  const { theme } = useThemeContext();
+  const { colors, theme } = usePageTheme();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const typo = getTypography(breakpoint);
-  const gold = getBrandGold(theme);
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -39,21 +34,6 @@ export const NotFoundPage: FC = () => {
     padding: isMobile ? "1.5rem 0 3rem" : "2.5rem 0 4rem",
     maxWidth: "44rem",
     margin: "0 auto",
-  };
-
-  // Hairline frame, no radius: the same register every framed figure in the
-  // project uses.
-  const figureStyle: CSSProperties = {
-    margin: 0,
-    width: "100%",
-    border: `${BRAND.figures.ruleThickness}px solid ${withOpacity(gold, 0.4)}`,
-    lineHeight: 0,
-  };
-
-  const imageStyle: CSSProperties = {
-    width: "100%",
-    height: "auto",
-    display: "block",
   };
 
   const titleStyle: CSSProperties = {
@@ -80,15 +60,12 @@ export const NotFoundPage: FC = () => {
 
   return (
     <div style={containerStyle}>
-      <figure style={figureStyle}>
-        <img
-          src={theme === "dark" ? notFoundDark : notFoundLight}
-          alt={imageAlt}
-          style={imageStyle}
-          width={1536}
-          height={1024}
-        />
-      </figure>
+      {/* The page supplies its own spacing, so the figure keeps none of its own. */}
+      <Illustration
+        src={theme === "dark" ? notFoundDark : notFoundLight}
+        alt={imageAlt}
+        margin="0 auto"
+      />
 
       <h1 style={titleStyle}>{title}</h1>
       <p style={bodyStyle}>{body}</p>
