@@ -2,7 +2,7 @@ import { type CSSProperties, type FC, type ReactNode, useState } from "react";
 
 import { BRAND, getBrandGold, getTypography, THEME_COLORS, useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
 
-import { ArrowRight } from "@icons";
+import { DoodleCursorClick } from "@doodle";
 
 type Props = {
   title: string;
@@ -99,7 +99,10 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     fontFamily: BRAND.fonts.mono,
     fontWeight: 500,
     color: accent,
-    letterSpacing: "0.04em",
+    // Button's own tracking: the card cannot host a real Button (it is itself a
+    // <button>, and nesting one would be invalid), so the label borrows its
+    // register instead of imitating its frame.
+    letterSpacing: "0.14em",
     fontVariant: "small-caps",
     opacity: isHovered ? 1 : 0.85,
     transition: "opacity 0.3s var(--ease-smooth)",
@@ -133,7 +136,7 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
       <p style={descStyle}>{description}</p>
       <div style={ctaRowStyle}>
         {cta && <span style={ctaLabelStyle}>{cta}</span>}
-        <ArrowRight size={isMobile ? 16 : 18} strokeWidth={2} aria-hidden />
+        <DoodleCursorClick size={isMobile ? 18 : 20} aria-hidden />
       </div>
     </button>
   );

@@ -6,6 +6,8 @@ import notFoundLight from "../../../Design/img/not_found_light.webp";
 import { Illustration } from "../../../Interactive";
 import { useNotFoundPage } from "../hooks";
 
+import { DoodleSmileyCheeky } from "@doodle";
+
 /**
  * The dead end, drawn rather than apologised for.
  *
@@ -51,6 +53,15 @@ export const NotFoundPage: FC = () => {
     maxWidth: "34rem",
   };
 
+  // Sits on the text baseline rather than on its own line, so it reads as the
+  // end of the sentence and not as a second illustration.
+  const smileyStyle: CSSProperties = {
+    display: "inline-block",
+    verticalAlign: "-0.2em",
+    marginLeft: "0.4rem",
+    color: colors.base.text.secondary,
+  };
+
   const actionsStyle: CSSProperties = {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
@@ -68,7 +79,10 @@ export const NotFoundPage: FC = () => {
       />
 
       <h1 style={titleStyle}>{title}</h1>
-      <p style={bodyStyle}>{body}</p>
+      <p style={bodyStyle}>
+        {body}
+        <DoodleSmileyCheeky size={22} style={smileyStyle} aria-hidden />
+      </p>
 
       <div style={actionsStyle}>
         <Button variant="primary" onClick={goStart} fullWidth={isMobile}>
