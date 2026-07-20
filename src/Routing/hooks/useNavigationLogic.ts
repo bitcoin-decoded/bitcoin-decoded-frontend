@@ -1,9 +1,11 @@
 import { useMemo } from "react";
-import { useRouterContext } from "./useRouterContext";
+
+import { useTranslation } from "../../I18n";
 import { getNavigationTree } from "../data/NAVIGATION_TREE";
 import { flattenPages } from "../helpers";
-import { useTranslation } from "../../I18n";
 import type { NavigationLogic } from "../types/NavigationLogic";
+
+import { useRouterContext } from "./useRouterContext";
 
 /**
  * Custom hook that determines the previous and next pages based on the current route.

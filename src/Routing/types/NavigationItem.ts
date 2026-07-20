@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+
 import { type RouteName } from "./RouteName";
 
 export type NavigationItem = {
