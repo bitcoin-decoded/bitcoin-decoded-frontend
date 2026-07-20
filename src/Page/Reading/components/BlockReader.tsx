@@ -99,7 +99,11 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
       )}
 
       {blocks.map((block, i) => {
-        if (i > maxRevealed) return null;
+        // Every block is rendered, including the ones ahead of the reader. The
+        // build turns each chapter into HTML for search engines, and a block
+        // left out of the tree has no prose to find. `BlockShell` hides the
+        // ones not reached yet.
+        const isUnreached = i > maxRevealed;
 
         const kind = block.props.kind ?? "prose";
         const isLast = block.props.last ?? i === blockCount - 1;
@@ -126,6 +130,7 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
               revealPhase={getRevealPhase(i)}
               title={block.props.title}
               onActivate={() => jump(i)}
+              isUnreached={isUnreached}
             >
               {content}
 
