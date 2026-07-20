@@ -12,12 +12,9 @@ import { writeStored } from "./writeStored";
  * a component initialised. Vitest runs under Node with no DOM, so these assert
  * the real condition rather than a simulation of it.
  *
- * Nothing outside this domain is imported here, deliberately. A test that
- * rendered the whole application would be stricter, but it cannot run: several
- * modules import each other in a cycle, which Vite resolves when it bundles and
- * this loader does not. That fragility is real and worth its own pass; it is
- * not about browser safety, and the SSR build is what proves the application
- * renders.
+ * Nothing outside this domain is imported here, deliberately: these stay fast
+ * and cannot fail for a reason unrelated to their subject. The whole-tree
+ * guarantee is asserted separately, in `nodeSafety.test.tsx`.
  */
 describe("platform, with no browser present", () => {
   it("knows there is none", () => {

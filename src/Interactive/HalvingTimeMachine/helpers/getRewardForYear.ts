@@ -1,6 +1,5 @@
 import { BITCOIN_REFS } from "../../../References";
 
-const SCHEDULE = BITCOIN_REFS.HALVING_SCHEDULE;
 const SATOSHIS_PER_BTC = 100_000_000;
 const HALVING_INTERVAL_YEARS = 4;
 
@@ -13,6 +12,9 @@ const HALVING_INTERVAL_YEARS = 4;
  * whole satoshis, which naturally drives the subsidy to exactly 0 around 2140.
  */
 export const getRewardForYear = (year: number): number => {
+  // Read inside the function, not at module level: dereferencing an imported
+  // binding on import is what turns a cycle from harmless into fatal.
+  const SCHEDULE = BITCOIN_REFS.HALVING_SCHEDULE;
   const last = SCHEDULE[SCHEDULE.length - 1];
 
   if (year <= last.year) {

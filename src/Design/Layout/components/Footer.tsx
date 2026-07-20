@@ -1,16 +1,24 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { useTranslation } from "../../../I18n";
-import { BitcoinDonationFooter } from "../../../Interactive";
 import { withOpacity } from "../../helpers";
 import type { Breakpoint } from "../../Responsive";
 import { BRAND, getBrandGold, THEME_COLORS, useThemeContext } from "../../Theme";
 
 type Props = {
   breakpoint?: Breakpoint;
+  /**
+   * Whatever sits at the footer's leading edge, injected by the shell.
+   *
+   * Design used to import it from `Interactive` directly, which made the
+   * primitives layer depend on the feature layer while the feature layer
+   * depends on the primitives. That cycle left `BRAND` undefined under any
+   * loader that does not bundle.
+   */
+  aside?: ReactNode;
 };
 
-export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
+export const Footer: FC<Props> = ({ breakpoint = "desktop", aside }) => {
   const { theme } = useThemeContext();
   const { t } = useTranslation();
   const colors = THEME_COLORS[theme];
@@ -87,7 +95,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop" }) => {
     <footer style={footerStyle}>
       <div style={ruleLineStyle} aria-hidden="true" />
       <div style={innerStyle}>
-        <BitcoinDonationFooter display="footer" />
+        {aside}
         <div style={legalBlockStyle}>
           <p style={copyrightStyle}>{t("footer.copyright")}</p>
           <p style={creditStyle}>{t("footer.iconCredit")}</p>

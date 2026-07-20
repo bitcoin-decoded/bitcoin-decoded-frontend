@@ -13,8 +13,6 @@ const NAVY = "#16213E";
 const CREAM = "#F8F5EE";
 const GOLD = "#C4A45A";
 
-const FONT_FAMILY = BRAND.fonts.wordmark;
-
 /**
  * Bitcoin.Decoded logo lockup ("Bitcoin" + gold rule + small gold square +
  * italic "Decoded"). Renders the **Logo Kit Version 04** (full color, dark
@@ -48,7 +46,7 @@ export const BitcoinDecodedLogo: FC<Props> = ({ width = 320, style }) => {
       <text
         x="150"
         y="40"
-        fontFamily={FONT_FAMILY}
+        fontFamily={BRAND.fonts.wordmark}
         fontSize="42"
         fontWeight="400"
         letterSpacing="4"
@@ -67,7 +65,7 @@ export const BitcoinDecodedLogo: FC<Props> = ({ width = 320, style }) => {
       <text
         x="150"
         y="86"
-        fontFamily={FONT_FAMILY}
+        fontFamily={BRAND.fonts.wordmark}
         fontSize="16"
         fontWeight="300"
         fontStyle="italic"

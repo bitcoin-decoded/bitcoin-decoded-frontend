@@ -10,7 +10,9 @@ import { UtxoCoin } from "./UtxoCoin";
 
 import { ArrowDown, RefreshCw, Wallet, Zap } from "@icons";
 
-const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
+// Read on call, not on import: a module-level dereference of an imported
+// binding is what turns an import cycle from harmless into fatal.
+const mono = (): CSSProperties => ({ fontFamily: BRAND.fonts.mono });
 
 /** Trim trailing zeros, suffix the bitcoin sign. 1 → "1 BTC", 0.4999 → "0.4999 BTC". */
 const fmt = (n: number) => `${+n.toFixed(8)} BTC`;
@@ -59,7 +61,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
   };
 
   const txBox: CSSProperties = {
-    ...mono,
+    ...mono(),
     display: "inline-flex",
     alignItems: "center",
     gap: "0.35rem",
@@ -85,7 +87,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
   };
 
   const balancePill: CSSProperties = {
-    ...mono,
+    ...mono(),
     display: "inline-flex",
     alignItems: "center",
     gap: "0.35rem",
@@ -138,7 +140,7 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
           }}
         >
           <span
-            style={{ ...mono, fontSize: typo.note.fontSize, fontWeight: 500, color: world.text.primary }}
+            style={{ ...mono(), fontSize: typo.note.fontSize, fontWeight: 500, color: world.text.primary }}
           >
             {t("utxoGraph.walletTitle")}
           </span>
