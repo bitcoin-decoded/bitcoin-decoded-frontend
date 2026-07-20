@@ -6,7 +6,8 @@ import { withOpacity } from "../../helpers";
 import { useBreakpoint } from "../../Responsive";
 import { BRAND, getTypography, type ThemeColors } from "../../Theme";
 
-import { DoodleCheck, DoodleLock, DoodleStamp } from "@doodle";
+import { DoodleLock } from "@doodle";
+import { Check, CircleHelp } from "@icons";
 import { ChevronRight } from "@icons";
 
 type Props = {
@@ -35,6 +36,12 @@ type Props = {
   onInteractionEnd: () => void;
   renderItem: (item: NavigationItem, level: number, index: number, moduleColor: string) => JSX.Element;
 };
+
+// One size and one weight for both trailing marks. Kept together because the
+// pair only reads as a pair while they match, and a heavier stroke is what a
+// smaller glyph needs to stay legible.
+const MARK_SIZE = 15;
+const MARK_WEIGHT = "bold" as const;
 
 export const NavItem: FC<Props> = ({
   item,
@@ -216,15 +223,30 @@ export const NavItem: FC<Props> = ({
 
         <span style={isModule ? moduleLabelStyle : chapterLabelStyle}>{item.label}</span>
 
-        {/* The stamp alone says "quiz" — the word beside it was redundant. */}
+        {/* The mark alone says "quiz"; the word beside it was redundant.
+            Both marks are Phosphor at one size and one weight, so they read as a
+            pair rather than as two borrowed glyphs. The freehand check could not
+            take a heavier stroke at all: it is a filled shape with no stroke to
+            thicken. */}
         {isChallenge && (
-          <DoodleStamp
-            size={22}
+          <CircleHelp
+            size={MARK_SIZE}
+            weight={MARK_WEIGHT}
             style={{ flexShrink: 0, marginLeft: "auto", color: moduleColor }}
           />
         )}
-        {isChapter && !isChallenge && isComplete && (
-          <DoodleCheck size={18} style={{ marginLeft: "auto", flexShrink: 0, color: gold }} />
+        {isChapter && isComplete && (
+          <Check
+            size={MARK_SIZE}
+            weight={MARK_WEIGHT}
+            style={{
+              // A passed quiz earns its module trophy, so it gets the mark too,
+              // beside its question rather than instead of it.
+              marginLeft: isChallenge ? "0.4rem" : "auto",
+              flexShrink: 0,
+              color: gold,
+            }}
+          />
         )}
         {isChapter && isOutOfSequence && (
           <DoodleLock
