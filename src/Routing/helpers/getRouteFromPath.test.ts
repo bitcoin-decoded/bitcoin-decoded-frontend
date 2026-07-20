@@ -26,6 +26,8 @@ describe("ROUTE_PATH", () => {
       // Lowercase, unaccented, hyphen separated. An accent or a capital would
       // survive here and come back percent-encoded in a search result.
       expect(path, path).toMatch(/^\/$|^(\/[a-z0-9-]+)+$/);
+      // "/404" is a number that names a condition, not a position in a module.
+      if (route === ROUTE_NAME.NotFound) continue;
       expect(path, `${path} carries a position that reordering would break`).not.toMatch(/\d{2}/);
     }
   });

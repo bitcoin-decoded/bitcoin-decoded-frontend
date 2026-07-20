@@ -47,4 +47,8 @@ export const ROUTE_PATH: Record<RouteName, string> = {
 
   [ROUTE_NAME.GetStarted]: "/acheter-du-bitcoin",
   [ROUTE_NAME.Badges]: "/badges",
+
+  // Reachable on purpose, so the page can be opened and reviewed like any
+  // other. Every unclaimed address resolves here too.
+  [ROUTE_NAME.NotFound]: "/404",
 };

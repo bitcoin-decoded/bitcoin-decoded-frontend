@@ -2,6 +2,11 @@ const en = {
   // Layout
   "header.homeAriaLabel": "Back to homepage",
   "nav.title": "Navigation",
+  "notFound.title": "This address leads nowhere",
+  "notFound.body": "The link may be incomplete, or the page may have moved. The course itself has not.",
+  "notFound.home": "Back to the home page",
+  "notFound.start": "Start the course",
+  "notFound.alt": "A hiker lost in the desert reads a map beside a signpost pointing to Bitcoin Decoded",
   "progression.notice.title": "You are joining a course midway",
   "progression.notice.body": "This chapter builds on the ones before it. You can read it now, but it will not count towards your progress until the earlier chapters are done.",
   "progression.notice.resume": "Resume at chapter",

@@ -11,14 +11,16 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: "instant" });
 /**
  * The route the current address points at.
  *
- * An unknown path falls back to the home page rather than showing a not-found
- * screen, which is what the hash router did with an unknown fragment. Worth
- * knowing: with the SPA rewrite in place every path answers 200, so an unknown
- * one is a soft 404. Harmless while the host is held out of the index, and
- * worth a real not-found route before that changes.
+ * An unclaimed address resolves to the not-found page rather than quietly
+ * showing the home page, which would tell a reader their link worked when it
+ * did not, and would tell a crawler that every typo is a real page.
+ *
+ * The response is still 200: a static host serving one HTML file for every path
+ * cannot vary the status. What keeps that from being an indexable soft 404 is
+ * the `noindex` the page carries (see `Seo`).
  */
 const readRoute = (): RouteName =>
-  getRouteFromPath(window.location.pathname) ?? ROUTE_NAME.HomePage;
+  getRouteFromPath(window.location.pathname) ?? ROUTE_NAME.NotFound;
 
 export const useRouter = (): RouterContextState => {
   const [currentPage, setCurrentPageState] = useState<RouteName>(readRoute);

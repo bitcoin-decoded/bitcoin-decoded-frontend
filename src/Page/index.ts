@@ -1,4 +1,5 @@
 export { BadgesPage } from "./Badges";
+export { NotFoundPage } from "./NotFound";
 export {
   Banking1Page,
   Banking2Page,

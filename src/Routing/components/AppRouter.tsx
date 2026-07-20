@@ -26,6 +26,7 @@ import {
   MoneyLaws4Page,
   MoneyLaws5Page,
   MoneyLaws6Page,
+  NotFoundPage,
 } from "../../Page";
 import { ROUTE_NAME, useRouterContext } from "../../Routing";
 
@@ -87,8 +88,12 @@ export const AppRouter: FC = () => {
       case ROUTE_NAME.Badges:
         return <BadgesPage />;
 
+      case ROUTE_NAME.NotFound:
+        return <NotFoundPage />;
+      // Unreachable: `useRouter` already resolves an unclaimed address to
+      // NotFound, so nothing arrives here without a case.
       default:
-        return <HomePage />;
+        return <NotFoundPage />;
     }
   };
 

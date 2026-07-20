@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useTranslation } from "../../I18n";
-import { useRouterContext } from "../../Routing";
+import { ROUTE_NAME, useRouterContext } from "../../Routing";
 import { BRANDED_ROUTES, getPageSeo } from "../data";
 import { buildPageTitle } from "../helpers";
 
@@ -18,6 +18,10 @@ export const usePageHead = () => {
 
   const seo = getPageSeo(currentPage, language);
   const withBrand = BRANDED_ROUTES.has(currentPage);
+  // A static host serves one HTML file for every path, so an unclaimed
+  // address still answers 200. This is what stops that being an indexable
+  // soft 404.
+  const noindex = currentPage === ROUTE_NAME.NotFound;
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -27,5 +31,6 @@ export const usePageHead = () => {
     title: buildPageTitle(seo.title, withBrand),
     description: seo.description,
     locale: language === "fr" ? "fr_FR" : "en_US",
+    noindex,
   };
 };
