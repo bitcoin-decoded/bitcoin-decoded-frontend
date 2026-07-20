@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import type { FC, ReactNode } from "react";
 
+import { readStored, writeStored } from "../../../Platform";
 import { THEME_COLORS } from "../data";
 import type { Theme } from "../types";
 
@@ -9,14 +10,14 @@ import { ThemeContext } from "./ThemeContext";
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem("theme");
+    const stored = readStored("theme");
     return stored === "light" || stored === "dark" ? stored : "dark";
   });
 
   const toggleTheme = () => {
     setTheme((prev) => {
       const next = prev === "light" ? "dark" : "light";
-      localStorage.setItem("theme", next);
+      writeStored("theme", next);
       return next;
     });
   };

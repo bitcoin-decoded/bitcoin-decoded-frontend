@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 
 import type { FC, ReactNode } from "react";
 
+import { readStored, writeStored } from "../../Platform";
 import type { Language } from "../types";
 
 import { LanguageContext } from "./LanguageContext";
@@ -9,7 +10,7 @@ import { LanguageContext } from "./LanguageContext";
 const STORAGE_KEY = "bitcoin-decoded-language";
 
 const getInitialLanguage = (): Language => {
-  const stored = localStorage.getItem(STORAGE_KEY);
+  const stored = readStored(STORAGE_KEY);
   if (stored === "en" || stored === "fr") return stored;
   return "fr";
 };
@@ -20,7 +21,7 @@ export const LanguageProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const toggleLanguage = () => {
     setLanguage((prev) => {
       const next = prev === "fr" ? "en" : "fr";
-      localStorage.setItem(STORAGE_KEY, next);
+      writeStored(STORAGE_KEY, next);
       return next;
     });
   };

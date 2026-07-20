@@ -1,9 +1,10 @@
+import { readStored } from "../../Platform";
 import { BADGE_BY_ID, BADGES_STORAGE_KEY } from "../data";
 import type { EarnedBadges } from "../types";
 
 export const readEarnedBadges = (): EarnedBadges => {
   try {
-    const raw = localStorage.getItem(BADGES_STORAGE_KEY);
+    const raw = readStored(BADGES_STORAGE_KEY);
     if (!raw) return {};
     const parsed = JSON.parse(raw) as unknown;
     if (parsed === null || typeof parsed !== "object") return {};

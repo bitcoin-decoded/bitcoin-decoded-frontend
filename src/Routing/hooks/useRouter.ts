@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
+import { isBrowser } from "../../Platform";
 import { ROUTE_NAME } from "../data/ROUTE_NAME";
 import { ROUTE_PATH } from "../data/ROUTE_PATH";
 import { getRouteFromLegacyHash, getRouteFromPath } from "../helpers";
@@ -22,8 +23,20 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: "instant" });
 const readRoute = (): RouteName =>
   getRouteFromPath(window.location.pathname) ?? ROUTE_NAME.NotFound;
 
-export const useRouter = (): RouterContextState => {
-  const [currentPage, setCurrentPageState] = useState<RouteName>(readRoute);
+/**
+ * The route to open with.
+ *
+ * The build renders one file per route under Node, where there is no address to
+ * read, so it says which route it is rendering. Guarding to the home page
+ * instead would put the home page inside all twenty-six files.
+ */
+const initialRoute = (given?: RouteName): RouteName => {
+  if (given) return given;
+  return isBrowser ? readRoute() : ROUTE_NAME.HomePage;
+};
+
+export const useRouter = (route?: RouteName): RouterContextState => {
+  const [currentPage, setCurrentPageState] = useState<RouteName>(() => initialRoute(route));
 
   // Scrolled here, as the navigation is issued and before the next page
   // renders, rather than from an effect on `currentPage`. Effects run
