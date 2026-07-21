@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" rx="32" fill="#16213E"/>
-  <g transform="translate(-16 0)">
-    <text x="200" y="350" font-family="'Cormorant Garamond', Garamond, Georgia, serif" font-size="470" font-weight="500" font-style="italic" fill="#F8F5EE" text-anchor="middle">B</text>
-    <g transform="skewX(-12)">
-      <rect x="254" y="24" width="14" height="354" fill="#C4A45A" rx="2"/>
-      <rect x="222" y="24" width="14" height="354" fill="#C4A45A" rx="2"/>
-    </g>
-    <rect x="288" y="288" width="50" height="50" fill="#C4A45A" rx="2.5"/>
+  <rect width="400" height="400" fill="#16213E"></rect>
+
+  <!--
+    The B is an outline rather than a text element. A favicon renders in an
+    isolated context with no access to the page's web fonts, so naming
+    'Cormorant Garamond' resolved to Georgia instead: 203px of ink where
+    Cormorant gives 148. This is Cormorant Garamond wght 600 at 300px on the
+    baseline y=290, converted to a path so the letter is the same everywhere.
+  -->
+  <path transform="translate(112.7 290) scale(0.3)" fill="#D4B469" d="M303.8 -337.5 314.8 -353Q380.5 -353 428.9 -331Q477.4 -309 504.1 -270.6Q530.9 -232.3 530.9 -182.1Q530.9 -129.6 502.3 -87.3Q473.6 -45 423.6 -20.5Q373.6 4 310.9 4Q282.2 4 241.2 1Q200.1 -2 165.8 -2Q130.9 -2 99.1 -1Q67.3 0 41.8 0Q39.1 0 39.1 -6Q39.1 -12 41.8 -12Q72.6 -12 89.2 -17Q105.8 -22 112.4 -37Q119.1 -52 119.1 -81V-544Q119.1 -573 112.9 -587.5Q106.8 -602 90.3 -607.5Q73.9 -613 43.1 -613Q40.8 -613 40.8 -619Q40.8 -625 43.1 -625Q68.3 -625 99.6 -623.5Q130.9 -622 165.8 -622Q194 -622 225.9 -625Q257.9 -628 287.1 -628Q346.9 -628 387.4 -612.4Q428 -596.8 449.1 -567.9Q470.2 -539 470.2 -497.9Q470.2 -442.3 427.1 -398.6Q384.1 -354.9 303.8 -337.5ZM269.9 -608.5Q249.6 -608.5 237.1 -603.2Q224.6 -597.9 219.6 -583.9Q214.5 -570 214.5 -542V-346L179.5 -353.3Q212.2 -352 233.2 -351.5Q254.2 -351 256.5 -351Q318.4 -351 347.4 -391.2Q376.3 -431.4 376.3 -489.4Q376.3 -526.3 364.5 -553.2Q352.8 -580 329.3 -594.2Q305.9 -608.5 269.9 -608.5ZM294.7 -18.5Q365.7 -18.5 397.9 -55.1Q430.1 -91.7 430.1 -157.8Q430.1 -232.1 391.7 -279Q353.3 -325.9 274.8 -326.2Q259.8 -326.5 235 -325.8Q210.2 -325.2 183.2 -320.5L214.5 -332.2V-81Q214.5 -59.6 220 -45.6Q225.5 -31.5 242.7 -25Q259.9 -18.5 294.7 -18.5Z"></path>
+
+  <g stroke="#F8F5EE" stroke-width="18" fill="none" stroke-linecap="square">
+    <path d="M 32 90 L 32 32 L 90 32"></path>
+    <path d="M 310 32 L 368 32 L 368 90"></path>
+    <path d="M 368 310 L 368 368 L 310 368"></path>
+    <path d="M 90 368 L 32 368 L 32 310"></path>
   </g>
 </svg>
