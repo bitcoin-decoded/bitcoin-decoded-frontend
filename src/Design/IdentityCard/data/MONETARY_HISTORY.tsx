@@ -1,9 +1,9 @@
 import cauris from "../../../Design/img/cauris.webp";
-import grainOrge from "../../../Design/img/grains_orge.jpg";
-import oneDollar from "../../../Design/img/one_dollar.png";
-import or from "../../../Design/img/Or.png";
+import grainOrge from "../../../Design/img/grains_orge.webp";
+import oneDollar from "../../../Design/img/one_dollar.webp";
+import or from "../../../Design/img/Or.webp";
 import sel from "../../../Design/img/sel.jpg";
-import pierreYap from "../../../Design/img/yap_stone.jpg";
+import pierreYap from "../../../Design/img/yap_stone.webp";
 import type { Language } from "../../../I18n";
 import { Reference } from "../..";
 import type { MonetaryItem } from "../types";

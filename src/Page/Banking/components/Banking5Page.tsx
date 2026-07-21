@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import cantillonEffectImg from "../../../../src/Design/img/Cantillon_Effect.jpg";
+import cantillonEffectImg from "../../../../src/Design/img/Cantillon_Effect.webp";
 import gyroGearlooseImg from "../../../../src/Design/img/Gyro_Gearloose.png";
 import picsouImg from "../../../../src/Design/img/picsou.webp";
 import { Callout, IdentityCard, Reference } from "../../../Design";

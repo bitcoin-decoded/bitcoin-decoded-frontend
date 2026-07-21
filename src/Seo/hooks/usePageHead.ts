@@ -3,7 +3,12 @@ import { useEffect } from "react";
 import { useTranslation } from "../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../Routing";
 import { BRANDED_ROUTES, getPageSeo } from "../data";
-import { buildAlternates, buildCanonicalUrl, buildPageTitle } from "../helpers";
+import {
+  buildAlternates,
+  buildCanonicalUrl,
+  buildPageTitle,
+  buildStructuredData,
+} from "../helpers";
 
 /**
  * What the current route should tell a search engine about itself.
@@ -14,7 +19,7 @@ import { buildAlternates, buildCanonicalUrl, buildPageTitle } from "../helpers";
  */
 export const usePageHead = () => {
   const { currentPage } = useRouterContext();
-  const { language } = useTranslation();
+  const { t, language } = useTranslation();
 
   const seo = getPageSeo(currentPage, language);
   const withBrand = BRANDED_ROUTES.has(currentPage);
@@ -22,6 +27,10 @@ export const usePageHead = () => {
   // address still answers 200. This is what stops that being an indexable
   // soft 404.
   const noindex = currentPage === ROUTE_NAME.NotFound;
+
+  // Hoisted: the structured data names the same address the canonical does, so
+  // both read one value rather than two that could drift.
+  const canonical = noindex ? null : buildCanonicalUrl(currentPage, language);
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -34,9 +43,13 @@ export const usePageHead = () => {
     noindex,
     // A page kept out of the index has no canonical address to name, and
     // claiming one while refusing to be indexed says two different things.
-    canonical: noindex ? null : buildCanonicalUrl(currentPage, language),
+    canonical,
     // A page kept out of the index has no alternates to offer either: the
     // pairing exists so a crawler can choose between versions it may index.
     alternates: noindex ? [] : buildAlternates(currentPage),
+    // A page kept out of the index describes itself to no one.
+    structuredData: canonical
+      ? buildStructuredData({ route: currentPage, language, seo, canonical, t })
+      : null,
   };
 };

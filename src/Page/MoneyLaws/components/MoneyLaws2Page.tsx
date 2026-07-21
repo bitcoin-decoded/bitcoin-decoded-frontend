@@ -1,8 +1,8 @@
 import { type FC } from "react";
 
 import { Callout, Reference } from "../../../Design";
-import highTimePreference from "../../../Design/img/high_time_preference.jpg";
-import lowTimePreference from "../../../Design/img/low_time_preference.jpg";
+import highTimePreference from "../../../Design/img/high_time_preference.webp";
+import lowTimePreference from "../../../Design/img/low_time_preference.webp";
 import { useTranslation } from "../../../I18n";
 import { CapitalStructureChain, Illustration } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
