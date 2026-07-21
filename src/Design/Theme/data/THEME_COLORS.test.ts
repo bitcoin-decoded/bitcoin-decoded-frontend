@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 import { getContrastRatio } from "../../helpers";
@@ -53,5 +54,30 @@ describe.each(THEMES)("THEME_COLORS.%s text tokens", (theme) => {
   it.each(cases)("%s clears WCAG AA on %s", (_name, _surface, pair) => {
     const [color, bg] = pair.split("|");
     expect(getContrastRatio(color, bg) ?? 0).toBeGreaterThanOrEqual(AA_BODY);
+  });
+});
+
+/**
+ * `index.css` has to name the two page backgrounds literally.
+ *
+ * They are painted before React runs, from the `data-theme` the inline script
+ * in `index.html` stamps ahead of the first paint, so they cannot be read from
+ * these tokens at that moment. That is the one place a theme colour is
+ * duplicated outside this file, and a silent drift there would show a reader
+ * the wrong background on every cold load. So it is pinned here instead.
+ */
+describe("the pre-paint backgrounds in index.css", () => {
+  const css = readFileSync(new URL("../../../index.css", import.meta.url), "utf8");
+
+  const declared = (theme: Theme) => {
+    const rule = new RegExp(String.raw`:root\[data-theme="${theme}"\]\s+body\s*\{[^}]*\}`);
+    return css
+      .match(rule)?.[0]
+      .match(/background-color:\s*(#[0-9a-fA-F]{3,8})/)?.[1]
+      ?.toLowerCase();
+  };
+
+  it.each(THEMES)("%s matches base.background.primary", (theme) => {
+    expect(declared(theme)).toBe(THEME_COLORS[theme].base.background.primary.toLowerCase());
   });
 });

@@ -106,6 +106,29 @@ body,
   --focus-ring: #7d6428; /* deepened gold, visible on cream paper */
 }
 
+/* The two colours that have to exist before React does.
+ *
+ * `data-theme` is stamped by the inline script in index.html, ahead of the
+ * first paint, so the page never shows a background belonging to the other
+ * theme. Everything else is themed from THEME_COLORS through the components;
+ * only these two are duplicated here, and THEME_COLORS.test.ts fails if they
+ * drift from their tokens. */
+:root[data-theme="dark"] body {
+  background-color: #101010;
+}
+:root[data-theme="light"] body {
+  background-color: #faf8f2;
+}
+
+/* Every prerendered file is dark. A reader who chose light must not watch it
+ * paint before React replaces it, so it is held back until the render that
+ * matches their theme has happened. Costs nothing: the client mounts with
+ * createRoot and discards this markup regardless. The flag is only ever set
+ * when the stored theme disagrees with the file, so dark readers never wait. */
+:root[data-theme-pending] #root {
+  visibility: hidden;
+}
+
 body {
   transition:
     background-color 0.3s var(--ease-smooth),
