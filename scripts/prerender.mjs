@@ -96,10 +96,17 @@ const main = async () => {
     throw new Error("The built shell no longer declares a language to replace.");
   }
 
-  // React warns about missing keys on a few pages. That is a known defect,
-  // tracked on its own, and it would otherwise drown this script's output.
+  // React's warnings used to be silenced outright here, to keep this script's
+  // output readable while the missing keys were a known defect. A silent
+  // channel is exactly how that defect survived five phases, so they are
+  // counted now, and the first few still printed: the total is reported at the
+  // end, and going back above zero is meant to be noticed.
   const noisy = console.error;
-  console.error = () => {};
+  let warnings = 0;
+  console.error = (...args) => {
+    warnings += 1;
+    if (warnings <= 3) noisy(...args);
+  };
 
   const written = [];
   for (const { route, language, path } of pages) {
@@ -134,6 +141,11 @@ const main = async () => {
       .join(", ")}`,
   );
   console.log(`Sitemap lists ${pages.filter((page) => page.listed).length} of them`);
+  console.log(
+    warnings === 0
+      ? "No React warnings across the 52 renders"
+      : `${warnings} React warnings across the 52 renders, see the first few above`,
+  );
 };
 
 await main();
