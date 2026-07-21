@@ -3,24 +3,36 @@ import { useCallback, useEffect, useState } from "react";
 import type { Language } from "../../I18n";
 import { isBrowser } from "../../Platform";
 import { ROUTE_NAME } from "../data/ROUTE_NAME";
-import { getRouteFromLegacyHash, getRoutePath, resolveRoute } from "../helpers";
+import {
+  getLanguageFromPath,
+  getRouteFromLegacyHash,
+  getRoutePath,
+  resolveRoute,
+} from "../helpers";
 import type { RouterContextState } from "../types";
 import { type RouteName } from "../types/RouteName";
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "instant" });
-
-const DEFAULT = { route: ROUTE_NAME.NotFound as RouteName, language: "fr" as Language };
 
 /**
  * The route and language the current address points at.
  *
  * An unclaimed address resolves to the not-found page rather than quietly
  * showing the home page, which would tell a reader their link worked when it
- * did not. The response is still 200, since a static host serving one file per
- * path cannot vary the status; what keeps that from being an indexable soft
- * 404 is the `noindex` the page carries.
+ * did not. Its language comes from the address rather than defaulting to
+ * French: the host answers every unmatched path with the one `404.html` at the
+ * output root, so `/en/nawak` arrives here as a French document and only this
+ * can put it back into English.
  */
-const readAddress = () => resolveRoute(window.location.pathname) ?? DEFAULT;
+const readAddress = () => {
+  const { pathname } = window.location;
+  return (
+    resolveRoute(pathname) ?? {
+      route: ROUTE_NAME.NotFound as RouteName,
+      language: getLanguageFromPath(pathname),
+    }
+  );
+};
 
 /**
  * What to open with.
