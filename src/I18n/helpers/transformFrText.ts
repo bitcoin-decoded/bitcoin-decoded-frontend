@@ -1,4 +1,5 @@
 import {
+  Children,
   cloneElement,
   createElement,
   Fragment,
@@ -76,7 +77,11 @@ const transformTextProps = (props: UnknownProps): UnknownProps | null => {
 export const transformFrText = (node: ReactNode): ReactNode => {
   if (typeof node === "string") return fixFrenchPunctuation(node);
 
-  if (Array.isArray(node)) return node.map(transformFrText);
+  // `Children.map`, not `node.map`: it keys what it returns. A plain map hands
+  // React a fresh array of elements with no keys, which is the "unique key
+  // prop" warning that filled the console on every chapter, and that both the
+  // SSR test and the prerender script had to silence to stay readable.
+  if (Array.isArray(node)) return Children.map(node, transformFrText);
 
   if (!isValidElement(node)) return node;
 
