@@ -4,6 +4,42 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      /*
+        Blocking, and in the head, on purpose: this has to run before the first
+        paint.
+
+        The build cannot read localStorage, so all 52 files are prerendered in
+        the dark theme. A reader who chose light watched that dark markup paint
+        and then get repainted once React read their preference.
+
+        So: stamp the theme on <html> before anything renders, which gives the
+        page its right background straight away, and mark the prerendered
+        markup as pending when it does not match, so it stays hidden until
+        React has rendered it in the right colours. Nothing is lost by hiding
+        it, since the client mounts with createRoot and replaces it wholesale.
+
+        Dark readers are untouched: the file already matches, so nothing is
+        hidden and nothing is delayed. The timeout is a safety net, so a reader
+        whose bundle never runs gets the page back rather than a blank screen.
+      */
+      (function () {
+        var root = document.documentElement;
+        var theme = "dark";
+        try {
+          if (localStorage.getItem("theme") === "light") theme = "light";
+        } catch (e) {
+          /* private mode, quota, storage disabled: the default stands */
+        }
+        root.dataset.theme = theme;
+        if (theme === "light") {
+          root.dataset.themePending = "";
+          setTimeout(function () {
+            delete root.dataset.themePending;
+          }, 3000);
+        }
+      })();
+    </script>
     <!--
       No <title> or <meta name="description"> here on purpose. `src/Seo` renders
       them per route and React 19 hoists them into this head, so a copy here

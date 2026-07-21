@@ -29,6 +29,9 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
     document.body.style.backgroundColor = colors.base.background.primary;
     // Lets index.css branch on the mode (font smoothing, keyframes, pseudo-elements).
     document.documentElement.dataset.theme = theme;
+    // The prerendered markup is always dark, so index.html hides it when this
+    // reader chose light. This render is the one that matches: reveal it.
+    delete document.documentElement.dataset.themePending;
   }, [theme]);
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
