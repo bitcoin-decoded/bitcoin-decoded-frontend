@@ -13,7 +13,7 @@ import { usePageHead } from "../hooks";
  * plain.
  */
 export const PageHead: FC = () => {
-  const { title, description, locale, noindex, canonical } = usePageHead();
+  const { title, description, locale, noindex, canonical, alternates } = usePageHead();
 
   return (
     <>
@@ -21,6 +21,14 @@ export const PageHead: FC = () => {
       <meta name="description" content={description} />
       {noindex && <meta name="robots" content="noindex" />}
       {canonical && <link rel="canonical" href={canonical} />}
+      {alternates.map((alternate) => (
+        <link
+          key={alternate.hreflang}
+          rel="alternate"
+          hrefLang={alternate.hreflang}
+          href={alternate.href}
+        />
+      ))}
 
       <meta property="og:site_name" content={SITE.name} />
       <meta property="og:type" content="article" />
