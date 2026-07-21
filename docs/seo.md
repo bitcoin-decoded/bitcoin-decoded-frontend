@@ -72,9 +72,11 @@ Ce défaut a vécu depuis la phase 5 sans être vu, parce que la vérification p
 
 `vercel.json` pose `X-Robots-Tag: noindex` uniquement sur `bitcoin-decoded.vercel.app`. Un `noindex` global aurait suivi sur le domaine réel sans que personne ne le remarque. Ainsi cadré, attacher un domaine suffit à le rendre indexable, sans rien à défaire.
 
-### La réécriture pointe sur la 404
+### La réécriture pointe sur la 404, et le statut est un vrai 404
 
 Les 52 routes ayant un fichier, la réécriture ne rattrape que l'inconnu. Elle vise `/404.html` et non la home : sinon une adresse inexistante servirait le contenu de la home à une URL qui n'est pas la sienne.
+
+Depuis `cleanUrls`, une adresse inconnue répond **404** et non 200. Ce fichier a longtemps affirmé l'inverse, en tenant le « soft 404 » pour indépassable sur un hébergement statique. Vérifié sur cinq chemins inconnus, aux deux préfixes de langue et à toutes les profondeurs : statut 404, page « introuvable », `noindex`. Le `noindex` reste la ceinture, le statut est devenu les bretelles.
 
 ---
 
@@ -85,7 +87,6 @@ Les 52 routes ayant un fichier, la réécriture ne rattrape que l'inconnu. Elle 
 - **`og:image` et cartes X.** Aucune image de partage n'existe. En nommer une qui n'existe pas casse toutes les cartes au lieu de les laisser sobres. Un compte X est prévu ; les deux se traiteront ensemble.
 - **Canonical sur les pages 404.** Une page qui refuse l'indexation n'a pas d'adresse canonique à revendiquer.
 - **`lastmod`, `changefreq`, `priority` au sitemap.** Aucune date honnête à donner, et les deux autres sont ignorés depuis des années.
-- **Un vrai statut 404.** Un hébergement statique sert le même fichier pour tout chemin et ne peut pas faire varier le statut. C'est le `noindex` qui neutralise le risque ; il restera un signalement « soft 404 » cosmétique en Search Console.
 
 ---
 
@@ -123,7 +124,10 @@ Deux cycles d'imports ont aussi été découverts en chemin, `Routing → Page` 
 
 ## Ce qui reste
 
-- **Phase 7** : découpage du bundle, images, JSON-LD, retrait d'Inter
+- **[#173](https://github.com/bitcoin-decoded/bitcoin-decoded-frontend/issues/173)** : les balises de tête sont doublées après exécution du JS, le HTML brut restant propre
 - **[#165](https://github.com/bitcoin-decoded/bitcoin-decoded-frontend/issues/165)** : la suite de tests met 1 à 2 minutes, presque tout en chargement de modules
 - **[#166](https://github.com/bitcoin-decoded/bitcoin-decoded-frontend/issues/166)** : avertissements React de clés, causés par `transformFrText`
-- Attacher `bitcoindecoded.fr` dans Vercel, puis soumettre le sitemap en Search Console
+- `og:image` et cartes X, en attente du compte X
+- Soumettre le sitemap en Search Console
+
+Le domaine est attaché depuis le 21 juillet 2026 et les 50 URL du sitemap répondent 200 avec leur vrai contenu.
