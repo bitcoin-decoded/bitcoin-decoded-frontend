@@ -1,7 +1,7 @@
 import { type FC } from "react";
 
-import picsouCar from "../../../../src/Design/img/picsou_car.jpg";
-import picsouVilla from "../../../../src/Design/img/picsou_villa.jpg";
+import picsouCar from "../../../../src/Design/img/picsou_car.webp";
+import picsouVilla from "../../../../src/Design/img/picsou_villa.webp";
 import { Quote } from "../../../Design";
 import { Callout, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";

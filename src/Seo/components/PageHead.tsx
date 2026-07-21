@@ -13,7 +13,8 @@ import { usePageHead } from "../hooks";
  * plain.
  */
 export const PageHead: FC = () => {
-  const { title, description, locale, noindex, canonical, alternates } = usePageHead();
+  const { title, description, locale, noindex, canonical, alternates, structuredData } =
+    usePageHead();
 
   return (
     <>
@@ -21,6 +22,14 @@ export const PageHead: FC = () => {
       <meta name="description" content={description} />
       {noindex && <meta name="robots" content="noindex" />}
       {canonical && <link rel="canonical" href={canonical} />}
+      {structuredData && (
+        // React does not hoist <script>, so this stays in the body. Search
+        // engines read JSON-LD wherever it sits in the document.
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: structuredData }}
+        />
+      )}
       {alternates.map((alternate) => (
         <link
           key={alternate.hreflang}
