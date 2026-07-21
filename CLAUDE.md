@@ -79,6 +79,12 @@ Source unique des chiffres : `BITCOIN_REFS` / `MACRO_REFS` / `MARKET_REFS` + hel
 
 Branches `lba/feat/*` · `lba/fix/*` · `lba/refacto/*` (le préfixe suit le type de commit). Process : brancher depuis `main` → commit → push → **PR obligatoire**. Jamais de push direct sur `main`, **sauf** modification de `CLAUDE.md`. **Avant tout `git push` touchant `src/`** : invoquer le skill `ddd-pr-check` (`.claude/skills/ddd-pr-check/`).
 
+## SEO et prérendu
+
+Le site est **prérendu au build** : 52 fichiers HTML (26 routes × 2 langues), chacun avec sa prose et ses métadonnées, sans exécution JS. La langue est dans l'URL (FR à la racine, EN sous `/en`), jamais en stockage.
+
+`docs/seo.md` décrit ce qui existe, où, et pourquoi. **Le lire avant de toucher** à `src/Seo/`, `src/Routing/data/ROUTE_SLUG.ts` ou `scripts/prerender.mjs` : plusieurs choix y sont contre-intuitifs et documentés comme tels.
+
 ## Commands
 
 `npm run dev` · `npm run build` · `npm run lint` · `npm run preview` · `npm run audit:reading-time`
