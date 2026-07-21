@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 
@@ -24,6 +25,30 @@ export default defineConfig(({ isSsrBuild }) => ({
             },
           },
     },
+  },
+  test: {
+    // The suite spends its time loading modules, not asserting: a run reports
+    // ~1.5s of tests against a two-minute import total. Ten files were each
+    // paying for their own copy of a graph they overwhelmingly share, with
+    // `nodeSafety` pulling in the whole application on its own.
+    //
+    // One worker, one graph, loaded once. Measured warm, three runs each:
+    // import fell from ~131s to ~52s and wall time from ~65s to ~54s. The
+    // wall-clock gain is the smaller of the two because the parallelism that
+    // used to hide some of the loading is gone; there is simply much less
+    // loading left to hide.
+    //
+    // Two other approaches were measured and rejected, so they need not be
+    // tried again: `isolate: false` on its own changed nothing (~70s), and
+    // `deps.optimizer.ssr` made it clearly worse (~88s).
+    //
+    // Sharing the registry is safe here because nothing under test mutates
+    // module state: the caches that exist, the address table and the colour
+    // tokens, are built once from constants and only ever read. Should the
+    // suite ever grow a wide set of genuinely independent files, parallelism
+    // would start to pay again and this is the line to revisit.
+    isolate: false,
+    fileParallelism: false,
   },
   resolve: {
     alias: {
