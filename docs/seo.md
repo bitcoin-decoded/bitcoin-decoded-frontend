@@ -32,7 +32,7 @@ Chaque page porte son `<title>`, sa `description`, son `canonical`, ses paires `
 | Préfixe de langue | `src/Routing/data/LANGUAGE_PREFIX.ts` |
 | Adresse → route + langue | `src/Routing/helpers/resolveRoute.ts` |
 | Génération des fichiers et du sitemap | `scripts/prerender.mjs` |
-| Réécritures et `noindex` d'hôte | `vercel.json` |
+| Résolution des adresses, réécritures, `noindex` d'hôte | `vercel.json` |
 
 Le *pourquoi* de chaque choix est en commentaire à côté du code concerné. Ce fichier est la carte, pas la doublure.
 
@@ -58,9 +58,15 @@ Le client remplace le HTML prérendu au lieu de l'hydrater. Hydrater exigerait q
 
 La langue est dans l'URL et nulle part ailleurs. Une préférence antérieure est ignorée. Rediriger selon l'`Accept-Language` ou une visite passée cache une version aux robots, ce que Google déconseille explicitement.
 
-### Fichiers plats, pas des dossiers
+### Fichiers plats, plus `cleanUrls`
 
 Les pages sont écrites en `<chemin>.html`, pas `<chemin>/index.html`. Un hébergeur statique ne résout un dossier vers son index **que si l'adresse finit par un slash**, et les adresses produites ici n'en ont pas. Écrit autrement, **toutes les pages répondaient la home**.
+
+Les fichiers plats seuls ne suffisent pourtant pas, et c'est le piège le plus coûteux du lot. Vercel cherche un fichier au nom **exact** : `/bitcoin/halving` ne correspond à rien, puisque le fichier s'appelle `bitcoin/halving.html`. La réécriture attrape alors la requête et sert la 404. Résultat : **49 des 50 URL du sitemap répondaient la page « introuvable » en 200, avec son `noindex`**, seule la home fonctionnant parce que `/` se résout nativement vers `index.html`.
+
+`"cleanUrls": true` fait résoudre `/chemin` vers `chemin.html` avant que la réécriture ne s'applique, et `"trailingSlash": false` fait converger `/chemin/` vers la même adresse. Les deux sont dans `vercel.json` et ne doivent pas en sortir.
+
+Ce défaut a vécu depuis la phase 5 sans être vu, parce que la vérification portait sur `dist/` : les 52 fichiers y étaient corrects. **Vérifier l'artefact n'est pas vérifier le service.** Toute modification du routage se contrôle désormais en demandant une URL profonde au déploiement, et en lisant le `<title>` rendu, pas seulement le code HTTP. Un 200 qui sert la 404 est indiscernable d'un succès si on ne regarde que le statut.
 
 ### Le `noindex` est conditionné à l'hôte
 
@@ -109,6 +115,7 @@ Consigné parce que le document d'architecture porte encore ces erreurs.
 | Phase 5 « moyenne » | le prérendu ne publiait qu'un bloc sur six, il a fallu revoir le moteur de lecture d'abord |
 | `Progression` répond à deux questions | une seule ; « est-ce dans l'ordre » et « peut-on sceller » sont la même |
 | Le domaine conditionne la phase 3 | il ne conditionne que le canonical, l'`og:url` et le sitemap, donc la 5b |
+| Les fichiers plats règlent le service des pages | il y fallait aussi `cleanUrls`, faute de quoi 49 URL sur 50 servaient la 404 |
 
 Deux cycles d'imports ont aussi été découverts en chemin, `Routing → Page` et `Design → Interactive`, invisibles sous Vite qui les résout en bundlant. Le test SSR de `src/Platform/nodeSafety.test.tsx` les empêche de revenir.
 
