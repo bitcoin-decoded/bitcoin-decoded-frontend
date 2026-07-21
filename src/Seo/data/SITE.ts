@@ -1,13 +1,13 @@
 /**
  * Everything about *where* the site lives, in one place.
  *
- * The domain is not bought yet. It is needed only by `canonical`, `og:url` and
- * the future sitemap, none of which ship before the static prerender. Isolating
- * it here means the day it is decided, this is the only line to change.
+ * `canonical`, `og:url` and the sitemap all need an absolute address, and all
+ * three must agree: two spellings of the same page are two pages to a search
+ * engine. They read it from here so they cannot disagree.
+ *
+ * No trailing slash: every path already starts with one.
  */
 export const SITE = {
-  // TODO: confirm at deployment. Nothing else in the codebase knows the domain.
-  url: "https://bitcoin-decoded.fr",
+  url: "https://bitcoindecoded.fr",
   name: "Bitcoin.Decoded",
-  twitter: "",
 } as const;

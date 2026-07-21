@@ -2,6 +2,7 @@ import { renderToString } from "react-dom/server";
 
 import { App } from "./App";
 import { ROUTE_NAME, ROUTE_PATH, type RouteName } from "./Routing";
+import { SITE } from "./Seo";
 
 /**
  * Renders one route to HTML at build time.
@@ -21,4 +22,10 @@ export const render = (route: RouteName): string => renderToString(<App route={r
 export const pages = Object.values(ROUTE_NAME).map((route) => ({
   route,
   path: ROUTE_PATH[route],
+  // The not-found page carries `noindex`, so it is written out like any other
+  // page but never offered to a crawler as somewhere to go.
+  listed: route !== ROUTE_NAME.NotFound,
 }));
+
+/** Where the site lives, so the build can write absolute addresses. */
+export const site = SITE;

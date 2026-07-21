@@ -50,8 +50,29 @@ const splitHead = (html) => {
  */
 const fileFor = (path) => (path === "/" ? join(DIST, "index.html") : join(DIST, `${path}.html`));
 
+/**
+ * The sitemap, built from the same list the files are.
+ *
+ * Generated rather than written by hand so it cannot come to list a page that
+ * no longer exists, or miss one that does. No `lastmod`, `changefreq` or
+ * `priority`: there is no honest date to give, and search engines have long
+ * ignored the other two.
+ */
+const sitemapFor = (pages, site) => {
+  const urls = pages
+    .filter((page) => page.listed)
+    .map((page) => `  <url><loc>${site.url}${page.path}</loc></url>`)
+    .join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>
+`;
+};
+
 const main = async () => {
-  const { render, pages } = await import(SSR_ENTRY);
+  const { render, pages, site } = await import(SSR_ENTRY);
   const shell = await readFile(join(DIST, "index.html"), "utf8");
 
   if (!shell.includes('<div id="root"></div>')) {
@@ -79,8 +100,12 @@ const main = async () => {
 
   console.error = noisy;
 
+  const sitemap = sitemapFor(pages, site);
+  await writeFile(join(DIST, "sitemap.xml"), sitemap, "utf8");
+
   const total = written.reduce((sum, page) => sum + page.bytes, 0);
   console.log(`Prerendered ${written.length} pages, ${(total / 1024).toFixed(0)} kB of HTML`);
+  console.log(`Sitemap lists ${pages.filter((page) => page.listed).length} of them`);
   for (const page of written) {
     console.log(`  ${page.path.padEnd(52)} ${String(page.bytes).padStart(7)} B`);
   }
