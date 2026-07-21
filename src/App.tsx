@@ -2,7 +2,7 @@ import { type FC } from "react";
 
 import { BadgeNavButton, BadgeProvider, getBadgeIdForRoute, useBadges } from "./Achievements";
 import { MainLayout, ThemeProvider } from "./Design";
-import { LanguageProvider } from "./I18n";
+import { type Language, LanguageProvider } from "./I18n";
 import { BitcoinDonationFooter } from "./Interactive";
 import { useChapterProgression } from "./Progression";
 import { type RouteName, RouterProvider } from "./Routing";
@@ -36,16 +36,18 @@ const AppShell: FC = () => {
   );
 };
 
-export const App: FC<{ route?: RouteName }> = ({ route }) => {
+export const App: FC<{ route?: RouteName; language?: Language }> = ({ route, language }) => {
   return (
-    <LanguageProvider>
-      <ThemeProvider>
-        <RouterProvider route={route}>
+    // The router is outermost now: it reads the language from the address, and
+    // everything below is told rather than deciding for itself.
+    <RouterProvider route={route} language={language}>
+      <LanguageProvider>
+        <ThemeProvider>
           <BadgeProvider>
             <AppShell />
           </BadgeProvider>
-        </RouterProvider>
-      </ThemeProvider>
-    </LanguageProvider>
+        </ThemeProvider>
+      </LanguageProvider>
+    </RouterProvider>
   );
 };
