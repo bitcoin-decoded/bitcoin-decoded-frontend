@@ -7,4 +7,4 @@ Allow: /
 # would hide the noindex, and a URL discovered elsewhere could still be listed
 # with no snippet, which is the outcome this avoids.
 
-# Sitemap declared once the static prerender ships it (phase 5).
+Sitemap: https://bitcoindecoded.fr/sitemap.xml

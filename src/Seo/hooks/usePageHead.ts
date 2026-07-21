@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useTranslation } from "../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../Routing";
 import { BRANDED_ROUTES, getPageSeo } from "../data";
-import { buildPageTitle } from "../helpers";
+import { buildCanonicalUrl, buildPageTitle } from "../helpers";
 
 /**
  * What the current route should tell a search engine about itself.
@@ -32,5 +32,8 @@ export const usePageHead = () => {
     description: seo.description,
     locale: language === "fr" ? "fr_FR" : "en_US",
     noindex,
+    // A page kept out of the index has no canonical address to name, and
+    // claiming one while refusing to be indexed says two different things.
+    canonical: noindex ? null : buildCanonicalUrl(currentPage),
   };
 };

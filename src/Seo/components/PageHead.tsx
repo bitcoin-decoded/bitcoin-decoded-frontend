@@ -4,29 +4,30 @@ import { SITE } from "../data";
 import { usePageHead } from "../hooks";
 
 /**
- * Per-route metadata. React 19 hoists `<title>` and `<meta>` rendered anywhere
- * in the tree into `<head>`, so no imperative DOM writing and no helmet
- * library, and it lands in the HTML as-is once the build prerenders routes.
+ * Per-route metadata. React 19 hoists `<title>`, `<meta>` and `<link>` rendered
+ * anywhere in the tree into `<head>`, so no imperative DOM writing and no
+ * helmet library, and the build finds them there when it writes each page out.
  *
- * `canonical`, `og:url` and `og:image` are deliberately absent. The first two
- * need a real per-page URL, which hash routing cannot give, and the third needs
- * an image that does not exist yet. Emitting them now would mean pointing every
- * page at the same address, which is worse than saying nothing.
+ * `og:image` is still absent: there is no share image to point at, and naming
+ * one that does not exist would break every social card rather than leave it
+ * plain.
  */
 export const PageHead: FC = () => {
-  const { title, description, locale, noindex } = usePageHead();
+  const { title, description, locale, noindex, canonical } = usePageHead();
 
   return (
     <>
       <title>{title}</title>
       <meta name="description" content={description} />
       {noindex && <meta name="robots" content="noindex" />}
+      {canonical && <link rel="canonical" href={canonical} />}
 
       <meta property="og:site_name" content={SITE.name} />
       <meta property="og:type" content="article" />
       <meta property="og:locale" content={locale} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
+      {canonical && <meta property="og:url" content={canonical} />}
     </>
   );
 };
