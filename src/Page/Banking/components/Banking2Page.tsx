@@ -1,5 +1,6 @@
 import { type FC } from "react";
 
+import bankCompensation from "../../../../src/Design/img/bank_compensation.webp";
 import michuHouse from "../../../../src/Design/img/michu_house.webp";
 import nicolasMichuTransfer from "../../../../src/Design/img/nicolas_michu_transfer.webp";
 import nicolasRich from "../../../../src/Design/img/nicolas_rich.webp";
@@ -143,6 +144,15 @@ export const Banking2Page: FC = () => {
               </>
             )}
           </p>
+          <Illustration
+            src={bankCompensation}
+            alt={
+              fr
+                ? "La banque centrale au-dessus de deux banques commerciales qui se règlent entre elles"
+                : "The central bank above two commercial banks settling between themselves"
+            }
+            width="62%"
+          />
         </Block>
 
         <Block>

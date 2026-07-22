@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import cantillonEffectImg from "../../../../src/Design/img/Cantillon_Effect.webp";
+import cantillonEffectImg from "../../../../src/Design/img/cantillon_effect.webp";
 import gyroGearlooseImg from "../../../../src/Design/img/Gyro_Gearloose.png";
 import picsouImg from "../../../../src/Design/img/picsou.webp";
 import { Callout, IdentityCard, Reference } from "../../../Design";
@@ -196,8 +196,12 @@ export const Banking5Page: FC = () => {
           </p>
           <Illustration
             src={cantillonEffectImg}
-            alt="Cantillon Effect"
-            width="40%"
+            alt={
+              fr
+                ? "La banque imprime, l'argent file vers le riche au chapeau haut de forme, pas vers l'homme au bol vide"
+                : "The bank prints, the money flows to the top-hatted rich man, never to the man with the empty bowl"
+            }
+            width="72%"
             caption={
               fr
                 ? "Le ruissellement de l'argent : le robinet monétaire remplit d'abord les portefeuilles des « Picsou » avant que ça ne finisse par ruisseler... jusque dans notre caddie"

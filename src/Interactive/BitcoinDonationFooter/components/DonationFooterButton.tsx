@@ -5,7 +5,7 @@ import { withOpacity } from "../../../Design/helpers";
 import { useTranslation } from "../../../I18n";
 import { getDonationCopy } from "../data";
 
-import { Bitcoin } from "@icons";
+import { BitcoinMark } from "@icons";
 
 type Props = {
   onClick: () => void;
@@ -46,7 +46,7 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Bitcoin size={17} strokeWidth={2.2} style={{ color: BRAND.orange }} />
+      <BitcoinMark size={19} />
       {copy.footerCta}
     </button>
   );

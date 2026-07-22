@@ -4,7 +4,7 @@ export const getDonationCopy = (language: Language) => {
   const fr = language === "fr";
 
   return {
-    footerCta: fr ? "Soutenir en bitcoin" : "Support with bitcoin",
+    footerCta: fr ? "Soutenir mon travail" : "Support my work",
     notConfigured: fr
       ? "Adresse de don pas encore configurée."
       : "Donation address not configured yet.",
