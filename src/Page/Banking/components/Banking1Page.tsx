@@ -1,8 +1,9 @@
 import { type FC } from "react";
 
+import nicolasDream from "../../../../src/Design/img/nicolas_dream.webp";
 import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { AccountingTerms, CreditCreationSimulator } from "../../../Interactive";
+import { AccountingTerms, CreditCreationSimulator, Illustration } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { Block, BlockReader } from "../../Reading";
 import { ChapterPrelude, PageTemplate } from "../../Shared/";
@@ -131,6 +132,15 @@ export const Banking1Page: FC = () => {
               </>
             )}
           </p>
+          <Illustration
+            src={nicolasDream}
+            alt={
+              fr
+                ? "Nicolas, accoudé à une table, rêve d'une maison"
+                : "Nicolas, leaning on a table, daydreaming about a house"
+            }
+            width="45%"
+          />
           <Callout title={fr ? "Nicolas veut acheter une maison" : "Nicolas wants to buy a house"}>
             <p>
               {fr

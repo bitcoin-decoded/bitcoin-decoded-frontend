@@ -3,8 +3,8 @@ import type { PageMetadataMap } from "../types";
 
 
 export const PAGE_METADATA: PageMetadataMap = {
-  [ROUTE_NAME.Banking_1]: { wordCount: 796, interactiveCount: 2 },
-  [ROUTE_NAME.Banking_2]: { wordCount: 807, interactiveCount: 2 },
+  [ROUTE_NAME.Banking_1]: { wordCount: 737, interactiveCount: 3 },
+  [ROUTE_NAME.Banking_2]: { wordCount: 739, interactiveCount: 4 },
   [ROUTE_NAME.Banking_3]: { wordCount: 1066, interactiveCount: 2 },
   [ROUTE_NAME.Banking_4]: { wordCount: 880, interactiveCount: 2 },
   [ROUTE_NAME.Banking_5]: { wordCount: 440, interactiveCount: 2 },

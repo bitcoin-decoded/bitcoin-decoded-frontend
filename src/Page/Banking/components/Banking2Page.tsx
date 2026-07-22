@@ -1,8 +1,10 @@
 import { type FC } from "react";
 
+import nicolasRich from "../../../../src/Design/img/nicolas_rich.webp";
+import nicolasTransfer from "../../../../src/Design/img/nicolas_transfer.webp";
 import { Callout, Disclosure, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { CompensationSimulator, MonetaryAggregates } from "../../../Interactive";
+import { CompensationSimulator, Illustration, MonetaryAggregates } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { Block, BlockReader } from "../../Reading";
 import { ChapterPrelude, PageTemplate } from "../../Shared/";
@@ -35,6 +37,15 @@ export const Banking2Page: FC = () => {
         </Block>
 
         <Block>
+          <Illustration
+            src={nicolasRich}
+            alt={
+              fr
+                ? "Nicolas en smoking et monocle, un éventail de billets à la main"
+                : "Nicolas in black tie and monocle, holding a fan of banknotes"
+            }
+            width="42%"
+          />
           <p>
             {fr ? (
               <>
@@ -130,6 +141,15 @@ export const Banking2Page: FC = () => {
               ? "Cela te parait abstrait ? Très bien, passons une fois de plus à la pratique !"
               : "Sounds abstract? Good. Let's get our hands dirty once again!"}
           </p>
+          <Illustration
+            src={nicolasTransfer}
+            alt={
+              fr
+                ? "Nicolas, à son bureau, appuie sur un bouton pour lancer le virement"
+                : "Nicolas, at his desk, pressing a button to send the transfer"
+            }
+            width="48%"
+          />
           <Callout
             icon={<Home size={20} strokeWidth={2} />}
             title={
