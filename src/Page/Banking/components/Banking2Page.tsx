@@ -141,15 +141,6 @@ export const Banking2Page: FC = () => {
               ? "Cela te parait abstrait ? Très bien, passons une fois de plus à la pratique !"
               : "Sounds abstract? Good. Let's get our hands dirty once again!"}
           </p>
-          <Illustration
-            src={nicolasTransfer}
-            alt={
-              fr
-                ? "Nicolas, à son bureau, appuie sur un bouton pour lancer le virement"
-                : "Nicolas, at his desk, pressing a button to send the transfer"
-            }
-            width="48%"
-          />
           <Callout
             icon={<Home size={20} strokeWidth={2} />}
             title={
@@ -173,6 +164,16 @@ export const Banking2Page: FC = () => {
                 </>
               )}
             </p>
+            <Illustration
+              src={nicolasTransfer}
+              alt={
+                fr
+                  ? "Nicolas, à son bureau, appuie sur un bouton pour lancer le virement"
+                  : "Nicolas, at his desk, pressing a button to send the transfer"
+              }
+              width="58%"
+              margin="1.5rem auto"
+            />
             <p>
               {fr
                 ? "On arrive en fin de journée, c'est l'heure des comptes : la banque de Nicolas doit 200 000 € à la banque de Mme Michu. Quelle monnaie va être utilisée ? Exact, la monnaie M0 !"
