@@ -3,8 +3,7 @@ import { type CSSProperties, type FC } from "react";
 import { Button, Caption, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 
-import { DoodleArrowDown, DoodleArrowUp } from "@doodle";
-import { Lock } from "@icons";
+import { DoodleArrowDown, DoodleArrowUp, DoodleLock } from "@doodle";
 
 type Props = {
   isFirst: boolean;
@@ -57,7 +56,7 @@ export const BlockNav: FC<Props> = ({
           variant="note"
           size="sm"
           color={hintColor}
-          icon={<Lock size={13} strokeWidth={2} />}
+          icon={<DoodleLock size={17} />}
           style={{ alignSelf: "flex-end" }}
         >
           {t("reading.lockHint")}

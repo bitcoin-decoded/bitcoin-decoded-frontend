@@ -6,8 +6,6 @@ import { useBreakpoint } from "../../../Design/Responsive";
 import { useTranslation } from "../../../I18n";
 import type { BalanceSheetLine } from "../types";
 
-import { DoodleBalance } from "@doodle";
-
 type Props = {
   title: string;
   assets: BalanceSheetLine[];
@@ -25,11 +23,21 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   const rowCount = Math.max(assets.length, liabilities.length);
   const rows = Array.from({ length: rowCount });
 
+  // The rules carry the ledger here, so they are drawn rather than hinted: the
+  // frame at two pixels, the head-to-body divider with it, and the cell rules
+  // left at one but given the opacity they were missing. A pixel and a half
+  // lands between device pixels on a standard screen and blurs, which reads as
+  // weaker than one crisp pixel, not stronger.
+  const outerRule = `2px solid ${withOpacity(accentColor, 0.55)}`;
+  const headRule = `2px solid ${withOpacity(accentColor, 0.45)}`;
+  const columnRule = `1px solid ${withOpacity(accentColor, 0.38)}`;
+  const rowRule = `1px solid ${withOpacity(accentColor, 0.26)}`;
+
   const containerStyle: CSSProperties = {
     width: "100%",
     overflowX: "auto",
     borderRadius: 0,
-    border: `1px solid ${withOpacity(accentColor, 0.3)}`,
+    border: outerRule,
   };
 
   const titleStyle: CSSProperties = {
@@ -39,7 +47,6 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: isMobile ? "0.5rem" : "0.7rem",
     fontVariant: "small-caps",
     color: colors[moduleTheme].text.primary,
   };
@@ -59,13 +66,16 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     letterSpacing: "0.08em",
     fontVariant: "small-caps",
     color: colors[moduleTheme].text.primary,
-    backgroundColor: withOpacity(accentColor, 0.1),
-    borderBottom: `1px solid ${withOpacity(accentColor, 0.3)}`,
+    backgroundColor: withOpacity(accentColor, 0.12),
+    // Ruled on both sides: the band was closed underneath and open above, so it
+    // floated under the title instead of separating it from the figures.
+    borderTop: headRule,
+    borderBottom: headRule,
   };
 
   const headerLeftStyle: CSSProperties = {
     ...tableHeaderStyle,
-    borderRight: `1px solid ${withOpacity(accentColor, 0.15)}`,
+    borderRight: columnRule,
   };
 
   const cellStyle: CSSProperties = {
@@ -75,12 +85,12 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     fontSize: isMobile ? "0.875rem" : "0.9375rem",
     lineHeight: 1.55,
     color: colors.base.text.secondary,
-    borderBottom: `1px solid ${withOpacity(accentColor, 0.1)}`,
+    borderBottom: rowRule,
   };
 
   const cellLeftStyle: CSSProperties = {
     ...cellStyle,
-    borderRight: `1px solid ${withOpacity(accentColor, 0.15)}`,
+    borderRight: columnRule,
   };
 
   const changedColor = colors.amber.text.secondary;
@@ -89,7 +99,6 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   return (
     <div style={containerStyle}>
       <h3 style={titleStyle}>
-        <DoodleBalance size={isMobile ? 24 : 30} style={{ flexShrink: 0 }} />
         <span style={{ textAlign: "center" }}>{title}</span>
       </h3>
       <table style={tableStyle}>
