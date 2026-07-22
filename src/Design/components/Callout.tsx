@@ -28,11 +28,13 @@ export const Callout: FC<Props> = ({ title, children }) => {
     margin: isMobile ? "1.5rem 0" : "2.5rem 0",
   };
 
+  // Inside the frame now, in the eyebrow register rather than as a heading: it
+  // names the box it sits in, so it belongs within the brackets that draw it.
   const titleStyle: CSSProperties = {
-    ...typography.heading,
+    ...typography.kicker,
     display: "block",
     color: moduleAccent,
-    marginBottom: "0.55rem",
+    marginBottom: "0.8rem",
   };
 
   const frameStyle: CSSProperties = {
@@ -90,14 +92,14 @@ export const Callout: FC<Props> = ({ title, children }) => {
 
   return (
     <aside style={wrapperStyle}>
-      <span style={titleStyle}>
-        <FrText>{title}</FrText>
-      </span>
       <div style={frameStyle}>
         <div style={topLeftStyle} />
         <div style={topRightStyle} />
         <div style={bottomLeftStyle} />
         <div style={bottomRightStyle} />
+        <span style={titleStyle}>
+          <FrText>{title}</FrText>
+        </span>
         <div style={bodyStyle}>{children}</div>
       </div>
     </aside>

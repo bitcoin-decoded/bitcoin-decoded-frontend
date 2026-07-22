@@ -1,8 +1,9 @@
 import { type FC } from "react";
 
+import nicolasDream from "../../../../src/Design/img/nicolas_dream.webp";
 import { Callout, HighlightText, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { AccountingTerms, CreditCreationSimulator } from "../../../Interactive";
+import { AccountingTerms, CreditCreationSimulator, Illustration } from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { Block, BlockReader } from "../../Reading";
 import { ChapterPrelude, PageTemplate } from "../../Shared/";
@@ -137,6 +138,16 @@ export const Banking1Page: FC = () => {
                 ? "Nicolas a un super projet : être propriétaire de sa résidence principale. Pour cela, il va faire une demande de prêt à sa banque pour un montant de 200 000 €."
                 : "Nicolas has a great plan: to own the home he lives in. To pull it off, he's going to ask his bank for a €200,000 loan."}
             </p>
+            <Illustration
+              src={nicolasDream}
+              alt={
+                fr
+                  ? "Nicolas, accoudé à une table, rêve d'une maison"
+                  : "Nicolas, leaning on a table, daydreaming about a house"
+              }
+              width="55%"
+              margin="1.5rem auto"
+            />
             <p>
               {fr
                 ? "Et c'est là que tu entres en scène : tu es son banquier, tu as le pouvoir d'accomplir son rêve en lui accordant ce prêt."
