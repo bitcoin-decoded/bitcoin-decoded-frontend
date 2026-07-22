@@ -28,13 +28,21 @@ export const ReadingTimeBadge: FC = () => {
     // role (13/14px) matches the chapter kicker above it.
     fontSize: typo.label.fontSize,
     letterSpacing: "0.08em",
-    color: colors.base.text.secondary,
+    // The prose colour, not the secondary grey. This sits alone under the
+    // title, with nothing around it to be quiet against, and the grey read as
+    // switched off rather than as understated.
+    color: colors.base.text.primary,
   };
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <span style={labelStyle}>
-        <DoodleClock size={isMobile ? 18 : 20} style={{ opacity: 0.75 }} />
+        {/* Freehand line art, so it reads lighter than a solid glyph at the
+            same nominal size and needs the extra couple of pixels to sit level
+            with the figure beside it. It inherits the label's colour, and is no
+            longer dimmed on top of it: a thin hand-drawn stroke at 75% was the
+            first thing to disappear. */}
+        <DoodleClock size={isMobile ? 21 : 24} />
         {estimate.minutes} min
       </span>
     </div>

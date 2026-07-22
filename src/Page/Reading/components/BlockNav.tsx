@@ -60,13 +60,13 @@ export const BlockNav: FC<Props> = ({
     marginTop: "1.75rem",
   };
 
-  // Stacked and edge-aligned on a phone. The old single row wrapped, and the
-  // next button carried `margin-left: auto`, so the two ended up staggered on
-  // opposite sides instead of reading as a pair.
+  // Stacked on a phone, but centred rather than stretched. Edge to edge, a
+  // control ends up mostly empty and its label floats in the middle of a very
+  // wide box, which reads as a banner rather than as something to press.
   const rowStyle: CSSProperties = {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
-    alignItems: isMobile ? "stretch" : "center",
+    alignItems: "center",
     gap: "0.85rem",
   };
 
@@ -92,7 +92,6 @@ export const BlockNav: FC<Props> = ({
             color={moduleColor}
             icon={<DoodleArrowUp size={24} />}
             hideBrackets
-            fullWidth={isMobile}
             onClick={onPrev}
             style={{ opacity: 0.75 }}
           >
@@ -101,12 +100,7 @@ export const BlockNav: FC<Props> = ({
         )}
         <div style={{ marginLeft: isMobile ? undefined : "auto" }}>
           {isLast && outOfSequence ? (
-            <Button
-              variant="primary"
-              color={moduleColor}
-              fullWidth={isMobile}
-              onClick={onResume}
-            >
+            <Button variant="primary" color={moduleColor} onClick={onResume}>
               {resumeLabel}
             </Button>
           ) : isLast ? (
@@ -114,7 +108,6 @@ export const BlockNav: FC<Props> = ({
               variant="stamped"
               color={moduleColor}
               disabled={locked}
-              fullWidth={isMobile}
               onClick={onFinish}
             >
               {t("reading.finish")}
@@ -126,7 +119,6 @@ export const BlockNav: FC<Props> = ({
               icon={<DoodleArrowDown size={24} />}
               iconPosition="right"
               hideBrackets
-              fullWidth={isMobile}
               disabled={locked}
               onClick={onNext}
             >

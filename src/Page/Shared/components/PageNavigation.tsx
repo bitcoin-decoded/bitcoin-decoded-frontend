@@ -20,6 +20,10 @@ export const PageNavigation: FC = () => {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
     justifyContent: "space-between",
+    // Stacked on a phone, the default `stretch` pulled each button edge to
+    // edge, leaving its label adrift in a mostly empty frame. Centred, they
+    // take the width of what they say.
+    alignItems: isMobile ? "center" : undefined,
     gap: isMobile ? "0.75rem" : "1rem",
     marginTop: "3rem",
     paddingTop: "1.5rem",

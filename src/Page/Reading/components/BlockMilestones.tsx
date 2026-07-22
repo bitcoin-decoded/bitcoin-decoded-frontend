@@ -75,14 +75,13 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
   };
 
   // Names what this rail navigates, so it cannot be mistaken for the chapter
-  // rail sitting right above it.
-  // Same weight as the chapter rail label above it: Source Serif 4 has a real
-  // 600, so this is bold rather than a synthetic smear. Full gold — the accent
-  // the reached markers wear — so the two rails read as equals.
+  // rail sitting right above it. Same weight as that one, 400: the pair sets
+  // the context and should not compete with the markers it introduces. Full
+  // gold, the accent the reached markers wear, so the two rails read as equals.
   const railLabelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
     fontSize: typo.label.fontSize,
-    fontWeight: 600,
+    fontWeight: 400,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: gold,

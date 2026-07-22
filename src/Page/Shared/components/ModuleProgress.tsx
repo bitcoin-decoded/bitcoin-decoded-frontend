@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, Fragment, type ReactNode, useState } from "react";
+import { type CSSProperties, type FC, Fragment, useState } from "react";
 
 import {
   BRAND,
@@ -16,16 +16,24 @@ import { useModuleProgress } from "../hooks";
 import { DoodleLock } from "@doodle";
 
 /**
- * The module's chapters as one ledger entry — [ 01 — 02 — 03 — QUIZ ] — sitting
- * directly above the block ribbon so the two rails read as a pair: this one
- * moves between chapters, the one below between blocks. Each is prefixed with
- * what it navigates so they cannot be confused.
+ * The module's chapters as one unbroken rail — Chap. [01]—02—03—Quiz — sitting
+ * directly above the block ribbon so the two read as a pair: this one moves
+ * between chapters, the one below between blocks. Each is prefixed with what it
+ * navigates so they cannot be confused.
  *
- * The outer brackets are thick and wear the module's identity colour; the
- * chapters are gold, linked by the same hairline segments the block ribbon uses
- * — the chain motif, one level up. Only the chapter being read is marked, by a
- * lighter bracket of its own. Nothing signals "finished": that is the badge's
- * job, and a second marker here only competed with this one.
+ * Three states, three colours, and no fourth invented for the occasion:
+ *
+ *   reading   the module's gold, filled, with the page ground as its ink
+ *   open      the module's own accent, the identity colour it already wears
+ *   locked    the neutral secondary text token, plus a padlock
+ *
+ * Gold is structure and marks position; the module accent is identity and marks
+ * what is open. Both come from `THEME_COLORS`, whose text tokens are held to
+ * WCAG AA on either ground by `THEME_COLORS.test.ts`, so neither needs a
+ * light-mode variant invented here.
+ *
+ * Nothing signals "finished": that is the badge's job, and a second marker here
+ * only competed with this one.
  */
 export const ModuleProgress: FC = () => {
   const progress = useModuleProgress();
@@ -43,179 +51,175 @@ export const ModuleProgress: FC = () => {
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
   const currentId = progress.chapters[progress.currentIndex].id;
 
-  const linkWidth = isMobile ? 10 : 18;
+  // Narrow screens trade the rule for a middot. Seven chapters plus their links
+  // do not fit on one line at 375px, and a rail that wraps onto two lines stops
+  // reading as a rail at all.
+  const linkWidth = isMobile ? 0 : 16;
 
-  const railStyle: CSSProperties = {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: isMobile ? "0.3rem 0.45rem" : "0.35rem 0.6rem",
+  // Two elements, for one reason: the rail must never wrap onto a second line,
+  // and a nine-chapter module at 375px wants about 350px against roughly 350
+  // available. It fits, but with nothing to spare, and a longer module or a
+  // wider glyph would break it.
+  //
+  // So the outer element scrolls and the inner one is sized to its content:
+  // under the available width `margin: auto` centres it as usual, over it the
+  // rail slides instead of wrapping or pushing the page sideways. The
+  // scrollbar itself is hidden by the shared `.no-scrollbar` utility.
+  const scrollerStyle: CSSProperties = {
+    overflowX: "auto",
+    maxWidth: "100%",
     margin: isMobile ? "0 0 1.25rem" : "0 0 1.5rem",
   };
 
-  // Source Serif 4 rather than the mono: it ships a real 600, so this reads as
-  // bold instead of the synthetic smear Cutive would give.
-  const labelWrapStyle: CSSProperties = {
-    display: "inline-flex",
+  const railStyle: CSSProperties = {
+    display: "flex",
+    flexWrap: "nowrap",
     alignItems: "center",
-    gap: isMobile ? "0.3rem" : "0.4rem",
-    color: moduleAccent,
-    marginRight: isMobile ? "0.25rem" : "0.4rem",
+    width: "max-content",
+    margin: "0 auto",
+    // Zero, deliberately: the links are the only thing between two chapters, so
+    // the rule runs edge to edge instead of breaking into dashes.
+    gap: 0,
   };
 
-  // Gold, like the "Bloc" label on the rail below, and the same size: the two
-  // name what they navigate and must read as a pair. Wearing the module colour
-  // made this one look quieter than its neighbour rather than different from
-  // it, which is not what the pair is for.
+  // Weight 400, not 600. The pair of prefixes sets the context and should not
+  // compete with the figures they introduce.
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
     fontSize: typo.label.fontSize,
-    fontWeight: 600,
+    fontWeight: 400,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: gold,
+    marginRight: isMobile ? "0.3rem" : "0.55rem",
+    flex: "0 0 auto",
   };
 
-  // The same hairline the block ribbon links its markers with — the chain motif.
   const linkStyle: CSSProperties = {
     flex: "0 0 auto",
     width: linkWidth,
     height: BRAND.figures.ruleThickness,
-    background: withOpacity(gold, 0.5),
+    background: withOpacity(gold, 0.45),
   };
 
-  const numberStyle = (
+  const dotStyle: CSSProperties = {
+    flex: "0 0 auto",
+    ...typo.micro,
+    color: withOpacity(gold, 0.55),
+    padding: "0 0.13rem",
+    lineHeight: 1,
+  };
+
+  const figureColor = (isCurrent: boolean, isLocked: boolean, isHovered: boolean): string => {
+    if (isCurrent) return colors.base.background.primary;
+    if (isLocked) return colors.base.text.secondary;
+    return isHovered ? gold : moduleAccent;
+  };
+
+  const figureStyle = (
     isCurrent: boolean,
+    isLocked: boolean,
     isHovered: boolean,
-    isOutOfSequence: boolean,
   ): CSSProperties => ({
     ...typo.figure,
     fontFamily: BRAND.fonts.mono,
-    // Only the chapter being read wears the module colour; the others carry the
-    // block ribbon's full gold, which is what makes that rail readable at a
-    // glance.
-    //
-    // A locked one steps down only slightly. That deliberately shifts the weight
-    // of the state onto the padlock and the dead click: dimming far enough to
-    // signal "closed" on its own also dimmed it far enough to have to hunt for
-    // the number, and a number you cannot read is not a quieter number, it is a
-    // missing one.
-    color: isOutOfSequence
-      ? withOpacity(gold, 0.8)
-      : isCurrent
-        ? moduleAccent
-        : isHovered
-          ? gold
-          : withOpacity(gold, 0.95),
-    letterSpacing: "0.06em",
+    color: figureColor(isCurrent, isLocked, isHovered),
+    // Tracking is a luxury the narrow rail cannot afford: across the twenty-odd
+    // glyphs of a nine-chapter module it alone costs more than a chapter cell.
+    letterSpacing: isMobile ? "0.02em" : "0.06em",
     transition: "color 0.2s var(--ease-smooth)",
   });
 
-  // Sits at the numeral's bottom-right corner, deliberately left at 12 while the
-  // figures moved up a step: the size gap is what makes the padlock read as an
-  // annotation on the number rather than as its equal.
+  // Sits at the numeral's bottom-right corner, smaller than the figure on
+  // purpose: the size gap is what makes the padlock read as an annotation on
+  // the number rather than as its equal.
   const lockSize = 12;
-  const numeralWrapStyle: CSSProperties = {
-    position: "relative",
-    display: "inline-flex",
-    alignItems: "center",
-  };
   const lockStyle: CSSProperties = {
     position: "absolute",
-    right: -lockSize * 0.6,
-    bottom: -lockSize * 0.35,
-    color: withOpacity(gold, 0.8),
+    right: -lockSize * 0.55,
+    bottom: -lockSize * 0.3,
+    color: colors.base.text.secondary,
     pointerEvents: "none",
   };
 
-  // The navbar frames its module numerals with four right-angle corners rather
-  // than a box; the current chapter is marked the same way.
-  const cornerFrameStyle: CSSProperties = {
-    position: "relative",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: isMobile ? "0.3rem 0.45rem" : "0.35rem 0.55rem",
-    // The same wash the navbar puts behind the chapter you are reading.
-    background: withOpacity(moduleAccent, 0.1),
+  // The chapter being read: a filled gold cartouche, square like everything
+  // structural here. Filled rather than outlined because it has to win against
+  // six siblings wearing a saturated accent.
+  const cartoucheStyle: CSSProperties = {
+    background: gold,
+    padding: isMobile ? "0.15rem 0.3rem" : "0.2rem 0.4rem",
   };
 
-  const cornerSize = 5;
-  const cornerStroke = `${BRAND.figures.ruleThickness}px solid ${gold}`;
-  const corners = (): ReactNode => {
-    const base: CSSProperties = {
-      position: "absolute",
-      width: cornerSize,
-      height: cornerSize,
-      pointerEvents: "none",
+  const cellStyle = (isCurrent: boolean, isLocked: boolean): CSSProperties => {
+    const side = isMobile ? "0.09rem" : "0.3rem";
+    return {
+      position: "relative",
+      display: "inline-flex",
+      alignItems: "center",
+      flex: "0 0 auto",
+      // The rule stops short of the glyphs rather than touching them; the
+      // cartouche brings its own padding and needs none.
+      //
+      // A locked chapter reserves the padlock's overhang on its right as
+      // padding rather than margin. As margin it pushed the following link
+      // away and punched a hole in the rule, which is the one thing this rail
+      // is not allowed to have.
+      padding: isCurrent ? 0 : `0 ${isLocked ? `${lockSize * 0.45}px` : side} 0 ${side}`,
+      border: "none",
+      borderRadius: 0,
+      background: "transparent",
+      cursor: isLocked ? "not-allowed" : isCurrent ? "default" : "pointer",
     };
-    return (
-      <>
-        <span style={{ ...base, top: 0, left: 0, borderTop: cornerStroke, borderLeft: cornerStroke }} />
-        <span style={{ ...base, top: 0, right: 0, borderTop: cornerStroke, borderRight: cornerStroke }} />
-        <span style={{ ...base, bottom: 0, left: 0, borderBottom: cornerStroke, borderLeft: cornerStroke }} />
-        <span style={{ ...base, bottom: 0, right: 0, borderBottom: cornerStroke, borderRight: cornerStroke }} />
-      </>
-    );
   };
-
-  const cellStyle = (isCurrent: boolean, isOutOfSequence: boolean): CSSProperties => ({
-    display: "inline-flex",
-    alignItems: "center",
-    gap: isCurrent ? "0.3rem" : 0,
-    padding: 0,
-    border: "none",
-    borderRadius: 0,
-    background: "transparent",
-    cursor: isOutOfSequence ? "not-allowed" : isCurrent ? "default" : "pointer",
-    // Room for the padlock to overhang without colliding with the next link.
-    marginRight: isOutOfSequence ? lockSize * 0.5 : 0,
-  });
 
   return (
-    <nav aria-label={progress.moduleLabel} style={railStyle}>
-      <span style={labelWrapStyle}>
+    <div className="no-scrollbar" style={scrollerStyle}>
+      <nav aria-label={progress.moduleLabel} style={railStyle}>
         <span style={labelStyle}>{t("moduleProgress.label")}</span>
-      </span>
 
-      {progress.chapters.map((chapter, index) => {
-        const isCurrent = chapter.id === currentId;
-        const isLocked = progress.isOutOfSequence(chapter.id);
-        const isHovered = hovered === chapter.id && !isLocked;
-        const figure = chapter.isChallenge
-          ? t("moduleProgress.quiz")
-          : String(chapter.number).padStart(2, "0");
+        {progress.chapters.map((chapter, index) => {
+          const isCurrent = chapter.id === currentId;
+          const isLocked = progress.isOutOfSequence(chapter.id);
+          const isHovered = hovered === chapter.id && !isLocked;
+          const figure = chapter.isChallenge
+            ? t("moduleProgress.quiz")
+            : String(chapter.number).padStart(2, "0");
 
-        return (
-          <Fragment key={chapter.id}>
-            {index > 0 && <span style={linkStyle} aria-hidden />}
-            <button
-              type="button"
-              aria-current={isCurrent ? "page" : undefined}
-              aria-disabled={isLocked || undefined}
-              aria-label={isLocked ? `${chapter.label}, ${t("nav.locked")}` : undefined}
-              onClick={() => !isCurrent && !isLocked && progress.goTo(chapter.id)}
-              onMouseEnter={() => setHovered(chapter.id)}
-              onMouseLeave={() => setHovered(null)}
-              style={cellStyle(isCurrent, isLocked)}
-            >
-              {isCurrent ? (
-                <span style={cornerFrameStyle}>
-                  {corners()}
-                  <span style={numberStyle(true, isHovered, false)}>{figure}</span>
-                </span>
-              ) : (
-                <span style={numeralWrapStyle}>
-                  <span style={numberStyle(false, isHovered, isLocked)}>{figure}</span>
-                  {isLocked && <DoodleLock size={lockSize} aria-hidden style={lockStyle} />}
-                </span>
-              )}
-            </button>
-          </Fragment>
-        );
-      })}
-
-    </nav>
+          return (
+            <Fragment key={chapter.id}>
+              {index > 0 &&
+                (isMobile ? (
+                  <span style={dotStyle} aria-hidden>
+                    ·
+                  </span>
+                ) : (
+                  <span style={linkStyle} aria-hidden />
+                ))}
+              <button
+                type="button"
+                aria-current={isCurrent ? "page" : undefined}
+                aria-disabled={isLocked || undefined}
+                aria-label={isLocked ? `${chapter.label}, ${t("nav.locked")}` : undefined}
+                onClick={() => !isCurrent && !isLocked && progress.goTo(chapter.id)}
+                onMouseEnter={() => setHovered(chapter.id)}
+                onMouseLeave={() => setHovered(null)}
+                style={cellStyle(isCurrent, isLocked)}
+              >
+                {isCurrent ? (
+                  <span style={cartoucheStyle}>
+                    <span style={figureStyle(true, false, false)}>{figure}</span>
+                  </span>
+                ) : (
+                  <>
+                    <span style={figureStyle(false, isLocked, isHovered)}>{figure}</span>
+                    {isLocked && <DoodleLock size={lockSize} aria-hidden style={lockStyle} />}
+                  </>
+                )}
+              </button>
+            </Fragment>
+          );
+        })}
+      </nav>
+    </div>
   );
 };

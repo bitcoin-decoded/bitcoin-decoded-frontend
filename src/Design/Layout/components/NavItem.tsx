@@ -7,7 +7,7 @@ import { useBreakpoint } from "../../Responsive";
 import { BRAND, getTypography, type ThemeColors } from "../../Theme";
 
 import { DoodleLock } from "@doodle";
-import { Check, CircleHelp } from "@icons";
+import { Check } from "@icons";
 import { ChevronRight } from "@icons";
 
 type Props = {
@@ -17,8 +17,6 @@ type Props = {
   index: number;
   /** The parent module's accent hex; modules pass it down to their chapters. */
   moduleColor: string;
-  /** Structural gold, for the module numeral's corner brackets. */
-  gold: string;
   isDirectlyActive: boolean;
   isExpanded: boolean;
   isInteracting: boolean;
@@ -37,15 +35,10 @@ type Props = {
   renderItem: (item: NavigationItem, level: number, index: number, moduleColor: string) => JSX.Element;
 };
 
-// The trailing marks, kept together because they are read together.
-//
-// The two sizes differ on purpose. The check fills its box; the question is a
-// mark inside a circle, so the same box gives it a visibly smaller symbol.
-// Matching the numbers would have looked mismatched, which is the opposite of
-// what a shared constant is for: what has to agree is the optical weight, not
-// the figure.
+// The trailing marks, kept together because they are read together: the quiz
+// pill names the kind of chapter, the check says it is finished, and a passed
+// quiz shows both.
 const CHECK_SIZE = 15;
-const QUIZ_SIZE = 18;
 const MARK_WEIGHT = "bold" as const;
 // The pair belongs to one row, so it travels as one block.
 const MARK_GAP = "0.2rem";
@@ -55,7 +48,6 @@ export const NavItem: FC<Props> = ({
   level = 0,
   index,
   moduleColor,
-  gold,
   isDirectlyActive,
   isExpanded,
   isInteracting,
@@ -102,12 +94,21 @@ export const NavItem: FC<Props> = ({
     WebkitTapHighlightColor: "transparent",
   };
 
-  // Module header: Arabic numeral + uppercase mono label, both in the module
-  // color. Wraps onto a second line rather than truncating (the sidebar is
-  // narrow and the module titles are long). Never dimmed: tracked 13px mono has
-  // no contrast to give away, and the chevron already carries the open state.
+  // Module header, in the module colour, wrapping rather than truncating: the
+  // sidebar is narrow and the titles are long.
+  //
+  // Source Serif 4 rather than the mono, because it carries a real 600. Single
+  // weight tracked mono had no stroke to give, which left the three titles
+  // thinner than the chapter labels they govern. Uppercase stays, this being
+  // the part-label register, but the tracking comes well down: a serif needs
+  // far less of it than mono to stay open.
   const moduleLabelStyle: CSSProperties = {
-    ...typo.kicker,
+    fontFamily: BRAND.fonts.body,
+    fontSize: typo.kicker.fontSize,
+    fontWeight: 600,
+    textTransform: "uppercase",
+    letterSpacing: "0.07em",
+    lineHeight: 1.35,
     color: moduleColor,
     flex: 1,
     minWidth: 0,
@@ -129,32 +130,48 @@ export const NavItem: FC<Props> = ({
   });
 
   // Module numeral: an editorial display-serif figure in the module's own
-  // colour, framed by the four right-angle corner brackets of the Callout (gold
-  // = structure). Arabic, single digit: the three modules are 1 · 2 · 3.
-  const numeralCornerStroke = `1px solid ${gold}`;
+  // colour. Arabic, single digit: the three modules are 1 · 2 · 3.
+  //
+  // The four gold corner brackets that used to frame it are gone. In a slot
+  // barely thirty pixels wide the row already carries a coloured numeral, a
+  // coloured title and a chevron; a hairline frame on top of that read as a
+  // scratch rather than as structure, and it competed with the very figure it
+  // was meant to hold. Gold still marks structure where it has the room to be
+  // read as such: the chapter rail and the block shell.
+  //
+  // The figure takes the weight the brackets were carrying instead: a step up
+  // in size, and 500 rather than 400, which Literata has for real.
   const moduleNumeralFrameStyle: CSSProperties = {
-    position: "relative",
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     width: "1.85rem",
-    height: "1.85rem",
     flexShrink: 0,
   };
   const moduleNumeralStyle: CSSProperties = {
     fontFamily: BRAND.fonts.display,
-    fontSize: "1.2rem",
-    fontWeight: 400,
+    fontSize: typo.heading.fontSize,
+    fontWeight: 500,
     lineHeight: 1,
     color: moduleColor,
     fontVariantNumeric: "lining-nums",
   };
-  const numeralCorner = (edges: CSSProperties): CSSProperties => ({
-    position: "absolute",
-    width: 6,
-    height: 6,
-    ...edges,
-  });
+
+  // A framed word rather than a glyph. The circled question mark sat optically
+  // higher than the padlock next to it and came from a different family, so the
+  // two never lined up. This is the device the chapter rail uses to mark the
+  // chapter being read, outlined and in the module's colour rather than filled
+  // in gold, since here it names a kind of chapter rather than your position.
+  const quizPillStyle: CSSProperties = {
+    ...typo.micro,
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
+    color: moduleColor,
+    border: `1px solid ${withOpacity(moduleColor, 0.5)}`,
+    padding: "0.02rem 0.32rem",
+    lineHeight: 1.35,
+    flexShrink: 0,
+  };
 
   const activeBarStyle: CSSProperties = {
     position: "absolute",
@@ -211,10 +228,6 @@ export const NavItem: FC<Props> = ({
 
         {isModule && (
           <span style={moduleNumeralFrameStyle}>
-            <span style={numeralCorner({ top: 0, left: 0, borderTop: numeralCornerStroke, borderLeft: numeralCornerStroke })} />
-            <span style={numeralCorner({ top: 0, right: 0, borderTop: numeralCornerStroke, borderRight: numeralCornerStroke })} />
-            <span style={numeralCorner({ bottom: 0, left: 0, borderBottom: numeralCornerStroke, borderLeft: numeralCornerStroke })} />
-            <span style={numeralCorner({ bottom: 0, right: 0, borderBottom: numeralCornerStroke, borderRight: numeralCornerStroke })} />
             <span style={moduleNumeralStyle}>{index + 1}</span>
           </span>
         )}
@@ -245,9 +258,7 @@ export const NavItem: FC<Props> = ({
               flexShrink: 0,
             }}
           >
-            {isChallenge && (
-              <CircleHelp size={QUIZ_SIZE} weight={MARK_WEIGHT} style={{ color: moduleColor }} />
-            )}
+            {isChallenge && <span style={quizPillStyle}>{t("moduleProgress.quiz")}</span>}
             {isComplete && (
               // The module colour, not gold: gold is the structure of the
               // ledger, while finishing a chapter belongs to its module.
