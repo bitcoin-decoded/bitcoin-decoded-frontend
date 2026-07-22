@@ -24,9 +24,9 @@ const en = {
   "chapterLabel.chapter": "Chapter",
   // Rail prefixes: they name what each rail navigates, so the chapter rail and
   // the block ribbon sitting under it cannot be mistaken for one another.
-  "moduleProgress.label": "Chapter",
+  "moduleProgress.label": "Chap.",
   "moduleProgress.quiz": "Quiz",
-  "reading.railLabel": "Block",
+  "reading.railLabel": "Progress",
   "quiz.label": "Quiz",
   "synthesisQuiz.label": "Synthesis quiz",
   "synthesisQuiz.question": "Question",
