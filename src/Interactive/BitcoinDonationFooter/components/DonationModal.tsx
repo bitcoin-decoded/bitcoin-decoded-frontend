@@ -13,7 +13,6 @@ type Props = {
   children: ReactNode;
 };
 
-/** Centered modal shell for the footer display mode (backdrop / Escape / X to close). */
 export const DonationModal: FC<Props> = ({ onClose, ariaLabel, closeLabel, children }) => {
   const { colors } = usePageTheme();
   useModalDismiss(onClose);

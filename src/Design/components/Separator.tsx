@@ -3,7 +3,6 @@ import { type CSSProperties, type FC } from "react";
 import { getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 type Props = {
-  /** Vertical margin around the separator. @default "1.5rem 0" */
   margin?: string;
 };
 

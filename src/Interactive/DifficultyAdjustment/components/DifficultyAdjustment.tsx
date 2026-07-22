@@ -7,7 +7,6 @@ import { useDifficultyAdjustment } from "../hooks";
 import { Minus, Plus, Target, Timer, Users } from "@icons";
 
 type Props = {
-  /** Fired once the reader shifts the difficulty off baseline (gates the tool block). */
   onComplete?: () => void;
 };
 

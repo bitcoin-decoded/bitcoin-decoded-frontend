@@ -7,14 +7,6 @@ import { BRAND, getBrandGold, THEME_COLORS, useThemeContext } from "../../Theme"
 
 type Props = {
   breakpoint?: Breakpoint;
-  /**
-   * Whatever sits at the footer's leading edge, injected by the shell.
-   *
-   * Design used to import it from `Interactive` directly, which made the
-   * primitives layer depend on the feature layer while the feature layer
-   * depends on the primitives. That cycle left `BRAND` undefined under any
-   * loader that does not bundle.
-   */
   aside?: ReactNode;
 };
 
@@ -40,12 +32,6 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop", aside }) => {
     width: "100%",
   };
 
-  // Desolidarise the donation from the legal text: on a wide screen they sit on
-  // opposite ends of one row (donation left, copyright/credit right) instead of
-  // three stacked lines; on mobile they stack and centre. Symmetric padding (no
-  // sidebar offset) so the row centres on the WHOLE page — the footer spans the
-  // full width below the nav, so it should read centred against it, not against
-  // the content column alone.
   const innerStyle: CSSProperties = {
     padding: isMobile ? "1.5rem 1rem 1.25rem" : "1.5rem 2.5rem 1.35rem",
     display: "flex",
@@ -68,14 +54,6 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop", aside }) => {
     flexShrink: 0,
   };
 
-  // Footer legibility was fixed on three axes, not just one:
-  //   • Font — the body SERIF, not Cutive Mono. Thin single-weight mono at ~12px
-  //     is the recurring illegibility (see the light-mode work); a reading serif
-  //     is far clearer at this size.
-  //   • Colour — the PRIMARY ink (not muted `text.secondary`, ~0.5α on dark).
-  //     Copyright ≈ 11:1, credit ≈ 7:1 on the worse (light) ground. The earlier
-  //     0.72/0.56 values sat at 5.8/3.6 — the credit failed AA outright.
-  //   • Size — nudged up so the meta doesn't read as fine print.
   const copyrightStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
     fontSize: "0.85rem",

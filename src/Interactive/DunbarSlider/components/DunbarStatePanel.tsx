@@ -6,8 +6,6 @@ import { withOpacity } from "../../../Design/helpers";
 import { DoodleWarningTriangle } from "@doodle";
 
 type Props = {
-  /** Tier name — not rendered here (it sits in the card header); keys the
-   *  overload alert's entry animation. */
   label: string;
   statePhrase: string;
   relations: number;
@@ -16,15 +14,9 @@ type Props = {
   isOverload: boolean;
   overloadTitle: string;
   overloadBody: string;
-  /** Intl locale tag for number grouping. */
   localeTag: string;
 };
 
-/**
- * Reads out the current tier: the one-line state phrase, the live relationship
- * counter, and (past the Dunbar ceiling) an overload alert. The tier's icon and
- * name live in the card header, alongside the group size.
- */
 export const DunbarStatePanel: FC<Props> = ({
   label,
   statePhrase,
@@ -66,7 +58,6 @@ export const DunbarStatePanel: FC<Props> = ({
 
   const counterValueStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    // Was 1.6/2rem, matching an already-oversized header readout.
     fontSize: isMobile ? "1.3rem" : "1.55rem",
     fontWeight: 400,
     color,

@@ -215,7 +215,6 @@ export const MoneyLaws1Page: FC = () => {
           <MonetaryPillars />
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand 3 monnaies ont été explorées (compteur x/3). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

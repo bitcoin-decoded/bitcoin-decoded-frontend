@@ -7,23 +7,13 @@ import { DoodleCursorClick } from "@doodle";
 type Props = {
   title: string;
   subtitle: string;
-  /** Multi-line description supported via `\n` (rendered with pre-line). */
   description: string;
-  /** Module identity — resolves to its themed accent in THEME_COLORS. */
   module: "blue" | "violet" | "amber";
-  /** A large centered doodle glyph (rendered in the module colour). */
   icon: ReactNode;
   onClick: () => void;
-  /** Optional CTA label rendered inline next to the arrow. */
   cta?: string;
 };
 
-/**
- * A journey navigation tile, in the ledger register: a sharp hairline frame in
- * the module color (radius 0, no gradient, no shadow), a mono small-caps kicker,
- * a mono title, serif description, and a module-colored arrow that nudges on
- * hover. Replaces the previous rounded gradient card + lift/glow recipe.
- */
 export const WorldCard: FC<Props> = ({ title, subtitle, description, module, icon, onClick, cta }) => {
   const typo = getTypography();
   const [isHovered, setIsHovered] = useState(false);
@@ -49,20 +39,13 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     alignItems: "center",
     gap: isMobile ? "0.45rem" : "0.6rem",
     textAlign: "center",
-    // A <button> does NOT inherit text color by default (it uses the system
-    // buttontext, ~black) — set it explicitly so the description reads in the
-    // page ink, not black-on-near-black.
     color: colors.base.text.primary,
   };
 
-  // Large centered doodle glyph, painted in the module colour (the glyph is
-  // currentColor). It nudges up a hair on hover, echoing the card's arrow.
   const iconWrapStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    // Pinned: without it the glyph loses width (but not height) when the card
-    // gets tight.
     flexShrink: 0,
     color: accent,
     marginBottom: isMobile ? "0.2rem" : "0.4rem",
@@ -70,14 +53,10 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     transition: "transform 0.3s var(--ease-smooth)",
   };
 
-  // The chapter-kicker device, reused for the card head: "MODULE 1 · <full
-  // module title, exactly as in the left navbar>". Gold marker (structure),
-  // module-coloured title (identity). Replaces the vague short titles.
   const kickerStyle: CSSProperties = {
     ...typo.kicker,
     margin: 0,
     lineHeight: 1.5,
-    // Reserve 3 lines so cards align regardless of module-title length.
     minHeight: "4.5em",
   };
   const markerStyle: CSSProperties = { color: gold };
@@ -90,7 +69,6 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     color: colors.base.text.primary,
     opacity: 0.8,
     margin: 0,
-    // Multi-line descriptions split via "\n" render naturally.
     whiteSpace: "pre-line",
   };
 
@@ -99,9 +77,6 @@ export const WorldCard: FC<Props> = ({ title, subtitle, description, module, ico
     fontFamily: BRAND.fonts.mono,
     fontWeight: 500,
     color: accent,
-    // Button's own tracking: the card cannot host a real Button (it is itself a
-    // <button>, and nesting one would be invalid), so the label borrows its
-    // register instead of imitating its frame.
     letterSpacing: "0.14em",
     fontVariant: "small-caps",
     opacity: isHovered ? 1 : 0.85,

@@ -4,22 +4,12 @@ import { Caption, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "
 
 type Props = {
   title: string;
-  /** Lucide eyebrow icon identifying the method. */
   icon: ReactNode;
-  /** Calm, non-alert accent color for this method (blue / violet). */
   accent: string;
-  /** One-line takeaway shown at the bottom of the frame. */
   closingLine: string;
   children: ReactNode;
 };
 
-/**
- * Shared shell for the two scientific-method visuals: a SurfaceCard with an
- * eyebrow title, the diagram body, and a closing takeaway line. Keeping the
- * frame in one place guarantees the physicist / logician pair reads as a
- * matched set (same paddings, same title-and-closing rhythm) while each body
- * carries its own opposed geometry - horizontal vs vertical.
- */
 export const MethodFrame: FC<Props> = ({ title, icon, accent, closingLine, children }) => {
   const { colors } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";

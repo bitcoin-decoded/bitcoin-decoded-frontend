@@ -13,11 +13,6 @@ import type {
 
 import { resolveProfile } from "./resolveProfile";
 
-/**
- * Resolves the reader's profile and turns its plans into the two output
- * sections. Each step shows the profile's plan A (recommended, starred) and an
- * optional plan B. Returns `null` until the answers resolve to a profile.
- */
 export const buildProfileResult = (
   answers: PathAnswers,
   copy: PathFinderCopy,

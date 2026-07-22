@@ -14,10 +14,6 @@ type DunbarSliderState = {
   tierCount: number;
 };
 
-/**
- * Owns the single piece of state (the selected tier index) and derives the
- * current tier, its population, and the pairwise-relationship count from it.
- */
 export const useDunbarSlider = (): DunbarSliderState => {
   const [tierIndex, setTierIndex] = useState(0);
 

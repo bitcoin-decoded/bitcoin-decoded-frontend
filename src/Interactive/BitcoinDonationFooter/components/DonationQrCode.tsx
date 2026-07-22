@@ -8,11 +8,6 @@ type Props = {
   size?: number;
 };
 
-/**
- * Client-side QR, always dark-on-white (so it scans in dark mode too). Returns
- * null if generation fails - the caller then shows the text + copy fallback
- * (spec §10), never blocking.
- */
 export const DonationQrCode: FC<Props> = ({ value, ariaLabel, size = 200 }) => {
   const { dataUrl, error } = useQrDataUrl(value);
 

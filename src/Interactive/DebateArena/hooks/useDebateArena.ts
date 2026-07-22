@@ -4,9 +4,7 @@ import { useExplorationGate } from "../../../Design";
 import type { HoveredSide } from "../types";
 
 type Options = {
-  /** Distinct debate rows that must be opened to complete. 0 disables the gate. */
   requiredExplored?: number;
-  /** Fired once enough rows have had a side revealed. */
   onComplete?: () => void;
 };
 
@@ -21,7 +19,6 @@ export const useDebateArena = (count: number, options: Options = {}) => {
 
   const selectSide = useCallback(
     (index: number, side: 0 | 1) => {
-      // Opening any side counts the row as explored (sticky - toggling off never un-counts it).
       markExplored(index);
       setActiveSides((prev) => {
         const next = [...prev];

@@ -16,8 +16,6 @@ describe("getLanguageFromPath", () => {
   });
 
   it("reads the language of addresses no route claims", () => {
-    // The whole point: the host answers these with the French 404 file, so the
-    // language can only come from the address.
     expect(getLanguageFromPath("/en/nawak")).toBe("en");
     expect(getLanguageFromPath("/en/bitcoin/pas-un-chapitre")).toBe("en");
     expect(getLanguageFromPath("/nawak")).toBe("fr");

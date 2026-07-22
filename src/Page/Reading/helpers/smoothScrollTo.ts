@@ -1,8 +1,3 @@
-// Controlled-duration scroll to an element's top (minus a sticky-header
-// offset), easing in and out like an automaton settling into place. The native
-// `scrollIntoView({ behavior: "smooth" })` gives a short, browser-controlled
-// duration; the reading reveal needs a deliberately longer, predictable one so
-// the page mechanically travels to the next block BEFORE its content composes.
 export const smoothScrollTo = (el: Element, durationMs: number, offsetPx = 0): void => {
   const startY = window.scrollY;
   const targetY = el.getBoundingClientRect().top + startY - offsetPx;

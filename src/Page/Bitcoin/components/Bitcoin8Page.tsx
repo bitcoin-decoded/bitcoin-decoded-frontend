@@ -64,7 +64,6 @@ export const Bitcoin8Page: FC = () => {
           <p>{fr ? "Remettons les choses dans l'ordre." : "Let's put things back in order."}</p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a généré une seed. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -213,7 +212,6 @@ export const Bitcoin8Page: FC = () => {
           </p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a résolu le défi (bonne carte + bon montant). Montants UTXO à 1 décimale pour faciliter le calcul mental. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

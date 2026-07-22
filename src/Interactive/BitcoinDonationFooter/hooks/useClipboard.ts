@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 
-/** Copy-to-clipboard with a brief "copied" pulse (drives the Copy → Check swap). */
 export const useClipboard = (resetMs = 1500) => {
   const [copied, setCopied] = useState(false);
 

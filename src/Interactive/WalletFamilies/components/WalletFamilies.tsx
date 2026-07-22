@@ -6,9 +6,6 @@ import { ExpandableDefinitions } from "../../ExpandableDefinitions";
 import { getWalletFamilies } from "../data";
 
 
-/** Thin wrapper (mirrors `AccountingTerms`): the three wallet families as
- *  expand-to-learn cards, each carrying a simplicité / souveraineté score
- *  matrix in its always-visible meta strip. */
 export const WalletFamilies: FC = () => {
   const { t, language } = useTranslation();
   const { colors } = usePageTheme();

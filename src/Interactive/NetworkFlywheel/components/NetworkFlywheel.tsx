@@ -11,7 +11,6 @@ import { FlywheelStep } from "./FlywheelStep";
 import { PlusCircle, RefreshCw, RotateCcw } from "@icons";
 
 type Props = {
-  /** Fired once the reader turns the wheel at least once (gates the tool block). */
   onComplete?: () => void;
 };
 

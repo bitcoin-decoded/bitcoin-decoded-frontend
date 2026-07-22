@@ -41,7 +41,6 @@ export const Bitcoin7Page: FC = () => {
             </p>
           </Callout>
         </Block>
-        {/* Bloc-outil : déverrouillé quand les trois objets ont été explorés (compteur 3/3). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -54,7 +53,6 @@ export const Bitcoin7Page: FC = () => {
             </>
           )}
         </Block>
-        {/* Bloc-outil : déverrouillé quand le lecteur a parcouru les trois étapes (calculer, signer, vérifier). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

@@ -10,11 +10,6 @@ import { TravelLever } from "./TravelLever";
 
 import { History, Info } from "@icons";
 
-/**
- * "Halving time machine": dial a destination year, pull the lever, and - after a
- * brief temporal flux - the screen reveals the block reward in effect that year.
- * Lets readers feel the staircase down to zero, well past 2040.
- */
 export const HalvingTimeMachine: FC = () => {
   const typo = getTypography();
   const { t } = useTranslation();

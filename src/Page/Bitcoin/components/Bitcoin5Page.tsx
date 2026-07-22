@@ -42,7 +42,6 @@ export const Bitcoin5Page: FC = () => {
           </p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a récompensé le mineur. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -180,7 +179,6 @@ export const Bitcoin5Page: FC = () => {
           <HalvingTimeMachine />
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -296,7 +294,6 @@ export const Bitcoin5Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a tourné la roue au moins une fois. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

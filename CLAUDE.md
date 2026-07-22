@@ -25,6 +25,7 @@ Invariants (audités par le skill `ddd-pr-check`, cf. Git) :
 - Rien d'inline dans un composant : dataset, helper, type, ternaire i18n de label → fichiers dédiés. (Seules exceptions : son type `Props`, ses `CSSProperties`, ses render-helpers locaux.)
 - `barrel index.ts` à chaque niveau peuplé ; le barrel racine d'un domaine n'expose que l'API publique.
 - `type` plutôt qu'`interface` ; pas d'enum (types union) ; éviter `as const` (sauf datasets figés) ; pas de duplication ; **simplicité > abstraction**.
+- **Commentaires : par exception seulement.** Un code clair se passe de commentaire, et le paraphraser est un doublon. N'en écrire un que si le retirer permettrait de réintroduire un bug connu, ou s'il porte un savoir absent du code (contrainte externe, valeur métier, ordre d'appel obligatoire). Jamais d'historique (« avant c'était… »), jamais de préambule sur un fichier d'une ligne. Deux lignes maximum ; au-delà, ça relève de `docs/`.
 - Donnée/helper/type consommé par 2+ features → promu en domaine top-level (ex. `References/`), jamais re-exporté en douce depuis une feature.
 
 Domaines : `Design/` (primitives, theme, layout, icons), `Interactive/<Feature>/` (simulateurs, quiz, viz ; `Interactive/index.ts` n'expose que le composant principal de chaque feature), `Page/` (contenu pédagogique ; `Page/Shared/` = transverse), `Achievements/` (badges), `References/` (constantes éco), `Routing/`, `I18n/`.

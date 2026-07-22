@@ -12,8 +12,6 @@ export const useWalletDiscoveryGame = (onComplete?: () => void) => {
   const [verdict, setVerdict] = useState<WalletGameVerdict>(null);
   const isLocked = verdict === "correct";
 
-  // Fires once the reader has solved the challenge (the action this block is
-  // built around). One-shot.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);
@@ -30,7 +28,6 @@ export const useWalletDiscoveryGame = (onComplete?: () => void) => {
     (id: number) => {
       if (isLocked) return;
       setSelectedCardId(id);
-      // Picking again resets any previous verdict so the user can re-validate
       setVerdict(null);
       setStage((prev) => (prev === "validated" ? "revealed" : prev));
     },

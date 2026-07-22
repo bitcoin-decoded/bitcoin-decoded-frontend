@@ -1,5 +1,5 @@
 export type YieldDataPoint = {
-  term: number; // Année (axe X)
-  shortRate: number; // Taux court (ligne plate)
-  longRate: number; // Taux long (ligne croissante)
+  term: number;
+  shortRate: number;
+  longRate: number;
 };

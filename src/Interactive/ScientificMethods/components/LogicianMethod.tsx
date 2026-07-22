@@ -8,13 +8,6 @@ import { MethodFrame } from "./MethodFrame";
 
 import { ArrowDown, MoreHorizontal, ScrollText, Sigma, Triangle } from "@icons";
 
-/**
- * The logician's method, read top-to-bottom: a single root of axioms branches
- * down into known theorems (Thales, Pythagoras), which branch again into more
- * conclusions. No observation feeds in, no arrow ever points back up - the flow
- * is strictly deductive and downward. Form carries the meaning: one source,
- * cascading certainty.
- */
 export const LogicianMethod: FC = () => {
   const typo = getTypography();
   const { colors } = usePageTheme();
@@ -62,9 +55,6 @@ export const LogicianMethod: FC = () => {
     color: colors.base.text.secondary,
   };
 
-  // Fork: a centered 50%-wide box so its left/right edges land at 25% / 75% of
-  // the tree - exactly above each child column's center. Plain connector lines
-  // (no arrowheads), the only arrows point down.
   const forkWrap: CSSProperties = { position: "relative", width: "50%", height: "1.25rem" };
   const busLine: CSSProperties = {
     position: "absolute",
@@ -144,9 +134,6 @@ export const LogicianMethod: FC = () => {
     </div>
   );
 
-  // `FrText` only walks the tree it is handed, and this component builds its
-  // own copy from a language-aware getter — so the page-level wrapper never
-  // sees it. It fixes its own French punctuation here.
   return (
     <FrText>
       <MethodFrame

@@ -67,8 +67,6 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
     gap: isMobile ? "0.6rem" : "0.7rem",
   };
 
-  // Each answer is a ledger cell: four gold corner brackets around a module-tinted
-  // wash (mirrors Callout and the navbar module numerals), coloured by state.
   const cornerSize = 12;
   const corners = (color: string): ReactNode => {
     const s = `${BRAND.figures.ruleThickness}px solid ${color}`;
@@ -115,8 +113,6 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
 
     const style: CSSProperties = {
       position: "relative",
-      // A flex column anchored to the top so the A/B/C letters line up across
-      // options regardless of text length (a bare <button> centres its content).
       display: "flex",
       flexDirection: "column",
       justifyContent: "flex-start",
@@ -126,8 +122,6 @@ export const Quiz: FC<QuizProps> = ({ onCorrectAnswer, ...data }) => {
       border: "none",
       background: wash,
       color: text,
-      // Centred: the answers are short and sat left-aligned under a centred
-      // letter, which read as a misalignment.
       textAlign: "center",
       alignItems: "center",
       cursor: isCorrectlySolved ? "default" : "pointer",

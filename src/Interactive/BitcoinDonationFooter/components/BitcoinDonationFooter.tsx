@@ -14,24 +14,15 @@ import { NoWalletRedirect } from "./NoWalletRedirect";
 import { OnchainAddressDisplay } from "./OnchainAddressDisplay";
 
 type Props = {
-  /** `footer` (default): chrome button + modal. `inline`: expanded chapter block. */
   display?: DonationDisplayMode;
 };
 
-/**
- * Orchestrates the donation journey (v2, on-chain only). Both display modes
- * share one state machine and open straight on the amount selector: a discreet
- * footer button that opens a modal, or an expanded inline block at the end of a
- * chapter.
- */
 export const BitcoinDonationFooter: FC<Props> = ({ display = "footer" }) => {
   const { colors } = usePageTheme();
   const { language } = useTranslation();
   const copy = getDonationCopy(language);
   const journey = useBitcoinDonationFooter();
 
-  // Leaving the entry (amount) or finishing closes the modal in footer mode,
-  // and resets the flow in inline mode.
   const exit = display === "footer" ? journey.close : journey.reset;
 
   const renderStep = (): ReactNode => {
@@ -63,7 +54,6 @@ export const BitcoinDonationFooter: FC<Props> = ({ display = "footer" }) => {
     }
   };
 
-  // `key` on the step re-triggers the fade-in on every transition (spec §15).
   const screen = (
     <div key={journey.step} style={{ animation: "donationFade 200ms var(--ease-smooth) both" }}>
       {renderStep()}

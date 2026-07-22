@@ -1,10 +1,5 @@
 import type { BtcRate } from "../types";
 
-/**
- * BTC/EUR spot rate. Primary source mempool.space (bitcoiner-native,
- * CORS-friendly, no key); falls back to Kraken. Throws only if both fail,
- * leaving the caller to degrade to a sats-only display (spec §10).
- */
 export const fetchBtcRate = async (): Promise<BtcRate> => {
   try {
     const res = await fetch("https://mempool.space/api/v1/prices");

@@ -1,17 +1,11 @@
 import type { Connection } from "../types";
 
-/** Deterministic LCG so the sampled web is stable between renders. */
 const seededRandom = (seed: number): (() => number) => {
   let s = seed % 2147483647;
   if (s <= 0) s += 2147483646;
   return () => (s = (s * 16807) % 2147483647) / 2147483647;
 };
 
-/**
- * Links to draw between dots. Below the cap, every pair is connected; above
- * it, a stable random sample of `maxLines` pairs stands in for the web (the
- * rest is conveyed by the density halo).
- */
 export const computeConnections = (dotCount: number, maxLines: number): Connection[] => {
   if (dotCount < 2) return [];
 

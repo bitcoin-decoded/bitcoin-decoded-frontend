@@ -79,9 +79,6 @@ export const FeedbackPanel: FC<Props> = ({
     <div style={baseStyle}>
       {hasTitle && (
         <div style={titleStyle}>
-          {/* Pinned like `Caption` does: a bare flex child would be free to
-           *  shrink below its own size once a title grows long enough to
-           *  overflow the row. */}
           {icon && <span style={{ display: "inline-flex", flexShrink: 0 }}>{icon}</span>}
           {title}
         </div>
@@ -91,8 +88,6 @@ export const FeedbackPanel: FC<Props> = ({
           style={{
             display: "flex",
             alignItems: "flex-start",
-            // A leading icon needs room to read as its own column — at 0.5rem
-            // the doodle smileys crowded the verdict text.
             gap: isMobile ? "0.85rem" : "1.1rem",
             color: colors.base.text.primary,
           }}

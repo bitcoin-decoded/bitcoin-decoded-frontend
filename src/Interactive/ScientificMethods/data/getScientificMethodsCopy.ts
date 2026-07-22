@@ -1,12 +1,5 @@
 import type { Language } from "../../../I18n";
 
-/**
- * Bilingual copy for the two method visuals (physicist vs logician).
- * Feature-local, language-aware getter (mirrors getDunbarTierText /
- * getDonationCopy) rather than global t() keys: the set is small, specific to
- * this chapter, and never reused elsewhere. The years are language-neutral and
- * live here too so each visual can render them as standalone badges.
- */
 export const getScientificMethodsCopy = (language: Language) => {
   const fr = language === "fr";
 

@@ -137,9 +137,6 @@ export const getNavigationTree = (t: TranslationFn): NavigationItem[] => [
       },
     ],
   },
-  // Standalone post-module node - deliberately outside Module 3. The Rabbit
-  // icon is the singular visual marker for this special entry point (NavItem
-  // only renders icons at level 0, so no chapter inside a module can carry one).
   {
     id: ROUTE_NAME.GetStarted,
     label: t("nav.tree.getStarted"),

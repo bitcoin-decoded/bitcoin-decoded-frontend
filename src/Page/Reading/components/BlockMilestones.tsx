@@ -19,21 +19,8 @@ type Props = {
   onJump: (index: number) => void;
 };
 
-// Header height + signature rule it tucks under.
 const HEADER_OFFSET = "3.5rem";
 
-/**
- * Chapter progress rendered as a chain ribbon — a horizontal row of small
- * carrés-bloc linked by hairline gold segments. Reached blocks are filled in
- * gold; the current one carries a subtle outline ring; future blocks are
- * hollow with a faint stroke. Clicking a revealed block jumps to it.
- *
- * Sits as a sticky sub-bar just under the auto-hiding header (sharing its
- * useHeaderHidden source of truth) so it stays visible while reading. Per
- * the block-vs-coin dichotomy (rule 9), each milestone is a STRUCTURAL
- * marker — a carré-bloc, not a coin — because it represents a block in
- * the chapter's chain, not a quantity being manipulated.
- */
 export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump }) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
@@ -48,10 +35,6 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
   const linkColor = withOpacity(gold, 0.6);
   const linkIdle = withOpacity(colors.base.text.primary, 0.15);
 
-  // Smaller markers than the rule signature's 14px carré-bloc — these read
-  // as navigation dots, not as another structural block marker. Avoids the
-  // visual doublon with the BlockShell top-rule carré that appears right
-  // below this ribbon.
   const size = isMobile ? 6 : 7;
   const linkWidth = isMobile ? 12 : 18;
 
@@ -74,10 +57,6 @@ export const BlockMilestones: FC<Props> = ({ count, current, maxRevealed, onJump
     transition: "top 0.3s var(--ease-smooth)",
   };
 
-  // Names what this rail navigates, so it cannot be mistaken for the chapter
-  // rail sitting right above it. Same weight as that one, 400: the pair sets
-  // the context and should not compete with the markers it introduces. Full
-  // gold, the accent the reached markers wear, so the two rails read as equals.
   const railLabelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
     fontSize: typo.label.fontSize,

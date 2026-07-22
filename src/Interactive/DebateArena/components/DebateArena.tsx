@@ -7,12 +7,7 @@ import type { DebateItem } from "../types";
 
 type DebateArenaProps = {
   items: DebateItem[];
-  /**
-   * When > 0, the arena gates: a "n/N explored" counter shows and `onComplete`
-   * fires once a side has been opened in that many distinct rows. Default 0 = no gate.
-   */
   requiredExplored?: number;
-  /** Fired once `requiredExplored` distinct debate rows have been opened. */
   onComplete?: () => void;
 };
 

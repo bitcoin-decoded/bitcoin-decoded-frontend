@@ -14,9 +14,6 @@ export const renderFeedback = (
 ) => {
   if (state === "idle") return null;
   const isSuccess = state === "success";
-  // Inverted mapping: in this demo "success" of a bad action shows in error
-  // tone (it actually happened - fiat dilution / censorship), and "failure"
-  // of a bad action shows in success tone (Bitcoin protocol prevented it).
   return (
     <FeedbackPanel
       tone={isSuccess ? "error" : "success"}

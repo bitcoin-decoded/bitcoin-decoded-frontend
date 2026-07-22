@@ -30,8 +30,6 @@ export const ExploredCounter: FC<Props> = ({ explored, total, label }) => {
     transition: "all 0.35s var(--ease-smooth)",
   };
 
-  // Was 9-10px — well under the 12px floor, and in single-weight Cutive. The
-  // count carries the state through colour, so no faux-bold either.
   const textStyle: CSSProperties = {
     ...typo.micro,
     whiteSpace: "nowrap",

@@ -27,10 +27,9 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     const colors = THEME_COLORS[theme];
     document.body.style.backgroundColor = colors.base.background.primary;
-    // Lets index.css branch on the mode (font smoothing, keyframes, pseudo-elements).
     document.documentElement.dataset.theme = theme;
-    // The prerendered markup is always dark, so index.html hides it when this
-    // reader chose light. This render is the one that matches: reveal it.
+    // Reveals the prerendered markup index.html hid when the stored theme
+    // disagreed with the file.
     delete document.documentElement.dataset.themePending;
   }, [theme]);
 

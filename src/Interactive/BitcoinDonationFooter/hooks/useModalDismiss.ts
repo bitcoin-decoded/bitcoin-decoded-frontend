@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-/** Wire a modal's Escape-to-close and body-scroll lock while it's mounted. */
 export const useModalDismiss = (onClose: () => void) => {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

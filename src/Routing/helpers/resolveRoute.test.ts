@@ -21,10 +21,7 @@ describe("the address table", () => {
   it("keeps slugs URL-safe and free of chapter numbers", () => {
     for (const { route, language } of EVERY) {
       const path = getRoutePath(route, language);
-      // Lowercase, unaccented, hyphen separated. An accent or a capital would
-      // survive here and come back percent-encoded in a search result.
       expect(path, path).toMatch(/^\/$|^(\/[a-z0-9-]+)+$/);
-      // "/404" is a number naming a condition, not a position in a module.
       if (route === ROUTE_NAME.NotFound) continue;
       expect(path, `${path} carries a position that reordering would break`).not.toMatch(/\d{2}/);
     }
@@ -66,7 +63,6 @@ describe("resolveRoute", () => {
     expect(resolveRoute("/bitcoin")).toBeNull();
     expect(resolveRoute("/en")).not.toBeNull();
     expect(resolveRoute("/bitcoin/does-not-exist")).toBeNull();
-    // A French slug behind the English prefix is not an address the site writes.
     expect(resolveRoute("/en/bitcoin/preuve-de-travail")).toBeNull();
   });
 });

@@ -7,7 +7,6 @@ import { SimulatorControls } from "../../SimulatorControls";
 import { getUsersDebtsDefault } from "../data";
 
 type Props = {
-  /** Fired once the default has been simulated (the simulator's final state). */
   onComplete?: () => void;
 };
 

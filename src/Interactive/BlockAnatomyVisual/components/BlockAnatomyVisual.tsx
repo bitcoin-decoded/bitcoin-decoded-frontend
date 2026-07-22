@@ -14,8 +14,6 @@ export const BlockAnatomyVisual: FC = () => {
   const isMobile = breakpoint === "mobile";
   const world = colors[moduleTheme];
 
-  // Sizing kept in lockstep with BlockchainChainVisual's BlockCard so this
-  // "anatomy" reads as the very same block (#100826), just annotated.
   const titleStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: typo.note.fontSize,
@@ -52,8 +50,6 @@ export const BlockAnatomyVisual: FC = () => {
     transition: "background 0.2s ease",
   };
 
-  // Structural icon badge — a square (radius 0), per the block-vs-coin rule:
-  // squares mark structure, circles are reserved for value being manipulated.
   const iconBadge: CSSProperties = {
     width: isMobile ? "1.5rem" : "1.65rem",
     height: isMobile ? "1.5rem" : "1.65rem",
@@ -101,8 +97,6 @@ export const BlockAnatomyVisual: FC = () => {
       </div>
     ));
 
-  // `FrText` only walks the tree it is handed, and this component holds its
-  // own inline French copy — the page-level wrapper never sees it.
   return (
     <FrText>
       <SurfaceCard

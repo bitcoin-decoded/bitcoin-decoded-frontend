@@ -12,11 +12,8 @@ import { NavDrawer } from "./NavDrawer";
 export const MainLayout: FC<{
   children: ReactNode;
   headerAction?: ReactNode;
-  /** Injected from App (badge access) so the nav can mark finished chapters. */
   isChapterComplete?: (id: string) => boolean;
-  /** Rendered at the footer's leading edge. Keeps Design ignorant of Interactive. */
   footerAside?: ReactNode;
-  /** Injected by the shell — Design never reads the progression rule itself. */
   isChapterOutOfSequence?: (id: string) => boolean;
 }> = ({ children, headerAction, isChapterComplete, isChapterOutOfSequence, footerAside }) => {
   const { theme } = useThemeContext();
@@ -45,18 +42,12 @@ export const MainLayout: FC<{
     flex: "1 1 auto",
   };
 
-  // The nav is chrome: it must never be brighter than the column it frames.
-  // `background.primary` is the darkest surface in dark mode but the lightest
-  // in light mode, so the one token recedes in dark and glares in light. In
-  // light it takes the deepest cream, a step below the reading column — the
-  // two shared a tone before, which read flat against the lighter header.
   const navContainerStyle: CSSProperties = {
     backgroundColor:
       theme === "dark" ? colors.base.background.primary : colors.base.background.tertiary,
     color: colors.base.text.secondary,
     width: "18rem",
     flexShrink: 0,
-    // Was 13px — the nav is a long list of chapter titles, read at a glance.
     fontSize: "0.875rem",
     lineHeight: "1.25rem",
     position: "sticky",

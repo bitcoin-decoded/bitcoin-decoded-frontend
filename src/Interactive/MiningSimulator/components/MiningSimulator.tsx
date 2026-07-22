@@ -8,7 +8,6 @@ import { useMiningSimulator } from "../hooks";
 import { CircleCheck, CircleX, Pickaxe, RotateCcw } from "@icons";
 
 type Props = {
-  /** Fired once the reader tries at least one nonce (gates the tool block). */
   onComplete?: () => void;
 };
 

@@ -4,7 +4,6 @@ import { getArrivalAnchor } from "./getArrivalAnchor";
 import { getChapterState } from "./getChapterState";
 import { readLastVisitedBlock } from "./readLastVisitedBlock";
 
-/** The three states, end to end: stored record -> state -> anchor. */
 const anchorFor = (stored: {
   maxRevealed: number;
   current: number;
@@ -65,7 +64,6 @@ describe("readLastVisitedBlock: migrating records written before the field", () 
   });
 
   it("reads progress from maxRevealed when the reader walked back to block 01", () => {
-    // The case `current` alone cannot tell apart from "merely opened".
     expect(readLastVisitedBlock({ maxRevealed: 3, current: 0, done: [], finished: false })).toBe(0);
   });
 

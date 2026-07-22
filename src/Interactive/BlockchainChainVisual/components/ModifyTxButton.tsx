@@ -16,10 +16,6 @@ export const ModifyTxButton: FC<Props> = ({ onClick, blockNumber, disabled = fal
   const { t } = useTranslation();
   const { colors } = usePageTheme();
 
-  // Inline destructive micro-action that lives in a field-row header (not a
-  // CTA) — too small for the bracketed `Button` primitive, so it stays a
-  // bespoke chip but on the ledger register: sharp corners, mono small-caps,
-  // weight 500, 12px floor. The error tint is the "tamper" signal.
   const buttonStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: typo.micro.fontSize,

@@ -14,11 +14,6 @@ type Props = {
   onChange: (year: number) => void;
 };
 
-/**
- * The dial: a single centered "Année de destination - 2135" line, a slider
- * flanked by ±1 steppers (reusing the app Button, like DifficultyAdjustment),
- * and a few quick-jump chips (genesis, today, end of issuance).
- */
 export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, onChange }) => {
   const typo = getTypography();
   const { t } = useTranslation();
@@ -27,11 +22,9 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   const world = colors[moduleTheme];
   const accent = world.border.secondary;
   const baseBorderSecondary = colors.base.border.secondary;
-  const sliderFill = world.background.secondary; // solid Bitcoin orange (#f7931a) in both modes
+  const sliderFill = world.background.secondary;
 
   const currentYear = new Date().getFullYear();
-  // Plain years (genesis · today · end of issuance) - no "Fin" label, which
-  // could be misread as "the end of Bitcoin".
   const chips = [
     { year: minYear, label: String(minYear) },
     { year: currentYear, label: String(currentYear) },
@@ -80,8 +73,6 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     width: "100%",
   };
 
-  // Connected segmented control (cf. SeedGenerator's 12/24 toggle), split into
-  // three sections: genesis · today · end of issuance. Sharp corners (radius 0).
   const segmentedWrapStyle: CSSProperties = {
     display: "inline-flex",
     border: `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,

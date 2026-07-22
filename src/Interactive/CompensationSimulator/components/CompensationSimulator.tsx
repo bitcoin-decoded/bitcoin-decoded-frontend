@@ -8,7 +8,6 @@ import { SimulatorControls } from "../../SimulatorControls";
 import { getUserBankCompensation } from "../data";
 
 type Props = {
-  /** Fired once the compensation has been triggered (the simulator's final state). */
   onComplete?: () => void;
 };
 

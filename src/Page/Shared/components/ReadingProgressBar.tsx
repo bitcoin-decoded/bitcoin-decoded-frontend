@@ -10,11 +10,6 @@ export const ReadingProgressBar: FC = () => {
 
   const accent = colors[moduleTheme].text.secondary;
 
-  // Pinned to the bottom of the viewport so it stays visible regardless
-  // of the header's hide-on-scroll-down behavior. A previous "below the
-  // header" placement would orphan the bar (showing a 3.5rem gap above
-  // it whenever the header transformed off-screen). The bottom edge is
-  // also a known reading-progress UX pattern (Medium, Substack).
   const track: CSSProperties = {
     position: "fixed",
     bottom: 0,

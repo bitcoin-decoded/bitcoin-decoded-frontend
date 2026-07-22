@@ -12,7 +12,6 @@ type Props = {
   copiedLabel: string;
 };
 
-/** Copy-to-clipboard pill: Copy → Check swap for 1.5s, with an aria-live announce. */
 export const CopyButton: FC<Props> = ({ value, copyLabel, copiedLabel }) => {
   const typo = getTypography();
   const { colors } = usePageTheme();

@@ -5,8 +5,6 @@ import { TIME_MACHINE_MAX_YEAR } from "../data";
 import { getRewardForYear, isSubsidySymbolic } from "../helpers";
 import type { TravelPhase } from "../types";
 
-// Read on call, not on import: a module-level dereference of an imported
-// binding is what turns an import cycle from harmless into fatal.
 const genesis = () => BITCOIN_REFS.HALVING_SCHEDULE[0];
 const minYear = () => genesis().year;
 const MAX_YEAR = TIME_MACHINE_MAX_YEAR;
@@ -15,12 +13,6 @@ const SCRAMBLE_MS = 70;
 
 const clampYear = (year: number) => Math.min(MAX_YEAR, Math.max(minYear(), Math.round(year)));
 
-/**
- * Drives the halving time machine: the user dials a `targetYear`, then pulls the
- * lever (`travel`) to be propelled there. While traveling, `displayYear`
- * scrambles for a flux effect; on arrival it locks to the target and the reward
- * for that year is revealed. Honors prefers-reduced-motion by jumping instantly.
- */
 export const useHalvingTimeMachine = () => {
   const [targetYear, setTargetYearState] = useState(() => clampYear(new Date().getFullYear()));
   const [displayYear, setDisplayYear] = useState(targetYear);

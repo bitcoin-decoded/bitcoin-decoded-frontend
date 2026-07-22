@@ -7,7 +7,6 @@ import { useHashDemo } from "../hooks";
 import { CircleCheck, Hash, RotateCcw } from "@icons";
 
 type Props = {
-  /** Fired once the reader hashes something (gates the surrounding tool block). */
   onComplete?: () => void;
 };
 

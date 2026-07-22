@@ -1,7 +1,3 @@
-// Streamline Freehand — "security-shield-settings" (CC BY 4.0, Streamline). Vendored via Iconify.
-// Retouched: the source draws a gear inside the shield (two further paths, the
-// hub and the toothed body). Only the shield outline is kept — hardness is the
-// resistance to new units being minted, not a settings affordance.
 import { DoodleIcon, type DoodleIconProps } from "./DoodleIcon";
 
 const INNER = `<g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M22.91 2.723c-3.499-3.83-15.998-3.31-21.517-.36a.36.36 0 1 0 .33.64c5.45-2.79 17.398-2.93 20.388.44c.54.62-.4 8.998-.92 11.238s-5 6.2-7.22 7.53c-1.46.88-1.63.85-3.059 0c-2.72-1.66-7.83-6.38-7.999-7.55c0-.17-1.83-9.609-1.66-10.279a.32.32 0 0 0-.61-.16c-.19.85 1.46 10.15 1.48 10.48c.13 1.829 8 9.318 10.359 9.298s9.169-5.91 9.889-8.999c.35-1.62 1.7-10.999.54-12.278"/></g>`;

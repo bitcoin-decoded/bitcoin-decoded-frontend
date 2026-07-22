@@ -1,5 +1,4 @@
 const fr = {
-  // Layout
   "header.homeAriaLabel": "Retour à la page d'accueil",
   "nav.title": "Navigation",
   "notFound.title": "Cette adresse ne mène nulle part",
@@ -11,9 +10,6 @@ const fr = {
   "progression.notice.body": "Ce chapitre s'appuie sur ceux qui le précèdent. Tu peux le lire maintenant, mais il ne comptera pas dans ta progression tant que les précédents ne sont pas terminés.",
   "progression.notice.resume": "Reprendre au chapitre",
   "progression.notice.start": "Commencer par le début",
-  // Pluriel : la frontière peut laisser plusieurs chapitres non scellés derrière
-  // elle, et le bouton « précédent » pointe justement souvent sur celui qui est
-  // verrouillé, ce qui rendait le singulier faux à l'endroit le plus visible.
   "nav.locked": "Termine les chapitres précédents pour débloquer",
   "nav.lockedShort": "Verrouillé",
   "nav.previous": "Précédent",
@@ -22,11 +18,8 @@ const fr = {
   "theme.toggleAriaLabel.dark": "Passer en mode clair",
   "language.toggleAriaLabel": "Switch to English",
 
-  // Components
   "chapterPrelude.label": "Prélude",
   "chapterLabel.chapter": "Chapitre",
-  // Rail prefixes: they name what each rail navigates, so the chapter rail and
-  // the block ribbon sitting under it cannot be mistaken for one another.
   "moduleProgress.label": "Chap.",
   "moduleProgress.quiz": "Quiz",
   "reading.railLabel": "Progression",
@@ -41,7 +34,6 @@ const fr = {
   "synthesisQuiz.passed": "Validé ! Tu maîtrises les fondations.",
   "synthesisQuiz.failed": "Pas tout à fait. Recommence pour valider.",
 
-  // Badges / accomplissements
   "badges.navLabel": "Mes badges",
   "badges.title": "Ma collection de badges",
   "badges.intro":
@@ -58,7 +50,6 @@ const fr = {
   "balanceSheet.assets": "ACTIF",
   "balanceSheet.liabilities": "PASSIF",
 
-  // Simulators - buttons
   "simulator.credit.grant": "J'accorde le prêt !",
   "simulator.credit.retry": "Réessayer",
   "simulator.credit.title": "BILAN COMPTABLE DE LA BANQUE DE NICOLAS",
@@ -77,7 +68,6 @@ const fr = {
     "Le coupon (paiement annuel) de l'obligation est fixé à 40 € (4% de 1 000 €).",
   "simulator.capitalChain.button": "REMONTER LE TEMPS",
 
-  // YieldCurve
   "yieldCurve.title":
     "Simulation de la rentabilité des banques commerciales en fonction du taux à long terme",
   "yieldCurve.shortRate": "Taux à court terme",
@@ -87,44 +77,34 @@ const fr = {
   "yieldCurve.years": "Années",
   "yieldCurve.evaluation": "Évaluation",
 
-  // MonetaryGallery
   "monetaryGallery.history": "Son histoire :",
   "monetaryGallery.characteristics": "Ses caractéristiques :",
   "monetaryGallery.limitations": "Ses limitations :",
   "monetaryGallery.explored": "explorées",
 
-  // Monetary characteristics
   "characteristic.durability": "Durabilité",
   "characteristic.portability": "Portabilité",
   "characteristic.divisibility": "Divisibilité",
   "characteristic.fungibility": "Fongibilité",
   "characteristic.hardness": "Dureté",
 
-  // AccountingTerms
   "accountingTerms.sectionTitle": "Comptabilité : quelques définitions",
 
-  // CustodyOptions
   "custodyOptions.sectionTitle": "Deux grandes manières de garder tes bitcoins",
 
-  // WalletFamilies
   "walletFamilies.sectionTitle": "Deux familles de portefeuilles",
 
-  // PathFinder — Quelle voie pour toi ?
   "pathFinder.step": "Étape",
 
-  // MonetaryAggregates
   "monetaryAggregates.sectionTitle":
     "Les deux types de monnaie : celle que l'on utilise et celle réservée aux Banques",
 
-  // MonetaryPillars
   "monetaryPillars.sectionTitle": "Les cinq piliers d'une monnaie",
   "monetaryPillars.prompt":
     " Clique sur chaque pilier pour la définition. Garde un œil sur le cinquième. C'est lui qui décide de tout.",
 
-  // MonetaryProperties
   "monetaryProperties.sectionTitle": "Rareté versus Dureté",
 
-  // BlockchainChainVisual
   "chain.block": "Bloc",
   "chain.header": "En-tête",
   "chain.body": "Corps",
@@ -151,7 +131,6 @@ const fr = {
   "chain.note":
     "Le hash de chaque bloc est calculé en appliquant un double SHA-256 à son en-tête, pas directement à ses transactions. Les transactions sont d'abord condensées en une racine de Merkle, qui est placée dans l'en-tête. Modifier une seule transaction change la racine de Merkle, donc l'en-tête, donc le hash du bloc. Tous les blocs suivants pointent alors vers un hash qui n'existe plus. La chaîne entière s'effondre.",
 
-  // MiningSimulator
   "mining.title": "Simulateur de minage",
   "mining.target": "Cible : le hash doit commencer par",
   "mining.button": "Tester un nonce",
@@ -162,7 +141,6 @@ const fr = {
   "mining.headerLabel": "En-tête du bloc hashé :",
   "mining.nonce": "nonce",
 
-  // DoubleSpendDemo
   "doubleSpend.title": "La double dépense",
   "doubleSpend.sender": "Nicolas",
   "doubleSpend.txA": "Transaction A",
@@ -183,7 +161,6 @@ const fr = {
   "doubleSpend.reset": "Recommencer",
   "doubleSpend.continue": "Comment décider ?",
 
-  // MempoolVisual
   "mempool.subtitle": "Transactions en attente",
   "mempool.blockLabel": "Bloc",
   "mempool.blockSubtitle": "En-tête & transactions incluses",
@@ -198,7 +175,6 @@ const fr = {
   "mempool.addBlock": "Ajouter ce nouveau bloc",
   "mempool.reset": "Réinitialiser",
 
-  // MiningRewardBlock
   "miningReward.blockSubtitle": "En-tête + transactions sélectionnées par le mineur",
   "miningReward.validated": "Validé",
   "miningReward.rewardTitle": "Récompense du bloc",
@@ -216,7 +192,6 @@ const fr = {
   "miningReward.rewardNoteSubsidy": "de subvention protocolaire",
   "miningReward.rewardNoteNewBitcoin": "nouveaux bitcoins créés par ce bloc",
 
-  // HalvingChart
   "halvingChart.title": "Récompense par bloc (BTC) - programme des halvings",
   "halvingChart.today": "aujourd'hui",
   "halvingChart.tooltipLabel": "Récompense",
@@ -224,7 +199,6 @@ const fr = {
   "halvingChart.caption":
     "Chaque palier correspond à un halving (~tous les 210 000 blocs, soit ~4 ans).",
 
-  // HalvingTimeMachine
   "halvingTimeMachine.title": "Machine à explorer le halving",
   "halvingTimeMachine.yearLabel": "Année",
   "halvingTimeMachine.intro":
@@ -246,16 +220,12 @@ const fr = {
   "halvingTimeMachine.caption":
     "Récompenses arrondies au satoshi près. Au-delà de ~2140, l'émission tombe à zéro.",
 
-  // DunbarSlider
-  // Stays descriptive: it is the slider's aria-label, never shown on screen.
   "dunbar.sliderAria": "Taille du groupe",
-  // The on-screen caption, kept short so the header reads on one line.
   "dunbar.sizeLabel": "Taille",
   "dunbar.counterLabel": "Relations possibles à mémoriser",
   "dunbar.overloadTitle": "Surcharge cognitive",
   "dunbar.overloadBody": "Mémoire individuelle saturée. Il faut un système externe : la monnaie.",
 
-  // NetworkFlywheel
   "flywheel.step.usage": "Utilisation du réseau",
   "flywheel.step.fees": "Frais générés (par bloc)",
   "flywheel.step.miners": "Revenus mineurs (par bloc)",
@@ -268,7 +238,6 @@ const fr = {
   "flywheel.tagline": "Plus le réseau est utilisé, plus il est sécurisé.",
   "flywheel.cycleLabel": "Cycle auto-renforcé",
 
-  // UTXOTransactionBuilder
   "utxoBuilder.title": "Construis une transaction",
   "utxoBuilder.step1": "1. Sélectionne les pièces de Nicolas",
   "utxoBuilder.step2": "2. Montant à envoyer (BTC)",
@@ -294,15 +263,12 @@ const fr = {
   "utxoBuilder.totalRow": "Total entrées",
   "utxoBuilder.coinLabel": "Pièce",
 
-  // CapitalStructureChain
-  // No glyph in the string: the button renders the hourglass itself.
   "capitalChain.traceBack": "Remonter le temps",
   "capitalChain.explored": "explorés",
   "flipCard.explored": "explorées",
   "debateArena.explored": "explorées",
   "trustComparison.explored": "explorés",
 
-  // UtxoGraph
   "utxoGraph.title": "Le graphe des UTXO",
   "utxoGraph.walletTitle": "Ton portefeuille",
   "utxoGraph.balance": "Solde :",
@@ -323,7 +289,6 @@ const fr = {
   "utxoGraph.captionWallet":
     "Ton « solde » n'est pas un compteur : c'est la somme des pièces que tes clés contrôlent, recalculée après chaque transaction.",
 
-  // Reading (lecture par blocs)
   "reading.next": "Bloc suivant",
   "reading.previous": "Bloc précédent",
   "reading.finish": "Sceller le chapitre",
@@ -333,7 +298,6 @@ const fr = {
   "reading.milestoneAria": "Progression dans le chapitre",
   "reading.blockLabel": "Bloc",
 
-  // SignatureVerifier
   "sigVerifier.title": "Vérification de signature",
   "sigVerifier.message": "Message",
   "sigVerifier.pubkey": "Clé publique",
@@ -351,13 +315,11 @@ const fr = {
   "sigVerifier.idle": "Clique sur « Vérifier » pour simuler la vérification.",
   "sigVerifier.reset": "Réinitialiser",
 
-  // KeySignatureTrio
   "keyTrio.sectionTitle": "Trois éléments, trois rôles",
   "keyTrio.prompt": "Clique sur chaque élément. Tu vas voir comment tout s'articule.",
   "keyTrio.emptyState": "Choisis un élément pour découvrir son rôle.",
   "keyTrio.explored": "explorés",
 
-  // SignaturePlayground
   "signaturePlayground.title": "Nicolas réalise sa première transaction",
   "signaturePlayground.sectionElements": "Les trois éléments",
   "signaturePlayground.privateKeyLabel": "Clé privée (secrète)",
@@ -413,7 +375,6 @@ const fr = {
     "C'est comme une serrure : tout le monde peut vérifier qu'une clé ouvre la porte, mais seul celui qui possède la bonne clé peut l'utiliser.",
   "signaturePlayground.reset": "Réinitialiser",
 
-  // SeedGenerator
   "seedGenerator.title": "Génères ta seed",
   "seedGenerator.subtitle":
     "Une seed phrase est une façon simple pour un humain de représenter une grande quantité d'information aléatoire, que la machine, elle, manipule en bits.",
@@ -441,7 +402,6 @@ const fr = {
     "En BIP39, les longueurs standard sont 12, 15, 18, 21 ou 24 mots.",
   "seedGenerator.notePedagogical": "Les mots affichés ici sont des exemples pédagogiques.",
 
-  // WalletDiscoveryGame
   "walletGame.title": "Retrouve les fonds dans ce portefeuille",
   "walletGame.intro":
     "Pour cet exercice, le portefeuille ne génère que 3 clés. Une seule permet de dépenser des fonds. Sauras-tu la retrouver ?",
@@ -472,7 +432,6 @@ const fr = {
   "walletGame.cardNoUtxos": "Aucun UTXO sur cette adresse",
   "walletGame.cardUtxoPrefix": "UTXO",
 
-  // TransactionModelComparison
   "txComparison.bankTitle": "Banque",
   "txComparison.bankSubtitle": "Simulation d'une transaction bancaire",
   "txComparison.bankDesc": "Un virement met à jour un solde de compte.",
@@ -512,7 +471,6 @@ const fr = {
   "txComparison.btcRightsDestroyed":
     "Les anciens droits sont détruits. De nouveaux droits sont créés.",
 
-  // DifficultyAdjustment
   "difficulty.title": "Régulation de la difficulté",
   "difficulty.miners": "mineurs",
   "difficulty.hashTarget": "Cible de hash",
@@ -522,7 +480,6 @@ const fr = {
   "difficulty.hint.emphasis": "~10 minutes",
   "difficulty.hint.suffix": ". Plus de mineurs ⇒ plus de zéros exigés ⇒ problème plus dur.",
 
-  // Navigation tree
   "nav.tree.bankingSystem": "Comment fonctionne l'argent",
   "nav.tree.moneyOrigin": "D'où vient vraiment ton argent?",
   "nav.tree.twoLevels": "Les deux euros que tu ignores",
@@ -548,31 +505,26 @@ const fr = {
   "nav.tree.walletsAndSeed": "Bitcoin, ni compte, ni coffre",
   "nav.tree.getStarted": "Entrer dans le terrier",
 
-  // Footer
   "footer.builtWith": "Construit avec",
   "footer.inspiredBy": "Inspiré par le travail de",
 
-  // HomePage - Hero
   "home.hero.headline": "L'argent que tu utilises... tu ne le comprends pas vraiment.",
   "home.hero.subheadline":
     "Comprendre Bitcoin, c'est d'abord comprendre comment fonctionne l'argent aujourd'hui.",
   "home.hero.ctaPrimary": "Commencer le parcours",
   "home.hero.ctaSecondary": "Voir le programme",
 
-  // HomePage - Section 1: Hook
   "home.hook.title": "Tu bosses autant qu'avant, voire plus. Ton caddie, lui, s'amincit.",
   "home.hook.line1": "Le loyer, les courses, l'essence : tout grimpe.",
   "home.hook.line2": "Ta fiche de paie, elle traîne loin derrière.",
   "home.hook.bridgeP1": "Ce n'est pas une fatalité. C'est une mécanique.",
   "home.hook.bridgeP2": "Et tout commence par un prêt.",
 
-  // HomePage - Section 2: Positioning
   "home.positioning.title": "La plupart commencent par Bitcoin. Nous, on commence par l'argent.",
   "home.positioning.comparisonP1": "Comprendre Bitcoin sans comprendre l'argent,",
   "home.positioning.comparisonP2": "c'est lire la dernière page sans connaître l'histoire.",
   "home.positioning.flip": "Alors on prend l'histoire dans l'ordre.",
 
-  // HomePage - Section 3: Journey (3 cards)
   "home.journey.title": "Un parcours en 3 modules",
   "home.journey.step1.label": "Module 1",
   "home.journey.step1.title": "Le Problème",
@@ -588,7 +540,6 @@ const fr = {
     "Une autre façon de concevoir l'argent.\nEt ce que cela change vraiment.",
   "home.journey.cardCta": "Voir ce module",
 
-  // HomePage - Section 4: Audience
   "home.audience.title": "Ce parcours est pour toi si...",
   "home.audience.item1": "Tu utilises l'argent sans savoir comment il est fabriqué.",
   "home.audience.item2": "Tu sens que quelque chose déraille, sans pouvoir mettre le doigt dessus.",
@@ -596,23 +547,19 @@ const fr = {
   "home.audience.payoff":
     "À la fin, tu sauras expliquer Bitcoin mieux que la plupart des gens qui en parlent.",
 
-  // HomePage - Section 6: Differentiation
   "home.differentiation.neg1": "Pas de hype.",
   "home.differentiation.neg2": "Pas de promesse de devenir riche.",
   "home.differentiation.neg3": "Pas de « fais-moi confiance ».",
   "home.differentiation.posIntro": "Juste une règle :",
   "home.differentiation.pos": "On simplifie, mais on ne te ment pas.",
 
-  // HomePage - Section 7: Philosophy quote
   "home.philosophy.quote":
     "Le problème fondamental des monnaies traditionnelles, c'est toute la confiance qu'elles exigent.",
 
-  // HomePage - Section 8: Final CTA
   "home.finalCta.titleP1": "Accès totalement libre et gratuit.",
   "home.finalCta.titleP2": "La curiosité est ton seul guide.",
   "home.finalCta.button": "Commencer le parcours",
 
-  // Footer
   "footer.donateMessage": "Si ce projet te plaît, soutiens-le en sats.",
   "footer.copy": "Copier",
   "footer.copied": "Copié !",

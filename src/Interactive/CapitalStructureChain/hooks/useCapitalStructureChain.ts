@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 type Options = {
-  /** Détours (upstream steps) that must be revealed to complete. 0 disables the gate. */
   requiredDetours?: number;
-  /** Fired once, the moment enough détours have been traced back. */
   onComplete?: () => void;
 };
 
@@ -16,8 +14,6 @@ export const useCapitalStructureChain = (totalSteps: number, options: Options = 
     if (count < totalSteps) setCount((prev) => prev + 1);
   };
 
-  // The first card is the final good (the sandwich); every reveal after it is
-  // one production détour traced back upstream.
   const exploredDetours = count - 1;
 
   const onCompleteRef = useRef(onComplete);
@@ -30,7 +26,6 @@ export const useCapitalStructureChain = (totalSteps: number, options: Options = 
     }
   }, [exploredDetours, requiredDetours]);
 
-  // No button-hover state here: the shared `Button` primitive owns its own.
   return {
     count,
     exploredDetours,

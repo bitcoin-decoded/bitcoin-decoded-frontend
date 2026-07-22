@@ -7,7 +7,6 @@ export const useIllustration = () => {
 
   return {
     isHovered,
-    // On expose un objet 'handlers' prêt à être spreadé (...) sur la div
     containerHandlers: {
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,

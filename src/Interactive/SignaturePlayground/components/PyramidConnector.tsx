@@ -5,20 +5,12 @@ import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
 
 type Props = {
-  /** Verb shown on the connector: "calcule", "signe", "vérifie". */
   label: string;
-  /** Directional arrow icon (points from the source node toward the target). */
   icon: ReactNode;
-  /** Lit once the relationship has happened (derived / signed / verified). */
   active: boolean;
   colors: SigPlaygroundColors;
 };
 
-/**
- * A directional pyramid edge: a small chip carrying an arrow + a verb, so the
- * reader sees who acts on whom (private key -calcule→ public key, etc.). Faint
- * until its action has run, then lit in the module accent.
- */
 export const PyramidConnector: FC<Props> = ({ label, icon, active, colors }) => {
   const typo = getTypography();
   const tone = active ? colors.accentColor : withOpacity(colors.baseTextSecondary, 0.6);

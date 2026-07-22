@@ -8,9 +8,7 @@ import { RotateCw } from "@icons";
 
 type FlipCardProps = {
   item: FlipCardItem;
-  /** 0-based position in the chain, surfaced as a "01"–"06" step marker. */
   index: number;
-  /** Fired when the card flips to its back face (lets a grid gate on exploration). */
   onReveal?: () => void;
 };
 
@@ -48,8 +46,6 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
     willChange: "transform",
   };
 
-  // Ledger card face: sharp corners, a flat surface, a single hairline border
-  // (no gradient fill, no drop shadow, no gradient-border glow).
   const faceStyle: CSSProperties = {
     position: "absolute",
     inset: 0,
@@ -101,7 +97,6 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
       {...hoverHandlers}
     >
       <div style={innerStyle}>
-        {/* Front - emoji + step title */}
         <div style={frontStyle}>
           <span style={stepStyle}>{step}</span>
           <span
@@ -141,7 +136,6 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
           />
         </div>
 
-        {/* Back - the cascade of decisions, centered */}
         <div style={backStyle}>
           <span
             style={{
@@ -169,9 +163,6 @@ export const FlipCard: FC<FlipCardProps> = ({ item, index, onReveal }) => {
               key={i}
               style={{
                 fontSize: typo.micro.fontSize,
-                // Primary text — these questions are the card's payload, so
-                // they must read clearly in both themes (were too faint at
-                // text.secondary).
                 color: colors.base.text.primary,
                 textAlign: "center",
                 lineHeight: 1.35,

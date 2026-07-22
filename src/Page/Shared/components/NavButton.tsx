@@ -21,12 +21,6 @@ type Props = {
   type: "prev" | "next";
 };
 
-/**
- * One chapter-level nav button, ledger register: a sharp hairline frame (no
- * gradient-border, no rounded card, no circle icon), a mono small-caps kicker
- * label, the destination title in the body serif, a chevron in the module color.
- * The frame + label brighten to the module accent on hover.
- */
 export const NavButton: FC<Props> = ({ page, type }) => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
@@ -38,8 +32,6 @@ export const NavButton: FC<Props> = ({ page, type }) => {
   const { isOutOfSequence } = useChapterProgression();
   const [hovered, setHovered] = useState(false);
 
-  // Same verdict as the navbar and the rail, read from the one place that
-  // states it.
   const locked = isOutOfSequence(page.id);
 
   const gold = getBrandGold(theme);
@@ -53,13 +45,6 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     alignItems: "center",
     gap: "0.7rem",
     flexDirection: align === "left" ? "row" : "row-reverse",
-    // Sharing the row equally on a wide screen, sized to its content on a
-    // phone, where the pair is stacked and centred instead.
-    //
-    // Capped there as well: the locked message is a full sentence, so content
-    // width alone still reached the screen edges and the control went on
-    // reading as a banner. Capped, the sentence wraps onto a second line and
-    // the frame looks like something to press.
     flex: isMobile ? "0 1 auto" : 1,
     maxWidth: isMobile ? "20rem" : "100%",
     padding: isMobile ? "0.85rem 1rem" : "0.95rem 1.15rem",
@@ -73,7 +58,6 @@ export const NavButton: FC<Props> = ({ page, type }) => {
 
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    // Was 10px and faux-bold on single-weight Cutive.
     fontSize: typo.micro.fontSize,
     fontWeight: 400,
     fontVariant: "small-caps",
@@ -82,8 +66,6 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     transition: "color 0.25s var(--ease-smooth)",
   };
 
-  // The chevron keeps the outer edge in both directions, so it still reads as
-  // "back" on the left and "forward" on the right with the padlock beside it.
   const iconGroupStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",

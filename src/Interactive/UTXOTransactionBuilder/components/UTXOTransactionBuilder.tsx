@@ -21,13 +21,10 @@ import {
   XCircle,
 } from "@icons";
 
-// ── Card (unified, used for inputs, outputs, fees) ──────────────────────────
 
-// ── Main component ──────────────────────────────────────────────────────────
 
 type Props = {
   lockedAmount?: string;
-  /** Fired once the reader builds a valid transaction (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -88,7 +85,6 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
       margin={isMobile ? "1.5rem 0" : "2rem 0"}
       style={{ ...mono, overflow: "hidden" }}
     >
-      {/* Header */}
       <Caption
         tone="accent"
         size="md"
@@ -98,7 +94,6 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
         {t("utxoBuilder.title")}
       </Caption>
 
-      {/* Step 1 - UTXO selection */}
       <div style={{ minWidth: 0 }}>
         <Caption
           tone="world"
@@ -160,7 +155,6 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
         </div>
       </div>
 
-      {/* Step 2 - Amount */}
       <div style={{ minWidth: 0 }}>
         <Caption
           tone="world"
@@ -196,10 +190,8 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
         />
       </div>
 
-      {/* Transaction panel */}
       {(hasSelection || hasAmount) && (
         <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", minWidth: 0 }}>
-          {/* Inputs */}
           {hasSelection && (
             <>
               <Caption
@@ -255,7 +247,6 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             </>
           )}
 
-          {/* Divider */}
           {hasSelection && hasAmount && (
             <div
               style={{
@@ -285,7 +276,6 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             </div>
           )}
 
-          {/* Outputs */}
           {hasAmount && (
             <>
               <Caption
@@ -339,7 +329,6 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             </>
           )}
 
-          {/* Status badge */}
           <Badge
             tone={isValid ? "success" : isInsufficient ? "error" : "neutral"}
             icon={
@@ -365,7 +354,6 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
         </div>
       )}
 
-      {/* Reset */}
       <Button
         variant="secondary"
         size="sm"

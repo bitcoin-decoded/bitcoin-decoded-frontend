@@ -9,8 +9,6 @@ export const useSeedGenerator = (onComplete?: () => void) => {
   const [seed, setSeed] = useState<SeedData | null>(null);
   const [revealedCount, setRevealedCount] = useState(0);
 
-  // Fires once the reader has generated a seed (the action this block is built
-  // around). One-shot - regenerating or switching length never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);
@@ -21,14 +19,12 @@ export const useSeedGenerator = (onComplete?: () => void) => {
     }
   }, [seed]);
 
-  // Track timeouts so we can cancel a previous reveal animation cleanly
   const timeoutsRef = useRef<number[]>([]);
   const clearTimeouts = () => {
     timeoutsRef.current.forEach((t) => window.clearTimeout(t));
     timeoutsRef.current = [];
   };
 
-  // Whenever a new seed is set, kick off a word-by-word reveal animation
   useEffect(() => {
     if (!seed) {
       setRevealedCount(0);

@@ -10,11 +10,6 @@ type Props = {
   isFirst: boolean;
   isLast: boolean;
   locked: boolean;
-  /**
-   * The chapter was reached out of order, so it cannot be sealed. The seal CTA
-   * gives way to the offer to join the course, which is the moment the reader
-   * is most likely to accept it: they have just read a whole chapter.
-   */
   outOfSequence: boolean;
   resumeLabel: string;
   onPrev: () => void;
@@ -23,13 +18,6 @@ type Props = {
   onResume: () => void;
 };
 
-/**
- * The single navigation set, rendered only under the active block. Previous
- * and next share the same bracketed primary treatment (same size, same shape)
- * so the pair reads as a consistent control; the final block swaps "next" for
- * a `stamped` seal CTA — the literal gold cachet that seals the chapter. A
- * lock hint appears while a tool block hasn't been manipulated.
- */
 export const BlockNav: FC<Props> = ({
   isFirst,
   isLast,
@@ -45,12 +33,7 @@ export const BlockNav: FC<Props> = ({
   const { colors, moduleTheme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
 
-  // Bring the module identity color back onto the navigation controls (violet
-  // on MoneyLaws, blue on Banking, …). On neutral pages `undefined` lets the
-  // Button fall back to its gold default.
   const moduleColor = moduleTheme === "base" ? undefined : colors[moduleTheme].text.secondary;
-  // The lock hint takes the module color (it explains the locked module-colored
-  // next button); neutral readable fallback on base pages.
   const hintColor = moduleColor ?? withOpacity(colors.base.text.primary, 0.72);
 
   const wrapperStyle: CSSProperties = {
@@ -60,9 +43,6 @@ export const BlockNav: FC<Props> = ({
     marginTop: "1.75rem",
   };
 
-  // Stacked on a phone, but centred rather than stretched. Edge to edge, a
-  // control ends up mostly empty and its label floats in the middle of a very
-  // wide box, which reads as a banner rather than as something to press.
   const rowStyle: CSSProperties = {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
@@ -73,8 +53,6 @@ export const BlockNav: FC<Props> = ({
   return (
     <div style={wrapperStyle}>
       {locked && (
-        // Above the buttons, right-aligned, in the module color — it explains
-        // why the next button is locked.
         <Caption
           variant="note"
           size="sm"

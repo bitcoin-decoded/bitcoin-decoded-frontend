@@ -1,18 +1,4 @@
-/**
- * Writes one HTML file per route and language, with that page's content and
- * metadata already in it.
- *
- * The application is a single-page app: the server sends one empty shell and
- * the browser builds every page from it. Search engines were therefore offered
- * a document with no words in it. This runs the same components under Node
- * after the client build, and drops the result into the shell.
- *
- * The client still mounts with `createRoot`, not `hydrateRoot`, so it discards
- * this markup and renders fresh. That is deliberate: hydrating would require
- * the first client render to match this HTML exactly, and theme, badges and
- * reading progress all come from storage the build cannot see. The HTML is
- * here to be read by crawlers, not to save the browser work.
- */
+// One HTML file per route and language, for crawlers. See docs/seo.md.
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
@@ -20,15 +6,8 @@ const DIST = "dist";
 const SSR_ENTRY = "../dist-ssr/entry-server.js";
 const NL = "\n";
 
-/**
- * Splits what `renderToString` returns into the tags that belong in `<head>`
- * and the markup that belongs in the page.
- *
- * React 19 hoists `<title>`, `<meta>` and `<link>` rendered anywhere in the
- * tree. With no document to hoist them into, it emits them first, contiguously,
- * before any application markup. So the head block is however many of those
- * tags sit at the very start, and the body is the rest.
- */
+// React 19 emits the tags it would hoist first and contiguously, so the head
+// block is however many of them sit at the very start.
 const splitHead = (html) => {
   const HEAD_TAG = /^<(?:title>[\s\S]*?<\/title|(?:meta|link)\b[^>]*\/?)>/;
   let cut = 0;
@@ -40,29 +19,11 @@ const splitHead = (html) => {
   return { head: html.slice(0, cut), body: html.slice(cut) };
 };
 
-/**
- * Where a path is written.
- *
- * Flat `.html` files, not `<path>/index.html`. A static host resolves a
- * directory to its index only when the address ends in a slash, and the
- * addresses this application produces do not; without the slash the SPA
- * fallback answers instead and every page serves the home page. Flat files are
- * matched by name, with or without the slash.
- */
+// Flat `.html`, never `<path>/index.html`: a directory only resolves to its
+// index when the address ends in a slash, and these addresses do not.
 const fileFor = (path) => (path === "/" ? join(DIST, "index.html") : join(DIST, `${path}.html`));
 
-/**
- * The sitemap, built from the same list the files are.
- *
- * Generated rather than written by hand so it cannot come to name a page that
- * no longer exists, or miss one that does. No `lastmod`, `changefreq` or
- * `priority`: there is no honest date to give, and search engines have long
- * ignored the other two.
- *
- * Each entry names its own address and every translation of it. A search engine
- * that finds one version is then told the other exists, rather than left to
- * discover it or to treat it as a duplicate.
- */
+// Built from the same list as the files, so it cannot drift from them.
 const sitemapFor = (pages, site) => {
   const urls = pages
     .filter((page) => page.listed)
@@ -96,11 +57,8 @@ const main = async () => {
     throw new Error("The built shell no longer declares a language to replace.");
   }
 
-  // React's warnings used to be silenced outright here, to keep this script's
-  // output readable while the missing keys were a known defect. A silent
-  // channel is exactly how that defect survived five phases, so they are
-  // counted now, and the first few still printed: the total is reported at the
-  // end, and going back above zero is meant to be noticed.
+  // Counted rather than silenced: a silent channel is how the missing keys
+  // survived five phases unnoticed.
   const noisy = console.error;
   let warnings = 0;
   console.error = (...args) => {
@@ -113,7 +71,6 @@ const main = async () => {
     const { head, body } = splitHead(render(route, language));
 
     const html = shell
-      // The shell is written in French; each file states the language it holds.
       .replace('<html lang="fr">', `<html lang="${language}">`)
       .replace("</head>", `${head}</head>`)
       .replace('<div id="root"></div>', `<div id="root">${body}</div>`);

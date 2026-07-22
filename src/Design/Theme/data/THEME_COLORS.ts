@@ -1,9 +1,3 @@
-/**
- * Per-mode ramps. Invariant: every `text.*` token must clear WCAG AA (4.5:1)
- * against its own mode's `base.background.primary`. In dark mode the module
- * accents are tints (light on black); in light mode they must be shades (dark
- * on white), never the same mid-tone — a mid-tone only ever passes on one side.
- */
 export const THEME_COLORS = {
   dark: {
     base: {
@@ -95,11 +89,6 @@ export const THEME_COLORS = {
     },
   },
   light: {
-    // Warm paper, not clinical white. The brand spec is "cream → bg in light"
-    // (see BRAND.ts) but the theme had shipped pure #fff + cool slate ink —
-    // maximum luminance + cold hue, which glares and fatigues the eye even at
-    // high contrast. These are warm off-whites and a warm near-black; contrast
-    // is preserved (all AA, guarded by THEME_COLORS.test.ts), the glare is not.
     base: {
       background: {
         primary: "#faf8f2",
@@ -109,9 +98,6 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#2a2620",
-        // Warm-neutral gray. The prior #625b4e leaned olive-taupe (blue channel
-        // dragged well below red/green), which read muddy; #605c57 keeps the
-        // warmth but sits near-neutral, cleaner against the cream paper.
         secondary: "#605c57",
         onAccent: "#ffffff",
       },
@@ -142,8 +128,6 @@ export const THEME_COLORS = {
       },
       text: {
         primary: "#92400e",
-        // Deepened from #b45309: burnt orange is the lightest accent, and on the
-        // warm canvas (#f3f0e7) the old value fell to 4.41 — just under AA.
         secondary: "#9e4409",
       },
       border: {

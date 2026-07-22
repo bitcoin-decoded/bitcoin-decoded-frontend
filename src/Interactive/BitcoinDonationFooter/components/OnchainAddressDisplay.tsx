@@ -27,7 +27,6 @@ type Props = {
   onSent: () => void;
 };
 
-/** Step 2, on-chain (spec §5.2). */
 export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) => {
   const typo = getTypography();
   const { colors } = usePageTheme();
@@ -45,7 +44,6 @@ export const OnchainAddressDisplay: FC<Props> = ({ amountEur, onBack, onSent }) 
   const bip21 = btc !== null ? buildBip21Uri(address, btc) : `bitcoin:${address}`;
   const feeSats = fees ? estimateOnchainFeeSats(fees.halfHourFeeSatPerVb) : null;
   const feeEur = feeSats !== null && rate ? satsToEur(feeSats, rate.eurPerBtc) : null;
-  // Informative nudge when fees eat a big chunk of a small donation (spec §2.4).
   const highFees = feeEur !== null && amountEur !== null && feeEur > 0.33 * amountEur;
 
   const titleStyle: CSSProperties = {

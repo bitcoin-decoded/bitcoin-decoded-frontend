@@ -9,7 +9,6 @@ import { DoodleQuestion } from "@doodle";
 import { ArrowLeft, ArrowRight, Check, CircleCheck, CircleX, RotateCcw } from "@icons";
 
 type Props = SynthesisQuizData & {
-  /** localStorage key used to persist selections + submitted across page navigations. */
   storageKey: string;
   onPass?: () => void;
   onReset?: () => void;
@@ -90,7 +89,6 @@ export const SynthesisQuiz: FC<Props> = ({
   };
 
   const indexStyle: CSSProperties = {
-    // Cutive Mono is single-weight, so no 500 (that synthesises a faux-bold).
     fontFamily: BRAND.fonts.mono,
     fontSize: typo.micro.fontSize,
     fontVariant: "small-caps",
@@ -99,9 +97,6 @@ export const SynthesisQuiz: FC<Props> = ({
   };
 
   const questionTitleStyle: CSSProperties = {
-    // The question is the focal point of the page, so it sits at the 16px prose
-    // register (bigger than the 14px options). Source Serif 4 has a real medium
-    // weight — this is not a synthesised faux-bold.
     ...typo.prose,
     color: colors.base.text.primary,
     fontWeight: 500,
@@ -215,7 +210,6 @@ export const SynthesisQuiz: FC<Props> = ({
                 gap: "0.2rem 0.6rem",
               }}
             >
-              {/* Prominence from the 20px heading size, not a mono faux-bold. */}
               <span style={{ ...typo.heading, color: scoreColor }}>
                 {score} / {questions.length}
               </span>

@@ -20,7 +20,6 @@ import {
 } from "@icons";
 
 type Props = {
-  /** Fired once the reader rewards the miner (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -52,10 +51,7 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     alignItems: "stretch",
   };
 
-  // ── Block panel (highlights on reward) ────────────────────────────────────
 
-  // Reward state is signalled by the border strengthening to success green —
-  // no glow/shadow and no gradient fill (ledger surfaces stay flat + sharp).
   const blockPanel: CSSProperties = {
     ...mono,
     flex: 1,
@@ -70,7 +66,6 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     minWidth: 0,
   };
 
-  // ── Reward panel (success green accent, always distinct) ───────────────────
 
   const rewardPanel: CSSProperties = {
     ...mono,
@@ -151,7 +146,6 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
     opacity: 0.78,
   };
 
-  // Total line is set apart by color (mono is single-weight — no faux-bold).
   const rewardLine = (emphasize = false): CSSProperties => ({
     ...mono,
     display: "flex",
@@ -218,7 +212,6 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
   return (
     <SurfaceCard gap="0.85rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={mono}>
       <div style={panelsRow}>
-        {/* ── Block panel ── */}
         <div style={blockPanel}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Caption
@@ -285,7 +278,6 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
           </div>
         </div>
 
-        {/* ── Reward panel ── */}
         <div style={rewardPanel}>
           <Caption
             tone="world"
@@ -346,7 +338,6 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
             {rewarded ? t("miningReward.rewarded") : t("miningReward.unassigned")}
           </Badge>
 
-          {/* Button + confetti wrapper */}
           <div style={{ position: "relative" }}>
             <Button
               variant={rewarded ? "secondary" : "primary"}
@@ -364,7 +355,6 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
               {rewarded ? t("miningReward.resetBtn") : t("miningReward.rewardBtn")}
             </Button>
 
-            {/* Confetti burst */}
             {rewarded && (
               <div
                 style={{
@@ -400,7 +390,6 @@ export const MiningRewardBlock: FC<Props> = ({ onComplete }) => {
             )}
           </div>
 
-          {/* Reward summary note */}
           {rewarded && (
             <div style={rewardNoteStyle}>
               <strong>{t("miningReward.rewardNoteTitle")}</strong>

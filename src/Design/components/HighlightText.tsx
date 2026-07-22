@@ -4,7 +4,6 @@ import { getBrandGold, usePageTheme, useThemeContext } from "../Theme";
 
 type HighlightTextProps = {
   children: ReactNode;
-  /** Override the gold underline when the highlight needs a specific signal color. */
   highLightColorHex?: string;
 };
 

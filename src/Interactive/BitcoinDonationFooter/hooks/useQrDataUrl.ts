@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 
 import { toDataURL } from "qrcode";
 
-/**
- * Generate a PNG data URL QR for `text`, client-side. Dark modules on a white
- * background (so it scans regardless of theme). `error` lets the caller drop
- * to a text-only fallback (spec §10).
- */
 export const useQrDataUrl = (text: string) => {
   const [dataUrl, setDataUrl] = useState<string | null>(null);
   const [error, setError] = useState(false);

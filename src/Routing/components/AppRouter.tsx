@@ -90,8 +90,6 @@ export const AppRouter: FC = () => {
 
       case ROUTE_NAME.NotFound:
         return <NotFoundPage />;
-      // Unreachable: `useRouter` already resolves an unclaimed address to
-      // NotFound, so nothing arrives here without a case.
       default:
         return <NotFoundPage />;
     }

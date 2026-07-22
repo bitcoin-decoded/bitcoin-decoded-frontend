@@ -11,7 +11,6 @@ type Props = {
   originalHash: string;
   isEdited: boolean;
   isAnchor?: boolean;
-  /** Pedagogical highlight on the output hash when the chain is still intact. */
   highlightHash?: boolean;
 };
 

@@ -8,12 +8,7 @@ import { FlipCard } from "./FlipCard";
 
 type FlipCardGridProps = {
   items: FlipCardItem[];
-  /**
-   * When > 0, the grid gates: a "n/N explored" counter shows and `onComplete`
-   * fires once that many distinct cards have been flipped. Default 0 = no gate.
-   */
   requiredExplored?: number;
-  /** Fired once `requiredExplored` distinct cards have been flipped. */
   onComplete?: () => void;
 };
 

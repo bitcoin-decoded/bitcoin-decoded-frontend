@@ -11,12 +11,9 @@ import {
 } from "../../../Design";
 import { FrText, useLanguageContext, useTranslation } from "../../../I18n";
 
-// Reading a few cards is the pedagogical act here, so the block gates on it:
-// explore any 3 of the monetary specimens to unlock the rest of the chapter.
 const REQUIRED_EXPLORED = 3;
 
 type Props = {
-  /** Fired once 3 distinct cards have been opened (gates the reading block). */
   onComplete?: () => void;
 };
 
@@ -29,7 +26,6 @@ export const MonetaryGallery: FC<Props> = ({ onComplete }) => {
     onComplete,
   });
 
-  // Large screens fit three trading-card-sized columns; tablets two; phones one.
   const columns = breakpoint === "desktop" ? 3 : breakpoint === "tablet" ? 2 : 1;
   const isMobile = breakpoint === "mobile";
 
@@ -41,8 +37,6 @@ export const MonetaryGallery: FC<Props> = ({ onComplete }) => {
 
   const gridStyle: CSSProperties = {
     display: "grid",
-    // A lone column (mobile / narrow viewports) is capped and centered so the
-    // card stays card-sized instead of stretching full-width on wide phones.
     gridTemplateColumns: columns === 1 ? "minmax(0, 26rem)" : `repeat(${columns}, minmax(0, 1fr))`,
     justifyContent: columns === 1 ? "center" : undefined,
     gap: isMobile ? "1.25rem" : "1.5rem",
@@ -50,9 +44,6 @@ export const MonetaryGallery: FC<Props> = ({ onComplete }) => {
     alignItems: "start",
   };
 
-  // `FrText` only walks the tree it is handed, and this component builds its
-  // own copy from a language-aware getter — so the page-level wrapper never
-  // sees it. It fixes its own French punctuation here.
   return (
     <FrText>
       <>

@@ -1,9 +1,3 @@
-/**
- * Places `count` nodes evenly around a circle (first node at the top, going
- * clockwise) inside a 0–100 viewBox, and returns both the vertices and the
- * edges that close the loop - so the wheel can be drawn with plain SVG lines
- * and the cards positioned with percentages. `radius` is in viewBox units.
- */
 export const getPentagonLayout = (
   count: number,
   radius: number,

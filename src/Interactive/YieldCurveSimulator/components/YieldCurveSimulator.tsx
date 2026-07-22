@@ -19,7 +19,6 @@ import { useYieldCurve } from "../hooks/useYieldCurve";
 import { DoodleSmileyGrumpy, DoodleSmileyThumbsUp } from "@doodle";
 
 type Props = {
-  /** Fired once the reader has moved the long-rate slider (manipulated). */
   onComplete?: () => void;
 };
 
@@ -33,8 +32,6 @@ export const YieldCurveSimulator: FC<Props> = ({ onComplete }) => {
   const typo = getTypography(breakpoint);
   const { longRate, setLongRate, chartData, fixedShortRate } = useYieldCurve();
   const marginIsHealthy = longRate > 1.5;
-  // Semantic margin color (healthy spread = success, thin/inverted = error) is
-  // meaningful pedagogy — kept. Only the chart chrome moves to the ledger theme.
   const marginColor = marginIsHealthy
     ? colors.semantic.success.text
     : colors.semantic.error.text;

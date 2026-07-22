@@ -157,7 +157,6 @@ export const Bitcoin3Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a haché un texte. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -260,7 +259,6 @@ export const Bitcoin3Page: FC = () => {
           )}
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a ajouté un bloc. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

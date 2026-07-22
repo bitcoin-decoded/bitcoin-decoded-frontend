@@ -1,9 +1,3 @@
-/**
- * Pool of plausible BIP39-style words used for the pedagogical demo.
- * These come from the public BIP39 English wordlist - the standard is
- * open and the words themselves carry no secret. The sequences generated
- * from this pool by the demo are random and do NOT form valid seeds.
- */
 export const SEED_WORD_POOL: readonly string[] = [
   "abandon",
   "ability",

@@ -2,10 +2,6 @@ import type { DotPosition } from "../types";
 
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 
-/**
- * Even, organic dot layout inside a disc (sunflower / phyllotaxis spiral).
- * Deterministic, so the cloud stays stable across re-renders.
- */
 export const computeDotPositions = (
   count: number,
   radius: number,

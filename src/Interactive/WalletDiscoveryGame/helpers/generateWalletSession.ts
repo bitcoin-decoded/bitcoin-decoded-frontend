@@ -8,7 +8,7 @@ import { round2 } from "./round2";
 
 export const generateWalletSession = (): WalletGameSession => {
   const fundedCardId = Math.floor(Math.random() * 3);
-  const utxoCount = 2 + Math.floor(Math.random() * 3); // 2..4
+  const utxoCount = 2 + Math.floor(Math.random() * 3);
 
   const cards: WalletCardData[] = Array.from({ length: 3 }, (_, id) => {
     const utxos: WalletUtxo[] =

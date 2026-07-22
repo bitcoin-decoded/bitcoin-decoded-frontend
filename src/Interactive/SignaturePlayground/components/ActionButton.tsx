@@ -17,11 +17,6 @@ type Props = {
   colors: SigPlaygroundColors;
 };
 
-/**
- * Action button with two crystal-clear states:
- *   - Active: bold accent gradient + glow → "click me" is obvious.
- *   - Consumed: dashed border + ✓ icon + muted → "done" is obvious.
- */
 export const ActionButton: FC<Props> = ({
   onClick,
   consumed,
@@ -35,9 +30,6 @@ export const ActionButton: FC<Props> = ({
   const typo = getTypography();
   const palette = variant === "primary" ? colors.accentColor : colors.successColor;
 
-  // Style aligned with the rest of the Bitcoin section (cf. DoubleSpendDemo,
-  // chapter 4): subtle gradient + accent border + accent text. Less "loud"
-  // than a saturated white-on-color button.
   const activeStyle: CSSProperties = {
     cursor: "pointer",
     color: variant === "primary" ? colors.basePrimaryText : palette,

@@ -10,12 +10,9 @@ type Props = {
   card: WalletCardData;
   index: number;
   selected: boolean;
-  /** Marks this card as the "correct" choice - used after validation. */
   highlightAsAnswer?: boolean;
-  /** Marks this card as the "wrong" pick - used after validation. */
   highlightAsWrong?: boolean;
   onSelect: (id: number) => void;
-  /** i18n labels passed in to keep the sub-component decoupled from useTranslation */
   addressPrefix: string;
   privateKeyLabel: string;
   publicKeyLabel: string;
@@ -23,7 +20,6 @@ type Props = {
   utxosLabel: string;
   noUtxosLabel: string;
   utxoPrefix: string;
-  // Theme passthroughs
   accentColor: string;
   successColor: string;
   errorColor: string;
@@ -33,10 +29,6 @@ type Props = {
   baseBackgroundSecondary: string;
 };
 
-/**
- * One derived (privateKey, publicKey, address) tuple plus its UTXOs.
- * The user clicks one to claim "this is the address that controls funds".
- */
 export const WalletCard: FC<Props> = ({
   card,
   index,
@@ -60,8 +52,6 @@ export const WalletCard: FC<Props> = ({
   baseBackgroundSecondary,
 }) => {
   const typo = getTypography();
-  // Border color logic:
-  //   answer (success) > wrong (error) > selected (accent) > idle
   const borderOpacity = highlightAsAnswer || highlightAsWrong || selected ? 0.55 : 0.2;
   const bgTint = highlightAsAnswer
     ? withOpacity(successColor, 0.06)

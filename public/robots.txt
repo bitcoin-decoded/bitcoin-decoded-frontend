@@ -1,10 +1,4 @@
 User-agent: *
 Allow: /
 
-# Crawling stays open on purpose, even while the vercel.app host is held out of
-# the index. That host is excluded by an X-Robots-Tag header (see vercel.json),
-# and a header can only be obeyed if the page is fetched first. Disallowing here
-# would hide the noindex, and a URL discovered elsewhere could still be listed
-# with no snippet, which is the outcome this avoids.
-
 Sitemap: https://bitcoindecoded.fr/sitemap.xml

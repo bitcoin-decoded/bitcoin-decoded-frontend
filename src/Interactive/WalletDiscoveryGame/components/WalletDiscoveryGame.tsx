@@ -9,7 +9,6 @@ import { WalletCard } from "./WalletCard";
 import { CheckCircle, KeyRound, RefreshCw, Sparkles, Wallet, XCircle } from "@icons";
 
 type Props = {
-  /** Fired once the reader solves the challenge (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -85,7 +84,6 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
       margin={isMobile ? "1.5rem 0" : "2rem 0"}
       style={{ ...mono, overflow: "hidden", textAlign: "left" }}
     >
-      {/* Header */}
       <Caption
         tone="accent"
         size="md"
@@ -103,7 +101,6 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
 
       <p style={introStyle}>{t("walletGame.intro")}</p>
 
-      {/* Stage: idle - only the reveal button is shown */}
       {stage === "idle" && (
         <Button
           variant="primary"
@@ -115,7 +112,6 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
         </Button>
       )}
 
-      {/* Stage: revealed or validated - full game UI */}
       {stage !== "idle" && (
         <>
           <div style={{ minWidth: 0 }}>
@@ -164,7 +160,6 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
             </div>
           </div>
 
-          {/* User answer area */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0.7rem", minWidth: 0 }}>
             <div>
               <div style={sectionLabelStyle}>{t("walletGame.questionLabel")}</div>
@@ -213,7 +208,6 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
             </Button>
           </div>
 
-          {/* Verdict */}
           {stage === "validated" && verdict === "correct" && (
             <FeedbackPanel
               tone="success"
@@ -252,7 +246,6 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
             </FeedbackPanel>
           )}
 
-          {/* Reset / restart - visible whenever cards are revealed */}
           <Button
             variant="secondary"
             size="sm"
@@ -265,7 +258,6 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
         </>
       )}
 
-      {/* Discreet pedagogical disclaimer */}
       <p
         style={{
           fontSize: typo.micro.fontSize,

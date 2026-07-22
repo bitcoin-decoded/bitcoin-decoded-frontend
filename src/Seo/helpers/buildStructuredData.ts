@@ -8,30 +8,14 @@ type Input = {
   language: Language;
   seo: PageSeo;
   canonical: string;
-  /** Reads the navigation tree, which needs the current translation. */
   t: TranslationFn;
 };
 
-/**
- * The JSON-LD a page publishes about itself.
- *
- * Two things only, both of which a search engine does something visible with.
- * The breadcrumb is what turns a bare address in a result into a readable path,
- * "Bitcoin.Decoded > Bitcoin > Proof of work", which is worth more on a site
- * whose value is that its pages sit in an order. The article states what the
- * page is and in which language.
- *
- * `Course` is deliberately absent: its rich result is meant for course
- * providers and carries eligibility rules about pricing and instructors that
- * this does not meet. Claiming it would be a claim, not a description.
- */
 export const buildStructuredData = ({ route, language, seo, canonical, t }: Input): string => {
   const home = `${SITE.url}${getRoutePath(ROUTE_NAME.HomePage, language)}`;
 
   const trail: { name: string; item: string }[] = [{ name: SITE.name, item: home }];
 
-  // A chapter sits inside a module; standalone pages sit directly under the
-  // site, so their trail is just the site and themselves.
   for (const module of getNavigationTree(t)) {
     const child = module.children?.find((item) => item.id === route);
     if (!child) continue;

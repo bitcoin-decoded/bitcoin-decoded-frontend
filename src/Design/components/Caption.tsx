@@ -31,8 +31,6 @@ export const Caption: FC<Props> = ({
   const { colors, moduleTheme } = usePageTheme();
   const typo = getTypography(useBreakpoint());
 
-  // Sizes come from the central type scale (elevated mono): md = section title
-  // (aligned with Callout headings), sm = kicker/label, xs = the smallest note.
   const fontSize =
     size === "md"
       ? typo.heading.fontSize
@@ -63,8 +61,6 @@ export const Caption: FC<Props> = ({
     ...style,
   };
 
-  // The icon must never be squeezed by a long label: as a flex child it would
-  // otherwise shrink in width (keeping its height) and distort. Pin it.
   const iconNode = icon
     ? createElement("span", { style: { display: "inline-flex", flexShrink: 0 } }, icon)
     : null;

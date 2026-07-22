@@ -3,14 +3,6 @@ import type { RouteName } from "../types/RouteName";
 
 import { ROUTE_NAME } from "./ROUTE_NAME";
 
-/**
- * Each route's address in each language, before the language prefix.
- *
- * The two sets are translations of intent, not of words: both lead with the
- * term someone would actually search in that language. A few coincide because
- * the term itself does, which is a fact about the vocabulary rather than an
- * oversight.
- */
 export const ROUTE_SLUG: Record<Language, Record<RouteName, string>> = {
   fr: {
     [ROUTE_NAME.HomePage]: "/",

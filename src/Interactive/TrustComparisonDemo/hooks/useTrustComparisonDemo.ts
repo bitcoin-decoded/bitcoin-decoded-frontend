@@ -4,13 +4,10 @@ import { useExplorationGate } from "../../../Design";
 import type { SideState } from "../types";
 
 type Options = {
-  /** Distinct action buttons that must be tried to complete. 0 disables the gate. */
   requiredExplored?: number;
-  /** Fired once enough distinct buttons have been clicked. */
   onComplete?: () => void;
 };
 
-// Each of the four action buttons is a distinct explorable item.
 const FIAT_CREATE = 0;
 const FIAT_CENSOR = 1;
 const BITCOIN_CREATE = 2;

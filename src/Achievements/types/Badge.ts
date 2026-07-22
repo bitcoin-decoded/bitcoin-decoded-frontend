@@ -9,7 +9,6 @@ export type Badge = {
   id: string;
   kind: BadgeKind;
   module: BadgeModule;
-  /** Accepts both Phosphor icons (@icons) and doodle glyphs (@doodle). */
   icon: IconComponent;
   nameKey: TranslationKey;
 };

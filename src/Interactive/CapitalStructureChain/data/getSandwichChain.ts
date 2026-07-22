@@ -3,7 +3,6 @@ import type { ProductionStep } from "../types";
 
 import { Crane, Factory, Grains, Mountain, Oven, Sandwich, Tractor } from "@icons";
 
-/** The sandwich production chain, language-aware (mirrors getBeerProductionChain). */
 export const getSandwichChain = (language: Language): ProductionStep[] => {
   const fr = language === "fr";
   return [

@@ -101,7 +101,6 @@ export const MoneyLaws4Page: FC = () => {
           </Quote>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <Callout
@@ -246,7 +245,6 @@ export const MoneyLaws4Page: FC = () => {
           </p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand 3 cartes de la chaîne ont été retournées (compteur x/3). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

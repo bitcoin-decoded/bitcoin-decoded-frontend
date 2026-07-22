@@ -19,8 +19,6 @@ export const useDifficultyAdjustment = (onComplete?: () => void) => {
   const decrease = useCallback(() => setMiners((m) => Math.max(MIN_MINERS, m - STEP)), []);
   const increase = useCallback(() => setMiners((m) => Math.min(MAX_MINERS, m + STEP)), []);
 
-  // Fires once the reader has shifted the difficulty off its baseline (the
-  // action this block is built around). One-shot - further clicks never re-fire.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);

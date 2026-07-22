@@ -25,15 +25,8 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
   const rowCount = Math.max(assets.length, liabilities.length);
   const rows = Array.from({ length: rowCount });
 
-  // Ledger frame: sharp corners + a single module hairline. No gradient fill
-  // and no gradient-border glow.
   const containerStyle: CSSProperties = {
     width: "100%",
-    // A balance sheet is two columns of figures whose thousands separators are
-    // non-breaking ("500 000 000 €" is one token), so the table cannot fold
-    // below ~640px. With `overflow: hidden` that width was pushed onto the
-    // page, which is what broke the chapter on a phone. It scrolls inside its
-    // own frame instead — the page body never scrolls sideways.
     overflowX: "auto",
     borderRadius: 0,
     border: `1px solid ${withOpacity(accentColor, 0.3)}`,
@@ -79,8 +72,6 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     padding: isMobile ? "0.625rem 0.75rem" : "0.75rem 1.25rem",
     width: "50%",
     whiteSpace: "pre-line",
-    // Elevated from the old 14px: the parenthetical descriptions (e.g.
-    // "créance sur Nicolas") were too small to read comfortably.
     fontSize: isMobile ? "0.875rem" : "0.9375rem",
     lineHeight: 1.55,
     color: colors.base.text.secondary,
@@ -117,7 +108,6 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
             const buildCellContent = (line?: BalanceSheetLine) =>
               line ? (
                 <>
-                  {/* Amounts are ledger figures — mono, tabular, no faux-bold. */}
                   <strong style={{ ...typo.figure }}>{line.amount}</strong>
                   <br />
                   {line.description}

@@ -32,46 +32,29 @@ export const HomePage: FC = () => {
   const isMobile = breakpoint === "mobile";
   const isTablet = breakpoint === "tablet";
 
-  // ── Vertical rhythm - single source of truth for the whole homepage ──
-  // Three tiers (mobile / tablet / desktop). Picking values that keep the
-  // total between sections (sectionPadY × 2 + separator margin) around
-  // ~4rem mobile / ~5rem tablet / ~6rem desktop - comfortable for a
-  // landing page without feeling padded for the sake of padding.
   const pick = <T,>(m: T, ta: T, d: T): T => (isMobile ? m : isTablet ? ta : d);
 
   const space = {
-    // Section padding (top = bottom)
     sectionPadY: pick("1.75rem", "2.25rem", "2.75rem"),
-    // Gap between elements inside a section (title → body → punch line, etc.)
     sectionGap: pick("0.85rem", "1rem", "1.15rem"),
 
-    // Hero - the entry surface. Generous top padding, slightly tighter bottom.
     heroPadTop: pick("2rem", "3.25rem", "4.5rem"),
     heroPadBottom: pick("1.25rem", "2rem", "2.75rem"),
 
-    // Hero internal - semantic groupings (brand block / content block / CTA
-    // block) get distinct breathing rhythms rather than a uniform gap.
     logoToSlogan: pick("0.35rem", "0.4rem", "0.5rem"), // tight: brand identity
     sloganToHeadline: pick("1.25rem", "1.5rem", "1.85rem"), // wide: brand → message
     headlineToSub: pick("0.5rem", "0.65rem", "0.75rem"), // tight: message body
     subToCta: pick("1rem", "1.25rem", "1.5rem"), // medium: anticipation
 
-    // Section 3 - cards row spacing
     cardsGap: pick("0.75rem", "0.9rem", "1.25rem"),
     cardsMarginTop: pick("0.5rem", "0.75rem", "1rem"),
 
-    // Three-line stacks (hook lines, differentiation negs)
     stackedLinesGap: pick("0.25rem", "0.3rem", "0.3rem"),
-    // Bullet list rows
     listGap: pick("0.55rem", "0.6rem", "0.65rem"),
 
-    // Page-level horizontal padding (container)
     containerPadX: pick("0.75rem", "1.25rem", "1.5rem"),
 
-    // Section 7 (Quote) tightens its top padding to feel like a continuation
-    // of section 6's punch line rather than a brand-new section.
     quoteTopOverride: pick("0.5rem", "1rem", "1.5rem"),
-    // Final CTA expands its bottom padding for clean page exit
     finalCtaBottomOverride: pick("2.25rem", "3.5rem", "4.5rem"),
   };
 
@@ -81,7 +64,6 @@ export const HomePage: FC = () => {
     el?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // ── Shared style tokens ──────────────────────────────────────────────────
 
   const containerStyle: CSSProperties = {
     display: "flex",
@@ -91,10 +73,6 @@ export const HomePage: FC = () => {
     padding: `0 ${space.containerPadX}`,
   };
 
-  // Section vertical spacing - driven by the spacing tokens above.
-  // Longhand padding (not the `padding` shorthand) so sections that override
-  // only paddingTop / paddingBottom below don't mix shorthand + longhand,
-  // which React flags on re-render.
   const sectionStyle: CSSProperties = {
     paddingTop: space.sectionPadY,
     paddingBottom: space.sectionPadY,
@@ -128,24 +106,14 @@ export const HomePage: FC = () => {
     color: colors.base.text.secondary,
   };
 
-  // Single short accent line used at the end of a section to land the message.
   const punchLineStyle: CSSProperties = {
     fontSize: pick("1.05rem", "1.1rem", "1.2rem"),
     fontWeight: 600,
-    // Orange is reserved for the Bitcoin module + on-chain validations; the
-    // homepage accent is the structural gold.
     color: gold,
     margin: 0,
     letterSpacing: "-0.005em",
   };
 
-  // ── Hero ─────────────────────────────────────────────────────────────────
-  // We drop the uniform flex `gap` and instead drive every transition via
-  // the spacing tokens above (`logoToSlogan`, `sloganToHeadline`,
-  // `headlineToSub`, `subToCta`). Three semantic blocks emerge:
-  //   • Brand (logo + slogan)   - tight inside, wide gap to next
-  //   • Message (h1 + sub)      - tight inside, medium gap to next
-  //   • Action (primary + sub)  - tight inside
   const heroStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -161,9 +129,6 @@ export const HomePage: FC = () => {
     color: colors.base.text.primary,
   };
 
-  // English-only tagline rendered just under the logo. Serif italic pairs
-  // with "Decoded" in the lockup; the "." separator borrows the kit's gold
-  // accent for a discrete brand callback.
   const sloganStyle: CSSProperties = {
     fontFamily: BRAND.fonts.display,
     fontStyle: "italic",
@@ -186,8 +151,6 @@ export const HomePage: FC = () => {
   const headlineStyle: CSSProperties = {
     fontSize: pick("1.85rem", "2.35rem", "2.85rem"),
     fontFamily: BRAND.fonts.mono,
-    // Cutive Mono is single-weight — 500 (not 700) avoids a synthetic faux-bold;
-    // the hero size carries the presence.
     fontWeight: 500,
     letterSpacing: "-0.02em",
     lineHeight: 1.15,
@@ -211,7 +174,6 @@ export const HomePage: FC = () => {
     gap: "0.6rem",
   };
 
-  // ── Section 4: Audience list ─────────────────────────────────────────────
   const audienceListStyle: CSSProperties = {
     listStyle: "none",
     padding: 0,
@@ -240,7 +202,6 @@ export const HomePage: FC = () => {
     fontWeight: 500,
   };
 
-  // ── Section 3: Cards row ─────────────────────────────────────────────────
   const cardsWrapperStyle: CSSProperties = {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
@@ -250,7 +211,6 @@ export const HomePage: FC = () => {
 
   return (
     <div style={containerStyle}>
-      {/* ─────── HERO ─────── */}
       <section style={heroStyle}>
         <RevealOnScroll delay={0} duration={600} style={{ marginBottom: space.logoToSlogan }}>
           <div style={heroBadgeStyle}>
@@ -293,7 +253,6 @@ export const HomePage: FC = () => {
         <Separator margin="0" />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 1 - HOOK ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <h2 style={sectionTitleStyle}>{t("home.hook.title")}</h2>
@@ -322,7 +281,6 @@ export const HomePage: FC = () => {
         <Separator margin="0" />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 2 - POSITIONING ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <h2 style={sectionTitleStyle}>{t("home.positioning.title")}</h2>
@@ -339,7 +297,6 @@ export const HomePage: FC = () => {
         <Separator margin="0" />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 3 - JOURNEY (cards) ─────── */}
       <section id={JOURNEY_SECTION_ID} style={sectionStyle}>
         <RevealOnScroll>
           <h2 style={sectionTitleStyle}>{t("home.journey.title")}</h2>
@@ -406,7 +363,6 @@ export const HomePage: FC = () => {
         <Separator margin="0" />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 4 - AUDIENCE ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <h2 style={sectionTitleStyle}>{t("home.audience.title")}</h2>
@@ -430,7 +386,6 @@ export const HomePage: FC = () => {
         <Separator margin="0" />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 6 - DIFFERENTIATION ─────── */}
       <RevealOnScroll>
         <section style={sectionStyle}>
           <div
@@ -456,7 +411,6 @@ export const HomePage: FC = () => {
         <Separator margin="0" />
       </RevealOnScroll>
 
-      {/* ─────── SECTION 7 - PHILOSOPHY ─────── */}
       <RevealOnScroll>
         <section style={{ ...sectionStyle, paddingTop: space.quoteTopOverride }}>
           <Quote author="Satoshi Nakamoto" source="BitcoinTalk, 2010">
@@ -465,7 +419,6 @@ export const HomePage: FC = () => {
         </section>
       </RevealOnScroll>
 
-      {/* ─────── SECTION 8 - FINAL CTA ─────── */}
       <RevealOnScroll>
         <section style={{ ...sectionStyle, paddingBottom: space.finalCtaBottomOverride }}>
           <h2 style={sectionTitleStyle}>

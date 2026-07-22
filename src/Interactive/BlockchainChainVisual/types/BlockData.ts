@@ -7,8 +7,6 @@ export type BlockData = {
   nonce: number;
   timestamp: string;
   isEdited: boolean;
-  /** Original Merkle root computed from the seed tx, never updated after edit. */
   originalMerkleRoot: string;
-  /** Original block hash computed from the seed header, never updated after edit. */
   originalHeaderHash: string;
 };

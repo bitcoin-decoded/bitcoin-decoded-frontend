@@ -1,12 +1,5 @@
 import type { Language } from "../../../I18n";
 
-/**
- * Every bilingual string of the donation flow, in one place. Kept as a
- * language-aware getter (not ~70 global t() keys) because the set is large,
- * feature-local, and heavily interpolated. Formatting of numbers (sats, EUR,
- * BTC, fees) is done by the caller via helpers; the builders here only
- * template the already-formatted strings.
- */
 export const getDonationCopy = (language: Language) => {
   const fr = language === "fr";
 
@@ -41,7 +34,6 @@ export const getDonationCopy = (language: Language) => {
       disclaimer: fr
         ? "Les montants en euros sont indicatifs. Le donataire reçoit la valeur en bitcoin que tu envoies."
         : "Euro amounts are indicative. The recipient receives the bitcoin value you send.",
-      /** Coffee anchors. 21 is intentionally absent (silent easter egg). */
       presetSubs: {
         1: fr ? "le prix d'un expresso" : "the price of an espresso",
         5: fr ? "le prix d'une bière en pression" : "the price of a draft beer",

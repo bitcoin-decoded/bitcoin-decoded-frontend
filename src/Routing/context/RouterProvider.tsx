@@ -8,7 +8,6 @@ import { RouterContext } from ".";
 
 type Props = {
   children: ReactNode;
-  /** Set by the build, which renders one file per route and language. */
   route?: RouteName;
   language?: Language;
 };
