@@ -67,6 +67,9 @@ export const BalanceSheet: FC<Props> = ({ title, assets, liabilities }) => {
     fontVariant: "small-caps",
     color: colors[moduleTheme].text.primary,
     backgroundColor: withOpacity(accentColor, 0.12),
+    // Ruled on both sides: the band was closed underneath and open above, so it
+    // floated under the title instead of separating it from the figures.
+    borderTop: headRule,
     borderBottom: headRule,
   };
 
