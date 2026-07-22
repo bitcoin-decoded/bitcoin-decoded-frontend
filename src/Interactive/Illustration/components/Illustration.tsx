@@ -59,7 +59,12 @@ export const Illustration: FC<IllustrationProps> = ({
     height: "auto",
     borderRadius: 0,
     border: `1px solid ${withOpacity(gold, isHovered ? 0.4 : 0.22)}`,
-    backgroundColor: colors.base.background.secondary,
+    // Transparent, so the frame takes whatever it is dropped on. The
+    // illustrations carry their own alpha, and painting `background.secondary`
+    // here put a near-black rectangle inside the tinted wash of a callout. On
+    // the reading page the two are the same colour anyway, so nothing changes
+    // where it already looked right.
+    backgroundColor: "transparent",
     overflow: "hidden",
     display: "flex",
     justifyContent: "center",
