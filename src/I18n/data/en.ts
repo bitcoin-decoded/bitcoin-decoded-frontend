@@ -11,7 +11,10 @@ const en = {
   "progression.notice.body": "This chapter builds on the ones before it. You can read it now, but it will not count towards your progress until the earlier chapters are done.",
   "progression.notice.resume": "Resume at chapter",
   "progression.notice.start": "Start from the beginning",
-  "nav.locked": "Finish the previous chapter to unlock",
+  // Plural: the frontier can leave several chapters unsealed behind it, and the
+  // "previous" button often points at the locked one, which made the singular
+  // wrong in the most visible place it appears.
+  "nav.locked": "Finish the previous chapters to unlock",
   "nav.lockedShort": "Locked",
   "nav.previous": "Previous",
   "nav.next": "Next",

@@ -11,7 +11,10 @@ const fr = {
   "progression.notice.body": "Ce chapitre s'appuie sur ceux qui le précèdent. Tu peux le lire maintenant, mais il ne comptera pas dans ta progression tant que les précédents ne sont pas terminés.",
   "progression.notice.resume": "Reprendre au chapitre",
   "progression.notice.start": "Commencer par le début",
-  "nav.locked": "Termine le chapitre précédent pour débloquer",
+  // Pluriel : la frontière peut laisser plusieurs chapitres non scellés derrière
+  // elle, et le bouton « précédent » pointe justement souvent sur celui qui est
+  // verrouillé, ce qui rendait le singulier faux à l'endroit le plus visible.
+  "nav.locked": "Termine les chapitres précédents pour débloquer",
   "nav.lockedShort": "Verrouillé",
   "nav.previous": "Précédent",
   "nav.next": "Suivant",

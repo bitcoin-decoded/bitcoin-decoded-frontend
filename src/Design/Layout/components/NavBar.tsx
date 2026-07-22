@@ -80,7 +80,6 @@ export const NavBar: FC<Props> = ({ isChapterComplete, isChapterOutOfSequence })
       level={level}
       index={index}
       moduleColor={moduleColor}
-      gold={gold}
       isComplete={item.id ? (isChapterComplete?.(item.id) ?? false) : false}
       isOutOfSequence={item.id ? (isChapterOutOfSequence?.(item.id) ?? false) : false}
       isDirectlyActive={currentPage === item.id}

@@ -53,7 +53,15 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     alignItems: "center",
     gap: "0.7rem",
     flexDirection: align === "left" ? "row" : "row-reverse",
-    flex: 1,
+    // Sharing the row equally on a wide screen, sized to its content on a
+    // phone, where the pair is stacked and centred instead.
+    //
+    // Capped there as well: the locked message is a full sentence, so content
+    // width alone still reached the screen edges and the control went on
+    // reading as a banner. Capped, the sentence wraps onto a second line and
+    // the frame looks like something to press.
+    flex: isMobile ? "0 1 auto" : 1,
+    maxWidth: isMobile ? "20rem" : "100%",
     padding: isMobile ? "0.85rem 1rem" : "0.95rem 1.15rem",
     border: `1px solid ${isHovered ? withOpacity(moduleAccent, 0.7) : withOpacity(colors.base.text.primary, 0.3)}`,
     background: "transparent",
