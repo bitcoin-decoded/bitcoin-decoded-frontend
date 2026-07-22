@@ -13,12 +13,6 @@ type Props = {
   accent: string;
 };
 
-/**
- * One sub-category inside a section: icon + label, a "Plan A/B" rank badge on
- * the right (Plan A also carries the big filled star) and the adaptive
- * descriptive comment underneath. No named products - the comment stays at
- * the category level by design.
- */
 export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) => {
   const typo = getTypography();
   const { colors } = usePageTheme();
@@ -38,7 +32,6 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
 
   const headerStyle: CSSProperties = { display: "flex", alignItems: "center", gap: "0.65rem" };
 
-  // Structural icon badge — a square (radius 0), per the block-vs-coin rule.
   const iconChipStyle: CSSProperties = {
     width: "2rem",
     height: "2rem",
@@ -70,7 +63,6 @@ export const SubCategoryRow: FC<Props> = ({ item, icon: Icon, copy, accent }) =>
     flexShrink: 0,
   };
 
-  // The recommended star carries no glow (ledger surfaces stay flat).
   const starStyle: CSSProperties = {
     flexShrink: 0,
   };

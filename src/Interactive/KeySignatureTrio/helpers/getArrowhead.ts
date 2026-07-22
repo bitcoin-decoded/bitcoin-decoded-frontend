@@ -1,12 +1,5 @@
 type Point = { x: number; y: number };
 
-/**
- * Build a small open-chevron arrowhead at the `b` end of segment a→b, pulled
- * back by `clear` units so its tip sits exactly where the trimmed line ends
- * (see trimSegment). Returns the three chevron points: left barb → tip →
- * right barb. The chevron points toward `b`, showing the direction of the
- * action (who acts on whom).
- */
 export const getArrowhead = (
   a: Point,
   b: Point,

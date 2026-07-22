@@ -8,9 +8,7 @@ type FlywheelStepProps = {
   icon: IconType;
   label: string;
   metric: string;
-  /** Category accent (see `getStepTones`). */
   accent: string;
-  /** True while the propagation wave is on this step. */
   isActive: boolean;
   isMobile: boolean;
 };
@@ -27,8 +25,6 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
 
-  // Flat ledger node — active state is signalled by a stronger flat tint +
-  // border + a subtle scale, not a gradient fill, glow or backdrop blur.
   const nodeStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     width: "100%",
@@ -46,7 +42,6 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
     transition: "all 0.35s var(--ease-smooth)",
   };
 
-  // Structural icon badge — a square (radius 0), per the block-vs-coin rule.
   const iconWrapStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
@@ -82,7 +77,6 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
         <Icon size={isMobile ? 16 : 17} strokeWidth={2} />
       </div>
       <span style={labelStyle}>{label}</span>
-      {/* keyed on the value so it re-pops only when this step's metric changes */}
       <span key={metric} className="metric-pop" style={metricStyle}>
         {metric}
       </span>

@@ -151,7 +151,6 @@ export const MoneyLaws2Page: FC = () => {
           )}
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand 2 détours de production ont été remontés (compteur x/2). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

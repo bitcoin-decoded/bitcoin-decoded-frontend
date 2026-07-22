@@ -5,32 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      /*
-        Blocking, and in the head, on purpose: this has to run before the first
-        paint.
-
-        The build cannot read localStorage, so all 52 files are prerendered in
-        the dark theme. A reader who chose light watched that dark markup paint
-        and then get repainted once React read their preference.
-
-        So: stamp the theme on <html> before anything renders, which gives the
-        page its right background straight away, and mark the prerendered
-        markup as pending when it does not match, so it stays hidden until
-        React has rendered it in the right colours. Nothing is lost by hiding
-        it, since the client mounts with createRoot and replaces it wholesale.
-
-        Dark readers are untouched: the file already matches, so nothing is
-        hidden and nothing is delayed. The timeout is a safety net, so a reader
-        whose bundle never runs gets the page back rather than a blank screen.
-      */
+      /* Blocking and before the first paint: every file is prerendered dark,
+         so a light reader would watch it repaint. Hiding is undone by
+         ThemeProvider, or by the timeout if the bundle never runs. */
       (function () {
         var root = document.documentElement;
         var theme = "dark";
         try {
           if (localStorage.getItem("theme") === "light") theme = "light";
-        } catch (e) {
-          /* private mode, quota, storage disabled: the default stands */
-        }
+        } catch (e) {}
         root.dataset.theme = theme;
         if (theme === "light") {
           root.dataset.themePending = "";
@@ -40,13 +23,7 @@
         }
       })();
     </script>
-    <!--
-      No <title> or <meta name="description"> here on purpose. `src/Seo` renders
-      them per route and React 19 hoists them into this head, so a copy here
-      would be a second source of truth that is wrong on 24 routes out of 25,
-      and a duplicate tag for crawlers to arbitrate. A crawler that does not run
-      JS sees an empty body either way, so a generic title would buy nothing.
-    -->
+    <!-- No title or description here: src/Seo renders them per route. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cutive+Mono&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">

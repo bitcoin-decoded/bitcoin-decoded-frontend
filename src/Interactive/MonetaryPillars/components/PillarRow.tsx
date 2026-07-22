@@ -7,21 +7,10 @@ import { ChevronDown } from "@icons";
 
 type Props = {
   pillar: MonetaryPillar;
-  /** 1-based pillar number, used for the leading badge ("01" → "05"). */
   index: number;
-  /** When true, no border-bottom is drawn (this is the last row of the unified block). */
   isLast: boolean;
 };
 
-/**
- * One pillar row inside the unified `MonetaryPillars` envelope. Flat by
- * design (no per-row border or shadow) - the visual unity comes from the
- * outer container and the shared internal dividers between rows.
- *
- * When `pillar.isKeystone` is true, the row is rendered with an amber
- * accent + a "Structurel" badge to single out the keystone property
- * (hardness, in the current dataset).
- */
 export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
   const typo = getTypography();
   const { isOpen, toggle } = useDisclosure(false);
@@ -67,7 +56,6 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
   const numberStyle: CSSProperties = {
     ...mono,
     fontSize: typo.micro.fontSize,
-    // Cutive Mono is single-weight — 500 synthesised a faux-bold.
     fontWeight: 400,
     color: accentText,
     letterSpacing: "0.08em",
@@ -76,8 +64,6 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
     opacity: pillar.isKeystone ? 1 : 0.7,
   };
 
-  // The doodle carries itself: no box, no border — the glyph just gets bigger
-  // (same move as the expandable definitions).
   const iconStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
@@ -103,8 +89,6 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
     flexWrap: "wrap",
   };
 
-  // Aligned with the expandable-definition card titles: same heading size, same
-  // small-caps mono register (was `note`, which read a tier too small here).
   const titleStyle: CSSProperties = {
     ...mono,
     fontSize: typo.heading.fontSize,
@@ -132,7 +116,6 @@ export const PillarRow: FC<Props> = ({ pillar, index, isLast }) => {
     minHeight: 0,
   };
 
-  // Indent body to align with the title column (icon + number + gaps).
   const bodyLeftPad = isMobile
     ? `calc(0.95rem + ${numberStyle.minWidth} + 0.7rem + 30px + 0.7rem)`
     : `calc(1.1rem + ${numberStyle.minWidth} + 0.85rem + 36px + 0.85rem)`;

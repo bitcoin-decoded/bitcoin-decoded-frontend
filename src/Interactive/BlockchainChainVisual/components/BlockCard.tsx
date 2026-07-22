@@ -19,12 +19,9 @@ type Props = {
   isOrphaned: boolean;
   expectedPrevHash?: string;
   onEditTx: (next: string) => void;
-  /** "skeleton" = only title + prev hash visible. "revealing" = full with stagger anim. "full" = full, no anim. */
   revealStage?: "skeleton" | "revealing" | "full";
   canEdit?: boolean;
-  /** Marks block #1's hash formula as the scroll anchor used when adding a new block. */
   isFirstBlock?: boolean;
-  /** When true, the chain is intact and pedagogical highlights are applied to linked hashes. */
   highlightChainLink?: boolean;
 };
 
@@ -90,8 +87,6 @@ export const BlockCard: FC<Props> = ({
     wordBreak: "break-all",
   };
 
-  // Cutive Mono ships a single weight — keep everything at 500 (heavier
-  // synthesizes a crude faux-bold). Emphasis comes from color, not weight.
   const accentValueStyle = (accent: string): CSSProperties => ({
     ...valueStyle,
     color: accent,

@@ -12,17 +12,6 @@ const THEMES: Theme[] = ["dark", "light"];
 const MODULE_RAMPS = ["blue", "amber", "violet"] as const;
 const SEMANTIC_ROLES = ["success", "error", "info", "warning"] as const;
 
-/**
- * The app was built dark-first, which let every light-mode accent sit at a
- * mid-tone that only ever passed on black. This pins the fix: every opaque
- * text token, in both modes, must clear WCAG AA against the surface it is
- * actually painted on — and that includes the reading CANVAS (`bg.secondary`),
- * not only `bg.primary`. Prose and kickers live on the canvas, which is darker;
- * checking primary alone once let the burnt-orange amber slip to 4.41 there.
- *
- * `base.text.secondary` is excluded on purpose: in dark mode it carries an
- * alpha channel and is composited by the browser, so it has no standalone ratio.
- */
 describe.each(THEMES)("THEME_COLORS.%s text tokens", (theme) => {
   const ramp = THEME_COLORS[theme];
   const surfaces: [string, string][] = [
@@ -57,15 +46,6 @@ describe.each(THEMES)("THEME_COLORS.%s text tokens", (theme) => {
   });
 });
 
-/**
- * `index.css` has to name the two page backgrounds literally.
- *
- * They are painted before React runs, from the `data-theme` the inline script
- * in `index.html` stamps ahead of the first paint, so they cannot be read from
- * these tokens at that moment. That is the one place a theme colour is
- * duplicated outside this file, and a silent drift there would show a reader
- * the wrong background on every cold load. So it is pinned here instead.
- */
 describe("the pre-paint backgrounds in index.css", () => {
   const css = readFileSync(new URL("../../../index.css", import.meta.url), "utf8");
 

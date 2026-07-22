@@ -101,14 +101,12 @@ export const Banking3Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <Quiz {...getQuizDataM0(language)} onCorrectAnswer={markComplete} />
           )}
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand la défaillance est simulée. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

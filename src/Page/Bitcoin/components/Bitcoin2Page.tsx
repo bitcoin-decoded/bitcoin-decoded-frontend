@@ -64,7 +64,6 @@ export const Bitcoin2Page: FC = () => {
           <p>{fr ? "Regarde ce graphique." : "Take a look at this chart."}</p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse (le titre du graphique se révèle alors). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -333,7 +332,6 @@ export const Bitcoin2Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand 2 actions distinctes ont été essayées (compteur x/2). */}
         <Block kind="tool">
           {({ markComplete }) => <TrustComparisonDemo onComplete={markComplete} />}
         </Block>

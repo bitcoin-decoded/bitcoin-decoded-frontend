@@ -15,13 +15,6 @@ export const MonetaryPillars: FC = () => {
   const pillars = getMonetaryPillars(language);
   const world = colors[moduleTheme];
 
-  /**
-   * Unified envelope wrapping the 5 rows. The accent left-border is the
-   * "thread" that visually ties the pillars together; the internal dashed
-   * dividers reinforce that they belong to one coherent block.
-   */
-  // Sharp ledger envelope: flat module wash + a single hairline. No gradient
-  // fill, no drop shadow.
   const envelopeStyle: CSSProperties = {
     position: "relative",
     display: "flex",
@@ -51,14 +44,9 @@ export const MonetaryPillars: FC = () => {
     textAlign: "left",
   };
 
-  // `FrText` only walks the tree it is handed, and this component builds its
-  // own copy from a language-aware getter — so the page-level wrapper never
-  // sees it. It fixes its own French punctuation here.
   return (
     <FrText>
       <SurfaceCard margin={isMobile ? "1.5rem 0" : "2.25rem 0"} gap={isMobile ? "0.85rem" : "1rem"}>
-        {/* No marker on the section title — same call as the expandable
-         *  definitions: each row already carries its own glyph. */}
         <Caption tone="world" size="md">
           {t("monetaryPillars.sectionTitle")}
         </Caption>

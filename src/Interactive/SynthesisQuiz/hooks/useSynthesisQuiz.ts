@@ -45,9 +45,6 @@ export const useSynthesisQuiz = ({ questions, passThreshold, storageKey, onPass 
     () => readPersistedState(storageKey, questions.length)?.submitted ?? false,
   );
 
-  // One-question-at-a-time stepper (à la PathFinder). Not persisted: a re-open
-  // restarts at the first question, or lands straight on the recap if the quiz
-  // was already submitted.
   const [step, setStep] = useState(0);
   const lastStep = questions.length - 1;
 
@@ -84,7 +81,6 @@ export const useSynthesisQuiz = ({ questions, passThreshold, storageKey, onPass 
       next[qIdx] = aIdx;
       return next;
     });
-    // Answering the current question slides to the next one (stays on the last).
     setStep((s) => (qIdx === s && s < lastStep ? s + 1 : s));
   };
 

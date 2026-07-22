@@ -85,7 +85,6 @@ export const SignatureVerifier: FC = () => {
         {t("sigVerifier.title")}
       </Caption>
 
-      {/* Field rows */}
       {FIELDS.map(({ key, label }) => {
         const isTampered = tampered.has(key);
         return (
@@ -99,7 +98,6 @@ export const SignatureVerifier: FC = () => {
         );
       })}
 
-      {/* Original reference (subtle) */}
       {tampered.size > 0 && (
         <div
           style={{
@@ -127,7 +125,6 @@ export const SignatureVerifier: FC = () => {
         </div>
       )}
 
-      {/* Verify button */}
       <Button
         variant="primary"
         icon={<ShieldCheck size={14} strokeWidth={2} />}
@@ -137,7 +134,6 @@ export const SignatureVerifier: FC = () => {
         {t("sigVerifier.verify")}
       </Button>
 
-      {/* Result */}
       <FeedbackPanel
         tone={status === "valid" ? "success" : status === "invalid" ? "error" : "neutral"}
         icon={

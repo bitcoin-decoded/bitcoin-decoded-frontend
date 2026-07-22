@@ -8,36 +8,23 @@ import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
 type Props = {
   icon: ReactNode;
   label: string;
-  /** Optional step number rendered as a small badge before the icon (1, 2, 3). */
   number?: number;
-  /** Optional block rendered at the very top of the card, above the label (e.g. the message to sign). */
   header?: ReactNode;
   value: string;
   hint?: string;
-  /** Small caption rendered just above the value (e.g. "Clé publique générée :"). */
   valuePrefix?: string;
   tone: FieldTone;
   valueKind: ValueKind;
-  /** Truncate the read-only value (long hex) to first8…last6 so it stays on one line. */
   truncate?: boolean;
-  /** Overrides the value text color (e.g. green when keys match, red when they don't). */
   valueColor?: string;
   badge?: ReactNode;
-  /** Optional action rendered just below the value (e.g. the "modify key" button). */
   action?: ReactNode;
-  /** Optional footer line (e.g. "Connue uniquement de Nicolas"). */
   footerIcon?: ReactNode;
   footerLabel?: string;
-  /** Accessibility label for the read-only value. */
   readOnlyLabel: string;
   colors: SigPlaygroundColors;
 };
 
-/**
- * One labelled, read-only field - used for the private key, public key and
- * signature. Long hex values are truncated to first8…last6 so they stay on a
- * single line; the value text can be tinted (green/red) to signal a match.
- */
 export const FieldCard: FC<Props> = ({
   icon,
   label,
@@ -94,7 +81,6 @@ export const FieldCard: FC<Props> = ({
     minWidth: 0,
   };
 
-  // Step-number badge stays a circle — it is a count marker (block-vs-coin rule).
   const numberBadgeStyle: CSSProperties = {
     display: "inline-flex",
     alignItems: "center",

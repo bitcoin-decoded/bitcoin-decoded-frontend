@@ -1,11 +1,3 @@
-/*
- * Doodle icon set — hand-drawn illustrative glyphs, the warm counterpoint to
- * Phosphor's functional line icons (@icons). Reserved for expressive/hero
- * moments: homepage world-cards, enlarged definition markers, badge medals.
- *
- * Source: Streamline "Freehand" (streamlinehq.com), served via Iconify.
- * Licence: CC BY 4.0 — attribution rendered in the app footer.
- */
 export { DoodleAngel } from "./DoodleAngel";
 export { DoodleArrowDown } from "./DoodleArrowDown";
 export { DoodleArrowUp } from "./DoodleArrowUp";

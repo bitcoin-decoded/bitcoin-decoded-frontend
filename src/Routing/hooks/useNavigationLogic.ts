@@ -7,10 +7,6 @@ import type { NavigationLogic } from "../types/NavigationLogic";
 
 import { useRouterContext } from "./useRouterContext";
 
-/**
- * Custom hook that determines the previous and next pages based on the current route.
- * It flattens the navigation tree to create a linear sequence of pages.
- */
 export const useNavigationLogic = (): NavigationLogic => {
   const { currentPage } = useRouterContext();
   const { t } = useTranslation();

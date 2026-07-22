@@ -9,8 +9,6 @@ export const useMiningSimulator = (onComplete?: () => void) => {
   const [nextNonce, setNextNonce] = useState(0);
   const [found, setFound] = useState(false);
 
-  // Fires once the reader has tried at least one nonce (the action this block
-  // is built around). One-shot - resetting and retrying never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);

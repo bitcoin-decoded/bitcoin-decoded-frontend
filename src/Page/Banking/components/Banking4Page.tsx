@@ -125,7 +125,6 @@ export const Banking4Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand l'opération de QE est lancée. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -174,7 +173,6 @@ export const Banking4Page: FC = () => {
             : "And since the government rate (the loan considered the safest) serves as the benchmark, it drags down pretty much every other type of loan with it (mortgages, business loans, and so on)."}
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur manipule la courbe des taux. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

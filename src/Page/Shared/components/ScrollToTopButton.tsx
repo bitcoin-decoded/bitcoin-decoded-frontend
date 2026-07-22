@@ -6,14 +6,6 @@ import { useScrollToTop } from "../hooks";
 
 import { ArrowUp } from "@icons";
 
-/**
- * Floating "back to top" control, ledger register: a square cell on a flat
- * surface with a gold hairline that warms on hover. The old circle with its
- * gradient fill, drop shadow and backdrop blur belonged to the previous design
- * language.
- *
- * Presentational only — all state and behaviour live in `useScrollToTop`.
- */
 export const ScrollToTopButton: FC = () => {
   const { visible, scrollToTop } = useScrollToTop();
   const { colors, moduleTheme } = usePageTheme();
@@ -28,9 +20,6 @@ export const ScrollToTopButton: FC = () => {
     position: "fixed",
     bottom: isMobile ? "1.5rem" : "2rem",
     right: isMobile ? "1.5rem" : "2rem",
-    // Below the nav drawer (which goes full-screen on mobile) and above
-    // ordinary page content. ReadingProgressBar sits at z-index 100; we
-    // intentionally stay below it so the bar always wins at the very edge.
     zIndex: 90,
     width: isMobile ? "2.5rem" : "2.75rem",
     height: isMobile ? "2.5rem" : "2.75rem",
@@ -46,7 +35,6 @@ export const ScrollToTopButton: FC = () => {
       "opacity 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth), border-color 0.25s var(--ease-smooth), color 0.25s var(--ease-smooth)",
     opacity: visible ? 1 : 0,
     pointerEvents: visible ? "auto" : "none",
-    // Lifts a hair on hover, like every other ledger control.
     transform: visible ? (hovered ? "translateY(-2px)" : "translateY(0)") : "translateY(8px)",
   };
 

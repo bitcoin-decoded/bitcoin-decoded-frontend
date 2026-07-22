@@ -135,7 +135,6 @@ export const MoneyLaws3Page: FC = () => {
           </p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <Callout

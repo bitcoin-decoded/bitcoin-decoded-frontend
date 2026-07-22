@@ -1,13 +1,5 @@
 import { useEffect,useState } from "react";
 
-/**
- * Reading progress (0 → 1) of the page.
- *
- * Robust against scroll-container changes: depending on CSS (e.g. `overflow-x: hidden`
- * on html/body/#root), the scrolling element can be the window OR `#root`.
- * We sample both and use whichever has measurable progress, so the bar keeps
- * working even if a future CSS change moves the scroll container.
- */
 export const useReadingProgress = (): number => {
   const [progress, setProgress] = useState(0);
 

@@ -57,8 +57,6 @@ export const Quote: FC<Props> = ({ children, author, source }) => {
     flexWrap: "wrap",
     marginTop: "0.9rem",
     fontFamily: BRAND.fonts.mono,
-    // Was 13px at 0.85 opacity — far too small against the 17px quote body.
-    // 15px at full opacity; the muted source colour already keeps it quiet.
     fontSize: "0.9375rem",
     letterSpacing: "0.03em",
   };

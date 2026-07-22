@@ -24,11 +24,9 @@ import {
   Zap,
 } from "@icons";
 
-// ── Component ─────────────────────────────────────────────────────────────────
 
 type Props = {
   mode?: ComparisonMode;
-  /** Fired once the reader runs the transaction (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -48,7 +46,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   const isAfter = phase === "after";
   const iconSm = isMobile ? 11 : 12;
 
-  // ── Shared card geometry ───────────────────────────────────────────────────
 
   const card = (accent: string): CSSProperties => ({
     ...mono,
@@ -85,7 +82,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     fontStyle: "italic",
   };
 
-  // Info line: a lightbulb flags this as a "good to know" note (both modes).
   const cardDescRow = (accent: string): CSSProperties => ({
     display: "flex",
     alignItems: "flex-start",
@@ -147,10 +143,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     transition: "color 0.35s var(--ease-smooth)",
   });
 
-  // ── Bank card: one living "ledger" that updates in place ────────────────────
-  // A single registry; no before/after split. Each account shows its balance,
-  // and the honest visual is the transfer itself (money flowing sender →
-  // receiver) - not a bar measured against an arbitrary "max" balance.
 
   const ledgerLabelRow: CSSProperties = {
     display: "flex",
@@ -195,8 +187,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     flexShrink: 0,
   };
 
-  // Transfer connector: the amount flowing from the sender (top entry) to the
-  // receiver (bottom entry). Faint while pending, lit once the transfer runs.
   const transferConnector: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -212,8 +202,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     transition: "background 0.4s var(--ease-smooth)",
   };
 
-  // Lit only once the transfer runs (rendered solely in the "after" state),
-  // and clearly labelled so its purpose is unambiguous.
   const transferPill: CSSProperties = {
     ...mono,
     display: "inline-flex",
@@ -272,9 +260,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     </div>
   );
 
-  // ── Bitcoin-card styles ────────────────────────────────────────────────────
 
-  // Input UTXO card
   const inputCard = (): CSSProperties => ({
     display: "flex",
     alignItems: "center",
@@ -331,7 +317,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     transition: "opacity 0.35s var(--ease-smooth) 0.1s",
   };
 
-  // Transaction connector
   const txConnector: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -355,7 +340,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     color: withOpacity(btcAccent, 0.8),
   };
 
-  // Output UTXO row
   const outputCard = (delay: number, accent: string): CSSProperties => ({
     display: "flex",
     alignItems: "center",
@@ -407,7 +391,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     transition: "color 0.4s var(--ease-smooth)",
   });
 
-  // Pedagogical phrase
   const pedagogyPhrase: CSSProperties = {
     padding: isMobile ? "0.45rem 0.6rem" : "0.6rem 0.8rem",
     borderRadius: 0,
@@ -424,7 +407,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     transition: "all 0.45s var(--ease-smooth) 0.55s",
   };
 
-  // ── Wrappers ───────────────────────────────────────────────────────────────
 
   const outerContainer: CSSProperties = {
     margin: isMobile ? "1.25rem 0" : "2rem 0",
@@ -440,7 +422,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     alignItems: "stretch",
   };
 
-  // ── Bank card ──────────────────────────────────────────────────────────────
 
   const bankCard = (
     <div style={card(bankAccent)}>
@@ -473,14 +454,11 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
       </div>
 
       <div style={cardBody}>
-        {/* Scenario context */}
         <div style={scenarioBox(bankAccent)}>
           <ArrowRightLeft size={13} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
           {t("txComparison.bankScenario")}
         </div>
 
-        {/* One living ledger - the same registry, updated in place. No
-            before/after split, so nothing is shown twice. */}
         <div style={ledgerLabelRow}>
           <div style={sectionLabel(bankAccent)}>
             <BookText size={10} strokeWidth={2} />
@@ -528,7 +506,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     </div>
   );
 
-  // ── Bitcoin card (redesigned) ──────────────────────────────────────────────
 
   const bitcoinCard = (
     <div style={card(btcAccent)}>
@@ -561,19 +538,16 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
       </div>
 
       <div style={cardBody}>
-        {/* Scenario context - same layout as bank card */}
         <div style={scenarioBox(btcAccent)}>
           <ArrowRightLeft size={13} strokeWidth={2} style={{ color: btcAccent, flexShrink: 0 }} />
           {t("txComparison.btcScenario")}
         </div>
 
-        {/* ── INPUTS ── */}
         <div style={sectionLabel(btcAccent)}>
           <Lock size={9} strokeWidth={2} />
           {t("txComparison.btcInputsLabel")}
         </div>
 
-        {/* UTXO 1 */}
         <div style={inputCard()}>
           <div style={inputIconBox()}>
             <Lock size={iconSm} strokeWidth={2} />
@@ -590,7 +564,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
           </Badge>
         </div>
 
-        {/* UTXO 2 */}
         <div style={inputCard()}>
           <div style={inputIconBox()}>
             <Lock size={iconSm} strokeWidth={2} />
@@ -607,7 +580,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
           </Badge>
         </div>
 
-        {/* ── TRANSACTION CONNECTOR ── */}
         <div style={txConnector}>
           <ArrowDown size={10} strokeWidth={2} style={{ color: withOpacity(btcAccent, 0.35) }} />
           <div style={txBox}>
@@ -617,13 +589,11 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
           <ArrowDown size={10} strokeWidth={2} style={{ color: withOpacity(btcAccent, 0.35) }} />
         </div>
 
-        {/* ── OUTPUTS ── */}
         <div style={sectionLabel(btcAccent, !isAfter)}>
           <KeyRound size={9} strokeWidth={2} />
           {t("txComparison.btcOutputsLabel")}
         </div>
 
-        {/* Michu */}
         <div style={outputCard(0.25, successColor)}>
           <div style={outputIconBox(successColor)}>
             <KeyRound size={iconSm} strokeWidth={2} />
@@ -637,7 +607,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
           </div>
         </div>
 
-        {/* Nicolas (change) */}
         <div style={outputCard(0.38, btcAccent)}>
           <div style={outputIconBox(btcAccent)}>
             <Wallet size={iconSm} strokeWidth={2} />
@@ -652,7 +621,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
           </div>
         </div>
 
-        {/* Miner fee */}
         <div
           style={{
             ...outputCard(0.5, colors.base.text.secondary),
@@ -682,7 +650,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
           </div>
         </div>
 
-        {/* ── PEDAGOGICAL PHRASE ── */}
         <div style={pedagogyPhrase}>{t("txComparison.btcRightsDestroyed")}</div>
       </div>
 
@@ -693,7 +660,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     </div>
   );
 
-  // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
     <div style={outerContainer}>

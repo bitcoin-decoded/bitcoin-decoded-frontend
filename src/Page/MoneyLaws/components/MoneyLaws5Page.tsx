@@ -131,7 +131,6 @@ export const MoneyLaws5Page: FC = () => {
           </ul>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -186,7 +185,6 @@ export const MoneyLaws5Page: FC = () => {
           )}
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand 2 débats ont été explorés (un camp ouvert ; compteur x/2). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

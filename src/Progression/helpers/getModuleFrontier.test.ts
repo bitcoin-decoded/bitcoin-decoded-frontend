@@ -7,7 +7,6 @@ import { isChapterOutOfSequence } from "./isChapterOutOfSequence";
 
 const chapter = (id: string): NavigationItem => ({ id: id as RouteName, label: id, isPage: true });
 
-/** Two modules, so the "no lock between modules" rule has something to prove. */
 const TREE: NavigationItem[] = [
   {
     label: "Module A",
@@ -51,9 +50,7 @@ describe("getModuleFrontier", () => {
   });
 
   it("reads each module independently", () => {
-    // Module A fully sealed must not advance module B past its first chapter...
     expect(frontierOf("b-1", "a-1", "a-2", "a-3", "a-quiz")).toMatchObject({ frontierId: "b-1" });
-    // ...and an untouched module A must not hold module B back either.
     expect(ahead("b-1")).toBe(false);
   });
 
@@ -89,9 +86,6 @@ describe("isChapterOutOfSequence", () => {
   });
 
   it("keeps one boundary when the sealed history has a hole", () => {
-    // Sealed 1 and 3 but not 2. The per-chapter reading ("is my predecessor
-    // sealed?") would place a-quiz in sequence while a-3 stays out of it. The
-    // frontier cannot: it is a single boundary.
     expect(ahead("a-2", "a-1", "a-3")).toBe(false);
     expect(ahead("a-3", "a-1", "a-3")).toBe(true);
     expect(ahead("a-quiz", "a-1", "a-3")).toBe(true);

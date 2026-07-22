@@ -17,7 +17,6 @@ type Props = {
   onNoWallet: () => void;
 };
 
-/** Step 1 (spec §4.1 / §5.1): pick an amount, then proceed to the on-chain address. */
 export const DonationAmountSelector: FC<Props> = ({
   amountEur,
   onAmount,

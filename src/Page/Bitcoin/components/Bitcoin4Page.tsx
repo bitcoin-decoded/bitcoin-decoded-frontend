@@ -18,10 +18,6 @@ export const Bitcoin4Page: FC = () => {
   const { t, language } = useTranslation();
   const fr = language === "fr";
 
-  // Bloc 1 = double verrou : il ne se déverrouille que lorsque le double-spend
-  // a été propagé ET le quiz byzantin résolu. Les deux signaux alimentent une
-  // porte d'exploration partagée (seuil 2) ; sa complétion appelle le
-  // markComplete du bloc, capturé dans une ref car il vit dans le render-prop.
   const byzantineMarkRef = useRef<() => void>(() => {});
   const { markExplored: markByzantine } = useExplorationGate({
     threshold: 2,
@@ -109,7 +105,6 @@ export const Bitcoin4Page: FC = () => {
           </p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le double-spend a été propagé ET le quiz résolu (les deux requis). */}
         <Block kind="tool">
           {({ markComplete }) => {
             byzantineMarkRef.current = markComplete;
@@ -145,7 +140,6 @@ export const Bitcoin4Page: FC = () => {
           </ol>
         </Block>
 
-        {/* Bloc explicatif (mempool intro, sans contrôle) : non verrouillant. */}
         <Block>
           <Callout title={fr ? "Memory Pool ou salle d'attente" : "Memory Pool: the waiting room"}>
             <p>
@@ -212,7 +206,6 @@ export const Bitcoin4Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a tenté au moins un nonce. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -304,7 +297,6 @@ export const Bitcoin4Page: FC = () => {
           )}
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a ajouté le bloc (le conflit se résout). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -388,7 +380,6 @@ export const Bitcoin4Page: FC = () => {
           </Callout>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur a fait varier la difficulté. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

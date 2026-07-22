@@ -23,12 +23,6 @@ type Props = {
   colors: SigPlaygroundColors;
 };
 
-/**
- * The three inputs the network feeds to verify(message, signature, public key),
- * shown side by side on a single line (each in its element color), followed by
- * the verdict. Truncated hashes keep the public key / signature on one line; the
- * message arrives already quoted by the caller (locale-aware).
- */
 export const MatchVisualizer: FC<Props> = ({
   message,
   messageLabel,
@@ -96,7 +90,6 @@ export const MatchVisualizer: FC<Props> = ({
         background: withOpacity(verdictColor, 0.03),
       }}
     >
-      {/* verify() notation + hyperlink for the curious */}
       <div
         style={{
           fontFamily: BRAND.fonts.mono,
@@ -123,7 +116,6 @@ export const MatchVisualizer: FC<Props> = ({
         </a>
       </div>
 
-      {/* The three inputs, side by side on one line */}
       <div style={{ display: "flex", flexDirection: "row", gap: "0.4rem", alignItems: "stretch" }}>
         <div style={boxStyle(colors.neutralColor)}>
           <span style={boxLabel(withOpacity(colors.baseTextSecondary, 0.85))}>{messageLabel}</span>
@@ -139,7 +131,6 @@ export const MatchVisualizer: FC<Props> = ({
         </div>
       </div>
 
-      {/* Verdict */}
       <div
         style={{
           display: "flex",

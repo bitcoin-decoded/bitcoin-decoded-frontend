@@ -11,10 +11,6 @@ type Props = {
   onContinue: () => void;
 };
 
-/**
- * Final screen (spec §7). Deliberately sober: a single quiet check, no
- * confetti, no exclamation - the pedagogical pact continues.
- */
 export const DonationThankYou: FC<Props> = ({ onContinue }) => {
   const typo = getTypography();
   const { colors } = usePageTheme();

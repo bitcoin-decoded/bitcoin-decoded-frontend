@@ -5,11 +5,8 @@ import { withOpacity } from "../../../Design/helpers";
 import { computeConnections, computeDotPositions, getHaloOpacity } from "../helpers";
 
 type Props = {
-  /** Real group size (drives dot count, capped for display). */
   size: number;
-  /** Pairwise relationship count (drives the density halo). */
   relations: number;
-  /** Dominant tier accent. */
   color: string;
 };
 
@@ -20,11 +17,6 @@ const DOT_RADIUS = 76;
 const MAX_DOTS = 80;
 const MAX_LINES = 50;
 
-/**
- * The visual frame: a bounded circle holding up to MAX_DOTS human dots laid
- * out in a stable phyllotaxis spiral, a capped web of links between them, and
- * a density halo that intensifies (with n²) once the web exceeds the cap.
- */
 export const DunbarVisual: FC<Props> = ({ size, relations, color }) => {
   const { colors } = usePageTheme();
 

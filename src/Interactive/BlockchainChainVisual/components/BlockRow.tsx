@@ -12,13 +12,6 @@ type Props = {
   children: ReactNode;
 };
 
-/**
- * Single field row inside a block card - icon circle on the left, label and
- * optional inline action on the right header, value below. Extracted to its
- * own module so the FC reference stays stable across `BlockCard` re-renders,
- * preventing every child (including the animated linked-hash span) from
- * unmounting and replaying its CSS animation on every parent render.
- */
 export const BlockRow: FC<Props> = ({
   icon,
   iconAccent,
@@ -44,7 +37,6 @@ export const BlockRow: FC<Props> = ({
     transition: "background 0.2s ease",
   };
 
-  // Structural field marker — a square (radius 0), per the block-vs-coin rule.
   const iconBadgeStyle: CSSProperties = {
     width: isMobile ? "1.5rem" : "1.65rem",
     height: isMobile ? "1.5rem" : "1.65rem",

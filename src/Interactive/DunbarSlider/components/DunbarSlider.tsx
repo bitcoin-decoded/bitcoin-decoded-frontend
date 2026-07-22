@@ -17,12 +17,6 @@ import { DunbarStatePanel } from "./DunbarStatePanel";
 import { DunbarStepSlider } from "./DunbarStepSlider";
 import { DunbarVisual } from "./DunbarVisual";
 
-/**
- * Dunbar's-number playground: slide through five group sizes and watch the
- * web of relationships (n(n-1)/2) explode. Past ~150 the dominant color turns
- * red and an overload alert appears, motivating the need for an external
- * memory system (money).
- */
 export const DunbarSlider: FC = () => {
   const { t, language } = useTranslation();
   const { theme, colors } = usePageTheme();
@@ -37,9 +31,6 @@ export const DunbarSlider: FC = () => {
   const activeText = texts[tier.key];
   const localeTag = language === "fr" ? "fr-FR" : "en-US";
 
-  // One line: caption, size, then the tier that size qualifies as — the reading
-  // is "size: 150, a village". Every item sits on a shared baseline; centring
-  // instead left the caption floating against the much larger numeral.
   const headerStyle: CSSProperties = {
     display: "flex",
     flexWrap: "wrap",
@@ -51,7 +42,6 @@ export const DunbarSlider: FC = () => {
 
   const populationStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    // Was 1.7/2.1rem — the readout dominated a card that is already tall.
     fontSize: isMobile ? "1.3rem" : "1.55rem",
     fontWeight: 400,
     color,
@@ -60,9 +50,6 @@ export const DunbarSlider: FC = () => {
     transition: "color 0.5s var(--ease-smooth)",
   };
 
-  // Plain inline, not inline-flex: a flex box takes its baseline from its first
-  // item — the icon — which would drag the whole tier off the shared baseline.
-  // As inline content the baseline stays the text's, and the glyph rides it.
   const tierStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: typo.label.fontSize,
@@ -78,8 +65,6 @@ export const DunbarSlider: FC = () => {
     marginRight: "0.45rem",
   };
 
-  // Mono like its neighbours: inheriting the body serif gave the dot different
-  // metrics from everything else on the line.
   const separatorStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
     fontSize: typo.label.fontSize,
@@ -104,9 +89,6 @@ export const DunbarSlider: FC = () => {
     width: "100%",
   };
 
-  // `FrText` only walks the tree it is handed, and this component builds its
-  // own copy from a language-aware getter — so the page-level wrapper never
-  // sees it. It fixes its own French punctuation here.
   return (
     <FrText>
       <SurfaceCard glowColor={color} size="lg" gap="1.5rem" margin="2rem 0">

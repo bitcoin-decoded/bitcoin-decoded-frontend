@@ -2,18 +2,6 @@ import type { Language } from "../../I18n";
 import { ROUTE_NAME, type RouteName } from "../../Routing";
 import type { PageSeo } from "../types";
 
-/**
- * Title and description for every route, in both languages.
- *
- * Titles are hybrid on purpose: the editorial title the chapter already carries,
- * extended with the term the page should be found on. `nav.tree.*` alone reads
- * well but contains none of the vocabulary anyone searches for, and the title is
- * the strongest on-page signal there is.
- *
- * Descriptions are written, not extracted. A meta description is a pitch aimed
- * at someone scanning a result page, which is a different job from a chapter's
- * opening paragraph.
- */
 const FR: Record<RouteName, PageSeo> = {
   [ROUTE_NAME.HomePage]: {
     title: "Comprendre l'argent, l'économie et Bitcoin",

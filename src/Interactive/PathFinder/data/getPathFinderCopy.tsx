@@ -129,8 +129,6 @@ export const getPathFinderCopy = (language: Language) => {
       },
     },
 
-    // Section + sub-category labels. The per-plan descriptions come from the
-    // profile (getProfiles), so sub-categories only need their family label.
     sections: {
       acquisition: {
         label: fr ? "Je m'expose à Bitcoin" : "I get exposure to Bitcoin",

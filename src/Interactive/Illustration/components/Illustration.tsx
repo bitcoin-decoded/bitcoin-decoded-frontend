@@ -17,12 +17,6 @@ type IllustrationProps = {
   alt?: string;
   width?: string;
   caption?: string;
-  /**
-   * Override the vertical margin around the figure. The default
-   * `2.5rem auto` suits standalone in-page illustrations; pass a smaller
-   * value when embedding inside another card (e.g. inside an expandable
-   * definition body).
-   */
   margin?: string;
 };
 
@@ -41,7 +35,6 @@ export const Illustration: FC<IllustrationProps> = ({
 
   const gold = getBrandGold(theme);
   const cornerSize = isMobile ? 10 : 14;
-  // Gap between the picture edge and the brackets.
   const bracketInset = 5;
 
   const containerStyle: CSSProperties = {
@@ -50,26 +43,17 @@ export const Illustration: FC<IllustrationProps> = ({
     alignItems: "center",
     margin,
     width: "100%",
-    // On narrow screens the per-page `width` (e.g. "35%") would be tiny, so we
-    // widen — but cap at ~22rem so the figure stays a figure and never balloons
-    // to a full-bleed image on tablets / large phones.
     maxWidth: isMobile ? "min(100%, 22rem)" : width,
   };
 
-  // The gold corner brackets sit in this wrapper's padding — just outside the
-  // picture rather than on top of it, where gold-on-artwork would be unreadable.
   const frameWrapStyle: CSSProperties = {
     position: "relative",
     padding: bracketInset,
-    // On mobile the wrap hugs the (height-capped) image, so a portrait figure
-    // doesn't leave empty bars either side of it.
     width: isMobile && src ? "fit-content" : "100%",
     maxWidth: "100%",
     cursor: "pointer",
   };
 
-  // Ledger frame: sharp corners, a hairline that merely seats the picture — the
-  // brackets carry the structure. No drop shadow, no gradient-border glow.
   const frameStyle: CSSProperties = {
     width: "100%",
     height: "auto",
@@ -83,7 +67,6 @@ export const Illustration: FC<IllustrationProps> = ({
     transition: "border-color 0.3s var(--ease-smooth)",
   };
 
-  // Same four L-shaped corners as Callout / the Quiz cells / the navbar numerals.
   const corners = (): ReactNode => {
     const s = `${BRAND.figures.ruleThickness}px solid ${withOpacity(gold, isHovered ? 0.9 : 0.55)}`;
     const base: CSSProperties = {
@@ -118,8 +101,6 @@ export const Illustration: FC<IllustrationProps> = ({
           : "none",
   };
 
-  // Width alone can't bound a figure: a tall image at 22rem wide still ate most
-  // of a phone screen. Cap the height too and let the width follow the ratio.
   const imgStyle: CSSProperties = {
     ...contentTransitionStyle,
     ...(isMobile
@@ -139,9 +120,6 @@ export const Illustration: FC<IllustrationProps> = ({
     color: colors.base.text.secondary,
     fontStyle: "italic",
     textAlign: "center",
-    // Caption follows the figure width on mobile (no narrower than the
-    // image - visual mismatch). Slight inset on desktop to keep the eye
-    // anchored on the image.
     maxWidth: isMobile ? "100%" : "85%",
     paddingLeft: isMobile ? "0.25rem" : 0,
     paddingRight: isMobile ? "0.25rem" : 0,
@@ -169,9 +147,6 @@ export const Illustration: FC<IllustrationProps> = ({
         </div>
       </div>
 
-      {/* The caption arrives as a prop, which `FrText` cannot reach from the
-       *  page (it only walks children) — so the figure applies it itself, and
-       *  ":" / "?" / "!" stay glued to the word before them. */}
       {caption && (
         <figcaption style={captionStyle}>
           <FrText>{caption}</FrText>

@@ -25,28 +25,15 @@ import { RotateCcw } from "@icons";
 type BlockElement = ReactElement<ComponentProps<typeof Block>>;
 
 type Props = {
-  /** Unique chapter id (ROUTE_NAME.*) - the localStorage namespace for progress. */
   chapterId: string;
-  /** Ordered `<Block>` children. */
   children: ReactNode;
 };
 
-/**
- * Turns a chapter's JSX into a block-by-block read: revealed blocks render as
- * enclosed cards linked by a chain, the active one is highlighted and
- * interactive while past ones recede and lock, tool blocks gate the "next"
- * control until their component completes (via the render-prop `markComplete`),
- * jalons track position and jump to any revealed block, and a centered overlay
- * celebrates completion. All state lives in `useBlockReader`. Vertical flow -
- * never a carousel.
- */
 export const BlockReader: FC<Props> = ({ chapterId, children }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
   const gold = getBrandGold(theme);
-  // Module identity color for the seal celebration (matches the seal button),
-  // falling back to gold on neutral pages.
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
 
   const blocks = Children.toArray(children).filter(
@@ -54,13 +41,8 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
   );
   const blockCount = blocks.length;
 
-  // The badge is read *before* the reader hook, because it is what decides
-  // where an arriving reader lands (see `getChapterState`).
   const { award, isEarned } = useBadges();
   const badgeEarned = isEarned(chapterId);
-  // Reading is free, progressing is not. A chapter reached out of order can be
-  // read end to end without ever counting, which is what keeps the sequence
-  // meaningful now that no URL is refused.
   const { show: outOfSequence, actionLabel: resumeLabel, onAction: onResume } = useResumeOffer();
 
   const {
@@ -78,11 +60,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
     replay,
   } = useBlockReader({ chapterId, blockCount, badgeEarned });
 
-  // First-ever completion of this chapter unlocks its badge (idempotent - a
-  // revisit or replay never re-awards). The badge's unlock overlay is the
-  // completion celebration. Skipped out of order: the badge is what moves the
-  // frontier, so awarding it here would let a single deep link unlock a whole
-  // module.
   useEffect(() => {
     if (finished && !outOfSequence) award(chapterId);
   }, [finished, outOfSequence, award, chapterId]);
@@ -99,10 +76,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
       )}
 
       {blocks.map((block, i) => {
-        // Every block is rendered, including the ones ahead of the reader. The
-        // build turns each chapter into HTML for search engines, and a block
-        // left out of the tree has no prose to find. `BlockShell` hides the
-        // ones not reached yet.
         const isUnreached = i > maxRevealed;
 
         const kind = block.props.kind ?? "prose";
@@ -110,10 +83,6 @@ export const BlockReader: FC<Props> = ({ chapterId, children }) => {
         const isCurrent = i === current;
         const locked = kind === "tool" && !isDone(i);
 
-        // Render-prop blocks (tool blocks) are evaluated AFTER PageTemplate's
-        // top-level `<FrText>` has walked the static tree. Their output never
-        // sees the French-typography pass unless we re-wrap it here. Static
-        // children already went through the outer walk - no double-pass needed.
         const raw = block.props.children;
         const content =
           typeof raw === "function" ? (

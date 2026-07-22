@@ -43,10 +43,6 @@ export const RangeLedger: FC<Props> = ({
 
   const accent = color ?? getBrandGold(theme);
   const trackColor = colors.base.text.secondary;
-  // Was `${trackColor}55` — string concatenation that only works when the token
-  // happens to be hex. In dark mode it is `rgba(242, 242, 242, 0.5)`, so this
-  // produced `rgba(...)55`, an invalid colour the browser dropped: the track
-  // vanished entirely. `withOpacity` parses both forms.
   const trackIdle = withOpacity(trackColor, 0.4);
 
   const range = max - min;
@@ -65,8 +61,6 @@ export const RangeLedger: FC<Props> = ({
     alignItems: "baseline",
     gap: "0.75rem",
     fontFamily: BRAND.fonts.mono,
-    // The slider caption + live value sit at the `label` role (16px) — the mono
-    // small-caps label register. 12px Cutive was illegible, worst in light mode.
     fontSize: typo.label.fontSize,
     letterSpacing: "0.05em",
   };
@@ -76,16 +70,12 @@ export const RangeLedger: FC<Props> = ({
     fontVariant: "small-caps",
   };
 
-  // Prominence via the stronger primary color, not weight — Cutive Mono is
-  // single-weight, so a heavier value would only synthesise a crude faux-bold.
   const valueStyle: CSSProperties = {
     color: colors.base.text.primary,
     fontVariantNumeric: "tabular-nums",
   };
 
   const trackHeight = 14;
-  // A square block rides the ledger line rather than a coin — the thumb reads as
-  // "the block you drag along the chain", consistent with the block identity.
   const thumbSize = isMobile ? 15 : BRAND.figures.blockSize + 3;
 
   const visualLayerStyle: CSSProperties = {

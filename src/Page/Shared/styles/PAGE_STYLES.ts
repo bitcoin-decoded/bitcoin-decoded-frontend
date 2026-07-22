@@ -33,5 +33,4 @@ export const getPageStyles = (breakpoint: Breakpoint = "desktop") => ({
   } as CSSProperties,
 });
 
-/** @deprecated Use getPageStyles(breakpoint) instead */
 export const PAGE_STYLES = getPageStyles("desktop");

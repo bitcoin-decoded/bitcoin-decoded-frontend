@@ -10,13 +10,6 @@ import { ArrowDown, ArrowRight, Telescope } from "@icons";
 
 type Theory = { year: string; name: string; observations: string };
 
-/**
- * The physicist's method, read left-to-right: a time arrow runs across two
- * successive theories (Newton then Einstein), each carrying its own pile of
- * observations. The newer theory keeps more of them, and a "replaces" chip
- * marks the revision. Form carries the meaning - a horizontal, revisable
- * timeline. On mobile the two theories stack vertically (time flows downward).
- */
 export const PhysicistMethod: FC = () => {
   const typo = getTypography();
   const { colors } = usePageTheme();
@@ -140,9 +133,6 @@ export const PhysicistMethod: FC = () => {
     </div>
   );
 
-  // `FrText` only walks the tree it is handed, and this component builds its
-  // own copy from a language-aware getter — so the page-level wrapper never
-  // sees it. It fixes its own French punctuation here.
   return (
     <FrText>
       <MethodFrame

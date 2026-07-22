@@ -13,7 +13,6 @@ export type RechartsTheme = {
   gridStrokeDasharray: string;
   primary: string;
   accent: string;
-  /** Reserved Bitcoin signal — only use when chart is specifically about BTC. */
   bitcoinOrange: string;
   tooltipContentStyle: CSSProperties;
   tooltipLabelStyle: CSSProperties;
@@ -38,10 +37,10 @@ export const useRechartsTheme = (): RechartsTheme => {
   const gridColor = isDark
     ? "rgba(242, 242, 242, 0.07)"
     : "rgba(22, 33, 62, 0.08)";
-  const axisLineColor = `${gold}66`; // ~40% opacity hairline gold
+  const axisLineColor = `${gold}66`;
 
   const tooltipBg = isDark ? "#1a2236" : "#fbfaf3";
-  const tooltipBorder = `${gold}99`; // ~60% opacity
+  const tooltipBorder = `${gold}99`;
 
   return {
     gridColor,
@@ -76,8 +75,6 @@ export const useRechartsTheme = (): RechartsTheme => {
       padding: 0,
     },
     tickProp: {
-      // 13px: Cutive Mono axis graduations read too faint below this, worst in
-      // light mode (matches the `micro` typography floor).
       fontSize: 13,
       fontFamily: BRAND.fonts.mono,
       fill: axisTickColor,

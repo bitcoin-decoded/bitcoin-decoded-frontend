@@ -19,16 +19,12 @@ export const BitcoinNodeDemo: FC = () => {
 
   const iconSize = isMobile ? 22 : 28;
 
-  // Compact card padding/alignment - distinct from default SurfaceCard's
-  // simulator padding. Pass via style override.
   const cardStyleOverride: CSSProperties = {
     alignItems: "center",
     padding: isMobile ? "1.25rem 1rem" : "1.5rem 2rem",
     transition: TRANSITION,
   };
 
-  // Paired cards (Computer / Bitcoin software) share a fixed width so the
-  // two never end up different sizes whatever the label length.
   const pairCardStyle: CSSProperties = {
     ...cardStyleOverride,
     width: isMobile ? "100%" : "11rem",
@@ -58,8 +54,6 @@ export const BitcoinNodeDemo: FC = () => {
     letterSpacing: "0.05em",
     color: colors.base.text.secondary,
     textAlign: "center",
-    // Reserve two lines so a one-word label ("Ordinateur") and a two-word
-    // one ("Logiciel Bitcoin") occupy the exact same height.
     minHeight: "2.2em",
     lineHeight: 1.2,
     display: "flex",

@@ -31,8 +31,6 @@ export const useUTXOTransactionBuilder = (lockedAmount?: string, onComplete?: ()
     setRawAmount(lockedAmount ?? "");
   };
 
-  // Fires once the reader has built a valid transaction (the success state this
-  // block is built around). One-shot - resetting never re-fires.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const firedRef = useRef(false);

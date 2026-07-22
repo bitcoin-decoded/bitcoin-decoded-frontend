@@ -8,7 +8,6 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   isChapterComplete?: (id: string) => boolean;
-  /** Injected by the shell — Design never reads the progression rule itself. */
   isChapterOutOfSequence?: (id: string) => boolean;
 };
 
@@ -29,15 +28,12 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose, isChapterComplete, isCha
     transition: "opacity 0.35s cubic-bezier(0.165, 0.84, 0.44, 1)",
   };
 
-  // Full-width overlay below the desktop breakpoint (the desktop sidebar takes
-  // over at ≥1280) — consistent, fluid behaviour on tablet and mobile alike.
   const drawerStyle: CSSProperties = {
     position: "fixed",
     top: "3.5rem",
     left: 0,
     width: "100vw",
     height: "calc(100vh - 3.5rem)",
-    // Same deep cream as the desktop nav (see MainLayout).
     backgroundColor:
       theme === "dark" ? colors.base.background.primary : colors.base.background.tertiary,
     zIndex: 100,

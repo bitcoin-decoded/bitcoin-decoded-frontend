@@ -46,8 +46,6 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
     opacity: 0.7,
   };
 
-  // Fiat money-supply line in ink (navy/cream); reserved orange stays for
-  // Bitcoin charts only. The dramatic curve speaks for itself.
   const accentColor = chart.primary;
 
   return (

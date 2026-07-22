@@ -4,23 +4,14 @@ import { BRAND, getTypography, RangeLedger, useBreakpoint, usePageTheme } from "
 import { withOpacity } from "../../../Design/helpers";
 
 type Props = {
-  /** Group size at each step (chip labels). */
   sizes: number[];
   activeIndex: number;
   onChange: (index: number) => void;
-  /** Dominant tier accent (slider trail + active chip) — the green→red Dunbar scale. */
   color: string;
   ariaLabel: string;
-  /** Intl locale tag for number grouping. */
   localeTag: string;
 };
 
-/**
- * Discrete 5-step control: the ledger `RangeLedger` primitive (coin thumb,
- * hairline track) snapping to integer steps, plus a connected segmented row of
- * quick-jump chips for direct selection. The dominant `color` is the tier's
- * Dunbar-scale shade, so the slider trail tracks the calm→overload gradient.
- */
 export const DunbarStepSlider: FC<Props> = ({
   sizes,
   activeIndex,
@@ -35,9 +26,6 @@ export const DunbarStepSlider: FC<Props> = ({
 
   const lastIndex = sizes.length - 1;
 
-  // `border.secondary` at 0.25 is a whisper on cream — the segmented control
-  // read as floating numbers with no frame in light mode. The ink token holds
-  // its own on both surfaces.
   const segmentBorder = withOpacity(colors.base.text.secondary, 0.32);
 
   const wrapStyle: CSSProperties = {

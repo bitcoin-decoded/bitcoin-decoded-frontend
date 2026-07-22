@@ -40,12 +40,9 @@ export const HalvingChart: FC = () => {
     opacity: 0.7,
   };
 
-  // Halving chart is BTC-specific → use Bitcoin orange as the data accent.
-  // Other charts pick `chart.accent` (gold) or `chart.primary` (navy/cream).
   const accentColor = chart.bitcoinOrange;
   const todayYear = new Date().getFullYear();
 
-  // Format BTC: strip trailing zeros for axis/tooltips
   const fmtBTC = (v: number): string => {
     if (v >= 1) return `${v}`;
     return v.toFixed(8).replace(/\.?0+$/, "");

@@ -11,7 +11,6 @@ import { TrioNode } from "./TrioNode";
 import { Link2, MousePointerClick } from "@icons";
 
 type Props = {
-  /** Fired once every node has been explored (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -41,7 +40,6 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
-  // ── styles ──────────────────────────────────────────────────────────────────
 
   const headerRow: CSSProperties = {
     display: "flex",
@@ -127,7 +125,6 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   const detailHeader: CSSProperties = { display: "flex", alignItems: "center", gap: "0.6rem" };
 
-  // Structural icon badge — a square (radius 0), per the block-vs-coin rule.
   const detailIconBox: CSSProperties = {
     width: "2.1rem",
     height: "2.1rem",
@@ -183,11 +180,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
     textAlign: "center",
   };
 
-  // ── render ────────────────────────────────────────────────────────────────────
 
-  // `FrText` only walks the tree it is handed, and this component builds its
-  // own copy from a language-aware getter — so the page-level wrapper never
-  // sees it. It fixes its own French punctuation here.
   return (
     <FrText>
       <SurfaceCard
@@ -239,7 +232,6 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
                       strokeLinecap="round"
                       style={{ transition }}
                     />
-                    {/* Arrowhead at the `to` end - shows the direction of the action. */}
                     <polyline
                       points={`${head.left.x},${head.left.y} ${head.tip.x},${head.tip.y} ${head.right.x},${head.right.y}`}
                       fill="none"

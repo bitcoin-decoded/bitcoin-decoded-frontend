@@ -10,11 +10,6 @@ const ROUTES = Object.values(ROUTE_NAME);
 const LANGUAGES = Object.keys(LANGUAGE_PREFIX) as Language[];
 const EVERY = LANGUAGES.flatMap((language) => ROUTES.map((route) => ({ route, language })));
 
-/**
- * The canonical address is what a search engine is told to treat as the real
- * one. Getting it subtly wrong is worse than omitting it: the pages still
- * exist, but each one points at an address that answers nothing.
- */
 describe("buildCanonicalUrl", () => {
   it("gives every route in every language an absolute address", () => {
     for (const { route, language } of EVERY) {
@@ -25,8 +20,6 @@ describe("buildCanonicalUrl", () => {
   });
 
   it("never doubles the slash between origin and path", () => {
-    // The one realistic way this breaks: a trailing slash added to `SITE.url`,
-    // which every path already starts with. It would spoil all of them at once.
     expect(SITE.url).not.toMatch(/\/$/);
     for (const { route, language } of EVERY) {
       expect(
@@ -43,8 +36,6 @@ describe("buildCanonicalUrl", () => {
   });
 
   it("gives the two languages of one page two different addresses", () => {
-    // The whole point of moving language into the URL: one address per version,
-    // so a search engine has something to index for each.
     for (const route of ROUTES) {
       expect(buildCanonicalUrl(route, "fr")).not.toBe(buildCanonicalUrl(route, "en"));
     }

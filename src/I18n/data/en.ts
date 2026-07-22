@@ -1,5 +1,4 @@
 const en = {
-  // Layout
   "header.homeAriaLabel": "Back to homepage",
   "nav.title": "Navigation",
   "notFound.title": "This address leads nowhere",
@@ -11,9 +10,6 @@ const en = {
   "progression.notice.body": "This chapter builds on the ones before it. You can read it now, but it will not count towards your progress until the earlier chapters are done.",
   "progression.notice.resume": "Resume at chapter",
   "progression.notice.start": "Start from the beginning",
-  // Plural: the frontier can leave several chapters unsealed behind it, and the
-  // "previous" button often points at the locked one, which made the singular
-  // wrong in the most visible place it appears.
   "nav.locked": "Finish the previous chapters to unlock",
   "nav.lockedShort": "Locked",
   "nav.previous": "Previous",
@@ -22,11 +18,8 @@ const en = {
   "theme.toggleAriaLabel.dark": "Switch to light mode",
   "language.toggleAriaLabel": "Passer en français",
 
-  // Components
   "chapterPrelude.label": "Prelude",
   "chapterLabel.chapter": "Chapter",
-  // Rail prefixes: they name what each rail navigates, so the chapter rail and
-  // the block ribbon sitting under it cannot be mistaken for one another.
   "moduleProgress.label": "Chap.",
   "moduleProgress.quiz": "Quiz",
   "reading.railLabel": "Progress",
@@ -41,7 +34,6 @@ const en = {
   "synthesisQuiz.passed": "Passed! The foundations are in place.",
   "synthesisQuiz.failed": "Not quite there. Try again to unlock the synthesis.",
 
-  // Badges / achievements
   "badges.navLabel": "My badges",
   "badges.title": "My badge collection",
   "badges.intro":
@@ -58,7 +50,6 @@ const en = {
   "balanceSheet.assets": "ASSETS",
   "balanceSheet.liabilities": "LIABILITIES",
 
-  // Simulators - buttons
   "simulator.credit.grant": "Grant the loan!",
   "simulator.credit.retry": "Retry",
   "simulator.credit.title": "NICOLAS'S BANK BALANCE SHEET",
@@ -77,7 +68,6 @@ const en = {
     "The bond's coupon (its annual payment) is fixed at €40 (4% of €1,000).",
   "simulator.capitalChain.button": "GO BACK IN TIME",
 
-  // YieldCurve
   "yieldCurve.title": "Simulation of commercial bank profitability based on the long-term rate",
   "yieldCurve.shortRate": "Short-term rate",
   "yieldCurve.longRate": "Long-term rate",
@@ -86,44 +76,34 @@ const en = {
   "yieldCurve.years": "Years",
   "yieldCurve.evaluation": "Assessment",
 
-  // MonetaryGallery
   "monetaryGallery.history": "Its history:",
   "monetaryGallery.characteristics": "Its characteristics:",
   "monetaryGallery.limitations": "Its limitations:",
   "monetaryGallery.explored": "explored",
 
-  // Monetary characteristics
   "characteristic.durability": "Durability",
   "characteristic.portability": "Portability",
   "characteristic.divisibility": "Divisibility",
   "characteristic.fungibility": "Fungibility",
   "characteristic.hardness": "Hardness",
 
-  // AccountingTerms
   "accountingTerms.sectionTitle": "Accounting: a few key definitions",
 
-  // CustodyOptions
   "custodyOptions.sectionTitle": "Two ways to hold your bitcoin",
 
-  // WalletFamilies
   "walletFamilies.sectionTitle": "Three wallet families",
 
-  // PathFinder — Which path for you?
   "pathFinder.step": "Step",
 
-  // MonetaryAggregates
   "monetaryAggregates.sectionTitle":
     "The two kinds of money: the one you use, and the one reserved for banks",
 
-  // MonetaryPillars
   "monetaryPillars.sectionTitle": "The five pillars of money",
   "monetaryPillars.prompt":
     "Click each pillar for the definition. Keep an eye on the fifth one. It's the one that decides everything.",
 
-  // MonetaryProperties
   "monetaryProperties.sectionTitle": "Scarcity versus Hardness",
 
-  // BlockchainChainVisual
   "chain.block": "Block",
   "chain.header": "Header",
   "chain.body": "Body",
@@ -150,7 +130,6 @@ const en = {
   "chain.note":
     "Each block's hash is computed by applying SHA-256 twice to its header, not directly to its transactions. Transactions are first condensed into a Merkle root, which is then placed in the header. Modifying a single transaction changes the Merkle root, hence the header, hence the block hash. Every subsequent block now points to a hash that no longer exists. The whole chain collapses.",
 
-  // MiningSimulator
   "mining.title": "Mining simulator",
   "mining.target": "Target: the hash must start with",
   "mining.button": "Test a nonce",
@@ -161,7 +140,6 @@ const en = {
   "mining.headerLabel": "Block header being hashed:",
   "mining.nonce": "nonce",
 
-  // DoubleSpendDemo
   "doubleSpend.title": "Double-spending",
   "doubleSpend.sender": "Nicolas",
   "doubleSpend.txA": "Transaction A",
@@ -182,7 +160,6 @@ const en = {
   "doubleSpend.reset": "Try again",
   "doubleSpend.continue": "How do we decide?",
 
-  // MempoolVisual
   "mempool.subtitle": "Pending transactions",
   "mempool.blockLabel": "Block",
   "mempool.blockSubtitle": "Header & included transactions",
@@ -197,7 +174,6 @@ const en = {
   "mempool.addBlock": "Add this new block",
   "mempool.reset": "Reset",
 
-  // MiningRewardBlock
   "miningReward.blockSubtitle": "Header + transactions selected by the miner",
   "miningReward.validated": "Validated",
   "miningReward.rewardTitle": "Block reward",
@@ -215,7 +191,6 @@ const en = {
   "miningReward.rewardNoteSubsidy": "in protocol subsidy",
   "miningReward.rewardNoteNewBitcoin": "new bitcoins created by this block",
 
-  // HalvingChart
   "halvingChart.title": "Block reward (BTC) - halving schedule",
   "halvingChart.today": "today",
   "halvingChart.tooltipLabel": "Reward",
@@ -223,7 +198,6 @@ const en = {
   "halvingChart.caption":
     "Each plateau corresponds to a halving (~every 210,000 blocks, i.e. ~4 years).",
 
-  // HalvingTimeMachine
   "halvingTimeMachine.title": "Halving time machine",
   "halvingTimeMachine.yearLabel": "Year",
   "halvingTimeMachine.intro":
@@ -244,16 +218,12 @@ const en = {
   "halvingTimeMachine.caption":
     "Rewards rounded to the nearest satoshi. Beyond ~2140, issuance drops to zero.",
 
-  // DunbarSlider
-  // Stays descriptive: it is the slider's aria-label, never shown on screen.
   "dunbar.sliderAria": "Group size",
-  // The on-screen caption, kept short so the header reads on one line.
   "dunbar.sizeLabel": "Size",
   "dunbar.counterLabel": "Possible relationships to remember",
   "dunbar.overloadTitle": "Cognitive overload",
   "dunbar.overloadBody": "Individual memory maxed out. You need an external system: money.",
 
-  // NetworkFlywheel
   "flywheel.step.usage": "Network usage",
   "flywheel.step.fees": "Fees generated (per block)",
   "flywheel.step.miners": "Miner revenue (per block)",
@@ -266,7 +236,6 @@ const en = {
   "flywheel.tagline": "The more the network is used, the more secure it becomes.",
   "flywheel.cycleLabel": "Self-reinforcing cycle",
 
-  // UTXOTransactionBuilder
   "utxoBuilder.title": "Build a transaction",
   "utxoBuilder.step1": "1. Select Nicolas's coins",
   "utxoBuilder.step2": "2. Amount to send (BTC)",
@@ -291,15 +260,12 @@ const en = {
   "utxoBuilder.totalRow": "Total inputs",
   "utxoBuilder.coinLabel": "Coin",
 
-  // CapitalStructureChain
-  // No glyph in the string: the button renders the hourglass itself.
   "capitalChain.traceBack": "Trace back in time",
   "capitalChain.explored": "explored",
   "flipCard.explored": "explored",
   "debateArena.explored": "explored",
   "trustComparison.explored": "explored",
 
-  // UtxoGraph
   "utxoGraph.title": "The UTXO graph",
   "utxoGraph.walletTitle": "Your wallet",
   "utxoGraph.balance": "Balance:",
@@ -320,7 +286,6 @@ const en = {
   "utxoGraph.captionWallet":
     "Your \"balance\" isn't a counter: it's the sum of the coins your keys control, recomputed after every transaction.",
 
-  // Reading (block-by-block chapters)
   "reading.next": "Next block",
   "reading.previous": "Previous block",
   "reading.finish": "Seal the chapter",
@@ -330,7 +295,6 @@ const en = {
   "reading.milestoneAria": "Chapter progress",
   "reading.blockLabel": "Block",
 
-  // SignatureVerifier
   "sigVerifier.title": "Signature verification",
   "sigVerifier.message": "Message",
   "sigVerifier.pubkey": "Public key",
@@ -347,13 +311,11 @@ const en = {
   "sigVerifier.idle": 'Click "Verify" to simulate the verification.',
   "sigVerifier.reset": "Reset",
 
-  // KeySignatureTrio
   "keyTrio.sectionTitle": "Three elements, three roles",
   "keyTrio.prompt": "Click on each element. You'll see how it all fits together.",
   "keyTrio.emptyState": "Pick an element to discover its role.",
   "keyTrio.explored": "explored",
 
-  // SignaturePlayground
   "signaturePlayground.title": "Nicolas makes his first transaction",
   "signaturePlayground.sectionElements": "The three elements",
   "signaturePlayground.privateKeyLabel": "Private key (secret)",
@@ -410,7 +372,6 @@ const en = {
     "It's like a lock: anyone can verify that a key opens the door, but only whoever holds the right key can use it.",
   "signaturePlayground.reset": "Reset",
 
-  // SeedGenerator
   "seedGenerator.title": "Generate your seed",
   "seedGenerator.subtitle":
     "A seed phrase is a human-friendly way to represent a large amount of random information - information the machine itself handles as bits.",
@@ -438,7 +399,6 @@ const en = {
     "In BIP39, the standard lengths are 12, 15, 18, 21 or 24 words.",
   "seedGenerator.notePedagogical": "The words shown here are pedagogical examples.",
 
-  // WalletDiscoveryGame
   "walletGame.title": "Find the funds in this wallet",
   "walletGame.intro":
     "For this exercise, the wallet generates only 3 keys. Only one allows you to spend funds. Can you find it?",
@@ -469,7 +429,6 @@ const en = {
   "walletGame.cardNoUtxos": "No UTXO on this address",
   "walletGame.cardUtxoPrefix": "UTXO",
 
-  // TransactionModelComparison
   "txComparison.bankTitle": "Bank",
   "txComparison.bankSubtitle": "Bank transaction simulation",
   "txComparison.bankDesc": "A transfer updates an account balance.",
@@ -508,7 +467,6 @@ const en = {
   "txComparison.btcChangeNote": "change",
   "txComparison.btcRightsDestroyed": "Old rights are destroyed. New rights are created.",
 
-  // DifficultyAdjustment
   "difficulty.title": "Difficulty self-regulation",
   "difficulty.miners": "miners",
   "difficulty.hashTarget": "Hash target",
@@ -518,7 +476,6 @@ const en = {
   "difficulty.hint.emphasis": "~10 minutes",
   "difficulty.hint.suffix": ". More miners ⇒ more zeros required ⇒ harder problem.",
 
-  // Navigation tree
   "nav.tree.bankingSystem": "How money really works",
   "nav.tree.moneyOrigin": "Who really creates your money?",
   "nav.tree.twoLevels": "The two dollars you don't know about",
@@ -544,18 +501,15 @@ const en = {
   "nav.tree.walletsAndSeed": "Bitcoin: not an account, not a vault",
   "nav.tree.getStarted": "Down the Rabbit Hole",
 
-  // Footer
   "footer.builtWith": "Built with",
   "footer.inspiredBy": "Inspired by the work of",
 
-  // HomePage - Hero
   "home.hero.headline": "The money you use... you don't really understand it.",
   "home.hero.subheadline":
     "To understand Bitcoin, you first need to understand how money work today.",
   "home.hero.ctaPrimary": "Start the journey",
   "home.hero.ctaSecondary": "See the program",
 
-  // HomePage - Section 1: Hook
   "home.hook.title":
     "You work as much as you used to, maybe more. Your grocery cart keeps shrinking.",
   "home.hook.line1": "Rent, groceries, fuel: everything climbs.",
@@ -563,13 +517,11 @@ const en = {
   "home.hook.bridgeP1": "This is not fate. It's a mechanism.",
   "home.hook.bridgeP2": "And it all starts with a loan.",
 
-  // HomePage - Section 2: Positioning
   "home.positioning.title": "Most people start with Bitcoin. We start with money.",
   "home.positioning.comparisonP1": "Trying to understand Bitcoin without understanding money",
   "home.positioning.comparisonP2": "is like reading the last page before the story.",
   "home.positioning.flip": "So we take the story in order.",
 
-  // HomePage - Section 3: Journey (3 cards)
   "home.journey.title": "A journey in 3 modules",
   "home.journey.step1.label": "Module 1",
   "home.journey.step1.title": "The Problem",
@@ -583,7 +535,6 @@ const en = {
   "home.journey.step3.desc": "A different way to design money.\nAnd what it really changes.",
   "home.journey.cardCta": "See this module",
 
-  // HomePage - Section 4: Audience
   "home.audience.title": "This journey is for you if...",
   "home.audience.item1": "You use money without knowing how it's made.",
   "home.audience.item2": "You feel something is off, without being able to name it.",
@@ -591,23 +542,19 @@ const en = {
   "home.audience.payoff":
     "By the end, you'll explain Bitcoin better than most people who talk about it.",
 
-  // HomePage - Section 6: Differentiation
   "home.differentiation.neg1": "No hype.",
   "home.differentiation.neg2": "No get-rich promises.",
   "home.differentiation.neg3": 'No "just trust me".',
   "home.differentiation.posIntro": "Just one rule:",
   "home.differentiation.pos": "We simplify, but we never lie to you.",
 
-  // HomePage - Section 7: Philosophy quote
   "home.philosophy.quote":
     "The root problem with conventional currency is all the trust that's required...",
 
-  // HomePage - Section 8: Final CTA
   "home.finalCta.titleP1": "Free and open access.",
   "home.finalCta.titleP2": "Curiosity is your only guide.",
   "home.finalCta.button": "Start the journey",
 
-  // Footer
   "footer.donateMessage": "If you like this project, support it in sats.",
   "footer.copy": "Copy",
   "footer.copied": "Copied!",

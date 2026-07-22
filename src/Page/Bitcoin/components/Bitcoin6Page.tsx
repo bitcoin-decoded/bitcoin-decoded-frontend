@@ -56,7 +56,6 @@ export const Bitcoin6Page: FC = () => {
           </p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur exécute la transaction (mode banque). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -91,7 +90,6 @@ export const Bitcoin6Page: FC = () => {
           )}
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur compose une transaction valide. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -190,7 +188,6 @@ export const Bitcoin6Page: FC = () => {
           </p>
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le lecteur exécute la transaction (mode bitcoin). */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>
@@ -246,7 +243,6 @@ export const Bitcoin6Page: FC = () => {
           )}
         </Block>
 
-        {/* Bloc-outil : déverrouillé quand le quiz reçoit une bonne réponse. */}
         <Block kind="tool">
           {({ markComplete }) => (
             <>

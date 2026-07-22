@@ -31,7 +31,6 @@ import {
 } from "@icons";
 
 type Props = {
-  /** Fired once the reader completes the derive → sign → verify flow (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -42,13 +41,11 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   const isMobile = useBreakpoint() === "mobile";
   const world = themeColors[moduleTheme];
 
-  // Bundle of colors used by every sub-component
   const colors: SigPlaygroundColors = {
     accentColor: world.border.secondary,
     successColor: themeColors.semantic.success.text,
     errorColor: themeColors.semantic.error.text,
     neutralColor: themeColors.base.text.primary,
-    // Private key = blue, public key = lighter (info) blue, signature = violet.
     secretColor: themeColors.blue.text.secondary,
     publicColor: themeColors.semantic.info?.text ?? themeColors.blue.text.primary,
     signatureColor: themeColors.violet.text.secondary,
@@ -75,19 +72,14 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     reset,
   } = useSignaturePlayground(onComplete);
 
-  // Match state drives the value-text color: green when the private key still
-  // derives to the on-record public key, red once it has been swapped out.
   const matchColor = isOriginalKey ? colors.successColor : colors.errorColor;
 
   const displayMessage = t("signaturePlayground.message");
-  // Re-run the fixer: `t()` fixed the message, but the guillemets are added
-  // here, after the fact, with plain spaces that nothing else would tighten.
   const quotedMessage =
     language === "fr"
       ? fixFrenchPunctuation(`« ${displayMessage} »`)
       : `"${displayMessage}"`;
 
-  // ── styles ──────────────────────────────────────────────────────────────────
 
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
@@ -100,7 +92,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     marginBottom: "0.65rem",
   };
 
-  // Message-to-sign, rendered as the header of the signature block.
   const msgHeaderStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
@@ -125,7 +116,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     lineHeight: 1.4,
   };
 
-  // Pyramid: privée (apex) / publique (base-left) / signature (base-right).
   const pyramidCol: CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -135,8 +125,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
 
   const apexWrap: CSSProperties = { display: "flex", justifyContent: "center" };
 
-  // Now that every value is truncated, the apex can stay narrow: one base
-  // column on desktop, a touch wider on mobile to fit the "modify key" button.
   const apexNode: CSSProperties = {
     width: isMobile ? "72%" : "calc(50% - 0.3rem)",
     display: "flex",
@@ -148,7 +136,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     padding: "0 20%",
   };
 
-  // Two equal columns, each the same width as the apex (calc(50% - 0.3rem)).
   const baseRow: CSSProperties = {
     display: "flex",
     alignItems: "stretch",
@@ -179,7 +166,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     transition: "all 0.35s var(--ease-smooth)",
   };
 
-  // ── render helpers ────────────────────────────────────────────────────────────
 
   const renderPending = (
     n: number,
@@ -247,8 +233,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     </div>
   );
 
-  // The message to sign - rendered as the header of the signature block, so
-  // it reads as "this message → produces → this signature".
   const messageHeader = (
     <div style={msgHeaderStyle}>
       <Mail
@@ -375,9 +359,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     />
   );
 
-  // Pyramid at every breakpoint: private key at the apex, public key +
-  // signature side by side at the base, calcule / signe fanning down from the
-  // apex - so the private key is unambiguously the one that signs.
   const pyramid = (
     <div style={pyramidCol}>
       <div style={apexWrap}>
@@ -394,7 +375,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     </div>
   );
 
-  // The CTA depends on the phase: derive → sign → verify.
   const actionButton = !isDerived ? (
     <ActionButton
       onClick={derive}
@@ -430,7 +410,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     />
   ) : null;
 
-  // ── render ──────────────────────────────────────────────────────────────────
 
   return (
     <SurfaceCard
@@ -438,7 +417,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       margin={isMobile ? "1.5rem 0" : "2rem 0"}
       style={{ ...mono, overflow: "hidden", textAlign: "left" }}
     >
-      {/* Header */}
       <Caption
         tone="accent"
         size="md"
@@ -454,16 +432,13 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         {t("signaturePlayground.title")}
       </Caption>
 
-      {/* The three elements, laid out as a pyramid */}
       <div style={{ minWidth: 0 }}>
         <div style={sectionLabel}>{t("signaturePlayground.sectionElements")}</div>
         {pyramid}
       </div>
 
-      {/* Phase CTA */}
       {actionButton}
 
-      {/* Verification result panel */}
       {verifyStatus !== "idle" && (
         <FeedbackPanel
           tone={verifyStatus === "accepted" ? "success" : "error"}
@@ -526,7 +501,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         </FeedbackPanel>
       )}
 
-      {/* Pyramid context caption (kept from the original) */}
       <p
         style={{
           margin: 0,
@@ -539,7 +513,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         {t("signaturePlayground.derivationCaption")}
       </p>
 
-      {/* Pedagogy disclosures */}
       <Disclosure
         title={t("signaturePlayground.disclosureDerivationTitle")}
         icon={<DoodleBulb size={28} />}
@@ -564,7 +537,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         </p>
       </Disclosure>
 
-      {/* Reset - available once the flow has started */}
       {(isDerived || hasSignature || verifyStatus !== "idle") && (
         <Button
           variant="secondary"

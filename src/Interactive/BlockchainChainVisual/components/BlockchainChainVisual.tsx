@@ -18,7 +18,6 @@ import { Plus, RotateCcw, Sparkles } from "@icons";
 
 type Props = {
   resetScrollTargetId?: string;
-  /** Fired once the reader has added a block (gates the surrounding tool block). */
   onComplete?: () => void;
 };
 

@@ -3,10 +3,6 @@ import type { KeyElement, TrioConnection } from "../types";
 
 import { KeyRound, Lock, PenLine } from "@icons";
 
-/**
- * Language-aware content for the trio. Geometry lives in TRIO_LAYOUT; this
- * getter only owns the prose + icons so the component stays dumb.
- */
 export const getKeySignatureTrio = (
   language: Language,
 ): { elements: KeyElement[]; connections: TrioConnection[] } => {

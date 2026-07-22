@@ -14,11 +14,6 @@ const EMPTY_ANSWERS: PathAnswers = {
 
 const LAST_STEP = 3;
 
-/**
- * Owns the wizard state: a one-question-at-a-time stepper, the answers, and a
- * `submitted` flag that gates the result cards. Answering advances to the next
- * question; the reader can step back to the very first one.
- */
 export const usePathFinder = () => {
   const { language } = useTranslation();
   const copy = useMemo(() => getPathFinderCopy(language), [language]);
@@ -26,7 +21,6 @@ export const usePathFinder = () => {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
 
-  /** Record an answer and advance to the next question (stays put on the last). */
   const answer = useCallback(<K extends keyof PathAnswers>(key: K, value: PathAnswers[K]) => {
     setAnswers((prev) => ({ ...prev, [key]: value }));
     setStep((s) => (s < LAST_STEP ? s + 1 : s));

@@ -6,17 +6,10 @@ import type { KeyElement } from "../types";
 type Props = {
   element: KeyElement;
   isSelected: boolean;
-  /** Another node is selected - this one steps back. */
   isDimmed: boolean;
   onClick: () => void;
 };
 
-/**
- * One clickable element of the trio: an explicit icon in a circle, its title,
- * and its one-word role. Dumb component - selection state is owned by
- * `useKeySignatureTrio`; only ephemeral hover lives here (same pattern as
- * PillarRow).
- */
 export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) => {
   const typo = getTypography();
   const { colors, moduleTheme } = usePageTheme();
@@ -46,9 +39,6 @@ export const TrioNode: FC<Props> = ({ element, isSelected, isDimmed, onClick }) 
     transition: "opacity 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth)",
   };
 
-  // Graph node stays a circle — the SVG connectors trim to a circular clearance
-  // radius. Flattened: no radial-gradient fill, no glow; selection reads via the
-  // stronger border + scale.
   const iconCircleStyle: CSSProperties = {
     width: circle,
     height: circle,

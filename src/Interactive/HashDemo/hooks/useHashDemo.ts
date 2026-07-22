@@ -17,9 +17,6 @@ export const useHashDemo = (onComplete?: () => void) => {
     setHash(null);
   }, []);
 
-  // Fires once the reader has actually hashed something (the action this block
-  // is built around). `hasHashed` is monotonic - reset clears the output but not
-  // the signal - so the effect runs exactly once.
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   useEffect(() => {

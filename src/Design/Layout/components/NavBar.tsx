@@ -10,9 +10,7 @@ import { useHeaderHidden, useNavBar } from "../hooks";
 import { NavItem } from "./NavItem";
 
 type Props = {
-  /** Injected from App (which has badge access) so Design stays free of Achievements. */
   isChapterComplete?: (id: string) => boolean;
-  /** Injected by the shell — Design never reads the progression rule itself. */
   isChapterOutOfSequence?: (id: string) => boolean;
 };
 
@@ -32,8 +30,6 @@ export const NavBar: FC<Props> = ({ isChapterComplete, isChapterOutOfSequence })
   const isHeaderHidden = useHeaderHidden();
   const gold = getBrandGold(theme);
 
-  // A module's accent is its theme color (blue/violet/amber), read off its first
-  // chapter's route; standalone entries fall back to the structural gold.
   const moduleColorFor = (item: NavigationItem): string => {
     const firstChildId = item.children?.find((child) => child.id)?.id;
     const name = firstChildId ? getModuleThemeColor(firstChildId) : "base";
@@ -53,10 +49,6 @@ export const NavBar: FC<Props> = ({ isChapterComplete, isChapterOutOfSequence })
   const listContainerStyle: CSSProperties = {
     overflowY: "auto",
     flex: "1 1 auto",
-    // Reserve the scrollbar gutter permanently. Otherwise, expanding a module
-    // adds its chapters, the list overflows, a scrollbar appears and steals
-    // ~6px of width — enough to reflow the tracked mono module title from 2 to
-    // 3 lines. A stable gutter keeps the usable width constant open or closed.
     scrollbarGutter: "stable",
   };
 

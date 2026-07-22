@@ -49,8 +49,6 @@ export const IdentityCard: FC<Props> = ({
   const ramp = getIdentityCardRamp(effectiveCompact);
   const gold = getBrandGold(theme);
 
-  // A ledger registry entry: flat surface, square, gold hairline that warms on
-  // hover. No gradient / drop shadow / glow border — those were the old look.
   const containerStyle: CSSProperties = {
     position: "relative",
     ...(fillHeight ? { flex: 1 } : {}),
@@ -89,11 +87,6 @@ export const IdentityCard: FC<Props> = ({
     transition: "padding-bottom 0.4s var(--ease-smooth)",
   };
 
-  // The portrait is a stamped block straddling the card's top edge. The art is
-  // fully transparent, and the block overhangs onto the page, so it needs an
-  // opaque backing or a seam shows through the character — but that backing
-  // must follow the theme: a fixed cream one burns a white square into dark
-  // mode. Matching the card surface keeps the overlap seamless in both.
   const avatarContainerStyle: CSSProperties = {
     position: "absolute",
     top: 0,
@@ -120,8 +113,6 @@ export const IdentityCard: FC<Props> = ({
     color: colors.base.text.primary,
   };
 
-  // Was `border.secondary` — a 50%-alpha module tint that dissolved in dark
-  // mode. The module's text accent is the readable register in both themes.
   const profileStyle: CSSProperties = {
     margin: effectiveCompact ? "0.2rem 0 0.8rem 0" : "0.25rem 0 1rem 0",
     fontFamily: BRAND.fonts.mono,
@@ -213,8 +204,6 @@ export const IdentityCard: FC<Props> = ({
     >
       <div style={avatarContainerStyle}>{profilePicture}</div>
       <div style={contentStyle}>
-        {/* This card takes its copy through props, which `FrText` cannot reach
-         *  from the page (it only walks children) — so it applies it here. */}
         <div style={nameStyle}>
           <FrText>{name}</FrText>
         </div>

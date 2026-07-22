@@ -20,7 +20,6 @@ import {
 
 type Props = {
   scrollTargetId?: string;
-  /** Fired once the reader propagates the double-spend (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -41,7 +40,6 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
 
   const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
-  // ── styles ────────────────────────────────────────────────────────────
   const nicolasRow: CSSProperties = {
     display: "flex",
     justifyContent: "center",
@@ -159,7 +157,6 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     document.getElementById(scrollTargetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // ── render helpers ────────────────────────────────────────────────────
   const renderBranch = (branch: Branch) => {
     const accent = accents[branch.id];
     return (
@@ -212,7 +209,6 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     );
   };
 
-  // ── render ────────────────────────────────────────────────────────────
   const captionIcon: ReactNode = <Coins size={isMobile ? 16 : 18} strokeWidth={2} />;
 
   return (
@@ -224,7 +220,6 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
         {t("doubleSpend.title")}
       </Caption>
 
-      {/* Single Nicolas at the top - one person, two broadcasts below. */}
       <div style={nicolasRow}>
         <div
           style={{ ...partyCard(colors.base.border.secondary), width: isMobile ? "60%" : "40%" }}
@@ -234,7 +229,6 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
         </div>
       </div>
 
-      {/* Fork: two diagonal arrows showing the broadcast splits. */}
       <div style={forkRow}>
         <ArrowDownLeft size={20} strokeWidth={2} color={accents.a} />
         <ArrowDownRight size={20} strokeWidth={2} color={accents.b} />

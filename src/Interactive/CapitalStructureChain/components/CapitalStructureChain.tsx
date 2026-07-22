@@ -17,12 +17,9 @@ import { useCapitalStructureChain } from "../hooks";
 
 import { DoodleHourglass } from "@doodle";
 
-// Tracing the chain back is the pedagogical act, so the block gates on it:
-// reveal at least 2 production détours to unlock the rest of the chapter.
 const REQUIRED_DETOURS = 2;
 
 type Props = {
-  /** Fired once enough détours have been traced back (gates the reading block). */
   onComplete?: () => void;
 };
 
@@ -64,8 +61,6 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     paddingBottom: "2rem",
   };
 
-  // Two per row on a phone, a fixed figure width beyond — the old flat 10rem
-  // left a lone card stranded mid-row on narrow screens.
   const itemWrapperStyle: CSSProperties = {
     display: "flex",
     flex: isMobile ? "1 1 calc(50% - 0.625rem)" : "0 0 auto",
@@ -94,8 +89,6 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     );
   };
 
-  // Ledger cell: flat surface, gold corner brackets, and a lift on hover — the
-  // old scale(1.03) zoom belonged to the previous design language.
   const cardStyle = (index: number): CSSProperties => {
     const isHovered = hoveredCardIndex === index;
     return {
@@ -112,8 +105,6 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     };
   };
 
-  // The glyph sits on a quiet module wash, not the saturated block the old
-  // card used as a header.
   const iconBoxStyle: CSSProperties = {
     height: isMobile ? "4.5rem" : "5rem",
     display: "flex",
@@ -124,8 +115,6 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     color: accent,
   };
 
-  // Square, like every other index in the app (the ordered-list cells, the
-  // navbar numerals) — a circle reads as a coin, and this is a step number.
   const numberCellStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
@@ -168,9 +157,6 @@ export const CapitalStructureChain: FC<Props> = ({ onComplete }) => {
     fontStyle: "italic",
   };
 
-  // `FrText` only walks the tree it is handed, and this component builds its
-  // own copy from a language-aware getter — so the page-level wrapper never
-  // sees it. It fixes its own French punctuation here.
   return (
     <FrText>
       <>

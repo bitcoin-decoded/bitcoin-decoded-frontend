@@ -10,11 +10,8 @@ import { UtxoCoin } from "./UtxoCoin";
 
 import { ArrowDown, RefreshCw, Wallet, Zap } from "@icons";
 
-// Read on call, not on import: a module-level dereference of an imported
-// binding is what turns an import cycle from harmless into fatal.
 const mono = (): CSSProperties => ({ fontFamily: BRAND.fonts.mono });
 
-/** Trim trailing zeros, suffix the bitcoin sign. 1 → "1 BTC", 0.4999 → "0.4999 BTC". */
 const fmt = (n: number) => `${+n.toFixed(8)} BTC`;
 
 export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
@@ -33,8 +30,6 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
   const { inputs, outputs } = UTXO_GRAPH_SCENARIO;
   const inputTotal = inputs.reduce((s, c) => s + c.amount, 0);
   const yourChange = outputs.filter((o) => o.kind === "change").reduce((s, c) => s + c.amount, 0);
-  // Wallet mode: the "balance" is recomputed from the UTXOs you still control -
-  // your two coins before, just the change coin after the transaction.
   const walletBalance = ran ? yourChange : inputTotal;
 
   const caption =
@@ -150,7 +145,6 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
         </div>
       )}
 
-      {/* Inputs - existing UTXOs, consumed when the transaction runs */}
       <div
         style={{ display: "flex", flexDirection: "column", gap: "0.4rem", alignItems: "center" }}
       >
@@ -172,7 +166,6 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
         </div>
       </div>
 
-      {/* Transaction */}
       <div style={connector}>
         <ArrowDown size={14} strokeWidth={2} />
         <div style={txBox}>
@@ -182,7 +175,6 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
         <ArrowDown size={14} strokeWidth={2} />
       </div>
 
-      {/* Outputs - new UTXOs, created by the transaction */}
       <div
         style={{ display: "flex", flexDirection: "column", gap: "0.4rem", alignItems: "center" }}
       >

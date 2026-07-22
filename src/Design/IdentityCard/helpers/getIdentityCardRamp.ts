@@ -12,7 +12,6 @@ type IdentityCardRamp = {
   sectionGap: string;
 };
 
-/** Size/spacing scale for the identity card, in its compact vs full register. */
 export const getIdentityCardRamp = (compact: boolean): IdentityCardRamp => {
   if (compact) {
     const avatarSize = "min(33%, 8.5rem)";
@@ -25,7 +24,6 @@ export const getIdentityCardRamp = (compact: boolean): IdentityCardRamp => {
       contentPadBottom: "0.9rem",
       baseFont: "0.875rem",
       nameFont: "1rem",
-      // 13px floor: this label is Cutive Mono, which dissolves below it.
       profileFont: "0.8125rem",
       dividerMargin: "0 auto 0.85rem auto",
       sectionGap: "1rem",

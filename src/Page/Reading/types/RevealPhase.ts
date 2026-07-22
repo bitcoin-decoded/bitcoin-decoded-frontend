@@ -1,4 +1,3 @@
-// A freshly surfaced block's two-phase entrance (see index.css):
-//   "arriving" — held hidden while the page mechanically scrolls to it;
-//   "playing"  — its content composes in, top-to-bottom, once the scroll lands.
+// Ordered: "arriving" holds the block hidden while the page scrolls to it,
+// "playing" composes it in once the scroll lands. Paired with index.css.
 export type RevealPhase = "arriving" | "playing";

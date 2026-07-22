@@ -7,11 +7,9 @@ import { useTrustComparisonDemo } from "../hooks";
 
 import { Ban, Bitcoin, CirclePlus, Landmark, ShieldCheck, ShieldOff } from "@icons";
 
-// Try at least two of the four action buttons to clear the gate.
 const REQUIRED_EXPLORED = 2;
 
 type Props = {
-  /** Fired once two distinct action buttons have been tried (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -43,9 +41,6 @@ export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
   const borderSecondary = colors.base.border.secondary;
   const iconSize = isMobile ? 14 : 16;
 
-  // The two déclinaisons (Fiat vs Bitcoin) live inside ONE SurfaceCard, so the
-  // comparison gets a SINGLE three-square separator bracket — not one pair per
-  // column (which read as four separators). Each side is a bordered ledger panel.
   const fiatAccent = fiatTrustBroken ? danger : borderSecondary;
   const bitcoinAccent = bitcoinAttempted ? success : world.border.secondary;
 

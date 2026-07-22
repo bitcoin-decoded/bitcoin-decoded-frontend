@@ -6,11 +6,6 @@ import { useNavigationLogic } from "../../../Routing/";
 
 import { NavButton } from "./NavButton";
 
-/**
- * Chapter-level previous / next navigation, ledger register: two sharp
- * hairline-framed buttons (see NavButton) above a thin top rule. No
- * gradient-border, no rounded cards, no circle icons.
- */
 export const PageNavigation: FC = () => {
   const { previousPage, nextPage } = useNavigationLogic();
   const { colors } = usePageTheme();
@@ -20,9 +15,6 @@ export const PageNavigation: FC = () => {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
     justifyContent: "space-between",
-    // Stacked on a phone, the default `stretch` pulled each button edge to
-    // edge, leaving its label adrift in a mostly empty frame. Centred, they
-    // take the width of what they say.
     alignItems: isMobile ? "center" : undefined,
     gap: isMobile ? "0.75rem" : "1rem",
     marginTop: "3rem",

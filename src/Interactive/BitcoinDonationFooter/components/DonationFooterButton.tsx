@@ -11,7 +11,6 @@ type Props = {
   onClick: () => void;
 };
 
-/** Discreet chrome button (spec §12.1) that opens the donation modal. */
 export const DonationFooterButton: FC<Props> = ({ onClick }) => {
   const typo = getTypography();
   const { colors } = usePageTheme();
@@ -27,9 +26,6 @@ export const DonationFooterButton: FC<Props> = ({ onClick }) => {
     gap: "0.55rem",
     padding: "0.6rem 1.25rem",
     fontFamily: BRAND.fonts.mono,
-    // A donation CTA is a primary message, not chrome. Cutive Mono is
-    // single-weight (no real bold), so presence comes from a persistent filled
-    // amber cell + a firm border + size, not from font-weight.
     fontSize: typo.heading.fontSize,
     fontWeight: 500,
     fontVariant: "small-caps",

@@ -6,8 +6,8 @@ import "./index.css";
 import { App } from "./App";
 import { dropPrerenderedHead } from "./Seo";
 
-// Before mounting, not after: once React has rendered its own metadata, the
-// prerendered copy is indistinguishable from it by selector.
+// Before mounting: afterwards React's own metadata is indistinguishable from
+// the prerendered copy and both would survive.
 dropPrerenderedHead();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

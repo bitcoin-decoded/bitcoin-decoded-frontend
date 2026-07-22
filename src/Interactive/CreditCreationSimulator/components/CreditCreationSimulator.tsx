@@ -11,7 +11,6 @@ import { getUserBankCredit } from "../data";
 import { DoodleMagicHat } from "@doodle";
 
 type Props = {
-  /** Fired once the loan has been granted (the simulator's final state). */
   onComplete?: () => void;
 };
 

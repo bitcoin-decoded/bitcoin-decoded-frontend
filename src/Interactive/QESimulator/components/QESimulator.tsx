@@ -7,7 +7,6 @@ import { useToggleSimulator } from "../../hooks";
 import { SimulatorControls } from "../../SimulatorControls";
 
 type Props = {
-  /** Fired once the QE operation has been run (the simulator's final state). */
   onComplete?: () => void;
 };
 
@@ -23,8 +22,6 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
     if (isActive) onComplete?.();
   }, [isActive, onComplete]);
 
-  // Bond-coupon ticket — amber routed through the theme (was hardcoded
-  // navy/amber hex), sharp corners.
   const ticketContainerStyle: CSSProperties = {
     position: "relative",
     backgroundColor: withOpacity(colors.amber.text.secondary, theme === "dark" ? 0.14 : 0.18),
@@ -46,8 +43,6 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    // Align fields by their bottom edge so the values stay on a single visual
-    // baseline even when one label wraps onto two lines.
     alignItems: "flex-end",
     gap: "1rem",
   };
@@ -77,14 +72,11 @@ export const QESimulator: FC<Props> = ({ onComplete }) => {
     lineHeight: 1.2,
     textAlign: "center",
     whiteSpace: "nowrap",
-    // Brief background flash on the new value so the change registers,
-    // without permanently shifting the color (amber stays the field tone).
     padding: "0.1rem 0.4rem",
     borderRadius: 0,
     animation: isActive ? "qeValuePulse 0.85s ease-out" : undefined,
   };
 
-  // Coupon perforation notches at the ticket's edges.
   const cutoutStyle: CSSProperties = {
     position: "absolute",
     top: "50%",

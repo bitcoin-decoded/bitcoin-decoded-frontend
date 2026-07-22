@@ -1,10 +1,5 @@
 type Point = { x: number; y: number };
 
-/**
- * Shorten a segment a→b by `clear` units at BOTH ends, along its own
- * direction. Used to keep the triangle edges from touching the node icons
- * and labels: the visible line floats in the gap between the two nodes.
- */
 export const trimSegment = (a: Point, b: Point, clear: number) => {
   const dx = b.x - a.x;
   const dy = b.y - a.y;

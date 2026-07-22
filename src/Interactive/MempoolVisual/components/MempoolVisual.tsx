@@ -12,7 +12,6 @@ import { AlertTriangle, Box, CircleCheck, Inbox, PlusCircle, RotateCcw } from "@
 
 type Props = {
   variant?: MempoolVariant;
-  /** Fired once the reader adds the block (resolution variant; gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -85,7 +84,6 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
   return (
     <SurfaceCard gap="0.85rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={mono}>
       <div style={panelsRow}>
-        {/* Mempool */}
         <div style={panel}>
           <Caption
             tone="world"
@@ -143,7 +141,6 @@ export const MempoolVisual: FC<Props> = ({ variant = "intro", onComplete }) => {
           )}
         </div>
 
-        {/* Bloc proposé - mode resolution uniquement */}
         {isResolution && (
           <div style={panel}>
             <div style={{ display: "flex", alignItems: "center" }}>

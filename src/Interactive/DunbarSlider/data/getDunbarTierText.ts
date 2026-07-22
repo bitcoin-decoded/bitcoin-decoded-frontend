@@ -1,11 +1,6 @@
 import type { Language } from "../../../I18n";
 import type { DunbarTierKey } from "../types";
 
-/**
- * Localized short label + one-line state phrase for each tier. Kept as a
- * language-aware data getter (not global t() keys) since it is a small,
- * feature-local dataset, mirroring getMonetaryPillars / getAccountingTerms.
- */
 export const getDunbarTierText = (
   language: Language,
 ): Record<DunbarTierKey, { label: string; statePhrase: string }> => {

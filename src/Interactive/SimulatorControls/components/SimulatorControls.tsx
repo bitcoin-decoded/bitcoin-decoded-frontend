@@ -11,11 +11,6 @@ type Props = {
   secondaryDisabled: boolean;
 };
 
-/**
- * The two simulator actions (run / reset), rendered with the ledger `Button`
- * primitive: a bracketed module-color primary and a quiet dashed-underline
- * secondary. No hand-rolled rounded boxes.
- */
 export const SimulatorControls: FC<Props> = ({
   primaryLabel,
   secondaryLabel,

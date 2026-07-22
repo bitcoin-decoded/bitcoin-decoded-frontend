@@ -20,10 +20,6 @@ import { ReadingTimeBadge } from "./ReadingTimeBadge";
 type Props = {
   title: string;
   prelude?: ReactNode;
-  /**
-   * Show the "X min" reading-time badge under the title.
-   * Default `true`. Pass `false` for chapters that aren't a read (quizzes).
-   */
   showReadingTime?: boolean;
   children: ReactNode;
 };
@@ -40,39 +36,24 @@ export const PageTemplate: FC<Props> = ({
   const isTablet = breakpoint === "tablet";
   const typography = getTypography(breakpoint);
   const kicker = useChapterKicker();
-  // List markers take the module's readable text accent. `border.secondary` is
-  // a 50%-alpha tint that dissolves in dark mode — fine for a rule, not for a
-  // mark the eye has to catch. `--accent-soft` is its hairline companion.
   const accentColor =
     moduleTheme === "base" ? colors.base.text.secondary : colors[moduleTheme].text.secondary;
   const accentSoft = withOpacity(accentColor, 0.45);
-  // Chapter title carries the module identity color (violet on MoneyLaws,
-  // blue on Banking, amber on Bitcoin), falling back to ink on neutral pages.
   const titleColor =
     moduleTheme === "base" ? colors.base.text.primary : colors[moduleTheme].text.secondary;
 
-  // ── Vertical rhythm - single source of truth for the page header.
-  // Three tiers (mobile / tablet / desktop). Same philosophy as HomePage:
-  // tight coupling within a semantic group, generous breathing between groups.
   const pick = <T,>(m: T, ta: T, d: T): T => (isMobile ? m : isTablet ? ta : d);
 
   const space = {
-    // Container chrome - comfortable top breathing before the title lands.
     pageTop: pick("1.5rem", "2rem", "2.5rem"),
     pageBottom: pick("2rem", "2.5rem", "3rem"),
 
-    // Header internals - title and reading time form a tight "page header"
-    // group. They belong together, so the gap is small enough to read as
-    // a couplet but wide enough to breathe.
     titleToReadingTime: pick("0.85rem", "1rem", "1.15rem"),
 
-    // Header → prelude - clear semantic break (page identity → abstract).
     headerToPrelude: pick("2rem", "2.5rem", "3rem"),
 
-    // Prelude → body - second clear break (abstract → development).
     preludeToBody: pick("2rem", "2.5rem", "3rem"),
 
-    // No-prelude case: header → body needs the equivalent total breathing.
     headerToBodyNoPrelude: pick("2rem", "2.5rem", "3rem"),
   };
 
@@ -104,8 +85,6 @@ export const PageTemplate: FC<Props> = ({
   };
 
   const sectionStyle: CSSProperties = {
-    // Chapter reading prose — centralized in the `prose` typography role
-    // (16px body serif, line-height 1.6). The accent var feeds list markers.
     ...typography.prose,
     "--accent-color": accentColor,
     "--accent-soft": accentSoft,
@@ -124,14 +103,10 @@ export const PageTemplate: FC<Props> = ({
           <FrText>{prelude}</FrText>
         </ChapterPrelude>
       )}
-      {/* Directly above the block ribbon: the two rails read as a pair — this
-       *  one moves between chapters, the one below between blocks. */}
       <ModuleProgress />
       <section className="page-content" style={sectionStyle}>
         <FrText>{children}</FrText>
       </section>
-      {/* Always rendered. It used to be hidden on block-reading chapters, which
-       *  left no way out of a chapter until every block had been revealed. */}
       <PageNavigation />
     </div>
   );

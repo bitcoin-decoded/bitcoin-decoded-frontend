@@ -5,12 +5,6 @@ import { useTranslation } from "../../../I18n";
 import { ExpandableDefinitions } from "../../ExpandableDefinitions";
 import { getScientificMethodTerms } from "../data";
 
-/**
- * Two click-to-reveal cards (keynesian / austrian) wrapping the matched
- * method illustrations. Mirrors the AccountingTerms pattern: the reader
- * compares one school at a time rather than facing both visuals stacked
- * vertically. The opposition of forms is preserved inside each body.
- */
 export const ScientificMethods: FC = () => {
   const { language } = useTranslation();
   const { colors } = usePageTheme();

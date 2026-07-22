@@ -1,6 +1,5 @@
 import type { NavigationItem } from "../types";
 
-// Helper function to recursively flatten the navigation tree into a simple list of pages
 export const flattenPages = (items: NavigationItem[]): NavigationItem[] => {
   let pages: NavigationItem[] = [];
   for (const item of items) {

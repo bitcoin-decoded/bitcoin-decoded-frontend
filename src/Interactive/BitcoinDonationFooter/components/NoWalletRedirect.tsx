@@ -10,7 +10,6 @@ type Props = {
   onClose: () => void;
 };
 
-/** Porte C (spec §6): no instructions, just redirect to the wallet chapter. */
 export const NoWalletRedirect: FC<Props> = ({ onClose }) => {
   const typo = getTypography();
   const { colors } = usePageTheme();

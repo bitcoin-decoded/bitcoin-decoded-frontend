@@ -2,11 +2,6 @@ import { useCallback, useState } from "react";
 
 import type { DonationStep } from "../types";
 
-/**
- * The donation journey state machine (v2, on-chain only). It opens straight on
- * the amount selector - there is no gate-selection screen. The no-wallet screen
- * is reached via a discreet link and returns to the amount selector.
- */
 export const useBitcoinDonationFooter = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<DonationStep>("amount");
@@ -35,7 +30,6 @@ export const useBitcoinDonationFooter = () => {
 
   const confirmSent = useCallback(() => setStep("thank-you"), []);
 
-  /** From any sub-screen (address / no-wallet) back to the amount selector. */
   const back = useCallback(() => setStep("amount"), []);
 
   return {

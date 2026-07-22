@@ -8,18 +8,6 @@ import { useNotFoundPage } from "../hooks";
 
 import { DoodleSmileyCheeky } from "@doodle";
 
-/**
- * The dead end, drawn rather than apologised for.
- *
- * The figure goes through `Illustration` rather than reproducing its frame, so
- * the corner brackets, the hairline, the hover and the mobile height cap are
- * the same here as in every chapter, and stay the same when they change there.
- *
- * The artwork itself is swapped on the theme instead of being tinted, which is
- * the one thing the component cannot do: the two versions are lit differently,
- * and a filter over the daylight one would give a grey desert at midnight
- * rather than a night sky.
- */
 export const NotFoundPage: FC = () => {
   const { title, body, imageAlt, homeLabel, startLabel, goHome, goStart } = useNotFoundPage();
   const { colors, theme } = usePageTheme();
@@ -53,8 +41,6 @@ export const NotFoundPage: FC = () => {
     maxWidth: "34rem",
   };
 
-  // Sits on the text baseline rather than on its own line, so it reads as the
-  // end of the sentence and not as a second illustration.
   const smileyStyle: CSSProperties = {
     display: "inline-block",
     verticalAlign: "-0.2em",
@@ -71,7 +57,6 @@ export const NotFoundPage: FC = () => {
 
   return (
     <div style={containerStyle}>
-      {/* The page supplies its own spacing, so the figure keeps none of its own. */}
       <Illustration
         src={theme === "dark" ? notFoundDark : notFoundLight}
         alt={imageAlt}

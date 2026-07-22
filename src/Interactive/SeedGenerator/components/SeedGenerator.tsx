@@ -9,7 +9,6 @@ import type { SeedLength } from "../types";
 import { Info, Sparkles, Sprout } from "@icons";
 
 type Props = {
-  /** Fired once the reader generates a seed (gates the tool block). */
   onComplete?: () => void;
 };
 
@@ -139,7 +138,6 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
       margin={isMobile ? "1.5rem 0" : "2rem 0"}
       style={{ ...mono, overflow: "hidden", textAlign: "left" }}
     >
-      {/* Header */}
       <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", minWidth: 0 }}>
         <Caption
           tone="accent"
@@ -170,7 +168,6 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
           flexWrap: "wrap",
         }}
       >
-        {/* Step 1 - segmented control */}
         <div>
           <div style={stepLabelStyle}>{t("seedGenerator.step1Label")}</div>
           <div
@@ -197,7 +194,6 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
           </div>
         </div>
 
-        {/* Step 2 - generate */}
         <div>
           <div style={stepLabelStyle}>{t("seedGenerator.step2Label")}</div>
           <Button
@@ -211,7 +207,6 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
         </div>
       </div>
 
-      {/* Seed output */}
       {seed && (
         <>
           <div>
@@ -229,8 +224,6 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
             </div>
           </div>
 
-          {/* Binary visualization - collapsed by default to keep the focus
-              on the human-readable form first. Power users can dive in. */}
           <Disclosure title={t("seedGenerator.binaryDisclosureTitle")}>
             <div>
               <div style={sectionLabelStyle}>
@@ -257,12 +250,10 @@ export const SeedGenerator: FC<Props> = ({ onComplete }) => {
             </div>
           </Disclosure>
 
-          {/* Hero quote */}
           <p style={heroQuoteStyle}>{t("seedGenerator.heroQuote")}</p>
         </>
       )}
 
-      {/* Pedagogy note (always visible) */}
       <div style={noteStyle}>
         <Caption
           tone="world"

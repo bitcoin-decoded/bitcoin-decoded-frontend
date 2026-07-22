@@ -5,23 +5,13 @@ import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "
 import type { IconType } from "@icons";
 
 type Props = {
-  /** Attribute name (e.g. "Simplicité"). */
   label: string;
-  /** Lucide glyph prefixing the label. */
   icon: IconType;
-  /** Filled segments, 0..max. */
   score: number;
-  /** Filled-pip color (the wallet card's accent). */
   accent: string;
-  /** Total segments. @default 5 */
   max?: number;
 };
 
-/**
- * A gamified stat row - an attribute label plus segmented pips, RPG-style.
- * Stacked across the three wallet cards (filled counts aligned), the gauges
- * read as a simplicité ↘ / souveraineté ↗ trade-off matrix at a glance.
- */
 export const ScoreGauge: FC<Props> = ({ label, icon: Icon, score, accent, max = 5 }) => {
   const typo = getTypography();
   const { colors } = usePageTheme();

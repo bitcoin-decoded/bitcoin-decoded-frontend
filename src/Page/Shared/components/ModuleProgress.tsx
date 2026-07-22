@@ -15,26 +15,6 @@ import { useModuleProgress } from "../hooks";
 
 import { DoodleLock } from "@doodle";
 
-/**
- * The module's chapters as one unbroken rail — Chap. [01]—02—03—Quiz — sitting
- * directly above the block ribbon so the two read as a pair: this one moves
- * between chapters, the one below between blocks. Each is prefixed with what it
- * navigates so they cannot be confused.
- *
- * Three states, three colours, and no fourth invented for the occasion:
- *
- *   reading   the module's gold, filled, with the page ground as its ink
- *   open      the module's own accent, the identity colour it already wears
- *   locked    the neutral secondary text token, plus a padlock
- *
- * Gold is structure and marks position; the module accent is identity and marks
- * what is open. Both come from `THEME_COLORS`, whose text tokens are held to
- * WCAG AA on either ground by `THEME_COLORS.test.ts`, so neither needs a
- * light-mode variant invented here.
- *
- * Nothing signals "finished": that is the badge's job, and a second marker here
- * only competed with this one.
- */
 export const ModuleProgress: FC = () => {
   const progress = useModuleProgress();
   const { colors, moduleTheme } = usePageTheme();
@@ -51,20 +31,8 @@ export const ModuleProgress: FC = () => {
   const moduleAccent = moduleTheme === "base" ? gold : colors[moduleTheme].text.secondary;
   const currentId = progress.chapters[progress.currentIndex].id;
 
-  // Narrow screens trade the rule for a middot. Seven chapters plus their links
-  // do not fit on one line at 375px, and a rail that wraps onto two lines stops
-  // reading as a rail at all.
   const linkWidth = isMobile ? 0 : 16;
 
-  // Two elements, for one reason: the rail must never wrap onto a second line,
-  // and a nine-chapter module at 375px wants about 350px against roughly 350
-  // available. It fits, but with nothing to spare, and a longer module or a
-  // wider glyph would break it.
-  //
-  // So the outer element scrolls and the inner one is sized to its content:
-  // under the available width `margin: auto` centres it as usual, over it the
-  // rail slides instead of wrapping or pushing the page sideways. The
-  // scrollbar itself is hidden by the shared `.no-scrollbar` utility.
   const scrollerStyle: CSSProperties = {
     overflowX: "auto",
     maxWidth: "100%",
@@ -77,13 +45,9 @@ export const ModuleProgress: FC = () => {
     alignItems: "center",
     width: "max-content",
     margin: "0 auto",
-    // Zero, deliberately: the links are the only thing between two chapters, so
-    // the rule runs edge to edge instead of breaking into dashes.
     gap: 0,
   };
 
-  // Weight 400, not 600. The pair of prefixes sets the context and should not
-  // compete with the figures they introduce.
   const labelStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
     fontSize: typo.label.fontSize,
@@ -124,15 +88,10 @@ export const ModuleProgress: FC = () => {
     ...typo.figure,
     fontFamily: BRAND.fonts.mono,
     color: figureColor(isCurrent, isLocked, isHovered),
-    // Tracking is a luxury the narrow rail cannot afford: across the twenty-odd
-    // glyphs of a nine-chapter module it alone costs more than a chapter cell.
     letterSpacing: isMobile ? "0.02em" : "0.06em",
     transition: "color 0.2s var(--ease-smooth)",
   });
 
-  // Sits at the numeral's bottom-right corner, smaller than the figure on
-  // purpose: the size gap is what makes the padlock read as an annotation on
-  // the number rather than as its equal.
   const lockSize = 12;
   const lockStyle: CSSProperties = {
     position: "absolute",
@@ -142,9 +101,6 @@ export const ModuleProgress: FC = () => {
     pointerEvents: "none",
   };
 
-  // The chapter being read: a filled gold cartouche, square like everything
-  // structural here. Filled rather than outlined because it has to win against
-  // six siblings wearing a saturated accent.
   const cartoucheStyle: CSSProperties = {
     background: gold,
     padding: isMobile ? "0.15rem 0.3rem" : "0.2rem 0.4rem",
@@ -157,13 +113,8 @@ export const ModuleProgress: FC = () => {
       display: "inline-flex",
       alignItems: "center",
       flex: "0 0 auto",
-      // The rule stops short of the glyphs rather than touching them; the
-      // cartouche brings its own padding and needs none.
-      //
-      // A locked chapter reserves the padlock's overhang on its right as
-      // padding rather than margin. As margin it pushed the following link
-      // away and punched a hole in the rule, which is the one thing this rail
-      // is not allowed to have.
+      // The padlock overhang is reserved as padding, never margin: as margin
+      // it pushed the next link away and punched a hole in the rule.
       padding: isCurrent ? 0 : `0 ${isLocked ? `${lockSize * 0.45}px` : side} 0 ${side}`,
       border: "none",
       borderRadius: 0,

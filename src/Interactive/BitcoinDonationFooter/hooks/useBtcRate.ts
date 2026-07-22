@@ -6,14 +6,8 @@ import type { BtcRate } from "../types";
 const CACHE_MS = 60_000;
 const STALE_MS = 5 * 60_000;
 
-// Module-level cache so the rate is shared across mounts and survives a
-// modal close/reopen within the 60s window (spec §8.2).
 let cachedRate: BtcRate | null = null;
 
-/**
- * BTC/EUR rate with a 60s cache, a user-forced refresh (no blocking
- * cooldown), and an `isStale` flag once the rate is older than 5 minutes.
- */
 export const useBtcRate = () => {
   const [rate, setRate] = useState<BtcRate | null>(cachedRate);
   const [loading, setLoading] = useState(false);
@@ -42,7 +36,6 @@ export const useBtcRate = () => {
     void load(false);
   }, [load]);
 
-  // Recompute staleness over time without any user action.
   useEffect(() => {
     const id = window.setInterval(() => setNow(Date.now()), 30_000);
     return () => window.clearInterval(id);

@@ -10,9 +10,6 @@ type Props = {
   accent: string;
   onClick: () => void;
   disabled?: boolean;
-  /** When set, the option renders as a lettered ledger cell (gold corner
-   *  brackets + a big A/B/C/… mono letter) instead of the radio-coin row —
-   *  the treatment shared with the `Quiz`. Omit for the plain radio option. */
   index?: number;
 };
 
@@ -34,8 +31,6 @@ export const OptionButton: FC<Props> = ({
   const gold = getBrandGold(theme);
   const isDark = theme === "dark";
 
-  // Ledger cell: four gold corner brackets around a module-tinted wash, coloured
-  // by state (mirrors the `Quiz` options + `Callout`).
   const bracket = active ? accent : withOpacity(gold, 0.85);
   const wash = selected
     ? withOpacity(accent, isDark ? 0.18 : 0.1)

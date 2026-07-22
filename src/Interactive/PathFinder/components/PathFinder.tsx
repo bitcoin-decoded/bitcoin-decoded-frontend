@@ -96,7 +96,6 @@ export const PathFinder: FC = () => {
     gap: "0.9rem",
   };
 
-  // Structural icon badge — a square (radius 0), per the block-vs-coin rule.
   const profileIconChipStyle: CSSProperties = {
     flexShrink: 0,
     width: isMobile ? "3rem" : "3.4rem",

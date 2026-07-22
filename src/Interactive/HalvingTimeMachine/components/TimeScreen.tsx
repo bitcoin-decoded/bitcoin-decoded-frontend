@@ -18,11 +18,6 @@ type Props = {
   isExhausted: boolean;
 };
 
-/**
- * The retro CRT display: a glowing year, and - once you've travelled - the block
- * reward for that era. Everything is centered vertically and horizontally.
- * While traveling, a flux flash sweeps over a shaking, year-scrambling screen.
- */
 export const TimeScreen: FC<Props> = ({
   displayYear,
   arrivedYear,
@@ -41,15 +36,9 @@ export const TimeScreen: FC<Props> = ({
   const isLight = theme === "light";
   const machine = getMachineColors();
 
-  // The "screen" adapts to the theme: a deep glowing CRT in dark mode, a light
-  // panel in light mode - never a black box on a white page. Text + accents use
-  // theme tokens, readable on whichever background.
-  const glow = world.text.secondary; // amber readout + accents
-  const screenInk = world.text.primary; // reward value - warm/amber, readable in both modes (never plain black)
-  const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85); // labels / subline / prompt
-  // Flat instrument panel — a faint amber tint in light mode, a solid dark
-  // screen in dark mode. No gradient, no glow, no scanlines (the CRT chrome was
-  // a gimmick the ledger refonte removes); the amber mono figures carry it.
+  const glow = world.text.secondary;
+  const screenInk = world.text.primary;
+  const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85);
   const screenBg = isLight ? withOpacity(glow, 0.08) : machine.screenBgDark;
   const localizeDecimal = (s: string) => (fr ? s.replace(".", ",") : s);
 
@@ -144,9 +133,6 @@ export const TimeScreen: FC<Props> = ({
             position: "absolute",
             inset: 0,
             pointerEvents: "none",
-            // On the dark CRT, a soft amber glow with "screen" blend pops. On the
-            // light panel, "screen" washes out - so use vivid yellow→orange with
-            // normal blend so the time-flux is clearly visible in both modes.
             background: isLight
               ? machine.fluxLight
               : `radial-gradient(circle at 50% 45%, ${withOpacity(glow, 0.55)}, transparent 70%)`,

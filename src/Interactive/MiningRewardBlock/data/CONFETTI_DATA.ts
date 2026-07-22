@@ -1,6 +1,5 @@
 import type { ConfettiPiece } from "../types";
 
-/** 14-piece confetti burst data for the mining reward animation */
 export const CONFETTI_DATA: readonly ConfettiPiece[] = [
   { x: -85, y: -145, rot: 270, delay: 0, color: "#f7931a", size: 7 },
   { x: 55, y: -110, rot: -180, delay: 0.06, color: "#10b981", size: 5 },

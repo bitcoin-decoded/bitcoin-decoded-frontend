@@ -3,11 +3,6 @@ export type M2DataPoint = {
   value: number;
 };
 
-/**
- * US M2 Money Supply (trillions USD) - simplified annual snapshots.
- * Source: Federal Reserve Economic Data (FRED), series M2SL
- * https://fred.stlouisfed.org/series/M2SL
- */
 export const M2_MONEY_SUPPLY: M2DataPoint[] = [
   { year: 1960, value: 0.3 },
   { year: 1965, value: 0.43 },

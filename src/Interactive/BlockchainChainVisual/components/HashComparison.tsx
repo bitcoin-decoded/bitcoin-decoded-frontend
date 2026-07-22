@@ -7,7 +7,6 @@ import { truncateHash } from "../../helpers";
 type Props = {
   originalHash: string;
   newHash: string;
-  /** Zone color (e.g. violet for hashes, blue for merkle root). Original is dimmed via opacity, new stays full strength. */
   accent: string;
 };
 
@@ -47,8 +46,6 @@ export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => 
     wordBreak: "break-all",
   };
 
-  // Emphasis is carried by color + opacity, not weight (Cutive Mono is
-  // single-weight; the "before" is dimmed, the "after" stays full strength).
   return (
     <div style={wrapper}>
       <div style={row}>

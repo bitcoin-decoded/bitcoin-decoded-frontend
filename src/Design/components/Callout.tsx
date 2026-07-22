@@ -90,9 +90,6 @@ export const Callout: FC<Props> = ({ title, children }) => {
 
   return (
     <aside style={wrapperStyle}>
-      {/* The title arrives as a prop, which `FrText` cannot reach from the page
-       *  (it only walks children) — so the Callout applies it itself, and the
-       *  narrow no-break space keeps "?" / "!" glued to the last word. */}
       <span style={titleStyle}>
         <FrText>{title}</FrText>
       </span>

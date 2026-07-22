@@ -10,7 +10,6 @@ type Props = {
   amount: string;
   sublabel?: string;
   mode: UtxoGraphMode;
-  /** idle = pending, consumed = spent input, created = new output. */
   state: "idle" | "consumed" | "created";
   accent: string;
   successColor: string;
@@ -18,8 +17,6 @@ type Props = {
   baseTextSecondary: string;
 };
 
-// Read on call, not on import: a module-level dereference of an imported
-// binding is what turns an import cycle from harmless into fatal.
 const mono = (): CSSProperties => ({ fontFamily: BRAND.fonts.mono });
 
 export const UtxoCoin: FC<Props> = ({
