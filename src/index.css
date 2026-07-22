@@ -430,6 +430,13 @@ body {
   flex-direction: column;
   gap: 0.625rem;
 }
+/* A list that declares `start` is continuing the one above it, usually across
+ * a simulator that had to sit between two steps. The numeral comes from a CSS
+ * counter, which ignores the HTML attribute, so the reset is what has to go:
+ * without it the count carries on and the sequence stays unbroken. */
+.page-content ol[start] {
+  counter-reset: none;
+}
 .page-content ol > li {
   position: relative;
   padding-left: 2.75rem;

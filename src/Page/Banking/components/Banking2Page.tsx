@@ -1,7 +1,8 @@
 import { type FC } from "react";
 
+import michuHouse from "../../../../src/Design/img/michu_house.webp";
+import nicolasMichuTransfer from "../../../../src/Design/img/nicolas_michu_transfer.webp";
 import nicolasRich from "../../../../src/Design/img/nicolas_rich.webp";
-import nicolasTransfer from "../../../../src/Design/img/nicolas_transfer.webp";
 import { Callout, Disclosure, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { CompensationSimulator, Illustration, MonetaryAggregates } from "../../../Interactive";
@@ -51,17 +52,26 @@ export const Banking2Page: FC = () => {
               <>
                 <i>Nicolas</i> est content puisqu'il a reçu 200 000 €, prêtés par sa banque pour
                 l'achat d'une résidence principale. Cet argent ne va pas rester très longtemps sur
-                le compte de Nicolas : il va payer la vendeuse de la maison, <i>Mme Michu</i>. Et
-                que se passe-t-il si le compte de <i>Mme Michu</i> est dans une autre banque ?
+                le compte de Nicolas : il va payer la vendeuse de la maison, <i>Mme Michu</i>.
               </>
             ) : (
               <>
                 <i>Nicolas</i> is a happy man: his bank just lent him €200,000 to buy his main home.
                 That money won't sit in Nicolas's account for long: he's using it to pay the seller,{" "}
-                <i>Ms. Smith</i>. So what happens if <i>Ms. Smith</i> banks somewhere else?
+                <i>Ms. Smith</i>.
               </>
             )}
           </p>
+          <Illustration
+            src={michuHouse}
+            alt={
+              fr
+                ? "Mme Michu, lunettes de soleil et collier de perles, devant sa maison"
+                : "Ms. Smith, in sunglasses and pearls, standing in front of her house"
+            }
+            width="55%"
+            margin="1.5rem auto"
+          />
           <p>
             {fr ? (
               <>
@@ -165,13 +175,13 @@ export const Banking2Page: FC = () => {
               )}
             </p>
             <Illustration
-              src={nicolasTransfer}
+              src={nicolasMichuTransfer}
               alt={
                 fr
-                  ? "Nicolas, à son bureau, appuie sur un bouton pour lancer le virement"
-                  : "Nicolas, at his desk, pressing a button to send the transfer"
+                  ? "Nicolas appuie sur le bouton du virement, Mme Michu trinque en croisière"
+                  : "Nicolas presses the transfer button while Ms. Smith toasts on a cruise"
               }
-              width="58%"
+              width="92%"
               margin="1.5rem auto"
             />
             <p>
