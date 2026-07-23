@@ -105,6 +105,8 @@ const fr = {
 
   "monetaryProperties.sectionTitle": "Rareté versus Dureté",
 
+  "blockAnatomy.title": "Exemple fictif : Bloc #100826",
+
   "chain.block": "Bloc",
   "chain.header": "En-tête",
   "chain.body": "Corps",

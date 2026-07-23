@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, getTypography, usePageTheme } from "../../../Design";
+import { getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { truncateHash } from "../../helpers";
 
@@ -11,11 +11,10 @@ type Props = {
 };
 
 export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const typo = getTypography(breakpoint);
   const { t } = useTranslation();
   const { colors } = usePageTheme();
-
-  const mono = { fontFamily: BRAND.fonts.mono } as const;
 
   const wrapper: CSSProperties = {
     display: "flex",
@@ -27,38 +26,32 @@ export const HashComparison: FC<Props> = ({ originalHash, newHash, accent }) => 
   const row: CSSProperties = {
     display: "flex",
     alignItems: "baseline",
-    gap: "0.4rem",
+    gap: "0.45rem",
     flexWrap: "wrap",
   };
 
   const labelBase: CSSProperties = {
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
-    letterSpacing: "0.06em",
     color: colors.base.text.secondary,
   };
 
   const valueBase: CSSProperties = {
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    wordBreak: "break-all",
+    ...typo.figure,
+    wordBreak: "break-word",
   };
 
   return (
     <div style={wrapper}>
       <div style={row}>
         <span style={labelBase}>{t("chain.originalHash")}</span>
-        <span style={{ ...valueBase, color: accent, opacity: 0.55, fontWeight: 500 }}>
+        <span style={{ ...valueBase, color: accent, opacity: 0.55 }}>
           {truncateHash(originalHash)}
         </span>
       </div>
       <div style={row}>
         <span style={{ ...labelBase, color: accent }}>{t("chain.newHash")}</span>
-        <span style={{ ...valueBase, color: accent, fontWeight: 500 }}>
-          {truncateHash(newHash)}
-        </span>
+        <span style={{ ...valueBase, color: accent }}>{truncateHash(newHash)}</span>
       </div>
     </div>
   );

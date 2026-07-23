@@ -1,18 +1,24 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge, BRAND, getTypography, HighlightText, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Badge,
+  getTypography,
+  HighlightText,
+  useBreakpoint,
+  usePageTheme,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { BlockPlate, BlockPlateRow, BlockPlateSection } from "../../components";
 import { truncateHash } from "../../helpers";
 import { randomizeTx } from "../helpers";
 import type { BlockData } from "../types";
 
 import { BlockHashFormula } from "./BlockHashFormula";
-import { BlockRow } from "./BlockRow";
 import { HashComparison } from "./HashComparison";
 import { ModifyTxButton } from "./ModifyTxButton";
 import { TransactionInput } from "./TransactionInput";
 
-import { Clock, GitMerge, Hash, Link2, Pickaxe } from "@icons";
+import { DoodleBookPages, DoodleClock, DoodleHash, DoodleHierarchy, DoodleNumber } from "@doodle";
 
 type Props = {
   block: BlockData;
@@ -35,65 +41,28 @@ export const BlockCard: FC<Props> = ({
   isFirstBlock = false,
   highlightChainLink = false,
 }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t, language } = useTranslation();
   const fr = language === "fr";
-  const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
-  const world = colors[moduleTheme];
+  const { colors } = usePageTheme();
   const isBrokenLink = expectedPrevHash !== undefined;
+  const isBroken = isOrphaned || block.isEdited;
 
   const merkleAccent = block.isEdited ? colors.semantic.error.text : colors.semantic.info.text;
   const prevHashAccent = isBrokenLink ? colors.semantic.error.text : colors.violet.text.secondary;
   const highlightHex = colors.violet.text.secondary;
 
-  const mono = { fontFamily: BRAND.fonts.mono } as const;
-
-  const titleStyle: CSSProperties = {
-    ...mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.05em",
-    color: world.text.secondary,
-    textAlign: "center",
-    paddingBottom: "0.35rem",
-    borderBottom: `1px solid ${withOpacity(world.border.secondary, 0.3)}`,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.5rem",
-  };
-
-  const sectionLabel: CSSProperties = {
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.06em",
-    color: world.text.primary,
-    padding: "0.2rem 0.45rem",
-    borderRadius: 0,
-    background: withOpacity(world.background.secondary, 0.1),
-    border: `1px solid ${withOpacity(world.border.secondary, 0.2)}`,
-    alignSelf: "flex-start",
-    marginTop: "0.1rem",
-  };
+  const iconSize = isMobile ? 20 : 22;
 
   const valueStyle: CSSProperties = {
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    color: colors.base.text.secondary,
-    wordBreak: "break-all",
+    ...typo.figure,
+    color: colors.base.text.primary,
+    wordBreak: "break-word",
   };
 
-  const accentValueStyle = (accent: string): CSSProperties => ({
-    ...valueStyle,
-    color: accent,
-    fontWeight: 500,
-  });
-
-  const iconSize = isMobile ? 12 : 14;
+  const accentValueStyle = (accent: string): CSSProperties => ({ ...valueStyle, color: accent });
 
   const stagger = (i: number): CSSProperties =>
     revealStage === "revealing" ? { animationDelay: `${i * 0.16}s` } : {};
@@ -108,11 +77,9 @@ export const BlockCard: FC<Props> = ({
         accent={prevHashAccent}
       />
     ) : highlightChainLink && !isFirstBlock ? (
-      <span className="chain-hash-focus" style={{ alignSelf: "flex-start" }}>
+      <span className="chain-hash-focus">
         <HighlightText highLightColorHex={highlightHex}>
-          <span style={accentValueStyle(prevHashAccent)}>
-            {truncateHash(block.prevHash)}
-          </span>
+          <span style={accentValueStyle(prevHashAccent)}>{truncateHash(block.prevHash)}</span>
         </HighlightText>
       </span>
     ) : (
@@ -130,86 +97,76 @@ export const BlockCard: FC<Props> = ({
   );
 
   return (
-    <SurfaceCard
-      gap="0.25rem"
-      glowColor={isOrphaned || block.isEdited ? colors.semantic.error.border : undefined}
-      style={{
-        padding: isMobile ? "0.8rem" : "0.95rem",
-        borderRadius: 0,
-        width: "100%",
-        transition: "all 0.3s var(--ease-smooth)",
-      }}
+    <BlockPlate
+      frameColor={isBroken ? colors.semantic.error.text : undefined}
+      title={
+        <>
+          <span>
+            {t("chain.block")} #{block.number}
+          </span>
+          {block.isEdited && (
+            <Badge tone="error" size="xs">
+              {t("chain.modified")}
+            </Badge>
+          )}
+          {isOrphaned && !block.isEdited && (
+            <Badge tone="error" size="xs">
+              {t("chain.chainBroken")}
+            </Badge>
+          )}
+        </>
+      }
     >
-      <div style={titleStyle}>
-        <span>
-          {t("chain.block")} #{block.number}
-        </span>
-        {block.isEdited && (
-          <Badge tone="error" size="xs">
-            {t("chain.modified")}
-          </Badge>
-        )}
-        {isOrphaned && !block.isEdited && (
-          <Badge tone="error" size="xs">
-            {t("chain.chainBroken")}
-          </Badge>
-        )}
-      </div>
+      <BlockPlateSection>{t("chain.header")}</BlockPlateSection>
 
-      <span style={sectionLabel}>{t("chain.header")}</span>
-
-      <BlockRow
-        icon={<Hash size={iconSize} strokeWidth={1.8} />}
-        iconAccent={prevHashAccent}
+      <BlockPlateRow
+        icon={<DoodleHash size={iconSize} />}
         label={t("chain.prevHash")}
         zebra
+        stacked={isBrokenLink}
       >
         {prevHashContent}
-      </BlockRow>
+      </BlockPlateRow>
 
       {revealStage !== "skeleton" && (
         <>
           <div className={revealClass} style={stagger(0)}>
-            <BlockRow
-              icon={<GitMerge size={iconSize} strokeWidth={1.8} />}
-              iconAccent={merkleAccent}
+            <BlockPlateRow
+              icon={<DoodleHierarchy size={iconSize} />}
               label={t("chain.merkleRoot")}
               zebra={false}
+              stacked={block.isEdited}
             >
               {merkleContent}
-            </BlockRow>
+            </BlockPlateRow>
           </div>
 
           <div className={revealClass} style={stagger(1)}>
-            <BlockRow icon={<Clock size={iconSize} strokeWidth={1.8} />} label={t("chain.timestamp")} zebra>
+            <BlockPlateRow icon={<DoodleClock size={iconSize} />} label={t("chain.timestamp")} zebra>
               <span style={valueStyle}>{block.timestamp}</span>
-            </BlockRow>
+            </BlockPlateRow>
           </div>
 
           <div className={revealClass} style={stagger(2)}>
-            <BlockRow icon={<Pickaxe size={iconSize} strokeWidth={1.8} />} label="Nonce" zebra={false}>
+            <BlockPlateRow
+              icon={<DoodleNumber size={iconSize} />}
+              label="Nonce"
+              zebra={false}
+            >
               <span style={valueStyle}>{block.nonce.toLocaleString(fr ? "fr-FR" : "en-US")}</span>
-            </BlockRow>
+            </BlockPlateRow>
           </div>
 
-          <div
-            className={revealClass}
-            style={{
-              ...stagger(3),
-              borderTop: `1px dashed ${withOpacity(world.border.secondary, 0.3)}`,
-              margin: "0.3rem 0 0.15rem",
-            }}
-          />
-
           <div className={revealClass} style={stagger(3)}>
-            <span style={sectionLabel}>{t("chain.body")}</span>
+            <BlockPlateSection>{t("chain.body")}</BlockPlateSection>
           </div>
 
           <div className={revealClass} style={stagger(4)}>
-            <BlockRow
-              icon={<Link2 size={iconSize} strokeWidth={1.8} />}
+            <BlockPlateRow
+              icon={<DoodleBookPages size={iconSize} />}
               label={t("chain.transaction")}
               zebra
+              stacked
               headerAction={
                 isFirstBlock ? (
                   <ModifyTxButton
@@ -221,19 +178,10 @@ export const BlockCard: FC<Props> = ({
               }
             >
               <TransactionInput value={block.tx} />
-            </BlockRow>
+            </BlockPlateRow>
           </div>
 
-          <div
-            className={revealClass}
-            style={{
-              ...stagger(5),
-              borderTop: `1px dashed ${withOpacity(world.border.secondary, 0.3)}`,
-              margin: "0.3rem 0 0.15rem",
-            }}
-          />
-
-          <div className={revealClass} style={stagger(5)}>
+          <div className={revealClass} style={{ ...stagger(5), marginTop: "0.5rem" }}>
             <BlockHashFormula
               hash={block.headerHash}
               originalHash={block.originalHeaderHash}
@@ -244,6 +192,6 @@ export const BlockCard: FC<Props> = ({
           </div>
         </>
       )}
-    </SurfaceCard>
+    </BlockPlate>
   );
 };

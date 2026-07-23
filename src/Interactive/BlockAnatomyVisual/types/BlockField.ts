@@ -1,5 +1,5 @@
 export type BlockField = {
-  icon: React.FC<{ size: number; strokeWidth: number }>;
+  icon: React.FC<{ size?: number }>;
   labelFr: string;
   labelEn: string;
   valueFr: string;

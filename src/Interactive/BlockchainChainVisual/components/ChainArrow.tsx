@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, getTypography, usePageTheme } from "../../../Design";
+import { getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 
 import { ArrowDown } from "@icons";
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const ChainArrow: FC<Props> = ({ isBroken = false, caption }) => {
-  const typo = getTypography();
+  const typo = getTypography(useBreakpoint());
   const { colors, moduleTheme } = usePageTheme();
   const color = isBroken ? colors.semantic.error.text : colors[moduleTheme].text.secondary;
 
@@ -25,11 +25,8 @@ export const ChainArrow: FC<Props> = ({ isBroken = false, caption }) => {
   };
 
   const captionStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
-    letterSpacing: "0.08em",
     color,
   };
 
