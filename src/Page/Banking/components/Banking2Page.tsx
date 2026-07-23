@@ -2,7 +2,6 @@ import { type FC } from "react";
 
 import michuCruise from "../../../../src/Design/img/michu_cruise.webp";
 import michuHouse from "../../../../src/Design/img/michu_house.webp";
-import nicolasRich from "../../../../src/Design/img/nicolas_rich.webp";
 import { Callout, Disclosure, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { CompensationSimulator, Illustration, MonetaryAggregates } from "../../../Interactive";
@@ -38,15 +37,6 @@ export const Banking2Page: FC = () => {
         </Block>
 
         <Block>
-          <Illustration
-            src={nicolasRich}
-            alt={
-              fr
-                ? "Nicolas en smoking et monocle, un éventail de billets à la main"
-                : "Nicolas in black tie and monocle, holding a fan of banknotes"
-            }
-            width="42%"
-          />
           <p>
             {fr ? (
               <>
