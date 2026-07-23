@@ -1,36 +1,45 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { getBrandGold, usePageTheme, useThemeContext } from "../Theme";
+import { getMarkerStroke, getStableSeed } from "../helpers";
+import { BRAND, type ModuleThemeName, usePageTheme, useThemeContext } from "../Theme";
+
+const INK_OPACITY = 0.38;
 
 type HighlightTextProps = {
   children: ReactNode;
-  highLightColorHex?: string;
+  hue?: ModuleThemeName;
 };
 
-const handUnderline = (color: string): string => {
-  const encoded = encodeURIComponent(color);
-  const svg =
-    `%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E` +
-    `%3Cpath d='M1,5 C18,3 34,6.5 50,4.5 C66,2.5 83,6.5 99,4' ` +
-    `stroke='${encoded}' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E`;
-  return `url("data:image/svg+xml,${svg}")`;
-};
-
-export const HighlightText: FC<HighlightTextProps> = ({ children, highLightColorHex }) => {
+export const HighlightText: FC<HighlightTextProps> = ({ children, hue }) => {
   const { theme } = useThemeContext();
   const { colors, moduleTheme } = usePageTheme();
+  const isDark = theme === "dark";
 
-  const moduleAccent = moduleTheme === "base" ? getBrandGold(theme) : colors[moduleTheme].text.secondary;
-  const color = highLightColorHex ?? moduleAccent;
+  // A highlighter lays down a light pigment. On the dark surface that is the
+  // world's pale tint; on paper it is the saturated hue, since the world's text
+  // colour there is a near-brown that dries muddy rather than pastel.
+  const world = hue ?? moduleTheme;
+  const ink =
+    world === "base"
+      ? BRAND.goldDark
+      : isDark
+        ? colors[world].text.secondary
+        : colors[world].background.secondary;
 
+  // The phrase seeds its own stroke, so the same words always get the same
+  // wobble and two highlights in a paragraph never come out identical.
+  const seed = getStableSeed(typeof children === "string" ? children : "marker");
+
+  // Geometry, wrapping and the sweep live in `.marker-highlight`; only the ink
+  // is theme-dependent and therefore computed here.
   const highlightStyle: CSSProperties = {
     fontWeight: 500,
-    backgroundImage: handUnderline(color),
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center bottom",
-    backgroundSize: "100% 0.42em",
-    paddingBottom: "0.1em",
+    backgroundImage: getMarkerStroke(ink, seed, INK_OPACITY),
   };
 
-  return <span style={highlightStyle}>{children}</span>;
+  return (
+    <span className="marker-highlight" style={highlightStyle}>
+      {children}
+    </span>
+  );
 };

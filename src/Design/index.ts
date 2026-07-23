@@ -26,7 +26,7 @@ export { getMonetaryHistory, IdentityCard, RatingRow, useIdentityCard } from "./
 export { MainLayout, useHeaderHidden } from "./Layout";
 export type { Breakpoint } from "./Responsive";
 export { useBreakpoint, useMediaQuery } from "./Responsive";
-export type { RechartsTheme } from "./Theme";
+export type { ModuleThemeName, RechartsTheme } from "./Theme";
 export {
   BRAND,
   getBrandGold,

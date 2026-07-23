@@ -106,6 +106,14 @@ const en = {
 
   "blockAnatomy.title": "Fictional example: Block #100826",
 
+  "hashDemo.placeholder": "Type anything you want...",
+  "hashDemo.run": "Hash",
+  "hashDemo.retry": "Retry",
+  "hashDemo.output": "Generated hash",
+  "hashDemo.noteTitle": "Why you cannot go back",
+  "hashDemo.note":
+    "In practice, there's no way to recover the original text from its hash. Each fingerprint is deterministic, fixed in size (64 hexadecimal characters for SHA-256), and built so that two different inputs are vanishingly unlikely to land on the same fingerprint.",
+
   "chain.block": "Block",
   "chain.header": "Header",
   "chain.body": "Body",
@@ -123,8 +131,9 @@ const en = {
   "chain.modifyTx": "Modify transaction",
   "chain.originalHash": "Original hash",
   "chain.newHash": "New hash",
+  "chain.revealTitle": "Alakazam!",
   "chain.invitation":
-    "ALAKAZAM! 💥 See that? The hash of the first block became the reference of the second. Now, the real show: modify the transaction in block #100826 and watch the chain break.",
+    "See that? The hash of the first block became the reference of the second. Now, the real show: modify the transaction in block #100826 and watch the chain break.",
   "chain.disclosureTitle": "Why only one transaction per block?",
   "chain.disclosureBody":
     "A teaching simplification. In reality, a Bitcoin block contains thousands of transactions, all summed up in the Merkle root. Here we show only one so the mechanism stays readable. Don't worry, the principle is exactly the same.",

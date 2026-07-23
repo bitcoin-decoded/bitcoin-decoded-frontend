@@ -52,7 +52,6 @@ export const BlockCard: FC<Props> = ({
 
   const merkleAccent = block.isEdited ? colors.semantic.error.text : colors.semantic.info.text;
   const prevHashAccent = isBrokenLink ? colors.semantic.error.text : colors.violet.text.secondary;
-  const highlightHex = colors.violet.text.secondary;
 
   const iconSize = isMobile ? 20 : 22;
 
@@ -78,8 +77,10 @@ export const BlockCard: FC<Props> = ({
       />
     ) : highlightChainLink && !isFirstBlock ? (
       <span className="chain-hash-focus">
-        <HighlightText highLightColorHex={highlightHex}>
-          <span style={accentValueStyle(prevHashAccent)}>{truncateHash(block.prevHash)}</span>
+        {/* Neutral, not violet: the marker behind it is violet, and the pair
+            sank into each other. */}
+        <HighlightText hue="violet">
+          <span style={valueStyle}>{truncateHash(block.prevHash)}</span>
         </HighlightText>
       </span>
     ) : (
