@@ -45,12 +45,13 @@ export const NavButton: FC<Props> = ({ page, type }) => {
     alignItems: "center",
     gap: "0.7rem",
     flexDirection: align === "left" ? "row" : "row-reverse",
-    flex: locked ? "0 1 auto" : isMobile ? "0 1 auto" : 1,
-    maxWidth: isMobile ? "20rem" : "100%",
-    // A locked destination is an announcement, not an invitation: it shrinks,
-    // quietens its frame, and moves to the trailing edge, which is where the
-    // next chapter belongs.
-    alignSelf: locked ? "flex-end" : undefined,
+    // Equal halves, so the pair is one size whatever the labels say.
+    flex: "1 1 0",
+    minWidth: 0,
+    maxWidth: "100%",
+    // A locked destination stays the same size as its twin but goes quiet: a
+    // fainter frame, smaller type, secondary ink. It is an announcement rather
+    // than an invitation, and it is the only one you cannot click.
     padding: locked
       ? isMobile
         ? "0.5rem 0.7rem"
