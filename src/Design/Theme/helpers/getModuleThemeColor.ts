@@ -1,6 +1,5 @@
 import type { RouteName } from "../../../Routing/types";
-
-export type ModuleThemeName = "blue" | "amber" | "violet" | "base";
+import type { ModuleThemeName } from "../types";
 
 export const getModuleThemeColor = (
   currentPage: RouteName

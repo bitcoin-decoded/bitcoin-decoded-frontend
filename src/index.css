@@ -295,6 +295,40 @@ body {
   animation: chainFieldReveal 0.75s var(--ease-smooth) both;
 }
 
+/* Marker highlight - the stroke is laid down left to right, like a felt tip */
+@keyframes markerSweep {
+  from {
+    background-size: 0% var(--marker-height);
+  }
+  to {
+    background-size: 100% var(--marker-height);
+  }
+}
+.marker-highlight {
+  /* Taller than the type: a felt tip overshoots the letters rather than
+     tracing them, so the words sit plunged inside the band. */
+  --marker-height: 1.7em;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 100% var(--marker-height);
+  /* A little horizontal padding pushes the first and last glyphs off the round
+     tips onto the solid body; kept small so the stroke hugs the words. */
+  padding: 0.1em 0.24em;
+  margin: 0 -0.18em;
+  /* A wrapped phrase is several inline fragments; without this the browser
+     paints one stroke across them all and the second line comes out bare. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  /* No fill-mode: outside the sweep the rule above holds, so a stroke that
+     never gets to animate is a drawn stroke rather than a missing one. */
+  animation: markerSweep 0.55s var(--ease-smooth);
+}
+@media (prefers-reduced-motion: reduce) {
+  .marker-highlight {
+    animation: none;
+  }
+}
+
 /* Blockchain chain visual - paired hash focus (block N output ↔ block N+1 prev hash) */
 @keyframes chainHashEnter {
   0% {

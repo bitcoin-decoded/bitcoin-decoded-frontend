@@ -1,17 +1,13 @@
 import { type CSSProperties, type FC, useEffect, useRef } from "react";
 
-import {
-  Button,
-  Disclosure,
-  getTypography,
-  useBreakpoint,
-  usePageTheme,
-} from "../../../Design";
+import { Button, Disclosure, FeedbackPanel, useBreakpoint } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useBlockchainChainVisual } from "../hooks";
 
 import { BlockCard } from "./BlockCard";
 import { ChainArrow } from "./ChainArrow";
+
+import { DoodleMagicHat } from "@doodle";
 
 type Props = {
   resetScrollTargetId?: string;
@@ -20,10 +16,7 @@ type Props = {
 
 export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComplete }) => {
   const { t } = useTranslation();
-  const { colors, moduleTheme } = usePageTheme();
-  const breakpoint = useBreakpoint();
-  const isMobile = breakpoint === "mobile";
-  const typo = getTypography(breakpoint);
+  const isMobile = useBreakpoint() === "mobile";
   const { blocks, addPhase, canAddBlock, canEdit, editTx, addBlock, reset } =
     useBlockchainChainVisual(onComplete);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -94,13 +87,6 @@ export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComple
     gap: "0.6rem",
   };
 
-  const invitationStyle: CSSProperties = {
-    ...typo.note,
-    color: colors[moduleTheme].text.secondary,
-    textAlign: "center",
-    whiteSpace: "pre-line",
-  };
-
   return (
     <div ref={containerRef} style={containerStyle}>
       <div style={chainStyle}>
@@ -143,7 +129,16 @@ export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComple
         </Button>
       </div>
 
-      {showInvitation && <p style={invitationStyle}>{t("chain.invitation")}</p>}
+      {showInvitation && (
+        <FeedbackPanel
+          tone="info"
+          title={t("chain.revealTitle")}
+          icon={<DoodleMagicHat size={isMobile ? 22 : 26} />}
+          style={{ width: "100%" }}
+        >
+          {t("chain.invitation")}
+        </FeedbackPanel>
+      )}
     </div>
   );
 };

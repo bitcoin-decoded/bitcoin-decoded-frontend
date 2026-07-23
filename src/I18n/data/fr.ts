@@ -107,6 +107,14 @@ const fr = {
 
   "blockAnatomy.title": "Exemple fictif : Bloc #100826",
 
+  "hashDemo.placeholder": "Entres ce que tu veux...",
+  "hashDemo.run": "Hacher",
+  "hashDemo.retry": "Réessayer",
+  "hashDemo.output": "Empreinte générée",
+  "hashDemo.noteTitle": "Pourquoi on ne peut pas revenir en arrière",
+  "hashDemo.note":
+    "En pratique, il est impossible de retrouver le texte d'origine à partir de son hash. Chaque empreinte est déterministe, de taille fixe (64 caractères hexadécimaux pour SHA-256) et conçue pour que deux entrées différentes produisent quasiment jamais la même empreinte.",
+
   "chain.block": "Bloc",
   "chain.header": "En-tête",
   "chain.body": "Corps",
@@ -124,8 +132,9 @@ const fr = {
   "chain.modifyTx": "Modifier la transaction",
   "chain.originalHash": "Hash d'origine",
   "chain.newHash": "Nouveau hash",
+  "chain.revealTitle": "Alakazam !",
   "chain.invitation":
-    "ALAKAZAM ! 💥 Tu vois ? Le hash du premier bloc est devenu la référence du second. Maintenant, le clou du spectacle : modifie la transaction du bloc #100826 et regarde la chaîne se briser.",
+    "Tu vois ? Le hash du premier bloc est devenu la référence du second. Maintenant, le clou du spectacle : modifie la transaction du bloc #100826 et regarde la chaîne se briser.",
   "chain.disclosureTitle": "Pourquoi une seule transaction par bloc ?",
   "chain.disclosureBody":
     "Simplification pédagogique. Dans la réalité, un bloc Bitcoin contient des milliers de transactions, toutes résumées dans la racine de Merkle. Ici, on n'en met qu'une pour que le mécanisme reste lisible. Rassure-toi, le principe est exactement le même.",

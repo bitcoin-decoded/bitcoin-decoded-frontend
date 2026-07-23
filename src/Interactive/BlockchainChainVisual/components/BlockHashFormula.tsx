@@ -59,7 +59,9 @@ export const BlockHashFormula: FC<Props> = ({
     gap: "0.4rem",
   };
 
-  const hashValueStyle: CSSProperties = { ...typo.figure, color: accent };
+  // Neutral, never violet: the value sits on a violet-tinted panel, and behind
+  // the highlighted one runs a violet marker, so violet ink dissolved into both.
+  const hashValueStyle: CSSProperties = { ...typo.figure, color: colors.base.text.primary };
 
   return (
     <div style={container} {...(isAnchor ? { "data-first-block-hash": "true" } : {})}>
@@ -74,7 +76,7 @@ export const BlockHashFormula: FC<Props> = ({
           <span style={{ opacity: 0.7 }}>=</span>
           {highlightHash ? (
             <span className="chain-hash-focus">
-              <HighlightText highLightColorHex={colors.violet.text.secondary}>
+              <HighlightText hue="violet">
                 <span style={hashValueStyle}>{truncateHash(hash)}</span>
               </HighlightText>
             </span>

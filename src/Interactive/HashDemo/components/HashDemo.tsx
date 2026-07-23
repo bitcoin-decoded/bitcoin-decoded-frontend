@@ -1,101 +1,114 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
-import { useLanguageContext } from "../../../I18n";
+import {
+  BRAND,
+  Button,
+  Caption,
+  Disclosure,
+  getTypography,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
+import { useTranslation } from "../../../I18n";
 import { useHashDemo } from "../hooks";
 
-import { CircleCheck, Hash, RotateCcw } from "@icons";
+import { DoodleHash } from "@doodle";
 
 type Props = {
   onComplete?: () => void;
 };
 
 export const HashDemo: FC<Props> = ({ onComplete }) => {
-  const typo = getTypography();
-  const { language } = useLanguageContext();
-  const fr = language === "fr";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
+  const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const { theme } = useThemeContext();
   const world = colors[moduleTheme];
   const { input, setInput, hash, hasHashed, handleHash, handleReset } = useHashDemo(onComplete);
 
   const disabled = hash !== null;
   const hashDisabled = input.length === 0 || disabled;
 
+  // A wash rather than a slab: the demo sits inside a tinted callout, and the
+  // opaque `background.secondary` punched a cold hole through it.
+  const fieldFill = withOpacity(colors.base.text.primary, theme === "dark" ? 0.05 : 0.035);
+
   const inputStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.note.fontSize,
+    ...typo.figure,
     padding: isMobile ? "0.7rem 1rem" : "0.75rem 1.25rem",
-    borderRadius: 0,
-    border: `1px solid ${hash ? world.border.secondary : colors.base.border.secondary}`,
-    background: colors.base.background.secondary,
+    border: `${BRAND.figures.ruleThickness}px solid ${
+      hash ? world.border.secondary : colors.base.border.tertiary
+    }`,
+    background: fieldFill,
     color: disabled ? colors.base.text.secondary : colors.base.text.primary,
     width: "100%",
-    transition: "all 0.3s var(--ease-smooth)",
-    opacity: disabled ? 0.5 : 1,
+    boxSizing: "border-box",
+    transition: "border-color 0.3s var(--ease-smooth), opacity 0.3s var(--ease-smooth)",
+    opacity: disabled ? 0.6 : 1,
     cursor: disabled ? "default" : "text",
   };
 
   const outputBox: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    lineHeight: 1.6,
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.4rem",
     padding: isMobile ? "0.75rem 1rem" : "1rem 1.25rem",
-    borderRadius: 0,
-    background: withOpacity(world.background.secondary, 0.06),
-    border: `1px solid ${withOpacity(world.border.secondary, 0.3)}`,
+    background: fieldFill,
+    border: `${BRAND.figures.ruleThickness}px solid ${withOpacity(world.border.secondary, 0.35)}`,
+  };
+
+  const outputLabelStyle: CSSProperties = {
+    ...typo.label,
+    fontVariant: "small-caps",
     color: world.text.secondary,
+  };
+
+  const hashStyle: CSSProperties = {
+    ...typo.figure,
+    color: colors.base.text.primary,
     wordBreak: "break-all",
-    textAlign: "left",
+    lineHeight: 1.6,
   };
 
   return (
-    <SurfaceCard
-      glowColor={hash ? world.border.secondary : colors.base.border.secondary}
-      style={{ marginTop: "0.75rem" }}
-    >
-      <Caption icon={<Hash size={isMobile ? 16 : 18} strokeWidth={2} />}>SHA-256</Caption>
+    <SurfaceCard style={{ marginTop: "0.75rem" }}>
+      <Caption icon={<DoodleHash size={isMobile ? 22 : 24} />}>SHA-256</Caption>
 
       <input
         type="text"
         maxLength={50}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={fr ? "Entres ce que tu veux..." : "Type anything you want..."}
+        placeholder={t("hashDemo.placeholder")}
         style={inputStyle}
         disabled={disabled}
       />
 
       <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
         <Button onClick={handleHash} disabled={hashDisabled}>
-          {fr ? "▶ Hacher" : "▶ Hash"}
+          {t("hashDemo.run")}
         </Button>
         {hash && (
-          <Button
-            variant="secondary"
-            onClick={handleReset}
-            icon={<RotateCcw size={isMobile ? 12 : 14} strokeWidth={2} />}
-          >
-            {fr ? "Réessayer" : "Retry"}
+          <Button variant="secondary" onClick={handleReset}>
+            {t("hashDemo.retry")}
           </Button>
         )}
       </div>
 
       {hash && (
         <div style={outputBox}>
-          {fr ? "Empreinte générée :" : "Generated hash:"} <strong>{hash}</strong>
+          <span style={outputLabelStyle}>{t("hashDemo.output")}</span>
+          <span style={hashStyle}>{hash}</span>
         </div>
       )}
 
       {hasHashed && hash && (
-        <FeedbackPanel
-          tone="success"
-          icon={<CircleCheck size={18} strokeWidth={2} color={colors.semantic.success.text} />}
-        >
-          {fr
-            ? "En pratique, il est impossible de retrouver le texte d'origine à partir de son hash. Chaque empreinte est déterministe, de taille fixe (64 caractères hexadécimaux pour SHA-256) et conçue pour que deux entrées différentes produisent quasiment jamais la même empreinte."
-            : "In practice, there's no way to recover the original text from its hash. Each fingerprint is deterministic, fixed in size (64 hexadecimal characters for SHA-256), and built so that two different inputs are vanishingly unlikely to land on the same fingerprint."}
-        </FeedbackPanel>
+        <Disclosure title={t("hashDemo.noteTitle")}>{t("hashDemo.note")}</Disclosure>
       )}
     </SurfaceCard>
   );
