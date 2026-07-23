@@ -1,10 +1,10 @@
 import type { BlockField } from "../types";
 
-import { List } from "@icons";
+import { DoodleBookPages } from "@doodle";
 
 export const BODY_FIELDS: BlockField[] = [
   {
-    icon: List,
+    icon: DoodleBookPages,
     labelFr: "Transactions",
     labelEn: "Transactions",
     valueFr: "3 240 transactions",

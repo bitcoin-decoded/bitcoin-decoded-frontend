@@ -104,6 +104,8 @@ const en = {
 
   "monetaryProperties.sectionTitle": "Scarcity versus Hardness",
 
+  "blockAnatomy.title": "Fictional example: Block #100826",
+
   "chain.block": "Block",
   "chain.header": "Header",
   "chain.body": "Body",

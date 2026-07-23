@@ -1,9 +1,7 @@
-import { type CSSProperties, type FC } from "react";
+import { type FC } from "react";
 
-import { BRAND, getTypography, usePageTheme, withOpacity } from "../../../Design";
+import { Button, usePageTheme } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-
-import { Shuffle } from "@icons";
 
 type Props = {
   onClick: () => void;
@@ -12,41 +10,19 @@ type Props = {
 };
 
 export const ModifyTxButton: FC<Props> = ({ onClick, blockNumber, disabled = false }) => {
-  const typo = getTypography();
   const { t } = useTranslation();
   const { colors } = usePageTheme();
 
-  const buttonStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    color: colors.semantic.error.text,
-    padding: "0.3rem 0.5rem",
-    borderRadius: 0,
-    background: withOpacity(colors.semantic.error.text, 0.1),
-    border: `1px solid ${withOpacity(colors.semantic.error.border, 0.4)}`,
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.3rem",
-    cursor: disabled ? "not-allowed" : "pointer",
-    fontVariant: "small-caps",
-    letterSpacing: "0.05em",
-    whiteSpace: "nowrap",
-    flexShrink: 0,
-    opacity: disabled ? 0.4 : 1,
-    transition: "opacity 0.25s var(--ease-smooth), background 0.2s var(--ease-smooth)",
-  };
-
   return (
-    <button
-      type="button"
+    <Button
+      variant="secondary"
+      size="sm"
+      color={colors.semantic.error.text}
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
-      aria-label={`${t("chain.editTx")} #${blockNumber}`}
-      style={buttonStyle}
+      ariaLabel={`${t("chain.editTx")} #${blockNumber}`}
     >
-      <Shuffle size={12} strokeWidth={2.5} />
       {t("chain.modifyTx")}
-    </button>
+    </Button>
   );
 };

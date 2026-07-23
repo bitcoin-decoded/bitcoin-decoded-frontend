@@ -2,19 +2,16 @@ import { type CSSProperties, type FC, useEffect, useRef } from "react";
 
 import {
   Button,
-  Caption,
   Disclosure,
+  getTypography,
   useBreakpoint,
   usePageTheme,
-  withOpacity,
 } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useBlockchainChainVisual } from "../hooks";
 
 import { BlockCard } from "./BlockCard";
 import { ChainArrow } from "./ChainArrow";
-
-import { Plus, RotateCcw, Sparkles } from "@icons";
 
 type Props = {
   resetScrollTargetId?: string;
@@ -24,7 +21,9 @@ type Props = {
 export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComplete }) => {
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { blocks, addPhase, canAddBlock, canEdit, editTx, addBlock, reset } =
     useBlockchainChainVisual(onComplete);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -76,7 +75,7 @@ export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComple
     alignItems: "center",
     gap: "1.25rem",
     width: "100%",
-    maxWidth: "26rem",
+    maxWidth: "38rem",
     margin: isMobile ? "1.5rem auto 2rem" : "2rem auto 2.5rem",
   };
 
@@ -96,17 +95,9 @@ export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComple
   };
 
   const invitationStyle: CSSProperties = {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: "0.5rem",
-    padding: "0.65rem 0.9rem",
-    borderRadius: 0,
-    background: withOpacity(colors[moduleTheme].background.secondary, 0.08),
-    border: `1px dashed ${withOpacity(colors[moduleTheme].border.secondary, 0.4)}`,
-    color: colors[moduleTheme].text.primary,
-    letterSpacing: "0.01em",
-    lineHeight: 1.4,
-    textAlign: "left",
+    ...typo.note,
+    color: colors[moduleTheme].text.secondary,
+    textAlign: "center",
     whiteSpace: "pre-line",
   };
 
@@ -144,30 +135,15 @@ export const BlockchainChainVisual: FC<Props> = ({ resetScrollTargetId, onComple
       </Disclosure>
 
       <div style={controlsStyle}>
-        <Button
-          onClick={handleAdd}
-          disabled={!canAddBlock}
-          icon={<Plus size={14} strokeWidth={2.5} />}
-          size="sm"
-        >
+        <Button onClick={handleAdd} disabled={!canAddBlock} size="sm">
           {t("chain.addBlock")}
         </Button>
-        <Button
-          variant="secondary"
-          onClick={handleReset}
-          icon={<RotateCcw size={14} strokeWidth={2} />}
-          size="sm"
-        >
+        <Button variant="secondary" onClick={handleReset} size="sm">
           {t("chain.reset")}
         </Button>
       </div>
 
-      {showInvitation && (
-        <Caption tone="world" variant="note" size="sm" as="p" style={invitationStyle}>
-          <Sparkles size={14} strokeWidth={2} style={{ flexShrink: 0, marginTop: "0.15rem" }} />
-          <span>{t("chain.invitation")}</span>
-        </Caption>
-      )}
+      {showInvitation && <p style={invitationStyle}>{t("chain.invitation")}</p>}
     </div>
   );
 };
