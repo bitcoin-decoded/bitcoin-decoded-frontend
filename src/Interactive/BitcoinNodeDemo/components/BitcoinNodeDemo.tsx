@@ -95,9 +95,12 @@ export const BitcoinNodeDemo: FC = () => {
     width: tileWidth,
     padding: isMobile ? "0.9rem 0.6rem" : "1.1rem 1rem",
     borderRadius: 0,
+    // A wash rather than a slab. `background.tertiary` is an opaque grey, and
+    // dropped into the warm tint of a callout it punched a cold hole through
+    // it. Translucent, the tile lifts off whatever it is actually sitting on.
     background: isLaunched
       ? withOpacity(world.background.secondary, 0.1)
-      : colors.base.background.tertiary,
+      : withOpacity(colors.base.text.primary, theme === "dark" ? 0.05 : 0.04),
     // One border, four equal sides, in every state. Hiding the seam by clearing
     // a single edge left that edge out of step with the other three, and it
     // read as a heavier rule rather than as no rule at all.

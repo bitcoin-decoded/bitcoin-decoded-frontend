@@ -1,11 +1,20 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { Caption, ExploredCounter, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  BRAND,
+  Button,
+  ExploredCounter,
+  getBrandGold,
+  getTypography,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { renderActionButton, renderFeedback } from "../helpers";
 import { useTrustComparisonDemo } from "../hooks";
-
-import { Ban, Bitcoin, CirclePlus, Landmark, ShieldCheck, ShieldOff } from "@icons";
 
 const REQUIRED_EXPLORED = 2;
 
@@ -14,12 +23,13 @@ type Props = {
 };
 
 export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t, language } = useTranslation();
   const fr = language === "fr";
-  const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
-  const world = colors[moduleTheme];
+  const { colors } = usePageTheme();
+  const { theme } = useThemeContext();
   const gated = onComplete !== undefined;
 
   const {
@@ -31,47 +41,157 @@ export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
     bitcoinCensorTx,
     fiatTrustBroken,
     bitcoinAttempted,
+    hasActed,
+    reset,
     exploredCount,
   } = useTrustComparisonDemo({ requiredExplored: gated ? REQUIRED_EXPLORED : 0, onComplete });
 
-  const danger = colors.semantic.error.text;
-  const success = colors.semantic.success.text;
+  const gold = getBrandGold(theme);
   const textPrimary = colors.base.text.primary;
   const textSecondary = colors.base.text.secondary;
-  const borderSecondary = colors.base.border.secondary;
-  const iconSize = isMobile ? 14 : 16;
 
-  const fiatAccent = fiatTrustBroken ? danger : borderSecondary;
-  const bitcoinAccent = bitcoinAttempted ? success : world.border.secondary;
+  // Gold is the measure of trust, so both sides are drawn in it and only its
+  // strength differs: break the fiat side and its gold fades, push on the
+  // Bitcoin side and its gold holds. Green and red said the opposite of what
+  // happens here, since creating money out of thin air succeeds, which is the
+  // bad news, and the attempt on Bitcoin fails, which is the good news.
+  //
+  // The strength is a number rather than a pre-dimmed colour: `withOpacity`
+  // replaces an alpha instead of multiplying it, so nesting two calls silently
+  // dropped the first.
+  const IDLE_STRENGTH = 0.22;
+  const fiatStrength = fiatTrustBroken ? 0.12 : IDLE_STRENGTH;
+  const bitcoinStrength = bitcoinAttempted ? 0.5 : IDLE_STRENGTH;
 
-  const panel = (accent: string): CSSProperties => ({
+  const headerStyle: CSSProperties = {
+    ...typo.kicker,
+    color: gold,
+    textAlign: "center",
+    paddingBottom: "0.7rem",
+    borderBottom: `${BRAND.figures.ruleThickness}px solid ${withOpacity(gold, 0.4)}`,
+  };
+
+  const gridStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    alignItems: "stretch",
+    gap: isMobile ? "1.25rem" : "1.75rem",
+    width: "100%",
+  };
+
+  const panelStyle = (strength: number): CSSProperties => ({
     flex: 1,
     minWidth: 0,
     display: "flex",
     flexDirection: "column",
-    gap: "1rem",
+    gap: "0.85rem",
     padding: isMobile ? "1rem" : "1.25rem",
     borderRadius: 0,
-    border: `1px solid ${withOpacity(accent, 0.25)}`,
-    background: withOpacity(accent, 0.03),
-    transition: "all 0.35s var(--ease-smooth)",
+    border: `1px solid ${withOpacity(gold, strength)}`,
+    background: withOpacity(gold, strength * 0.16),
+    transition: "border-color 0.4s var(--ease-smooth), background 0.4s var(--ease-smooth)",
   });
 
-  const infoBox = (accent: string): CSSProperties => ({
-    display: "flex",
-    alignItems: "flex-start",
-    gap: "0.5rem",
-    padding: "0.75rem 1rem",
-    borderRadius: 0,
-    background: withOpacity(accent, 0.06),
-    border: `1px solid ${withOpacity(accent, 0.15)}`,
-    fontSize: typo.note.fontSize,
-    lineHeight: 1.5,
+  const panelTitleStyle: CSSProperties = {
+    ...typo.label,
+    fontVariant: "small-caps",
     color: textPrimary,
+    textAlign: "left",
+  };
+
+  // The reading column is justified, and these short lines would open rivers
+  // of white inside a narrow panel, so they opt out explicitly.
+  const stateStyle = (accent: string): CSSProperties => ({
+    ...typo.note,
+    color: accent,
+    textAlign: "left",
+    minHeight: "2.6em",
   });
+
+  const effectStyle: CSSProperties = {
+    ...typo.note,
+    color: textSecondary,
+    textAlign: "left",
+  };
+
+  const trustLine = (broken: boolean, side: "fiat" | "bitcoin"): string => {
+    if (side === "fiat") {
+      return broken
+        ? fr
+          ? "Confiance rompue. Rien ne t'en a empêché."
+          : "Trust broken. Nothing stopped you."
+        : fr
+          ? "Repose sur la confiance. La tienne, ici."
+          : "Rests on trust. Yours, right here.";
+    }
+    return broken
+      ? fr
+        ? "Confiance intacte. Le code a refusé, pas un arbitre."
+        : "Trust intact. The code refused, not a referee."
+      : fr
+        ? "Ne demande aucune confiance. Essaie donc."
+        : "Asks for no trust. Go ahead and try.";
+  };
+
+  const panel = (side: "fiat" | "bitcoin"): ReactNode => {
+    const isFiat = side === "fiat";
+    const strength = isFiat ? fiatStrength : bitcoinStrength;
+    const touched = isFiat ? fiatTrustBroken : bitcoinAttempted;
+    const state = isFiat ? fiat : bitcoin;
+    // The state line follows the panel: dimmed where trust was lost, full
+    // strength where it held.
+    const accent = withOpacity(gold, isFiat && touched ? 0.55 : 1);
+
+    return (
+      <div style={panelStyle(strength)}>
+        <span style={panelTitleStyle}>{isFiat ? (fr ? "Monnaie fiat" : "Fiat money") : "Bitcoin"}</span>
+        <span style={stateStyle(touched ? accent : textSecondary)}>
+          {trustLine(touched, side)}
+        </span>
+
+        {renderActionButton(
+          state.createMoney,
+          isFiat ? fiatCreateMoney : bitcoinCreateMoney,
+          fr ? "Créer de la monnaie" : "Create money",
+          accent,
+        )}
+        {renderFeedback(
+          state.createMoney,
+          isFiat
+            ? fr
+              ? "Monnaie créée. L'épargne de tout le monde vient d'être diluée."
+              : "Money created. Everyone's savings just got diluted."
+            : fr
+              ? "Refusé. Les 21 millions sont dans le code, et chaque nœud rejetterait la transaction."
+              : "Refused. The 21 million cap is in the code, and every node would reject the transaction.",
+          accent,
+          effectStyle,
+        )}
+
+        {renderActionButton(
+          state.censorTx,
+          isFiat ? fiatCensorTx : bitcoinCensorTx,
+          fr ? "Censurer une transaction" : "Censor a transaction",
+          accent,
+        )}
+        {renderFeedback(
+          state.censorTx,
+          isFiat
+            ? fr
+              ? "Transaction censurée. L'utilisateur n'a aucun recours."
+              : "Transaction censored. The user has no recourse."
+            : fr
+              ? "Refusé. Aucun acteur seul n'a ce pouvoir sur le réseau."
+              : "Refused. No single actor holds that power over the network.",
+          accent,
+          effectStyle,
+        )}
+      </div>
+    );
+  };
 
   return (
-    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2rem 0"} gap="1rem">
+    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2rem 0"} gap="1.25rem">
       {gated && (
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <ExploredCounter
@@ -81,134 +201,21 @@ export const TrustComparisonDemo: FC<Props> = ({ onComplete }) => {
           />
         </div>
       )}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          gap: isMobile ? "1.5rem" : "2rem",
-          width: "100%",
-        }}
-      >
-        <div style={panel(fiatAccent)}>
-          <Caption
-            icon={<Landmark size={isMobile ? 16 : 18} />}
-            tone="accent"
-            size="md"
-            color={textPrimary}
-          >
-            {fr ? "Monnaie Fiat" : "Fiat Currency"}
-          </Caption>
 
-          <div style={infoBox(fiatTrustBroken ? danger : textSecondary)}>
-            {fiatTrustBroken ? (
-              <ShieldOff size={16} color={danger} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
-            ) : (
-              <ShieldCheck size={16} style={{ flexShrink: 0, marginTop: "0.1rem" }} />
-            )}
-            <span>
-              {fiatTrustBroken
-                ? fr
-                  ? "La confiance peut être rompue. Et c'est exactement ce qui se passe dans le système actuel."
-                  : "Trust can be broken. And that's exactly what's happening in the current system."
-                : fr
-                  ? "On te fait confiance pour ne cliquer sur aucun des deux boutons ci-dessous."
-                  : "We're trusting you not to click either of the buttons below."}
-            </span>
-          </div>
+      <span style={headerStyle}>{fr ? "État de la confiance" : "State of trust"}</span>
 
-          {renderActionButton(
-            fiat.createMoney,
-            fiatCreateMoney,
-            <CirclePlus size={iconSize} />,
-            fr ? "Créer de la monnaie" : "Create money",
-          )}
-          {renderFeedback(
-            fiat.createMoney,
-            fr
-              ? "Monnaie créée. L'épargne de tout le monde vient d'être diluée."
-              : "Money created. Everyone's savings just got diluted.",
-            null,
-            success,
-            danger,
-          )}
-
-          {renderActionButton(
-            fiat.censorTx,
-            fiatCensorTx,
-            <Ban size={iconSize} />,
-            fr ? "Censurer une transaction" : "Censor a transaction",
-          )}
-          {renderFeedback(
-            fiat.censorTx,
-            fr
-              ? "Transaction censurée. L'utilisateur n'a aucun recours."
-              : "Transaction censored. The user has no recourse.",
-            null,
-            success,
-            danger,
-          )}
-        </div>
-
-        <div style={panel(bitcoinAccent)}>
-          <Caption
-            icon={<Bitcoin size={isMobile ? 16 : 18} color={world.text.secondary} />}
-            tone="accent"
-            size="md"
-            color={textPrimary}
-          >
-            Bitcoin
-          </Caption>
-
-          <div style={infoBox(bitcoinAttempted ? success : world.text.secondary)}>
-            <ShieldCheck
-              size={16}
-              color={bitcoinAttempted ? success : world.text.secondary}
-              style={{ flexShrink: 0, marginTop: "0.1rem" }}
-            />
-            <span>
-              {bitcoinAttempted
-                ? fr
-                  ? "Le protocole a fait son travail. Pas de PDG à appeler, pas de comité à supplier, pas de ministre à convaincre. Reste à faire confiance au code lui-même, que chacun de nous peut lire."
-                  : "The protocol did its job. No CEO to call, no committee to beg, no minister to convince. The only thing left to trust is the code itself, which anyone can read."
-                : fr
-                  ? "Pas besoin de te faire confiance ici. Mais tente quand même."
-                  : "No need to trust you here. But go ahead and try."}
-            </span>
-          </div>
-
-          {renderActionButton(
-            bitcoin.createMoney,
-            bitcoinCreateMoney,
-            <CirclePlus size={iconSize} />,
-            fr ? "Créer de la monnaie" : "Create money",
-          )}
-          {renderFeedback(
-            bitcoin.createMoney,
-            null,
-            fr
-              ? "Échec. L'offre maximale de 21 millions est gravée dans le code, et chaque nœud du réseau refuserait la transaction."
-              : "Failed. The maximum supply of 21 million is hard-coded, and every node on the network would reject the transaction.",
-            success,
-            danger,
-          )}
-
-          {renderActionButton(
-            bitcoin.censorTx,
-            bitcoinCensorTx,
-            <Ban size={iconSize} />,
-            fr ? "Censurer une transaction" : "Censor a transaction",
-          )}
-          {renderFeedback(
-            bitcoin.censorTx,
-            null,
-            fr
-              ? "Échec. Aucun acteur unique n'a ce pouvoir sur le réseau lui-même."
-              : "Failed. No single actor has that power over the network itself.",
-            success,
-            danger,
-          )}
-        </div>
+      <div style={gridStyle}>
+        {panel("fiat")}
+        {panel("bitcoin")}
       </div>
+
+      {hasActed && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="secondary" onClick={reset}>
+            {fr ? "Réinitialiser" : "Reset"}
+          </Button>
+        </div>
+      )}
     </SurfaceCard>
   );
 };

@@ -30,3 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Sources brutes des illustrations : planches d origine et kits de logo. Seuls
+# les WebP derives sont versionnes.
+src/Design/img/*_board.png
+src/Design/img/* board.png
+src/Design/img/*.zip
