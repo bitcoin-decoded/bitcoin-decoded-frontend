@@ -61,6 +61,10 @@ export const Button: FC<Props> = ({
   const padY = size === "sm" ? "0.45rem" : "0.6rem";
   const padXMd = size === "sm" ? "1rem" : "1.5rem";
   const padYMd = size === "sm" ? "0.5rem" : "0.65rem";
+  // Stacked controls have to line up, so primary and stamped take one height
+  // rather than each finding its own. Stamped used to be 28px tall against a
+  // primary near 44, which read as squashed under the button above it.
+  const controlHeight = size === "sm" ? (isMobile ? 34 : 36) : isMobile ? 44 : 46;
 
   const baseStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
@@ -92,6 +96,7 @@ export const Button: FC<Props> = ({
     const bracketColor = isLifted ? accent : withOpacity(accent, 0.9);
     variantStyle = {
       padding: isMobile ? `${padY} ${padX}` : `${padYMd} ${padXMd}`,
+      minHeight: controlHeight,
       color: colors.base.text.primary,
       background: withOpacity(accent, isLifted ? 0.2 : 0.11),
       border: `1px solid ${withOpacity(accent, isLifted ? 0.8 : 0.5)}`,
@@ -124,7 +129,7 @@ export const Button: FC<Props> = ({
       background: withOpacity(neutralText, isLifted ? 0.06 : 0),
     };
   } else if (variant === "stamped") {
-    const stampHeight = size === "sm" ? 24 : 28;
+    const stampHeight = controlHeight;
     variantStyle = {
       padding: 0,
       height: stampHeight,

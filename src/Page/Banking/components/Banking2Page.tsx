@@ -1,7 +1,7 @@
 import { type FC } from "react";
 
+import michuCruise from "../../../../src/Design/img/michu_cruise.webp";
 import michuHouse from "../../../../src/Design/img/michu_house.webp";
-import nicolasMichuTransfer from "../../../../src/Design/img/nicolas_michu_transfer.webp";
 import nicolasRich from "../../../../src/Design/img/nicolas_rich.webp";
 import { Callout, Disclosure, Reference } from "../../../Design";
 import { useTranslation } from "../../../I18n";
@@ -175,13 +175,13 @@ export const Banking2Page: FC = () => {
               )}
             </p>
             <Illustration
-              src={nicolasMichuTransfer}
+              src={michuCruise}
               alt={
                 fr
-                  ? "Nicolas appuie sur le bouton du virement, Mme Michu trinque en croisière"
-                  : "Nicolas presses the transfer button while Ms. Smith toasts on a cruise"
+                  ? "Mme Michu trinque au champagne sur le pont d'un bateau de croisière"
+                  : "Ms. Smith raising a glass of champagne on a cruise ship deck"
               }
-              width="92%"
+              width="62%"
               margin="1.5rem auto"
             />
             <p>

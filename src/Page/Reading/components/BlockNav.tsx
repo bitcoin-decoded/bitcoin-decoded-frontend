@@ -42,12 +42,17 @@ export const BlockNav: FC<Props> = ({
     marginTop: "1.75rem",
   };
 
+  // One left, one right, at every width. Stacked they were a column of
+  // lookalike blocks; side by side the pair says back and forward on its own.
   const rowStyle: CSSProperties = {
     display: "flex",
-    flexDirection: isMobile ? "column" : "row",
-    alignItems: "center",
-    gap: "0.85rem",
+    flexDirection: "row",
+    alignItems: "stretch",
+    gap: isMobile ? "0.5rem" : "0.85rem",
   };
+
+  // Equal halves, so the two controls are the same size whatever their labels.
+  const cellStyle: CSSProperties = { flex: "1 1 0", display: "flex", minWidth: 0 };
 
   return (
     <div style={wrapperStyle}>
@@ -63,27 +68,31 @@ export const BlockNav: FC<Props> = ({
         </Caption>
       )}
       <div style={rowStyle}>
-        {!isFirst && (
-          <Button
-            variant="primary"
-            color={moduleColor}
-            icon={<DoodleArrowUp size={24} />}
-            hideBrackets
-            onClick={onPrev}
-            style={{ opacity: 0.75 }}
-          >
-            {t("reading.previous")}
-          </Button>
-        )}
-        <div style={{ marginLeft: isMobile ? undefined : "auto" }}>
+        <div style={cellStyle}>
+          {!isFirst && (
+            <Button
+              variant="primary"
+              color={moduleColor}
+              icon={<DoodleArrowUp size={24} />}
+              hideBrackets
+              fullWidth
+              onClick={onPrev}
+              style={{ opacity: 0.75 }}
+            >
+              {t("reading.previous")}
+            </Button>
+          )}
+        </div>
+        <div style={cellStyle}>
           {isLast && outOfSequence ? (
-            <Button variant="primary" color={moduleColor} onClick={onResume}>
+            <Button variant="primary" color={moduleColor} fullWidth onClick={onResume}>
               {resumeLabel}
             </Button>
           ) : isLast ? (
             <Button
               variant="stamped"
               color={moduleColor}
+              fullWidth
               disabled={locked}
               onClick={onFinish}
             >
@@ -96,6 +105,7 @@ export const BlockNav: FC<Props> = ({
               icon={<DoodleArrowDown size={24} />}
               iconPosition="right"
               hideBrackets
+              fullWidth
               disabled={locked}
               onClick={onNext}
             >

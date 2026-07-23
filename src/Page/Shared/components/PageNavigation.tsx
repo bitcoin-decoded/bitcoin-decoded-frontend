@@ -13,10 +13,12 @@ export const PageNavigation: FC = () => {
 
   const containerStyle: CSSProperties = {
     display: "flex",
-    flexDirection: isMobile ? "column" : "row",
+    // One left, one right, at every width: the pair reads as back and forward
+    // on its own, which a stacked column never did.
+    flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: isMobile ? "center" : undefined,
-    gap: isMobile ? "0.75rem" : "1rem",
+    alignItems: "stretch",
+    gap: isMobile ? "0.5rem" : "1rem",
     marginTop: "3rem",
     paddingTop: "1.5rem",
     borderTop: `1px solid ${withOpacity(colors.base.text.primary, 0.1)}`,
@@ -27,12 +29,12 @@ export const PageNavigation: FC = () => {
       {previousPage ? (
         <NavButton page={previousPage} type="prev" />
       ) : (
-        !isMobile && <div style={{ flex: 1 }} />
+        <div style={{ flex: "1 1 0" }} />
       )}
       {nextPage ? (
         <NavButton page={nextPage} type="next" />
       ) : (
-        !isMobile && <div style={{ flex: 1 }} />
+        <div style={{ flex: "1 1 0" }} />
       )}
     </nav>
   );
