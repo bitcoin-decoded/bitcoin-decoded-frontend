@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { LINKS, NODES } from "../data";
 
@@ -35,11 +35,8 @@ export const BitcoinNetworkMap: FC = () => {
   const cpuSize = isMobile ? 9 : 11;
 
   const titleStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
+    ...typo.label,
     fontVariant: "small-caps",
-    letterSpacing: "0.08em",
     color: world.text.secondary,
     textAlign: "center",
     marginTop: "0.5rem",
@@ -95,12 +92,12 @@ export const BitcoinNetworkMap: FC = () => {
             color: world.text.secondary,
           };
 
+          // The node names are what the map is read by, so they take the
+          // label role whole rather than a micro size with a weight bolted on:
+          // Cutive Mono has one weight, and 500 only synthesised a faux bold.
           const labelNodeStyle: CSSProperties = {
-            fontFamily: BRAND.fonts.mono,
-            fontSize: typo.micro.fontSize,
-            fontWeight: 500,
+            ...typo.label,
             color: colors.base.text.secondary,
-            letterSpacing: "0.05em",
           };
 
           return (
