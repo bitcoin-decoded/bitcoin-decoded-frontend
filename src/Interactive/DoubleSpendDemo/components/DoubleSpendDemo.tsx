@@ -1,22 +1,29 @@
-import { type CSSProperties, type FC, type ReactNode } from "react";
+import { type CSSProperties, type FC } from "react";
 
-import { Badge, BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Button,
+  FeedbackPanel,
+  getTypography,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { BRANCHES, CITIES } from "../data";
 import { useDoubleSpendDemo } from "../hooks";
 import type { Branch, TxId } from "../types";
 
 import {
-  ArrowDown,
-  ArrowDownLeft,
-  ArrowDownRight,
-  Coins,
-  Eye,
-  Monitor,
-  RotateCcw,
-  User,
-  Wallet,
-} from "@icons";
+  DoodleCoinPurse,
+  DoodleEyeNetwork,
+  DoodleFaceMale,
+  DoodleNodeLaptop,
+  DoodleSmileyGrumpy,
+} from "@doodle";
+import { ArrowDown, ArrowDownLeft, ArrowDownRight } from "@icons";
+
+const EASE = "0.4s var(--ease-smooth)";
 
 type Props = {
   scrollTargetId?: string;
@@ -24,25 +31,56 @@ type Props = {
 };
 
 export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
 
   const { phase, nodeFirstSeen, reveal, reset } = useDoubleSpendDemo(onComplete);
   const propagated = phase === "propagated";
 
+  const textPrimary = colors.base.text.primary;
+  const textSecondary = colors.base.text.secondary;
+
+  // One cool hue, one warm, carry the only thing colour needs to say here:
+  // which of the two transactions a node happened to see first. Info-blue pairs
+  // with the module's own amber (warning-orange fell below AA on the light
+  // paper); neither is success / error, since neither transaction is the good
+  // one.
   const accents: Record<TxId, string> = {
-    a: colors.semantic.info.text, // cyan
-    b: colors.violet.text.secondary, // violet
+    a: colors.semantic.info.text,
+    b: world.text.secondary,
   };
 
-  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
+  const introStyle: CSSProperties = {
+    ...typo.note,
+    color: textSecondary,
+    textAlign: "left",
+    margin: 0,
+  };
 
-  const nicolasRow: CSSProperties = {
+  const iconTint = withOpacity(textPrimary, 0.75);
+
+  const partyCard = (accent: string, tint: number): CSSProperties => ({
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "0.4rem",
+    padding: isMobile ? "0.7rem 0.5rem" : "0.85rem 1rem",
+    background: withOpacity(accent, tint),
+    border: `1px solid ${withOpacity(accent, tint + 0.16)}`,
+    width: "100%",
+    boxSizing: "border-box",
+    transition: `background ${EASE}, border-color ${EASE}`,
+  });
+
+  const partyLabel: CSSProperties = {
+    ...typo.label,
+    fontVariant: "small-caps",
+    color: textPrimary,
+    textAlign: "center",
   };
 
   const forkRow: CSSProperties = {
@@ -50,7 +88,6 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     gridTemplateColumns: "1fr 1fr",
     placeItems: "center",
     columnGap: isMobile ? "0.75rem" : "2rem",
-    marginTop: "-0.25rem",
   };
 
   const branchesGrid: CSSProperties = {
@@ -63,68 +100,35 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "0.4rem",
+    gap: "0.5rem",
   };
 
-  const partyCard = (accent: string): CSSProperties => ({
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "0.25rem",
-    padding: isMobile ? "0.6rem 0.5rem" : "0.75rem 1rem",
-    borderRadius: 0,
-    background: withOpacity(accent, 0.06),
-    border: `1px solid ${withOpacity(accent, 0.25)}`,
-    width: "100%",
-  });
-
-  const partyLabel: CSSProperties = {
-    ...mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    color: colors.base.text.primary,
-  };
-
-  const txBlock = (accent: string): CSSProperties => ({
-    ...mono,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "0.15rem",
-    fontSize: typo.micro.fontSize,
-    lineHeight: 1.35,
+  const txTitleStyle = (accent: string): CSSProperties => ({
+    ...typo.micro,
+    fontVariant: "small-caps",
     color: accent,
     textAlign: "center",
   });
 
-  const txTitle: CSSProperties = {
-    fontWeight: 500,
-    letterSpacing: "0.04em",
-    fontVariant: "small-caps",
-    fontSize: typo.micro.fontSize,
+  const txOriginStyle: CSSProperties = {
+    ...typo.note,
+    color: textSecondary,
+    textAlign: "center",
   };
 
-  const txOrigin: CSSProperties = {
-    color: colors.base.text.secondary,
-    fontSize: typo.micro.fontSize,
-    letterSpacing: "0.04em",
-    fontVariant: "small-caps",
-    opacity: 0.85,
-  };
+  const txAmountStyle = (accent: string): CSSProperties => ({
+    ...typo.figure,
+    color: accent,
+    textAlign: "center",
+  });
 
-  const pinchNotice: CSSProperties = {
-    ...mono,
+  const firstSeenLabel: CSSProperties = {
+    ...typo.label,
+    fontVariant: "small-caps",
+    color: world.text.secondary,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    gap: "0.4rem",
-    fontSize: typo.micro.fontSize,
-    color: colors.base.text.secondary,
-    padding: "0.5rem 0.75rem",
-    borderRadius: 0,
-    background: withOpacity(world.background.secondary, 0.06),
-    border: `1px dashed ${withOpacity(world.border.secondary, 0.3)}`,
-    textAlign: "center",
+    gap: "0.5rem",
   };
 
   const nodesGrid: CSSProperties = {
@@ -137,12 +141,23 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "0.35rem",
-    padding: "0.65rem 0.4rem",
-    borderRadius: 0,
-    background: withOpacity(accent, 0.04),
-    border: `1px solid ${withOpacity(accent, 0.22)}`,
-    transition: "all 0.4s var(--ease-smooth)",
+    gap: "0.4rem",
+    padding: isMobile ? "0.65rem 0.4rem" : "0.75rem 0.5rem",
+    background: withOpacity(accent, 0.05),
+    border: `1px solid ${withOpacity(accent, 0.28)}`,
+    transition: `background ${EASE}, border-color ${EASE}`,
+  });
+
+  const nodeCity: CSSProperties = {
+    ...typo.micro,
+    fontVariant: "small-caps",
+    color: textPrimary,
+  };
+
+  const nodeRecipient = (accent: string): CSSProperties => ({
+    ...typo.micro,
+    color: accent,
+    textAlign: "center",
   });
 
   const ctaRow: CSSProperties = {
@@ -151,6 +166,8 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     justifyContent: "center",
     flexWrap: "wrap",
   };
+
+  const iconSize = isMobile ? 26 : 30;
 
   const continueForward = () => {
     if (!scrollTargetId) return;
@@ -161,16 +178,16 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     const accent = accents[branch.id];
     return (
       <div key={branch.id} style={branchColumn}>
-        <div style={txBlock(accent)}>
-          <span style={txTitle}>{t(branch.labelKey)}</span>
-          <span style={txOrigin}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.1rem" }}>
+          <span style={txTitleStyle(accent)}>{t(branch.labelKey)}</span>
+          <span style={txOriginStyle}>
             {t("doubleSpend.signedFrom")} {t(branch.originKey)}
           </span>
-          <span>{t("doubleSpend.amount")}</span>
+          <span style={txAmountStyle(accent)}>{t("doubleSpend.amount")}</span>
         </div>
-        <ArrowDown size={16} strokeWidth={2} color={accent} />
-        <div style={partyCard(accent)}>
-          <Wallet size={isMobile ? 18 : 22} strokeWidth={1.5} color={accent} />
+        <ArrowDown size={18} strokeWidth={1.75} color={withOpacity(accent, 0.7)} />
+        <div style={partyCard(accent, 0.07)}>
+          <DoodleCoinPurse size={iconSize} style={{ color: accent }} />
           <span style={partyLabel}>{t(branch.recipientKey)}</span>
         </div>
       </div>
@@ -182,68 +199,35 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
     const accent = accents[txId];
     const branch = BRANCHES.find((b) => b.id === txId)!;
     return (
-      <div key={city} style={nodeCard(accent)}>
-        <Monitor size={isMobile ? 18 : 20} strokeWidth={1.5} color={accent} />
-        <span
-          style={{
-            ...mono,
-            fontSize: typo.micro.fontSize,
-            fontWeight: 500,
-            color: colors.base.text.primary,
-          }}
-        >
-          {city}
-        </span>
-        <Badge
-          tone="neutral"
-          size="xs"
-          style={{
-            background: withOpacity(accent, 0.12),
-            color: accent,
-            border: `1px solid ${withOpacity(accent, 0.3)}`,
-          }}
-        >
-          → {t(branch.recipientKey)}
-        </Badge>
+      <div key={city} className="page-enter" style={{ ...nodeCard(accent), animationDelay: `${i * 0.09}s` }}>
+        <DoodleNodeLaptop size={isMobile ? 24 : 28} style={{ color: accent }} />
+        <span style={nodeCity}>{city}</span>
+        <span style={nodeRecipient(accent)}>{t(branch.recipientKey)}</span>
       </div>
     );
   };
 
-  const captionIcon: ReactNode = <Coins size={isMobile ? 16 : 18} strokeWidth={2} />;
-
   return (
-    <SurfaceCard
-      glowColor={propagated ? colors.semantic.error.border : world.border.secondary}
-      margin={isMobile ? "1.5rem 0" : "2rem 0"}
-    >
-      <Caption tone="world" size="md" icon={captionIcon}>
-        {t("doubleSpend.title")}
-      </Caption>
+    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2rem 0"} gap="1.25rem">
+      <p style={introStyle}>{t("doubleSpend.pinch")}</p>
 
-      <div style={nicolasRow}>
-        <div
-          style={{ ...partyCard(colors.base.border.secondary), width: isMobile ? "60%" : "40%" }}
-        >
-          <User size={isMobile ? 18 : 22} strokeWidth={1.5} color={colors.base.text.secondary} />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ ...partyCard(textPrimary, 0.05), width: isMobile ? "60%" : "42%" }}>
+          <DoodleFaceMale size={iconSize} style={{ color: iconTint }} />
           <span style={partyLabel}>{t("doubleSpend.sender")}</span>
         </div>
       </div>
 
       <div style={forkRow}>
-        <ArrowDownLeft size={20} strokeWidth={2} color={accents.a} />
-        <ArrowDownRight size={20} strokeWidth={2} color={accents.b} />
+        <ArrowDownLeft size={22} strokeWidth={1.75} color={withOpacity(accents.a, 0.7)} />
+        <ArrowDownRight size={22} strokeWidth={1.75} color={withOpacity(accents.b, 0.7)} />
       </div>
 
       <div style={branchesGrid}>{BRANCHES.map(renderBranch)}</div>
 
-      <div style={pinchNotice}>
-        <Coins size={12} strokeWidth={2} />
-        {t("doubleSpend.pinch")}
-      </div>
-
       {!propagated && (
         <div style={ctaRow}>
-          <Button variant="primary" icon={<Eye size={14} strokeWidth={2} />} onClick={reveal}>
+          <Button variant="primary" onClick={reveal}>
             {t("doubleSpend.revealAction")}
           </Button>
         </div>
@@ -251,28 +235,25 @@ export const DoubleSpendDemo: FC<Props> = ({ scrollTargetId, onComplete }) => {
 
       {propagated && (
         <>
-          <Caption tone="muted" size="sm">
+          <span style={firstSeenLabel}>
+            <DoodleEyeNetwork size={isMobile ? 22 : 26} style={{ color: world.text.secondary, flexShrink: 0 }} />
             {t("doubleSpend.firstSeenLabel")}
-          </Caption>
+          </span>
           <div style={nodesGrid}>{CITIES.map(renderNode)}</div>
 
-          <FeedbackPanel tone="error" title={t("doubleSpend.verdictTitle")}>
+          <FeedbackPanel
+            tone="error"
+            title={t("doubleSpend.verdictTitle")}
+            icon={<DoodleSmileyGrumpy size={isMobile ? 22 : 26} />}
+          >
             {t("doubleSpend.verdictBody")}
           </FeedbackPanel>
 
           <div style={ctaRow}>
-            <Button
-              variant="secondary"
-              icon={<RotateCcw size={14} strokeWidth={2} />}
-              onClick={reset}
-            >
+            <Button variant="secondary" onClick={reset}>
               {t("doubleSpend.reset")}
             </Button>
-            <Button
-              variant="primary"
-              icon={<ArrowDown size={14} strokeWidth={2} />}
-              onClick={continueForward}
-            >
+            <Button variant="primary" onClick={continueForward}>
               {t("doubleSpend.continue")}
             </Button>
           </div>
