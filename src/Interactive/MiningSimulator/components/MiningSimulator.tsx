@@ -1,22 +1,45 @@
 import { type CSSProperties, type FC, useEffect, useRef } from "react";
 
-import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Button,
+  Caption,
+  FeedbackPanel,
+  getBrandGold,
+  getTypography,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { BlockPlate, BlockPlateRow } from "../../components";
 import { truncateHash } from "../../helpers";
 import { useMiningSimulator } from "../hooks";
 
-import { CircleCheck, CircleX, Pickaxe, RotateCcw } from "@icons";
+import {
+  DoodleClock,
+  DoodleHash,
+  DoodleHierarchy,
+  DoodleMining,
+  DoodleNumber,
+  DoodleSmileyGrumpy,
+  DoodleSmileyHappy,
+} from "@doodle";
 
 type Props = {
   onComplete?: () => void;
 };
 
 export const MiningSimulator: FC<Props> = ({ onComplete }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const { theme } = useThemeContext();
   const world = colors[moduleTheme];
+  const gold = getBrandGold(theme);
   const { attempts, found, difficultyPrefix, headerFields, currentNonce, tryNonce, reset } =
     useMiningSimulator(onComplete);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -25,167 +48,105 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [attempts.length]);
 
-  const mono = { fontFamily: BRAND.fonts.mono } as const;
+  const iconSize = isMobile ? 20 : 22;
 
-  const targetBox: CSSProperties = {
-    ...mono,
-    fontSize: typo.note.fontSize,
-    color: colors.base.text.primary,
-    padding: "0.6rem 0.85rem",
-    borderRadius: 0,
-    background: withOpacity(world.background.secondary, 0.06),
-    border: `1px solid ${withOpacity(world.border.secondary, 0.2)}`,
+  const targetRow: CSSProperties = {
     display: "flex",
-    alignItems: "center",
+    alignItems: "baseline",
+    flexWrap: "wrap",
     gap: "0.5rem",
   };
 
-  const targetPrefix: CSSProperties = {
-    ...mono,
-    fontWeight: 500,
-    fontSize: isMobile ? "0.85rem" : "0.95rem",
-    color: world.text.secondary,
-    letterSpacing: "0.1em",
-  };
+  const targetLabel: CSSProperties = { ...typo.note, color: colors.base.text.secondary };
+  const targetPrefix: CSSProperties = { ...typo.figure, color: gold, letterSpacing: "0.12em" };
 
-  const headerBox: CSSProperties = {
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    color: colors.base.text.secondary,
-    padding: "0.75rem 1rem",
-    borderRadius: 0,
-    background: withOpacity(world.background.secondary, 0.04),
-    border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.25rem",
-  };
-
-  const fieldName: CSSProperties = {
-    color: colors.base.text.secondary,
-    opacity: 0.6,
-    minWidth: isMobile ? "5rem" : "6.5rem",
-    display: "inline-block",
-  };
-
-  const fieldValue: CSSProperties = { color: colors.base.text.primary };
-  const nonceVal: CSSProperties = { color: world.text.secondary, fontWeight: 500 };
+  const headerValue: CSSProperties = { ...typo.figure, color: colors.base.text.secondary, wordBreak: "break-word" };
+  const nonceValue: CSSProperties = { ...typo.figure, color: world.text.secondary };
 
   const logBox: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    gap: "0.2rem",
+    gap: "0.15rem",
     maxHeight: "14rem",
     overflowY: "auto",
     padding: "0.5rem",
-    borderRadius: 0,
-    background: colors.base.background.secondary,
+    background: withOpacity(colors.base.text.primary, theme === "dark" ? 0.05 : 0.035),
+    border: `1px solid ${colors.base.border.tertiary}`,
   };
 
-  const logHeader: CSSProperties = {
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+  const logHeadRow: CSSProperties = {
+    ...typo.micro,
     fontVariant: "small-caps",
-    letterSpacing: "0.04em",
     color: colors.base.text.secondary,
-    opacity: 0.5,
     display: "flex",
     alignItems: "center",
     gap: "0.5rem",
     padding: "0.2rem 0.5rem",
-    borderBottom: `1px solid ${withOpacity(world.border.secondary, 0.1)}`,
+    borderBottom: `1px solid ${withOpacity(world.border.secondary, 0.2)}`,
     marginBottom: "0.15rem",
   };
 
-  const row = (valid: boolean): CSSProperties => ({
-    ...mono,
-    fontSize: typo.micro.fontSize,
+  const logRow = (valid: boolean): CSSProperties => ({
+    ...typo.micro,
     display: "flex",
     alignItems: "center",
     gap: "0.5rem",
     padding: "0.3rem 0.5rem",
-    borderRadius: 0,
-    background: valid ? withOpacity(colors.semantic.success.text, 0.08) : "transparent",
+    background: valid ? withOpacity(colors.semantic.success.text, 0.1) : "transparent",
     color: valid ? colors.semantic.success.text : colors.base.text.secondary,
   });
 
+  const nonceCol = isMobile ? "4.5rem" : "5.5rem";
+
   return (
-    <SurfaceCard
-      glowColor={found ? colors.semantic.success.border : world.border.secondary}
-      margin={isMobile ? "1.5rem 0" : "2rem 0"}
-      style={mono}
-    >
-      <Caption tone="world" size="md" icon={<Pickaxe size={isMobile ? 16 : 18} strokeWidth={2} />}>
+    <SurfaceCard margin={isMobile ? "1.5rem 0" : "2rem 0"}>
+      <Caption tone="world" size="md" icon={<DoodleMining size={iconSize} />}>
         {t("mining.title")}
       </Caption>
 
-      <div style={targetBox}>
-        <span>{t("mining.target")}</span>
+      <div style={targetRow}>
+        <span style={targetLabel}>{t("mining.target")}</span>
         <span style={targetPrefix}>{difficultyPrefix}…</span>
       </div>
 
-      <div style={headerBox}>
-        <Caption tone="world" size="xs" style={{ marginBottom: "0.25rem" }}>
-          {t("mining.headerLabel")}
-        </Caption>
-        <div>
-          <span style={fieldName}>bloc</span> <span style={nonceVal}>#{headerFields.height}</span>
-        </div>
-        <div>
-          <span style={fieldName}>prevHash</span>{" "}
-          <span style={fieldValue}>{headerFields.prevHash}</span>
-        </div>
-        <div>
-          <span style={fieldName}>merkleRoot</span>{" "}
-          <span style={fieldValue}>{headerFields.merkleRoot}</span>
-        </div>
-        <div>
-          <span style={fieldName}>timestamp</span>{" "}
-          <span style={fieldValue}>{headerFields.timestamp}</span>
-        </div>
-        <div>
-          <span style={fieldName}>{t("mining.nonce")}</span>{" "}
-          <span style={nonceVal}>{currentNonce}</span>
-        </div>
-      </div>
+      <BlockPlate title={`${t("chain.block")} #${headerFields.height}`}>
+        <BlockPlateRow icon={<DoodleHash size={iconSize} />} label={t("chain.prevHash")} zebra>
+          <span style={headerValue}>{headerFields.prevHash}</span>
+        </BlockPlateRow>
+        <BlockPlateRow icon={<DoodleHierarchy size={iconSize} />} label={t("chain.merkleRoot")} zebra={false}>
+          <span style={headerValue}>{headerFields.merkleRoot}</span>
+        </BlockPlateRow>
+        <BlockPlateRow icon={<DoodleClock size={iconSize} />} label={t("chain.timestamp")} zebra>
+          <span style={headerValue}>{headerFields.timestamp}</span>
+        </BlockPlateRow>
+        <BlockPlateRow icon={<DoodleNumber size={iconSize} />} label={t("mining.nonce")} zebra={false}>
+          <span style={nonceValue}>{currentNonce}</span>
+        </BlockPlateRow>
+      </BlockPlate>
 
       {attempts.length > 0 && (
         <div ref={scrollRef} style={logBox}>
-          <div style={logHeader}>
-            <span style={{ minWidth: isMobile ? "4.5rem" : "5.5rem" }}>{t("mining.nonce")}</span>
+          <div style={logHeadRow}>
+            <span style={{ minWidth: nonceCol }}>{t("mining.nonce")}</span>
             <span style={{ flex: 1 }}>hash</span>
             <span style={{ width: "1rem" }} />
           </div>
           {attempts.map((a) => (
-            <div key={a.nonce} style={row(a.valid)}>
-              <span style={{ minWidth: isMobile ? "4.5rem" : "5.5rem" }}>{a.nonce}</span>
-              <span style={{ flex: 1 }}>{truncateHash(a.hash)}</span>
-              {a.valid ? (
-                <CircleCheck size={14} strokeWidth={2} />
-              ) : (
-                <CircleX size={14} strokeWidth={2} style={{ opacity: 0.3 }} />
-              )}
+            <div key={a.nonce} className="chain-field-reveal" style={logRow(a.valid)}>
+              <span style={{ minWidth: nonceCol }}>{a.nonce}</span>
+              <span style={{ flex: 1, wordBreak: "break-all" }}>{truncateHash(a.hash)}</span>
+              {a.valid && <DoodleSmileyHappy size={16} style={{ flexShrink: 0 }} />}
             </div>
           ))}
         </div>
       )}
 
       <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-        <Button
-          variant="primary"
-          icon={<Pickaxe size={isMobile ? 12 : 14} strokeWidth={2} />}
-          onClick={!found ? tryNonce : undefined}
-          disabled={found}
-        >
+        <Button variant="primary" onClick={!found ? tryNonce : undefined} disabled={found}>
           {t("mining.button")}
         </Button>
         {attempts.length > 0 && (
-          <Button
-            variant="secondary"
-            icon={<RotateCcw size={isMobile ? 12 : 14} strokeWidth={2} />}
-            onClick={reset}
-          >
+          <Button variant="secondary" onClick={reset}>
             {t("mining.reset")}
           </Button>
         )}
@@ -194,13 +155,7 @@ export const MiningSimulator: FC<Props> = ({ onComplete }) => {
       {attempts.length > 0 && (
         <FeedbackPanel
           tone={found ? "success" : "info"}
-          icon={
-            found ? (
-              <CircleCheck size={18} strokeWidth={2} />
-            ) : (
-              <CircleX size={18} strokeWidth={2} />
-            )
-          }
+          icon={found ? <DoodleSmileyHappy size={iconSize} /> : <DoodleSmileyGrumpy size={iconSize} />}
         >
           {found ? t("mining.found") : t("mining.notFound")}
         </FeedbackPanel>

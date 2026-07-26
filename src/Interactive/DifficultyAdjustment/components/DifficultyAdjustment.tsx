@@ -1,25 +1,40 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Button,
+  Caption,
+  FeedbackPanel,
+  getBrandGold,
+  getTypography,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useDifficultyAdjustment } from "../hooks";
 
-import { Minus, Plus, Target, Timer, Users } from "@icons";
+import { DoodleClock, DoodleHash, DoodleMining } from "@doodle";
+import { Minus, Plus } from "@icons";
 
 type Props = {
   onComplete?: () => void;
 };
 
 export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const { theme } = useThemeContext();
   const world = colors[moduleTheme];
+  const gold = getBrandGold(theme);
   const { miners, target, canDecrease, canIncrease, decrease, increase, step } =
     useDifficultyAdjustment(onComplete);
 
-  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
+  const iconSize = isMobile ? 20 : 22;
 
   const controlRow: CSSProperties = {
     display: "flex",
@@ -27,13 +42,11 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
     justifyContent: "space-between",
     gap: isMobile ? "0.5rem" : "0.75rem",
     padding: "0.85rem 1rem",
-    borderRadius: 0,
-    background: withOpacity(world.background.secondary, 0.04),
-    border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
+    background: withOpacity(world.background.secondary, 0.05),
+    border: `1px solid ${withOpacity(world.border.secondary, 0.18)}`,
   };
 
   const minerCount: CSSProperties = {
-    ...mono,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -44,19 +57,15 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
   };
 
   const minerNumber: CSSProperties = {
-    ...mono,
-    fontSize: isMobile ? "1.2rem" : "1.5rem",
-    fontWeight: 500,
-    color: world.text.primary,
-    letterSpacing: "0.03em",
+    ...typo.heading,
+    color: colors.base.text.primary,
+    transition: "color 0.3s var(--ease-smooth)",
   };
 
   const minerLabel: CSSProperties = {
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    color: colors.base.text.secondary,
+    ...typo.micro,
     fontVariant: "small-caps",
-    letterSpacing: "0.05em",
+    color: colors.base.text.secondary,
   };
 
   const metricsRow: CSSProperties = {
@@ -66,35 +75,27 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
   };
 
   const metric: CSSProperties = {
-    ...mono,
     flex: 1,
     display: "flex",
     flexDirection: "column",
     gap: "0.35rem",
     padding: "0.75rem 0.9rem",
-    borderRadius: 0,
-    background: withOpacity(world.background.secondary, 0.04),
-    border: `1px solid ${withOpacity(world.border.secondary, 0.15)}`,
+    background: withOpacity(world.background.secondary, 0.05),
+    border: `1px solid ${withOpacity(world.border.secondary, 0.18)}`,
     minWidth: 0,
   };
 
-  const metricValue: CSSProperties = {
-    ...mono,
-    fontSize: isMobile ? "0.95rem" : "1.05rem",
-    fontWeight: 500,
-    color: world.text.primary,
+  const metricValue = (accent: string): CSSProperties => ({
+    ...typo.figure,
+    color: accent,
     letterSpacing: "0.05em",
-    transition: "all 0.3s var(--ease-smooth)",
-  };
-
-  const fixedMetricValue: CSSProperties = {
-    ...metricValue,
-    color: colors.semantic.success.text,
-  };
+    transition: "color 0.3s var(--ease-smooth)",
+    wordBreak: "break-word",
+  });
 
   return (
     <SurfaceCard gap="0.85rem" margin={isMobile ? "1.5rem 0" : "2rem 0"}>
-      <Caption tone="world" size="md" icon={<Users size={isMobile ? 16 : 18} strokeWidth={2} />}>
+      <Caption tone="world" size="md" icon={<DoodleMining size={iconSize} />}>
         {t("difficulty.title")}
       </Caption>
 
@@ -127,25 +128,17 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
 
       <div style={metricsRow}>
         <div style={metric}>
-          <Caption
-            tone="muted"
-            size="xs"
-            icon={<Target size={isMobile ? 11 : 13} strokeWidth={2} />}
-          >
+          <Caption tone="muted" size="xs" icon={<DoodleHash size={iconSize} />}>
             {t("difficulty.hashTarget")}
           </Caption>
-          <span style={metricValue}>{target}…</span>
+          <span style={metricValue(gold)}>{target}…</span>
         </div>
 
         <div style={metric}>
-          <Caption
-            tone="muted"
-            size="xs"
-            icon={<Timer size={isMobile ? 11 : 13} strokeWidth={2} />}
-          >
+          <Caption tone="muted" size="xs" icon={<DoodleClock size={iconSize} />}>
             {t("difficulty.avgTime")}
           </Caption>
-          <span style={fixedMetricValue}>10 min</span>
+          <span style={metricValue(world.text.secondary)}>10 min</span>
         </div>
       </div>
 

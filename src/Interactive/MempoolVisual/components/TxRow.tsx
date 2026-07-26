@@ -1,9 +1,10 @@
 import type { CSSProperties, FC } from "react";
 
-import { BRAND, getTypography, type usePageTheme, withOpacity } from "../../../Design";
+import { getTypography, useBreakpoint, type usePageTheme, withOpacity } from "../../../Design";
 import type { MempoolTransaction, TxState } from "../types";
 
-import { AlertTriangle, ArrowRight } from "@icons";
+import { DoodleWarningTriangle } from "@doodle";
+import { ArrowRight } from "@icons";
 
 export const TxRow: FC<{
   tx: MempoolTransaction;
@@ -12,8 +13,7 @@ export const TxRow: FC<{
   moduleTheme: ReturnType<typeof usePageTheme>["moduleTheme"];
   isMobile: boolean;
 }> = ({ tx, state, colors, moduleTheme, isMobile }) => {
-  const typo = getTypography();
-  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
+  const typo = getTypography(useBreakpoint());
   const world = colors[moduleTheme];
   const isConflict = state === "conflict";
   const isRejected = state === "rejected";
@@ -21,39 +21,31 @@ export const TxRow: FC<{
   const borderColor = flagged ? colors.semantic.error.text : world.border.secondary;
 
   const row: CSSProperties = {
-    ...mono,
+    ...typo.micro,
     display: "flex",
     alignItems: "center",
     gap: isMobile ? "0.35rem" : "0.5rem",
     padding: isMobile ? "0.4rem 0.55rem" : "0.45rem 0.65rem",
-    borderRadius: 0,
-    fontSize: typo.micro.fontSize,
-    background: withOpacity(borderColor, flagged ? 0.08 : 0.03),
-    border: `1px solid ${withOpacity(borderColor, flagged ? 0.3 : 0.1)}`,
-    transition: "all 0.4s var(--ease-smooth)",
+    background: withOpacity(borderColor, flagged ? 0.09 : 0.04),
+    border: `1px solid ${withOpacity(borderColor, flagged ? 0.35 : 0.14)}`,
+    transition: "background 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth)",
     textDecoration: isRejected ? "line-through" : "none",
     opacity: isRejected ? 0.6 : 1,
   };
 
-  const nameStyle: CSSProperties = { fontWeight: 500, color: colors.base.text.primary };
-  const amountStyle: CSSProperties = {
-    fontWeight: 500,
-    color: world.text.primary,
-    marginLeft: "auto",
-  };
+  const nameStyle: CSSProperties = { color: colors.base.text.primary };
+  const amountStyle: CSSProperties = { color: colors.base.text.primary, marginLeft: "auto" };
 
   return (
     <div style={row}>
       {flagged && (
-        <AlertTriangle
-          size={11}
-          strokeWidth={2}
-          color={colors.semantic.error.text}
-          style={{ flexShrink: 0 }}
+        <DoodleWarningTriangle
+          size={16}
+          style={{ color: colors.semantic.error.text, flexShrink: 0 }}
         />
       )}
       <span style={nameStyle}>{tx.from}</span>
-      <ArrowRight size={12} strokeWidth={2} style={{ opacity: 0.4, flexShrink: 0 }} />
+      <ArrowRight size={13} strokeWidth={1.75} style={{ opacity: 0.35, flexShrink: 0 }} />
       <span style={nameStyle}>{tx.to}</span>
       <span style={amountStyle}>{tx.amount}</span>
     </div>
