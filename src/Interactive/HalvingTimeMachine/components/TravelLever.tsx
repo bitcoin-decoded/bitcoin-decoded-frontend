@@ -15,7 +15,7 @@ export const TravelLever: FC<Props> = ({ traveling, onPull }) => {
 
   return (
     <Button
-      variant="stamped"
+      variant="primary"
       icon={<Zap size={14} strokeWidth={2.5} />}
       onClick={onPull}
       disabled={traveling}

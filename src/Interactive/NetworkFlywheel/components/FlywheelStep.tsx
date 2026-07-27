@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, getTypography, usePageTheme, withOpacity } from "../../../Design";
+import { getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 
 import type { IconType } from "@icons";
 
@@ -21,20 +21,22 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   isActive,
   isMobile,
 }) => {
-  const typo = getTypography();
+  const typo = getTypography(useBreakpoint());
   const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
 
+  // A fixed min-height so all five tiles are the same size regardless of how
+  // many lines their label wraps to; the content centres within it.
   const nodeStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
     width: "100%",
     minWidth: 0,
+    minHeight: isMobile ? "6rem" : "6.75rem",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
     gap: "0.3rem",
-    padding: isMobile ? "0.45rem 0.35rem" : "0.55rem 0.45rem",
-    borderRadius: 0,
+    padding: isMobile ? "0.5rem 0.35rem" : "0.6rem 0.45rem",
     textAlign: "center",
     background: withOpacity(accent, isActive ? 0.14 : 0.05),
     border: `1px solid ${withOpacity(accent, isActive ? 0.65 : 0.2)}`,
@@ -42,31 +44,23 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
     transition: "all 0.35s var(--ease-smooth)",
   };
 
+  // No box behind the icon: just the mark, in the accent.
   const iconWrapStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: isMobile ? "1.6rem" : "1.85rem",
-    height: isMobile ? "1.6rem" : "1.85rem",
-    borderRadius: 0,
-    flexShrink: 0,
-    background: withOpacity(accent, isActive ? 0.25 : 0.12),
     color: accent,
-    transition: "background 0.35s var(--ease-smooth)",
   };
 
   const labelStyle: CSSProperties = {
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    letterSpacing: "0.02em",
+    ...typo.micro,
     fontVariant: "small-caps",
     lineHeight: 1.2,
     color: colors.base.text.secondary,
   };
 
   const metricStyle: CSSProperties = {
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
+    ...typo.figure,
     color: isActive ? accent : world.text.primary,
     transition: "color 0.35s var(--ease-smooth)",
   };
@@ -74,7 +68,7 @@ export const FlywheelStep: FC<FlywheelStepProps> = ({
   return (
     <div style={nodeStyle}>
       <div style={iconWrapStyle}>
-        <Icon size={isMobile ? 16 : 17} strokeWidth={2} />
+        <Icon size={isMobile ? 19 : 22} strokeWidth={1.9} />
       </div>
       <span style={labelStyle}>{label}</span>
       <span key={metric} className="metric-pop" style={metricStyle}>

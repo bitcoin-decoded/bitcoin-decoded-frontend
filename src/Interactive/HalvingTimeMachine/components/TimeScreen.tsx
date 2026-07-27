@@ -1,8 +1,15 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  BRAND,
+  getBrandGold,
+  getTypography,
+  useBreakpoint,
+  usePageTheme,
+  useThemeContext,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { getMachineColors } from "../data";
 import { formatRewardBTC, getMinerWorkTime } from "../helpers";
 import type { TravelPhase } from "../types";
 
@@ -27,138 +34,81 @@ export const TimeScreen: FC<Props> = ({
   isSubsidySymbolic,
   isExhausted,
 }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const typo = getTypography(breakpoint);
   const { t, language } = useTranslation();
   const fr = language === "fr";
-  const { theme, colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const { theme } = useThemeContext();
+  const { colors, moduleTheme } = usePageTheme();
   const world = colors[moduleTheme];
-  const isLight = theme === "light";
-  const machine = getMachineColors();
+  const gold = getBrandGold(theme);
 
-  const glow = world.text.secondary;
-  const screenInk = world.text.primary;
-  const screenInkMuted = withOpacity(colors.base.text.secondary, 0.85);
-  const screenBg = isLight ? withOpacity(glow, 0.08) : machine.screenBgDark;
+  const amber = world.text.secondary;
   const localizeDecimal = (s: string) => (fr ? s.replace(".", ",") : s);
+
+  // Thicker than the hairline the callouts use: this is the machine's readout,
+  // so its ledger frame reads a touch bolder.
+  const stroke = BRAND.figures.ruleThickness + 1;
+  const cornerLen = breakpoint === "mobile" ? 12 : 16;
 
   const screenStyle: CSSProperties = {
     position: "relative",
-    overflow: "hidden",
-    borderRadius: 0,
-    padding: isMobile ? "1.25rem 1rem" : "1.6rem 1.25rem",
-    background: screenBg,
-    border: `1px solid ${withOpacity(glow, 0.4)}`,
+    padding: breakpoint === "mobile" ? "1.4rem 1.1rem" : "1.75rem 1.4rem",
+    background: withOpacity(colors.base.text.primary, theme === "dark" ? 0.05 : 0.035),
+    border: `${stroke}px solid ${withOpacity(gold, 0.4)}`,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: isMobile ? "0.7rem" : "0.85rem",
+    gap: "0.7rem",
     textAlign: "center",
-    minHeight: isMobile ? "10.5rem" : "11.5rem",
+    minHeight: breakpoint === "mobile" ? "10.5rem" : "11.5rem",
   };
 
-  const groupStyle: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
+  const corners = (): ReactNode => {
+    const s = `${stroke}px solid ${gold}`;
+    const base: CSSProperties = { position: "absolute", width: cornerLen, height: cornerLen, pointerEvents: "none" };
+    return (
+      <>
+        <span style={{ ...base, top: -stroke, left: -stroke, borderTop: s, borderLeft: s }} />
+        <span style={{ ...base, top: -stroke, right: -stroke, borderTop: s, borderRight: s }} />
+        <span style={{ ...base, bottom: -stroke, left: -stroke, borderBottom: s, borderLeft: s }} />
+        <span style={{ ...base, bottom: -stroke, right: -stroke, borderBottom: s, borderRight: s }} />
+      </>
+    );
+  };
+
+  const group: CSSProperties = { display: "flex", flexDirection: "column", alignItems: "center", gap: "0.25rem" };
+  const eyebrow: CSSProperties = { ...typo.kicker, color: withOpacity(amber, 0.85) };
+  const year: CSSProperties = { ...typo.display, color: amber };
+  const divider: CSSProperties = { width: "2.5rem", height: 1, background: withOpacity(amber, 0.3) };
+  const rewardLabel: CSSProperties = { ...typo.label, fontVariant: "small-caps", color: colors.base.text.secondary };
+  const rewardValue: CSSProperties = { ...typo.heading, color: gold };
+  const subline: CSSProperties = { ...typo.note, color: colors.base.text.secondary, margin: 0, maxWidth: "20rem" };
+  const prompt: CSSProperties = { ...typo.note, color: colors.base.text.secondary, margin: 0, maxWidth: "18rem" };
+  const traveling: CSSProperties = {
+    ...typo.micro,
+    fontVariant: "small-caps",
+    color: amber,
+    display: "inline-flex",
     alignItems: "center",
-    gap: "0.15rem",
-  };
-
-  const eyebrowStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.25em",
-    color: withOpacity(glow, 0.65),
-  };
-
-  const yearStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "1.7rem" : "2rem",
-    fontWeight: 500,
-    lineHeight: 1,
-    color: glow,
-    fontVariantNumeric: "tabular-nums",
-  };
-
-  const dividerStyle: CSSProperties = {
-    width: "2.5rem",
-    height: "1px",
-    background: withOpacity(glow, 0.25),
-  };
-
-  const rewardLabelStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.12em",
-    color: withOpacity(glow, 0.8),
-  };
-
-  const rewardValueStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "1.4rem" : "1.7rem",
-    fontWeight: 500,
-    lineHeight: 1.1,
-    color: screenInk,
-  };
-
-  const sublineStyle: CSSProperties = {
-    margin: 0,
-    marginTop: "0.5rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    lineHeight: 1.5,
-    color: screenInkMuted,
-  };
-
-  const promptStyle: CSSProperties = {
-    margin: 0,
-    fontSize: typo.micro.fontSize,
-    fontStyle: "italic",
-    color: screenInkMuted,
-    maxWidth: "18rem",
-    lineHeight: 1.5,
+    gap: "0.4rem",
   };
 
   return (
-    <div className={phase === "traveling" ? "htm-screen--traveling" : undefined} style={screenStyle}>
-      {phase === "traveling" && (
-        <div
-          className="htm-flux"
-          style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
-            background: isLight
-              ? machine.fluxLight
-              : `radial-gradient(circle at 50% 45%, ${withOpacity(glow, 0.55)}, transparent 70%)`,
-            mixBlendMode: isLight ? "normal" : "screen",
-          }}
-        />
-      )}
-
-      <div style={groupStyle}>
-        <span style={eyebrowStyle}>{t("halvingTimeMachine.yearLabel")}</span>
-        <span style={yearStyle}>{displayYear}</span>
+    <div style={screenStyle}>
+      {corners()}
+      <div style={group}>
+        <span style={eyebrow}>{t("halvingTimeMachine.yearLabel")}</span>
+        <span style={year}>{displayYear}</span>
       </div>
 
-      <div style={dividerStyle} />
+      <div style={divider} />
 
-      {phase === "idle" && <p style={promptStyle}>{t("halvingTimeMachine.screenIdle")}</p>}
+      {phase === "idle" && <p style={prompt}>{t("halvingTimeMachine.screenIdle")}</p>}
 
       {phase === "traveling" && (
-        <span
-          style={{
-            ...rewardLabelStyle,
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.4rem",
-          }}
-        >
+        <span style={traveling}>
           <Zap size={13} strokeWidth={2.5} />
           {t("halvingTimeMachine.traveling")}
         </span>
@@ -168,23 +118,21 @@ export const TimeScreen: FC<Props> = ({
         <div
           key={arrivedYear ?? "none"}
           className="htm-materialize"
-          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.2rem" }}
+          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.25rem" }}
         >
           {isExhausted ? (
             <>
-              <span style={rewardValueStyle}>0 BTC</span>
-              <p style={{ ...sublineStyle, maxWidth: "20rem" }}>
-                {t("halvingTimeMachine.exhausted")}
-              </p>
+              <span style={rewardValue}>0 BTC</span>
+              <p style={subline}>{t("halvingTimeMachine.exhausted")}</p>
             </>
           ) : (
             <>
-              <span style={rewardLabelStyle}>{t("halvingTimeMachine.rewardLabel")}</span>
-              <span style={rewardValueStyle}>
+              <span style={rewardLabel}>{t("halvingTimeMachine.rewardLabel")}</span>
+              <span style={rewardValue}>
                 {localizeDecimal(formatRewardBTC(reward ?? 0))}{" "}
-                <span style={{ fontSize: "0.78em", color: withOpacity(glow, 0.85) }}>BTC</span>
+                <span style={{ ...typo.micro, color: withOpacity(gold, 0.85) }}>BTC</span>
               </span>
-              <p style={sublineStyle}>
+              <p style={subline}>
                 {isSubsidySymbolic ? (
                   t("halvingTimeMachine.workTimeSymbolic")
                 ) : isGenesisEra ? (
@@ -192,7 +140,7 @@ export const TimeScreen: FC<Props> = ({
                 ) : (
                   <>
                     {t("halvingTimeMachine.workTimePrefix")}{" "}
-                    <strong style={{ color: glow }}>{getMinerWorkTime(reward ?? 0, fr)}</strong>{" "}
+                    <strong style={{ color: amber }}>{getMinerWorkTime(reward ?? 0, fr)}</strong>{" "}
                     {t("halvingTimeMachine.workTimeSuffix")}
                   </>
                 )}
