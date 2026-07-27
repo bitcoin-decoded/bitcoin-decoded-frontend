@@ -10,6 +10,8 @@ import { withOpacity } from "../helpers";
 import { useBreakpoint } from "../Responsive";
 import { BRAND, getBrandGold, getTypography, usePageTheme, useThemeContext } from "../Theme";
 
+import { DoodleStamp } from "@doodle";
+
 type Variant = "primary" | "secondary" | "ghost" | "stamped";
 type Size = "sm" | "md";
 
@@ -129,12 +131,16 @@ export const Button: FC<Props> = ({
       background: withOpacity(neutralText, isLifted ? 0.06 : 0),
     };
   } else if (variant === "stamped") {
-    const stampHeight = controlHeight;
+    // Height is a floor, not a fixed value: a long label wraps and both the
+    // stamp block and the label grow with it (align-items: stretch), instead of
+    // the label spilling out of a 28px box while the square stays single-line.
     variantStyle = {
       padding: 0,
-      height: stampHeight,
       gap: 0,
+      minHeight: controlHeight,
+      alignItems: "stretch",
       background: "transparent",
+      color: colors.base.text.primary,
       transform: isPressed && hoverable ? "translateY(1px)" : isLifted ? "translateY(-1px)" : "translateY(0)",
     };
     labelDecoration = {
@@ -142,29 +148,21 @@ export const Button: FC<Props> = ({
         <span
           aria-hidden="true"
           style={{
-            width: stampHeight,
-            height: stampHeight,
-            background: accent,
+            flexShrink: 0,
+            minWidth: controlHeight,
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
+            background: accent,
             color: BRAND.cream,
-            fontFamily: BRAND.fonts.display,
-            fontSize: size === "sm" ? 16 : 18,
-            lineHeight: 1,
-            fontWeight: 500,
             filter: isLifted ? "brightness(1.1)" : "none",
             transition: "filter 0.2s var(--ease-smooth)",
           }}
         >
-          ⌗
+          <DoodleStamp size={size === "sm" ? 18 : 22} />
         </span>
       ),
       after: null,
-    };
-    variantStyle = {
-      ...variantStyle,
-      color: colors.base.text.primary,
     };
   }
 
@@ -176,10 +174,11 @@ export const Button: FC<Props> = ({
     variant === "stamped" ? (
       <span
         style={{
+          flex: 1,
           display: "inline-flex",
           alignItems: "center",
-          height: size === "sm" ? 24 : 28,
-          padding: `0 ${isMobile ? "0.85rem" : "1rem"}`,
+          justifyContent: "center",
+          padding: isMobile ? "0.4rem 0.7rem" : "0.45rem 1rem",
           border: `1px solid ${accent}`,
           borderLeft: "none",
           background: isLifted ? withOpacity(accent, 0.12) : "transparent",
@@ -187,6 +186,8 @@ export const Button: FC<Props> = ({
           fontFamily: BRAND.fonts.mono,
           letterSpacing: "0.14em",
           fontVariant: "small-caps",
+          lineHeight: 1.3,
+          textAlign: "center",
         }}
       >
         {children}
