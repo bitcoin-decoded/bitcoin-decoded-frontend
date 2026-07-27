@@ -1,29 +1,35 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { Badge, BRAND, Button, Caption, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  Badge,
+  Button,
+  getTypography,
+  SurfaceCard,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import { fmtBTC, fmtEur } from "../../helpers";
+import { UtxoChip } from "../../components";
+import { fmtBTC } from "../../helpers";
 import { BANK, BTC } from "../data";
 import { useTransactionComparison } from "../hooks";
 import type { ComparisonMode } from "../types";
 
-import {
-  ArrowDown,
-  ArrowRightLeft,
-  BookText,
-  Building2,
-  CircleCheck,
-  CircleDollarSign,
-  KeyRound,
-  Lightbulb,
-  Lock,
-  Pickaxe,
-  RefreshCw,
-  User,
-  Wallet,
-  Zap,
-} from "@icons";
+import { LedgerEntry } from "./LedgerEntry";
+import { ModelCard } from "./ModelCard";
 
+import {
+  DoodleBank,
+  DoodleBitcoin,
+  DoodleKey,
+  DoodleLock,
+  DoodleMining,
+  DoodleNotes,
+  DoodlePaperPlane,
+  DoodleWallet,
+} from "@doodle";
+import { ArrowDown } from "@icons";
 
 type Props = {
   mode?: ComparisonMode;
@@ -31,654 +37,229 @@ type Props = {
 };
 
 export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComplete }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t, language } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
   const { phase, trigger, reset } = useTransactionComparison(onComplete);
 
   const world = colors[moduleTheme];
-  const bankAccent = colors.blue.border.secondary;
-  const btcAccent = world.border.secondary;
-  const successColor = colors.semantic.success.text;
-  const errorColor = colors.semantic.error.text;
-  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
+  // Blue is the banking module's own colour: reused here so the reader reads the
+  // ledger card as "the bank world", against Bitcoin's amber.
+  const bankAccent = colors.blue.text.secondary;
+  const btcAccent = world.text.secondary;
+  const success = colors.semantic.success.text;
+  const error = colors.semantic.error.text;
   const isAfter = phase === "after";
-  const iconSm = isMobile ? 11 : 12;
+  const iconSize = isMobile ? 20 : 22;
 
-
-  const card = (accent: string): CSSProperties => ({
-    ...mono,
-    flex: isMobile ? "0 0 auto" : "1 1 0",
-    minWidth: 0,
+  const sectionLabel: CSSProperties = {
+    ...typo.micro,
+    fontVariant: "small-caps",
     display: "flex",
-    flexDirection: "column",
-    borderRadius: 0,
-    overflow: "hidden",
-    border: `1px solid ${withOpacity(accent, 0.25)}`,
-    background: withOpacity(accent, 0.04),
-  });
-
-  const cardHeader = (accent: string): CSSProperties => ({
-    padding: isMobile ? "0.6rem 0.75rem 0.5rem" : "0.85rem 1rem 0.75rem",
-    borderBottom: `1px solid ${withOpacity(accent, 0.12)}`,
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.25rem",
-  });
-
-  const cardHeaderRow: CSSProperties = { display: "flex", alignItems: "center", gap: "0.5rem" };
-
-  const cardSubtitle: CSSProperties = {
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    color: world.text.primary,
-  };
-
-  const cardDescStyle: CSSProperties = {
-    fontSize: typo.micro.fontSize,
-    lineHeight: 1.5,
-    color: colors.base.text.secondary,
-    fontStyle: "italic",
-  };
-
-  const cardDescRow = (accent: string): CSSProperties => ({
-    display: "flex",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: "0.4rem",
-    padding: "0.3rem 0.45rem",
-    borderRadius: 0,
-    background: withOpacity(accent, 0.05),
-  });
-
-  const scenarioBox = (accent: string): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-    padding: "0.45rem 0.65rem",
-    borderRadius: 0,
-    background: withOpacity(accent, 0.06),
-    border: `1px solid ${withOpacity(accent, 0.12)}`,
-    fontSize: typo.micro.fontSize,
-    fontStyle: "italic",
-    color: colors.base.text.secondary,
-  });
-
-  const cardBody: CSSProperties = {
-    padding: isMobile ? "0.55rem 0.75rem" : "0.85rem 1rem",
-    display: "flex",
-    flexDirection: "column",
-    gap: isMobile ? "0.35rem" : "0.55rem",
-    flex: 1,
   };
 
-  const cardFooter = (accent: string): CSSProperties => ({
-    padding: isMobile ? "0.55rem 0.8rem" : "0.7rem 1rem",
-    borderTop: `1px solid ${withOpacity(accent, 0.1)}`,
-    background: withOpacity(accent, 0.04),
-    fontSize: typo.micro.fontSize,
-    lineHeight: 1.55,
-    color: colors.base.text.secondary,
-    fontStyle: "italic",
-  });
-
-  const keyText = (accent: string): CSSProperties => ({
-    marginTop: "0.3rem",
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    fontStyle: "normal",
-    color: accent,
-    lineHeight: 1.4,
-  });
-
-  const sectionLabel = (accent: string, dimmed = false): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "0.3rem",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.09em",
-    color: withOpacity(accent, dimmed ? 0.35 : 0.65),
-    transition: "color 0.35s var(--ease-smooth)",
-  });
-
-
-  const ledgerLabelRow: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "0.5rem",
-  };
-
-  const ledgerBadge: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.25rem",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.06em",
-    color: successColor,
-    padding: "0.12rem 0.4rem",
-    borderRadius: 0,
-    background: withOpacity(successColor, 0.12),
-  };
-
-  const ledgerEntry: CSSProperties = {
-    display: "flex",
-    alignItems: "baseline",
-    justifyContent: "space-between",
-    gap: "0.5rem 0.75rem",
-    flexWrap: "wrap",
-    padding: isMobile ? "0.5rem 0.7rem" : "0.6rem 0.85rem",
-    borderRadius: 0,
-    background: withOpacity(bankAccent, 0.05),
-    border: `1px solid ${withOpacity(bankAccent, 0.12)}`,
-  };
-
-  const ledgerName: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.35rem",
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    color: colors.base.text.primary,
-    flexShrink: 0,
-  };
-
-  const transferConnector: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "0.15rem",
-    padding: "0.05rem 0",
-  };
-
-  const transferStem: CSSProperties = {
-    width: "1.5px",
-    height: "0.5rem",
-    background: withOpacity(bankAccent, isAfter ? 0.5 : 0.18),
-    transition: "background 0.4s var(--ease-smooth)",
-  };
-
-  const transferPill: CSSProperties = {
-    ...mono,
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.3rem",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.05em",
-    padding: "0.16rem 0.6rem",
-    borderRadius: 0,
-    color: bankAccent,
-    background: withOpacity(bankAccent, 0.14),
-    border: `1px solid ${withOpacity(bankAccent, 0.35)}`,
-  };
-
-  const ledgerEquation: CSSProperties = {
-    ...mono,
-    display: "flex",
-    alignItems: "baseline",
-    flexWrap: "wrap",
-    justifyContent: "flex-end",
-    gap: "0.3rem",
-    fontSize: typo.note.fontSize,
-    textAlign: "right",
-  };
-
-  const eqBefore: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.75) };
-  const eqDelta = (positive: boolean): CSSProperties => ({
-    fontWeight: 500,
-    color: positive ? successColor : errorColor,
-  });
-  const eqSign: CSSProperties = { color: withOpacity(colors.base.text.secondary, 0.45) };
-  const eqResult: CSSProperties = { fontWeight: 500, color: colors.base.text.primary };
-
-  const renderLedgerEntry = (name: string, before: number, after: number, positive: boolean) => (
-    <div style={ledgerEntry}>
-      <span style={ledgerName}>
-        <User size={iconSm} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
-        {name}
-      </span>
-      <span style={ledgerEquation}>
-        {isAfter ? (
-          <>
-            <span style={eqBefore}>{fmtEur(before, language)}</span>
-            <span style={eqDelta(positive)}>
-              {positive ? "+" : "−"} {fmtEur(BANK.sent, language)}
-            </span>
-            <span style={eqSign}>=</span>
-            <span style={eqResult}>{fmtEur(after, language)}</span>
-          </>
-        ) : (
-          <span style={eqResult}>{fmtEur(before, language)}</span>
-        )}
-      </span>
+  const scenarioBox = (accent: string, text: string): ReactNode => (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+        padding: "0.45rem 0.65rem",
+        background: withOpacity(accent, 0.06),
+        border: `1px solid ${withOpacity(accent, 0.14)}`,
+      }}
+    >
+      <DoodlePaperPlane size={iconSize} style={{ flexShrink: 0, color: accent }} />
+      <span style={{ ...typo.note, color: colors.base.text.secondary }}>{text}</span>
     </div>
   );
 
-
-  const inputCard = (): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    padding: isMobile ? "0.35rem 0.5rem" : "0.5rem 0.65rem",
-    borderRadius: 0,
-    border: `1px solid ${withOpacity(isAfter ? errorColor : btcAccent, isAfter ? 0.3 : 0.4)}`,
-    background: withOpacity(isAfter ? errorColor : btcAccent, isAfter ? 0.05 : 0.08),
-    transition: "all 0.45s var(--ease-smooth)",
-  });
-
-  const inputIconBox = (): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: isMobile ? "1.25rem" : "1.5rem",
-    height: isMobile ? "1.25rem" : "1.5rem",
-    borderRadius: 0,
-    background: withOpacity(isAfter ? errorColor : btcAccent, 0.12),
-    color: isAfter ? withOpacity(errorColor, 0.55) : btcAccent,
-    flexShrink: 0,
-    transition: "all 0.45s var(--ease-smooth)",
-  });
-
-  const inputCardBody: CSSProperties = {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.1rem",
-    minWidth: 0,
-  };
-
-  const inputAmountStyle = (): CSSProperties => ({
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    color: isAfter ? withOpacity(errorColor, 0.5) : btcAccent,
-    textDecoration: isAfter ? "line-through" : "none",
-    transition: "all 0.45s var(--ease-smooth)",
-  });
-
-  const inputOwnerStyle = (): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "0.25rem",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    color: isAfter ? withOpacity(errorColor, 0.35) : withOpacity(colors.base.text.secondary, 0.65),
-    transition: "color 0.45s var(--ease-smooth)",
-  });
-
-  const consumedBadgeStyle: CSSProperties = {
-    flexShrink: 0,
-    opacity: isAfter ? 1 : 0,
-    transition: "opacity 0.35s var(--ease-smooth) 0.1s",
-  };
-
-  const txConnector: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "0.2rem",
-    padding: "0.05rem 0",
-  };
-
-  const txBox: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.3rem",
-    padding: isMobile ? "0.3rem 0.6rem" : "0.35rem 0.8rem",
-    borderRadius: 0,
-    border: `1px solid ${withOpacity(btcAccent, 0.2)}`,
-    background: withOpacity(btcAccent, 0.06),
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.07em",
-    color: withOpacity(btcAccent, 0.8),
-  };
-
-  const outputCard = (delay: number, accent: string): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    padding: isMobile ? "0.3rem 0.5rem" : "0.45rem 0.65rem",
-    borderRadius: 0,
-    border: `1px solid ${withOpacity(accent, isAfter ? 0.35 : 0.08)}`,
-    background: withOpacity(accent, isAfter ? 0.06 : 0.015),
+  const revealStyle = (delay: number): CSSProperties => ({
     opacity: isAfter ? 1 : 0.12,
     transform: isAfter ? "translateY(0)" : "translateY(6px)",
-    transition: `all 0.4s var(--ease-smooth) ${delay}s`,
+    transition: `opacity 0.4s var(--ease-smooth) ${delay}s, transform 0.4s var(--ease-smooth) ${delay}s`,
   });
 
-  const outputIconBox = (accent: string): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: isMobile ? "1.25rem" : "1.5rem",
-    height: isMobile ? "1.25rem" : "1.5rem",
-    borderRadius: 0,
-    background: withOpacity(accent, 0.12),
-    color: isAfter ? accent : withOpacity(accent, 0.3),
-    flexShrink: 0,
-    transition: "color 0.4s var(--ease-smooth)",
-  });
+  const consumedBadge = (
+    <Badge tone="error" size="xs" style={{ opacity: isAfter ? 1 : 0, transition: "opacity 0.35s var(--ease-smooth)" }}>
+      {t("txComparison.btcConsumedBadge")}
+    </Badge>
+  );
 
-  const outputCardBody: CSSProperties = {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.1rem",
-    minWidth: 0,
-  };
+  const input = (amount: number): ReactNode => (
+    <UtxoChip
+      icon={<DoodleLock size={iconSize} />}
+      amount={fmtBTC(amount)}
+      sublabel={`${t("txComparison.btcLockedBy")} ${t("txComparison.nicolas")}`}
+      accent={isAfter ? error : btcAccent}
+      struck={isAfter}
+      badge={consumedBadge}
+    />
+  );
 
-  const outputAmountStyle = (accent: string): CSSProperties => ({
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    color: isAfter ? accent : withOpacity(accent, 0.3),
-    transition: "color 0.4s var(--ease-smooth)",
-  });
-
-  const outputOwnerStyle = (accent: string): CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "0.25rem",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    color: isAfter ? withOpacity(accent, 0.7) : withOpacity(accent, 0.2),
-    transition: "color 0.4s var(--ease-smooth)",
-  });
-
-  const pedagogyPhrase: CSSProperties = {
-    padding: isMobile ? "0.45rem 0.6rem" : "0.6rem 0.8rem",
-    borderRadius: 0,
-    border: `1px solid ${withOpacity(btcAccent, isAfter ? 0.22 : 0.05)}`,
-    background: withOpacity(btcAccent, isAfter ? 0.06 : 0),
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    fontStyle: "italic",
-    color: isAfter ? btcAccent : withOpacity(btcAccent, 0.15),
-    lineHeight: 1.5,
-    textAlign: "center",
-    opacity: isAfter ? 1 : 0,
-    transform: isAfter ? "translateY(0)" : "translateY(8px)",
-    transition: "all 0.45s var(--ease-smooth) 0.55s",
-  };
-
-
-  const outerContainer: CSSProperties = {
-    margin: isMobile ? "1.25rem 0" : "2rem 0",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.75rem",
-  };
-
-  const cardsRow: CSSProperties = {
-    display: "flex",
-    flexDirection: isMobile ? "column" : "row",
-    gap: isMobile ? "0.75rem" : "1rem",
-    alignItems: "stretch",
-  };
-
+  const output = (
+    icon: ReactNode,
+    amount: number,
+    sublabel: ReactNode,
+    accent: string,
+    delay: number,
+  ): ReactNode => (
+    <div style={revealStyle(delay)}>
+      <UtxoChip icon={icon} amount={fmtBTC(amount)} sublabel={sublabel} accent={accent} />
+    </div>
+  );
 
   const bankCard = (
-    <div style={card(bankAccent)}>
-      <div style={cardHeader(bankAccent)}>
-        <div style={cardHeaderRow}>
-          <Caption
-            size="md"
-            color={bankAccent}
-            icon={
-              <Building2
-                size={isMobile ? 13 : 14}
-                strokeWidth={2}
-                style={{ color: bankAccent, flexShrink: 0 }}
-              />
-            }
-            style={{ letterSpacing: "0.07em" }}
-          >
-            {t("txComparison.bankTitle")}
-          </Caption>
-        </div>
-        <span style={cardSubtitle}>{t("txComparison.bankSubtitle")}</span>
-        <div style={cardDescRow(bankAccent)}>
-          <Lightbulb
-            size={12}
-            strokeWidth={2}
-            style={{ color: bankAccent, flexShrink: 0, marginTop: "0.1rem" }}
-          />
-          <span style={cardDescStyle}>{t("txComparison.bankDesc")}</span>
-        </div>
+    <ModelCard
+      accent={bankAccent}
+      icon={<DoodleBank size={iconSize} style={{ color: bankAccent }} />}
+      title={t("txComparison.bankTitle")}
+      subtitle={t("txComparison.bankSubtitle")}
+      description={t("txComparison.bankDesc")}
+      summary={t("txComparison.bankSummary")}
+      keyText={t("txComparison.bankKeyText")}
+    >
+      {scenarioBox(bankAccent, t("txComparison.bankScenario"))}
+
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
+        <span style={{ ...sectionLabel, color: bankAccent }}>
+          <DoodleNotes size={iconSize} />
+          {t("txComparison.bankLedger")}
+        </span>
+        {isAfter && (
+          <Badge tone="success" size="xs">
+            {t("txComparison.bankUpdated")}
+          </Badge>
+        )}
       </div>
 
-      <div style={cardBody}>
-        <div style={scenarioBox(bankAccent)}>
-          <ArrowRightLeft size={13} strokeWidth={2} style={{ color: bankAccent, flexShrink: 0 }} />
-          {t("txComparison.bankScenario")}
-        </div>
-
-        <div style={ledgerLabelRow}>
-          <div style={sectionLabel(bankAccent)}>
-            <BookText size={10} strokeWidth={2} />
-            {t("txComparison.bankLedger")}
-          </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+        <LedgerEntry
+          name={t("txComparison.nicolas")}
+          before={BANK.nicolasBefore}
+          after={BANK.nicolasAfter}
+          sent={BANK.sent}
+          positive={false}
+          isAfter={isAfter}
+          accent={bankAccent}
+          language={language}
+        />
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0.4rem", color: withOpacity(bankAccent, isAfter ? 0.7 : 0.3) }}>
+          <ArrowDown size={14} strokeWidth={2} />
           {isAfter && (
-            <span style={ledgerBadge}>
-              <CircleCheck size={9} strokeWidth={2.5} />
-              {t("txComparison.bankUpdated")}
+            <span style={{ ...typo.micro, fontVariant: "small-caps", color: bankAccent }}>
+              {t("txComparison.bankTransferLabel")}
             </span>
           )}
         </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-          {renderLedgerEntry(
-            t("txComparison.nicolas"),
-            BANK.nicolasBefore,
-            BANK.nicolasAfter,
-            false,
-          )}
-          <div style={transferConnector}>
-            <div style={transferStem} />
-            {isAfter ? (
-              <span style={transferPill}>
-                <ArrowDown size={11} strokeWidth={2.5} />
-                {t("txComparison.bankTransferLabel")} {fmtEur(BANK.sent, language)}
-              </span>
-            ) : (
-              <ArrowDown
-                size={14}
-                strokeWidth={2}
-                style={{ color: withOpacity(bankAccent, 0.3) }}
-              />
-            )}
-            <div style={transferStem} />
-          </div>
-          {renderLedgerEntry(t("txComparison.michu"), BANK.michuBefore, BANK.michuAfter, true)}
-        </div>
+        <LedgerEntry
+          name={t("txComparison.michu")}
+          before={BANK.michuBefore}
+          after={BANK.michuAfter}
+          sent={BANK.sent}
+          positive
+          isAfter={isAfter}
+          accent={bankAccent}
+          language={language}
+        />
       </div>
-
-      <div style={cardFooter(bankAccent)}>
-        {t("txComparison.bankSummary")}
-        <div style={keyText(bankAccent)}>{t("txComparison.bankKeyText")}</div>
-      </div>
-    </div>
+    </ModelCard>
   );
-
 
   const bitcoinCard = (
-    <div style={card(btcAccent)}>
-      <div style={cardHeader(btcAccent)}>
-        <div style={cardHeaderRow}>
-          <Caption
-            size="md"
-            color={btcAccent}
-            icon={
-              <CircleDollarSign
-                size={isMobile ? 13 : 14}
-                strokeWidth={2}
-                style={{ color: btcAccent, flexShrink: 0 }}
-              />
-            }
-            style={{ letterSpacing: "0.07em" }}
-          >
-            {t("txComparison.btcTitle")}
-          </Caption>
-        </div>
-        <span style={cardSubtitle}>{t("txComparison.btcSubtitle")}</span>
-        <div style={cardDescRow(btcAccent)}>
-          <Lightbulb
-            size={12}
-            strokeWidth={2}
-            style={{ color: btcAccent, flexShrink: 0, marginTop: "0.1rem" }}
-          />
-          <span style={cardDescStyle}>{t("txComparison.btcDesc")}</span>
-        </div>
+    <ModelCard
+      accent={btcAccent}
+      icon={<DoodleBitcoin size={iconSize} style={{ color: btcAccent }} />}
+      title={t("txComparison.btcTitle")}
+      subtitle={t("txComparison.btcSubtitle")}
+      description={t("txComparison.btcDesc")}
+      summary={t("txComparison.btcSummary")}
+      keyText={t("txComparison.btcKeyText")}
+    >
+      {scenarioBox(btcAccent, t("txComparison.btcScenario"))}
+
+      <span style={{ ...sectionLabel, color: btcAccent }}>
+        <DoodleLock size={iconSize} />
+        {t("txComparison.btcInputsLabel")}
+      </span>
+      {input(BTC.utxo1)}
+      {input(BTC.utxo2)}
+
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.25rem", color: withOpacity(btcAccent, 0.4) }}>
+        <ArrowDown size={14} strokeWidth={2} />
+        <span style={{ ...typo.micro, fontVariant: "small-caps", color: withOpacity(btcAccent, 0.85) }}>
+          {t("txComparison.btcTxBox")}
+        </span>
+        <ArrowDown size={14} strokeWidth={2} />
       </div>
 
-      <div style={cardBody}>
-        <div style={scenarioBox(btcAccent)}>
-          <ArrowRightLeft size={13} strokeWidth={2} style={{ color: btcAccent, flexShrink: 0 }} />
-          {t("txComparison.btcScenario")}
-        </div>
+      <span style={{ ...sectionLabel, color: withOpacity(btcAccent, isAfter ? 1 : 0.4), transition: "color 0.35s var(--ease-smooth)" }}>
+        <DoodleKey size={iconSize} />
+        {t("txComparison.btcOutputsLabel")}
+      </span>
+      {output(
+        <DoodleKey size={iconSize} />,
+        BTC.sentToMichu,
+        `${t("txComparison.michu")} ${t("txComparison.btcCanSpend")}`,
+        success,
+        0.25,
+      )}
+      {output(
+        <DoodleWallet size={iconSize} />,
+        BTC.changeToNicolas,
+        <>
+          {t("txComparison.nicolas")} {t("txComparison.btcCanSpend")}{" "}
+          <span style={{ color: colors.base.text.secondary }}>({t("txComparison.btcChangeNote")})</span>
+        </>,
+        btcAccent,
+        0.38,
+      )}
+      {output(
+        <DoodleMining size={iconSize} />,
+        BTC.fees,
+        t("txComparison.fees"),
+        colors.base.text.secondary,
+        0.5,
+      )}
 
-        <div style={sectionLabel(btcAccent)}>
-          <Lock size={9} strokeWidth={2} />
-          {t("txComparison.btcInputsLabel")}
-        </div>
-
-        <div style={inputCard()}>
-          <div style={inputIconBox()}>
-            <Lock size={iconSm} strokeWidth={2} />
-          </div>
-          <div style={inputCardBody}>
-            <span style={inputAmountStyle()}>{fmtBTC(BTC.utxo1)}</span>
-            <span style={inputOwnerStyle()}>
-              <KeyRound size={9} strokeWidth={2} />
-              {t("txComparison.btcLockedBy")} {t("txComparison.nicolas")}
-            </span>
-          </div>
-          <Badge tone="error" size="xs" style={consumedBadgeStyle}>
-            {t("txComparison.btcConsumedBadge")}
-          </Badge>
-        </div>
-
-        <div style={inputCard()}>
-          <div style={inputIconBox()}>
-            <Lock size={iconSm} strokeWidth={2} />
-          </div>
-          <div style={inputCardBody}>
-            <span style={inputAmountStyle()}>{fmtBTC(BTC.utxo2)}</span>
-            <span style={inputOwnerStyle()}>
-              <KeyRound size={9} strokeWidth={2} />
-              {t("txComparison.btcLockedBy")} {t("txComparison.nicolas")}
-            </span>
-          </div>
-          <Badge tone="error" size="xs" style={consumedBadgeStyle}>
-            {t("txComparison.btcConsumedBadge")}
-          </Badge>
-        </div>
-
-        <div style={txConnector}>
-          <ArrowDown size={10} strokeWidth={2} style={{ color: withOpacity(btcAccent, 0.35) }} />
-          <div style={txBox}>
-            <Zap size={10} strokeWidth={2} />
-            {t("txComparison.btcTxBox")}
-          </div>
-          <ArrowDown size={10} strokeWidth={2} style={{ color: withOpacity(btcAccent, 0.35) }} />
-        </div>
-
-        <div style={sectionLabel(btcAccent, !isAfter)}>
-          <KeyRound size={9} strokeWidth={2} />
-          {t("txComparison.btcOutputsLabel")}
-        </div>
-
-        <div style={outputCard(0.25, successColor)}>
-          <div style={outputIconBox(successColor)}>
-            <KeyRound size={iconSm} strokeWidth={2} />
-          </div>
-          <div style={outputCardBody}>
-            <span style={outputAmountStyle(successColor)}>{fmtBTC(BTC.sentToMichu)}</span>
-            <span style={outputOwnerStyle(successColor)}>
-              <KeyRound size={9} strokeWidth={2} />
-              {t("txComparison.michu")} {t("txComparison.btcCanSpend")}
-            </span>
-          </div>
-        </div>
-
-        <div style={outputCard(0.38, btcAccent)}>
-          <div style={outputIconBox(btcAccent)}>
-            <Wallet size={iconSm} strokeWidth={2} />
-          </div>
-          <div style={outputCardBody}>
-            <span style={outputAmountStyle(btcAccent)}>{fmtBTC(BTC.changeToNicolas)}</span>
-            <span style={outputOwnerStyle(btcAccent)}>
-              <KeyRound size={9} strokeWidth={2} />
-              {t("txComparison.nicolas")} {t("txComparison.btcCanSpend")}{" "}
-              <span style={{ opacity: 0.65 }}>({t("txComparison.btcChangeNote")})</span>
-            </span>
-          </div>
-        </div>
-
-        <div
-          style={{
-            ...outputCard(0.5, colors.base.text.secondary),
-            border: `1px solid ${withOpacity(colors.base.border.secondary, isAfter ? 0.12 : 0.04)}`,
-          }}
-        >
-          <div style={outputIconBox(withOpacity(colors.base.text.secondary, 0.55))}>
-            <Pickaxe size={iconSm} strokeWidth={2} />
-          </div>
-          <div style={outputCardBody}>
-            <span
-              style={{
-                ...outputAmountStyle(colors.base.text.secondary),
-                opacity: isAfter ? 0.65 : 0.2,
-              }}
-            >
-              {fmtBTC(BTC.fees)}
-            </span>
-            <span
-              style={{
-                ...outputOwnerStyle(colors.base.text.secondary),
-                opacity: isAfter ? 0.55 : 0.15,
-              }}
-            >
-              {t("txComparison.fees")}
-            </span>
-          </div>
-        </div>
-
-        <div style={pedagogyPhrase}>{t("txComparison.btcRightsDestroyed")}</div>
+      <div
+        style={{
+          ...revealStyle(0.55),
+          ...typo.note,
+          color: btcAccent,
+          textAlign: "center",
+          padding: "0.5rem 0.7rem",
+          border: `1px solid ${withOpacity(btcAccent, isAfter ? 0.22 : 0.05)}`,
+          background: withOpacity(btcAccent, isAfter ? 0.06 : 0),
+        }}
+      >
+        {t("txComparison.btcRightsDestroyed")}
       </div>
-
-      <div style={cardFooter(btcAccent)}>
-        {t("txComparison.btcSummary")}
-        <div style={keyText(btcAccent)}>{t("txComparison.btcKeyText")}</div>
-      </div>
-    </div>
+    </ModelCard>
   );
 
-
   return (
-    <div style={outerContainer}>
-      <div style={cardsRow}>
+    <SurfaceCard gap="1rem" margin={isMobile ? "1.5rem 0" : "2rem 0"}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          gap: isMobile ? "0.85rem" : "1rem",
+          alignItems: "stretch",
+        }}
+      >
         {(mode === "bank" || mode === "compare") && bankCard}
         {(mode === "bitcoin" || mode === "compare") && bitcoinCard}
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          variant={isAfter ? "secondary" : "primary"}
-          icon={
-            isAfter ? <RefreshCw size={12} strokeWidth={2} /> : <Zap size={12} strokeWidth={2} />
-          }
-          onClick={isAfter ? reset : trigger}
-          style={{ letterSpacing: "0.05em" }}
-        >
+        <Button variant={isAfter ? "secondary" : "primary"} onClick={isAfter ? reset : trigger}>
           {isAfter ? t("txComparison.reset") : t("txComparison.simulate")}
         </Button>
       </div>
-    </div>
+    </SurfaceCard>
   );
 };
