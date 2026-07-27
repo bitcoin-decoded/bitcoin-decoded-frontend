@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { BRAND, Caption, getTypography, useBreakpoint, useRechartsTheme } from "../../../Design";
+import { BRAND, Caption, getBrandGold, getTypography, useBreakpoint, useRechartsTheme, useThemeContext } from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { M2_MONEY_SUPPLY } from "../data";
 
@@ -26,6 +26,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const chart = useRechartsTheme();
+  const { theme } = useThemeContext();
 
   const containerStyle: CSSProperties = {
     width: "100%",
@@ -46,7 +47,9 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
     opacity: 0.7,
   };
 
-  const accentColor = chart.primary;
+  // Dark gold rather than the near-black ink line: the money supply curve reads
+  // as a bitcoin-adjacent signal, not a neutral data series.
+  const accentColor = getBrandGold(theme);
 
   return (
     <div style={containerStyle}>
@@ -131,7 +134,7 @@ export const M2MoneySupplyChart: FC<Props> = ({ showTitle = true }) => {
           </AreaChart>
         </ResponsiveContainer>
         <div style={sourceStyle}>
-          Source : Federal Reserve (FRED) - fred.stlouisfed.org/series/M2SL
+          Source : Federal Reserve (FRED) - fred.stlouisfed.org/series/M2SL
         </div>
       </div>
     </div>

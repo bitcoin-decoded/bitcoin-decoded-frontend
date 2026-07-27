@@ -94,7 +94,14 @@ export const DifficultyAdjustment: FC<Props> = ({ onComplete }) => {
   });
 
   return (
-    <SurfaceCard gap="0.85rem" margin={isMobile ? "1.5rem 0" : "2rem 0"}>
+    <SurfaceCard
+      gap="0.85rem"
+      margin={isMobile ? "1.5rem 0" : "2rem 0"}
+      style={{
+        background: withOpacity(colors.base.text.primary, theme === "dark" ? 0.05 : 0.035),
+        border: `1px solid ${colors.base.border.tertiary}`,
+      }}
+    >
       <Caption tone="world" size="md" icon={<DoodleMining size={iconSize} />}>
         {t("difficulty.title")}
       </Caption>

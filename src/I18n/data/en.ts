@@ -226,6 +226,7 @@ const en = {
   "halvingTimeMachine.exhausted": "Issuance complete: all 21 million bitcoins are in circulation.",
   "halvingTimeMachine.lever": "Pull the lever",
   "halvingTimeMachine.leverTraveling": "Traveling...",
+  "halvingTimeMachine.captionTitle": "About the rewards",
   "halvingTimeMachine.caption":
     "Rewards rounded to the nearest satoshi. Beyond ~2140, issuance drops to zero.",
 

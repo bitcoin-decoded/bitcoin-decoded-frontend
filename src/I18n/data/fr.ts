@@ -228,6 +228,7 @@ const fr = {
     "Émission terminée : les 21 millions de bitcoins sont tous en circulation.",
   "halvingTimeMachine.lever": "Tire le levier",
   "halvingTimeMachine.leverTraveling": "Voyage en cours...",
+  "halvingTimeMachine.captionTitle": "À propos des récompenses",
   "halvingTimeMachine.caption":
     "Récompenses arrondies au satoshi près. Au-delà de ~2140, l'émission tombe à zéro.",
 

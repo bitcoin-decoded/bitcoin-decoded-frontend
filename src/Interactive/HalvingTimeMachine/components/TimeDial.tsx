@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, getTypography, RangeLedger, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Button, getTypography, RangeLedger, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { TIME_MACHINE_END_YEAR } from "../data";
 
@@ -48,20 +48,14 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
   };
 
   const labelStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
-    letterSpacing: "0.1em",
-    color: withOpacity(colors.base.text.secondary, 0.75),
+    color: colors.base.text.secondary,
   };
 
   const yearValueStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "1.15rem" : "1.3rem",
-    fontWeight: 500,
-    color: world.text.primary,
-    letterSpacing: "0.02em",
+    ...typo.figure,
+    color: world.text.secondary,
     fontVariantNumeric: "tabular-nums",
   };
 
@@ -80,20 +74,21 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
     overflow: "hidden",
   };
 
+  // Only the active chip carries an inline background; the idle chips leave it
+  // to CSS so `.htm-year-chip:hover` can tint them without an `!important`
+  // fight. The hover colour rides in on a custom property so it stays theme-aware.
   const segmentBtnStyle = (active: boolean, first: boolean): CSSProperties => ({
-    fontFamily: BRAND.fonts.mono,
+    ...typo.micro,
     cursor: disabled ? "not-allowed" : "pointer",
     padding: isMobile ? "0.5rem 0.7rem" : "0.55rem 1rem",
     border: "none",
     borderLeft: first ? "none" : `1px solid ${withOpacity(baseBorderSecondary, 0.25)}`,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    letterSpacing: "0.04em",
     whiteSpace: "nowrap",
-    color: active ? colors.base.text.onAccent : withOpacity(colors.base.text.secondary, 0.85),
-    background: active ? accent : "transparent",
+    color: active ? colors.base.text.onAccent : colors.base.text.secondary,
+    background: active ? accent : undefined,
     opacity: disabled ? 0.5 : 1,
     transition: "all 0.25s var(--ease-smooth)",
+    ["--chip-hover" as string]: withOpacity(accent, 0.14),
   });
 
   const atMin = targetYear <= minYear;
@@ -147,6 +142,7 @@ export const TimeDial: FC<Props> = ({ targetYear, minYear, maxYear, disabled, on
             key={chip.year}
             type="button"
             role="tab"
+            className="htm-year-chip"
             aria-selected={targetYear === chip.year}
             disabled={disabled}
             onClick={() => onChange(chip.year)}

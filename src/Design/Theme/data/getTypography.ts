@@ -22,6 +22,14 @@ export const getTypography = (breakpoint: Breakpoint = "desktop") => {
       letterSpacing: "0.02em",
       textAlign: "left",
     },
+    display: {
+      fontFamily: BRAND.fonts.mono,
+      fontSize: compact ? "2rem" : "2.5rem",
+      fontWeight: 400,
+      lineHeight: 1.05,
+      letterSpacing: "0.01em",
+      fontVariantNumeric: "tabular-nums",
+    },
     label: {
       fontFamily: BRAND.fonts.mono,
       fontSize: compact ? "1rem" : "1.0625rem",

@@ -252,23 +252,6 @@ body {
   filter: brightness(1.18);
 }
 
-@keyframes confettiBurst {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  65% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0.4);
-  }
-}
-.confetti-piece {
-  animation: confettiBurst var(--dur, 1.2s) var(--delay, 0s) cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
-}
-
 @keyframes rewardNoteFade {
   from {
     opacity: 0;
@@ -365,69 +348,29 @@ body {
   animation: flywheelSpin 1.9s linear infinite;
 }
 
-/* Halving time machine - travel flux, screen shake, and arrival materialize */
-@keyframes htmFlux {
-  0% {
-    opacity: 0;
-  }
-  8% {
-    opacity: 0.95;
-  }
-  26% {
-    opacity: 0.15;
-  }
-  48% {
-    opacity: 0.7;
-  }
-  70% {
-    opacity: 0.1;
-  }
-  100% {
-    opacity: 0;
-  }
+/* Halving time machine - year quick-jump chips. Idle chips are transparent
+   (never the user-agent button grey); the active one sets its own inline
+   background, and idle chips tint on hover. */
+.htm-year-chip {
+  background: transparent;
 }
-.htm-flux {
-  animation: htmFlux 1.3s ease-out forwards;
+.htm-year-chip:not([aria-selected="true"]):not(:disabled):hover {
+  background: var(--chip-hover);
 }
 
-@keyframes htmShake {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  20% {
-    transform: translate(-1.5px, 1px);
-  }
-  40% {
-    transform: translate(1.5px, -1px);
-  }
-  60% {
-    transform: translate(-1px, -1.5px);
-  }
-  80% {
-    transform: translate(1px, 1.5px);
-  }
-}
-.htm-screen--traveling {
-  animation: htmShake 0.16s linear infinite;
-}
-
+/* Halving time machine - a restrained fade as the reward for a year resolves */
 @keyframes htmMaterialize {
-  0% {
+  from {
     opacity: 0;
-    transform: translateY(10px);
-    filter: blur(7px);
-    letter-spacing: 0.3em;
+    transform: translateY(6px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
-    letter-spacing: normal;
   }
 }
 .htm-materialize {
-  animation: htmMaterialize 0.7s var(--ease-smooth) both;
+  animation: htmMaterialize 0.45s var(--ease-smooth) both;
 }
 
 /* ── Styled lists - page content ──────────────────────────── */
