@@ -17,6 +17,7 @@ export { DoodleBrokenPhone } from "./DoodleBrokenPhone";
 export { DoodleBulb } from "./DoodleBulb";
 export { DoodleBurnMoney } from "./DoodleBurnMoney";
 export { DoodleCart } from "./DoodleCart";
+export { DoodleCashGive } from "./DoodleCashGive";
 export { DoodleCastle } from "./DoodleCastle";
 export { DoodleCheck } from "./DoodleCheck";
 export { DoodleChess } from "./DoodleChess";
