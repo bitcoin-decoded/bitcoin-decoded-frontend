@@ -2,29 +2,16 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { Caption, getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 
-import { DoodleBulb } from "@doodle";
-
 type Props = {
   accent: string;
   icon: ReactNode;
   title: string;
-  subtitle: string;
-  description: string;
   summary: string;
   keyText: string;
   children: ReactNode;
 };
 
-export const ModelCard: FC<Props> = ({
-  accent,
-  icon,
-  title,
-  subtitle,
-  description,
-  summary,
-  keyText,
-  children,
-}) => {
+export const ModelCard: FC<Props> = ({ accent, icon, title, summary, keyText, children }) => {
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const typo = getTypography(breakpoint);
@@ -42,18 +29,6 @@ export const ModelCard: FC<Props> = ({
   const header: CSSProperties = {
     padding: isMobile ? "0.75rem 0.85rem" : "0.95rem 1.1rem",
     borderBottom: `1px solid ${withOpacity(accent, 0.18)}`,
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.4rem",
-  };
-
-  const subtitleStyle: CSSProperties = { ...typo.note, color: colors.base.text.primary };
-
-  const descRow: CSSProperties = {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: "0.45rem",
-    color: colors.base.text.secondary,
   };
 
   const body: CSSProperties = {
@@ -79,11 +54,6 @@ export const ModelCard: FC<Props> = ({
         <Caption size="md" color={accent} icon={icon}>
           {title}
         </Caption>
-        <span style={subtitleStyle}>{subtitle}</span>
-        <div style={descRow}>
-          <DoodleBulb size={isMobile ? 18 : 20} style={{ flexShrink: 0, color: accent }} />
-          <span style={typo.note}>{description}</span>
-        </div>
       </div>
 
       <div style={body}>{children}</div>

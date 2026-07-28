@@ -9,6 +9,8 @@ import {
   usePageTheme,
   withOpacity,
 } from "../../../Design";
+import michuPortrait from "../../../Design/img/michu_portrait.webp";
+import nicolasTransfer from "../../../Design/img/nicolas_transfer.webp";
 import { useTranslation } from "../../../I18n";
 import { UtxoChip } from "../../components";
 import { fmtBTC } from "../../helpers";
@@ -16,17 +18,18 @@ import { BANK, BTC } from "../data";
 import { useTransactionComparison } from "../hooks";
 import type { ComparisonMode } from "../types";
 
-import { LedgerEntry } from "./LedgerEntry";
+import { AccountCard } from "./AccountCard";
 import { ModelCard } from "./ModelCard";
 
 import {
   DoodleBank,
-  DoodleBitcoin,
+  DoodleBitcoinGive,
+  DoodleBitcoinGlobe,
+  DoodleCashGive,
   DoodleKey,
   DoodleLock,
   DoodleMining,
   DoodleNotes,
-  DoodlePaperPlane,
   DoodleWallet,
 } from "@doodle";
 import { ArrowDown } from "@icons";
@@ -53,6 +56,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   const error = colors.semantic.error.text;
   const isAfter = phase === "after";
   const iconSize = isMobile ? 20 : 22;
+  const giveSize = isMobile ? 26 : 34;
 
   const sectionLabel: CSSProperties = {
     ...typo.micro,
@@ -61,22 +65,6 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
     alignItems: "center",
     gap: "0.4rem",
   };
-
-  const scenarioBox = (accent: string, text: string): ReactNode => (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "0.5rem",
-        padding: "0.45rem 0.65rem",
-        background: withOpacity(accent, 0.06),
-        border: `1px solid ${withOpacity(accent, 0.14)}`,
-      }}
-    >
-      <DoodlePaperPlane size={iconSize} style={{ flexShrink: 0, color: accent }} />
-      <span style={{ ...typo.note, color: colors.base.text.secondary }}>{text}</span>
-    </div>
-  );
 
   const revealStyle = (delay: number): CSSProperties => ({
     opacity: isAfter ? 1 : 0.12,
@@ -118,13 +106,9 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
       accent={bankAccent}
       icon={<DoodleBank size={iconSize} style={{ color: bankAccent }} />}
       title={t("txComparison.bankTitle")}
-      subtitle={t("txComparison.bankSubtitle")}
-      description={t("txComparison.bankDesc")}
       summary={t("txComparison.bankSummary")}
       keyText={t("txComparison.bankKeyText")}
     >
-      {scenarioBox(bankAccent, t("txComparison.bankScenario"))}
-
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
         <span style={{ ...sectionLabel, color: bankAccent }}>
           <DoodleNotes size={iconSize} />
@@ -137,34 +121,40 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
         )}
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-        <LedgerEntry
+      <div style={{ display: "flex", alignItems: "stretch", gap: isMobile ? "0.4rem" : "0.6rem" }}>
+        <AccountCard
           name={t("txComparison.nicolas")}
-          before={BANK.nicolasBefore}
-          after={BANK.nicolasAfter}
-          sent={BANK.sent}
-          positive={false}
-          isAfter={isAfter}
-          accent={bankAccent}
+          imgSrc={nicolasTransfer}
+          balanceLabel={t("txComparison.balance")}
+          balance={isAfter ? BANK.nicolasAfter : BANK.nicolasBefore}
           language={language}
+          accent={bankAccent}
+          isAfter={isAfter}
+          direction="down"
+          objectPosition="58% 22%"
         />
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0.4rem", color: withOpacity(bankAccent, isAfter ? 0.7 : 0.3) }}>
-          <ArrowDown size={14} strokeWidth={2} />
-          {isAfter && (
-            <span style={{ ...typo.micro, fontVariant: "small-caps", color: bankAccent }}>
-              {t("txComparison.bankTransferLabel")}
-            </span>
-          )}
-        </div>
-        <LedgerEntry
+        <DoodleCashGive
+          size={giveSize}
+          style={{
+            color: bankAccent,
+            transform: "scaleX(-1)",
+            flexShrink: 0,
+            alignSelf: "center",
+            opacity: isAfter ? 1 : 0,
+            transition: "opacity 0.45s var(--ease-smooth)",
+          }}
+        />
+        <AccountCard
           name={t("txComparison.michu")}
-          before={BANK.michuBefore}
-          after={BANK.michuAfter}
-          sent={BANK.sent}
-          positive
-          isAfter={isAfter}
-          accent={bankAccent}
+          imgSrc={michuPortrait}
+          balanceLabel={t("txComparison.balance")}
+          balance={isAfter ? BANK.michuAfter : BANK.michuBefore}
           language={language}
+          accent={bankAccent}
+          isAfter={isAfter}
+          direction="up"
+          flipImage
+          objectPosition="50% 24%"
         />
       </div>
     </ModelCard>
@@ -173,15 +163,11 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   const bitcoinCard = (
     <ModelCard
       accent={btcAccent}
-      icon={<DoodleBitcoin size={iconSize} style={{ color: btcAccent }} />}
+      icon={<DoodleBitcoinGlobe size={iconSize} style={{ color: btcAccent }} />}
       title={t("txComparison.btcTitle")}
-      subtitle={t("txComparison.btcSubtitle")}
-      description={t("txComparison.btcDesc")}
       summary={t("txComparison.btcSummary")}
       keyText={t("txComparison.btcKeyText")}
     >
-      {scenarioBox(btcAccent, t("txComparison.btcScenario"))}
-
       <span style={{ ...sectionLabel, color: btcAccent }}>
         <DoodleLock size={iconSize} />
         {t("txComparison.btcInputsLabel")}
@@ -189,11 +175,9 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
       {input(BTC.utxo1)}
       {input(BTC.utxo2)}
 
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.25rem", color: withOpacity(btcAccent, 0.4) }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.15rem", color: withOpacity(btcAccent, 0.4) }}>
         <ArrowDown size={14} strokeWidth={2} />
-        <span style={{ ...typo.micro, fontVariant: "small-caps", color: withOpacity(btcAccent, 0.85) }}>
-          {t("txComparison.btcTxBox")}
-        </span>
+        <DoodleBitcoinGive size={giveSize} style={{ color: btcAccent }} />
         <ArrowDown size={14} strokeWidth={2} />
       </div>
 
