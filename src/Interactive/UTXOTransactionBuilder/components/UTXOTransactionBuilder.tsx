@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { Badge, BRAND, Button, Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, Button, Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { fmtBTC, sanitizeAmount } from "../helpers";
 import { useUTXOTransactionBuilder } from "../hooks";
@@ -8,20 +8,8 @@ import type { CardTone } from "../types";
 
 import { TxCard } from "./TxCard";
 
-import {
-  ArrowDown,
-  CheckCircle,
-  Coins,
-  Info,
-  Pickaxe,
-  RefreshCw,
-  Send,
-  User,
-  Wallet,
-  XCircle,
-} from "@icons";
-
-
+import { DoodleBulb, DoodleCoin, DoodleFlowDown, DoodleKey, DoodleMining, DoodlePaperPlane, DoodleWallet } from "@doodle";
+import { CheckCircle, XCircle } from "@icons";
 
 type Props = {
   lockedAmount?: string;
@@ -29,17 +17,17 @@ type Props = {
 };
 
 export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
-  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
 
-  const accentColor = world.border.secondary;
+  // same accent as TransactionModelComparison (mode="bitcoin") and UtxoGraph
+  const accentColor = world.text.secondary;
   const successColor = colors.semantic.success.text;
   const errorColor = colors.semantic.error.text;
-  const mutedColor = withOpacity(colors.base.text.secondary, 0.7);
 
   const {
     utxos,
@@ -61,108 +49,109 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
   const toneColors: Record<CardTone, { color: string; border: string; bg: string }> = {
     accent: {
       color: accentColor,
-      border: withOpacity(accentColor, 0.22),
-      bg: withOpacity(accentColor, 0.04),
+      border: withOpacity(accentColor, 0.3),
+      bg: withOpacity(accentColor, 0.05),
     },
     success: {
-      color: isValid ? successColor : mutedColor,
-      border: withOpacity(successColor, isValid ? 0.32 : 0.1),
-      bg: withOpacity(successColor, isValid ? 0.05 : 0.02),
+      color: successColor,
+      border: withOpacity(successColor, 0.3),
+      bg: withOpacity(successColor, 0.05),
     },
     muted: {
-      color: mutedColor,
-      border: withOpacity(colors.base.border.secondary, 0.18),
-      bg: withOpacity(colors.base.background.secondary, 0.03),
+      color: colors.base.text.secondary,
+      border: colors.base.border.tertiary,
+      bg: withOpacity(colors.base.text.secondary, 0.04),
     },
   };
 
-  const amountFont = typo.note.fontSize;
-  const iconSize = isMobile ? 12 : 13;
+  const iconSize = isMobile ? 20 : 22;
+
+  const chipButton = (selected: boolean): CSSProperties => ({
+    ...typo.figure,
+    cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.4rem",
+    padding: "0.45rem 0.7rem",
+    border: `1px solid ${withOpacity(accentColor, selected ? 0.6 : 0.25)}`,
+    background: withOpacity(accentColor, selected ? 0.1 : 0.03),
+    color: selected ? accentColor : colors.base.text.primary,
+    transition: "border-color 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth), color 0.25s var(--ease-smooth)",
+    whiteSpace: "nowrap",
+    maxWidth: "100%",
+  });
+
+  const hintRow: CSSProperties = {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "0.45rem",
+    marginTop: "0.55rem",
+    minWidth: 0,
+  };
+
+  const totalRow: CSSProperties = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "0.5rem",
+    padding: "0 0.1rem",
+    minWidth: 0,
+  };
+
+  const input: CSSProperties = {
+    ...typo.figure,
+    // 16px keeps iOS from zooming the field on focus
+    fontSize: "1rem",
+    width: "100%",
+    maxWidth: "100%",
+    padding: "0.55rem 0.85rem",
+    border: `1px solid ${withOpacity(isInsufficient ? errorColor : accentColor, isInsufficient ? 0.6 : 0.3)}`,
+    background: withOpacity(accentColor, 0.04),
+    color: colors.base.text.primary,
+    transition: "border-color 0.25s var(--ease-smooth)",
+    boxSizing: "border-box",
+    touchAction: "manipulation",
+  };
 
   return (
-    <SurfaceCard
-      gap="1.1rem"
-      margin={isMobile ? "1.5rem 0" : "2rem 0"}
-      style={{ ...mono, overflow: "hidden" }}
-    >
+    <SurfaceCard gap="1.5rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={{ overflow: "hidden" }}>
       <Caption
-        tone="accent"
         size="md"
-        icon={<Coins size={isMobile ? 15 : 16} strokeWidth={2} style={{ color: accentColor }} />}
+        color={accentColor}
+        icon={<DoodleCoin size={iconSize} style={{ color: accentColor }} />}
         style={{ minWidth: 0, overflowWrap: "anywhere" }}
       >
         {t("utxoBuilder.title")}
       </Caption>
 
       <div style={{ minWidth: 0 }}>
-        <Caption
-          tone="world"
-          size="xs"
-          icon={<Wallet size={iconSize} strokeWidth={2} />}
-          as="div"
-          style={{ marginBottom: "0.5rem" }}
-        >
+        <Caption size="xs" tone="world" icon={<DoodleWallet size={20} />} as="div" style={{ marginBottom: "0.5rem" }}>
           {t("utxoBuilder.step1")}
         </Caption>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
           {utxos.map((u) => {
             const selected = selectedIds.includes(u.id);
             return (
-              <button
-                key={u.id}
-                onClick={() => toggle(u.id)}
-                style={{
-                  ...mono,
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.35rem",
-                  padding: "0.4rem 0.7rem",
-                  borderRadius: 0,
-                  fontSize: typo.micro.fontSize,
-                  fontWeight: 500,
-                  border: `1px solid ${withOpacity(selected ? accentColor : world.border.secondary, selected ? 0.7 : 0.25)}`,
-                  background: selected
-                    ? withOpacity(accentColor, 0.12)
-                    : withOpacity(world.background.secondary, 0.04),
-                  color: selected ? accentColor : world.text.primary,
-                  transition: "all 0.25s var(--ease-smooth)",
-                  whiteSpace: "nowrap",
-                  maxWidth: "100%",
-                }}
-              >
-                <Coins size={11} strokeWidth={2} style={{ opacity: selected ? 1 : 0.5 }} />
+              <button key={u.id} onClick={() => toggle(u.id)} style={chipButton(selected)}>
+                <DoodleCoin
+                  size={18}
+                  style={{ color: selected ? accentColor : colors.base.text.secondary, opacity: selected ? 1 : 0.6 }}
+                />
                 {fmtBTC(u.amount)}
               </button>
             );
           })}
         </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            gap: "0.4rem",
-            marginTop: "0.55rem",
-            fontSize: typo.micro.fontSize,
-            lineHeight: 1.5,
-            color: withOpacity(colors.base.text.secondary, 0.65),
-            minWidth: 0,
-            overflowWrap: "anywhere",
-          }}
-        >
-          <Info size={11} strokeWidth={2} style={{ flexShrink: 0, marginTop: "0.15rem" }} />
-          <span style={{ minWidth: 0 }}>{t("utxoBuilder.utxoHint")}</span>
+        <div style={hintRow}>
+          <DoodleBulb size={18} style={{ flexShrink: 0, color: accentColor }} />
+          <span style={{ ...typo.micro, color: colors.base.text.secondary, minWidth: 0, overflowWrap: "anywhere" }}>
+            {t("utxoBuilder.utxoHint")}
+          </span>
         </div>
       </div>
 
       <div style={{ minWidth: 0 }}>
-        <Caption
-          tone="world"
-          size="xs"
-          icon={<Send size={iconSize} strokeWidth={2} />}
-          as="div"
-          style={{ marginBottom: "0.5rem" }}
-        >
+        <Caption size="xs" tone="world" icon={<DoodlePaperPlane size={20} />} as="div" style={{ marginBottom: "0.5rem" }}>
           {t("utxoBuilder.step2")}
         </Caption>
         <input
@@ -172,21 +161,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
           value={rawAmount}
           readOnly={lockedAmount != null}
           onChange={(e) => setRawAmount(sanitizeAmount(e.target.value))}
-          style={{
-            ...mono,
-            width: "100%",
-            maxWidth: "100%",
-            padding: "0.55rem 0.85rem",
-            borderRadius: 0,
-            fontSize: isMobile ? "1rem" : typo.note.fontSize,
-            fontWeight: 500,
-            border: `1px solid ${withOpacity(isInsufficient ? errorColor : accentColor, isInsufficient ? 0.6 : 0.3)}`,
-            background: withOpacity(world.background.secondary, 0.05),
-            color: world.text.primary,
-            transition: "border-color 0.25s var(--ease-smooth)",
-            boxSizing: "border-box",
-            touchAction: "manipulation",
-          }}
+          style={input}
         />
       </div>
 
@@ -194,12 +169,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
         <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", minWidth: 0 }}>
           {hasSelection && (
             <>
-              <Caption
-                tone="muted"
-                size="xs"
-                color={withOpacity(colors.base.text.secondary, 0.5)}
-                as="div"
-              >
+              <Caption size="xs" tone="muted" as="div">
                 {t("utxoBuilder.inputs")}
               </Caption>
               {selectedIds.map((id) => {
@@ -207,40 +177,19 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
                 return (
                   <TxCard
                     key={id}
-                    icon={<Coins size={12} strokeWidth={2} />}
+                    icon={<DoodleCoin size={20} />}
                     title={`${t("utxoBuilder.coinLabel")} #${id + 1}`}
-                    desc="Nicolas"
                     amount={`+${fmtBTC(u.amount)}`}
                     tone="accent"
                     toneColors={toneColors}
-                    amountFontSize={amountFont}
-                    baseTextSecondary={colors.base.text.secondary}
                   />
                 );
               })}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  fontSize: typo.micro.fontSize,
-                  color: colors.base.text.secondary,
-                  padding: "0 0.1rem",
-                  minWidth: 0,
-                }}
-              >
-                <span style={{ minWidth: 0, overflowWrap: "anywhere" }}>
+              <div style={totalRow}>
+                <span style={{ ...typo.micro, color: colors.base.text.secondary, minWidth: 0, overflowWrap: "anywhere" }}>
                   {t("utxoBuilder.totalRow")}
                 </span>
-                <span
-                  style={{
-                    fontWeight: 500,
-                    color: accentColor,
-                    flexShrink: 0,
-                    whiteSpace: "nowrap",
-                  }}
-                >
+                <span style={{ ...typo.figure, color: colors.base.text.primary, flexShrink: 0, whiteSpace: "nowrap" }}>
                   {fmtBTC(totalInput)}
                 </span>
               </div>
@@ -251,79 +200,52 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             <div
               style={{
                 display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                color: withOpacity(colors.base.text.secondary, 0.3),
-                padding: "0.1rem 0",
-                minWidth: 0,
+                justifyContent: "center",
+                color: withOpacity(accentColor, isValid ? 0.7 : 0.35),
+                transition: "color 0.35s var(--ease-smooth)",
               }}
             >
-              <div
-                style={{
-                  flex: 1,
-                  height: 1,
-                  background: withOpacity(world.border.secondary, 0.12),
-                }}
-              />
-              <ArrowDown size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
-              <div
-                style={{
-                  flex: 1,
-                  height: 1,
-                  background: withOpacity(world.border.secondary, 0.12),
-                }}
-              />
+              <DoodleFlowDown size={isMobile ? 24 : 28} />
             </div>
           )}
 
           {hasAmount && (
             <>
-              <Caption
-                tone="muted"
-                size="xs"
-                color={withOpacity(colors.base.text.secondary, 0.5)}
-                as="div"
-              >
+              <Caption size="xs" tone="muted" as="div">
                 {t("utxoBuilder.outputs")}
               </Caption>
 
               {isValid && (
                 <TxCard
-                  icon={<User size={12} strokeWidth={2} />}
+                  icon={<DoodleKey size={20} />}
                   title={t("utxoBuilder.newUtxoRecipient")}
-                  desc={isValid ? t("utxoBuilder.recipientDesc") : "test"}
+                  desc={t("utxoBuilder.recipientDesc")}
                   amount={fmtBTC(parsedAmount)}
                   tone="success"
                   toneColors={toneColors}
-                  amountFontSize={amountFont}
-                  baseTextSecondary={colors.base.text.secondary}
                 />
               )}
 
               {isValid && change > 0 && (
                 <TxCard
-                  icon={<Wallet size={12} strokeWidth={2} />}
+                  icon={<DoodleWallet size={20} />}
                   title={t("utxoBuilder.newUtxoNicolas")}
                   desc={t("utxoBuilder.changeDesc")}
                   amount={fmtBTC(change)}
                   tone="accent"
                   toneColors={toneColors}
-                  amountFontSize={amountFont}
-                  baseTextSecondary={colors.base.text.secondary}
                 />
               )}
 
               {fees > 0 && isValid && (
                 <TxCard
-                  icon={<Pickaxe size={12} strokeWidth={2} />}
+                  icon={<DoodleMining size={20} />}
                   title={t("utxoBuilder.feesImplicit")}
                   desc={t("utxoBuilder.feesDesc")}
                   amount={fmtBTC(fees)}
                   tone="muted"
                   toneColors={toneColors}
-                  amountFontSize={typo.micro.fontSize}
-                  amountOpacity={0.75}
-                  baseTextSecondary={colors.base.text.secondary}
+                  amountMuted
                 />
               )}
             </>
@@ -333,17 +255,12 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
             tone={isValid ? "success" : isInsufficient ? "error" : "neutral"}
             icon={
               isValid ? (
-                <CheckCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
+                <CheckCircle size={12} strokeWidth={2} style={{ flexShrink: 0 }} />
               ) : isInsufficient ? (
-                <XCircle size={11} strokeWidth={2} style={{ flexShrink: 0 }} />
+                <XCircle size={12} strokeWidth={2} style={{ flexShrink: 0 }} />
               ) : undefined
             }
-            style={{
-              alignSelf: "flex-start",
-              padding: "0.45rem 0.7rem",
-              overflowWrap: "anywhere",
-              whiteSpace: "normal",
-            }}
+            style={{ alignSelf: "flex-start", padding: "0.45rem 0.7rem", overflowWrap: "anywhere", whiteSpace: "normal" }}
           >
             {isValid
               ? t("utxoBuilder.valid")
@@ -354,13 +271,7 @@ export const UTXOTransactionBuilder: FC<Props> = ({ lockedAmount, onComplete }) 
         </div>
       )}
 
-      <Button
-        variant="secondary"
-        size="sm"
-        icon={<RefreshCw size={11} strokeWidth={2} />}
-        onClick={reset}
-        style={{ alignSelf: "flex-end" }}
-      >
+      <Button variant="secondary" size="sm" onClick={reset} style={{ alignSelf: "flex-end" }}>
         {t("utxoBuilder.reset")}
       </Button>
     </SurfaceCard>

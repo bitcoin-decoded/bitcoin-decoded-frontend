@@ -56,15 +56,25 @@ export const AccountCard: FC<Props> = ({
     padding: isMobile ? "0.7rem 0.5rem 0" : "0.9rem 0.6rem 0",
   };
 
-  const imgStyle: CSSProperties = {
+  const imgFrame: CSSProperties = {
+    position: "relative",
     width: isMobile ? "64%" : "56%",
     height: isMobile ? "6.5rem" : "8rem",
+    flexShrink: 0,
+  };
+
+  const imgStyle: CSSProperties = {
+    width: "100%",
+    height: "100%",
     objectFit: "cover",
     objectPosition,
     display: "block",
-    border: `1px solid ${withOpacity(accent, 0.25)}`,
     transform: flipImage ? "scaleX(-1)" : undefined,
   };
+
+  const cornerSize = isMobile ? 10 : 12;
+  const cornerRule = `1.5px solid ${withOpacity(accent, 0.75)}`;
+  const cornerBase: CSSProperties = { position: "absolute", width: cornerSize, height: cornerSize, pointerEvents: "none" };
 
   const footer: CSSProperties = {
     padding: isMobile ? "0.55rem 0.6rem" : "0.7rem 0.75rem",
@@ -100,7 +110,13 @@ export const AccountCard: FC<Props> = ({
   return (
     <div style={card}>
       <div style={imgWrap}>
-        <img src={imgSrc} alt={name} style={imgStyle} />
+        <div style={imgFrame}>
+          <img src={imgSrc} alt={name} style={imgStyle} />
+          <span style={{ ...cornerBase, top: 0, left: 0, borderTop: cornerRule, borderLeft: cornerRule }} />
+          <span style={{ ...cornerBase, top: 0, right: 0, borderTop: cornerRule, borderRight: cornerRule }} />
+          <span style={{ ...cornerBase, bottom: 0, left: 0, borderBottom: cornerRule, borderLeft: cornerRule }} />
+          <span style={{ ...cornerBase, bottom: 0, right: 0, borderBottom: cornerRule, borderRight: cornerRule }} />
+        </div>
       </div>
       <div style={footer}>
         <span style={{ ...typo.figure, color: colors.base.text.primary }}>{name}</span>

@@ -22,9 +22,8 @@ import { AccountCard } from "./AccountCard";
 import { ModelCard } from "./ModelCard";
 
 import {
-  DoodleBank,
-  DoodleBitcoinGive,
   DoodleBitcoinGlobe,
+  DoodleCashBag,
   DoodleCashGive,
   DoodleKey,
   DoodleLock,
@@ -67,7 +66,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   };
 
   const revealStyle = (delay: number): CSSProperties => ({
-    opacity: isAfter ? 1 : 0.12,
+    opacity: isAfter ? 1 : 0,
     transform: isAfter ? "translateY(0)" : "translateY(6px)",
     transition: `opacity 0.4s var(--ease-smooth) ${delay}s, transform 0.4s var(--ease-smooth) ${delay}s`,
   });
@@ -104,7 +103,7 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
   const bankCard = (
     <ModelCard
       accent={bankAccent}
-      icon={<DoodleBank size={iconSize} style={{ color: bankAccent }} />}
+      icon={<DoodleCashBag size={iconSize} style={{ color: bankAccent }} />}
       title={t("txComparison.bankTitle")}
       summary={t("txComparison.bankSummary")}
       keyText={t("txComparison.bankKeyText")}
@@ -175,10 +174,8 @@ export const TransactionModelComparison: FC<Props> = ({ mode = "compare", onComp
       {input(BTC.utxo1)}
       {input(BTC.utxo2)}
 
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.15rem", color: withOpacity(btcAccent, 0.4) }}>
-        <ArrowDown size={14} strokeWidth={2} />
-        <DoodleBitcoinGive size={giveSize} style={{ color: btcAccent }} />
-        <ArrowDown size={14} strokeWidth={2} />
+      <div style={{ display: "flex", justifyContent: "center", color: withOpacity(btcAccent, 0.5) }}>
+        <ArrowDown size={16} strokeWidth={2} />
       </div>
 
       <span style={{ ...sectionLabel, color: withOpacity(btcAccent, isAfter ? 1 : 0.4), transition: "color 0.35s var(--ease-smooth)" }}>

@@ -1,101 +1,51 @@
-import type { FC, ReactNode } from "react";
+import type { CSSProperties, FC, ReactNode } from "react";
 
-import { getTypography, withOpacity } from "../../../Design";
+import { getTypography, useBreakpoint, usePageTheme } from "../../../Design";
 import type { CardTone } from "../types";
 
-type TxCardProps = {
+type Props = {
   icon: ReactNode;
   title: string;
-  desc: string;
+  desc?: string;
   amount: string;
   tone: CardTone;
   toneColors: Record<CardTone, { color: string; border: string; bg: string }>;
-  amountFontSize: string;
-  amountOpacity?: number;
-  baseTextSecondary: string;
+  amountMuted?: boolean;
 };
 
-export const TxCard: FC<TxCardProps> = ({
-  icon,
-  title,
-  desc,
-  amount,
-  tone,
-  toneColors,
-  amountFontSize,
-  amountOpacity,
-  baseTextSecondary,
-}) => {
-  const typo = getTypography();
+export const TxCard: FC<Props> = ({ icon, title, desc, amount, tone, toneColors, amountMuted }) => {
+  const typo = getTypography(useBreakpoint());
+  const { colors } = usePageTheme();
   const { color, border, bg } = toneColors[tone];
+
+  const shell: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.6rem",
+    padding: "0.55rem 0.7rem",
+    border: `1px solid ${border}`,
+    background: bg,
+    width: "100%",
+    minWidth: 0,
+    boxSizing: "border-box",
+    transition: "border-color 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth)",
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "0.6rem",
-        padding: "0.55rem 0.7rem",
-        borderRadius: 0,
-        border: `1px solid ${border}`,
-        background: bg,
-        width: "100%",
-        minWidth: 0,
-        boxSizing: "border-box",
-        transition: "all 0.35s var(--ease-smooth)",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "1.6rem",
-          height: "1.6rem",
-          borderRadius: 0,
-          background: withOpacity(color, 0.12),
-          color,
-          flexShrink: 0,
-        }}
-      >
-        {icon}
-      </div>
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.1rem",
-          minWidth: 0,
-        }}
-      >
-        <span
-          style={{
-            fontSize: typo.note.fontSize,
-            fontWeight: 500,
-            color,
-            overflowWrap: "anywhere",
-            lineHeight: 1.3,
-          }}
-        >
-          {title}
-        </span>
-        <span
-          style={{
-            fontSize: typo.micro.fontSize,
-            color: withOpacity(baseTextSecondary, 0.6),
-            overflowWrap: "anywhere",
-            lineHeight: 1.3,
-          }}
-        >
-          {desc}
-        </span>
+    <div style={shell}>
+      <span style={{ display: "inline-flex", flexShrink: 0, color }}>{icon}</span>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.1rem", minWidth: 0 }}>
+        <span style={{ ...typo.figure, color, overflowWrap: "anywhere", lineHeight: 1.3 }}>{title}</span>
+        {desc && (
+          <span style={{ ...typo.micro, color: colors.base.text.secondary, overflowWrap: "anywhere", lineHeight: 1.3 }}>
+            {desc}
+          </span>
+        )}
       </div>
       <span
         style={{
-          fontWeight: 500,
-          fontSize: amountFontSize,
-          color,
-          opacity: amountOpacity,
+          ...typo.figure,
+          color: amountMuted ? colors.base.text.secondary : colors.base.text.primary,
           flexShrink: 0,
           whiteSpace: "nowrap",
         }}
