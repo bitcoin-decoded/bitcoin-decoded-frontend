@@ -1,31 +1,29 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Button, Caption, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import { fmtBTC } from "../../helpers";
 import { UTXO_GRAPH_SCENARIO } from "../data";
 import { useUtxoGraph } from "../hooks";
 import type { UtxoGraphMode } from "../types";
 
 import { UtxoCoin } from "./UtxoCoin";
 
-import { ArrowDown, RefreshCw, Wallet, Zap } from "@icons";
-
-const mono = (): CSSProperties => ({ fontFamily: BRAND.fonts.mono });
-
-const fmt = (n: number) => `${+n.toFixed(8)} BTC`;
+import { DoodleBulb, DoodleFlowDown, DoodleHierarchy } from "@doodle";
 
 export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t } = useTranslation();
   const { colors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
   const world = colors[moduleTheme];
   const { ran, run, reset } = useUtxoGraph();
 
-  const accent = world.border.secondary;
+  // same accent as TransactionModelComparison (mode="bitcoin")
+  const accent = world.text.secondary;
   const successColor = colors.semantic.success.text;
   const errorColor = colors.semantic.error.text;
-  const baseTextSecondary = colors.base.text.secondary;
 
   const { inputs, outputs } = UTXO_GRAPH_SCENARIO;
   const inputTotal = inputs.reduce((s, c) => s + c.amount, 0);
@@ -39,13 +37,23 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
         ? t("utxoGraph.captionWallet")
         : t("utxoGraph.captionIntro");
 
+  const iconSize = isMobile ? 20 : 22;
+
+  const sectionPanel: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.55rem",
+    alignItems: "center",
+    padding: isMobile ? "0.7rem 0.6rem" : "0.85rem 0.9rem",
+    background: withOpacity(accent, 0.04),
+    border: `1px solid ${withOpacity(accent, 0.15)}`,
+  };
+
   const sectionLabel: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
-    letterSpacing: "0.08em",
-    color: withOpacity(baseTextSecondary, 0.6),
+    letterSpacing: "0.05em",
+    color: accent,
   };
 
   const row: CSSProperties = {
@@ -55,160 +63,123 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
     justifyContent: "center",
   };
 
-  const txBox: CSSProperties = {
-    ...mono(),
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.35rem",
-    padding: "0.3rem 0.8rem",
-    borderRadius: 0,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.07em",
-    color: ran ? accent : withOpacity(accent, 0.5),
-    border: `1px solid ${withOpacity(accent, ran ? 0.4 : 0.18)}`,
-    background: withOpacity(accent, ran ? 0.1 : 0.04),
-    transition: "all 0.4s var(--ease-smooth)",
-  };
-
-  const connector: CSSProperties = {
+  const walletBar: CSSProperties = {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
-    gap: "0.2rem",
-    color: withOpacity(accent, ran ? 0.7 : 0.3),
-    transition: "color 0.4s var(--ease-smooth)",
+    justifyContent: "space-between",
+    gap: "0.5rem",
+    flexWrap: "wrap",
+    padding: "0.5rem 0.7rem",
+    border: `1px solid ${withOpacity(accent, 0.16)}`,
+    background: withOpacity(accent, 0.04),
   };
 
   const balancePill: CSSProperties = {
-    ...mono(),
+    ...typo.micro,
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.35rem",
-    padding: "0.25rem 0.6rem",
-    borderRadius: 0,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    gap: "0.3rem",
+    padding: "0.2rem 0.5rem",
     color: accent,
-    border: `1px solid ${withOpacity(accent, 0.35)}`,
-    background: withOpacity(accent, 0.1),
-    transition: "all 0.4s var(--ease-smooth)",
+    border: `1px solid ${withOpacity(accent, 0.3)}`,
+    background: withOpacity(accent, 0.09),
   };
 
-  const captionStyle: CSSProperties = {
-    margin: 0,
-    fontSize: typo.note.fontSize,
-    lineHeight: 1.55,
-    fontStyle: "italic",
-    textAlign: "center",
-    color: withOpacity(baseTextSecondary, 0.95),
+  // the takeaway only surfaces once the transaction has run, revealed gently
+  const noteRow: CSSProperties = {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "0.5rem",
+    padding: isMobile ? "0.6rem 0.7rem" : "0.7rem 0.85rem",
+    background: withOpacity(accent, 0.05),
+    border: `1px solid ${withOpacity(accent, 0.18)}`,
+    opacity: ran ? 1 : 0,
+    transform: ran ? "translateY(0)" : "translateY(6px)",
+    transition: "opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth)",
+    pointerEvents: ran ? "auto" : "none",
   };
 
   return (
-    <SurfaceCard
-      glowColor={accent}
-      gap="0.95rem"
-      margin={isMobile ? "1.5rem 0" : "2rem 0"}
-      style={{ overflow: "hidden" }}
-    >
+    <SurfaceCard gap="0.95rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={{ overflow: "hidden" }}>
       <Caption
-        tone="accent"
         size="md"
-        icon={<Wallet size={isMobile ? 15 : 16} strokeWidth={2} style={{ color: accent }} />}
+        color={accent}
+        icon={<DoodleHierarchy size={iconSize} style={{ color: accent }} />}
       >
         {t("utxoGraph.title")}
       </Caption>
 
       {mode === "wallet" && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "0.5rem",
-            flexWrap: "wrap",
-            padding: "0.5rem 0.7rem",
-            borderRadius: 0,
-            border: `1px solid ${withOpacity(accent, 0.16)}`,
-            background: withOpacity(accent, 0.03),
-          }}
-        >
-          <span
-            style={{ ...mono(), fontSize: typo.note.fontSize, fontWeight: 500, color: world.text.primary }}
-          >
-            {t("utxoGraph.walletTitle")}
-          </span>
+        <div style={walletBar}>
+          <span style={{ ...typo.note, color: world.text.primary }}>{t("utxoGraph.walletTitle")}</span>
           <span style={balancePill}>
-            {t("utxoGraph.balance")} {fmt(walletBalance)}
+            {t("utxoGraph.balance")} {fmtBTC(walletBalance)}
           </span>
         </div>
       )}
 
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "0.4rem", alignItems: "center" }}
-      >
+      <div style={sectionPanel}>
         <span style={sectionLabel}>{t("utxoGraph.inputs")}</span>
         <div style={row}>
           {inputs.map((c) => (
             <UtxoCoin
               key={c.id}
-              amount={fmt(c.amount)}
+              amount={fmtBTC(c.amount)}
               sublabel={mode === "keys" ? t("utxoGraph.lockedBy") : undefined}
               mode={mode}
               state={ran ? "consumed" : "idle"}
               accent={accent}
               successColor={successColor}
               errorColor={errorColor}
-              baseTextSecondary={baseTextSecondary}
             />
           ))}
         </div>
       </div>
 
-      <div style={connector}>
-        <ArrowDown size={14} strokeWidth={2} />
-        <div style={txBox}>
-          <Zap size={11} strokeWidth={2.2} />
-          {t("utxoGraph.tx")}
-        </div>
-        <ArrowDown size={14} strokeWidth={2} />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          color: withOpacity(accent, ran ? 0.85 : 0.4),
+          transition: "color 0.4s var(--ease-smooth)",
+        }}
+      >
+        <DoodleFlowDown size={isMobile ? 26 : 30} />
       </div>
 
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "0.4rem", alignItems: "center" }}
-      >
+      <div style={sectionPanel}>
         <span style={sectionLabel}>{t("utxoGraph.outputs")}</span>
         <div
           style={{
             ...row,
-            opacity: ran ? 1 : 0.25,
+            opacity: ran ? 1 : 0,
             transform: ran ? "translateY(0)" : "translateY(6px)",
-            transition: "all 0.45s var(--ease-smooth) 0.2s",
+            transition: "opacity 0.45s var(--ease-smooth) 0.2s, transform 0.45s var(--ease-smooth) 0.2s",
           }}
         >
           {outputs.map((c) => (
             <UtxoCoin
               key={c.id}
-              amount={fmt(c.amount)}
+              amount={fmtBTC(c.amount)}
               sublabel={t(c.kind === "recipient" ? "utxoGraph.recipient" : "utxoGraph.change")}
+              isChange={c.kind === "change"}
               mode={mode}
               state={ran ? "created" : "idle"}
               accent={accent}
               successColor={successColor}
               errorColor={errorColor}
-              baseTextSecondary={baseTextSecondary}
             />
           ))}
         </div>
       </div>
 
-      <p style={captionStyle}>{caption}</p>
+      <div style={noteRow}>
+        <DoodleBulb size={isMobile ? 18 : 20} style={{ flexShrink: 0, color: accent }} />
+        <span style={{ ...typo.note, color: colors.base.text.secondary }}>{caption}</span>
+      </div>
 
       <Button
         variant={ran ? "secondary" : "primary"}
-        color={accent}
-        icon={ran ? <RefreshCw size={13} strokeWidth={2} /> : <Zap size={14} strokeWidth={2.2} />}
         onClick={ran ? reset : run}
         style={{ alignSelf: "center" }}
       >
