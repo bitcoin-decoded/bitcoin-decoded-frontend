@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, getTypography } from "../../../Design";
+import { getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
 
@@ -16,16 +16,13 @@ export const PyramidConnector: FC<Props> = ({ label, icon, active, colors }) => 
   const tone = active ? colors.accentColor : withOpacity(colors.baseTextSecondary, 0.6);
 
   const style: CSSProperties = {
+    ...typo.micro,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.3rem",
     alignSelf: "center",
     flexShrink: 0,
     padding: "0.16rem 0.5rem",
-    borderRadius: 0,
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
     whiteSpace: "nowrap",

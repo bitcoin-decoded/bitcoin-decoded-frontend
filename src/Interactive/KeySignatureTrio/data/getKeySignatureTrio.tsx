@@ -1,7 +1,7 @@
 import type { Language } from "../../../I18n";
 import type { KeyElement, TrioConnection } from "../types";
 
-import { KeyRound, Lock, PenLine } from "@icons";
+import { DoodleDrawPen, DoodleLoginKey } from "@doodle";
 
 export const getKeySignatureTrio = (
   language: Language,
@@ -11,7 +11,7 @@ export const getKeySignatureTrio = (
   const elements: KeyElement[] = [
     {
       id: "privateKey",
-      icon: Lock,
+      icon: DoodleLoginKey,
       title: fr ? "Clé privée" : "Private key",
       role: fr ? "Le secret" : "The secret",
       description: fr
@@ -20,7 +20,7 @@ export const getKeySignatureTrio = (
     },
     {
       id: "publicKey",
-      icon: KeyRound,
+      icon: DoodleLoginKey,
       title: fr ? "Clé publique" : "Public key",
       role: fr ? "Le vérificateur" : "The verifier",
       description: fr
@@ -29,7 +29,7 @@ export const getKeySignatureTrio = (
     },
     {
       id: "signature",
-      icon: PenLine,
+      icon: DoodleDrawPen,
       title: fr ? "Signature" : "Signature",
       role: fr ? "La preuve" : "The proof",
       description: fr

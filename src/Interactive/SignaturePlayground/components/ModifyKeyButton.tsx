@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, getTypography } from "../../../Design";
+import { getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
 
@@ -16,13 +16,10 @@ type Props = {
 export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, colors }) => {
   const typo = getTypography();
   const buttonStyle: CSSProperties = {
+    ...typo.micro,
     alignSelf: "center",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     color: colors.errorColor,
     padding: "0.3rem 0.55rem",
-    borderRadius: 0,
     background: withOpacity(colors.errorColor, 0.1),
     border: `1px solid ${withOpacity(colors.errorColor, 0.4)}`,
     display: "inline-flex",
