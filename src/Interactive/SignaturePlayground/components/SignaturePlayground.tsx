@@ -3,25 +3,12 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 import { Badge, Button, Caption, Disclosure, FeedbackPanel, getBrandGold, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { fixFrenchPunctuation } from "../../../FrenchPunctuation";
 import { useTranslation } from "../../../I18n";
-import { FieldCard, MatchVisualizer, ModifyKeyButton, PyramidConnector } from "../components";
+import { FieldCard, MatchVisualizer, ModifyKeyButton, PyramidConnector, SignatureParcours } from "../components";
 import { useSignaturePlayground } from "../hooks";
-import type { SigPlaygroundColors } from "../types";
+import type { ParcoursStep, SigPlaygroundColors } from "../types";
 
-import { DoodleBulb, DoodleDrawPen } from "@doodle";
-import {
-  ArrowDownLeft,
-  ArrowDownRight,
-  CheckCircle,
-  Globe,
-  KeyRound,
-  Lock,
-  Mail,
-  PenLine,
-  RefreshCw,
-  ShieldCheck,
-  User,
-  XCircle,
-} from "@icons";
+import { DoodleBulb, DoodleDrawPen, DoodleEyeNetwork, DoodleFaceMale, DoodleFlowDiagonal, DoodleLoginKey, DoodleMailFilter, DoodleNetwork } from "@doodle";
+import { CheckCircle, RefreshCw, XCircle } from "@icons";
 
 type Props = {
   onComplete?: () => void;
@@ -66,13 +53,34 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     reset,
   } = useSignaturePlayground(onComplete);
 
-  const matchColor = isOriginalKey ? colors.successColor : colors.errorColor;
+  const elementLabel = t("signaturePlayground.elementLabel");
 
   const displayMessage = t("signaturePlayground.message");
   const quotedMessage =
-    language === "fr"
-      ? fixFrenchPunctuation(`« ${displayMessage} »`)
-      : `"${displayMessage}"`;
+    language === "fr" ? fixFrenchPunctuation(`« ${displayMessage} »`) : `"${displayMessage}"`;
+
+  const concordance = (ok: boolean): string =>
+    t(ok ? "signaturePlayground.parcoursConcordant" : "signaturePlayground.parcoursNotConcordant");
+
+  const steps: ParcoursStep[] = [
+    {
+      label: t("signaturePlayground.parcoursDerive"),
+      status: !isDerived ? "current" : "done",
+      note: isDerived ? concordance(isOriginalKey) : undefined,
+    },
+    {
+      label: t("signaturePlayground.parcoursSign"),
+      status: !isDerived ? "upcoming" : !hasSignature ? "current" : "done",
+      note: hasSignature
+        ? t(isOriginalKey ? "signaturePlayground.parcoursOriginalKey" : "signaturePlayground.parcoursModifiedKey")
+        : undefined,
+    },
+    {
+      label: t("signaturePlayground.parcoursVerify"),
+      status: !hasSignature ? "upcoming" : verifyStatus === "idle" ? "current" : "done",
+      note: verifyStatus === "idle" ? undefined : concordance(verifyStatus === "accepted"),
+    },
+  ];
 
   const sectionLabel: CSSProperties = {
     ...typo.micro,
@@ -82,26 +90,13 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
     marginBottom: "0.65rem",
   };
 
-  const msgHeaderStyle: CSSProperties = {
+  const contentPanel: CSSProperties = {
     display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    paddingBottom: "0.6rem",
-    borderBottom: `1px solid ${withOpacity(colors.baseBorderSecondary, 0.15)}`,
-  };
-
-  const msgHeaderLabel: CSSProperties = {
-    ...typo.micro,
-    fontVariant: "small-caps",
-    letterSpacing: "0.06em",
-    color: withOpacity(colors.baseTextSecondary, 0.7),
-  };
-
-  const msgHeaderValue: CSSProperties = {
-    ...typo.note,
-    fontStyle: "italic",
-    color: colors.basePrimaryText,
-    lineHeight: 1.4,
+    flexDirection: "column",
+    gap: isMobile ? "0.85rem" : "1rem",
+    padding: isMobile ? "0.85rem 0.8rem" : "1.1rem 1.1rem",
+    background: withOpacity(themeColors.base.text.primary, theme === "dark" ? 0.05 : 0.035),
+    border: `1px solid ${themeColors.base.border.tertiary}`,
   };
 
   const pyramidCol: CSSProperties = {
@@ -112,222 +107,97 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   };
 
   const apexWrap: CSSProperties = { display: "flex", justifyContent: "center" };
+  const apexNode: CSSProperties = { width: isMobile ? "78%" : "calc(50% - 0.3rem)", display: "flex" };
+  const fanRow: CSSProperties = { display: "flex", justifyContent: "space-between", padding: "0 20%" };
+  const baseRow: CSSProperties = { display: "flex", alignItems: "stretch", gap: "0.6rem" };
 
-  const apexNode: CSSProperties = {
-    width: isMobile ? "72%" : "calc(50% - 0.3rem)",
-    display: "flex",
-  };
+  const elementIcon = (icon: ReactNode, color: string): ReactNode => (
+    <span style={{ color, flexShrink: 0, display: "inline-flex" }}>{icon}</span>
+  );
 
-  const fanRow: CSSProperties = {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "0 20%",
-  };
-
-  const baseRow: CSSProperties = {
-    display: "flex",
-    alignItems: "stretch",
-    gap: "0.6rem",
-  };
-
-  const coherenceBanner: CSSProperties = {
-    ...typo.micro,
-    display: "flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    padding: "0.4rem 0.55rem",
-    lineHeight: 1.4,
-    ...(isOriginalKey
-      ? {
-          color: colors.successColor,
-          background: withOpacity(colors.successColor, 0.1),
-          border: `1px solid ${withOpacity(colors.successColor, 0.3)}`,
-        }
-      : {
-          color: colors.errorColor,
-          background: withOpacity(colors.errorColor, 0.1),
-          border: `1px solid ${withOpacity(colors.errorColor, 0.3)}`,
-        }),
-    transition: "all 0.35s var(--ease-smooth)",
-  };
-
-  const renderPending = (
-    n: number,
-    icon: ReactNode,
-    label: string,
-    hint: string,
-    accent: string,
-    header?: ReactNode,
-  ) => (
+  const messageBlock: ReactNode = (
     <div
       style={{
-        flex: 1,
-        minWidth: 0,
         display: "flex",
-        flexDirection: "column",
-        gap: "0.5rem",
-        padding: "0.85rem 0.9rem",
-        border: `1px dashed ${withOpacity(accent, 0.3)}`,
-        background: withOpacity(accent, 0.02),
+        alignItems: "flex-start",
+        gap: "0.4rem",
+        width: "100%",
+        padding: "0.5rem 0.6rem",
+        border: `1px solid ${withOpacity(colors.baseBorderSecondary, 0.16)}`,
+        background: withOpacity(colors.neutralColor, 0.02),
+        textAlign: "left",
       }}
     >
-      {header}
-      <div
-        style={{
-          ...typo.micro,
-          display: "flex",
-          alignItems: "center",
-          gap: "0.35rem",
-          fontVariant: "small-caps",
-          letterSpacing: "0.04em",
-          color: withOpacity(accent, 0.7),
-        }}
-      >
-        <span
-          style={{
-            ...typo.micro,
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "1.15rem",
-            height: "1.15rem",
-            color: withOpacity(accent, 0.8),
-            border: `1px dashed ${withOpacity(accent, 0.5)}`,
-          }}
-        >
-          {n}
+      <DoodleMailFilter size={16} style={{ flexShrink: 0, color: withOpacity(colors.neutralColor, 0.6) }} />
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem", minWidth: 0 }}>
+        <span style={{ ...typo.micro, fontVariant: "small-caps", letterSpacing: "0.05em", color: withOpacity(colors.baseTextSecondary, 0.7) }}>
+          {t("signaturePlayground.messageLabel")}
         </span>
-        {icon}
-        {label}
-      </div>
-      <p style={{ ...typo.note, margin: 0, lineHeight: 1.5, fontStyle: "italic", color: withOpacity(colors.baseTextSecondary, 0.7) }}>
-        {hint}
-      </p>
-    </div>
-  );
-
-  const messageHeader = (
-    <div style={msgHeaderStyle}>
-      <Mail
-        size={13}
-        strokeWidth={2}
-        style={{ color: withOpacity(colors.neutralColor, 0.55), flexShrink: 0 }}
-      />
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.05rem", minWidth: 0 }}>
-        <span style={msgHeaderLabel}>{t("signaturePlayground.messageLabel")}</span>
-        <span style={msgHeaderValue}>{quotedMessage}</span>
+        <span style={{ ...typo.note, fontStyle: "italic", color: colors.basePrimaryText, lineHeight: 1.4 }}>
+          {quotedMessage}
+        </span>
       </div>
     </div>
-  );
-
-  const coherenceBadge = (
-    <div style={coherenceBanner}>
-      {isOriginalKey ? (
-        <CheckCircle size={13} strokeWidth={2.5} style={{ flexShrink: 0 }} />
-      ) : (
-        <XCircle size={13} strokeWidth={2.5} style={{ flexShrink: 0 }} />
-      )}
-      <span style={{ minWidth: 0 }}>
-        {isOriginalKey
-          ? t("signaturePlayground.statusValid")
-          : t("signaturePlayground.statusInvalid")}
-      </span>
-    </div>
-  );
-
-  const modifyButton = (
-    <ModifyKeyButton
-      onClick={modifyKey}
-      disabled={!canModifyKey}
-      label={t("signaturePlayground.modifyKeyAction")}
-      colors={colors}
-    />
   );
 
   const privateNode = (
     <FieldCard
-      icon={<Lock size={11} strokeWidth={2.5} />}
+      elementLabel={elementLabel}
       number={1}
+      icon={elementIcon(<DoodleLoginKey size={22} />, colors.secretColor)}
       label={t("signaturePlayground.privateKeyLabel")}
       value={privateKey}
       tone="secret"
       valueKind="hex"
       truncate
-      valueColor={isDerived ? matchColor : undefined}
-      action={modifyButton}
-      footerIcon={<User size={10} strokeWidth={2.5} />}
+      action={
+        <ModifyKeyButton
+          onClick={modifyKey}
+          disabled={!canModifyKey}
+          label={t("signaturePlayground.modifyKeyAction")}
+          colors={colors}
+        />
+      }
+      footerIcon={<DoodleFaceMale size={16} style={{ color: withOpacity(colors.baseTextSecondary, 0.85) }} />}
       footerLabel={t("signaturePlayground.privateKeyOwner")}
       readOnlyLabel={t("signaturePlayground.readOnly")}
       colors={colors}
     />
   );
 
-  const publicNode = isDerived ? (
+  const publicNode = (
     <FieldCard
-      icon={<KeyRound size={11} strokeWidth={2.5} />}
+      elementLabel={elementLabel}
       number={2}
+      icon={elementIcon(<DoodleLoginKey size={22} />, colors.publicColor)}
       label={t("signaturePlayground.publicKeyLabel")}
+      pending={!isDerived}
       valuePrefix={t("signaturePlayground.publicKeyGenerated")}
       value={publicKey}
       tone="public"
       valueKind="hex"
       truncate
-      valueColor={matchColor}
-      badge={coherenceBadge}
-      footerIcon={<Globe size={10} strokeWidth={2.5} />}
+      footerIcon={<DoodleNetwork size={16} style={{ color: withOpacity(colors.baseTextSecondary, 0.85) }} />}
       footerLabel={t("signaturePlayground.publicKeyOwner")}
       readOnlyLabel={t("signaturePlayground.readOnly")}
       colors={colors}
     />
-  ) : (
-    renderPending(
-      2,
-      <KeyRound size={11} strokeWidth={2.5} />,
-      t("signaturePlayground.publicKeyLabel"),
-      t("signaturePlayground.publicKeyPending"),
-      colors.publicColor,
-    )
   );
 
-  const signatureNode = hasSignature ? (
+  const signatureNode = (
     <FieldCard
-      icon={<PenLine size={11} strokeWidth={2.5} />}
+      elementLabel={elementLabel}
       number={3}
-      header={messageHeader}
+      icon={elementIcon(<DoodleDrawPen size={22} />, colors.signatureColor)}
       label={t("signaturePlayground.signatureLabel")}
+      pending={!hasSignature}
       valuePrefix={t("signaturePlayground.signatureGenerated")}
       value={signature ?? ""}
       tone="signature"
       valueKind="hex"
       truncate
+      bottomSlot={messageBlock}
       readOnlyLabel={t("signaturePlayground.readOnly")}
-      colors={colors}
-    />
-  ) : (
-    renderPending(
-      3,
-      <PenLine size={11} strokeWidth={2.5} />,
-      t("signaturePlayground.signatureLabel"),
-      t("signaturePlayground.signaturePending"),
-      colors.neutralColor,
-      messageHeader,
-    )
-  );
-
-  const calcule = (
-    <PyramidConnector
-      label={t("signaturePlayground.edgeDerive")}
-      icon={<ArrowDownLeft size={12} strokeWidth={2.2} />}
-      active={isDerived}
-      colors={colors}
-    />
-  );
-
-  const signe = (
-    <PyramidConnector
-      label={t("signaturePlayground.edgeSign")}
-      icon={<ArrowDownRight size={12} strokeWidth={2.2} />}
-      active={hasSignature}
       colors={colors}
     />
   );
@@ -338,8 +208,18 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         <div style={apexNode}>{privateNode}</div>
       </div>
       <div style={fanRow}>
-        {calcule}
-        {signe}
+        <PyramidConnector
+          label={t("signaturePlayground.edgeDerive")}
+          icon={<DoodleFlowDiagonal size={16} />}
+          active={isDerived}
+          colors={colors}
+        />
+        <PyramidConnector
+          label={t("signaturePlayground.edgeSign")}
+          icon={<DoodleFlowDiagonal size={16} style={{ transform: "scaleX(-1)" }} />}
+          active={hasSignature}
+          colors={colors}
+        />
       </div>
       <div style={baseRow}>
         {publicNode}
@@ -349,43 +229,21 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   );
 
   const actionButton = !isDerived ? (
-    <Button
-      variant="primary"
-      color={colors.accentColor}
-      icon={<KeyRound size={14} strokeWidth={2.2} />}
-      onClick={derive}
-      style={{ alignSelf: "flex-start" }}
-    >
+    <Button variant="primary" color={colors.accentColor} icon={<DoodleLoginKey size={16} />} onClick={derive} style={{ alignSelf: "center" }}>
       {t("signaturePlayground.deriveAction")}
     </Button>
   ) : !hasSignature ? (
-    <Button
-      variant="primary"
-      color={colors.accentColor}
-      icon={<PenLine size={14} strokeWidth={2.2} />}
-      onClick={sign}
-      style={{ alignSelf: "flex-start" }}
-    >
+    <Button variant="primary" color={colors.accentColor} icon={<DoodleDrawPen size={16} />} onClick={sign} style={{ alignSelf: "center" }}>
       {t("signaturePlayground.signAction")}
     </Button>
   ) : verifyStatus === "idle" ? (
-    <Button
-      variant="primary"
-      color={colors.accentColor}
-      icon={<ShieldCheck size={14} strokeWidth={2.2} />}
-      onClick={verify}
-      style={{ alignSelf: "flex-start" }}
-    >
+    <Button variant="primary" color={colors.accentColor} icon={<DoodleEyeNetwork size={16} />} onClick={verify} style={{ alignSelf: "center" }}>
       {t("signaturePlayground.verifyAction")}
     </Button>
   ) : null;
 
   return (
-    <SurfaceCard
-      gap="1.1rem"
-      margin={isMobile ? "1.5rem 0" : "2rem 0"}
-      style={{ overflow: "hidden", textAlign: "left" }}
-    >
+    <SurfaceCard gap="1.1rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={{ overflow: "hidden", textAlign: "left" }}>
       <Caption
         tone="accent"
         size="md"
@@ -395,96 +253,62 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         {t("signaturePlayground.title")}
       </Caption>
 
-      <div style={{ minWidth: 0 }}>
-        <div style={sectionLabel}>{t("signaturePlayground.sectionElements")}</div>
-        {pyramid}
-      </div>
+      <SignatureParcours steps={steps} colors={colors} />
 
       {actionButton}
 
-      {verifyStatus !== "idle" && (
-        <FeedbackPanel
-          tone={verifyStatus === "accepted" ? "success" : "error"}
-          style={{ gap: "1.1rem" }}
-        >
-          <div
-            style={{
-              ...sectionLabel,
-              marginBottom: 0,
-              color: withOpacity(colors.baseTextSecondary, 0.6),
-            }}
-          >
-            {t("signaturePlayground.networkVerifies")}
-          </div>
+      <div style={contentPanel}>
+        {pyramid}
 
-          <MatchVisualizer
-            message={quotedMessage}
-            messageLabel={t("signaturePlayground.rowMessage")}
-            publicKey={publicKey}
-            publicKeyLabel={t("signaturePlayground.rowPubkey")}
-            signature={signature ?? ""}
-            signatureLabel={t("signaturePlayground.rowSignature")}
-            matches={isOriginalKey}
-            verifyFnLabel={t("signaturePlayground.matchVerifyFn")}
-            verifyMoreInfoLabel={t("signaturePlayground.verifyMoreInfo")}
-            verifyMoreInfoUrl={t("signaturePlayground.verifyMoreInfoUrl")}
-            matchLabel={t("signaturePlayground.matchYes")}
-            noMatchLabel={t("signaturePlayground.matchNo")}
-            colors={colors}
-          />
+        {verifyStatus !== "idle" && (
+          <FeedbackPanel tone={verifyStatus === "accepted" ? "success" : "error"} style={{ gap: "1.1rem" }}>
+            <div style={{ ...sectionLabel, marginBottom: 0, color: withOpacity(colors.baseTextSecondary, 0.6) }}>
+              {t("signaturePlayground.networkVerifies")}
+            </div>
 
-          <Badge
-            tone={verifyStatus === "accepted" ? "success" : "error"}
-            icon={
-              verifyStatus === "accepted" ? (
-                <CheckCircle size={11} strokeWidth={2.5} />
-              ) : (
-                <XCircle size={11} strokeWidth={2.5} />
-              )
-            }
-            style={{ alignSelf: "flex-start" }}
-          >
-            {verifyStatus === "accepted"
-              ? t("signaturePlayground.acceptedBadge")
-              : t("signaturePlayground.rejectedBadge")}
-          </Badge>
+            <MatchVisualizer
+              message={quotedMessage}
+              messageLabel={t("signaturePlayground.rowMessage")}
+              publicKey={publicKey}
+              publicKeyLabel={t("signaturePlayground.rowPubkey")}
+              signature={signature ?? ""}
+              signatureLabel={t("signaturePlayground.rowSignature")}
+              matches={isOriginalKey}
+              verifyFnLabel={t("signaturePlayground.matchVerifyFn")}
+              verifyMoreInfoLabel={t("signaturePlayground.verifyMoreInfo")}
+              verifyMoreInfoUrl={t("signaturePlayground.verifyMoreInfoUrl")}
+              matchLabel={t("signaturePlayground.matchYes")}
+              noMatchLabel={t("signaturePlayground.matchNo")}
+              colors={colors}
+            />
 
-          <p style={{ ...typo.note, lineHeight: 1.55, color: colors.baseTextSecondary, margin: 0 }}>
-            {verifyStatus === "accepted"
-              ? t("signaturePlayground.acceptedExpl")
-              : t("signaturePlayground.rejectedExpl")}
+            <Badge
+              tone={verifyStatus === "accepted" ? "success" : "error"}
+              icon={verifyStatus === "accepted" ? <CheckCircle size={11} strokeWidth={2.5} /> : <XCircle size={11} strokeWidth={2.5} />}
+              style={{ alignSelf: "flex-start" }}
+            >
+              {verifyStatus === "accepted" ? t("signaturePlayground.acceptedBadge") : t("signaturePlayground.rejectedBadge")}
+            </Badge>
+
+            <p style={{ ...typo.note, lineHeight: 1.55, color: colors.baseTextSecondary, margin: 0 }}>
+              {verifyStatus === "accepted" ? t("signaturePlayground.acceptedExpl") : t("signaturePlayground.rejectedExpl")}
+            </p>
+          </FeedbackPanel>
+        )}
+
+        <Disclosure title={t("signaturePlayground.disclosureDerivationTitle")} icon={<DoodleBulb size={28} />}>
+          <p style={{ margin: 0 }}>{t("signaturePlayground.derivationDefinition")}</p>
+        </Disclosure>
+        <Disclosure title={t("signaturePlayground.disclosurePrivateKeyTitle")} icon={<DoodleBulb size={28} />}>
+          <p style={{ margin: 0 }}>{t("signaturePlayground.pedagogyConcretely")}</p>
+          <p style={{ ...typo.note, margin: 0, fontStyle: "italic", color: withOpacity(colors.baseTextSecondary, 0.85), lineHeight: 1.55 }}>
+            {t("signaturePlayground.pedagogyAnalogy")}
           </p>
-        </FeedbackPanel>
-      )}
-
-      <p style={{ ...typo.note, margin: 0, lineHeight: 1.55, fontStyle: "italic", color: withOpacity(colors.baseTextSecondary, 0.75) }}>
-        {t("signaturePlayground.derivationCaption")}
-      </p>
-
-      <Disclosure
-        title={t("signaturePlayground.disclosureDerivationTitle")}
-        icon={<DoodleBulb size={28} />}
-      >
-        <p style={{ margin: 0 }}>{t("signaturePlayground.derivationDefinition")}</p>
-      </Disclosure>
-      <Disclosure
-        title={t("signaturePlayground.disclosurePrivateKeyTitle")}
-        icon={<DoodleBulb size={28} />}
-      >
-        <p style={{ margin: 0 }}>{t("signaturePlayground.pedagogyConcretely")}</p>
-        <p style={{ ...typo.note, margin: 0, fontStyle: "italic", color: withOpacity(colors.baseTextSecondary, 0.85), lineHeight: 1.55 }}>
-          {t("signaturePlayground.pedagogyAnalogy")}
-        </p>
-      </Disclosure>
+        </Disclosure>
+      </div>
 
       {(isDerived || hasSignature || verifyStatus !== "idle") && (
-        <Button
-          variant="secondary"
-          size="sm"
-          icon={<RefreshCw size={11} strokeWidth={2} />}
-          onClick={reset}
-          style={{ alignSelf: "flex-end" }}
-        >
+        <Button variant="secondary" size="sm" icon={<RefreshCw size={11} strokeWidth={2} />} onClick={reset} style={{ alignSelf: "flex-end" }}>
           {t("signaturePlayground.reset")}
         </Button>
       )}
