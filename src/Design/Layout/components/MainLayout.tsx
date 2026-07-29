@@ -65,6 +65,10 @@ export const MainLayout: FC<{
 
   const mainContentStyle: CSSProperties = {
     flex: "1 1 auto",
+    // let the flex child shrink below its content's min-content width, so a wide
+    // element (e.g. the module chapter nav) scrolls internally instead of pushing
+    // the whole page past the mobile viewport
+    minWidth: 0,
     padding: mainContentPadding[breakpoint],
     lineHeight: 1.7,
     textAlign: breakpoint === "mobile" ? "left" : "justify",

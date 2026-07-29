@@ -4,7 +4,7 @@ import { getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import type { SigPlaygroundColors } from "../types";
 
-import { Shuffle } from "@icons";
+import { DoodleEditPencil } from "@doodle";
 
 type Props = {
   onClick: () => void;
@@ -18,10 +18,10 @@ export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, colors })
   const buttonStyle: CSSProperties = {
     ...typo.micro,
     alignSelf: "center",
-    color: colors.errorColor,
+    color: colors.secretColor,
     padding: "0.3rem 0.55rem",
-    background: withOpacity(colors.errorColor, 0.1),
-    border: `1px solid ${withOpacity(colors.errorColor, 0.4)}`,
+    background: withOpacity(colors.secretColor, 0.1),
+    border: `1px solid ${withOpacity(colors.secretColor, 0.4)}`,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.35rem",
@@ -41,7 +41,7 @@ export const ModifyKeyButton: FC<Props> = ({ onClick, disabled, label, colors })
       aria-label={label}
       style={buttonStyle}
     >
-      <Shuffle size={12} strokeWidth={2.5} style={{ flexShrink: 0 }} />
+      <DoodleEditPencil size={16} style={{ flexShrink: 0 }} />
       {label}
     </button>
   );

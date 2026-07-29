@@ -6,41 +6,43 @@ import { truncateHash } from "../../helpers";
 import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
 
 type Props = {
+  elementLabel: string;
+  number: number;
   icon: ReactNode;
   label: string;
-  number?: number;
-  header?: ReactNode;
   value: string;
-  hint?: string;
   valuePrefix?: string;
   tone: FieldTone;
   valueKind: ValueKind;
   truncate?: boolean;
   valueColor?: string;
-  badge?: ReactNode;
+  pending?: boolean;
   action?: ReactNode;
+  badge?: ReactNode;
   footerIcon?: ReactNode;
   footerLabel?: string;
+  bottomSlot?: ReactNode;
   readOnlyLabel: string;
   colors: SigPlaygroundColors;
 };
 
 export const FieldCard: FC<Props> = ({
+  elementLabel,
+  number,
   icon,
   label,
-  number,
-  header,
   value,
-  hint,
   valuePrefix,
   tone,
   valueKind,
   truncate,
   valueColor,
-  badge,
+  pending = false,
   action,
+  badge,
   footerIcon,
   footerLabel,
+  bottomSlot,
   readOnlyLabel,
   colors,
 }) => {
@@ -53,75 +55,81 @@ export const FieldCard: FC<Props> = ({
         : tone === "signature"
           ? colors.signatureColor
           : colors.neutralColor;
-  const accentOpacityBorder = tone === "neutral" ? 0.18 : tone === "secret" ? 0.3 : 0.28;
-  const accentOpacityBg = tone === "neutral" ? 0.03 : tone === "secret" ? 0.06 : 0.05;
 
   const containerStyle: CSSProperties = {
+    position: "relative",
     display: "flex",
     flexDirection: "column",
-    gap: "0.55rem",
-    padding: "0.85rem 0.9rem",
-    border: `1px solid ${withOpacity(accent, accentOpacityBorder)}`,
-    background: withOpacity(accent, accentOpacityBg),
+    alignItems: "center",
+    gap: "0.5rem",
+    padding: "0.95rem 1rem",
+    background: withOpacity(accent, pending ? 0.03 : 0.06),
     minWidth: 0,
     boxSizing: "border-box",
     flex: 1,
+    textAlign: "center",
+    opacity: pending ? 0.75 : 1,
+    transition: "opacity 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth)",
+  };
+
+  // ledger corner brackets in the element's accent (no continuous border)
+  const cornerBase: CSSProperties = {
+    position: "absolute",
+    width: "0.7rem",
+    height: "0.7rem",
+    pointerEvents: "none",
+  };
+  const cornerStroke = `1.5px solid ${withOpacity(accent, pending ? 0.4 : 0.6)}`;
+  const corners = (
+    <>
+      <span style={{ ...cornerBase, top: 0, left: 0, borderTop: cornerStroke, borderLeft: cornerStroke }} />
+      <span style={{ ...cornerBase, top: 0, right: 0, borderTop: cornerStroke, borderRight: cornerStroke }} />
+      <span style={{ ...cornerBase, bottom: 0, left: 0, borderBottom: cornerStroke, borderLeft: cornerStroke }} />
+      <span style={{ ...cornerBase, bottom: 0, right: 0, borderBottom: cornerStroke, borderRight: cornerStroke }} />
+    </>
+  );
+
+  const elementHeader: CSSProperties = {
+    ...typo.micro,
+    fontVariant: "small-caps",
+    letterSpacing: "0.08em",
+    color: withOpacity(colors.baseTextSecondary, 0.7),
+  };
+
+  const labelRow: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.4rem",
+    color: accent,
+    minWidth: 0,
   };
 
   const labelStyle: CSSProperties = {
     ...typo.micro,
-    display: "flex",
-    alignItems: "center",
-    gap: "0.35rem",
     fontVariant: "small-caps",
     letterSpacing: "0.04em",
-    color: accent,
+    overflowWrap: "break-word",
     minWidth: 0,
-  };
-
-  const numberBadgeStyle: CSSProperties = {
-    ...typo.micro,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-    width: "1.15rem",
-    height: "1.15rem",
-    color: accent,
-    background: withOpacity(accent, 0.14),
-    border: `1px solid ${withOpacity(accent, 0.4)}`,
-  };
-
-  const readOnlyValueStyle: CSSProperties = {
-    ...typo.micro,
-    width: "100%",
-    padding: "0.5rem 0.65rem",
-    color: valueColor ?? colors.basePrimaryText,
-    textAlign: "center",
-    wordBreak: valueKind === "hex" ? "break-all" : "normal",
-    overflowWrap: valueKind === "hex" ? "anywhere" : "break-word",
-    border: `1px solid ${withOpacity(colors.baseBorderSecondary, 0.16)}`,
-    background: withOpacity(colors.baseBackgroundSecondary, 0.04),
-    boxSizing: "border-box",
-    cursor: "default",
-    transition: "color 0.3s var(--ease-smooth)",
-  };
-
-  const hintStyle: CSSProperties = {
-    ...typo.note,
-    lineHeight: 1.5,
-    color: withOpacity(colors.baseTextSecondary, 0.8),
-    margin: 0,
-    fontStyle: "italic",
   };
 
   const valuePrefixStyle: CSSProperties = {
     ...typo.micro,
-    display: "block",
-    textAlign: "center",
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: withOpacity(colors.baseTextSecondary, 0.7),
+  };
+
+  const valueStyle: CSSProperties = {
+    ...typo.micro,
+    width: "100%",
+    padding: "0.5rem 0.65rem",
+    color: pending ? withOpacity(colors.baseTextSecondary, 0.6) : (valueColor ?? colors.basePrimaryText),
+    wordBreak: valueKind === "hex" ? "break-all" : "normal",
+    overflowWrap: valueKind === "hex" ? "anywhere" : "break-word",
+    border: `1px ${pending ? "dashed" : "solid"} ${withOpacity(colors.baseBorderSecondary, 0.16)}`,
+    background: pending ? "transparent" : withOpacity(colors.baseBackgroundSecondary, 0.04),
+    boxSizing: "border-box",
+    transition: "color 0.3s var(--ease-smooth)",
   };
 
   const footerStyle: CSSProperties = {
@@ -130,29 +138,24 @@ export const FieldCard: FC<Props> = ({
     alignItems: "center",
     gap: "0.35rem",
     color: withOpacity(colors.baseTextSecondary, 0.85),
-    marginTop: "0.1rem",
   };
 
   return (
     <div style={containerStyle}>
-      {header}
+      {corners}
+      <span style={elementHeader}>
+        {elementLabel} {number}
+      </span>
 
-      <div style={labelStyle}>
-        {number !== undefined && <span style={numberBadgeStyle}>{number}</span>}
+      <span style={labelRow}>
         {icon}
-        <span style={{ minWidth: 0, overflowWrap: "break-word" }}>{label}</span>
-      </div>
+        <span style={labelStyle}>{label}</span>
+      </span>
 
-      {hint && <p style={hintStyle}>{hint}</p>}
+      {!pending && valuePrefix && <span style={valuePrefixStyle}>{valuePrefix}</span>}
 
-      {valuePrefix && <span style={valuePrefixStyle}>{valuePrefix}</span>}
-
-      <div
-        style={readOnlyValueStyle}
-        aria-label={readOnlyLabel}
-        title={truncate ? value : undefined}
-      >
-        {truncate ? truncateHash(value) : value}
+      <div style={valueStyle} aria-label={readOnlyLabel} title={truncate && !pending ? value : undefined}>
+        {pending ? "· · ·" : truncate ? truncateHash(value) : value}
       </div>
 
       {action}
@@ -165,6 +168,8 @@ export const FieldCard: FC<Props> = ({
           <span style={{ minWidth: 0, overflowWrap: "anywhere" }}>{footerLabel}</span>
         </span>
       )}
+
+      {bottomSlot}
     </div>
   );
 };

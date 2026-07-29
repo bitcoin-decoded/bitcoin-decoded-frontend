@@ -62,14 +62,6 @@ export const TrioNode: FC<Props> = ({ element, accent, isSelected, isDimmed, onC
     transition: "color 0.3s var(--ease-smooth)",
   };
 
-  const roleStyle: CSSProperties = {
-    ...typo.note,
-    fontStyle: "italic",
-    lineHeight: 1.2,
-    color: withOpacity(colors.base.text.secondary, isSelected ? 0.95 : 0.6),
-    transition: "color 0.3s var(--ease-smooth)",
-  };
-
   const Icon = element.icon;
 
   return (
@@ -85,7 +77,6 @@ export const TrioNode: FC<Props> = ({ element, accent, isSelected, isDimmed, onC
         <Icon size={isMobile ? 22 : 26} />
       </span>
       <span style={titleStyle}>{element.title}</span>
-      <span style={roleStyle}>{element.role}</span>
     </button>
   );
 };
