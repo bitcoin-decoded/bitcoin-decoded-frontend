@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, getTypography } from "../../../Design";
+import { getTypography, useBreakpoint } from "../../../Design";
 import { withOpacity } from "../../../Design/";
 import { truncateHash } from "../../helpers";
 import type { SigPlaygroundColors } from "../types";
@@ -39,6 +39,7 @@ export const MatchVisualizer: FC<Props> = ({
   colors,
 }) => {
   const typo = getTypography();
+  const isMobile = useBreakpoint() === "mobile";
   const verdictColor = matches ? colors.successColor : colors.errorColor;
 
   const boxStyle = (accent: string): CSSProperties => ({
@@ -48,31 +49,26 @@ export const MatchVisualizer: FC<Props> = ({
     flexDirection: "column",
     gap: "0.3rem",
     padding: "0.5rem 0.55rem",
-    borderRadius: 0,
     border: `1px solid ${withOpacity(accent, 0.3)}`,
     background: withOpacity(accent, 0.05),
     boxSizing: "border-box",
   });
 
   const boxLabel = (accent: string): CSSProperties => ({
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: accent,
   });
 
   const monoValue: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     color: colors.basePrimaryText,
     wordBreak: "break-all",
   };
 
   const messageValue: CSSProperties = {
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.note,
     fontStyle: "italic",
     lineHeight: 1.4,
     color: colors.basePrimaryText,
@@ -85,15 +81,13 @@ export const MatchVisualizer: FC<Props> = ({
         flexDirection: "column",
         gap: "0.7rem",
         padding: "0.7rem",
-        borderRadius: 0,
         border: `1px dashed ${withOpacity(verdictColor, 0.3)}`,
         background: withOpacity(verdictColor, 0.03),
       }}
     >
       <div
         style={{
-          fontFamily: BRAND.fonts.mono,
-          fontSize: typo.micro.fontSize,
+          ...typo.micro,
           color: withOpacity(colors.baseTextSecondary, 0.7),
           letterSpacing: "0.02em",
           textAlign: "center",
@@ -116,7 +110,14 @@ export const MatchVisualizer: FC<Props> = ({
         </a>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "row", gap: "0.4rem", alignItems: "stretch" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          gap: "0.4rem",
+          alignItems: "stretch",
+        }}
+      >
         <div style={boxStyle(colors.neutralColor)}>
           <span style={boxLabel(withOpacity(colors.baseTextSecondary, 0.85))}>{messageLabel}</span>
           <span style={messageValue}>{message}</span>
@@ -133,13 +134,12 @@ export const MatchVisualizer: FC<Props> = ({
 
       <div
         style={{
+          ...typo.micro,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           gap: "0.4rem",
           color: verdictColor,
-          fontWeight: 500,
-          fontSize: typo.micro.fontSize,
           fontVariant: "small-caps",
           letterSpacing: "0.06em",
         }}

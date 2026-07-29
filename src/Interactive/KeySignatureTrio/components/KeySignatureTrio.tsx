@@ -1,14 +1,15 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Caption, ExploredCounter, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Caption, ExploredCounter, getBrandGold, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { FrText, useTranslation } from "../../../I18n";
 import { getKeySignatureTrio, TRIO_LAYOUT } from "../data";
 import { getArrowhead, trimSegment } from "../helpers";
 import { useKeySignatureTrio } from "../hooks";
+import type { KeyElementId } from "../types";
 
 import { TrioNode } from "./TrioNode";
 
-import { Link2, MousePointerClick } from "@icons";
+import { DoodleCursorHighlight, DoodleThreeBoxes } from "@doodle";
 
 type Props = {
   onComplete?: () => void;
@@ -17,12 +18,13 @@ type Props = {
 export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
   const typo = getTypography();
   const { t, language } = useTranslation();
-  const { colors, moduleTheme } = usePageTheme();
+  const { colors, moduleTheme, theme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
 
   const world = colors[moduleTheme];
   const accent = world.text.secondary;
-  const accentBorder = world.border.secondary;
+  const gold = getBrandGold(theme);
+  const elementAccent = (id: KeyElementId): string => (id === "privateKey" ? gold : accent);
 
   const { elements, connections } = getKeySignatureTrio(language);
   const { selectedId, hasSelection, select, exploredCount } = useKeySignatureTrio({
@@ -37,9 +39,9 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
 
   const selected = elements.find((el) => el.id === selectedId) ?? null;
   const SelectedIcon = selected?.icon ?? null;
+  const selectedAccent = selected ? elementAccent(selected.id) : accent;
 
-  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
-
+  const softWash = withOpacity(colors.base.text.primary, theme === "dark" ? 0.05 : 0.035);
 
   const headerRow: CSSProperties = {
     display: "flex",
@@ -50,26 +52,79 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
   };
 
   const promptStyle: CSSProperties = {
-    fontSize: typo.note.fontSize,
+    ...typo.note,
     color: colors.base.text.secondary,
     fontStyle: "italic",
-    lineHeight: 1.5,
     margin: 0,
     textAlign: "left",
   };
 
-  const diagramWrapper: CSSProperties = {
+  const detailPanel: CSSProperties = {
     display: "flex",
-    justifyContent: "center",
-    width: "100%",
+    flexDirection: "column",
+    gap: "0.6rem",
+    padding: isMobile ? "0.8rem 0.9rem" : "0.85rem 1rem",
+    border: `1px solid ${withOpacity(selectedAccent, selected ? 0.4 : 0.18)}`,
+    background: selected ? withOpacity(selectedAccent, 0.06) : softWash,
+    transition: "border-color 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth)",
   };
+
+  const detailHeader: CSSProperties = { display: "flex", alignItems: "center", gap: "0.6rem", flexWrap: "wrap" };
+
+  const detailIconBox: CSSProperties = {
+    width: "2.1rem",
+    height: "2.1rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    color: selectedAccent,
+    background: withOpacity(selectedAccent, 0.14),
+    border: `1px solid ${withOpacity(selectedAccent, 0.4)}`,
+  };
+
+  const detailTitle: CSSProperties = {
+    ...typo.label,
+    fontVariant: "small-caps",
+    color: selectedAccent,
+  };
+
+  const roleTag: CSSProperties = {
+    ...typo.micro,
+    fontVariant: "small-caps",
+    letterSpacing: "0.06em",
+    padding: "0.14rem 0.45rem",
+    color: selectedAccent,
+    background: withOpacity(selectedAccent, 0.12),
+    border: `1px solid ${withOpacity(selectedAccent, 0.35)}`,
+  };
+
+  const detailDesc: CSSProperties = {
+    ...typo.note,
+    lineHeight: 1.6,
+    margin: 0,
+    color: colors.base.text.primary,
+  };
+
+  const emptyState: CSSProperties = {
+    ...typo.note,
+    display: "flex",
+    alignItems: "center",
+    gap: "0.55rem",
+    color: withOpacity(colors.base.text.secondary, 0.85),
+    fontStyle: "italic",
+  };
+
+  const diagramWrapper: CSSProperties = { display: "flex", justifyContent: "center", width: "100%" };
 
   const diagramBox: CSSProperties = {
     position: "relative",
     width: "100%",
-    maxWidth: isMobile ? "19rem" : "29rem",
+    maxWidth: isMobile ? "20rem" : "30rem",
     aspectRatio: `${viewWidth} / ${viewHeight}`,
-    margin: isMobile ? "0.35rem auto 0.5rem" : "0.75rem auto",
+    padding: isMobile ? "0.6rem" : "0.9rem",
+    background: softWash,
+    border: `1px solid ${colors.base.border.tertiary}`,
     overflow: "visible",
   };
 
@@ -90,96 +145,21 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
   });
 
   const labelChip = (active: boolean, x: number, y: number): CSSProperties => ({
-    ...mono,
+    ...typo.micro,
     position: "absolute",
     left: pctX(x),
     top: pctY(y),
     transform: "translate(-50%, -50%)",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
     padding: "0.12rem 0.42rem",
-    borderRadius: 0,
     whiteSpace: "nowrap",
     pointerEvents: "none",
-    color: active ? accent : withOpacity(colors.base.text.secondary, 0.7),
-    background: colors.base.background.primary,
-    border: `1px solid ${withOpacity(accentBorder, active ? 0.6 : 0.22)}`,
+    color: active ? accent : withOpacity(colors.base.text.secondary, 0.75),
+    background: colors.base.background.secondary,
+    border: `1px solid ${withOpacity(accent, active ? 0.6 : 0.22)}`,
     transition: "all 0.35s var(--ease-smooth)",
   });
-
-  const detailPanel: CSSProperties = {
-    minHeight: isMobile ? "7.5rem" : "6.5rem",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.6rem",
-    padding: isMobile ? "0.85rem 0.95rem" : "1rem 1.1rem",
-    borderRadius: 0,
-    border: `1px solid ${withOpacity(accentBorder, selected ? 0.4 : 0.18)}`,
-    background: selected
-      ? withOpacity(accent, 0.06)
-      : withOpacity(colors.base.text.secondary, 0.03),
-    transition: "border-color 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth)",
-  };
-
-  const detailHeader: CSSProperties = { display: "flex", alignItems: "center", gap: "0.6rem" };
-
-  const detailIconBox: CSSProperties = {
-    width: "2.1rem",
-    height: "2.1rem",
-    borderRadius: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-    color: accent,
-    background: withOpacity(accent, 0.14),
-    border: `1px solid ${withOpacity(accentBorder, 0.4)}`,
-  };
-
-  const detailTitle: CSSProperties = {
-    ...mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.05em",
-    color: accent,
-  };
-
-  const roleTag: CSSProperties = {
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
-    fontVariant: "small-caps",
-    letterSpacing: "0.06em",
-    padding: "0.14rem 0.45rem",
-    borderRadius: 0,
-    color: accent,
-    background: withOpacity(accent, 0.12),
-    border: `1px solid ${withOpacity(accentBorder, 0.35)}`,
-  };
-
-  const detailDesc: CSSProperties = {
-    margin: 0,
-    fontSize: typo.note.fontSize,
-    lineHeight: 1.6,
-    color: colors.base.text.primary,
-  };
-
-  const emptyState: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.5rem",
-    height: "100%",
-    flex: 1,
-    color: withOpacity(colors.base.text.secondary, 0.75),
-    fontSize: typo.note.fontSize,
-    fontStyle: "italic",
-    textAlign: "center",
-  };
-
 
   return (
     <FrText>
@@ -189,7 +169,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
         style={{ textAlign: "left" }}
       >
         <div style={headerRow}>
-          <Caption tone="world" size="md" icon={<Link2 size={isMobile ? 16 : 18} strokeWidth={2} />}>
+          <Caption tone="world" size="md" icon={<DoodleThreeBoxes size={isMobile ? 20 : 24} />}>
             {t("keyTrio.sectionTitle")}
           </Caption>
           <ExploredCounter
@@ -200,6 +180,34 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
         </div>
 
         <p style={promptStyle}>{t("keyTrio.prompt")}</p>
+
+        <div style={detailPanel}>
+          {selected && SelectedIcon ? (
+            <div
+              key={selected.id}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.6rem",
+                animation: "chainFieldReveal 0.5s var(--ease-smooth) both",
+              }}
+            >
+              <div style={detailHeader}>
+                <span style={detailIconBox}>
+                  <SelectedIcon size={20} />
+                </span>
+                <span style={detailTitle}>{selected.title}</span>
+                <span style={roleTag}>{selected.role}</span>
+              </div>
+              <p style={detailDesc}>{selected.description}</p>
+            </div>
+          ) : (
+            <div style={emptyState}>
+              <DoodleCursorHighlight size={20} style={{ flexShrink: 0, color: accent }} />
+              <span>{t("keyTrio.emptyState")}</span>
+            </div>
+          )}
+        </div>
 
         <div style={diagramWrapper}>
           <div style={diagramBox}>
@@ -266,6 +274,7 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
                 <div key={el.id} style={nodeWrapper(p.x, p.y)}>
                   <TrioNode
                     element={el}
+                    accent={elementAccent(el.id)}
                     isSelected={selectedId === el.id}
                     isDimmed={hasSelection && selectedId !== el.id}
                     onClick={() => select(el.id)}
@@ -274,34 +283,6 @@ export const KeySignatureTrio: FC<Props> = ({ onComplete }) => {
               );
             })}
           </div>
-        </div>
-
-        <div style={detailPanel}>
-          {selected && SelectedIcon ? (
-            <div
-              key={selected.id}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.6rem",
-                animation: "chainFieldReveal 0.5s var(--ease-smooth) both",
-              }}
-            >
-              <div style={detailHeader}>
-                <span style={detailIconBox}>
-                  <SelectedIcon size={18} strokeWidth={2} />
-                </span>
-                <span style={detailTitle}>{selected.title}</span>
-                <span style={roleTag}>{selected.role}</span>
-              </div>
-              <p style={detailDesc}>{selected.description}</p>
-            </div>
-          ) : (
-            <div style={emptyState}>
-              <MousePointerClick size={16} strokeWidth={2} style={{ flexShrink: 0 }} />
-              <span>{t("keyTrio.emptyState")}</span>
-            </div>
-          )}
         </div>
       </SurfaceCard>
     </FrText>

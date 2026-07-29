@@ -1,19 +1,13 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { Badge, BRAND, Button, Caption, Disclosure, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Badge, Button, Caption, Disclosure, FeedbackPanel, getBrandGold, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { fixFrenchPunctuation } from "../../../FrenchPunctuation";
 import { useTranslation } from "../../../I18n";
-import {
-  ActionButton,
-  FieldCard,
-  MatchVisualizer,
-  ModifyKeyButton,
-  PyramidConnector,
-} from "../components";
+import { FieldCard, MatchVisualizer, ModifyKeyButton, PyramidConnector } from "../components";
 import { useSignaturePlayground } from "../hooks";
 import type { SigPlaygroundColors } from "../types";
 
-import { DoodleBulb } from "@doodle";
+import { DoodleBulb, DoodleDrawPen } from "@doodle";
 import {
   ArrowDownLeft,
   ArrowDownRight,
@@ -26,7 +20,6 @@ import {
   RefreshCw,
   ShieldCheck,
   User,
-  UserCheck,
   XCircle,
 } from "@icons";
 
@@ -37,18 +30,19 @@ type Props = {
 export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   const typo = getTypography();
   const { t, language } = useTranslation();
-  const { colors: themeColors, moduleTheme } = usePageTheme();
+  const { colors: themeColors, moduleTheme, theme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const world = themeColors[moduleTheme];
+  const gold = getBrandGold(theme);
 
   const colors: SigPlaygroundColors = {
-    accentColor: world.border.secondary,
+    accentColor: world.text.secondary,
     successColor: themeColors.semantic.success.text,
     errorColor: themeColors.semantic.error.text,
     neutralColor: themeColors.base.text.primary,
-    secretColor: themeColors.blue.text.secondary,
-    publicColor: themeColors.semantic.info?.text ?? themeColors.blue.text.primary,
-    signatureColor: themeColors.violet.text.secondary,
+    secretColor: gold,
+    publicColor: world.text.secondary,
+    signatureColor: world.text.secondary,
     worldBorderSecondary: world.border.secondary,
     basePrimaryText: world.text.primary,
     baseTextSecondary: themeColors.base.text.secondary,
@@ -80,15 +74,11 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       ? fixFrenchPunctuation(`« ${displayMessage} »`)
       : `"${displayMessage}"`;
 
-
-  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
-
   const sectionLabel: CSSProperties = {
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
-    color: withOpacity(colors.baseTextSecondary, 0.55),
+    color: withOpacity(colors.baseTextSecondary, 0.6),
     marginBottom: "0.65rem",
   };
 
@@ -101,16 +91,14 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   };
 
   const msgHeaderLabel: CSSProperties = {
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: withOpacity(colors.baseTextSecondary, 0.7),
   };
 
   const msgHeaderValue: CSSProperties = {
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
+    ...typo.note,
     fontStyle: "italic",
     color: colors.basePrimaryText,
     lineHeight: 1.4,
@@ -143,14 +131,11 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   };
 
   const coherenceBanner: CSSProperties = {
+    ...typo.micro,
     display: "flex",
     alignItems: "center",
     gap: "0.4rem",
     padding: "0.4rem 0.55rem",
-    borderRadius: 0,
-    ...mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     lineHeight: 1.4,
     ...(isOriginalKey
       ? {
@@ -165,7 +150,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         }),
     transition: "all 0.35s var(--ease-smooth)",
   };
-
 
   const renderPending = (
     n: number,
@@ -183,7 +167,6 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         flexDirection: "column",
         gap: "0.5rem",
         padding: "0.85rem 0.9rem",
-        borderRadius: 0,
         border: `1px dashed ${withOpacity(accent, 0.3)}`,
         background: withOpacity(accent, 0.02),
       }}
@@ -191,11 +174,10 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       {header}
       <div
         style={{
+          ...typo.micro,
           display: "flex",
           alignItems: "center",
           gap: "0.35rem",
-          fontSize: typo.micro.fontSize,
-          fontWeight: 500,
           fontVariant: "small-caps",
           letterSpacing: "0.04em",
           color: withOpacity(accent, 0.7),
@@ -203,13 +185,12 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
       >
         <span
           style={{
+            ...typo.micro,
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "1.05rem",
-            height: "1.05rem",
-            borderRadius: "50%",
-            fontSize: typo.micro.fontSize,
+            width: "1.15rem",
+            height: "1.15rem",
             color: withOpacity(accent, 0.8),
             border: `1px dashed ${withOpacity(accent, 0.5)}`,
           }}
@@ -219,15 +200,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         {icon}
         {label}
       </div>
-      <p
-        style={{
-          margin: 0,
-          fontSize: typo.micro.fontSize,
-          lineHeight: 1.5,
-          fontStyle: "italic",
-          color: withOpacity(colors.baseTextSecondary, 0.7),
-        }}
-      >
+      <p style={{ ...typo.note, margin: 0, lineHeight: 1.5, fontStyle: "italic", color: withOpacity(colors.baseTextSecondary, 0.7) }}>
         {hint}
       </p>
     </div>
@@ -376,57 +349,47 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
   );
 
   const actionButton = !isDerived ? (
-    <ActionButton
+    <Button
+      variant="primary"
+      color={colors.accentColor}
+      icon={<KeyRound size={14} strokeWidth={2.2} />}
       onClick={derive}
-      consumed={false}
-      variant="primary"
-      label={t("signaturePlayground.deriveAction")}
-      consumedLabel={t("signaturePlayground.deriveConsumed")}
-      icon={<KeyRound size={13} strokeWidth={2.2} />}
-      isMobile={isMobile}
-      colors={colors}
-    />
+      style={{ alignSelf: "flex-start" }}
+    >
+      {t("signaturePlayground.deriveAction")}
+    </Button>
   ) : !hasSignature ? (
-    <ActionButton
+    <Button
+      variant="primary"
+      color={colors.accentColor}
+      icon={<PenLine size={14} strokeWidth={2.2} />}
       onClick={sign}
-      consumed={false}
-      variant="primary"
-      label={t("signaturePlayground.signAction")}
-      consumedLabel={t("signaturePlayground.signConsumed")}
-      icon={<PenLine size={13} strokeWidth={2.2} />}
-      isMobile={isMobile}
-      colors={colors}
-    />
+      style={{ alignSelf: "flex-start" }}
+    >
+      {t("signaturePlayground.signAction")}
+    </Button>
   ) : verifyStatus === "idle" ? (
-    <ActionButton
-      onClick={verify}
-      consumed={false}
+    <Button
       variant="primary"
-      label={t("signaturePlayground.verifyAction")}
-      consumedLabel={t("signaturePlayground.verifyConsumed")}
-      icon={<ShieldCheck size={13} strokeWidth={2.2} />}
-      isMobile={isMobile}
-      colors={colors}
-    />
+      color={colors.accentColor}
+      icon={<ShieldCheck size={14} strokeWidth={2.2} />}
+      onClick={verify}
+      style={{ alignSelf: "flex-start" }}
+    >
+      {t("signaturePlayground.verifyAction")}
+    </Button>
   ) : null;
-
 
   return (
     <SurfaceCard
       gap="1.1rem"
       margin={isMobile ? "1.5rem 0" : "2rem 0"}
-      style={{ ...mono, overflow: "hidden", textAlign: "left" }}
+      style={{ overflow: "hidden", textAlign: "left" }}
     >
       <Caption
         tone="accent"
         size="md"
-        icon={
-          <UserCheck
-            size={isMobile ? 17 : 18}
-            strokeWidth={2}
-            style={{ color: colors.accentColor, flexShrink: 0 }}
-          />
-        }
+        icon={<DoodleDrawPen size={isMobile ? 20 : 22} style={{ color: colors.accentColor, flexShrink: 0 }} />}
         style={{ minWidth: 0, overflowWrap: "anywhere" }}
       >
         {t("signaturePlayground.title")}
@@ -486,14 +449,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
               : t("signaturePlayground.rejectedBadge")}
           </Badge>
 
-          <p
-            style={{
-              fontSize: typo.note.fontSize,
-              lineHeight: 1.55,
-              color: colors.baseTextSecondary,
-              margin: 0,
-            }}
-          >
+          <p style={{ ...typo.note, lineHeight: 1.55, color: colors.baseTextSecondary, margin: 0 }}>
             {verifyStatus === "accepted"
               ? t("signaturePlayground.acceptedExpl")
               : t("signaturePlayground.rejectedExpl")}
@@ -501,15 +457,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         </FeedbackPanel>
       )}
 
-      <p
-        style={{
-          margin: 0,
-          fontSize: typo.micro.fontSize,
-          lineHeight: 1.55,
-          fontStyle: "italic",
-          color: withOpacity(colors.baseTextSecondary, 0.75),
-        }}
-      >
+      <p style={{ ...typo.note, margin: 0, lineHeight: 1.55, fontStyle: "italic", color: withOpacity(colors.baseTextSecondary, 0.75) }}>
         {t("signaturePlayground.derivationCaption")}
       </p>
 
@@ -524,15 +472,7 @@ export const SignaturePlayground: FC<Props> = ({ onComplete }) => {
         icon={<DoodleBulb size={28} />}
       >
         <p style={{ margin: 0 }}>{t("signaturePlayground.pedagogyConcretely")}</p>
-        <p
-          style={{
-            margin: 0,
-            fontStyle: "italic",
-            color: withOpacity(colors.baseTextSecondary, 0.85),
-            fontSize: typo.micro.fontSize,
-            lineHeight: 1.55,
-          }}
-        >
+        <p style={{ ...typo.note, margin: 0, fontStyle: "italic", color: withOpacity(colors.baseTextSecondary, 0.85), lineHeight: 1.55 }}>
           {t("signaturePlayground.pedagogyAnalogy")}
         </p>
       </Disclosure>

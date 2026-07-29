@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, type ReactNode } from "react";
 
-import { BRAND, getTypography } from "../../../Design";
+import { getTypography } from "../../../Design";
 import { withOpacity } from "../../../Design/helpers";
 import { truncateHash } from "../../helpers";
 import type { FieldTone, SigPlaygroundColors, ValueKind } from "../types";
@@ -61,7 +61,6 @@ export const FieldCard: FC<Props> = ({
     flexDirection: "column",
     gap: "0.55rem",
     padding: "0.85rem 0.9rem",
-    borderRadius: 0,
     border: `1px solid ${withOpacity(accent, accentOpacityBorder)}`,
     background: withOpacity(accent, accentOpacityBg),
     minWidth: 0,
@@ -70,11 +69,10 @@ export const FieldCard: FC<Props> = ({
   };
 
   const labelStyle: CSSProperties = {
+    ...typo.micro,
     display: "flex",
     alignItems: "center",
     gap: "0.35rem",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.04em",
     color: accent,
@@ -82,27 +80,22 @@ export const FieldCard: FC<Props> = ({
   };
 
   const numberBadgeStyle: CSSProperties = {
+    ...typo.micro,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
-    width: "1.05rem",
-    height: "1.05rem",
-    borderRadius: "50%",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    width: "1.15rem",
+    height: "1.15rem",
     color: accent,
     background: withOpacity(accent, 0.14),
     border: `1px solid ${withOpacity(accent, 0.4)}`,
   };
 
   const readOnlyValueStyle: CSSProperties = {
+    ...typo.micro,
     width: "100%",
     padding: "0.5rem 0.65rem",
-    borderRadius: 0,
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.note.fontSize,
-    fontWeight: 500,
     color: valueColor ?? colors.basePrimaryText,
     textAlign: "center",
     wordBreak: valueKind === "hex" ? "break-all" : "normal",
@@ -115,7 +108,7 @@ export const FieldCard: FC<Props> = ({
   };
 
   const hintStyle: CSSProperties = {
-    fontSize: typo.micro.fontSize,
+    ...typo.note,
     lineHeight: 1.5,
     color: withOpacity(colors.baseTextSecondary, 0.8),
     margin: 0,
@@ -123,22 +116,20 @@ export const FieldCard: FC<Props> = ({
   };
 
   const valuePrefixStyle: CSSProperties = {
+    ...typo.micro,
     display: "block",
     textAlign: "center",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.05em",
     color: withOpacity(colors.baseTextSecondary, 0.7),
   };
 
   const footerStyle: CSSProperties = {
+    ...typo.micro,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.35rem",
-    fontSize: typo.micro.fontSize,
     color: withOpacity(colors.baseTextSecondary, 0.85),
-    fontWeight: 500,
     marginTop: "0.1rem",
   };
 

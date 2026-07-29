@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import type { KeyElementId } from "./KeyElementId";
 
-type IconProps = { size?: number | string; strokeWidth?: number };
+type IconProps = { size?: number };
 
 export type KeyElement = {
   id: KeyElementId;

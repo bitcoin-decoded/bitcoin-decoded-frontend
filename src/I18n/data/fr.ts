@@ -288,15 +288,24 @@ const fr = {
   "utxoGraph.outputs": "Sorties (nouveaux UTXO)",
   "utxoGraph.run": "Effectuer la transaction",
   "utxoGraph.replay": "Recommencer",
-  "utxoGraph.consumed": "consommé",
-  "utxoGraph.created": "créé",
-  "utxoGraph.recipient": "pour le destinataire",
-  "utxoGraph.change": "retour monnaie (change)",
-  "utxoGraph.lockedBy": "verrouillé",
+  "utxoGraph.statusLocked": "Verrouillé",
+  "utxoGraph.statusSpent": "Consommé",
+  "utxoGraph.statusCreated": "Créé",
+  "utxoGraph.lockedToNicolas": "Verrouillé à Nicolas",
+  "utxoGraph.lockedToRecipient": "Verrouillé au destinataire",
+  "utxoGraph.lockedToChange": "Retour à Nicolas",
+  "utxoGraph.roleRecipient": "Pour le destinataire",
+  "utxoGraph.roleChange": "Retour monnaie (change)",
+  "utxoGraph.openedLabel": "Ouvert",
+  "utxoGraph.openedBy": "Signé par la clé privée de Nicolas",
+  "utxoGraph.legend":
+    "Rappel : la serrure, c'est la clé publique. La clé, c'est la clé privée. Ouvrir, c'est signer.",
+  "utxoGraph.footnote":
+    "Chaque pièce est fermée par une serrure : sa clé publique. La dépenser, c'est prouver que tu possèdes la clé privée qui l'ouvre. Rien ne se déplace, une serrure s'ouvre.",
+  "utxoGraph.footnoteAlt":
+    "Chaque pièce est verrouillée par sa clé publique. La dépenser, c'est prouver que tu détiens la clé privée qui l'ouvre, pas déplacer un solde.",
   "utxoGraph.captionIntro":
     "La valeur ne monte ni ne descend comme un solde : les pièces d'entrée sont détruites, et de nouvelles pièces (des droits de dépense) sont recréées.",
-  "utxoGraph.captionKeys":
-    "Chaque pièce est verrouillée par une clé. La dépenser, c'est prouver qu'on possède la clé, pas déplacer un solde.",
   "utxoGraph.captionWallet":
     "Ton « solde » n'est pas un compteur : c'est la somme des pièces que tes clés contrôlent, recalculée après chaque transaction.",
 
@@ -349,7 +358,7 @@ const fr = {
   "signaturePlayground.publicKeyDerivation": "Dérivée de la clé privée",
   "signaturePlayground.derivationCaption":
     "Cet exemple présente l'un des couples (clé privée ↔ clé publique) de Nicolas. Dans Bitcoin, chaque utilisateur peut en posséder plusieurs. Et chaque couple est tiré d'un espace si vaste qu'il y a plus de clés possibles que d'atomes dans l'univers observable. Bonne chance pour tomber sur la même !",
-  "signaturePlayground.message": "Nicolas envoie 1 BTC à Mme Michu",
+  "signaturePlayground.message": "Nicolas envoie 1,3 BTC à Mme Michu",
   "signaturePlayground.statusValid": "Cette clé publique est bien dérivée de la clé privée",
   "signaturePlayground.statusInvalid": "Cette clé publique n'est plus dérivée de cette clé privée",
   "signaturePlayground.edgeDerive": "calcule",
