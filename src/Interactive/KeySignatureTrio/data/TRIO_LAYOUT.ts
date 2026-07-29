@@ -9,11 +9,11 @@ export const TRIO_LAYOUT: {
   clearance: { mobile: number; desktop: number };
 } = {
   viewWidth: 140,
-  viewHeight: 104,
+  viewHeight: 112,
   nodes: {
-    privateKey: { x: 70, y: 18 },
-    publicKey: { x: 24, y: 88 },
-    signature: { x: 116, y: 88 },
+    privateKey: { x: 70, y: 16 },
+    publicKey: { x: 26, y: 82 },
+    signature: { x: 114, y: 82 },
   },
-  clearance: { mobile: 21, desktop: 15 },
+  clearance: { mobile: 20, desktop: 15 },
 };
