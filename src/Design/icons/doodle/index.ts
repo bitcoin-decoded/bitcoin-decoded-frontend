@@ -2,6 +2,7 @@ export { DoodleAngel } from "./DoodleAngel";
 export { DoodleArrowDown } from "./DoodleArrowDown";
 export { DoodleArrowReturn } from "./DoodleArrowReturn";
 export { DoodleArrowUp } from "./DoodleArrowUp";
+export { DoodleAsterisk } from "./DoodleAsterisk";
 export { DoodleBagIncrease } from "./DoodleBagIncrease";
 export { DoodleBalance } from "./DoodleBalance";
 export { DoodleBank } from "./DoodleBank";

@@ -285,15 +285,24 @@ const en = {
   "utxoGraph.outputs": "Outputs (new UTXOs)",
   "utxoGraph.run": "Execute transaction",
   "utxoGraph.replay": "Restart",
-  "utxoGraph.consumed": "consumed",
-  "utxoGraph.created": "created",
-  "utxoGraph.recipient": "for the recipient",
-  "utxoGraph.change": "change returned",
-  "utxoGraph.lockedBy": "locked",
+  "utxoGraph.statusLocked": "Locked",
+  "utxoGraph.statusSpent": "Spent",
+  "utxoGraph.statusCreated": "Created",
+  "utxoGraph.lockedToNicolas": "Locked to Nicolas",
+  "utxoGraph.lockedToRecipient": "Locked to the recipient",
+  "utxoGraph.lockedToChange": "Back to Nicolas",
+  "utxoGraph.roleRecipient": "To the recipient",
+  "utxoGraph.roleChange": "Change",
+  "utxoGraph.openedLabel": "Opened",
+  "utxoGraph.openedBy": "Signed with Nicolas's private key",
+  "utxoGraph.legend":
+    "Reminder: the lock is the public key. The key is the private key. Opening it is signing.",
+  "utxoGraph.footnote":
+    "Every coin is sealed by a lock: its public key. Spending it means proving you hold the private key that opens it. Nothing moves. A lock opens.",
+  "utxoGraph.footnoteAlt":
+    "Every coin is locked by its public key. Spending it means proving you hold the private key that opens it, not moving a balance.",
   "utxoGraph.captionIntro":
     "Value doesn't rise or fall like a balance: the input coins are destroyed, and new coins (spending rights) are recreated.",
-  "utxoGraph.captionKeys":
-    "Each coin is locked by a key. Spending it means proving you own the key, not moving a balance.",
   "utxoGraph.captionWallet":
     "Your \"balance\" isn't a counter: it's the sum of the coins your keys control, recomputed after every transaction.",
 
@@ -345,7 +354,7 @@ const en = {
   "signaturePlayground.publicKeyDerivation": "Derived from the private key",
   "signaturePlayground.derivationCaption":
     "This example shows one of Nicolas's (private key ↔ public key) pairs. In Bitcoin, each user can hold several. And each pair is drawn from a space so vast that there are more possible keys than atoms in the observable universe. Good luck landing on the same one.",
-  "signaturePlayground.message": "Nicolas sends 1 BTC to Ms. Smith",
+  "signaturePlayground.message": "Nicolas sends 1.3 BTC to Ms. Smith",
   "signaturePlayground.statusValid": "This public key is derived from the private key",
   "signaturePlayground.statusInvalid": "This public key is no longer derived from the private key",
   "signaturePlayground.edgeDerive": "computes",

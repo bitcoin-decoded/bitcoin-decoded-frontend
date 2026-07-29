@@ -9,7 +9,7 @@ import type { UtxoGraphMode } from "../types";
 
 import { UtxoCoin } from "./UtxoCoin";
 
-import { DoodleBulb, DoodleFlowDown, DoodleHierarchy } from "@doodle";
+import { DoodleBulb, DoodleFlowDown, DoodleHierarchy, DoodleLock } from "@doodle";
 
 export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
   const breakpoint = useBreakpoint();
@@ -23,21 +23,37 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
   // same accent as TransactionModelComparison (mode="bitcoin")
   const accent = world.text.secondary;
   const successColor = colors.semantic.success.text;
-  const errorColor = colors.semantic.error.text;
+  const isKeys = mode === "keys";
 
   const { inputs, outputs } = UTXO_GRAPH_SCENARIO;
   const inputTotal = inputs.reduce((s, c) => s + c.amount, 0);
   const yourChange = outputs.filter((o) => o.kind === "change").reduce((s, c) => s + c.amount, 0);
   const walletBalance = ran ? yourChange : inputTotal;
 
+  // in the "keys" chapter the lock/key story is explicit; elsewhere coins just carry their role
+  const inputSublabel = isKeys ? t("utxoGraph.lockedToNicolas") : undefined;
+  const outputSublabel = (kind: "recipient" | "change" | undefined): string =>
+    isKeys
+      ? t(kind === "recipient" ? "utxoGraph.lockedToRecipient" : "utxoGraph.lockedToChange")
+      : t(kind === "recipient" ? "utxoGraph.roleRecipient" : "utxoGraph.roleChange");
+
   const caption =
     mode === "keys"
-      ? t("utxoGraph.captionKeys")
+      ? t("utxoGraph.footnote")
       : mode === "wallet"
         ? t("utxoGraph.captionWallet")
         : t("utxoGraph.captionIntro");
 
   const iconSize = isMobile ? 20 : 22;
+
+  const legendRow: CSSProperties = {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "0.5rem",
+    padding: isMobile ? "0.55rem 0.7rem" : "0.6rem 0.85rem",
+    background: withOpacity(accent, 0.04),
+    border: `1px solid ${withOpacity(accent, 0.16)}`,
+  };
 
   const sectionPanel: CSSProperties = {
     display: "flex",
@@ -109,6 +125,13 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
         {t("utxoGraph.title")}
       </Caption>
 
+      {isKeys && (
+        <div style={legendRow}>
+          <DoodleLock size={iconSize} style={{ flexShrink: 0, color: accent }} />
+          <span style={{ ...typo.note, color: colors.base.text.secondary }}>{t("utxoGraph.legend")}</span>
+        </div>
+      )}
+
       {mode === "wallet" && (
         <div style={walletBar}>
           <span style={{ ...typo.note, color: world.text.primary }}>{t("utxoGraph.walletTitle")}</span>
@@ -125,12 +148,13 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
             <UtxoCoin
               key={c.id}
               amount={fmtBTC(c.amount)}
-              sublabel={mode === "keys" ? t("utxoGraph.lockedBy") : undefined}
+              sublabel={inputSublabel}
+              openedLabel={isKeys ? t("utxoGraph.openedLabel") : undefined}
+              openedBy={isKeys ? t("utxoGraph.openedBy") : undefined}
               mode={mode}
               state={ran ? "consumed" : "idle"}
               accent={accent}
               successColor={successColor}
-              errorColor={errorColor}
             />
           ))}
         </div>
@@ -161,13 +185,12 @@ export const UtxoGraph: FC<{ mode?: UtxoGraphMode }> = ({ mode = "intro" }) => {
             <UtxoCoin
               key={c.id}
               amount={fmtBTC(c.amount)}
-              sublabel={t(c.kind === "recipient" ? "utxoGraph.recipient" : "utxoGraph.change")}
+              sublabel={outputSublabel(c.kind)}
               isChange={c.kind === "change"}
               mode={mode}
               state={ran ? "created" : "idle"}
               accent={accent}
               successColor={successColor}
-              errorColor={errorColor}
             />
           ))}
         </div>
