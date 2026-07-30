@@ -1,6 +1,12 @@
 import { type CSSProperties, type FC } from "react";
 
-import { getTypography, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import {
+  getBrandGold,
+  getTypography,
+  useBreakpoint,
+  usePageTheme,
+  withOpacity,
+} from "../../../Design";
 import { useLanguageContext } from "../../../I18n";
 import { LINKS, NODES } from "../data";
 
@@ -10,10 +16,11 @@ export const BitcoinNetworkMap: FC = () => {
   const typo = getTypography();
   const { language } = useLanguageContext();
   const fr = language === "fr";
-  const { colors, moduleTheme } = usePageTheme();
+  const { colors, moduleTheme, theme } = usePageTheme();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const world = colors[moduleTheme];
+  const linkStroke = withOpacity(getBrandGold(theme), theme === "dark" ? 0.7 : 0.6);
 
   const containerStyle: CSSProperties = {
     position: "relative",
@@ -61,8 +68,8 @@ export const BitcoinNetworkMap: FC = () => {
               y1={NODES[a].y}
               x2={NODES[b].x}
               y2={NODES[b].y}
-              stroke={withOpacity(world.background.secondary, 0.2)}
-              strokeWidth="0.3"
+              stroke={linkStroke}
+              strokeWidth="0.45"
               strokeDasharray="1.2 0.8"
             />
           ))}

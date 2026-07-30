@@ -152,6 +152,7 @@ const INTERACTIVE_NAMES = new Set([
   "MonetaryPillars",
   "MonetaryProperties",
   "NetworkFlywheel",
+  "NodeSuperpowers",
   "PathFinder",
   "Quiz",
   "ScientificMethods",

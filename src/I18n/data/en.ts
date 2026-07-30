@@ -335,6 +335,9 @@ const en = {
   "keyTrio.prompt": "Click on each element. You'll see how it all fits together.",
   "keyTrio.emptyState": "Pick an element to discover its role.",
   "keyTrio.explored": "explored",
+  "nodeSuperpowers.cta": "Click and reveal each one",
+  "nodeSuperpowers.ctaLast": "Click and reveal the last superpower",
+  "nodeSuperpowers.explored": "explored",
 
   "signaturePlayground.title": "Nicolas makes his first transaction",
   "signaturePlayground.elementLabel": "Element",
