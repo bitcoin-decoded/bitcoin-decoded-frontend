@@ -1,25 +1,28 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, Caption, FeedbackPanel, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
+import { Button, Caption, FeedbackPanel, getBrandGold, getTypography, SurfaceCard, useBreakpoint, usePageTheme, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useWalletDiscoveryGame } from "../hooks";
 
 import { WalletCard } from "./WalletCard";
 
-import { CheckCircle, KeyRound, RefreshCw, Sparkles, Wallet, XCircle } from "@icons";
+import { DoodleCheck, DoodleLoginKey, DoodleWallet } from "@doodle";
+import { CheckCircle, RefreshCw, XCircle } from "@icons";
 
 type Props = {
   onComplete?: () => void;
 };
 
 export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
-  const typo = getTypography();
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "mobile";
+  const typo = getTypography(breakpoint);
   const { t } = useTranslation();
-  const { colors: themeColors, moduleTheme } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
+  const { colors: themeColors, moduleTheme, theme } = usePageTheme();
   const world = themeColors[moduleTheme];
 
-  const accentColor = world.border.secondary;
+  const accentColor = world.text.secondary;
+  const secretColor = getBrandGold(theme);
   const successColor = themeColors.semantic.success.text;
   const errorColor = themeColors.semantic.error.text;
   const basePrimaryText = world.text.primary;
@@ -42,18 +45,15 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
     restart,
   } = useWalletDiscoveryGame(onComplete);
 
-  const mono: CSSProperties = { fontFamily: BRAND.fonts.mono };
-
   const introStyle: CSSProperties = {
-    fontSize: typo.note.fontSize,
+    ...typo.note,
     lineHeight: 1.55,
     color: withOpacity(baseTextSecondary, 0.85),
     margin: 0,
   };
 
   const sectionLabelStyle: CSSProperties = {
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
     letterSpacing: "0.08em",
     color: withOpacity(baseTextSecondary, 0.55),
@@ -61,13 +61,10 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
   };
 
   const inputStyle: CSSProperties = {
-    ...mono,
+    ...typo.figure,
     width: "100%",
     maxWidth: isMobile ? "100%" : "16rem",
     padding: "0.5rem 0.7rem",
-    borderRadius: 0,
-    fontSize: "1rem",
-    fontWeight: 500,
     border: `1px solid ${withOpacity(accentColor, 0.4)}`,
     background: withOpacity(baseBackgroundSecondary, 0.05),
     color: basePrimaryText,
@@ -79,21 +76,11 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
   const validateReady = selectedCardId !== null && amountInput.trim() !== "";
 
   return (
-    <SurfaceCard
-      gap="1.1rem"
-      margin={isMobile ? "1.5rem 0" : "2rem 0"}
-      style={{ ...mono, overflow: "hidden", textAlign: "left" }}
-    >
+    <SurfaceCard gap="1.1rem" margin={isMobile ? "1.5rem 0" : "2rem 0"} style={{ overflow: "hidden", textAlign: "left" }}>
       <Caption
         tone="accent"
         size="md"
-        icon={
-          <Wallet
-            size={isMobile ? 17 : 18}
-            strokeWidth={2}
-            style={{ color: accentColor, flexShrink: 0 }}
-          />
-        }
+        icon={<DoodleWallet size={isMobile ? 20 : 22} style={{ color: accentColor, flexShrink: 0 }} />}
         style={{ minWidth: 0, overflowWrap: "anywhere" }}
       >
         {t("walletGame.title")}
@@ -102,12 +89,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
       <p style={introStyle}>{t("walletGame.intro")}</p>
 
       {stage === "idle" && (
-        <Button
-          variant="primary"
-          icon={<KeyRound size={14} strokeWidth={2.2} />}
-          onClick={reveal}
-          style={{ alignSelf: "flex-start" }}
-        >
+        <Button variant="primary" icon={<DoodleLoginKey size={16} />} onClick={reveal} style={{ alignSelf: "flex-start" }}>
           {t("walletGame.revealAction")}
         </Button>
       )}
@@ -127,10 +109,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
               {cards.map((card, idx) => {
                 const isAnswer = stage === "validated" && card.id === fundedCardId;
                 const isWrong =
-                  stage === "validated" &&
-                  verdict === "incorrect" &&
-                  selectedCardId === card.id &&
-                  card.id !== fundedCardId;
+                  stage === "validated" && verdict === "incorrect" && selectedCardId === card.id && card.id !== fundedCardId;
                 return (
                   <WalletCard
                     key={card.id}
@@ -148,6 +127,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
                     noUtxosLabel={t("walletGame.cardNoUtxos")}
                     utxoPrefix={t("walletGame.cardUtxoPrefix")}
                     accentColor={accentColor}
+                    secretColor={secretColor}
                     successColor={successColor}
                     errorColor={errorColor}
                     basePrimaryText={basePrimaryText}
@@ -171,14 +151,7 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
             </div>
 
             <div>
-              <label
-                style={{
-                  ...sectionLabelStyle,
-                  display: "block",
-                  marginBottom: "0.4rem",
-                }}
-                htmlFor="wallet-game-amount"
-              >
+              <label style={{ ...sectionLabelStyle, display: "block", marginBottom: "0.4rem" }} htmlFor="wallet-game-amount">
                 {t("walletGame.amountLabel")}
               </label>
               <input
@@ -189,17 +162,13 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
                 value={amountInput}
                 onChange={(e) => updateAmount(e.target.value)}
                 disabled={isLocked}
-                style={{
-                  ...inputStyle,
-                  opacity: isLocked ? 0.6 : 1,
-                  cursor: isLocked ? "default" : "text",
-                }}
+                style={{ ...inputStyle, opacity: isLocked ? 0.6 : 1, cursor: isLocked ? "default" : "text" }}
               />
             </div>
 
             <Button
               variant="primary"
-              icon={<Sparkles size={14} strokeWidth={2.2} />}
+              icon={<DoodleCheck size={16} />}
               onClick={validate}
               disabled={!validateReady || isLocked}
               style={{ alignSelf: "flex-start" }}
@@ -209,64 +178,27 @@ export const WalletDiscoveryGame: FC<Props> = ({ onComplete }) => {
           </div>
 
           {stage === "validated" && verdict === "correct" && (
-            <FeedbackPanel
-              tone="success"
-              icon={<CheckCircle size={14} strokeWidth={2.5} />}
-              title={t("walletGame.correctTitle")}
-            >
-              <p
-                style={{ fontSize: typo.note.fontSize, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
-              >
-                {t("walletGame.correctMain")}
-              </p>
-              <p
-                style={{
-                  fontSize: typo.micro.fontSize,
-                  lineHeight: 1.55,
-                  color: withOpacity(baseTextSecondary, 0.85),
-                  margin: "0.4rem 0 0 0",
-                }}
-              >
+            <FeedbackPanel tone="success" icon={<CheckCircle size={14} strokeWidth={2.5} />} title={t("walletGame.correctTitle")}>
+              <p style={{ ...typo.note, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}>{t("walletGame.correctMain")}</p>
+              <p style={{ ...typo.note, lineHeight: 1.55, color: withOpacity(baseTextSecondary, 0.85), margin: "0.4rem 0 0 0" }}>
                 {t("walletGame.correctPedagogy")}
               </p>
             </FeedbackPanel>
           )}
 
           {stage === "validated" && verdict === "incorrect" && (
-            <FeedbackPanel
-              tone="error"
-              icon={<XCircle size={14} strokeWidth={2.5} />}
-              title={t("walletGame.incorrectTitle")}
-            >
-              <p
-                style={{ fontSize: typo.note.fontSize, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}
-              >
-                {t("walletGame.incorrectMain")}
-              </p>
+            <FeedbackPanel tone="error" icon={<XCircle size={14} strokeWidth={2.5} />} title={t("walletGame.incorrectTitle")}>
+              <p style={{ ...typo.note, lineHeight: 1.55, color: basePrimaryText, margin: 0 }}>{t("walletGame.incorrectMain")}</p>
             </FeedbackPanel>
           )}
 
-          <Button
-            variant="secondary"
-            size="sm"
-            icon={<RefreshCw size={11} strokeWidth={2} />}
-            onClick={restart}
-            style={{ alignSelf: "flex-end" }}
-          >
+          <Button variant="secondary" size="sm" icon={<RefreshCw size={11} strokeWidth={2} />} onClick={restart} style={{ alignSelf: "flex-end" }}>
             {t("walletGame.restart")}
           </Button>
         </>
       )}
 
-      <p
-        style={{
-          fontSize: typo.micro.fontSize,
-          fontStyle: "italic",
-          color: withOpacity(baseTextSecondary, 0.55),
-          margin: 0,
-          textAlign: "center",
-        }}
-      >
+      <p style={{ ...typo.micro, fontStyle: "italic", color: withOpacity(baseTextSecondary, 0.55), margin: 0, textAlign: "center" }}>
         {t("walletGame.disclaimer")}
       </p>
     </SurfaceCard>
