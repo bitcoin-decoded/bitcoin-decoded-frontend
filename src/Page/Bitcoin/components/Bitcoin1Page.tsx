@@ -290,42 +290,45 @@ export const Bitcoin1Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Une fois qu'un mineur a trouvé la solution et proposé un nouveau bloc, celui-ci est
-                diffusé à l'ensemble du réseau.
+                Lorsqu'un mineur remporte la compétition, il propose un nouveau bloc, c'est-à-dire un
+                ensemble de transactions, à ajouter à l'historique de Bitcoin.
               </>
             ) : (
               <>
-                Once a miner finds the solution and proposes a new block, it gets broadcast to the
-                entire network.
+                When a miner wins the competition, they propose a new block, a group of
+                transactions, to be added to Bitcoin's history.
               </>
             )}
           </p>
           <p>
             {fr
-              ? "Les nœuds simples entrent alors en action : chacun d'entre eux vérifie indépendamment que le bloc respecte toutes les règles :"
-              : "Simple nodes then step in: each one independently checks that the block follows every rule:"}
+              ? "Cette proposition est alors diffusée à tous les autres nœuds du réseau."
+              : "This proposal is then broadcast to all the other nodes on the network."}
+          </p>
+          <p>
+            {fr
+              ? "Chaque nœud vérifie indépendamment que tout respecte les règles de Bitcoin :"
+              : "Each node independently verifies that everything follows Bitcoin's rules:"}
           </p>
           <ul>
             <li>{fr ? "Les transactions sont-elles valides ?" : "Are the transactions valid?"}</li>
 
             <li>
               {fr
-                ? "Le problème mathématique a-t-il bien été résolu ?"
-                : "Was the calculation properly solved?"}
+                ? "Les règles du protocole sont-elles respectées ?"
+                : "Are the protocol rules being followed?"}
             </li>
-
-            <li>{fr ? "Aucune règle n'a-t-elle été enfreinte ?" : "Was any rule broken?"}</li>
           </ul>
           <p>
             {fr ? (
               <>
-                Et si tout est conforme, le nœud ajoute cette nouvelle page à son propre exemplaire
-                du grand livre de comptes. Sinon, le bloc est purement et simplement rejeté.
+                Si tout est conforme, le nouveau bloc est accepté et ajouté à sa propre copie de
+                l'historique. Sinon, il est rejeté.
               </>
             ) : (
               <>
-                If everything checks out, the node adds this new page to its own copy of the ledger.
-                Otherwise, the block is plainly and simply rejected.
+                If everything is correct, the new block is accepted and added to its own copy of the
+                history. Otherwise, it is rejected.
               </>
             )}
           </p>
@@ -333,12 +336,12 @@ export const Bitcoin1Page: FC = () => {
             {fr ? (
               <>
                 C'est cette vérification collective et indépendante qui rend Bitcoin si robuste :
-                personne ne fait confiance à personne, mais tout le monde vérifie tout.
+                personne ne fait confiance à personne, mais tout le monde vérifie.
               </>
             ) : (
               <>
-                This collective, independent verification is what makes Bitcoin so robust: nobody
-                trusts anyone, but everyone verifies everything.
+                This collective and independent verification is what makes Bitcoin so robust: no one
+                trusts anyone, but everyone verifies.
               </>
             )}
           </p>
