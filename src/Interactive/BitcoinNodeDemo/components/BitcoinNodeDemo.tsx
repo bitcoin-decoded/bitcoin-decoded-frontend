@@ -5,6 +5,7 @@ import {
   Button,
   getBrandGold,
   getTypography,
+  LedgerNumeral,
   useBreakpoint,
   usePageTheme,
   useThemeContext,
@@ -17,7 +18,11 @@ import { DoodleExeFile, DoodleLaptop } from "@doodle";
 
 const EASE = "0.7s var(--ease-smooth)";
 
-export const BitcoinNodeDemo: FC = () => {
+type Props = {
+  onComplete?: () => void;
+};
+
+export const BitcoinNodeDemo: FC<Props> = ({ onComplete }) => {
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
   const typo = getTypography(breakpoint);
@@ -26,7 +31,7 @@ export const BitcoinNodeDemo: FC = () => {
   const { colors, moduleTheme } = usePageTheme();
   const { theme } = useThemeContext();
   const world = colors[moduleTheme];
-  const { isLaunched, handleLaunch, handleReset } = useBitcoinNodeDemo();
+  const { isLaunched, handleLaunch, handleReset } = useBitcoinNodeDemo({ onComplete });
 
   const gold = getBrandGold(theme);
   const iconSize = isMobile ? 36 : 46;
@@ -87,6 +92,7 @@ export const BitcoinNodeDemo: FC = () => {
   };
 
   const tileStyle: CSSProperties = {
+    position: "relative",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -125,15 +131,36 @@ export const BitcoinNodeDemo: FC = () => {
     justifyContent: "center",
   };
 
+  const numeralWrapStyle: CSSProperties = {
+    position: "absolute",
+    top: isMobile ? "0.4rem" : "0.5rem",
+    left: isMobile ? "0.4rem" : "0.5rem",
+  };
+
+  // The two numerals reappear side by side once the node is running: the pieces
+  // that sat apart on their tiles are now added together into one thing.
+  const resultRowStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    gap: isMobile ? "0.4rem" : "0.55rem",
+    opacity: isLaunched ? 1 : 0,
+    transform: isLaunched ? "translateY(0)" : "translateY(-0.4rem)",
+    transition: `opacity ${EASE}, transform ${EASE}`,
+    minHeight: "1.75rem",
+  };
+
+  const operatorStyle: CSSProperties = {
+    ...typo.label,
+    color: world.text.secondary,
+  };
+
   const resultStyle: CSSProperties = {
     ...typo.label,
     fontVariant: "small-caps",
     textAlign: "center",
     color: world.text.secondary,
-    opacity: isLaunched ? 1 : 0,
-    transform: isLaunched ? "translateY(0)" : "translateY(-0.4rem)",
-    transition: `opacity ${EASE}, transform ${EASE}`,
-    minHeight: "1.5em",
   };
 
   return (
@@ -142,17 +169,28 @@ export const BitcoinNodeDemo: FC = () => {
         {corners()}
         <div style={pairStyle}>
           <div style={tileStyle}>
+            <span style={numeralWrapStyle}>
+              <LedgerNumeral value={1} size={isMobile ? 20 : 22} accent={world.text.secondary} />
+            </span>
             <DoodleLaptop size={iconSize} />
             <span style={labelStyle}>{fr ? "Ordinateur" : "Computer"}</span>
           </div>
           <div style={tileStyle}>
+            <span style={numeralWrapStyle}>
+              <LedgerNumeral value={2} size={isMobile ? 20 : 22} accent={world.text.secondary} />
+            </span>
             <DoodleExeFile size={iconSize} />
             <span style={labelStyle}>{fr ? "Logiciel Bitcoin" : "Bitcoin software"}</span>
           </div>
         </div>
       </div>
 
-      <span style={resultStyle}>{fr ? "= un nœud du réseau" : "= a network node"}</span>
+      <div style={resultRowStyle}>
+        <LedgerNumeral value={1} size={isMobile ? 22 : 26} accent={world.text.secondary} />
+        <span style={operatorStyle}>+</span>
+        <LedgerNumeral value={2} size={isMobile ? 22 : 26} accent={world.text.secondary} />
+        <span style={resultStyle}>{fr ? "= un nœud du réseau" : "= a network node"}</span>
+      </div>
 
       <Button
         variant={isLaunched ? "secondary" : "primary"}

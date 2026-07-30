@@ -32,6 +32,7 @@ export { MonetaryGallery } from "./MonetaryGallery";
 export { MonetaryPillars } from "./MonetaryPillars";
 export { MonetaryProperties } from "./MonetaryProperties";
 export { NetworkFlywheel } from "./NetworkFlywheel";
+export { NodeSuperpowers, type Superpower } from "./NodeSuperpowers";
 export { PathFinder } from "./PathFinder";
 export { QESimulator } from "./QESimulator";
 export {

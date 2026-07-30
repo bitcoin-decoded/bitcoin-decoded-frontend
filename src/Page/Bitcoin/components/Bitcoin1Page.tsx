@@ -1,41 +1,109 @@
-import { type CSSProperties, type FC } from "react";
+import { type FC } from "react";
 
-import { Callout, Disclosure, IdentityCard, Reference } from "../../../Design";
+import { Callout, Disclosure, ReaderAside, Reference, useBreakpoint } from "../../../Design";
+import synergyFr from "../../../Design/img/Simple-nodes-and-mining-nodes-synergy.webp";
+import synergyEn from "../../../Design/img/Simple-nodes-and-mining-nodes-synergy_EN.webp";
 import { useTranslation } from "../../../I18n";
-import { BitcoinNetworkMap, BitcoinNodeDemo } from "../../../Interactive";
+import {
+  BitcoinNetworkMap,
+  BitcoinNodeDemo,
+  Illustration,
+  NodeSuperpowers,
+  type Superpower,
+} from "../../../Interactive";
 import { ROUTE_NAME } from "../../../Routing";
 import { Block, BlockReader } from "../../Reading";
-import { ChapterPrelude, PAGE_STYLES, PageTemplate } from "../../Shared/";
+import { ChapterPrelude, PageTemplate } from "../../Shared/";
 
 import {
-  Bitcoin,
-  Blocks,
-  Cpu,
-  Laptop,
-  Monitor,
-  Pickaxe,
-  ScrollText,
-  ShieldCheck,
-} from "@icons";
+  DoodleBookPages,
+  DoodleContentWrite,
+  DoodleMining,
+  DoodleNodeLaptop,
+  DoodleShieldWall,
+  DoodleSynchronize,
+} from "@doodle";
 
 export const Bitcoin1Page: FC = () => {
   const { t, language } = useTranslation();
   const fr = language === "fr";
+  const isMobile = useBreakpoint() === "mobile";
 
-  const cardWrapperStyle: CSSProperties = {
-    flex: "1 1 300px",
-    maxWidth: "25rem",
-    minWidth: "17.5rem",
-    display: "flex",
-    flexDirection: "column",
+  const powerIconSize = isMobile ? 26 : 30;
+  const headerIconSize = isMobile ? 20 : 24;
+  const synergyImg = fr ? synergyFr : synergyEn;
+
+  // The three superpowers a simple node holds. Reused as a dimmed recall on the
+  // mining side, where the fourth power is what actually gets highlighted.
+  const nodePowers = (muted: boolean): Superpower[] => [
+    {
+      muted,
+      icon: <DoodleBookPages size={powerIconSize} />,
+      label: fr ? "Accès au registre" : "Ledger access",
+      body: fr
+        ? " Pouvoir n°1 : il connaît l'historique de toutes les transactions validées sur le réseau depuis le tout début. En quelque sorte, il est omniscient."
+        : "Superpower #1: it has access to the complete history of all transactions confirmed on the network since day one. In a way, it is omniscient.",
+    },
+    {
+      muted,
+      icon: (
+        <>
+          <DoodleSynchronize size={powerIconSize} />
+          <DoodleBookPages size={powerIconSize} />
+        </>
+      ),
+      label: fr ? "Synchronisation" : "Synchronization",
+      body: fr
+        ? "Pouvoir n°2 : il est capable de se synchroniser en permanence avec le réseau pour connaître les dernières transactions validées."
+        : "Superpower #2: it constantly stays synchronized with the network, keeping track of the latest validated transactions.",
+    },
+    {
+      muted,
+      icon: <DoodleShieldWall size={powerIconSize} />,
+      label: fr ? "Sentinelle" : "Sentinel",
+      body: fr
+        ? "Pouvoir n°3 : il joue le rôle de sentinelle du réseau en vérifiant que les règles de Bitcoin sont respectées et en rejetant toute transaction invalide."
+        : "Superpower #3: it acts as a network sentinel by checking that Bitcoin's rules are followed and rejecting any invalid transaction.",
+    },
+  ];
+
+  // The fourth power is what a mining node adds: the right to write new
+  // transactions into Bitcoin's history by winning the mining competition.
+  const builderPower: Superpower = {
+    highlight: true,
+    icon: <DoodleContentWrite size={powerIconSize} />,
+    label: fr ? "Écrire le registre" : "Write to the ledger",
+    body: fr ? (
+      <>
+        <span style={{ display: "block" }}>
+          Pouvoir n°4 : certains nœuds ont un pouvoir supplémentaire : ils peuvent ajouter de
+          nouvelles transactions à l'historique de Bitcoin.
+        </span>
+        <span style={{ display: "block", marginTop: "0.85rem" }}>
+          Ces nœuds particuliers sont appelés des mineurs. Pour obtenir ce droit, ils participent à
+          une compétition.
+        </span>
+        <span style={{ display: "block", marginTop: "0.85rem" }}>
+          Le premier mineur qui gagne la compétition a le droit d'ajouter les nouvelles transactions
+          et reçoit une récompense en bitcoin. Génial non ?
+        </span>
+      </>
+    ) : (
+      <>
+        <span style={{ display: "block" }}>
+          Superpower #4: some nodes hold one extra power: they get to add brand-new transactions to
+          Bitcoin's history.
+        </span>
+        <span style={{ display: "block", marginTop: "0.85rem" }}>
+          These special nodes are called miners. To earn that right, they enter a competition.
+        </span>
+        <span style={{ display: "block", marginTop: "0.85rem" }}>
+          The first miner to win it earns the right to add the new transactions, and pockets a
+          bitcoin reward. Pretty neat, right?
+        </span>
+      </>
+    ),
   };
-
-  const cardsRowStyle: CSSProperties = {
-    ...PAGE_STYLES.cardsContainer,
-    alignItems: "stretch",
-  };
-
-  const charIconProps = { size: 15, strokeWidth: 2 } as const;
 
   return (
     <PageTemplate title={t("nav.tree.howBitcoinWorks")}>
@@ -59,127 +127,100 @@ export const Bitcoin1Page: FC = () => {
             )}
           </ChapterPrelude>
           <p>
-            {fr
-              ? "Expliquer Bitcoin de façon simple et complète n'est pas si facile, tant c'est un objet compliqué à approcher parce qu'il couvre beaucoup de sujets différents."
-              : "Explaining Bitcoin in a simple yet complete way isn't easy: it's a tricky object to approach because it touches on so many different topics."}
-          </p>
-          <p>{fr ? "Bitcoin est trois choses à la fois :" : "Bitcoin is three things at once:"}</p>
-          <ol>
-            <li>{fr ? "Un logiciel" : "A piece of software"}</li>
-            <li>{fr ? "Un réseau" : "A network"}</li>
-            <li>{fr ? "Et une monnaie" : "And a currency"}</li>
-          </ol>
-          <p>
-            {fr
-              ? "Ensemble, ces éléments constituent l'essence de Bitcoin, c'est-à-dire une infrastructure publique de paiement."
-              : "Together, these pieces form the essence of Bitcoin: a public payment infrastructure."}
-          </p>
-          <p>
             {fr ? (
               <>
-                Cette infrastructure change la donne : elle permet à n'importe qui, n'importe où et
-                n'importe quand de pouvoir envoyer ou de recevoir de la valeur. Sans discrimination.
-                Sans tiers de confiance. Uniquement de pair-à-pair au sein d'un réseau décentralisé.
+                Un logiciel, un réseau, une monnaie. Ensemble, ça permet à n'importe qui, n'importe
+                où et n'importe quand d'envoyer et de recevoir de la valeur. Sans aucun
+                intermédiaire. Juste celui qui envoie, et celui qui reçoit.
               </>
             ) : (
               <>
-                This infrastructure changes the picture: it lets anyone, anywhere, at any time, send
-                or receive value. Without discrimination. Without any trusted third party. Purely
-                peer-to-peer, inside a decentralized network.
+                Software, a network, a currency. Together, they let anyone, anywhere, anytime send
+                and receive value. No middleman. Just the one who sends, and the one who receives.
               </>
             )}
           </p>
         </Block>
 
         <Block>
-          <p>
-            {fr ? (
-              <>
-                « Ok c'est bien, mais concrètement comment ça fonctionne ? » me demanderas-tu.{" "}
-                <br />
-                Et t'as bien raison de demander, c'est précisément ce que tu vas voir maintenant.
-              </>
-            ) : (
-              <>
-                "OK, sounds nice, but how does it actually work?" you're probably asking. <br />
-                And you're right to ask. That's exactly what you're about to see.
-              </>
-            )}
-          </p>
-
-          <Callout
-            title={fr ? "Comment ça fonctionne - Les nœuds simples" : "How it works - Simple nodes"}
-          >
-            <p>
-              {fr
-                ? "Bitcoin est un logiciel libre et gratuit qui tourne sur un ordinateur. N'importe qui peut en lire le code, le modifier, le faire tourner."
-                : "Bitcoin is a free and open-source software that runs on a computer. Anyone can read the code, modify it, run it."}
-            </p>
-            <p>
-              {fr
-                ? "Et ce logiciel permet d'avoir en quelque sorte des super-pouvoirs :"
-                : "And this software gives you a kind of superpower:"}
-            </p>
-            <ul>
-              <li>
+          {({ markComplete }) => (
+            <>
+              <ReaderAside mode="question">
+                {fr ? "Waouh, tout ça à la fois ?" : "Wow... it's all of that at once?"}
+              </ReaderAside>
+              <p>
+                {fr
+                  ? "Dans l'mille ! C'est justement pour cette raison qu'il y a tant de confusion quand on parle de Bitcoin. Laisse moi t'expliquer."
+                  : "Bingo! That's exactly why Bitcoin can be so confusing at first. Let's break it down."}
+              </p>
+              <p>
+                {fr
+                  ? "Bitcoin est un logiciel libre et gratuit qui tourne sur un ordinateur. N'importe qui peut en lire le code, l'améliorer, le partager, le faire tourner."
+                  : "Bitcoin is a free and open-source software that runs on a computer. Anyone can read the code, improve it, share it, run it."}
+              </p>
+              <p>
                 {fr ? (
                   <span>
-                    Accès à l'historique de toutes les transactions qui ont eu lieu sur le réseau
-                    depuis le départ, c'est-à-dire un grand livre de comptes appelé{" "}
-                    <Reference to={ROUTE_NAME.Bitcoin_3}>
-                      <i>blockchain</i>
-                    </Reference>
-                    .
+                    En utilisant ce logiciel tu deviens un acteur à part entière du réseau Bitcoin,
+                    appelé <i>nœud</i>.
                   </span>
                 ) : (
                   <span>
-                    Access to the full history of every transaction that ever happened on the
-                    network - a ledger called the{" "}
-                    <Reference to={ROUTE_NAME.Bitcoin_3}>
-                      <i>blockchain</i>
-                    </Reference>
-                    .
+                    By running this software you become a full participant of the Bitcoin network,
+                    called a <i>node</i>.
                   </span>
                 )}
-              </li>
-
-              <li>
-                {fr
-                  ? "Synchronisation avec ce grand livre de comptes en temps réel."
-                  : "Real-time synchronization with this ledger."}
-              </li>
-
-              <li>
-                {fr
-                  ? "Et capacité de veiller à la bonne application des règles en détectant d'éventuels acteurs malveillants."
-                  : "And the ability to enforce the rules by spotting any malicious actor."}
-              </li>
-            </ul>
-
-            <p>
-              {fr ? (
-                <span>
-                  En utilisant ce logiciel, on devient un acteur à part entière du réseau Bitcoin,
-                  appelé <i>nœud</i>.
-                </span>
-              ) : (
-                <span>
-                  By running this software, you become a full participant in the Bitcoin network,
-                  called a <i>node</i>.
-                </span>
-              )}
-            </p>
-            <BitcoinNodeDemo />
-          </Callout>
+              </p>
+              <BitcoinNodeDemo onComplete={markComplete} />
+            </>
+          )}
         </Block>
 
         <Block>
           <p>
             {fr
-              ? "Et le réseau Bitcoin, ce n'est rien de plus que plusieurs nœuds connectés entre eux."
-              : "And the Bitcoin network is nothing more than a bunch of nodes connected to each other."}
+              ? "Le réseau Bitcoin, ce n'est rien de plus que plusieurs nœuds."
+              : "And the Bitcoin network is nothing more than a bunch of nodes."}
           </p>
           <BitcoinNetworkMap />
+          <p>
+            {fr
+              ? "Et tous ces nœuds connectés au réseau, ils permettent de faire circuler quoi ? Une monnaie appelée bitcoin."
+              : "And what do all these nodes connected to the network make possible? The transfer of a currency called bitcoin."}
+          </p>
+          <p>
+            {fr
+              ? "Et voilà, les trois concepts sont calés."
+              : "And there you go, the three concepts are now clear."}
+          </p>
+        </Block>
+
+        <Block kind="tool">
+          {({ markComplete }) => (
+            <>
+              <Callout
+                title={fr ? "Comment fonctionnent les nœuds ?" : "How do Bitcoin nodes work?"}
+              >
+                <p>
+                  {fr
+                    ? "Tous les nœuds exécutent le même logiciel et appliquent les mêmes règles. Ensemble, ils font vivre le réseau Bitcoin, en le maintenant et en le faisant fonctionner."
+                    : "All nodes run the same software and follow the same rules. Together, they keep the Bitcoin network alive by maintaining it and making it work."}
+                </p>
+
+                <NodeSuperpowers
+                  title={
+                    fr ? "Les superpouvoirs des nœuds simples" : "The superpowers of simple nodes"
+                  }
+                  icon={<DoodleNodeLaptop size={headerIconSize} />}
+                  powers={nodePowers(false)}
+                  onComplete={markComplete}
+                />
+              </Callout>
+            </>
+          )}
+        </Block>
+
+        <Block>
           <p>{fr ? "Il existe plusieurs types de nœuds :" : "There are several types of nodes:"}</p>
           <ul>
             <li>
@@ -196,91 +237,53 @@ export const Bitcoin1Page: FC = () => {
           </ul>
         </Block>
 
-        <Block>
-          <Callout
-            title={fr ? "Comment ça fonctionne - Les nœuds-mineurs" : "How it works - Mining nodes"}
-          >
-            <p>
-              {fr ? (
-                <>
-                  Les nœuds-mineurs sont des nœuds comme les autres, mais avec un super-pouvoir en
-                  plus.
-                </>
-              ) : (
-                <>Mining nodes are regular nodes, but with one extra superpower.</>
-              )}
-            </p>
-            <p>
-              {fr ? (
-                <>
-                  En plus de stocker et vérifier les transactions, ils participent à une compétition
-                  permanente : ils utilisent leur puissance de calcul pour résoudre un calcul
-                  difficile à résoudre, mais simple à vérifier, appelé{" "}
-                  <Reference to={ROUTE_NAME.Bitcoin_4}>
-                    <i>preuve de travail</i>
-                  </Reference>
-                  .
-                </>
-              ) : (
-                <>
-                  On top of storing and verifying transactions, they enter a permanent race: they
-                  use their computing power to solve a calculation that's hard to crack but easy to
-                  check, called{" "}
-                  <Reference to={ROUTE_NAME.Bitcoin_4}>
-                    <i>proof of work</i>
-                  </Reference>
-                  .
-                </>
-              )}
-            </p>
-            <p>
-              {fr
-                ? "Le premier mineur qui trouve la solution gagne deux choses :"
-                : "The first miner to find the solution wins two things:"}
-            </p>
-            <ol>
-              <li>
+        <Block kind="tool">
+          {({ markComplete }) => (
+            <Callout
+              title={
+                fr ? "Comment ça fonctionne - Les nœuds-mineurs" : "How it works - Mining nodes"
+              }
+            >
+              <p>
                 {fr ? (
-                  <>Le droit d'ajouter une nouvelle page au grand livre de comptes.</>
+                  <>
+                    Les nœuds-mineurs sont des nœuds comme les autres, mais avec un super-pouvoir en
+                    plus.
+                  </>
                 ) : (
-                  <>The right to add a new page to the ledger.</>
+                  <>Mining nodes are regular nodes, but with one extra superpower.</>
                 )}
-              </li>
+              </p>
 
-              <li>
+              <NodeSuperpowers
+                title={
+                  fr ? "Les superpouvoirs des nœuds-mineurs" : "The superpowers of mining nodes"
+                }
+                icon={<DoodleMining size={headerIconSize} />}
+                powers={[...nodePowers(true), builderPower]}
+                cta={t("nodeSuperpowers.ctaLast")}
+                onComplete={markComplete}
+              />
+
+              <Disclosure title={fr ? "Note d'attention" : "A word of caution"}>
                 {fr ? (
-                  <>
-                    Une récompense en bitcoin composée de deux parts : les nouveaux bitcoins créés
-                    par le protocole (la seule façon dont de nouveaux bitcoins entrent en
-                    circulation) et les frais des transactions incluses dans le bloc.
-                  </>
+                  <p>
+                    La création de nouveaux bitcoins n'est pas illimitée : elle est divisée par deux
+                    tous les quatre ans environ et s'arrêtera définitivement à 21 millions de
+                    bitcoins au total. Cette mécanique fondamentale a un nom et tout un chapitre
+                    dédié : <Reference to={ROUTE_NAME.Bitcoin_5}>le halving</Reference>.
+                  </p>
                 ) : (
-                  <>
-                    A bitcoin reward made of two parts: the new bitcoins created by the protocol
-                    (the only way new bitcoins enter circulation) and the fees from the transactions
-                    included in the block.
-                  </>
+                  <p>
+                    The creation of new bitcoins isn't unlimited: it's cut in half roughly every
+                    four years and will stop for good at a total of 21 million bitcoins. This core
+                    mechanic has a name, and a chapter of its own:{" "}
+                    <Reference to={ROUTE_NAME.Bitcoin_5}>the halving</Reference>.
+                  </p>
                 )}
-              </li>
-            </ol>
-            <Disclosure title={fr ? "Note d'attention" : "A word of caution"}>
-              {fr ? (
-                <p>
-                  La création de nouveaux bitcoins n'est pas illimitée : elle est divisée par deux
-                  tous les quatre ans environ et s'arrêtera définitivement à 21 millions de bitcoins
-                  au total. Cette mécanique fondamentale a un nom et tout un chapitre dédié :{" "}
-                  <Reference to={ROUTE_NAME.Bitcoin_5}>le halving</Reference>.
-                </p>
-              ) : (
-                <p>
-                  The creation of new bitcoins isn't unlimited: it's cut in half roughly every four
-                  years and will stop for good at a total of 21 million bitcoins. This core mechanic
-                  has a name, and a chapter of its own:{" "}
-                  <Reference to={ROUTE_NAME.Bitcoin_5}>the halving</Reference>.
-                </p>
-              )}
-            </Disclosure>
-          </Callout>
+              </Disclosure>
+            </Callout>
+          )}
         </Block>
 
         <Block>
@@ -339,104 +342,15 @@ export const Bitcoin1Page: FC = () => {
               </>
             )}
           </p>
-        </Block>
-
-        <Block>
-          <p>
-            {fr
-              ? "Pour récapituler, voici les deux acteurs du réseau :"
-              : "To recap, here are the two players in the network:"}
-          </p>
-          <div style={cardsRowStyle}>
-            <div style={cardWrapperStyle}>
-              <IdentityCard
-                compact
-                fillHeight
-                name={fr ? "Nœud simple" : "Simple node"}
-                profile={fr ? "Le gardien des règles" : "The rule keeper"}
-                profilePicture={
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  >
-                    <Monitor size={48} strokeWidth={1.5} />
-                  </div>
-                }
-                characteristics={[
-                  {
-                    icon: <ScrollText {...charIconProps} />,
-                    label: fr ? "Son rôle :" : "Its role:",
-                    value: fr
-                      ? "Stocker une copie complète de la blockchain et vérifier que chaque transaction et chaque bloc respectent les règles du protocole."
-                      : "Store a complete copy of the blockchain and check that every transaction and every block follows the protocol's rules.",
-                  },
-                  {
-                    icon: <ShieldCheck {...charIconProps} />,
-                    label: fr ? "Son super-pouvoir :" : "Its superpower:",
-                    value: fr
-                      ? "Rejeter tout bloc invalide, même s'il provient du mineur le plus puissant du monde."
-                      : "Reject any invalid block, even from the most powerful miner on Earth.",
-                  },
-                  {
-                    icon: <Laptop {...charIconProps} />,
-                    label: fr ? "Accessible à tous :" : "Within reach of anyone:",
-                    value: fr
-                      ? "Un simple ordinateur et une connexion internet suffisent pour en faire tourner un."
-                      : "A regular computer and an internet connection are all it takes to run one.",
-                  },
-                ]}
-              />
-            </div>
-            <div style={cardWrapperStyle}>
-              <IdentityCard
-                compact
-                fillHeight
-                name={fr ? "Nœud mineur" : "Mining node"}
-                profile={fr ? "Le bâtisseur de blocs" : "The block builder"}
-                profilePicture={
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  >
-                    <Pickaxe size={48} strokeWidth={1.5} />
-                  </div>
-                }
-                characteristics={[
-                  {
-                    icon: <Blocks {...charIconProps} />,
-                    label: fr ? "Son rôle :" : "Its role:",
-                    value: fr
-                      ? "Proposer un nouveau bloc rempli de transactions en résolvant ce calcul le premier."
-                      : "Propose a new block full of transactions by being the first to solve that calculation.",
-                  },
-                  {
-                    icon: <Bitcoin {...charIconProps} />,
-                    label: fr ? "Son super-pouvoir :" : "Its superpower:",
-                    value: fr
-                      ? "Créer de nouveaux bitcoins à chaque bloc validé, en quantité qui diminue de moitié tous les quatre ans environ, jusqu'à un plafond total de 21 millions."
-                      : "Create new bitcoins with every validated block, in an amount that gets cut in half roughly every four years, up to a total cap of 21 million.",
-                  },
-                  {
-                    icon: <Cpu {...charIconProps} />,
-                    label: fr ? "Ce qu'il faut :" : "What it takes:",
-                    value: fr
-                      ? "Du matériel de calcul spécialisé (ASIC) et de l'électricité à moindre coût pour que cela soit rentable."
-                      : "Specialized computing hardware (ASIC) and cheap electricity to make it profitable.",
-                  },
-                ]}
-              />
-            </div>
-          </div>
+          <Illustration
+            src={synergyImg}
+            alt={
+              fr
+                ? "Nœuds simples et nœuds-mineurs travaillant en synergie"
+                : "Simple nodes and mining nodes working in synergy"
+            }
+            width="60%"
+          />
         </Block>
 
         <Block last>

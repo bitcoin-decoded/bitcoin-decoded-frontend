@@ -339,6 +339,9 @@ const fr = {
   "keyTrio.prompt": "Clique sur chaque élément. Tu vas voir comment tout s'articule.",
   "keyTrio.emptyState": "Choisis un élément pour découvrir son rôle.",
   "keyTrio.explored": "explorés",
+  "nodeSuperpowers.cta": "Clique et découvre chacun d'eux",
+  "nodeSuperpowers.ctaLast": "Clique et découvre le dernier superpouvoir",
+  "nodeSuperpowers.explored": "explorés",
 
   "signaturePlayground.title": "Nicolas réalise sa première transaction",
   "signaturePlayground.elementLabel": "Élément",
