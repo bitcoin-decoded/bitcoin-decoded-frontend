@@ -1,10 +1,11 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, getTypography, withOpacity } from "../../../Design";
+import { getTypography, withOpacity } from "../../../Design";
 import { fmtBTC, truncateHash } from "../../helpers";
 import type { WalletCardData } from "../types";
 
-import { Coins, KeyRound, Lock, MapPin } from "@icons";
+import { DoodleLoginKey } from "@doodle";
+import { Coins, MapPin } from "@icons";
 
 type Props = {
   card: WalletCardData;
@@ -21,6 +22,7 @@ type Props = {
   noUtxosLabel: string;
   utxoPrefix: string;
   accentColor: string;
+  secretColor: string;
   successColor: string;
   errorColor: string;
   basePrimaryText: string;
@@ -44,6 +46,7 @@ export const WalletCard: FC<Props> = ({
   noUtxosLabel,
   utxoPrefix,
   accentColor,
+  secretColor,
   successColor,
   errorColor,
   basePrimaryText,
@@ -52,6 +55,7 @@ export const WalletCard: FC<Props> = ({
   baseBackgroundSecondary,
 }) => {
   const typo = getTypography();
+  const hasUtxos = card.utxos.length > 0;
   const borderOpacity = highlightAsAnswer || highlightAsWrong || selected ? 0.55 : 0.2;
   const bgTint = highlightAsAnswer
     ? withOpacity(successColor, 0.06)
@@ -66,15 +70,8 @@ export const WalletCard: FC<Props> = ({
     flexDirection: "column",
     gap: "0.6rem",
     padding: "0.85rem 0.9rem",
-    borderRadius: 0,
     border: `1px solid ${withOpacity(
-      highlightAsAnswer
-        ? successColor
-        : highlightAsWrong
-          ? errorColor
-          : selected
-            ? accentColor
-            : baseBorderSecondary,
+      highlightAsAnswer ? successColor : highlightAsWrong ? errorColor : selected ? accentColor : baseBorderSecondary,
       borderOpacity,
     )}`,
     background: bgTint,
@@ -87,40 +84,23 @@ export const WalletCard: FC<Props> = ({
     color: "inherit",
   };
 
-  const headerRowStyle: CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "0.5rem",
-  };
-
   const headerLabelStyle: CSSProperties = {
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color: selected || highlightAsAnswer ? accentColor : withOpacity(baseTextSecondary, 0.7),
   };
 
   const utxoBadgeStyle: CSSProperties = {
+    ...typo.micro,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.25rem",
     padding: "0.2rem 0.4rem",
-    borderRadius: 0,
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     letterSpacing: "0.04em",
-    color: card.utxos.length > 0 ? accentColor : withOpacity(baseTextSecondary, 0.55),
-    background:
-      card.utxos.length > 0
-        ? withOpacity(accentColor, 0.1)
-        : withOpacity(baseBorderSecondary, 0.05),
-    border: `1px solid ${withOpacity(
-      card.utxos.length > 0 ? accentColor : baseBorderSecondary,
-      card.utxos.length > 0 ? 0.3 : 0.15,
-    )}`,
+    color: hasUtxos ? accentColor : withOpacity(baseTextSecondary, 0.55),
+    background: hasUtxos ? withOpacity(accentColor, 0.1) : withOpacity(baseBorderSecondary, 0.05),
+    border: `1px solid ${withOpacity(hasUtxos ? accentColor : baseBorderSecondary, hasUtxos ? 0.3 : 0.15)}`,
     whiteSpace: "nowrap",
   };
 
@@ -132,48 +112,43 @@ export const WalletCard: FC<Props> = ({
   };
 
   const fieldLabelStyle = (color: string): CSSProperties => ({
+    ...typo.micro,
     display: "inline-flex",
     alignItems: "center",
     gap: "0.3rem",
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
     fontVariant: "small-caps",
     letterSpacing: "0.06em",
     color,
   });
 
   const fieldValueStyle: CSSProperties = {
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
-    fontWeight: 500,
+    ...typo.micro,
     color: basePrimaryText,
     wordBreak: "break-all",
   };
 
   const utxoItemStyle: CSSProperties = {
+    ...typo.micro,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     gap: "0.4rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: typo.micro.fontSize,
     padding: "0.3rem 0.45rem",
-    borderRadius: 0,
     background: withOpacity(accentColor, 0.06),
     border: `1px solid ${withOpacity(accentColor, 0.18)}`,
     color: basePrimaryText,
   };
 
   const utxoEmptyStyle: CSSProperties = {
+    ...typo.micro,
     fontStyle: "italic",
-    fontSize: typo.micro.fontSize,
     color: withOpacity(baseTextSecondary, 0.6),
     padding: "0.3rem 0.1rem",
   };
 
   return (
     <button type="button" onClick={() => onSelect(card.id)} style={containerStyle}>
-      <div style={headerRowStyle}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
         <span style={headerLabelStyle}>
           {addressPrefix} #{index + 1}
         </span>
@@ -184,15 +159,15 @@ export const WalletCard: FC<Props> = ({
       </div>
 
       <div style={fieldRowStyle}>
-        <span style={fieldLabelStyle(withOpacity(errorColor, 0.85))}>
-          <Lock size={12} strokeWidth={2.5} /> {privateKeyLabel}
+        <span style={fieldLabelStyle(secretColor)}>
+          <DoodleLoginKey size={16} /> {privateKeyLabel}
         </span>
         <span style={fieldValueStyle}>{truncateHash(card.privateKey)}</span>
       </div>
 
       <div style={fieldRowStyle}>
         <span style={fieldLabelStyle(withOpacity(accentColor, 0.85))}>
-          <KeyRound size={12} strokeWidth={2.5} /> {publicKeyLabel}
+          <DoodleLoginKey size={16} /> {publicKeyLabel}
         </span>
         <span style={fieldValueStyle}>{truncateHash(card.publicKey)}</span>
       </div>
@@ -215,7 +190,7 @@ export const WalletCard: FC<Props> = ({
                 <span style={{ opacity: 0.7 }}>
                   {utxoPrefix} #{i + 1}
                 </span>
-                <span style={{ fontWeight: 500 }}>{fmtBTC(u.amount)}</span>
+                <span>{fmtBTC(u.amount)}</span>
               </div>
             ))}
           </div>
