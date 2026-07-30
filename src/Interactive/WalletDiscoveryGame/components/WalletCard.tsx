@@ -4,7 +4,8 @@ import { getTypography, withOpacity } from "../../../Design";
 import { fmtBTC, truncateHash } from "../../helpers";
 import type { WalletCardData } from "../types";
 
-import { Coins, KeyRound, Lock, MapPin } from "@icons";
+import { DoodleLoginKey } from "@doodle";
+import { Coins, MapPin } from "@icons";
 
 type Props = {
   card: WalletCardData;
@@ -159,14 +160,14 @@ export const WalletCard: FC<Props> = ({
 
       <div style={fieldRowStyle}>
         <span style={fieldLabelStyle(secretColor)}>
-          <Lock size={12} strokeWidth={2.5} /> {privateKeyLabel}
+          <DoodleLoginKey size={16} /> {privateKeyLabel}
         </span>
         <span style={fieldValueStyle}>{truncateHash(card.privateKey)}</span>
       </div>
 
       <div style={fieldRowStyle}>
         <span style={fieldLabelStyle(withOpacity(accentColor, 0.85))}>
-          <KeyRound size={12} strokeWidth={2.5} /> {publicKeyLabel}
+          <DoodleLoginKey size={16} /> {publicKeyLabel}
         </span>
         <span style={fieldValueStyle}>{truncateHash(card.publicKey)}</span>
       </div>
