@@ -49,24 +49,17 @@ export const Bitcoin2Page: FC = () => {
           </p>
           <p>
             {fr ? (
-              <>
-                Pourquoi Bitcoin existe-t-il ? <br />
-                Quel problème résout-il ?
-              </>
+              <>Pourquoi Bitcoin existe-t-il ? Quel problème résout-il ?</>
             ) : (
-              <>
-                Why does Bitcoin exist? <br />
-                What problem does it solve?
-              </>
+              <>Why does Bitcoin exist? What problem does it solve?</>
             )}
           </p>
-
-          <p>{fr ? "Regarde ce graphique." : "Take a look at this chart."}</p>
         </Block>
 
         <Block kind="tool">
           {({ markComplete }) => (
             <>
+              <p>{fr ? "Regarde ce graphique." : "Take a look at this chart."}</p>
               <M2MoneySupplyChart showTitle={isQuizSolved} />
               <Quiz
                 {...getQuizDataM2Explosion(language)}
@@ -80,6 +73,7 @@ export const Bitcoin2Page: FC = () => {
         </Block>
 
         <Block>
+          <M2MoneySupplyChart showTitle={isQuizSolved} />
           <p>{fr ? "Observe l'accélération." : "Notice the acceleration."}</p>
           <ol>
             <li>
@@ -136,6 +130,9 @@ export const Bitcoin2Page: FC = () => {
               </>
             )}
           </p>
+        </Block>
+
+        <Block>
           <p>
             {fr ? (
               <>
@@ -333,7 +330,16 @@ export const Bitcoin2Page: FC = () => {
         </Block>
 
         <Block kind="tool">
-          {({ markComplete }) => <TrustComparisonDemo onComplete={markComplete} />}
+          {({ markComplete }) => (
+            <>
+              <p>
+                {fr
+                  ? "Que se passe-t-il lorsque t'essaies de contourner les règles ? Compare une monnaie traditionnelle à Bitcoin."
+                  : "What happens when you try to bend the rules? Compare a traditional monetary system with Bitcoin."}
+              </p>
+              <TrustComparisonDemo onComplete={markComplete} />
+            </>
+          )}
         </Block>
 
         <Block last>
