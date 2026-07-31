@@ -33,8 +33,6 @@ export const Bitcoin1Page: FC = () => {
   const headerIconSize = isMobile ? 20 : 24;
   const synergyImg = fr ? synergyFr : synergyEn;
 
-  // The three superpowers a simple node holds. Reused as a dimmed recall on the
-  // mining side, where the fourth power is what actually gets highlighted.
   const nodePowers = (muted: boolean): Superpower[] => [
     {
       muted,
@@ -67,8 +65,6 @@ export const Bitcoin1Page: FC = () => {
     },
   ];
 
-  // The fourth power is what a mining node adds: the right to write new
-  // transactions into Bitcoin's history by winning the mining competition.
   const builderPower: Superpower = {
     highlight: true,
     icon: <DoodleContentWrite size={powerIconSize} />,
@@ -76,23 +72,24 @@ export const Bitcoin1Page: FC = () => {
     body: fr ? (
       <>
         <span style={{ display: "block" }}>
-          Pouvoir n°4 : certains nœuds ont un pouvoir supplémentaire : ils peuvent ajouter de
-          nouvelles transactions à l'historique de Bitcoin.
+          Pouvoir n°4 : ils peuvent ajouter de nouvelles transactions à l'historique de Bitcoin.
         </span>
         <span style={{ display: "block", marginTop: "0.85rem" }}>
           Ces nœuds particuliers sont appelés des mineurs. Pour obtenir ce droit, ils participent à
           une compétition.
         </span>
         <span style={{ display: "block", marginTop: "0.85rem" }}>
-          Le premier mineur qui gagne la compétition a le droit d'ajouter les nouvelles transactions
-          et reçoit une récompense en bitcoin. Génial non ?
+          Le premier mineur qui remporte cette compétition gagne le droit d'ajouter les nouvelles
+          transactions et reçoit une récompense en bitcoin. Génial non ?
+        </span>
+        <span style={{ display: "block", marginTop: "0.85rem" }}>
+          Ne t'inquiète pas, on verra plus tard comment tout cela fonctionne.
         </span>
       </>
     ) : (
       <>
         <span style={{ display: "block" }}>
-          Superpower #4: some nodes hold one extra power: they get to add brand-new transactions to
-          Bitcoin's history.
+          Superpower #4: they get to add brand-new transactions to Bitcoin's history.
         </span>
         <span style={{ display: "block", marginTop: "0.85rem" }}>
           These special nodes are called miners. To earn that right, they enter a competition.
@@ -100,6 +97,9 @@ export const Bitcoin1Page: FC = () => {
         <span style={{ display: "block", marginTop: "0.85rem" }}>
           The first miner to win it earns the right to add the new transactions, and pockets a
           bitcoin reward. Pretty neat, right?
+        </span>
+        <span style={{ display: "block", marginTop: "0.85rem" }}>
+          Don't worry, we'll see later how it actually works.
         </span>
       </>
     ),
@@ -179,8 +179,8 @@ export const Bitcoin1Page: FC = () => {
         <Block>
           <p>
             {fr
-              ? "Le réseau Bitcoin, ce n'est rien de plus que plusieurs nœuds."
-              : "And the Bitcoin network is nothing more than a bunch of nodes."}
+              ? "Le réseau Bitcoin, ce n'est rien de plus que des milliers de nœuds connectés entre eux, répartis partout dans le monde. C'est ce qu'on appelle un réseau décentralisé : aucune entité centrale qui contrôle l'ensemble."
+              : "The Bitcoin network is nothing more than thousands of nodes connected to each other, spread all around the world. This is what we call a decentralized network: no central entity controlling the entire system."}
           </p>
           <BitcoinNetworkMap />
           <p>
@@ -290,8 +290,8 @@ export const Bitcoin1Page: FC = () => {
           <p>
             {fr ? (
               <>
-                Lorsqu'un mineur remporte la compétition, il propose un nouveau bloc, c'est-à-dire un
-                ensemble de transactions, à ajouter à l'historique de Bitcoin.
+                Lorsqu'un mineur remporte la compétition, il propose un nouveau bloc, c'est-à-dire
+                un ensemble de transactions, à ajouter à l'historique de Bitcoin.
               </>
             ) : (
               <>
@@ -345,6 +345,8 @@ export const Bitcoin1Page: FC = () => {
               </>
             )}
           </p>
+        </Block>
+        <Block>
           <Illustration
             src={synergyImg}
             alt={
@@ -352,8 +354,11 @@ export const Bitcoin1Page: FC = () => {
                 ? "Nœuds simples et nœuds-mineurs travaillant en synergie"
                 : "Simple nodes and mining nodes working in synergy"
             }
-            width="60%"
+            width={isMobile ? "100%" : "60%"}
           />
+          <p>
+            {fr ? "Aucun acteur unique ne contrôle Bitcoin." : "No single entity controls Bitcoin."}
+          </p>
         </Block>
 
         <Block last>
@@ -364,22 +369,19 @@ export const Bitcoin1Page: FC = () => {
           </p>
           <p>
             {fr
-              ? "Aucune banque pour valider les transactions. Aucun gouvernement pour faire tourner le réseau. Aucun intermédiaire pour autoriser ton paiement. Juste du code, de l'électricité et des maths."
-              : "No bank to validate the transactions. No government to run the network. No middleman to authorize your payment. Just code, electricity, and math."}
+              ? "Aucune banque pour valider les transactions. Aucun gouvernement pour faire tourner le réseau. Aucun intermédiaire pour autoriser ton paiement. Juste du code, de l'électricité et des règles que tout le monde vérifie."
+              : "No bank to validate the transactions. No government to run the network. No middleman to authorize your payment. Just code, electricity, and rules that everyone can verify."}
           </p>
           <p>
             {fr ? (
               <>
-                Mais une question essentielle reste en suspens : pourquoi tout cela est-il si
-                important ?
-                <br />
-                Pourquoi l'humanité aurait-elle besoin d'une monnaie que personne ne contrôle ?
+                Mais une question essentielle reste en suspens : pourquoi avoir besoin d'une monnaie
+                que personne ne contrôle ?
               </>
             ) : (
               <>
-                But one crucial question still hangs in the air: why does all of this matter?
-                <br />
-                Why would humanity need a currency that nobody controls?
+                But one crucial question still hangs in the air: why would we need a currency that
+                nobody controls?
               </>
             )}
           </p>
