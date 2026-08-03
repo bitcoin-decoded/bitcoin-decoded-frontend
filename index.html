@@ -15,6 +15,10 @@
           if (localStorage.getItem("theme") === "light") theme = "light";
         } catch (e) {}
         root.dataset.theme = theme;
+        /* Paint the themed background on the root immediately, so even a slow
+           network (external CSS not in yet) never shows a white flash while the
+           app initialises. Must stay in sync with the body colours in index.css. */
+        root.style.backgroundColor = theme === "light" ? "#faf8f2" : "#101010";
         if (theme === "light") {
           root.dataset.themePending = "";
           setTimeout(function () {

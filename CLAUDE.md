@@ -48,16 +48,22 @@ Certains chapitres se lisent **bloc par bloc** (révélation progressive). Expos
 
 - **Câblage** : envelopper la prose **existante** (jamais déplacée vers `data`/`fr.ts`, rien retiré) dans `<BlockReader chapterId={ROUTE_NAME.X}>` + `<Block>` ordonnés ; ajouter la route à `BLOCK_READING_CHAPTERS` ; `npm run audit:reading-time` → recopier dans `PAGE_METADATA`. Le **découpage** (frontières des blocs, lesquels sont `tool`) est fourni par l'utilisateur, on ne le réinvente pas.
 - **Bloc-outil** (`kind="tool"`) : verrouille « Bloc suivant » tant que la manipulation - qui **est** l'action pédagogique - n'est pas faite. Bloc en render-prop `({ markComplete }) => …` ; on câble `markComplete` au signal `onComplete` du composant à son état terminal (simulateur lancé, `Quiz` via `onCorrectAnswer`, etc.). Exploration obligatoire « x/N » via primitives partagées `useExplorationGate` + `ExploredCounter` (`Design`). Ne pas verrouiller si la manipulation n'est pas l'action (alors pas de `kind="tool"`).
-- **Persistance** : `localStorage` `bd:reading:<chapterId>` = `{maxRevealed, current, done[], finished, blockCount}` (garde sur `blockCount`, discipline try/catch). La fin de chapitre est célébrée par le **badge** du chapitre (cf. Achievements), pas d'overlay générique.
+- **Persistance** : lue/écrite via le store `UserData` (`useUserData().getChapterReading/saveChapterReading`), plus par `localStorage` en direct. Forme `{maxRevealed, current, done[], finished, lastVisitedBlock, blockCount}`, garde sur `blockCount`. Architecture et migration backend : `docs/user-data.md`. La fin de chapitre est célébrée par le **badge** du chapitre (cf. Achievements), pas d'overlay générique.
 - Détails (jalons `BlockMilestones`, `BlockShell`, animations `index.css`) : lire le code.
 
 ## Badges - `src/Achievements/`
 
 Gamification inter-chapitres : un badge se débloque **une seule fois**, à la 1re complétion d'un chapitre et à la 1re validation d'un quiz de module. Entrée header → page `Badges` (collection groupée par module, médailles obtenues vs verrouillées).
 
-- `useBadgesStore` : état + persistance `localStorage` `bd:badges` ; `award(id)` **idempotent** + file de célébration. `useBadges` = consommateur du contexte ; `BadgeProvider` monté autour du shell (`App`).
+- État porté par le store `UserData` (source unique, cf. `docs/user-data.md`) ; `useBadges` est un **adaptateur** au-dessus de `useUserData` qui garde la même API (`isEarned`, `award(id)` idempotent, `earnedCount`, file de célébration). La célébration est montée via `BadgeCelebration` dans le shell. Plus de `BadgeProvider`/`useBadgesStore`.
 - Octroi : `BlockReader` appelle `award(chapterId)` sur `finished` ; les pages de synthèse appellent `award(MODULE_QUIZ_BADGE_ID.<module>)` dans `onPass`. Overlay `BadgeUnlockOverlay` (apparition→disparition, porté dans `document.body`).
 - Catalogue `BADGES` (~22) : id d'un badge chapitre = son `ROUTE_NAME`, nom = clé `nav.tree.*` du chapitre.
+
+## Données utilisateur - `src/UserData/`
+
+Source unique de l'état utilisateur (badges + progression de lecture), cycle `loading → ready → error` : **un seul chargement** au démarrage derrière l'abstraction `UserRepository` (aujourd'hui `localStorage`, demain un backend). Les composants ne rendent que quand `ready` ; le gate affiche sinon un loader global ou un écran d'erreur (timeout + « Réessayer »). `useBadges` et `useBlockReader` sont des **consommateurs**, ils ne touchent jamais au stockage.
+
+`docs/user-data.md` décrit l'architecture **et surtout comment migrer vers le backend** (réimplémenter `UserRepository`, une ligne dans `App`). **Le lire avant de toucher** à `src/UserData/`, `useBadges` ou la persistance de lecture.
 
 ## Quiz de synthèse - `src/Interactive/SynthesisQuiz/`
 

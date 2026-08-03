@@ -1,2 +1,1 @@
-export { BadgeContext, useBadges } from "./useBadges";
-export { useBadgesStore } from "./useBadgesStore";
+export { useBadges } from "./useBadges";
