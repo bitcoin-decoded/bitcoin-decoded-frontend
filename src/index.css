@@ -278,6 +278,23 @@ body {
   animation: chainFieldReveal 0.75s var(--ease-smooth) both;
 }
 
+/* User-data init loader. The reveal is used with a delay and `both` fill, so the
+   spinner stays invisible for the first beat and never flashes on an instant
+   load; the spin is the ring itself. */
+@keyframes userDataLoaderReveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes userDataSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Marker highlight - the stroke is laid down left to right, like a felt tip */
 @keyframes markerSweep {
   from {

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { type StoredChapterProgress, useUserData } from "../../../UserData";
 import {
   getArrivalAnchor,
   getChapterState,
@@ -20,48 +21,38 @@ type Reveal = { index: number; phase: RevealPhase };
 const REVEAL_SCROLL_MS = 750;
 const HEADER_OFFSET_PX = 104;
 
-const storageKey = (chapterId: string) => `bd:reading:${chapterId}`;
-
-const readProgress = (chapterId: string, blockCount: number): ReadingProgress | null => {
-  try {
-    const raw = localStorage.getItem(storageKey(chapterId));
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as Partial<ReadingProgress> & {
-      blockCount?: number;
-      lastVisitedBlock?: number | null;
-    };
-    if (
-      typeof parsed.maxRevealed !== "number" ||
-      typeof parsed.current !== "number" ||
-      typeof parsed.finished !== "boolean" ||
-      !Array.isArray(parsed.done) ||
-      parsed.blockCount !== blockCount
-    ) {
-      return null;
-    }
-    const clamp = (n: number) => Math.max(0, Math.min(blockCount - 1, Math.floor(n)));
-    const lastVisitedBlock = readLastVisitedBlock({
-      maxRevealed: parsed.maxRevealed,
-      current: parsed.current,
-      done: parsed.done.filter((d): d is number => typeof d === "number"),
-      finished: parsed.finished,
-      lastVisitedBlock: parsed.lastVisitedBlock,
-    });
-    return {
-      maxRevealed: clamp(parsed.maxRevealed),
-      current: clamp(parsed.current),
-      done: parsed.done.filter((d): d is number => typeof d === "number"),
-      finished: parsed.finished,
-      lastVisitedBlock: lastVisitedBlock === null ? null : clamp(lastVisitedBlock),
-    };
-  } catch {
-    return null;
-  }
+// Turns the persisted snapshot into runtime state: a snapshot saved against a
+// different block count (chapter re-split since) is dropped, the rest clamped
+// into range. The read/write source is the user-data store, not localStorage.
+const normalizeStored = (
+  stored: StoredChapterProgress | undefined,
+  blockCount: number,
+): ReadingProgress | null => {
+  if (!stored || stored.blockCount !== blockCount) return null;
+  const clamp = (n: number) => Math.max(0, Math.min(blockCount - 1, Math.floor(n)));
+  const lastVisitedBlock = readLastVisitedBlock({
+    maxRevealed: stored.maxRevealed,
+    current: stored.current,
+    done: stored.done,
+    finished: stored.finished,
+    lastVisitedBlock: stored.lastVisitedBlock,
+  });
+  return {
+    maxRevealed: clamp(stored.maxRevealed),
+    current: clamp(stored.current),
+    done: stored.done,
+    finished: stored.finished,
+    lastVisitedBlock: lastVisitedBlock === null ? null : clamp(lastVisitedBlock),
+  };
 };
 
 export const useBlockReader = ({ chapterId, blockCount, badgeEarned }: Options) => {
   const lastIndex = Math.max(0, blockCount - 1);
-  const restored = useMemo(() => readProgress(chapterId, blockCount), [chapterId, blockCount]);
+  const { getChapterReading, saveChapterReading } = useUserData();
+  const restored = useMemo(
+    () => normalizeStored(getChapterReading(chapterId), blockCount),
+    [chapterId, blockCount, getChapterReading],
+  );
 
   const [maxRevealed, setMaxRevealed] = useState(() => restored?.maxRevealed ?? 0);
   const [current, setCurrent] = useState(() => restored?.current ?? 0);
@@ -81,15 +72,25 @@ export const useBlockReader = ({ chapterId, blockCount, badgeEarned }: Options) 
   const hasProgress = lastVisitedBlock !== null || maxRevealed > 0 || done.length > 0 || finished;
   useEffect(() => {
     if (!hasProgress) return;
-    try {
-      localStorage.setItem(
-        storageKey(chapterId),
-        JSON.stringify({ maxRevealed, current, done, finished, blockCount, lastVisitedBlock }),
-      );
-    } catch {
-      // storage full or unavailable - silently ignore
-    }
-  }, [chapterId, maxRevealed, current, done, finished, blockCount, lastVisitedBlock, hasProgress]);
+    saveChapterReading(chapterId, {
+      maxRevealed,
+      current,
+      done,
+      finished,
+      lastVisitedBlock,
+      blockCount,
+    });
+  }, [
+    chapterId,
+    maxRevealed,
+    current,
+    done,
+    finished,
+    blockCount,
+    lastVisitedBlock,
+    hasProgress,
+    saveChapterReading,
+  ]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const blockEl = useCallback(
@@ -108,10 +109,7 @@ export const useBlockReader = ({ chapterId, blockCount, badgeEarned }: Options) 
   );
 
   const arrival = useRef(
-    getArrivalAnchor(
-      getChapterState({ badgeEarned, lastVisitedBlock }),
-      lastVisitedBlock,
-    ),
+    getArrivalAnchor(getChapterState({ badgeEarned, lastVisitedBlock }), lastVisitedBlock),
   );
 
   const anchored = useRef(false);
