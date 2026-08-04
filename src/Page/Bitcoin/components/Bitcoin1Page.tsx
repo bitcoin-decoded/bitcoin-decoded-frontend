@@ -29,7 +29,7 @@ export const Bitcoin1Page: FC = () => {
   const fr = language === "fr";
   const isMobile = useBreakpoint() === "mobile";
 
-  const powerIconSize = isMobile ? 26 : 30;
+  const powerIconSize = isMobile ? 30 : 34;
   const headerIconSize = isMobile ? 20 : 24;
   const synergyImg = fr ? synergyFr : synergyEn;
 

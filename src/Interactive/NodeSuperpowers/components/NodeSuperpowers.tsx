@@ -36,7 +36,7 @@ export const NodeSuperpowers: FC<Props> = ({ title, icon, powers, cta, onComplet
 
   const gated = onComplete !== undefined;
   const requiredCount = powers.filter((power) => !power.muted).length;
-  const { openIndex, toggle, exploredCount } = useNodeSuperpowers({
+  const { openIndex, toggle, exploredCount, discovered } = useNodeSuperpowers({
     requiredExplored: gated ? requiredCount : 0,
     onComplete,
   });
@@ -121,6 +121,7 @@ export const NodeSuperpowers: FC<Props> = ({ title, icon, powers, cta, onComplet
             index={index}
             superpower={power}
             active={openIndex === index}
+            revealed={openIndex === index || discovered.has(index) || Boolean(power.muted)}
             dimmed={openIndex !== null && openIndex !== index}
             accent={accent}
             onSelect={() => toggle(index, !power.muted)}
