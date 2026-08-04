@@ -58,12 +58,15 @@ export const SuperpowerTile: FC<Props> = ({
       ? withOpacity(accent, 0.06)
       : softWash;
 
+  // Two stacked zones of fixed height, so the icon of every tile sits on the
+  // same line and the labels start on the same line, whatever the icon count or
+  // how many lines the label wraps to.
   const tileStyle: CSSProperties = {
     position: "relative",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     gap: isMobile ? "0.55rem" : "0.7rem",
     minHeight: isMobile ? "7rem" : "8rem",
     padding: isMobile ? "1.6rem 0.7rem 1rem" : "1.8rem 0.85rem 1.15rem",
@@ -91,19 +94,27 @@ export const SuperpowerTile: FC<Props> = ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    height: isMobile ? "2.1rem" : "2.4rem",
     gap: "0.3rem",
     color: active || isHighlight ? accent : withOpacity(accent, 0.82),
     stroke: "currentColor",
     strokeWidth: 0.5,
     transition: "color 0.35s var(--ease-smooth)",
+    animation: "superpowerReveal 0.4s var(--ease-smooth) both",
   };
 
   const labelStyle: CSSProperties = {
     ...typo.label,
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    width: "100%",
+    minHeight: "2.4em",
     fontVariant: "small-caps",
     lineHeight: 1.2,
     color: active ? colors.base.text.primary : colors.base.text.secondary,
     transition: "color 0.35s var(--ease-smooth)",
+    animation: "superpowerReveal 0.4s var(--ease-smooth) both",
   };
 
   return (
@@ -111,10 +122,12 @@ export const SuperpowerTile: FC<Props> = ({
       <span style={numeralStyle}>
         <LedgerNumeral value={index + 1} size={isMobile ? 22 : 24} accent={accent} muted={isMuted} />
       </span>
-      <span style={iconRowStyle}>
+      <span key={revealed ? "icon" : "search"} style={iconRowStyle}>
         {revealed ? superpower.icon : <DoodleSearchMagnifier size={isMobile ? 30 : 34} />}
       </span>
-      <span style={labelStyle}>{superpower.label}</span>
+      <span key={revealed ? "label" : "index"} style={labelStyle}>
+        {revealed ? superpower.label : `#${index + 1}`}
+      </span>
     </button>
   );
 };
