@@ -10,10 +10,13 @@ import {
 } from "../../../Design";
 import type { Superpower } from "../types";
 
+import { DoodleSearchMagnifier } from "@doodle";
+
 type Props = {
   index: number;
   superpower: Superpower;
   active: boolean;
+  revealed: boolean;
   dimmed: boolean;
   accent: string;
   onSelect: () => void;
@@ -23,6 +26,7 @@ export const SuperpowerTile: FC<Props> = ({
   index,
   superpower,
   active,
+  revealed,
   dimmed,
   accent,
   onSelect,
@@ -80,12 +84,17 @@ export const SuperpowerTile: FC<Props> = ({
     left: isMobile ? "0.45rem" : "0.55rem",
   };
 
+  // A hairline stroke in the icon colour thickens the freehand lines a touch, so
+  // the card icons carry the same visual weight as the larger ones in
+  // BitcoinNodeDemo. Fill-based doodles have no stroke otherwise.
   const iconRowStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     gap: "0.3rem",
     color: active || isHighlight ? accent : withOpacity(accent, 0.82),
+    stroke: "currentColor",
+    strokeWidth: 0.5,
     transition: "color 0.35s var(--ease-smooth)",
   };
 
@@ -102,7 +111,9 @@ export const SuperpowerTile: FC<Props> = ({
       <span style={numeralStyle}>
         <LedgerNumeral value={index + 1} size={isMobile ? 22 : 24} accent={accent} muted={isMuted} />
       </span>
-      <span style={iconRowStyle}>{superpower.icon}</span>
+      <span style={iconRowStyle}>
+        {revealed ? superpower.icon : <DoodleSearchMagnifier size={isMobile ? 30 : 34} />}
+      </span>
       <span style={labelStyle}>{superpower.label}</span>
     </button>
   );

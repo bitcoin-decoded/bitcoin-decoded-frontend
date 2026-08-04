@@ -71,6 +71,7 @@ export { DoodleQuestion } from "./DoodleQuestion";
 export { DoodleQuestionMark } from "./DoodleQuestionMark";
 export { DoodleRadioactive } from "./DoodleRadioactive";
 export { DoodleSafe } from "./DoodleSafe";
+export { DoodleSearchMagnifier } from "./DoodleSearchMagnifier";
 export { DoodleSeedling } from "./DoodleSeedling";
 export { DoodleShield } from "./DoodleShield";
 export { DoodleShieldWall } from "./DoodleShieldWall";
