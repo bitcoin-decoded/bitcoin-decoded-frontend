@@ -9,7 +9,6 @@ import {
   withOpacity,
 } from "../../../Design";
 import { FrText } from "../../../I18n";
-import { useIllustration } from "../hooks";
 
 type IllustrationProps = {
   src?: string;
@@ -19,6 +18,12 @@ type IllustrationProps = {
   caption?: string;
   margin?: string;
 };
+
+// Width is the primary bound (the `width` prop on desktop/tablet, the full column
+// on mobile); max-height is only an overflow guard so a very tall portrait never
+// exceeds the viewport. The image keeps `width/height: auto`, so both bounds scale
+// it as one unit, aspect preserved, and the fit-content frame hugs it on both axes.
+const MAX_HEIGHT = "min(90vh, 48rem)";
 
 export const Illustration: FC<IllustrationProps> = ({
   src,
@@ -30,55 +35,58 @@ export const Illustration: FC<IllustrationProps> = ({
 }) => {
   const typo = getTypography();
   const { theme, colors } = usePageTheme();
-  const { isHovered, containerHandlers } = useIllustration();
   const isMobile = useBreakpoint() === "mobile";
 
   const gold = getBrandGold(theme);
   const cornerSize = isMobile ? 10 : 14;
   const bracketInset = 5;
 
-  const containerStyle: CSSProperties = {
+  // maxWidth sits on the figure so it sizes correctly as a flex item when pages
+  // lay two illustrations side by side (PAGE_STYLES.illustrationsWrapper); the
+  // frame then hugs the image within that width.
+  const figureStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     margin,
     width: "100%",
-    maxWidth: isMobile ? "min(100%, 22rem)" : width,
+    maxWidth: isMobile ? "100%" : width,
   };
 
   const frameWrapStyle: CSSProperties = {
     position: "relative",
     padding: bracketInset,
-    width: isMobile && src ? "fit-content" : "100%",
+    width: "fit-content",
     maxWidth: "100%",
-    cursor: "pointer",
   };
 
   const frameStyle: CSSProperties = {
-    width: "100%",
-    height: "auto",
     borderRadius: 0,
-    border: `1px solid ${withOpacity(gold, isHovered ? 0.4 : 0.22)}`,
-    // Transparent, so the frame takes whatever it is dropped on. The
-    // illustrations carry their own alpha, and painting `background.secondary`
-    // here put a near-black rectangle inside the tinted wash of a callout. On
-    // the reading page the two are the same colour anyway, so nothing changes
-    // where it already looked right.
+    border: `1px solid ${withOpacity(gold, 0.22)}`,
+    // Transparent, so the frame takes whatever it is dropped on. The illustrations
+    // carry their own alpha, and painting a surface colour here put a near-black
+    // rectangle inside the tinted wash of a callout.
     backgroundColor: "transparent",
     overflow: "hidden",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    transition: "border-color 0.3s var(--ease-smooth)",
+  };
+
+  const mediaStyle: CSSProperties = {
+    display: "block",
+    width: "auto",
+    height: "auto",
+    maxWidth: "100%",
+    maxHeight: MAX_HEIGHT,
   };
 
   const corners = (): ReactNode => {
-    const s = `${BRAND.figures.ruleThickness}px solid ${withOpacity(gold, isHovered ? 0.9 : 0.55)}`;
+    const s = `${BRAND.figures.ruleThickness}px solid ${withOpacity(gold, 0.55)}`;
     const base: CSSProperties = {
       position: "absolute",
       width: cornerSize,
       height: cornerSize,
-      transition: "border-color 0.3s var(--ease-smooth)",
       pointerEvents: "none",
     };
     return (
@@ -91,33 +99,6 @@ export const Illustration: FC<IllustrationProps> = ({
     );
   };
 
-  const contentTransitionStyle: CSSProperties = {
-    width: "100%",
-    height: "auto",
-    display: "block",
-    objectFit: "cover",
-    filter:
-      theme === "dark"
-        ? isHovered
-          ? "brightness(1)"
-          : "brightness(0.9)"
-        : isHovered
-          ? "brightness(0.95)"
-          : "none",
-  };
-
-  const imgStyle: CSSProperties = {
-    ...contentTransitionStyle,
-    ...(isMobile
-      ? {
-          width: "auto",
-          maxWidth: "100%",
-          maxHeight: "min(38vh, 15rem)",
-          objectFit: "contain",
-        }
-      : {}),
-  };
-
   const captionStyle: CSSProperties = {
     marginTop: "0.75rem",
     fontSize: typo.label.fontSize,
@@ -125,29 +106,18 @@ export const Illustration: FC<IllustrationProps> = ({
     color: colors.base.text.secondary,
     fontStyle: "italic",
     textAlign: "center",
-    maxWidth: isMobile ? "100%" : "85%",
-    paddingLeft: isMobile ? "0.25rem" : 0,
-    paddingRight: isMobile ? "0.25rem" : 0,
+    maxWidth: "85%",
   };
 
   return (
-    <figure style={containerStyle}>
-      <div style={frameWrapStyle} {...containerHandlers}>
+    <figure style={figureStyle}>
+      <div style={frameWrapStyle}>
         {corners()}
         <div style={frameStyle}>
           {src ? (
-            <img src={src} alt={alt || "Illustration"} style={imgStyle} />
+            <img src={src} alt={alt || "Illustration"} style={mediaStyle} />
           ) : (
-            <div
-              style={{
-                ...contentTransitionStyle,
-                display: "flex",
-                justifyContent: "center",
-                padding: "1rem",
-              }}
-            >
-              {children}
-            </div>
+            <div style={{ ...mediaStyle, padding: "1rem" }}>{children}</div>
           )}
         </div>
       </div>

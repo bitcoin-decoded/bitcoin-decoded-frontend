@@ -354,7 +354,7 @@ export const Bitcoin1Page: FC = () => {
                 ? "Nœuds simples et nœuds-mineurs travaillant en synergie"
                 : "Simple nodes and mining nodes working in synergy"
             }
-            width={isMobile ? "100%" : "60%"}
+            width="60%"
           />
           <p>
             {fr ? "Aucun acteur unique ne contrôle Bitcoin." : "No single entity controls Bitcoin."}

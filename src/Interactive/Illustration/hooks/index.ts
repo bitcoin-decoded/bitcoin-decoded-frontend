@@ -1,1 +1,0 @@
-export { useIllustration } from "./useIllustration";
