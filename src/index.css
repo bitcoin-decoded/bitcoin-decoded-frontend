@@ -278,6 +278,20 @@ body {
   animation: chainFieldReveal 0.75s var(--ease-smooth) both;
 }
 
+/* Superpower tile: the magnifier gives way to the power icon (and #n to its
+   name) on a soft fade, so the reveal is something the reader watches settle
+   rather than a hard swap. */
+@keyframes superpowerReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* User-data init loader. The reveal is used with a delay and `both` fill, so the
    spinner stays invisible for the first beat and never flashes on an instant
    load; the spin is the ring itself. */
