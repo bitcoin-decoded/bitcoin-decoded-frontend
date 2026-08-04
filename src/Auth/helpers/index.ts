@@ -1,0 +1,9 @@
+export { buildSignMessage } from "./buildSignMessage";
+export { decryptVault } from "./decryptVault";
+export { deriveKeyPair } from "./deriveKeyPair";
+export { encryptVault } from "./encryptVault";
+export { generateMnemonic } from "./generateMnemonic";
+export { parseVaultFile } from "./parseVaultFile";
+export { signChallenge } from "./signChallenge";
+export { validateMnemonic } from "./validateMnemonic";
+export { verifyChallenge } from "./verifyChallenge";
