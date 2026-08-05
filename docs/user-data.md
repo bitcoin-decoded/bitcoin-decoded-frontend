@@ -75,60 +75,37 @@ Le repository localStorage écrit tout sous une seule clé `bd:userdata`. À la 
 
 ---
 
-## Migrer vers le backend
+## Le backend, tel que branché (Phase 3)
 
-C'est **toute** la migration : écrire un `UserRepository` et le passer au provider. Rien au-dessus de ce type ne bouge.
+La bascule promise a eu lieu, **sans toucher une ligne au-dessus de `UserRepository`**. Le défaut du provider n'est plus `createLocalRepository` mais **`createDefaultRepository`** : un **repository composite** (invité → `localStorage`, connecté → API du compte). `App.tsx` n'a pas bougé.
 
-### 1. Implémenter le repository API
+### Les pièces
 
-Dans `src/UserData/helpers/createApiRepository.ts` :
+| Fichier | Rôle |
+| --- | --- |
+| `helpers/createApiRepository.ts` | `load` = `GET /api/progress` (un **401** devient `SessionExpiredError`), `save` **débouncé** (`PROGRESS_SAVE_DEBOUNCE_MS`) avec **flush `keepalive` sur `pagehide`/`visibilitychange`** |
+| `helpers/toProgressItems.ts` / `fromProgressItems.ts` | L'**adaptateur** : le back stocke des lignes normalisées `progress(item_id, item_type, status, score, data)` (CDC §5.3), pas un blob `{badges, readingProgress}`. Un badge → `earned` (date dans `data.at`) ; un chapitre → statut dérivé + `StoredChapterProgress` dans `data` |
+| `helpers/createCompositeRepository.ts` | Sélection invité/connecté par **flags injectés** (`hasAccount` / `migrated`, donc testable sans navigateur), avec la migration au 1er login |
+| `helpers/createDefaultRepository.ts` | Câble les flags sur `localStorage` (`HAS_ACCOUNT_KEY`, `PROGRESS_MIGRATED_KEY`) et assemble le composite. Seul endroit qui touche au stockage |
+| `helpers/mergeUserData.ts` | Fusion **non-régressive** côté client (finished gagne, sinon `maxRevealed` max ; badge = date la plus ancienne), miroir de la règle serveur |
 
-```ts
-import type { UserData, UserRepository } from "../types";
+### La logique du composite
 
-export const createApiRepository = (): UserRepository => ({
-  load: async (signal) => {
-    const res = await fetch("/api/me", { signal, credentials: "include" });
-    if (!res.ok) throw new Error(`GET /api/me → ${res.status}`);
-    return (await res.json()) as UserData; // le back renvoie { badges, readingProgress }
-  },
-  save: (data) => {
-    // fire-and-forget ; débounce + sendBeacon sur unload à ajouter ici
-    void fetch("/api/me", {
-      method: "PUT",
-      credentials: "include",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(data),
-    });
-  },
-});
-```
+- **Pas de compte sur l'appareil** (`hasAccount` faux) → `local` seul, **aucun appel réseau**. C'est le cas de tout invité, donc de tout le monde tant que la Phase 4 (UI) n'a pas posé le flag.
+- **Compte présent** → `api.load()`. Au **premier** chargement authentifié, la progression locale (invité) est **fondue dans le compte** : l'union (`mergeUserData`) est renvoyée immédiatement (rien ne paraît perdu) puis poussée au serveur, dont la fusion non-régressive rend le push idempotent (CDC §8). Ensuite, le serveur fait foi.
+- **Session expirée** (`SessionExpiredError`) → repli sur `local` (la Phase 4 remplacera ce repli par l'écran de déverrouillage). Une **vraie erreur réseau** remonte, elle, à l'écran d'erreur d'init (timeout + « Réessayer »).
+- **`save`** écrit toujours dans `local` (cache chaud) et, si authentifié, dans l'`api`.
 
-Puis l'exporter dans `src/UserData/helpers/index.ts`.
+### Ce que la Phase 4 (UI) branchera dessus
 
-### 2. L'injecter (le seul changement de câblage)
+- Poser / retirer `HAS_ACCOUNT_KEY` à la création / restauration / effacement d'un accès. C'est le seul signal qui active l'API.
+- L'écran de déverrouillage (le repli local sur session expirée devient un prompt mot de passe).
+- Rien d'autre côté `UserData` : l'adaptateur, le composite et la migration sont déjà là et testés (`progressAdapter.test.ts`, `mergeUserData.test.ts`, `createCompositeRepository.test.ts`).
 
-Dans `src/App.tsx` :
+### Ce qui n'a pas bougé
 
-```tsx
-<UserDataProvider repository={createApiRepository()}>
-```
-
-Le provider accepte déjà `repository?` et retombe sur `createLocalRepository()` par défaut. **C'est la seule ligne applicative à changer.**
-
-### Ce qui marche déjà sans y toucher
-
-- Le lifecycle `loading/ready/error`, le **timeout** (l'`AbortSignal` est passé à `load`) et le **retry** : prévus pour un réseau lent ou en échec.
-- Le **gate**, le **loader**, l'**écran d'erreur** : inchangés.
-- Tous les consommateurs : `useBadges`, `useBlockReader`, `useChapterProgression`, la page Badges. Aucune signature ne bouge.
-- La forme d'échange est déjà le contrat d'API : `GET /me` → `UserData`, `PUT /me` ← `UserData`.
-
-### Les points à trancher côté backend
-
-- **Auth.** Le repository porte le token / les cookies (`credentials: "include"` ci-dessus). Un 401 (non connecté) : soit renvoyer un snapshot vide (mode anonyme), soit déclencher un flux de login. À décider selon le produit.
-- **Anonyme + connecté.** Option propre : un repository composite qui lit le `localStorage` pour un invité et bascule sur l'API après connexion (et pousse la progression locale au premier login). Le point d'injection reste unique.
-- **Granularité des écritures.** Aujourd'hui `save(snapshotComplet)`. Si l'API préfère un `PATCH` ciblé (juste les badges, juste un chapitre), on **fait évoluer le type `UserRepository`** (ajouter des méthodes) et les mutateurs de `useUserDataStore` — c'est le seul endroit qui appelle `save`. Les composants ne bougent toujours pas.
-- **Fiabilité de la sauvegarde.** Un `fetch` non attendu peut être coupé par un unload. Débouncer dans le repository et flusher via `navigator.sendBeacon` sur `visibilitychange`/`pagehide`.
+- Le lifecycle `loading/ready/error`, le **timeout** (`AbortSignal` passé à `load`), le **retry**, le **gate**, le **loader**, l'écran d'erreur.
+- Tous les consommateurs : `useBadges`, `useBlockReader`, `useChapterProgression`, la page Badges. Aucune signature ne change.
 
 ---
 
