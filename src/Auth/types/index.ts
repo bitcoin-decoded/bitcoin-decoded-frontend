@@ -1,3 +1,3 @@
-export type { ChallengeMessage } from "./ChallengeMessage";
-export type { KeyPair } from "./KeyPair";
-export type { VaultContainer } from "./VaultContainer";
+export type { ChallengeMessage } from "./ChallengeMessage.js";
+export type { KeyPair } from "./KeyPair.js";
+export type { VaultContainer } from "./VaultContainer.js";

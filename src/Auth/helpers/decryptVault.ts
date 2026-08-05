@@ -1,6 +1,6 @@
-import type { VaultContainer } from "../types";
+import type { VaultContainer } from "../types/index.js";
 
-import { base64ToBytes } from "./base64";
+import { base64ToBytes } from "./base64.js";
 
 // Reverse of encryptVault. A wrong password fails the GCM authentication tag and
 // throws; we surface a single clean error, never a partial value (CDC §10 test 3).

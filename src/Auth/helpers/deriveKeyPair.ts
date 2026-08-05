@@ -1,5 +1,5 @@
-import { AUTH_DERIVATION } from "../data";
-import type { KeyPair } from "../types";
+import { AUTH_DERIVATION } from "../data/index.js";
+import type { KeyPair } from "../types/index.js";
 
 import { schnorr } from "@noble/curves/secp256k1.js";
 import { hkdf } from "@noble/hashes/hkdf.js";

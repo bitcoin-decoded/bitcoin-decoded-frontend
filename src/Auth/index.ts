@@ -8,5 +8,5 @@ export {
   signChallenge,
   validateMnemonic,
   verifyChallenge,
-} from "./helpers";
-export type { ChallengeMessage, KeyPair, VaultContainer } from "./types";
+} from "./helpers/index.js";
+export type { ChallengeMessage, KeyPair, VaultContainer } from "./types/index.js";

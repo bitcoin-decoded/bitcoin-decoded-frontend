@@ -1,6 +1,6 @@
-import type { ChallengeMessage } from "../types";
+import type { ChallengeMessage } from "../types/index.js";
 
-import { buildSignMessage } from "./buildSignMessage";
+import { buildSignMessage } from "./buildSignMessage.js";
 
 import { schnorr } from "@noble/curves/secp256k1.js";
 import { hexToBytes, utf8ToBytes } from "@noble/hashes/utils.js";

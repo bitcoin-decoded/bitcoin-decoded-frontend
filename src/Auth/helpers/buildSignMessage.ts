@@ -1,4 +1,4 @@
-import type { ChallengeMessage } from "../types";
+import type { ChallengeMessage } from "../types/index.js";
 
 // The exact bytes the client signs and the server reconstructs (CDC §4.3). Both
 // sides call this one function, so correctness only needs the two calls to agree.

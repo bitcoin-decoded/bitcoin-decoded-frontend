@@ -1,7 +1,7 @@
-import { PBKDF2_ITERATIONS, VAULT_FORMAT } from "../data";
-import type { VaultContainer } from "../types";
+import { PBKDF2_ITERATIONS, VAULT_FORMAT } from "../data/index.js";
+import type { VaultContainer } from "../types/index.js";
 
-import { bytesToBase64 } from "./base64";
+import { bytesToBase64 } from "./base64.js";
 
 // PBKDF2-SHA256 (600k) → AES-256-GCM over the mnemonic itself (CDC §4.4/§4.5),
 // with a fresh random salt and IV every call. We encrypt the source, not a
