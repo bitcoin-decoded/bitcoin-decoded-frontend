@@ -1,3 +1,5 @@
+export type { AccountFlags } from "./AccountFlags";
+export type { ProgressItem } from "./ProgressItem";
 export type { ReadingProgressMap } from "./ReadingProgressMap";
 export type { StoredChapterProgress } from "./StoredChapterProgress";
 export type { UserData } from "./UserData";
