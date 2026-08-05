@@ -11,10 +11,12 @@
     "format": "prettier --write src",
     "preview": "vite preview",
     "test": "vitest run",
+    "typecheck:api": "tsc --noEmit -p tsconfig.api.json",
     "audit:reading-time": "node scripts/count-prose.mjs",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr --logLevel warn"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@noble/curves": "^2.2.0",
     "@noble/hashes": "^2.2.0",
     "@phosphor-icons/react": "^2.1.10",
@@ -29,6 +31,7 @@
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
+    "@vercel/node": "^5.9.5",
     "@vitejs/plugin-react-swc": "^4.1.0",
     "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",

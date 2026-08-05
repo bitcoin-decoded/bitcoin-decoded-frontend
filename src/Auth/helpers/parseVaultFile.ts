@@ -1,5 +1,5 @@
-import { VAULT_FORMAT } from "../data";
-import type { VaultContainer } from "../types";
+import { VAULT_FORMAT } from "../data/index.js";
+import type { VaultContainer } from "../types/index.js";
 
 // Validates a .bdw file's envelope (CDC §7.4) and returns the container so the UI
 // can show the pseudo before asking for the password. Throws a coded error the UI
