@@ -1,14 +1,12 @@
 import { authFetch } from "./authFetch.js";
-import { clearSessionKey } from "./sessionKey.js";
 
-// Sign out (CDC §7.7): drop the in-memory key and clear the cookie server-side.
-// The vault stays in IndexedDB, so the reader can unlock again. Best-effort on
-// the network call — the key is already gone locally either way.
+// Sign out (CDC §7.7): clear the session cookie server-side. The vault stays in
+// IndexedDB, so the reader can unlock again. Best-effort on the network call —
+// an expired cookie lapses on its own anyway.
 export const logoutSession = async (): Promise<void> => {
-  clearSessionKey();
   try {
     await authFetch("/api/auth/logout", { method: "POST" });
   } catch {
-    // The cookie will lapse on its own; the local key is what mattered.
+    // Nothing to undo locally; the cookie will lapse regardless.
   }
 };

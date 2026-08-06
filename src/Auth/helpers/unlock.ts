@@ -3,7 +3,6 @@ import { createVault } from "./createVault.js";
 import { decryptVault } from "./decryptVault.js";
 import { deriveKeyPair } from "./deriveKeyPair.js";
 import { login } from "./login.js";
-import { setSessionKey } from "./sessionKey.js";
 
 // Return-to-app unlock (CDC §7.2): read the vault, decrypt with the password,
 // derive the key, re-open the session. A wrong password is the GCM tag failing,
@@ -19,8 +18,5 @@ export const unlock = async (password: string): Promise<{ username: string }> =>
     throw new AuthError("wrong_password");
   }
 
-  const keyPair = deriveKeyPair(mnemonic);
-  const result = await login(keyPair);
-  setSessionKey(keyPair);
-  return result;
+  return login(deriveKeyPair(mnemonic));
 };

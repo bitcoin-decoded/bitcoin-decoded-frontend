@@ -3,7 +3,6 @@ import { createVault } from "./createVault.js";
 import { deriveKeyPair } from "./deriveKeyPair.js";
 import { encryptVault } from "./encryptVault.js";
 import { login } from "./login.js";
-import { setSessionKey } from "./sessionKey.js";
 import { validateMnemonic } from "./validateMnemonic.js";
 
 // Restore on a new device from the 12 words (CDC §7.3): validate the checksum,
@@ -26,6 +25,5 @@ export const restore = async (input: {
     username: result.username,
   });
   await createVault().save(container);
-  setSessionKey(keyPair);
   return result;
 };

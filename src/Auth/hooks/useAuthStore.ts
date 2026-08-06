@@ -3,20 +3,20 @@ import { useCallback, useEffect, useState } from "react";
 import {
   AuthError,
   checkUsername,
-  clearSessionKey,
   createAccount,
   createVault,
   fetchSession,
   logoutSession,
+  resolveInitialStatus,
   restore,
   unlock,
 } from "../helpers/index.js";
 import type { AuthErrorCode, AuthStatus } from "../types/index.js";
 
 // The auth state machine (CDC §7.2). On mount it probes the session once, then
-// falls back to the vault to tell locked from anonymous. Actions wrap the service
-// operations and fold their outcome into the state; the private key never lives
-// here, only in the sessionKey closure the helpers own.
+// falls back to the vault to tell locked from anonymous (the rule lives in the
+// pure resolveInitialStatus). Actions wrap the service operations and fold their
+// outcome into the state; no private key is held here.
 export const useAuthStore = () => {
   const [status, setStatus] = useState<AuthStatus>("checking");
   const [username, setUsername] = useState<string | null>(null);
@@ -35,7 +35,7 @@ export const useAuthStore = () => {
       }
       const hasVault = await createVault().exists();
       if (!alive) return;
-      setStatus(hasVault ? "locked" : "anonymous");
+      setStatus(resolveInitialStatus(null, hasVault));
     })();
     return () => {
       alive = false;
@@ -81,7 +81,6 @@ export const useAuthStore = () => {
     }, []),
     erase: useCallback(async () => {
       await createVault().clear();
-      clearSessionKey();
       setUsername(null);
       setStatus("anonymous");
     }, []),
