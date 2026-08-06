@@ -14,7 +14,7 @@ const repo = (loadImpl: () => Promise<UserData>): UserRepository => ({
 });
 
 const flags = (over: Partial<AccountFlags> = {}): AccountFlags => ({
-  hasAccount: () => false,
+  hasAccount: async () => false,
   migrated: () => false,
   setMigrated: vi.fn(),
   ...over,
@@ -24,7 +24,7 @@ describe("createCompositeRepository", () => {
   it("uses local and never calls the API for a guest", async () => {
     const local = repo(async () => ({ badges: { g: 1 }, readingProgress: {} }));
     const api = repo(async () => empty);
-    const composite = createCompositeRepository(local, api, flags({ hasAccount: () => false }));
+    const composite = createCompositeRepository(local, api, flags({ hasAccount: async () => false }));
 
     const data = await composite.load(signal);
     expect(data.badges).toEqual({ g: 1 });
@@ -42,7 +42,7 @@ describe("createCompositeRepository", () => {
     const composite = createCompositeRepository(
       local,
       api,
-      flags({ hasAccount: () => true, migrated: () => false, setMigrated }),
+      flags({ hasAccount: async () => true, migrated: () => false, setMigrated }),
     );
 
     const data = await composite.load(signal);
@@ -57,7 +57,7 @@ describe("createCompositeRepository", () => {
     const composite = createCompositeRepository(
       local,
       api,
-      flags({ hasAccount: () => true, migrated: () => true }),
+      flags({ hasAccount: async () => true, migrated: () => true }),
     );
 
     const data = await composite.load(signal);
@@ -70,7 +70,7 @@ describe("createCompositeRepository", () => {
     const api = repo(async () => {
       throw new SessionExpiredError();
     });
-    const composite = createCompositeRepository(local, api, flags({ hasAccount: () => true }));
+    const composite = createCompositeRepository(local, api, flags({ hasAccount: async () => true }));
 
     const data = await composite.load(signal);
     expect(data.badges).toEqual({ g: 1 });
@@ -85,7 +85,7 @@ describe("createCompositeRepository", () => {
     const composite = createCompositeRepository(
       local,
       api,
-      flags({ hasAccount: () => true, migrated: () => true }),
+      flags({ hasAccount: async () => true, migrated: () => true }),
     );
 
     await composite.load(signal);

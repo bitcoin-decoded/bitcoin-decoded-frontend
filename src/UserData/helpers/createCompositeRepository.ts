@@ -21,7 +21,7 @@ export const createCompositeRepository = (
 
   return {
     load: async (signal) => {
-      if (!flags.hasAccount()) {
+      if (!(await flags.hasAccount())) {
         authenticated = false;
         return local.load(signal);
       }

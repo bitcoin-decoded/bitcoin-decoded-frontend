@@ -63,8 +63,9 @@ export const createVault = () => ({
         )
       : Promise.resolve(null),
 
-  // The single source of truth for "does this device hold an account" — replaces
-  // the Phase 3 HAS_ACCOUNT_KEY placeholder (wired into the composite in 4c).
+  // The single source of truth for "does this device hold an account": the
+  // composite repository wires its hasAccount flag straight to this, so vault
+  // presence alone turns the account API on. No separate flag to keep in sync.
   exists: (): Promise<boolean> =>
     available()
       ? request<IDBValidKey | undefined>(VAULT_STORE, "readonly", (s) => s.getKey(CURRENT)).then(
