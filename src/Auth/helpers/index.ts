@@ -1,4 +1,6 @@
 export { buildSignMessage } from "./buildSignMessage.js";
+export { buildVaultExport } from "./buildVaultExport.js";
+export { createVault } from "./createVault.js";
 export { decryptVault } from "./decryptVault.js";
 export { deriveKeyPair } from "./deriveKeyPair.js";
 export { encryptVault } from "./encryptVault.js";
