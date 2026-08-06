@@ -580,6 +580,114 @@ const fr = {
   "footer.copied": "Copié !",
   "footer.copyright": "© 2026 - Bitcoin.Decoded",
   "footer.iconCredit": "Icônes doodle : Streamline (CC BY 4.0)",
+
+  // Auth (CDC v1.1 §14): final French editorial copy, word for word. Do not
+  // rewrite, add or cut anything (acceptance criterion §13.10). The
+  // {pseudo}/{n}/{date}/{key} tokens are interpolated at the call-site.
+  "auth.landing.title": "Ton accès à Bitcoin.Decoded",
+  "auth.landing.body":
+    "Pas d'adresse mail, pas de compte à créer chez quelqu'un d'autre. Ta progression est liée à une clé que toi seul détiens, exactement comme un portefeuille Bitcoin. Sauf qu'ici, il n'y a pas d'argent dessus, juste tes chapitres terminés.",
+  "auth.landing.primary": "Créer mon accès",
+  "auth.landing.secondary": "J'ai déjà un accès",
+
+  "auth.username.title": "Choisis un pseudo",
+  "auth.username.body":
+    "C'est le nom qui s'affichera dans l'application. Rien ne t'oblige à utiliser ton vrai nom, et c'est même plutôt une bonne idée de ne pas le faire.",
+  "auth.username.hint": "3 à 20 caractères, lettres minuscules, chiffres, tiret et tiret bas.",
+  "auth.username.available": "Ce pseudo est libre.",
+  "auth.username.taken": "Ce pseudo est déjà utilisé. Essaie autre chose.",
+  "auth.username.invalid": "Caractères non autorisés.",
+  "auth.username.button": "Continuer",
+
+  "auth.seed.display.title": "Voici tes 12 mots",
+  "auth.seed.display.body":
+    "Ces 12 mots sont ta seule clé d'accès. Note-les sur un papier, dans l'ordre. Si tu les perds, personne ne pourra les retrouver, nous non plus. Il n'y a pas de bouton \"mot de passe oublié\" derrière.",
+  "auth.seed.display.warning":
+    "Ne les prends pas en photo, ne les envoie pas par message, ne les colle pas dans une note synchronisée dans le cloud.",
+  "auth.seed.display.checkbox": "J'ai noté mes 12 mots.",
+  "auth.seed.display.copy": "Copier les 12 mots",
+  "auth.seed.display.button": "Vérifier ma sauvegarde",
+
+  "auth.seed.confirm.title": "Vérifions",
+  "auth.seed.confirm.body":
+    "Retape trois de tes mots. C'est la seule façon de savoir si tu les as vraiment notés.",
+  "auth.seed.confirm.field": "Mot n°{n}",
+  "auth.seed.confirm.error": "Un des mots ne correspond pas. Reviens à ta liste et recommence.",
+  "auth.seed.confirm.back": "Revoir mes 12 mots",
+  "auth.seed.confirm.button": "Valider",
+
+  "auth.password.create.title": "Un mot de passe pour cet appareil",
+  "auth.password.create.body1":
+    "Ce mot de passe chiffre tes 12 mots sur cet appareil et dans ton fichier de sauvegarde. Il ne part jamais sur nos serveurs, on ne peut ni le lire ni le réinitialiser.",
+  "auth.password.create.body2":
+    "Il protège ta sauvegarde, pas ton compte. Si tu l'oublies mais que tu as tes 12 mots, tu retrouves tout. Si tu perds les deux, c'est terminé.",
+  "auth.password.create.field1": "Mot de passe",
+  "auth.password.create.field2": "Confirme le mot de passe",
+  "auth.password.create.hint": "8 caractères minimum.",
+  "auth.password.create.mismatch": "Les deux mots de passe ne sont pas identiques.",
+  "auth.password.create.button": "Créer mon accès",
+
+  "auth.success.title": "C'est en place",
+  "auth.success.body1":
+    "Tu viens de faire exactement ce que fait n'importe quel portefeuille Bitcoin à sa création : générer une clé, la sauvegarder, la protéger. Le chapitre sur l'auto-conservation va te sembler beaucoup plus concret.",
+  "auth.success.body2":
+    "Télécharge ton fichier de sauvegarde maintenant. C'est ce qui te permettra de reprendre ta progression sur un autre appareil sans retaper tes 12 mots.",
+  "auth.success.primary": "Télécharger ma sauvegarde",
+  "auth.success.secondary": "Plus tard",
+  "auth.success.migration": "Ta progression sur cet appareil a été rattachée à ton accès.",
+
+  "auth.restore.seed.title": "Saisis tes 12 mots",
+  "auth.restore.seed.warning":
+    "N'utilise jamais ici la phrase d'un portefeuille qui contient des fonds. Cette page attend une phrase générée par Bitcoin.Decoded, pour ta progression et rien d'autre.",
+  "auth.restore.seed.field": "Tes 12 mots, séparés par des espaces",
+  "auth.restore.seed.checksumError":
+    "Cette phrase n'est pas valide. Vérifie l'ordre et l'orthographe des mots.",
+  "auth.restore.seed.unknownAccount":
+    "Aucune progression n'est liée à cette phrase. Veux-tu créer un accès avec ?",
+  "auth.restore.seed.button": "Retrouver ma progression",
+
+  "auth.restore.file.title": "Importe ta sauvegarde",
+  "auth.restore.file.body":
+    "Sélectionne le fichier .bdw que tu as téléchargé lors de la création de ton accès.",
+  "auth.restore.file.recognised": "Sauvegarde de {pseudo}.",
+  "auth.restore.file.formatError": "Ce fichier n'est pas une sauvegarde Bitcoin.Decoded.",
+  "auth.restore.file.versionError":
+    "Ce fichier vient d'une version plus récente de l'application. Mets à jour la page et réessaie.",
+  "auth.restore.file.button": "Choisir un fichier",
+
+  "auth.unlock.title": "Content de te revoir, {pseudo}",
+  "auth.unlock.body": "Saisis ton mot de passe pour déverrouiller ton accès sur cet appareil.",
+  "auth.unlock.error": "Mot de passe incorrect.",
+  "auth.unlock.link": "Je n'ai plus mon mot de passe",
+  "auth.unlock.button": "Déverrouiller",
+
+  "auth.backup.reminder.text":
+    "Tu n'as pas encore téléchargé ta sauvegarde. Si tu vides le cache de ce navigateur, ta progression part avec.",
+  "auth.backup.reminder.button": "Télécharger maintenant",
+  "auth.backup.reminder.link": "Plus tard",
+
+  "auth.settings.sectionTitle": "Ton accès",
+  "auth.settings.username": "Connecté en tant que {pseudo}",
+  "auth.settings.publicKey": "Ta clé publique : {key}",
+  "auth.settings.exportBody":
+    "Télécharge un fichier chiffré contenant tes 12 mots. C'est ce qui te permet de reprendre ta progression sur un autre appareil.",
+  "auth.settings.exportButton": "Télécharger ma sauvegarde",
+  "auth.settings.lastExport": "Dernière sauvegarde le {date}.",
+  "auth.settings.neverExported": "Tu n'as jamais téléchargé de sauvegarde.",
+  "auth.settings.signOutBody":
+    "Tes 12 mots restent chiffrés sur cet appareil. Ton mot de passe te sera redemandé au retour.",
+  "auth.settings.signOutButton": "Me déconnecter",
+  "auth.settings.eraseBody":
+    "Efface tes 12 mots chiffrés de cet appareil. Tu auras besoin de ta sauvegarde ou de tes 12 mots pour revenir.",
+  "auth.settings.eraseButton": "Effacer cet accès de cet appareil",
+  "auth.settings.eraseConfirm":
+    "Tu n'as jamais téléchargé de sauvegarde. Si tu effaces maintenant et que tu n'as pas tes 12 mots, ta progression est perdue définitivement. Tu confirmes ?",
+
+  "auth.errors.network": "Connexion impossible. Vérifie ta connexion et réessaie.",
+  "auth.errors.server": "Quelque chose s'est mal passé de notre côté. Réessaie dans un instant.",
+  "auth.errors.sessionExpired": "Ta session a expiré. Saisis ton mot de passe pour reprendre.",
+  "auth.errors.storageUnavailable":
+    "Ce navigateur ne permet pas de conserver ton accès, sans doute à cause de la navigation privée. Tu peux avancer, mais télécharge ta sauvegarde avant de fermer l'onglet.",
 } as const;
 
 export default fr;
