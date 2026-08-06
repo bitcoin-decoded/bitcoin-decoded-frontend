@@ -1,6 +1,7 @@
 import { type FC } from "react";
 
 import { BadgeCelebration, BadgeNavButton, getBadgeIdForRoute, useBadges } from "./Achievements";
+import { AuthProvider } from "./Auth/components";
 import { MainLayout, ThemeProvider } from "./Design";
 import { type Language, LanguageProvider } from "./I18n";
 import { BitcoinDonationFooter } from "./Interactive";
@@ -35,9 +36,11 @@ export const App: FC<{ route?: RouteName; language?: Language }> = ({ route, lan
     <RouterProvider route={route} language={language}>
       <LanguageProvider>
         <ThemeProvider>
-          <UserDataProvider>
-            <AppShell />
-          </UserDataProvider>
+          <AuthProvider>
+            <UserDataProvider>
+              <AppShell />
+            </UserDataProvider>
+          </AuthProvider>
         </ThemeProvider>
       </LanguageProvider>
     </RouterProvider>

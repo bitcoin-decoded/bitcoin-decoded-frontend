@@ -1,5 +1,6 @@
 export {
   buildSignMessage,
+  createVault,
   decryptVault,
   deriveKeyPair,
   encryptVault,

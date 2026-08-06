@@ -86,21 +86,25 @@ La bascule promise a eu lieu, **sans toucher une ligne au-dessus de `UserReposit
 | `helpers/createApiRepository.ts` | `load` = `GET /api/progress` (un **401** devient `SessionExpiredError`), `save` **débouncé** (`PROGRESS_SAVE_DEBOUNCE_MS`) avec **flush `keepalive` sur `pagehide`/`visibilitychange`** |
 | `helpers/toProgressItems.ts` / `fromProgressItems.ts` | L'**adaptateur** : le back stocke des lignes normalisées `progress(item_id, item_type, status, score, data)` (CDC §5.3), pas un blob `{badges, readingProgress}`. Un badge → `earned` (date dans `data.at`) ; un chapitre → statut dérivé + `StoredChapterProgress` dans `data` |
 | `helpers/createCompositeRepository.ts` | Sélection invité/connecté par **flags injectés** (`hasAccount` / `migrated`, donc testable sans navigateur), avec la migration au 1er login |
-| `helpers/createDefaultRepository.ts` | Câble les flags sur `localStorage` (`HAS_ACCOUNT_KEY`, `PROGRESS_MIGRATED_KEY`) et assemble le composite. Seul endroit qui touche au stockage |
+| `helpers/createDefaultRepository.ts` | Câble `hasAccount` sur le **vault de l'appareil** (`createVault().exists()`, IndexedDB) et `migrated` sur `localStorage` (`PROGRESS_MIGRATED_KEY`), puis assemble le composite. Seul endroit qui touche au stockage |
 | `helpers/mergeUserData.ts` | Fusion **non-régressive** côté client (finished gagne, sinon `maxRevealed` max ; badge = date la plus ancienne), miroir de la règle serveur |
 
 ### La logique du composite
 
-- **Pas de compte sur l'appareil** (`hasAccount` faux) → `local` seul, **aucun appel réseau**. C'est le cas de tout invité, donc de tout le monde tant que la Phase 4 (UI) n'a pas posé le flag.
+- **Pas de compte sur l'appareil** (`hasAccount` faux, càd pas de vault) → `local` seul, **aucun appel réseau**. C'est le cas de tout invité.
 - **Compte présent** → `api.load()`. Au **premier** chargement authentifié, la progression locale (invité) est **fondue dans le compte** : l'union (`mergeUserData`) est renvoyée immédiatement (rien ne paraît perdu) puis poussée au serveur, dont la fusion non-régressive rend le push idempotent (CDC §8). Ensuite, le serveur fait foi.
-- **Session expirée** (`SessionExpiredError`) → repli sur `local` (la Phase 4 remplacera ce repli par l'écran de déverrouillage). Une **vraie erreur réseau** remonte, elle, à l'écran d'erreur d'init (timeout + « Réessayer »).
+- **Session expirée** (`SessionExpiredError`) → repli sur `local`. Au retour dans l'app, un appareil « verrouillé » (vault présent, pas de session) affiche donc la copie locale tant que l'utilisateur n'a pas déverrouillé ; l'écran de déverrouillage (Phase 4d) s'appuie sur ce repli. Une **vraie erreur réseau** remonte, elle, à l'écran d'erreur d'init (timeout + « Réessayer »).
 - **`save`** écrit toujours dans `local` (cache chaud) et, si authentifié, dans l'`api`.
 
-### Ce que la Phase 4 (UI) branchera dessus
+### Ce que la Phase 4c a branché
 
-- Poser / retirer `HAS_ACCOUNT_KEY` à la création / restauration / effacement d'un accès. C'est le seul signal qui active l'API.
-- L'écran de déverrouillage (le repli local sur session expirée devient un prompt mot de passe).
-- Rien d'autre côté `UserData` : l'adaptateur, le composite et la migration sont déjà là et testés (`progressAdapter.test.ts`, `mergeUserData.test.ts`, `createCompositeRepository.test.ts`).
+- **Le signal, c'est le vault.** `createDefaultRepository` câble `hasAccount` sur `createVault().exists()` ; création/restauration écrivent le vault, effacement le supprime, donc aucun flag séparé à poser (le placeholder `HAS_ACCOUNT_KEY` a disparu).
+- **Recharge au changement de compte pendant la visite.** `useReloadOnAccountChange` (monté par `UserDataProvider`, sous `AuthProvider`) observe le statut d'`useAuth` : une création/déverrouillage en cours de session bascule vers `authenticated` → le repository **recharge**, ce qui déclenche la **migration au 1er login** (la progression invité locale est fondue dans le compte) ; un logout recharge vers le repli local. La résolution initiale hors de `checking` n'est **pas** un changement, donc pas de recharge parasite au montage.
+
+### Ce que la Phase 4d (UI) branchera dessus
+
+- L'écran de déverrouillage (le repli local sur session verrouillée devient un prompt mot de passe).
+- Rien d'autre côté `UserData` : l'adaptateur, le composite, la migration et la recharge sont déjà là et testés (`progressAdapter.test.ts`, `mergeUserData.test.ts`, `createCompositeRepository.test.ts`).
 
 ### Ce qui n'a pas bougé
 

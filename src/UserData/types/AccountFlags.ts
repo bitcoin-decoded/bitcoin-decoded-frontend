@@ -3,7 +3,7 @@
 // from storage inside the composite, so the selection logic stays testable
 // without a browser; createDefaultRepository is what binds these to localStorage.
 export type AccountFlags = {
-  hasAccount: () => boolean;
+  hasAccount: () => Promise<boolean>;
   migrated: () => boolean;
   setMigrated: () => void;
 };
