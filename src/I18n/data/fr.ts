@@ -593,8 +593,7 @@ const fr = {
   "auth.username.title": "Choisis un pseudo",
   "auth.username.body":
     "C'est le nom qui s'affichera dans l'application. Rien ne t'oblige à utiliser ton vrai nom, et c'est même plutôt une bonne idée de ne pas le faire.",
-  "auth.username.hint":
-    "3 à 20 caractères : minuscules et chiffres. Caractères spéciaux autorisés : - et _.",
+  "auth.username.hint": "3 à 20 caractères : lettres et chiffres uniquement.",
   "auth.username.available": "Ce pseudo est libre.",
   "auth.username.taken": "Ce pseudo est déjà utilisé. Essaie autre chose.",
   "auth.username.invalid": "Caractères non autorisés.",

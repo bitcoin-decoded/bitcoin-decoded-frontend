@@ -588,8 +588,7 @@ const en = {
   "auth.username.title": "Pick a username",
   "auth.username.body":
     "This is the name the app will display. Nothing forces you to use your real name, and not using it is arguably the better call.",
-  "auth.username.hint":
-    "3 to 20 characters: lowercase letters and digits. Special characters allowed: - and _.",
+  "auth.username.hint": "3 to 20 characters: letters and digits only.",
   "auth.username.available": "This username is free.",
   "auth.username.taken": "This username is already in use. Try another one.",
   "auth.username.invalid": "Characters not allowed.",

@@ -18,7 +18,7 @@ import type { AuthFlowScreen, VaultContainer } from "../types/index.js";
 
 import { useAuth } from "./useAuth.js";
 
-type UsernameStatus = "idle" | "checking" | "available" | "taken" | "invalid";
+type UsernameStatus = "idle" | "checking" | "available" | "taken" | "invalid" | "network";
 
 // CDC §7.1 écran 2: the live username check is debounced.
 const USERNAME_DEBOUNCE_MS = 400;
@@ -131,9 +131,10 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
       void checkUsername(value)
         .then((result) => {
           if (token !== usernameTokenRef.current) return;
-          // Only the server saying "invalid" marks a well-formed pseudo invalid.
-          // An unreachable or non-JSON response (offline, dev without /api) leaves
-          // it idle rather than falsely rejecting it as "characters not allowed".
+          // Three explicit outcomes plus a network one: the server tells taken vs
+          // invalid; a reachable-but-unexpected body (offline, dev without /api,
+          // a failing function) surfaces as "network" rather than a false
+          // "characters not allowed".
           setUsernameStatus(
             result.available
               ? "available"
@@ -141,11 +142,11 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
                 ? "taken"
                 : result.reason === "invalid"
                   ? "invalid"
-                  : "idle",
+                  : "network",
           );
         })
         .catch(() => {
-          if (token === usernameTokenRef.current) setUsernameStatus("idle");
+          if (token === usernameTokenRef.current) setUsernameStatus("network");
         });
     }, USERNAME_DEBOUNCE_MS);
     return () => clearTimeout(id);

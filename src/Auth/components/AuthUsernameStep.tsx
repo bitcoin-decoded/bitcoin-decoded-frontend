@@ -16,12 +16,16 @@ export const AuthUsernameStep: FC = () => {
   const { username, setUsername, usernameStatus, submitUsername } = useAuthFlow();
 
   const isAvailable = usernameStatus === "available";
+  // Three outcomes, each named plainly (CDC §14.2 + the network fallback §14.12):
+  // taken, invalid characters, or the check could not reach the server.
   const error =
     usernameStatus === "taken"
       ? t("auth.username.taken")
       : usernameStatus === "invalid"
         ? t("auth.username.invalid")
-        : undefined;
+        : usernameStatus === "network"
+          ? t("auth.errors.network")
+          : undefined;
 
   const status =
     usernameStatus === "checking" ? (
