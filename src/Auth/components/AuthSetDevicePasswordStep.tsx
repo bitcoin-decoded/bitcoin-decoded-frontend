@@ -7,13 +7,15 @@ import { useAuthFlow } from "../hooks";
 import { AuthScreen } from "./AuthScreen";
 import { PasswordField } from "./PasswordField";
 
-// CDC §7.3: after a valid phrase, set a new device password and rewrite the vault.
-// The CDC has no dedicated copy for this step, so it composes the create-password
-// text (§14.5) with the restore action label (§14.7) — flagged for review. One
-// field only, matching "un nouveau mot de passe" (singular) in §7.3.
-export const AuthRestorePassword: FC = () => {
+// CDC §7.3: after a valid phrase, set a NEW local password for this device and
+// rewrite the vault. This never asks for the previous password — hence the name
+// setDevicePassword. The CDC defines no dedicated copy for this step, so it
+// composes the create-password text (§14.5) with the restore action (§14.7);
+// the "new password" wording is flagged for an editorial decision. One field
+// only, matching "un nouveau mot de passe" (singular) in §7.3.
+export const AuthSetDevicePasswordStep: FC = () => {
   const { t } = useTranslation();
-  const { password, setPassword, revealPassword, toggleReveal, submitRestorePassword, busy } =
+  const { password, setPassword, revealPassword, toggleReveal, submitSetDevicePassword, busy } =
     useAuthFlow();
 
   return (
@@ -30,13 +32,13 @@ export const AuthRestorePassword: FC = () => {
         hint={t("auth.password.create.hint")}
         autoFocus
         autoComplete="new-password"
-        onEnter={submitRestorePassword}
+        onEnter={submitSetDevicePassword}
       />
       <Button
         variant="primary"
         fullWidth
         disabled={password.length < 8 || busy}
-        onClick={submitRestorePassword}
+        onClick={submitSetDevicePassword}
       >
         {t("auth.restore.seed.button")}
       </Button>

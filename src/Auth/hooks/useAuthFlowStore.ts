@@ -54,8 +54,8 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [revealPassword, setRevealPassword] = useState(false);
 
-  // Restore
-  const [restoreInput, setRestoreInput] = useState("");
+  // Restore: one field per word (CDC §7.3), so the phrase reads like a phrase
+  const [restoreWords, setRestoreWords] = useState<string[]>(() => Array(12).fill(""));
   const [restoreMnemonic, setRestoreMnemonic] = useState<string | null>(null);
   const [checksumError, setChecksumError] = useState(false);
   const [unknownAccount, setUnknownAccount] = useState(false);
@@ -86,7 +86,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setPassword("");
     setPasswordConfirm("");
     setRevealPassword(false);
-    setRestoreInput("");
+    setRestoreWords(Array(12).fill(""));
     setRestoreMnemonic(null);
     setChecksumError(false);
     setUnknownAccount(false);
@@ -131,7 +131,18 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
       void checkUsername(value)
         .then((result) => {
           if (token !== usernameTokenRef.current) return;
-          setUsernameStatus(result.available ? "available" : result.reason === "taken" ? "taken" : "invalid");
+          // Only the server saying "invalid" marks a well-formed pseudo invalid.
+          // An unreachable or non-JSON response (offline, dev without /api) leaves
+          // it idle rather than falsely rejecting it as "characters not allowed".
+          setUsernameStatus(
+            result.available
+              ? "available"
+              : result.reason === "taken"
+                ? "taken"
+                : result.reason === "invalid"
+                  ? "invalid"
+                  : "idle",
+          );
         })
         .catch(() => {
           if (token === usernameTokenRef.current) setUsernameStatus("idle");
@@ -173,7 +184,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
           return fromRestore ? "restore.seed" : "landing";
         case "restore.seed":
           return "landing";
-        case "restore.password":
+        case "restore.setDevicePassword":
           return "restore.seed";
         case "import":
           return "restore.seed";
@@ -189,7 +200,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     "create.confirm",
     "create.password",
     "restore.seed",
-    "restore.password",
+    "restore.setDevicePassword",
     "import",
   ].includes(screen);
 
@@ -283,9 +294,17 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setScreen("restore.seed");
   }, [resetFields]);
 
+  const setRestoreWord = useCallback(
+    (index: number, value: string) =>
+      setRestoreWords((prev) => prev.map((word, i) => (i === index ? value : word))),
+    [],
+  );
+
+  const restoreComplete = restoreWords.every((word) => word.trim().length > 0);
+
   const submitRestoreSeed = useCallback(() => {
     // CDC §7.3: validate the BIP39 checksum before anything else.
-    const normalized = normalizeMnemonicInput(restoreInput);
+    const normalized = normalizeMnemonicInput(restoreWords.join(" "));
     if (!validateMnemonic(normalized)) {
       setChecksumError(true);
       return;
@@ -294,10 +313,12 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setUnknownAccount(false);
     setRestoreMnemonic(normalized);
     setPassword("");
-    setScreen("restore.password");
-  }, [restoreInput]);
+    setScreen("restore.setDevicePassword");
+  }, [restoreWords]);
 
-  const submitRestorePassword = useCallback(async () => {
+  // Restore sets a NEW local password on this device (it never asks for the old
+  // one); the screen and this handler are named accordingly (restore.setDevicePassword).
+  const submitSetDevicePassword = useCallback(async () => {
     if (!restoreMnemonic || password.length < 8) return;
     try {
       await restore({ mnemonic: restoreMnemonic, password });
@@ -416,11 +437,12 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     submitUnlock,
     forgotPassword,
     // restore
-    restoreInput,
-    setRestoreInput,
+    restoreWords,
+    setRestoreWord,
+    restoreComplete,
     checksumError,
     submitRestoreSeed,
-    submitRestorePassword,
+    submitSetDevicePassword,
     unknownAccount,
     createFromRestore,
     // import

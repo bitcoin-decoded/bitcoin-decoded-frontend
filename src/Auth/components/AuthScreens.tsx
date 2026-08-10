@@ -9,9 +9,9 @@ import { AuthImportStep } from "./AuthImportStep";
 import { AuthLanding } from "./AuthLanding";
 import { AuthOverlay } from "./AuthOverlay";
 import { AuthPasswordStep } from "./AuthPasswordStep";
-import { AuthRestorePassword } from "./AuthRestorePassword";
 import { AuthRestoreSeed } from "./AuthRestoreSeed";
 import { AuthSeedStep } from "./AuthSeedStep";
+import { AuthSetDevicePasswordStep } from "./AuthSetDevicePasswordStep";
 import { AuthSuccessStep } from "./AuthSuccessStep";
 import { AuthUnlock } from "./AuthUnlock";
 import { AuthUsernameStep } from "./AuthUsernameStep";
@@ -41,8 +41,8 @@ export const AuthScreens: FC = () => {
         return <AuthUnlock />;
       case "restore.seed":
         return <AuthRestoreSeed />;
-      case "restore.password":
-        return <AuthRestorePassword />;
+      case "restore.setDevicePassword":
+        return <AuthSetDevicePasswordStep />;
       case "import":
         return <AuthImportStep />;
       default:

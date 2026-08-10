@@ -593,7 +593,8 @@ const fr = {
   "auth.username.title": "Choisis un pseudo",
   "auth.username.body":
     "C'est le nom qui s'affichera dans l'application. Rien ne t'oblige à utiliser ton vrai nom, et c'est même plutôt une bonne idée de ne pas le faire.",
-  "auth.username.hint": "3 à 20 caractères, lettres minuscules, chiffres, tiret et tiret bas.",
+  "auth.username.hint":
+    "3 à 20 caractères : minuscules et chiffres. Caractères spéciaux autorisés : - et _.",
   "auth.username.available": "Ce pseudo est libre.",
   "auth.username.taken": "Ce pseudo est déjà utilisé. Essaie autre chose.",
   "auth.username.invalid": "Caractères non autorisés.",
@@ -639,7 +640,6 @@ const fr = {
   "auth.restore.seed.title": "Saisis tes 12 mots",
   "auth.restore.seed.warning":
     "N'utilise jamais ici la phrase d'un portefeuille qui contient des fonds. Cette page attend une phrase générée par Bitcoin.Decoded, pour ta progression et rien d'autre.",
-  "auth.restore.seed.field": "Tes 12 mots, séparés par des espaces",
   "auth.restore.seed.checksumError":
     "Cette phrase n'est pas valide. Vérifie l'ordre et l'orthographe des mots.",
   "auth.restore.seed.unknownAccount":

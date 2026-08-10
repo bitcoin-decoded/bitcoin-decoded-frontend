@@ -11,5 +11,5 @@ export type AuthFlowScreen =
   | "create.success"
   | "unlock"
   | "restore.seed"
-  | "restore.password"
+  | "restore.setDevicePassword"
   | "import";

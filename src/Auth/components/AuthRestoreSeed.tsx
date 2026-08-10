@@ -4,19 +4,20 @@ import { Button, FeedbackPanel } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { useAuthFlow } from "../hooks";
 
-import { AuthField } from "./AuthField";
 import { AuthScreen } from "./AuthScreen";
+import { SeedWordsInput } from "./SeedWordsInput";
 
 import { AlertTriangle } from "@icons";
 
-// CDC §7.3 / §14.7: recover from the 12 words. The warning comes before the field.
-// An unknown account is an offer to create with this phrase, not a dead end; a
-// discreet link switches to importing a backup file instead (§7.4).
+// CDC §7.3 / §14.7: recover from the 12 words, one numbered field each. The warning
+// comes before the fields. An unknown account is an offer to create with this
+// phrase, not a dead end; a discreet link switches to importing a backup file (§7.4).
 export const AuthRestoreSeed: FC = () => {
   const { t } = useTranslation();
   const {
-    restoreInput,
-    setRestoreInput,
+    restoreWords,
+    setRestoreWord,
+    restoreComplete,
     checksumError,
     submitRestoreSeed,
     unknownAccount,
@@ -31,15 +32,9 @@ export const AuthRestoreSeed: FC = () => {
         {t("auth.restore.seed.warning")}
       </FeedbackPanel>
 
-      <AuthField
-        label={t("auth.restore.seed.field")}
-        value={restoreInput}
-        onChange={setRestoreInput}
-        multiline
-        rows={3}
-        autoComplete="off"
-        error={checksumError ? t("auth.restore.seed.checksumError") : undefined}
-      />
+      <SeedWordsInput words={restoreWords} onWordChange={setRestoreWord} onComplete={submitRestoreSeed} />
+
+      {checksumError && <FeedbackPanel tone="error">{t("auth.restore.seed.checksumError")}</FeedbackPanel>}
 
       {unknownAccount && (
         <FeedbackPanel tone="info">
@@ -52,12 +47,7 @@ export const AuthRestoreSeed: FC = () => {
         </FeedbackPanel>
       )}
 
-      <Button
-        variant="primary"
-        fullWidth
-        disabled={restoreInput.trim().length === 0 || busy}
-        onClick={submitRestoreSeed}
-      >
+      <Button variant="primary" fullWidth disabled={!restoreComplete || busy} onClick={submitRestoreSeed}>
         {t("auth.restore.seed.button")}
       </Button>
 

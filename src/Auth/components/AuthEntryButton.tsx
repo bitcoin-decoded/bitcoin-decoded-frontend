@@ -4,7 +4,7 @@ import { BRAND, THEME_COLORS, useThemeContext } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { useAuth, useAuthFlow } from "../hooks";
 
-import { KeyRound, User } from "@icons";
+import { DoodleFaceMale } from "@doodle";
 
 // The header entry point to the account (CDC §7). Signed in, it is a quiet chip
 // showing the pseudo (settings land in Phase 4d-3); otherwise it opens the flow —
@@ -33,7 +33,7 @@ export const AuthEntryButton: FC = () => {
   if (status === "authenticated") {
     return (
       <span style={{ ...base, color: colors.base.text.secondary }}>
-        <User size={16} strokeWidth={2} />
+        <DoodleFaceMale size={18} />
         <span style={{ maxWidth: "9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {username}
         </span>
@@ -56,7 +56,7 @@ export const AuthEntryButton: FC = () => {
         transition: "background-color 0.2s, color 0.2s",
       }}
     >
-      <KeyRound size={16} strokeWidth={2} />
+      <DoodleFaceMale size={18} />
     </button>
   );
 };
