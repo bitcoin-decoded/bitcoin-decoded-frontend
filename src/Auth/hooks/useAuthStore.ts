@@ -6,12 +6,13 @@ import {
   createAccount,
   createVault,
   fetchSession,
+  importAccount,
   logoutSession,
   resolveInitialStatus,
   restore,
   unlock,
 } from "../helpers/index.js";
-import type { AuthErrorCode, AuthStatus } from "../types/index.js";
+import type { AuthErrorCode, AuthStatus, VaultContainer } from "../types/index.js";
 
 // The auth state machine (CDC §7.2). On mount it probes the session once, then
 // falls back to the vault to tell locked from anonymous (the rule lives in the
@@ -74,6 +75,12 @@ export const useAuthStore = () => {
       (input: { mnemonic: string; password: string }) => run(() => restore(input)),
       [run],
     ),
+    importAccount: useCallback(
+      (container: VaultContainer, password: string) =>
+        run(() => importAccount(container, password)),
+      [run],
+    ),
+    clearError: useCallback(() => setError(null), []),
     logout: useCallback(async () => {
       await logoutSession();
       const hasVault = await createVault().exists();

@@ -683,6 +683,13 @@ const fr = {
   "auth.settings.eraseConfirm":
     "Tu n'as jamais téléchargé de sauvegarde. Si tu effaces maintenant et que tu n'as pas tes 12 mots, ta progression est perdue définitivement. Tu confirmes ?",
 
+  // Accessibility labels (not shown as text): consistent with the existing aria
+  // keys (theme/language toggles), never part of the CDC §14 editorial content.
+  "auth.a11y.close": "Fermer",
+  "auth.a11y.back": "Retour",
+  "auth.a11y.revealPassword": "Afficher le mot de passe",
+  "auth.a11y.concealPassword": "Masquer le mot de passe",
+
   "auth.errors.network": "Connexion impossible. Vérifie ta connexion et réessaie.",
   "auth.errors.server": "Quelque chose s'est mal passé de notre côté. Réessaie dans un instant.",
   "auth.errors.sessionExpired": "Ta session a expiré. Saisis ton mot de passe pour reprendre.",

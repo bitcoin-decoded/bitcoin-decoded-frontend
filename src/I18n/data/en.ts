@@ -677,6 +677,13 @@ const en = {
   "auth.settings.eraseConfirm":
     "You have never downloaded a backup. If you erase now and do not have your 12 words, your progress is gone for good. Confirm?",
 
+  // Accessibility labels (not shown as text): consistent with the existing aria
+  // keys (theme/language toggles), never part of the CDC §15 editorial content.
+  "auth.a11y.close": "Close",
+  "auth.a11y.back": "Back",
+  "auth.a11y.revealPassword": "Show password",
+  "auth.a11y.concealPassword": "Hide password",
+
   "auth.errors.network": "Cannot connect. Check your connection and try again.",
   "auth.errors.server": "Something went wrong on our side. Try again in a moment.",
   "auth.errors.sessionExpired": "Your session expired. Enter your password to continue.",
