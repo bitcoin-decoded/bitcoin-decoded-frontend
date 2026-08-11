@@ -15,7 +15,12 @@ export const AuthLanding: FC = () => {
   const { startCreate, startRestore } = useAuthFlow();
 
   return (
-    <AuthScreen icon={<DoodleFaceMale size={32} />} title={t("auth.landing.title")} lead={t("auth.landing.body")}>
+    <AuthScreen
+      icon={<DoodleFaceMale size={28} />}
+      inlineIcon
+      title={t("auth.landing.title")}
+      lead={t("auth.landing.body")}
+    >
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", marginTop: "0.35rem" }}>
         <Button variant="primary" fullWidth onClick={startCreate}>
           {t("auth.landing.primary")}

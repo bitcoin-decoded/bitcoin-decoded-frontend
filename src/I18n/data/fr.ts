@@ -593,7 +593,7 @@ const fr = {
   "auth.username.title": "Choisis un pseudo",
   "auth.username.body":
     "C'est le nom qui s'affichera dans l'application. Rien ne t'oblige à utiliser ton vrai nom, et c'est même plutôt une bonne idée de ne pas le faire.",
-  "auth.username.hint": "3 à 20 caractères : lettres et chiffres uniquement.",
+  "auth.username.hint": "3 à 20 caractères, lettres et chiffres uniquement.",
   "auth.username.available": "Ce pseudo est libre.",
   "auth.username.taken": "Ce pseudo est déjà utilisé. Essaie autre chose.",
   "auth.username.invalid": "Caractères non autorisés.",
@@ -626,6 +626,15 @@ const fr = {
   "auth.password.create.hint": "8 caractères minimum.",
   "auth.password.create.mismatch": "Les deux mots de passe ne sont pas identiques.",
   "auth.password.create.button": "Créer mon accès",
+
+  // Écran mot de passe de la RESTAURATION (CDC v1.2 §14.5b) : l'utilisateur en
+  // définit un NOUVEAU, il ne saisit pas l'ancien. Les champs/aide/erreur/bouton
+  // réutilisent auth.password.create.* et auth.restore.seed.button (texte identique).
+  "auth.password.restore.title": "Choisis un mot de passe pour cet appareil",
+  "auth.password.restore.body1":
+    "Ce n'est pas ton ancien mot de passe qu'on te demande. Tu en crées un nouveau, ici, pour protéger tes 12 mots sur cet appareil.",
+  "auth.password.restore.body2":
+    "Il ne part jamais sur nos serveurs, on ne peut ni le lire ni le réinitialiser. Il protège ta sauvegarde sur cet appareil, pas ton compte : tes 12 mots restent la seule vraie clé.",
 
   "auth.success.title": "C'est en place",
   "auth.success.body1":

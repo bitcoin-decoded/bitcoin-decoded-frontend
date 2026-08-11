@@ -319,13 +319,14 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setUnknownAccount(false);
     setRestoreMnemonic(normalized);
     setPassword("");
+    setPasswordConfirm("");
     setScreen("restore.setDevicePassword");
   }, [restoreWords]);
 
   // Restore sets a NEW local password on this device (it never asks for the old
   // one); the screen and this handler are named accordingly (restore.setDevicePassword).
   const submitSetDevicePassword = useCallback(async () => {
-    if (!restoreMnemonic || password.length < 8) return;
+    if (!restoreMnemonic || password.length < 8 || password !== passwordConfirm) return;
     try {
       await restore({ mnemonic: restoreMnemonic, password });
       close();
@@ -337,7 +338,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
         setScreen("restore.seed");
       }
     }
-  }, [restoreMnemonic, password, restore, close]);
+  }, [restoreMnemonic, password, passwordConfirm, restore, close]);
 
   const createFromRestore = useCallback(() => {
     setMnemonic(restoreMnemonic);

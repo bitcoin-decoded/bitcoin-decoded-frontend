@@ -7,21 +7,29 @@ import { useAuthFlow } from "../hooks";
 import { AuthScreen } from "./AuthScreen";
 import { PasswordField } from "./PasswordField";
 
-// CDC §7.3: after a valid phrase, set a NEW local password for this device and
-// rewrite the vault. This never asks for the previous password — hence the name
-// setDevicePassword. The CDC defines no dedicated copy for this step, so it
-// composes the create-password text (§14.5) with the restore action (§14.7);
-// the "new password" wording is flagged for an editorial decision. One field
-// only, matching "un nouveau mot de passe" (singular) in §7.3.
+// CDC v1.2 §7.3 / §14.5b: after a valid phrase, the reader SETS a new local
+// password (never the old one). Dedicated copy (auth.password.restore.*) says so
+// frontally; the fields, hint and error reuse the create-password strings and the
+// button reuses the restore action. Two fields, matching the create flow.
 export const AuthSetDevicePasswordStep: FC = () => {
   const { t } = useTranslation();
-  const { password, setPassword, revealPassword, toggleReveal, submitSetDevicePassword, busy } =
-    useAuthFlow();
+  const {
+    password,
+    setPassword,
+    passwordConfirm,
+    setPasswordConfirm,
+    revealPassword,
+    toggleReveal,
+    passwordMismatch,
+    canSubmitCreate,
+    submitSetDevicePassword,
+    busy,
+  } = useAuthFlow();
 
   return (
     <AuthScreen
-      title={t("auth.password.create.title")}
-      lead={[t("auth.password.create.body1"), t("auth.password.create.body2")]}
+      title={t("auth.password.restore.title")}
+      lead={[t("auth.password.restore.body1"), t("auth.password.restore.body2")]}
     >
       <PasswordField
         label={t("auth.password.create.field1")}
@@ -32,12 +40,21 @@ export const AuthSetDevicePasswordStep: FC = () => {
         hint={t("auth.password.create.hint")}
         autoFocus
         autoComplete="new-password"
+      />
+      <PasswordField
+        label={t("auth.password.create.field2")}
+        value={passwordConfirm}
+        onChange={setPasswordConfirm}
+        reveal={revealPassword}
+        onToggleReveal={toggleReveal}
+        error={passwordMismatch ? t("auth.password.create.mismatch") : undefined}
+        autoComplete="new-password"
         onEnter={submitSetDevicePassword}
       />
       <Button
         variant="primary"
         fullWidth
-        disabled={password.length < 8 || busy}
+        disabled={!canSubmitCreate || busy}
         onClick={submitSetDevicePassword}
       >
         {t("auth.restore.seed.button")}
