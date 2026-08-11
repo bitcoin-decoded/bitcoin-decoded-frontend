@@ -1,1 +1,1 @@
-export { BitcoinDecodedAvatar,BitcoinDecodedLogo } from "./components";
+export { BitcoinDecodedAvatar, BitcoinDecodedLoader, BitcoinDecodedLogo } from "./components";

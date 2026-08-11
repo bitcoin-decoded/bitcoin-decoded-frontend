@@ -70,17 +70,21 @@ export const SeedWordsInput: FC<Props> = ({ words, onWordChange, onComplete }) =
     }
   };
 
+  // minmax(0, 1fr) lets the columns shrink below their content on a narrow phone
+  // (a bare 1fr keeps its min-content width and overflows). The label sits above
+  // the input so the input keeps the full cell width instead of being pushed right.
   const gridStyle: CSSProperties = {
     display: "grid",
-    gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr",
+    gridTemplateColumns: isMobile ? "repeat(2, minmax(0, 1fr))" : "repeat(3, minmax(0, 1fr))",
     gap: "0.5rem",
   };
 
   const cellStyle = (index: number): CSSProperties => ({
     display: "flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    padding: "0.4rem 0.55rem",
+    flexDirection: "column",
+    gap: "0.15rem",
+    minWidth: 0,
+    padding: "0.35rem 0.5rem",
     background: withOpacity(colors.base.background.primary, theme === "dark" ? 0.6 : 0.7),
     border: `1px solid ${focused === index ? gold : colors.base.border.secondary}`,
     transition: "border-color 0.2s var(--ease-smooth)",
@@ -93,9 +97,9 @@ export const SeedWordsInput: FC<Props> = ({ words, onWordChange, onComplete }) =
           <span
             style={{
               fontFamily: BRAND.fonts.mono,
-              fontSize: "0.68rem",
+              fontSize: "0.6rem",
+              letterSpacing: "0.02em",
               color: colors.base.text.secondary,
-              minWidth: "2.9rem",
               whiteSpace: "nowrap",
               userSelect: "none",
             }}
@@ -116,15 +120,16 @@ export const SeedWordsInput: FC<Props> = ({ words, onWordChange, onComplete }) =
             autoComplete="off"
             autoCapitalize="none"
             spellCheck={false}
+            size={1}
             style={{
-              flex: 1,
+              width: "100%",
               minWidth: 0,
               border: "none",
               background: "transparent",
               outline: "none",
               color: colors.base.text.primary,
               fontFamily: BRAND.fonts.mono,
-              fontSize: "0.9rem",
+              fontSize: "0.85rem",
             }}
           />
         </label>
