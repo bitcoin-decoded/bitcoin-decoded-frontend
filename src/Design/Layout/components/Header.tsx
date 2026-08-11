@@ -2,6 +2,7 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { LanguageToggle, useTranslation } from "../../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../../Routing";
+import { BitcoinDecodedAvatar } from "../../Brand";
 import type { Breakpoint } from "../../Responsive";
 import { BRAND, getBrandGold, THEME_COLORS, ThemeToggle, useThemeContext } from "../../Theme";
 import { useHeader, useHeaderHidden } from "../hooks";
@@ -60,17 +61,32 @@ export const Header: FC<Props> = ({
     gap: "0.75rem",
   };
 
-  const wordmarkButtonStyle: CSSProperties = {
-    background: "none",
-    border: "none",
-    padding: 0,
-    cursor: "pointer",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: isMobile ? "0.4rem" : "0.5rem",
-    color: isWordmarkHovered ? colors.base.text.primary : colors.base.text.secondary,
-    transition: "color 0.25s var(--ease-smooth)",
-  };
+  // On mobile the full wordmark crowds the header, so the home control shrinks to
+  // the compact brand mark (the "B" and the gold block) inside a bordered pill that
+  // matches the other header icons. Desktop keeps the full "Bitcoin ▪ Decoded".
+  const wordmarkButtonStyle: CSSProperties = isMobile
+    ? {
+        height: "2rem",
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "0 0.5rem",
+        background: isWordmarkHovered ? colors.base.background.hover : "transparent",
+        border: `1px solid ${colors.base.border.primary}`,
+        borderRadius: "0.5rem",
+        cursor: "pointer",
+        transition: "background-color 0.2s var(--ease-smooth)",
+      }
+    : {
+        background: "none",
+        border: "none",
+        padding: 0,
+        cursor: "pointer",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "0.5rem",
+        color: isWordmarkHovered ? colors.base.text.primary : colors.base.text.secondary,
+        transition: "color 0.25s var(--ease-smooth)",
+      };
 
   const wordmarkTextBitcoinStyle: CSSProperties = {
     fontFamily: BRAND.fonts.wordmark,
@@ -120,9 +136,15 @@ export const Header: FC<Props> = ({
           onMouseLeave={() => setIsWordmarkHovered(false)}
           aria-label={t("header.homeAriaLabel")}
         >
-          <span style={wordmarkTextBitcoinStyle}>Bitcoin</span>
-          <span style={wordmarkBlockStyle} aria-hidden="true" />
-          <span style={wordmarkTextDecodedStyle}>Decoded</span>
+          {isMobile ? (
+            <BitcoinDecodedAvatar size={20} />
+          ) : (
+            <>
+              <span style={wordmarkTextBitcoinStyle}>Bitcoin</span>
+              <span style={wordmarkBlockStyle} aria-hidden="true" />
+              <span style={wordmarkTextDecodedStyle}>Decoded</span>
+            </>
+          )}
         </button>
 
         <div style={rightGroupStyle}>

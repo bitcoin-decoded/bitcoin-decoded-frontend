@@ -1,22 +1,16 @@
 import { type CSSProperties, type FC } from "react";
 
-import {
-  getBrandGold,
-  getTypography,
-  useBreakpoint,
-  usePageTheme,
-  withOpacity,
-} from "../../Design";
+import { BitcoinDecodedLoader, BRAND, useBreakpoint, usePageTheme } from "../../Design";
 import { useTranslation } from "../../I18n";
 
 // The global init screen. Its reveal is delayed in CSS (`userDataLoaderReveal`),
 // so a load that resolves in a frame, as localStorage always does, never flashes
-// the spinner: the reader just sees the app.
+// it: the reader just sees the app. The brand wordmark is the loader — its gold
+// block slides along the rule — with a larger, clearly visible label beneath.
 export const UserDataLoader: FC = () => {
-  const { colors, theme } = usePageTheme();
-  const typo = getTypography(useBreakpoint());
+  const { colors } = usePageTheme();
+  const isMobile = useBreakpoint() === "mobile";
   const { t } = useTranslation();
-  const gold = getBrandGold(theme);
 
   const wrapStyle: CSSProperties = {
     position: "fixed",
@@ -25,29 +19,21 @@ export const UserDataLoader: FC = () => {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: "1.1rem",
+    gap: "1.6rem",
     animation: "userDataLoaderReveal 0.4s var(--ease-smooth) 0.18s both",
   };
 
-  const ringStyle: CSSProperties = {
-    width: "2.25rem",
-    height: "2.25rem",
-    borderRadius: "50%",
-    border: `2px solid ${withOpacity(gold, 0.18)}`,
-    borderTopColor: gold,
-    animation: "userDataSpin 0.9s linear infinite",
-  };
-
   const labelStyle: CSSProperties = {
-    ...typo.micro,
+    fontFamily: BRAND.fonts.mono,
+    fontSize: isMobile ? "1rem" : "1.1rem",
     fontVariant: "small-caps",
-    letterSpacing: "0.08em",
+    letterSpacing: "0.14em",
     color: colors.base.text.secondary,
   };
 
   return (
     <div style={wrapStyle} role="status" aria-live="polite">
-      <span style={ringStyle} aria-hidden="true" />
+      <BitcoinDecodedLoader width={isMobile ? 170 : 210} />
       <span style={labelStyle}>{t("userData.loading")}</span>
     </div>
   );

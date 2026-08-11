@@ -1,4 +1,4 @@
-export { BitcoinDecodedAvatar, BitcoinDecodedLogo } from "./Brand";
+export { BitcoinDecodedAvatar, BitcoinDecodedLoader, BitcoinDecodedLogo } from "./Brand";
 export type { LedgerTraceRow, RangeLedgerTick } from "./components";
 export {
   Badge,
