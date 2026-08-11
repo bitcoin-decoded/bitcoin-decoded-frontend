@@ -17,7 +17,8 @@ export const AuthSuccessStep: FC = () => {
 
   return (
     <AuthScreen
-      icon={<ShieldCheck size={28} />}
+      icon={<ShieldCheck size={26} />}
+      inlineIcon
       title={t("auth.success.title")}
       lead={[t("auth.success.body1"), t("auth.success.body2")]}
     >

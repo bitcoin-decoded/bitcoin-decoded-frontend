@@ -266,7 +266,12 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     }
   }, [mnemonic, password, passwordConfirm, username, createAccount, detectLocalProgress]);
 
-  const download = useCallback(() => downloadBackup(), []);
+  // Downloading the backup is the last step: trigger the file, then close — the
+  // reader should not have to click "later" after they have just saved it.
+  const download = useCallback(async () => {
+    await downloadBackup();
+    close();
+  }, [close]);
 
   const toggleReveal = useCallback(() => setRevealPassword((value) => !value), []);
 

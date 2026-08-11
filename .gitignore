@@ -36,3 +36,5 @@ dist-ssr
 src/Design/img/*_board.png
 src/Design/img/* board.png
 src/Design/img/*.zip
+.vercel
+.env*.local

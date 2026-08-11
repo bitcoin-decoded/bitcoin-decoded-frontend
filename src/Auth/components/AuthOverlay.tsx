@@ -54,13 +54,20 @@ export const AuthOverlay: FC<Props> = ({ open, canGoBack, onBack, onClose, child
 
   if (typeof document === "undefined" || !open) return null;
 
+  // The backdrop is the scroll container; the card centres with auto margins and,
+  // when it is taller than the viewport, the top stays reachable (flex column +
+  // auto vertical margins). Side padding gives real margins on mobile, and nothing
+  // is anchored to the bottom — the earlier bottom-anchor made the card drift down
+  // and fight the scroll on phones.
   const backdropStyle: CSSProperties = {
     position: "fixed",
     inset: 0,
     zIndex: 80,
-    display: "grid",
-    placeItems: isMobile ? "end center" : "center",
-    padding: isMobile ? 0 : "1.5rem",
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: isMobile ? "0.75rem" : "1.5rem",
     background: withOpacity(colors.base.background.primary, 0.6),
     backdropFilter: "blur(6px)",
     WebkitBackdropFilter: "blur(6px)",
@@ -70,17 +77,16 @@ export const AuthOverlay: FC<Props> = ({ open, canGoBack, onBack, onClose, child
 
   const cardStyle: CSSProperties = {
     position: "relative",
+    margin: "auto 0",
     width: "100%",
     maxWidth: isMobile ? "100%" : "31rem",
-    maxHeight: isMobile ? "92vh" : "88vh",
-    overflowY: "auto",
     boxSizing: "border-box",
-    padding: isMobile ? "3rem 1.35rem 1.6rem" : "3rem 2.25rem 2.25rem",
+    padding: isMobile ? "2.75rem 1.25rem 1.5rem" : "3rem 2.25rem 2.25rem",
     background: colors.base.background.secondary,
     border: `1px solid ${colors.base.border.secondary}`,
     borderTop: `2px solid ${gold}`,
     boxShadow: colors.boxShadow.strong,
-    transform: show ? "translateY(0) scale(1)" : `translateY(${isMobile ? "16px" : "8px"}) scale(0.99)`,
+    transform: show ? "translateY(0) scale(1)" : `translateY(${isMobile ? "12px" : "8px"}) scale(0.99)`,
     opacity: show ? 1 : 0,
     transition: "transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.35s var(--ease-smooth)",
   };
