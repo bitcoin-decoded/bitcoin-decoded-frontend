@@ -6,7 +6,7 @@ import { useAuthFlow } from "../hooks";
 
 import { AuthScreen } from "./AuthScreen";
 
-import { ShieldCheck } from "@icons";
+import { DoodleLuckyCat } from "@doodle";
 
 // CDC §7.1 écran 6 / §14.6: the account is live. Downloading the backup is the
 // primary action, not a discreet link. The migration notice shows only when guest
@@ -17,7 +17,8 @@ export const AuthSuccessStep: FC = () => {
 
   return (
     <AuthScreen
-      icon={<ShieldCheck size={28} />}
+      icon={<DoodleLuckyCat size={30} />}
+      inlineIcon
       title={t("auth.success.title")}
       lead={[t("auth.success.body1"), t("auth.success.body2")]}
     >

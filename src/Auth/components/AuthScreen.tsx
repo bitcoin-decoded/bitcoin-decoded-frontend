@@ -6,13 +6,15 @@ type Props = {
   title: string;
   lead?: string | string[];
   icon?: ReactNode;
+  // Render the mark on the same line as the title rather than stacked above it.
+  inlineIcon?: boolean;
   children?: ReactNode;
 };
 
 // The shared layout for every onboarding screen: an optional gold mark, the mono
 // title, one or more body paragraphs, then the screen's own controls. Keeps the
 // rhythm identical across the flow so nothing feels bolted on. Dumb.
-export const AuthScreen: FC<Props> = ({ title, lead, icon, children }) => {
+export const AuthScreen: FC<Props> = ({ title, lead, icon, inlineIcon = false, children }) => {
   const { colors, theme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const leads = lead === undefined ? [] : Array.isArray(lead) ? lead : [lead];
@@ -35,10 +37,21 @@ export const AuthScreen: FC<Props> = ({ title, lead, icon, children }) => {
     margin: 0,
   };
 
+  const mark = <span style={{ color: getBrandGold(theme), lineHeight: 0, flexShrink: 0 }}>{icon}</span>;
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1.15rem" }}>
-      {icon && <div style={{ color: getBrandGold(theme), lineHeight: 0 }}>{icon}</div>}
-      <h2 style={titleStyle}>{title}</h2>
+      {icon && inlineIcon ? (
+        <div style={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
+          {mark}
+          <h2 style={titleStyle}>{title}</h2>
+        </div>
+      ) : (
+        <>
+          {icon && mark}
+          <h2 style={titleStyle}>{title}</h2>
+        </>
+      )}
       {leads.map((paragraph, index) => (
         <p key={index} style={leadStyle}>
           {paragraph}

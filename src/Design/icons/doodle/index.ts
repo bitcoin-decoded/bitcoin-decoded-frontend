@@ -56,6 +56,7 @@ export { DoodleKey } from "./DoodleKey";
 export { DoodleLaptop } from "./DoodleLaptop";
 export { DoodleLock } from "./DoodleLock";
 export { DoodleLoginKey } from "./DoodleLoginKey";
+export { DoodleLuckyCat } from "./DoodleLuckyCat";
 export { DoodleMagicHat } from "./DoodleMagicHat";
 export { DoodleMailFilter } from "./DoodleMailFilter";
 export { DoodleMining } from "./DoodleMining";

@@ -588,7 +588,7 @@ const en = {
   "auth.username.title": "Pick a username",
   "auth.username.body":
     "This is the name the app will display. Nothing forces you to use your real name, and not using it is arguably the better call.",
-  "auth.username.hint": "3 to 20 characters: letters and digits only.",
+  "auth.username.hint": "3 to 20 characters, letters and numbers only.",
   "auth.username.available": "This username is free.",
   "auth.username.taken": "This username is already in use. Try another one.",
   "auth.username.invalid": "Characters not allowed.",
@@ -621,6 +621,15 @@ const en = {
   "auth.password.create.hint": "8 characters minimum.",
   "auth.password.create.mismatch": "The two passwords do not match.",
   "auth.password.create.button": "Create my access",
+
+  // Restore device-password screen (CDC v1.2 §15.5b): the user SETS a new one,
+  // they do not enter an old one. Fields/hint/error/button reuse
+  // auth.password.create.* and auth.restore.seed.button (identical text).
+  "auth.password.restore.title": "Choose a password for this device",
+  "auth.password.restore.body1":
+    "We are not asking for a previous password. You are creating a new one here, to protect your 12 words on this device.",
+  "auth.password.restore.body2":
+    "It never reaches our servers, we can neither read it nor reset it. It protects your backup on this device, not your account: your 12 words remain the only real key.",
 
   "auth.success.title": "You are set",
   "auth.success.body1":

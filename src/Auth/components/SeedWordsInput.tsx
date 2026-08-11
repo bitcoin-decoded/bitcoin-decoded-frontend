@@ -8,6 +8,7 @@ import {
 } from "react";
 
 import { BRAND, getBrandGold, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
+import { interpolate, useTranslation } from "../../I18n";
 
 type Props = {
   words: string[];
@@ -22,6 +23,7 @@ const COUNT = 12;
 // pasting a whole phrase spreads it across the fields; Backspace on an empty field
 // steps back. The single focus index is presentational state (as in Button).
 export const SeedWordsInput: FC<Props> = ({ words, onWordChange, onComplete }) => {
+  const { t } = useTranslation();
   const { colors, theme } = usePageTheme();
   const isMobile = useBreakpoint() === "mobile";
   const gold = getBrandGold(theme);
@@ -91,14 +93,14 @@ export const SeedWordsInput: FC<Props> = ({ words, onWordChange, onComplete }) =
           <span
             style={{
               fontFamily: BRAND.fonts.mono,
-              fontSize: "0.72rem",
+              fontSize: "0.68rem",
               color: colors.base.text.secondary,
-              minWidth: "1.1rem",
-              textAlign: "right",
+              minWidth: "2.9rem",
+              whiteSpace: "nowrap",
               userSelect: "none",
             }}
           >
-            {index + 1}
+            {interpolate(t("auth.seed.confirm.field"), { n: index + 1 })}
           </span>
           <input
             ref={(node) => {
