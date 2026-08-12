@@ -87,7 +87,9 @@ export const useAuthStore = () => {
       setStatus(hasVault ? "locked" : "anonymous");
     }, []),
     erase: useCallback(async () => {
-      await createVault().clear();
+      const vault = createVault();
+      await vault.clear();
+      await vault.clearBackupMeta();
       setUsername(null);
       setStatus("anonymous");
     }, []),

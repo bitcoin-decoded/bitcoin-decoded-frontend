@@ -690,6 +690,9 @@ const fr = {
   "auth.settings.eraseButton": "Effacer cet accès de cet appareil",
   "auth.settings.eraseConfirm":
     "Tu n'as jamais téléchargé de sauvegarde. Si tu effaces maintenant et que tu n'as pas tes 12 mots, ta progression est perdue définitivement. Tu confirmes ?",
+  // UI control label (not CDC §14 prose): the neutral cancel next to the erase
+  // confirmation, in the spirit of the a11y keys below.
+  "auth.settings.eraseCancel": "Annuler",
 
   // Accessibility labels (not shown as text): consistent with the existing aria
   // keys (theme/language toggles), never part of the CDC §14 editorial content.
