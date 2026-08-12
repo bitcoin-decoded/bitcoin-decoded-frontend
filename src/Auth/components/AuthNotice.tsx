@@ -96,19 +96,14 @@ export const AuthNotice: FC = () => {
               <Button variant="primary" size="sm" onClick={() => void download()}>
                 {t("auth.backup.reminder.button")}
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => void dismiss()}>
+              <Button variant="ghost" size="sm" onClick={dismiss}>
                 {t("auth.backup.reminder.link")}
               </Button>
             </div>
           </div>
         ) : (
           <>
-            <button
-              type="button"
-              onClick={() => void dismiss()}
-              aria-label={t("auth.a11y.close")}
-              style={closeButtonStyle}
-            >
+            <button type="button" onClick={dismiss} aria-label={t("auth.a11y.close")} style={closeButtonStyle}>
               <X size={16} />
             </button>
             <p style={{ ...textStyle, paddingRight: "1.5rem" }}>{t("auth.errors.storageUnavailable")}</p>

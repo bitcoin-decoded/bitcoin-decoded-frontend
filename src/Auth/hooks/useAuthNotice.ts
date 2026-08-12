@@ -27,6 +27,7 @@ export const useAuthNotice = () => {
   const [dismissed, setDismissed] = useState(false);
 
   const countedRef = useRef(false);
+  const shownCountedRef = useRef(false);
 
   // Probe persistence once at startup (§9): a defined indexedDB is not proof it
   // works, so we attempt a real read.
@@ -69,23 +70,31 @@ export const useAuthNotice = () => {
         ? "backupReminder"
         : null;
 
-  // "Download now" from the reminder: exporting stamps meta.exportedAt, which
-  // silences the reminder for good, so no dismissal count is spent.
+  // The CDC caps the reminder at 3 *affichages* (meta.remindersDismissed), so the
+  // count is spent when it is shown — once per session — not when it is dismissed.
+  // Otherwise a reader who never clicks "Later" would see it every session forever.
+  // The persisted value is bumped but the in-session backupMeta is left untouched,
+  // so the banner stays visible through the session it is counted in.
+  useEffect(() => {
+    if (notice === "backupReminder" && backupMeta && !shownCountedRef.current) {
+      shownCountedRef.current = true;
+      void createVault().setBackupMeta({
+        ...backupMeta,
+        remindersDismissed: backupMeta.remindersDismissed + 1,
+      });
+    }
+  }, [notice, backupMeta]);
+
+  // "Download now": exporting stamps meta.exportedAt, which silences the reminder
+  // for good; hide it for this session too.
   const download = useCallback(async () => {
     await downloadBackup();
     setDismissed(true);
   }, []);
 
-  // "Later": spend one of the three reminder shows, then hide for this session.
-  const dismiss = useCallback(async () => {
-    if (notice === "backupReminder" && backupMeta) {
-      await createVault().setBackupMeta({
-        ...backupMeta,
-        remindersDismissed: backupMeta.remindersDismissed + 1,
-      });
-    }
-    setDismissed(true);
-  }, [notice, backupMeta]);
+  // "Later" / the storage warning's ✕: hide for this session. The reminder's show
+  // was already counted above, so nothing to persist here.
+  const dismiss = useCallback(() => setDismissed(true), []);
 
   return { notice, download, dismiss };
 };

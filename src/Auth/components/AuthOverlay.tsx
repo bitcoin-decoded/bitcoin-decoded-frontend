@@ -18,10 +18,11 @@ const prefersReducedMotion = (): boolean =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // The onboarding modal shell (CDC §7): a dimmed, blurred backdrop over a single
-// centred card. Escape and a backdrop click close it — for a locked device that
-// means "keep reading as a guest", never a trap. Ported to document.body so it
-// sits above the app (and above the data gate, which is why the flow lives higher
-// in the tree). Presentational state only.
+// centred card. Closing is deliberate only — the ✕ (and, where a flow offers one,
+// an explicit Annuler) — never a backdrop click or Escape, so a stray tap can't
+// discard a half-filled parcours. Ported to document.body so it sits above the app
+// (and above the data gate, which is why the flow lives higher in the tree).
+// Presentational state only.
 export const AuthOverlay: FC<Props> = ({ open, canGoBack, onBack, onClose, children }) => {
   const { t } = useTranslation();
   const { theme } = useThemeContext();
@@ -43,26 +44,49 @@ export const AuthOverlay: FC<Props> = ({ open, canGoBack, onBack, onClose, child
     return () => cancelAnimationFrame(raf);
   }, [open]);
 
+  // A real scroll lock for the whole time the modal is open: the document behind is
+  // frozen (position: fixed pins it, top compensates for the current scroll), so it
+  // cannot drift under the backdrop and expose uncovered areas — a defect seen on
+  // Android. Only the card (and the backdrop's own overflow) may scroll. The exact
+  // scroll offset is restored on close.
   useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+    if (!open || typeof document === "undefined") return;
+    const { body } = document;
+    const scrollY = window.scrollY;
+    const previous = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    return () => {
+      body.style.position = previous.position;
+      body.style.top = previous.top;
+      body.style.left = previous.left;
+      body.style.right = previous.right;
+      body.style.width = previous.width;
+      body.style.overflow = previous.overflow;
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
 
   if (typeof document === "undefined" || !open) return null;
 
-  // The backdrop is the scroll container; the card centres with auto margins and,
-  // when it is taller than the viewport, the top stays reachable (flex column +
-  // auto vertical margins). Side padding gives real margins on mobile, and nothing
-  // is anchored to the bottom — the earlier bottom-anchor made the card drift down
-  // and fight the scroll on phones.
+  // The backdrop is the scroll container for a card taller than the viewport (flex
+  // column + auto vertical margins keep the top reachable). Above the sticky header
+  // (z 101) so it covers the whole viewport. Side padding gives real mobile margins.
   const backdropStyle: CSSProperties = {
     position: "fixed",
     inset: 0,
-    zIndex: 80,
+    zIndex: 200,
     overflowY: "auto",
     display: "flex",
     flexDirection: "column",
@@ -108,8 +132,8 @@ export const AuthOverlay: FC<Props> = ({ open, canGoBack, onBack, onClose, child
   });
 
   return createPortal(
-    <div style={backdropStyle} onClick={onClose} role="presentation">
-      <div style={cardStyle} onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true">
+    <div style={backdropStyle} role="presentation">
+      <div style={cardStyle} role="dialog" aria-modal="true">
         {canGoBack && (
           <button type="button" onClick={onBack} aria-label={t("auth.a11y.back")} style={cornerButton("left")}>
             <ChevronLeft size={18} />
