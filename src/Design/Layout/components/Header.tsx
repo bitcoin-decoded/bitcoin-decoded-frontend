@@ -2,12 +2,13 @@ import { type CSSProperties, type FC, type ReactNode } from "react";
 
 import { LanguageToggle, useTranslation } from "../../../I18n";
 import { ROUTE_NAME, useRouterContext } from "../../../Routing";
-import { BitcoinDecodedAvatar } from "../../Brand";
 import type { Breakpoint } from "../../Responsive";
 import { BRAND, getBrandGold, THEME_COLORS, ThemeToggle, useThemeContext } from "../../Theme";
 import { useHeader, useHeaderHidden } from "../hooks";
 
 import { HamburgerButton } from "./HamburgerButton";
+
+import { Home } from "@icons";
 
 type Props = {
   showHamburger?: boolean;
@@ -61,9 +62,10 @@ export const Header: FC<Props> = ({
     gap: "0.75rem",
   };
 
-  // On mobile the full wordmark crowds the header, so the home control shrinks to
-  // the compact brand mark (the "B" and the gold block) inside a bordered pill that
-  // matches the other header icons. Desktop keeps the full "Bitcoin ▪ Decoded".
+  // On mobile the full wordmark crowds the header and a second brand mark would
+  // compete with the app's own loader/home identity, so the home control is a plain
+  // house icon in a bordered pill, matching the other header icons. Desktop keeps
+  // the full "Bitcoin ▪ Decoded".
   const wordmarkButtonStyle: CSSProperties = isMobile
     ? {
         height: "2rem",
@@ -73,8 +75,9 @@ export const Header: FC<Props> = ({
         background: isWordmarkHovered ? colors.base.background.hover : "transparent",
         border: `1px solid ${colors.base.border.primary}`,
         borderRadius: "0.5rem",
+        color: isWordmarkHovered ? colors.base.text.primary : colors.base.text.secondary,
         cursor: "pointer",
-        transition: "background-color 0.2s var(--ease-smooth)",
+        transition: "background-color 0.2s var(--ease-smooth), color 0.2s var(--ease-smooth)",
       }
     : {
         background: "none",
@@ -137,7 +140,7 @@ export const Header: FC<Props> = ({
           aria-label={t("header.homeAriaLabel")}
         >
           {isMobile ? (
-            <BitcoinDecodedAvatar size={20} />
+            <Home size={18} strokeWidth={2} />
           ) : (
             <>
               <span style={wordmarkTextBitcoinStyle}>Bitcoin</span>
