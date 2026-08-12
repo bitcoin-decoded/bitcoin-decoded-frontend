@@ -27,16 +27,23 @@ export const useAuthStore = () => {
   useEffect(() => {
     let alive = true;
     void (async () => {
-      const session = await fetchSession();
-      if (!alive) return;
-      if (session) {
-        setUsername(session.username);
-        setStatus("authenticated");
-        return;
+      try {
+        const session = await fetchSession();
+        if (!alive) return;
+        if (session) {
+          setUsername(session.username);
+          setStatus("authenticated");
+          return;
+        }
+        const hasVault = await createVault().exists();
+        if (!alive) return;
+        setStatus(resolveInitialStatus(null, hasVault));
+      } catch {
+        // A browser with IndexedDB present but broken (Safari private mode) makes
+        // the vault probe reject; without this the status would stay "checking"
+        // forever. Treat it as a guest — the storage warning (§9) handles the rest.
+        if (alive) setStatus("anonymous");
       }
-      const hasVault = await createVault().exists();
-      if (!alive) return;
-      setStatus(resolveInitialStatus(null, hasVault));
     })();
     return () => {
       alive = false;
@@ -86,8 +93,16 @@ export const useAuthStore = () => {
       const hasVault = await createVault().exists();
       setStatus(hasVault ? "locked" : "anonymous");
     }, []),
+    // "Erase this access from this device" (CDC §7.7): unlike sign out, this also
+    // ends the session, otherwise the cookie would survive a vault-less device and
+    // a reload would land "authenticated" with nothing to unlock or export. Order:
+    // drop the session, then the container, then its backup bookkeeping. Nothing on
+    // the server is deleted (no account deletion in v1).
     erase: useCallback(async () => {
-      await createVault().clear();
+      await logoutSession();
+      const vault = createVault();
+      await vault.clear();
+      await vault.clearBackupMeta();
       setUsername(null);
       setStatus("anonymous");
     }, []),

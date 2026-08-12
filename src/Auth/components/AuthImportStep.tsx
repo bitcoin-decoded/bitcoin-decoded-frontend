@@ -46,7 +46,10 @@ export const AuthImportStep: FC = () => {
       {importContainer ? (
         <>
           <p style={{ margin: 0, color: colors.base.text.primary }}>
-            {interpolate(t("auth.restore.file.recognised"), { pseudo: importContainer.username })}
+            {interpolate(t("auth.restore.file.recognised"), {
+              pseudo: importContainer.username,
+              username: importContainer.username,
+            })}
           </p>
           <PasswordField
             label={t("auth.password.create.field1")}

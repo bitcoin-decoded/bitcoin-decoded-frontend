@@ -91,4 +91,11 @@ export const createVault = () => ({
     available()
       ? request(META_STORE, "readwrite", (s) => s.put(meta, BACKUP)).then(() => {})
       : Promise.resolve(),
+
+  // Erasing the access also drops its backup bookkeeping, so a fresh account
+  // created later on this device does not inherit a stale "already exported" flag.
+  clearBackupMeta: (): Promise<void> =>
+    available()
+      ? request(META_STORE, "readwrite", (s) => s.delete(BACKUP)).then(() => {})
+      : Promise.resolve(),
 });

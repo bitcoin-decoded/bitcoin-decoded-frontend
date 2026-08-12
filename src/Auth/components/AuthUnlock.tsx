@@ -25,7 +25,10 @@ export const AuthUnlock: FC = () => {
 
   return (
     <AuthScreen
-      title={interpolate(t("auth.unlock.title"), { pseudo: unlockUsername ?? "" })}
+      title={interpolate(t("auth.unlock.title"), {
+        pseudo: unlockUsername ?? "",
+        username: unlockUsername ?? "",
+      })}
       lead={t("auth.unlock.body")}
     >
       <PasswordField

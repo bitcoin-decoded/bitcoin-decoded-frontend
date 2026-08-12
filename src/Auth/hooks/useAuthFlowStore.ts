@@ -4,17 +4,19 @@ import {
   AuthError,
   authErrorKey,
   confirmationMatches,
+  createVault,
   downloadBackup,
   generateMnemonic,
   normalizeMnemonicInput,
   parseVaultFile,
   passwordStrength,
   pickConfirmationIndices,
+  readVaultPublicKey,
   readVaultUsername,
   validateMnemonic,
   validateUsername,
 } from "../helpers/index.js";
-import type { AuthFlowScreen, VaultContainer } from "../types/index.js";
+import type { AuthFlowScreen, AuthStatus, BackupMeta, VaultContainer } from "../types/index.js";
 
 import { useAuth } from "./useAuth.js";
 
@@ -33,8 +35,20 @@ const INLINE_CODES = new Set(["wrong_password", "account_not_found", "invalid_ph
 // whose results move the session state. `detectLocalProgress` is injected (never
 // imported from UserData) so Auth keeps no dependency on UserData.
 export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
-  const { status, busy, error, clearError, createAccount, unlock, restore, importAccount, checkUsername } =
-    useAuth();
+  const {
+    status,
+    username: sessionUsername,
+    busy,
+    error,
+    clearError,
+    createAccount,
+    unlock,
+    restore,
+    importAccount,
+    checkUsername,
+    logout,
+    erase,
+  } = useAuth();
 
   const [screen, setScreen] = useState<AuthFlowScreen>("closed");
 
@@ -70,7 +84,13 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   const [unlockUsername, setUnlockUsername] = useState<string | null>(null);
   const [wrongPassword, setWrongPassword] = useState(false);
 
-  const autoOpenedRef = useRef(false);
+  // Settings (CDC §7.11 / §14.11): loaded from the vault on open, never mirrored
+  // auth state. The erase step is a two-click confirmation held here.
+  const [publicKey, setPublicKey] = useState<string | null>(null);
+  const [backupMeta, setBackupMeta] = useState<BackupMeta | null>(null);
+  const [eraseConfirming, setEraseConfirming] = useState(false);
+
+  const prevStatusRef = useRef<AuthStatus>("checking");
   const usernameTokenRef = useRef(0);
 
   const resetFields = useCallback(() => {
@@ -93,21 +113,24 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setImportContainer(null);
     setImportError(null);
     setWrongPassword(false);
+    setPublicKey(null);
+    setBackupMeta(null);
+    setEraseConfirming(false);
     clearError();
   }, [clearError]);
 
-  // CDC §7.2: a locked device (vault present, no session) lands on the unlock
-  // screen, greeting the reader by the pseudo kept in cleartext in the vault. Shown
-  // once per locked episode; dismissing it does not re-trigger until status changes.
+  // CDC §7.2: a locked device found at startup (vault present, no session) lands on
+  // the unlock screen, greeting the reader by the pseudo kept in cleartext in the
+  // vault. Gated on the *initial* checking->locked transition only: an in-app sign
+  // out (authenticated->locked) must not bounce the reader onto unlock — it closes
+  // to the header, from which they can unlock deliberately.
   useEffect(() => {
-    if (status === "locked") {
-      if (autoOpenedRef.current) return;
-      autoOpenedRef.current = true;
+    const previous = prevStatusRef.current;
+    prevStatusRef.current = status;
+    if (status === "locked" && previous === "checking") {
       setWrongPassword(false);
       void readVaultUsername().then(setUnlockUsername);
       setScreen("unlock");
-    } else {
-      autoOpenedRef.current = false;
     }
   }, [status]);
 
@@ -158,9 +181,21 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     resetFields();
   }, [resetFields]);
 
+  // CDC §7.11: a valid session opens the account settings, loaded fresh from the
+  // vault (public key + backup bookkeeping) each time they are opened.
+  const loadSettings = useCallback(async () => {
+    const [key, meta] = await Promise.all([readVaultPublicKey(), createVault().getBackupMeta()]);
+    setPublicKey(key);
+    setBackupMeta(meta);
+  }, []);
+
   const open = useCallback(() => {
-    // CDC §7.2: valid session asks nothing; account settings are Phase 4d-3.
-    if (status === "authenticated") return;
+    if (status === "authenticated") {
+      setEraseConfirming(false);
+      void loadSettings();
+      setScreen("settings");
+      return;
+    }
     if (status === "locked") {
       setWrongPassword(false);
       setPassword("");
@@ -170,7 +205,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     }
     resetFields();
     setScreen("landing");
-  }, [status, resetFields]);
+  }, [status, resetFields, loadSettings]);
 
   const back = useCallback(() => {
     setScreen((current) => {
@@ -396,6 +431,29 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setScreen("restore.seed");
   }, [clearError]);
 
+  // Settings actions (CDC §7.5-§7.7) -----------------------------------------
+  // Export copies the already-encrypted container as-is; no password re-ask (§7.5).
+  const exportBackup = useCallback(async () => {
+    await downloadBackup();
+    setBackupMeta(await createVault().getBackupMeta());
+  }, []);
+
+  // Sign out clears the cookie and the in-memory key; the vault stays (§7.7). Close
+  // to the header rather than the unlock screen — see the locked effect's gate.
+  const signOut = useCallback(async () => {
+    await logout();
+    close();
+  }, [logout, close]);
+
+  const askErase = useCallback(() => setEraseConfirming(true), []);
+  const cancelErase = useCallback(() => setEraseConfirming(false), []);
+  const confirmErase = useCallback(async () => {
+    await erase();
+    close();
+  }, [erase, close]);
+
+  const neverExported = !backupMeta?.exportedAt;
+
   const genericErrorKey = error && !INLINE_CODES.has(error) ? authErrorKey(error) : null;
 
   return {
@@ -459,5 +517,16 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     submitImport,
     goToImport,
     goToRestoreSeed,
+    // settings
+    accountUsername: sessionUsername,
+    publicKey,
+    lastExportAt: backupMeta?.exportedAt ?? null,
+    neverExported,
+    eraseConfirming,
+    exportBackup,
+    signOut,
+    askErase,
+    cancelErase,
+    confirmErase,
   };
 };

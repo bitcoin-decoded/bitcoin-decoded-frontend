@@ -7,8 +7,8 @@ import { useAuth, useAuthFlow } from "../hooks";
 import { User } from "@icons";
 
 // The header entry point to the account (CDC §7). Signed in, it is a quiet chip
-// showing the pseudo (settings land in Phase 4d-3); otherwise it opens the flow —
-// the landing for a guest, the unlock screen for a locked device.
+// showing the pseudo that opens the settings panel (§7.11); otherwise it opens the
+// flow — the landing for a guest, the unlock screen for a locked device.
 export const AuthEntryButton: FC = () => {
   const { t } = useTranslation();
   const { theme } = useThemeContext();
@@ -30,31 +30,39 @@ export const AuthEntryButton: FC = () => {
     letterSpacing: "0.02em",
   };
 
+  const lit = hovered;
+  const interactiveStyle: CSSProperties = {
+    ...base,
+    cursor: "pointer",
+    background: lit ? colors.base.background.hover : "transparent",
+    color: lit ? colors.base.text.primary : colors.base.text.secondary,
+    transition: "background-color 0.2s, color 0.2s",
+  };
+
   if (status === "authenticated") {
     return (
-      <span style={{ ...base, color: colors.base.text.secondary }}>
+      <button
+        onClick={open}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        aria-label={t("auth.settings.sectionTitle")}
+        style={interactiveStyle}
+      >
         <User size={16} strokeWidth={2} />
         <span style={{ maxWidth: "9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {username}
         </span>
-      </span>
+      </button>
     );
   }
 
-  const lit = hovered;
   return (
     <button
       onClick={open}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       aria-label={t("auth.landing.title")}
-      style={{
-        ...base,
-        cursor: "pointer",
-        background: lit ? colors.base.background.hover : "transparent",
-        color: lit ? colors.base.text.primary : colors.base.text.secondary,
-        transition: "background-color 0.2s, color 0.2s",
-      }}
+      style={interactiveStyle}
     >
       <User size={16} strokeWidth={2} />
     </button>
