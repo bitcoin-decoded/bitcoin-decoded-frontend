@@ -684,6 +684,8 @@ const en = {
   "auth.settings.eraseButton": "Erase this access from this device",
   "auth.settings.eraseConfirm":
     "You have never downloaded a backup. If you erase now and do not have your 12 words, your progress is gone for good. Confirm?",
+  "auth.settings.eraseConfirmExported":
+    "You are about to erase your access from this device. You can come back with your backup file or your 12 words. Erase?",
   // Erase-confirmation cancel — the safe exit next to the destructive confirm
   // (added to the CDC in v1.3, §15.11).
   "auth.settings.eraseCancel": "Cancel",

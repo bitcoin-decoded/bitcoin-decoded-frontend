@@ -690,6 +690,8 @@ const fr = {
   "auth.settings.eraseButton": "Effacer cet accès de cet appareil",
   "auth.settings.eraseConfirm":
     "Tu n'as jamais téléchargé de sauvegarde. Si tu effaces maintenant et que tu n'as pas tes 12 mots, ta progression est perdue définitivement. Tu confirmes ?",
+  "auth.settings.eraseConfirmExported":
+    "Tu vas effacer ton accès de cet appareil. Tu pourras revenir avec ta sauvegarde ou tes 12 mots. On efface ?",
   // Erase-confirmation cancel — the safe exit next to the destructive confirm
   // (added to the CDC in v1.3, §14.11).
   "auth.settings.eraseCancel": "Annuler",
