@@ -11,8 +11,6 @@ import {
   parseVaultFile,
   passwordStrength,
   pickConfirmationIndices,
-  probeStorageAvailable,
-  readVaultPublicKey,
   readVaultUsername,
   validateMnemonic,
   validateUsername,
@@ -48,7 +46,6 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     importAccount,
     checkUsername,
     logout,
-    erase,
   } = useAuth();
 
   const [screen, setScreen] = useState<AuthFlowScreen>("closed");
@@ -85,24 +82,12 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   const [unlockUsername, setUnlockUsername] = useState<string | null>(null);
   const [wrongPassword, setWrongPassword] = useState(false);
 
-  // CDC v1.4 §9: with IndexedDB unavailable (private browsing), no device access can
-  // persist, so the landing blocks create/restore rather than half-succeed. Probed
-  // once at startup, defaulting to available until the probe settles.
-  const [storageAvailable, setStorageAvailable] = useState(true);
-
-  // Settings (CDC §7.11 / §14.11): loaded from the vault on open, never mirrored
-  // auth state. The erase step is a two-click confirmation held here.
-  const [publicKey, setPublicKey] = useState<string | null>(null);
+  // Settings (CDC §7.11 / §14.11): the backup bookkeeping, loaded from the vault on
+  // open, never mirrored auth state.
   const [backupMeta, setBackupMeta] = useState<BackupMeta | null>(null);
-  const [eraseConfirming, setEraseConfirming] = useState(false);
 
   const prevStatusRef = useRef<AuthStatus>("checking");
   const usernameTokenRef = useRef(0);
-
-  // Probe persistence once (§9): a defined indexedDB is not proof it works.
-  useEffect(() => {
-    void probeStorageAvailable().then(setStorageAvailable);
-  }, []);
 
   const resetFields = useCallback(() => {
     setMnemonic(null);
@@ -124,9 +109,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setImportContainer(null);
     setImportError(null);
     setWrongPassword(false);
-    setPublicKey(null);
     setBackupMeta(null);
-    setEraseConfirming(false);
     clearError();
   }, [clearError]);
 
@@ -192,17 +175,14 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     resetFields();
   }, [resetFields]);
 
-  // CDC §7.11: a valid session opens the account settings, loaded fresh from the
-  // vault (public key + backup bookkeeping) each time they are opened.
+  // CDC §7.11: a valid session opens the account settings, its backup bookkeeping
+  // loaded fresh from the vault each time they are opened.
   const loadSettings = useCallback(async () => {
-    const [key, meta] = await Promise.all([readVaultPublicKey(), createVault().getBackupMeta()]);
-    setPublicKey(key);
-    setBackupMeta(meta);
+    setBackupMeta(await createVault().getBackupMeta());
   }, []);
 
   const open = useCallback(() => {
     if (status === "authenticated") {
-      setEraseConfirming(false);
       void loadSettings();
       setScreen("settings");
       return;
@@ -456,13 +436,6 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     close();
   }, [logout, close]);
 
-  const askErase = useCallback(() => setEraseConfirming(true), []);
-  const cancelErase = useCallback(() => setEraseConfirming(false), []);
-  const confirmErase = useCallback(async () => {
-    await erase();
-    close();
-  }, [erase, close]);
-
   const neverExported = !backupMeta?.exportedAt;
 
   const genericErrorKey = error && !INLINE_CODES.has(error) ? authErrorKey(error) : null;
@@ -479,7 +452,6 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     back,
     startCreate,
     startRestore,
-    storageAvailable,
     // create
     mnemonic,
     fromRestore,
@@ -531,14 +503,9 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     goToRestoreSeed,
     // settings
     accountUsername: sessionUsername,
-    publicKey,
     lastExportAt: backupMeta?.exportedAt ?? null,
     neverExported,
-    eraseConfirming,
     exportBackup,
     signOut,
-    askErase,
-    cancelErase,
-    confirmErase,
   };
 };

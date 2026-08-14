@@ -42,7 +42,12 @@ export const AuthUnlock: FC = () => {
         autoComplete="current-password"
         onEnter={submitUnlock}
       />
-      <Button variant="primary" fullWidth disabled={password.length === 0 || busy} onClick={submitUnlock}>
+      <Button
+        variant="primary"
+        style={{ alignSelf: "center" }}
+        disabled={password.length === 0 || busy}
+        onClick={submitUnlock}
+      >
         {t("auth.unlock.button")}
       </Button>
       <div style={{ textAlign: "center" }}>

@@ -7,9 +7,13 @@ import { useAuthFlow } from "../hooks";
 import { AuthScreen } from "./AuthScreen";
 import { PasswordField } from "./PasswordField";
 
-// CDC §7.4 / §14.8: import a .bdw backup. The pseudo is shown before the password
-// is asked; a wrong file version or format gets a clear line, never a raw trace. A
-// discreet link switches to entering the 12 words instead (§7.3).
+import { Check } from "@icons";
+
+// CDC §7.4 / §14.8: import a spare key (.bdw) on a single screen. Before a file is
+// chosen the reader gets the instruction and the picker; once chosen, the picker
+// gives way to a confirmation that the key was recognised and the password. A wrong
+// file version or format gets a clear line, never a raw trace. A discreet link
+// switches to entering the 12 words instead (§7.3).
 export const AuthImportStep: FC = () => {
   const { t } = useTranslation();
   const { colors } = usePageTheme();
@@ -29,7 +33,10 @@ export const AuthImportStep: FC = () => {
   } = useAuthFlow();
 
   return (
-    <AuthScreen title={t("auth.restore.file.title")} lead={t("auth.restore.file.body")}>
+    <AuthScreen
+      title={t("auth.restore.file.title")}
+      lead={importContainer ? undefined : t("auth.restore.file.body")}
+    >
       <input
         ref={inputRef}
         type="file"
@@ -45,14 +52,27 @@ export const AuthImportStep: FC = () => {
 
       {importContainer ? (
         <>
-          <p style={{ margin: 0, color: colors.base.text.primary }}>
-            {interpolate(t("auth.restore.file.recognised"), {
-              pseudo: importContainer.username,
-              username: importContainer.username,
-            })}
-          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.55rem",
+              color: colors.semantic.success.text,
+              fontFamily: "inherit",
+              fontSize: "0.95rem",
+            }}
+          >
+            <Check size={18} strokeWidth={2.5} style={{ flexShrink: 0 }} />
+            <span>
+              {interpolate(t("auth.restore.file.recognised"), {
+                pseudo: importContainer.username,
+                username: importContainer.username,
+              })}
+            </span>
+          </div>
           <PasswordField
-            label={t("auth.password.create.field1")}
+            label={t("auth.restore.file.passwordLabel")}
+            hint={t("auth.restore.file.passwordHint")}
             value={password}
             onChange={setPassword}
             reveal={revealPassword}
@@ -64,7 +84,7 @@ export const AuthImportStep: FC = () => {
           />
           <Button
             variant="primary"
-            fullWidth
+            style={{ alignSelf: "center" }}
             disabled={password.length === 0 || busy}
             onClick={submitImport}
           >
@@ -72,7 +92,7 @@ export const AuthImportStep: FC = () => {
           </Button>
         </>
       ) : (
-        <Button variant="primary" fullWidth onClick={() => inputRef.current?.click()}>
+        <Button variant="primary" style={{ alignSelf: "center" }} onClick={() => inputRef.current?.click()}>
           {t("auth.restore.file.button")}
         </Button>
       )}

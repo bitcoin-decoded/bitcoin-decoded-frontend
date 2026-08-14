@@ -70,7 +70,12 @@ export const AuthPasswordStep: FC = () => {
         autoComplete="new-password"
         onEnter={submitCreate}
       />
-      <Button variant="primary" fullWidth disabled={!canSubmitCreate || busy} onClick={submitCreate}>
+      <Button
+        variant="primary"
+        style={{ alignSelf: "center" }}
+        disabled={!canSubmitCreate || busy}
+        onClick={submitCreate}
+      >
         {t("auth.password.create.button")}
       </Button>
     </AuthScreen>

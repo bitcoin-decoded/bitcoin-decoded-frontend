@@ -74,7 +74,12 @@ export const AuthSeedStep: FC = () => {
         </span>
       </label>
 
-      <Button variant="primary" fullWidth disabled={!seedAcknowledged} onClick={goToConfirm}>
+      <Button
+        variant="primary"
+        style={{ alignSelf: "center" }}
+        disabled={!seedAcknowledged}
+        onClick={goToConfirm}
+      >
         {t("auth.seed.display.button")}
       </Button>
     </AuthScreen>
