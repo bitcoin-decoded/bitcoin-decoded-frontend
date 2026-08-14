@@ -16,6 +16,7 @@ export { formatPublicKey } from "./formatPublicKey.js";
 export { generateMnemonic } from "./generateMnemonic.js";
 export { importAccount } from "./importAccount.js";
 export { logoutSession } from "./logoutSession.js";
+export { nextActiveDays } from "./nextActiveDays.js";
 export { normalizeMnemonicInput } from "./normalizeMnemonicInput.js";
 export { parseVaultFile } from "./parseVaultFile.js";
 export { passwordStrength } from "./passwordStrength.js";

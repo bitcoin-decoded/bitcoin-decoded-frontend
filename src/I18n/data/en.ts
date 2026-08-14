@@ -684,8 +684,8 @@ const en = {
   "auth.settings.eraseButton": "Erase this access from this device",
   "auth.settings.eraseConfirm":
     "You have never downloaded a backup. If you erase now and do not have your 12 words, your progress is gone for good. Confirm?",
-  // UI control label (not CDC §15 prose): the neutral cancel next to the erase
-  // confirmation, in the spirit of the a11y keys below.
+  // Erase-confirmation cancel — the safe exit next to the destructive confirm
+  // (added to the CDC in v1.3, §15.11).
   "auth.settings.eraseCancel": "Cancel",
 
   // Accessibility labels (not shown as text): consistent with the existing aria
