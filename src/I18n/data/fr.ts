@@ -707,7 +707,7 @@ const fr = {
   "auth.errors.server": "Quelque chose s'est mal passé de notre côté. Réessaie dans un instant.",
   "auth.errors.sessionExpired": "Ta session a expiré. Saisis ton mot de passe pour reprendre.",
   "auth.errors.storageUnavailable":
-    "Ce navigateur ne permet pas de conserver ton accès, sans doute à cause de la navigation privée. Tu peux avancer, mais télécharge ta sauvegarde avant de fermer l'onglet.",
+    "En navigation privée, ton navigateur n'enregistre rien : un accès créé ici disparaîtrait à la fermeture de l'onglet. Pour créer ton accès et garder ta progression, ouvre Bitcoin.Decoded dans une fenêtre normale.",
 } as const;
 
 export default fr;

@@ -701,7 +701,7 @@ const en = {
   "auth.errors.server": "Something went wrong on our side. Try again in a moment.",
   "auth.errors.sessionExpired": "Your session expired. Enter your password to continue.",
   "auth.errors.storageUnavailable":
-    "This browser cannot keep your access, most likely because of private browsing. You can keep going, but download your backup before closing the tab.",
+    "In private browsing, your browser saves nothing: an access created here would vanish when you close the tab. To create your access and keep your progress, open Bitcoin.Decoded in a normal window.",
 } as const;
 
 export default en;

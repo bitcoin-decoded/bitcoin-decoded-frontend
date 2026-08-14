@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { createVault, downloadBackup, nextActiveDays, probeStorageAvailable } from "../helpers/index.js";
+import { createVault, downloadBackup, nextActiveDays } from "../helpers/index.js";
 import type { BackupMeta } from "../types/index.js";
 
 import { useAuth } from "./useAuth.js";
 
-type AuthNoticeKind = "storageUnavailable" | "backupReminder" | null;
+type AuthNoticeKind = "backupReminder" | null;
 
 // CDC v1.3 §7.6: the reminder starts on the 3rd distinct *day* of use and shows at
 // most 3 times (once per day), then stays silent. A distinct day, not a distinct
@@ -20,12 +20,13 @@ const MAX_REMINDERS = 3;
 const ACTIVE_DAYS_KEY = "bd.auth.activeDays";
 const LAST_ACTIVE_DAY_KEY = "bd.auth.lastActiveDay";
 
-// Drives the non-modal notices that live outside the overlay (CDC §7.6 backup
-// reminder, §9 storage unavailable). Reads auth status, never mirrors it.
+// Drives the non-modal backup reminder (CDC §7.6), which lives outside the overlay.
+// Reads auth status, never mirrors it. Storage-unavailable (§9) is not handled here:
+// v1.4 blocks account creation in private browsing at the landing, so an
+// authenticated reader always has working storage.
 export const useAuthNotice = () => {
   const { status } = useAuth();
 
-  const [storageAvailable, setStorageAvailable] = useState(true);
   const [backupMeta, setBackupMeta] = useState<BackupMeta | null>(null);
   const [activeDays, setActiveDays] = useState(0);
   const [isNewDay, setIsNewDay] = useState(false);
@@ -33,12 +34,6 @@ export const useAuthNotice = () => {
 
   const countedRef = useRef(false);
   const shownCountedRef = useRef(false);
-
-  // Probe persistence once at startup (§9): a defined indexedDB is not proof it
-  // works, so we attempt a real read.
-  useEffect(() => {
-    void probeStorageAvailable().then(setStorageAvailable);
-  }, []);
 
   // On the first authenticated settle of this load, fold today into the distinct-day
   // tally and read the backup bookkeeping. Erasing (-> anonymous) resets the tally
@@ -73,20 +68,13 @@ export const useAuthNotice = () => {
   // Shown once per new day (isNewDay), from the 3rd distinct day, capped at 3 total.
   const backupReminder =
     status === "authenticated" &&
-    storageAvailable &&
     isNewDay &&
     backupMeta !== null &&
     !backupMeta.exportedAt &&
     activeDays >= REMINDER_AT_DAY &&
     backupMeta.remindersDismissed < MAX_REMINDERS;
 
-  const notice: AuthNoticeKind = dismissed
-    ? null
-    : status === "authenticated" && !storageAvailable
-      ? "storageUnavailable"
-      : backupReminder
-        ? "backupReminder"
-        : null;
+  const notice: AuthNoticeKind = !dismissed && backupReminder ? "backupReminder" : null;
 
   // Each appearance spends one of the three (meta.remindersDismissed). The banner
   // only appears on a new day, so this is at most once per day. Persisted only; the
@@ -108,8 +96,7 @@ export const useAuthNotice = () => {
     setDismissed(true);
   }, []);
 
-  // "Later" / the storage warning's ✕: hide for this session. The reminder's show
-  // was already counted above, so nothing to persist here.
+  // "Later": hide for this session. The reminder's show was already counted above.
   const dismiss = useCallback(() => setDismissed(true), []);
 
   return { notice, download, dismiss };

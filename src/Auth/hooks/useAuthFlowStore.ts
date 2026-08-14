@@ -11,6 +11,7 @@ import {
   parseVaultFile,
   passwordStrength,
   pickConfirmationIndices,
+  probeStorageAvailable,
   readVaultPublicKey,
   readVaultUsername,
   validateMnemonic,
@@ -84,6 +85,11 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   const [unlockUsername, setUnlockUsername] = useState<string | null>(null);
   const [wrongPassword, setWrongPassword] = useState(false);
 
+  // CDC v1.4 §9: with IndexedDB unavailable (private browsing), no device access can
+  // persist, so the landing blocks create/restore rather than half-succeed. Probed
+  // once at startup, defaulting to available until the probe settles.
+  const [storageAvailable, setStorageAvailable] = useState(true);
+
   // Settings (CDC §7.11 / §14.11): loaded from the vault on open, never mirrored
   // auth state. The erase step is a two-click confirmation held here.
   const [publicKey, setPublicKey] = useState<string | null>(null);
@@ -92,6 +98,11 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
 
   const prevStatusRef = useRef<AuthStatus>("checking");
   const usernameTokenRef = useRef(0);
+
+  // Probe persistence once (§9): a defined indexedDB is not proof it works.
+  useEffect(() => {
+    void probeStorageAvailable().then(setStorageAvailable);
+  }, []);
 
   const resetFields = useCallback(() => {
     setMnemonic(null);
@@ -468,6 +479,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     back,
     startCreate,
     startRestore,
+    storageAvailable,
     // create
     mnemonic,
     fromRestore,
