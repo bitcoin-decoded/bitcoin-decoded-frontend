@@ -684,8 +684,10 @@ const en = {
   "auth.settings.eraseButton": "Erase this access from this device",
   "auth.settings.eraseConfirm":
     "You have never downloaded a backup. If you erase now and do not have your 12 words, your progress is gone for good. Confirm?",
-  // UI control label (not CDC §15 prose): the neutral cancel next to the erase
-  // confirmation, in the spirit of the a11y keys below.
+  "auth.settings.eraseConfirmExported":
+    "You are about to erase your access from this device. You can come back with your backup file or your 12 words. Erase?",
+  // Erase-confirmation cancel — the safe exit next to the destructive confirm
+  // (added to the CDC in v1.3, §15.11).
   "auth.settings.eraseCancel": "Cancel",
 
   // Accessibility labels (not shown as text): consistent with the existing aria
@@ -699,7 +701,7 @@ const en = {
   "auth.errors.server": "Something went wrong on our side. Try again in a moment.",
   "auth.errors.sessionExpired": "Your session expired. Enter your password to continue.",
   "auth.errors.storageUnavailable":
-    "This browser cannot keep your access, most likely because of private browsing. You can keep going, but download your backup before closing the tab.",
+    "In private browsing, your browser saves nothing: an access created here would vanish when you close the tab. To create your access and keep your progress, open Bitcoin.Decoded in a normal window.",
 } as const;
 
 export default en;

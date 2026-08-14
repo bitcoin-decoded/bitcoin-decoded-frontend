@@ -105,8 +105,10 @@ export const AuthSettings: FC = () => {
         <p style={bodyStyle}>{t("auth.settings.eraseBody")}</p>
         {eraseConfirming ? (
           <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-            {neverExported && (
+            {neverExported ? (
               <p style={{ ...bodyStyle, color: errorColor }}>{t("auth.settings.eraseConfirm")}</p>
+            ) : (
+              <p style={bodyStyle}>{t("auth.settings.eraseConfirmExported")}</p>
             )}
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1rem" }}>
               <Button variant="primary" color={errorColor} onClick={confirmErase}>
