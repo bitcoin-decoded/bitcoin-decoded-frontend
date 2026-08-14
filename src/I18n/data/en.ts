@@ -635,8 +635,8 @@ const en = {
   "auth.success.body1":
     "You just did exactly what any Bitcoin wallet does when it is created: generate a key, back it up, protect it. The chapter on self-custody is about to feel a lot more concrete.",
   "auth.success.body2":
-    "Download your backup file now. It is what lets you pick up your progress on another device without typing your 12 words again.",
-  "auth.success.primary": "Download my backup",
+    "Download your spare key now. It is your 12 words encrypted into a file: it is what brings you back on another device without retyping them.",
+  "auth.success.primary": "Download my spare key",
   "auth.success.secondary": "Later",
   "auth.success.migration": "Your progress on this device has been linked to your access.",
 
@@ -649,13 +649,15 @@ const en = {
     "No progress is linked to this phrase. Do you want to create an access with it?",
   "auth.restore.seed.button": "Recover my progress",
 
-  "auth.restore.file.title": "Import your backup",
-  "auth.restore.file.body": "Select the .bdw file you downloaded when you created your access.",
-  "auth.restore.file.recognised": "Backup for {username}.",
-  "auth.restore.file.formatError": "This is not a Bitcoin.Decoded backup file.",
+  "auth.restore.file.title": "Import your spare key",
+  "auth.restore.file.body": "Select your spare key: the .bdw file you downloaded when you created your access.",
+  "auth.restore.file.recognised": "Spare key for {username}.",
+  "auth.restore.file.formatError": "This is not a Bitcoin.Decoded spare key.",
   "auth.restore.file.versionError":
     "This file comes from a newer version of the app. Refresh the page and try again.",
   "auth.restore.file.button": "Choose a file",
+  "auth.restore.file.passwordLabel": "Password for this access",
+  "auth.restore.file.passwordHint": "The one you chose when you created it.",
 
   "auth.unlock.title": "Good to see you, {username}",
   "auth.unlock.body": "Enter your password to unlock your access on this device.",
@@ -663,32 +665,20 @@ const en = {
   "auth.unlock.link": "I no longer have my password",
   "auth.unlock.button": "Unlock",
 
-  "auth.backup.reminder.text":
-    "You have not downloaded your backup yet. If you clear this browser's cache, your progress goes with it.",
-  "auth.backup.reminder.button": "Download now",
+  "auth.backup.reminder.text": "You have not downloaded your spare key yet.",
+  "auth.backup.reminder.button": "Download my spare key",
   "auth.backup.reminder.link": "Later",
 
   "auth.settings.sectionTitle": "Your access",
   "auth.settings.username": "Signed in as {username}",
-  "auth.settings.publicKey": "Your public key: {key}",
   "auth.settings.exportBody":
-    "Download an encrypted file containing your 12 words. This is what lets you pick up your progress on another device.",
-  "auth.settings.exportButton": "Download my backup",
-  "auth.settings.lastExport": "Last backup on {date}.",
-  "auth.settings.neverExported": "You have never downloaded a backup.",
+    "It is your 12 words, encrypted into a file. Keep it like a duplicate of your key: it brings your progress back on another device.",
+  "auth.settings.exportButton": "Download my spare key",
+  "auth.settings.lastExport": "Last download on {date}.",
+  "auth.settings.neverExported": "You have never downloaded your spare key.",
   "auth.settings.signOutBody":
     "Your 12 words stay encrypted on this device. Your password will be asked again when you come back.",
   "auth.settings.signOutButton": "Sign out",
-  "auth.settings.eraseBody":
-    "Erase your encrypted 12 words from this device. You will need your backup file or your 12 words to come back.",
-  "auth.settings.eraseButton": "Erase this access from this device",
-  "auth.settings.eraseConfirm":
-    "You have never downloaded a backup. If you erase now and do not have your 12 words, your progress is gone for good. Confirm?",
-  "auth.settings.eraseConfirmExported":
-    "You are about to erase your access from this device. You can come back with your backup file or your 12 words. Erase?",
-  // Erase-confirmation cancel — the safe exit next to the destructive confirm
-  // (added to the CDC in v1.3, §15.11).
-  "auth.settings.eraseCancel": "Cancel",
 
   // Accessibility labels (not shown as text): consistent with the existing aria
   // keys (theme/language toggles), never part of the CDC §15 editorial content.
@@ -700,8 +690,6 @@ const en = {
   "auth.errors.network": "Cannot connect. Check your connection and try again.",
   "auth.errors.server": "Something went wrong on our side. Try again in a moment.",
   "auth.errors.sessionExpired": "Your session expired. Enter your password to continue.",
-  "auth.errors.storageUnavailable":
-    "In private browsing, your browser saves nothing: an access created here would vanish when you close the tab. To create your access and keep your progress, open Bitcoin.Decoded in a normal window.",
 } as const;
 
 export default en;

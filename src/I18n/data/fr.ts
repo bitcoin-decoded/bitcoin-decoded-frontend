@@ -640,8 +640,8 @@ const fr = {
   "auth.success.body1":
     "Tu viens de faire exactement ce que fait n'importe quel portefeuille Bitcoin à sa création : générer une clé, la sauvegarder, la protéger. Le chapitre sur l'auto-conservation va te sembler beaucoup plus concret.",
   "auth.success.body2":
-    "Télécharge ton fichier de sauvegarde maintenant. C'est ce qui te permettra de reprendre ta progression sur un autre appareil sans retaper tes 12 mots.",
-  "auth.success.primary": "Télécharger ma sauvegarde",
+    "Télécharge ta clé de secours maintenant. C'est tes 12 mots chiffrés dans un fichier : c'est ce qui te fera revenir sur un autre appareil sans les retaper.",
+  "auth.success.primary": "Télécharger ma clé de secours",
   "auth.success.secondary": "Plus tard",
   "auth.success.migration": "Ta progression sur cet appareil a été rattachée à ton accès.",
 
@@ -654,14 +654,16 @@ const fr = {
     "Aucune progression n'est liée à cette phrase. Veux-tu créer un accès avec ?",
   "auth.restore.seed.button": "Retrouver ma progression",
 
-  "auth.restore.file.title": "Importe ta sauvegarde",
+  "auth.restore.file.title": "Importe ta clé de secours",
   "auth.restore.file.body":
-    "Sélectionne le fichier .bdw que tu as téléchargé lors de la création de ton accès.",
-  "auth.restore.file.recognised": "Sauvegarde de {pseudo}.",
-  "auth.restore.file.formatError": "Ce fichier n'est pas une sauvegarde Bitcoin.Decoded.",
+    "Sélectionne ta clé de secours : le fichier .bdw téléchargé à la création de ton accès.",
+  "auth.restore.file.recognised": "Clé de secours de {pseudo}.",
+  "auth.restore.file.formatError": "Ce fichier n'est pas une clé de secours Bitcoin.Decoded.",
   "auth.restore.file.versionError":
     "Ce fichier vient d'une version plus récente de l'application. Mets à jour la page et réessaie.",
   "auth.restore.file.button": "Choisir un fichier",
+  "auth.restore.file.passwordLabel": "Mot de passe de cet accès",
+  "auth.restore.file.passwordHint": "Celui que tu as choisi en créant cet accès.",
 
   "auth.unlock.title": "Content de te revoir, {pseudo}",
   "auth.unlock.body": "Saisis ton mot de passe pour déverrouiller ton accès sur cet appareil.",
@@ -669,32 +671,20 @@ const fr = {
   "auth.unlock.link": "Je n'ai plus mon mot de passe",
   "auth.unlock.button": "Déverrouiller",
 
-  "auth.backup.reminder.text":
-    "Tu n'as pas encore téléchargé ta sauvegarde. Si tu vides le cache de ce navigateur, ta progression part avec.",
-  "auth.backup.reminder.button": "Télécharger maintenant",
+  "auth.backup.reminder.text": "Tu n'as pas encore téléchargé ta clé de secours.",
+  "auth.backup.reminder.button": "Télécharger ma clé de secours",
   "auth.backup.reminder.link": "Plus tard",
 
   "auth.settings.sectionTitle": "Ton accès",
   "auth.settings.username": "Connecté en tant que {pseudo}",
-  "auth.settings.publicKey": "Ta clé publique : {key}",
   "auth.settings.exportBody":
-    "Télécharge un fichier chiffré contenant tes 12 mots. C'est ce qui te permet de reprendre ta progression sur un autre appareil.",
-  "auth.settings.exportButton": "Télécharger ma sauvegarde",
-  "auth.settings.lastExport": "Dernière sauvegarde le {date}.",
-  "auth.settings.neverExported": "Tu n'as jamais téléchargé de sauvegarde.",
+    "C'est tes 12 mots, chiffrés dans un fichier. Garde-le comme un double de ta clé : il te fait reprendre ta progression sur un autre appareil.",
+  "auth.settings.exportButton": "Télécharger ma clé de secours",
+  "auth.settings.lastExport": "Dernier téléchargement le {date}.",
+  "auth.settings.neverExported": "Tu n'as jamais téléchargé ta clé de secours.",
   "auth.settings.signOutBody":
     "Tes 12 mots restent chiffrés sur cet appareil. Ton mot de passe te sera redemandé au retour.",
   "auth.settings.signOutButton": "Me déconnecter",
-  "auth.settings.eraseBody":
-    "Efface tes 12 mots chiffrés de cet appareil. Tu auras besoin de ta sauvegarde ou de tes 12 mots pour revenir.",
-  "auth.settings.eraseButton": "Effacer cet accès de cet appareil",
-  "auth.settings.eraseConfirm":
-    "Tu n'as jamais téléchargé de sauvegarde. Si tu effaces maintenant et que tu n'as pas tes 12 mots, ta progression est perdue définitivement. Tu confirmes ?",
-  "auth.settings.eraseConfirmExported":
-    "Tu vas effacer ton accès de cet appareil. Tu pourras revenir avec ta sauvegarde ou tes 12 mots. On efface ?",
-  // Erase-confirmation cancel — the safe exit next to the destructive confirm
-  // (added to the CDC in v1.3, §14.11).
-  "auth.settings.eraseCancel": "Annuler",
 
   // Accessibility labels (not shown as text): consistent with the existing aria
   // keys (theme/language toggles), never part of the CDC §14 editorial content.
@@ -706,8 +696,6 @@ const fr = {
   "auth.errors.network": "Connexion impossible. Vérifie ta connexion et réessaie.",
   "auth.errors.server": "Quelque chose s'est mal passé de notre côté. Réessaie dans un instant.",
   "auth.errors.sessionExpired": "Ta session a expiré. Saisis ton mot de passe pour reprendre.",
-  "auth.errors.storageUnavailable":
-    "En navigation privée, ton navigateur n'enregistre rien : un accès créé ici disparaîtrait à la fermeture de l'onglet. Pour créer ton accès et garder ta progression, ouvre Bitcoin.Decoded dans une fenêtre normale.",
 } as const;
 
 export default fr;

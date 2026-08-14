@@ -1,7 +1,7 @@
 import { type FC, useRef } from "react";
 
 import { Button, FeedbackPanel, usePageTheme } from "../../Design";
-import { useTranslation } from "../../I18n";
+import { interpolate, useTranslation } from "../../I18n";
 import { useAuthFlow } from "../hooks";
 
 import { AuthScreen } from "./AuthScreen";
@@ -9,18 +9,17 @@ import { PasswordField } from "./PasswordField";
 
 import { Check } from "@icons";
 
-// CDC §7.4 / §14.8: import a .bdw backup, on a single screen. Before a file is
+// CDC §7.4 / §14.8: import a spare key (.bdw) on a single screen. Before a file is
 // chosen the reader gets the instruction and the picker; once chosen, the picker
-// gives way to a confirmation of the selected file and the password. A wrong file
-// version or format gets a clear line, never a raw trace. A discreet link switches
-// to entering the 12 words instead (§7.3).
+// gives way to a confirmation that the key was recognised and the password. A wrong
+// file version or format gets a clear line, never a raw trace. A discreet link
+// switches to entering the 12 words instead (§7.3).
 export const AuthImportStep: FC = () => {
   const { t } = useTranslation();
   const { colors } = usePageTheme();
   const inputRef = useRef<HTMLInputElement>(null);
   const {
     importContainer,
-    importFileName,
     importError,
     selectFile,
     password,
@@ -60,15 +59,20 @@ export const AuthImportStep: FC = () => {
               gap: "0.55rem",
               color: colors.semantic.success.text,
               fontFamily: "inherit",
-              fontSize: "0.9rem",
-              wordBreak: "break-all",
+              fontSize: "0.95rem",
             }}
           >
             <Check size={18} strokeWidth={2.5} style={{ flexShrink: 0 }} />
-            <span>{importFileName}</span>
+            <span>
+              {interpolate(t("auth.restore.file.recognised"), {
+                pseudo: importContainer.username,
+                username: importContainer.username,
+              })}
+            </span>
           </div>
           <PasswordField
-            label={t("auth.password.create.field1")}
+            label={t("auth.restore.file.passwordLabel")}
+            hint={t("auth.restore.file.passwordHint")}
             value={password}
             onChange={setPassword}
             reveal={revealPassword}

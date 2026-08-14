@@ -93,18 +93,5 @@ export const useAuthStore = () => {
       const hasVault = await createVault().exists();
       setStatus(hasVault ? "locked" : "anonymous");
     }, []),
-    // "Erase this access from this device" (CDC §7.7): unlike sign out, this also
-    // ends the session, otherwise the cookie would survive a vault-less device and
-    // a reload would land "authenticated" with nothing to unlock or export. Order:
-    // drop the session, then the container, then its backup bookkeeping. Nothing on
-    // the server is deleted (no account deletion in v1).
-    erase: useCallback(async () => {
-      await logoutSession();
-      const vault = createVault();
-      await vault.clear();
-      await vault.clearBackupMeta();
-      setUsername(null);
-      setStatus("anonymous");
-    }, []),
   };
 };
