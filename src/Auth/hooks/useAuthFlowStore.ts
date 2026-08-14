@@ -77,6 +77,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
 
   // Import
   const [importContainer, setImportContainer] = useState<VaultContainer | null>(null);
+  const [importFileName, setImportFileName] = useState<string | null>(null);
   const [importError, setImportError] = useState<
     "auth.restore.file.formatError" | "auth.restore.file.versionError" | null
   >(null);
@@ -122,6 +123,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setChecksumError(false);
     setUnknownAccount(false);
     setImportContainer(null);
+    setImportFileName(null);
     setImportError(null);
     setWrongPassword(false);
     setPublicKey(null);
@@ -402,10 +404,12 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   const selectFile = useCallback(async (file: File) => {
     setImportError(null);
     setImportContainer(null);
+    setImportFileName(null);
     setWrongPassword(false);
     try {
       const container = parseVaultFile(await file.text());
       setImportContainer(container);
+      setImportFileName(file.name);
       setPassword("");
     } catch (err) {
       setImportError(
@@ -430,6 +434,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   const goToImport = useCallback(() => {
     setImportError(null);
     setImportContainer(null);
+    setImportFileName(null);
     setPassword("");
     clearError();
     setScreen("import");
@@ -524,6 +529,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     createFromRestore,
     // import
     importContainer,
+    importFileName,
     importError,
     selectFile,
     submitImport,

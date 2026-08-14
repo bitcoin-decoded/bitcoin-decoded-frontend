@@ -26,7 +26,7 @@ export const AuthConfirmStep: FC = () => {
           onEnter={submitConfirm}
         />
       ))}
-      <Button variant="primary" fullWidth onClick={submitConfirm}>
+      <Button variant="primary" style={{ alignSelf: "center" }} onClick={submitConfirm}>
         {t("auth.seed.confirm.button")}
       </Button>
       <div style={{ textAlign: "center" }}>

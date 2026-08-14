@@ -24,7 +24,7 @@ export const AuthSuccessStep: FC = () => {
     >
       {migrated && <FeedbackPanel tone="success">{t("auth.success.migration")}</FeedbackPanel>}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", marginTop: "0.35rem" }}>
-        <Button variant="primary" fullWidth onClick={download}>
+        <Button variant="primary" onClick={download}>
           {t("auth.success.primary")}
         </Button>
         <Button variant="secondary" onClick={close}>

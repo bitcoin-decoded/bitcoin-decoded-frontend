@@ -53,7 +53,7 @@ export const AuthSetDevicePasswordStep: FC = () => {
       />
       <Button
         variant="primary"
-        fullWidth
+        style={{ alignSelf: "center" }}
         disabled={!canSubmitCreate || busy}
         onClick={submitSetDevicePassword}
       >

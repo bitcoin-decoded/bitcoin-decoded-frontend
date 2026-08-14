@@ -1,8 +1,8 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, Button, usePageTheme } from "../../Design";
+import { BRAND, Button, getBrandGold, usePageTheme } from "../../Design";
 import { interpolate, useTranslation } from "../../I18n";
-import { formatBackupDate, formatPublicKey } from "../helpers";
+import { formatBackupDate } from "../helpers";
 import { useAuthFlow } from "../hooks";
 
 import { AuthScreen } from "./AuthScreen";
@@ -15,10 +15,9 @@ import { User } from "@icons";
 // value and handler comes from useAuthFlow.
 export const AuthSettings: FC = () => {
   const { t, language } = useTranslation();
-  const { colors } = usePageTheme();
+  const { colors, theme } = usePageTheme();
   const {
     accountUsername,
-    publicKey,
     lastExportAt,
     neverExported,
     eraseConfirming,
@@ -28,6 +27,11 @@ export const AuthSettings: FC = () => {
     cancelErase,
     confirmErase,
   } = useAuthFlow();
+
+  // The pseudo is the reader's identity here, so it wears the brand gold. The label
+  // around it is the CDC copy verbatim; only the value is styled (the token in
+  // "Connecté en tant que {pseudo}" / "Signed in as {username}" splits it in two).
+  const [usernameBefore, usernameAfter = ""] = t("auth.settings.username").split(/\{pseudo\}|\{username\}/);
 
   const bodyStyle: CSSProperties = {
     fontFamily: BRAND.fonts.body,
@@ -43,7 +47,6 @@ export const AuthSettings: FC = () => {
     letterSpacing: "0.01em",
     color: colors.base.text.primary,
     margin: 0,
-    wordBreak: "break-all",
   };
 
   const captionStyle: CSSProperties = {
@@ -66,19 +69,11 @@ export const AuthSettings: FC = () => {
 
   return (
     <AuthScreen icon={<User size={26} strokeWidth={2} />} inlineIcon title={t("auth.settings.sectionTitle")}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-        <p style={identityLineStyle}>
-          {interpolate(t("auth.settings.username"), {
-            pseudo: accountUsername ?? "",
-            username: accountUsername ?? "",
-          })}
-        </p>
-        {publicKey && (
-          <p style={{ ...identityLineStyle, color: colors.base.text.secondary }}>
-            {interpolate(t("auth.settings.publicKey"), { key: formatPublicKey(publicKey) })}
-          </p>
-        )}
-      </div>
+      <p style={identityLineStyle}>
+        {usernameBefore}
+        <span style={{ color: getBrandGold(theme), fontWeight: 500 }}>{accountUsername}</span>
+        {usernameAfter}
+      </p>
 
       <section style={sectionStyle}>
         <p style={bodyStyle}>{t("auth.settings.exportBody")}</p>

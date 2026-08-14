@@ -25,7 +25,7 @@ export const AuthLanding: FC = () => {
     >
       {storageAvailable ? (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", marginTop: "0.35rem" }}>
-          <Button variant="primary" fullWidth onClick={startCreate}>
+          <Button variant="primary" onClick={startCreate}>
             {t("auth.landing.primary")}
           </Button>
           <Button variant="secondary" onClick={startRestore}>

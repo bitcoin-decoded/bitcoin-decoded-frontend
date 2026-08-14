@@ -51,7 +51,12 @@ export const AuthUsernameStep: FC = () => {
           {t("auth.username.available")}
         </p>
       )}
-      <Button variant="primary" fullWidth disabled={!isAvailable} onClick={submitUsername}>
+      <Button
+        variant="primary"
+        style={{ alignSelf: "center" }}
+        disabled={!isAvailable}
+        onClick={submitUsername}
+      >
         {t("auth.username.button")}
       </Button>
     </AuthScreen>

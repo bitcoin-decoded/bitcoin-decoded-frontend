@@ -47,7 +47,12 @@ export const AuthRestoreSeed: FC = () => {
         </FeedbackPanel>
       )}
 
-      <Button variant="primary" fullWidth disabled={!restoreComplete || busy} onClick={submitRestoreSeed}>
+      <Button
+        variant="primary"
+        style={{ alignSelf: "center" }}
+        disabled={!restoreComplete || busy}
+        onClick={submitRestoreSeed}
+      >
         {t("auth.restore.seed.button")}
       </Button>
 
