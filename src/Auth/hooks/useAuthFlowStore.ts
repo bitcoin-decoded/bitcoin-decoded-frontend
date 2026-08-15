@@ -5,6 +5,7 @@ import {
   authErrorKey,
   confirmationMatches,
   createVault,
+  decryptVault,
   downloadBackup,
   generateMnemonic,
   normalizeMnemonicInput,
@@ -20,6 +21,14 @@ import type { AuthFlowScreen, AuthStatus, BackupMeta, VaultContainer } from "../
 import { useAuth } from "./useAuth.js";
 
 type UsernameStatus = "idle" | "checking" | "available" | "taken" | "invalid" | "network";
+
+// How the reader reached restore.seed. Only "landing" offers the import path (12
+// words -> file); the recovery contexts hide it (the file needs the very password
+// that was forgotten) and drive the back arrow (CDC §7.2 recovery, guard §5.1).
+type RestoreOrigin = "landing" | "unlock" | "import";
+
+// The 12-words display auto-hides after this idle delay (spec: dev's choice).
+const REVEAL_AUTOHIDE_MS = 60_000;
 
 // CDC §7.1 écran 2: the live username check is debounced.
 const USERNAME_DEBOUNCE_MS = 400;
@@ -86,6 +95,19 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   // open, never mirrored auth state.
   const [backupMeta, setBackupMeta] = useState<BackupMeta | null>(null);
 
+  // Reveal-my-12-words (spec): the decrypted phrase is held only while the reveal
+  // screen shows it, then wiped (on hide, close, tab-away, idle timeout). Each view
+  // re-asks the password — no "revealed once, visible all session".
+  const [revealedMnemonic, setRevealedMnemonic] = useState<string | null>(null);
+  const [revealError, setRevealError] = useState(false);
+
+  // Which path led to restore.seed (drives the import link + the back arrow).
+  const [restoreOrigin, setRestoreOrigin] = useState<RestoreOrigin>("landing");
+
+  // Overwrite guard (§5.1): the pseudo of the existing vault, set when creating a
+  // new access would replace it.
+  const [overwriteUsername, setOverwriteUsername] = useState<string | null>(null);
+
   const prevStatusRef = useRef<AuthStatus>("checking");
   const usernameTokenRef = useRef(0);
 
@@ -110,8 +132,31 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setImportError(null);
     setWrongPassword(false);
     setBackupMeta(null);
+    setRevealedMnemonic(null);
+    setRevealError(false);
+    setRestoreOrigin("landing");
+    setOverwriteUsername(null);
     clearError();
   }, [clearError]);
+
+  // The 12-words display never outlives its screen: a tab switch or an idle timeout
+  // wipes it and drops back to settings, so re-viewing re-asks the password.
+  useEffect(() => {
+    if (screen !== "reveal.seed") return;
+    const hide = () => {
+      setRevealedMnemonic(null);
+      setScreen("settings");
+    };
+    const onVisibility = () => {
+      if (typeof document !== "undefined" && document.hidden) hide();
+    };
+    const timer = setTimeout(hide, REVEAL_AUTOHIDE_MS);
+    if (typeof document !== "undefined") document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      clearTimeout(timer);
+      if (typeof document !== "undefined") document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [screen]);
 
   // CDC §7.2: a locked device found at startup (vault present, no session) lands on
   // the unlock screen, greeting the reader by the pseudo kept in cleartext in the
@@ -210,16 +255,20 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
         case "create.username":
           return fromRestore ? "restore.seed" : "landing";
         case "restore.seed":
-          return "landing";
+          // A reader who reached here to recover goes back where they came from (the
+          // unlock screen, the import screen), not into the "create an access" flow.
+          return restoreOrigin === "unlock" ? "unlock" : restoreOrigin === "import" ? "import" : "landing";
         case "restore.setDevicePassword":
           return "restore.seed";
         case "import":
           return "restore.seed";
+        case "reveal.password":
+          return "settings";
         default:
           return current;
       }
     });
-  }, [fromRestore]);
+  }, [fromRestore, restoreOrigin]);
 
   const canGoBack = [
     "create.username",
@@ -229,6 +278,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     "restore.seed",
     "restore.setDevicePassword",
     "import",
+    "reveal.password",
   ].includes(screen);
 
   // Create (CDC §7.1) ---------------------------------------------------------
@@ -280,7 +330,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   const passwordMismatch = passwordConfirm.length > 0 && password !== passwordConfirm;
   const canSubmitCreate = password.length >= 8 && password === passwordConfirm;
 
-  const submitCreate = useCallback(async () => {
+  const doCreate = useCallback(async () => {
     if (!mnemonic || password.length < 8 || password !== passwordConfirm) return;
     const hadProgress = detectLocalProgress();
     try {
@@ -291,6 +341,32 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
       // A generic failure is surfaced through the shared error banner.
     }
   }, [mnemonic, password, passwordConfirm, username, createAccount, detectLocalProgress]);
+
+  // Overwrite guard (§5.1: IndexedDB holds a single `current` vault). Writing a new
+  // one replaces whatever is there, so — whatever navigation led here — finalising a
+  // creation while a vault exists first warns, offering the existing access back.
+  const submitCreate = useCallback(async () => {
+    if (!mnemonic || password.length < 8 || password !== passwordConfirm) return;
+    if (await createVault().exists()) {
+      setOverwriteUsername(await readVaultUsername());
+      setScreen("create.overwrite");
+      return;
+    }
+    await doCreate();
+  }, [mnemonic, password, passwordConfirm, doCreate]);
+
+  const confirmOverwriteCreate = useCallback(() => {
+    void doCreate();
+  }, [doCreate]);
+
+  // The safe exit from the overwrite warning: abandon the new access and unlock the
+  // one already on this device.
+  const cancelOverwrite = useCallback(() => {
+    resetFields();
+    setWrongPassword(false);
+    void readVaultUsername().then(setUnlockUsername);
+    setScreen("unlock");
+  }, [resetFields]);
 
   // Downloading the backup is the last step: trigger the file, then close — the
   // reader should not have to click "later" after they have just saved it.
@@ -313,9 +389,11 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   }, [unlock, password, close]);
 
   const forgotPassword = useCallback(() => {
-    // CDC §7.2: "je n'ai plus mon mot de passe" leads to recovery by phrase.
+    // CDC §7.2: "je n'ai plus mon mot de passe" leads straight to the 12 words — the
+    // only password-free recovery. No import here: the file needs that same password.
     setPassword("");
     setWrongPassword(false);
+    setRestoreOrigin("unlock");
     clearError();
     setScreen("restore.seed");
   }, [clearError]);
@@ -323,6 +401,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
   // Restore (CDC §7.3) --------------------------------------------------------
   const startRestore = useCallback(() => {
     resetFields();
+    setRestoreOrigin("landing");
     setScreen("restore.seed");
   }, [resetFields]);
 
@@ -415,9 +494,12 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     setScreen("import");
   }, [clearError]);
 
+  // From the import password wall (#221 recovery link): the reader forgot the
+  // password the file needs, so send them to the 12 words with no import loop back.
   const goToRestoreSeed = useCallback(() => {
     setChecksumError(false);
     setUnknownAccount(false);
+    setRestoreOrigin("import");
     clearError();
     setScreen("restore.seed");
   }, [clearError]);
@@ -435,6 +517,44 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     await logout();
     close();
   }, [logout, close]);
+
+  // Reveal my 12 words (spec) -------------------------------------------------
+  const startReveal = useCallback(() => {
+    setPassword("");
+    setRevealError(false);
+    setRevealedMnemonic(null);
+    setScreen("reveal.password");
+  }, []);
+
+  // Re-confirm the password even though the session is valid: decrypt the vault to
+  // recover the phrase. A wrong password fails the GCM tag, mapped to a clean flag.
+  const submitRevealPassword = useCallback(async () => {
+    if (password.length < 1) return;
+    setRevealError(false);
+    const container = await createVault().load();
+    if (!container) return;
+    try {
+      const mnemonicPhrase = await decryptVault(container, password);
+      setRevealedMnemonic(mnemonicPhrase);
+      setPassword("");
+      setScreen("reveal.seed");
+    } catch {
+      setRevealError(true);
+    }
+  }, [password]);
+
+  // Copying a seed is a clipboard leak vector, so wipe it a little later (best
+  // effort; some browsers block a background clipboard write).
+  const copyRevealed = useCallback(() => {
+    if (!revealedMnemonic) return;
+    void navigator.clipboard?.writeText(revealedMnemonic);
+    setTimeout(() => void navigator.clipboard?.writeText("").catch(() => {}), 20_000);
+  }, [revealedMnemonic]);
+
+  const hideReveal = useCallback(() => {
+    setRevealedMnemonic(null);
+    setScreen("settings");
+  }, []);
 
   const neverExported = !backupMeta?.exportedAt;
 
@@ -480,6 +600,10 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     submitCreate,
     migrated,
     download,
+    // overwrite guard
+    overwriteUsername,
+    confirmOverwriteCreate,
+    cancelOverwrite,
     // unlock
     unlockUsername,
     wrongPassword,
@@ -494,6 +618,7 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     submitSetDevicePassword,
     unknownAccount,
     createFromRestore,
+    restoreOrigin,
     // import
     importContainer,
     importError,
@@ -507,5 +632,12 @@ export const useAuthFlowStore = (detectLocalProgress: () => boolean) => {
     neverExported,
     exportBackup,
     signOut,
+    // reveal 12 words
+    startReveal,
+    submitRevealPassword,
+    revealError,
+    revealedMnemonic,
+    copyRevealed,
+    hideReveal,
   };
 };

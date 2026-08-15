@@ -622,6 +622,14 @@ const en = {
   "auth.password.create.mismatch": "The two passwords do not match.",
   "auth.password.create.button": "Create my access",
 
+  // Overwrite guard (§5.1): one vault per device; creating an access while one
+  // exists replaces it, so we warn and offer to go back.
+  "auth.overwrite.title": "This device already has an access",
+  "auth.overwrite.body":
+    "It already holds {pseudo}'s access. Creating a new one will remove it from this device — you will only be able to get it back with its 12 words or its access copy.",
+  "auth.overwrite.safe": "Back to {pseudo}",
+  "auth.overwrite.destructive": "Create a new access anyway",
+
   // Restore device-password screen (CDC v1.2 §15.5b): the user SETS a new one,
   // they do not enter an old one. Fields/hint/error/button reuse
   // auth.password.create.* and auth.restore.seed.button (identical text).
@@ -681,6 +689,18 @@ const en = {
   "auth.settings.signOutBody":
     "Your 12 words stay encrypted on this device. Your password will be asked again when you come back.",
   "auth.settings.signOutButton": "Sign out",
+
+  // See your 12 words again (settings block + password step + display). Field, hint,
+  // error, warning box and the copy button reuse existing keys.
+  "auth.reveal.settingsIntro": "Your 12 words are your real key. Show them if you haven't written them down yet.",
+  "auth.reveal.settingsButton": "Show my 12 words",
+  "auth.reveal.password.title": "Confirm it's you",
+  "auth.reveal.password.body":
+    "You are already signed in, but showing your 12 words requires confirming your password.",
+  "auth.reveal.password.warning": "Make sure no one is looking at your screen.",
+  "auth.reveal.password.button": "Show my 12 words",
+  "auth.reveal.display.title": "Your 12 words",
+  "auth.reveal.display.hide": "Hide",
 
   // Accessibility labels (not shown as text): consistent with the existing aria
   // keys (theme/language toggles), never part of the CDC §15 editorial content.

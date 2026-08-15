@@ -627,6 +627,14 @@ const fr = {
   "auth.password.create.mismatch": "Les deux mots de passe ne sont pas identiques.",
   "auth.password.create.button": "Créer mon accès",
 
+  // Garde-fou d'écrasement (§5.1) : un seul vault par appareil ; créer un accès
+  // alors qu'un vault existe le remplace, donc on avertit et on propose le retour.
+  "auth.overwrite.title": "Cet appareil a déjà un accès",
+  "auth.overwrite.body":
+    "Il contient déjà l'accès de {pseudo}. Créer un nouvel accès le retirera de cet appareil — tu ne pourras le retrouver qu'avec ses 12 mots ou sa copie d'accès.",
+  "auth.overwrite.safe": "Revenir à {pseudo}",
+  "auth.overwrite.destructive": "Créer un nouvel accès quand même",
+
   // Écran mot de passe de la RESTAURATION (CDC v1.2 §14.5b) : l'utilisateur en
   // définit un NOUVEAU, il ne saisit pas l'ancien. Les champs/aide/erreur/bouton
   // réutilisent auth.password.create.* et auth.restore.seed.button (texte identique).
@@ -687,6 +695,18 @@ const fr = {
   "auth.settings.signOutBody":
     "Tes 12 mots restent chiffrés sur cet appareil. Ton mot de passe te sera redemandé au retour.",
   "auth.settings.signOutButton": "Me déconnecter",
+
+  // Revoir ses 12 mots (bloc réglages + étape mot de passe + affichage). Le champ,
+  // l'aide, l'erreur, l'encart et le bouton copier réutilisent des clés existantes.
+  "auth.reveal.settingsIntro": "Tes 12 mots sont ta vraie clé. Affiche-les si tu ne les as pas encore notés.",
+  "auth.reveal.settingsButton": "Afficher mes 12 mots",
+  "auth.reveal.password.title": "Confirme que c'est bien toi",
+  "auth.reveal.password.body":
+    "Tu es déjà connecté, mais afficher tes 12 mots demande de confirmer ton mot de passe.",
+  "auth.reveal.password.warning": "Assure-toi que personne ne regarde ton écran.",
+  "auth.reveal.password.button": "Afficher mes 12 mots",
+  "auth.reveal.display.title": "Tes 12 mots",
+  "auth.reveal.display.hide": "Masquer",
 
   // Accessibility labels (not shown as text): consistent with the existing aria
   // keys (theme/language toggles), never part of the CDC §14 editorial content.

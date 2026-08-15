@@ -8,8 +8,11 @@ import { AuthConfirmStep } from "./AuthConfirmStep";
 import { AuthImportStep } from "./AuthImportStep";
 import { AuthLanding } from "./AuthLanding";
 import { AuthOverlay } from "./AuthOverlay";
+import { AuthOverwriteWarning } from "./AuthOverwriteWarning";
 import { AuthPasswordStep } from "./AuthPasswordStep";
 import { AuthRestoreSeed } from "./AuthRestoreSeed";
+import { AuthRevealPassword } from "./AuthRevealPassword";
+import { AuthRevealSeed } from "./AuthRevealSeed";
 import { AuthSeedStep } from "./AuthSeedStep";
 import { AuthSetDevicePasswordStep } from "./AuthSetDevicePasswordStep";
 import { AuthSettings } from "./AuthSettings";
@@ -36,6 +39,8 @@ export const AuthScreens: FC = () => {
         return <AuthConfirmStep />;
       case "create.password":
         return <AuthPasswordStep />;
+      case "create.overwrite":
+        return <AuthOverwriteWarning />;
       case "create.success":
         return <AuthSuccessStep />;
       case "unlock":
@@ -48,6 +53,10 @@ export const AuthScreens: FC = () => {
         return <AuthImportStep />;
       case "settings":
         return <AuthSettings />;
+      case "reveal.password":
+        return <AuthRevealPassword />;
+      case "reveal.seed":
+        return <AuthRevealSeed />;
       default:
         return null;
     }

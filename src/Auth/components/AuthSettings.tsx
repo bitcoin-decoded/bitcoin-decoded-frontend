@@ -15,7 +15,8 @@ import { User } from "@icons";
 export const AuthSettings: FC = () => {
   const { t, language } = useTranslation();
   const { colors, theme } = usePageTheme();
-  const { accountUsername, lastExportAt, neverExported, exportBackup, signOut } = useAuthFlow();
+  const { accountUsername, lastExportAt, neverExported, exportBackup, startReveal, signOut } =
+    useAuthFlow();
 
   // The pseudo is the reader's identity here, so it wears the brand gold. The label
   // around it is the CDC copy verbatim; only the value is styled (the token in
@@ -74,6 +75,13 @@ export const AuthSettings: FC = () => {
               : t("auth.settings.neverExported")}
           </p>
         </div>
+      </section>
+
+      <section style={sectionStyle}>
+        <p style={bodyStyle}>{t("auth.reveal.settingsIntro")}</p>
+        <Button variant="secondary" onClick={startReveal}>
+          {t("auth.reveal.settingsButton")}
+        </Button>
       </section>
 
       <section style={sectionStyle}>

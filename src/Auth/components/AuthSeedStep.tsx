@@ -1,10 +1,11 @@
-import { type CSSProperties, type FC } from "react";
+import { type FC } from "react";
 
-import { BRAND, Button, FeedbackPanel, useBreakpoint, usePageTheme, withOpacity } from "../../Design";
+import { BRAND, Button, FeedbackPanel, usePageTheme } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { useAuthFlow } from "../hooks";
 
 import { AuthScreen } from "./AuthScreen";
+import { SeedWordsGrid } from "./SeedWordsGrid";
 
 import { AlertTriangle, Copy } from "@icons";
 
@@ -14,43 +15,16 @@ import { AlertTriangle, Copy } from "@icons";
 export const AuthSeedStep: FC = () => {
   const { t } = useTranslation();
   const { colors } = usePageTheme();
-  const isMobile = useBreakpoint() === "mobile";
   const { mnemonic, copySeed, seedAcknowledged, setSeedAcknowledged, goToConfirm, confirmError } =
     useAuthFlow();
 
   const words = mnemonic ? mnemonic.split(" ") : [];
 
-  const gridStyle: CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr",
-    gap: "0.5rem",
-    padding: "0.85rem",
-    border: `1px solid ${colors.base.border.secondary}`,
-    background: withOpacity(colors.base.background.primary, 0.5),
-  };
-
-  const cellStyle: CSSProperties = {
-    display: "flex",
-    alignItems: "baseline",
-    gap: "0.5rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: "0.9rem",
-  };
-
   return (
     <AuthScreen title={t("auth.seed.display.title")} lead={t("auth.seed.display.body")}>
       {confirmError && <FeedbackPanel tone="error">{t("auth.seed.confirm.error")}</FeedbackPanel>}
 
-      <div style={gridStyle}>
-        {words.map((word, index) => (
-          <div key={index} style={cellStyle}>
-            <span style={{ color: colors.base.text.secondary, minWidth: "1.25rem", textAlign: "right" }}>
-              {index + 1}
-            </span>
-            <span style={{ color: colors.base.text.primary }}>{word}</span>
-          </div>
-        ))}
-      </div>
+      <SeedWordsGrid words={words} />
 
       <div>
         <Button variant="ghost" size="sm" icon={<Copy size={15} />} onClick={copySeed}>
