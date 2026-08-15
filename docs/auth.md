@@ -94,37 +94,35 @@ La base Neon contient la **seule** copie de la progression (non reconstructible 
 - `Strict-Transport-Security: max-age=31536000; includeSubDomains`
 - `Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()`
 
-### À activer : la CSP (mitigation XSS de la clé privée en mémoire)
+### Livré : la CSP (mitigation XSS de la clé privée en mémoire)
 
-La CSP **bloque** des ressources : à activer avec méthode, parce qu'une erreur casse le rendu. Contraintes connues de cette app :
-
-- **Polices Google Fonts** (chargées via `<link>` externe) → `style-src` doit inclure `https://fonts.googleapis.com`, `font-src` inclure `https://fonts.gstatic.com`.
-- **Styles React en ligne** (`CSSProperties`) partout → `style-src 'unsafe-inline'` inévitable (les styles en ligne ne peuvent pas porter de nonce/hash en pratique).
-- **Un script inline** dans `index.html` (anti-FOUC du thème, bloquant avant le premier paint) → l'autoriser par **hash** `'sha256-…'`, pas par `'unsafe-inline'`. Attention : Vite peut transformer/minifier ce script au build → **recalculer le hash depuis la sortie buildée** (`dist/index.html` ou une page prérendue), pas depuis `index.html` source. Hash du script source (point de départ, à revérifier) : `sha256-ZQcKrOEJYWjAv+ezrhVVtVX6L474i+r1JGZANWiZmm4=`.
-- Bundle Vite same-origin → `script-src 'self'`. API same-origin → `connect-src 'self'`.
-
-Politique cible :
+`vercel.json` applique la politique ci-dessous à toutes les routes. Vérifiée **contre le build réel** (`dist/` servi avec l'en-tête CSP, console ouverte) : accueil, page de contenu (Recharts), modale d'auth, et les fetchs de données live — aucune violation.
 
 ```
 default-src 'self';
-script-src 'self' 'sha256-<hash du script buildé>';
+script-src 'self' 'sha256-D2Yu3SkseGTKa5UVA/GonXs+177hoKMgc533m6a0dUU=';
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
 font-src 'self' https://fonts.gstatic.com;
 img-src 'self' data:;
-connect-src 'self';
-base-uri 'self';
-form-action 'self';
-frame-ancestors 'none';
-object-src 'none'
+connect-src 'self' https://mempool.space https://api.kraken.com;
+base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
 ```
 
-**Rollout recommandé** : d'abord `Content-Security-Policy-Report-Only` sur un déploiement de preview, ouvrir la console, naviguer + ouvrir la modale d'auth, corriger toute violation (polices, script, styles), **puis** basculer en `Content-Security-Policy` enforce. La vérification exige un déploiement réel (une CSP en en-tête HTTP ne s'applique pas sous `vite dev`).
+Pourquoi chaque morceau (et deux pièges rencontrés) :
+
+- **Polices Google Fonts** (via `<link>` externe) → `style-src https://fonts.googleapis.com` (la feuille) + `font-src https://fonts.gstatic.com` (les fichiers).
+- **Styles React en ligne** (`CSSProperties`, ~269 attributs `style=` par page) → `style-src 'unsafe-inline'` inévitable (pas de nonce/hash sur des styles en ligne).
+- **Script inline anti-FOUC** dans `index.html` → autorisé par **hash**, pas par `'unsafe-inline'`. **Piège #1 (CRLF/LF)** : les navigateurs normalisent `\r\n → \n` **avant** de hasher. Sur Windows le fichier a des CRLF ; il faut donc le hash de la version **LF** (`D2Yu3Sk…`), pas celui des octets bruts (`ZQcK…`). Ce hash LF est correct quel que soit le fin de ligne servi. **Recalculer si on édite ce script** : `node -e '…lecture dist/index.html, remplace \r\n par \n, sha256 base64…'`.
+- **JSON-LD** (`<script type="application/ld+json">`, contenu par page) → **non exécuté**, donc `script-src` ne s'y applique pas : pas de hash nécessaire (vérifié, aucune violation).
+- **Fetchs de données live** — **Piège #2** : `BitcoinDonationFooter` (`fetchBtcRate`, `fetchNetworkFees`) appelle `https://mempool.space` et `https://api.kraken.com` (cours BTC + frais réseau). D'où `connect-src` qui les inclut, sinon le footer casse silencieusement. **Toute nouvelle dépendance réseau externe devra être ajoutée à `connect-src`.**
+- Bundle + preload Recharts same-origin → `script-src 'self'` ; API same-origin → `connect-src 'self'`.
+
+**Restant à vérifier sur un déploiement réel** (non testable en local, faute de backend) : le téléchargement de la copie d'accès (`.bdw`, via `<a download href="blob:…">` — normalement hors du champ CSP) et les appels `/api/*` (same-origin, couverts par `connect-src 'self'`). Ouvrir la console sur la preview, créer un accès → télécharger la copie → l'importer, et confirmer zéro erreur CSP.
 
 ---
 
 ## Reste à faire (dette explicite)
 
-- **CSP enforce** : voir ci-dessus (report-only → enforce, hash à recalculer au build).
 - **Nettoyage `*_migrated_backup` à 30 j** (§8) : la migration invité→compte pose un drapeau `bd:migrated` mais ne conserve pas de copie locale datée à purger. À implémenter côté `src/UserData/` si on veut le filet de 30 jours.
 - **Copie « déconnexion »** (§14.11) : le libellé sous « Me déconnecter » n'a pas été retouché faute de copie éditoriale ; en attente de l'édito.
 - **Doc CDC** : plusieurs éléments ont été décommissionnés côté code (message navigation privée §14.12, bloc effacement §14.11, affichage clé publique §14.11) — à marquer « retiré » dans le CDC lors d'une passe.
