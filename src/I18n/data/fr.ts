@@ -606,7 +606,7 @@ const fr = {
     "Ne les prends pas en photo, ne les envoie pas par message, ne les colle pas dans une note synchronisée dans le cloud.",
   "auth.seed.display.checkbox": "J'ai noté mes 12 mots.",
   "auth.seed.display.copy": "Copier les 12 mots",
-  "auth.seed.display.button": "Vérifier ma sauvegarde",
+  "auth.seed.display.button": "Vérifier mes 12 mots",
 
   "auth.seed.confirm.title": "Vérifions",
   "auth.seed.confirm.body":
@@ -618,9 +618,9 @@ const fr = {
 
   "auth.password.create.title": "Un mot de passe pour cet appareil",
   "auth.password.create.body1":
-    "Ce mot de passe chiffre tes 12 mots sur cet appareil et dans ton fichier de sauvegarde. Il ne part jamais sur nos serveurs, on ne peut ni le lire ni le réinitialiser.",
+    "Ce mot de passe chiffre tes 12 mots sur cet appareil et dans la copie de ton accès. Il ne part jamais sur nos serveurs, on ne peut ni le lire ni le réinitialiser.",
   "auth.password.create.body2":
-    "Il protège ta sauvegarde, pas ton compte. Si tu l'oublies mais que tu as tes 12 mots, tu retrouves tout. Si tu perds les deux, c'est terminé.",
+    "Il protège ta copie d'accès, pas ton compte. Si tu l'oublies mais que tu as tes 12 mots, tu retrouves tout. Si tu perds les deux, c'est terminé.",
   "auth.password.create.field1": "Mot de passe",
   "auth.password.create.field2": "Confirme le mot de passe",
   "auth.password.create.hint": "8 caractères minimum.",
@@ -634,14 +634,14 @@ const fr = {
   "auth.password.restore.body1":
     "Ce n'est pas ton ancien mot de passe qu'on te demande. Tu en crées un nouveau, ici, pour protéger tes 12 mots sur cet appareil.",
   "auth.password.restore.body2":
-    "Il ne part jamais sur nos serveurs, on ne peut ni le lire ni le réinitialiser. Il protège ta sauvegarde sur cet appareil, pas ton compte : tes 12 mots restent la seule vraie clé.",
+    "Il ne part jamais sur nos serveurs, on ne peut ni le lire ni le réinitialiser. Il protège ta copie d'accès sur cet appareil, pas ton compte : tes 12 mots restent la seule vraie clé.",
 
   "auth.success.title": "C'est en place",
   "auth.success.body1":
     "Tu viens de faire exactement ce que fait n'importe quel portefeuille Bitcoin à sa création : générer une clé, la sauvegarder, la protéger. Le chapitre sur l'auto-conservation va te sembler beaucoup plus concret.",
   "auth.success.body2":
-    "Télécharge ta clé de secours maintenant. C'est tes 12 mots chiffrés dans un fichier : c'est ce qui te fera revenir sur un autre appareil sans les retaper.",
-  "auth.success.primary": "Télécharger ma clé de secours",
+    "Télécharge une copie de ton accès maintenant. C'est tes 12 mots chiffrés dans un fichier : avec ton mot de passe, elle te fait revenir sur un autre appareil sans les retaper.",
+  "auth.success.primary": "Télécharger une copie de mon accès",
   "auth.success.secondary": "Plus tard",
   "auth.success.migration": "Ta progression sur cet appareil a été rattachée à ton accès.",
 
@@ -654,16 +654,17 @@ const fr = {
     "Aucune progression n'est liée à cette phrase. Veux-tu créer un accès avec ?",
   "auth.restore.seed.button": "Retrouver ma progression",
 
-  "auth.restore.file.title": "Importe ta clé de secours",
+  "auth.restore.file.title": "Importe une copie de ton accès",
   "auth.restore.file.body":
-    "Sélectionne ta clé de secours : le fichier .bdw téléchargé à la création de ton accès.",
-  "auth.restore.file.recognised": "Clé de secours de {pseudo}.",
-  "auth.restore.file.formatError": "Ce fichier n'est pas une clé de secours Bitcoin.Decoded.",
+    "Sélectionne une copie de ton accès : le fichier .bdw téléchargé à la création de ton accès.",
+  "auth.restore.file.recognised": "Copie de l'accès de {pseudo}.",
+  "auth.restore.file.formatError": "Ce fichier n'est pas une copie d'accès Bitcoin.Decoded.",
   "auth.restore.file.versionError":
     "Ce fichier vient d'une version plus récente de l'application. Mets à jour la page et réessaie.",
   "auth.restore.file.button": "Choisir un fichier",
   "auth.restore.file.passwordLabel": "Mot de passe de cet accès",
   "auth.restore.file.passwordHint": "Celui que tu as choisi en créant cet accès.",
+  "auth.restore.file.recoveryLink": "Je n'ai plus mon mot de passe",
 
   "auth.unlock.title": "Content de te revoir, {pseudo}",
   "auth.unlock.body": "Saisis ton mot de passe pour déverrouiller ton accès sur cet appareil.",
@@ -671,17 +672,18 @@ const fr = {
   "auth.unlock.link": "Je n'ai plus mon mot de passe",
   "auth.unlock.button": "Déverrouiller",
 
-  "auth.backup.reminder.text": "Tu n'as pas encore téléchargé ta clé de secours.",
-  "auth.backup.reminder.button": "Télécharger ma clé de secours",
+  "auth.backup.reminder.text":
+    "Tu n'as pas encore téléchargé de copie de ton accès. Tes 12 mots restent ta vraie clé ; la copie est un second filet, et elle t'évite de les retaper pour changer d'appareil.",
+  "auth.backup.reminder.button": "Télécharger une copie de mon accès",
   "auth.backup.reminder.link": "Plus tard",
 
   "auth.settings.sectionTitle": "Ton accès",
   "auth.settings.username": "Connecté en tant que {pseudo}",
   "auth.settings.exportBody":
-    "C'est tes 12 mots, chiffrés dans un fichier. Garde-le comme un double de ta clé : il te fait reprendre ta progression sur un autre appareil.",
-  "auth.settings.exportButton": "Télécharger ma clé de secours",
+    "Tes 12 mots restent ta vraie clé, ils te font revenir partout. Cette copie chiffrée de ton accès est un plus : elle te change d'appareil sans les retaper, en te demandant ton mot de passe.",
+  "auth.settings.exportButton": "Télécharger une copie de mon accès",
   "auth.settings.lastExport": "Dernier téléchargement le {date}.",
-  "auth.settings.neverExported": "Tu n'as jamais téléchargé ta clé de secours.",
+  "auth.settings.neverExported": "Tu n'as jamais téléchargé de copie de ton accès.",
   "auth.settings.signOutBody":
     "Tes 12 mots restent chiffrés sur cet appareil. Ton mot de passe te sera redemandé au retour.",
   "auth.settings.signOutButton": "Me déconnecter",

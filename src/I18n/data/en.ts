@@ -601,7 +601,7 @@ const en = {
     "Do not photograph them, do not send them in a message, do not paste them into a note that syncs to the cloud.",
   "auth.seed.display.checkbox": "I have written down my 12 words.",
   "auth.seed.display.copy": "Copy the 12 words",
-  "auth.seed.display.button": "Check my backup",
+  "auth.seed.display.button": "Check my 12 words",
 
   "auth.seed.confirm.title": "Let's check",
   "auth.seed.confirm.body":
@@ -613,9 +613,9 @@ const en = {
 
   "auth.password.create.title": "A password for this device",
   "auth.password.create.body1":
-    "This password encrypts your 12 words on this device and in your backup file. It never reaches our servers, we can neither read it nor reset it.",
+    "This password encrypts your 12 words on this device and in the copy of your access. It never reaches our servers, we can neither read it nor reset it.",
   "auth.password.create.body2":
-    "It protects your backup, not your account. If you forget it but still have your 12 words, you get everything back. Lose both and it is over.",
+    "It protects your access copy, not your account. If you forget it but still have your 12 words, you get everything back. Lose both and it is over.",
   "auth.password.create.field1": "Password",
   "auth.password.create.field2": "Confirm password",
   "auth.password.create.hint": "8 characters minimum.",
@@ -629,14 +629,14 @@ const en = {
   "auth.password.restore.body1":
     "We are not asking for a previous password. You are creating a new one here, to protect your 12 words on this device.",
   "auth.password.restore.body2":
-    "It never reaches our servers, we can neither read it nor reset it. It protects your backup on this device, not your account: your 12 words remain the only real key.",
+    "It never reaches our servers, we can neither read it nor reset it. It protects your access copy on this device, not your account: your 12 words remain the only real key.",
 
   "auth.success.title": "You are set",
   "auth.success.body1":
     "You just did exactly what any Bitcoin wallet does when it is created: generate a key, back it up, protect it. The chapter on self-custody is about to feel a lot more concrete.",
   "auth.success.body2":
-    "Download your spare key now. It is your 12 words encrypted into a file: it is what brings you back on another device without retyping them.",
-  "auth.success.primary": "Download my spare key",
+    "Download a copy of your access now. It is your 12 words encrypted into a file: with your password, it brings you back on another device without retyping them.",
+  "auth.success.primary": "Download a copy of my access",
   "auth.success.secondary": "Later",
   "auth.success.migration": "Your progress on this device has been linked to your access.",
 
@@ -649,15 +649,16 @@ const en = {
     "No progress is linked to this phrase. Do you want to create an access with it?",
   "auth.restore.seed.button": "Recover my progress",
 
-  "auth.restore.file.title": "Import your spare key",
-  "auth.restore.file.body": "Select your spare key: the .bdw file you downloaded when you created your access.",
-  "auth.restore.file.recognised": "Spare key for {username}.",
-  "auth.restore.file.formatError": "This is not a Bitcoin.Decoded spare key.",
+  "auth.restore.file.title": "Import a copy of your access",
+  "auth.restore.file.body": "Select a copy of your access: the .bdw file you downloaded when you created your access.",
+  "auth.restore.file.recognised": "A copy of {username}'s access.",
+  "auth.restore.file.formatError": "This is not a Bitcoin.Decoded access copy.",
   "auth.restore.file.versionError":
     "This file comes from a newer version of the app. Refresh the page and try again.",
   "auth.restore.file.button": "Choose a file",
   "auth.restore.file.passwordLabel": "Password for this access",
   "auth.restore.file.passwordHint": "The one you chose when you created it.",
+  "auth.restore.file.recoveryLink": "I no longer have my password",
 
   "auth.unlock.title": "Good to see you, {username}",
   "auth.unlock.body": "Enter your password to unlock your access on this device.",
@@ -665,17 +666,18 @@ const en = {
   "auth.unlock.link": "I no longer have my password",
   "auth.unlock.button": "Unlock",
 
-  "auth.backup.reminder.text": "You have not downloaded your spare key yet.",
-  "auth.backup.reminder.button": "Download my spare key",
+  "auth.backup.reminder.text":
+    "You have not downloaded a copy of your access yet. Your 12 words remain your real key; the copy is a second net, and it saves you retyping them to switch devices.",
+  "auth.backup.reminder.button": "Download a copy of my access",
   "auth.backup.reminder.link": "Later",
 
   "auth.settings.sectionTitle": "Your access",
   "auth.settings.username": "Signed in as {username}",
   "auth.settings.exportBody":
-    "It is your 12 words, encrypted into a file. Keep it like a duplicate of your key: it brings your progress back on another device.",
-  "auth.settings.exportButton": "Download my spare key",
+    "Your 12 words remain your real key, they bring you back anywhere. This encrypted copy of your access is a bonus: it moves you to another device without retyping them, asking for your password.",
+  "auth.settings.exportButton": "Download a copy of my access",
   "auth.settings.lastExport": "Last download on {date}.",
-  "auth.settings.neverExported": "You have never downloaded your spare key.",
+  "auth.settings.neverExported": "You have never downloaded a copy of your access.",
   "auth.settings.signOutBody":
     "Your 12 words stay encrypted on this device. Your password will be asked again when you come back.",
   "auth.settings.signOutButton": "Sign out",
