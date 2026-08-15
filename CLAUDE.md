@@ -65,6 +65,12 @@ Source unique de l'état utilisateur (badges + progression de lecture), cycle `l
 
 `docs/user-data.md` décrit l'architecture **et surtout comment migrer vers le backend** (réimplémenter `UserRepository`, une ligne dans `App`). **Le lire avant de toucher** à `src/UserData/`, `useBadges` ou la persistance de lecture.
 
+## Authentification - `src/Auth/` + `api/`
+
+Auth par paire de clés façon portefeuille : 12 mots BIP39 → clé privée → clé publique = identité ; **zéro donnée personnelle** côté serveur (ni mail, ni mot de passe). Le mot de passe chiffre les 12 mots en local (IndexedDB) et dans la « copie de ton accès » (`.bdw`) ; le cookie (30 j) porte la fraîcheur de session. Client = `src/Auth/` (barrel racine **sans React**, `api/` l'importe ; imports `.js` explicites, NodeNext). Serveur = fonctions Vercel sous `api/` (hors `src/`, hors `ddd-pr-check`). `useAuthFlowStore` = orchestrateur d'UI **uniquement** (ne double jamais l'état d'auth de `useAuthStore`).
+
+`docs/auth.md` décrit le modèle, **le périmètre de sécurité (§11 : ce qui est protégé et ce qui ne l'est pas)**, la purge des défis, la sauvegarde base, et le plan CSP + dette. **Le lire avant de toucher** à `src/Auth/`, `api/auth/*` ou `vercel.json` (en-têtes/CSP). Vocabulaire imposé : « chiffré » **seulement** pour AES-GCM ; jamais « sécurisé » sans dire contre quoi.
+
 ## Quiz de synthèse - `src/Interactive/SynthesisQuiz/`
 
 Quiz final par module, **paginé** (une question à la fois, nav prev/next + jalons, bouton terminer). Seuils : Banking 10/15, MoneyLaws 10/15, Bitcoin 15/20. UX : pas de feedback immédiat, validation unique, persistance localStorage ; après validation, score + réussite/échec **sans dévoiler les bonnes réponses**.
