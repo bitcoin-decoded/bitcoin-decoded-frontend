@@ -1,6 +1,6 @@
 import { type CSSProperties, type FC, useState } from "react";
 
-import { BRAND, THEME_COLORS, useThemeContext } from "../../Design";
+import { BRAND, getBrandGold, THEME_COLORS, useThemeContext } from "../../Design";
 import { useTranslation } from "../../I18n";
 import { useAuth, useAuthFlow } from "../hooks";
 
@@ -49,7 +49,16 @@ export const AuthEntryButton: FC = () => {
         style={interactiveStyle}
       >
         <User size={16} strokeWidth={2} />
-        <span style={{ maxWidth: "9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        <span
+          style={{
+            maxWidth: "9rem",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            color: getBrandGold(theme),
+            fontWeight: 500,
+          }}
+        >
           {username}
         </span>
       </button>
