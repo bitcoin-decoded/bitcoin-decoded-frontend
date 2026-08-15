@@ -9,9 +9,12 @@ export type AuthFlowScreen =
   | "create.seed"
   | "create.confirm"
   | "create.password"
+  | "create.overwrite"
   | "create.success"
   | "unlock"
   | "restore.seed"
   | "restore.setDevicePassword"
   | "import"
-  | "settings";
+  | "settings"
+  | "reveal.password"
+  | "reveal.seed";

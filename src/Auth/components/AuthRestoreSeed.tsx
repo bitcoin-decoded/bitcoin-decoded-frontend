@@ -11,7 +11,9 @@ import { AlertTriangle } from "@icons";
 
 // CDC §7.3 / §14.7: recover from the 12 words, one numbered field each. The warning
 // comes before the fields. An unknown account is an offer to create with this
-// phrase, not a dead end; a discreet link switches to importing a backup file (§7.4).
+// phrase, not a dead end. The switch-to-import link shows only when the reader chose
+// this path from the landing: in the "forgot my password" contexts the file is a
+// dead end (it needs that same password), so it is hidden.
 export const AuthRestoreSeed: FC = () => {
   const { t } = useTranslation();
   const {
@@ -23,6 +25,7 @@ export const AuthRestoreSeed: FC = () => {
     unknownAccount,
     createFromRestore,
     goToImport,
+    restoreOrigin,
     busy,
   } = useAuthFlow();
 
@@ -56,11 +59,13 @@ export const AuthRestoreSeed: FC = () => {
         {t("auth.restore.seed.button")}
       </Button>
 
-      <div style={{ textAlign: "center" }}>
-        <Button variant="secondary" onClick={goToImport}>
-          {t("auth.restore.file.title")}
-        </Button>
-      </div>
+      {restoreOrigin === "landing" && (
+        <div style={{ textAlign: "center" }}>
+          <Button variant="secondary" onClick={goToImport}>
+            {t("auth.restore.file.title")}
+          </Button>
+        </div>
+      )}
     </AuthScreen>
   );
 };
