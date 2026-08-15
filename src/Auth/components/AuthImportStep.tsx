@@ -97,9 +97,13 @@ export const AuthImportStep: FC = () => {
         </Button>
       )}
 
+      {/* With a file chosen the reader is at the password wall: a forgotten password
+          makes the encrypted file unusable, so the escape here is framed as recovery
+          ("Je n'ai plus mon mot de passe" -> type the 12 words, set a new password).
+          Before a file is chosen it is simply the "type the words instead" path. */}
       <div style={{ textAlign: "center" }}>
         <Button variant="secondary" onClick={goToRestoreSeed}>
-          {t("auth.restore.seed.title")}
+          {importContainer ? t("auth.unlock.link") : t("auth.restore.seed.title")}
         </Button>
       </div>
     </AuthScreen>
