@@ -2,7 +2,6 @@ import { type CSSProperties, type FC } from "react";
 
 import {
   BRAND,
-  getBrandGold,
   THEME_COLORS,
   useBreakpoint,
   useThemeContext,
@@ -10,6 +9,7 @@ import {
 } from "../../../Design";
 import { interpolate, useTranslation } from "../../../I18n";
 import type { RouteName } from "../../../Routing";
+import { formatDuration } from "../helpers";
 import { useHover } from "../hooks";
 import type { CurriculumCard as CurriculumCardData } from "../types";
 
@@ -17,7 +17,6 @@ import { LedgerCorners } from "./LedgerCorners";
 import { NotionCloud } from "./NotionCloud";
 
 import { DoodleBank, DoodleBitcoinGlobe, DoodleClock, DoodleCursorClick, DoodleMoneyBag } from "@doodle";
-import { Check } from "@icons";
 
 type Props = {
   card: CurriculumCardData;
@@ -40,7 +39,6 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
 
   const colors = THEME_COLORS[theme];
   const accent = colors[card.theme].text.secondary;
-  const gold = getBrandGold(theme);
   const Icon = ICONS[card.index - 1] ?? DoodleBank;
 
   const cardStyle: CSSProperties = {
@@ -63,32 +61,11 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
 
   const cornerColor = withOpacity(accent, isHovered ? 0.85 : 0.4);
 
-  const topClusterStyle: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "0.3rem",
-  };
-
   const iconWrapStyle: CSSProperties = {
     color: accent,
     transform: isHovered ? "translateY(-2px)" : "translateY(0)",
     transition: "transform 0.35s var(--ease-smooth)",
   };
-
-  const stateStyle: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.3rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: "0.75rem",
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    color: card.state === "completed" ? gold : accent,
-    whiteSpace: "nowrap",
-  };
-
-  const dotStyle: CSSProperties = { width: 6, height: 6, background: accent };
 
   const kickerStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
@@ -126,11 +103,21 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
     maxWidth: "22rem",
   };
 
-  // The reading time and CTA share a bottom-anchored footer (marginTop:auto), so the
-  // extra room a card with fewer notions has is absorbed above them and the three
+  // The notion cloud sits in a flexible region that grows to fill the space between
+  // the punchline and the footer and centres the keywords in it, so a card with
+  // fewer notions has them vertically centred rather than stuck under the punchline.
+  const cloudRegionStyle: CSSProperties = {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    padding: "0.6rem 0",
+  };
+
+  // The footer then lands at the bottom of every (equal-height) card, so the three
   // reading times line up across the row.
   const cardFooterStyle: CSSProperties = {
-    marginTop: "auto",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -186,22 +173,9 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
     <button type="button" style={cardStyle} onClick={() => onOpen(card.startRoute)} {...hoverProps}>
       <LedgerCorners color={cornerColor} />
 
-      <div style={topClusterStyle}>
-        <span style={iconWrapStyle}>
-          <Icon size={isMobile ? 48 : 52} />
-        </span>
-        {card.state === "completed" ? (
-          <span style={stateStyle}>
-            <Check size={15} aria-hidden />
-            {t("home.curriculum.state.completed")}
-          </span>
-        ) : card.state === "in-progress" ? (
-          <span style={stateStyle}>
-            <span style={dotStyle} aria-hidden />
-            {t("home.curriculum.state.inProgress")}
-          </span>
-        ) : null}
-      </div>
+      <span style={iconWrapStyle}>
+        <Icon size={isMobile ? 48 : 52} />
+      </span>
 
       <div>
         <p style={kickerStyle}>{`Module 0${card.index}`}</p>
@@ -210,14 +184,16 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
 
       <p style={punchlineStyle}>{t(card.punchlineKey)}</p>
 
-      <NotionCloud words={card.notions} color={accent} />
+      <div style={cloudRegionStyle}>
+        <NotionCloud words={card.notions} color={accent} />
+      </div>
 
       <div style={cardFooterStyle}>
         <div style={readingBlockStyle}>
           <span style={readingTimeRowStyle}>
             <DoodleClock size={isMobile ? 24 : 26} style={{ color: accent }} aria-hidden />
             <span style={readingTimeTextStyle}>
-              {interpolate(t("home.curriculum.minutes"), { m: card.minutes })}
+              {interpolate(t("home.curriculum.minutes"), { duration: formatDuration(card.minutes) })}
             </span>
           </span>
           <span style={chaptersStyle}>

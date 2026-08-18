@@ -24,7 +24,6 @@ export const NotionCloud: FC<Props> = ({ words, color }) => {
     alignItems: "center",
     gap: "1.15rem 1.1rem",
     maxWidth: "26rem",
-    margin: "1.35rem 0",
   };
 
   // getStableSeed keeps the scatter deterministic: a word always lands at the same
