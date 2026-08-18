@@ -1,9 +1,10 @@
-// Compact, language-neutral duration: "45 min" below an hour, "2h" / "2h10"
-// above (5-minute rounding). Used for the curriculum headline total.
+// Reading time, rounded to the nearest 5 minutes and switched to hours past the
+// hour: 44 -> "45 min", 61 -> "1h", 130 -> "2h10". Used for the module cards and
+// the curriculum headline total.
 export const formatDuration = (minutes: number): string => {
-  if (minutes < 60) return `${minutes} min`;
-  const hours = Math.floor(minutes / 60);
-  const rest = Math.round((minutes % 60) / 5) * 5;
-  if (rest === 60) return `${hours + 1}h`;
+  const rounded = Math.round(minutes / 5) * 5;
+  if (rounded < 60) return `${rounded} min`;
+  const hours = Math.floor(rounded / 60);
+  const rest = rounded % 60;
   return rest === 0 ? `${hours}h` : `${hours}h${String(rest).padStart(2, "0")}`;
 };

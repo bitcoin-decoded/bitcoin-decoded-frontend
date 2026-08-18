@@ -545,7 +545,7 @@ const en = {
   "home.curriculum.module2.punchline": "What makes a currency hold, and what makes it give way.",
   "home.curriculum.module3.punchline": "What Bitcoin changes, and what it doesn't.",
   "home.curriculum.chapters": "{n} chapters",
-  "home.curriculum.minutes": "{m} min read",
+  "home.curriculum.minutes": "{duration} read",
   "home.curriculum.cta.start": "Start",
   "home.curriculum.cta.resume": "Resume",
   "home.curriculum.cta.review": "Re-read",

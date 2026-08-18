@@ -549,7 +549,7 @@ const fr = {
   "home.curriculum.module2.punchline": "Ce qui fait qu'une monnaie tient, et ce qui la fait céder.",
   "home.curriculum.module3.punchline": "Ce que Bitcoin change, et ce qu'il ne change pas.",
   "home.curriculum.chapters": "{n} chapitres",
-  "home.curriculum.minutes": "{m} min de lecture",
+  "home.curriculum.minutes": "{duration} de lecture",
   "home.curriculum.cta.start": "Commencer",
   "home.curriculum.cta.resume": "Reprendre",
   "home.curriculum.cta.review": "Relire",

@@ -9,6 +9,7 @@ import {
 } from "../../../Design";
 import { interpolate, useTranslation } from "../../../I18n";
 import type { RouteName } from "../../../Routing";
+import { formatDuration } from "../helpers";
 import { useHover } from "../hooks";
 import type { CurriculumCard as CurriculumCardData } from "../types";
 
@@ -102,11 +103,21 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
     maxWidth: "22rem",
   };
 
-  // The reading time and CTA share a bottom-anchored footer (marginTop:auto), so the
-  // extra room a card with fewer notions has is absorbed above them and the three
+  // The notion cloud sits in a flexible region that grows to fill the space between
+  // the punchline and the footer and centres the keywords in it, so a card with
+  // fewer notions has them vertically centred rather than stuck under the punchline.
+  const cloudRegionStyle: CSSProperties = {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    padding: "0.6rem 0",
+  };
+
+  // The footer then lands at the bottom of every (equal-height) card, so the three
   // reading times line up across the row.
   const cardFooterStyle: CSSProperties = {
-    marginTop: "auto",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -173,14 +184,16 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
 
       <p style={punchlineStyle}>{t(card.punchlineKey)}</p>
 
-      <NotionCloud words={card.notions} color={accent} />
+      <div style={cloudRegionStyle}>
+        <NotionCloud words={card.notions} color={accent} />
+      </div>
 
       <div style={cardFooterStyle}>
         <div style={readingBlockStyle}>
           <span style={readingTimeRowStyle}>
             <DoodleClock size={isMobile ? 24 : 26} style={{ color: accent }} aria-hidden />
             <span style={readingTimeTextStyle}>
-              {interpolate(t("home.curriculum.minutes"), { m: card.minutes })}
+              {interpolate(t("home.curriculum.minutes"), { duration: formatDuration(card.minutes) })}
             </span>
           </span>
           <span style={chaptersStyle}>
