@@ -1,9 +1,8 @@
-import { type CSSProperties, type FC, Fragment } from "react";
+import { type CSSProperties, type FC } from "react";
 
 import {
   BRAND,
   getBrandGold,
-  HighlightText,
   THEME_COLORS,
   useBreakpoint,
   useThemeContext,
@@ -15,6 +14,7 @@ import { useHover } from "../hooks";
 import type { CurriculumCard as CurriculumCardData } from "../types";
 
 import { LedgerCorners } from "./LedgerCorners";
+import { NotionCloud } from "./NotionCloud";
 
 import { DoodleBank, DoodleBitcoinGlobe, DoodleClock, DoodleCursorClick, DoodleMoneyBag } from "@doodle";
 import { Check } from "@icons";
@@ -100,7 +100,14 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
     margin: 0,
   };
 
+  // Reserve two lines for the title so a one-line module name still occupies the same
+  // height as the wrapping ones — the punchlines below then start on the same row
+  // across the three cards.
   const titleStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    minHeight: "2.4em",
     fontSize: isMobile ? "1.2rem" : "1.3rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -119,18 +126,16 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
     maxWidth: "22rem",
   };
 
-  const notionsStyle: CSSProperties = {
-    textAlign: "center",
-    lineHeight: 2.1,
-    fontSize: "0.85rem",
-    maxWidth: "26rem",
-  };
-
-  const notionItemStyle: CSSProperties = { whiteSpace: "nowrap" };
-
-  const notionSepStyle: CSSProperties = {
-    color: withOpacity(colors.base.text.secondary, 0.5),
-    margin: "0 0.1rem",
+  // The reading time and CTA share a bottom-anchored footer (marginTop:auto), so the
+  // extra room a card with fewer notions has is absorbed above them and the three
+  // reading times line up across the row.
+  const cardFooterStyle: CSSProperties = {
+    marginTop: "auto",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "0.7rem",
+    paddingTop: "0.7rem",
   };
 
   const readingBlockStyle: CSSProperties = {
@@ -138,7 +143,6 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
     flexDirection: "column",
     alignItems: "center",
     gap: "0.2rem",
-    marginTop: "0.1rem",
   };
 
   const readingTimeRowStyle: CSSProperties = {
@@ -165,8 +169,6 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
     display: "inline-flex",
     alignItems: "center",
     gap: "0.5rem",
-    marginTop: "auto",
-    paddingTop: "0.5rem",
     color: accent,
     transform: isHovered ? "translateY(-1px)" : "translateY(0)",
     transition: "transform 0.35s var(--ease-smooth)",
@@ -208,37 +210,25 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
 
       <p style={punchlineStyle}>{t(card.punchlineKey)}</p>
 
-      <div style={notionsStyle}>
-        {card.notions.map((notion, i) => (
-          <Fragment key={notion}>
-            <span style={notionItemStyle}>
-              <HighlightText hue={card.theme}>{notion}</HighlightText>
-              {i < card.notions.length - 1 && (
-                <span style={notionSepStyle} aria-hidden>
-                  {" ·"}
-                </span>
-              )}
+      <NotionCloud words={card.notions} color={accent} />
+
+      <div style={cardFooterStyle}>
+        <div style={readingBlockStyle}>
+          <span style={readingTimeRowStyle}>
+            <DoodleClock size={isMobile ? 24 : 26} style={{ color: accent }} aria-hidden />
+            <span style={readingTimeTextStyle}>
+              {interpolate(t("home.curriculum.minutes"), { m: card.minutes })}
             </span>
-            {i < card.notions.length - 1 ? " " : null}
-          </Fragment>
-        ))}
-      </div>
-
-      <div style={readingBlockStyle}>
-        <span style={readingTimeRowStyle}>
-          <DoodleClock size={isMobile ? 24 : 26} style={{ color: accent }} aria-hidden />
-          <span style={readingTimeTextStyle}>
-            {interpolate(t("home.curriculum.minutes"), { m: card.minutes })}
           </span>
-        </span>
-        <span style={chaptersStyle}>
-          {interpolate(t("home.curriculum.chapters"), { n: card.chapterCount })}
-        </span>
-      </div>
+          <span style={chaptersStyle}>
+            {interpolate(t("home.curriculum.chapters"), { n: card.chapterCount })}
+          </span>
+        </div>
 
-      <div style={ctaRowStyle}>
-        <span style={ctaLabelStyle}>{t(CTA_KEY[card.state])}</span>
-        <DoodleCursorClick size={isMobile ? 20 : 22} aria-hidden />
+        <div style={ctaRowStyle}>
+          <span style={ctaLabelStyle}>{t(CTA_KEY[card.state])}</span>
+          <DoodleCursorClick size={isMobile ? 20 : 22} aria-hidden />
+        </div>
       </div>
     </button>
   );

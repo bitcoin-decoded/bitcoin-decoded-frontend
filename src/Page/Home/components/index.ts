@@ -5,3 +5,4 @@ export { HomeHero } from "./HomeHero";
 export { HomePage } from "./HomePage";
 export { HomeResume } from "./HomeResume";
 export { LedgerCorners } from "./LedgerCorners";
+export { NotionCloud } from "./NotionCloud";
