@@ -1,10 +1,10 @@
 export {
   ChapterPrelude,
-  HomePage,
   PageNavigation,
   PageTemplate,
   ReadingProgressBar,
   ReadingTimeBadge,
+  RevealOnScroll,
   ScrollToTopButton,
 } from "./components";
 export { PAGE_METADATA } from "./data";

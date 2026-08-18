@@ -20,6 +20,7 @@ export {
   Bitcoin9Page,
   GetStartedPage,
 } from "./Bitcoin";
+export { HomePage } from "./Home";
 export {
   MoneyLaws1Page,
   MoneyLaws2Page,
@@ -34,7 +35,6 @@ export type { PageMetadata, PageMetadataMap, ReadingTimeEstimate } from "./Share
 export {
   ChapterPrelude,
   getReadingTime,
-  HomePage,
   PAGE_METADATA,
   PAGE_STYLES,
   PageNavigation,
