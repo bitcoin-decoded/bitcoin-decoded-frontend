@@ -529,12 +529,25 @@ const en = {
   "home.hero.ctaSecondary": "See the syllabus",
 
   "home.resume.title": "Pick up where you left off",
-  "home.resume.position": "Module {m} · Chapter {c}",
   "home.resume.progress": "{done} / {total} chapters",
-  "home.resume.remaining": "{n} chapters left, ~{m} min",
   "home.resume.button": "Resume",
-  "home.resume.restart": "Start over",
-  "home.resume.allDone": "You've completed all {total} chapters.",
+  "home.resume.restart": "Review from the start",
+  "home.resume.badges": "See my badges",
+  "home.resume.tier.start.title": "Ready to go down the rabbit hole?",
+  "home.resume.tier.start.message":
+    "Your access is set up. All that's left is to understand why the money you use doesn't work the way you think.",
+  "home.resume.tier.start.button": "Start Module 1",
+  "home.resume.tier.early.message":
+    "{x} of 19. The early chapters are where it all clicks into place. Keep going, it connects fast.",
+  "home.resume.tier.mid.message":
+    "{x} of 19. You're starting to see the strings most people never will.",
+  "home.resume.tier.half.message": "{x} of 19, past halfway. Too late to unsee it now.",
+  "home.resume.tier.near.title": "Just a few chapters left",
+  "home.resume.tier.near.message":
+    "{x} of 19. The far end of the rabbit hole is in sight. Bitcoin's about to run out of mysteries.",
+  "home.resume.tier.done.title": "You've decoded it all.",
+  "home.resume.tier.done.message":
+    "19 of 19. You now understand something most finance graduates can't explain properly. (Not bad, right?)",
 
   "home.curriculum.title": "The syllabus",
   "home.curriculum.intro": "{modules} modules · {chapters} chapters",

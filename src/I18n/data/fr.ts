@@ -533,12 +533,26 @@ const fr = {
   "home.hero.ctaSecondary": "Voir le programme",
 
   "home.resume.title": "Reprends où tu t'es arrêté",
-  "home.resume.position": "Module {m} · Chapitre {c}",
   "home.resume.progress": "{done} / {total} chapitres",
-  "home.resume.remaining": "Il te reste {n} chapitres, ~{m} min",
   "home.resume.button": "Reprendre",
   "home.resume.restart": "Revoir depuis le début",
-  "home.resume.allDone": "Tu as terminé les {total} chapitres.",
+  "home.resume.badges": "Voir mes badges",
+  "home.resume.tier.start.title": "Prêt à entrer dans le terrier ?",
+  "home.resume.tier.start.message":
+    "Ton accès est créé. Il ne reste plus qu'à comprendre pourquoi l'argent que tu utilises ne marche pas comme tu le crois.",
+  "home.resume.tier.start.button": "Commencer le Module 1",
+  "home.resume.tier.early.message":
+    "{x} sur 19. Le début, c'est là où tout se met en place. Continue, ça s'emboîte vite.",
+  "home.resume.tier.mid.message":
+    "{x} sur 19. Tu commences à voir les ficelles que la plupart des gens ne verront jamais.",
+  "home.resume.tier.half.message":
+    "{x} sur 19, plus de la moitié. Trop tard pour désapprendre, maintenant.",
+  "home.resume.tier.near.title": "Plus que quelques chapitres",
+  "home.resume.tier.near.message":
+    "{x} sur 19. La sortie du terrier est en vue. Bitcoin n'aura bientôt plus de mystères pour toi.",
+  "home.resume.tier.done.title": "Tu as tout décodé.",
+  "home.resume.tier.done.message":
+    "19 sur 19. Tu comprends maintenant un truc que la plupart des diplômés en finance n'expliquent pas correctement. (Pas mal, non ?)",
 
   "home.curriculum.title": "Le programme",
   "home.curriculum.intro": "{modules} modules · {chapters} chapitres",

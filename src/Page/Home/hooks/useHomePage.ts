@@ -11,6 +11,7 @@ export const useHomePage = () => {
     curriculumSectionId: CURRICULUM_SECTION_ID,
     startJourney: () => setCurrentPage(ROUTE_NAME.Banking_1),
     openChapter: (route: RouteName) => setCurrentPage(route),
+    openBadges: () => setCurrentPage(ROUTE_NAME.Badges),
     openAccessInfo: open,
     scrollToCurriculum: () =>
       document

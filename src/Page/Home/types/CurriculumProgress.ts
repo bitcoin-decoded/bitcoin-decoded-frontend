@@ -6,6 +6,5 @@ export type CurriculumProgress = {
   moduleCount: number;
   totalChapters: number;
   totalMinutes: number;
-  hasProgress: boolean;
   resume: CurriculumResume | null;
 };

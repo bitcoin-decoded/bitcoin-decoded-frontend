@@ -1,5 +1,6 @@
 import { type CSSProperties, type FC } from "react";
 
+import { useAuth } from "../../../Auth/hooks";
 import { Separator, useBreakpoint } from "../../../Design";
 import { RevealOnScroll } from "../../Shared";
 import { useCurriculumProgress, useHomePage } from "../hooks";
@@ -10,11 +11,16 @@ import { HomeHero } from "./HomeHero";
 import { HomeResume } from "./HomeResume";
 
 export const HomePage: FC = () => {
-  const { curriculumSectionId, startJourney, openChapter, openAccessInfo, scrollToCurriculum } =
+  const { curriculumSectionId, startJourney, openChapter, openBadges, openAccessInfo, scrollToCurriculum } =
     useHomePage();
   const { cards, moduleCount, totalChapters, totalMinutes, resume } = useCurriculumProgress();
+  const { status: authStatus } = useAuth();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
+
+  // Signed-in visitors see the resume block even at zero progress (the "start" tier
+  // greets a freshly created access); guests see it only once they have progress.
+  const showResume = resume !== null && (resume.doneCount > 0 || authStatus === "authenticated");
 
   const sepMargin = isMobile ? "2rem 0" : breakpoint === "tablet" ? "2.5rem 0" : "3.25rem 0";
 
@@ -36,11 +42,11 @@ export const HomePage: FC = () => {
     <div style={containerStyle}>
       <HomeHero onStart={startJourney} onSeeProgram={scrollToCurriculum} />
 
-      {resume && (
+      {showResume && resume && (
         <>
           <Separator margin={sepMargin} />
           <RevealOnScroll style={resumeWrapperStyle}>
-            <HomeResume resume={resume} onResume={openChapter} onRestart={startJourney} />
+            <HomeResume resume={resume} onOpen={openChapter} onBadges={openBadges} />
           </RevealOnScroll>
         </>
       )}

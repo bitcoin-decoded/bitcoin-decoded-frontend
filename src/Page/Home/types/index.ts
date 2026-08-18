@@ -4,3 +4,4 @@ export type { CurriculumProgress } from "./CurriculumProgress";
 export type { CurriculumResume } from "./CurriculumResume";
 export type { ModuleColor } from "./ModuleColor";
 export type { ModuleState } from "./ModuleState";
+export type { ResumeTier } from "./ResumeTier";
