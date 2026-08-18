@@ -9,6 +9,8 @@ import type { CurriculumCard as CurriculumCardData } from "../types";
 
 import { CurriculumCard } from "./CurriculumCard";
 
+import { DoodleClock } from "@doodle";
+
 type Props = {
   sectionId: string;
   cards: CurriculumCardData[];
@@ -49,6 +51,11 @@ export const HomeCurriculum: FC<Props> = ({
   };
 
   const introStyle: CSSProperties = {
+    display: "inline-flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.4rem",
     fontFamily: BRAND.fonts.mono,
     fontSize: isMobile ? "0.85rem" : "0.95rem",
     letterSpacing: "0.04em",
@@ -68,7 +75,6 @@ export const HomeCurriculum: FC<Props> = ({
   const intro = interpolate(t("home.curriculum.intro"), {
     modules: moduleCount,
     chapters: totalChapters,
-    duration: formatDuration(totalMinutes),
   });
 
   return (
@@ -77,7 +83,14 @@ export const HomeCurriculum: FC<Props> = ({
         <h2 style={titleStyle}>{t("home.curriculum.title")}</h2>
       </RevealOnScroll>
       <RevealOnScroll delay={80}>
-        <p style={introStyle}>{intro}</p>
+        <p style={introStyle}>
+          <span>{intro}</span>
+          <span aria-hidden style={{ opacity: 0.55 }}>
+            ·
+          </span>
+          <DoodleClock size={20} aria-hidden />
+          <span>{formatDuration(totalMinutes)}</span>
+        </p>
       </RevealOnScroll>
       <div style={cardsWrapperStyle}>
         {cards.map((card, index) => (

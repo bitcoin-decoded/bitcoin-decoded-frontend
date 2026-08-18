@@ -5,6 +5,7 @@ import {
   BRAND,
   Button,
   getBrandGold,
+  HighlightText,
   THEME_COLORS,
   useBreakpoint,
   useThemeContext,
@@ -12,7 +13,7 @@ import {
 import { useTranslation } from "../../../I18n";
 import { RevealOnScroll } from "../../Shared";
 
-import { DoodleArrowDown } from "@doodle";
+import { DoodleArrowDown, DoodleSmileyCheeky } from "@doodle";
 
 type Props = {
   onStart: () => void;
@@ -71,10 +72,16 @@ export const HomeHero: FC<Props> = ({ onStart, onSeeProgram }) => {
 
   const subheadlineStyle: CSSProperties = {
     fontSize: pick("1rem", "1.075rem", "1.15rem"),
-    color: colors.base.text.secondary,
+    color: gold,
     lineHeight: 1.5,
     margin: `${pick("0.85rem", "1rem", "1.15rem")} 0 0`,
     maxWidth: "34rem",
+  };
+
+  const smileyStyle: CSSProperties = {
+    display: "inline-block",
+    verticalAlign: "middle",
+    marginLeft: "0.4em",
   };
 
   const pitchStyle: CSSProperties = {
@@ -106,11 +113,18 @@ export const HomeHero: FC<Props> = ({ onStart, onSeeProgram }) => {
       </RevealOnScroll>
 
       <RevealOnScroll delay={240} duration={700}>
-        <h1 style={headlineStyle}>{t("home.hero.headline")}</h1>
+        <h1 style={headlineStyle}>
+          {t("home.hero.headlineLead")}
+          <HighlightText>{t("home.hero.headlineHighlight")}</HighlightText>
+          {t("home.hero.headlineTail")}
+        </h1>
       </RevealOnScroll>
 
       <RevealOnScroll delay={360} duration={700}>
-        <p style={subheadlineStyle}>{t("home.hero.subheadline")}</p>
+        <p style={subheadlineStyle}>
+          {t("home.hero.subheadline")}
+          <DoodleSmileyCheeky size={22} style={smileyStyle} aria-hidden />
+        </p>
       </RevealOnScroll>
 
       <RevealOnScroll delay={460} duration={700}>

@@ -519,7 +519,9 @@ const en = {
   "footer.builtWith": "Built with",
   "footer.inspiredBy": "Inspired by the work of",
 
-  "home.hero.headline": "You use money every day. But you don't really know how it's created.",
+  "home.hero.headlineLead": "You use money every day. But you don't really know ",
+  "home.hero.headlineHighlight": "how",
+  "home.hero.headlineTail": " it's created.",
   "home.hero.subheadline": "Let me reassure you: almost no one does. Finance graduates included.",
   "home.hero.pitch":
     "A free course to understand money, the system around it, then Bitcoin. (And make up your own mind.)",
@@ -535,29 +537,20 @@ const en = {
   "home.resume.allDone": "You've completed all {total} chapters.",
 
   "home.curriculum.title": "The syllabus",
-  "home.curriculum.intro": "{modules} modules · {chapters} chapters · ≈ {duration}",
+  "home.curriculum.intro": "{modules} modules · {chapters} chapters",
   "home.curriculum.module1.name": "How money works",
   "home.curriculum.module2.name": "When the system breaks down",
   "home.curriculum.module3.name": "The Bitcoin rupture",
   "home.curriculum.module1.punchline": "Understand where the money you use really comes from.",
   "home.curriculum.module2.punchline": "What makes a currency hold, and what makes it give way.",
   "home.curriculum.module3.punchline": "What Bitcoin changes, and what it doesn't.",
-  "home.curriculum.learn": "You'll learn:",
   "home.curriculum.chapters": "{n} chapters",
-  "home.curriculum.minutes": "~{m} min read",
+  "home.curriculum.minutes": "{m} min read",
   "home.curriculum.state.inProgress": "In progress",
   "home.curriculum.state.completed": "Completed",
   "home.curriculum.cta.start": "Start",
   "home.curriculum.cta.resume": "Resume",
-  "home.curriculum.cta.review": "Review",
-
-  "home.difference.title": "Why it's different",
-  "home.difference.openSource": "Free and open-source. The code is open, check it yourself.",
-  "home.difference.sources": "Every key claim is sourced.",
-  "home.difference.privacyTitle": "We don't know who you are",
-  "home.difference.privacyBody":
-    "No email, no password, no Google. Even if I wanted to, I couldn't tell who you are. The reason is simple: if I ever get hacked, no one should be able to guess you're into Bitcoin. A site that talks about sovereignty doesn't start by collecting yours.",
-  "home.difference.privacyLink": "How your access works",
+  "home.curriculum.cta.review": "Re-read",
 
   "footer.donateMessage": "If you like this project, support it in sats.",
   "footer.copy": "Copy",

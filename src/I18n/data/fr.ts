@@ -523,8 +523,9 @@ const fr = {
   "footer.builtWith": "Construit avec",
   "footer.inspiredBy": "Inspiré par le travail de",
 
-  "home.hero.headline":
-    "L'argent, tu l'utilises tous les jours. Mais tu ne sais pas vraiment comment il est créé.",
+  "home.hero.headlineLead": "L'argent, tu l'utilises tous les jours. Mais tu ne sais pas vraiment ",
+  "home.hero.headlineHighlight": "comment",
+  "home.hero.headlineTail": " il est créé.",
   "home.hero.subheadline": "Je te rassure : presque personne ne le sait. Les diplômés en finance non plus.",
   "home.hero.pitch":
     "Un parcours gratuit pour comprendre l'argent, le système qui va avec, puis Bitcoin. (Et te faire ton propre avis.)",
@@ -540,29 +541,20 @@ const fr = {
   "home.resume.allDone": "Tu as terminé les {total} chapitres.",
 
   "home.curriculum.title": "Le programme",
-  "home.curriculum.intro": "{modules} modules · {chapters} chapitres · ≈ {duration}",
+  "home.curriculum.intro": "{modules} modules · {chapters} chapitres",
   "home.curriculum.module1.name": "Comment fonctionne l'argent",
   "home.curriculum.module2.name": "Quand le système déraille",
   "home.curriculum.module3.name": "La rupture Bitcoin",
   "home.curriculum.module1.punchline": "Comprendre d'où vient vraiment l'argent que tu utilises.",
   "home.curriculum.module2.punchline": "Ce qui fait qu'une monnaie tient, et ce qui la fait céder.",
   "home.curriculum.module3.punchline": "Ce que Bitcoin change, et ce qu'il ne change pas.",
-  "home.curriculum.learn": "Tu y apprends :",
   "home.curriculum.chapters": "{n} chapitres",
-  "home.curriculum.minutes": "~{m} min de lecture",
+  "home.curriculum.minutes": "{m} min de lecture",
   "home.curriculum.state.inProgress": "En cours",
   "home.curriculum.state.completed": "Terminé",
   "home.curriculum.cta.start": "Commencer",
   "home.curriculum.cta.resume": "Reprendre",
-  "home.curriculum.cta.review": "Revoir",
-
-  "home.difference.title": "Pourquoi c'est différent",
-  "home.difference.openSource": "Gratuit et open-source. Le code est ouvert, vérifie toi-même.",
-  "home.difference.sources": "Chaque affirmation importante est sourcée.",
-  "home.difference.privacyTitle": "On ne sait pas qui tu es",
-  "home.difference.privacyBody":
-    "Pas d'email, pas de mot de passe, pas de Google. Même si je le voulais, je ne pourrais pas dire qui tu es. La raison est simple : si je me fais pirater un jour, personne ne doit pouvoir deviner que tu t'intéresses au Bitcoin. Un site qui parle de souveraineté ne commence pas par collecter la tienne.",
-  "home.difference.privacyLink": "Comment marche ton accès",
+  "home.curriculum.cta.review": "Relire",
 
   "footer.donateMessage": "Si ce projet te plaît, soutiens-le en sats.",
   "footer.copy": "Copier",

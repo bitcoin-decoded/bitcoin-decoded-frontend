@@ -5,13 +5,11 @@ import { RevealOnScroll } from "../../Shared";
 import { useCurriculumProgress, useHomePage } from "../hooks";
 
 import { HomeCurriculum } from "./HomeCurriculum";
-import { HomeDifference } from "./HomeDifference";
 import { HomeHero } from "./HomeHero";
 import { HomeResume } from "./HomeResume";
 
 export const HomePage: FC = () => {
-  const { curriculumSectionId, startJourney, openChapter, openAccessInfo, scrollToCurriculum } =
-    useHomePage();
+  const { curriculumSectionId, startJourney, openChapter, scrollToCurriculum } = useHomePage();
   const { cards, moduleCount, totalChapters, totalMinutes, resume } = useCurriculumProgress();
   const breakpoint = useBreakpoint();
   const isMobile = breakpoint === "mobile";
@@ -54,11 +52,6 @@ export const HomePage: FC = () => {
         totalMinutes={totalMinutes}
         onOpen={openChapter}
       />
-
-      <Separator margin={sepMargin} />
-      <RevealOnScroll>
-        <HomeDifference onLearnMore={openAccessInfo} />
-      </RevealOnScroll>
     </div>
   );
 };
