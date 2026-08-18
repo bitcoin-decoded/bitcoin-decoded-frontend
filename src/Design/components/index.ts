@@ -10,6 +10,7 @@ export { KeywordHighlight } from "./KeywordHighlight";
 export { LedgerNumeral } from "./LedgerNumeral";
 export type { LedgerTraceRow } from "./LedgerTrace";
 export { LedgerTrace } from "./LedgerTrace";
+export { ModalShell } from "./ModalShell";
 export { OptionButton } from "./OptionButton";
 export { Quote } from "./Quote";
 export type { RangeLedgerTick } from "./RangeLedger";

@@ -12,6 +12,7 @@ export {
   KeywordHighlight,
   LedgerNumeral,
   LedgerTrace,
+  ModalShell,
   OptionButton,
   Quote,
   RangeLedger,
@@ -21,7 +22,7 @@ export {
   Separator,
   SurfaceCard,
 } from "./components";
-export { withOpacity } from "./helpers";
+export { getStableSeed, withOpacity } from "./helpers";
 export { useDisclosure, useExplorationGate } from "./hooks";
 export type { IdentityCharacteristic, MonetaryItem } from "./IdentityCard";
 export { getMonetaryHistory, IdentityCard, RatingRow, useIdentityCard } from "./IdentityCard";
