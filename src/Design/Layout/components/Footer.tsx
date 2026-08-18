@@ -69,6 +69,18 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop", aside }) => {
     color: withOpacity(colors.base.text.primary, 0.78),
   };
 
+  const disclaimerStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.body,
+    fontSize: "0.72rem",
+    lineHeight: 1.5,
+    color: withOpacity(colors.base.text.primary, 0.6),
+    textAlign: "center",
+    alignSelf: "center",
+    maxWidth: "44rem",
+    margin: 0,
+    padding: isMobile ? "0 1rem 1.25rem" : "0 2.5rem 1.25rem",
+  };
+
   return (
     <footer style={footerStyle}>
       <div style={ruleLineStyle} aria-hidden="true" />
@@ -79,6 +91,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop", aside }) => {
           <p style={creditStyle}>{t("footer.iconCredit")}</p>
         </div>
       </div>
+      <p style={disclaimerStyle}>{t("footer.disclaimer")}</p>
     </footer>
   );
 };

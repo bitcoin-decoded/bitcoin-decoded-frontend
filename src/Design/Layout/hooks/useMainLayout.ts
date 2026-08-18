@@ -35,6 +35,7 @@ export const useMainLayout = () => {
     toggleDrawer,
     closeDrawer,
     isChapterPage: currentPage !== ROUTE_NAME.HomePage,
+    isHomePage: currentPage === ROUTE_NAME.HomePage,
     isBlockChapter: BLOCK_READING_CHAPTERS.has(currentPage),
   };
 };

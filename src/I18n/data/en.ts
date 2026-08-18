@@ -519,62 +519,53 @@ const en = {
   "footer.builtWith": "Built with",
   "footer.inspiredBy": "Inspired by the work of",
 
-  "home.hero.headline": "The money you use... you don't really understand it.",
-  "home.hero.subheadline":
-    "To understand Bitcoin, you first need to understand how money work today.",
-  "home.hero.ctaPrimary": "Start the journey",
-  "home.hero.ctaSecondary": "See the program",
+  "home.hero.headlineLead": "You use money every day. But you don't really know ",
+  "home.hero.headlineHighlight": "how",
+  "home.hero.headlineTail": " it's created.",
+  "home.hero.subheadline": "Let me reassure you: almost no one does. Finance graduates included.",
+  "home.hero.pitch":
+    "A free course to understand money, the system around it, then Bitcoin. (And make up your own mind.)",
+  "home.hero.ctaPrimary": "Start the course",
+  "home.hero.ctaSecondary": "See the syllabus",
 
-  "home.hook.title":
-    "You work as much as you used to, maybe more. Your grocery cart keeps shrinking.",
-  "home.hook.line1": "Rent, groceries, fuel: everything climbs.",
-  "home.hook.line2": "Your paycheck lags far behind.",
-  "home.hook.bridgeP1": "This is not fate. It's a mechanism.",
-  "home.hook.bridgeP2": "And it all starts with a loan.",
+  "home.resume.title": "Pick up where you left off",
+  "home.resume.position": "Module {m} · Chapter {c}",
+  "home.resume.progress": "{done} / {total} chapters",
+  "home.resume.remaining": "{n} chapters left, ~{m} min",
+  "home.resume.button": "Resume",
+  "home.resume.restart": "Start over",
+  "home.resume.allDone": "You've completed all {total} chapters.",
 
-  "home.positioning.title": "Most people start with Bitcoin. We start with money.",
-  "home.positioning.comparisonP1": "Trying to understand Bitcoin without understanding money",
-  "home.positioning.comparisonP2": "is like reading the last page before the story.",
-  "home.positioning.flip": "So we take the story in order.",
+  "home.curriculum.title": "The syllabus",
+  "home.curriculum.intro": "{modules} modules · {chapters} chapters",
+  "home.curriculum.module1.name": "How money works",
+  "home.curriculum.module2.name": "When the system breaks down",
+  "home.curriculum.module3.name": "The Bitcoin rupture",
+  "home.curriculum.module1.punchline": "Understand where the money you use really comes from.",
+  "home.curriculum.module2.punchline": "What makes a currency hold, and what makes it give way.",
+  "home.curriculum.module3.punchline": "What Bitcoin changes, and what it doesn't.",
+  "home.curriculum.chapters": "{n} chapters",
+  "home.curriculum.minutes": "{m} min read",
+  "home.curriculum.state.inProgress": "In progress",
+  "home.curriculum.state.completed": "Completed",
+  "home.curriculum.cta.start": "Start",
+  "home.curriculum.cta.resume": "Resume",
+  "home.curriculum.cta.review": "Re-read",
 
-  "home.journey.title": "A journey in 3 modules",
-  "home.journey.step1.label": "Module 1",
-  "home.journey.step1.title": "The Problem",
-  "home.journey.step1.desc": "Why are your savings losing value?\nHow is money actually created?",
-  "home.journey.step2.label": "Module 2",
-  "home.journey.step2.title": "The Rules",
-  "home.journey.step2.desc":
-    'What makes a currency "good"?\nThe invisible rules that govern everything.',
-  "home.journey.step3.label": "Module 3",
-  "home.journey.step3.title": "Bitcoin",
-  "home.journey.step3.desc": "A different way to design money.\nAnd what it really changes.",
-  "home.journey.cardCta": "See this module",
-
-  "home.audience.title": "This journey is for you if...",
-  "home.audience.item1": "You use money without knowing how it's made.",
-  "home.audience.item2": "You feel something is off, without being able to name it.",
-  "home.audience.item3": "You want to form your own opinion, not be sold one.",
-  "home.audience.payoff":
-    "By the end, you'll explain Bitcoin better than most people who talk about it.",
-
-  "home.differentiation.neg1": "No hype.",
-  "home.differentiation.neg2": "No get-rich promises.",
-  "home.differentiation.neg3": 'No "just trust me".',
-  "home.differentiation.posIntro": "Just one rule:",
-  "home.differentiation.pos": "We simplify, but we never lie to you.",
-
-  "home.philosophy.quote":
-    "The root problem with conventional currency is all the trust that's required...",
-
-  "home.finalCta.titleP1": "Free and open access.",
-  "home.finalCta.titleP2": "Curiosity is your only guide.",
-  "home.finalCta.button": "Start the journey",
+  "home.difference.openSource": "Free and open-source. The code is open, check it yourself.",
+  "home.difference.sources": "Every key claim is sourced.",
+  "home.difference.privacyTitle": "We don't know who you are",
+  "home.difference.privacyBody":
+    "No email, no password, no Google. Even if I wanted to, I couldn't tell who you are. The reason is simple: if I ever get hacked, no one should be able to guess you're into Bitcoin. A site that talks about sovereignty doesn't start by collecting yours.",
+  "home.difference.privacyLink": "How your access works",
 
   "footer.donateMessage": "If you like this project, support it in sats.",
   "footer.copy": "Copy",
   "footer.copied": "Copied!",
   "footer.copyright": "© 2026 - Bitcoin.Decoded",
   "footer.iconCredit": "Doodle icons: Streamline (CC BY 4.0)",
+  "footer.disclaimer":
+    "Free, open-source, non-commercial educational resource. This is not investment advice.",
 
   // Auth (CDC v1.1 §15): final editorial text, word for word. Do not rewrite,
   // add or cut anything (acceptance criterion §13.10). The {username}/{n}/{date}/

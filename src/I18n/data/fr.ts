@@ -523,63 +523,53 @@ const fr = {
   "footer.builtWith": "Construit avec",
   "footer.inspiredBy": "Inspiré par le travail de",
 
-  "home.hero.headline": "L'argent que tu utilises... tu ne le comprends pas vraiment.",
-  "home.hero.subheadline":
-    "Comprendre Bitcoin, c'est d'abord comprendre comment fonctionne l'argent aujourd'hui.",
+  "home.hero.headlineLead": "L'argent, tu l'utilises tous les jours. Mais tu ne sais pas vraiment ",
+  "home.hero.headlineHighlight": "comment",
+  "home.hero.headlineTail": " il est créé.",
+  "home.hero.subheadline": "Je te rassure : presque personne ne le sait. Les diplômés en finance non plus.",
+  "home.hero.pitch":
+    "Un parcours gratuit pour comprendre l'argent, le système qui va avec, puis Bitcoin. (Et te faire ton propre avis.)",
   "home.hero.ctaPrimary": "Commencer le parcours",
   "home.hero.ctaSecondary": "Voir le programme",
 
-  "home.hook.title": "Tu bosses autant qu'avant, voire plus. Ton caddie, lui, s'amincit.",
-  "home.hook.line1": "Le loyer, les courses, l'essence : tout grimpe.",
-  "home.hook.line2": "Ta fiche de paie, elle traîne loin derrière.",
-  "home.hook.bridgeP1": "Ce n'est pas une fatalité. C'est une mécanique.",
-  "home.hook.bridgeP2": "Et tout commence par un prêt.",
+  "home.resume.title": "Reprends où tu t'es arrêté",
+  "home.resume.position": "Module {m} · Chapitre {c}",
+  "home.resume.progress": "{done} / {total} chapitres",
+  "home.resume.remaining": "Il te reste {n} chapitres, ~{m} min",
+  "home.resume.button": "Reprendre",
+  "home.resume.restart": "Revoir depuis le début",
+  "home.resume.allDone": "Tu as terminé les {total} chapitres.",
 
-  "home.positioning.title": "La plupart commencent par Bitcoin. Nous, on commence par l'argent.",
-  "home.positioning.comparisonP1": "Comprendre Bitcoin sans comprendre l'argent,",
-  "home.positioning.comparisonP2": "c'est lire la dernière page sans connaître l'histoire.",
-  "home.positioning.flip": "Alors on prend l'histoire dans l'ordre.",
+  "home.curriculum.title": "Le programme",
+  "home.curriculum.intro": "{modules} modules · {chapters} chapitres",
+  "home.curriculum.module1.name": "Comment fonctionne l'argent",
+  "home.curriculum.module2.name": "Quand le système déraille",
+  "home.curriculum.module3.name": "La rupture Bitcoin",
+  "home.curriculum.module1.punchline": "Comprendre d'où vient vraiment l'argent que tu utilises.",
+  "home.curriculum.module2.punchline": "Ce qui fait qu'une monnaie tient, et ce qui la fait céder.",
+  "home.curriculum.module3.punchline": "Ce que Bitcoin change, et ce qu'il ne change pas.",
+  "home.curriculum.chapters": "{n} chapitres",
+  "home.curriculum.minutes": "{m} min de lecture",
+  "home.curriculum.state.inProgress": "En cours",
+  "home.curriculum.state.completed": "Terminé",
+  "home.curriculum.cta.start": "Commencer",
+  "home.curriculum.cta.resume": "Reprendre",
+  "home.curriculum.cta.review": "Relire",
 
-  "home.journey.title": "Un parcours en 3 modules",
-  "home.journey.step1.label": "Module 1",
-  "home.journey.step1.title": "Le Problème",
-  "home.journey.step1.desc":
-    "Pourquoi ton épargne perd-elle de la valeur ?\nComment l'argent est-il créé ?",
-  "home.journey.step2.label": "Module 2",
-  "home.journey.step2.title": "Les Lois",
-  "home.journey.step2.desc":
-    "Qu'est-ce qui fait une « bonne » monnaie ?\nLes règles invisibles qui gouvernent tout.",
-  "home.journey.step3.label": "Module 3",
-  "home.journey.step3.title": "Bitcoin",
-  "home.journey.step3.desc":
-    "Une autre façon de concevoir l'argent.\nEt ce que cela change vraiment.",
-  "home.journey.cardCta": "Voir ce module",
-
-  "home.audience.title": "Ce parcours est pour toi si...",
-  "home.audience.item1": "Tu utilises l'argent sans savoir comment il est fabriqué.",
-  "home.audience.item2": "Tu sens que quelque chose déraille, sans pouvoir mettre le doigt dessus.",
-  "home.audience.item3": "Tu veux te faire ton propre avis, pas qu'on te le vende.",
-  "home.audience.payoff":
-    "À la fin, tu sauras expliquer Bitcoin mieux que la plupart des gens qui en parlent.",
-
-  "home.differentiation.neg1": "Pas de hype.",
-  "home.differentiation.neg2": "Pas de promesse de devenir riche.",
-  "home.differentiation.neg3": "Pas de « fais-moi confiance ».",
-  "home.differentiation.posIntro": "Juste une règle :",
-  "home.differentiation.pos": "On simplifie, mais on ne te ment pas.",
-
-  "home.philosophy.quote":
-    "Le problème fondamental des monnaies traditionnelles, c'est toute la confiance qu'elles exigent.",
-
-  "home.finalCta.titleP1": "Accès totalement libre et gratuit.",
-  "home.finalCta.titleP2": "La curiosité est ton seul guide.",
-  "home.finalCta.button": "Commencer le parcours",
+  "home.difference.openSource": "Gratuit et open-source. Le code est ouvert, vérifie toi-même.",
+  "home.difference.sources": "Chaque affirmation importante est sourcée.",
+  "home.difference.privacyTitle": "On ne sait pas qui tu es",
+  "home.difference.privacyBody":
+    "Pas d'email, pas de mot de passe, pas de Google. Même si je le voulais, je ne pourrais pas dire qui tu es. La raison est simple : si je me fais pirater un jour, personne ne doit pouvoir deviner que tu t'intéresses au Bitcoin. Un site qui parle de souveraineté ne commence pas par collecter la tienne.",
+  "home.difference.privacyLink": "Comment marche ton accès",
 
   "footer.donateMessage": "Si ce projet te plaît, soutiens-le en sats.",
   "footer.copy": "Copier",
   "footer.copied": "Copié !",
   "footer.copyright": "© 2026 - Bitcoin.Decoded",
   "footer.iconCredit": "Icônes doodle : Streamline (CC BY 4.0)",
+  "footer.disclaimer":
+    "Ressource éducative gratuite, open-source, non commerciale. Ceci n'est pas un conseil en investissement.",
 
   // Auth (CDC v1.1 §14): final French editorial copy, word for word. Do not
   // rewrite, add or cut anything (acceptance criterion §13.10). The

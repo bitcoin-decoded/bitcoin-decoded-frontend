@@ -1,5 +1,4 @@
 export { ChapterPrelude } from "./ChapterPrelude";
-export { HomePage } from "./HomePage";
 export { ModuleProgress } from "./ModuleProgress";
 export { PageNavigation } from "./PageNavigation";
 export { PageTemplate } from "./PageTemplate";
