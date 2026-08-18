@@ -552,6 +552,13 @@ const en = {
   "home.curriculum.cta.resume": "Resume",
   "home.curriculum.cta.review": "Re-read",
 
+  "home.difference.openSource": "Free and open-source. The code is open, check it yourself.",
+  "home.difference.sources": "Every key claim is sourced.",
+  "home.difference.privacyTitle": "We don't know who you are",
+  "home.difference.privacyBody":
+    "No email, no password, no Google. Even if I wanted to, I couldn't tell who you are. The reason is simple: if I ever get hacked, no one should be able to guess you're into Bitcoin. A site that talks about sovereignty doesn't start by collecting yours.",
+  "home.difference.privacyLink": "How your access works",
+
   "footer.donateMessage": "If you like this project, support it in sats.",
   "footer.copy": "Copy",
   "footer.copied": "Copied!",

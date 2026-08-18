@@ -25,6 +25,7 @@ export const MainLayout: FC<{
     toggleDrawer,
     closeDrawer,
     isChapterPage,
+    isHomePage,
     isBlockChapter,
   } = useMainLayout();
 
@@ -57,9 +58,11 @@ export const MainLayout: FC<{
     borderRight: `1px solid ${colors.base.border.primary}`,
   };
 
+  // The landing page hosts its own centered container and a three-up card row, so
+  // it wants the full column width; the heavy chapter gutters would squeeze it.
   const mainContentPadding = {
-    desktop: "3rem 10rem",
-    tablet: "2rem 4rem",
+    desktop: isHomePage ? "2.5rem 3rem" : "3rem 10rem",
+    tablet: isHomePage ? "2rem 1.75rem" : "2rem 4rem",
     mobile: "1.5rem 0",
   };
 

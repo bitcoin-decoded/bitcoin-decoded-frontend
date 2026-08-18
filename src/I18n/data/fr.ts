@@ -556,6 +556,13 @@ const fr = {
   "home.curriculum.cta.resume": "Reprendre",
   "home.curriculum.cta.review": "Relire",
 
+  "home.difference.openSource": "Gratuit et open-source. Le code est ouvert, vérifie toi-même.",
+  "home.difference.sources": "Chaque affirmation importante est sourcée.",
+  "home.difference.privacyTitle": "On ne sait pas qui tu es",
+  "home.difference.privacyBody":
+    "Pas d'email, pas de mot de passe, pas de Google. Même si je le voulais, je ne pourrais pas dire qui tu es. La raison est simple : si je me fais pirater un jour, personne ne doit pouvoir deviner que tu t'intéresses au Bitcoin. Un site qui parle de souveraineté ne commence pas par collecter la tienne.",
+  "home.difference.privacyLink": "Comment marche ton accès",
+
   "footer.donateMessage": "Si ce projet te plaît, soutiens-le en sats.",
   "footer.copy": "Copier",
   "footer.copied": "Copié !",

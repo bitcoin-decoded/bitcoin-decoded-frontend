@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC } from "react";
+import { type CSSProperties, type FC, Fragment } from "react";
 
 import {
   BRAND,
@@ -92,10 +92,10 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
 
   const kickerStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
-    fontSize: "0.75rem",
+    fontSize: isMobile ? "0.88rem" : "0.95rem",
     fontWeight: 500,
-    letterSpacing: "0.16em",
-    color: gold,
+    letterSpacing: "0.12em",
+    color: accent,
     fontVariant: "small-caps",
     margin: 0,
   };
@@ -120,13 +120,17 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
   };
 
   const notionsStyle: CSSProperties = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "0.55rem 0.7rem",
-    lineHeight: 1.9,
+    textAlign: "center",
+    lineHeight: 2.1,
     fontSize: "0.85rem",
-    maxWidth: "24rem",
+    maxWidth: "26rem",
+  };
+
+  const notionItemStyle: CSSProperties = { whiteSpace: "nowrap" };
+
+  const notionSepStyle: CSSProperties = {
+    color: withOpacity(colors.base.text.secondary, 0.5),
+    margin: "0 0.1rem",
   };
 
   const readingBlockStyle: CSSProperties = {
@@ -205,10 +209,18 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
       <p style={punchlineStyle}>{t(card.punchlineKey)}</p>
 
       <div style={notionsStyle}>
-        {card.notions.map((notion) => (
-          <HighlightText key={notion} hue={card.theme}>
-            {notion}
-          </HighlightText>
+        {card.notions.map((notion, i) => (
+          <Fragment key={notion}>
+            <span style={notionItemStyle}>
+              <HighlightText hue={card.theme}>{notion}</HighlightText>
+              {i < card.notions.length - 1 && (
+                <span style={notionSepStyle} aria-hidden>
+                  {" ·"}
+                </span>
+              )}
+            </span>
+            {i < card.notions.length - 1 ? " " : null}
+          </Fragment>
         ))}
       </div>
 
