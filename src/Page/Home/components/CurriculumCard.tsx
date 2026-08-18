@@ -2,7 +2,6 @@ import { type CSSProperties, type FC } from "react";
 
 import {
   BRAND,
-  getBrandGold,
   THEME_COLORS,
   useBreakpoint,
   useThemeContext,
@@ -17,7 +16,6 @@ import { LedgerCorners } from "./LedgerCorners";
 import { NotionCloud } from "./NotionCloud";
 
 import { DoodleBank, DoodleBitcoinGlobe, DoodleClock, DoodleCursorClick, DoodleMoneyBag } from "@doodle";
-import { Check } from "@icons";
 
 type Props = {
   card: CurriculumCardData;
@@ -40,7 +38,6 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
 
   const colors = THEME_COLORS[theme];
   const accent = colors[card.theme].text.secondary;
-  const gold = getBrandGold(theme);
   const Icon = ICONS[card.index - 1] ?? DoodleBank;
 
   const cardStyle: CSSProperties = {
@@ -63,32 +60,11 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
 
   const cornerColor = withOpacity(accent, isHovered ? 0.85 : 0.4);
 
-  const topClusterStyle: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "0.3rem",
-  };
-
   const iconWrapStyle: CSSProperties = {
     color: accent,
     transform: isHovered ? "translateY(-2px)" : "translateY(0)",
     transition: "transform 0.35s var(--ease-smooth)",
   };
-
-  const stateStyle: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.3rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: "0.75rem",
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    color: card.state === "completed" ? gold : accent,
-    whiteSpace: "nowrap",
-  };
-
-  const dotStyle: CSSProperties = { width: 6, height: 6, background: accent };
 
   const kickerStyle: CSSProperties = {
     fontFamily: BRAND.fonts.mono,
@@ -186,22 +162,9 @@ export const CurriculumCard: FC<Props> = ({ card, onOpen }) => {
     <button type="button" style={cardStyle} onClick={() => onOpen(card.startRoute)} {...hoverProps}>
       <LedgerCorners color={cornerColor} />
 
-      <div style={topClusterStyle}>
-        <span style={iconWrapStyle}>
-          <Icon size={isMobile ? 48 : 52} />
-        </span>
-        {card.state === "completed" ? (
-          <span style={stateStyle}>
-            <Check size={15} aria-hidden />
-            {t("home.curriculum.state.completed")}
-          </span>
-        ) : card.state === "in-progress" ? (
-          <span style={stateStyle}>
-            <span style={dotStyle} aria-hidden />
-            {t("home.curriculum.state.inProgress")}
-          </span>
-        ) : null}
-      </div>
+      <span style={iconWrapStyle}>
+        <Icon size={isMobile ? 48 : 52} />
+      </span>
 
       <div>
         <p style={kickerStyle}>{`Module 0${card.index}`}</p>

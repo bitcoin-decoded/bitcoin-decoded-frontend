@@ -550,8 +550,6 @@ const fr = {
   "home.curriculum.module3.punchline": "Ce que Bitcoin change, et ce qu'il ne change pas.",
   "home.curriculum.chapters": "{n} chapitres",
   "home.curriculum.minutes": "{m} min de lecture",
-  "home.curriculum.state.inProgress": "En cours",
-  "home.curriculum.state.completed": "Terminé",
   "home.curriculum.cta.start": "Commencer",
   "home.curriculum.cta.resume": "Reprendre",
   "home.curriculum.cta.review": "Relire",

@@ -69,6 +69,10 @@ export const HomeCurriculum: FC<Props> = ({
     alignItems: "stretch",
     gap: isMobile ? "0.85rem" : "1.15rem",
     width: "100%",
+    // On a phone a stacked card would otherwise run edge to edge; inset it so the
+    // card keeps roughly the same width-to-margin proportion as on desktop.
+    padding: isMobile ? "0 1.5rem" : 0,
+    boxSizing: "border-box",
     marginTop: "0.5rem",
   };
 
