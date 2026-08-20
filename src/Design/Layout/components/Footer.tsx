@@ -8,9 +8,10 @@ import { BRAND, getBrandGold, THEME_COLORS, useThemeContext } from "../../Theme"
 type Props = {
   breakpoint?: Breakpoint;
   aside?: ReactNode;
+  link?: ReactNode;
 };
 
-export const Footer: FC<Props> = ({ breakpoint = "desktop", aside }) => {
+export const Footer: FC<Props> = ({ breakpoint = "desktop", aside, link }) => {
   const { theme } = useThemeContext();
   const { t } = useTranslation();
   const colors = THEME_COLORS[theme];
@@ -87,6 +88,7 @@ export const Footer: FC<Props> = ({ breakpoint = "desktop", aside }) => {
       <div style={innerStyle}>
         {aside}
         <div style={legalBlockStyle}>
+          {link}
           <p style={copyrightStyle}>{t("footer.copyright")}</p>
           <p style={creditStyle}>{t("footer.iconCredit")}</p>
         </div>

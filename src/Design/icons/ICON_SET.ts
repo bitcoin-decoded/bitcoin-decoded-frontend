@@ -4,6 +4,9 @@ export type { Icon as IconType } from "@phosphor-icons/react";
 // The official mark, not a Phosphor glyph: the donation button names bitcoin
 // itself, so it wears the real logo rather than an interpretation of it.
 export { BitcoinMark } from "./BitcoinMark";
+// A plain "?" mark: the About entry wants the bare glyph, not the circled
+// help icon the Phosphor set aliases as CircleHelp/HelpCircle.
+export { QuestionMark } from "./QuestionMark";
 
 export type IconComponent = ComponentType<{
   size?: number;
