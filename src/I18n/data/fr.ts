@@ -503,7 +503,7 @@ const fr = {
   "nav.tree.cantillon": "Pourquoi l'argent va à l'argent",
   "nav.tree.inflation": "Pourquoi ta baguette coûte plus cher",
   "nav.tree.synthesis": "Tu as compris ? Prouve-le.",
-  "nav.tree.moneyLaws": "Pourquoi le système échoue",
+  "nav.tree.moneyLaws": "Quand le système déraille",
   "nav.tree.whatIsMoney": "5000 ans de batteries qui fuient",
   "nav.tree.priceOfTime": "Quand le taux dit la vérité",
   "nav.tree.economicCycles": "La boussole truquée de l'économie",
@@ -582,6 +582,20 @@ const fr = {
   "footer.iconCredit": "Icônes doodle : Streamline (CC BY 4.0)",
   "footer.disclaimer":
     "Ressource éducative gratuite, open-source, non commerciale. Ceci n'est pas un conseil en investissement.",
+
+  "about.nav": "À propos",
+  "about.title": "À propos",
+  "about.close": "Fermer",
+  "about.p1":
+    "Tu as sans doute grandi sans qu'on t'explique <hl>comment marche l'argent</hl>. C'est mon cas. Chez moi c'était presque tabou : Livret A, assurance-vie, et surtout on ne joue pas avec l'argent de ses économies.",
+  "about.p2":
+    "Comme beaucoup, je suis arrivé dans les cryptos en courant après ce qui montait. Spoiler : ça ne s'est pas très bien passé.<dizzy/> Puis c'est le prix démesuré de bitcoin qui m'a fait voir autre chose que les courbes : ses fondamentaux, sa proposition de valeur, et par ricochet, ce qu'est réellement <hl>une monnaie</hl>.",
+  "about.p3":
+    "Je suis ingénieur de formation, venu à la finance sur le tard, par le terrier de Bitcoin. En creusant, j'ai découvert l'École autrichienne, celle qui colle le mieux à ce que Bitcoin propose.",
+  "about.p4a":
+    "Le contenu français m'a frustré. D'un côté le prix et le rêve, de l'autre du sérieux réservé aux initiés. Entre les deux, presque rien. Alors j'ai pris le problème par où je sais faire : <hl>un terrain de jeu</hl> où tu manipules les concepts pour mieux comprendre. Léger sur le ton, rigoureux sur le fond. Gratuit et open-source.",
+  "about.p4b":
+    "Ici, pas de promesse de richesse, pas d'« Achète maintenant, to the moon ! », pas d'affiliation douteuse. Je ne te vends rien. Le reste, c'est à toi de le <hl>décoder</hl>.<cheeky/>",
 
   // Auth (CDC v1.1 §14): final French editorial copy, word for word. Do not
   // rewrite, add or cut anything (acceptance criterion §13.10). The

@@ -14,8 +14,16 @@ export const MainLayout: FC<{
   headerAction?: ReactNode;
   isChapterComplete?: (id: string) => boolean;
   footerAside?: ReactNode;
+  footerLink?: ReactNode;
   isChapterOutOfSequence?: (id: string) => boolean;
-}> = ({ children, headerAction, isChapterComplete, isChapterOutOfSequence, footerAside }) => {
+}> = ({
+  children,
+  headerAction,
+  isChapterComplete,
+  isChapterOutOfSequence,
+  footerAside,
+  footerLink,
+}) => {
   const { theme } = useThemeContext();
   const colors = THEME_COLORS[theme];
   const {
@@ -103,7 +111,7 @@ export const MainLayout: FC<{
         )}
         <main style={mainContentStyle}>{children}</main>
       </div>
-      <Footer breakpoint={breakpoint} aside={footerAside} />
+      <Footer breakpoint={breakpoint} aside={footerAside} link={footerLink} />
       {isChapterPage && <ScrollToTopButton />}
     </div>
   );

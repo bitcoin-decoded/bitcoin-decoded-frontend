@@ -499,7 +499,7 @@ const en = {
   "nav.tree.cantillon": "The trickle that never trickles",
   "nav.tree.inflation": "Why your groceries cost more",
   "nav.tree.synthesis": "Got it? Prove it.",
-  "nav.tree.moneyLaws": "Why does the system fail?",
+  "nav.tree.moneyLaws": "When the system breaks down",
   "nav.tree.whatIsMoney": "5,000 years of leaky batteries",
   "nav.tree.priceOfTime": "When Interest Rates Tell the Truth",
   "nav.tree.economicCycles": "Economy's rigged compass",
@@ -577,6 +577,20 @@ const en = {
   "footer.iconCredit": "Doodle icons: Streamline (CC BY 4.0)",
   "footer.disclaimer":
     "Free, open-source, non-commercial educational resource. This is not investment advice.",
+
+  "about.nav": "About",
+  "about.title": "About",
+  "about.close": "Close",
+  "about.p1":
+    "You probably grew up without anyone explaining <hl>how money actually works</hl>. Same here. At home it was almost taboo: a savings account, some life insurance, and above all, you don't gamble what you've set aside.",
+  "about.p2":
+    "Like a lot of people, I came into crypto chasing whatever was going up. Spoiler: it didn't go particularly well.<dizzy/> Then it was Bitcoin's outsized price that made me look past the charts, to its fundamentals, its value proposition, and eventually, what <hl>money</hl> really is.",
+  "about.p3":
+    "I'm an engineer by training, who came to finance late, through the Bitcoin rabbit hole. Digging in, I found the Austrian school of economics, the one that fits what Bitcoin proposes best.",
+  "about.p4a":
+    "French-language content had frustrated me. On one side, price and hype. On the other, serious material written for insiders. In between, almost nothing. So I took the problem where I know how: <hl>a playground</hl> where you handle the concepts to understand them better. Light in tone, rigorous underneath. Free and open-source.",
+  "about.p4b":
+    "You won't find any promise of riches here, no \"buy now, to the moon!\", no shady affiliate links. I'm not selling you anything. The rest is yours to <hl>decode</hl>.<cheeky/>",
 
   // Auth (CDC v1.1 §15): final editorial text, word for word. Do not rewrite,
   // add or cut anything (acceptance criterion §13.10). The {username}/{n}/{date}/

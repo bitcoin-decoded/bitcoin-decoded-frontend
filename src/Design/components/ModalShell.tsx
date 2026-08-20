@@ -15,6 +15,9 @@ type Props = {
   canGoBack?: boolean;
   onBack?: () => void;
   backLabel?: string;
+  // Escape closes the modal. Off by default so a half-filled flow (auth, donation)
+  // is never lost to a stray key; informational modals (about) opt in.
+  closeOnEscape?: boolean;
   children: ReactNode;
 };
 
@@ -34,6 +37,7 @@ export const ModalShell: FC<Props> = ({
   canGoBack = false,
   onBack,
   backLabel,
+  closeOnEscape = false,
   children,
 }) => {
   const { theme } = useThemeContext();
@@ -87,6 +91,15 @@ export const ModalShell: FC<Props> = ({
       window.scrollTo(0, scrollY);
     };
   }, [open]);
+
+  useEffect(() => {
+    if (!open || !closeOnEscape || typeof document === "undefined") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, closeOnEscape, onClose]);
 
   if (typeof document === "undefined" || !open) return null;
 
