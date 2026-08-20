@@ -4,7 +4,7 @@ import { THEME_COLORS, useThemeContext } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { useAbout } from "../hooks";
 
-import { HelpCircle } from "@icons";
+import { QuestionMark } from "@icons";
 
 // The header entry point: an icon-only bordered pill matching the other header
 // controls (badges, account) — text would crowd the right cluster on mobile, so it
@@ -37,7 +37,7 @@ export const AboutEntryButton: FC = () => {
       onMouseLeave={() => setHovered(false)}
       aria-label={t("about.nav")}
     >
-      <HelpCircle size={16} strokeWidth={2} />
+      <QuestionMark size={16} />
     </button>
   );
 };
