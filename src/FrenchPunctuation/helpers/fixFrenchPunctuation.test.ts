@@ -58,7 +58,7 @@ describe("fixFrenchPunctuation", () => {
   });
 
   it("does not touch Windows paths", () => {
-    expect(fixFrenchPunctuation("C:\\Users\\loic")).toBe("C:\\Users\\loic");
+    expect(fixFrenchPunctuation("C:\\Users\\test")).toBe("C:\\Users\\test");
   });
 
   it("handles a mixed sentence end-to-end", () => {
