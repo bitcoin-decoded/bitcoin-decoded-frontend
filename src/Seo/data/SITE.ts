@@ -1,4 +1,7 @@
+const url = "https://bitcoindecoded.fr";
+
 export const SITE = {
-  url: "https://bitcoindecoded.fr",
+  url,
   name: "Bitcoin.Decoded",
+  ogImage: `${url}/og-image.png`,
 } as const;
