@@ -27,6 +27,7 @@ export const usePageHead = () => {
   return {
     title: buildPageTitle(seo.title, withBrand),
     description: seo.description,
+    ogType: currentPage === ROUTE_NAME.HomePage ? "website" : "article",
     locale: language === "fr" ? "fr_FR" : "en_US",
     noindex,
     canonical,
