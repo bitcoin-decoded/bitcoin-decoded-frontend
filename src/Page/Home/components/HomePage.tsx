@@ -1,70 +1,69 @@
 import { type CSSProperties, type FC } from "react";
 
 import { useAuth } from "../../../Auth/hooks";
-import { Separator, useBreakpoint } from "../../../Design";
-import { RevealOnScroll } from "../../Shared";
-import { useCurriculumProgress, useHomePage } from "../hooks";
+import { useBreakpoint, useThemeContext, withOpacity } from "../../../Design";
+import { INSIGHT_STEPS } from "../data";
+import { getLandingColors } from "../helpers";
+import { useCurriculumProgress, useHomePage, useLandingMode } from "../hooks";
 
+import { FinalPalier } from "./FinalPalier";
+import { HeroPalier } from "./HeroPalier";
 import { HomeCurriculum } from "./HomeCurriculum";
-import { HomeDifference } from "./HomeDifference";
-import { HomeHero } from "./HomeHero";
-import { HomeResume } from "./HomeResume";
+import { InsightPalier } from "./InsightPalier";
+import { LandingRail } from "./LandingRail";
+import { ResumePalier } from "./ResumePalier";
 
 export const HomePage: FC = () => {
-  const { curriculumSectionId, startJourney, openChapter, openBadges, openAccessInfo, scrollToCurriculum } =
+  useLandingMode();
+
+  const { sectionId, startJourney, openChapter, openBadges, scrollToId, scrollToProgram } =
     useHomePage();
   const { cards, moduleCount, totalChapters, totalMinutes, resume } = useCurriculumProgress();
   const { status: authStatus } = useAuth();
-  const breakpoint = useBreakpoint();
-  const isMobile = breakpoint === "mobile";
+  const { theme } = useThemeContext();
+  const isDesktop = useBreakpoint() === "desktop";
 
-  // Signed-in visitors see the resume block even at zero progress (the "start" tier
-  // greets a freshly created access); guests see it only once they have progress.
+  const { ground, ink, gold, line } = getLandingColors(theme);
+
+  // A returning visitor with progress (or a freshly created access) gets the
+  // discreet resume ribbon; a fresh visitor never does, so the hero stays pristine.
   const showResume = resume !== null && (resume.doneCount > 0 || authStatus === "authenticated");
+  const heroResume = showResume ? resume : null;
 
-  const sepMargin = isMobile ? "2rem 0" : breakpoint === "tablet" ? "2.5rem 0" : "3.25rem 0";
-
-  const containerStyle: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    maxWidth: "62rem",
-    margin: "0 auto",
-    padding: `0 ${isMobile ? "0.75rem" : "1.5rem"}`,
-  };
-
-  const resumeWrapperStyle: CSSProperties = {
-    display: "flex",
-    justifyContent: "center",
+  // The immersive ground: warm halo top-right + a fixed ledger trame, both keyed
+  // to the theme so the sas reads in dark and light (spec §7).
+  const rootStyle: CSSProperties = {
+    position: "relative",
     width: "100%",
+    color: ink,
+    backgroundColor: ground,
+    backgroundImage: `radial-gradient(120% 60% at 78% -10%, ${withOpacity(gold, 0.1)}, transparent 60%), repeating-linear-gradient(${line} 0 1px, transparent 1px 36px)`,
+    backgroundAttachment: "fixed",
   };
 
   return (
-    <div style={containerStyle}>
-      <HomeHero onStart={startJourney} onSeeProgram={scrollToCurriculum} />
+    <div style={rootStyle}>
+      {isDesktop && <LandingRail onJump={scrollToId} />}
 
-      {showResume && resume && (
-        <>
-          <Separator margin={sepMargin} />
-          <RevealOnScroll style={resumeWrapperStyle}>
-            <HomeResume resume={resume} onOpen={openChapter} onBadges={openBadges} />
-          </RevealOnScroll>
-        </>
+      <HeroPalier onLook={() => scrollToId(INSIGHT_STEPS[0].id)} />
+
+      {heroResume && (
+        <ResumePalier resume={heroResume} onOpen={openChapter} onBadges={openBadges} />
       )}
 
-      <Separator margin={sepMargin} />
-      <HomeCurriculum
-        sectionId={curriculumSectionId}
-        cards={cards}
+      {INSIGHT_STEPS.map((step) => (
+        <InsightPalier key={step.id} step={step} />
+      ))}
+
+      <FinalPalier
         moduleCount={moduleCount}
         totalChapters={totalChapters}
         totalMinutes={totalMinutes}
-        onOpen={openChapter}
+        onStart={startJourney}
+        onSeeProgram={scrollToProgram}
       />
 
-      <Separator margin={sepMargin} />
-      <RevealOnScroll>
-        <HomeDifference onLearnMore={openAccessInfo} />
-      </RevealOnScroll>
+      <HomeCurriculum sectionId={sectionId.programme} cards={cards} onOpen={openChapter} />
     </div>
   );
 };

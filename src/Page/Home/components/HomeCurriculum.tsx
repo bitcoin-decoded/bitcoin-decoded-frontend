@@ -1,66 +1,66 @@
 import { type CSSProperties, type FC } from "react";
 
-import { BRAND, THEME_COLORS, useBreakpoint, useThemeContext } from "../../../Design";
-import { interpolate, useTranslation } from "../../../I18n";
+import { BRAND, useBreakpoint, useThemeContext } from "../../../Design";
+import { useTranslation } from "../../../I18n";
 import type { RouteName } from "../../../Routing";
 import { RevealOnScroll } from "../../Shared";
-import { formatDuration } from "../helpers";
+import { getLandingColors } from "../helpers";
 import type { CurriculumCard as CurriculumCardData } from "../types";
 
 import { CurriculumCard } from "./CurriculumCard";
-
-import { DoodleClock } from "@doodle";
+import { Eyebrow } from "./Eyebrow";
 
 type Props = {
   sectionId: string;
   cards: CurriculumCardData[];
-  moduleCount: number;
-  totalChapters: number;
-  totalMinutes: number;
   onOpen: (route: RouteName) => void;
 };
 
-export const HomeCurriculum: FC<Props> = ({
-  sectionId,
-  cards,
-  moduleCount,
-  totalChapters,
-  totalMinutes,
-  onOpen,
-}) => {
+// The programme, after the course door and outside the staircase: the three
+// module cards for the methodical visitor who wants the syllabus before walking.
+// Structure only ever appears this late, never before the desire.
+export const HomeCurriculum: FC<Props> = ({ sectionId, cards, onOpen }) => {
   const { t } = useTranslation();
   const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
-  const colors = THEME_COLORS[theme];
+  const { ink, ink2 } = getLandingColors(theme);
 
+  // No scroll-snap here: the programme sits outside the escalier, and snapping it
+  // was pulling the reader back off the footer. Only the paliers above snap.
   const sectionStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    gap: "1rem",
+    alignItems: "center",
+    boxSizing: "border-box",
+    padding: "clamp(3.5rem, 9vh, 5.5rem) clamp(1.25rem, 6vw, 3rem) clamp(4rem, 10vh, 6rem)",
+  };
+
+  const headStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
+    maxWidth: "44rem",
+    marginBottom: "2.4rem",
   };
 
   const titleStyle: CSSProperties = {
-    fontSize: isMobile ? "1.4rem" : "1.85rem",
+    fontFamily: BRAND.fonts.display,
+    fontSize: isMobile ? "1.7rem" : "2.4rem",
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    lineHeight: 1.25,
+    lineHeight: 1.1,
     margin: 0,
-    color: colors.base.text.primary,
+    color: ink,
   };
 
-  const introStyle: CSSProperties = {
-    display: "inline-flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.4rem",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: isMobile ? "0.85rem" : "0.95rem",
-    letterSpacing: "0.04em",
-    color: colors.base.text.secondary,
-    margin: 0,
+  const leadStyle: CSSProperties = {
+    fontFamily: BRAND.fonts.body,
+    fontSize: isMobile ? "1rem" : "1.1rem",
+    lineHeight: 1.5,
+    color: ink2,
+    margin: "1rem 0 0",
+    maxWidth: "40ch",
   };
 
   const cardsWrapperStyle: CSSProperties = {
@@ -69,33 +69,23 @@ export const HomeCurriculum: FC<Props> = ({
     alignItems: "stretch",
     gap: isMobile ? "0.85rem" : "1.15rem",
     width: "100%",
-    // On a phone a stacked card would otherwise run edge to edge; inset it so the
-    // card keeps roughly the same width-to-margin proportion as on desktop.
-    padding: isMobile ? "0 1.5rem" : 0,
-    boxSizing: "border-box",
-    marginTop: "0.5rem",
+    maxWidth: "56rem",
   };
-
-  const intro = interpolate(t("home.curriculum.intro"), {
-    modules: moduleCount,
-    chapters: totalChapters,
-  });
 
   return (
     <section id={sectionId} style={sectionStyle}>
-      <RevealOnScroll>
-        <h2 style={titleStyle}>{t("home.curriculum.title")}</h2>
-      </RevealOnScroll>
-      <RevealOnScroll delay={80}>
-        <p style={introStyle}>
-          <span>{intro}</span>
-          <span aria-hidden style={{ opacity: 0.55 }}>
-            ·
-          </span>
-          <DoodleClock size={20} aria-hidden />
-          <span>{formatDuration(totalMinutes)}</span>
-        </p>
-      </RevealOnScroll>
+      <div style={headStyle}>
+        <RevealOnScroll>
+          <Eyebrow label={t("home.curriculum.eyebrow")} align="center" />
+        </RevealOnScroll>
+        <RevealOnScroll delay={80}>
+          <h2 style={titleStyle}>{t("home.curriculum.title")}</h2>
+        </RevealOnScroll>
+        <RevealOnScroll delay={140}>
+          <p style={leadStyle}>{t("home.curriculum.lead")}</p>
+        </RevealOnScroll>
+      </div>
+
       <div style={cardsWrapperStyle}>
         {cards.map((card, index) => (
           <RevealOnScroll

@@ -4,7 +4,7 @@ import { useBadges } from "../../../Achievements";
 import { type TranslationKey, useTranslation } from "../../../I18n";
 import { getNavigationTree, type RouteName } from "../../../Routing";
 import { useUserData } from "../../../UserData";
-import { CURRICULUM_MODULES, getModuleNotions } from "../data";
+import { CURRICULUM_MODULES } from "../data";
 import { getModuleReadingMinutes } from "../helpers";
 import type { CurriculumCard, CurriculumProgress, CurriculumResume, ModuleState } from "../types";
 
@@ -20,7 +20,7 @@ const punchlineKey = (index: number): TranslationKey =>
 // is always the fresh-visitor state; the resume block is shown (and its tier chosen)
 // by the caller from doneCount + auth.
 export const useCurriculumProgress = (): CurriculumProgress => {
-  const { t, language } = useTranslation();
+  const { t } = useTranslation();
   const { isEarned } = useBadges();
   const { status } = useUserData();
 
@@ -49,7 +49,6 @@ export const useCurriculumProgress = (): CurriculumProgress => {
         nameKey: meta.nameKey,
         punchlineKey: punchlineKey(moduleIndex + 1),
         theme: meta.theme,
-        notions: getModuleNotions(language, moduleIndex),
         chapterCount: chapterIds.length,
         minutes: getModuleReadingMinutes(chapterIds),
         state: moduleState(done, chapterIds.length),
@@ -77,5 +76,5 @@ export const useCurriculumProgress = (): CurriculumProgress => {
       totalMinutes: getModuleReadingMinutes(flat),
       resume,
     };
-  }, [t, language, isEarned, status]);
+  }, [t, isEarned, status]);
 };
