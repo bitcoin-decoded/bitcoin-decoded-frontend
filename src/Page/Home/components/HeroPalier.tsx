@@ -2,23 +2,32 @@ import { type CSSProperties, type FC } from "react";
 
 import { BRAND, useThemeContext } from "../../../Design";
 import { useTranslation } from "../../../I18n";
+import type { RouteName } from "../../../Routing";
 import { RevealOnScroll } from "../../Shared";
 import { getLandingColors } from "../helpers";
+import type { CurriculumResume } from "../types";
 
+import { HomeResume } from "./HomeResume";
+import { ScrollCue } from "./ScrollCue";
 import { TrustSignature } from "./TrustSignature";
+
+const MAX_WIDTH = "64rem";
 
 type Props = {
   onLook: () => void;
+  resume: CurriculumResume | null;
+  onOpenResume: (route: RouteName) => void;
+  onBadges: () => void;
 };
 
-// Palier 0. One faille-phrase understood in two seconds, a lede that promises the
-// apéritif, an invitation to descend, and the sobriety signature pinned at the
-// foot of the viewport (visible on every breakpoint). No course length, no
-// structure here.
-export const HeroPalier: FC<Props> = ({ onLook }) => {
+// Palier 0. For a returning visitor the progress panel comes first (the one thing
+// they came back for); then one faille-phrase, a lede that promises the apéritif,
+// the invitation to descend, and the sobriety signature pinned at the foot. No
+// course length, no structure here.
+export const HeroPalier: FC<Props> = ({ onLook, resume, onOpenResume, onBadges }) => {
   const { t } = useTranslation();
   const { theme } = useThemeContext();
-  const { ink, ink2, gold, lineStrong } = getLandingColors(theme);
+  const { ink, ink2, gold } = getLandingColors(theme);
 
   const sectionStyle: CSSProperties = {
     position: "relative",
@@ -29,8 +38,16 @@ export const HeroPalier: FC<Props> = ({ onLook }) => {
     display: "flex",
     flexDirection: "column",
     boxSizing: "border-box",
-    padding: "clamp(3rem, 8vh, 5rem) clamp(1.25rem, 6vw, 3rem) clamp(1.5rem, 4vh, 2.2rem)",
+    padding: "clamp(2rem, 5vh, 3rem) clamp(1.25rem, 5vw, 3rem) clamp(1.5rem, 4vh, 2.2rem)",
     scrollSnapAlign: "start",
+  };
+
+  const bandStyle: CSSProperties = {
+    width: "100%",
+    maxWidth: MAX_WIDTH,
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "flex-start",
   };
 
   const contentStyle: CSSProperties = {
@@ -42,7 +59,7 @@ export const HeroPalier: FC<Props> = ({ onLook }) => {
 
   const wrapStyle: CSSProperties = {
     width: "100%",
-    maxWidth: "56rem",
+    maxWidth: MAX_WIDTH,
     margin: "0 auto",
     display: "flex",
     flexDirection: "column",
@@ -79,41 +96,22 @@ export const HeroPalier: FC<Props> = ({ onLook }) => {
     maxWidth: "42ch",
   };
 
-  const cueStyle: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.8rem",
-    marginTop: "2.4rem",
-    padding: 0,
-    border: "none",
-    background: "none",
-    cursor: "pointer",
-    fontFamily: BRAND.fonts.mono,
-    fontSize: "0.75rem",
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-    color: ink2,
-  };
-
-  const cueRingStyle: CSSProperties = {
-    display: "grid",
-    placeItems: "center",
-    width: "2rem",
-    height: "2rem",
-    borderRadius: "50%",
-    border: `1px solid ${lineStrong}`,
-    color: gold,
-    flexShrink: 0,
-  };
+  const cueWrapStyle: CSSProperties = { marginTop: "2.4rem" };
 
   const trustWrapStyle: CSSProperties = {
     width: "100%",
-    maxWidth: "56rem",
+    maxWidth: MAX_WIDTH,
     margin: "0 auto",
   };
 
   return (
     <section id="top" style={sectionStyle}>
+      {resume && (
+        <RevealOnScroll duration={700} style={bandStyle}>
+          <HomeResume resume={resume} onOpen={onOpenResume} onBadges={onBadges} />
+        </RevealOnScroll>
+      )}
+
       <div style={contentStyle}>
         <div style={wrapStyle}>
           <RevealOnScroll delay={60} duration={700}>
@@ -128,26 +126,8 @@ export const HeroPalier: FC<Props> = ({ onLook }) => {
             <p style={ledeStyle}>{t("home.hero.lede")}</p>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={380} duration={700}>
-            <button type="button" style={cueStyle} onClick={onLook}>
-              <span style={cueRingStyle}>
-                <svg
-                  className="landing-cue-bob"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14M5 12l7 7 7-7" />
-                </svg>
-              </span>
-              {t("home.hero.cue")}
-            </button>
+          <RevealOnScroll delay={380} duration={700} style={cueWrapStyle}>
+            <ScrollCue label={t("home.hero.cue")} onClick={onLook} />
           </RevealOnScroll>
         </div>
       </div>

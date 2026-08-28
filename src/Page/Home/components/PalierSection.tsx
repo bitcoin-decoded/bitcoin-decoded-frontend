@@ -23,7 +23,7 @@ export const PalierSection: FC<Props> = ({ id, align = "left", children }) => {
 
   const wrapStyle: CSSProperties = {
     width: "100%",
-    maxWidth: "56rem",
+    maxWidth: "64rem",
     margin: "0 auto",
     display: "flex",
     flexDirection: "column",

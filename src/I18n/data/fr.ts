@@ -527,6 +527,7 @@ const fr = {
   "home.hero.headline": "D'où vient vraiment ton argent ?",
   "home.hero.lede": "Trois idées, et tu ne regarderas plus ton argent pareil.",
   "home.hero.cue": "Regarde",
+  "home.palier.continue": "Continue",
 
   "home.trust.free": "Gratuit",
   "home.trust.noAccount": "Aucun compte, aucun email",

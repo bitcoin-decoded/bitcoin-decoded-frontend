@@ -11,7 +11,6 @@ import { HeroPalier } from "./HeroPalier";
 import { HomeCurriculum } from "./HomeCurriculum";
 import { InsightPalier } from "./InsightPalier";
 import { LandingRail } from "./LandingRail";
-import { ResumePalier } from "./ResumePalier";
 
 export const HomePage: FC = () => {
   useLandingMode();
@@ -45,14 +44,19 @@ export const HomePage: FC = () => {
     <div style={rootStyle}>
       {isDesktop && <LandingRail onJump={scrollToId} />}
 
-      <HeroPalier onLook={() => scrollToId(INSIGHT_STEPS[0].id)} />
+      <HeroPalier
+        onLook={() => scrollToId(INSIGHT_STEPS[0].id)}
+        resume={heroResume}
+        onOpenResume={openChapter}
+        onBadges={openBadges}
+      />
 
-      {heroResume && (
-        <ResumePalier resume={heroResume} onOpen={openChapter} onBadges={openBadges} />
-      )}
-
-      {INSIGHT_STEPS.map((step) => (
-        <InsightPalier key={step.id} step={step} />
+      {INSIGHT_STEPS.map((step, index) => (
+        <InsightPalier
+          key={step.id}
+          step={step}
+          onContinue={() => scrollToId(INSIGHT_STEPS[index + 1]?.id ?? sectionId.final)}
+        />
       ))}
 
       <FinalPalier

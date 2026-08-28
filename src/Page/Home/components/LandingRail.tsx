@@ -1,7 +1,6 @@
 import { type CSSProperties, type FC, useMemo } from "react";
 
-import { useThemeContext } from "../../../Design";
-import { BRAND } from "../../../Design";
+import { BRAND, useThemeContext, withOpacity } from "../../../Design";
 import { useTranslation } from "../../../I18n";
 import { RAIL_STEPS } from "../data";
 import { getLandingColors } from "../helpers";
@@ -34,7 +33,7 @@ export const LandingRail: FC<Props> = ({ onJump }) => {
 
   const lineStyle: CSSProperties = {
     position: "absolute",
-    left: 5,
+    left: 6,
     top: "1.4rem",
     bottom: "1.4rem",
     width: 1,
@@ -54,14 +53,18 @@ export const LandingRail: FC<Props> = ({ onJump }) => {
     transition: "color 0.25s var(--ease-smooth)",
   });
 
+  // Same block motif as the chapter parcoureur (BlockMilestones): an upright gold
+  // square when active, a bordered empty square otherwise, the active one scaled
+  // with a soft gold halo. Squares, never diamonds — the ledger block is the mark.
   const stepStyle = (active: boolean): CSSProperties => ({
-    width: 11,
-    height: 11,
+    width: 13,
+    height: 13,
     flexShrink: 0,
     border: `1px solid ${active ? gold : ink3}`,
     background: active ? gold : "transparent",
-    transform: "rotate(45deg)",
-    transition: "background 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth)",
+    transform: active ? "scale(1.2)" : "scale(1)",
+    boxShadow: active ? `0 0 0 2px ${withOpacity(gold, 0.16)}` : "none",
+    transition: "all 0.3s var(--ease-smooth)",
   });
 
   const labelStyle = (active: boolean): CSSProperties => ({
