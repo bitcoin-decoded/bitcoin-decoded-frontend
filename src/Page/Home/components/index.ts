@@ -1,8 +1,13 @@
 export { CurriculumCard } from "./CurriculumCard";
+export { Eyebrow } from "./Eyebrow";
+export { FinalPalier } from "./FinalPalier";
+export { HeroPalier } from "./HeroPalier";
 export { HomeCurriculum } from "./HomeCurriculum";
-export { HomeDifference } from "./HomeDifference";
-export { HomeHero } from "./HomeHero";
 export { HomePage } from "./HomePage";
 export { HomeResume } from "./HomeResume";
+export { InsightPalier } from "./InsightPalier";
+export { LandingRail } from "./LandingRail";
 export { LedgerCorners } from "./LedgerCorners";
-export { NotionCloud } from "./NotionCloud";
+export { PalierSection } from "./PalierSection";
+export { ScrollCue } from "./ScrollCue";
+export { TrustSignature } from "./TrustSignature";

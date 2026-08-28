@@ -9,7 +9,6 @@ export type CurriculumCard = {
   nameKey: TranslationKey;
   punchlineKey: TranslationKey;
   theme: ModuleColor;
-  notions: string[];
   chapterCount: number;
   minutes: number;
   state: ModuleState;

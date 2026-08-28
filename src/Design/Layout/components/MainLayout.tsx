@@ -66,12 +66,13 @@ export const MainLayout: FC<{
     borderRight: `1px solid ${colors.base.border.primary}`,
   };
 
-  // The landing page hosts its own centered container and a three-up card row, so
-  // it wants the full column width; the heavy chapter gutters would squeeze it.
+  // The landing escalier is a full-bleed sas: it paints its own ground and manages
+  // its own per-palier padding, so the shell gives it the whole column with no
+  // gutters. Chapter pages keep their reading gutters.
   const mainContentPadding = {
-    desktop: isHomePage ? "2.5rem 3rem" : "3rem 10rem",
-    tablet: isHomePage ? "2rem 1.75rem" : "2rem 4rem",
-    mobile: "1.5rem 0",
+    desktop: isHomePage ? "0" : "3rem 10rem",
+    tablet: isHomePage ? "0" : "2rem 4rem",
+    mobile: isHomePage ? "0" : "1.5rem 0",
   };
 
   const mainContentStyle: CSSProperties = {
@@ -82,20 +83,26 @@ export const MainLayout: FC<{
     minWidth: 0,
     padding: mainContentPadding[breakpoint],
     lineHeight: 1.7,
-    textAlign: breakpoint === "mobile" ? "left" : "justify",
+    textAlign: isHomePage || breakpoint === "mobile" ? "left" : "justify",
   };
+
+  // On the escalier the module/chapter list — the "2h10 bill" — stays folded into
+  // the hamburger on every breakpoint, desktop included (spec §2, §12); the
+  // sidebar only accompanies the reading pages.
+  const showHamburger = !isDesktop || isHomePage;
+  const showSidebar = isDesktop && !isHomePage;
 
   return (
     <div style={rootStyle}>
       <Header
-        showHamburger={!isDesktop}
+        showHamburger={showHamburger}
         isDrawerOpen={isDrawerOpen}
         onToggleDrawer={toggleDrawer}
         breakpoint={breakpoint}
         rightSlot={headerAction}
       />
       {isChapterPage && !isBlockChapter && <ReadingProgressBar />}
-      {!isDesktop && (
+      {showHamburger && (
         <NavDrawer
           isOpen={isDrawerOpen}
           onClose={closeDrawer}
@@ -104,7 +111,7 @@ export const MainLayout: FC<{
         />
       )}
       <div style={bodyContainerStyle}>
-        {isDesktop && (
+        {showSidebar && (
           <div style={navContainerStyle}>
             <NavBar isChapterComplete={isChapterComplete} isChapterOutOfSequence={isChapterOutOfSequence} />
           </div>

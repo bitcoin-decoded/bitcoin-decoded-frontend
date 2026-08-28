@@ -2,17 +2,21 @@ const fr = {
   "header.homeAriaLabel": "Retour à la page d'accueil",
   "nav.title": "Navigation",
   "notFound.title": "Cette adresse ne mène nulle part",
-  "notFound.body": "Le lien est peut-être incomplet, ou la page a changé d'adresse. Le parcours, lui, n'a pas bougé.",
+  "notFound.body":
+    "Le lien est peut-être incomplet, ou la page a changé d'adresse. Le parcours, lui, n'a pas bougé.",
   "notFound.home": "Retour à l'accueil",
   "notFound.start": "Commencer le parcours",
-  "notFound.alt": "Un marcheur perdu dans le désert consulte sa carte devant un panneau indiquant Bitcoin Decoded",
+  "notFound.alt":
+    "Un marcheur perdu dans le désert consulte sa carte devant un panneau indiquant Bitcoin Decoded",
   "progression.notice.title": "Tu entres au milieu d'un parcours",
-  "progression.notice.body": "Ce chapitre s'appuie sur ceux qui le précèdent. Tu peux le lire maintenant, mais il ne comptera pas dans ta progression tant que les précédents ne sont pas terminés.",
+  "progression.notice.body":
+    "Ce chapitre s'appuie sur ceux qui le précèdent. Tu peux le lire maintenant, mais il ne comptera pas dans ta progression tant que les précédents ne sont pas terminés.",
   "progression.notice.resume": "Reprendre au chapitre",
   "progression.notice.start": "Commencer par le début",
   "userData.loading": "Chargement",
   "userData.error.title": "Impossible de charger tes données",
-  "userData.error.body": "Une erreur est survenue pendant le chargement de ta progression. Réessaie ou recharge la page.",
+  "userData.error.body":
+    "Une erreur est survenue pendant le chargement de ta progression. Réessaie ou recharge la page.",
   "userData.error.retry": "Réessayer",
   "userData.error.reload": "Recharger la page",
   "nav.locked": "Termine les chapitres précédents pour débloquer",
@@ -523,14 +527,22 @@ const fr = {
   "footer.builtWith": "Construit avec",
   "footer.inspiredBy": "Inspiré par le travail de",
 
-  "home.hero.headlineLead": "L'argent, tu l'utilises tous les jours. Mais tu ne sais pas vraiment ",
-  "home.hero.headlineHighlight": "comment",
-  "home.hero.headlineTail": " il est créé.",
-  "home.hero.subheadline": "Je te rassure : presque personne ne le sait. Les diplômés en finance non plus.",
-  "home.hero.pitch":
-    "Un parcours gratuit pour comprendre l'argent, le système qui va avec, puis Bitcoin. (Et te faire ton propre avis.)",
-  "home.hero.ctaPrimary": "Commencer le parcours",
-  "home.hero.ctaSecondary": "Voir le programme",
+  "home.hero.kicker": "Comprends l'argent avant de comprendre Bitcoin",
+  "home.hero.headline": "D'où vient vraiment ton argent ?",
+  "home.hero.lede": "Trois idées, et tu ne regarderas plus ton argent pareil.",
+  "home.hero.cue": "Regarde",
+  "home.palier.continue": "Continue",
+
+  "home.trust.free": "Gratuit",
+  "home.trust.noAccount": "Aucun compte, aucun email",
+  "home.trust.sourced": "Chaque affirmation sourcée",
+  "home.trust.openSource": "Open source",
+
+  "home.rail.top": "Entrée",
+  "home.rail.value": "La valeur",
+  "home.rail.control": "Le contrôle",
+  "home.rail.network": "Le réseau",
+  "home.rail.final": "Le parcours",
 
   "home.resume.title": "Reprends où tu t'es arrêté",
   "home.resume.progress": "{done} / {total} chapitres",
@@ -542,7 +554,7 @@ const fr = {
     "Ton accès est créé. Il ne reste plus qu'à comprendre pourquoi l'argent que tu utilises ne marche pas comme tu le crois.",
   "home.resume.tier.start.button": "Commencer le Module 1",
   "home.resume.tier.early.message":
-    "{x} sur 19. Le début, c'est là où tout se met en place. Continue, ça s'emboîte vite.",
+    "{x} sur 19. T'es au début, c'est là où tout se met en place. Continue, ça s'enchaîne vite.",
   "home.resume.tier.mid.message":
     "{x} sur 19. Tu commences à voir les ficelles que la plupart des gens ne verront jamais.",
   "home.resume.tier.half.message":
@@ -552,28 +564,57 @@ const fr = {
     "{x} sur 19. La sortie du terrier est en vue. Bitcoin n'aura bientôt plus de mystères pour toi.",
   "home.resume.tier.done.title": "Tu as tout décodé.",
   "home.resume.tier.done.message":
-    "19 sur 19. Tu comprends maintenant un truc que la plupart des diplômés en finance n'expliquent pas correctement. (Pas mal, non ?)",
+    "19 sur 19. Tu comprends maintenant un truc que même beaucoup de diplômés en finance expliquent mal (plutôt cool, non ?).",
 
-  "home.curriculum.title": "Le programme",
-  "home.curriculum.intro": "{modules} modules · {chapters} chapitres",
+  "home.curriculum.eyebrow": "Le programme",
+  "home.curriculum.title": "Trois modules, morceau par morceau",
+  "home.curriculum.lead": "Tu peux voir le détail avant d'entrer. Tout est transparent.",
   "home.curriculum.module1.name": "Comment fonctionne l'argent",
   "home.curriculum.module2.name": "Quand le système déraille",
   "home.curriculum.module3.name": "La rupture Bitcoin",
   "home.curriculum.module1.punchline": "Comprendre d'où vient vraiment l'argent que tu utilises.",
-  "home.curriculum.module2.punchline": "Ce qui fait qu'une monnaie tient, et ce qui la fait céder.",
-  "home.curriculum.module3.punchline": "Ce que Bitcoin change, et ce qu'il ne change pas.",
+  "home.curriculum.module2.punchline": "Ce qui fait qu'une monnaie tient, et ce qui la condamne.",
+  "home.curriculum.module3.punchline": "Ce que Bitcoin change.",
   "home.curriculum.chapters": "{n} chapitres",
   "home.curriculum.minutes": "{duration} de lecture",
   "home.curriculum.cta.start": "Commencer",
   "home.curriculum.cta.resume": "Reprendre",
   "home.curriculum.cta.review": "Relire",
 
-  "home.difference.openSource": "Gratuit et open-source. Le code est ouvert, vérifie toi-même.",
-  "home.difference.sources": "Chaque affirmation importante est sourcée.",
-  "home.difference.privacyTitle": "On ne sait pas qui tu es",
-  "home.difference.privacyBody":
-    "Pas d'email, pas de mot de passe, pas de Google. Même si je le voulais, je ne pourrais pas dire qui tu es. La raison est simple : si je me fais pirater un jour, personne ne doit pouvoir deviner que tu t'intéresses au Bitcoin. Un site qui parle de souveraineté ne commence pas par collecter la tienne.",
-  "home.difference.privacyLink": "Comment marche ton accès",
+  "home.step1.eyebrow": "01 · La valeur",
+  "home.step1.heading": "Pourquoi tout coûte plus cher, chaque année ?",
+  "home.step1.alt": "La même baguette au fil des ans, avec toujours plus d'euros pour l'acheter.",
+  "home.step1.caption":
+    "La même baguette. Toujours plus d'euros pour l'acheter, année après année.",
+  "home.step1.basculeLead": "Ce n'est pas que les prix montent. C'est que ta monnaie ",
+  "home.step1.basculeEmphasis": "fond",
+  "home.step1.basculeTail": ".",
+
+  "home.step2.eyebrow": "02 · Le contrôle",
+  "home.step2.heading": "Qui décide de la quantité de monnaie en circulation ?",
+  "home.step2.alt":
+    "D'un côté, une main sur un robinet qui laisse couler la monnaie. De l'autre, une règle d'émission monétaire codée et connue à l'avance.",
+  "home.step2.caption": "D'un côté, une main sur le robinet. De l'autre, une règle connue de tous.",
+  "home.step2.basculeLead": "D'un côté, quelqu'un a la main. De l'autre, ",
+  "home.step2.basculeEmphasis": "personne",
+  "home.step2.basculeTail": ". Juste du code.",
+
+  "home.step3.eyebrow": "03 · Le réseau",
+  "home.step3.heading": "Et si on décidait d'éteindre le réseau ?",
+  "home.step3.alt":
+    "D'un côté, un siège central fermé d'un cadenas. De l'autre, une toile de maisons reliées entre elles, sans QG.",
+  "home.step3.caption": "D'un côté, un siège central. De l'autre, un réseau distribué.",
+  "home.step3.basculeLead":
+    "D'un côté, un système avec un siège qu'on peut fermer. De l'autre, Bitcoin qui ",
+  "home.step3.basculeEmphasis": "n'en a pas",
+  "home.step3.basculeTail": ".",
+
+  "home.final.eyebrow": "Le parcours",
+  "home.final.heading": "Tu veux la mécanique complète ?",
+  "home.final.lede": "De la création monétaire au fonctionnement de Bitcoin, morceau par morceau.",
+  "home.final.struct": "{modules} modules · {chapters} chapitres · {duration}",
+  "home.final.ctaEnter": "Entrer dans le parcours",
+  "home.final.ctaProgram": "Voir le programme",
 
   "footer.donateMessage": "Si ce projet te plaît, soutiens-le en sats.",
   "footer.copy": "Copier",
@@ -714,7 +755,8 @@ const fr = {
 
   // Revoir ses 12 mots (bloc réglages + étape mot de passe + affichage). Le champ,
   // l'aide, l'erreur, l'encart et le bouton copier réutilisent des clés existantes.
-  "auth.reveal.settingsIntro": "Tes 12 mots sont ta vraie clé. Affiche-les si tu ne les as pas encore notés.",
+  "auth.reveal.settingsIntro":
+    "Tes 12 mots sont ta vraie clé. Affiche-les si tu ne les as pas encore notés.",
   "auth.reveal.settingsButton": "Afficher mes 12 mots",
   "auth.reveal.password.title": "Confirme que c'est bien toi",
   "auth.reveal.password.body":
