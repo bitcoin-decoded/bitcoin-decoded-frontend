@@ -2,17 +2,21 @@ const en = {
   "header.homeAriaLabel": "Back to homepage",
   "nav.title": "Navigation",
   "notFound.title": "This address leads nowhere",
-  "notFound.body": "The link may be incomplete, or the page may have moved. The course itself has not.",
+  "notFound.body":
+    "The link may be incomplete, or the page may have moved. The course itself has not.",
   "notFound.home": "Back to the home page",
   "notFound.start": "Start the course",
-  "notFound.alt": "A hiker lost in the desert reads a map beside a signpost pointing to Bitcoin Decoded",
+  "notFound.alt":
+    "A hiker lost in the desert reads a map beside a signpost pointing to Bitcoin Decoded",
   "progression.notice.title": "You are joining a course midway",
-  "progression.notice.body": "This chapter builds on the ones before it. You can read it now, but it will not count towards your progress until the earlier chapters are done.",
+  "progression.notice.body":
+    "This chapter builds on the ones before it. You can read it now, but it will not count towards your progress until the earlier chapters are done.",
   "progression.notice.resume": "Resume at chapter",
   "progression.notice.start": "Start from the beginning",
   "userData.loading": "Loading",
   "userData.error.title": "Couldn't load your data",
-  "userData.error.body": "Something went wrong while loading your progress. Try again or reload the page.",
+  "userData.error.body":
+    "Something went wrong while loading your progress. Try again or reload the page.",
   "userData.error.retry": "Try again",
   "userData.error.reload": "Reload the page",
   "nav.locked": "Finish the previous chapters to unlock",
@@ -547,52 +551,54 @@ const en = {
   "home.resume.tier.start.button": "Start Module 1",
   "home.resume.tier.early.message":
     "{x} of 19. The early chapters are where it all clicks into place. Keep going, it connects fast.",
-  "home.resume.tier.mid.message":
-    "{x} of 19. You're starting to see the strings most people never will.",
+  "home.resume.tier.mid.message": "{x} of 19. You're starting to see how the strings are pulled.",
   "home.resume.tier.half.message": "{x} of 19, past halfway. Too late to unsee it now.",
   "home.resume.tier.near.title": "Just a few chapters left",
   "home.resume.tier.near.message":
-    "{x} of 19. The far end of the rabbit hole is in sight. Bitcoin's about to run out of mysteries.",
+    "{x} of 19. You're almost out of the rabbit hole. Bitcoin won't have many mysteries left for you.",
   "home.resume.tier.done.title": "You've decoded it all.",
   "home.resume.tier.done.message":
-    "19 of 19. You now understand something most finance graduates can't explain properly. (Not bad, right?)",
+    "19 of 19. You now understand something even many finance graduates struggle to explain. (Pretty cool, right?)",
 
-  "home.curriculum.eyebrow": "The syllabus",
+  "home.curriculum.eyebrow": "The course",
   "home.curriculum.title": "Three modules, piece by piece",
-  "home.curriculum.lead": "See the detail before you enter. Nothing to hide.",
+  "home.curriculum.lead": "See exactly what's inside before you start.",
   "home.curriculum.module1.name": "How money works",
   "home.curriculum.module2.name": "When the system breaks down",
-  "home.curriculum.module3.name": "The Bitcoin rupture",
+  "home.curriculum.module3.name": "The Bitcoin break",
   "home.curriculum.module1.punchline": "Understand where the money you use really comes from.",
-  "home.curriculum.module2.punchline": "What makes a currency hold, and what makes it give way.",
-  "home.curriculum.module3.punchline": "What Bitcoin changes, and what it doesn't.",
+  "home.curriculum.module2.punchline": "What makes a currency endure, and what makes it fail.",
+  "home.curriculum.module3.punchline": "What Bitcoin changes.",
   "home.curriculum.chapters": "{n} chapters",
-  "home.curriculum.minutes": "{duration} read",
+  "home.curriculum.minutes": "{duration} to read",
   "home.curriculum.cta.start": "Start",
   "home.curriculum.cta.resume": "Resume",
   "home.curriculum.cta.review": "Re-read",
 
   "home.step1.eyebrow": "01 · Value",
   "home.step1.heading": "Why does everything cost more, every year?",
-  "home.step1.alt": "The same baguette over the years, with an ever taller stack of euros needed to buy it.",
+  "home.step1.alt":
+    "The same baguette over the years, with an ever taller stack of euros needed to buy it.",
   "home.step1.caption": "The same baguette. Always more euros to buy it, year after year.",
   "home.step1.basculeLead": "It's not that prices go up. It's that your money ",
   "home.step1.basculeEmphasis": "melts",
   "home.step1.basculeTail": ".",
 
   "home.step2.eyebrow": "02 · Control",
-  "home.step2.heading": "Who decides how much money exists?",
-  "home.step2.alt": "On one side, a hand on a tap letting money pour out. On the other, a coded rule that halves the issuance on its own.",
-  "home.step2.caption": "On one side, a hand on the tap. On the other, a rule that halves itself.",
+  "home.step2.heading": "Who decides how much money is in circulation?",
+  "home.step2.alt":
+    "On one side, a hand on a tap letting money flow. On the other, a coded monetary rule known in advance.",
+  "home.step2.caption": "On one side, a hand on the tap. On the other, a rule known to everyone.",
   "home.step2.basculeLead": "On one side, someone's in control. On the other, ",
   "home.step2.basculeEmphasis": "no one",
   "home.step2.basculeTail": ". Just code.",
 
   "home.step3.eyebrow": "03 · The network",
   "home.step3.heading": "What if someone decided to shut the network down?",
-  "home.step3.alt": "On one side, a single headquarters closed with a padlock. On the other, a web of houses linked together, with no center.",
-  "home.step3.caption": "A headquarters you can shut. A web you cannot.",
-  "home.step3.basculeLead": "A system has a headquarters you can shut. Bitcoin ",
+  "home.step3.alt":
+    "On one side, a central headquarters secured with a padlock. On the other, a web of houses linked together, with no HQ.",
+  "home.step3.caption": "On one side, a central headquarters. On the other, a distributed network.",
+  "home.step3.basculeLead": "A system has a headquarters you can shut down. Bitcoin ",
   "home.step3.basculeEmphasis": "has none",
   "home.step3.basculeTail": ".",
 
@@ -645,7 +651,7 @@ const en = {
 
   "auth.seed.display.title": "Here are your 12 words",
   "auth.seed.display.body":
-    "These 12 words are your only access key. Write them down on paper, in order. If you lose them, no one can retrieve them, not even us. There is no \"forgot password\" button behind this.",
+    'These 12 words are your only access key. Write them down on paper, in order. If you lose them, no one can retrieve them, not even us. There is no "forgot password" button behind this.',
   "auth.seed.display.warning":
     "Do not photograph them, do not send them in a message, do not paste them into a note that syncs to the cloud.",
   "auth.seed.display.checkbox": "I have written down my 12 words.",
@@ -656,7 +662,8 @@ const en = {
   "auth.seed.confirm.body":
     "Type three of your words again. It is the only way to know whether you really wrote them down.",
   "auth.seed.confirm.field": "Word #{n}",
-  "auth.seed.confirm.error": "One of the words does not match. Go back to your list and start over.",
+  "auth.seed.confirm.error":
+    "One of the words does not match. Go back to your list and start over.",
   "auth.seed.confirm.back": "Show my 12 words again",
   "auth.seed.confirm.button": "Confirm",
 
@@ -707,7 +714,8 @@ const en = {
   "auth.restore.seed.button": "Recover my progress",
 
   "auth.restore.file.title": "Import a copy of your access",
-  "auth.restore.file.body": "Select a copy of your access: the .bdw file you downloaded when you created your access.",
+  "auth.restore.file.body":
+    "Select a copy of your access: the .bdw file you downloaded when you created your access.",
   "auth.restore.file.recognised": "A copy of {username}'s access.",
   "auth.restore.file.formatError": "This is not a Bitcoin.Decoded access copy.",
   "auth.restore.file.versionError":
@@ -741,7 +749,8 @@ const en = {
 
   // See your 12 words again (settings block + password step + display). Field, hint,
   // error, warning box and the copy button reuse existing keys.
-  "auth.reveal.settingsIntro": "Your 12 words are your real key. Show them if you haven't written them down yet.",
+  "auth.reveal.settingsIntro":
+    "Your 12 words are your real key. Show them if you haven't written them down yet.",
   "auth.reveal.settingsButton": "Show my 12 words",
   "auth.reveal.password.title": "Confirm it's you",
   "auth.reveal.password.body":
