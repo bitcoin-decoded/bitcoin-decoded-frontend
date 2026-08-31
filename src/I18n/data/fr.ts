@@ -531,7 +531,6 @@ const fr = {
   "home.hero.headline": "D'où vient vraiment ton argent ?",
   "home.hero.lede": "Trois idées, et tu ne regarderas plus ton argent pareil.",
   "home.hero.cue": "Regarde",
-  "home.palier.continue": "Continue",
 
   "home.trust.free": "Gratuit",
   "home.trust.noAccount": "Aucun compte, aucun email",
@@ -549,6 +548,7 @@ const fr = {
   "home.resume.button": "Reprendre",
   "home.resume.restart": "Revoir depuis le début",
   "home.resume.badges": "Voir mes badges",
+  "home.resume.dismiss": "Masquer ma progression",
   "home.resume.tier.start.title": "Prêt à entrer dans le terrier ?",
   "home.resume.tier.start.message":
     "Ton accès est créé. Il ne reste plus qu'à comprendre pourquoi l'argent que tu utilises ne marche pas comme tu le crois.",

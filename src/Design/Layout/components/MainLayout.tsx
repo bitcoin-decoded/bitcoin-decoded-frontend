@@ -119,7 +119,8 @@ export const MainLayout: FC<{
         <main style={mainContentStyle}>{children}</main>
       </div>
       <Footer breakpoint={breakpoint} aside={footerAside} link={footerLink} />
-      {isChapterPage && <ScrollToTopButton />}
+      {/* On every scrolling page, the escalier included; it hides itself near the top. */}
+      <ScrollToTopButton />
     </div>
   );
 };

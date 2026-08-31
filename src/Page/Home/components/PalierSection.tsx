@@ -6,19 +6,18 @@ type Props = {
   children: ReactNode;
 };
 
-// One rung of the staircase: a full-viewport section that snaps into place. The
-// height and side padding are fluid (clamp) so every palier holds on a short
-// phone without a per-breakpoint branch; the top padding clears the sticky header.
+// One rung of the staircase. Content-sized with a generous vertical rhythm (no
+// forced 100svh, no centering — that left a big empty band above each palier)
+// and no scroll-snap, so the page reads as one calm continuous scroll. The
+// side/vertical padding is fluid (clamp) so it holds on a short phone.
 export const PalierSection: FC<Props> = ({ id, align = "left", children }) => {
   const sectionStyle: CSSProperties = {
     position: "relative",
-    minHeight: "100svh",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     boxSizing: "border-box",
-    padding: "clamp(4.5rem, 11vh, 6.5rem) clamp(1.25rem, 6vw, 3rem) clamp(3rem, 8vh, 5rem)",
-    scrollSnapAlign: "start",
+    padding: "clamp(3.25rem, 8vh, 5.5rem) clamp(1.25rem, 6vw, 3rem)",
   };
 
   const wrapStyle: CSSProperties = {

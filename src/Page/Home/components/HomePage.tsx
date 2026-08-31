@@ -11,12 +11,21 @@ import { HeroPalier } from "./HeroPalier";
 import { HomeCurriculum } from "./HomeCurriculum";
 import { InsightPalier } from "./InsightPalier";
 import { LandingRail } from "./LandingRail";
+import { ResumeSection } from "./ResumeSection";
 
 export const HomePage: FC = () => {
   useLandingMode();
 
-  const { sectionId, startJourney, openChapter, openBadges, scrollToId, scrollToProgram } =
-    useHomePage();
+  const {
+    sectionId,
+    startJourney,
+    openChapter,
+    openBadges,
+    scrollToId,
+    scrollToProgram,
+    resumeDismissed,
+    dismissResume,
+  } = useHomePage();
   const { cards, moduleCount, totalChapters, totalMinutes, resume } = useCurriculumProgress();
   const { status: authStatus } = useAuth();
   const { theme } = useThemeContext();
@@ -25,9 +34,10 @@ export const HomePage: FC = () => {
   const { ground, ink, gold, line } = getLandingColors(theme);
 
   // A returning visitor with progress (or a freshly created access) gets the
-  // discreet resume ribbon; a fresh visitor never does, so the hero stays pristine.
-  const showResume = resume !== null && (resume.doneCount > 0 || authStatus === "authenticated");
-  const heroResume = showResume ? resume : null;
+  // resume panel above the hero, until they dismiss it; a fresh visitor never
+  // does, so the accroche stays pristine.
+  const showResume =
+    resume !== null && !resumeDismissed && (resume.doneCount > 0 || authStatus === "authenticated");
 
   // The immersive ground: warm halo top-right + a fixed ledger trame, both keyed
   // to the theme so the sas reads in dark and light (spec §7).
@@ -44,19 +54,19 @@ export const HomePage: FC = () => {
     <div style={rootStyle}>
       {isDesktop && <LandingRail onJump={scrollToId} />}
 
-      <HeroPalier
-        onLook={() => scrollToId(INSIGHT_STEPS[0].id)}
-        resume={heroResume}
-        onOpenResume={openChapter}
-        onBadges={openBadges}
-      />
-
-      {INSIGHT_STEPS.map((step, index) => (
-        <InsightPalier
-          key={step.id}
-          step={step}
-          onContinue={() => scrollToId(INSIGHT_STEPS[index + 1]?.id ?? sectionId.final)}
+      {showResume && resume && (
+        <ResumeSection
+          resume={resume}
+          onOpen={openChapter}
+          onBadges={openBadges}
+          onDismiss={dismissResume}
         />
+      )}
+
+      <HeroPalier onLook={() => scrollToId(INSIGHT_STEPS[0].id)} />
+
+      {INSIGHT_STEPS.map((step) => (
+        <InsightPalier key={step.id} step={step} />
       ))}
 
       <FinalPalier

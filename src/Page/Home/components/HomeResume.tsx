@@ -15,13 +15,16 @@ import { RESUME_TIER_COPY } from "../data";
 import { getResumeTier } from "../helpers";
 import type { CurriculumResume } from "../types";
 
+import { X } from "@icons";
+
 type Props = {
   resume: CurriculumResume;
   onOpen: (route: RouteName) => void;
   onBadges: () => void;
+  onDismiss?: () => void;
 };
 
-export const HomeResume: FC<Props> = ({ resume, onOpen, onBadges }) => {
+export const HomeResume: FC<Props> = ({ resume, onOpen, onBadges, onDismiss }) => {
   const { t } = useTranslation();
   const { theme } = useThemeContext();
   const isMobile = useBreakpoint() === "mobile";
@@ -38,6 +41,7 @@ export const HomeResume: FC<Props> = ({ resume, onOpen, onBadges }) => {
     copy.secondaryKind === "badges" ? "home.resume.badges" : "home.resume.restart";
 
   const cardStyle: CSSProperties = {
+    position: "relative",
     display: "flex",
     flexDirection: "column",
     gap: isMobile ? "1rem" : "1.15rem",
@@ -47,6 +51,19 @@ export const HomeResume: FC<Props> = ({ resume, onOpen, onBadges }) => {
     width: "100%",
     maxWidth: "42rem",
     boxSizing: "border-box",
+  };
+
+  const dismissStyle: CSSProperties = {
+    position: "absolute",
+    top: isMobile ? "0.7rem" : "0.85rem",
+    right: isMobile ? "0.7rem" : "0.85rem",
+    display: "inline-flex",
+    padding: "0.35rem",
+    border: "none",
+    background: "none",
+    cursor: "pointer",
+    color: colors.base.text.secondary,
+    lineHeight: 0,
   };
 
   const titleStyle: CSSProperties = {
@@ -105,6 +122,11 @@ export const HomeResume: FC<Props> = ({ resume, onOpen, onBadges }) => {
 
   return (
     <div style={cardStyle}>
+      {onDismiss && (
+        <button type="button" style={dismissStyle} onClick={onDismiss} aria-label={t("home.resume.dismiss")}>
+          <X size={isMobile ? 18 : 20} />
+        </button>
+      )}
       <h3 style={titleStyle}>{t(copy.titleKey)}</h3>
       <p style={messageStyle}>{interpolate(t(copy.messageKey), { x: resume.doneCount })}</p>
 
