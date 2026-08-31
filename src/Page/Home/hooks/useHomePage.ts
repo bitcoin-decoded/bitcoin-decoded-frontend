@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { ROUTE_NAME, type RouteName, useRouterContext } from "../../../Routing";
 
 // Section anchor ids, shared by the paliers, the descent rail and the in-page
@@ -14,6 +16,10 @@ const scrollToId = (id: string): void =>
 export const useHomePage = () => {
   const { setCurrentPage } = useRouterContext();
 
+  // A returning visitor can clear the resume panel for the visit; it comes back
+  // next time, so it never permanently hides the shortcut back into the course.
+  const [resumeDismissed, setResumeDismissed] = useState(false);
+
   return {
     sectionId: SECTION_ID,
     startJourney: () => setCurrentPage(ROUTE_NAME.Banking_1),
@@ -21,5 +27,7 @@ export const useHomePage = () => {
     openBadges: () => setCurrentPage(ROUTE_NAME.Badges),
     scrollToId,
     scrollToProgram: () => scrollToId(SECTION_ID.programme),
+    resumeDismissed,
+    dismissResume: () => setResumeDismissed(true),
   };
 };

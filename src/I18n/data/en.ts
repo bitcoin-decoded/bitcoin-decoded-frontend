@@ -527,7 +527,6 @@ const en = {
   "home.hero.headline": "Where does your money really come from?",
   "home.hero.lede": "Three ideas, and you won't look at your money the same way.",
   "home.hero.cue": "Look",
-  "home.palier.continue": "Continue",
 
   "home.trust.free": "Free",
   "home.trust.noAccount": "No account, no email",
@@ -545,6 +544,7 @@ const en = {
   "home.resume.button": "Resume",
   "home.resume.restart": "Review from the start",
   "home.resume.badges": "See my badges",
+  "home.resume.dismiss": "Hide my progress",
   "home.resume.tier.start.title": "Ready to go down the rabbit hole?",
   "home.resume.tier.start.message":
     "Your access is set up. All that's left is to understand why the money you use doesn't work the way you think.",

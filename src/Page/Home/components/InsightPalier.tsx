@@ -9,18 +9,16 @@ import type { InsightStep } from "../types";
 
 import { Eyebrow } from "./Eyebrow";
 import { PalierSection } from "./PalierSection";
-import { ScrollCue } from "./ScrollCue";
 
 type Props = {
   step: InsightStep;
-  onContinue: () => void;
 };
 
 // Paliers 1 to 3: a quotidian question, the final illustration that makes the
 // mechanism intuitive (framed like the chapter plates — soft ground, gold ledger
 // corners, in both themes), then the one-line switch whose emphasis word is the
 // aha. Symptom → mechanism → property.
-export const InsightPalier: FC<Props> = ({ step, onContinue }) => {
+export const InsightPalier: FC<Props> = ({ step }) => {
   const { t } = useTranslation();
   const { theme } = useThemeContext();
   const { ink, accent } = getLandingColors(theme);
@@ -80,10 +78,6 @@ export const InsightPalier: FC<Props> = ({ step, onContinue }) => {
           <b style={emphasisStyle}>{t(step.basculeEmphasisKey)}</b>
           {t(step.basculeTailKey)}
         </p>
-      </RevealOnScroll>
-
-      <RevealOnScroll delay={320} style={{ marginTop: "2rem" }}>
-        <ScrollCue label={t("home.palier.continue")} onClick={onContinue} />
       </RevealOnScroll>
     </PalierSection>
   );

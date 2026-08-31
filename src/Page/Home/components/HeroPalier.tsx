@@ -2,12 +2,9 @@ import { type CSSProperties, type FC } from "react";
 
 import { BRAND, useThemeContext } from "../../../Design";
 import { useTranslation } from "../../../I18n";
-import type { RouteName } from "../../../Routing";
 import { RevealOnScroll } from "../../Shared";
 import { getLandingColors } from "../helpers";
-import type { CurriculumResume } from "../types";
 
-import { HomeResume } from "./HomeResume";
 import { ScrollCue } from "./ScrollCue";
 import { TrustSignature } from "./TrustSignature";
 
@@ -15,16 +12,12 @@ const MAX_WIDTH = "64rem";
 
 type Props = {
   onLook: () => void;
-  resume: CurriculumResume | null;
-  onOpenResume: (route: RouteName) => void;
-  onBadges: () => void;
 };
 
-// Palier 0. For a returning visitor the progress panel comes first (the one thing
-// they came back for); then one faille-phrase, a lede that promises the apéritif,
-// the invitation to descend, and the sobriety signature pinned at the foot. No
-// course length, no structure here.
-export const HeroPalier: FC<Props> = ({ onLook, resume, onOpenResume, onBadges }) => {
+// Palier 0. One faille-phrase understood in two seconds, a lede that promises the
+// apéritif, a visible invitation to descend, and the sobriety signature pinned at
+// the foot. No course length, no structure here.
+export const HeroPalier: FC<Props> = ({ onLook }) => {
   const { t } = useTranslation();
   const { theme } = useThemeContext();
   const { ink, ink2, gold } = getLandingColors(theme);
@@ -38,16 +31,7 @@ export const HeroPalier: FC<Props> = ({ onLook, resume, onOpenResume, onBadges }
     display: "flex",
     flexDirection: "column",
     boxSizing: "border-box",
-    padding: "clamp(2rem, 5vh, 3rem) clamp(1.25rem, 5vw, 3rem) clamp(1.5rem, 4vh, 2.2rem)",
-    scrollSnapAlign: "start",
-  };
-
-  const bandStyle: CSSProperties = {
-    width: "100%",
-    maxWidth: MAX_WIDTH,
-    margin: "0 auto",
-    display: "flex",
-    justifyContent: "flex-start",
+    padding: "clamp(1.5rem, 4vh, 2.5rem) clamp(1.25rem, 5vw, 3rem) clamp(1.5rem, 4vh, 2.2rem)",
   };
 
   const contentStyle: CSSProperties = {
@@ -106,12 +90,6 @@ export const HeroPalier: FC<Props> = ({ onLook, resume, onOpenResume, onBadges }
 
   return (
     <section id="top" style={sectionStyle}>
-      {resume && (
-        <RevealOnScroll duration={700} style={bandStyle}>
-          <HomeResume resume={resume} onOpen={onOpenResume} onBadges={onBadges} />
-        </RevealOnScroll>
-      )}
-
       <div style={contentStyle}>
         <div style={wrapStyle}>
           <RevealOnScroll delay={60} duration={700}>

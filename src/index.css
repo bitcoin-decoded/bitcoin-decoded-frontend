@@ -574,18 +574,14 @@ body {
   }
 }
 
-/* ── Landing escalier - scroll-snap + descent cue ──
- * Scoped to the homepage via html[data-landing] (set by useLandingMode) so no
- * other route snaps. `proximity` (not mandatory) plus scroll-padding for the
- * sticky header helps the eye settle on a palier without scroll-jacking; it
- * folds away entirely under reduced motion, leaving a plain scrollable page. */
+/* ── Landing escalier - descent cue ──
+ * The homepage scrolls like any page: no scroll-snap (users read it as a bug
+ * when a short scroll is pulled back). The only scoped rule left, via
+ * html[data-landing] (set by useLandingMode), offsets in-page jumps and the
+ * hero cue so a target section clears the sticky header instead of hiding
+ * under it. */
 html[data-landing] {
-  scroll-padding-top: 3.5rem;
-}
-@media (prefers-reduced-motion: no-preference) {
-  html[data-landing] {
-    scroll-snap-type: y proximity;
-  }
+  scroll-padding-top: 4rem;
 }
 
 @keyframes landingCueBob {

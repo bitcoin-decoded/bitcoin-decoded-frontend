@@ -9,5 +9,6 @@ export { InsightPalier } from "./InsightPalier";
 export { LandingRail } from "./LandingRail";
 export { LedgerCorners } from "./LedgerCorners";
 export { PalierSection } from "./PalierSection";
+export { ResumeSection } from "./ResumeSection";
 export { ScrollCue } from "./ScrollCue";
 export { TrustSignature } from "./TrustSignature";
